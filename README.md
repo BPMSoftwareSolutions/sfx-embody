@@ -9,10 +9,12 @@ sfx-embody materializes executable Capability and Scenario bodies from database 
 | tests/ | Resolver regression tests |
 | config/ | Workspace paths and Capability/Scenario selections |
 | embodiments/ | Capability → scenarios → Scenario → language → body and evidence |
-| evidence/ | Retained database query results, regression results and review evidence |
-| evidence/history/ | Historical exploration records and superseded review specimens |
+| evidence/ | Local database query results, regression results and review evidence; ignored by Git |
+| evidence/history/ | Local historical exploration records and superseded review specimens |
 | docs/ | Current implementation findings and acceptance limits |
 | baselines/ | Frozen original source, bodies and evidence with byte manifests |
+
+Every directory named evidence is ignored by Git, including those inside Scenarios and frozen baselines. Generated bodies remain version controlled. Verification and audit commands recreate current evidence locally; historical baseline verification requires its saved local evidence.
 
 | Scenario | Executable code | Evidence |
 | --- | --- | --- |
@@ -48,7 +50,7 @@ npm run audit:lowering
 npm run report
 ```
 
-The regression and four resolver tests passed with exit code 0. [regression-results.json](evidence/regression-results.json) retains exact component digests, database pins, dependency installation results and receipt hashes. Selection inputs live under config/selections/, and retained database bundles live under evidence/authority/. Regeneration holds on unsupported topology or unavailable/ambiguous providers and protects edits to previously generated files. Historical specimens under evidence/history/ retain the context of their original run and are not current verification commands.
+The regression and four resolver tests passed with exit code 0. The local evidence/regression-results.json retains exact component digests, database pins, dependency installation results and receipt hashes. Selection inputs live under config/selections/, and local database bundles live under evidence/authority/. Regeneration holds on unsupported topology or unavailable/ambiguous providers and protects edits to previously generated files. Historical specimens under evidence/history/ retain the context of their original run and are not current verification commands.
 
 Receipts state EXECUTION_CHECKS_PASSED and NOT_REQUESTED for managed admission. They bind contract, native projection and lineage proof digests. Child Scenario testimony identifies its parent-fixture scope. These results do not claim universal Capability coverage, full governed Reveal/Compare, authority/database round trips or Cross-Apply to other languages. No sfx invocation or database admission write is claimed.
 

@@ -58,7 +58,7 @@ Contract projection now retains required const-valued members, closed enum types
 
 The user's acceptance law remains the bar. Transformation recovery is one part of full semantic recovery. These results do not award CONFORMS to the whole embodiment, and they do not claim support for every capability or language merely because these cases pass. Unsupported topology or unresolved provider bindings remain explicit holds.
 
-The original 17-fixture baseline, source, lockfiles, authority bundles and evidence are preserved in the [baseline manifest](../${baseline}/baseline.manifest.json). Current evidence is in each language directory under evidence/; receipt digests bind contract, native projection and lineage proofs. The complete latest run is [regression-results.json](../evidence/regression-results.json).
+The original 17-fixture baseline, source, lockfiles, authority bundles and evidence are recorded in the [baseline manifest](../${baseline}/baseline.manifest.json). Every evidence directory is kept locally and ignored by Git, including Scenario and baseline evidence. Receipt digests bind contract, native projection and lineage proofs. The complete latest run is retained locally at evidence/regression-results.json. Verifying the historical baseline requires its saved local evidence.
 
 Implementation: ${regression.implementationDigest}
 
@@ -67,6 +67,7 @@ Database snapshot: ${regression.snapshotId}
 await fs.mkdir(path.join(root, 'docs'), { recursive: true });
 await fs.writeFile(path.join(root, 'docs/native-embodiment-repair.md'), text);
 const oldReadme = await fs.readFile(path.join(root, 'README.md'));
+await fs.mkdir(path.join(root, 'evidence/history/semantic-expression-review'), { recursive: true });
 await fs.writeFile(path.join(root, 'evidence/history/semantic-expression-review/README.before-native-lowering.md'), oldReadme, { flag: 'wx' }).catch(e => { if (e.code !== 'EEXIST') throw e; });
 const links = [];
 for (const result of results) {
@@ -86,10 +87,12 @@ await fs.writeFile(path.join(root, 'README.md'), `sfx-embody materializes execut
 | tests/ | Resolver regression tests |
 | config/ | Workspace paths and Capability/Scenario selections |
 | embodiments/ | Capability → scenarios → Scenario → language → body and evidence |
-| evidence/ | Retained database query results, regression results and review evidence |
-| evidence/history/ | Historical exploration records and superseded review specimens |
+| evidence/ | Local database query results, regression results and review evidence; ignored by Git |
+| evidence/history/ | Local historical exploration records and superseded review specimens |
 | docs/ | Current implementation findings and acceptance limits |
 | baselines/ | Frozen original source, bodies and evidence with byte manifests |
+
+Every directory named evidence is ignored by Git, including those inside Scenarios and frozen baselines. Generated bodies remain version controlled. Verification and audit commands recreate current evidence locally; historical baseline verification requires its saved local evidence.
 
 | Scenario | Executable code | Evidence |
 | --- | --- | --- |
@@ -116,7 +119,7 @@ npm run audit:lowering
 npm run report
 \x60\x60\x60
 
-The regression and four resolver tests passed with exit code 0. [regression-results.json](evidence/regression-results.json) retains exact component digests, database pins, dependency installation results and receipt hashes. Selection inputs live under config/selections/, and retained database bundles live under evidence/authority/. Regeneration holds on unsupported topology or unavailable/ambiguous providers and protects edits to previously generated files. Historical specimens under evidence/history/ retain the context of their original run and are not current verification commands.
+The regression and four resolver tests passed with exit code 0. The local evidence/regression-results.json retains exact component digests, database pins, dependency installation results and receipt hashes. Selection inputs live under config/selections/, and local database bundles live under evidence/authority/. Regeneration holds on unsupported topology or unavailable/ambiguous providers and protects edits to previously generated files. Historical specimens under evidence/history/ retain the context of their original run and are not current verification commands.
 
 Receipts state EXECUTION_CHECKS_PASSED and NOT_REQUESTED for managed admission. They bind contract, native projection and lineage proof digests. Child Scenario testimony identifies its parent-fixture scope. These results do not claim universal Capability coverage, full governed Reveal/Compare, authority/database round trips or Cross-Apply to other languages. No sfx invocation or database admission write is claimed.
 

@@ -8,5 +8,6 @@ const input = JSON.parse(await fs.readFile(new URL('../config/selections/admit-c
 const result = await query(`SELECT definition_json FROM analysis.v_selected_semantic_definition
   WHERE estate_model_pk=@estate_model_pk AND object_kind='SCENARIO'
   AND JSON_VALUE(definition_json,'$.address.id')=JSON_VALUE(@input,'$.scenarioId')`, { input, rowLimit: 100000 });
+await fs.mkdir(new URL('../evidence/review/', import.meta.url), { recursive: true });
 await fs.writeFile(new URL('../evidence/review/scenario-round-trip-authority.json', import.meta.url), JSON.stringify(result, null, 2) + '\n');
 console.log(JSON.stringify(result.recordsets[0].map(r => JSON.parse(r.definition_json)), null, 2));

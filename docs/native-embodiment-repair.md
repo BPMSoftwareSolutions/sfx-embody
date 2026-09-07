@@ -31,7 +31,7 @@ Contract projection now retains required const-valued members, closed enum types
 
 The user's acceptance law remains the bar. Transformation recovery is one part of full semantic recovery. These results do not award CONFORMS to the whole embodiment, and they do not claim support for every capability or language merely because these cases pass. Unsupported topology or unresolved provider bindings remain explicit holds.
 
-The original 17-fixture baseline, source, lockfiles, authority bundles and evidence are preserved in the [baseline manifest](../baselines/bbf0345d901983b6c0eeab449c2842419a3154b56bf2d04a973cf51c6974d66a/baseline.manifest.json). Current evidence is in each language directory under evidence/; receipt digests bind contract, native projection and lineage proofs. The complete latest run is [regression-results.json](../evidence/regression-results.json).
+The original 17-fixture baseline, source, lockfiles, authority bundles and evidence are recorded in the [baseline manifest](../baselines/bbf0345d901983b6c0eeab449c2842419a3154b56bf2d04a973cf51c6974d66a/baseline.manifest.json). Every evidence directory is kept locally and ignored by Git, including Scenario and baseline evidence. Receipt digests bind contract, native projection and lineage proofs. The complete latest run is retained locally at evidence/regression-results.json. Verifying the historical baseline requires its saved local evidence.
 
 Implementation: sha256:a81932af72490a7c1f0017005995dbd7661abf2b25421d1bd61644028ea78643
 
