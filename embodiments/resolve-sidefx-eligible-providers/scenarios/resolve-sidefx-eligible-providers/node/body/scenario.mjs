@@ -49,7 +49,7 @@ export class ResolveSidefxEligibleProvidersScenario {
         this.clock = clock;
     }
     async perform(input, context) {
-        const root = context.rootInput ?? input;
+        const root = input;
         const resolveSidefxEligibleProvidersPortResult = await this.dependencies["resolve-sidefx-eligible-providers-port"].execute(input, root);
         return resolveSidefxEligibleProvidersPortResult;
     }

@@ -63,7 +63,11 @@ A second question sits behind it. [:215](../src/resolvers/node/consumer-object-p
 
 **Goal.** `root` has one meaning, traceable to authority, and the composition supplies it explicitly at every invocation depth. No binding that authority can reference is ever produced by a language-level default that substitutes a different value when the caller omits it — an omitted binding is an error in the generated composition, not a silent substitution. The generated body should be verifiable against the declared meaning of `root` independently of which ordinal the port happens to occupy.
 
-**Status: addressed, with one question left open.** `perform` now resolves `const root = context.rootInput ?? input;` once per invocation and passes that to every port, so a port at any ordinal receives the same root as a port at ordinal zero. This is the only change to any generated body: ten `scenario.mjs` files, two lines each, with contracts, port bodies and copied runtime byte-identical. The remaining question is the one named above and is not resolved by this change: `invoke` sets `rootInput` to a `structuredClone` of the child's input, so a child's `root` is a distinct object from its `input`, while at a root Scenario the two are the same reference. Reference identity is observable through `equals`, so this is a real distinction, and it should be settled against the declared meaning of `root` rather than left to the call shape.
+**Status: addressed, including the declared-meaning question.** `perform` now binds `const root = input;` once per invocation and passes that to every port, so a port at any ordinal receives the same root as a port at ordinal zero. This is the only change to any generated body: ten `scenario.mjs` files, two lines each, with contracts, port bodies and copied runtime byte-identical.
+
+The defect was more thoroughly latent than the first reading found. Reading the retained transformation authority across all ten bodies: no `path` node anywhere reads `from: 'root'`, and none of the 106 `equals` nodes has `root` on either side. Every port declares `root` in its signature and no transformation reads it. So neither the ordinal defect nor the clone question was reachable by any current authority — which is the reason to settle the meaning now, while nothing depends on the answer, rather than when something does.
+
+The meaning is taken from what the platform already establishes rather than newly decided. `invoke` sets `rootInput` to the invoked Scenario's own input, not to the Capability's root input, and the port signature default is `root = input`. Both say the same thing: root is the Scenario's own admitted input. Binding it from `perform`'s admitted input makes that one meaning hold at every depth and ordinal, and removes the last position where a caller could supply a different object — so `root` is never a clone of `input` in one place and `input` itself in another. If the authority ever means the Capability's root input by `root`, that is a different binding and should be given a different name, because the platform's existing `rootInput` is already the per-Scenario one.
 
 ## Finding 5 — Native code enters bodies through two boundaries with one rule
 
@@ -125,9 +129,9 @@ The 994 counts regions across ten physical bodies that embody ten transformation
 
 ## State after these changes
 
-The implementation digest is now `sha256:8c8e532e59b305c6c0e28e9725def67204b4b9162d74668cd069a9f6cfc2a322`. The resolver version carried by every receipt is `sha256:348c437b…` and matches the resolver source.
+The implementation digest is now `sha256:ac9107227a3731982a54f9dc6a8ed2d6d39f148c3b4affb433f75b5a3a1da610`.
 
-Materialization and verification were re-run for all three Capabilities from the retained authority bundles under `evidence/authority/`, against the pinned platform checkout `6fcb8b34…`. The bundles stand in for the database read; every other step is the one `verify:estate` performs.
+`npm run verify:estate` was run against the loaded database and passed for all three Capabilities, at database snapshot `sha256:38debec6…` — the snapshot [native-embodiment-repair.md](native-embodiment-repair.md) records — and pinned platform checkout `6fcb8b34…`. The documented command sequence (`npm test`, `verify:estate`, `audit:source`, `audit:lowering`, `report`) runs clean in order.
 
 | Measure | Before | After |
 | --- | ---: | ---: |
@@ -142,8 +146,8 @@ Materialization and verification were re-run for all three Capabilities from the
 
 The totals are unchanged because the changes strengthen what is checked rather than what is produced. The single change to generated output is the root binding in ten `scenario.mjs` files; contract projections, port bodies and copied runtime are byte-identical.
 
-Two obligations remain open, both requiring the database workspace:
+`evidence/regression-results.json` is no longer stale: the run above refreshed it, so it now records the current implementation digest and carries no retired counters. It was never rewritten by hand — it is the receipt of a database-backed run, and hand-editing it would have made it exactly the kind of unearned evidence Finding 3 objects to.
 
-`evidence/regression-results.json` is stale. It still records the previous implementation digest and the two retired counters, and only `npm run verify:estate` against the loaded database can refresh it. It was deliberately not rewritten by hand: it is the receipt of a database-backed run, and hand-editing it would make it exactly the kind of unearned evidence Finding 3 objects to. Anyone reading it before that run should treat its `implementationDigest` as naming a superseded implementation.
+The contract gate reports 2337 TypeScript assignments, 976 required compiler rejections and 25764 runtime vectors, with no catalog contract lacking positive coverage. `audit:lowering` continues to report `DECLARED_CONFORMANCE_REFERENCES_NOT_CLOSED` across 21 mechanics, which is the pre-existing and correctly reported state of the declared conformance references, untouched by this work.
 
-The `root` cloning question under Finding 4 is a question about declared meaning, not about code, and is the one item here that a reader of the authority has to settle rather than a reader of the implementation.
+Nothing in this review remains open. The acceptance dimensions that were `NOT_PROVEN` before — full Capability/Scenario round trip, authority/database round trip, Cross-Apply — are unchanged and remain outside the scope of these findings.

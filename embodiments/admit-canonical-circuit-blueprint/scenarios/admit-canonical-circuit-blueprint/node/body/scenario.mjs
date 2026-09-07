@@ -49,7 +49,7 @@ export class AdmitCanonicalCircuitBlueprintScenario {
         this.clock = clock;
     }
     async perform(input, context) {
-        const root = context.rootInput ?? input;
+        const root = input;
         const admitCanonicalCircuitBlueprintPortResult = await this.dependencies["admit-canonical-circuit-blueprint-port"].execute(input, root);
         const conformanceObligationDispositionResult = await this.dependencies["require-blueprint-conformance-evidence"].invoke(admitCanonicalCircuitBlueprintPortResult, context, 1);
         const geometryObligationDispositionResult = await this.dependencies["require-blueprint-geometry-proof"].invoke(conformanceObligationDispositionResult, context, 2);

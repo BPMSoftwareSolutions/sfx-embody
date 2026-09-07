@@ -48,7 +48,7 @@ export class RequireCurrentApprovedReviewReceiptScenario {
         this.clock = clock;
     }
     async perform(input, context) {
-        const root = context.rootInput ?? input;
+        const root = input;
         const requireCurrentApprovedReviewReceiptPortResult = await this.dependencies["require-current-approved-review-receipt-port"].execute(input, root);
         return requireCurrentApprovedReviewReceiptPortResult;
     }

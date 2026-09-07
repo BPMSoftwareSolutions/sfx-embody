@@ -206,10 +206,14 @@ export class NodeConsumerObjectProvider {
       output(`${base}/providers/native-mechanics.mjs`, `// Native helpers from ${this.sourceRef}; ${this.sourceDigest}\n` + prelude +
         `\nexport { ${[...helpers].sort().join(', ')} };\n`, [this.sourceRef]);
       // The Scenario's own admitted input is the root of every transformation it
-      // invokes. Resolving it once per invocation keeps it independent of the
-      // ordinal a port occupies; a port after a child Scenario receives the same
-      // root as a port at ordinal zero.
-      const rootBinding = dependencies.some(d => d.kind === 'invoke-port') ? '    const root = context.rootInput ?? input;\n' : '';
+      // invokes. Binding it here gives root one meaning at every depth and every
+      // ordinal: a port after a child Scenario sees the same root as a port at
+      // ordinal zero, and a child Scenario's root is its own input, which is what
+      // invoke already establishes when it sets rootInput. Taking it from the
+      // admitted input rather than from caller-supplied context also removes the
+      // last place where a caller could supply a different object, so root is
+      // never a clone of input in one position and input itself in another.
+      const rootBinding = dependencies.some(d => d.kind === 'invoke-port') ? '    const root = input;\n' : '';
       const scenarioClass = identifier(scenario.scenarioId) + 'Scenario';
       const declaration = dataLiteral(scenario);
       const content = `// Generated from database-retained Scenario and execution authority.\n` +

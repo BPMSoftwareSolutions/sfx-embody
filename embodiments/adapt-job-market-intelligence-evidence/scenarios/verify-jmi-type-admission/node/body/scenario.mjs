@@ -49,7 +49,7 @@ export class VerifyJmiTypeAdmissionScenario {
         this.clock = clock;
     }
     async perform(input, context) {
-        const root = context.rootInput ?? input;
+        const root = input;
         const verifyJmiTypeAdmissionPortResult = await this.dependencies["verify-jmi-type-admission-port"].execute(input, root);
         return verifyJmiTypeAdmissionPortResult;
     }
