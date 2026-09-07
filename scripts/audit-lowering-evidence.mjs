@@ -20,8 +20,13 @@ const inventory = await query(`SELECT a.source_class,a.source_path,a.entry_id,
   ORDER BY a.source_path`, { rowLimit: 100000 });
 if (inventory.truncated) throw new Error('CONFORMANCE_INVENTORY_TRUNCATED');
 const used = new Map();
+const pinnedCommits = [];
 for (const entry of config.cases) {
   const bundle = await read(entry.bundleFile);
+  for (const record of [...bundle.authority.recordsets[1], ...bundle.authority.recordsets[2]]) {
+    if (!record.source_path.endsWith('.json')) continue;
+    try { const v = JSON.parse(Buffer.from(record.content_bytes.base64, 'base64').toString('utf8')); if (v.sdaPlatform?.commit) pinnedCommits.push(v.sdaPlatform.commit); } catch { /* not a platform package */ }
+  }
   if (bundle.authority.snapshotId !== inventory.snapshotId || bundle.authority.projectionDigest !== inventory.projectionDigest) throw new Error('CONFORMANCE_INVENTORY_AUTHORITY_CHANGED');
   // Mechanic usage is recovered from retained projection lineage; IDs are then
   // resolved against the selected database declarations, without name aliases.
@@ -38,6 +43,9 @@ for (const entry of config.cases) {
   }
 }
 const commit = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: config.sdaRoot, encoding: 'utf8' }).trim();
+const pinned = [...new Set(pinnedCommits)];
+if (pinned.length !== 1) throw new Error('PINNED_PLATFORM_COMMIT_NOT_SINGULAR:' + pinned.length);
+if (commit !== pinned[0]) throw new Error('INSPECTED_PLATFORM_COMMIT_IS_NOT_PINNED:' + commit + ' expected ' + pinned[0]);
 const mechanics = [];
 for (const [id, declaration] of [...used].sort(([a], [b]) => a.localeCompare(b))) {
   const references = [];
@@ -57,7 +65,8 @@ for (const [id, declaration] of [...used].sort(([a], [b]) => a.localeCompare(b))
 }
 const report = { snapshotId: inventory.snapshotId, projectionDigest: inventory.projectionDigest, inspectedPlatformCommit: commit,
   inventory, mechanics, scope: 'Exact declared references only. Related tests are not substituted for unresolved references.',
-  disposition: 'DECLARED_CONFORMANCE_REFERENCES_NOT_CLOSED' };
+  disposition: mechanics.some(m => m.references.some(r => r.disposition === 'REFERENCE_NOT_RESOLVED')) || !mechanics.length
+    ? 'DECLARED_CONFORMANCE_REFERENCES_NOT_CLOSED' : 'DECLARED_CONFORMANCE_REFERENCES_RESOLVED_REQUIRING_VECTOR_BINDING' };
 await fs.mkdir(path.join(root, 'evidence/review'), { recursive: true });
 await fs.writeFile(path.join(root, 'evidence/review/lowering-evidence-readiness.json'), JSON.stringify(report, null, 2) + '\n');
 console.log(JSON.stringify({ mechanics: mechanics.length, unresolvedReferences: mechanics.flatMap(m => m.references).filter(r => r.disposition === 'REFERENCE_NOT_RESOLVED').length, disposition: report.disposition }));

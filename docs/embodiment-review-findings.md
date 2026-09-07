@@ -21,6 +21,8 @@ The load-bearing risk in this design is that [native-expression-projection.mjs](
 
 The comparison at [:100](../src/verification/verify-native-projection.mjs#L100) uses `observeGraph`, which distinguishes prototypes, reference identity, `-0` and post-call scope mutation. The independent anchor is [:151](../src/verification/verify-native-projection.mjs#L151), comparing the revealed expression against digest-checked database bytes rather than against lineage. The whole-expression structural comparison at [:178](../src/verification/verify-native-projection.mjs#L178) and the single-class, single-return constraints at [:154-173](../src/verification/verify-native-projection.mjs#L154-L173) leave no room for unmapped executable code in a port body. These parts need no goal; they are the standard the rest should meet.
 
+One boundary on that praise, learned later and recorded in [cross-target-embodiment.md](cross-target-embodiment.md): the corpus establishes that the lowering agrees with the *selected provider*, not that either conforms to declared mechanic meaning. Measured against the declared conformance vectors, the provider is conformant for 16 of its 32 pure mechanics. Both hold at once — the bodies faithfully embody the provider they were resolved to, and that provider diverges from the declaration in 24 measured ways. Nothing in this review is invalidated by that; the distinction simply has to be stated rather than assumed.
+
 ## Finding 1 — The platform pin does not cover the tools that shape the output
 
 [materialize-node.mjs:46](../src/materialize-node.mjs#L46) checks `tools/src`, `languages/typescript` and `package.json` for modification against the pinned commit. The Gherkin parser, scenario graph builder, transition graph builder, type graph builder, target projection graph builder and structural projection provider are all loaded from `artifacts/tools/dist/…` at [:49-51](../src/materialize-node.mjs#L49-L51) and [:102-104](../src/materialize-node.mjs#L102-L104), which no checked path covers. `git diff --name-only` also does not report untracked files, so a newly added file inside a checked path passes as well.
@@ -105,6 +107,18 @@ The claim in [native-embodiment-repair.md](native-embodiment-repair.md) that equ
 
 The `@estate_model_pk` item is withdrawn. The database reader binds that parameter itself, from `source.current_model` under `HOLDLOCK`, for every query it runs (`src/query/run.mjs`). Model selection is deliberately the reader's to own, so callers cannot query a different model than the one the snapshot pins. Binding it at the call site would weaken that guarantee, not clarify it. The original observation confused an ambient dependency with an unbound parameter.
 
+## Finding 8 — The lowering audit answered for a platform it was not pinned to
+
+Found while preparing cross-target work, after the original review. `scripts/audit-lowering-evidence.mjs` resolves each declared conformance reference against a physical file under `sdaRoot`, but it read whatever was checked out. With the platform workspace on an unpinned branch it reported all 21 references resolved and recorded `inspectedPlatformCommit` as that branch's head, while the embodiment authority pins `6fcb8b34`. The answer was true of a tree the embodiment was never materialized against.
+
+Its disposition was also a constant. `DECLARED_CONFORMANCE_REFERENCES_NOT_CLOSED` was written literally into the report regardless of what the run found, so the same run that resolved all 21 references still reported them not closed.
+
+These are the two families already named here, appearing in a second place: reading bytes outside the verified boundary, and a field that cannot reflect what happened.
+
+**Goal.** An audit answers for exactly the platform the authority pins, and refuses rather than answers for a different one. Every disposition it publishes is computed from what the run observed, so a report that says "not closed" is a measurement rather than a constant. Where an audit reads physical files, it records their digests, and that record — not a repository-wide cleanliness assertion — is what carries integrity, so the audit does not block on state that cannot reach its answer.
+
+**Status: addressed.** The pinned commit is now taken from the same platform package the materializer reads, and a mismatch raises `INSPECTED_PLATFORM_COMMIT_IS_NOT_PINNED` instead of producing a report. The disposition is derived from the references actually resolved. Verified in both directions: against the unpinned branch the audit refuses; against `6fcb8b34` it reports 21 unresolved, which is the truth at that commit.
+
 ## Calibration of the current claims
 
 The existing documentation is unusually disciplined: `embodimentRoundTrip`, `databaseRoundTrip` and `crossApply` are carried as `NOT_PROVEN` into every receipt, and the limits of finite vectors are stated where they apply. Two statements reach slightly past what runs.
@@ -126,6 +140,7 @@ The 994 counts regions across ten physical bodies that embody ten transformation
 | 5 | Native code boundary | Currently benign, fails without diagnostic when it stops being benign |
 | 6 | Mutation coverage | Measurement gap, not a defect |
 | 7 | Smaller items | Legibility and single-writer hygiene |
+| 8 | Audit pinned to the wrong platform | Found later; both families above, recurring in the audit layer |
 
 ## State after these changes
 
@@ -151,3 +166,5 @@ The totals are unchanged because the changes strengthen what is checked rather t
 The contract gate reports 2337 TypeScript assignments, 976 required compiler rejections and 25764 runtime vectors, with no catalog contract lacking positive coverage. `audit:lowering` continues to report `DECLARED_CONFORMANCE_REFERENCES_NOT_CLOSED` across 21 mechanics, which is the pre-existing and correctly reported state of the declared conformance references, untouched by this work.
 
 Nothing in this review remains open. The acceptance dimensions that were `NOT_PROVEN` before — full Capability/Scenario round trip, authority/database round trip, Cross-Apply — are unchanged and remain outside the scope of these findings.
+
+Cross-Apply has since been taken up as its own line of work, and it surfaced a layer beneath everything reviewed here: the declared mechanic conformance references resolve to nothing, so cross-target meaning was undefined. That analysis, the rulings it required and their grounding are in [cross-target-embodiment.md](cross-target-embodiment.md).
