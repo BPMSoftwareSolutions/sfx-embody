@@ -2,7 +2,7 @@ This is a review of the current Node embodiment implementation described in [nat
 
 Nothing here contradicts a retained result. The findings concern the integrity boundary around those results, the strictness of the oracles that produce them, and the fields that carry them.
 
-Findings 1 through 6 and part of 7 are now addressed; each carries a status below, and the closing section records what was re-verified. Line references describe the implementation as reviewed, at implementation digest `sha256:a81932af…`; the lines have since moved, and the surrounding quoted code identifies the site.
+Findings 1 through 6, part of 7, and 8 are now addressed; each carries a status below, and the closing section records what was re-verified. Line references describe the implementation as reviewed, at implementation digest `sha256:a81932af…`; the lines have since moved, and the surrounding quoted code identifies the site.
 
 ## What the review verified
 
@@ -128,6 +128,8 @@ All 994 expression regions recover their transformation authority — true modul
 The 994 counts regions across ten physical bodies that embody ten transformations, each independently revealed. The count is defensible as a count of verified regions and reads as a count of distinct ones.
 
 **Goal.** Every headline number states its unit and the normalization it tolerates, so a reader arrives at the same interpretation as the code without opening the code. Where a comparison is deliberately modulo something, the claim names what it is modulo and where the un-normalized form is retained.
+
+**Status: addressed in the documents the calibration governs.** [native-embodiment-repair.md](native-embodiment-repair.md) and the README now state the 994 count together with the empty-segment path-spelling normalization it is modulo, and name `pathSpelling` in lineage as the retained un-normalized form.
 
 ## Priority
 

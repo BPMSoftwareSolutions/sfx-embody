@@ -57,7 +57,7 @@ So the strict rulings cost nothing against the current estate. That is the point
 
 ## What was produced, and where it lives
 
-On platform branch `embody-python-csharp-mechanics`, based on `6fcb8b34` and **not pinned**: 157 vectors across the 32 mechanics that have an observing embodiment, a runner that tests any target's evaluator, and 17 recorded decisions. Each decision states the question, the ruling, the rationale and the measurement that grounded it. The four mechanics excluded declare in their own authoring notes that no embodiment observes them.
+On platform branch `embody-python-csharp-mechanics`, based on `6fcb8b34` and **not pinned**: 157 vectors across the 32 mechanics that have an observing embodiment, a runner that tests any target's evaluator, and 17 recorded decisions. Each decision states the question, the ruling, the rationale and the measurement that grounded it. Of the four mechanics excluded, three declare in their own authoring notes that no embodiment observes them; `bind-path` has no observing embodiment at all.
 
 Running the existing Node evaluator against those vectors:
 
@@ -74,7 +74,7 @@ Nothing already claimed becomes false, but one distinction now has to be stated 
 
 The 200-vector differential corpus in `verify-native-projection.mjs` establishes that the **lowering agrees with the selected provider** — same result, same scope mutation, same failure. It does not establish that either conforms to declared mechanic meaning, and at 16 of 32 the provider does not. Both statements are true at once: the Node bodies faithfully embody the provider they were resolved to, and that provider diverges from the declared meaning in 24 measured ways. Cross-Apply needs the second property, which is why layer 0 had to come first.
 
-`audit:lowering` continues to report `DECLARED_CONFORMANCE_REFERENCES_NOT_CLOSED` across 21 mechanics. That remains correct at the pinned commit, and will stay correct until the platform branch is merged and re-pinned.
+`audit:lowering` continues to report `DECLARED_CONFORMANCE_REFERENCES_NOT_CLOSED` across 21 mechanics — the subset of the 36 conformance-ref mechanics that the three selected capabilities actually use, since the audit is scoped to retained lineage. That remains correct at the pinned commit, and will stay correct until the platform branch is merged and re-pinned.
 
 ## Remaining, in order
 

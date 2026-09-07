@@ -6,3 +6,4 @@ embodiment.receipt.json
 .env
 .env.*
 !.env.example
+.tmp*/
