@@ -48,7 +48,8 @@ export class EmitImmutableBlueprintAuthorityScenario {
         this.clock = clock;
     }
     async perform(input, context) {
-        const emitImmutableBlueprintAuthorityPortResult = await this.dependencies["emit-immutable-blueprint-authority-port"].execute(input, context.rootInput);
+        const root = context.rootInput ?? input;
+        const emitImmutableBlueprintAuthorityPortResult = await this.dependencies["emit-immutable-blueprint-authority-port"].execute(input, root);
         return emitImmutableBlueprintAuthorityPortResult;
     }
     async execute(input, context) {

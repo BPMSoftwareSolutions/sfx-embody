@@ -49,7 +49,8 @@ export class AdaptJobMarketIntelligenceEvidenceScenario {
         this.clock = clock;
     }
     async perform(input, context) {
-        const adaptJobMarketIntelligenceEvidencePortResult = await this.dependencies["adapt-job-market-intelligence-evidence-port"].execute(input, context.rootInput);
+        const root = context.rootInput ?? input;
+        const adaptJobMarketIntelligenceEvidencePortResult = await this.dependencies["adapt-job-market-intelligence-evidence-port"].execute(input, root);
         const jobMarketIntelligenceAdapterRecordResult = await this.dependencies["verify-jmi-record-binding"].invoke(adaptJobMarketIntelligenceEvidencePortResult, context, 1);
         const jobMarketIntelligenceAdapterRecordResult$occurrence = await this.dependencies["verify-jmi-type-admission"].invoke(jobMarketIntelligenceAdapterRecordResult, context, 2);
         const jobMarketIntelligenceAdapterRecordResult$occurrence$occurrence = await this.dependencies["bind-jmi-adapter-receipt"].invoke(jobMarketIntelligenceAdapterRecordResult$occurrence, context, 3);

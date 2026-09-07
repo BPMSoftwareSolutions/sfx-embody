@@ -49,7 +49,8 @@ export class BindJmiAdapterReceiptScenario {
         this.clock = clock;
     }
     async perform(input, context) {
-        const bindJmiAdapterReceiptPortResult = await this.dependencies["bind-jmi-adapter-receipt-port"].execute(input, context.rootInput);
+        const root = context.rootInput ?? input;
+        const bindJmiAdapterReceiptPortResult = await this.dependencies["bind-jmi-adapter-receipt-port"].execute(input, root);
         return bindJmiAdapterReceiptPortResult;
     }
     async execute(input, context) {

@@ -48,7 +48,8 @@ export class RequireBlueprintConformanceEvidenceScenario {
         this.clock = clock;
     }
     async perform(input, context) {
-        const requireBlueprintConformanceEvidencePortResult = await this.dependencies["require-blueprint-conformance-evidence-port"].execute(input, context.rootInput);
+        const root = context.rootInput ?? input;
+        const requireBlueprintConformanceEvidencePortResult = await this.dependencies["require-blueprint-conformance-evidence-port"].execute(input, root);
         return requireBlueprintConformanceEvidencePortResult;
     }
     async execute(input, context) {

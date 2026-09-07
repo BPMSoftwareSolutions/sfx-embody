@@ -12,7 +12,9 @@ The same resolver was used without modification for all three capabilities:
 
 There are 0 numbered expression variables, 0 numbered state variables and 0 numbered dependency aliases in 465 planned files. The previous Expression runtime and mechanic dictionary are retired. Original runtime dependencies and the five-step Scenario Kernel remain real platform implementations.
 
-The native resolver and inverse reader cover all 32 pure mechanics implemented by the selected Node provider. A 200-vector corpus checks execution against that provider and recovers each vector from emitted native syntax. Those are candidate conformance tests, not fabricated admitted evidence. The actual capability fixtures separately exercised 64 native port comparisons and 320 kernel observations. All 994 expression regions across ten transformations round-trip to their retained transformation declarations. Equality mutation checks fail when the emitted operator changes.
+The native resolver and inverse reader cover all 32 pure mechanics implemented by the selected Node provider. A 200-vector corpus checks execution against that provider and recovers each vector from emitted native syntax. Those are candidate conformance tests, not fabricated admitted evidence. The actual capability fixtures separately exercised 64 native port comparisons and 320 kernel observations. All 994 expression regions across ten transformations round-trip to their retained transformation declarations. A declared eight-class mutation set is applied to every emitted port body; the reveal rejects each mutation the body admits, and the classes a body does not exercise are reported per port as unmeasured rather than counted as passing.
+
+Platform integrity does not rest on the commit pin alone. Built output is ignored in the platform repository, so the compiler chain and the copied kernel are outside revision control; every platform byte this materializer reads is digested as it is read, recorded in evidence as the platform surface, and bound into each receipt as platformDigest. The verified set is the set that was loaded.
 
 The inverse reader obtains literals, operators, operands, field names, paths and lexical bindings from the native AST. Source maps supply semantic addresses and reversible identifier mappings. The recovered expressions are compared against separately retained, digest-checked authority. Binding and evaluation order remain significant. Formatting is ignored. The verifier rejects extra executable statements in port bodies and checks native helper implementations against the selected provider.
 
@@ -33,6 +35,8 @@ The user's acceptance law remains the bar. Transformation recovery is one part o
 
 The original 17-fixture baseline, source, lockfiles, authority bundles and evidence are recorded in the [baseline manifest](../baselines/bbf0345d901983b6c0eeab449c2842419a3154b56bf2d04a973cf51c6974d66a/baseline.manifest.json). Every evidence directory and embodiment.receipt.json file is kept locally and ignored by Git, including Scenario and baseline records. Receipt digests bind contract, native projection and lineage proofs. The complete latest run is retained locally at evidence/regression-results.json. Verifying the historical baseline requires its saved local evidence and receipts.
 
-Implementation: sha256:a81932af72490a7c1f0017005995dbd7661abf2b25421d1bd61644028ea78643
+Implementation: sha256:8c8e532e59b305c6c0e28e9725def67204b4b9162d74668cd069a9f6cfc2a322
+
+Open findings and the goals behind these changes: [embodiment-review-findings.md](embodiment-review-findings.md). The retained regression evidence predates this implementation digest and is refreshed by npm run verify:estate against the loaded database.
 
 Database snapshot: sha256:38debec6dbfa1266f68d903166f69b831c178ffe967208900efcddd9ce2973bc

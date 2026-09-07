@@ -113,6 +113,7 @@ export class NodeConsumerObjectProvider {
     this.sourceDigest = digest(mechanicSource);
     this.provenance = provenance;
     this.resolvedTransformationPorts = resolvedTransformationPorts;
+    this.emittedImports = new Set();
     this.mechanics = new Map();
     for (const declaration of mechanicDeclarations) {
       const operation = declaration.semantics.mechanic?.authoringForm?.operation;
@@ -149,7 +150,7 @@ export class NodeConsumerObjectProvider {
       const base = `embodiments/${physicalSegment(capabilityId)}/scenarios/${physicalSegment(scenario.scenarioId)}/node/body`;
       const authority = executionAuthorities.find(a => a.id === scenario.event.executionAuthorityId);
       if (!authority) throw new Error('EXECUTION_AUTHORITY_NOT_RESOLVED:' + scenario.scenarioId);
-      const dependencies = [], statements = [], used = new Set(), helpers = new Set(), resultNames = new Set(['input']);
+      const dependencies = [], statements = [], helpers = new Set(), resultNames = new Set(['input']);
       let state = 'input';
       for (const [ordinal, operation] of authority.operations.entries()) {
         const responsibilityId = operation.portId ?? scenarios.find(s => s.scenarioId === operation.scenarioId)?.outcome.outcomeId;
@@ -166,14 +167,14 @@ export class NodeConsumerObjectProvider {
           const lowering = new NativeExpressionProjection(this.ts, this.mechanics, this.bodies);
           const expression = lowering.emit(transformation.expression);
           const nodes = lowering.nodes;
-          nodes.forEach(n => { used.add(n.operation); n.providerSourceRef = this.sourceRef; });
+          nodes.forEach(n => { n.providerSourceRef = this.sourceRef; });
           lowering.helpers.forEach(helper => helpers.add(helper));
           const module = `providers/${physicalSegment(operation.portId)}.mjs`;
           output(`${base}/${module}`, `// Generated from ${transformation.sourceRef}; ${transformation.sourceDigest}\n` +
             (lowering.helpers.size ? `import { ${[...lowering.helpers].sort().join(', ')} } from './native-mechanics.mjs';\n\n` : '') +
             `export class ${identifier(operation.portId)} {\n  execute(input, root = input) {\n    return ${expression};\n  }\n}\n`, [transformation.sourceRef]);
           dependencies.push({ id: operation.portId, module: './' + module, className: identifier(operation.portId), kind: operation.kind });
-          statements.push(`    const ${next} = await this.dependencies[${JSON.stringify(operation.portId)}].execute(${state}, context.rootInput);`);
+          statements.push(`    const ${next} = await this.dependencies[${JSON.stringify(operation.portId)}].execute(${state}, root);`);
           lineage.push({ scenarioId: scenario.scenarioId, operationOrdinal: ordinal, portId: operation.portId,
             transformationId: transformation.id, sourceRef: transformation.sourceRef, sourceDigest: transformation.sourceDigest,
             physicalFile: `${base}/${module}`, bindings: lowering.bindings, helpers: [...lowering.helpers], nodes });
@@ -198,9 +199,17 @@ export class NodeConsumerObjectProvider {
         prior = required.size;
         for (const s of this.preludeStatements) if (s.name && required.has(s.name.text)) scan(s.getText());
       } while (required.size !== prior);
+      // Every module specifier the helper module carries is recorded so the
+      // materializer can hold when one does not resolve inside the body it built.
+      for (const s of this.preludeStatements) if (this.ts.isImportDeclaration(s)) this.emittedImports.add(s.moduleSpecifier.text);
       const prelude = this.preludeStatements.filter(s => this.ts.isImportDeclaration(s) || (s.name && required.has(s.name.text))).map(s => s.getText()).join('\n');
       output(`${base}/providers/native-mechanics.mjs`, `// Native helpers from ${this.sourceRef}; ${this.sourceDigest}\n` + prelude +
         `\nexport { ${[...helpers].sort().join(', ')} };\n`, [this.sourceRef]);
+      // The Scenario's own admitted input is the root of every transformation it
+      // invokes. Resolving it once per invocation keeps it independent of the
+      // ordinal a port occupies; a port after a child Scenario receives the same
+      // root as a port at ordinal zero.
+      const rootBinding = dependencies.some(d => d.kind === 'invoke-port') ? '    const root = context.rootInput ?? input;\n' : '';
       const scenarioClass = identifier(scenario.scenarioId) + 'Scenario';
       const declaration = dataLiteral(scenario);
       const content = `// Generated from database-retained Scenario and execution authority.\n` +
@@ -209,7 +218,7 @@ export class NodeConsumerObjectProvider {
         `const declaration = ${declaration};\n\nexport class ${scenarioClass} {\n` +
         `  static capabilityId = ${JSON.stringify(capabilityId)};\n  static scenarioId = ${JSON.stringify(scenario.scenarioId)};\n` +
         `  constructor(dependencies, contracts, observer, clock) {\n    this.dependencies = dependencies;\n    this.contracts = contracts;\n    this.observer = observer;\n    this.clock = clock;\n  }\n\n` +
-        `  async perform(input, context) {\n${statements.join('\n')}\n    return ${state};\n  }\n\n` +
+        `  async perform(input, context) {\n${rootBinding}${statements.join('\n')}\n    return ${state};\n  }\n\n` +
         `  async execute(input, context) {\n    const kernel = new ScenarioKernel(this.contracts, {\n      async resolve(event) {\n        if (event.executionAuthorityId !== declaration.event.executionAuthorityId) throw new Error('EXECUTION_AUTHORITY_DIVERGENCE');\n        return { executionAuthorityId: event.executionAuthorityId, handler: declaration.event };\n      }\n    }, { execute: async (_authority, value) => this.perform(value, context) }, new DispositionResolver(), this.observer, this.clock);\n` +
         `    const execution = await kernel.execute(declaration, { ...context, input });\n    context.collect?.(execution);\n    return execution;\n  }\n\n` +
         `  async invoke(input, parent, ordinal) {\n    const ancestry = parent.ancestry ?? [];\n    if (ancestry.includes(declaration.scenarioId)) throw new Error('RECURSIVE_SCENARIO_INVOCATION');\n    const execution = await this.execute(input, { ...parent,\n      executionId: parent.executionId + '/' + ordinal + '/' + declaration.scenarioId,\n      rootInput: structuredClone(input), parentExecutionId: parent.executionId, ancestry: [...ancestry, declaration.scenarioId]\n    });\n    if (execution.disposition === 'failed' || execution.disposition === 'rejected') throw new Error('CHILD_SCENARIO_' + execution.disposition.toUpperCase());\n    return execution.outcome;\n  }\n}\n`;

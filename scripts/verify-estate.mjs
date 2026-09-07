@@ -65,7 +65,7 @@ for (const component of components) if (hash(await fs.readFile(path.join(root, c
 const totals = cases.reduce((total, result) => {
   for (const key of Object.keys(total)) total[key] += result.verification?.[key] ?? 0;
   return total;
-}, { fixtures: 0, passed: 0, scenarioBodies: 0, mechanicClasses: 0, kernelObservations: 0, mechanicInvocations: 0, nativeExpressionNodes: 0, nativePortComparisons: 0, negativeChecks: 0 });
+}, { fixtures: 0, passed: 0, scenarioBodies: 0, kernelObservations: 0, nativeExpressionNodes: 0, nativePortComparisons: 0, negativeChecks: 0 });
 const evidence = { executedAt: new Date().toISOString(), command: 'node scripts/verify-estate.mjs config/regression.cases.json',
   implementationDigest, components, snapshotId, projectionDigest, cases, totals,
   disposition: cases.every(c => c.disposition === 'PASSED') ? 'PASSED' : 'FAILED',

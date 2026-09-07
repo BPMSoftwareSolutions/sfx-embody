@@ -48,7 +48,8 @@ export class RequireBlueprintGeometryProofScenario {
         this.clock = clock;
     }
     async perform(input, context) {
-        const requireBlueprintGeometryProofPortResult = await this.dependencies["require-blueprint-geometry-proof-port"].execute(input, context.rootInput);
+        const root = context.rootInput ?? input;
+        const requireBlueprintGeometryProofPortResult = await this.dependencies["require-blueprint-geometry-proof-port"].execute(input, root);
         return requireBlueprintGeometryProofPortResult;
     }
     async execute(input, context) {

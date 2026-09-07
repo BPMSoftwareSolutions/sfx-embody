@@ -49,7 +49,8 @@ export class VerifyJmiRecordBindingScenario {
         this.clock = clock;
     }
     async perform(input, context) {
-        const verifyJmiRecordBindingPortResult = await this.dependencies["verify-jmi-record-binding-port"].execute(input, context.rootInput);
+        const root = context.rootInput ?? input;
+        const verifyJmiRecordBindingPortResult = await this.dependencies["verify-jmi-record-binding-port"].execute(input, root);
         return verifyJmiRecordBindingPortResult;
     }
     async execute(input, context) {

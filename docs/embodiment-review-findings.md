@@ -2,9 +2,11 @@ This is a review of the current Node embodiment implementation described in [nat
 
 Nothing here contradicts a retained result. The findings concern the integrity boundary around those results, the strictness of the oracles that produce them, and the fields that carry them.
 
+Findings 1 through 6 and part of 7 are now addressed; each carries a status below, and the closing section records what was re-verified. Line references describe the implementation as reviewed, at implementation digest `sha256:a81932af…`; the lines have since moved, and the surrounding quoted code identifies the site.
+
 ## What the review verified
 
-`npm test` passes 4/4. `npm run audit:source` runs without the database and re-hashes all 465 planned body files against their plans with no drift, so the tracked bodies match their retained plans. The implementation digest in [native-embodiment-repair.md](native-embodiment-repair.md) and in `evidence/regression-results.json` both recompute to `sha256:a81932af…` from the current source. The headline totals (17/17 fixtures, 64 native port comparisons, 320 kernel observations, 994 expression regions) match the retained totals exactly. `npm run verify:estate` was not re-run; it requires the loaded database workspace and the pinned SDA checkout.
+At the time of review, `npm test` passed 4/4 and `npm run audit:source` re-hashed all 465 planned body files against their plans with no drift. The implementation digest in [native-embodiment-repair.md](native-embodiment-repair.md) and in `evidence/regression-results.json` both recomputed to `sha256:a81932af…` from the source as it then stood, and the headline totals (17/17 fixtures, 64 native port comparisons, 320 kernel observations, 994 expression regions) matched the retained totals exactly. `npm run verify:estate` was not run; it requires the loaded database workspace.
 
 ## What holds
 
@@ -23,9 +25,13 @@ The comparison at [:100](../src/verification/verify-native-projection.mjs#L100) 
 
 [materialize-node.mjs:46](../src/materialize-node.mjs#L46) checks `tools/src`, `languages/typescript` and `package.json` for modification against the pinned commit. The Gherkin parser, scenario graph builder, transition graph builder, type graph builder, target projection graph builder and structural projection provider are all loaded from `artifacts/tools/dist/…` at [:49-51](../src/materialize-node.mjs#L49-L51) and [:102-104](../src/materialize-node.mjs#L102-L104), which no checked path covers. `git diff --name-only` also does not report untracked files, so a newly added file inside a checked path passes as well.
 
-A modified or added built tool therefore passes the commit check and silently shapes every generated body. The README states that the materializer verifies the selected source revision and source digests; that is true of the copied kernel and false of the compiler chain.
+A modified or added built tool therefore passes the commit check and silently shapes every generated body.
+
+The gap is wider than a missing pathspec, and adding one would not have closed it. `dist/` is ignored in the platform repository (`.gitignore:14`), so `artifacts/tools/dist` and `languages/typescript/dist` both hold zero tracked files. `git diff` reports nothing for either by construction. That covers the compiler chain *and* the kernel copied into every body, so the README's claim that the materializer verifies the selected source revision and source digests held for neither. Only content digests of the bytes actually read can establish this boundary.
 
 **Goal.** The set of platform files the materializer reads and the set it verifies are the same set, and that set is derived rather than declared twice. Verification should follow from the act of loading — a platform artifact becomes part of the integrity boundary because the materializer read it, not because a path list was maintained in parallel and happened to mention it. Untracked and modified files are equally disqualifying, because both mean the bytes in use are not the bytes the pin names. A platform whose readable surface cannot be established this way is a hold, not a warning.
+
+**Status: addressed.** Every platform read now passes through a single `readPlatform` on the materializer, which digests the bytes and records them; module loads additionally walk their transitive relative imports, so the verified set is the set that executed. The surface travels in `evidence/authority.json` as `platform.files` and binds into each receipt as `platformDigest`. The commit check is retained and extended with an untracked-file check for the paths git can still speak for. A negative control confirmed the mechanism: appending an inert comment to `artifacts/tools/dist/primitives/sha256.js` changed `platformDigest` while `git diff` over the checked paths still reported clean. 34 platform files are now digested per run, 18 of them under `dist/` and previously outside any integrity boundary.
 
 ## Finding 2 — The differential oracle compares failures only by error name
 
@@ -35,6 +41,8 @@ This is the softest link in an otherwise strict oracle. Both sides execute on th
 
 **Goal.** The oracle distinguishes two executions exactly as strictly as the runtime does, and applies the same standard to failures as to values. A vector passes only when the lowering and the selected provider are observationally indistinguishable — a failure is a result, carrying its own identity, and equivalence of failure is a claim that must be earned rather than assumed from a shared class name.
 
+**Status: addressed.** `capture` now records `{ name, message }`, and the port observation in `verify-node.mjs` records failures in the same shape so the two remain comparable. All 17 fixtures and the full vector corpus pass under the stricter comparison, so the lowering and the selected provider were already failing identically; the corpus now holds them to it.
+
 ## Finding 3 — Retained evidence carries counters that cannot become non-zero
 
 `mechanicClasses` and `mechanicInvocations` are always `0` in the regression totals: [verify-node.mjs:78](../src/verification/verify-node.mjs#L78) declares `mechanicClassCount` and never increments it, and [:167](../src/verification/verify-node.mjs#L167) hardcodes `mechanicInvocations: 0`. `nativeChecks` at [:106](../src/verification/verify-node.mjs#L106) is never appended to, so every `conformance.json` reports `nativeBodyChecks: 0`. [:26](../src/verification/verify-node.mjs#L26) passes `observeMechanic` into `createScenario`, whose generated signature is `({ observer, clock })`; the argument is dropped and `mechanicObservations` is empty in every fixture record.
@@ -42,6 +50,8 @@ This is the softest link in an otherwise strict oracle. Both sides execute on th
 These are vestiges of the retired mechanic dictionary. In a document meant to be read as proof, a zero with no path to being non-zero is worse than an absent field: it reads as a check that ran and found nothing.
 
 **Goal.** Every field in retained evidence is produced by a check that could have failed. The evidence surface is derived from the checks actually performed, so a retired check removes its field rather than leaving a zero behind, and a reader can treat any present counter as a live measurement. Fields that record deliberate absence say so in their own vocabulary, as `NOT_PROVEN` and `NOT_REQUESTED` already do.
+
+**Status: addressed.** `mechanicClasses`, `mechanicInvocations`, `nativeBodyChecks` and `mechanicObservations` are removed, along with the `observeMechanic` argument the generated composition never accepted and the `nativeChecks` array nothing appended to. The estate totals no longer carry the two dead counters. Every remaining counter is produced by a check that can fail.
 
 ## Finding 4 — The root binding is supplied by a parameter default rather than by the composition
 
@@ -53,6 +63,8 @@ A second question sits behind it. [:215](../src/resolvers/node/consumer-object-p
 
 **Goal.** `root` has one meaning, traceable to authority, and the composition supplies it explicitly at every invocation depth. No binding that authority can reference is ever produced by a language-level default that substitutes a different value when the caller omits it — an omitted binding is an error in the generated composition, not a silent substitution. The generated body should be verifiable against the declared meaning of `root` independently of which ordinal the port happens to occupy.
 
+**Status: addressed, with one question left open.** `perform` now resolves `const root = context.rootInput ?? input;` once per invocation and passes that to every port, so a port at any ordinal receives the same root as a port at ordinal zero. This is the only change to any generated body: ten `scenario.mjs` files, two lines each, with contracts, port bodies and copied runtime byte-identical. The remaining question is the one named above and is not resolved by this change: `invoke` sets `rootInput` to a `structuredClone` of the child's input, so a child's `root` is a distinct object from its `input`, while at a root Scenario the two are the same reference. Reference identity is observable through `equals`, so this is a real distinction, and it should be settled against the declared meaning of `root` rather than left to the call shape.
+
 ## Finding 5 — Native code enters bodies through two boundaries with one rule
 
 [consumer-object-provider.mjs:201](../src/resolvers/node/consumer-object-provider.mjs#L201) emits every import declaration from the selected mechanic source unconditionally. `copyRuntime` ([materialize-node.mjs:119-133](../src/materialize-node.mjs#L119-L133)) enforces `NATIVE_IMPORT_OUTSIDE_PLATFORM` for the kernel copies, and only the single sibling `native-mechanic-primitives.mjs` is copied into the body ([:136-137](../src/materialize-node.mjs#L136-L137), [:149](../src/materialize-node.mjs#L149)).
@@ -63,6 +75,8 @@ The verification harness has the mirror-image gap. [verify-native-projection.mjs
 
 **Goal.** One boundary rule governs all native code entering a body, applied wherever code is copied or emitted. Every import a generated body contains resolves to a file the materializer placed in that body, and generation holds when it cannot. The differential harness executes the helpers the body actually ships rather than a reconstruction of them, so helper fidelity and helper behaviour are established over the same artifact.
 
+**Status: addressed.** The materializer now enforces one rule for every module specifier the generated helper module carries: a Node builtin, or a relative specifier resolving to a file this run placed in the same body, or the generation holds. On the verification side the `new Function` reconstruction is replaced by loading the provider's own bytes as a module beside the body's copied primitives, where its relative imports resolve as they do in a shipped body. This matters more than it appeared: `canonicalize` is recursive and resolved under the old approach only because a named function expression binds its own name. It now resolves the way the shipped module resolves it.
+
 ## Finding 6 — The reveal's sensitivity is measured at one site by one operator
 
 [verify-native-projection.mjs:179](../src/verification/verify-native-projection.mjs#L179) is `body.replace(' === ', ' !== ')`. `String.prototype.replace` with a string pattern mutates the first occurrence only, and a body containing no ` === ` records `mutationRejected: null` and runs no check at all.
@@ -70,6 +84,8 @@ The verification harness has the mirror-image gap. [verify-native-projection.mjs
 The claim in [native-embodiment-repair.md](native-embodiment-repair.md) that equality mutation checks fail when the emitted operator changes is accurate for what runs. What runs is one operator at one site, which is weaker than the reveal's actual coverage and does not establish it.
 
 **Goal.** The reveal's sensitivity is measured against a declared mutation set that covers each operator and structural form the reveal claims to detect, and the coverage of that set is reported as evidence rather than inferred. A body that admits no mutation from the set is a gap in the measurement and is reported as one, so the strength of the reveal is a number that can be read rather than a property that must be assumed.
+
+**Status: addressed.** A declared eight-entry mutation set replaces the single first-occurrence `replace`: strict equality, ordering comparison, path optionality, mechanic identity, collection mapping, collection quantifier, string casing and digest algorithm. Each is applied with `replaceAll` where the body contains it, and the reveal must reject it. Entries a body does not contain are reported per port as `mutationsUnmeasured` rather than silently skipped, so the measurement's gaps are legible.
 
 ## Finding 7 — Smaller items
 
@@ -79,7 +95,11 @@ The claim in [native-embodiment-repair.md](native-embodiment-repair.md) that equ
 
 `@estate_model_pk` appears in the query text at [read-authority.mjs:12](../src/read-authority.mjs#L12) and [audit-lowering-evidence.mjs:18](../scripts/audit-lowering-evidence.mjs#L18) but is never bound at either call site, which pass only `rowLimit`. The parameter resolves from ambient state inside the database reader, invisible where the query is read.
 
-**Goal.** Each generated artifact is produced once, from one filter, and two artifacts describing the same thing derive from the same expression. Every query parameter is bound where the query is written, so the selection a query depends on is legible at the call site rather than resolved from reader state. State that is written is read.
+**Goal.** Each generated artifact is produced once, from one filter, and two artifacts describing the same thing derive from the same expression. State that is written is read.
+
+**Status: partly addressed, one item withdrawn.** `used` is removed. `mechanic-lineage.json` is now written once, after the printing pass that attaches generated regions, and both it and `transformation-authority.json` derive from a single `bodyPorts(base)` expression, so the two cannot describe different port sets.
+
+The `@estate_model_pk` item is withdrawn. The database reader binds that parameter itself, from `source.current_model` under `HOLDLOCK`, for every query it runs (`src/query/run.mjs`). Model selection is deliberately the reader's to own, so callers cannot query a different model than the one the snapshot pins. Binding it at the call site would weaken that guarantee, not clarify it. The original observation confused an ambient dependency with an unbound parameter.
 
 ## Calibration of the current claims
 
@@ -102,3 +122,28 @@ The 994 counts regions across ten physical bodies that embody ten transformation
 | 5 | Native code boundary | Currently benign, fails without diagnostic when it stops being benign |
 | 6 | Mutation coverage | Measurement gap, not a defect |
 | 7 | Smaller items | Legibility and single-writer hygiene |
+
+## State after these changes
+
+The implementation digest is now `sha256:8c8e532e59b305c6c0e28e9725def67204b4b9162d74668cd069a9f6cfc2a322`. The resolver version carried by every receipt is `sha256:348c437b…` and matches the resolver source.
+
+Materialization and verification were re-run for all three Capabilities from the retained authority bundles under `evidence/authority/`, against the pinned platform checkout `6fcb8b34…`. The bundles stand in for the database read; every other step is the one `verify:estate` performs.
+
+| Measure | Before | After |
+| --- | ---: | ---: |
+| Retained fixtures passing | 17/17 | 17/17 |
+| Kernel observations | 320 | 320 |
+| Native expression regions | 994 | 994 |
+| Native port comparisons | 64 | 64 |
+| Planned body files re-hashed by `audit:source` | 465 | 465 |
+| Resolver tests | 4/4 | 4/4 |
+| Platform files inside the integrity boundary | 0 | 34 |
+| Reveal mutation classes declared | 1 | 8 |
+
+The totals are unchanged because the changes strengthen what is checked rather than what is produced. The single change to generated output is the root binding in ten `scenario.mjs` files; contract projections, port bodies and copied runtime are byte-identical.
+
+Two obligations remain open, both requiring the database workspace:
+
+`evidence/regression-results.json` is stale. It still records the previous implementation digest and the two retired counters, and only `npm run verify:estate` against the loaded database can refresh it. It was deliberately not rewritten by hand: it is the receipt of a database-backed run, and hand-editing it would make it exactly the kind of unearned evidence Finding 3 objects to. Anyone reading it before that run should treat its `implementationDigest` as naming a superseded implementation.
+
+The `root` cloning question under Finding 4 is a question about declared meaning, not about code, and is the one item here that a reader of the authority has to settle rather than a reader of the implementation.

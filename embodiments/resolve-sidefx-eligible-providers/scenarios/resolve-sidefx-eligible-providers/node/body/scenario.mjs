@@ -49,7 +49,8 @@ export class ResolveSidefxEligibleProvidersScenario {
         this.clock = clock;
     }
     async perform(input, context) {
-        const resolveSidefxEligibleProvidersPortResult = await this.dependencies["resolve-sidefx-eligible-providers-port"].execute(input, context.rootInput);
+        const root = context.rootInput ?? input;
+        const resolveSidefxEligibleProvidersPortResult = await this.dependencies["resolve-sidefx-eligible-providers-port"].execute(input, root);
         return resolveSidefxEligibleProvidersPortResult;
     }
     async execute(input, context) {

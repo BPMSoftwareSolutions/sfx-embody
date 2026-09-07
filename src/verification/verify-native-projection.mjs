@@ -15,6 +15,18 @@ const normalized = expression => JSON.stringify(comparableExpression(expression)
 const L = value => ({ op: 'literal', value });
 const P = (path = '', from = 'input') => ({ op: 'path', from, path });
 const vectorProofCache = new Map();
+// Each entry names a semantic distinction the reveal asserts. Textual so it can
+// be applied to any emitted body without re-deriving its AST.
+const mutationSet = [
+  { label: 'strict equality', from: ' === ', to: ' !== ' },
+  { label: 'ordering comparison', from: ' > ', to: ' < ' },
+  { label: 'path optionality', from: '?.', to: '.' },
+  { label: 'mechanic identity', from: 'JSON.stringify(', to: 'JSON.parse(' },
+  { label: 'collection mapping', from: '.flatMap(', to: '.map(' },
+  { label: 'collection quantifier', from: '.some(', to: '.every(' },
+  { label: 'string casing', from: '.toLowerCase(', to: '.trim(' },
+  { label: 'digest algorithm', from: "'sha256'", to: "'sha512'" },
+];
 
 function observeGraph(value, seen = new Map()) {
   if (value === null || typeof value !== 'object') {
@@ -81,10 +93,25 @@ export async function verifyNativeProjection(base, sdaRoot, outputRoot, pureCall
   const provider = new NodeConsumerObjectProvider({ typescript: ts, mechanicSource: source, mechanicSourceRef: authority.nativeBinding.implementation_id,
     mechanicExport: authority.nativeBinding.implementation_export, mechanicDeclarations: declarations, provenance: {}, resolvedTransformationPorts: [] });
   const sourceAst = ts.createSourceFile(sourceFile, source, ts.ScriptTarget.Latest, true);
-  const helperFunctions = Object.fromEntries(sourceAst.statements.filter(s => ts.isFunctionDeclaration(s) && s.name.text !== authority.nativeBinding.implementation_export)
-    .map(s => [s.name.text, new Function('return ' + s.getText(sourceAst))()]));
-  const helpers = { crypto, ...helperFunctions };
-  const capture = action => { try { return { value: action() }; } catch (error) { return { error: error.name }; } };
+  const helperNames = sourceAst.statements.filter(s => ts.isFunctionDeclaration(s) && s.name.text !== authority.nativeBinding.implementation_export).map(s => s.name.text);
+  // The provider's helpers are module-local, so they are reached by loading the
+  // provider's own bytes as a module beside the body's copied primitives, where
+  // its relative imports resolve exactly as they do in a shipped body. A helper
+  // that closes over an import or a sibling therefore behaves here as it does
+  // there, instead of resolving by accident.
+  const helperProbe = path.join(base, 'body/providers/native-mechanics.vectors.mjs');
+  let helpers;
+  try {
+    await fs.writeFile(helperProbe, source + `
+export { ${['crypto', ...helperNames].join(', ')} };
+`);
+    const loaded = await import(pathToFileURL(helperProbe).href + '?probe=' + nativeDigest(source).slice(7, 23));
+    helpers = Object.fromEntries(['crypto', ...helperNames].map(name => [name, loaded[name]]));
+  } finally { await fs.unlink(helperProbe).catch(() => {}); }
+  for (const [name, value] of Object.entries(helpers)) assert.ok(value !== undefined, 'Native helper not resolvable from the provider module:' + name);
+  // Finding: a failure is a result. Two executions are equivalent only when they
+  // fail the same way, not merely in the same error class.
+  const capture = action => { try { return { value: action() }; } catch (error) { return { error: { name: error.name, message: error.message } }; } };
   const equivalent = async (expression, input, root) => {
     const lower = new NativeExpressionProjection(ts, provider.mechanics, provider.bodies);
     const marked = lower.emit(expression);
@@ -176,12 +203,17 @@ export async function verifyNativeProjection(base, sdaRoot, outputRoot, pureCall
     const reprojection = ts.createSourceFile('projection.mjs', `const body = ${native};`, ts.ScriptTarget.Latest, true);
     const expression = reprojection.statements[0].declarationList.declarations[0].initializer;
     assert.deepEqual(nativeSyntax(ts, expression), nativeSyntax(ts, methods[0].body.statements[0].expression), 'Native structure outside the recovered mechanic grammar');
-    const mutation = body.replace(' === ', ' !== ');
-    let mutationRejected = null;
-    if (mutation !== body) {
-      try { revealNativeExpressions(ts, mutation, port); mutationRejected = false; } catch { mutationRejected = true; }
-      assert.equal(mutationRejected, true, 'Reveal must detect changed equality semantics');
-    }
+    // Every operator and structural form the reveal claims to check gets a
+    // mutation. Each one that the body actually contains must be rejected, and
+    // the ones it does not contain are reported as unmeasured rather than passed.
+    const mutationChecks = mutationSet.map(({ label, from, to }) => {
+      const mutation = body.replaceAll(from, to);
+      if (mutation === body) return { label, applied: false, rejected: null };
+      let rejected;
+      try { revealNativeExpressions(ts, mutation, port); rejected = false; } catch { rejected = true; }
+      assert.ok(rejected, 'Reveal must detect mutated native semantics:' + label + ':' + port.portId);
+      return { label, applied: true, rejected };
+    });
     const calls = pureCalls.filter(call => call.scenarioId === authority.scenario.scenarioId && call.portId === port.portId);
     for (const call of calls) {
       const scope = structuredClone({ input: call.input, root: call.root });
@@ -191,7 +223,8 @@ export async function verifyNativeProjection(base, sdaRoot, outputRoot, pureCall
       behavioral.push({ portId: port.portId, inputDigest: nativeDigest(pretty(call.input)), outcomeDigest: nativeDigest(pretty(call.result)), passed });
     }
     recovered.push({ portId: port.portId, transformationId: port.transformationId, expression: revelation.expression,
-      nodeCount: revelation.nodeCount, sourceDigest: retainedSource.sourceDigest, physicalDigest: nativeDigest(body), mutationRejected });
+      nodeCount: revelation.nodeCount, sourceDigest: retainedSource.sourceDigest, physicalDigest: nativeDigest(body),
+      mutationChecks, mutationsApplied: mutationChecks.filter(m => m.applied).length, mutationsUnmeasured: mutationChecks.filter(m => !m.applied).map(m => m.label) });
   }
   const used = [...new Set(ports.flatMap(p => p.nodes.map(n => n.operation)))];
   const missingVectors = used.filter(op => !checkedVectors.some(v => v.operations.includes(op)));
@@ -203,5 +236,5 @@ export async function verifyNativeProjection(base, sdaRoot, outputRoot, pureCall
     managedAdmission: 'NOT_REQUESTED' };
   await fs.writeFile(path.join(base, 'evidence/native-projection.json'), pretty(proof));
   return { transformations: ports.length, mechanics: used.length, nodes: recovered.reduce((n, r) => n + r.nodeCount, 0), vectors: checkedVectors.length, portComparisons: behavioral.length,
-    mutationChecks: recovered.filter(r => r.mutationRejected).length, helperChecks: helperChecks.length };
+    mutationsApplied: recovered.reduce((n, r) => n + r.mutationsApplied, 0), mutationSetSize: mutationSet.length, helperChecks: helperChecks.length };
 }

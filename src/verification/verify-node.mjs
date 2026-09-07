@@ -22,8 +22,8 @@ export async function verifyNode(base, sdaRoot, outputRoot) {
   if (!fixtures.length || fixtures.some(f => f.expected.terminalScenarioId !== rootReceipt.scenarioId)) throw new Error('SELECTED_SCENARIO_FIXTURE_AUTHORITY_NOT_ESTABLISHED');
   const results = [], pureCalls = [];
   for (const fixture of fixtures) {
-    const observations = [], mechanics = [], executions = [];
-    const scenario = createScenario({ observer: { observe: value => observations.push(value) }, clock: { now: () => new Date().toISOString() }, observeMechanic: value => mechanics.push(value) });
+    const observations = [], executions = [];
+    const scenario = createScenario({ observer: { observe: value => observations.push(value) }, clock: { now: () => new Date().toISOString() } });
     const observePorts = instance => {
       for (const [portId, dependency] of Object.entries(instance.dependencies)) {
         if (dependency.dependencies) { observePorts(dependency); continue; }
@@ -31,7 +31,7 @@ export async function verifyNode(base, sdaRoot, outputRoot) {
         dependency.execute = (input, root = input) => {
           const call = { scenarioId: instance.constructor.scenarioId, portId, ...structuredClone({ input, root }) };
           try { const value = execute(input, root); call.result = { value: structuredClone(value) }; return value; }
-          catch (error) { call.result = { error: error.name }; throw error; }
+          catch (error) { call.result = { error: { name: error.name, message: error.message } }; throw error; }
           finally { call.after = structuredClone({ input, root }); pureCalls.push(call); }
         };
       }
@@ -54,7 +54,7 @@ export async function verifyNode(base, sdaRoot, outputRoot) {
         return steps.length === 5 && steps.every((o, i) => o.sequence === i && o.status === 'observed');
       })
     };
-    results.push({ fixtureId: fixture.fixtureId, checks, passed: Object.values(checks).every(Boolean), assertions, actual, executions, observations, mechanicObservations: mechanics });
+    results.push({ fixtureId: fixture.fixtureId, checks, passed: Object.values(checks).every(Boolean), assertions, actual, executions, observations });
   }
   // Retain native execution results even if a subsequent structural check fails.
   await writeJson(path.join(base, 'evidence/fixture-results.json'), { fixtureSource: 'fixture-authority.json', fixtures: results });
@@ -75,7 +75,7 @@ export async function verifyNode(base, sdaRoot, outputRoot) {
   await collectBodies(base);
   const printer = ts.createPrinter({ newLine: ts.NewLineKind.LineFeed, removeComments: true });
   const revelations = new Map();
-  let bodyCount = 0, mechanicClassCount = 0;
+  let bodyCount = 0;
   for (const [scenarioId, target] of targetBases) {
     const plan = await readJson(path.join(target, 'evidence/embodiment-plan.json'));
     const receipt = await readJson(path.join(target, 'embodiment.receipt.json'));
@@ -103,11 +103,9 @@ export async function verifyNode(base, sdaRoot, outputRoot) {
     }
     const nativeSource = await fs.readFile(path.join(sdaRoot, authority.nativeBinding.implementation_id), 'utf8');
     const nativeProjection = await verifyNativeProjection(target, sdaRoot, outputRoot, pureCalls);
-    const nativeChecks = [];
     const fixtureExecutions = results.map(result => ({ fixtureId: result.fixtureId,
       executions: result.executions.filter(e => e.scenarioId === scenarioId),
-      observations: result.observations.filter(o => o.scenarioId === scenarioId),
-      mechanicObservations: result.mechanicObservations.filter(o => o.scenarioId === scenarioId) }));
+      observations: result.observations.filter(o => o.scenarioId === scenarioId) }));
     const reveal = { capabilityId: receipt.capabilityId, scenarioId, target: 'node', method: 'Recover transformations from native syntax and checked binding lineage; compare with retained authority and selected-provider execution',
       files, nativeSource: { path: authority.nativeBinding.implementation_id, digest: hash(nativeSource) },
       contractTypeCheck: { files: contractFiles.length, diagnostics: diagnostics.length }, nativeProjection, observedClasses };
@@ -116,7 +114,7 @@ export async function verifyNode(base, sdaRoot, outputRoot) {
       scope: 'CHILD_EXECUTIONS_WITHIN_PARENT_FIXTURES', parentScenarioId: rootReceipt.scenarioId,
       parentFixtureResults: path.relative(path.join(target, 'evidence'), path.join(base, 'evidence/fixture-results.json')).replaceAll('\\', '/'), fixtures: fixtureExecutions });
     const contractFidelity = await verifyContractFidelity(target);
-    revelations.set(scenarioId, { target, reveal, receipt, nativeChecks, contractFidelity, nativeProjection });
+    revelations.set(scenarioId, { target, reveal, receipt, contractFidelity, nativeProjection });
   }
   // Negative checks exercise real admission and exception propagation. These are
   // explicitly test injections, never executable provider substitutes in a body.
@@ -142,11 +140,11 @@ export async function verifyNode(base, sdaRoot, outputRoot) {
   const negativeChecks = { invalidInput: { disposition: rejected.disposition, observations: rejectionObservations }, nestedFailure };
   await writeJson(path.join(base, 'evidence/negative-checks.json'), negativeChecks);
   const passed = results.every(r => r.passed);
-  for (const [scenarioId, { target, receipt, reveal, nativeChecks, contractFidelity, nativeProjection }] of revelations) {
+  for (const [scenarioId, { target, receipt, reveal, contractFidelity, nativeProjection }] of revelations) {
     const conformance = { capabilityId: receipt.capabilityId, scenarioId, target: 'node',
       scope: scenarioId === rootReceipt.scenarioId ? 'RETAINED_CAPABILITY_FIXTURES' : 'CHILD_EXECUTIONS_WITHIN_PARENT_FIXTURES',
       fixtureCount: results.length, fixturePassCount: results.filter(r => r.passed).length,
-      nativeBodyChecks: nativeChecks.length, negativeChecks: scenarioId === rootReceipt.scenarioId ? 'negative-checks.json' : null,
+      negativeChecks: scenarioId === rootReceipt.scenarioId ? 'negative-checks.json' : null,
       contractFidelity, nativeProjection,
       acceptance: { behavioralFixtures: passed ? 'PASSED' : 'FAILED', contractVectors: contractFidelity.missingPositiveCoverage.length ? 'INCOMPLETE' : 'PASSED',
         nativeSemanticStructure: 'TRANSFORMATIONS_CHECKED', nativeLowering: 'TESTED_VECTORS_PASSED', transformationRoundTrip: 'PASSED', embodimentRoundTrip: 'NOT_PROVEN', databaseRoundTrip: 'NOT_PROVEN', crossApply: 'NOT_PROVEN' },
@@ -163,8 +161,8 @@ export async function verifyNode(base, sdaRoot, outputRoot) {
   }
   assert.ok(passed, 'retained fixture expectations failed; inspect fixture-results.json');
   return { capabilityId: rootReceipt.capabilityId, scenarioId: rootReceipt.scenarioId, fixtures: results.length, passed: results.filter(r => r.passed).length,
-    scenarioBodies: targetBases.size, bodyFiles: bodyCount, mechanicClasses: mechanicClassCount,
-    kernelObservations: results.reduce((n, r) => n + r.observations.length, 0), mechanicInvocations: 0,
+    scenarioBodies: targetBases.size, bodyFiles: bodyCount,
+    kernelObservations: results.reduce((n, r) => n + r.observations.length, 0),
     nativeExpressionNodes: [...revelations.values()].reduce((n, r) => n + r.nativeProjection.nodes, 0),
     nativePortComparisons: pureCalls.length, negativeChecks: nestedFailure ? 2 : 1 };
 }
