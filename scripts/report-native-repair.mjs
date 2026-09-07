@@ -58,7 +58,7 @@ Contract projection now retains required const-valued members, closed enum types
 
 The user's acceptance law remains the bar. Transformation recovery is one part of full semantic recovery. These results do not award CONFORMS to the whole embodiment, and they do not claim support for every capability or language merely because these cases pass. Unsupported topology or unresolved provider bindings remain explicit holds.
 
-The original 17-fixture baseline, source, lockfiles, authority bundles and evidence are recorded in the [baseline manifest](../${baseline}/baseline.manifest.json). Every evidence directory is kept locally and ignored by Git, including Scenario and baseline evidence. Receipt digests bind contract, native projection and lineage proofs. The complete latest run is retained locally at evidence/regression-results.json. Verifying the historical baseline requires its saved local evidence.
+The original 17-fixture baseline, source, lockfiles, authority bundles and evidence are recorded in the [baseline manifest](../${baseline}/baseline.manifest.json). Every evidence directory and embodiment.receipt.json file is kept locally and ignored by Git, including Scenario and baseline records. Receipt digests bind contract, native projection and lineage proofs. The complete latest run is retained locally at evidence/regression-results.json. Verifying the historical baseline requires its saved local evidence and receipts.
 
 Implementation: ${regression.implementationDigest}
 
@@ -74,7 +74,7 @@ for (const result of results) {
   const dependencies = await read(path.join(result.base, 'body/dependencies.json'));
   const port = dependencies.find(d => d.kind === 'invoke-port');
   const location = path.relative(root, result.base).replaceAll('\\', '/');
-  links.push(`| ${result.scenarioId} | [Scenario](${location}/body/scenario.mjs), [port](${location}/body/${port.module.replace(/^\.\//, '')}), [composition](${location}/body/composition.mjs) | [receipt](${location}/embodiment.receipt.json) |`);
+  links.push(`| ${result.scenarioId} | [Scenario](${location}/body/scenario.mjs), [port](${location}/body/${port.module.replace(/^\.\//, '')}), [composition](${location}/body/composition.mjs) |`);
 }
 await fs.writeFile(path.join(root, 'README.md'), `sfx-embody materializes executable Capability and Scenario bodies from database authority. The database selects the Capability, Scenario, downstream Scenarios, transformations, mechanics and provider bindings. The existing Node projection boundary materializes their native bodies. Paths derive from authority IDs and never establish identity.
 
@@ -92,10 +92,10 @@ await fs.writeFile(path.join(root, 'README.md'), `sfx-embody materializes execut
 | docs/ | Current implementation findings and acceptance limits |
 | baselines/ | Frozen original source, bodies and evidence with byte manifests |
 
-Every directory named evidence is ignored by Git, including those inside Scenarios and frozen baselines. Generated bodies remain version controlled. Verification and audit commands recreate current evidence locally; historical baseline verification requires its saved local evidence.
+Every directory named evidence and every embodiment.receipt.json file is ignored by Git, including those inside Scenarios and frozen baselines. Generated bodies remain version controlled. Verification and audit commands recreate current evidence and receipts locally; historical baseline verification requires its saved local evidence and receipts.
 
-| Scenario | Executable code | Evidence |
-| --- | --- | --- |
+| Scenario | Executable code |
+| --- | --- |
 ${links.join('\n')}
 
 The same implementation passes 17/17 retained fixtures across three Capabilities and ten Scenarios, with 64 native port comparisons against the selected provider and 320 real kernel observations. All 994 expression regions recover their transformation authority. A 200-vector corpus checks all 32 pure mechanics implemented by that provider, including native syntax recovery. Contract evidence includes ${contracts.assignments} TypeScript assignments, ${contracts.expectedRejections} required compiler rejections, and ${contracts.runtimeVectors} runtime vectors.

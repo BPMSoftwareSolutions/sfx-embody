@@ -2,6 +2,7 @@ node_modules/
 embodiments/**/body/node_modules/
 # Local execution evidence at every depth; generated bodies remain tracked.
 evidence/
+embodiment.receipt.json
 .env
 .env.*
 !.env.example
