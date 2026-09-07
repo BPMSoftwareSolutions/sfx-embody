@@ -2,7 +2,7 @@
   "capabilityId": "adapt-job-market-intelligence-evidence",
   "scenarioId": "verify-jmi-record-binding",
   "target": "node",
-  "resolverDigest": "sha256:7904530b58fb037db34446b40f4ef1c025dd52dff2991491853a8f96bf59bc20",
+  "resolverDigest": "sha256:55179b5bd9d76c7d43b5104eb3e54abcc75ab0b8ee9c9496359340c708b3a452",
   "files": [
     {
       "relativePath": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/providers/verify-jmi-record-binding-port.mjs",

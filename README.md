@@ -1,6 +1,18 @@
 sfx-embody materializes executable Capability and Scenario bodies from database authority. The database selects the Capability, Scenario, downstream Scenarios, transformations, mechanics and provider bindings. The existing Node projection boundary materializes their native bodies. Paths derive from authority IDs and never establish identity.
 
-[Current repair and acceptance evidence](review/native-embodiment-repair.md). The required meaning already existed. This repair replaces the Expression runtime with native expressions, retains declared lexical bindings, fixes weakened contract types, and adds inverse transformation checks. Full Capability/Scenario round-trip equivalence remains an explicit acceptance obligation.
+[Current repair and acceptance evidence](docs/native-embodiment-repair.md). The required meaning already existed. This repair replaces the Expression runtime with native expressions, retains declared lexical bindings, fixes weakened contract types, and adds inverse transformation checks. Full Capability/Scenario round-trip equivalence remains an explicit acceptance obligation.
+
+| Directory | Contents |
+| --- | --- |
+| src/ | Database reader, materializer, language resolvers, native Reveal and verification |
+| scripts/ | Regression, audit, reporting and baseline commands |
+| tests/ | Resolver regression tests |
+| config/ | Workspace paths and Capability/Scenario selections |
+| embodiments/ | Capability → scenarios → Scenario → language → body and evidence |
+| evidence/ | Retained database query results, regression results and review evidence |
+| evidence/history/ | Historical exploration records and superseded review specimens |
+| docs/ | Current implementation findings and acceptance limits |
+| baselines/ | Frozen original source, bodies and evidence with byte manifests |
 
 | Scenario | Executable code | Evidence |
 | --- | --- | --- |
@@ -19,9 +31,9 @@ The same implementation passes 17/17 retained fixtures across three Capabilities
 
 The body contains no numbered expression variables, numbered state variables, numbered dependency aliases, generic Expression runtime, or mechanic dictionary. Contracts are TypeScript projections; the original JSON Schemas remain runtime admission authority. The real SDA Scenario Kernel, admission provider and native helper dependencies remain visible under body/providers/.
 
-[NodeConsumerObjectProvider](resolvers/node/consumer-object-provider.mjs) implements the existing SDA ConsumerApplicationProvider.render protocol as a candidate native provider. [Native expression projection](resolvers/node/native-expression-projection.mjs) supplies Node syntax, lexical scoping and physical source maps. [Reveal](reveal-native-expressions.mjs) reads actual native syntax; [verification](verify-native-projection.mjs) compares recovered transformations and execution with separately retained authority and the selected provider. The existing SDA graph and type builders remain in use.
+[NodeConsumerObjectProvider](src/resolvers/node/consumer-object-provider.mjs) implements the existing SDA ConsumerApplicationProvider.render protocol as a candidate native provider. [Native expression projection](src/resolvers/node/native-expression-projection.mjs) supplies Node syntax, lexical scoping and physical source maps. [Reveal](src/reveal-native-expressions.mjs) reads actual native syntax; [verification](src/verification/verify-native-projection.mjs) compares recovered transformations and execution with separately retained authority and the selected provider. The existing SDA graph and type builders remain in use.
 
-Use Node.js 20 or later. Full regeneration requires the loaded SideFX Database workspace and the Scenario Driven Architecture workspace, including its built tools and Node kernel. Their locations are configuration data in [regression.cases.json](regression.cases.json); relative locations resolve against that file, and absolute locations are also supported. The default layout is sfx-embody and scenario-driven-architecture under repos/, with sidefx-database alongside repos/. The database workspace owns its dependencies, local snapshot store and connection configuration (sidefx-connection-string); credentials are not part of this repository.
+Use Node.js 20 or later. Full regeneration requires the loaded SideFX Database workspace and the Scenario Driven Architecture workspace, including its built tools and Node kernel. Their locations are configuration data in [regression.cases.json](config/regression.cases.json). All configured paths, including selection and retained bundle locations, resolve against that file; absolute locations are also supported. The default layout is sfx-embody and scenario-driven-architecture under repos/, with sidefx-database alongside repos/. The database workspace owns its dependencies, local snapshot store and connection configuration (sidefx-connection-string); credentials are not part of this repository.
 
 The selected database authority pins the SDA checkout to 6fcb8b34f0b85c70a8984940cc21a20cfdb507dd. Prepare that checkout with its dependency installation and npm run build:tools before regenerating. The materializer verifies the selected source revision and source digests. An unavailable or different provider remains a hold. Retained baselines and historical reports preserve their original paths; current evidence records the folder where the latest verification actually ran. Git preserves exact bytes for digest-bearing files.
 
@@ -36,7 +48,7 @@ npm run audit:lowering
 npm run report
 ```
 
-The regression and four resolver tests passed with exit code 0. [regression-results.json](regression-results.json) retains exact component digests, database pins, dependency installation results and receipt hashes. Selection inputs are data in regression.cases.json. Regeneration holds on unsupported topology or unavailable/ambiguous providers and protects edits to previously generated files.
+The regression and four resolver tests passed with exit code 0. [regression-results.json](evidence/regression-results.json) retains exact component digests, database pins, dependency installation results and receipt hashes. Selection inputs live under config/selections/, and retained database bundles live under evidence/authority/. Regeneration holds on unsupported topology or unavailable/ambiguous providers and protects edits to previously generated files. Historical specimens under evidence/history/ retain the context of their original run and are not current verification commands.
 
 Receipts state EXECUTION_CHECKS_PASSED and NOT_REQUESTED for managed admission. They bind contract, native projection and lineage proof digests. Child Scenario testimony identifies its parent-fixture scope. These results do not claim universal Capability coverage, full governed Reveal/Compare, authority/database round trips or Cross-Apply to other languages. No sfx invocation or database admission write is claimed.
 

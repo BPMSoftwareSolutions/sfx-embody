@@ -4,9 +4,9 @@ import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const read = async file => JSON.parse(await fs.readFile(path.resolve(root, file), 'utf8'));
-const regression = await read('regression-results.json');
+const regression = await read('evidence/regression-results.json');
 if (regression.disposition !== 'PASSED') throw new Error('REPORT_REQUIRES_COMPLETED_PASSING_REGRESSION');
-const audit = await read('review/semantic-expression-audit.json');
+const audit = await read('evidence/review/semantic-expression-audit.json');
 if (audit.implementationDigest !== regression.implementationDigest) throw new Error('AUDIT_IS_NOT_CURRENT');
 const results = [];
 for (const c of regression.cases) for (const r of c.receipts) {
@@ -23,7 +23,8 @@ const status = { implementationDigest: regression.implementationDigest, snapshot
   disposition: 'FULL_EMBODIMENT_ACCEPTANCE_NOT_YET_PROVEN', fixtures: regression.totals, contracts, sourceAudit: audit.totals, results,
   remaining: ['Full Capability/Scenario authority round trip, including all topology, product, variant, provider and evidence relationships.',
     'Canonical authority/database round trip.', 'Cross-Apply execution and reverse projection through exact language/provider bindings.', 'Managed admission was not requested.'] };
-await fs.writeFile(path.join(root, 'review/embodiment-acceptance.json'), JSON.stringify(status, null, 2) + '\n');
+await fs.mkdir(path.join(root, 'evidence/review'), { recursive: true });
+await fs.writeFile(path.join(root, 'evidence/review/embodiment-acceptance.json'), JSON.stringify(status, null, 2) + '\n');
 const body = 'embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs';
 const baseline = 'baselines/bbf0345d901983b6c0eeab449c2842419a3154b56bf2d04a973cf51c6974d66a';
 const text = `The repair is at the existing Node embodiment resolver boundary. The required meaning was already present in the retained database authority. No capability definitions, Scenario definitions, contracts, mechanic declarations, or database mappings were revised for this repair.
@@ -57,15 +58,16 @@ Contract projection now retains required const-valued members, closed enum types
 
 The user's acceptance law remains the bar. Transformation recovery is one part of full semantic recovery. These results do not award CONFORMS to the whole embodiment, and they do not claim support for every capability or language merely because these cases pass. Unsupported topology or unresolved provider bindings remain explicit holds.
 
-The original 17-fixture baseline, source, lockfiles, authority bundles and evidence are preserved in the [baseline manifest](../${baseline}/baseline.manifest.json). Current evidence is in each language directory under evidence/; receipt digests bind contract, native projection and lineage proofs. The complete latest run is [regression-results.json](../regression-results.json).
+The original 17-fixture baseline, source, lockfiles, authority bundles and evidence are preserved in the [baseline manifest](../${baseline}/baseline.manifest.json). Current evidence is in each language directory under evidence/; receipt digests bind contract, native projection and lineage proofs. The complete latest run is [regression-results.json](../evidence/regression-results.json).
 
 Implementation: ${regression.implementationDigest}
 
 Database snapshot: ${regression.snapshotId}
 `;
-await fs.writeFile(path.join(root, 'review/native-embodiment-repair.md'), text);
+await fs.mkdir(path.join(root, 'docs'), { recursive: true });
+await fs.writeFile(path.join(root, 'docs/native-embodiment-repair.md'), text);
 const oldReadme = await fs.readFile(path.join(root, 'README.md'));
-await fs.writeFile(path.join(root, 'review/README.before-native-lowering.md'), oldReadme, { flag: 'wx' }).catch(e => { if (e.code !== 'EEXIST') throw e; });
+await fs.writeFile(path.join(root, 'evidence/history/semantic-expression-review/README.before-native-lowering.md'), oldReadme, { flag: 'wx' }).catch(e => { if (e.code !== 'EEXIST') throw e; });
 const links = [];
 for (const result of results) {
   const dependencies = await read(path.join(result.base, 'body/dependencies.json'));
@@ -75,7 +77,19 @@ for (const result of results) {
 }
 await fs.writeFile(path.join(root, 'README.md'), `sfx-embody materializes executable Capability and Scenario bodies from database authority. The database selects the Capability, Scenario, downstream Scenarios, transformations, mechanics and provider bindings. The existing Node projection boundary materializes their native bodies. Paths derive from authority IDs and never establish identity.
 
-[Current repair and acceptance evidence](review/native-embodiment-repair.md). The required meaning already existed. This repair replaces the Expression runtime with native expressions, retains declared lexical bindings, fixes weakened contract types, and adds inverse transformation checks. Full Capability/Scenario round-trip equivalence remains an explicit acceptance obligation.
+[Current repair and acceptance evidence](docs/native-embodiment-repair.md). The required meaning already existed. This repair replaces the Expression runtime with native expressions, retains declared lexical bindings, fixes weakened contract types, and adds inverse transformation checks. Full Capability/Scenario round-trip equivalence remains an explicit acceptance obligation.
+
+| Directory | Contents |
+| --- | --- |
+| src/ | Database reader, materializer, language resolvers, native Reveal and verification |
+| scripts/ | Regression, audit, reporting and baseline commands |
+| tests/ | Resolver regression tests |
+| config/ | Workspace paths and Capability/Scenario selections |
+| embodiments/ | Capability → scenarios → Scenario → language → body and evidence |
+| evidence/ | Retained database query results, regression results and review evidence |
+| evidence/history/ | Historical exploration records and superseded review specimens |
+| docs/ | Current implementation findings and acceptance limits |
+| baselines/ | Frozen original source, bodies and evidence with byte manifests |
 
 | Scenario | Executable code | Evidence |
 | --- | --- | --- |
@@ -85,9 +99,9 @@ The same implementation passes 17/17 retained fixtures across three Capabilities
 
 The body contains no numbered expression variables, numbered state variables, numbered dependency aliases, generic Expression runtime, or mechanic dictionary. Contracts are TypeScript projections; the original JSON Schemas remain runtime admission authority. The real SDA Scenario Kernel, admission provider and native helper dependencies remain visible under body/providers/.
 
-[NodeConsumerObjectProvider](resolvers/node/consumer-object-provider.mjs) implements the existing SDA ConsumerApplicationProvider.render protocol as a candidate native provider. [Native expression projection](resolvers/node/native-expression-projection.mjs) supplies Node syntax, lexical scoping and physical source maps. [Reveal](reveal-native-expressions.mjs) reads actual native syntax; [verification](verify-native-projection.mjs) compares recovered transformations and execution with separately retained authority and the selected provider. The existing SDA graph and type builders remain in use.
+[NodeConsumerObjectProvider](src/resolvers/node/consumer-object-provider.mjs) implements the existing SDA ConsumerApplicationProvider.render protocol as a candidate native provider. [Native expression projection](src/resolvers/node/native-expression-projection.mjs) supplies Node syntax, lexical scoping and physical source maps. [Reveal](src/reveal-native-expressions.mjs) reads actual native syntax; [verification](src/verification/verify-native-projection.mjs) compares recovered transformations and execution with separately retained authority and the selected provider. The existing SDA graph and type builders remain in use.
 
-Use Node.js 20 or later. Full regeneration requires the loaded SideFX Database workspace and the Scenario Driven Architecture workspace, including its built tools and Node kernel. Their locations are configuration data in [regression.cases.json](regression.cases.json); relative locations resolve against that file, and absolute locations are also supported. The default layout is sfx-embody and scenario-driven-architecture under repos/, with sidefx-database alongside repos/. The database workspace owns its dependencies, local snapshot store and connection configuration (sidefx-connection-string); credentials are not part of this repository.
+Use Node.js 20 or later. Full regeneration requires the loaded SideFX Database workspace and the Scenario Driven Architecture workspace, including its built tools and Node kernel. Their locations are configuration data in [regression.cases.json](config/regression.cases.json). All configured paths, including selection and retained bundle locations, resolve against that file; absolute locations are also supported. The default layout is sfx-embody and scenario-driven-architecture under repos/, with sidefx-database alongside repos/. The database workspace owns its dependencies, local snapshot store and connection configuration (sidefx-connection-string); credentials are not part of this repository.
 
 The selected database authority pins the SDA checkout to 6fcb8b34f0b85c70a8984940cc21a20cfdb507dd. Prepare that checkout with its dependency installation and npm run build:tools before regenerating. The materializer verifies the selected source revision and source digests. An unavailable or different provider remains a hold. Retained baselines and historical reports preserve their original paths; current evidence records the folder where the latest verification actually ran. Git preserves exact bytes for digest-bearing files.
 
@@ -102,7 +116,7 @@ npm run audit:lowering
 npm run report
 \x60\x60\x60
 
-The regression and four resolver tests passed with exit code 0. [regression-results.json](regression-results.json) retains exact component digests, database pins, dependency installation results and receipt hashes. Selection inputs are data in regression.cases.json. Regeneration holds on unsupported topology or unavailable/ambiguous providers and protects edits to previously generated files.
+The regression and four resolver tests passed with exit code 0. [regression-results.json](evidence/regression-results.json) retains exact component digests, database pins, dependency installation results and receipt hashes. Selection inputs live under config/selections/, and retained database bundles live under evidence/authority/. Regeneration holds on unsupported topology or unavailable/ambiguous providers and protects edits to previously generated files. Historical specimens under evidence/history/ retain the context of their original run and are not current verification commands.
 
 Receipts state EXECUTION_CHECKS_PASSED and NOT_REQUESTED for managed admission. They bind contract, native projection and lineage proof digests. Child Scenario testimony identifies its parent-fixture scope. These results do not claim universal Capability coverage, full governed Reveal/Compare, authority/database round trips or Cross-Apply to other languages. No sfx invocation or database admission write is claimed.
 

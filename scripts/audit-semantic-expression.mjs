@@ -3,19 +3,20 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import ts from 'typescript';
 import { fileURLToPath } from 'node:url';
+import { readWorkspaceConfig } from '../src/read-workspace-config.mjs';
 
 // Read-only inspection of the retained authority and materialized code.
 // This does not regenerate bodies, revise authority, or change execution receipts.
-const root = path.dirname(fileURLToPath(import.meta.url));
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const read = async file => JSON.parse((await fs.readFile(file, 'utf8')).replace(/^\uFEFF/, ''));
-const regression = await read(path.join(root, 'regression-results.json'));
-const cases = await read(path.join(root, 'regression.cases.json'));
+const regression = await read(path.join(root, 'evidence/regression-results.json'));
+const cases = await readWorkspaceConfig();
 const result = { implementationDigest: regression.implementationDigest, files: [], scenarios: [], contractFindings: [] };
 const digest = text => 'sha256:' + crypto.createHash('sha256').update(text).digest('hex');
 for (const tested of regression.cases) {
   const testCase = cases.cases.find(c => c.selectionFile === tested.selectionFile)
-    ?? (await Promise.all(cases.cases.map(async c => ({ ...c, selection: await read(path.join(root, c.selectionFile)) })))).find(c => c.selection.capabilityId === tested.selection.capabilityId);
-  const bundle = await read(path.join(root, testCase.bundleFile));
+    ?? (await Promise.all(cases.cases.map(async c => ({ ...c, selection: await read(c.selectionFile) })))).find(c => c.selection.capabilityId === tested.selection.capabilityId);
+  const bundle = await read(testCase.bundleFile);
   const mechanicForms = new Map(bundle.mechanics.recordsets[0].map(r => JSON.parse(r.definition_json)).filter(d => d.semantics.mechanic?.authoringForm).map(d => [d.address.id, d.semantics.mechanic.authoringForm]));
   for (const reference of tested.receipts) {
     const base = path.dirname(reference.file);
@@ -88,6 +89,6 @@ result.totals = { bodyFiles: result.files.length, distinctFileContents: new Set(
   numberedExpressions: result.scenarios.reduce((n, s) => n + s.numberedExpressions, 0), numberedStates: result.scenarios.reduce((n, s) => n + s.numberedStates, 0),
   numberedDependencyImports: result.scenarios.reduce((n, s) => n + s.numberedDependencyImports, 0), declaredBindings: result.scenarios.reduce((n, s) => n + s.declaredBindings.length, 0),
   declaredIterationBindings: result.scenarios.reduce((n, s) => n + s.declaredIterationBindings.length, 0), contractFilesMissingRequiredConstants: result.contractFindings.length };
-await fs.mkdir(path.join(root, 'review'), { recursive: true });
-await fs.writeFile(path.join(root, 'review/semantic-expression-audit.json'), JSON.stringify(result, null, 2) + '\n');
+await fs.mkdir(path.join(root, 'evidence/review'), { recursive: true });
+await fs.writeFile(path.join(root, 'evidence/review/semantic-expression-audit.json'), JSON.stringify(result, null, 2) + '\n');
 console.log(JSON.stringify({ totals: result.totals, scenarios: result.scenarios.map(({ declaredBindings, declaredIterationBindings, ...s }) => ({ ...s, declaredBindings: declaredBindings.length, declaredIterationBindings: declaredIterationBindings.length })) }, null, 2));

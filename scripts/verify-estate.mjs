@@ -3,30 +3,31 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { readAuthority } from './read-authority.mjs';
-import { materializeNode } from './materialize-node.mjs';
-import { verifyNode } from './verify-node.mjs';
-import { readWorkspaceConfig } from './read-workspace-config.mjs';
+import { readAuthority } from '../src/read-authority.mjs';
+import { materializeNode } from '../src/materialize-node.mjs';
+import { verifyNode } from '../src/verification/verify-node.mjs';
+import { readWorkspaceConfig } from '../src/read-workspace-config.mjs';
 
 const pretty = value => JSON.stringify(value, null, 2) + '\n';
 const hash = value => 'sha256:' + crypto.createHash('sha256').update(value).digest('hex');
 const json = value => JSON.parse(value.replace(/^\uFEFF/, ''));
-const root = path.dirname(fileURLToPath(import.meta.url));
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const config = await readWorkspaceConfig(process.argv[2]);
-const componentNames = ['package.json', 'package-lock.json', 'read-workspace-config.mjs', 'read-authority.mjs', 'materialize-node.mjs', 'verify-node.mjs', 'verify-contract-fidelity.mjs', 'verify-native-projection.mjs', 'reveal-native-expressions.mjs', 'resolvers/node/consumer-object-provider.mjs', 'resolvers/node/native-expression-projection.mjs'];
+const componentNames = ['package.json', 'package-lock.json', 'src/read-workspace-config.mjs', 'src/read-authority.mjs', 'src/materialize-node.mjs', 'src/verification/verify-node.mjs', 'src/verification/verify-contract-fidelity.mjs', 'src/verification/verify-native-projection.mjs', 'src/reveal-native-expressions.mjs', 'src/resolvers/node/consumer-object-provider.mjs', 'src/resolvers/node/native-expression-projection.mjs'];
 const components = await Promise.all(componentNames.map(async name => ({ name, digest: hash(await fs.readFile(path.join(root, name))) })));
 const implementationDigest = hash(pretty(components));
 const cases = [];
 let snapshotId, projectionDigest;
 for (const request of config.cases) {
-  const selection = json(await fs.readFile(path.join(root, request.selectionFile), 'utf8'));
+  const selection = json(await fs.readFile(request.selectionFile, 'utf8'));
   const result = { selection, implementationDigest, installations: [] };
   try {
     const bundle = await readAuthority(config.databaseRoot, selection);
     snapshotId ??= bundle.authority.snapshotId;
     projectionDigest ??= bundle.authority.projectionDigest;
     if (snapshotId !== bundle.authority.snapshotId || projectionDigest !== bundle.authority.projectionDigest) throw new Error('DATABASE_AUTHORITY_CHANGED_DURING_REGRESSION');
-    const bundleFile = path.join(root, request.bundleFile);
+    const bundleFile = request.bundleFile;
+    await fs.mkdir(path.dirname(bundleFile), { recursive: true });
     await fs.writeFile(bundleFile, pretty(bundle));
     const materialization = await materializeNode({ bundleFile, sdaRoot: config.sdaRoot, outputRoot: root });
     let selectedBase;
@@ -48,7 +49,7 @@ for (const request of config.cases) {
     result.receipts = await Promise.all(materialization.outputBases.map(async base => {
       const file = path.join(base, 'embodiment.receipt.json');
       const receipt = json(await fs.readFile(file, 'utf8'));
-      if (receipt.resolverVersion !== hash(pretty(components.filter(c => c.name.startsWith('resolvers/'))))) throw new Error('RESOLVER_CHANGED_DURING_REGRESSION');
+      if (receipt.resolverVersion !== hash(pretty(components.filter(c => c.name.startsWith('src/resolvers/'))))) throw new Error('RESOLVER_CHANGED_DURING_REGRESSION');
       return { file, digest: hash(await fs.readFile(file)), scenarioId: receipt.scenarioId, resolverVersion: receipt.resolverVersion, artifactDigest: receipt.artifactDigest };
     }));
     result.disposition = 'PASSED';
@@ -65,10 +66,11 @@ const totals = cases.reduce((total, result) => {
   for (const key of Object.keys(total)) total[key] += result.verification?.[key] ?? 0;
   return total;
 }, { fixtures: 0, passed: 0, scenarioBodies: 0, mechanicClasses: 0, kernelObservations: 0, mechanicInvocations: 0, nativeExpressionNodes: 0, nativePortComparisons: 0, negativeChecks: 0 });
-const evidence = { executedAt: new Date().toISOString(), command: 'node verify-estate.mjs regression.cases.json',
+const evidence = { executedAt: new Date().toISOString(), command: 'node scripts/verify-estate.mjs config/regression.cases.json',
   implementationDigest, components, snapshotId, projectionDigest, cases, totals,
   disposition: cases.every(c => c.disposition === 'PASSED') ? 'PASSED' : 'FAILED',
   scope: 'NODE_EXECUTION_OF_RETAINED_FIXTURES_FOR_DECLARED_REGRESSION_CASES', managedAdmission: 'NOT_REQUESTED' };
-await fs.writeFile(path.join(root, 'regression-results.json'), pretty(evidence));
+await fs.mkdir(path.join(root, 'evidence'), { recursive: true });
+await fs.writeFile(path.join(root, 'evidence/regression-results.json'), pretty(evidence));
 console.log(pretty({ disposition: evidence.disposition, implementationDigest, ...totals }));
 if (evidence.disposition !== 'PASSED') process.exitCode = 1;

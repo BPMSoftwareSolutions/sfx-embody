@@ -3,9 +3,9 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { execFileSync } from 'node:child_process';
-import { readWorkspaceConfig } from './read-workspace-config.mjs';
+import { readWorkspaceConfig } from '../src/read-workspace-config.mjs';
 
-const root = path.dirname(fileURLToPath(import.meta.url));
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const read = async relative => JSON.parse((await fs.readFile(path.resolve(root, relative), 'utf8')).replace(/^\uFEFF/, ''));
 const hash = value => 'sha256:' + crypto.createHash('sha256').update(value).digest('hex');
 const config = await readWorkspaceConfig();
@@ -25,7 +25,7 @@ for (const entry of config.cases) {
   if (bundle.authority.snapshotId !== inventory.snapshotId || bundle.authority.projectionDigest !== inventory.projectionDigest) throw new Error('CONFORMANCE_INVENTORY_AUTHORITY_CHANGED');
   // Mechanic usage is recovered from retained projection lineage; IDs are then
   // resolved against the selected database declarations, without name aliases.
-  const regression = await read('regression-results.json');
+  const regression = await read('evidence/regression-results.json');
   const caseResult = regression.cases.find(c => c.selection.capabilityId === bundle.selection.capabilityId);
   const ids = new Set();
   for (const receipt of caseResult.receipts) {
@@ -58,5 +58,6 @@ for (const [id, declaration] of [...used].sort(([a], [b]) => a.localeCompare(b))
 const report = { snapshotId: inventory.snapshotId, projectionDigest: inventory.projectionDigest, inspectedPlatformCommit: commit,
   inventory, mechanics, scope: 'Exact declared references only. Related tests are not substituted for unresolved references.',
   disposition: 'DECLARED_CONFORMANCE_REFERENCES_NOT_CLOSED' };
-await fs.writeFile(path.join(root, 'review/lowering-evidence-readiness.json'), JSON.stringify(report, null, 2) + '\n');
+await fs.mkdir(path.join(root, 'evidence/review'), { recursive: true });
+await fs.writeFile(path.join(root, 'evidence/review/lowering-evidence-readiness.json'), JSON.stringify(report, null, 2) + '\n');
 console.log(JSON.stringify({ mechanics: mechanics.length, unresolvedReferences: mechanics.flatMap(m => m.references).filter(r => r.disposition === 'REFERENCE_NOT_RESOLVED').length, disposition: report.disposition }));

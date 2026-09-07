@@ -1,5 +1,5 @@
 {
-  "implementationDigest": "sha256:10c590a2e449ae7b146d9e3851561a0cc4571ec0bb3f1496bdc227435afa756f",
+  "implementationDigest": "sha256:a81932af72490a7c1f0017005995dbd7661abf2b25421d1bd61644028ea78643",
   "snapshotId": "sha256:38debec6dbfa1266f68d903166f69b831c178ffe967208900efcddd9ce2973bc",
   "projectionDigest": "sha256:81eb41f0faeadcb413d1b5bae9ba991f2d9d753489cfb3a8919c5f72e71f7d28",
   "criterion": "Reveal(Embody(A)) must recover semantically equivalent authority, alongside correct execution.",

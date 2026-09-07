@@ -4,8 +4,8 @@
   "target": "node",
   "profile": "full-mechanics",
   "scenarioDefinitionDigest": "sha256:a18c0e606e1a70c22c5efd173e130016747bbaaf14f3f875bcc6428d9cc6a93f",
-  "embodimentPlanDigest": "sha256:70b4da2e50282c51944071cc946b398542363bc5f4f62e1352c047bdc7a374f7",
-  "resolverVersion": "sha256:7904530b58fb037db34446b40f4ef1c025dd52dff2991491853a8f96bf59bc20",
+  "embodimentPlanDigest": "sha256:a8f0c385b0a5a8e8482a1f423d73c973ef290dd57dabac4202cc954e8271e327",
+  "resolverVersion": "sha256:55179b5bd9d76c7d43b5104eb3e54abcc75ab0b8ee9c9496359340c708b3a452",
   "pinnedPlatformCommit": "6fcb8b34f0b85c70a8984940cc21a20cfdb507dd",
   "providers": [
     "node-deterministic-semantic-value-provider.v1",
@@ -20,6 +20,6 @@
   "contractFidelityDigest": "sha256:7e778abf29076eed0228948bfa5d129a904348a00ff1e0a1be09664519c8c226",
   "lineageDigest": "sha256:13ef975b3dab49ea3d99ac85da6819e87a41cb0090fd60deabf3a3d2ebf13de6",
   "dependencyLockDigest": "sha256:ad1d5e78e09bf26ff4eb818286356fd96d6c63727dd58513596a41d95e43bcf5",
-  "fixtureResultsDigest": "sha256:2e3d8d7c14e644967ac404354df9dd0c0de136426741381c7fb1e9cd0155ed01",
+  "fixtureResultsDigest": "sha256:c1d58df15069f2cc26c4458a1b1f03e3b87bf03acb5dda18287e5d7e83e0d34a",
   "conformanceDigest": "sha256:8e221016e2e1ff94d3a5c686687ed4430aa56afd389e6ae3c7700d19e492478b"
 }

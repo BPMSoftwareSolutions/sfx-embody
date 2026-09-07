@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import Ajv2020 from 'ajv/dist/2020.js';
-import { NodeConsumerObjectProvider } from './resolvers/node/consumer-object-provider.mjs';
+import { NodeConsumerObjectProvider } from '../src/resolvers/node/consumer-object-provider.mjs';
 
 test('nullable type projection preserves admission constraints and original authority', () => {
   const authority = {

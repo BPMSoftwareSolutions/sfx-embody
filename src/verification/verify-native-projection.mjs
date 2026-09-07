@@ -5,9 +5,9 @@ import crypto from 'node:crypto';
 import { isDeepStrictEqual } from 'node:util';
 import { pathToFileURL } from 'node:url';
 import ts from 'typescript';
-import { NodeConsumerObjectProvider } from './resolvers/node/consumer-object-provider.mjs';
-import { NativeExpressionProjection, nativeDigest, nativeSyntax, locateNativeRegions } from './resolvers/node/native-expression-projection.mjs';
-import { revealNativeExpressions, comparableExpression, unwrap } from './reveal-native-expressions.mjs';
+import { NodeConsumerObjectProvider } from '../resolvers/node/consumer-object-provider.mjs';
+import { NativeExpressionProjection, nativeDigest, nativeSyntax, locateNativeRegions } from '../resolvers/node/native-expression-projection.mjs';
+import { revealNativeExpressions, comparableExpression, unwrap } from '../reveal-native-expressions.mjs';
 
 const read = async file => JSON.parse(await fs.readFile(file, 'utf8'));
 const pretty = value => JSON.stringify(value, null, 2) + '\n';

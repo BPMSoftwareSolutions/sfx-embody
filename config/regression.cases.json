@@ -1,0 +1,9 @@
+{
+  "databaseRoot": "../../../sidefx-database",
+  "sdaRoot": "../../scenario-driven-architecture",
+  "cases": [
+    { "selectionFile": "selections/adapt-job-market-intelligence-evidence.json", "bundleFile": "../evidence/authority/adapt-job-market-intelligence-evidence.bundle.json" },
+    { "selectionFile": "selections/admit-canonical-circuit-blueprint.json", "bundleFile": "../evidence/authority/admit-canonical-circuit-blueprint.bundle.json" },
+    { "selectionFile": "selections/resolve-sidefx-eligible-providers.json", "bundleFile": "../evidence/authority/resolve-sidefx-eligible-providers.bundle.json" }
+  ]
+}

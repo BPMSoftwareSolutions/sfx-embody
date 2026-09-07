@@ -322,15 +322,15 @@
   },
   "pinnedPlatformCommit": "6fcb8b34f0b85c70a8984940cc21a20cfdb507dd",
   "resolver": {
-    "path": "C:\\lab\\repos\\sfx-embody\\resolvers\\node\\consumer-object-provider.mjs",
-    "digest": "sha256:7904530b58fb037db34446b40f4ef1c025dd52dff2991491853a8f96bf59bc20",
+    "path": "C:\\lab\\repos\\sfx-embody\\src\\resolvers\\node\\consumer-object-provider.mjs",
+    "digest": "sha256:55179b5bd9d76c7d43b5104eb3e54abcc75ab0b8ee9c9496359340c708b3a452",
     "components": [
       {
-        "name": "resolvers/node/consumer-object-provider.mjs",
+        "name": "src/resolvers/node/consumer-object-provider.mjs",
         "digest": "sha256:d31fefccc9caa1e6424890aa36e83329e2ac765e9e540e64da0cf480f843538b"
       },
       {
-        "name": "resolvers/node/native-expression-projection.mjs",
+        "name": "src/resolvers/node/native-expression-projection.mjs",
         "digest": "sha256:9f8f31362b683cea0ac58a2ac414be9eb96b0fa113ca8254483d57ded4666198"
       }
     ],

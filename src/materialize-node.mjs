@@ -137,7 +137,7 @@ export async function materializeNode({ bundleFile, sdaRoot, outputRoot }) {
   const primitives = await fs.readFile(path.join(sdaRoot, primitivesRef), 'utf8');
   const add = (relativePath, content, sourcePointers = []) => files.push({ relativePath, content, digest: hash(content), sourcePointers, target: 'node' });
   const resolverFile = fileURLToPath(new URL('./resolvers/node/consumer-object-provider.mjs', import.meta.url));
-  const resolverComponents = await Promise.all(['resolvers/node/consumer-object-provider.mjs', 'resolvers/node/native-expression-projection.mjs'].map(async name => ({ name, digest: hash(await fs.readFile(new URL('./' + name, import.meta.url))) })));
+  const resolverComponents = await Promise.all(['src/resolvers/node/consumer-object-provider.mjs', 'src/resolvers/node/native-expression-projection.mjs'].map(async name => ({ name, digest: hash(await fs.readFile(new URL('../' + name, import.meta.url))) })));
   const resolverDigest = hash(pretty(resolverComponents));
   const outputBases = [];
   for (const scenario of scenarios) {

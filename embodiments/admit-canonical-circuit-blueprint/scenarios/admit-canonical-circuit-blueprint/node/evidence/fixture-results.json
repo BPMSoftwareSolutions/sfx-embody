@@ -9248,7 +9248,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:21.831Z"
+          "observedAt": "2026-09-07T20:15:15.677Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -9259,7 +9259,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:21.831Z"
+          "observedAt": "2026-09-07T20:15:15.677Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -9270,7 +9270,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:21.835Z"
+          "observedAt": "2026-09-07T20:15:15.680Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -9281,7 +9281,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:21.835Z"
+          "observedAt": "2026-09-07T20:15:15.680Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -9292,7 +9292,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:21.838Z"
+          "observedAt": "2026-09-07T20:15:15.682Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -9303,7 +9303,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:21.838Z"
+          "observedAt": "2026-09-07T20:15:15.682Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -9314,7 +9314,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:21.838Z"
+          "observedAt": "2026-09-07T20:15:15.682Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -9325,7 +9325,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:21.840Z"
+          "observedAt": "2026-09-07T20:15:15.684Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -9336,7 +9336,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:21.840Z"
+          "observedAt": "2026-09-07T20:15:15.684Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -9347,7 +9347,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:21.842Z"
+          "observedAt": "2026-09-07T20:15:15.685Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -9358,7 +9358,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:21.842Z"
+          "observedAt": "2026-09-07T20:15:15.685Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -9369,7 +9369,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:21.842Z"
+          "observedAt": "2026-09-07T20:15:15.685Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -9380,7 +9380,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:21.844Z"
+          "observedAt": "2026-09-07T20:15:15.687Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -9391,7 +9391,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:21.844Z"
+          "observedAt": "2026-09-07T20:15:15.687Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -9402,7 +9402,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:21.847Z"
+          "observedAt": "2026-09-07T20:15:15.688Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -9413,7 +9413,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:21.847Z"
+          "observedAt": "2026-09-07T20:15:15.688Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -9424,7 +9424,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:21.847Z"
+          "observedAt": "2026-09-07T20:15:15.689Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -9435,7 +9435,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:21.849Z"
+          "observedAt": "2026-09-07T20:15:15.690Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -9446,7 +9446,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:21.849Z"
+          "observedAt": "2026-09-07T20:15:15.690Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -9457,7 +9457,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:21.851Z"
+          "observedAt": "2026-09-07T20:15:15.692Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -9468,7 +9468,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:21.857Z"
+          "observedAt": "2026-09-07T20:15:15.697Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -9479,7 +9479,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:21.857Z"
+          "observedAt": "2026-09-07T20:15:15.698Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -9490,7 +9490,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:21.857Z"
+          "observedAt": "2026-09-07T20:15:15.698Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -9501,7 +9501,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:21.862Z"
+          "observedAt": "2026-09-07T20:15:15.702Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -9512,7 +9512,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:21.862Z"
+          "observedAt": "2026-09-07T20:15:15.702Z"
         }
       ],
       "mechanicObservations": []
@@ -16598,7 +16598,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.077Z"
+          "observedAt": "2026-09-07T20:15:15.904Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -16609,7 +16609,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.077Z"
+          "observedAt": "2026-09-07T20:15:15.904Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -16620,7 +16620,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.079Z"
+          "observedAt": "2026-09-07T20:15:15.906Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -16631,7 +16631,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.079Z"
+          "observedAt": "2026-09-07T20:15:15.906Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -16642,7 +16642,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.080Z"
+          "observedAt": "2026-09-07T20:15:15.907Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -16653,7 +16653,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.080Z"
+          "observedAt": "2026-09-07T20:15:15.907Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -16664,7 +16664,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.080Z"
+          "observedAt": "2026-09-07T20:15:15.907Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -16675,7 +16675,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.080Z"
+          "observedAt": "2026-09-07T20:15:15.907Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -16686,7 +16686,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.080Z"
+          "observedAt": "2026-09-07T20:15:15.907Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -16697,7 +16697,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.081Z"
+          "observedAt": "2026-09-07T20:15:15.909Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -16708,7 +16708,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.081Z"
+          "observedAt": "2026-09-07T20:15:15.909Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -16719,7 +16719,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.081Z"
+          "observedAt": "2026-09-07T20:15:15.909Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -16730,7 +16730,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.082Z"
+          "observedAt": "2026-09-07T20:15:15.909Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -16741,7 +16741,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.082Z"
+          "observedAt": "2026-09-07T20:15:15.909Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -16752,7 +16752,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.083Z"
+          "observedAt": "2026-09-07T20:15:15.911Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -16763,7 +16763,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.083Z"
+          "observedAt": "2026-09-07T20:15:15.911Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -16774,7 +16774,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.083Z"
+          "observedAt": "2026-09-07T20:15:15.911Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -16785,7 +16785,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.083Z"
+          "observedAt": "2026-09-07T20:15:15.911Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -16796,7 +16796,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.083Z"
+          "observedAt": "2026-09-07T20:15:15.911Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -16807,7 +16807,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.084Z"
+          "observedAt": "2026-09-07T20:15:15.913Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -16818,7 +16818,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.085Z"
+          "observedAt": "2026-09-07T20:15:15.913Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -16829,7 +16829,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.085Z"
+          "observedAt": "2026-09-07T20:15:15.913Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -16840,7 +16840,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.085Z"
+          "observedAt": "2026-09-07T20:15:15.913Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -16851,7 +16851,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.085Z"
+          "observedAt": "2026-09-07T20:15:15.913Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -16862,7 +16862,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.085Z"
+          "observedAt": "2026-09-07T20:15:15.913Z"
         }
       ],
       "mechanicObservations": []
@@ -23947,7 +23947,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.291Z"
+          "observedAt": "2026-09-07T20:15:16.132Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -23958,7 +23958,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.291Z"
+          "observedAt": "2026-09-07T20:15:16.132Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -23969,7 +23969,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.292Z"
+          "observedAt": "2026-09-07T20:15:16.133Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -23980,7 +23980,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.292Z"
+          "observedAt": "2026-09-07T20:15:16.133Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -23991,7 +23991,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.293Z"
+          "observedAt": "2026-09-07T20:15:16.134Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -24002,7 +24002,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.293Z"
+          "observedAt": "2026-09-07T20:15:16.134Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -24013,7 +24013,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.293Z"
+          "observedAt": "2026-09-07T20:15:16.134Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -24024,7 +24024,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.294Z"
+          "observedAt": "2026-09-07T20:15:16.135Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -24035,7 +24035,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.294Z"
+          "observedAt": "2026-09-07T20:15:16.135Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -24046,7 +24046,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.295Z"
+          "observedAt": "2026-09-07T20:15:16.136Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -24057,7 +24057,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.295Z"
+          "observedAt": "2026-09-07T20:15:16.136Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -24068,7 +24068,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.295Z"
+          "observedAt": "2026-09-07T20:15:16.136Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -24079,7 +24079,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.295Z"
+          "observedAt": "2026-09-07T20:15:16.137Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -24090,7 +24090,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.295Z"
+          "observedAt": "2026-09-07T20:15:16.137Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -24101,7 +24101,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.296Z"
+          "observedAt": "2026-09-07T20:15:16.138Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -24112,7 +24112,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.296Z"
+          "observedAt": "2026-09-07T20:15:16.138Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -24123,7 +24123,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.296Z"
+          "observedAt": "2026-09-07T20:15:16.138Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -24134,7 +24134,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.297Z"
+          "observedAt": "2026-09-07T20:15:16.138Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -24145,7 +24145,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.297Z"
+          "observedAt": "2026-09-07T20:15:16.138Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -24156,7 +24156,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.298Z"
+          "observedAt": "2026-09-07T20:15:16.139Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -24167,7 +24167,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.298Z"
+          "observedAt": "2026-09-07T20:15:16.139Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -24178,7 +24178,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.298Z"
+          "observedAt": "2026-09-07T20:15:16.139Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -24189,7 +24189,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.298Z"
+          "observedAt": "2026-09-07T20:15:16.139Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -24200,7 +24200,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.298Z"
+          "observedAt": "2026-09-07T20:15:16.140Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -24211,7 +24211,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.298Z"
+          "observedAt": "2026-09-07T20:15:16.140Z"
         }
       ],
       "mechanicObservations": []
@@ -31281,7 +31281,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.488Z"
+          "observedAt": "2026-09-07T20:15:16.306Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -31292,7 +31292,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.488Z"
+          "observedAt": "2026-09-07T20:15:16.306Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -31303,7 +31303,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.489Z"
+          "observedAt": "2026-09-07T20:15:16.307Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -31314,7 +31314,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.489Z"
+          "observedAt": "2026-09-07T20:15:16.307Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -31325,7 +31325,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.490Z"
+          "observedAt": "2026-09-07T20:15:16.308Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -31336,7 +31336,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.490Z"
+          "observedAt": "2026-09-07T20:15:16.308Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -31347,7 +31347,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.490Z"
+          "observedAt": "2026-09-07T20:15:16.308Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -31358,7 +31358,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.491Z"
+          "observedAt": "2026-09-07T20:15:16.308Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -31369,7 +31369,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.491Z"
+          "observedAt": "2026-09-07T20:15:16.308Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -31380,7 +31380,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.492Z"
+          "observedAt": "2026-09-07T20:15:16.309Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -31391,7 +31391,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.492Z"
+          "observedAt": "2026-09-07T20:15:16.309Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -31402,7 +31402,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.492Z"
+          "observedAt": "2026-09-07T20:15:16.309Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -31413,7 +31413,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.492Z"
+          "observedAt": "2026-09-07T20:15:16.310Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -31424,7 +31424,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.492Z"
+          "observedAt": "2026-09-07T20:15:16.310Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -31435,7 +31435,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.494Z"
+          "observedAt": "2026-09-07T20:15:16.311Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -31446,7 +31446,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.494Z"
+          "observedAt": "2026-09-07T20:15:16.311Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -31457,7 +31457,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.494Z"
+          "observedAt": "2026-09-07T20:15:16.311Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -31468,7 +31468,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.494Z"
+          "observedAt": "2026-09-07T20:15:16.311Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -31479,7 +31479,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.494Z"
+          "observedAt": "2026-09-07T20:15:16.311Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -31490,7 +31490,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.497Z"
+          "observedAt": "2026-09-07T20:15:16.312Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -31501,7 +31501,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.497Z"
+          "observedAt": "2026-09-07T20:15:16.312Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -31512,7 +31512,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.497Z"
+          "observedAt": "2026-09-07T20:15:16.312Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -31523,7 +31523,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.497Z"
+          "observedAt": "2026-09-07T20:15:16.312Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -31534,7 +31534,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.497Z"
+          "observedAt": "2026-09-07T20:15:16.312Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -31545,7 +31545,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.497Z"
+          "observedAt": "2026-09-07T20:15:16.312Z"
         }
       ],
       "mechanicObservations": []
@@ -40797,7 +40797,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.676Z"
+          "observedAt": "2026-09-07T20:15:16.466Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -40808,7 +40808,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.676Z"
+          "observedAt": "2026-09-07T20:15:16.466Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -40819,7 +40819,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.678Z"
+          "observedAt": "2026-09-07T20:15:16.467Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -40830,7 +40830,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.678Z"
+          "observedAt": "2026-09-07T20:15:16.467Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -40841,7 +40841,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.679Z"
+          "observedAt": "2026-09-07T20:15:16.468Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -40852,7 +40852,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.679Z"
+          "observedAt": "2026-09-07T20:15:16.468Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -40863,7 +40863,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.679Z"
+          "observedAt": "2026-09-07T20:15:16.468Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -40874,7 +40874,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.679Z"
+          "observedAt": "2026-09-07T20:15:16.469Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -40885,7 +40885,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.679Z"
+          "observedAt": "2026-09-07T20:15:16.469Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -40896,7 +40896,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.680Z"
+          "observedAt": "2026-09-07T20:15:16.470Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -40907,7 +40907,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.680Z"
+          "observedAt": "2026-09-07T20:15:16.470Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -40918,7 +40918,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.680Z"
+          "observedAt": "2026-09-07T20:15:16.470Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -40929,7 +40929,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.681Z"
+          "observedAt": "2026-09-07T20:15:16.470Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -40940,7 +40940,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.681Z"
+          "observedAt": "2026-09-07T20:15:16.470Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -40951,7 +40951,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.682Z"
+          "observedAt": "2026-09-07T20:15:16.471Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -40962,7 +40962,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.682Z"
+          "observedAt": "2026-09-07T20:15:16.471Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -40973,7 +40973,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.682Z"
+          "observedAt": "2026-09-07T20:15:16.471Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -40984,7 +40984,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.682Z"
+          "observedAt": "2026-09-07T20:15:16.471Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -40995,7 +40995,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.682Z"
+          "observedAt": "2026-09-07T20:15:16.471Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -41006,7 +41006,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.684Z"
+          "observedAt": "2026-09-07T20:15:16.473Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -41017,7 +41017,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.684Z"
+          "observedAt": "2026-09-07T20:15:16.473Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -41028,7 +41028,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.684Z"
+          "observedAt": "2026-09-07T20:15:16.473Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -41039,7 +41039,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.684Z"
+          "observedAt": "2026-09-07T20:15:16.473Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -41050,7 +41050,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.685Z"
+          "observedAt": "2026-09-07T20:15:16.473Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -41061,7 +41061,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.685Z"
+          "observedAt": "2026-09-07T20:15:16.473Z"
         }
       ],
       "mechanicObservations": []
@@ -48188,7 +48188,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.851Z"
+          "observedAt": "2026-09-07T20:15:16.615Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -48199,7 +48199,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.851Z"
+          "observedAt": "2026-09-07T20:15:16.615Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -48210,7 +48210,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.852Z"
+          "observedAt": "2026-09-07T20:15:16.616Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -48221,7 +48221,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.852Z"
+          "observedAt": "2026-09-07T20:15:16.616Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -48232,7 +48232,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.853Z"
+          "observedAt": "2026-09-07T20:15:16.617Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -48243,7 +48243,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.853Z"
+          "observedAt": "2026-09-07T20:15:16.617Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -48254,7 +48254,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.853Z"
+          "observedAt": "2026-09-07T20:15:16.617Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -48265,7 +48265,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.853Z"
+          "observedAt": "2026-09-07T20:15:16.617Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -48276,7 +48276,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.853Z"
+          "observedAt": "2026-09-07T20:15:16.617Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -48287,7 +48287,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.854Z"
+          "observedAt": "2026-09-07T20:15:16.618Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -48298,7 +48298,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.854Z"
+          "observedAt": "2026-09-07T20:15:16.618Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -48309,7 +48309,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.854Z"
+          "observedAt": "2026-09-07T20:15:16.618Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -48320,7 +48320,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.855Z"
+          "observedAt": "2026-09-07T20:15:16.618Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -48331,7 +48331,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.855Z"
+          "observedAt": "2026-09-07T20:15:16.618Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -48342,7 +48342,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.856Z"
+          "observedAt": "2026-09-07T20:15:16.619Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -48353,7 +48353,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.856Z"
+          "observedAt": "2026-09-07T20:15:16.619Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -48364,7 +48364,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.856Z"
+          "observedAt": "2026-09-07T20:15:16.619Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -48375,7 +48375,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.857Z"
+          "observedAt": "2026-09-07T20:15:16.619Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -48386,7 +48386,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.857Z"
+          "observedAt": "2026-09-07T20:15:16.619Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -48397,7 +48397,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.858Z"
+          "observedAt": "2026-09-07T20:15:16.620Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -48408,7 +48408,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.858Z"
+          "observedAt": "2026-09-07T20:15:16.620Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -48419,7 +48419,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.858Z"
+          "observedAt": "2026-09-07T20:15:16.620Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -48430,7 +48430,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.858Z"
+          "observedAt": "2026-09-07T20:15:16.621Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -48441,7 +48441,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.858Z"
+          "observedAt": "2026-09-07T20:15:16.621Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -48452,7 +48452,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:22.858Z"
+          "observedAt": "2026-09-07T20:15:16.621Z"
         }
       ],
       "mechanicObservations": []
@@ -55579,7 +55579,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.002Z"
+          "observedAt": "2026-09-07T20:15:16.761Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -55590,7 +55590,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.002Z"
+          "observedAt": "2026-09-07T20:15:16.761Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -55601,7 +55601,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.003Z"
+          "observedAt": "2026-09-07T20:15:16.762Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -55612,7 +55612,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.003Z"
+          "observedAt": "2026-09-07T20:15:16.762Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -55623,7 +55623,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.004Z"
+          "observedAt": "2026-09-07T20:15:16.763Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -55634,7 +55634,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.004Z"
+          "observedAt": "2026-09-07T20:15:16.763Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -55645,7 +55645,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.004Z"
+          "observedAt": "2026-09-07T20:15:16.763Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -55656,7 +55656,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.004Z"
+          "observedAt": "2026-09-07T20:15:16.763Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -55667,7 +55667,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.004Z"
+          "observedAt": "2026-09-07T20:15:16.763Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -55678,7 +55678,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.005Z"
+          "observedAt": "2026-09-07T20:15:16.764Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -55689,7 +55689,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.005Z"
+          "observedAt": "2026-09-07T20:15:16.764Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -55700,7 +55700,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.005Z"
+          "observedAt": "2026-09-07T20:15:16.764Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -55711,7 +55711,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.005Z"
+          "observedAt": "2026-09-07T20:15:16.764Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -55722,7 +55722,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.005Z"
+          "observedAt": "2026-09-07T20:15:16.764Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -55733,7 +55733,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.006Z"
+          "observedAt": "2026-09-07T20:15:16.765Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -55744,7 +55744,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.006Z"
+          "observedAt": "2026-09-07T20:15:16.765Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -55755,7 +55755,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.006Z"
+          "observedAt": "2026-09-07T20:15:16.765Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -55766,7 +55766,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.007Z"
+          "observedAt": "2026-09-07T20:15:16.765Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -55777,7 +55777,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.007Z"
+          "observedAt": "2026-09-07T20:15:16.765Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -55788,7 +55788,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.008Z"
+          "observedAt": "2026-09-07T20:15:16.766Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -55799,7 +55799,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.008Z"
+          "observedAt": "2026-09-07T20:15:16.766Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -55810,7 +55810,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.008Z"
+          "observedAt": "2026-09-07T20:15:16.766Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -55821,7 +55821,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.008Z"
+          "observedAt": "2026-09-07T20:15:16.766Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -55832,7 +55832,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.008Z"
+          "observedAt": "2026-09-07T20:15:16.766Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -55843,7 +55843,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.008Z"
+          "observedAt": "2026-09-07T20:15:16.766Z"
         }
       ],
       "mechanicObservations": []
@@ -62881,7 +62881,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.159Z"
+          "observedAt": "2026-09-07T20:15:16.924Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -62892,7 +62892,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.159Z"
+          "observedAt": "2026-09-07T20:15:16.924Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -62903,7 +62903,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.160Z"
+          "observedAt": "2026-09-07T20:15:16.926Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -62914,7 +62914,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.160Z"
+          "observedAt": "2026-09-07T20:15:16.926Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -62925,7 +62925,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.161Z"
+          "observedAt": "2026-09-07T20:15:16.927Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -62936,7 +62936,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.161Z"
+          "observedAt": "2026-09-07T20:15:16.927Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -62947,7 +62947,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.161Z"
+          "observedAt": "2026-09-07T20:15:16.927Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -62958,7 +62958,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.161Z"
+          "observedAt": "2026-09-07T20:15:16.927Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -62969,7 +62969,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.161Z"
+          "observedAt": "2026-09-07T20:15:16.927Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -62980,7 +62980,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.162Z"
+          "observedAt": "2026-09-07T20:15:16.928Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -62991,7 +62991,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.162Z"
+          "observedAt": "2026-09-07T20:15:16.928Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -63002,7 +63002,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.162Z"
+          "observedAt": "2026-09-07T20:15:16.928Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -63013,7 +63013,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.162Z"
+          "observedAt": "2026-09-07T20:15:16.928Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -63024,7 +63024,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.162Z"
+          "observedAt": "2026-09-07T20:15:16.928Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -63035,7 +63035,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.164Z"
+          "observedAt": "2026-09-07T20:15:16.929Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -63046,7 +63046,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.164Z"
+          "observedAt": "2026-09-07T20:15:16.929Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -63057,7 +63057,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.164Z"
+          "observedAt": "2026-09-07T20:15:16.929Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -63068,7 +63068,7 @@
           "stepId": "admit-input",
           "sequence": 0,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.164Z"
+          "observedAt": "2026-09-07T20:15:16.930Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -63079,7 +63079,7 @@
           "stepId": "resolve-event-authority",
           "sequence": 1,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.164Z"
+          "observedAt": "2026-09-07T20:15:16.930Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -63090,7 +63090,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.165Z"
+          "observedAt": "2026-09-07T20:15:16.931Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -63101,7 +63101,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.165Z"
+          "observedAt": "2026-09-07T20:15:16.931Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -63112,7 +63112,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.165Z"
+          "observedAt": "2026-09-07T20:15:16.931Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -63123,7 +63123,7 @@
           "stepId": "execute-event-authority",
           "sequence": 2,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.165Z"
+          "observedAt": "2026-09-07T20:15:16.931Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -63134,7 +63134,7 @@
           "stepId": "admit-outcome",
           "sequence": 3,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.165Z"
+          "observedAt": "2026-09-07T20:15:16.931Z"
         },
         {
           "observationType": "scenario-execution-observation.v1",
@@ -63145,7 +63145,7 @@
           "stepId": "resolve-disposition",
           "sequence": 4,
           "status": "observed",
-          "observedAt": "2026-09-07T20:08:23.165Z"
+          "observedAt": "2026-09-07T20:15:16.931Z"
         }
       ],
       "mechanicObservations": []
