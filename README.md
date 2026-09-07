@@ -1,6 +1,6 @@
 sfx-embody materializes executable Capability and Scenario bodies from database authority. The database selects the Capability, Scenario, downstream Scenarios, transformations, mechanics and provider bindings. The existing Node projection boundary materializes their native bodies. Paths derive from authority IDs and never establish identity.
 
-[Current repair and acceptance evidence](docs/native-embodiment-repair.md). The required meaning already existed. This repair replaces the Expression runtime with native expressions, retains declared lexical bindings, fixes weakened contract types, and adds inverse transformation checks. Full Capability/Scenario round-trip equivalence remains an explicit acceptance obligation.
+[Current repair and acceptance evidence](docs/native-embodiment-repair.md). [Review findings and architectural goals](docs/embodiment-review-findings.md) record the open gaps in that evidence and the property each solution should establish. The required meaning already existed. This repair replaces the Expression runtime with native expressions, retains declared lexical bindings, fixes weakened contract types, and adds inverse transformation checks. Full Capability/Scenario round-trip equivalence remains an explicit acceptance obligation.
 
 | Directory | Contents |
 | --- | --- |
