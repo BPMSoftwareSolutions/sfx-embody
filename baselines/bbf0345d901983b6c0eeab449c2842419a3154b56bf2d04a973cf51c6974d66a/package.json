@@ -1,0 +1,9 @@
+{
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "ajv": "8.20.0",
+    "json-schema-traverse": "1.0.0",
+    "typescript": "5.9.3"
+  }
+}

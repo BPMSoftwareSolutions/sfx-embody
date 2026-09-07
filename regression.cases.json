@@ -1,0 +1,9 @@
+{
+  "databaseRoot": "../../sidefx-database",
+  "sdaRoot": "../scenario-driven-architecture",
+  "cases": [
+    { "selectionFile": "selection.json", "bundleFile": "authority-bundle.json" },
+    { "selectionFile": "second-root.input.json", "bundleFile": "second-root-authority-bundle.json" },
+    { "selectionFile": "third-capability.input.json", "bundleFile": "third-authority-bundle.json" }
+  ]
+}

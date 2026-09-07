@@ -1,0 +1,5371 @@
+[
+  {
+    "scenarioId": "require-blueprint-geometry-proof",
+    "operationOrdinal": 0,
+    "portId": "require-blueprint-geometry-proof-port",
+    "transformationId": "require-blueprint-geometry-proof.v1",
+    "sourceRef": "capabilities/admit-canonical-circuit-blueprint/semantic-transformation.authority.json",
+    "sourceDigest": "sha256:edd662a3271af9b23645ff2b0c6e263a053ed6cfe149d09add4a8fe6f9b15f93",
+    "physicalFile": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+    "bindings": [
+      {
+        "identity": "condition",
+        "nativeName": "condition",
+        "scope": "/bindings/checksClosed"
+      },
+      {
+        "identity": "checksClosed",
+        "nativeName": "checksClosed",
+        "scope": ""
+      },
+      {
+        "identity": "findingGroup",
+        "nativeName": "findingGroup",
+        "scope": "/bindings/obligationFindings"
+      },
+      {
+        "identity": "findingGroupIndex",
+        "nativeName": "findingGroupIndex",
+        "scope": "/bindings/obligationFindings"
+      },
+      {
+        "identity": "obligationFindings",
+        "nativeName": "obligationFindings",
+        "scope": ""
+      }
+    ],
+    "helpers": [],
+    "nodes": [
+      {
+        "sourcePointer": "",
+        "mechanicId": "let",
+        "operation": "let",
+        "parameterNames": [
+          "bindings",
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 12396,
+        "providerSourceEnd": 12644,
+        "providerBodyDigest": "sha256:f882831176ab819cf41cfe5abdc1486176f941730544863b6e1f0da291836c0a",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0
+          ],
+          "startLine": 4,
+          "startColumn": 12,
+          "endLine": 100,
+          "endColumn": 9,
+          "syntaxDigest": "sha256:a46b163bd78ed5543b1046e96a09e26aae0308d27ed618a3c884a1147339efd4"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/checksClosed",
+        "mechanicId": "every",
+        "operation": "every",
+        "parameterNames": [
+          "from",
+          "as",
+          "where"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 10055,
+        "providerSourceEnd": 10192,
+        "providerBodyDigest": "sha256:0404fcb636f768641468e8fcda8d2dcf870417e06ba674b495d0d444eb0ac1d2",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "startLine": 5,
+          "startColumn": 28,
+          "endLine": 19,
+          "endColumn": 49,
+          "syntaxDigest": "sha256:deb9a05e1fe4bc5a2b171423f753a78fbc0363e6c685b2fce5818d9fab789c32"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/checksClosed/from",
+        "mechanicId": "array",
+        "operation": "array",
+        "parameterNames": [
+          "items"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 9027,
+        "providerSourceEnd": 9095,
+        "providerBodyDigest": "sha256:deb44952445ad6e45765e0d03369cffa4737e64954602f8a3e30e9d00545778e",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "startLine": 5,
+          "startColumn": 28,
+          "endLine": 19,
+          "endColumn": 8,
+          "syntaxDigest": "sha256:8441a6f45ef080fd7d6fc95aaba44f16e75e9df33d8e1a629ea322f5eb8517e8"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/checksClosed/from/items/0",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "parameterNames": [
+          "left",
+          "right"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534,
+        "providerBodyDigest": "sha256:d72eba197cd5e76449c3c1af5f0c22be1021c3c4a9aa56568b04e647e17e4b1c",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "startLine": 6,
+          "startColumn": 9,
+          "endLine": 6,
+          "endColumn": 93,
+          "syntaxDigest": "sha256:6b71721cfebfe4ab26a8520f20e396e2a3ed634d64bdc90963db2e8ca0108520"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/checksClosed/from/items/0/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.geometryProof.proofType",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "startLine": 6,
+          "startColumn": 9,
+          "endLine": 6,
+          "endColumn": 49,
+          "syntaxDigest": "sha256:674ef2b746251d721fc1168b299dea04898b3ce0bc70711822e243c924eb994e"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/checksClosed/from/items/0/right",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            2
+          ],
+          "startLine": 6,
+          "startColumn": 54,
+          "endLine": 6,
+          "endColumn": 93,
+          "syntaxDigest": "sha256:f87b03045ea78a53e08e9c32c6696ceacb9195117a25c341dbbc6756bad720ad"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/checksClosed/from/items/1",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "parameterNames": [
+          "left",
+          "right"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534,
+        "providerBodyDigest": "sha256:d72eba197cd5e76449c3c1af5f0c22be1021c3c4a9aa56568b04e647e17e4b1c",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1
+          ],
+          "startLine": 7,
+          "startColumn": 9,
+          "endLine": 8,
+          "endColumn": 73,
+          "syntaxDigest": "sha256:af7f9f68f67a5e353494e5e2a23d08b436366f8c77b16acdb8c31164b66aef33"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/checksClosed/from/items/1/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.geometryProof.blueprintDigest",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0
+          ],
+          "startLine": 7,
+          "startColumn": 9,
+          "endLine": 7,
+          "endColumn": 55,
+          "syntaxDigest": "sha256:7645508bac134dc0d3b92fb194de704ac9479e57a773365da2f10fe820370438"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/checksClosed/from/items/1/right",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.candidate.blueprintAuthority.authorityDigest",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            2
+          ],
+          "startLine": 8,
+          "startColumn": 11,
+          "endLine": 8,
+          "endColumn": 73,
+          "syntaxDigest": "sha256:d0c32e9e1a296bec8e4d97a66a83130e42a1a96b5ee5680db1cf7c7347235ca3"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/checksClosed/from/items/2",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "parameterNames": [
+          "left",
+          "right"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534,
+        "providerBodyDigest": "sha256:d72eba197cd5e76449c3c1af5f0c22be1021c3c4a9aa56568b04e647e17e4b1c",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            2
+          ],
+          "startLine": 9,
+          "startColumn": 9,
+          "endLine": 9,
+          "endColumn": 66,
+          "syntaxDigest": "sha256:1f7a7bd65249a8348437ed958e1f0dcbfeed71af2d13f9a96c4c1c08275eb539"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/checksClosed/from/items/2/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.geometryProof.disposition",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            2,
+            0
+          ],
+          "startLine": 9,
+          "startColumn": 9,
+          "endLine": 9,
+          "endColumn": 51,
+          "syntaxDigest": "sha256:ab3bbbeaed0e0e784475b90e0da50e114f21df3e8c45c6592e4e75082ddf906d"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/checksClosed/from/items/2/right",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            2,
+            2
+          ],
+          "startLine": 9,
+          "startColumn": 56,
+          "endLine": 9,
+          "endColumn": 66,
+          "syntaxDigest": "sha256:d5f78c511436877b81222b964b3e9e8d1216ae687f1b9d09de0837267f12b7ec"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/checksClosed/from/items/3",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "parameterNames": [
+          "left",
+          "right"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534,
+        "providerBodyDigest": "sha256:d72eba197cd5e76449c3c1af5f0c22be1021c3c4a9aa56568b04e647e17e4b1c",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            3
+          ],
+          "startLine": 10,
+          "startColumn": 9,
+          "endLine": 11,
+          "endColumn": 52,
+          "syntaxDigest": "sha256:720ef0dde02d44f745040c478b22c506555095bd7f2e13f590f405d9c4dfdb3c"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/checksClosed/from/items/3/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.geometryProof.summary.nodeCount",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            3,
+            0
+          ],
+          "startLine": 10,
+          "startColumn": 9,
+          "endLine": 10,
+          "endColumn": 58,
+          "syntaxDigest": "sha256:5a76b7c8ace8f33607aa9c2d23ee0f84156f1de6c076df167e9e35f7557eb79b"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/checksClosed/from/items/3/right",
+        "mechanicId": "length",
+        "operation": "length",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 10540,
+        "providerSourceEnd": 10596,
+        "providerBodyDigest": "sha256:b069ef847e7543133dbf5d6f9cf19a21fee9cec82a129a6bb475450c005cc925",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            3,
+            2
+          ],
+          "startLine": 11,
+          "startColumn": 11,
+          "endLine": 11,
+          "endColumn": 52,
+          "syntaxDigest": "sha256:42fb474f6ed1378ae37880f64cf17e846a574627beda20606dab4a1a1b08e4c6"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/checksClosed/from/items/3/right/value",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.candidate.nodes",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            3,
+            2,
+            0
+          ],
+          "startLine": 11,
+          "startColumn": 12,
+          "endLine": 11,
+          "endColumn": 44,
+          "syntaxDigest": "sha256:8c5bcfb0e75ebb87b27b985eb38e791ce42413e56191366c0c44bcee4edb3356"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/checksClosed/from/items/4",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "parameterNames": [
+          "left",
+          "right"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534,
+        "providerBodyDigest": "sha256:d72eba197cd5e76449c3c1af5f0c22be1021c3c4a9aa56568b04e647e17e4b1c",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            4
+          ],
+          "startLine": 12,
+          "startColumn": 9,
+          "endLine": 13,
+          "endColumn": 52,
+          "syntaxDigest": "sha256:ae63737c14da436ad95088d113341e134ae785c9408a48b5532d54889e850b55"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/checksClosed/from/items/4/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.geometryProof.summary.edgeCount",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            4,
+            0
+          ],
+          "startLine": 12,
+          "startColumn": 9,
+          "endLine": 12,
+          "endColumn": 58,
+          "syntaxDigest": "sha256:39ca3623e44c4574b952414af69050a492a88ceb94c9c1692881620203a2cc85"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/checksClosed/from/items/4/right",
+        "mechanicId": "length",
+        "operation": "length",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 10540,
+        "providerSourceEnd": 10596,
+        "providerBodyDigest": "sha256:b069ef847e7543133dbf5d6f9cf19a21fee9cec82a129a6bb475450c005cc925",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            4,
+            2
+          ],
+          "startLine": 13,
+          "startColumn": 11,
+          "endLine": 13,
+          "endColumn": 52,
+          "syntaxDigest": "sha256:efa0341e312bf49933d20f0b456812facdde0a584d20cb250d0d85347aa12455"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/checksClosed/from/items/4/right/value",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.candidate.edges",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            4,
+            2,
+            0
+          ],
+          "startLine": 13,
+          "startColumn": 12,
+          "endLine": 13,
+          "endColumn": 44,
+          "syntaxDigest": "sha256:6ab941a825a4a6322b9715d46e3c4cfcad9e1c5d1614b891ec9cb3c673e2e731"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/checksClosed/from/items/5",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "parameterNames": [
+          "left",
+          "right"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534,
+        "providerBodyDigest": "sha256:d72eba197cd5e76449c3c1af5f0c22be1021c3c4a9aa56568b04e647e17e4b1c",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            5
+          ],
+          "startLine": 14,
+          "startColumn": 9,
+          "endLine": 15,
+          "endColumn": 47,
+          "syntaxDigest": "sha256:1184c0c45e290d0c658a51a7edf2c4682012939f180ee79bd3bd27e25fabfbe9"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/checksClosed/from/items/5/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.geometryProof.summary.featureScenarioCount",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            5,
+            0
+          ],
+          "startLine": 14,
+          "startColumn": 9,
+          "endLine": 14,
+          "endColumn": 69,
+          "syntaxDigest": "sha256:f059a5e933eeaf7d35780483dc4db8d946eb50488e3c0e391178fd8f702e3856"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/checksClosed/from/items/5/right",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.featureScenarioCount",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            5,
+            2
+          ],
+          "startLine": 15,
+          "startColumn": 11,
+          "endLine": 15,
+          "endColumn": 47,
+          "syntaxDigest": "sha256:a97db7e7e2d8eb9555acbf7e8178051e1bb472882913ac0c183efd0ac3de0a5c"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/checksClosed/from/items/6",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "parameterNames": [
+          "left",
+          "right"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534,
+        "providerBodyDigest": "sha256:d72eba197cd5e76449c3c1af5f0c22be1021c3c4a9aa56568b04e647e17e4b1c",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            6
+          ],
+          "startLine": 16,
+          "startColumn": 9,
+          "endLine": 17,
+          "endColumn": 59,
+          "syntaxDigest": "sha256:fe482a8933aa99e5b0752161a1cf7cec99fb589322861aa50c2e4614310ec57c"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/checksClosed/from/items/6/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.geometryProof.summary.findingCount",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            6,
+            0
+          ],
+          "startLine": 16,
+          "startColumn": 9,
+          "endLine": 16,
+          "endColumn": 61,
+          "syntaxDigest": "sha256:b15c97290ab3bb9ee0a56df34b5ed4af2f17e7188cf0730c7a95a771382a953b"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/checksClosed/from/items/6/right",
+        "mechanicId": "length",
+        "operation": "length",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 10540,
+        "providerSourceEnd": 10596,
+        "providerBodyDigest": "sha256:b069ef847e7543133dbf5d6f9cf19a21fee9cec82a129a6bb475450c005cc925",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            6,
+            2
+          ],
+          "startLine": 17,
+          "startColumn": 11,
+          "endLine": 17,
+          "endColumn": 59,
+          "syntaxDigest": "sha256:30b0913626c29fb70c17554b1a904c365bc679ddcc6c549d51426c13b9584e51"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/checksClosed/from/items/6/right/value",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.geometryProof.findings",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            6,
+            2,
+            0
+          ],
+          "startLine": 17,
+          "startColumn": 12,
+          "endLine": 17,
+          "endColumn": 51,
+          "syntaxDigest": "sha256:2bba42fff2dae58d9c932aa7fdb4e26fc44e8591490e0c84536527489b440f9b"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/checksClosed/from/items/7",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "parameterNames": [
+          "left",
+          "right"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534,
+        "providerBodyDigest": "sha256:d72eba197cd5e76449c3c1af5f0c22be1021c3c4a9aa56568b04e647e17e4b1c",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            7
+          ],
+          "startLine": 18,
+          "startColumn": 9,
+          "endLine": 18,
+          "endColumn": 63,
+          "syntaxDigest": "sha256:c3e34f25b5174c0cc680f20d0cc116b4cbdb50ad9da2213d09c5251b41df4a28"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/checksClosed/from/items/7/left",
+        "mechanicId": "length",
+        "operation": "length",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 10540,
+        "providerSourceEnd": 10596,
+        "providerBodyDigest": "sha256:b069ef847e7543133dbf5d6f9cf19a21fee9cec82a129a6bb475450c005cc925",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            7,
+            0
+          ],
+          "startLine": 18,
+          "startColumn": 9,
+          "endLine": 18,
+          "endColumn": 57,
+          "syntaxDigest": "sha256:30b0913626c29fb70c17554b1a904c365bc679ddcc6c549d51426c13b9584e51"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/checksClosed/from/items/7/left/value",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.geometryProof.findings",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            7,
+            0,
+            0
+          ],
+          "startLine": 18,
+          "startColumn": 10,
+          "endLine": 18,
+          "endColumn": 49,
+          "syntaxDigest": "sha256:2bba42fff2dae58d9c932aa7fdb4e26fc44e8591490e0c84536527489b440f9b"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/checksClosed/from/items/7/right",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            7,
+            2
+          ],
+          "startLine": 18,
+          "startColumn": 62,
+          "endLine": 18,
+          "endColumn": 63,
+          "syntaxDigest": "sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/checksClosed/where",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "condition": "condition"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            1,
+            2,
+            1
+          ],
+          "startLine": 19,
+          "startColumn": 38,
+          "endLine": 19,
+          "endColumn": 47,
+          "syntaxDigest": "sha256:596d40a4ed24c02a31b19d6e633f46f64304a672b40f793d8c6deab868beb0e2"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings",
+        "mechanicId": "flat-map",
+        "operation": "flat-map",
+        "parameterNames": [
+          "from",
+          "as",
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 9383,
+        "providerSourceEnd": 9569,
+        "providerBodyDigest": "sha256:0615623ba516fc661ac1083a2e684391dbe98c1ab0d92780f87867579b90c2d1",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1
+          ],
+          "startLine": 20,
+          "startColumn": 34,
+          "endLine": 90,
+          "endColumn": 67,
+          "syntaxDigest": "sha256:345d1ae84e0c93e117b59f5320e0c55a37f36c9679d39b3e46a8a43e8cedc174"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from",
+        "mechanicId": "array",
+        "operation": "array",
+        "parameterNames": [
+          "items"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 9027,
+        "providerSourceEnd": 9095,
+        "providerBodyDigest": "sha256:deb44952445ad6e45765e0d03369cffa4737e64954602f8a3e30e9d00545778e",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "startLine": 20,
+          "startColumn": 34,
+          "endLine": 90,
+          "endColumn": 8,
+          "syntaxDigest": "sha256:5c10f88fccc59a3a653948606fbcccd9a37e16b32cf7b26e364b48283012fb9b"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/0",
+        "mechanicId": "if",
+        "operation": "if",
+        "parameterNames": [
+          "when",
+          "then",
+          "else"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 10691,
+        "providerSourceEnd": 10791,
+        "providerBodyDigest": "sha256:a7e2d0af98002a3ec2c76fad0cecb1f38d192db53b2b003241e61368630fd09a",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "startLine": 21,
+          "startColumn": 9,
+          "endLine": 28,
+          "endColumn": 14,
+          "syntaxDigest": "sha256:b319e4d3d189ac04b20b2d6ce9981e1de72a7f29486dd457b4dad26a7575debe"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/0/when",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "parameterNames": [
+          "left",
+          "right"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534,
+        "providerBodyDigest": "sha256:d72eba197cd5e76449c3c1af5f0c22be1021c3c4a9aa56568b04e647e17e4b1c",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "startLine": 21,
+          "startColumn": 9,
+          "endLine": 21,
+          "endColumn": 93,
+          "syntaxDigest": "sha256:6b71721cfebfe4ab26a8520f20e396e2a3ed634d64bdc90963db2e8ca0108520"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/0/when/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.geometryProof.proofType",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "startLine": 21,
+          "startColumn": 9,
+          "endLine": 21,
+          "endColumn": 49,
+          "syntaxDigest": "sha256:674ef2b746251d721fc1168b299dea04898b3ce0bc70711822e243c924eb994e"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/0/when/right",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            2
+          ],
+          "startLine": 21,
+          "startColumn": 54,
+          "endLine": 21,
+          "endColumn": 93,
+          "syntaxDigest": "sha256:f87b03045ea78a53e08e9c32c6696ceacb9195117a25c341dbbc6756bad720ad"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/0/then",
+        "mechanicId": "array",
+        "operation": "array",
+        "parameterNames": [
+          "items"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 9027,
+        "providerSourceEnd": 9095,
+        "providerBodyDigest": "sha256:deb44952445ad6e45765e0d03369cffa4737e64954602f8a3e30e9d00545778e",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            2
+          ],
+          "startLine": 22,
+          "startColumn": 13,
+          "endLine": 22,
+          "endColumn": 15,
+          "syntaxDigest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/0/else",
+        "mechanicId": "array",
+        "operation": "array",
+        "parameterNames": [
+          "items"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 9027,
+        "providerSourceEnd": 9095,
+        "providerBodyDigest": "sha256:deb44952445ad6e45765e0d03369cffa4737e64954602f8a3e30e9d00545778e",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            4
+          ],
+          "startLine": 23,
+          "startColumn": 13,
+          "endLine": 28,
+          "endColumn": 14,
+          "syntaxDigest": "sha256:70af97df92a0454a383321f2c4a39882d49b3636f597b8b19688b057921ca4ed"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/0/else/items/0",
+        "mechanicId": "object",
+        "operation": "object",
+        "parameterNames": [
+          "fields"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8899,
+        "providerSourceEnd": 9021,
+        "providerBodyDigest": "sha256:1c64bf7e879a086062f051dfb0081f2d73ecf7ca51fe9f56cc0ecd19380b20ae",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            4,
+            0
+          ],
+          "startLine": 24,
+          "startColumn": 15,
+          "endLine": 27,
+          "endColumn": 16,
+          "syntaxDigest": "sha256:6d336dcf1e3122fb154d06706ed7597c92e71c2958c504e8c98651a6776cb093"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/0/else/items/0/fields/code",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            4,
+            0,
+            0,
+            1
+          ],
+          "startLine": 25,
+          "startColumn": 27,
+          "endLine": 25,
+          "endColumn": 61,
+          "syntaxDigest": "sha256:f2ca896da222146bf2f86680e5894789172c650d9bd08b35bd97f6ad848ced4d"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/0/else/items/0/fields/blueprintCellId",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            4,
+            0,
+            1,
+            1
+          ],
+          "startLine": 26,
+          "startColumn": 38,
+          "endLine": 26,
+          "endColumn": 72,
+          "syntaxDigest": "sha256:3af056223746dd238ec0fc43516c123575219590f82060dfcff7ed8c5431079f"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/1",
+        "mechanicId": "if",
+        "operation": "if",
+        "parameterNames": [
+          "when",
+          "then",
+          "else"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 10691,
+        "providerSourceEnd": 10791,
+        "providerBodyDigest": "sha256:a7e2d0af98002a3ec2c76fad0cecb1f38d192db53b2b003241e61368630fd09a",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1
+          ],
+          "startLine": 29,
+          "startColumn": 9,
+          "endLine": 37,
+          "endColumn": 14,
+          "syntaxDigest": "sha256:001630fa879c8cd1a2c862e8e2fd161d155f3f1b5143c855f4dc05caaa9447f7"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/1/when",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "parameterNames": [
+          "left",
+          "right"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534,
+        "providerBodyDigest": "sha256:d72eba197cd5e76449c3c1af5f0c22be1021c3c4a9aa56568b04e647e17e4b1c",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0
+          ],
+          "startLine": 29,
+          "startColumn": 9,
+          "endLine": 30,
+          "endColumn": 71,
+          "syntaxDigest": "sha256:761d994d0aff3446e42cf78d31ce628e6c251a0b178a298e23a2c4c36890fc13"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/1/when/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.geometryProof.blueprintDigest",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "startLine": 29,
+          "startColumn": 9,
+          "endLine": 29,
+          "endColumn": 55,
+          "syntaxDigest": "sha256:7645508bac134dc0d3b92fb194de704ac9479e57a773365da2f10fe820370438"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/1/when/right",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.candidate.blueprintAuthority.authorityDigest",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            2
+          ],
+          "startLine": 30,
+          "startColumn": 9,
+          "endLine": 30,
+          "endColumn": 71,
+          "syntaxDigest": "sha256:d0c32e9e1a296bec8e4d97a66a83130e42a1a96b5ee5680db1cf7c7347235ca3"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/1/then",
+        "mechanicId": "array",
+        "operation": "array",
+        "parameterNames": [
+          "items"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 9027,
+        "providerSourceEnd": 9095,
+        "providerBodyDigest": "sha256:deb44952445ad6e45765e0d03369cffa4737e64954602f8a3e30e9d00545778e",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            2
+          ],
+          "startLine": 31,
+          "startColumn": 13,
+          "endLine": 31,
+          "endColumn": 15,
+          "syntaxDigest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/1/else",
+        "mechanicId": "array",
+        "operation": "array",
+        "parameterNames": [
+          "items"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 9027,
+        "providerSourceEnd": 9095,
+        "providerBodyDigest": "sha256:deb44952445ad6e45765e0d03369cffa4737e64954602f8a3e30e9d00545778e",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            4
+          ],
+          "startLine": 32,
+          "startColumn": 13,
+          "endLine": 37,
+          "endColumn": 14,
+          "syntaxDigest": "sha256:99daa5a166105ec56407dac4a789948d4467b15074a504346d22de21063cf39a"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/1/else/items/0",
+        "mechanicId": "object",
+        "operation": "object",
+        "parameterNames": [
+          "fields"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8899,
+        "providerSourceEnd": 9021,
+        "providerBodyDigest": "sha256:1c64bf7e879a086062f051dfb0081f2d73ecf7ca51fe9f56cc0ecd19380b20ae",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            4,
+            0
+          ],
+          "startLine": 33,
+          "startColumn": 15,
+          "endLine": 36,
+          "endColumn": 16,
+          "syntaxDigest": "sha256:76e11a2af47e9d202ec0f659a91bd1d084de2748b3f1867e2202b7c388ce42c0"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/1/else/items/0/fields/code",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            4,
+            0,
+            0,
+            1
+          ],
+          "startLine": 34,
+          "startColumn": 27,
+          "endLine": 34,
+          "endColumn": 69,
+          "syntaxDigest": "sha256:2154da5535a7f2ed125ef43eb0026e2e215c0d4f006284631b1fab76fc470997"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/1/else/items/0/fields/blueprintCellId",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            4,
+            0,
+            1,
+            1
+          ],
+          "startLine": 35,
+          "startColumn": 38,
+          "endLine": 35,
+          "endColumn": 72,
+          "syntaxDigest": "sha256:3af056223746dd238ec0fc43516c123575219590f82060dfcff7ed8c5431079f"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/2",
+        "mechanicId": "if",
+        "operation": "if",
+        "parameterNames": [
+          "when",
+          "then",
+          "else"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 10691,
+        "providerSourceEnd": 10791,
+        "providerBodyDigest": "sha256:a7e2d0af98002a3ec2c76fad0cecb1f38d192db53b2b003241e61368630fd09a",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            2
+          ],
+          "startLine": 38,
+          "startColumn": 9,
+          "endLine": 45,
+          "endColumn": 14,
+          "syntaxDigest": "sha256:22cbe2e6578fabf4cd3ab7b6d498c8ede42dc302273015e4c639656eecd0afd2"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/2/when",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "parameterNames": [
+          "left",
+          "right"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534,
+        "providerBodyDigest": "sha256:d72eba197cd5e76449c3c1af5f0c22be1021c3c4a9aa56568b04e647e17e4b1c",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            2,
+            0
+          ],
+          "startLine": 38,
+          "startColumn": 9,
+          "endLine": 38,
+          "endColumn": 66,
+          "syntaxDigest": "sha256:1f7a7bd65249a8348437ed958e1f0dcbfeed71af2d13f9a96c4c1c08275eb539"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/2/when/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.geometryProof.disposition",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            2,
+            0,
+            0
+          ],
+          "startLine": 38,
+          "startColumn": 9,
+          "endLine": 38,
+          "endColumn": 51,
+          "syntaxDigest": "sha256:ab3bbbeaed0e0e784475b90e0da50e114f21df3e8c45c6592e4e75082ddf906d"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/2/when/right",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            2,
+            0,
+            2
+          ],
+          "startLine": 38,
+          "startColumn": 56,
+          "endLine": 38,
+          "endColumn": 66,
+          "syntaxDigest": "sha256:d5f78c511436877b81222b964b3e9e8d1216ae687f1b9d09de0837267f12b7ec"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/2/then",
+        "mechanicId": "array",
+        "operation": "array",
+        "parameterNames": [
+          "items"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 9027,
+        "providerSourceEnd": 9095,
+        "providerBodyDigest": "sha256:deb44952445ad6e45765e0d03369cffa4737e64954602f8a3e30e9d00545778e",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            2,
+            2
+          ],
+          "startLine": 39,
+          "startColumn": 13,
+          "endLine": 39,
+          "endColumn": 15,
+          "syntaxDigest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/2/else",
+        "mechanicId": "array",
+        "operation": "array",
+        "parameterNames": [
+          "items"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 9027,
+        "providerSourceEnd": 9095,
+        "providerBodyDigest": "sha256:deb44952445ad6e45765e0d03369cffa4737e64954602f8a3e30e9d00545778e",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            2,
+            4
+          ],
+          "startLine": 40,
+          "startColumn": 13,
+          "endLine": 45,
+          "endColumn": 14,
+          "syntaxDigest": "sha256:0153a7b822029a68aacd2f2912f53e20a02a6db02e7753e1151e0dd013f6d9b9"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/2/else/items/0",
+        "mechanicId": "object",
+        "operation": "object",
+        "parameterNames": [
+          "fields"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8899,
+        "providerSourceEnd": 9021,
+        "providerBodyDigest": "sha256:1c64bf7e879a086062f051dfb0081f2d73ecf7ca51fe9f56cc0ecd19380b20ae",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            2,
+            4,
+            0
+          ],
+          "startLine": 41,
+          "startColumn": 15,
+          "endLine": 44,
+          "endColumn": 16,
+          "syntaxDigest": "sha256:ae82efdd947d99e7a5c6315dee6ed9b57db3bcc80c43de04767ca3a090b78ecf"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/2/else/items/0/fields/code",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            2,
+            4,
+            0,
+            0,
+            1
+          ],
+          "startLine": 42,
+          "startColumn": 27,
+          "endLine": 42,
+          "endColumn": 64,
+          "syntaxDigest": "sha256:87d9e4bb8b658d4468f8201f6958fc0bd5735d51187c6d58b89c7c9e74dd6424"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/2/else/items/0/fields/blueprintCellId",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            2,
+            4,
+            0,
+            1,
+            1
+          ],
+          "startLine": 43,
+          "startColumn": 38,
+          "endLine": 43,
+          "endColumn": 72,
+          "syntaxDigest": "sha256:3af056223746dd238ec0fc43516c123575219590f82060dfcff7ed8c5431079f"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/3",
+        "mechanicId": "if",
+        "operation": "if",
+        "parameterNames": [
+          "when",
+          "then",
+          "else"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 10691,
+        "providerSourceEnd": 10791,
+        "providerBodyDigest": "sha256:a7e2d0af98002a3ec2c76fad0cecb1f38d192db53b2b003241e61368630fd09a",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            3
+          ],
+          "startLine": 46,
+          "startColumn": 9,
+          "endLine": 54,
+          "endColumn": 14,
+          "syntaxDigest": "sha256:2826203893a3714281d2e2e9cb264618df466fe767c832e20a1eba1d7fbadb64"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/3/when",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "parameterNames": [
+          "left",
+          "right"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534,
+        "providerBodyDigest": "sha256:d72eba197cd5e76449c3c1af5f0c22be1021c3c4a9aa56568b04e647e17e4b1c",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            3,
+            0
+          ],
+          "startLine": 46,
+          "startColumn": 9,
+          "endLine": 47,
+          "endColumn": 50,
+          "syntaxDigest": "sha256:0be1cc2807cd3f77ce91ffc553de7f4c41bbda2ac4f87d8507eb0d72c6c265dc"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/3/when/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.geometryProof.summary.nodeCount",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            3,
+            0,
+            0
+          ],
+          "startLine": 46,
+          "startColumn": 9,
+          "endLine": 46,
+          "endColumn": 58,
+          "syntaxDigest": "sha256:5a76b7c8ace8f33607aa9c2d23ee0f84156f1de6c076df167e9e35f7557eb79b"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/3/when/right",
+        "mechanicId": "length",
+        "operation": "length",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 10540,
+        "providerSourceEnd": 10596,
+        "providerBodyDigest": "sha256:b069ef847e7543133dbf5d6f9cf19a21fee9cec82a129a6bb475450c005cc925",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            3,
+            0,
+            2
+          ],
+          "startLine": 47,
+          "startColumn": 9,
+          "endLine": 47,
+          "endColumn": 50,
+          "syntaxDigest": "sha256:42fb474f6ed1378ae37880f64cf17e846a574627beda20606dab4a1a1b08e4c6"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/3/when/right/value",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.candidate.nodes",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            3,
+            0,
+            2,
+            0
+          ],
+          "startLine": 47,
+          "startColumn": 10,
+          "endLine": 47,
+          "endColumn": 42,
+          "syntaxDigest": "sha256:8c5bcfb0e75ebb87b27b985eb38e791ce42413e56191366c0c44bcee4edb3356"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/3/then",
+        "mechanicId": "array",
+        "operation": "array",
+        "parameterNames": [
+          "items"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 9027,
+        "providerSourceEnd": 9095,
+        "providerBodyDigest": "sha256:deb44952445ad6e45765e0d03369cffa4737e64954602f8a3e30e9d00545778e",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            3,
+            2
+          ],
+          "startLine": 48,
+          "startColumn": 13,
+          "endLine": 48,
+          "endColumn": 15,
+          "syntaxDigest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/3/else",
+        "mechanicId": "array",
+        "operation": "array",
+        "parameterNames": [
+          "items"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 9027,
+        "providerSourceEnd": 9095,
+        "providerBodyDigest": "sha256:deb44952445ad6e45765e0d03369cffa4737e64954602f8a3e30e9d00545778e",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            3,
+            4
+          ],
+          "startLine": 49,
+          "startColumn": 13,
+          "endLine": 54,
+          "endColumn": 14,
+          "syntaxDigest": "sha256:7b6339c600257f2384f262a90341dadabae1ea313b44dd77d40a17554ea24775"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/3/else/items/0",
+        "mechanicId": "object",
+        "operation": "object",
+        "parameterNames": [
+          "fields"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8899,
+        "providerSourceEnd": 9021,
+        "providerBodyDigest": "sha256:1c64bf7e879a086062f051dfb0081f2d73ecf7ca51fe9f56cc0ecd19380b20ae",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            3,
+            4,
+            0
+          ],
+          "startLine": 50,
+          "startColumn": 15,
+          "endLine": 53,
+          "endColumn": 16,
+          "syntaxDigest": "sha256:ea9369e3dff7a6ade30d57e4f53bf3c3c6d4f5ad02cd4651d99bd60d999a39b1"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/3/else/items/0/fields/code",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            3,
+            4,
+            0,
+            0,
+            1
+          ],
+          "startLine": 51,
+          "startColumn": 27,
+          "endLine": 51,
+          "endColumn": 57,
+          "syntaxDigest": "sha256:007731db94dc4a1035d08a27591f835a3a41087b6d4bb8d87584c09ea870d342"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/3/else/items/0/fields/blueprintCellId",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            3,
+            4,
+            0,
+            1,
+            1
+          ],
+          "startLine": 52,
+          "startColumn": 38,
+          "endLine": 52,
+          "endColumn": 72,
+          "syntaxDigest": "sha256:3af056223746dd238ec0fc43516c123575219590f82060dfcff7ed8c5431079f"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/4",
+        "mechanicId": "if",
+        "operation": "if",
+        "parameterNames": [
+          "when",
+          "then",
+          "else"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 10691,
+        "providerSourceEnd": 10791,
+        "providerBodyDigest": "sha256:a7e2d0af98002a3ec2c76fad0cecb1f38d192db53b2b003241e61368630fd09a",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            4
+          ],
+          "startLine": 55,
+          "startColumn": 9,
+          "endLine": 63,
+          "endColumn": 14,
+          "syntaxDigest": "sha256:bc044908efb9d15a2f7ab5c80d15ffc1a354bdb5ff6ff422478c21821022f269"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/4/when",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "parameterNames": [
+          "left",
+          "right"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534,
+        "providerBodyDigest": "sha256:d72eba197cd5e76449c3c1af5f0c22be1021c3c4a9aa56568b04e647e17e4b1c",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            4,
+            0
+          ],
+          "startLine": 55,
+          "startColumn": 9,
+          "endLine": 56,
+          "endColumn": 50,
+          "syntaxDigest": "sha256:a4f4ef1828bb272ec59ea9dc72a1d03135c9583e26eba308a8e6ab02188e2630"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/4/when/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.geometryProof.summary.edgeCount",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            4,
+            0,
+            0
+          ],
+          "startLine": 55,
+          "startColumn": 9,
+          "endLine": 55,
+          "endColumn": 58,
+          "syntaxDigest": "sha256:39ca3623e44c4574b952414af69050a492a88ceb94c9c1692881620203a2cc85"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/4/when/right",
+        "mechanicId": "length",
+        "operation": "length",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 10540,
+        "providerSourceEnd": 10596,
+        "providerBodyDigest": "sha256:b069ef847e7543133dbf5d6f9cf19a21fee9cec82a129a6bb475450c005cc925",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            4,
+            0,
+            2
+          ],
+          "startLine": 56,
+          "startColumn": 9,
+          "endLine": 56,
+          "endColumn": 50,
+          "syntaxDigest": "sha256:efa0341e312bf49933d20f0b456812facdde0a584d20cb250d0d85347aa12455"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/4/when/right/value",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.candidate.edges",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            4,
+            0,
+            2,
+            0
+          ],
+          "startLine": 56,
+          "startColumn": 10,
+          "endLine": 56,
+          "endColumn": 42,
+          "syntaxDigest": "sha256:6ab941a825a4a6322b9715d46e3c4cfcad9e1c5d1614b891ec9cb3c673e2e731"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/4/then",
+        "mechanicId": "array",
+        "operation": "array",
+        "parameterNames": [
+          "items"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 9027,
+        "providerSourceEnd": 9095,
+        "providerBodyDigest": "sha256:deb44952445ad6e45765e0d03369cffa4737e64954602f8a3e30e9d00545778e",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            4,
+            2
+          ],
+          "startLine": 57,
+          "startColumn": 13,
+          "endLine": 57,
+          "endColumn": 15,
+          "syntaxDigest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/4/else",
+        "mechanicId": "array",
+        "operation": "array",
+        "parameterNames": [
+          "items"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 9027,
+        "providerSourceEnd": 9095,
+        "providerBodyDigest": "sha256:deb44952445ad6e45765e0d03369cffa4737e64954602f8a3e30e9d00545778e",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            4,
+            4
+          ],
+          "startLine": 58,
+          "startColumn": 13,
+          "endLine": 63,
+          "endColumn": 14,
+          "syntaxDigest": "sha256:b05514799484816cdedb71d457cad2dcd474fb6a2954796179b46db85f8a72e2"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/4/else/items/0",
+        "mechanicId": "object",
+        "operation": "object",
+        "parameterNames": [
+          "fields"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8899,
+        "providerSourceEnd": 9021,
+        "providerBodyDigest": "sha256:1c64bf7e879a086062f051dfb0081f2d73ecf7ca51fe9f56cc0ecd19380b20ae",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            4,
+            4,
+            0
+          ],
+          "startLine": 59,
+          "startColumn": 15,
+          "endLine": 62,
+          "endColumn": 16,
+          "syntaxDigest": "sha256:44ce5f898bba332dc8285551402dda7212f2fb788bb176ddc6c32c6982e7940d"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/4/else/items/0/fields/code",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            4,
+            4,
+            0,
+            0,
+            1
+          ],
+          "startLine": 60,
+          "startColumn": 27,
+          "endLine": 60,
+          "endColumn": 57,
+          "syntaxDigest": "sha256:365f77b914f2ab9671dfde3974352466598d5b4bd74f52a4b7bf61a244bc28ad"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/4/else/items/0/fields/blueprintCellId",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            4,
+            4,
+            0,
+            1,
+            1
+          ],
+          "startLine": 61,
+          "startColumn": 38,
+          "endLine": 61,
+          "endColumn": 72,
+          "syntaxDigest": "sha256:3af056223746dd238ec0fc43516c123575219590f82060dfcff7ed8c5431079f"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/5",
+        "mechanicId": "if",
+        "operation": "if",
+        "parameterNames": [
+          "when",
+          "then",
+          "else"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 10691,
+        "providerSourceEnd": 10791,
+        "providerBodyDigest": "sha256:a7e2d0af98002a3ec2c76fad0cecb1f38d192db53b2b003241e61368630fd09a",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            5
+          ],
+          "startLine": 64,
+          "startColumn": 9,
+          "endLine": 72,
+          "endColumn": 14,
+          "syntaxDigest": "sha256:1035612151fe0a3261c3ae4907c60f2b1e3f5c3f6c9f65e7f37d441c8e6a4575"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/5/when",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "parameterNames": [
+          "left",
+          "right"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534,
+        "providerBodyDigest": "sha256:d72eba197cd5e76449c3c1af5f0c22be1021c3c4a9aa56568b04e647e17e4b1c",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            5,
+            0
+          ],
+          "startLine": 64,
+          "startColumn": 9,
+          "endLine": 65,
+          "endColumn": 45,
+          "syntaxDigest": "sha256:dfd1c8e541af197d3583771cead0b9e1fb40fe55336068f9a6eb9d787ac4b80c"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/5/when/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.geometryProof.summary.featureScenarioCount",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            5,
+            0,
+            0
+          ],
+          "startLine": 64,
+          "startColumn": 9,
+          "endLine": 64,
+          "endColumn": 69,
+          "syntaxDigest": "sha256:f059a5e933eeaf7d35780483dc4db8d946eb50488e3c0e391178fd8f702e3856"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/5/when/right",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.featureScenarioCount",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            5,
+            0,
+            2
+          ],
+          "startLine": 65,
+          "startColumn": 9,
+          "endLine": 65,
+          "endColumn": 45,
+          "syntaxDigest": "sha256:a97db7e7e2d8eb9555acbf7e8178051e1bb472882913ac0c183efd0ac3de0a5c"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/5/then",
+        "mechanicId": "array",
+        "operation": "array",
+        "parameterNames": [
+          "items"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 9027,
+        "providerSourceEnd": 9095,
+        "providerBodyDigest": "sha256:deb44952445ad6e45765e0d03369cffa4737e64954602f8a3e30e9d00545778e",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            5,
+            2
+          ],
+          "startLine": 66,
+          "startColumn": 13,
+          "endLine": 66,
+          "endColumn": 15,
+          "syntaxDigest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/5/else",
+        "mechanicId": "array",
+        "operation": "array",
+        "parameterNames": [
+          "items"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 9027,
+        "providerSourceEnd": 9095,
+        "providerBodyDigest": "sha256:deb44952445ad6e45765e0d03369cffa4737e64954602f8a3e30e9d00545778e",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            5,
+            4
+          ],
+          "startLine": 67,
+          "startColumn": 13,
+          "endLine": 72,
+          "endColumn": 14,
+          "syntaxDigest": "sha256:f0c8e52e851d5f8463c5a24019a187f3af16be5acc19e7af395ea0107be7e8d5"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/5/else/items/0",
+        "mechanicId": "object",
+        "operation": "object",
+        "parameterNames": [
+          "fields"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8899,
+        "providerSourceEnd": 9021,
+        "providerBodyDigest": "sha256:1c64bf7e879a086062f051dfb0081f2d73ecf7ca51fe9f56cc0ecd19380b20ae",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            5,
+            4,
+            0
+          ],
+          "startLine": 68,
+          "startColumn": 15,
+          "endLine": 71,
+          "endColumn": 16,
+          "syntaxDigest": "sha256:56704f76ebc3e95c172f24946a43daa54c22a99ba91c61e157f82ba00d7e7566"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/5/else/items/0/fields/code",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            5,
+            4,
+            0,
+            0,
+            1
+          ],
+          "startLine": 69,
+          "startColumn": 27,
+          "endLine": 69,
+          "endColumn": 69,
+          "syntaxDigest": "sha256:370ba201eade6a9b571f365397901c3a2e9c74a280516903157106f557bb2dd0"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/5/else/items/0/fields/blueprintCellId",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            5,
+            4,
+            0,
+            1,
+            1
+          ],
+          "startLine": 70,
+          "startColumn": 38,
+          "endLine": 70,
+          "endColumn": 72,
+          "syntaxDigest": "sha256:3af056223746dd238ec0fc43516c123575219590f82060dfcff7ed8c5431079f"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/6",
+        "mechanicId": "if",
+        "operation": "if",
+        "parameterNames": [
+          "when",
+          "then",
+          "else"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 10691,
+        "providerSourceEnd": 10791,
+        "providerBodyDigest": "sha256:a7e2d0af98002a3ec2c76fad0cecb1f38d192db53b2b003241e61368630fd09a",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            6
+          ],
+          "startLine": 73,
+          "startColumn": 9,
+          "endLine": 81,
+          "endColumn": 14,
+          "syntaxDigest": "sha256:111217771a914b3869bf106b71a44540509923f9e36cfe2ffbb7a0f1e9bb15e6"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/6/when",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "parameterNames": [
+          "left",
+          "right"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534,
+        "providerBodyDigest": "sha256:d72eba197cd5e76449c3c1af5f0c22be1021c3c4a9aa56568b04e647e17e4b1c",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            6,
+            0
+          ],
+          "startLine": 73,
+          "startColumn": 9,
+          "endLine": 74,
+          "endColumn": 57,
+          "syntaxDigest": "sha256:7aa9d55ec11653e763a7690c1e7c35451ac6ab2b29c545b3d9620071f4955081"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/6/when/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.geometryProof.summary.findingCount",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            6,
+            0,
+            0
+          ],
+          "startLine": 73,
+          "startColumn": 9,
+          "endLine": 73,
+          "endColumn": 61,
+          "syntaxDigest": "sha256:b15c97290ab3bb9ee0a56df34b5ed4af2f17e7188cf0730c7a95a771382a953b"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/6/when/right",
+        "mechanicId": "length",
+        "operation": "length",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 10540,
+        "providerSourceEnd": 10596,
+        "providerBodyDigest": "sha256:b069ef847e7543133dbf5d6f9cf19a21fee9cec82a129a6bb475450c005cc925",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            6,
+            0,
+            2
+          ],
+          "startLine": 74,
+          "startColumn": 9,
+          "endLine": 74,
+          "endColumn": 57,
+          "syntaxDigest": "sha256:30b0913626c29fb70c17554b1a904c365bc679ddcc6c549d51426c13b9584e51"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/6/when/right/value",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.geometryProof.findings",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            6,
+            0,
+            2,
+            0
+          ],
+          "startLine": 74,
+          "startColumn": 10,
+          "endLine": 74,
+          "endColumn": 49,
+          "syntaxDigest": "sha256:2bba42fff2dae58d9c932aa7fdb4e26fc44e8591490e0c84536527489b440f9b"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/6/then",
+        "mechanicId": "array",
+        "operation": "array",
+        "parameterNames": [
+          "items"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 9027,
+        "providerSourceEnd": 9095,
+        "providerBodyDigest": "sha256:deb44952445ad6e45765e0d03369cffa4737e64954602f8a3e30e9d00545778e",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            6,
+            2
+          ],
+          "startLine": 75,
+          "startColumn": 13,
+          "endLine": 75,
+          "endColumn": 15,
+          "syntaxDigest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/6/else",
+        "mechanicId": "array",
+        "operation": "array",
+        "parameterNames": [
+          "items"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 9027,
+        "providerSourceEnd": 9095,
+        "providerBodyDigest": "sha256:deb44952445ad6e45765e0d03369cffa4737e64954602f8a3e30e9d00545778e",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            6,
+            4
+          ],
+          "startLine": 76,
+          "startColumn": 13,
+          "endLine": 81,
+          "endColumn": 14,
+          "syntaxDigest": "sha256:17af06769a63facd74d8abcc3866ee7f32aa4b75a914d1cb2cdff528ad48bb10"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/6/else/items/0",
+        "mechanicId": "object",
+        "operation": "object",
+        "parameterNames": [
+          "fields"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8899,
+        "providerSourceEnd": 9021,
+        "providerBodyDigest": "sha256:1c64bf7e879a086062f051dfb0081f2d73ecf7ca51fe9f56cc0ecd19380b20ae",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            6,
+            4,
+            0
+          ],
+          "startLine": 77,
+          "startColumn": 15,
+          "endLine": 80,
+          "endColumn": 16,
+          "syntaxDigest": "sha256:37e3f6473e04039217a278cbeb45943a05c61f92b3f45fd392363bf5f61e5368"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/6/else/items/0/fields/code",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            6,
+            4,
+            0,
+            0,
+            1
+          ],
+          "startLine": 78,
+          "startColumn": 27,
+          "endLine": 78,
+          "endColumn": 60,
+          "syntaxDigest": "sha256:44bc30494e00fdbc92241c06d2163731d9a055695254c7ccf83acfbca0bfb9dd"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/6/else/items/0/fields/blueprintCellId",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            6,
+            4,
+            0,
+            1,
+            1
+          ],
+          "startLine": 79,
+          "startColumn": 38,
+          "endLine": 79,
+          "endColumn": 72,
+          "syntaxDigest": "sha256:3af056223746dd238ec0fc43516c123575219590f82060dfcff7ed8c5431079f"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/7",
+        "mechanicId": "if",
+        "operation": "if",
+        "parameterNames": [
+          "when",
+          "then",
+          "else"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 10691,
+        "providerSourceEnd": 10791,
+        "providerBodyDigest": "sha256:a7e2d0af98002a3ec2c76fad0cecb1f38d192db53b2b003241e61368630fd09a",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            7
+          ],
+          "startLine": 82,
+          "startColumn": 9,
+          "endLine": 89,
+          "endColumn": 14,
+          "syntaxDigest": "sha256:51b5deb40024eb27647a781cbf3d5cb351e29df2e22dd63c159181edac983824"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/7/when",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "parameterNames": [
+          "left",
+          "right"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534,
+        "providerBodyDigest": "sha256:d72eba197cd5e76449c3c1af5f0c22be1021c3c4a9aa56568b04e647e17e4b1c",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            7,
+            0
+          ],
+          "startLine": 82,
+          "startColumn": 9,
+          "endLine": 82,
+          "endColumn": 63,
+          "syntaxDigest": "sha256:c3e34f25b5174c0cc680f20d0cc116b4cbdb50ad9da2213d09c5251b41df4a28"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/7/when/left",
+        "mechanicId": "length",
+        "operation": "length",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 10540,
+        "providerSourceEnd": 10596,
+        "providerBodyDigest": "sha256:b069ef847e7543133dbf5d6f9cf19a21fee9cec82a129a6bb475450c005cc925",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            7,
+            0,
+            0
+          ],
+          "startLine": 82,
+          "startColumn": 9,
+          "endLine": 82,
+          "endColumn": 57,
+          "syntaxDigest": "sha256:30b0913626c29fb70c17554b1a904c365bc679ddcc6c549d51426c13b9584e51"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/7/when/left/value",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.geometryProof.findings",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            7,
+            0,
+            0,
+            0
+          ],
+          "startLine": 82,
+          "startColumn": 10,
+          "endLine": 82,
+          "endColumn": 49,
+          "syntaxDigest": "sha256:2bba42fff2dae58d9c932aa7fdb4e26fc44e8591490e0c84536527489b440f9b"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/7/when/right",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            7,
+            0,
+            2
+          ],
+          "startLine": 82,
+          "startColumn": 62,
+          "endLine": 82,
+          "endColumn": 63,
+          "syntaxDigest": "sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/7/then",
+        "mechanicId": "array",
+        "operation": "array",
+        "parameterNames": [
+          "items"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 9027,
+        "providerSourceEnd": 9095,
+        "providerBodyDigest": "sha256:deb44952445ad6e45765e0d03369cffa4737e64954602f8a3e30e9d00545778e",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            7,
+            2
+          ],
+          "startLine": 83,
+          "startColumn": 13,
+          "endLine": 83,
+          "endColumn": 15,
+          "syntaxDigest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/7/else",
+        "mechanicId": "array",
+        "operation": "array",
+        "parameterNames": [
+          "items"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 9027,
+        "providerSourceEnd": 9095,
+        "providerBodyDigest": "sha256:deb44952445ad6e45765e0d03369cffa4737e64954602f8a3e30e9d00545778e",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            7,
+            4
+          ],
+          "startLine": 84,
+          "startColumn": 13,
+          "endLine": 89,
+          "endColumn": 14,
+          "syntaxDigest": "sha256:735e7162b2abbc8826d9e026667327609e4db3e1edcd872e905a87cdf7cee0bb"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/7/else/items/0",
+        "mechanicId": "object",
+        "operation": "object",
+        "parameterNames": [
+          "fields"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8899,
+        "providerSourceEnd": 9021,
+        "providerBodyDigest": "sha256:1c64bf7e879a086062f051dfb0081f2d73ecf7ca51fe9f56cc0ecd19380b20ae",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            7,
+            4,
+            0
+          ],
+          "startLine": 85,
+          "startColumn": 15,
+          "endLine": 88,
+          "endColumn": 16,
+          "syntaxDigest": "sha256:19b3e04b4c2538594b97fe628680ac3148ae0a8a8f6dcf2a1d35886fac176e36"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/7/else/items/0/fields/code",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            7,
+            4,
+            0,
+            0,
+            1
+          ],
+          "startLine": 86,
+          "startColumn": 27,
+          "endLine": 86,
+          "endColumn": 56,
+          "syntaxDigest": "sha256:6de12d62d08119433e02626a8864ee0b3c0b289c9b46342d9483b895486a42a6"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/from/items/7/else/items/0/fields/blueprintCellId",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            7,
+            4,
+            0,
+            1,
+            1
+          ],
+          "startLine": 87,
+          "startColumn": 38,
+          "endLine": 87,
+          "endColumn": 72,
+          "syntaxDigest": "sha256:3af056223746dd238ec0fc43516c123575219590f82060dfcff7ed8c5431079f"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/obligationFindings/value",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed",
+          "findingGroup": "findingGroup",
+          "findingGroupIndex": "findingGroupIndex"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            1,
+            3
+          ],
+          "startLine": 90,
+          "startColumn": 54,
+          "endLine": 90,
+          "endColumn": 66,
+          "syntaxDigest": "sha256:b4737a7fa4fdb9413fb3f9d6465df1935e051a986958c6769409159fdcbf8a29"
+        }
+      },
+      {
+        "sourcePointer": "/value",
+        "mechanicId": "merge",
+        "operation": "merge",
+        "parameterNames": [
+          "values"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed",
+          "obligationFindings": "obligationFindings"
+        },
+        "providerSourceStart": 9101,
+        "providerSourceEnd": 9194,
+        "providerBodyDigest": "sha256:a5783ce9abfa463081111a250e4d6c61a4807953a3b6e1bc08bb052cbcff0074",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            2,
+            0
+          ],
+          "startLine": 91,
+          "startColumn": 14,
+          "endLine": 99,
+          "endColumn": 9,
+          "syntaxDigest": "sha256:ddbb3ec55184a132cb0b1220eca759f54841fdffca6da397ce303298c6c4d91c"
+        }
+      },
+      {
+        "sourcePointer": "/value/values/0",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed",
+          "obligationFindings": "obligationFindings"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            2,
+            0,
+            2
+          ],
+          "startLine": 91,
+          "startColumn": 32,
+          "endLine": 91,
+          "endColumn": 37,
+          "syntaxDigest": "sha256:c96c6d5be8d08a12e7b5cdc1b207fa6b2430974c86803d8891675e76fd992c20"
+        }
+      },
+      {
+        "sourcePointer": "/value/values/1",
+        "mechanicId": "object",
+        "operation": "object",
+        "parameterNames": [
+          "fields"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed",
+          "obligationFindings": "obligationFindings"
+        },
+        "providerSourceStart": 8899,
+        "providerSourceEnd": 9021,
+        "providerBodyDigest": "sha256:1c64bf7e879a086062f051dfb0081f2d73ecf7ca51fe9f56cc0ecd19380b20ae",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            2,
+            0,
+            3
+          ],
+          "startLine": 91,
+          "startColumn": 39,
+          "endLine": 99,
+          "endColumn": 8,
+          "syntaxDigest": "sha256:7be4e5e9cc492dd8f0bf908d90d49d13ddf018277233a02806c8034e7c0d589c"
+        }
+      },
+      {
+        "sourcePointer": "/value/values/1/fields/payload",
+        "mechanicId": "merge",
+        "operation": "merge",
+        "parameterNames": [
+          "values"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed",
+          "obligationFindings": "obligationFindings"
+        },
+        "providerSourceStart": 9101,
+        "providerSourceEnd": 9194,
+        "providerBodyDigest": "sha256:a5783ce9abfa463081111a250e4d6c61a4807953a3b6e1bc08bb052cbcff0074",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            2,
+            0,
+            3,
+            0,
+            1
+          ],
+          "startLine": 92,
+          "startColumn": 22,
+          "endLine": 98,
+          "endColumn": 11,
+          "syntaxDigest": "sha256:edb323494b5137f757dc7a2c1d6cd4a6f1c16c5e9414145f48b9cc5066f32caf"
+        }
+      },
+      {
+        "sourcePointer": "/value/values/1/fields/payload/values/0",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed",
+          "obligationFindings": "obligationFindings"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            2,
+            0,
+            3,
+            0,
+            1,
+            2
+          ],
+          "startLine": 92,
+          "startColumn": 40,
+          "endLine": 92,
+          "endColumn": 54,
+          "syntaxDigest": "sha256:b127079365650bc5b0e662ee2083d3da04dbda3b71d13f711ea1a98b73f6dbaf"
+        }
+      },
+      {
+        "sourcePointer": "/value/values/1/fields/payload/values/1",
+        "mechanicId": "object",
+        "operation": "object",
+        "parameterNames": [
+          "fields"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed",
+          "obligationFindings": "obligationFindings"
+        },
+        "providerSourceStart": 8899,
+        "providerSourceEnd": 9021,
+        "providerBodyDigest": "sha256:1c64bf7e879a086062f051dfb0081f2d73ecf7ca51fe9f56cc0ecd19380b20ae",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            2,
+            0,
+            3,
+            0,
+            1,
+            3
+          ],
+          "startLine": 92,
+          "startColumn": 56,
+          "endLine": 98,
+          "endColumn": 10,
+          "syntaxDigest": "sha256:309cde357c5bd5848256a6a23a4997c1065982259e263068eeccee4fcedfeda0"
+        }
+      },
+      {
+        "sourcePointer": "/value/values/1/fields/payload/values/1/fields/require-blueprint-geometry-proofDisposition",
+        "mechanicId": "object",
+        "operation": "object",
+        "parameterNames": [
+          "fields"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed",
+          "obligationFindings": "obligationFindings"
+        },
+        "providerSourceStart": 8899,
+        "providerSourceEnd": 9021,
+        "providerBodyDigest": "sha256:1c64bf7e879a086062f051dfb0081f2d73ecf7ca51fe9f56cc0ecd19380b20ae",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            2,
+            0,
+            3,
+            0,
+            1,
+            3,
+            0,
+            1
+          ],
+          "startLine": 93,
+          "startColumn": 60,
+          "endLine": 97,
+          "endColumn": 12,
+          "syntaxDigest": "sha256:7ddb8c4b61dd28b11f57a88db823aff97b7e461d57bc0764548f81d3f13f5196"
+        }
+      },
+      {
+        "sourcePointer": "/value/values/1/fields/payload/values/1/fields/require-blueprint-geometry-proofDisposition/fields/disposition",
+        "mechanicId": "if",
+        "operation": "if",
+        "parameterNames": [
+          "when",
+          "then",
+          "else"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed",
+          "obligationFindings": "obligationFindings"
+        },
+        "providerSourceStart": 10691,
+        "providerSourceEnd": 10791,
+        "providerBodyDigest": "sha256:a7e2d0af98002a3ec2c76fad0cecb1f38d192db53b2b003241e61368630fd09a",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            2,
+            0,
+            3,
+            0,
+            1,
+            3,
+            0,
+            1,
+            0,
+            1
+          ],
+          "startLine": 94,
+          "startColumn": 30,
+          "endLine": 94,
+          "endColumn": 60,
+          "syntaxDigest": "sha256:b46836d2825fc7913b96fa2d5047d48b8d1d4016dde1e34ae47be66d17d56248"
+        }
+      },
+      {
+        "sourcePointer": "/value/values/1/fields/payload/values/1/fields/require-blueprint-geometry-proofDisposition/fields/disposition/when",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed",
+          "obligationFindings": "obligationFindings"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            2,
+            0,
+            3,
+            0,
+            1,
+            3,
+            0,
+            1,
+            0,
+            1,
+            0
+          ],
+          "startLine": 94,
+          "startColumn": 30,
+          "endLine": 94,
+          "endColumn": 42,
+          "syntaxDigest": "sha256:863f4513c56467e2e68320ba995f74764c16501db4041d50c7218aec5ae9451d"
+        }
+      },
+      {
+        "sourcePointer": "/value/values/1/fields/payload/values/1/fields/require-blueprint-geometry-proofDisposition/fields/disposition/then",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed",
+          "obligationFindings": "obligationFindings"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            2,
+            0,
+            3,
+            0,
+            1,
+            3,
+            0,
+            1,
+            0,
+            1,
+            2
+          ],
+          "startLine": 94,
+          "startColumn": 45,
+          "endLine": 94,
+          "endColumn": 50,
+          "syntaxDigest": "sha256:f646c2c275848aef5866c925be308aaff589e03b8aec1113c9f6fd4219c34ceb"
+        }
+      },
+      {
+        "sourcePointer": "/value/values/1/fields/payload/values/1/fields/require-blueprint-geometry-proofDisposition/fields/disposition/else",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed",
+          "obligationFindings": "obligationFindings"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            2,
+            0,
+            3,
+            0,
+            1,
+            3,
+            0,
+            1,
+            0,
+            1,
+            4
+          ],
+          "startLine": 94,
+          "startColumn": 53,
+          "endLine": 94,
+          "endColumn": 60,
+          "syntaxDigest": "sha256:b008c849d0fcd7bb4696259877dd9f6c7173927d215e69f401a6b59469349a36"
+        }
+      },
+      {
+        "sourcePointer": "/value/values/1/fields/payload/values/1/fields/require-blueprint-geometry-proofDisposition/fields/blueprintCellId",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed",
+          "obligationFindings": "obligationFindings"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            2,
+            0,
+            3,
+            0,
+            1,
+            3,
+            0,
+            1,
+            1,
+            1
+          ],
+          "startLine": 95,
+          "startColumn": 34,
+          "endLine": 95,
+          "endColumn": 68,
+          "syntaxDigest": "sha256:3af056223746dd238ec0fc43516c123575219590f82060dfcff7ed8c5431079f"
+        }
+      },
+      {
+        "sourcePointer": "/value/values/1/fields/payload/values/1/fields/require-blueprint-geometry-proofDisposition/fields/findings",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "checksClosed": "checksClosed",
+          "obligationFindings": "obligationFindings"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            2,
+            0,
+            3,
+            0,
+            1,
+            3,
+            0,
+            1,
+            2,
+            1
+          ],
+          "startLine": 96,
+          "startColumn": 27,
+          "endLine": 96,
+          "endColumn": 45,
+          "syntaxDigest": "sha256:ac0dc8bb73482bfd81cf7f93ea42fa66676bcc83707837c4304255985116cc7f"
+        }
+      }
+    ]
+  }
+]

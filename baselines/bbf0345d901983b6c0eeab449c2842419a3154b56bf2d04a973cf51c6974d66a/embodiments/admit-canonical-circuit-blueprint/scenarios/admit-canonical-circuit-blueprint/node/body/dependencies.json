@@ -1,0 +1,32 @@
+[
+  {
+    "id": "admit-canonical-circuit-blueprint-port",
+    "module": "./providers/port-0.mjs",
+    "className": "AdmitCanonicalCircuitBlueprintPort",
+    "kind": "invoke-port"
+  },
+  {
+    "id": "require-blueprint-conformance-evidence",
+    "module": "../../../require-blueprint-conformance-evidence/node/body/scenario.mjs",
+    "className": "RequireBlueprintConformanceEvidenceScenario",
+    "kind": "invoke-scenario"
+  },
+  {
+    "id": "require-blueprint-geometry-proof",
+    "module": "../../../require-blueprint-geometry-proof/node/body/scenario.mjs",
+    "className": "RequireBlueprintGeometryProofScenario",
+    "kind": "invoke-scenario"
+  },
+  {
+    "id": "require-current-approved-review-receipt",
+    "module": "../../../require-current-approved-review-receipt/node/body/scenario.mjs",
+    "className": "RequireCurrentApprovedReviewReceiptScenario",
+    "kind": "invoke-scenario"
+  },
+  {
+    "id": "emit-immutable-blueprint-authority",
+    "module": "../../../emit-immutable-blueprint-authority/node/body/scenario.mjs",
+    "className": "EmitImmutableBlueprintAuthorityScenario",
+    "kind": "invoke-scenario"
+  }
+]

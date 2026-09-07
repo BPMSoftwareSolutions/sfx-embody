@@ -1,0 +1,16 @@
+{
+  "capabilityId": "admit-canonical-circuit-blueprint",
+  "scenarioId": "emit-immutable-blueprint-authority",
+  "target": "node",
+  "scope": "CHILD_EXECUTIONS_WITHIN_PARENT_FIXTURES",
+  "fixtureCount": 8,
+  "fixturePassCount": 8,
+  "nativeBodyChecks": 14,
+  "negativeChecks": null,
+  "disposition": "EXECUTION_CHECKS_PASSED",
+  "managedAdmission": "NOT_REQUESTED",
+  "limitations": [
+    "Candidate projection provider has not been admitted.",
+    "Passing these fixtures is not proof for untested inputs or other language targets."
+  ]
+}

@@ -1,0 +1,8 @@
+[
+  {
+    "id": "verify-jmi-type-admission-port",
+    "module": "./providers/port-0.mjs",
+    "className": "VerifyJmiTypeAdmissionPort",
+    "kind": "invoke-port"
+  }
+]

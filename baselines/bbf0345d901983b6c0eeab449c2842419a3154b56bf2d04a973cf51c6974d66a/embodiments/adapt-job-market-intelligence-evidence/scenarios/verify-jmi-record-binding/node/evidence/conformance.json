@@ -1,0 +1,16 @@
+{
+  "capabilityId": "adapt-job-market-intelligence-evidence",
+  "scenarioId": "verify-jmi-record-binding",
+  "target": "node",
+  "scope": "CHILD_EXECUTIONS_WITHIN_PARENT_FIXTURES",
+  "fixtureCount": 5,
+  "fixturePassCount": 5,
+  "nativeBodyChecks": 9,
+  "negativeChecks": null,
+  "disposition": "EXECUTION_CHECKS_PASSED",
+  "managedAdmission": "NOT_REQUESTED",
+  "limitations": [
+    "Candidate projection provider has not been admitted.",
+    "Passing these fixtures is not proof for untested inputs or other language targets."
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "invalidInput": {
+    "disposition": "rejected",
+    "observations": [
+      {
+        "observationType": "scenario-execution-observation.v1",
+        "executionId": "negative-input",
+        "rootExecutionId": "negative-input",
+        "parentExecutionId": null,
+        "scenarioId": "adapt-job-market-intelligence-evidence",
+        "stepId": "admit-input",
+        "sequence": 0,
+        "status": "admission-rejected",
+        "observedAt": "2026-09-07T18:23:18.541Z"
+      }
+    ]
+  },
+  "nestedFailure": {
+    "disposition": "failed",
+    "executions": [
+      {
+        "executionId": "negative-child/1/verify-jmi-record-binding",
+        "scenarioId": "verify-jmi-record-binding",
+        "rootExecutionId": "negative-child",
+        "parentExecutionId": "negative-child",
+        "input": {
+          "contractId": "job-market-intelligence-adapter-record.v1",
+          "jmiRecordRef": "features/resolve-market-signals.feature",
+          "jmiRecordType": "job-market-intelligence-state.v1",
+          "jmiRecordDigest": "sha256:40c49cfd3fe8f4b201a7742d867db97ac270214d593372c8b19d15c15b4cc141",
+          "adapterAuthorityId": "sidefx-jmi-adapter-authority.v1",
+          "adapterAuthorityDigest": "sha256:3a4fb77d237ae56da1c6762ba4387403c35224980d3995907fd87443b0d82de1",
+          "observedWindow": "2026-01-01/2026-08-18",
+          "adaptationDisposition": "ADAPTED_EVIDENCE_BINDING",
+          "findingCodes": [],
+          "adapterReceiptDigest": "sha256:1778c6cea17361c878efa00a01bcf2ac500fe31784ab710c08b64e54d3612111"
+        },
+        "event": {
+          "eventId": "jmi-record-binding-verification-requested",
+          "executionAuthorityId": "verify-jmi-record-binding.v1"
+        },
+        "outcome": null,
+        "disposition": "failed"
+      },
+      {
+        "executionId": "negative-child",
+        "scenarioId": "adapt-job-market-intelligence-evidence",
+        "rootExecutionId": "negative-child",
+        "parentExecutionId": null,
+        "input": {
+          "contractId": "job-market-intelligence-adapter-record.v1",
+          "jmiRecordRef": "features/resolve-market-signals.feature",
+          "jmiRecordType": "job-market-intelligence-state.v1",
+          "jmiRecordDigest": "sha256:40c49cfd3fe8f4b201a7742d867db97ac270214d593372c8b19d15c15b4cc141",
+          "adapterAuthorityId": "sidefx-jmi-adapter-authority.v1",
+          "adapterAuthorityDigest": "sha256:3a4fb77d237ae56da1c6762ba4387403c35224980d3995907fd87443b0d82de1",
+          "observedWindow": "2026-01-01/2026-08-18"
+        },
+        "event": {
+          "eventId": "job-market-intelligence-adaptation-requested",
+          "executionAuthorityId": "adapt-job-market-intelligence-evidence.v1"
+        },
+        "outcome": null,
+        "disposition": "failed"
+      }
+    ]
+  }
+}

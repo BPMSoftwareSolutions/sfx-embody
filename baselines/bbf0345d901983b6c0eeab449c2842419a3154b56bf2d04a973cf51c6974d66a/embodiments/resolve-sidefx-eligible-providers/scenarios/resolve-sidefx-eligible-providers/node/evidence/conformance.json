@@ -1,0 +1,16 @@
+{
+  "capabilityId": "resolve-sidefx-eligible-providers",
+  "scenarioId": "resolve-sidefx-eligible-providers",
+  "target": "node",
+  "scope": "RETAINED_CAPABILITY_FIXTURES",
+  "fixtureCount": 4,
+  "fixturePassCount": 4,
+  "nativeBodyChecks": 15,
+  "negativeChecks": "negative-checks.json",
+  "disposition": "EXECUTION_CHECKS_PASSED",
+  "managedAdmission": "NOT_REQUESTED",
+  "limitations": [
+    "Candidate projection provider has not been admitted.",
+    "Passing these fixtures is not proof for untested inputs or other language targets."
+  ]
+}

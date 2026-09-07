@@ -1,0 +1,91 @@
+{
+  "contracts": {
+    "job-market-intelligence-adapter-record.v1": {
+      "schemaRef": "capabilities/adapt-job-market-intelligence-evidence/contracts/input.schema.json",
+      "schemaId": "https://schemas.agentic-harness.local/adapt-job-market-intelligence-evidence/record.schema.json",
+      "schemaDigest": "a81f2fb657b5552093367d455fd67754a2cf4cf2293b599ec5c0141e7218e9ac",
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "https://schemas.agentic-harness.local/adapt-job-market-intelligence-evidence/record.schema.json",
+        "title": "Job market intelligence adapter record v1",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "contractId",
+          "jmiRecordRef",
+          "jmiRecordType",
+          "jmiRecordDigest",
+          "adapterAuthorityId",
+          "adapterAuthorityDigest",
+          "observedWindow"
+        ],
+        "properties": {
+          "contractId": {
+            "const": "job-market-intelligence-adapter-record.v1"
+          },
+          "jmiRecordRef": {
+            "type": "string"
+          },
+          "jmiRecordType": {
+            "type": "string"
+          },
+          "jmiRecordDigest": {
+            "type": "string"
+          },
+          "adapterAuthorityId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "adapterAuthorityDigest": {
+            "type": "string"
+          },
+          "observedWindow": {
+            "type": "string"
+          },
+          "adaptationDisposition": {
+            "enum": [
+              "ADAPTED_EVIDENCE_BINDING",
+              "ADAPTATION_HELD"
+            ]
+          },
+          "findingCodes": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "adapterReceiptDigest": {
+            "type": "string",
+            "pattern": "^sha256:[a-f0-9]{64}$"
+          },
+          "recordBindingResult": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "bound"
+            ],
+            "properties": {
+              "bound": {
+                "type": "boolean"
+              }
+            }
+          },
+          "typeAdmissionResult": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "admitted"
+            ],
+            "properties": {
+              "admitted": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

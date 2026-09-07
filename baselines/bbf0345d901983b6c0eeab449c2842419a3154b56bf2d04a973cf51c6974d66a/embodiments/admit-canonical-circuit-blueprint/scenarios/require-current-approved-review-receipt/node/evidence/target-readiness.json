@@ -1,0 +1,11 @@
+[
+  {
+    "capability_id": "admit-canonical-circuit-blueprint",
+    "scenario_id": "admit-canonical-circuit-blueprint",
+    "target_language": "node",
+    "requirement_count": "784",
+    "open_requirement_count": "0",
+    "readiness": "CAN_ATTEMPT_EMBODIMENT",
+    "conformance_status": "NOT_EVALUATED"
+  }
+]

@@ -1,0 +1,677 @@
+{
+  "capabilityId": "admit-canonical-circuit-blueprint",
+  "scenarioId": "require-blueprint-conformance-evidence",
+  "target": "node",
+  "method": "TypeScript AST inspection of materialized files; native method statements compared with selected provider",
+  "files": [
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/providers/port-0.mjs",
+      "digest": "sha256:7c3ba9e0ed7015a2098569431d02493d986b5c572c406ae583ebc2c1ef76461d",
+      "classes": [
+        {
+          "name": "RequireBlueprintConformanceEvidencePort",
+          "line": 4,
+          "methods": [
+            "execute"
+          ]
+        }
+      ]
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/providers/mechanics.mjs",
+      "digest": "sha256:89c25b42945d27fcf54620b6aa5f4d436bbc4da53de4712eec7c4ae55edd0e1c",
+      "classes": [
+        {
+          "name": "ArrayMechanic",
+          "line": 5,
+          "methods": [
+            "execute"
+          ]
+        },
+        {
+          "name": "EqualsMechanic",
+          "line": 11,
+          "methods": [
+            "execute"
+          ]
+        },
+        {
+          "name": "EveryMechanic",
+          "line": 17,
+          "methods": [
+            "execute"
+          ]
+        },
+        {
+          "name": "FlatMapMechanic",
+          "line": 23,
+          "methods": [
+            "execute"
+          ]
+        },
+        {
+          "name": "IfMechanic",
+          "line": 31,
+          "methods": [
+            "execute"
+          ]
+        },
+        {
+          "name": "LengthMechanic",
+          "line": 37,
+          "methods": [
+            "execute"
+          ]
+        },
+        {
+          "name": "LetMechanic",
+          "line": 43,
+          "methods": [
+            "execute"
+          ]
+        },
+        {
+          "name": "LiteralMechanic",
+          "line": 54,
+          "methods": [
+            "execute"
+          ]
+        },
+        {
+          "name": "MergeMechanic",
+          "line": 60,
+          "methods": [
+            "execute"
+          ]
+        },
+        {
+          "name": "ObjectMechanic",
+          "line": 66,
+          "methods": [
+            "execute"
+          ]
+        },
+        {
+          "name": "PathMechanic",
+          "line": 72,
+          "methods": [
+            "execute"
+          ]
+        }
+      ]
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/providers/expression.mjs",
+      "digest": "sha256:34625a18a276fc51168c1c101e84df0129916da527a98364fc63794ebb2f134a",
+      "classes": [
+        {
+          "name": "Expression",
+          "line": 2,
+          "methods": [
+            "execute"
+          ]
+        }
+      ]
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/scenario.mjs",
+      "digest": "sha256:a89790433e432fa90e70432d9e8e18bd0d8c229e9f4b0263140ae9f020eb39b6",
+      "classes": [
+        {
+          "name": "RequireBlueprintConformanceEvidenceScenario",
+          "line": 41,
+          "methods": [
+            "perform",
+            "execute",
+            "invoke"
+          ]
+        }
+      ]
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/dependencies.json",
+      "digest": "sha256:969281ef612396a8515b9e842b7a0eb4972915aece311d9e92b951e173f0a09d"
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-blueprint-admission-request-v1-payload.ts",
+      "digest": "sha256:df2b196685c703d364f08373eb3e6aa1b1e5383628a9d890257abd338b0e33e6",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-blueprint-admission-request-v1.ts",
+      "digest": "sha256:0184dd0ef6afe50f140b987c16e5c97e53f4eaaa538918eee945efddbb9f2fcd",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/blueprint-admission-obligation-disposition-v1-payload.ts",
+      "digest": "sha256:cf3717236a9d6831874f2e70d9f75d44e651d897423b5d1a0148e05d2d4be845",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/blueprint-admission-obligation-disposition-v1.ts",
+      "digest": "sha256:99bc60d101eedad32274ea627923b131c165afc7ba40cd654b741825e5ebbd4a",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload-admission-evidence.ts",
+      "digest": "sha256:565a23905b1a92816803c095a339a115d6576a13d82809effb434caea7d9a78f",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload-obligation-record-conformance.ts",
+      "digest": "sha256:c9e7580a583634a525e9c6060ed127359b251a4ae24d14b1822fcf2a1a07f0bd",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload-obligation-record-geometry.ts",
+      "digest": "sha256:0c3a5c3c64771ef5e26e2939138bfd7f39b983d121b2e90f54421840b8a9a9f6",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload-obligation-record-review.ts",
+      "digest": "sha256:a2139c37ae5087a2193ecea3d822e43a84683db6824458b118cb53feda7dea85",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload-obligation-record.ts",
+      "digest": "sha256:88bfcf679367c1bb4795d90622d4994aa09e8df8760d8080285ab8d74e8d2902",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload-items.ts",
+      "digest": "sha256:e0c0a0d974f399e1b7f79807ee45da3344a3313100d6b6af90eaefcdb9db842a",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload.ts",
+      "digest": "sha256:45647619b86318ca4c11e35cd664ccdac8ab6e6e366b361fdfe612bd337eb8f7",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/admitted-canonical-circuit-blueprint-v1.ts",
+      "digest": "sha256:4ca7a9c4ae205ab1d2075d8552b4c5d0e58f896515c43fb81a960dbe1319a424",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-capability.ts",
+      "digest": "sha256:4083c7ab02a63b41a39f44344969cbd95f824e22276b6068dbd2f6c9e7a12593",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-source-authority-authority-ref.ts",
+      "digest": "sha256:22337f4dcb751ee512443fb553728b6f74c5c44d301c38429c73264140c56e22",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-source-authority.ts",
+      "digest": "sha256:1cfda1de23b932713785e7798a1c457953417aad00778eaafb36a56ad6b9f7aa",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-blueprint-authority.ts",
+      "digest": "sha256:27cedd70ebcffffe701893cdd7778a1d2d4429dd83d0dc8fac9b0bc664fa92bd",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-first-authority-ref.ts",
+      "digest": "sha256:f80f5ac0a6ecf4e61aa52b444051b6bb6f6755b593272006f9dbb5e2296a8290",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-first.ts",
+      "digest": "sha256:6441bfbacc9239647956dca073d14852ada11da6a7a2f87d6f33602a783fce99",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-energized-authority-ref.ts",
+      "digest": "sha256:870df92801344b7a618b43bc8a43bee09d9294fd6d89ea44adf008bf79bb647e",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-energized.ts",
+      "digest": "sha256:3d1ad7e42a24a39908d129f9c1d7fb36d0aa2f03382a4429104fa4a63b1d4ddf",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-result-authority-ref.ts",
+      "digest": "sha256:dcb21749412123767e44a333c14b2503f0e4491309450ee7c6fce12741061257",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-result-items.ts",
+      "digest": "sha256:e8b4d96c9f7067d84f9d6099e64a83703659aea2281dbd722ad6426e671367ae",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-result.ts",
+      "digest": "sha256:632c23619d062ab671875c38d106b0189c16a6f8c29c9541b14069ead58c6078",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-node-cell.ts",
+      "digest": "sha256:87b1c4b96cb9b038924741f00423f7180583fca36721261560bb15e5fb5380df",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-node-provider-slot.ts",
+      "digest": "sha256:dc9c75638d0102db059d17c4542af1a02c39d0c171dff86a175740c060de66bf",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-node-observability-contract-items.ts",
+      "digest": "sha256:f96574a4e177c665f0f55e83852f0dbd9a5c141ecbdf49bb65b22163a9e30cbb",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-node-observability-contract-sampling-authority-ref.ts",
+      "digest": "sha256:8f496e80f211c9cd556e5393f0d6f30b20ebce745a1aef9a241ac9132d086544",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-node-observability-contract-sampling.ts",
+      "digest": "sha256:8436092aa2f423f9b11265e68a6c9a416f18d7b3e2f7fe69cf3c7605e0d684a1",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-node-observability-contract-authority-ref.ts",
+      "digest": "sha256:f5ac668da23c51e39f7e5edd5f6ff54afac58991e5b92f81aaec0e5af9b47e9f",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-node-observability-contract.ts",
+      "digest": "sha256:6c149d9330398837003069da5794b781954b18950df2a1b45d2f5f12299f7ed2",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-node.ts",
+      "digest": "sha256:3aa7626c5c698498d8e3d71ab4ae96c7f11e2e8fceee7ba221a3b1321ebba08f",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-edge-authority-ref.ts",
+      "digest": "sha256:f3ebe2b29c43497ce262f49315d74bead4c24b583c61e7b446569b9400666b16",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-edge-bounded-return-authority-ref.ts",
+      "digest": "sha256:325460a6adbf114a7cadaa959257e6223c06dfa73cfd89ac37954de80cdc1c13",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-edge-bounded-return.ts",
+      "digest": "sha256:9b64f99a0c5047c51af645358cedce3be8578b6e82d2fd5d6f1826fbbd386a0d",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-edge-edge-observability-obligation-authority-ref.ts",
+      "digest": "sha256:d587aadf755e0e1ed0eb9eb48e4b8345d6c94c67ff83dbee9fbcc8c62a43014f",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-edge-edge-observability-obligation.ts",
+      "digest": "sha256:40d1f8d02da93f8afdde2827131b063a36aaa0f002e9005405fe49354159c845",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-edge.ts",
+      "digest": "sha256:e6fae5e1642bb6158fb9d3770a321fdeb612301ac99a8ef9a55296178687125a",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-projection-authorities-authority-ref.ts",
+      "digest": "sha256:c967fa46c6f5b06973387919107e7520dfa78b0eae99f6e09f25af70474b3df6",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-projection-authorities.ts",
+      "digest": "sha256:cb5ba767b32b53d9167eac7e1299b5e1741469aa247242ccbda6a38a00c5a07b",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-structural-mapping-c4-mapping-authority-ref.ts",
+      "digest": "sha256:5d788d9f2a8b8a574445c240e86d9f40e8a90ddd63b71cf9fd85f0c3e42a0c8f",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-structural-mapping-c4-mapping.ts",
+      "digest": "sha256:4d71dd6d4f73e2e41429d4465faf3b356e4bed924913daba4af264b08fe8d230",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-structural-mapping.ts",
+      "digest": "sha256:cfe1d29cd56645b3f39403534dc13b9d05f93852b336e92b2e482aa22ddfcd3c",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-service-level-sli-definition.ts",
+      "digest": "sha256:7e80bfb344222725dccfe0189040b506ecc89ca50b60b20d051c7c12e90d1319",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-service-level-slo-definition-authority-ref.ts",
+      "digest": "sha256:c212c1611fcb7720450c482e95735afc7632a00e4fad5ede3693e466b67a9df9",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-service-level-slo-definition-items-authority-ref.ts",
+      "digest": "sha256:39c33490e7672f1c41416150ef58685a4278f99518588283c7955fc723e14bb9",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-service-level-slo-definition-items.ts",
+      "digest": "sha256:31057e0eb4059eaf7cd9ec159037dc4f94169507805d1bb50f02e94c6cbe625e",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-service-level-slo-definition.ts",
+      "digest": "sha256:caf049ce2942eef29a1a37623c84431dd99bbc965aeb36ffddf8fdad2f3d3f7f",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-service-level-sla-boundary-authority-ref.ts",
+      "digest": "sha256:a934c8563ff25998303cc092ddb51d73b7831f78887ff5603438a1a9ccefc6ac",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-service-level-sla-boundary.ts",
+      "digest": "sha256:f5a0ef4d5897c97e96291b524847aa5f30714b86974ada99a83a6d8e2ad6d48b",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-service-level-items-authority-ref.ts",
+      "digest": "sha256:f50899b40bda0a18b168a0dcf5c01c81d75df48295bd06b7fb4176790731d030",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-service-level-items.ts",
+      "digest": "sha256:61057a965d3650da9ebbcfd69f3ad12e6829903f2e355b63e97ba07fb646def2",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-service-level.ts",
+      "digest": "sha256:0fbfe8c04f1a5c739068e69ee075775fa9ab50ffa77b0120f3198782bdc3d325",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1.ts",
+      "digest": "sha256:7498421572aedd78bc1d54538b3ce6fe01ec8d71b4e7165185db226c5b35ae06",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/index.ts",
+      "digest": "sha256:3c702a0413ef01cca91f47f1564458dca5ef46e086a6e9ef617633bcf312a5b8",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/authority.json",
+      "digest": "sha256:539e3d68736b71c2123b4abf2fe59b7c2fdece9fc84dcc91ac9b0461a5d3f7c3"
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/providers/native-mechanic-primitives.mjs",
+      "digest": "sha256:1cc204869f0ce7b60ad03187d364db4a432b0b632ce4469a7cf37747d6a379d5",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/providers/sda/languages/typescript/dist/src/kernel/scenario-kernel.js",
+      "digest": "sha256:8a3cf0b6bac20fb514e631d27c29e5ec659625aaf885e2ccd64a7a340daa6384",
+      "classes": [
+        {
+          "name": "ScenarioKernel",
+          "line": 33,
+          "methods": [
+            "execute"
+          ]
+        }
+      ]
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/providers/sda/languages/typescript/dist/src/execution/index.js",
+      "digest": "sha256:a83b3c4caa43ac6ab1996b708797e15cde6b5d4b036b95be1da918688142159d",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/providers/sda/languages/typescript/dist/src/execution/contract-validator.js",
+      "digest": "sha256:9ee125e72ba67428097f6af28d9698d161db4c0f83f5e14918057b3faaf7be46",
+      "classes": [
+        {
+          "name": "ContractAdmissionException",
+          "line": 6,
+          "methods": []
+        }
+      ]
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/providers/sda/languages/typescript/dist/src/execution/execution-authority-resolver.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/providers/sda/languages/typescript/dist/src/execution/semantic-executor.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/providers/sda/languages/typescript/dist/src/execution/disposition-resolver.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/providers/sda/languages/typescript/dist/src/execution/execution-observer.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/providers/sda/languages/typescript/dist/src/kernel/disposition-resolver.js",
+      "digest": "sha256:7cdae956253d6a48de978f1191c044d999d515f8aac7427393fa9da735faa688",
+      "classes": [
+        {
+          "name": "DispositionResolver",
+          "line": 11,
+          "methods": [
+            "resolve"
+          ]
+        }
+      ]
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/providers/sda/languages/typescript/runtimes/node/schema-contract-admission-provider.mjs",
+      "digest": "sha256:b8b8b60d0023d2ab0bff2d1239a3e19d73ebe2d4405b47cef006004b370eac5a",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/package.json",
+      "digest": "sha256:ff10b66f9f3b2a597bfd3a8a45e886694ffd965a5eccb93ec4c88715c33c6f17"
+    },
+    {
+      "relativePath": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/composition.mjs",
+      "digest": "sha256:db21c4dd2861fb879f13de47c018b2e0e4eaf615d529d36e7bf85aab604d5d7d",
+      "classes": []
+    }
+  ],
+  "nativeSource": {
+    "path": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+    "digest": "sha256:21fb43c57817b8dc3c3d2dd5af13551ca03111cf99f5654989f490fda6732ac5"
+  },
+  "contractTypeCheck": {
+    "files": 54,
+    "diagnostics": 0
+  },
+  "nativeBodyChecks": [
+    {
+      "operation": "let",
+      "className": "LetMechanic",
+      "passed": true
+    },
+    {
+      "operation": "every",
+      "className": "EveryMechanic",
+      "passed": true
+    },
+    {
+      "operation": "array",
+      "className": "ArrayMechanic",
+      "passed": true
+    },
+    {
+      "operation": "equals",
+      "className": "EqualsMechanic",
+      "passed": true
+    },
+    {
+      "operation": "path",
+      "className": "PathMechanic",
+      "passed": true
+    },
+    {
+      "operation": "literal",
+      "className": "LiteralMechanic",
+      "passed": true
+    },
+    {
+      "operation": "length",
+      "className": "LengthMechanic",
+      "passed": true
+    },
+    {
+      "operation": "flat-map",
+      "className": "FlatMapMechanic",
+      "passed": true
+    },
+    {
+      "operation": "if",
+      "className": "IfMechanic",
+      "passed": true
+    },
+    {
+      "operation": "object",
+      "className": "ObjectMechanic",
+      "passed": true
+    },
+    {
+      "operation": "merge",
+      "className": "MergeMechanic",
+      "passed": true
+    }
+  ],
+  "observedClasses": [
+    {
+      "name": "RequireBlueprintConformanceEvidencePort",
+      "line": 4,
+      "methods": [
+        "execute"
+      ]
+    },
+    {
+      "name": "ArrayMechanic",
+      "line": 5,
+      "methods": [
+        "execute"
+      ]
+    },
+    {
+      "name": "EqualsMechanic",
+      "line": 11,
+      "methods": [
+        "execute"
+      ]
+    },
+    {
+      "name": "EveryMechanic",
+      "line": 17,
+      "methods": [
+        "execute"
+      ]
+    },
+    {
+      "name": "FlatMapMechanic",
+      "line": 23,
+      "methods": [
+        "execute"
+      ]
+    },
+    {
+      "name": "IfMechanic",
+      "line": 31,
+      "methods": [
+        "execute"
+      ]
+    },
+    {
+      "name": "LengthMechanic",
+      "line": 37,
+      "methods": [
+        "execute"
+      ]
+    },
+    {
+      "name": "LetMechanic",
+      "line": 43,
+      "methods": [
+        "execute"
+      ]
+    },
+    {
+      "name": "LiteralMechanic",
+      "line": 54,
+      "methods": [
+        "execute"
+      ]
+    },
+    {
+      "name": "MergeMechanic",
+      "line": 60,
+      "methods": [
+        "execute"
+      ]
+    },
+    {
+      "name": "ObjectMechanic",
+      "line": 66,
+      "methods": [
+        "execute"
+      ]
+    },
+    {
+      "name": "PathMechanic",
+      "line": 72,
+      "methods": [
+        "execute"
+      ]
+    },
+    {
+      "name": "Expression",
+      "line": 2,
+      "methods": [
+        "execute"
+      ]
+    },
+    {
+      "name": "RequireBlueprintConformanceEvidenceScenario",
+      "line": 41,
+      "methods": [
+        "perform",
+        "execute",
+        "invoke"
+      ]
+    },
+    {
+      "name": "ScenarioKernel",
+      "line": 33,
+      "methods": [
+        "execute"
+      ]
+    },
+    {
+      "name": "ContractAdmissionException",
+      "line": 6,
+      "methods": []
+    },
+    {
+      "name": "DispositionResolver",
+      "line": 11,
+      "methods": [
+        "resolve"
+      ]
+    }
+  ]
+}

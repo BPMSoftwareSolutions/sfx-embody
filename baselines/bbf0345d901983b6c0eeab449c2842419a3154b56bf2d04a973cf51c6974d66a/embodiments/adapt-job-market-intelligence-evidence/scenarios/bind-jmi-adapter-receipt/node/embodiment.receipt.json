@@ -1,0 +1,22 @@
+{
+  "capabilityId": "adapt-job-market-intelligence-evidence",
+  "scenarioId": "bind-jmi-adapter-receipt",
+  "target": "node",
+  "profile": "full-mechanics",
+  "scenarioDefinitionDigest": "sha256:4cd30230b685e8eeaa8d873f19623c44f907cfc21a49566df4359914b4feac0e",
+  "embodimentPlanDigest": "sha256:c82f0a843c7af891fa23342d1e1a397b15fae4d45a4f6e9da4f08d8d6433a536",
+  "resolverVersion": "sha256:e7252960e4d9547ef77bb2d780356db8796ef1693e8ce69479bd52e05cf6b068",
+  "pinnedPlatformCommit": "6fcb8b34f0b85c70a8984940cc21a20cfdb507dd",
+  "providers": [
+    "node-deterministic-semantic-value-provider.v1",
+    "ScenarioKernel.NodePlatform.Execution.AuthorityTransformation"
+  ],
+  "artifactDigest": "sha256:858b5e00eea9c0f178ea7ae654896679ac06abcd4bcc33de600bdb56ae237c9b",
+  "revealDigest": "sha256:6461bb114758a515d6280e15d59d709653e7c7bf2a3898256ba7e50b5484a41c",
+  "disposition": "EXECUTION_CHECKS_PASSED",
+  "managedAdmission": "NOT_REQUESTED",
+  "resolverStatus": "CANDIDATE_PHYSICAL_PROVIDER",
+  "dependencyLockDigest": "sha256:ad1d5e78e09bf26ff4eb818286356fd96d6c63727dd58513596a41d95e43bcf5",
+  "fixtureResultsDigest": "sha256:8554829aeda6268fadb95ac25030a6a0a9e86d9c85dcdd07f5ec587b1bfb98d2",
+  "conformanceDigest": "sha256:77ea51f33fcbe75204838ce026d4c01812a48691dc3367e9d698a4691f739b12"
+}

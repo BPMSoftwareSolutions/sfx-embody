@@ -1,0 +1,8 @@
+[
+  {
+    "id": "require-blueprint-geometry-proof-port",
+    "module": "./providers/require-blueprint-geometry-proof-port.mjs",
+    "className": "RequireBlueprintGeometryProofPort",
+    "kind": "invoke-port"
+  }
+]

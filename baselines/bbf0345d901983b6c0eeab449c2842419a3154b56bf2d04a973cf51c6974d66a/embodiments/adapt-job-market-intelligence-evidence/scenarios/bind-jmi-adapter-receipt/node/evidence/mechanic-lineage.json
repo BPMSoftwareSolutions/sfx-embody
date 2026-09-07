@@ -1,0 +1,116 @@
+[
+  {
+    "scenarioId": "bind-jmi-adapter-receipt",
+    "operationOrdinal": 0,
+    "portId": "bind-jmi-adapter-receipt-port",
+    "transformationId": "bind-jmi-adapter-receipt.v1",
+    "sourceRef": "capabilities/adapt-job-market-intelligence-evidence/semantic-transformation.authority.json",
+    "sourceDigest": "sha256:2b167eaf1093228810925754bece447ce574863a6ca8f5459be9e681f3972803",
+    "nodes": [
+      {
+        "sourcePointer": "",
+        "mechanicId": "let",
+        "operation": "let",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 12396,
+        "providerSourceEnd": 12644
+      },
+      {
+        "sourcePointer": "/bindings/adapterReceiptDigest",
+        "mechanicId": "format",
+        "operation": "format",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 11103,
+        "providerSourceEnd": 11286
+      },
+      {
+        "sourcePointer": "/bindings/adapterReceiptDigest/values/digest",
+        "mechanicId": "sha256",
+        "operation": "sha256",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 11649,
+        "providerSourceEnd": 11756
+      },
+      {
+        "sourcePointer": "/bindings/adapterReceiptDigest/values/digest/value",
+        "mechanicId": "json-stringify",
+        "operation": "json-stringify",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 11877,
+        "providerSourceEnd": 11950
+      },
+      {
+        "sourcePointer": "/bindings/adapterReceiptDigest/values/digest/value/value",
+        "mechanicId": "object",
+        "operation": "object",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8899,
+        "providerSourceEnd": 9021
+      },
+      {
+        "sourcePointer": "/bindings/adapterReceiptDigest/values/digest/value/value/fields/jmiRecordRef",
+        "mechanicId": "path",
+        "operation": "path",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893
+      },
+      {
+        "sourcePointer": "/bindings/adapterReceiptDigest/values/digest/value/value/fields/jmiRecordType",
+        "mechanicId": "path",
+        "operation": "path",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893
+      },
+      {
+        "sourcePointer": "/bindings/adapterReceiptDigest/values/digest/value/value/fields/jmiRecordDigest",
+        "mechanicId": "path",
+        "operation": "path",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893
+      },
+      {
+        "sourcePointer": "/bindings/adapterReceiptDigest/values/digest/value/value/fields/adaptationDisposition",
+        "mechanicId": "path",
+        "operation": "path",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893
+      },
+      {
+        "sourcePointer": "/value",
+        "mechanicId": "merge",
+        "operation": "merge",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 9101,
+        "providerSourceEnd": 9194
+      },
+      {
+        "sourcePointer": "/value/values/0",
+        "mechanicId": "path",
+        "operation": "path",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893
+      },
+      {
+        "sourcePointer": "/value/values/1",
+        "mechanicId": "object",
+        "operation": "object",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8899,
+        "providerSourceEnd": 9021
+      },
+      {
+        "sourcePointer": "/value/values/1/fields/adapterReceiptDigest",
+        "mechanicId": "path",
+        "operation": "path",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893
+      }
+    ]
+  }
+]

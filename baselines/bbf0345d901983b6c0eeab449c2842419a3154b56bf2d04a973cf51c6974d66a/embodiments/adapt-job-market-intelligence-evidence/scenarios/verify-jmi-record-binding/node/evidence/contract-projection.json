@@ -1,0 +1,10 @@
+[
+  {
+    "contractId": "job-market-intelligence-adapter-record.v1",
+    "sourceRef": "capabilities/adapt-job-market-intelligence-evidence/contracts/input.schema.json",
+    "sourceDigest": "sha256:a42b902b9a49d7b7571e5549802fae85ab43350e4864cd2b596b17341a7e4920",
+    "typeProjectionSchemaDigest": "sha256:a4b370848d3bfba81cc1a2c55c7ffa38b57e06bc7e4723ab91ef616ad12644a7",
+    "changes": [],
+    "runtimeAdmission": "ORIGINAL_SCHEMA_UNCHANGED"
+  }
+]

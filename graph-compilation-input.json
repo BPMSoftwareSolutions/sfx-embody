@@ -1,0 +1,1008 @@
+{
+  "capability": {
+    "capabilityId": "adapt-job-market-intelligence-evidence",
+    "name": "adapt-job-market-intelligence-evidence",
+    "mode": "capability",
+    "userStory": {
+      "actor": "market",
+      "intent": "adapt one Job Market Intelligence evidence record",
+      "outcome": "the observable adapted evidence or held adaptation outcome"
+    },
+    "experience": {
+      "experienceId": "job-market-intelligence-adaptation-experience.v1",
+      "actor": "market",
+      "promise": "adapted evidence binding or adaptation held outcome",
+      "observableConditions": [
+        {
+          "conditionId": "adapted-evidence-binding"
+        },
+        {
+          "conditionId": "adaptation-held"
+        }
+      ]
+    },
+    "rootScenarioId": "adapt-job-market-intelligence-evidence"
+  },
+  "scenarios": [
+    {
+      "scenarioId": "adapt-job-market-intelligence-evidence",
+      "input": {
+        "inputId": "job-market-intelligence-adapter-record",
+        "contract": {
+          "contractId": "job-market-intelligence-adapter-record.v1"
+        }
+      },
+      "event": {
+        "eventId": "job-market-intelligence-adaptation-requested",
+        "executionAuthorityId": "adapt-job-market-intelligence-evidence.v1"
+      },
+      "outcome": {
+        "outcomeId": "job-market-intelligence-adapter-record",
+        "contract": {
+          "contractId": "job-market-intelligence-adapter-record.v1"
+        },
+        "experience": {
+          "statement": "the adaptation is ADAPTED_EVIDENCE_BINDING or ADAPTATION_HELD with the exact holding finding, and a receipt binds the JMI record reference, type, digest, and disposition"
+        },
+        "terminal": true
+      },
+      "gherkin": {
+        "given": {
+          "semanticRef": "adapt-job-market-intelligence-evidence.given",
+          "text": "one JMI record reference, one admitted JMI record type, one content digest, one adapter authority identity, and one observation window"
+        },
+        "when": {
+          "semanticRef": "adapt-job-market-intelligence-evidence.when",
+          "text": "the JMI evidence adaptation is evaluated"
+        },
+        "then": {
+          "semanticRef": "adapt-job-market-intelligence-evidence.then",
+          "text": "the adaptation is ADAPTED_EVIDENCE_BINDING or ADAPTATION_HELD with the exact holding finding, and a receipt binds the JMI record reference, type, digest, and disposition"
+        }
+      },
+      "name": "Adapt one Job Market Intelligence evidence record"
+    },
+    {
+      "scenarioId": "verify-jmi-record-binding",
+      "input": {
+        "inputId": "job-market-intelligence-adapter-record",
+        "contract": {
+          "contractId": "job-market-intelligence-adapter-record.v1"
+        }
+      },
+      "event": {
+        "eventId": "jmi-record-binding-verification-requested",
+        "executionAuthorityId": "verify-jmi-record-binding.v1"
+      },
+      "outcome": {
+        "outcomeId": "job-market-intelligence-adapter-record",
+        "contract": {
+          "contractId": "job-market-intelligence-adapter-record.v1"
+        },
+        "experience": {
+          "statement": "the reference and the content digest are declared, reporting JMI_RECORD_UNBOUND otherwise"
+        },
+        "terminal": true
+      },
+      "gherkin": {
+        "given": {
+          "semanticRef": "verify-jmi-record-binding.given",
+          "text": "one JMI record reference and one JMI content digest"
+        },
+        "when": {
+          "semanticRef": "verify-jmi-record-binding.when",
+          "text": "record binding verification is evaluated"
+        },
+        "then": {
+          "semanticRef": "verify-jmi-record-binding.then",
+          "text": "the reference and the content digest are declared, reporting JMI_RECORD_UNBOUND otherwise"
+        }
+      },
+      "name": "Verify the JMI record binding"
+    },
+    {
+      "scenarioId": "verify-jmi-type-admission",
+      "input": {
+        "inputId": "job-market-intelligence-adapter-record",
+        "contract": {
+          "contractId": "job-market-intelligence-adapter-record.v1"
+        }
+      },
+      "event": {
+        "eventId": "jmi-type-admission-verification-requested",
+        "executionAuthorityId": "verify-jmi-type-admission.v1"
+      },
+      "outcome": {
+        "outcomeId": "job-market-intelligence-adapter-record",
+        "contract": {
+          "contractId": "job-market-intelligence-adapter-record.v1"
+        },
+        "experience": {
+          "statement": "the type is one of the admitted JMI record types under the adapter authority, reporting JMI_RECORD_TYPE_UNADMITTED or ADAPTER_AUTHORITY_UNADMITTED otherwise"
+        },
+        "terminal": true
+      },
+      "gherkin": {
+        "given": {
+          "semanticRef": "verify-jmi-type-admission.given",
+          "text": "one JMI record type and one adapter authority identity"
+        },
+        "when": {
+          "semanticRef": "verify-jmi-type-admission.when",
+          "text": "type admission verification is evaluated"
+        },
+        "then": {
+          "semanticRef": "verify-jmi-type-admission.then",
+          "text": "the type is one of the admitted JMI record types under the adapter authority, reporting JMI_RECORD_TYPE_UNADMITTED or ADAPTER_AUTHORITY_UNADMITTED otherwise"
+        }
+      },
+      "name": "Verify the JMI record type against the admitted adapter vocabulary"
+    },
+    {
+      "scenarioId": "bind-jmi-adapter-receipt",
+      "input": {
+        "inputId": "job-market-intelligence-adapter-record",
+        "contract": {
+          "contractId": "job-market-intelligence-adapter-record.v1"
+        }
+      },
+      "event": {
+        "eventId": "jmi-adapter-receipt-binding-requested",
+        "executionAuthorityId": "bind-jmi-adapter-receipt.v1"
+      },
+      "outcome": {
+        "outcomeId": "job-market-intelligence-adapter-record",
+        "contract": {
+          "contractId": "job-market-intelligence-adapter-record.v1"
+        },
+        "experience": {
+          "statement": "the JMI record reference, record type, content digest, and disposition bind into one replayable JMI adapter receipt"
+        },
+        "terminal": true
+      },
+      "gherkin": {
+        "given": {
+          "semanticRef": "bind-jmi-adapter-receipt.given",
+          "text": "one adaptation disposition over one JMI record reference"
+        },
+        "when": {
+          "semanticRef": "bind-jmi-adapter-receipt.when",
+          "text": "the adapter receipt is bound"
+        },
+        "then": {
+          "semanticRef": "bind-jmi-adapter-receipt.then",
+          "text": "the JMI record reference, record type, content digest, and disposition bind into one replayable JMI adapter receipt"
+        }
+      },
+      "name": "Bind one JMI adapter receipt"
+    }
+  ],
+  "transitions": [],
+  "executionAuthorities": [
+    {
+      "id": "adapt-job-market-intelligence-evidence.v1",
+      "owningScenarioId": "adapt-job-market-intelligence-evidence",
+      "operations": [
+        {
+          "kind": "invoke-port",
+          "portId": "adapt-job-market-intelligence-evidence-port"
+        },
+        {
+          "kind": "invoke-scenario",
+          "scenarioId": "verify-jmi-record-binding"
+        },
+        {
+          "kind": "invoke-scenario",
+          "scenarioId": "verify-jmi-type-admission"
+        },
+        {
+          "kind": "invoke-scenario",
+          "scenarioId": "bind-jmi-adapter-receipt"
+        }
+      ]
+    },
+    {
+      "id": "verify-jmi-record-binding.v1",
+      "owningScenarioId": "verify-jmi-record-binding",
+      "operations": [
+        {
+          "kind": "invoke-port",
+          "portId": "verify-jmi-record-binding-port"
+        }
+      ]
+    },
+    {
+      "id": "verify-jmi-type-admission.v1",
+      "owningScenarioId": "verify-jmi-type-admission",
+      "operations": [
+        {
+          "kind": "invoke-port",
+          "portId": "verify-jmi-type-admission-port"
+        }
+      ]
+    },
+    {
+      "id": "bind-jmi-adapter-receipt.v1",
+      "owningScenarioId": "bind-jmi-adapter-receipt",
+      "operations": [
+        {
+          "kind": "invoke-port",
+          "portId": "bind-jmi-adapter-receipt-port"
+        }
+      ]
+    }
+  ],
+  "interfaceAuthority": {
+    "interfaceAuthorityType": "consumer-interface-authority.v1",
+    "contractValidatorCapabilityId": "sda-schema-contract-admission.v1",
+    "contractCatalog": "contracts/contract-catalog.json",
+    "requiredPlatformObligations": [
+      "dynamic-semantic-execution",
+      "domain-contract-admission"
+    ],
+    "interfaces": [
+      {
+        "interfaceId": "adapt-job-market-intelligence-evidence-cli",
+        "kind": "cli",
+        "rootScenarioId": "adapt-job-market-intelligence-evidence",
+        "platformCapabilityId": "sda-json-cli.v1",
+        "projectionTargets": [
+          "node"
+        ]
+      }
+    ],
+    "portBindings": [
+      {
+        "portId": "adapt-job-market-intelligence-evidence-port",
+        "platformCapabilityId": "sda-authority-transformation-port.v1",
+        "configuration": {
+          "transformationAuthorityRef": "semantic-transformation.authority.json",
+          "transformationId": "adapt-job-market-intelligence-evidence.v1"
+        }
+      },
+      {
+        "portId": "verify-jmi-record-binding-port",
+        "platformCapabilityId": "sda-authority-transformation-port.v1",
+        "configuration": {
+          "transformationAuthorityRef": "semantic-transformation.authority.json",
+          "transformationId": "verify-jmi-record-binding.v1"
+        }
+      },
+      {
+        "portId": "verify-jmi-type-admission-port",
+        "platformCapabilityId": "sda-authority-transformation-port.v1",
+        "configuration": {
+          "transformationAuthorityRef": "semantic-transformation.authority.json",
+          "transformationId": "verify-jmi-type-admission.v1"
+        }
+      },
+      {
+        "portId": "bind-jmi-adapter-receipt-port",
+        "platformCapabilityId": "sda-authority-transformation-port.v1",
+        "configuration": {
+          "transformationAuthorityRef": "semantic-transformation.authority.json",
+          "transformationId": "bind-jmi-adapter-receipt.v1"
+        }
+      }
+    ],
+    "projectionBindings": []
+  },
+  "semanticTransformations": [
+    {
+      "id": "adapt-job-market-intelligence-evidence.v1",
+      "expression": {
+        "op": "let",
+        "bindings": {
+          "recordBound": {
+            "op": "every",
+            "from": {
+              "op": "array",
+              "items": [
+                {
+                  "op": "if",
+                  "when": {
+                    "op": "equals",
+                    "left": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "jmiRecordRef"
+                    },
+                    "right": {
+                      "op": "literal",
+                      "value": ""
+                    }
+                  },
+                  "then": {
+                    "op": "literal",
+                    "value": false
+                  },
+                  "else": {
+                    "op": "literal",
+                    "value": true
+                  }
+                },
+                {
+                  "op": "if",
+                  "when": {
+                    "op": "equals",
+                    "left": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "jmiRecordDigest"
+                    },
+                    "right": {
+                      "op": "literal",
+                      "value": ""
+                    }
+                  },
+                  "then": {
+                    "op": "literal",
+                    "value": false
+                  },
+                  "else": {
+                    "op": "literal",
+                    "value": true
+                  }
+                }
+              ]
+            },
+            "as": "check",
+            "where": {
+              "op": "path",
+              "from": "check",
+              "path": ""
+            }
+          },
+          "typeAdmitted": {
+            "op": "includes",
+            "in": {
+              "op": "literal",
+              "value": [
+                "job-market-observation-scope.v1",
+                "job-market-intelligence-state.v1",
+                "job-market-observation-request.v1",
+                "public-job-market-observation-state.v1",
+                "experience-admission-scope.v1",
+                "experience-gap-resolution-scope.v1",
+                "market-driven-experience-acquisition-scope.v1",
+                "experience-mission-planning-scope.v1"
+              ]
+            },
+            "value": {
+              "op": "path",
+              "from": "input",
+              "path": "jmiRecordType"
+            }
+          },
+          "authorityBound": {
+            "op": "every",
+            "from": {
+              "op": "array",
+              "items": [
+                {
+                  "op": "equals",
+                  "left": {
+                    "op": "path",
+                    "from": "input",
+                    "path": "adapterAuthorityId"
+                  },
+                  "right": {
+                    "op": "literal",
+                    "value": "sidefx-jmi-adapter-authority.v1"
+                  }
+                },
+                {
+                  "op": "if",
+                  "when": {
+                    "op": "equals",
+                    "left": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "adapterAuthorityDigest"
+                    },
+                    "right": {
+                      "op": "literal",
+                      "value": ""
+                    }
+                  },
+                  "then": {
+                    "op": "literal",
+                    "value": false
+                  },
+                  "else": {
+                    "op": "literal",
+                    "value": true
+                  }
+                }
+              ]
+            },
+            "as": "check",
+            "where": {
+              "op": "path",
+              "from": "check",
+              "path": ""
+            }
+          },
+          "windowDeclared": {
+            "op": "if",
+            "when": {
+              "op": "equals",
+              "left": {
+                "op": "path",
+                "from": "input",
+                "path": "observedWindow"
+              },
+              "right": {
+                "op": "literal",
+                "value": ""
+              }
+            },
+            "then": {
+              "op": "literal",
+              "value": false
+            },
+            "else": {
+              "op": "literal",
+              "value": true
+            }
+          },
+          "adaptationDisposition": {
+            "op": "if",
+            "when": {
+              "op": "equals",
+              "left": {
+                "op": "path",
+                "from": "recordBound",
+                "path": ""
+              },
+              "right": {
+                "op": "literal",
+                "value": false
+              }
+            },
+            "then": {
+              "op": "literal",
+              "value": "ADAPTATION_HELD"
+            },
+            "else": {
+              "op": "if",
+              "when": {
+                "op": "equals",
+                "left": {
+                  "op": "path",
+                  "from": "typeAdmitted",
+                  "path": ""
+                },
+                "right": {
+                  "op": "literal",
+                  "value": false
+                }
+              },
+              "then": {
+                "op": "literal",
+                "value": "ADAPTATION_HELD"
+              },
+              "else": {
+                "op": "if",
+                "when": {
+                  "op": "equals",
+                  "left": {
+                    "op": "path",
+                    "from": "authorityBound",
+                    "path": ""
+                  },
+                  "right": {
+                    "op": "literal",
+                    "value": false
+                  }
+                },
+                "then": {
+                  "op": "literal",
+                  "value": "ADAPTATION_HELD"
+                },
+                "else": {
+                  "op": "if",
+                  "when": {
+                    "op": "equals",
+                    "left": {
+                      "op": "path",
+                      "from": "windowDeclared",
+                      "path": ""
+                    },
+                    "right": {
+                      "op": "literal",
+                      "value": false
+                    }
+                  },
+                  "then": {
+                    "op": "literal",
+                    "value": "ADAPTATION_HELD"
+                  },
+                  "else": {
+                    "op": "literal",
+                    "value": "ADAPTED_EVIDENCE_BINDING"
+                  }
+                }
+              }
+            }
+          },
+          "findingCodes": {
+            "op": "if",
+            "when": {
+              "op": "equals",
+              "left": {
+                "op": "path",
+                "from": "recordBound",
+                "path": ""
+              },
+              "right": {
+                "op": "literal",
+                "value": false
+              }
+            },
+            "then": {
+              "op": "literal",
+              "value": [
+                "JMI_RECORD_UNBOUND"
+              ]
+            },
+            "else": {
+              "op": "if",
+              "when": {
+                "op": "equals",
+                "left": {
+                  "op": "path",
+                  "from": "typeAdmitted",
+                  "path": ""
+                },
+                "right": {
+                  "op": "literal",
+                  "value": false
+                }
+              },
+              "then": {
+                "op": "literal",
+                "value": [
+                  "JMI_RECORD_TYPE_UNADMITTED"
+                ]
+              },
+              "else": {
+                "op": "if",
+                "when": {
+                  "op": "equals",
+                  "left": {
+                    "op": "path",
+                    "from": "authorityBound",
+                    "path": ""
+                  },
+                  "right": {
+                    "op": "literal",
+                    "value": false
+                  }
+                },
+                "then": {
+                  "op": "literal",
+                  "value": [
+                    "ADAPTER_AUTHORITY_UNADMITTED"
+                  ]
+                },
+                "else": {
+                  "op": "if",
+                  "when": {
+                    "op": "equals",
+                    "left": {
+                      "op": "path",
+                      "from": "windowDeclared",
+                      "path": ""
+                    },
+                    "right": {
+                      "op": "literal",
+                      "value": false
+                    }
+                  },
+                  "then": {
+                    "op": "literal",
+                    "value": [
+                      "OBSERVATION_WINDOW_ABSENT"
+                    ]
+                  },
+                  "else": {
+                    "op": "literal",
+                    "value": []
+                  }
+                }
+              }
+            }
+          },
+          "adapterReceiptDigest": {
+            "op": "format",
+            "template": "sha256:{digest}",
+            "values": {
+              "digest": {
+                "op": "sha256",
+                "value": {
+                  "op": "json-stringify",
+                  "value": {
+                    "op": "object",
+                    "fields": {
+                      "jmiRecordRef": {
+                        "op": "path",
+                        "from": "input",
+                        "path": "jmiRecordRef"
+                      },
+                      "jmiRecordType": {
+                        "op": "path",
+                        "from": "input",
+                        "path": "jmiRecordType"
+                      },
+                      "jmiRecordDigest": {
+                        "op": "path",
+                        "from": "input",
+                        "path": "jmiRecordDigest"
+                      },
+                      "adaptationDisposition": {
+                        "op": "path",
+                        "from": "adaptationDisposition",
+                        "path": ""
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "value": {
+          "op": "merge",
+          "values": [
+            {
+              "op": "path",
+              "from": "input",
+              "path": ""
+            },
+            {
+              "op": "object",
+              "fields": {
+                "contractId": {
+                  "op": "literal",
+                  "value": "job-market-intelligence-adapter-record.v1"
+                },
+                "adaptationDisposition": {
+                  "op": "path",
+                  "from": "adaptationDisposition",
+                  "path": ""
+                },
+                "findingCodes": {
+                  "op": "path",
+                  "from": "findingCodes",
+                  "path": ""
+                },
+                "adapterReceiptDigest": {
+                  "op": "path",
+                  "from": "adapterReceiptDigest",
+                  "path": ""
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "verify-jmi-record-binding.v1",
+      "expression": {
+        "op": "let",
+        "bindings": {
+          "bound": {
+            "op": "every",
+            "from": {
+              "op": "array",
+              "items": [
+                {
+                  "op": "if",
+                  "when": {
+                    "op": "equals",
+                    "left": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "jmiRecordRef"
+                    },
+                    "right": {
+                      "op": "literal",
+                      "value": ""
+                    }
+                  },
+                  "then": {
+                    "op": "literal",
+                    "value": false
+                  },
+                  "else": {
+                    "op": "literal",
+                    "value": true
+                  }
+                },
+                {
+                  "op": "if",
+                  "when": {
+                    "op": "equals",
+                    "left": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "jmiRecordDigest"
+                    },
+                    "right": {
+                      "op": "literal",
+                      "value": ""
+                    }
+                  },
+                  "then": {
+                    "op": "literal",
+                    "value": false
+                  },
+                  "else": {
+                    "op": "literal",
+                    "value": true
+                  }
+                }
+              ]
+            },
+            "as": "check",
+            "where": {
+              "op": "path",
+              "from": "check",
+              "path": ""
+            }
+          }
+        },
+        "value": {
+          "op": "merge",
+          "values": [
+            {
+              "op": "path",
+              "from": "input",
+              "path": ""
+            },
+            {
+              "op": "object",
+              "fields": {
+                "recordBindingResult": {
+                  "op": "object",
+                  "fields": {
+                    "bound": {
+                      "op": "path",
+                      "from": "bound",
+                      "path": ""
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "verify-jmi-type-admission.v1",
+      "expression": {
+        "op": "let",
+        "bindings": {
+          "typeAdmitted": {
+            "op": "includes",
+            "in": {
+              "op": "literal",
+              "value": [
+                "job-market-observation-scope.v1",
+                "job-market-intelligence-state.v1",
+                "job-market-observation-request.v1",
+                "public-job-market-observation-state.v1",
+                "experience-admission-scope.v1",
+                "experience-gap-resolution-scope.v1",
+                "market-driven-experience-acquisition-scope.v1",
+                "experience-mission-planning-scope.v1"
+              ]
+            },
+            "value": {
+              "op": "path",
+              "from": "input",
+              "path": "jmiRecordType"
+            }
+          },
+          "authorityBound": {
+            "op": "every",
+            "from": {
+              "op": "array",
+              "items": [
+                {
+                  "op": "equals",
+                  "left": {
+                    "op": "path",
+                    "from": "input",
+                    "path": "adapterAuthorityId"
+                  },
+                  "right": {
+                    "op": "literal",
+                    "value": "sidefx-jmi-adapter-authority.v1"
+                  }
+                },
+                {
+                  "op": "if",
+                  "when": {
+                    "op": "equals",
+                    "left": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "adapterAuthorityDigest"
+                    },
+                    "right": {
+                      "op": "literal",
+                      "value": ""
+                    }
+                  },
+                  "then": {
+                    "op": "literal",
+                    "value": false
+                  },
+                  "else": {
+                    "op": "literal",
+                    "value": true
+                  }
+                }
+              ]
+            },
+            "as": "check",
+            "where": {
+              "op": "path",
+              "from": "check",
+              "path": ""
+            }
+          },
+          "admitted": {
+            "op": "every",
+            "from": {
+              "op": "array",
+              "items": [
+                {
+                  "op": "path",
+                  "from": "typeAdmitted",
+                  "path": ""
+                },
+                {
+                  "op": "path",
+                  "from": "authorityBound",
+                  "path": ""
+                }
+              ]
+            },
+            "as": "check",
+            "where": {
+              "op": "path",
+              "from": "check",
+              "path": ""
+            }
+          }
+        },
+        "value": {
+          "op": "merge",
+          "values": [
+            {
+              "op": "path",
+              "from": "input",
+              "path": ""
+            },
+            {
+              "op": "object",
+              "fields": {
+                "typeAdmissionResult": {
+                  "op": "object",
+                  "fields": {
+                    "admitted": {
+                      "op": "path",
+                      "from": "admitted",
+                      "path": ""
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "bind-jmi-adapter-receipt.v1",
+      "expression": {
+        "op": "let",
+        "bindings": {
+          "adapterReceiptDigest": {
+            "op": "format",
+            "template": "sha256:{digest}",
+            "values": {
+              "digest": {
+                "op": "sha256",
+                "value": {
+                  "op": "json-stringify",
+                  "value": {
+                    "op": "object",
+                    "fields": {
+                      "jmiRecordRef": {
+                        "op": "path",
+                        "from": "input",
+                        "path": "jmiRecordRef"
+                      },
+                      "jmiRecordType": {
+                        "op": "path",
+                        "from": "input",
+                        "path": "jmiRecordType"
+                      },
+                      "jmiRecordDigest": {
+                        "op": "path",
+                        "from": "input",
+                        "path": "jmiRecordDigest"
+                      },
+                      "adaptationDisposition": {
+                        "op": "path",
+                        "from": "input",
+                        "path": "adaptationDisposition"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "value": {
+          "op": "merge",
+          "values": [
+            {
+              "op": "path",
+              "from": "input",
+              "path": ""
+            },
+            {
+              "op": "object",
+              "fields": {
+                "adapterReceiptDigest": {
+                  "op": "path",
+                  "from": "adapterReceiptDigest",
+                  "path": ""
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "sourceRefs": [
+    "capabilities/adapt-job-market-intelligence-evidence/capability.authority.json",
+    "capabilities/adapt-job-market-intelligence-evidence/consumer-workspace.authority.json",
+    "capabilities/adapt-job-market-intelligence-evidence/contracts/contract-catalog.json",
+    "capabilities/adapt-job-market-intelligence-evidence/contracts/input.schema.json",
+    "capabilities/adapt-job-market-intelligence-evidence/contracts/outcome.schema.json",
+    "capabilities/adapt-job-market-intelligence-evidence/execution-authorities.authority.json",
+    "capabilities/adapt-job-market-intelligence-evidence/features/adapt-job-market-intelligence-evidence.feature",
+    "capabilities/adapt-job-market-intelligence-evidence/fixtures.authority.json",
+    "capabilities/adapt-job-market-intelligence-evidence/interfaces.authority.json",
+    "capabilities/adapt-job-market-intelligence-evidence/projection-authorities.authority.json",
+    "capabilities/adapt-job-market-intelligence-evidence/semantic-graph.authority.json",
+    "capabilities/adapt-job-market-intelligence-evidence/semantic-transformation.authority.json",
+    "contracts/agentic-contract-catalog.json",
+    "contracts/feature-authoring-contract-catalog.json",
+    "contracts/governed-agent-execution-context.schema.json",
+    "contracts/governed-agent-execution-testimony.schema.json",
+    "contracts/governed-feature-authoring-context.schema.json",
+    "contracts/governed-feature-authoring-testimony.schema.json",
+    "features/adapt-job-market-intelligence-evidence.feature",
+    "fixtures/agentic-fixtures.authority.json",
+    "fixtures/feature-authoring-fixtures.authority.json",
+    "semantic-authority/agentic-execution-authorities.authority.json",
+    "semantic-authority/agentic-interfaces.authority.json",
+    "semantic-authority/agentic-scenario-graph.authority.json",
+    "semantic-authority/agentic-transformations.authority.json",
+    "semantic-authority/feature-authoring-execution-authorities.authority.json",
+    "semantic-authority/feature-authoring-interfaces.authority.json",
+    "semantic-authority/feature-authoring-scenario-graph.authority.json",
+    "semantic-authority/feature-authoring-transformations.authority.json"
+  ]
+}

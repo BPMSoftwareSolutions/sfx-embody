@@ -1,0 +1,196 @@
+{
+  "capabilityId": "adapt-job-market-intelligence-evidence",
+  "scenarioId": "bind-jmi-adapter-receipt",
+  "target": "node",
+  "resolverDigest": "sha256:7904530b58fb037db34446b40f4ef1c025dd52dff2991491853a8f96bf59bc20",
+  "files": [
+    {
+      "relativePath": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/providers/bind-jmi-adapter-receipt-port.mjs",
+      "digest": "sha256:c725ffb86d11ac2d94c562a365ef5498afbe9656ee81787f134f745d5ced230c",
+      "sourcePointers": [
+        "capabilities/adapt-job-market-intelligence-evidence/semantic-transformation.authority.json"
+      ],
+      "target": "node"
+    },
+    {
+      "relativePath": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/providers/native-mechanics.mjs",
+      "digest": "sha256:0129b1ee8e210119ea1d659991e9b1c30f4dd1a200960c932ea023eb57583da5",
+      "sourcePointers": [
+        "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs"
+      ],
+      "target": "node"
+    },
+    {
+      "relativePath": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/scenario.mjs",
+      "digest": "sha256:c31259bab44d4e5e3ba017fc1e5f75c51b9a4f11be203acf3310a872ca08202b",
+      "sourcePointers": [
+        "features/adapt-job-market-intelligence-evidence.feature",
+        "capabilities/adapt-job-market-intelligence-evidence/execution-authorities.authority.json"
+      ],
+      "target": "node"
+    },
+    {
+      "relativePath": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/dependencies.json",
+      "digest": "sha256:92d45293bb6cc7dbb7fbdb34d34654796779d8eca650701511736e4402e645d7",
+      "sourcePointers": [
+        "capabilities/adapt-job-market-intelligence-evidence/execution-authorities.authority.json",
+        "capabilities/adapt-job-market-intelligence-evidence/interfaces.authority.json"
+      ],
+      "target": "node"
+    },
+    {
+      "relativePath": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/contracts/job-market-intelligence-adapter-record-v1-record-binding-result.ts",
+      "digest": "sha256:46df7dc3eb6e797c20fc69f92c35f04a06966f116b0ae5919f4646057595aa96",
+      "sourcePointers": [
+        "https://schemas.agentic-harness.local/adapt-job-market-intelligence-evidence/record.schema.json#/properties/recordBindingResult",
+        "https://schemas.agentic-harness.local/adapt-job-market-intelligence-evidence/record.schema.json#/properties/recordBindingResult/properties/bound"
+      ],
+      "target": "node"
+    },
+    {
+      "relativePath": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/contracts/job-market-intelligence-adapter-record-v1-type-admission-result.ts",
+      "digest": "sha256:984fef9abbfad34f0e8266ff53d38e5447805b3a8b00ea50102eb4425e0d2b14",
+      "sourcePointers": [
+        "https://schemas.agentic-harness.local/adapt-job-market-intelligence-evidence/record.schema.json#/properties/typeAdmissionResult",
+        "https://schemas.agentic-harness.local/adapt-job-market-intelligence-evidence/record.schema.json#/properties/typeAdmissionResult/properties/admitted"
+      ],
+      "target": "node"
+    },
+    {
+      "relativePath": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/contracts/job-market-intelligence-adapter-record-v1.ts",
+      "digest": "sha256:2063ad5d1193b760e8c402608dd1d2c5b8472857a4c1bec0021ee50e15cc666f",
+      "sourcePointers": [
+        "https://schemas.agentic-harness.local/adapt-job-market-intelligence-evidence/record.schema.json#",
+        "https://schemas.agentic-harness.local/adapt-job-market-intelligence-evidence/record.schema.json#/properties/contractId",
+        "https://schemas.agentic-harness.local/adapt-job-market-intelligence-evidence/record.schema.json#/properties/jmiRecordRef",
+        "https://schemas.agentic-harness.local/adapt-job-market-intelligence-evidence/record.schema.json#/properties/jmiRecordType",
+        "https://schemas.agentic-harness.local/adapt-job-market-intelligence-evidence/record.schema.json#/properties/jmiRecordDigest",
+        "https://schemas.agentic-harness.local/adapt-job-market-intelligence-evidence/record.schema.json#/properties/adapterAuthorityId",
+        "https://schemas.agentic-harness.local/adapt-job-market-intelligence-evidence/record.schema.json#/properties/adapterAuthorityDigest",
+        "https://schemas.agentic-harness.local/adapt-job-market-intelligence-evidence/record.schema.json#/properties/observedWindow",
+        "https://schemas.agentic-harness.local/adapt-job-market-intelligence-evidence/record.schema.json#/properties/adaptationDisposition",
+        "https://schemas.agentic-harness.local/adapt-job-market-intelligence-evidence/record.schema.json#/properties/findingCodes",
+        "https://schemas.agentic-harness.local/adapt-job-market-intelligence-evidence/record.schema.json#/properties/adapterReceiptDigest",
+        "https://schemas.agentic-harness.local/adapt-job-market-intelligence-evidence/record.schema.json#/properties/recordBindingResult",
+        "https://schemas.agentic-harness.local/adapt-job-market-intelligence-evidence/record.schema.json#/properties/typeAdmissionResult"
+      ],
+      "target": "node"
+    },
+    {
+      "relativePath": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/contracts/index.ts",
+      "digest": "sha256:592149e8dc05c594f857a0cc9c4bb0b7edd9ee7437883fb54ad0df4cb692f8fd",
+      "sourcePointers": [
+        "https://schemas.agentic-harness.local/adapt-job-market-intelligence-evidence/record.schema.json#/properties/recordBindingResult",
+        "https://schemas.agentic-harness.local/adapt-job-market-intelligence-evidence/record.schema.json#/properties/typeAdmissionResult",
+        "https://schemas.agentic-harness.local/adapt-job-market-intelligence-evidence/record.schema.json#"
+      ],
+      "target": "node"
+    },
+    {
+      "relativePath": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/contracts/authority.json",
+      "digest": "sha256:4873902d390bb0c6a958b219b2de213f2d64f0f86d640b40755958ae804cca43",
+      "sourcePointers": [
+        "capabilities/adapt-job-market-intelligence-evidence/contracts/input.schema.json"
+      ],
+      "target": "node"
+    },
+    {
+      "relativePath": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/providers/native-mechanic-primitives.mjs",
+      "digest": "sha256:1cc204869f0ce7b60ad03187d364db4a432b0b632ce4469a7cf37747d6a379d5",
+      "sourcePointers": [
+        "languages/typescript/runtimes/node/native-mechanic-primitives.mjs"
+      ],
+      "target": "node"
+    },
+    {
+      "relativePath": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/providers/sda/languages/typescript/dist/src/kernel/scenario-kernel.js",
+      "digest": "sha256:8a3cf0b6bac20fb514e631d27c29e5ec659625aaf885e2ccd64a7a340daa6384",
+      "sourcePointers": [
+        "languages/typescript/dist/src/kernel/scenario-kernel.js"
+      ],
+      "target": "node"
+    },
+    {
+      "relativePath": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/providers/sda/languages/typescript/dist/src/execution/index.js",
+      "digest": "sha256:a83b3c4caa43ac6ab1996b708797e15cde6b5d4b036b95be1da918688142159d",
+      "sourcePointers": [
+        "languages/typescript/dist/src/execution/index.js"
+      ],
+      "target": "node"
+    },
+    {
+      "relativePath": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/providers/sda/languages/typescript/dist/src/execution/contract-validator.js",
+      "digest": "sha256:9ee125e72ba67428097f6af28d9698d161db4c0f83f5e14918057b3faaf7be46",
+      "sourcePointers": [
+        "languages/typescript/dist/src/execution/contract-validator.js"
+      ],
+      "target": "node"
+    },
+    {
+      "relativePath": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/providers/sda/languages/typescript/dist/src/execution/execution-authority-resolver.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+      "sourcePointers": [
+        "languages/typescript/dist/src/execution/execution-authority-resolver.js"
+      ],
+      "target": "node"
+    },
+    {
+      "relativePath": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/providers/sda/languages/typescript/dist/src/execution/semantic-executor.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+      "sourcePointers": [
+        "languages/typescript/dist/src/execution/semantic-executor.js"
+      ],
+      "target": "node"
+    },
+    {
+      "relativePath": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/providers/sda/languages/typescript/dist/src/execution/disposition-resolver.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+      "sourcePointers": [
+        "languages/typescript/dist/src/execution/disposition-resolver.js"
+      ],
+      "target": "node"
+    },
+    {
+      "relativePath": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/providers/sda/languages/typescript/dist/src/execution/execution-observer.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+      "sourcePointers": [
+        "languages/typescript/dist/src/execution/execution-observer.js"
+      ],
+      "target": "node"
+    },
+    {
+      "relativePath": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/providers/sda/languages/typescript/dist/src/kernel/disposition-resolver.js",
+      "digest": "sha256:7cdae956253d6a48de978f1191c044d999d515f8aac7427393fa9da735faa688",
+      "sourcePointers": [
+        "languages/typescript/dist/src/kernel/disposition-resolver.js"
+      ],
+      "target": "node"
+    },
+    {
+      "relativePath": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/providers/sda/languages/typescript/runtimes/node/schema-contract-admission-provider.mjs",
+      "digest": "sha256:b8b8b60d0023d2ab0bff2d1239a3e19d73ebe2d4405b47cef006004b370eac5a",
+      "sourcePointers": [
+        "languages/typescript/runtimes/node/schema-contract-admission-provider.mjs"
+      ],
+      "target": "node"
+    },
+    {
+      "relativePath": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/package.json",
+      "digest": "sha256:ff10b66f9f3b2a597bfd3a8a45e886694ffd965a5eccb93ec4c88715c33c6f17",
+      "sourcePointers": [
+        "sda-bootstrap@87ae918ce46fe4acadd0aecbdcb030c9b55043d9/package.json"
+      ],
+      "target": "node"
+    },
+    {
+      "relativePath": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/composition.mjs",
+      "digest": "sha256:743d1b0424a9253621551799af3cdfbeb6288248d8fe7d6bb3c7e8557261a4e9",
+      "sourcePointers": [
+        "capabilities/adapt-job-market-intelligence-evidence/interfaces.authority.json",
+        "capabilities/adapt-job-market-intelligence-evidence/execution-authorities.authority.json",
+        "sda-bootstrap@87ae918ce46fe4acadd0aecbdcb030c9b55043d9/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json"
+      ],
+      "target": "node"
+    }
+  ]
+}

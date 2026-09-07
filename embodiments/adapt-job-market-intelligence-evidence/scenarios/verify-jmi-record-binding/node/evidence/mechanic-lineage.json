@@ -1,0 +1,877 @@
+[
+  {
+    "scenarioId": "verify-jmi-record-binding",
+    "operationOrdinal": 0,
+    "portId": "verify-jmi-record-binding-port",
+    "transformationId": "verify-jmi-record-binding.v1",
+    "sourceRef": "capabilities/adapt-job-market-intelligence-evidence/semantic-transformation.authority.json",
+    "sourceDigest": "sha256:2b167eaf1093228810925754bece447ce574863a6ca8f5459be9e681f3972803",
+    "physicalFile": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/providers/verify-jmi-record-binding-port.mjs",
+    "bindings": [
+      {
+        "identity": "check",
+        "nativeName": "check",
+        "scope": "/bindings/bound"
+      },
+      {
+        "identity": "bound",
+        "nativeName": "bound",
+        "scope": ""
+      }
+    ],
+    "helpers": [],
+    "nodes": [
+      {
+        "sourcePointer": "",
+        "mechanicId": "let",
+        "operation": "let",
+        "parameterNames": [
+          "bindings",
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 12396,
+        "providerSourceEnd": 12644,
+        "providerBodyDigest": "sha256:f882831176ab819cf41cfe5abdc1486176f941730544863b6e1f0da291836c0a",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/providers/verify-jmi-record-binding-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0
+          ],
+          "startLine": 4,
+          "startColumn": 12,
+          "endLine": 10,
+          "endColumn": 9,
+          "syntaxDigest": "sha256:77b4c147e75f6041e6736491e1e65fc588b28bf640a72437e02dae5f833616b0"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/bound",
+        "mechanicId": "every",
+        "operation": "every",
+        "parameterNames": [
+          "from",
+          "as",
+          "where"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 10055,
+        "providerSourceEnd": 10192,
+        "providerBodyDigest": "sha256:0404fcb636f768641468e8fcda8d2dcf870417e06ba674b495d0d444eb0ac1d2",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/providers/verify-jmi-record-binding-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "startLine": 5,
+          "startColumn": 21,
+          "endLine": 8,
+          "endColumn": 41,
+          "syntaxDigest": "sha256:b9be0003547fd5d72ad5d0b1bb624d79edb25eae708e24f4cb49ecff26bd2214"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/bound/from",
+        "mechanicId": "array",
+        "operation": "array",
+        "parameterNames": [
+          "items"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 9027,
+        "providerSourceEnd": 9095,
+        "providerBodyDigest": "sha256:deb44952445ad6e45765e0d03369cffa4737e64954602f8a3e30e9d00545778e",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/providers/verify-jmi-record-binding-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "startLine": 5,
+          "startColumn": 21,
+          "endLine": 8,
+          "endColumn": 8,
+          "syntaxDigest": "sha256:5cfd4a11a1cdc0fe346512ae806015d1e7da62314f9663cc07d3df9109f31c91"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/bound/from/items/0",
+        "mechanicId": "if",
+        "operation": "if",
+        "parameterNames": [
+          "when",
+          "then",
+          "else"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 10691,
+        "providerSourceEnd": 10791,
+        "providerBodyDigest": "sha256:a7e2d0af98002a3ec2c76fad0cecb1f38d192db53b2b003241e61368630fd09a",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/providers/verify-jmi-record-binding-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "startLine": 6,
+          "startColumn": 9,
+          "endLine": 6,
+          "endColumn": 50,
+          "syntaxDigest": "sha256:21500f479e5a08a4f62a554c2599d767696531b8646eb346b95f8fae2664b426"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/bound/from/items/0/when",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "parameterNames": [
+          "left",
+          "right"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534,
+        "providerBodyDigest": "sha256:d72eba197cd5e76449c3c1af5f0c22be1021c3c4a9aa56568b04e647e17e4b1c",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/providers/verify-jmi-record-binding-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "startLine": 6,
+          "startColumn": 9,
+          "endLine": 6,
+          "endColumn": 35,
+          "syntaxDigest": "sha256:53c9a9fbc0f97f38b0169c4700bb6d7aa21a782e67868034a24eff7a4dfb3bda"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/bound/from/items/0/when/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "jmiRecordRef",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/providers/verify-jmi-record-binding-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "startLine": 6,
+          "startColumn": 9,
+          "endLine": 6,
+          "endColumn": 28,
+          "syntaxDigest": "sha256:efa00e09edc3fb2b69d904bb2950a26e6798d7769add6d9a2e98839fb4f4c759"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/bound/from/items/0/when/right",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/providers/verify-jmi-record-binding-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            2
+          ],
+          "startLine": 6,
+          "startColumn": 33,
+          "endLine": 6,
+          "endColumn": 35,
+          "syntaxDigest": "sha256:12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/bound/from/items/0/then",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/providers/verify-jmi-record-binding-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            2
+          ],
+          "startLine": 6,
+          "startColumn": 38,
+          "endLine": 6,
+          "endColumn": 43,
+          "syntaxDigest": "sha256:fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/bound/from/items/0/else",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/providers/verify-jmi-record-binding-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            4
+          ],
+          "startLine": 6,
+          "startColumn": 46,
+          "endLine": 6,
+          "endColumn": 50,
+          "syntaxDigest": "sha256:b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/bound/from/items/1",
+        "mechanicId": "if",
+        "operation": "if",
+        "parameterNames": [
+          "when",
+          "then",
+          "else"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 10691,
+        "providerSourceEnd": 10791,
+        "providerBodyDigest": "sha256:a7e2d0af98002a3ec2c76fad0cecb1f38d192db53b2b003241e61368630fd09a",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/providers/verify-jmi-record-binding-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1
+          ],
+          "startLine": 7,
+          "startColumn": 9,
+          "endLine": 7,
+          "endColumn": 53,
+          "syntaxDigest": "sha256:5af0ff1af066e731d76ee7fa90143a11431f426c7aae52b520ea2cf525b72a30"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/bound/from/items/1/when",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "parameterNames": [
+          "left",
+          "right"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534,
+        "providerBodyDigest": "sha256:d72eba197cd5e76449c3c1af5f0c22be1021c3c4a9aa56568b04e647e17e4b1c",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/providers/verify-jmi-record-binding-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0
+          ],
+          "startLine": 7,
+          "startColumn": 9,
+          "endLine": 7,
+          "endColumn": 38,
+          "syntaxDigest": "sha256:cce76a6e5a345f7f4bf5e82eae5f06517d5441c9a5ff640147a19aaf31e3b2a5"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/bound/from/items/1/when/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "jmiRecordDigest",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/providers/verify-jmi-record-binding-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "startLine": 7,
+          "startColumn": 9,
+          "endLine": 7,
+          "endColumn": 31,
+          "syntaxDigest": "sha256:070ef72ade80ab9fb74ece116802dc31989b3149d4b2a1ae31202c573886a180"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/bound/from/items/1/when/right",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/providers/verify-jmi-record-binding-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            2
+          ],
+          "startLine": 7,
+          "startColumn": 36,
+          "endLine": 7,
+          "endColumn": 38,
+          "syntaxDigest": "sha256:12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/bound/from/items/1/then",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/providers/verify-jmi-record-binding-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            2
+          ],
+          "startLine": 7,
+          "startColumn": 41,
+          "endLine": 7,
+          "endColumn": 46,
+          "syntaxDigest": "sha256:fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/bound/from/items/1/else",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/providers/verify-jmi-record-binding-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            4
+          ],
+          "startLine": 7,
+          "startColumn": 49,
+          "endLine": 7,
+          "endColumn": 53,
+          "syntaxDigest": "sha256:b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/bound/where",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "check": "check"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/providers/verify-jmi-record-binding-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            1,
+            2,
+            1
+          ],
+          "startLine": 8,
+          "startColumn": 34,
+          "endLine": 8,
+          "endColumn": 39,
+          "syntaxDigest": "sha256:20f65c28671b40937c5bf23acc7c6f37e5a5ec0622e347b57685725df5ba9e50"
+        }
+      },
+      {
+        "sourcePointer": "/value",
+        "mechanicId": "merge",
+        "operation": "merge",
+        "parameterNames": [
+          "values"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "bound": "bound"
+        },
+        "providerSourceStart": 9101,
+        "providerSourceEnd": 9194,
+        "providerBodyDigest": "sha256:a5783ce9abfa463081111a250e4d6c61a4807953a3b6e1bc08bb052cbcff0074",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/providers/verify-jmi-record-binding-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0
+          ],
+          "startLine": 9,
+          "startColumn": 14,
+          "endLine": 9,
+          "endColumn": 89,
+          "syntaxDigest": "sha256:b43ce91ec5f3061e38d47c1e60d7bf16ec08f8986ebdbd0fdc138ac3993c4fee"
+        }
+      },
+      {
+        "sourcePointer": "/value/values/0",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "bound": "bound"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/providers/verify-jmi-record-binding-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            2
+          ],
+          "startLine": 9,
+          "startColumn": 32,
+          "endLine": 9,
+          "endColumn": 37,
+          "syntaxDigest": "sha256:c96c6d5be8d08a12e7b5cdc1b207fa6b2430974c86803d8891675e76fd992c20"
+        }
+      },
+      {
+        "sourcePointer": "/value/values/1",
+        "mechanicId": "object",
+        "operation": "object",
+        "parameterNames": [
+          "fields"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "bound": "bound"
+        },
+        "providerSourceStart": 8899,
+        "providerSourceEnd": 9021,
+        "providerBodyDigest": "sha256:1c64bf7e879a086062f051dfb0081f2d73ecf7ca51fe9f56cc0ecd19380b20ae",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/providers/verify-jmi-record-binding-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            3
+          ],
+          "startLine": 9,
+          "startColumn": 39,
+          "endLine": 9,
+          "endColumn": 88,
+          "syntaxDigest": "sha256:1441175939b43ab422563404eccfb3054b2b96cdb870ba8627e7ecd06e45ae58"
+        }
+      },
+      {
+        "sourcePointer": "/value/values/1/fields/recordBindingResult",
+        "mechanicId": "object",
+        "operation": "object",
+        "parameterNames": [
+          "fields"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "bound": "bound"
+        },
+        "providerSourceStart": 8899,
+        "providerSourceEnd": 9021,
+        "providerBodyDigest": "sha256:1c64bf7e879a086062f051dfb0081f2d73ecf7ca51fe9f56cc0ecd19380b20ae",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/providers/verify-jmi-record-binding-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            3,
+            0,
+            1
+          ],
+          "startLine": 9,
+          "startColumn": 66,
+          "endLine": 9,
+          "endColumn": 86,
+          "syntaxDigest": "sha256:6f1bc1a633fdeb24c5491721b11bd88aa21ff712e455a0a1faf45c40e4309aa6"
+        }
+      },
+      {
+        "sourcePointer": "/value/values/1/fields/recordBindingResult/fields/bound",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "bound": "bound"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/providers/verify-jmi-record-binding-port.mjs",
+          "astPath": [
+            0,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            3,
+            0,
+            1,
+            0,
+            1
+          ],
+          "startLine": 9,
+          "startColumn": 79,
+          "endLine": 9,
+          "endColumn": 84,
+          "syntaxDigest": "sha256:5e1cf42878df58fea7bfa45b715b7832d889092ad23e802e63912b1bfd205630"
+        }
+      }
+    ]
+  }
+]

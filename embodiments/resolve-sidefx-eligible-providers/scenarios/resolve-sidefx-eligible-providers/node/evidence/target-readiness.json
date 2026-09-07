@@ -1,0 +1,11 @@
+[
+  {
+    "capability_id": "resolve-sidefx-eligible-providers",
+    "scenario_id": "resolve-sidefx-eligible-providers",
+    "target_language": "node",
+    "requirement_count": "106",
+    "open_requirement_count": "0",
+    "readiness": "CAN_ATTEMPT_EMBODIMENT",
+    "conformance_status": "NOT_EVALUATED"
+  }
+]

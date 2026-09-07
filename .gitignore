@@ -1,0 +1,5 @@
+node_modules/
+embodiments/**/body/node_modules/
+.env
+.env.*
+!.env.example

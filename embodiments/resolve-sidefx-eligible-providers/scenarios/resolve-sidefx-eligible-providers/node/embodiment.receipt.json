@@ -1,0 +1,25 @@
+{
+  "capabilityId": "resolve-sidefx-eligible-providers",
+  "scenarioId": "resolve-sidefx-eligible-providers",
+  "target": "node",
+  "profile": "full-mechanics",
+  "scenarioDefinitionDigest": "sha256:a18c0e606e1a70c22c5efd173e130016747bbaaf14f3f875bcc6428d9cc6a93f",
+  "embodimentPlanDigest": "sha256:70b4da2e50282c51944071cc946b398542363bc5f4f62e1352c047bdc7a374f7",
+  "resolverVersion": "sha256:7904530b58fb037db34446b40f4ef1c025dd52dff2991491853a8f96bf59bc20",
+  "pinnedPlatformCommit": "6fcb8b34f0b85c70a8984940cc21a20cfdb507dd",
+  "providers": [
+    "node-deterministic-semantic-value-provider.v1",
+    "ScenarioKernel.NodePlatform.Execution.AuthorityTransformation"
+  ],
+  "artifactDigest": "sha256:d81fe0ab03931350419bdad39ee9680014096959b4d1102e51d7414fbf50bccc",
+  "revealDigest": "sha256:ef545c1142f9aea0ccdae212b43ee1161528165dc1a617a084a6b705f99eee7b",
+  "disposition": "EXECUTION_CHECKS_PASSED",
+  "managedAdmission": "NOT_REQUESTED",
+  "resolverStatus": "CANDIDATE_PHYSICAL_PROVIDER",
+  "nativeProjectionDigest": "sha256:f111cd6cf1debbdf8976fa525a6730589ea9aeab908ddcad3d7af1c68b4164e9",
+  "contractFidelityDigest": "sha256:7e778abf29076eed0228948bfa5d129a904348a00ff1e0a1be09664519c8c226",
+  "lineageDigest": "sha256:13ef975b3dab49ea3d99ac85da6819e87a41cb0090fd60deabf3a3d2ebf13de6",
+  "dependencyLockDigest": "sha256:ad1d5e78e09bf26ff4eb818286356fd96d6c63727dd58513596a41d95e43bcf5",
+  "fixtureResultsDigest": "sha256:2e3d8d7c14e644967ac404354df9dd0c0de136426741381c7fb1e9cd0155ed01",
+  "conformanceDigest": "sha256:8e221016e2e1ff94d3a5c686687ed4430aa56afd389e6ae3c7700d19e492478b"
+}

@@ -1,0 +1,8 @@
+[
+  {
+    "id": "bind-jmi-adapter-receipt-port",
+    "module": "./providers/bind-jmi-adapter-receipt-port.mjs",
+    "className": "BindJmiAdapterReceiptPort",
+    "kind": "invoke-port"
+  }
+]

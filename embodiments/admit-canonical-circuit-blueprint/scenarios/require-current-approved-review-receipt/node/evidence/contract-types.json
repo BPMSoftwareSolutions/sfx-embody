@@ -1,0 +1,1774 @@
+[
+  {
+    "typeName": "CanonicalBlueprintAdmissionRequestV1Payload",
+    "sourcePointer": "https://schemas.agentic-harness.local/contracts/canonical-blueprint-admission-request.v1.schema.json#/properties/payload",
+    "fields": [
+      {
+        "name": "capabilityId",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/canonical-blueprint-admission-request.v1.schema.json#/properties/payload/properties/capabilityId"
+      },
+      {
+        "name": "featureDigest",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/canonical-blueprint-admission-request.v1.schema.json#/properties/payload/properties/featureDigest"
+      },
+      {
+        "name": "featureScenarioCount",
+        "type": "number",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/canonical-blueprint-admission-request.v1.schema.json#/properties/payload/properties/featureScenarioCount"
+      },
+      {
+        "name": "candidateBytesBase64",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/canonical-blueprint-admission-request.v1.schema.json#/properties/payload/properties/candidateBytesBase64"
+      },
+      {
+        "name": "conformanceEvidenceBytesBase64",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/canonical-blueprint-admission-request.v1.schema.json#/properties/payload/properties/conformanceEvidenceBytesBase64"
+      },
+      {
+        "name": "geometryProofBytesBase64",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/canonical-blueprint-admission-request.v1.schema.json#/properties/payload/properties/geometryProofBytesBase64"
+      },
+      {
+        "name": "reviewReceiptBytesBase64",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/canonical-blueprint-admission-request.v1.schema.json#/properties/payload/properties/reviewReceiptBytesBase64"
+      },
+      {
+        "name": "reviewBoundaryBytesBase64",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/canonical-blueprint-admission-request.v1.schema.json#/properties/payload/properties/reviewBoundaryBytesBase64"
+      },
+      {
+        "name": "projectionReceiptBytesBase64",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/canonical-blueprint-admission-request.v1.schema.json#/properties/payload/properties/projectionReceiptBytesBase64"
+      },
+      {
+        "name": "reviewTestimonyBytesBase64",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/canonical-blueprint-admission-request.v1.schema.json#/properties/payload/properties/reviewTestimonyBytesBase64"
+      },
+      {
+        "name": "canonicalSchemaBytesBase64",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/canonical-blueprint-admission-request.v1.schema.json#/properties/payload/properties/canonicalSchemaBytesBase64"
+      },
+      {
+        "name": "candidate",
+        "type": "unknown",
+        "optional": true,
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/canonical-blueprint-admission-request.v1.schema.json#/properties/payload/properties/candidate"
+      },
+      {
+        "name": "candidateCarrierDigest",
+        "type": "unknown",
+        "optional": true,
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/canonical-blueprint-admission-request.v1.schema.json#/properties/payload/properties/candidateCarrierDigest"
+      },
+      {
+        "name": "conformanceEvidence",
+        "type": "unknown",
+        "optional": true,
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/canonical-blueprint-admission-request.v1.schema.json#/properties/payload/properties/conformanceEvidence"
+      },
+      {
+        "name": "conformanceEvidenceDigest",
+        "type": "unknown",
+        "optional": true,
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/canonical-blueprint-admission-request.v1.schema.json#/properties/payload/properties/conformanceEvidenceDigest"
+      },
+      {
+        "name": "geometryProof",
+        "type": "unknown",
+        "optional": true,
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/canonical-blueprint-admission-request.v1.schema.json#/properties/payload/properties/geometryProof"
+      },
+      {
+        "name": "geometryProofDigest",
+        "type": "unknown",
+        "optional": true,
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/canonical-blueprint-admission-request.v1.schema.json#/properties/payload/properties/geometryProofDigest"
+      },
+      {
+        "name": "reviewReceipt",
+        "type": "unknown",
+        "optional": true,
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/canonical-blueprint-admission-request.v1.schema.json#/properties/payload/properties/reviewReceipt"
+      },
+      {
+        "name": "reviewReceiptDigest",
+        "type": "unknown",
+        "optional": true,
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/canonical-blueprint-admission-request.v1.schema.json#/properties/payload/properties/reviewReceiptDigest"
+      },
+      {
+        "name": "reviewBoundary",
+        "type": "unknown",
+        "optional": true,
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/canonical-blueprint-admission-request.v1.schema.json#/properties/payload/properties/reviewBoundary"
+      },
+      {
+        "name": "reviewBoundaryDigest",
+        "type": "unknown",
+        "optional": true,
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/canonical-blueprint-admission-request.v1.schema.json#/properties/payload/properties/reviewBoundaryDigest"
+      },
+      {
+        "name": "projectionReceipt",
+        "type": "unknown",
+        "optional": true,
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/canonical-blueprint-admission-request.v1.schema.json#/properties/payload/properties/projectionReceipt"
+      },
+      {
+        "name": "projectionReceiptDigest",
+        "type": "unknown",
+        "optional": true,
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/canonical-blueprint-admission-request.v1.schema.json#/properties/payload/properties/projectionReceiptDigest"
+      },
+      {
+        "name": "reviewTestimony",
+        "type": "unknown",
+        "optional": true,
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/canonical-blueprint-admission-request.v1.schema.json#/properties/payload/properties/reviewTestimony"
+      },
+      {
+        "name": "reviewTestimonyDigest",
+        "type": "unknown",
+        "optional": true,
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/canonical-blueprint-admission-request.v1.schema.json#/properties/payload/properties/reviewTestimonyDigest"
+      },
+      {
+        "name": "canonicalSchemaDigest",
+        "type": "unknown",
+        "optional": true,
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/canonical-blueprint-admission-request.v1.schema.json#/properties/payload/properties/canonicalSchemaDigest"
+      },
+      {
+        "name": "admissionRequest",
+        "type": "unknown",
+        "optional": true,
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/canonical-blueprint-admission-request.v1.schema.json#/properties/payload/properties/admissionRequest"
+      },
+      {
+        "name": "require-blueprint-conformance-evidenceDisposition",
+        "type": "unknown",
+        "optional": true,
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/canonical-blueprint-admission-request.v1.schema.json#/properties/payload/properties/require-blueprint-conformance-evidenceDisposition"
+      },
+      {
+        "name": "require-blueprint-geometry-proofDisposition",
+        "type": "unknown",
+        "optional": true,
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/canonical-blueprint-admission-request.v1.schema.json#/properties/payload/properties/require-blueprint-geometry-proofDisposition"
+      },
+      {
+        "name": "require-current-approved-review-receiptDisposition",
+        "type": "unknown",
+        "optional": true,
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/canonical-blueprint-admission-request.v1.schema.json#/properties/payload/properties/require-current-approved-review-receiptDisposition"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalBlueprintAdmissionRequestV1",
+    "sourcePointer": "https://schemas.agentic-harness.local/contracts/canonical-blueprint-admission-request.v1.schema.json#",
+    "fields": [
+      {
+        "name": "contractId",
+        "type": "\"canonical-blueprint-admission-request.v1\"",
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/canonical-blueprint-admission-request.v1.schema.json#/properties/contractId",
+        "optional": false
+      },
+      {
+        "name": "payload",
+        "type": "CanonicalBlueprintAdmissionRequestV1Payload",
+        "optional": false,
+        "dependencies": [
+          "CanonicalBlueprintAdmissionRequestV1Payload"
+        ],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/canonical-blueprint-admission-request.v1.schema.json#/properties/payload"
+      }
+    ]
+  },
+  {
+    "typeName": "BlueprintAdmissionObligationDispositionV1Payload",
+    "sourcePointer": "https://schemas.agentic-harness.local/contracts/blueprint-admission-obligation-disposition.v1.schema.json#/properties/payload",
+    "fields": []
+  },
+  {
+    "typeName": "BlueprintAdmissionObligationDispositionV1",
+    "sourcePointer": "https://schemas.agentic-harness.local/contracts/blueprint-admission-obligation-disposition.v1.schema.json#",
+    "fields": [
+      {
+        "name": "contractId",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/blueprint-admission-obligation-disposition.v1.schema.json#/properties/contractId"
+      },
+      {
+        "name": "payload",
+        "type": "BlueprintAdmissionObligationDispositionV1Payload",
+        "optional": false,
+        "dependencies": [
+          "BlueprintAdmissionObligationDispositionV1Payload"
+        ],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/blueprint-admission-obligation-disposition.v1.schema.json#/properties/payload"
+      }
+    ]
+  },
+  {
+    "typeName": "AdmittedCanonicalCircuitBlueprintV1PayloadAdmissionEvidence",
+    "sourcePointer": "https://schemas.agentic-harness.local/contracts/admitted-canonical-circuit-blueprint.v1.schema.json#/properties/payload/properties/admissionEvidence",
+    "fields": [
+      {
+        "name": "conformanceEvidenceDigest",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/admitted-canonical-circuit-blueprint.v1.schema.json#/properties/payload/properties/admissionEvidence/properties/conformanceEvidenceDigest"
+      },
+      {
+        "name": "geometryProofDigest",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/admitted-canonical-circuit-blueprint.v1.schema.json#/properties/payload/properties/admissionEvidence/properties/geometryProofDigest"
+      },
+      {
+        "name": "reviewReceiptDigest",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/admitted-canonical-circuit-blueprint.v1.schema.json#/properties/payload/properties/admissionEvidence/properties/reviewReceiptDigest"
+      }
+    ]
+  },
+  {
+    "typeName": "AdmittedCanonicalCircuitBlueprintV1PayloadObligationRecordConformance",
+    "sourcePointer": "https://schemas.agentic-harness.local/contracts/admitted-canonical-circuit-blueprint.v1.schema.json#/properties/payload/properties/obligationRecord/properties/conformance",
+    "fields": []
+  },
+  {
+    "typeName": "AdmittedCanonicalCircuitBlueprintV1PayloadObligationRecordGeometry",
+    "sourcePointer": "https://schemas.agentic-harness.local/contracts/admitted-canonical-circuit-blueprint.v1.schema.json#/properties/payload/properties/obligationRecord/properties/geometry",
+    "fields": []
+  },
+  {
+    "typeName": "AdmittedCanonicalCircuitBlueprintV1PayloadObligationRecordReview",
+    "sourcePointer": "https://schemas.agentic-harness.local/contracts/admitted-canonical-circuit-blueprint.v1.schema.json#/properties/payload/properties/obligationRecord/properties/review",
+    "fields": []
+  },
+  {
+    "typeName": "AdmittedCanonicalCircuitBlueprintV1PayloadObligationRecord",
+    "sourcePointer": "https://schemas.agentic-harness.local/contracts/admitted-canonical-circuit-blueprint.v1.schema.json#/properties/payload/properties/obligationRecord",
+    "fields": [
+      {
+        "name": "conformance",
+        "type": "AdmittedCanonicalCircuitBlueprintV1PayloadObligationRecordConformance",
+        "optional": false,
+        "dependencies": [
+          "AdmittedCanonicalCircuitBlueprintV1PayloadObligationRecordConformance"
+        ],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/admitted-canonical-circuit-blueprint.v1.schema.json#/properties/payload/properties/obligationRecord/properties/conformance"
+      },
+      {
+        "name": "geometry",
+        "type": "AdmittedCanonicalCircuitBlueprintV1PayloadObligationRecordGeometry",
+        "optional": false,
+        "dependencies": [
+          "AdmittedCanonicalCircuitBlueprintV1PayloadObligationRecordGeometry"
+        ],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/admitted-canonical-circuit-blueprint.v1.schema.json#/properties/payload/properties/obligationRecord/properties/geometry"
+      },
+      {
+        "name": "review",
+        "type": "AdmittedCanonicalCircuitBlueprintV1PayloadObligationRecordReview",
+        "optional": false,
+        "dependencies": [
+          "AdmittedCanonicalCircuitBlueprintV1PayloadObligationRecordReview"
+        ],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/admitted-canonical-circuit-blueprint.v1.schema.json#/properties/payload/properties/obligationRecord/properties/review"
+      }
+    ]
+  },
+  {
+    "typeName": "AdmittedCanonicalCircuitBlueprintV1PayloadItems",
+    "sourcePointer": "https://schemas.agentic-harness.local/contracts/admitted-canonical-circuit-blueprint.v1.schema.json#/properties/payload/properties/findings/items",
+    "fields": []
+  },
+  {
+    "typeName": "AdmittedCanonicalCircuitBlueprintV1Payload",
+    "sourcePointer": "https://schemas.agentic-harness.local/contracts/admitted-canonical-circuit-blueprint.v1.schema.json#/properties/payload",
+    "fields": [
+      {
+        "name": "disposition",
+        "type": "\"BLUEPRINT_AUTHORITY_ADMITTED\" | \"BLUEPRINT_ADMISSION_REJECTED\"",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/admitted-canonical-circuit-blueprint.v1.schema.json#/properties/payload/properties/disposition"
+      },
+      {
+        "name": "blueprint",
+        "type": "(CanonicalCircuitBlueprintV1) | null",
+        "optional": false,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1"
+        ],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/admitted-canonical-circuit-blueprint.v1.schema.json#/properties/payload/properties/blueprint"
+      },
+      {
+        "name": "blueprintAuthorityDigest",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/admitted-canonical-circuit-blueprint.v1.schema.json#/properties/payload/properties/blueprintAuthorityDigest"
+      },
+      {
+        "name": "candidateCarrierDigest",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/admitted-canonical-circuit-blueprint.v1.schema.json#/properties/payload/properties/candidateCarrierDigest"
+      },
+      {
+        "name": "admittedCarrierDigest",
+        "type": "(string) | null",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/admitted-canonical-circuit-blueprint.v1.schema.json#/properties/payload/properties/admittedCarrierDigest"
+      },
+      {
+        "name": "admissionEvidence",
+        "type": "AdmittedCanonicalCircuitBlueprintV1PayloadAdmissionEvidence",
+        "optional": false,
+        "dependencies": [
+          "AdmittedCanonicalCircuitBlueprintV1PayloadAdmissionEvidence"
+        ],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/admitted-canonical-circuit-blueprint.v1.schema.json#/properties/payload/properties/admissionEvidence"
+      },
+      {
+        "name": "obligationRecord",
+        "type": "AdmittedCanonicalCircuitBlueprintV1PayloadObligationRecord",
+        "optional": false,
+        "dependencies": [
+          "AdmittedCanonicalCircuitBlueprintV1PayloadObligationRecord"
+        ],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/admitted-canonical-circuit-blueprint.v1.schema.json#/properties/payload/properties/obligationRecord"
+      },
+      {
+        "name": "findings",
+        "type": "(AdmittedCanonicalCircuitBlueprintV1PayloadItems)[]",
+        "optional": false,
+        "dependencies": [
+          "AdmittedCanonicalCircuitBlueprintV1PayloadItems"
+        ],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/admitted-canonical-circuit-blueprint.v1.schema.json#/properties/payload/properties/findings"
+      },
+      {
+        "name": "blueprintRouteDisposition",
+        "type": "\"CLOSED\"",
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/admitted-canonical-circuit-blueprint.v1.schema.json#/properties/payload/properties/blueprintRouteDisposition",
+        "optional": false
+      }
+    ]
+  },
+  {
+    "typeName": "AdmittedCanonicalCircuitBlueprintV1",
+    "sourcePointer": "https://schemas.agentic-harness.local/contracts/admitted-canonical-circuit-blueprint.v1.schema.json#",
+    "fields": [
+      {
+        "name": "contractId",
+        "type": "\"admitted-canonical-circuit-blueprint.v1\"",
+        "dependencies": [],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/admitted-canonical-circuit-blueprint.v1.schema.json#/properties/contractId",
+        "optional": false
+      },
+      {
+        "name": "payload",
+        "type": "AdmittedCanonicalCircuitBlueprintV1Payload",
+        "optional": false,
+        "dependencies": [
+          "AdmittedCanonicalCircuitBlueprintV1Payload"
+        ],
+        "sourcePointer": "https://schemas.agentic-harness.local/contracts/admitted-canonical-circuit-blueprint.v1.schema.json#/properties/payload"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1Capability",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/capability",
+    "fields": [
+      {
+        "name": "capabilityId",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/capability/properties/capabilityId"
+      },
+      {
+        "name": "version",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/capability/properties/version"
+      },
+      {
+        "name": "rootExperience",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/capability/properties/rootExperience"
+      },
+      {
+        "name": "capabilityAuthorityDigest",
+        "type": "string",
+        "optional": true,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/capability/properties/capabilityAuthorityDigest"
+      },
+      {
+        "name": "capsuleDigest",
+        "type": "string",
+        "optional": true,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/capability/properties/capsuleDigest"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1SourceAuthorityAuthorityRef",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef",
+    "fields": [
+      {
+        "name": "authorityId",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef/properties/authorityId"
+      },
+      {
+        "name": "digest",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef/properties/digest"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1SourceAuthority",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/sourceAuthority",
+    "fields": [
+      {
+        "name": "disposition",
+        "type": "\"CANDIDATE\" | \"ADMITTED\"",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/sourceAuthority/properties/disposition"
+      },
+      {
+        "name": "lineage",
+        "type": "(CanonicalCircuitBlueprintV1SourceAuthorityAuthorityRef)[]",
+        "optional": false,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1SourceAuthorityAuthorityRef"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/sourceAuthority/properties/lineage"
+      },
+      {
+        "name": "featureAuthorityRef",
+        "type": "CanonicalCircuitBlueprintV1SourceAuthorityAuthorityRef",
+        "optional": true,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1SourceAuthorityAuthorityRef"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/sourceAuthority/properties/featureAuthorityRef"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1BlueprintAuthority",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/blueprintAuthority",
+    "fields": [
+      {
+        "name": "blueprintId",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/blueprintAuthority/properties/blueprintId"
+      },
+      {
+        "name": "authorityDigest",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/blueprintAuthority/properties/authorityDigest"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1NodeCellFirstAuthorityRef",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef",
+    "fields": [
+      {
+        "name": "authorityId",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef/properties/authorityId"
+      },
+      {
+        "name": "digest",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef/properties/digest"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1NodeCellFirst",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/cell/properties/first",
+    "fields": [
+      {
+        "name": "identity",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/cell/properties/first/properties/identity"
+      },
+      {
+        "name": "contract",
+        "type": "CanonicalCircuitBlueprintV1NodeCellFirstAuthorityRef",
+        "optional": false,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1NodeCellFirstAuthorityRef"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/cell/properties/first/properties/contract"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1NodeCellEnergizedAuthorityRef",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef",
+    "fields": [
+      {
+        "name": "authorityId",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef/properties/authorityId"
+      },
+      {
+        "name": "digest",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef/properties/digest"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1NodeCellEnergized",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/cell/properties/energized",
+    "fields": [
+      {
+        "name": "identity",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/cell/properties/energized/properties/identity"
+      },
+      {
+        "name": "authority",
+        "type": "CanonicalCircuitBlueprintV1NodeCellEnergizedAuthorityRef",
+        "optional": false,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1NodeCellEnergizedAuthorityRef"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/cell/properties/energized/properties/authority"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1NodeCellResultAuthorityRef",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef",
+    "fields": [
+      {
+        "name": "authorityId",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef/properties/authorityId"
+      },
+      {
+        "name": "digest",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef/properties/digest"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1NodeCellResultItems",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/cell/properties/result/properties/variants/items",
+    "fields": [
+      {
+        "name": "variantId",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/cell/properties/result/properties/variants/items/properties/variantId"
+      },
+      {
+        "name": "projectionOrdinal",
+        "type": "number",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/cell/properties/result/properties/variants/items/properties/projectionOrdinal"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1NodeCellResult",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/cell/properties/result",
+    "fields": [
+      {
+        "name": "identity",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/cell/properties/result/properties/identity"
+      },
+      {
+        "name": "contract",
+        "type": "CanonicalCircuitBlueprintV1NodeCellResultAuthorityRef",
+        "optional": false,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1NodeCellResultAuthorityRef"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/cell/properties/result/properties/contract"
+      },
+      {
+        "name": "variants",
+        "type": "(CanonicalCircuitBlueprintV1NodeCellResultItems)[]",
+        "optional": true,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1NodeCellResultItems"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/cell/properties/result/properties/variants"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1NodeCell",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/cell",
+    "fields": [
+      {
+        "name": "first",
+        "type": "CanonicalCircuitBlueprintV1NodeCellFirst",
+        "optional": false,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1NodeCellFirst"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/cell/properties/first"
+      },
+      {
+        "name": "energized",
+        "type": "CanonicalCircuitBlueprintV1NodeCellEnergized",
+        "optional": false,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1NodeCellEnergized"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/cell/properties/energized"
+      },
+      {
+        "name": "result",
+        "type": "CanonicalCircuitBlueprintV1NodeCellResult",
+        "optional": false,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1NodeCellResult"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/cell/properties/result"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1NodeProviderSlot",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/node/properties/providerSlot",
+    "fields": [
+      {
+        "name": "portId",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/node/properties/providerSlot/properties/portId"
+      },
+      {
+        "name": "mode",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/node/properties/providerSlot/properties/mode"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1NodeObservabilityContractItems",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/observabilityContract/properties/measurements/items",
+    "fields": [
+      {
+        "name": "measurementId",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/observabilityContract/properties/measurements/items/properties/measurementId"
+      },
+      {
+        "name": "unit",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/observabilityContract/properties/measurements/items/properties/unit"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1NodeObservabilityContractSamplingAuthorityRef",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef",
+    "fields": [
+      {
+        "name": "authorityId",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef/properties/authorityId"
+      },
+      {
+        "name": "digest",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef/properties/digest"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1NodeObservabilityContractSampling",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/observabilityContract/properties/sampling",
+    "fields": [
+      {
+        "name": "strategy",
+        "type": "\"ALWAYS\" | \"RATE\" | \"CONDITIONAL\"",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/observabilityContract/properties/sampling/properties/strategy"
+      },
+      {
+        "name": "rate",
+        "type": "number",
+        "optional": true,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/observabilityContract/properties/sampling/properties/rate"
+      },
+      {
+        "name": "conditionRef",
+        "type": "CanonicalCircuitBlueprintV1NodeObservabilityContractSamplingAuthorityRef",
+        "optional": true,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1NodeObservabilityContractSamplingAuthorityRef"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/observabilityContract/properties/sampling/properties/conditionRef"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1NodeObservabilityContractAuthorityRef",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef",
+    "fields": [
+      {
+        "name": "authorityId",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef/properties/authorityId"
+      },
+      {
+        "name": "digest",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef/properties/digest"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1NodeObservabilityContract",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/observabilityContract",
+    "fields": [
+      {
+        "name": "checkpoints",
+        "type": "(string)[]",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/observabilityContract/properties/checkpoints"
+      },
+      {
+        "name": "semanticAddress",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/observabilityContract/properties/semanticAddress"
+      },
+      {
+        "name": "causalAddress",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/observabilityContract/properties/causalAddress"
+      },
+      {
+        "name": "measurements",
+        "type": "(CanonicalCircuitBlueprintV1NodeObservabilityContractItems)[]",
+        "optional": false,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1NodeObservabilityContractItems"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/observabilityContract/properties/measurements"
+      },
+      {
+        "name": "authorizedDimensions",
+        "type": "(string)[]",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/observabilityContract/properties/authorizedDimensions"
+      },
+      {
+        "name": "sampling",
+        "type": "CanonicalCircuitBlueprintV1NodeObservabilityContractSampling",
+        "optional": false,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1NodeObservabilityContractSampling"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/observabilityContract/properties/sampling"
+      },
+      {
+        "name": "evidenceDestination",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/observabilityContract/properties/evidenceDestination"
+      },
+      {
+        "name": "authority",
+        "type": "CanonicalCircuitBlueprintV1NodeObservabilityContractAuthorityRef",
+        "optional": false,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1NodeObservabilityContractAuthorityRef"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/observabilityContract/properties/authority"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1Node",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/node",
+    "fields": [
+      {
+        "name": "nodeId",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/node/properties/nodeId"
+      },
+      {
+        "name": "kind",
+        "type": "\"state\" | \"responsibility\" | \"outcome\" | \"junction\" | \"convergence\" | \"provider-slot\" | \"terminal\"",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/node/properties/kind"
+      },
+      {
+        "name": "altitude",
+        "type": "\"CAPABILITY\" | \"OPERATION\" | \"MECHANIC\" | \"PROVIDER\"",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/node/properties/altitude"
+      },
+      {
+        "name": "projectionOrdinal",
+        "type": "number",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/node/properties/projectionOrdinal"
+      },
+      {
+        "name": "cell",
+        "type": "CanonicalCircuitBlueprintV1NodeCell",
+        "optional": true,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1NodeCell"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/node/properties/cell"
+      },
+      {
+        "name": "requiredProducts",
+        "type": "(string)[]",
+        "optional": true,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/node/properties/requiredProducts"
+      },
+      {
+        "name": "terminalDisposition",
+        "type": "string",
+        "optional": true,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/node/properties/terminalDisposition"
+      },
+      {
+        "name": "providerSlot",
+        "type": "CanonicalCircuitBlueprintV1NodeProviderSlot",
+        "optional": true,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1NodeProviderSlot"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/node/properties/providerSlot"
+      },
+      {
+        "name": "observability",
+        "type": "CanonicalCircuitBlueprintV1NodeObservabilityContract",
+        "optional": true,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1NodeObservabilityContract"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/node/properties/observability"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1EdgeAuthorityRef",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef",
+    "fields": [
+      {
+        "name": "authorityId",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef/properties/authorityId"
+      },
+      {
+        "name": "digest",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef/properties/digest"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1EdgeBoundedReturnAuthorityRef",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef",
+    "fields": [
+      {
+        "name": "authorityId",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef/properties/authorityId"
+      },
+      {
+        "name": "digest",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef/properties/digest"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1EdgeBoundedReturn",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/edge/properties/boundedReturn",
+    "fields": [
+      {
+        "name": "kind",
+        "type": "\"REPAIR\" | \"RESUMPTION\" | \"ITERATION\"",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/edge/properties/boundedReturn/properties/kind"
+      },
+      {
+        "name": "bound",
+        "type": "number",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/edge/properties/boundedReturn/properties/bound"
+      },
+      {
+        "name": "authority",
+        "type": "CanonicalCircuitBlueprintV1EdgeBoundedReturnAuthorityRef",
+        "optional": false,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1EdgeBoundedReturnAuthorityRef"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/edge/properties/boundedReturn/properties/authority"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1EdgeEdgeObservabilityObligationAuthorityRef",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef",
+    "fields": [
+      {
+        "name": "authorityId",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef/properties/authorityId"
+      },
+      {
+        "name": "digest",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef/properties/digest"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1EdgeEdgeObservabilityObligation",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/edgeObservabilityObligation",
+    "fields": [
+      {
+        "name": "checkpoints",
+        "type": "(string)[]",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/edgeObservabilityObligation/properties/checkpoints"
+      },
+      {
+        "name": "authority",
+        "type": "CanonicalCircuitBlueprintV1EdgeEdgeObservabilityObligationAuthorityRef",
+        "optional": false,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1EdgeEdgeObservabilityObligationAuthorityRef"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/edgeObservabilityObligation/properties/authority"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1Edge",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/edge",
+    "fields": [
+      {
+        "name": "edgeId",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/edge/properties/edgeId"
+      },
+      {
+        "name": "from",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/edge/properties/from"
+      },
+      {
+        "name": "to",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/edge/properties/to"
+      },
+      {
+        "name": "topology",
+        "type": "\"TRANSITION\" | \"BRANCH_ROUTE\" | \"FAN_OUT_MEMBER\" | \"CONVERGENCE_REQUIREMENT\" | \"ALTITUDE_DESCENT\" | \"BOUNDED_RETURN\"",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/edge/properties/topology"
+      },
+      {
+        "name": "semanticPrecedence",
+        "type": "\"REQUIRED\" | \"INDEPENDENT\"",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/edge/properties/semanticPrecedence"
+      },
+      {
+        "name": "projectionOrdinal",
+        "type": "number",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/edge/properties/projectionOrdinal"
+      },
+      {
+        "name": "bindingAuthority",
+        "type": "CanonicalCircuitBlueprintV1EdgeAuthorityRef",
+        "optional": false,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1EdgeAuthorityRef"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/edge/properties/bindingAuthority"
+      },
+      {
+        "name": "contractRelation",
+        "type": "\"SATISFIES\" | \"REQUIRES\"",
+        "optional": true,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/edge/properties/contractRelation"
+      },
+      {
+        "name": "semanticProgress",
+        "type": "\"NARROWS\" | \"ESTABLISHES\" | \"TERMINATES\" | \"DESCENDS\" | \"BOUNDED_RETURN\"",
+        "optional": true,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/edge/properties/semanticProgress"
+      },
+      {
+        "name": "selectingVariant",
+        "type": "string",
+        "optional": true,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/edge/properties/selectingVariant"
+      },
+      {
+        "name": "boundedReturn",
+        "type": "CanonicalCircuitBlueprintV1EdgeBoundedReturn",
+        "optional": true,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1EdgeBoundedReturn"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/edge/properties/boundedReturn"
+      },
+      {
+        "name": "fanOutSetId",
+        "type": "string",
+        "optional": true,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/edge/properties/fanOutSetId"
+      },
+      {
+        "name": "observability",
+        "type": "CanonicalCircuitBlueprintV1EdgeEdgeObservabilityObligation",
+        "optional": true,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1EdgeEdgeObservabilityObligation"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/edge/properties/observability"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1ProjectionAuthoritiesAuthorityRef",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef",
+    "fields": [
+      {
+        "name": "authorityId",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef/properties/authorityId"
+      },
+      {
+        "name": "digest",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef/properties/digest"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1ProjectionAuthorities",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/projectionAuthorities",
+    "fields": [
+      {
+        "name": "profiles",
+        "type": "(CanonicalCircuitBlueprintV1ProjectionAuthoritiesAuthorityRef)[]",
+        "optional": false,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1ProjectionAuthoritiesAuthorityRef"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/projectionAuthorities/properties/profiles"
+      },
+      {
+        "name": "views",
+        "type": "(\"SCENARIO\" | \"MONOTONIC\" | \"BRANCH\" | \"DEPENDENCY\" | \"ALTITUDE\" | \"PROVIDER\" | \"EVIDENCE\" | \"RUNTIME_PLAY\" | \"SEMANTIC_DIFF\" | \"C4\" | \"OBSERVABILITY\" | \"SERVICE_LEVEL\")[]",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/projectionAuthorities/properties/views"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1StructuralMappingC4MappingAuthorityRef",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef",
+    "fields": [
+      {
+        "name": "authorityId",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef/properties/authorityId"
+      },
+      {
+        "name": "digest",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef/properties/digest"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1StructuralMappingC4Mapping",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/c4Mapping",
+    "fields": [
+      {
+        "name": "elementId",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/c4Mapping/properties/elementId"
+      },
+      {
+        "name": "realizationAuthority",
+        "type": "CanonicalCircuitBlueprintV1StructuralMappingC4MappingAuthorityRef",
+        "optional": false,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1StructuralMappingC4MappingAuthorityRef"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/c4Mapping/properties/realizationAuthority"
+      },
+      {
+        "name": "nodeIds",
+        "type": "(string)[]",
+        "optional": true,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/c4Mapping/properties/nodeIds"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1StructuralMapping",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/structuralMapping",
+    "fields": [
+      {
+        "name": "context",
+        "type": "CanonicalCircuitBlueprintV1StructuralMappingC4Mapping",
+        "optional": false,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1StructuralMappingC4Mapping"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/structuralMapping/properties/context"
+      },
+      {
+        "name": "container",
+        "type": "CanonicalCircuitBlueprintV1StructuralMappingC4Mapping",
+        "optional": false,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1StructuralMappingC4Mapping"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/structuralMapping/properties/container"
+      },
+      {
+        "name": "component",
+        "type": "CanonicalCircuitBlueprintV1StructuralMappingC4Mapping",
+        "optional": false,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1StructuralMappingC4Mapping"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/structuralMapping/properties/component"
+      },
+      {
+        "name": "code",
+        "type": "CanonicalCircuitBlueprintV1StructuralMappingC4Mapping",
+        "optional": true,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1StructuralMappingC4Mapping"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/structuralMapping/properties/code"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1ServiceLevelSliDefinition",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/sliDefinition",
+    "fields": [
+      {
+        "name": "sliId",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/sliDefinition/properties/sliId"
+      },
+      {
+        "name": "testimonyInputs",
+        "type": "(string)[]",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/sliDefinition/properties/testimonyInputs"
+      },
+      {
+        "name": "scope",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/sliDefinition/properties/scope"
+      },
+      {
+        "name": "calculation",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/sliDefinition/properties/calculation"
+      },
+      {
+        "name": "window",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/sliDefinition/properties/window"
+      },
+      {
+        "name": "freshness",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/sliDefinition/properties/freshness"
+      },
+      {
+        "name": "unit",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/sliDefinition/properties/unit"
+      },
+      {
+        "name": "missingTestimonyDisposition",
+        "type": "\"INCOMPLETE_EVIDENCE\" | \"EXCLUDE\" | \"FAIL_CLOSED\"",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/sliDefinition/properties/missingTestimonyDisposition"
+      },
+      {
+        "name": "dimensions",
+        "type": "(string)[]",
+        "optional": true,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/sliDefinition/properties/dimensions"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1ServiceLevelSloDefinitionAuthorityRef",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef",
+    "fields": [
+      {
+        "name": "authorityId",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef/properties/authorityId"
+      },
+      {
+        "name": "digest",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef/properties/digest"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1ServiceLevelSloDefinitionItemsAuthorityRef",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef",
+    "fields": [
+      {
+        "name": "authorityId",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef/properties/authorityId"
+      },
+      {
+        "name": "digest",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef/properties/digest"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1ServiceLevelSloDefinitionItems",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/sloDefinition/properties/childAllocations/items",
+    "fields": [
+      {
+        "name": "nodeId",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/sloDefinition/properties/childAllocations/items/properties/nodeId"
+      },
+      {
+        "name": "allocation",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/sloDefinition/properties/childAllocations/items/properties/allocation"
+      },
+      {
+        "name": "authority",
+        "type": "CanonicalCircuitBlueprintV1ServiceLevelSloDefinitionItemsAuthorityRef",
+        "optional": false,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1ServiceLevelSloDefinitionItemsAuthorityRef"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/sloDefinition/properties/childAllocations/items/properties/authority"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1ServiceLevelSloDefinition",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/sloDefinition",
+    "fields": [
+      {
+        "name": "sloId",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/sloDefinition/properties/sloId"
+      },
+      {
+        "name": "sliId",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/sloDefinition/properties/sliId"
+      },
+      {
+        "name": "target",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/sloDefinition/properties/target"
+      },
+      {
+        "name": "evaluationWindow",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/sloDefinition/properties/evaluationWindow"
+      },
+      {
+        "name": "errorBudgetPolicy",
+        "type": "CanonicalCircuitBlueprintV1ServiceLevelSloDefinitionAuthorityRef",
+        "optional": false,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1ServiceLevelSloDefinitionAuthorityRef"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/sloDefinition/properties/errorBudgetPolicy"
+      },
+      {
+        "name": "childAllocations",
+        "type": "(CanonicalCircuitBlueprintV1ServiceLevelSloDefinitionItems)[]",
+        "optional": true,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1ServiceLevelSloDefinitionItems"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/sloDefinition/properties/childAllocations"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1ServiceLevelSlaBoundaryAuthorityRef",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef",
+    "fields": [
+      {
+        "name": "authorityId",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef/properties/authorityId"
+      },
+      {
+        "name": "digest",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef/properties/digest"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1ServiceLevelSlaBoundary",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/slaBoundary",
+    "fields": [
+      {
+        "name": "slaId",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/slaBoundary/properties/slaId"
+      },
+      {
+        "name": "authority",
+        "type": "CanonicalCircuitBlueprintV1ServiceLevelSlaBoundaryAuthorityRef",
+        "optional": false,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1ServiceLevelSlaBoundaryAuthorityRef"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/slaBoundary/properties/authority"
+      },
+      {
+        "name": "serviceBoundary",
+        "type": "\"CAPABILITY\" | \"PRODUCT\" | \"INTERFACE\" | \"PLATFORM\" | \"PROVIDER\" | \"CUSTOMER_EXPERIENCE\"",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/slaBoundary/properties/serviceBoundary"
+      },
+      {
+        "name": "sloIds",
+        "type": "(string)[]",
+        "optional": true,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/slaBoundary/properties/sloIds"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1ServiceLevelItemsAuthorityRef",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef",
+    "fields": [
+      {
+        "name": "authorityId",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef/properties/authorityId"
+      },
+      {
+        "name": "digest",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/$defs/authorityRef/properties/digest"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1ServiceLevelItems",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/serviceLevel/properties/crossApplyParity/items",
+    "fields": [
+      {
+        "name": "targetId",
+        "type": "string",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/serviceLevel/properties/crossApplyParity/items/properties/targetId"
+      },
+      {
+        "name": "preservedIdentities",
+        "type": "(string)[]",
+        "optional": false,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/serviceLevel/properties/crossApplyParity/items/properties/preservedIdentities"
+      },
+      {
+        "name": "correlationRuleRef",
+        "type": "CanonicalCircuitBlueprintV1ServiceLevelItemsAuthorityRef",
+        "optional": true,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1ServiceLevelItemsAuthorityRef"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/serviceLevel/properties/crossApplyParity/items/properties/correlationRuleRef"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1ServiceLevel",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/serviceLevel",
+    "fields": [
+      {
+        "name": "indicators",
+        "type": "(CanonicalCircuitBlueprintV1ServiceLevelSliDefinition)[]",
+        "optional": false,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1ServiceLevelSliDefinition"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/serviceLevel/properties/indicators"
+      },
+      {
+        "name": "objectives",
+        "type": "(CanonicalCircuitBlueprintV1ServiceLevelSloDefinition)[]",
+        "optional": false,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1ServiceLevelSloDefinition"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/serviceLevel/properties/objectives"
+      },
+      {
+        "name": "agreements",
+        "type": "(CanonicalCircuitBlueprintV1ServiceLevelSlaBoundary)[]",
+        "optional": true,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1ServiceLevelSlaBoundary"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/serviceLevel/properties/agreements"
+      },
+      {
+        "name": "crossApplyParity",
+        "type": "(CanonicalCircuitBlueprintV1ServiceLevelItems)[]",
+        "optional": true,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1ServiceLevelItems"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/serviceLevel/properties/crossApplyParity"
+      }
+    ]
+  },
+  {
+    "typeName": "CanonicalCircuitBlueprintV1",
+    "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#",
+    "fields": [
+      {
+        "name": "carrierVersion",
+        "type": "\"canonical-circuit-blueprint.v1\"",
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/carrierVersion",
+        "optional": false
+      },
+      {
+        "name": "capability",
+        "type": "CanonicalCircuitBlueprintV1Capability",
+        "optional": false,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1Capability"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/capability"
+      },
+      {
+        "name": "sourceAuthority",
+        "type": "CanonicalCircuitBlueprintV1SourceAuthority",
+        "optional": false,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1SourceAuthority"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/sourceAuthority"
+      },
+      {
+        "name": "blueprintAuthority",
+        "type": "CanonicalCircuitBlueprintV1BlueprintAuthority",
+        "optional": false,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1BlueprintAuthority"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/blueprintAuthority"
+      },
+      {
+        "name": "nodes",
+        "type": "(CanonicalCircuitBlueprintV1Node)[]",
+        "optional": false,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1Node"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/nodes"
+      },
+      {
+        "name": "edges",
+        "type": "(CanonicalCircuitBlueprintV1Edge)[]",
+        "optional": false,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1Edge"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/edges"
+      },
+      {
+        "name": "projectionAuthorities",
+        "type": "CanonicalCircuitBlueprintV1ProjectionAuthorities",
+        "optional": false,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1ProjectionAuthorities"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/projectionAuthorities"
+      },
+      {
+        "name": "$schema",
+        "type": "string",
+        "optional": true,
+        "dependencies": [],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/$schema"
+      },
+      {
+        "name": "structuralMapping",
+        "type": "CanonicalCircuitBlueprintV1StructuralMapping",
+        "optional": true,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1StructuralMapping"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/structuralMapping"
+      },
+      {
+        "name": "serviceLevel",
+        "type": "CanonicalCircuitBlueprintV1ServiceLevel",
+        "optional": true,
+        "dependencies": [
+          "CanonicalCircuitBlueprintV1ServiceLevel"
+        ],
+        "sourcePointer": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json#/properties/serviceLevel"
+      }
+    ]
+  }
+]

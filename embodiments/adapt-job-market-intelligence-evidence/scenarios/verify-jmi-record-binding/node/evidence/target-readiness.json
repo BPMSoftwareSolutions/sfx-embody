@@ -1,0 +1,56 @@
+[
+  {
+    "capability_id": "adapt-job-market-intelligence-evidence",
+    "scenario_id": "adapt-job-market-intelligence-evidence",
+    "target_language": "cpp",
+    "requirement_count": "188",
+    "open_requirement_count": "158",
+    "readiness": "NOT_OBSERVABLE",
+    "conformance_status": "NOT_EVALUATED"
+  },
+  {
+    "capability_id": "adapt-job-market-intelligence-evidence",
+    "scenario_id": "adapt-job-market-intelligence-evidence",
+    "target_language": "csharp",
+    "requirement_count": "188",
+    "open_requirement_count": "154",
+    "readiness": "NOT_OBSERVABLE",
+    "conformance_status": "NOT_EVALUATED"
+  },
+  {
+    "capability_id": "adapt-job-market-intelligence-evidence",
+    "scenario_id": "adapt-job-market-intelligence-evidence",
+    "target_language": "go",
+    "requirement_count": "188",
+    "open_requirement_count": "158",
+    "readiness": "NOT_OBSERVABLE",
+    "conformance_status": "NOT_EVALUATED"
+  },
+  {
+    "capability_id": "adapt-job-market-intelligence-evidence",
+    "scenario_id": "adapt-job-market-intelligence-evidence",
+    "target_language": "java",
+    "requirement_count": "188",
+    "open_requirement_count": "158",
+    "readiness": "NOT_OBSERVABLE",
+    "conformance_status": "NOT_EVALUATED"
+  },
+  {
+    "capability_id": "adapt-job-market-intelligence-evidence",
+    "scenario_id": "adapt-job-market-intelligence-evidence",
+    "target_language": "node",
+    "requirement_count": "188",
+    "open_requirement_count": "0",
+    "readiness": "CAN_ATTEMPT_EMBODIMENT",
+    "conformance_status": "NOT_EVALUATED"
+  },
+  {
+    "capability_id": "adapt-job-market-intelligence-evidence",
+    "scenario_id": "adapt-job-market-intelligence-evidence",
+    "target_language": "python",
+    "requirement_count": "188",
+    "open_requirement_count": "154",
+    "readiness": "NOT_OBSERVABLE",
+    "conformance_status": "NOT_EVALUATED"
+  }
+]

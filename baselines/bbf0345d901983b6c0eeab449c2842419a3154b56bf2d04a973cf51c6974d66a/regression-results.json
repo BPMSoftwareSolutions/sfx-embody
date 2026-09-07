@@ -1,0 +1,263 @@
+{
+  "executedAt": "2026-09-07T18:23:41.232Z",
+  "command": "node verify-estate.mjs regression.cases.json",
+  "implementationDigest": "sha256:bbf0345d901983b6c0eeab449c2842419a3154b56bf2d04a973cf51c6974d66a",
+  "components": [
+    {
+      "name": "read-authority.mjs",
+      "digest": "sha256:9a131cc07d30ae2caf22fc9befb3b21617a84d1da58f0ec0c3476713abfd2c07"
+    },
+    {
+      "name": "materialize-node.mjs",
+      "digest": "sha256:7f4c4b2514d40ac35b7a118bd4d378cfec9fa7419fb95d398e91731a0c0efdf2"
+    },
+    {
+      "name": "verify-node.mjs",
+      "digest": "sha256:ed742dc60ebcf2dff478b955c84cf55b169a6a34ec5114536d9157bb5be3d0ee"
+    },
+    {
+      "name": "resolvers/node/consumer-object-provider.mjs",
+      "digest": "sha256:e7252960e4d9547ef77bb2d780356db8796ef1693e8ce69479bd52e05cf6b068"
+    }
+  ],
+  "snapshotId": "sha256:38debec6dbfa1266f68d903166f69b831c178ffe967208900efcddd9ce2973bc",
+  "projectionDigest": "sha256:81eb41f0faeadcb413d1b5bae9ba991f2d9d753489cfb3a8919c5f72e71f7d28",
+  "cases": [
+    {
+      "selection": {
+        "capabilityId": "adapt-job-market-intelligence-evidence",
+        "scenarioId": "adapt-job-market-intelligence-evidence"
+      },
+      "implementationDigest": "sha256:bbf0345d901983b6c0eeab449c2842419a3154b56bf2d04a973cf51c6974d66a",
+      "installations": [
+        {
+          "scenarioId": "adapt-job-market-intelligence-evidence",
+          "command": "npm ci --ignore-scripts --no-audit --no-fund",
+          "cwd": "C:\\lab\\experiments\\sidefx-embodiment\\embodiments\\adapt-job-market-intelligence-evidence\\scenarios\\adapt-job-market-intelligence-evidence\\node\\body",
+          "exitStatus": 0,
+          "stdout": "\nadded 5 packages in 1s\n",
+          "stderr": ""
+        },
+        {
+          "scenarioId": "bind-jmi-adapter-receipt",
+          "command": "npm ci --ignore-scripts --no-audit --no-fund",
+          "cwd": "C:\\lab\\experiments\\sidefx-embodiment\\embodiments\\adapt-job-market-intelligence-evidence\\scenarios\\bind-jmi-adapter-receipt\\node\\body",
+          "exitStatus": 0,
+          "stdout": "\nadded 5 packages in 816ms\n",
+          "stderr": ""
+        },
+        {
+          "scenarioId": "verify-jmi-record-binding",
+          "command": "npm ci --ignore-scripts --no-audit --no-fund",
+          "cwd": "C:\\lab\\experiments\\sidefx-embodiment\\embodiments\\adapt-job-market-intelligence-evidence\\scenarios\\verify-jmi-record-binding\\node\\body",
+          "exitStatus": 0,
+          "stdout": "\nadded 5 packages in 1s\n",
+          "stderr": ""
+        },
+        {
+          "scenarioId": "verify-jmi-type-admission",
+          "command": "npm ci --ignore-scripts --no-audit --no-fund",
+          "cwd": "C:\\lab\\experiments\\sidefx-embodiment\\embodiments\\adapt-job-market-intelligence-evidence\\scenarios\\verify-jmi-type-admission\\node\\body",
+          "exitStatus": 0,
+          "stdout": "\nadded 5 packages in 751ms\n",
+          "stderr": ""
+        }
+      ],
+      "verification": {
+        "capabilityId": "adapt-job-market-intelligence-evidence",
+        "scenarioId": "adapt-job-market-intelligence-evidence",
+        "fixtures": 5,
+        "passed": 5,
+        "scenarioBodies": 4,
+        "bodyFiles": 88,
+        "mechanicClasses": 39,
+        "kernelObservations": 100,
+        "mechanicInvocations": 667,
+        "negativeChecks": 2
+      },
+      "receipts": [
+        {
+          "file": "C:\\lab\\experiments\\sidefx-embodiment\\embodiments\\adapt-job-market-intelligence-evidence\\scenarios\\adapt-job-market-intelligence-evidence\\node\\embodiment.receipt.json",
+          "digest": "sha256:beadc6091408a7df4e746c721cfe1922f73be392941c9200ebafd4168f1cb0d4",
+          "scenarioId": "adapt-job-market-intelligence-evidence",
+          "resolverVersion": "sha256:e7252960e4d9547ef77bb2d780356db8796ef1693e8ce69479bd52e05cf6b068",
+          "artifactDigest": "sha256:5161df155a04cabfacba77726ae34fc07b20d0dd22629c944305ac568d7cdb4e"
+        },
+        {
+          "file": "C:\\lab\\experiments\\sidefx-embodiment\\embodiments\\adapt-job-market-intelligence-evidence\\scenarios\\bind-jmi-adapter-receipt\\node\\embodiment.receipt.json",
+          "digest": "sha256:f1cced81abb5f192b54be1d7b8970be14d015790af71f1264d7280e14a4a5fff",
+          "scenarioId": "bind-jmi-adapter-receipt",
+          "resolverVersion": "sha256:e7252960e4d9547ef77bb2d780356db8796ef1693e8ce69479bd52e05cf6b068",
+          "artifactDigest": "sha256:858b5e00eea9c0f178ea7ae654896679ac06abcd4bcc33de600bdb56ae237c9b"
+        },
+        {
+          "file": "C:\\lab\\experiments\\sidefx-embodiment\\embodiments\\adapt-job-market-intelligence-evidence\\scenarios\\verify-jmi-record-binding\\node\\embodiment.receipt.json",
+          "digest": "sha256:c8fa1f4e3aebbef019d0d24e65128d6fc2f85e109caab0e501685858ce4f1636",
+          "scenarioId": "verify-jmi-record-binding",
+          "resolverVersion": "sha256:e7252960e4d9547ef77bb2d780356db8796ef1693e8ce69479bd52e05cf6b068",
+          "artifactDigest": "sha256:30fa96f5722e177ae1d9ced0dbb425db755d48e4308a95ae2ef54b6a2ee92f59"
+        },
+        {
+          "file": "C:\\lab\\experiments\\sidefx-embodiment\\embodiments\\adapt-job-market-intelligence-evidence\\scenarios\\verify-jmi-type-admission\\node\\embodiment.receipt.json",
+          "digest": "sha256:2249278b579010b4157aea48e9c813561424d13f3e38d64b381b949775dd59c3",
+          "scenarioId": "verify-jmi-type-admission",
+          "resolverVersion": "sha256:e7252960e4d9547ef77bb2d780356db8796ef1693e8ce69479bd52e05cf6b068",
+          "artifactDigest": "sha256:282af7ea8e9c022eddfe08ab9386d32babb218e2796caeb940d0960377149163"
+        }
+      ],
+      "disposition": "PASSED"
+    },
+    {
+      "selection": {
+        "capabilityId": "admit-canonical-circuit-blueprint",
+        "scenarioId": "admit-canonical-circuit-blueprint",
+        "target": "node"
+      },
+      "implementationDigest": "sha256:bbf0345d901983b6c0eeab449c2842419a3154b56bf2d04a973cf51c6974d66a",
+      "installations": [
+        {
+          "scenarioId": "admit-canonical-circuit-blueprint",
+          "command": "npm ci --ignore-scripts --no-audit --no-fund",
+          "cwd": "C:\\lab\\experiments\\sidefx-embodiment\\embodiments\\admit-canonical-circuit-blueprint\\scenarios\\admit-canonical-circuit-blueprint\\node\\body",
+          "exitStatus": 0,
+          "stdout": "\nadded 5 packages in 789ms\n",
+          "stderr": ""
+        },
+        {
+          "scenarioId": "emit-immutable-blueprint-authority",
+          "command": "npm ci --ignore-scripts --no-audit --no-fund",
+          "cwd": "C:\\lab\\experiments\\sidefx-embodiment\\embodiments\\admit-canonical-circuit-blueprint\\scenarios\\emit-immutable-blueprint-authority\\node\\body",
+          "exitStatus": 0,
+          "stdout": "\nadded 5 packages in 732ms\n",
+          "stderr": ""
+        },
+        {
+          "scenarioId": "require-blueprint-conformance-evidence",
+          "command": "npm ci --ignore-scripts --no-audit --no-fund",
+          "cwd": "C:\\lab\\experiments\\sidefx-embodiment\\embodiments\\admit-canonical-circuit-blueprint\\scenarios\\require-blueprint-conformance-evidence\\node\\body",
+          "exitStatus": 0,
+          "stdout": "\nadded 5 packages in 774ms\n",
+          "stderr": ""
+        },
+        {
+          "scenarioId": "require-blueprint-geometry-proof",
+          "command": "npm ci --ignore-scripts --no-audit --no-fund",
+          "cwd": "C:\\lab\\experiments\\sidefx-embodiment\\embodiments\\admit-canonical-circuit-blueprint\\scenarios\\require-blueprint-geometry-proof\\node\\body",
+          "exitStatus": 0,
+          "stdout": "\nadded 5 packages in 928ms\n",
+          "stderr": ""
+        },
+        {
+          "scenarioId": "require-current-approved-review-receipt",
+          "command": "npm ci --ignore-scripts --no-audit --no-fund",
+          "cwd": "C:\\lab\\experiments\\sidefx-embodiment\\embodiments\\admit-canonical-circuit-blueprint\\scenarios\\require-current-approved-review-receipt\\node\\body",
+          "exitStatus": 0,
+          "stdout": "\nadded 5 packages in 769ms\n",
+          "stderr": ""
+        }
+      ],
+      "verification": {
+        "capabilityId": "admit-canonical-circuit-blueprint",
+        "scenarioId": "admit-canonical-circuit-blueprint",
+        "fixtures": 8,
+        "passed": 8,
+        "scenarioBodies": 5,
+        "bodyFiles": 360,
+        "mechanicClasses": 58,
+        "kernelObservations": 200,
+        "mechanicInvocations": 5139,
+        "negativeChecks": 2
+      },
+      "receipts": [
+        {
+          "file": "C:\\lab\\experiments\\sidefx-embodiment\\embodiments\\admit-canonical-circuit-blueprint\\scenarios\\admit-canonical-circuit-blueprint\\node\\embodiment.receipt.json",
+          "digest": "sha256:dc9bf29ee720cb5fe9323dec94961c2dfc4b182b1cce0ebcd1c2269057a6349a",
+          "scenarioId": "admit-canonical-circuit-blueprint",
+          "resolverVersion": "sha256:e7252960e4d9547ef77bb2d780356db8796ef1693e8ce69479bd52e05cf6b068",
+          "artifactDigest": "sha256:c99b282ea03febd9732e241fa6ac20dbd0daa2e35c728691d57f1aa68335adb9"
+        },
+        {
+          "file": "C:\\lab\\experiments\\sidefx-embodiment\\embodiments\\admit-canonical-circuit-blueprint\\scenarios\\emit-immutable-blueprint-authority\\node\\embodiment.receipt.json",
+          "digest": "sha256:8206337868e180e890e9321062f6ef26278dd4e31154c255d462addfdba2b987",
+          "scenarioId": "emit-immutable-blueprint-authority",
+          "resolverVersion": "sha256:e7252960e4d9547ef77bb2d780356db8796ef1693e8ce69479bd52e05cf6b068",
+          "artifactDigest": "sha256:4be42d90316079bd18f4cb81a86455dd348a5c3e393d6a60faa373b6a5572a95"
+        },
+        {
+          "file": "C:\\lab\\experiments\\sidefx-embodiment\\embodiments\\admit-canonical-circuit-blueprint\\scenarios\\require-blueprint-conformance-evidence\\node\\embodiment.receipt.json",
+          "digest": "sha256:1f5767a76283b2c0af776cb519c720d0e2b7446f8cd378c7c33125411fa4eaaf",
+          "scenarioId": "require-blueprint-conformance-evidence",
+          "resolverVersion": "sha256:e7252960e4d9547ef77bb2d780356db8796ef1693e8ce69479bd52e05cf6b068",
+          "artifactDigest": "sha256:4ce7600f9bd4d45893f426eb9149e021370e034f587fd00050b3272084ab800d"
+        },
+        {
+          "file": "C:\\lab\\experiments\\sidefx-embodiment\\embodiments\\admit-canonical-circuit-blueprint\\scenarios\\require-blueprint-geometry-proof\\node\\embodiment.receipt.json",
+          "digest": "sha256:3978d7b368e02cf19ad7a20de15295a5a65ea69b06e950413e888df81f33a3a4",
+          "scenarioId": "require-blueprint-geometry-proof",
+          "resolverVersion": "sha256:e7252960e4d9547ef77bb2d780356db8796ef1693e8ce69479bd52e05cf6b068",
+          "artifactDigest": "sha256:0d0f189cd897b94f106049b559e94bf1f5cf2383ae25b8b49ae521d70f42f84a"
+        },
+        {
+          "file": "C:\\lab\\experiments\\sidefx-embodiment\\embodiments\\admit-canonical-circuit-blueprint\\scenarios\\require-current-approved-review-receipt\\node\\embodiment.receipt.json",
+          "digest": "sha256:bfc89705c8ee6fe497b30685261fd151a28aa8235957330db63d1b3f20963701",
+          "scenarioId": "require-current-approved-review-receipt",
+          "resolverVersion": "sha256:e7252960e4d9547ef77bb2d780356db8796ef1693e8ce69479bd52e05cf6b068",
+          "artifactDigest": "sha256:ab2607df9570795153da725f76db88576f63a806645d818305111d28bea93b03"
+        }
+      ],
+      "disposition": "PASSED"
+    },
+    {
+      "selection": {
+        "capabilityId": "resolve-sidefx-eligible-providers",
+        "scenarioId": "resolve-sidefx-eligible-providers",
+        "target": "node"
+      },
+      "implementationDigest": "sha256:bbf0345d901983b6c0eeab449c2842419a3154b56bf2d04a973cf51c6974d66a",
+      "installations": [
+        {
+          "scenarioId": "resolve-sidefx-eligible-providers",
+          "command": "npm ci --ignore-scripts --no-audit --no-fund",
+          "cwd": "C:\\lab\\experiments\\sidefx-embodiment\\embodiments\\resolve-sidefx-eligible-providers\\scenarios\\resolve-sidefx-eligible-providers\\node\\body",
+          "exitStatus": 0,
+          "stdout": "\nadded 5 packages in 770ms\n",
+          "stderr": ""
+        }
+      ],
+      "verification": {
+        "capabilityId": "resolve-sidefx-eligible-providers",
+        "scenarioId": "resolve-sidefx-eligible-providers",
+        "fixtures": 4,
+        "passed": 4,
+        "scenarioBodies": 1,
+        "bodyFiles": 27,
+        "mechanicClasses": 15,
+        "kernelObservations": 20,
+        "mechanicInvocations": 442,
+        "negativeChecks": 1
+      },
+      "receipts": [
+        {
+          "file": "C:\\lab\\experiments\\sidefx-embodiment\\embodiments\\resolve-sidefx-eligible-providers\\scenarios\\resolve-sidefx-eligible-providers\\node\\embodiment.receipt.json",
+          "digest": "sha256:c6679c9300006f2e0823f02b176d63c8a3025f94dacbdbdf102f33921138913f",
+          "scenarioId": "resolve-sidefx-eligible-providers",
+          "resolverVersion": "sha256:e7252960e4d9547ef77bb2d780356db8796ef1693e8ce69479bd52e05cf6b068",
+          "artifactDigest": "sha256:feafe099cc0bc4e20a4ccf67995d6cceb9e3d1a08117d9393e248112ee194d62"
+        }
+      ],
+      "disposition": "PASSED"
+    }
+  ],
+  "totals": {
+    "fixtures": 17,
+    "passed": 17,
+    "scenarioBodies": 10,
+    "mechanicClasses": 112,
+    "kernelObservations": 320,
+    "mechanicInvocations": 6248,
+    "negativeChecks": 5
+  },
+  "disposition": "PASSED",
+  "scope": "NODE_EXECUTION_OF_RETAINED_FIXTURES_FOR_DECLARED_REGRESSION_CASES",
+  "managedAdmission": "NOT_REQUESTED"
+}

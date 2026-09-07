@@ -1,0 +1,4233 @@
+[
+  {
+    "scenarioId": "adapt-job-market-intelligence-evidence",
+    "operationOrdinal": 0,
+    "portId": "adapt-job-market-intelligence-evidence-port",
+    "transformationId": "adapt-job-market-intelligence-evidence.v1",
+    "sourceRef": "capabilities/adapt-job-market-intelligence-evidence/semantic-transformation.authority.json",
+    "sourceDigest": "sha256:2b167eaf1093228810925754bece447ce574863a6ca8f5459be9e681f3972803",
+    "physicalFile": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+    "bindings": [
+      {
+        "identity": "check",
+        "nativeName": "check",
+        "scope": "/bindings/recordBound"
+      },
+      {
+        "identity": "recordBound",
+        "nativeName": "recordBound",
+        "scope": ""
+      },
+      {
+        "identity": "typeAdmitted",
+        "nativeName": "typeAdmitted",
+        "scope": ""
+      },
+      {
+        "identity": "check",
+        "nativeName": "check$binding",
+        "scope": "/bindings/authorityBound"
+      },
+      {
+        "identity": "authorityBound",
+        "nativeName": "authorityBound",
+        "scope": ""
+      },
+      {
+        "identity": "windowDeclared",
+        "nativeName": "windowDeclared",
+        "scope": ""
+      },
+      {
+        "identity": "adaptationDisposition",
+        "nativeName": "adaptationDisposition",
+        "scope": ""
+      },
+      {
+        "identity": "findingCodes",
+        "nativeName": "findingCodes",
+        "scope": ""
+      },
+      {
+        "identity": "adapterReceiptDigest",
+        "nativeName": "adapterReceiptDigest",
+        "scope": ""
+      }
+    ],
+    "helpers": [
+      "crypto"
+    ],
+    "nodes": [
+      {
+        "sourcePointer": "",
+        "mechanicId": "let",
+        "operation": "let",
+        "parameterNames": [
+          "bindings",
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 12396,
+        "providerSourceEnd": 12644,
+        "providerBodyDigest": "sha256:f882831176ab819cf41cfe5abdc1486176f941730544863b6e1f0da291836c0a",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0
+          ],
+          "startLine": 5,
+          "startColumn": 12,
+          "endLine": 69,
+          "endColumn": 9,
+          "syntaxDigest": "sha256:c8b8e29576280ba0138caf5e1a87c0c61b3a199ceb6da83b4c57797aa19577bc"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/recordBound",
+        "mechanicId": "every",
+        "operation": "every",
+        "parameterNames": [
+          "from",
+          "as",
+          "where"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 10055,
+        "providerSourceEnd": 10192,
+        "providerBodyDigest": "sha256:0404fcb636f768641468e8fcda8d2dcf870417e06ba674b495d0d444eb0ac1d2",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "startLine": 6,
+          "startColumn": 27,
+          "endLine": 9,
+          "endColumn": 41,
+          "syntaxDigest": "sha256:b9be0003547fd5d72ad5d0b1bb624d79edb25eae708e24f4cb49ecff26bd2214"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/recordBound/from",
+        "mechanicId": "array",
+        "operation": "array",
+        "parameterNames": [
+          "items"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 9027,
+        "providerSourceEnd": 9095,
+        "providerBodyDigest": "sha256:deb44952445ad6e45765e0d03369cffa4737e64954602f8a3e30e9d00545778e",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "startLine": 6,
+          "startColumn": 27,
+          "endLine": 9,
+          "endColumn": 8,
+          "syntaxDigest": "sha256:5cfd4a11a1cdc0fe346512ae806015d1e7da62314f9663cc07d3df9109f31c91"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/recordBound/from/items/0",
+        "mechanicId": "if",
+        "operation": "if",
+        "parameterNames": [
+          "when",
+          "then",
+          "else"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 10691,
+        "providerSourceEnd": 10791,
+        "providerBodyDigest": "sha256:a7e2d0af98002a3ec2c76fad0cecb1f38d192db53b2b003241e61368630fd09a",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "startLine": 7,
+          "startColumn": 9,
+          "endLine": 7,
+          "endColumn": 50,
+          "syntaxDigest": "sha256:21500f479e5a08a4f62a554c2599d767696531b8646eb346b95f8fae2664b426"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/recordBound/from/items/0/when",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "parameterNames": [
+          "left",
+          "right"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534,
+        "providerBodyDigest": "sha256:d72eba197cd5e76449c3c1af5f0c22be1021c3c4a9aa56568b04e647e17e4b1c",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "startLine": 7,
+          "startColumn": 9,
+          "endLine": 7,
+          "endColumn": 35,
+          "syntaxDigest": "sha256:53c9a9fbc0f97f38b0169c4700bb6d7aa21a782e67868034a24eff7a4dfb3bda"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/recordBound/from/items/0/when/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "jmiRecordRef",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "startLine": 7,
+          "startColumn": 9,
+          "endLine": 7,
+          "endColumn": 28,
+          "syntaxDigest": "sha256:efa00e09edc3fb2b69d904bb2950a26e6798d7769add6d9a2e98839fb4f4c759"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/recordBound/from/items/0/when/right",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            2
+          ],
+          "startLine": 7,
+          "startColumn": 33,
+          "endLine": 7,
+          "endColumn": 35,
+          "syntaxDigest": "sha256:12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/recordBound/from/items/0/then",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            2
+          ],
+          "startLine": 7,
+          "startColumn": 38,
+          "endLine": 7,
+          "endColumn": 43,
+          "syntaxDigest": "sha256:fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/recordBound/from/items/0/else",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            4
+          ],
+          "startLine": 7,
+          "startColumn": 46,
+          "endLine": 7,
+          "endColumn": 50,
+          "syntaxDigest": "sha256:b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/recordBound/from/items/1",
+        "mechanicId": "if",
+        "operation": "if",
+        "parameterNames": [
+          "when",
+          "then",
+          "else"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 10691,
+        "providerSourceEnd": 10791,
+        "providerBodyDigest": "sha256:a7e2d0af98002a3ec2c76fad0cecb1f38d192db53b2b003241e61368630fd09a",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1
+          ],
+          "startLine": 8,
+          "startColumn": 9,
+          "endLine": 8,
+          "endColumn": 53,
+          "syntaxDigest": "sha256:5af0ff1af066e731d76ee7fa90143a11431f426c7aae52b520ea2cf525b72a30"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/recordBound/from/items/1/when",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "parameterNames": [
+          "left",
+          "right"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534,
+        "providerBodyDigest": "sha256:d72eba197cd5e76449c3c1af5f0c22be1021c3c4a9aa56568b04e647e17e4b1c",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0
+          ],
+          "startLine": 8,
+          "startColumn": 9,
+          "endLine": 8,
+          "endColumn": 38,
+          "syntaxDigest": "sha256:cce76a6e5a345f7f4bf5e82eae5f06517d5441c9a5ff640147a19aaf31e3b2a5"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/recordBound/from/items/1/when/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "jmiRecordDigest",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "startLine": 8,
+          "startColumn": 9,
+          "endLine": 8,
+          "endColumn": 31,
+          "syntaxDigest": "sha256:070ef72ade80ab9fb74ece116802dc31989b3149d4b2a1ae31202c573886a180"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/recordBound/from/items/1/when/right",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            2
+          ],
+          "startLine": 8,
+          "startColumn": 36,
+          "endLine": 8,
+          "endColumn": 38,
+          "syntaxDigest": "sha256:12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/recordBound/from/items/1/then",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            2
+          ],
+          "startLine": 8,
+          "startColumn": 41,
+          "endLine": 8,
+          "endColumn": 46,
+          "syntaxDigest": "sha256:fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/recordBound/from/items/1/else",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            4
+          ],
+          "startLine": 8,
+          "startColumn": 49,
+          "endLine": 8,
+          "endColumn": 53,
+          "syntaxDigest": "sha256:b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/recordBound/where",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "check": "check"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1,
+            1,
+            2,
+            1
+          ],
+          "startLine": 9,
+          "startColumn": 34,
+          "endLine": 9,
+          "endColumn": 39,
+          "syntaxDigest": "sha256:20f65c28671b40937c5bf23acc7c6f37e5a5ec0622e347b57685725df5ba9e50"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/typeAdmitted",
+        "mechanicId": "includes",
+        "operation": "includes",
+        "parameterNames": [
+          "in",
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound"
+        },
+        "providerSourceStart": 10198,
+        "providerSourceEnd": 10283,
+        "providerBodyDigest": "sha256:de38165a01f2fa4e0587f05ec4952f0b1a6747b87ff8b8d3a60b9437116313ab",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1
+          ],
+          "startLine": 10,
+          "startColumn": 28,
+          "endLine": 19,
+          "endColumn": 39,
+          "syntaxDigest": "sha256:43b028acedf04fb35b5b6c0a802942ed374878d66cb9f2fb684af1bda1b70014"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/typeAdmitted/in",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "startLine": 10,
+          "startColumn": 28,
+          "endLine": 19,
+          "endColumn": 8,
+          "syntaxDigest": "sha256:abe39a07e54f277659c1c4cce91d882d5b8cc57fce0c56dc05e9e762388c4ecb"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/typeAdmitted/value",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "jmiRecordType",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1,
+            1
+          ],
+          "startLine": 19,
+          "startColumn": 18,
+          "endLine": 19,
+          "endColumn": 38,
+          "syntaxDigest": "sha256:3162383f7cbf2bfdc9f75d90729c4f080071083c53c150004b0ca0c8fde60e11"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/authorityBound",
+        "mechanicId": "every",
+        "operation": "every",
+        "parameterNames": [
+          "from",
+          "as",
+          "where"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted"
+        },
+        "providerSourceStart": 10055,
+        "providerSourceEnd": 10192,
+        "providerBodyDigest": "sha256:0404fcb636f768641468e8fcda8d2dcf870417e06ba674b495d0d444eb0ac1d2",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            2,
+            0,
+            0,
+            1
+          ],
+          "startLine": 20,
+          "startColumn": 30,
+          "endLine": 23,
+          "endColumn": 57,
+          "syntaxDigest": "sha256:6c11a48ba5e7354fe10990230633129a7785e7dad386884d4a831aa51d3ae031"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/authorityBound/from",
+        "mechanicId": "array",
+        "operation": "array",
+        "parameterNames": [
+          "items"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted"
+        },
+        "providerSourceStart": 9027,
+        "providerSourceEnd": 9095,
+        "providerBodyDigest": "sha256:deb44952445ad6e45765e0d03369cffa4737e64954602f8a3e30e9d00545778e",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            2,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "startLine": 20,
+          "startColumn": 30,
+          "endLine": 23,
+          "endColumn": 8,
+          "syntaxDigest": "sha256:b945d0192d268b1713ddeefc94b880f0cb6ae8ce468c5280ba53cfe6b2e37b66"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/authorityBound/from/items/0",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "parameterNames": [
+          "left",
+          "right"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted"
+        },
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534,
+        "providerBodyDigest": "sha256:d72eba197cd5e76449c3c1af5f0c22be1021c3c4a9aa56568b04e647e17e4b1c",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            2,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "startLine": 21,
+          "startColumn": 9,
+          "endLine": 21,
+          "endColumn": 72,
+          "syntaxDigest": "sha256:8005099e50b6c30a0f863eb85eca3b8ae2492cfe7f2cc581796ba6afef4f8fc5"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/authorityBound/from/items/0/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "adapterAuthorityId",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            2,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "startLine": 21,
+          "startColumn": 9,
+          "endLine": 21,
+          "endColumn": 34,
+          "syntaxDigest": "sha256:1ea95f07cb8b64d60e6fe42a8df5b1cd737e07a775e269cf2510d22acedee25e"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/authorityBound/from/items/0/right",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            2,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            2
+          ],
+          "startLine": 21,
+          "startColumn": 39,
+          "endLine": 21,
+          "endColumn": 72,
+          "syntaxDigest": "sha256:6b98fd7d44515c6f7bfb925ae239fa5f023a2c3c4c10c8591f29866bbd259c9d"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/authorityBound/from/items/1",
+        "mechanicId": "if",
+        "operation": "if",
+        "parameterNames": [
+          "when",
+          "then",
+          "else"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted"
+        },
+        "providerSourceStart": 10691,
+        "providerSourceEnd": 10791,
+        "providerBodyDigest": "sha256:a7e2d0af98002a3ec2c76fad0cecb1f38d192db53b2b003241e61368630fd09a",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            2,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1
+          ],
+          "startLine": 22,
+          "startColumn": 9,
+          "endLine": 22,
+          "endColumn": 60,
+          "syntaxDigest": "sha256:4a4464e74826cb6484ed1a63cef90449e6900f016908f95e8d85122a47bfab1e"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/authorityBound/from/items/1/when",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "parameterNames": [
+          "left",
+          "right"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted"
+        },
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534,
+        "providerBodyDigest": "sha256:d72eba197cd5e76449c3c1af5f0c22be1021c3c4a9aa56568b04e647e17e4b1c",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            2,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0
+          ],
+          "startLine": 22,
+          "startColumn": 9,
+          "endLine": 22,
+          "endColumn": 45,
+          "syntaxDigest": "sha256:6738652920152013b5798346c85bb2b2d447b9ec5aa21e7d6128da78dee9c8b6"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/authorityBound/from/items/1/when/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "adapterAuthorityDigest",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            2,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "startLine": 22,
+          "startColumn": 9,
+          "endLine": 22,
+          "endColumn": 38,
+          "syntaxDigest": "sha256:b31b8f0f2a876c0c003cd85ec66a6f390ab651b0dbbfb8cf0f115effcc148d7c"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/authorityBound/from/items/1/when/right",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            2,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            2
+          ],
+          "startLine": 22,
+          "startColumn": 43,
+          "endLine": 22,
+          "endColumn": 45,
+          "syntaxDigest": "sha256:12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/authorityBound/from/items/1/then",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            2,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            2
+          ],
+          "startLine": 22,
+          "startColumn": 48,
+          "endLine": 22,
+          "endColumn": 53,
+          "syntaxDigest": "sha256:fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/authorityBound/from/items/1/else",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            2,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            4
+          ],
+          "startLine": 22,
+          "startColumn": 56,
+          "endLine": 22,
+          "endColumn": 60,
+          "syntaxDigest": "sha256:b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/authorityBound/where",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "check": "check$binding"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            2,
+            0,
+            0,
+            1,
+            1,
+            2,
+            1
+          ],
+          "startLine": 23,
+          "startColumn": 42,
+          "endLine": 23,
+          "endColumn": 55,
+          "syntaxDigest": "sha256:49422bc37c719881b0818ff442ace02ab63edb7b8829927409d0e270371cd2d5"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/windowDeclared",
+        "mechanicId": "if",
+        "operation": "if",
+        "parameterNames": [
+          "when",
+          "then",
+          "else"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound"
+        },
+        "providerSourceStart": 10691,
+        "providerSourceEnd": 10791,
+        "providerBodyDigest": "sha256:a7e2d0af98002a3ec2c76fad0cecb1f38d192db53b2b003241e61368630fd09a",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            3,
+            0,
+            0,
+            1
+          ],
+          "startLine": 24,
+          "startColumn": 30,
+          "endLine": 24,
+          "endColumn": 73,
+          "syntaxDigest": "sha256:6abfbfa336b94204e7ab9c456c106eeaff949d2862f14ae87214949e382f45d6"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/windowDeclared/when",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "parameterNames": [
+          "left",
+          "right"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound"
+        },
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534,
+        "providerBodyDigest": "sha256:d72eba197cd5e76449c3c1af5f0c22be1021c3c4a9aa56568b04e647e17e4b1c",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            3,
+            0,
+            0,
+            1,
+            0
+          ],
+          "startLine": 24,
+          "startColumn": 30,
+          "endLine": 24,
+          "endColumn": 58,
+          "syntaxDigest": "sha256:59b1d47bd4fe5c481458b651f8e17a44a6aa35aff88832366fdf32a2e2967a98"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/windowDeclared/when/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "observedWindow",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            3,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "startLine": 24,
+          "startColumn": 30,
+          "endLine": 24,
+          "endColumn": 51,
+          "syntaxDigest": "sha256:1702d7e24e93f2b476b0831743e1feaa50394510941786489b5a35f5890ee2b4"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/windowDeclared/when/right",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            3,
+            0,
+            0,
+            1,
+            0,
+            2
+          ],
+          "startLine": 24,
+          "startColumn": 56,
+          "endLine": 24,
+          "endColumn": 58,
+          "syntaxDigest": "sha256:12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/windowDeclared/then",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            3,
+            0,
+            0,
+            1,
+            2
+          ],
+          "startLine": 24,
+          "startColumn": 61,
+          "endLine": 24,
+          "endColumn": 66,
+          "syntaxDigest": "sha256:fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/windowDeclared/else",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            3,
+            0,
+            0,
+            1,
+            4
+          ],
+          "startLine": 24,
+          "startColumn": 69,
+          "endLine": 24,
+          "endColumn": 73,
+          "syntaxDigest": "sha256:b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition",
+        "mechanicId": "if",
+        "operation": "if",
+        "parameterNames": [
+          "when",
+          "then",
+          "else"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared"
+        },
+        "providerSourceStart": 10691,
+        "providerSourceEnd": 10791,
+        "providerBodyDigest": "sha256:a7e2d0af98002a3ec2c76fad0cecb1f38d192db53b2b003241e61368630fd09a",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            4,
+            0,
+            0,
+            1
+          ],
+          "startLine": 26,
+          "startColumn": 9,
+          "endLine": 34,
+          "endColumn": 45,
+          "syntaxDigest": "sha256:81d15707101b364cb109ec8a27d30f06686c56e7067e20fdffaa2abfd53d7605"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/when",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "parameterNames": [
+          "left",
+          "right"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared"
+        },
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534,
+        "providerBodyDigest": "sha256:d72eba197cd5e76449c3c1af5f0c22be1021c3c4a9aa56568b04e647e17e4b1c",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            4,
+            0,
+            0,
+            1,
+            0
+          ],
+          "startLine": 26,
+          "startColumn": 9,
+          "endLine": 26,
+          "endColumn": 30,
+          "syntaxDigest": "sha256:6e94b82ade4b9ca3c325b37d398ea3de7e78750b432b623cc88dae648edf54e1"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/when/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            4,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "startLine": 26,
+          "startColumn": 9,
+          "endLine": 26,
+          "endColumn": 20,
+          "syntaxDigest": "sha256:3dbd27de0724d8df8a36a9cae8bb1ea4575f3d355ad8ddecbc7d79898a9617e9"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/when/right",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            4,
+            0,
+            0,
+            1,
+            0,
+            2
+          ],
+          "startLine": 26,
+          "startColumn": 25,
+          "endLine": 26,
+          "endColumn": 30,
+          "syntaxDigest": "sha256:fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/then",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            4,
+            0,
+            0,
+            1,
+            2
+          ],
+          "startLine": 27,
+          "startColumn": 13,
+          "endLine": 27,
+          "endColumn": 30,
+          "syntaxDigest": "sha256:c6afa076d3c236069b48b7313f7f0fec12b28402643d3301bd4e0ee253a06f87"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/else",
+        "mechanicId": "if",
+        "operation": "if",
+        "parameterNames": [
+          "when",
+          "then",
+          "else"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared"
+        },
+        "providerSourceStart": 10691,
+        "providerSourceEnd": 10791,
+        "providerBodyDigest": "sha256:a7e2d0af98002a3ec2c76fad0cecb1f38d192db53b2b003241e61368630fd09a",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            4,
+            0,
+            0,
+            1,
+            4
+          ],
+          "startLine": 28,
+          "startColumn": 13,
+          "endLine": 34,
+          "endColumn": 45,
+          "syntaxDigest": "sha256:327ba0bb458b9b5a828091c193ba8c388c249c443c0209aa2857ca81499238ba"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/else/when",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "parameterNames": [
+          "left",
+          "right"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared"
+        },
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534,
+        "providerBodyDigest": "sha256:d72eba197cd5e76449c3c1af5f0c22be1021c3c4a9aa56568b04e647e17e4b1c",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            4,
+            0,
+            0,
+            1,
+            4,
+            0
+          ],
+          "startLine": 28,
+          "startColumn": 13,
+          "endLine": 28,
+          "endColumn": 35,
+          "syntaxDigest": "sha256:d0d0f01954bfe421edc1eb05015e9609e00c4584154c29059e8df5372ec654e0"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/else/when/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            4,
+            0,
+            0,
+            1,
+            4,
+            0,
+            0
+          ],
+          "startLine": 28,
+          "startColumn": 13,
+          "endLine": 28,
+          "endColumn": 25,
+          "syntaxDigest": "sha256:07e18c6dd2235e6efeac8d344f8876e4c50bad175a15310a5f5457b54503cfdc"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/else/when/right",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            4,
+            0,
+            0,
+            1,
+            4,
+            0,
+            2
+          ],
+          "startLine": 28,
+          "startColumn": 30,
+          "endLine": 28,
+          "endColumn": 35,
+          "syntaxDigest": "sha256:fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/else/then",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            4,
+            0,
+            0,
+            1,
+            4,
+            2
+          ],
+          "startLine": 29,
+          "startColumn": 15,
+          "endLine": 29,
+          "endColumn": 32,
+          "syntaxDigest": "sha256:c6afa076d3c236069b48b7313f7f0fec12b28402643d3301bd4e0ee253a06f87"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/else/else",
+        "mechanicId": "if",
+        "operation": "if",
+        "parameterNames": [
+          "when",
+          "then",
+          "else"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared"
+        },
+        "providerSourceStart": 10691,
+        "providerSourceEnd": 10791,
+        "providerBodyDigest": "sha256:a7e2d0af98002a3ec2c76fad0cecb1f38d192db53b2b003241e61368630fd09a",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            4,
+            0,
+            0,
+            1,
+            4,
+            4
+          ],
+          "startLine": 30,
+          "startColumn": 15,
+          "endLine": 34,
+          "endColumn": 45,
+          "syntaxDigest": "sha256:e741854a296b2e55a5ac1c7296214ebf0abc9d123e1a210c3444ce03bc9be6bc"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/else/else/when",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "parameterNames": [
+          "left",
+          "right"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared"
+        },
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534,
+        "providerBodyDigest": "sha256:d72eba197cd5e76449c3c1af5f0c22be1021c3c4a9aa56568b04e647e17e4b1c",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            4,
+            0,
+            0,
+            1,
+            4,
+            4,
+            0
+          ],
+          "startLine": 30,
+          "startColumn": 15,
+          "endLine": 30,
+          "endColumn": 39,
+          "syntaxDigest": "sha256:96fd39ec3b1688656869a282a7ec75782614a58416ccc969b8adeb541db7fd38"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/else/else/when/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            4,
+            0,
+            0,
+            1,
+            4,
+            4,
+            0,
+            0
+          ],
+          "startLine": 30,
+          "startColumn": 15,
+          "endLine": 30,
+          "endColumn": 29,
+          "syntaxDigest": "sha256:19aed2ec6fe5c97fc10bcffbd7244da0fb0f8ff99881bdc75deed7f87627959d"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/else/else/when/right",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            4,
+            0,
+            0,
+            1,
+            4,
+            4,
+            0,
+            2
+          ],
+          "startLine": 30,
+          "startColumn": 34,
+          "endLine": 30,
+          "endColumn": 39,
+          "syntaxDigest": "sha256:fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/else/else/then",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            4,
+            0,
+            0,
+            1,
+            4,
+            4,
+            2
+          ],
+          "startLine": 31,
+          "startColumn": 17,
+          "endLine": 31,
+          "endColumn": 34,
+          "syntaxDigest": "sha256:c6afa076d3c236069b48b7313f7f0fec12b28402643d3301bd4e0ee253a06f87"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/else/else/else",
+        "mechanicId": "if",
+        "operation": "if",
+        "parameterNames": [
+          "when",
+          "then",
+          "else"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared"
+        },
+        "providerSourceStart": 10691,
+        "providerSourceEnd": 10791,
+        "providerBodyDigest": "sha256:a7e2d0af98002a3ec2c76fad0cecb1f38d192db53b2b003241e61368630fd09a",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            4,
+            0,
+            0,
+            1,
+            4,
+            4,
+            4
+          ],
+          "startLine": 32,
+          "startColumn": 17,
+          "endLine": 34,
+          "endColumn": 45,
+          "syntaxDigest": "sha256:d125dae6b5a18a4c9f31c7ac9ca271329af834e21f4621f3b151f2b1637751e2"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/else/else/else/when",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "parameterNames": [
+          "left",
+          "right"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared"
+        },
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534,
+        "providerBodyDigest": "sha256:d72eba197cd5e76449c3c1af5f0c22be1021c3c4a9aa56568b04e647e17e4b1c",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            4,
+            0,
+            0,
+            1,
+            4,
+            4,
+            4,
+            0
+          ],
+          "startLine": 32,
+          "startColumn": 17,
+          "endLine": 32,
+          "endColumn": 41,
+          "syntaxDigest": "sha256:3e84bcbe851dc572f03aea6d193dcc97e3ee6a8d45c3228cf03acc483ddb0d00"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/else/else/else/when/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            4,
+            0,
+            0,
+            1,
+            4,
+            4,
+            4,
+            0,
+            0
+          ],
+          "startLine": 32,
+          "startColumn": 17,
+          "endLine": 32,
+          "endColumn": 31,
+          "syntaxDigest": "sha256:433c6ba4de5ba11aa03c7db4e4091655aa0946ec0ae1017dae2aa394bb010811"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/else/else/else/when/right",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            4,
+            0,
+            0,
+            1,
+            4,
+            4,
+            4,
+            0,
+            2
+          ],
+          "startLine": 32,
+          "startColumn": 36,
+          "endLine": 32,
+          "endColumn": 41,
+          "syntaxDigest": "sha256:fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/else/else/else/then",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            4,
+            0,
+            0,
+            1,
+            4,
+            4,
+            4,
+            2
+          ],
+          "startLine": 33,
+          "startColumn": 19,
+          "endLine": 33,
+          "endColumn": 36,
+          "syntaxDigest": "sha256:c6afa076d3c236069b48b7313f7f0fec12b28402643d3301bd4e0ee253a06f87"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/else/else/else/else",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            4,
+            0,
+            0,
+            1,
+            4,
+            4,
+            4,
+            4
+          ],
+          "startLine": 34,
+          "startColumn": 19,
+          "endLine": 34,
+          "endColumn": 45,
+          "syntaxDigest": "sha256:61fa24929338c7799de50a83b4b909c33e0afc57fdd7a015a6d75a38ea01d8a9"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes",
+        "mechanicId": "if",
+        "operation": "if",
+        "parameterNames": [
+          "when",
+          "then",
+          "else"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared",
+          "adaptationDisposition": "adaptationDisposition"
+        },
+        "providerSourceStart": 10691,
+        "providerSourceEnd": 10791,
+        "providerBodyDigest": "sha256:a7e2d0af98002a3ec2c76fad0cecb1f38d192db53b2b003241e61368630fd09a",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            5,
+            0,
+            0,
+            1
+          ],
+          "startLine": 36,
+          "startColumn": 9,
+          "endLine": 44,
+          "endColumn": 21,
+          "syntaxDigest": "sha256:b8a78209d5e64a6539e7ec3ccb445ddec1c17730c6689db013201b6c716861f6"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/when",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "parameterNames": [
+          "left",
+          "right"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared",
+          "adaptationDisposition": "adaptationDisposition"
+        },
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534,
+        "providerBodyDigest": "sha256:d72eba197cd5e76449c3c1af5f0c22be1021c3c4a9aa56568b04e647e17e4b1c",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            5,
+            0,
+            0,
+            1,
+            0
+          ],
+          "startLine": 36,
+          "startColumn": 9,
+          "endLine": 36,
+          "endColumn": 30,
+          "syntaxDigest": "sha256:6e94b82ade4b9ca3c325b37d398ea3de7e78750b432b623cc88dae648edf54e1"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/when/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared",
+          "adaptationDisposition": "adaptationDisposition"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            5,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "startLine": 36,
+          "startColumn": 9,
+          "endLine": 36,
+          "endColumn": 20,
+          "syntaxDigest": "sha256:3dbd27de0724d8df8a36a9cae8bb1ea4575f3d355ad8ddecbc7d79898a9617e9"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/when/right",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared",
+          "adaptationDisposition": "adaptationDisposition"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            5,
+            0,
+            0,
+            1,
+            0,
+            2
+          ],
+          "startLine": 36,
+          "startColumn": 25,
+          "endLine": 36,
+          "endColumn": 30,
+          "syntaxDigest": "sha256:fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/then",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared",
+          "adaptationDisposition": "adaptationDisposition"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            5,
+            0,
+            0,
+            1,
+            2
+          ],
+          "startLine": 37,
+          "startColumn": 13,
+          "endLine": 37,
+          "endColumn": 35,
+          "syntaxDigest": "sha256:bad175d9a21e371d4a6ea2e5dfa8c2d761e7148f78a32022e271d0d7e552a142"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/else",
+        "mechanicId": "if",
+        "operation": "if",
+        "parameterNames": [
+          "when",
+          "then",
+          "else"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared",
+          "adaptationDisposition": "adaptationDisposition"
+        },
+        "providerSourceStart": 10691,
+        "providerSourceEnd": 10791,
+        "providerBodyDigest": "sha256:a7e2d0af98002a3ec2c76fad0cecb1f38d192db53b2b003241e61368630fd09a",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            5,
+            0,
+            0,
+            1,
+            4
+          ],
+          "startLine": 38,
+          "startColumn": 13,
+          "endLine": 44,
+          "endColumn": 21,
+          "syntaxDigest": "sha256:e63309af85f4b20c2b91418ac0c0222d82948356794bbc866147d10b1cf788b6"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/else/when",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "parameterNames": [
+          "left",
+          "right"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared",
+          "adaptationDisposition": "adaptationDisposition"
+        },
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534,
+        "providerBodyDigest": "sha256:d72eba197cd5e76449c3c1af5f0c22be1021c3c4a9aa56568b04e647e17e4b1c",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            5,
+            0,
+            0,
+            1,
+            4,
+            0
+          ],
+          "startLine": 38,
+          "startColumn": 13,
+          "endLine": 38,
+          "endColumn": 35,
+          "syntaxDigest": "sha256:d0d0f01954bfe421edc1eb05015e9609e00c4584154c29059e8df5372ec654e0"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/else/when/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared",
+          "adaptationDisposition": "adaptationDisposition"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            5,
+            0,
+            0,
+            1,
+            4,
+            0,
+            0
+          ],
+          "startLine": 38,
+          "startColumn": 13,
+          "endLine": 38,
+          "endColumn": 25,
+          "syntaxDigest": "sha256:07e18c6dd2235e6efeac8d344f8876e4c50bad175a15310a5f5457b54503cfdc"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/else/when/right",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared",
+          "adaptationDisposition": "adaptationDisposition"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            5,
+            0,
+            0,
+            1,
+            4,
+            0,
+            2
+          ],
+          "startLine": 38,
+          "startColumn": 30,
+          "endLine": 38,
+          "endColumn": 35,
+          "syntaxDigest": "sha256:fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/else/then",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared",
+          "adaptationDisposition": "adaptationDisposition"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            5,
+            0,
+            0,
+            1,
+            4,
+            2
+          ],
+          "startLine": 39,
+          "startColumn": 15,
+          "endLine": 39,
+          "endColumn": 45,
+          "syntaxDigest": "sha256:520e31e9c4dd32b2943bda5a22425827449a5c50fdba5c7a2325c35582bf9d74"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/else/else",
+        "mechanicId": "if",
+        "operation": "if",
+        "parameterNames": [
+          "when",
+          "then",
+          "else"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared",
+          "adaptationDisposition": "adaptationDisposition"
+        },
+        "providerSourceStart": 10691,
+        "providerSourceEnd": 10791,
+        "providerBodyDigest": "sha256:a7e2d0af98002a3ec2c76fad0cecb1f38d192db53b2b003241e61368630fd09a",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            5,
+            0,
+            0,
+            1,
+            4,
+            4
+          ],
+          "startLine": 40,
+          "startColumn": 15,
+          "endLine": 44,
+          "endColumn": 21,
+          "syntaxDigest": "sha256:4732a906abef2dff6f7dc2a86fa5c0cfd815d311ec51837e82b60011cd0d8964"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/else/else/when",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "parameterNames": [
+          "left",
+          "right"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared",
+          "adaptationDisposition": "adaptationDisposition"
+        },
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534,
+        "providerBodyDigest": "sha256:d72eba197cd5e76449c3c1af5f0c22be1021c3c4a9aa56568b04e647e17e4b1c",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            5,
+            0,
+            0,
+            1,
+            4,
+            4,
+            0
+          ],
+          "startLine": 40,
+          "startColumn": 15,
+          "endLine": 40,
+          "endColumn": 39,
+          "syntaxDigest": "sha256:96fd39ec3b1688656869a282a7ec75782614a58416ccc969b8adeb541db7fd38"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/else/else/when/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared",
+          "adaptationDisposition": "adaptationDisposition"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            5,
+            0,
+            0,
+            1,
+            4,
+            4,
+            0,
+            0
+          ],
+          "startLine": 40,
+          "startColumn": 15,
+          "endLine": 40,
+          "endColumn": 29,
+          "syntaxDigest": "sha256:19aed2ec6fe5c97fc10bcffbd7244da0fb0f8ff99881bdc75deed7f87627959d"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/else/else/when/right",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared",
+          "adaptationDisposition": "adaptationDisposition"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            5,
+            0,
+            0,
+            1,
+            4,
+            4,
+            0,
+            2
+          ],
+          "startLine": 40,
+          "startColumn": 34,
+          "endLine": 40,
+          "endColumn": 39,
+          "syntaxDigest": "sha256:fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/else/else/then",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared",
+          "adaptationDisposition": "adaptationDisposition"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            5,
+            0,
+            0,
+            1,
+            4,
+            4,
+            2
+          ],
+          "startLine": 41,
+          "startColumn": 17,
+          "endLine": 41,
+          "endColumn": 49,
+          "syntaxDigest": "sha256:bd319705e0142958c6602996f6febe2076c8d1114a42a961944145e98d0eb394"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/else/else/else",
+        "mechanicId": "if",
+        "operation": "if",
+        "parameterNames": [
+          "when",
+          "then",
+          "else"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared",
+          "adaptationDisposition": "adaptationDisposition"
+        },
+        "providerSourceStart": 10691,
+        "providerSourceEnd": 10791,
+        "providerBodyDigest": "sha256:a7e2d0af98002a3ec2c76fad0cecb1f38d192db53b2b003241e61368630fd09a",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            5,
+            0,
+            0,
+            1,
+            4,
+            4,
+            4
+          ],
+          "startLine": 42,
+          "startColumn": 17,
+          "endLine": 44,
+          "endColumn": 21,
+          "syntaxDigest": "sha256:68abd3c881fdc5b8a72b1092cc727606779a174afb6a47ed931998e952c59c41"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/else/else/else/when",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "parameterNames": [
+          "left",
+          "right"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared",
+          "adaptationDisposition": "adaptationDisposition"
+        },
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534,
+        "providerBodyDigest": "sha256:d72eba197cd5e76449c3c1af5f0c22be1021c3c4a9aa56568b04e647e17e4b1c",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            5,
+            0,
+            0,
+            1,
+            4,
+            4,
+            4,
+            0
+          ],
+          "startLine": 42,
+          "startColumn": 17,
+          "endLine": 42,
+          "endColumn": 41,
+          "syntaxDigest": "sha256:3e84bcbe851dc572f03aea6d193dcc97e3ee6a8d45c3228cf03acc483ddb0d00"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/else/else/else/when/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared",
+          "adaptationDisposition": "adaptationDisposition"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            5,
+            0,
+            0,
+            1,
+            4,
+            4,
+            4,
+            0,
+            0
+          ],
+          "startLine": 42,
+          "startColumn": 17,
+          "endLine": 42,
+          "endColumn": 31,
+          "syntaxDigest": "sha256:433c6ba4de5ba11aa03c7db4e4091655aa0946ec0ae1017dae2aa394bb010811"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/else/else/else/when/right",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared",
+          "adaptationDisposition": "adaptationDisposition"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            5,
+            0,
+            0,
+            1,
+            4,
+            4,
+            4,
+            0,
+            2
+          ],
+          "startLine": 42,
+          "startColumn": 36,
+          "endLine": 42,
+          "endColumn": 41,
+          "syntaxDigest": "sha256:fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/else/else/else/then",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared",
+          "adaptationDisposition": "adaptationDisposition"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            5,
+            0,
+            0,
+            1,
+            4,
+            4,
+            4,
+            2
+          ],
+          "startLine": 43,
+          "startColumn": 19,
+          "endLine": 43,
+          "endColumn": 48,
+          "syntaxDigest": "sha256:0cde18229912973ff59e1a6831c742a3a40bc394689a386b3634a67c6aea2be9"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/else/else/else/else",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared",
+          "adaptationDisposition": "adaptationDisposition"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            5,
+            0,
+            0,
+            1,
+            4,
+            4,
+            4,
+            4
+          ],
+          "startLine": 44,
+          "startColumn": 19,
+          "endLine": 44,
+          "endColumn": 21,
+          "syntaxDigest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/adapterReceiptDigest",
+        "mechanicId": "format",
+        "operation": "format",
+        "parameterNames": [
+          "template",
+          "values"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared",
+          "adaptationDisposition": "adaptationDisposition",
+          "findingCodes": "findingCodes"
+        },
+        "providerSourceStart": 11103,
+        "providerSourceEnd": 11286,
+        "providerBodyDigest": "sha256:6ea06eec200037d1316ad18e15b6f79ad91a652fc227f94d57392c27dcd3493b",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            6,
+            0,
+            0,
+            1
+          ],
+          "startLine": 45,
+          "startColumn": 36,
+          "endLine": 62,
+          "endColumn": 8,
+          "syntaxDigest": "sha256:591dcb18ec1e37d707cbe4e7abfe5cbeba2dc371cdb16dc505242717f46ad6a3"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/adapterReceiptDigest/values/digest",
+        "mechanicId": "sha256",
+        "operation": "sha256",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared",
+          "adaptationDisposition": "adaptationDisposition",
+          "findingCodes": "findingCodes"
+        },
+        "providerSourceStart": 11649,
+        "providerSourceEnd": 11756,
+        "providerBodyDigest": "sha256:f70874eab6263f03b4329526c3a8a9f0db28ee7591d6ac5bc044e3a43964b6cc",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            6,
+            0,
+            0,
+            1,
+            2,
+            1
+          ],
+          "startLine": 48,
+          "startColumn": 11,
+          "endLine": 60,
+          "endColumn": 27,
+          "syntaxDigest": "sha256:bf4c3f7d9f6450d07844d2108af6e79df2f0c0460f54a3115f4404e9578c0f78"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/adapterReceiptDigest/values/digest/value",
+        "mechanicId": "json-stringify",
+        "operation": "json-stringify",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared",
+          "adaptationDisposition": "adaptationDisposition",
+          "findingCodes": "findingCodes"
+        },
+        "providerSourceStart": 11877,
+        "providerSourceEnd": 11950,
+        "providerBodyDigest": "sha256:0a9dc57d510928994484d3d8f476a3d0ca470cbba70e2e9f2ba7f3b26c713fd7",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            6,
+            0,
+            0,
+            1,
+            2,
+            1,
+            0,
+            0,
+            1,
+            1
+          ],
+          "startLine": 52,
+          "startColumn": 17,
+          "endLine": 57,
+          "endColumn": 19,
+          "syntaxDigest": "sha256:24a1b14c6a1a62e9cca582949a6d3388be5c06994bd1e3e705ccbf6a71917c08"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/adapterReceiptDigest/values/digest/value/value",
+        "mechanicId": "object",
+        "operation": "object",
+        "parameterNames": [
+          "fields"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared",
+          "adaptationDisposition": "adaptationDisposition",
+          "findingCodes": "findingCodes"
+        },
+        "providerSourceStart": 8899,
+        "providerSourceEnd": 9021,
+        "providerBodyDigest": "sha256:1c64bf7e879a086062f051dfb0081f2d73ecf7ca51fe9f56cc0ecd19380b20ae",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            6,
+            0,
+            0,
+            1,
+            2,
+            1,
+            0,
+            0,
+            1,
+            1,
+            1
+          ],
+          "startLine": 52,
+          "startColumn": 32,
+          "endLine": 57,
+          "endColumn": 18,
+          "syntaxDigest": "sha256:46502bb3dc553f54d31f716afd0b16b35a909224b9e7e3f78a0b509696024bd4"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/adapterReceiptDigest/values/digest/value/value/fields/jmiRecordRef",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared",
+          "adaptationDisposition": "adaptationDisposition",
+          "findingCodes": "findingCodes"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "jmiRecordRef",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            6,
+            0,
+            0,
+            1,
+            2,
+            1,
+            0,
+            0,
+            1,
+            1,
+            1,
+            0,
+            1
+          ],
+          "startLine": 53,
+          "startColumn": 37,
+          "endLine": 53,
+          "endColumn": 56,
+          "syntaxDigest": "sha256:efa00e09edc3fb2b69d904bb2950a26e6798d7769add6d9a2e98839fb4f4c759"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/adapterReceiptDigest/values/digest/value/value/fields/jmiRecordType",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared",
+          "adaptationDisposition": "adaptationDisposition",
+          "findingCodes": "findingCodes"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "jmiRecordType",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            6,
+            0,
+            0,
+            1,
+            2,
+            1,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "startLine": 54,
+          "startColumn": 38,
+          "endLine": 54,
+          "endColumn": 58,
+          "syntaxDigest": "sha256:3162383f7cbf2bfdc9f75d90729c4f080071083c53c150004b0ca0c8fde60e11"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/adapterReceiptDigest/values/digest/value/value/fields/jmiRecordDigest",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared",
+          "adaptationDisposition": "adaptationDisposition",
+          "findingCodes": "findingCodes"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "jmiRecordDigest",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            6,
+            0,
+            0,
+            1,
+            2,
+            1,
+            0,
+            0,
+            1,
+            1,
+            1,
+            2,
+            1
+          ],
+          "startLine": 55,
+          "startColumn": 40,
+          "endLine": 55,
+          "endColumn": 62,
+          "syntaxDigest": "sha256:070ef72ade80ab9fb74ece116802dc31989b3149d4b2a1ae31202c573886a180"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/adapterReceiptDigest/values/digest/value/value/fields/adaptationDisposition",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared",
+          "adaptationDisposition": "adaptationDisposition",
+          "findingCodes": "findingCodes"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            6,
+            0,
+            0,
+            1,
+            2,
+            1,
+            0,
+            0,
+            1,
+            1,
+            1,
+            3,
+            1
+          ],
+          "startLine": 56,
+          "startColumn": 46,
+          "endLine": 56,
+          "endColumn": 67,
+          "syntaxDigest": "sha256:a1b0c145969c1aa64862f10f82713693c6b5e863d634f7ff0fff5f8b4357e251"
+        }
+      },
+      {
+        "sourcePointer": "/value",
+        "mechanicId": "merge",
+        "operation": "merge",
+        "parameterNames": [
+          "values"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared",
+          "adaptationDisposition": "adaptationDisposition",
+          "findingCodes": "findingCodes",
+          "adapterReceiptDigest": "adapterReceiptDigest"
+        },
+        "providerSourceStart": 9101,
+        "providerSourceEnd": 9194,
+        "providerBodyDigest": "sha256:a5783ce9abfa463081111a250e4d6c61a4807953a3b6e1bc08bb052cbcff0074",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            7,
+            0
+          ],
+          "startLine": 63,
+          "startColumn": 14,
+          "endLine": 68,
+          "endColumn": 9,
+          "syntaxDigest": "sha256:5d18200d309f480d080ee968b1415224998c4d866625f23e9a5baebcc6d9f5ae"
+        }
+      },
+      {
+        "sourcePointer": "/value/values/0",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared",
+          "adaptationDisposition": "adaptationDisposition",
+          "findingCodes": "findingCodes",
+          "adapterReceiptDigest": "adapterReceiptDigest"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            7,
+            0,
+            2
+          ],
+          "startLine": 63,
+          "startColumn": 32,
+          "endLine": 63,
+          "endColumn": 37,
+          "syntaxDigest": "sha256:c96c6d5be8d08a12e7b5cdc1b207fa6b2430974c86803d8891675e76fd992c20"
+        }
+      },
+      {
+        "sourcePointer": "/value/values/1",
+        "mechanicId": "object",
+        "operation": "object",
+        "parameterNames": [
+          "fields"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared",
+          "adaptationDisposition": "adaptationDisposition",
+          "findingCodes": "findingCodes",
+          "adapterReceiptDigest": "adapterReceiptDigest"
+        },
+        "providerSourceStart": 8899,
+        "providerSourceEnd": 9021,
+        "providerBodyDigest": "sha256:1c64bf7e879a086062f051dfb0081f2d73ecf7ca51fe9f56cc0ecd19380b20ae",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            7,
+            0,
+            3
+          ],
+          "startLine": 63,
+          "startColumn": 39,
+          "endLine": 68,
+          "endColumn": 8,
+          "syntaxDigest": "sha256:149daf1ae2476e55aa82e6e547ea62764ea26f100cc1cc636cb65007774c7585"
+        }
+      },
+      {
+        "sourcePointer": "/value/values/1/fields/contractId",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared",
+          "adaptationDisposition": "adaptationDisposition",
+          "findingCodes": "findingCodes",
+          "adapterReceiptDigest": "adapterReceiptDigest"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            7,
+            0,
+            3,
+            0,
+            1
+          ],
+          "startLine": 64,
+          "startColumn": 25,
+          "endLine": 64,
+          "endColumn": 68,
+          "syntaxDigest": "sha256:b4deced087a833d05c5a44c7274546a86c0fb422f4cf1b041cf0e9febd90b244"
+        }
+      },
+      {
+        "sourcePointer": "/value/values/1/fields/adaptationDisposition",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared",
+          "adaptationDisposition": "adaptationDisposition",
+          "findingCodes": "findingCodes",
+          "adapterReceiptDigest": "adapterReceiptDigest"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            7,
+            0,
+            3,
+            1,
+            1
+          ],
+          "startLine": 65,
+          "startColumn": 36,
+          "endLine": 65,
+          "endColumn": 57,
+          "syntaxDigest": "sha256:a1b0c145969c1aa64862f10f82713693c6b5e863d634f7ff0fff5f8b4357e251"
+        }
+      },
+      {
+        "sourcePointer": "/value/values/1/fields/findingCodes",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared",
+          "adaptationDisposition": "adaptationDisposition",
+          "findingCodes": "findingCodes",
+          "adapterReceiptDigest": "adapterReceiptDigest"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            7,
+            0,
+            3,
+            2,
+            1
+          ],
+          "startLine": 66,
+          "startColumn": 27,
+          "endLine": 66,
+          "endColumn": 39,
+          "syntaxDigest": "sha256:7918306a7347afe6e363cdca9e6f0c3c96e6351d292eba2601b58b2eba2057fd"
+        }
+      },
+      {
+        "sourcePointer": "/value/values/1/fields/adapterReceiptDigest",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "recordBound": "recordBound",
+          "typeAdmitted": "typeAdmitted",
+          "authorityBound": "authorityBound",
+          "windowDeclared": "windowDeclared",
+          "adaptationDisposition": "adaptationDisposition",
+          "findingCodes": "findingCodes",
+          "adapterReceiptDigest": "adapterReceiptDigest"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            7,
+            0,
+            3,
+            3,
+            1
+          ],
+          "startLine": 67,
+          "startColumn": 35,
+          "endLine": 67,
+          "endColumn": 55,
+          "syntaxDigest": "sha256:e010dc90e2a535b425fc1deb866417cef9a4cb372017df54cf3b67f33017d87e"
+        }
+      }
+    ]
+  }
+]

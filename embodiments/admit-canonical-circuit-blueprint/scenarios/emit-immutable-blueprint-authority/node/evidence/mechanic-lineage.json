@@ -1,0 +1,3835 @@
+[
+  {
+    "scenarioId": "emit-immutable-blueprint-authority",
+    "operationOrdinal": 0,
+    "portId": "emit-immutable-blueprint-authority-port",
+    "transformationId": "emit-immutable-blueprint-authority.v1",
+    "sourceRef": "capabilities/admit-canonical-circuit-blueprint/semantic-transformation.authority.json",
+    "sourceDigest": "sha256:edd662a3271af9b23645ff2b0c6e263a053ed6cfe149d09add4a8fe6f9b15f93",
+    "physicalFile": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+    "bindings": [
+      {
+        "identity": "conformance",
+        "nativeName": "conformance",
+        "scope": ""
+      },
+      {
+        "identity": "geometry",
+        "nativeName": "geometry",
+        "scope": ""
+      },
+      {
+        "identity": "review",
+        "nativeName": "review",
+        "scope": ""
+      },
+      {
+        "identity": "findingGroup",
+        "nativeName": "findingGroup",
+        "scope": "/bindings/allFindings"
+      },
+      {
+        "identity": "findingGroupIndex",
+        "nativeName": "findingGroupIndex",
+        "scope": "/bindings/allFindings"
+      },
+      {
+        "identity": "allFindings",
+        "nativeName": "allFindings",
+        "scope": ""
+      },
+      {
+        "identity": "condition",
+        "nativeName": "condition",
+        "scope": "/bindings/closed"
+      },
+      {
+        "identity": "closed",
+        "nativeName": "closed",
+        "scope": ""
+      },
+      {
+        "identity": "lineageGroup",
+        "nativeName": "lineageGroup",
+        "scope": "/bindings/admittedLineage"
+      },
+      {
+        "identity": "lineageGroupIndex",
+        "nativeName": "lineageGroupIndex",
+        "scope": "/bindings/admittedLineage"
+      },
+      {
+        "identity": "admittedLineage",
+        "nativeName": "admittedLineage",
+        "scope": ""
+      },
+      {
+        "identity": "admittedBlueprint",
+        "nativeName": "admittedBlueprint",
+        "scope": ""
+      },
+      {
+        "identity": "admittedCarrierDigest",
+        "nativeName": "admittedCarrierDigest",
+        "scope": ""
+      }
+    ],
+    "helpers": [
+      "crypto",
+      "canonicalize"
+    ],
+    "nodes": [
+      {
+        "sourcePointer": "",
+        "mechanicId": "let",
+        "operation": "let",
+        "parameterNames": [
+          "bindings",
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 12396,
+        "providerSourceEnd": 12644,
+        "providerBodyDigest": "sha256:f882831176ab819cf41cfe5abdc1486176f941730544863b6e1f0da291836c0a",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0
+          ],
+          "startLine": 5,
+          "startColumn": 12,
+          "endLine": 75,
+          "endColumn": 9,
+          "syntaxDigest": "sha256:884b4d268d442f123009a337139a4e38d0635bd486876b6575d60fcaf85644d0"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/conformance",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.require-blueprint-conformance-evidenceDisposition",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            1
+          ],
+          "startLine": 6,
+          "startColumn": 27,
+          "endLine": 6,
+          "endColumn": 96,
+          "syntaxDigest": "sha256:64685b4b6a26feeeac0b6d40c55ff3767e0166eae6965b1d9f3aa1efb6801af8"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/geometry",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.require-blueprint-geometry-proofDisposition",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            1
+          ],
+          "startLine": 7,
+          "startColumn": 24,
+          "endLine": 7,
+          "endColumn": 87,
+          "syntaxDigest": "sha256:f67f417d323f59edd25fe111f5ee56e33ac4749960e2d0010dd6abd2c91b6b18"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/review",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.require-current-approved-review-receiptDisposition",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            2,
+            0,
+            0,
+            1
+          ],
+          "startLine": 8,
+          "startColumn": 22,
+          "endLine": 8,
+          "endColumn": 92,
+          "syntaxDigest": "sha256:7adcbe58fd3796980d2e88dbf8e4298e2eec4976e7f2c883954b088d98fe27eb"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/allFindings",
+        "mechanicId": "flat-map",
+        "operation": "flat-map",
+        "parameterNames": [
+          "from",
+          "as",
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review"
+        },
+        "providerSourceStart": 9383,
+        "providerSourceEnd": 9569,
+        "providerBodyDigest": "sha256:0615623ba516fc661ac1083a2e684391dbe98c1ab0d92780f87867579b90c2d1",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            3,
+            0,
+            0,
+            1
+          ],
+          "startLine": 9,
+          "startColumn": 27,
+          "endLine": 11,
+          "endColumn": 8,
+          "syntaxDigest": "sha256:42e645abf7c9617e66c8453104694525d472f51406bfd165f73d6e5164da0405"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/allFindings/from",
+        "mechanicId": "array",
+        "operation": "array",
+        "parameterNames": [
+          "items"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review"
+        },
+        "providerSourceStart": 9027,
+        "providerSourceEnd": 9095,
+        "providerBodyDigest": "sha256:deb44952445ad6e45765e0d03369cffa4737e64954602f8a3e30e9d00545778e",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            3,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "startLine": 9,
+          "startColumn": 27,
+          "endLine": 9,
+          "endColumn": 88,
+          "syntaxDigest": "sha256:6368fcab259c9df5d788286bcc3e92e7b3767d9784ddcb1fa014039783e3b72e"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/allFindings/from/items/0",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "findings",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            3,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "startLine": 9,
+          "startColumn": 28,
+          "endLine": 9,
+          "endColumn": 49,
+          "syntaxDigest": "sha256:905c2383e19c067ee9b4a8040f1b009a657ccd9a8965fcc9511eb4f10fa26d63"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/allFindings/from/items/1",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "findings",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            3,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1
+          ],
+          "startLine": 9,
+          "startColumn": 51,
+          "endLine": 9,
+          "endColumn": 69,
+          "syntaxDigest": "sha256:9e3c94308763971243638971465172c49a6305dfba8b34262a0ae14a5c5be7b2"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/allFindings/from/items/2",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "findings",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            3,
+            0,
+            0,
+            1,
+            0,
+            0,
+            2
+          ],
+          "startLine": 9,
+          "startColumn": 71,
+          "endLine": 9,
+          "endColumn": 87,
+          "syntaxDigest": "sha256:2fa4d6d8263b2f7e107b1cfc205bc0433080ef182d3d3a50b5a43b4c6ba38671"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/allFindings/value",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "findingGroup": "findingGroup",
+          "findingGroupIndex": "findingGroupIndex"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            3,
+            0,
+            0,
+            1,
+            1,
+            3
+          ],
+          "startLine": 10,
+          "startColumn": 46,
+          "endLine": 10,
+          "endColumn": 58,
+          "syntaxDigest": "sha256:b4737a7fa4fdb9413fb3f9d6465df1935e051a986958c6769409159fdcbf8a29"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/closed",
+        "mechanicId": "every",
+        "operation": "every",
+        "parameterNames": [
+          "from",
+          "as",
+          "where"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings"
+        },
+        "providerSourceStart": 10055,
+        "providerSourceEnd": 10192,
+        "providerBodyDigest": "sha256:0404fcb636f768641468e8fcda8d2dcf870417e06ba674b495d0d444eb0ac1d2",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            4,
+            0,
+            0,
+            1
+          ],
+          "startLine": 12,
+          "startColumn": 22,
+          "endLine": 16,
+          "endColumn": 49,
+          "syntaxDigest": "sha256:e6d9564b00f803b1e6bcfa04d8c1b8a58c14f7fc436fc7847c152d3f9abd9ce7"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/closed/from",
+        "mechanicId": "array",
+        "operation": "array",
+        "parameterNames": [
+          "items"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings"
+        },
+        "providerSourceStart": 9027,
+        "providerSourceEnd": 9095,
+        "providerBodyDigest": "sha256:deb44952445ad6e45765e0d03369cffa4737e64954602f8a3e30e9d00545778e",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            4,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "startLine": 12,
+          "startColumn": 22,
+          "endLine": 16,
+          "endColumn": 8,
+          "syntaxDigest": "sha256:5c11d7d4845063ce09bd01be9a3607ab2d44611983d74c0fd449c4f79827b0b6"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/closed/from/items/0",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "parameterNames": [
+          "left",
+          "right"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings"
+        },
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534,
+        "providerBodyDigest": "sha256:d72eba197cd5e76449c3c1af5f0c22be1021c3c4a9aa56568b04e647e17e4b1c",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            4,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "startLine": 13,
+          "startColumn": 9,
+          "endLine": 13,
+          "endColumn": 43,
+          "syntaxDigest": "sha256:bfe142e343d80324ced08333085a8b5a77199a058c3f8b29142360fe08250a34"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/closed/from/items/0/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "disposition",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            4,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "startLine": 13,
+          "startColumn": 9,
+          "endLine": 13,
+          "endColumn": 33,
+          "syntaxDigest": "sha256:633a4f43c880f293349fde99e302777b769e7ccf5970785d49be065ec791c48b"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/closed/from/items/0/right",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            4,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            2
+          ],
+          "startLine": 13,
+          "startColumn": 38,
+          "endLine": 13,
+          "endColumn": 43,
+          "syntaxDigest": "sha256:f646c2c275848aef5866c925be308aaff589e03b8aec1113c9f6fd4219c34ceb"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/closed/from/items/1",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "parameterNames": [
+          "left",
+          "right"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings"
+        },
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534,
+        "providerBodyDigest": "sha256:d72eba197cd5e76449c3c1af5f0c22be1021c3c4a9aa56568b04e647e17e4b1c",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            4,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1
+          ],
+          "startLine": 14,
+          "startColumn": 9,
+          "endLine": 14,
+          "endColumn": 40,
+          "syntaxDigest": "sha256:0ddbd74232607f013db1e9de89a494f8bc2923d331302ad03ca4395bea9cdbf1"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/closed/from/items/1/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "disposition",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            4,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0
+          ],
+          "startLine": 14,
+          "startColumn": 9,
+          "endLine": 14,
+          "endColumn": 30,
+          "syntaxDigest": "sha256:0a18a6f5d4ffb30adf6199fd424fc4bc0600b0c7c4f98ecf22ddbd2a3287cc52"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/closed/from/items/1/right",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            4,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            2
+          ],
+          "startLine": 14,
+          "startColumn": 35,
+          "endLine": 14,
+          "endColumn": 40,
+          "syntaxDigest": "sha256:f646c2c275848aef5866c925be308aaff589e03b8aec1113c9f6fd4219c34ceb"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/closed/from/items/2",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "parameterNames": [
+          "left",
+          "right"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings"
+        },
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534,
+        "providerBodyDigest": "sha256:d72eba197cd5e76449c3c1af5f0c22be1021c3c4a9aa56568b04e647e17e4b1c",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            4,
+            0,
+            0,
+            1,
+            0,
+            0,
+            2
+          ],
+          "startLine": 15,
+          "startColumn": 9,
+          "endLine": 15,
+          "endColumn": 38,
+          "syntaxDigest": "sha256:023c21115de92a3f1f8c42ae104c05c01f5bba0f6146c80b6963b09326034664"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/closed/from/items/2/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "disposition",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            4,
+            0,
+            0,
+            1,
+            0,
+            0,
+            2,
+            0
+          ],
+          "startLine": 15,
+          "startColumn": 9,
+          "endLine": 15,
+          "endColumn": 28,
+          "syntaxDigest": "sha256:48bafc88d86a4338d42bf2b35692ee582053212040b9f74931c2520e08e61a8c"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/closed/from/items/2/right",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            4,
+            0,
+            0,
+            1,
+            0,
+            0,
+            2,
+            2
+          ],
+          "startLine": 15,
+          "startColumn": 33,
+          "endLine": 15,
+          "endColumn": 38,
+          "syntaxDigest": "sha256:f646c2c275848aef5866c925be308aaff589e03b8aec1113c9f6fd4219c34ceb"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/closed/where",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "condition": "condition"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            4,
+            0,
+            0,
+            1,
+            1,
+            2,
+            1
+          ],
+          "startLine": 16,
+          "startColumn": 38,
+          "endLine": 16,
+          "endColumn": 47,
+          "syntaxDigest": "sha256:596d40a4ed24c02a31b19d6e633f46f64304a672b40f793d8c6deab868beb0e2"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/admittedLineage",
+        "mechanicId": "flat-map",
+        "operation": "flat-map",
+        "parameterNames": [
+          "from",
+          "as",
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed"
+        },
+        "providerSourceStart": 9383,
+        "providerSourceEnd": 9569,
+        "providerBodyDigest": "sha256:0615623ba516fc661ac1083a2e684391dbe98c1ab0d92780f87867579b90c2d1",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            5,
+            0,
+            0,
+            1
+          ],
+          "startLine": 17,
+          "startColumn": 31,
+          "endLine": 33,
+          "endColumn": 67,
+          "syntaxDigest": "sha256:35baad33f136c980c059352cd0919ff98dd45a9cced88106a862b197057a0ba2"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/admittedLineage/from",
+        "mechanicId": "array",
+        "operation": "array",
+        "parameterNames": [
+          "items"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed"
+        },
+        "providerSourceStart": 9027,
+        "providerSourceEnd": 9095,
+        "providerBodyDigest": "sha256:deb44952445ad6e45765e0d03369cffa4737e64954602f8a3e30e9d00545778e",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            5,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "startLine": 17,
+          "startColumn": 31,
+          "endLine": 33,
+          "endColumn": 8,
+          "syntaxDigest": "sha256:db3e4ca4718ea3bbdf2266777f0a4cfa3247773e2c60ea5a72b7415531f79e82"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/admittedLineage/from/items/0",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.candidate.sourceAuthority.lineage",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            5,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "startLine": 18,
+          "startColumn": 9,
+          "endLine": 18,
+          "endColumn": 60,
+          "syntaxDigest": "sha256:1cc4672d3781ccfb33bcf5ac4133c41497538c1f647d912952ee3dc4ed125fb9"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/admittedLineage/from/items/1",
+        "mechanicId": "array",
+        "operation": "array",
+        "parameterNames": [
+          "items"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed"
+        },
+        "providerSourceStart": 9027,
+        "providerSourceEnd": 9095,
+        "providerBodyDigest": "sha256:deb44952445ad6e45765e0d03369cffa4737e64954602f8a3e30e9d00545778e",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            5,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1
+          ],
+          "startLine": 19,
+          "startColumn": 9,
+          "endLine": 32,
+          "endColumn": 10,
+          "syntaxDigest": "sha256:3d9b9b261b71964cea17448ba4fb7654e12dd08e4e062af9800504d2869bddcf"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/admittedLineage/from/items/1/items/0",
+        "mechanicId": "object",
+        "operation": "object",
+        "parameterNames": [
+          "fields"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed"
+        },
+        "providerSourceStart": 8899,
+        "providerSourceEnd": 9021,
+        "providerBodyDigest": "sha256:1c64bf7e879a086062f051dfb0081f2d73ecf7ca51fe9f56cc0ecd19380b20ae",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            5,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0
+          ],
+          "startLine": 20,
+          "startColumn": 11,
+          "endLine": 23,
+          "endColumn": 12,
+          "syntaxDigest": "sha256:6e829ad128567889fde0c845b8994e9d64361555a81c1a03c6ef289d1be24c0c"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/admittedLineage/from/items/1/items/0/fields/authorityId",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            5,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1
+          ],
+          "startLine": 21,
+          "startColumn": 30,
+          "endLine": 21,
+          "endColumn": 75,
+          "syntaxDigest": "sha256:2e4a2db47725b18f97554d037bbded208546de16012f258d6c6804b42e27c8c3"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/admittedLineage/from/items/1/items/0/fields/digest",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.conformanceEvidenceDigest",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            5,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            0,
+            1,
+            1
+          ],
+          "startLine": 22,
+          "startColumn": 25,
+          "endLine": 22,
+          "endColumn": 66,
+          "syntaxDigest": "sha256:594af66fabadf06369f51f63d0a4228575c472c337be961fdbdf8b982121f5a9"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/admittedLineage/from/items/1/items/1",
+        "mechanicId": "object",
+        "operation": "object",
+        "parameterNames": [
+          "fields"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed"
+        },
+        "providerSourceStart": 8899,
+        "providerSourceEnd": 9021,
+        "providerBodyDigest": "sha256:1c64bf7e879a086062f051dfb0081f2d73ecf7ca51fe9f56cc0ecd19380b20ae",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            5,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            1
+          ],
+          "startLine": 24,
+          "startColumn": 11,
+          "endLine": 27,
+          "endColumn": 12,
+          "syntaxDigest": "sha256:a9863f6de61b1a13fead0d6adbec0b3240f0d9d6475c185af76918438c0b04df"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/admittedLineage/from/items/1/items/1/fields/authorityId",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            5,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            1,
+            0,
+            1
+          ],
+          "startLine": 25,
+          "startColumn": 30,
+          "endLine": 25,
+          "endColumn": 69,
+          "syntaxDigest": "sha256:f87b03045ea78a53e08e9c32c6696ceacb9195117a25c341dbbc6756bad720ad"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/admittedLineage/from/items/1/items/1/fields/digest",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.geometryProofDigest",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            5,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1
+          ],
+          "startLine": 26,
+          "startColumn": 25,
+          "endLine": 26,
+          "endColumn": 60,
+          "syntaxDigest": "sha256:97ce6ea251370f6e8985811d6314257a61299943c0145bc549bd98133a7a0cc4"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/admittedLineage/from/items/1/items/2",
+        "mechanicId": "object",
+        "operation": "object",
+        "parameterNames": [
+          "fields"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed"
+        },
+        "providerSourceStart": 8899,
+        "providerSourceEnd": 9021,
+        "providerBodyDigest": "sha256:1c64bf7e879a086062f051dfb0081f2d73ecf7ca51fe9f56cc0ecd19380b20ae",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            5,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            2
+          ],
+          "startLine": 28,
+          "startColumn": 11,
+          "endLine": 31,
+          "endColumn": 12,
+          "syntaxDigest": "sha256:8418c967b9dcea353ba4f806a61d9141d745815ec88f939ac7d4f907eff465a9"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/admittedLineage/from/items/1/items/2/fields/authorityId",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            5,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            2,
+            0,
+            1
+          ],
+          "startLine": 29,
+          "startColumn": 30,
+          "endLine": 29,
+          "endColumn": 69,
+          "syntaxDigest": "sha256:f6f57bae39cbb4e9b4fa941a7cae08969728c3ae1b30184367823558a839b948"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/admittedLineage/from/items/1/items/2/fields/digest",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.reviewReceiptDigest",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            5,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            2,
+            1,
+            1
+          ],
+          "startLine": 30,
+          "startColumn": 25,
+          "endLine": 30,
+          "endColumn": 60,
+          "syntaxDigest": "sha256:2782f63db6c53417ee29d79a60d5c04e2d0633bfa7e184b2f0305ec57271433b"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/admittedLineage/value",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "lineageGroup": "lineageGroup",
+          "lineageGroupIndex": "lineageGroupIndex"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            5,
+            0,
+            0,
+            1,
+            1,
+            3
+          ],
+          "startLine": 33,
+          "startColumn": 54,
+          "endLine": 33,
+          "endColumn": 66,
+          "syntaxDigest": "sha256:058295cff92c66f892b95ec6aac075b4482c12db0bfc61fe04c561b98f37e53e"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/admittedBlueprint",
+        "mechanicId": "merge",
+        "operation": "merge",
+        "parameterNames": [
+          "values"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage"
+        },
+        "providerSourceStart": 9101,
+        "providerSourceEnd": 9194,
+        "providerBodyDigest": "sha256:a5783ce9abfa463081111a250e4d6c61a4807953a3b6e1bc08bb052cbcff0074",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            6,
+            0,
+            0,
+            1
+          ],
+          "startLine": 34,
+          "startColumn": 33,
+          "endLine": 42,
+          "endColumn": 9,
+          "syntaxDigest": "sha256:088d3e8339ba9d40a8f7374f094fc036b484d027385fbda548d8f27a16f03e09"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/admittedBlueprint/values/0",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.candidate",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            6,
+            0,
+            0,
+            1,
+            2
+          ],
+          "startLine": 34,
+          "startColumn": 51,
+          "endLine": 34,
+          "endColumn": 76,
+          "syntaxDigest": "sha256:757edd391cde21ab4ef8f407b2b176eccf29ea6078dc26e2330628f39e6a8b53"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/admittedBlueprint/values/1",
+        "mechanicId": "object",
+        "operation": "object",
+        "parameterNames": [
+          "fields"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage"
+        },
+        "providerSourceStart": 8899,
+        "providerSourceEnd": 9021,
+        "providerBodyDigest": "sha256:1c64bf7e879a086062f051dfb0081f2d73ecf7ca51fe9f56cc0ecd19380b20ae",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            6,
+            0,
+            0,
+            1,
+            3
+          ],
+          "startLine": 34,
+          "startColumn": 78,
+          "endLine": 42,
+          "endColumn": 8,
+          "syntaxDigest": "sha256:2a92c5f6c2912e0a31fca9384a54723e606578315523703b337cb128e6ec48f5"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/admittedBlueprint/values/1/fields/capability",
+        "mechanicId": "merge",
+        "operation": "merge",
+        "parameterNames": [
+          "values"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage"
+        },
+        "providerSourceStart": 9101,
+        "providerSourceEnd": 9194,
+        "providerBodyDigest": "sha256:a5783ce9abfa463081111a250e4d6c61a4807953a3b6e1bc08bb052cbcff0074",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            6,
+            0,
+            0,
+            1,
+            3,
+            0,
+            1
+          ],
+          "startLine": 35,
+          "startColumn": 25,
+          "endLine": 37,
+          "endColumn": 11,
+          "syntaxDigest": "sha256:15d4b8f89db5ef219ee395f9e45180052dbaa949a524714d720e5514ebf9d908"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/admittedBlueprint/values/1/fields/capability/values/0",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.candidate.capability",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            6,
+            0,
+            0,
+            1,
+            3,
+            0,
+            1,
+            2
+          ],
+          "startLine": 35,
+          "startColumn": 43,
+          "endLine": 35,
+          "endColumn": 80,
+          "syntaxDigest": "sha256:de5d296cd7303a789e6d23823a907a8e411655a6fc6ff629985f4e2bf729a790"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/admittedBlueprint/values/1/fields/capability/values/1",
+        "mechanicId": "object",
+        "operation": "object",
+        "parameterNames": [
+          "fields"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage"
+        },
+        "providerSourceStart": 8899,
+        "providerSourceEnd": 9021,
+        "providerBodyDigest": "sha256:1c64bf7e879a086062f051dfb0081f2d73ecf7ca51fe9f56cc0ecd19380b20ae",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            6,
+            0,
+            0,
+            1,
+            3,
+            0,
+            1,
+            3
+          ],
+          "startLine": 35,
+          "startColumn": 82,
+          "endLine": 37,
+          "endColumn": 10,
+          "syntaxDigest": "sha256:5d4cbd22156a5a7e2b2f3709ad6ca5fde9310c5b02121696e62e2d298df96fa5"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/admittedBlueprint/values/1/fields/capability/values/1/fields/capabilityAuthorityDigest",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.featureDigest",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            6,
+            0,
+            0,
+            1,
+            3,
+            0,
+            1,
+            3,
+            0,
+            1
+          ],
+          "startLine": 36,
+          "startColumn": 42,
+          "endLine": 36,
+          "endColumn": 71,
+          "syntaxDigest": "sha256:ac6bc3ba171fd4c734502aeb7d5f8dde96b131a6aec34b0ad91a45cebbb347c4"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/admittedBlueprint/values/1/fields/sourceAuthority",
+        "mechanicId": "merge",
+        "operation": "merge",
+        "parameterNames": [
+          "values"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage"
+        },
+        "providerSourceStart": 9101,
+        "providerSourceEnd": 9194,
+        "providerBodyDigest": "sha256:a5783ce9abfa463081111a250e4d6c61a4807953a3b6e1bc08bb052cbcff0074",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            6,
+            0,
+            0,
+            1,
+            3,
+            1,
+            1
+          ],
+          "startLine": 38,
+          "startColumn": 30,
+          "endLine": 41,
+          "endColumn": 11,
+          "syntaxDigest": "sha256:c2c6fdcbcfb6acffa5ea611303c6b3dc559b5beb469e94579b8cea9c772cef2b"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/admittedBlueprint/values/1/fields/sourceAuthority/values/0",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.candidate.sourceAuthority",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            6,
+            0,
+            0,
+            1,
+            3,
+            1,
+            1,
+            2
+          ],
+          "startLine": 38,
+          "startColumn": 48,
+          "endLine": 38,
+          "endColumn": 90,
+          "syntaxDigest": "sha256:8cf7f576ac9f3a5fa69f9e2fda22bfda3be52cee6ec3df8803a4f5af72339d54"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/admittedBlueprint/values/1/fields/sourceAuthority/values/1",
+        "mechanicId": "object",
+        "operation": "object",
+        "parameterNames": [
+          "fields"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage"
+        },
+        "providerSourceStart": 8899,
+        "providerSourceEnd": 9021,
+        "providerBodyDigest": "sha256:1c64bf7e879a086062f051dfb0081f2d73ecf7ca51fe9f56cc0ecd19380b20ae",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            6,
+            0,
+            0,
+            1,
+            3,
+            1,
+            1,
+            3
+          ],
+          "startLine": 38,
+          "startColumn": 92,
+          "endLine": 41,
+          "endColumn": 10,
+          "syntaxDigest": "sha256:187aabfc72add7cee85fdb9cbe27a935e1177018c3f2df475c51394fddda96e4"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/admittedBlueprint/values/1/fields/sourceAuthority/values/1/fields/disposition",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            6,
+            0,
+            0,
+            1,
+            3,
+            1,
+            1,
+            3,
+            0,
+            1
+          ],
+          "startLine": 39,
+          "startColumn": 28,
+          "endLine": 39,
+          "endColumn": 38,
+          "syntaxDigest": "sha256:a4af093c485979b59f1fb043e484461abd1e4bbd318fad2399c36de92493d200"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/admittedBlueprint/values/1/fields/sourceAuthority/values/1/fields/lineage",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            6,
+            0,
+            0,
+            1,
+            3,
+            1,
+            1,
+            3,
+            1,
+            1
+          ],
+          "startLine": 40,
+          "startColumn": 24,
+          "endLine": 40,
+          "endColumn": 39,
+          "syntaxDigest": "sha256:3eb3f3550d34cfa63225fb571c0c3daacb20d406eb587c8fe35cfd59779b3350"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/admittedCarrierDigest",
+        "mechanicId": "format",
+        "operation": "format",
+        "parameterNames": [
+          "template",
+          "values"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage",
+          "admittedBlueprint": "admittedBlueprint"
+        },
+        "providerSourceStart": 11103,
+        "providerSourceEnd": 11286,
+        "providerBodyDigest": "sha256:6ea06eec200037d1316ad18e15b6f79ad91a652fc227f94d57392c27dcd3493b",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            7,
+            0,
+            0,
+            1
+          ],
+          "startLine": 43,
+          "startColumn": 37,
+          "endLine": 51,
+          "endColumn": 8,
+          "syntaxDigest": "sha256:ba00fbab01863bdadab150620b0e44c24bfac0e5dc9b3f40bcccccf51708d04d"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/admittedCarrierDigest/values/hash",
+        "mechanicId": "sha256",
+        "operation": "sha256",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage",
+          "admittedBlueprint": "admittedBlueprint"
+        },
+        "providerSourceStart": 11649,
+        "providerSourceEnd": 11756,
+        "providerBodyDigest": "sha256:f70874eab6263f03b4329526c3a8a9f0db28ee7591d6ac5bc044e3a43964b6cc",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            7,
+            0,
+            0,
+            1,
+            2,
+            1
+          ],
+          "startLine": 46,
+          "startColumn": 11,
+          "endLine": 49,
+          "endColumn": 27,
+          "syntaxDigest": "sha256:1b7d8f007171be3f8bff0ec3e13e34a22a0570ff85fc521a3332539b4cabc645"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/admittedCarrierDigest/values/hash/value",
+        "mechanicId": "json-stringify",
+        "operation": "json-stringify",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage",
+          "admittedBlueprint": "admittedBlueprint"
+        },
+        "providerSourceStart": 11877,
+        "providerSourceEnd": 11950,
+        "providerBodyDigest": "sha256:0a9dc57d510928994484d3d8f476a3d0ca470cbba70e2e9f2ba7f3b26c713fd7",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            7,
+            0,
+            0,
+            1,
+            2,
+            1,
+            0,
+            0,
+            1,
+            1
+          ],
+          "startLine": 48,
+          "startColumn": 28,
+          "endLine": 48,
+          "endColumn": 75,
+          "syntaxDigest": "sha256:0251267d80701f706db07d036f71d8b48e457fa7e62100af3c778400d9e05884"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/admittedCarrierDigest/values/hash/value/value",
+        "mechanicId": "canonicalize",
+        "operation": "canonicalize",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage",
+          "admittedBlueprint": "admittedBlueprint"
+        },
+        "providerSourceStart": 11956,
+        "providerSourceEnd": 12025,
+        "providerBodyDigest": "sha256:8e363f58326b886e63bda9dab3a9bd5ddedcb0442fdef4e3eaeb9d35d44872f4",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            7,
+            0,
+            0,
+            1,
+            2,
+            1,
+            0,
+            0,
+            1,
+            1,
+            1
+          ],
+          "startLine": 48,
+          "startColumn": 43,
+          "endLine": 48,
+          "endColumn": 74,
+          "syntaxDigest": "sha256:f945054497b823066e74e0eadb757e87c815a6e623bada39fd13393fa0075e02"
+        }
+      },
+      {
+        "sourcePointer": "/bindings/admittedCarrierDigest/values/hash/value/value/value",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage",
+          "admittedBlueprint": "admittedBlueprint"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            7,
+            0,
+            0,
+            1,
+            2,
+            1,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1
+          ],
+          "startLine": 48,
+          "startColumn": 56,
+          "endLine": 48,
+          "endColumn": 73,
+          "syntaxDigest": "sha256:4ff9fd53e7c5f9f1895c08faa671f9e1461b5b841a25f95392c62444a8a880b7"
+        }
+      },
+      {
+        "sourcePointer": "/value",
+        "mechanicId": "object",
+        "operation": "object",
+        "parameterNames": [
+          "fields"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage",
+          "admittedBlueprint": "admittedBlueprint",
+          "admittedCarrierDigest": "admittedCarrierDigest"
+        },
+        "providerSourceStart": 8899,
+        "providerSourceEnd": 9021,
+        "providerBodyDigest": "sha256:1c64bf7e879a086062f051dfb0081f2d73ecf7ca51fe9f56cc0ecd19380b20ae",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            8,
+            0
+          ],
+          "startLine": 52,
+          "startColumn": 14,
+          "endLine": 74,
+          "endColumn": 8,
+          "syntaxDigest": "sha256:ee8297196bcded976cf01e8a9a3227b6a80e8383773f6b0b4af26cf0c51e1911"
+        }
+      },
+      {
+        "sourcePointer": "/value/fields/contractId",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage",
+          "admittedBlueprint": "admittedBlueprint",
+          "admittedCarrierDigest": "admittedCarrierDigest"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            8,
+            0,
+            0,
+            1
+          ],
+          "startLine": 53,
+          "startColumn": 25,
+          "endLine": 53,
+          "endColumn": 66,
+          "syntaxDigest": "sha256:a7a6561c75254204fa14b9ef9aaa63a570a42e19fe6b472a2f890ed19a47fb6a"
+        }
+      },
+      {
+        "sourcePointer": "/value/fields/payload",
+        "mechanicId": "object",
+        "operation": "object",
+        "parameterNames": [
+          "fields"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage",
+          "admittedBlueprint": "admittedBlueprint",
+          "admittedCarrierDigest": "admittedCarrierDigest"
+        },
+        "providerSourceStart": 8899,
+        "providerSourceEnd": 9021,
+        "providerBodyDigest": "sha256:1c64bf7e879a086062f051dfb0081f2d73ecf7ca51fe9f56cc0ecd19380b20ae",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            8,
+            0,
+            1,
+            1
+          ],
+          "startLine": 54,
+          "startColumn": 22,
+          "endLine": 73,
+          "endColumn": 10,
+          "syntaxDigest": "sha256:1df44def6e6ebb2cf244c04e2ae78333f6cba328ccf52ffc96b8bd3b636d41b5"
+        }
+      },
+      {
+        "sourcePointer": "/value/fields/payload/fields/disposition",
+        "mechanicId": "if",
+        "operation": "if",
+        "parameterNames": [
+          "when",
+          "then",
+          "else"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage",
+          "admittedBlueprint": "admittedBlueprint",
+          "admittedCarrierDigest": "admittedCarrierDigest"
+        },
+        "providerSourceStart": 10691,
+        "providerSourceEnd": 10791,
+        "providerBodyDigest": "sha256:a7e2d0af98002a3ec2c76fad0cecb1f38d192db53b2b003241e61368630fd09a",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            8,
+            0,
+            1,
+            1,
+            0,
+            1
+          ],
+          "startLine": 55,
+          "startColumn": 28,
+          "endLine": 55,
+          "endColumn": 100,
+          "syntaxDigest": "sha256:4df4940e3aca590920bb7e6ee31314beb12d26711c334f3e6e9483a248c58261"
+        }
+      },
+      {
+        "sourcePointer": "/value/fields/payload/fields/disposition/when",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage",
+          "admittedBlueprint": "admittedBlueprint",
+          "admittedCarrierDigest": "admittedCarrierDigest"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            8,
+            0,
+            1,
+            1,
+            0,
+            1,
+            0
+          ],
+          "startLine": 55,
+          "startColumn": 28,
+          "endLine": 55,
+          "endColumn": 34,
+          "syntaxDigest": "sha256:c3eefb58d7c42440a9d4abec51d629544d635a6d936ff3c4d3fca96d611b3cf3"
+        }
+      },
+      {
+        "sourcePointer": "/value/fields/payload/fields/disposition/then",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage",
+          "admittedBlueprint": "admittedBlueprint",
+          "admittedCarrierDigest": "admittedCarrierDigest"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            8,
+            0,
+            1,
+            1,
+            0,
+            1,
+            2
+          ],
+          "startLine": 55,
+          "startColumn": 37,
+          "endLine": 55,
+          "endColumn": 67,
+          "syntaxDigest": "sha256:824ba1abcfe21f4c0cefa0b00413a656156d7ce906def640575f3e12151b6dbd"
+        }
+      },
+      {
+        "sourcePointer": "/value/fields/payload/fields/disposition/else",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage",
+          "admittedBlueprint": "admittedBlueprint",
+          "admittedCarrierDigest": "admittedCarrierDigest"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            8,
+            0,
+            1,
+            1,
+            0,
+            1,
+            4
+          ],
+          "startLine": 55,
+          "startColumn": 70,
+          "endLine": 55,
+          "endColumn": 100,
+          "syntaxDigest": "sha256:fcc1c69866ea0414fa4771c638d5ed1eecdebf57af68baa2c69f9b11dc689f5f"
+        }
+      },
+      {
+        "sourcePointer": "/value/fields/payload/fields/blueprint",
+        "mechanicId": "if",
+        "operation": "if",
+        "parameterNames": [
+          "when",
+          "then",
+          "else"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage",
+          "admittedBlueprint": "admittedBlueprint",
+          "admittedCarrierDigest": "admittedCarrierDigest"
+        },
+        "providerSourceStart": 10691,
+        "providerSourceEnd": 10791,
+        "providerBodyDigest": "sha256:a7e2d0af98002a3ec2c76fad0cecb1f38d192db53b2b003241e61368630fd09a",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            8,
+            0,
+            1,
+            1,
+            1,
+            1
+          ],
+          "startLine": 56,
+          "startColumn": 26,
+          "endLine": 56,
+          "endColumn": 59,
+          "syntaxDigest": "sha256:8483027edb37842f6ac474a4a15da6c52e97cdda0b4653e2231ddb4ee7ae3e4f"
+        }
+      },
+      {
+        "sourcePointer": "/value/fields/payload/fields/blueprint/when",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage",
+          "admittedBlueprint": "admittedBlueprint",
+          "admittedCarrierDigest": "admittedCarrierDigest"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            8,
+            0,
+            1,
+            1,
+            1,
+            1,
+            0
+          ],
+          "startLine": 56,
+          "startColumn": 26,
+          "endLine": 56,
+          "endColumn": 32,
+          "syntaxDigest": "sha256:c3eefb58d7c42440a9d4abec51d629544d635a6d936ff3c4d3fca96d611b3cf3"
+        }
+      },
+      {
+        "sourcePointer": "/value/fields/payload/fields/blueprint/then",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage",
+          "admittedBlueprint": "admittedBlueprint",
+          "admittedCarrierDigest": "admittedCarrierDigest"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            8,
+            0,
+            1,
+            1,
+            1,
+            1,
+            2
+          ],
+          "startLine": 56,
+          "startColumn": 35,
+          "endLine": 56,
+          "endColumn": 52,
+          "syntaxDigest": "sha256:4ff9fd53e7c5f9f1895c08faa671f9e1461b5b841a25f95392c62444a8a880b7"
+        }
+      },
+      {
+        "sourcePointer": "/value/fields/payload/fields/blueprint/else",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage",
+          "admittedBlueprint": "admittedBlueprint",
+          "admittedCarrierDigest": "admittedCarrierDigest"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            8,
+            0,
+            1,
+            1,
+            1,
+            1,
+            4
+          ],
+          "startLine": 56,
+          "startColumn": 55,
+          "endLine": 56,
+          "endColumn": 59,
+          "syntaxDigest": "sha256:74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      },
+      {
+        "sourcePointer": "/value/fields/payload/fields/blueprintAuthorityDigest",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage",
+          "admittedBlueprint": "admittedBlueprint",
+          "admittedCarrierDigest": "admittedCarrierDigest"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.candidate.blueprintAuthority.authorityDigest",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            8,
+            0,
+            1,
+            1,
+            2,
+            1
+          ],
+          "startLine": 58,
+          "startColumn": 13,
+          "endLine": 58,
+          "endColumn": 75,
+          "syntaxDigest": "sha256:d0c32e9e1a296bec8e4d97a66a83130e42a1a96b5ee5680db1cf7c7347235ca3"
+        }
+      },
+      {
+        "sourcePointer": "/value/fields/payload/fields/candidateCarrierDigest",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage",
+          "admittedBlueprint": "admittedBlueprint",
+          "admittedCarrierDigest": "admittedCarrierDigest"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.candidateCarrierDigest",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            8,
+            0,
+            1,
+            1,
+            3,
+            1
+          ],
+          "startLine": 59,
+          "startColumn": 39,
+          "endLine": 59,
+          "endColumn": 77,
+          "syntaxDigest": "sha256:a5f95f880152dcc3ffd52d68a79f0b743b9eb1803f0eb5326885bfbc447b36c7"
+        }
+      },
+      {
+        "sourcePointer": "/value/fields/payload/fields/admittedCarrierDigest",
+        "mechanicId": "if",
+        "operation": "if",
+        "parameterNames": [
+          "when",
+          "then",
+          "else"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage",
+          "admittedBlueprint": "admittedBlueprint",
+          "admittedCarrierDigest": "admittedCarrierDigest"
+        },
+        "providerSourceStart": 10691,
+        "providerSourceEnd": 10791,
+        "providerBodyDigest": "sha256:a7e2d0af98002a3ec2c76fad0cecb1f38d192db53b2b003241e61368630fd09a",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            8,
+            0,
+            1,
+            1,
+            4,
+            1
+          ],
+          "startLine": 60,
+          "startColumn": 38,
+          "endLine": 60,
+          "endColumn": 75,
+          "syntaxDigest": "sha256:87f33d26eee7a5491c59d8ff04fd97a24389c4901997f6ff059f9a9185b67c45"
+        }
+      },
+      {
+        "sourcePointer": "/value/fields/payload/fields/admittedCarrierDigest/when",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage",
+          "admittedBlueprint": "admittedBlueprint",
+          "admittedCarrierDigest": "admittedCarrierDigest"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            8,
+            0,
+            1,
+            1,
+            4,
+            1,
+            0
+          ],
+          "startLine": 60,
+          "startColumn": 38,
+          "endLine": 60,
+          "endColumn": 44,
+          "syntaxDigest": "sha256:c3eefb58d7c42440a9d4abec51d629544d635a6d936ff3c4d3fca96d611b3cf3"
+        }
+      },
+      {
+        "sourcePointer": "/value/fields/payload/fields/admittedCarrierDigest/then",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage",
+          "admittedBlueprint": "admittedBlueprint",
+          "admittedCarrierDigest": "admittedCarrierDigest"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            8,
+            0,
+            1,
+            1,
+            4,
+            1,
+            2
+          ],
+          "startLine": 60,
+          "startColumn": 47,
+          "endLine": 60,
+          "endColumn": 68,
+          "syntaxDigest": "sha256:b24790e87d3291d15ba41d90640ae49b4a34e386c1c4dc6f2c1e7aea4799665d"
+        }
+      },
+      {
+        "sourcePointer": "/value/fields/payload/fields/admittedCarrierDigest/else",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage",
+          "admittedBlueprint": "admittedBlueprint",
+          "admittedCarrierDigest": "admittedCarrierDigest"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            8,
+            0,
+            1,
+            1,
+            4,
+            1,
+            4
+          ],
+          "startLine": 60,
+          "startColumn": 71,
+          "endLine": 60,
+          "endColumn": 75,
+          "syntaxDigest": "sha256:74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      },
+      {
+        "sourcePointer": "/value/fields/payload/fields/admissionEvidence",
+        "mechanicId": "object",
+        "operation": "object",
+        "parameterNames": [
+          "fields"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage",
+          "admittedBlueprint": "admittedBlueprint",
+          "admittedCarrierDigest": "admittedCarrierDigest"
+        },
+        "providerSourceStart": 8899,
+        "providerSourceEnd": 9021,
+        "providerBodyDigest": "sha256:1c64bf7e879a086062f051dfb0081f2d73ecf7ca51fe9f56cc0ecd19380b20ae",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            8,
+            0,
+            1,
+            1,
+            5,
+            1
+          ],
+          "startLine": 61,
+          "startColumn": 34,
+          "endLine": 65,
+          "endColumn": 12,
+          "syntaxDigest": "sha256:14e1663ea588914889cd56a9bbac6cb42f4e33f7549bf92c8ed37421c5666f66"
+        }
+      },
+      {
+        "sourcePointer": "/value/fields/payload/fields/admissionEvidence/fields/conformanceEvidenceDigest",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage",
+          "admittedBlueprint": "admittedBlueprint",
+          "admittedCarrierDigest": "admittedCarrierDigest"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.conformanceEvidenceDigest",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            8,
+            0,
+            1,
+            1,
+            5,
+            1,
+            0,
+            1
+          ],
+          "startLine": 62,
+          "startColumn": 44,
+          "endLine": 62,
+          "endColumn": 85,
+          "syntaxDigest": "sha256:594af66fabadf06369f51f63d0a4228575c472c337be961fdbdf8b982121f5a9"
+        }
+      },
+      {
+        "sourcePointer": "/value/fields/payload/fields/admissionEvidence/fields/geometryProofDigest",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage",
+          "admittedBlueprint": "admittedBlueprint",
+          "admittedCarrierDigest": "admittedCarrierDigest"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.geometryProofDigest",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            8,
+            0,
+            1,
+            1,
+            5,
+            1,
+            1,
+            1
+          ],
+          "startLine": 63,
+          "startColumn": 38,
+          "endLine": 63,
+          "endColumn": 73,
+          "syntaxDigest": "sha256:97ce6ea251370f6e8985811d6314257a61299943c0145bc549bd98133a7a0cc4"
+        }
+      },
+      {
+        "sourcePointer": "/value/fields/payload/fields/admissionEvidence/fields/reviewReceiptDigest",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage",
+          "admittedBlueprint": "admittedBlueprint",
+          "admittedCarrierDigest": "admittedCarrierDigest"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "payload.reviewReceiptDigest",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            8,
+            0,
+            1,
+            1,
+            5,
+            1,
+            2,
+            1
+          ],
+          "startLine": 64,
+          "startColumn": 38,
+          "endLine": 64,
+          "endColumn": 73,
+          "syntaxDigest": "sha256:2782f63db6c53417ee29d79a60d5c04e2d0633bfa7e184b2f0305ec57271433b"
+        }
+      },
+      {
+        "sourcePointer": "/value/fields/payload/fields/obligationRecord",
+        "mechanicId": "object",
+        "operation": "object",
+        "parameterNames": [
+          "fields"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage",
+          "admittedBlueprint": "admittedBlueprint",
+          "admittedCarrierDigest": "admittedCarrierDigest"
+        },
+        "providerSourceStart": 8899,
+        "providerSourceEnd": 9021,
+        "providerBodyDigest": "sha256:1c64bf7e879a086062f051dfb0081f2d73ecf7ca51fe9f56cc0ecd19380b20ae",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            8,
+            0,
+            1,
+            1,
+            6,
+            1
+          ],
+          "startLine": 66,
+          "startColumn": 33,
+          "endLine": 70,
+          "endColumn": 12,
+          "syntaxDigest": "sha256:125f4a936eb98d6a2a7d280a33d7aa5fed76776c65f112ed817d91596b7389e3"
+        }
+      },
+      {
+        "sourcePointer": "/value/fields/payload/fields/obligationRecord/fields/conformance",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage",
+          "admittedBlueprint": "admittedBlueprint",
+          "admittedCarrierDigest": "admittedCarrierDigest"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            8,
+            0,
+            1,
+            1,
+            6,
+            1,
+            0,
+            1
+          ],
+          "startLine": 67,
+          "startColumn": 30,
+          "endLine": 67,
+          "endColumn": 41,
+          "syntaxDigest": "sha256:6c1d6cedf276ea3fd7486a212fd62b32fbb9ecaa4dea70545486737199dd24ed"
+        }
+      },
+      {
+        "sourcePointer": "/value/fields/payload/fields/obligationRecord/fields/geometry",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage",
+          "admittedBlueprint": "admittedBlueprint",
+          "admittedCarrierDigest": "admittedCarrierDigest"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            8,
+            0,
+            1,
+            1,
+            6,
+            1,
+            1,
+            1
+          ],
+          "startLine": 68,
+          "startColumn": 27,
+          "endLine": 68,
+          "endColumn": 35,
+          "syntaxDigest": "sha256:8148b7fefaf89ebf8e7951994d2601d731220c5460faecc64c69d12bb7ff3213"
+        }
+      },
+      {
+        "sourcePointer": "/value/fields/payload/fields/obligationRecord/fields/review",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage",
+          "admittedBlueprint": "admittedBlueprint",
+          "admittedCarrierDigest": "admittedCarrierDigest"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            8,
+            0,
+            1,
+            1,
+            6,
+            1,
+            2,
+            1
+          ],
+          "startLine": 69,
+          "startColumn": 25,
+          "endLine": 69,
+          "endColumn": 31,
+          "syntaxDigest": "sha256:c97ace4c8fef2cee8fa0f3c9f52aab18dbd4f42438afe362ffb8f75ce4c04b84"
+        }
+      },
+      {
+        "sourcePointer": "/value/fields/payload/fields/findings",
+        "mechanicId": "path",
+        "operation": "path",
+        "parameterNames": [
+          "from",
+          "path"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage",
+          "admittedBlueprint": "admittedBlueprint",
+          "admittedCarrierDigest": "admittedCarrierDigest"
+        },
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893,
+        "providerBodyDigest": "sha256:d6e97996ec256683743037b88b3bf6f5a23bb8ae83133fc4fe04b69fa75a498d",
+        "pathSpelling": "",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            8,
+            0,
+            1,
+            1,
+            7,
+            1
+          ],
+          "startLine": 71,
+          "startColumn": 25,
+          "endLine": 71,
+          "endColumn": 36,
+          "syntaxDigest": "sha256:746d03ed582670a1e376d7151694db5caeec8f66f26dafbd19f16f6f857d9903"
+        }
+      },
+      {
+        "sourcePointer": "/value/fields/payload/fields/blueprintRouteDisposition",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "parameterNames": [
+          "value"
+        ],
+        "scope": {
+          "input": "input",
+          "root": "root",
+          "conformance": "conformance",
+          "geometry": "geometry",
+          "review": "review",
+          "allFindings": "allFindings",
+          "closed": "closed",
+          "admittedLineage": "admittedLineage",
+          "admittedBlueprint": "admittedBlueprint",
+          "admittedCarrierDigest": "admittedCarrierDigest"
+        },
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807,
+        "providerBodyDigest": "sha256:5a3f36e89cf239c3a69e2aa2ceaa5687da4c369d1f14c5899a3c713de69acfac",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "generated": {
+          "file": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs",
+          "astPath": [
+            1,
+            2,
+            3,
+            0,
+            0,
+            0,
+            1,
+            8,
+            0,
+            1,
+            1,
+            8,
+            1
+          ],
+          "startLine": 72,
+          "startColumn": 42,
+          "endLine": 72,
+          "endColumn": 50,
+          "syntaxDigest": "sha256:a8519c42d78eadafc0d8e243adf20d076e5ca3ba6e9fb79d0ad31fcf842dd38e"
+        }
+      }
+    ]
+  }
+]

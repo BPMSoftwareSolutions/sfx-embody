@@ -1,0 +1,488 @@
+{
+  "contracts": {
+    "sidefx-provider-resolution-request.v1": {
+      "schemaRef": "authority/sidefx-semantic-brain/capabilities/resolve-sidefx-eligible-providers/contracts/sidefx-provider-resolution-request.schema.json",
+      "schemaId": "https://schemas.agentic-harness.local/sidefx/sidefx-provider-resolution-request.schema.json",
+      "schemaDigest": "175ae7d320e58f8099c364ff02dcf6cd3c5a200ace3190d06e7bb0065f07bb6b",
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "https://schemas.agentic-harness.local/sidefx/sidefx-provider-resolution-request.schema.json",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "contractId",
+          "evaluationBoundary",
+          "snapshotDigest",
+          "requestedPlatformCapabilityId",
+          "requestedTarget",
+          "conformantDispositions",
+          "providerBindings"
+        ],
+        "properties": {
+          "contractId": {
+            "const": "sidefx-provider-resolution-request.v1"
+          },
+          "evaluationBoundary": {
+            "const": "NON_PRODUCTION_WAVE3_SPECIALIST_ASK"
+          },
+          "snapshotDigest": {
+            "$ref": "#/$defs/digest"
+          },
+          "requestedPlatformCapabilityId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "requestedTarget": {
+            "type": "string",
+            "minLength": 1
+          },
+          "conformantDispositions": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "providerBindings": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "providerBindingRef",
+                "providerBindingDigest",
+                "providerAuthorityId",
+                "providerAuthorityRef",
+                "providerAuthorityDigest",
+                "platformCapabilityId",
+                "lifecycle",
+                "conformanceDisposition",
+                "conformanceReceiptRef",
+                "conformanceReceiptDigest",
+                "authorityBindings",
+                "declaredTargets"
+              ],
+              "properties": {
+                "providerBindingRef": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "providerBindingDigest": {
+                  "$ref": "#/$defs/digest"
+                },
+                "providerAuthorityId": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "providerAuthorityRef": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "providerAuthorityDigest": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "platformCapabilityId": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "lifecycle": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "conformanceDisposition": {
+                  "type": "string"
+                },
+                "conformanceReceiptRef": {
+                  "type": "string"
+                },
+                "conformanceReceiptDigest": {
+                  "type": "string"
+                },
+                "authorityBindings": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "bindingId",
+                      "sourceRef",
+                      "sourceDigest"
+                    ],
+                    "properties": {
+                      "bindingId": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "sourceRef": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "sourceDigest": {
+                        "$ref": "#/$defs/digest"
+                      }
+                    }
+                  }
+                },
+                "declaredTargets": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "$defs": {
+          "digest": {
+            "type": "string",
+            "pattern": "^sha256:[a-f0-9]{64}$"
+          }
+        }
+      }
+    },
+    "sidefx-semantic-provider-resolution.v1": {
+      "schemaRef": "authority/sidefx-semantic-brain/contracts/sidefx-semantic-provider-resolution.schema.json",
+      "schemaId": "https://schemas.agentic-harness.local/sidefx/sidefx-semantic-provider-resolution.schema.json",
+      "schemaDigest": "3124844c88e972ff7855c5dd8fffe13b1bec2769108f2d9c9f706d1ce640c58d",
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "https://schemas.agentic-harness.local/sidefx/sidefx-semantic-provider-resolution.schema.json",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "resolutionType",
+          "disposition",
+          "snapshotDigest",
+          "requestedPlatformCapabilityId",
+          "requestedTarget",
+          "providers",
+          "consideredCount",
+          "eligibleCount",
+          "findings",
+          "resolutionDigest"
+        ],
+        "properties": {
+          "resolutionType": {
+            "const": "sidefx-semantic-provider-resolution.v1"
+          },
+          "disposition": {
+            "enum": [
+              "PROVIDERS_RESOLVED",
+              "NOT_OBSERVABLE"
+            ]
+          },
+          "snapshotDigest": {
+            "$ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+          },
+          "requestedPlatformCapabilityId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "requestedTarget": {
+            "type": "string",
+            "minLength": 1
+          },
+          "providers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "providerBindingRef",
+                "providerBindingDigest",
+                "providerAuthorityId",
+                "providerAuthorityRef",
+                "providerAuthorityDigest",
+                "platformCapabilityId",
+                "lifecycle",
+                "conformanceDisposition",
+                "conformanceReceiptRef",
+                "conformanceReceiptDigest",
+                "authorityBindings",
+                "eligibilityDisposition",
+                "reasonCode"
+              ],
+              "properties": {
+                "providerBindingRef": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "providerBindingDigest": {
+                  "$ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+                },
+                "providerAuthorityId": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "providerAuthorityRef": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "providerAuthorityDigest": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "platformCapabilityId": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "lifecycle": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "conformanceDisposition": {
+                  "type": "string"
+                },
+                "conformanceReceiptRef": {
+                  "type": "string"
+                },
+                "conformanceReceiptDigest": {
+                  "type": "string"
+                },
+                "authorityBindings": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "bindingId",
+                      "sourceRef",
+                      "sourceDigest"
+                    ],
+                    "properties": {
+                      "bindingId": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "sourceRef": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "sourceDigest": {
+                        "$ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+                      }
+                    }
+                  }
+                },
+                "eligibilityDisposition": {
+                  "enum": [
+                    "ELIGIBLE",
+                    "INELIGIBLE",
+                    "NOT_OBSERVABLE",
+                    "NOT_APPLICABLE"
+                  ]
+                },
+                "reasonCode": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          },
+          "consideredCount": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "eligibleCount": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "findings": {
+            "type": "array",
+            "items": {
+              "$ref": "sidefx-semantic-common.schema.json#/$defs/finding"
+            }
+          },
+          "resolutionDigest": {
+            "$ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+          }
+        }
+      }
+    },
+    "sidefx-semantic-common.v1": {
+      "schemaRef": "authority/sidefx-semantic-brain/contracts/sidefx-semantic-common.schema.json",
+      "schemaId": "https://schemas.agentic-harness.local/sidefx/sidefx-semantic-common.schema.json",
+      "schemaDigest": "9956823b0057f75ddbb387a907653cd360249cbf104db41117208c348c88d080",
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "https://schemas.agentic-harness.local/sidefx/sidefx-semantic-common.schema.json",
+        "$defs": {
+          "digest": {
+            "type": "string",
+            "pattern": "^sha256:[a-f0-9]{64}$"
+          },
+          "nonEmptyString": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sourceClass": {
+            "enum": [
+              "CANONICAL_AUTHORITY",
+              "ADMITTED_EVIDENCE",
+              "PROJECTION_EVIDENCE",
+              "MODEL_TESTIMONY",
+              "DUPLICATE_OR_SUPERSEDED",
+              "UNSUPPORTED",
+              "EXCLUDED"
+            ]
+          },
+          "objectKind": {
+            "enum": [
+              "CAPABILITY",
+              "PROMISED_EXPERIENCE",
+              "OBSERVABLE_CONDITION",
+              "SCENARIO",
+              "INPUT",
+              "EVENT",
+              "OUTCOME",
+              "INPUT_CONTRACT",
+              "OUTCOME_CONTRACT",
+              "SCHEMA",
+              "TRANSITION",
+              "EXECUTION_AUTHORITY",
+              "EXECUTION_OPERATION",
+              "INTERFACE",
+              "PORT",
+              "PROJECTION_BINDING",
+              "PLATFORM_CAPABILITY",
+              "FIXTURE",
+              "PROJECTED_TEST",
+              "PROOF_OBLIGATION",
+              "PROJECTION_TARGET",
+              "CONFORMANCE_EVIDENCE",
+              "ARTIFACT",
+              "POLICY"
+            ]
+          },
+          "relationshipKind": {
+            "enum": [
+              "CAPABILITY_PROMISES_EXPERIENCE",
+              "EXPERIENCE_REQUIRES_CONDITION",
+              "CAPABILITY_HAS_SCENARIO",
+              "SCENARIO_ACCEPTS_INPUT",
+              "SCENARIO_HANDLES_EVENT",
+              "SCENARIO_PRODUCES_OUTCOME",
+              "EVENT_GOVERNED_BY_EXECUTION_AUTHORITY",
+              "SCENARIO_TRANSITIONS_TO_SCENARIO",
+              "EXECUTION_AUTHORITY_INVOKES_PORT",
+              "EXECUTION_AUTHORITY_INVOKES_SCENARIO",
+              "INTERFACE_EXPOSES_SCENARIO",
+              "PORT_BOUND_TO_PLATFORM_CAPABILITY",
+              "PROJECTION_BOUND_TO_PLATFORM_CAPABILITY",
+              "CONTRACT_CATALOG_DECLARES_CONTRACT",
+              "CONTRACT_VALIDATED_BY_SCHEMA",
+              "FIXTURE_EXERCISES_SCENARIO",
+              "FIXTURE_EXECUTED_AS_PROJECTED_TEST",
+              "EVIDENCE_PROVES_SUBJECT",
+              "PROJECTION_EMBODIES_CAPABILITY_ON_TARGET",
+              "ARTIFACT_DERIVED_FROM_AUTHORITY"
+            ]
+          },
+          "sourceLocator": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "sourceRef",
+              "sourcePointer",
+              "sourceDigest"
+            ],
+            "properties": {
+              "sourceRef": {
+                "$ref": "#/$defs/nonEmptyString"
+              },
+              "sourcePointer": {
+                "type": "string"
+              },
+              "sourceDigest": {
+                "$ref": "#/$defs/digest"
+              },
+              "start": {
+                "$ref": "#/$defs/sourcePosition"
+              },
+              "end": {
+                "$ref": "#/$defs/sourcePosition"
+              }
+            }
+          },
+          "sourcePosition": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "line",
+              "column",
+              "byteOffset"
+            ],
+            "properties": {
+              "line": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "column": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "byteOffset": {
+                "type": "integer",
+                "minimum": 0
+              }
+            }
+          },
+          "finding": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "code",
+              "severity",
+              "message",
+              "sourceRef",
+              "sourcePointer"
+            ],
+            "properties": {
+              "code": {
+                "$ref": "#/$defs/nonEmptyString"
+              },
+              "severity": {
+                "enum": [
+                  "INFO",
+                  "WARNING",
+                  "ERROR",
+                  "FATAL"
+                ]
+              },
+              "message": {
+                "$ref": "#/$defs/nonEmptyString"
+              },
+              "ruleId": {
+                "type": "string"
+              },
+              "sourceRef": {
+                "$ref": "#/$defs/nonEmptyString"
+              },
+              "sourcePointer": {
+                "type": "string"
+              },
+              "start": {
+                "$ref": "#/$defs/sourcePosition"
+              },
+              "end": {
+                "$ref": "#/$defs/sourcePosition"
+              },
+              "relatedSourcePointers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

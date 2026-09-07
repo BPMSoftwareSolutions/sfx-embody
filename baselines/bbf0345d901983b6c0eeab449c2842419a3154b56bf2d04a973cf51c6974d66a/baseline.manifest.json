@@ -1,0 +1,2475 @@
+{
+  "implementationDigest": "sha256:bbf0345d901983b6c0eeab449c2842419a3154b56bf2d04a973cf51c6974d66a",
+  "snapshotId": "sha256:38debec6dbfa1266f68d903166f69b831c178ffe967208900efcddd9ce2973bc",
+  "projectionDigest": "sha256:81eb41f0faeadcb413d1b5bae9ba991f2d9d753489cfb3a8919c5f72e71f7d28",
+  "files": [
+    {
+      "path": "authority-bundle.json",
+      "digest": "sha256:8bc2c99ccfdcec2f9359b68d0e52fe1e29141e017048a5599a57b543738047b8"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/composition.mjs",
+      "digest": "sha256:a413dab8ba07c2b498afda5581cab347add40db1002c20c9ab19d768f164c7ed"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/contracts/authority.json",
+      "digest": "sha256:4873902d390bb0c6a958b219b2de213f2d64f0f86d640b40755958ae804cca43"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/contracts/index.ts",
+      "digest": "sha256:592149e8dc05c594f857a0cc9c4bb0b7edd9ee7437883fb54ad0df4cb692f8fd"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/contracts/job-market-intelligence-adapter-record-v1-record-binding-result.ts",
+      "digest": "sha256:46df7dc3eb6e797c20fc69f92c35f04a06966f116b0ae5919f4646057595aa96"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/contracts/job-market-intelligence-adapter-record-v1-type-admission-result.ts",
+      "digest": "sha256:984fef9abbfad34f0e8266ff53d38e5447805b3a8b00ea50102eb4425e0d2b14"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/contracts/job-market-intelligence-adapter-record-v1.ts",
+      "digest": "sha256:de7f853953e7c39095b03ddea0164cb775e40c6ce20d8c771354c685987ee482"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/dependencies.json",
+      "digest": "sha256:6dc3538c4504f240d5465a686b2e49f888a1681ff9920db63ae53a3c1a0afa36"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/package-lock.json",
+      "digest": "sha256:ad1d5e78e09bf26ff4eb818286356fd96d6c63727dd58513596a41d95e43bcf5"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/package.json",
+      "digest": "sha256:ff10b66f9f3b2a597bfd3a8a45e886694ffd965a5eccb93ec4c88715c33c6f17"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/expression.mjs",
+      "digest": "sha256:34625a18a276fc51168c1c101e84df0129916da527a98364fc63794ebb2f134a"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/mechanics.mjs",
+      "digest": "sha256:705e675ec537909e1d1db03a0b3999450ac95116e68f715c5f40ad846c36dcdf"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/native-mechanic-primitives.mjs",
+      "digest": "sha256:1cc204869f0ce7b60ad03187d364db4a432b0b632ce4469a7cf37747d6a379d5"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/port-0.mjs",
+      "digest": "sha256:53e5f34d974d76be3a244271050a0fa5b60d4e14142d9a4b8bc6e770fc460a40"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/sda/languages/typescript/dist/src/execution/contract-validator.js",
+      "digest": "sha256:9ee125e72ba67428097f6af28d9698d161db4c0f83f5e14918057b3faaf7be46"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/sda/languages/typescript/dist/src/execution/disposition-resolver.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/sda/languages/typescript/dist/src/execution/execution-authority-resolver.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/sda/languages/typescript/dist/src/execution/execution-observer.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/sda/languages/typescript/dist/src/execution/index.js",
+      "digest": "sha256:a83b3c4caa43ac6ab1996b708797e15cde6b5d4b036b95be1da918688142159d"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/sda/languages/typescript/dist/src/execution/semantic-executor.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/sda/languages/typescript/dist/src/kernel/disposition-resolver.js",
+      "digest": "sha256:7cdae956253d6a48de978f1191c044d999d515f8aac7427393fa9da735faa688"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/sda/languages/typescript/dist/src/kernel/scenario-kernel.js",
+      "digest": "sha256:8a3cf0b6bac20fb514e631d27c29e5ec659625aaf885e2ccd64a7a340daa6384"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/sda/languages/typescript/runtimes/node/schema-contract-admission-provider.mjs",
+      "digest": "sha256:b8b8b60d0023d2ab0bff2d1239a3e19d73ebe2d4405b47cef006004b370eac5a"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/scenario.mjs",
+      "digest": "sha256:d99f9986060a11c70dbce9069e0bebf7bea34c24a3fb1fbe9d1d56995e483bc0"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/embodiment.receipt.json",
+      "digest": "sha256:beadc6091408a7df4e746c721cfe1922f73be392941c9200ebafd4168f1cb0d4"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/evidence/authority.json",
+      "digest": "sha256:0b21ea932337c15cd88bb1344376671d1c9832a4a625828bab06366ce50b0c71"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/evidence/canonical-execution-graph.json",
+      "digest": "sha256:40cb72dc2beffde87397380c7a597ce2b39c70c45f606832944c472983086afc"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/evidence/conformance.json",
+      "digest": "sha256:80e99c02489cb0732e6f8a6507e939b78064367ecf8cf9c58f11223889c45727"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/evidence/contract-projection.json",
+      "digest": "sha256:efcea9cf17716a72230586d43a5b826c06998535bfc5f0835b33612576711039"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/evidence/embodiment-plan.json",
+      "digest": "sha256:9d77af3acbd27416c7a7c38b78876434f26832b07622acb2b6b381a5ed07a3d5"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/evidence/fixture-authority.json",
+      "digest": "sha256:c1a0e9b06506166a1edea229292e91c97ede98132c756795e03fa3a3a71b63a3"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/evidence/fixture-results.json",
+      "digest": "sha256:1d41117f63f0ba8968f0fe72b6d4d1d618053c273d4eab41bedd7ecaf2a4638f"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/evidence/mechanic-lineage.json",
+      "digest": "sha256:c8fcb048d584befeb31465dda1c19976a606f30161c4d504a37b985fc5bb45d1"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/evidence/negative-checks.json",
+      "digest": "sha256:cdf13e7d459641d8e037dab29462f06a6eb9856e2c31d7a794dad02ded62de8f"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/evidence/reveal.json",
+      "digest": "sha256:b1cd16164e328aeb901cbb57ff59aa18c6d642b7f41be3dfacc3748fbfe6573b"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/evidence/target-readiness.json",
+      "digest": "sha256:0741be3016c9130f2f7ac93fba0d2ddc5eac11bab3fec436ceaf22a353bfdb5f"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/composition.mjs",
+      "digest": "sha256:5476dad9909fedb5f348aaf6949215b3cf8cc6ba8a2c6ceaee635728938594cc"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/contracts/authority.json",
+      "digest": "sha256:4873902d390bb0c6a958b219b2de213f2d64f0f86d640b40755958ae804cca43"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/contracts/index.ts",
+      "digest": "sha256:592149e8dc05c594f857a0cc9c4bb0b7edd9ee7437883fb54ad0df4cb692f8fd"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/contracts/job-market-intelligence-adapter-record-v1-record-binding-result.ts",
+      "digest": "sha256:46df7dc3eb6e797c20fc69f92c35f04a06966f116b0ae5919f4646057595aa96"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/contracts/job-market-intelligence-adapter-record-v1-type-admission-result.ts",
+      "digest": "sha256:984fef9abbfad34f0e8266ff53d38e5447805b3a8b00ea50102eb4425e0d2b14"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/contracts/job-market-intelligence-adapter-record-v1.ts",
+      "digest": "sha256:de7f853953e7c39095b03ddea0164cb775e40c6ce20d8c771354c685987ee482"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/dependencies.json",
+      "digest": "sha256:ccdd363f8e413ae57b6030eb200b160e1d4c8561c5df6cebe2beeafa17c37fcb"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/package-lock.json",
+      "digest": "sha256:ad1d5e78e09bf26ff4eb818286356fd96d6c63727dd58513596a41d95e43bcf5"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/package.json",
+      "digest": "sha256:ff10b66f9f3b2a597bfd3a8a45e886694ffd965a5eccb93ec4c88715c33c6f17"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/providers/expression.mjs",
+      "digest": "sha256:34625a18a276fc51168c1c101e84df0129916da527a98364fc63794ebb2f134a"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/providers/mechanics.mjs",
+      "digest": "sha256:a6d6816040c4cfc1e742881623cc15e1248042d3676f3db7f7cd0612a13f357b"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/providers/native-mechanic-primitives.mjs",
+      "digest": "sha256:1cc204869f0ce7b60ad03187d364db4a432b0b632ce4469a7cf37747d6a379d5"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/providers/port-0.mjs",
+      "digest": "sha256:1ffcff4ebf5109602f1c35eb1134781e721b21bbca62b312541a0ee13bc10919"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/providers/sda/languages/typescript/dist/src/execution/contract-validator.js",
+      "digest": "sha256:9ee125e72ba67428097f6af28d9698d161db4c0f83f5e14918057b3faaf7be46"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/providers/sda/languages/typescript/dist/src/execution/disposition-resolver.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/providers/sda/languages/typescript/dist/src/execution/execution-authority-resolver.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/providers/sda/languages/typescript/dist/src/execution/execution-observer.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/providers/sda/languages/typescript/dist/src/execution/index.js",
+      "digest": "sha256:a83b3c4caa43ac6ab1996b708797e15cde6b5d4b036b95be1da918688142159d"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/providers/sda/languages/typescript/dist/src/execution/semantic-executor.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/providers/sda/languages/typescript/dist/src/kernel/disposition-resolver.js",
+      "digest": "sha256:7cdae956253d6a48de978f1191c044d999d515f8aac7427393fa9da735faa688"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/providers/sda/languages/typescript/dist/src/kernel/scenario-kernel.js",
+      "digest": "sha256:8a3cf0b6bac20fb514e631d27c29e5ec659625aaf885e2ccd64a7a340daa6384"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/providers/sda/languages/typescript/runtimes/node/schema-contract-admission-provider.mjs",
+      "digest": "sha256:b8b8b60d0023d2ab0bff2d1239a3e19d73ebe2d4405b47cef006004b370eac5a"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/scenario.mjs",
+      "digest": "sha256:65da86f198a35b50b3a49098ce16ab3b4efdfb8de82238769db5b17600962661"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/embodiment.receipt.json",
+      "digest": "sha256:f1cced81abb5f192b54be1d7b8970be14d015790af71f1264d7280e14a4a5fff"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/evidence/authority.json",
+      "digest": "sha256:eb9f793906cb376788d985b5048d660d733c9a63cfb93808aea162a608400722"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/evidence/canonical-execution-graph.json",
+      "digest": "sha256:40cb72dc2beffde87397380c7a597ce2b39c70c45f606832944c472983086afc"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/evidence/conformance.json",
+      "digest": "sha256:77ea51f33fcbe75204838ce026d4c01812a48691dc3367e9d698a4691f739b12"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/evidence/contract-projection.json",
+      "digest": "sha256:efcea9cf17716a72230586d43a5b826c06998535bfc5f0835b33612576711039"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/evidence/embodiment-plan.json",
+      "digest": "sha256:c82f0a843c7af891fa23342d1e1a397b15fae4d45a4f6e9da4f08d8d6433a536"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/evidence/fixture-authority.json",
+      "digest": "sha256:c1a0e9b06506166a1edea229292e91c97ede98132c756795e03fa3a3a71b63a3"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/evidence/fixture-results.json",
+      "digest": "sha256:8554829aeda6268fadb95ac25030a6a0a9e86d9c85dcdd07f5ec587b1bfb98d2"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/evidence/mechanic-lineage.json",
+      "digest": "sha256:2bf149f33df8d9e94db9d9b76f127ec51bafa1308a1f45c5b7f68a74be1af076"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/evidence/reveal.json",
+      "digest": "sha256:6461bb114758a515d6280e15d59d709653e7c7bf2a3898256ba7e50b5484a41c"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/evidence/target-readiness.json",
+      "digest": "sha256:0741be3016c9130f2f7ac93fba0d2ddc5eac11bab3fec436ceaf22a353bfdb5f"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/composition.mjs",
+      "digest": "sha256:80b1309167bc58dbeb1b1007be1542f4ddad60d7dbaba792f82fb77de3236e73"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/contracts/authority.json",
+      "digest": "sha256:4873902d390bb0c6a958b219b2de213f2d64f0f86d640b40755958ae804cca43"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/contracts/index.ts",
+      "digest": "sha256:592149e8dc05c594f857a0cc9c4bb0b7edd9ee7437883fb54ad0df4cb692f8fd"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/contracts/job-market-intelligence-adapter-record-v1-record-binding-result.ts",
+      "digest": "sha256:46df7dc3eb6e797c20fc69f92c35f04a06966f116b0ae5919f4646057595aa96"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/contracts/job-market-intelligence-adapter-record-v1-type-admission-result.ts",
+      "digest": "sha256:984fef9abbfad34f0e8266ff53d38e5447805b3a8b00ea50102eb4425e0d2b14"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/contracts/job-market-intelligence-adapter-record-v1.ts",
+      "digest": "sha256:de7f853953e7c39095b03ddea0164cb775e40c6ce20d8c771354c685987ee482"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/dependencies.json",
+      "digest": "sha256:315b1f8ffb9a6b1efbfd5bc713f91425362903f3ab68b6a4856e5cdda86baa71"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/package-lock.json",
+      "digest": "sha256:ad1d5e78e09bf26ff4eb818286356fd96d6c63727dd58513596a41d95e43bcf5"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/package.json",
+      "digest": "sha256:ff10b66f9f3b2a597bfd3a8a45e886694ffd965a5eccb93ec4c88715c33c6f17"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/providers/expression.mjs",
+      "digest": "sha256:34625a18a276fc51168c1c101e84df0129916da527a98364fc63794ebb2f134a"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/providers/mechanics.mjs",
+      "digest": "sha256:a4aac1accfe79bb2a6721d94c4585d933b8b25486aff27d4584a245095e7ade5"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/providers/native-mechanic-primitives.mjs",
+      "digest": "sha256:1cc204869f0ce7b60ad03187d364db4a432b0b632ce4469a7cf37747d6a379d5"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/providers/port-0.mjs",
+      "digest": "sha256:3d0bf06fc5f86d4ad07d36353810a57c634f0d818cbd6a58d0795ff813f37102"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/providers/sda/languages/typescript/dist/src/execution/contract-validator.js",
+      "digest": "sha256:9ee125e72ba67428097f6af28d9698d161db4c0f83f5e14918057b3faaf7be46"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/providers/sda/languages/typescript/dist/src/execution/disposition-resolver.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/providers/sda/languages/typescript/dist/src/execution/execution-authority-resolver.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/providers/sda/languages/typescript/dist/src/execution/execution-observer.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/providers/sda/languages/typescript/dist/src/execution/index.js",
+      "digest": "sha256:a83b3c4caa43ac6ab1996b708797e15cde6b5d4b036b95be1da918688142159d"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/providers/sda/languages/typescript/dist/src/execution/semantic-executor.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/providers/sda/languages/typescript/dist/src/kernel/disposition-resolver.js",
+      "digest": "sha256:7cdae956253d6a48de978f1191c044d999d515f8aac7427393fa9da735faa688"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/providers/sda/languages/typescript/dist/src/kernel/scenario-kernel.js",
+      "digest": "sha256:8a3cf0b6bac20fb514e631d27c29e5ec659625aaf885e2ccd64a7a340daa6384"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/providers/sda/languages/typescript/runtimes/node/schema-contract-admission-provider.mjs",
+      "digest": "sha256:b8b8b60d0023d2ab0bff2d1239a3e19d73ebe2d4405b47cef006004b370eac5a"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/scenario.mjs",
+      "digest": "sha256:55ca398d2827a3db5d4560dece6fd07600fcf40f903200967be17f1190f69b6b"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/embodiment.receipt.json",
+      "digest": "sha256:c8fa1f4e3aebbef019d0d24e65128d6fc2f85e109caab0e501685858ce4f1636"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/evidence/authority.json",
+      "digest": "sha256:9bb0370cadf5c6e4759db35423927cf5a009fbead16b025487091bc17bb906e9"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/evidence/canonical-execution-graph.json",
+      "digest": "sha256:40cb72dc2beffde87397380c7a597ce2b39c70c45f606832944c472983086afc"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/evidence/conformance.json",
+      "digest": "sha256:425f340b004798fec54f37a097ba78c25f5dd57ccb26cfdc44d46d1b340254df"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/evidence/contract-projection.json",
+      "digest": "sha256:efcea9cf17716a72230586d43a5b826c06998535bfc5f0835b33612576711039"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/evidence/embodiment-plan.json",
+      "digest": "sha256:1e776bae7015f65dd9ad0c68042b0a03dca719ea5a18b52b82b40bd2cc75f57a"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/evidence/fixture-authority.json",
+      "digest": "sha256:c1a0e9b06506166a1edea229292e91c97ede98132c756795e03fa3a3a71b63a3"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/evidence/fixture-results.json",
+      "digest": "sha256:ed64d7d319f536d0373fb973bea71dbb9a4c597e8bc93482d105b21e7d7ec248"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/evidence/mechanic-lineage.json",
+      "digest": "sha256:423c1c969b715a9664d791d085070427db9787e246fb56e27bff76b3d4c2e42a"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/evidence/reveal.json",
+      "digest": "sha256:e55047852fb8a4bfb201a1d5a51a7679866ac875fbe41a00dca63917c97015c4"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/evidence/target-readiness.json",
+      "digest": "sha256:0741be3016c9130f2f7ac93fba0d2ddc5eac11bab3fec436ceaf22a353bfdb5f"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-type-admission/node/body/composition.mjs",
+      "digest": "sha256:2c59d0ffcd266fdb681fb2c2e2d733724074bddad239baa89d59ee0cf264dada"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-type-admission/node/body/contracts/authority.json",
+      "digest": "sha256:4873902d390bb0c6a958b219b2de213f2d64f0f86d640b40755958ae804cca43"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-type-admission/node/body/contracts/index.ts",
+      "digest": "sha256:592149e8dc05c594f857a0cc9c4bb0b7edd9ee7437883fb54ad0df4cb692f8fd"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-type-admission/node/body/contracts/job-market-intelligence-adapter-record-v1-record-binding-result.ts",
+      "digest": "sha256:46df7dc3eb6e797c20fc69f92c35f04a06966f116b0ae5919f4646057595aa96"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-type-admission/node/body/contracts/job-market-intelligence-adapter-record-v1-type-admission-result.ts",
+      "digest": "sha256:984fef9abbfad34f0e8266ff53d38e5447805b3a8b00ea50102eb4425e0d2b14"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-type-admission/node/body/contracts/job-market-intelligence-adapter-record-v1.ts",
+      "digest": "sha256:de7f853953e7c39095b03ddea0164cb775e40c6ce20d8c771354c685987ee482"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-type-admission/node/body/dependencies.json",
+      "digest": "sha256:eab5b30a6897f53c00ac1ebad31f53c536eec84271cbb558a9148bcea5c4f72c"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-type-admission/node/body/package-lock.json",
+      "digest": "sha256:ad1d5e78e09bf26ff4eb818286356fd96d6c63727dd58513596a41d95e43bcf5"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-type-admission/node/body/package.json",
+      "digest": "sha256:ff10b66f9f3b2a597bfd3a8a45e886694ffd965a5eccb93ec4c88715c33c6f17"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-type-admission/node/body/providers/expression.mjs",
+      "digest": "sha256:34625a18a276fc51168c1c101e84df0129916da527a98364fc63794ebb2f134a"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-type-admission/node/body/providers/mechanics.mjs",
+      "digest": "sha256:022c55f1bd00edb9a2e0d65f26f03ddc347c3da5b32585638b7b025803143566"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-type-admission/node/body/providers/native-mechanic-primitives.mjs",
+      "digest": "sha256:1cc204869f0ce7b60ad03187d364db4a432b0b632ce4469a7cf37747d6a379d5"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-type-admission/node/body/providers/port-0.mjs",
+      "digest": "sha256:30c9ae28df1838cf84b583207d545a71c3f2704c0cc052d3dd70679c7249f81e"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-type-admission/node/body/providers/sda/languages/typescript/dist/src/execution/contract-validator.js",
+      "digest": "sha256:9ee125e72ba67428097f6af28d9698d161db4c0f83f5e14918057b3faaf7be46"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-type-admission/node/body/providers/sda/languages/typescript/dist/src/execution/disposition-resolver.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-type-admission/node/body/providers/sda/languages/typescript/dist/src/execution/execution-authority-resolver.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-type-admission/node/body/providers/sda/languages/typescript/dist/src/execution/execution-observer.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-type-admission/node/body/providers/sda/languages/typescript/dist/src/execution/index.js",
+      "digest": "sha256:a83b3c4caa43ac6ab1996b708797e15cde6b5d4b036b95be1da918688142159d"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-type-admission/node/body/providers/sda/languages/typescript/dist/src/execution/semantic-executor.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-type-admission/node/body/providers/sda/languages/typescript/dist/src/kernel/disposition-resolver.js",
+      "digest": "sha256:7cdae956253d6a48de978f1191c044d999d515f8aac7427393fa9da735faa688"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-type-admission/node/body/providers/sda/languages/typescript/dist/src/kernel/scenario-kernel.js",
+      "digest": "sha256:8a3cf0b6bac20fb514e631d27c29e5ec659625aaf885e2ccd64a7a340daa6384"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-type-admission/node/body/providers/sda/languages/typescript/runtimes/node/schema-contract-admission-provider.mjs",
+      "digest": "sha256:b8b8b60d0023d2ab0bff2d1239a3e19d73ebe2d4405b47cef006004b370eac5a"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-type-admission/node/body/scenario.mjs",
+      "digest": "sha256:2dcf3aad4c2105e07ad3f650f71b73fae93a04581734b82e53119daa9eb8c314"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-type-admission/node/embodiment.receipt.json",
+      "digest": "sha256:2249278b579010b4157aea48e9c813561424d13f3e38d64b381b949775dd59c3"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-type-admission/node/evidence/authority.json",
+      "digest": "sha256:6392d598041a4a782abd13f1419bf6c098e1a5638cbb31760307b8efa367fb3f"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-type-admission/node/evidence/canonical-execution-graph.json",
+      "digest": "sha256:40cb72dc2beffde87397380c7a597ce2b39c70c45f606832944c472983086afc"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-type-admission/node/evidence/conformance.json",
+      "digest": "sha256:8e38b0e81440533b4a4036c1f907845d6755de5e732c74d8d8c283fa15cc6de8"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-type-admission/node/evidence/contract-projection.json",
+      "digest": "sha256:efcea9cf17716a72230586d43a5b826c06998535bfc5f0835b33612576711039"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-type-admission/node/evidence/embodiment-plan.json",
+      "digest": "sha256:5325580f553b6b19df8e59c269ac0018d4ff446149e853cb270b7ab72e30b453"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-type-admission/node/evidence/fixture-authority.json",
+      "digest": "sha256:c1a0e9b06506166a1edea229292e91c97ede98132c756795e03fa3a3a71b63a3"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-type-admission/node/evidence/fixture-results.json",
+      "digest": "sha256:e442126af661caf8a69762964c514a0011d050bf5dddfe25868916626a219d6f"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-type-admission/node/evidence/mechanic-lineage.json",
+      "digest": "sha256:c5e03efb1de47a251ee1ccef6014e5d5576b51d67d2c02f9d1f9f80844838ac0"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-type-admission/node/evidence/reveal.json",
+      "digest": "sha256:d9cb37fe1197f8850e69a9180d6829201ce25684f3ebdec35aedb5689f751387"
+    },
+    {
+      "path": "embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-type-admission/node/evidence/target-readiness.json",
+      "digest": "sha256:0741be3016c9130f2f7ac93fba0d2ddc5eac11bab3fec436ceaf22a353bfdb5f"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/composition.mjs",
+      "digest": "sha256:4442ad0a850cc1bea67fcfef185761e59d2a4c3a85308845ae13ac75c6183d37"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload-admission-evidence.ts",
+      "digest": "sha256:565a23905b1a92816803c095a339a115d6576a13d82809effb434caea7d9a78f"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload-items.ts",
+      "digest": "sha256:e0c0a0d974f399e1b7f79807ee45da3344a3313100d6b6af90eaefcdb9db842a"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload-obligation-record-conformance.ts",
+      "digest": "sha256:c9e7580a583634a525e9c6060ed127359b251a4ae24d14b1822fcf2a1a07f0bd"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload-obligation-record-geometry.ts",
+      "digest": "sha256:0c3a5c3c64771ef5e26e2939138bfd7f39b983d121b2e90f54421840b8a9a9f6"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload-obligation-record-review.ts",
+      "digest": "sha256:a2139c37ae5087a2193ecea3d822e43a84683db6824458b118cb53feda7dea85"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload-obligation-record.ts",
+      "digest": "sha256:88bfcf679367c1bb4795d90622d4994aa09e8df8760d8080285ab8d74e8d2902"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload.ts",
+      "digest": "sha256:45647619b86318ca4c11e35cd664ccdac8ab6e6e366b361fdfe612bd337eb8f7"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/admitted-canonical-circuit-blueprint-v1.ts",
+      "digest": "sha256:4ca7a9c4ae205ab1d2075d8552b4c5d0e58f896515c43fb81a960dbe1319a424"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/authority.json",
+      "digest": "sha256:539e3d68736b71c2123b4abf2fe59b7c2fdece9fc84dcc91ac9b0461a5d3f7c3"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/blueprint-admission-obligation-disposition-v1-payload.ts",
+      "digest": "sha256:cf3717236a9d6831874f2e70d9f75d44e651d897423b5d1a0148e05d2d4be845"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/blueprint-admission-obligation-disposition-v1.ts",
+      "digest": "sha256:99bc60d101eedad32274ea627923b131c165afc7ba40cd654b741825e5ebbd4a"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-blueprint-admission-request-v1-payload.ts",
+      "digest": "sha256:df2b196685c703d364f08373eb3e6aa1b1e5383628a9d890257abd338b0e33e6"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-blueprint-admission-request-v1.ts",
+      "digest": "sha256:0184dd0ef6afe50f140b987c16e5c97e53f4eaaa538918eee945efddbb9f2fcd"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-blueprint-authority.ts",
+      "digest": "sha256:27cedd70ebcffffe701893cdd7778a1d2d4429dd83d0dc8fac9b0bc664fa92bd"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-capability.ts",
+      "digest": "sha256:4083c7ab02a63b41a39f44344969cbd95f824e22276b6068dbd2f6c9e7a12593"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-edge-authority-ref.ts",
+      "digest": "sha256:f3ebe2b29c43497ce262f49315d74bead4c24b583c61e7b446569b9400666b16"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-edge-bounded-return-authority-ref.ts",
+      "digest": "sha256:325460a6adbf114a7cadaa959257e6223c06dfa73cfd89ac37954de80cdc1c13"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-edge-bounded-return.ts",
+      "digest": "sha256:9b64f99a0c5047c51af645358cedce3be8578b6e82d2fd5d6f1826fbbd386a0d"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-edge-edge-observability-obligation-authority-ref.ts",
+      "digest": "sha256:d587aadf755e0e1ed0eb9eb48e4b8345d6c94c67ff83dbee9fbcc8c62a43014f"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-edge-edge-observability-obligation.ts",
+      "digest": "sha256:40d1f8d02da93f8afdde2827131b063a36aaa0f002e9005405fe49354159c845"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-edge.ts",
+      "digest": "sha256:e6fae5e1642bb6158fb9d3770a321fdeb612301ac99a8ef9a55296178687125a"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-energized-authority-ref.ts",
+      "digest": "sha256:870df92801344b7a618b43bc8a43bee09d9294fd6d89ea44adf008bf79bb647e"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-energized.ts",
+      "digest": "sha256:3d1ad7e42a24a39908d129f9c1d7fb36d0aa2f03382a4429104fa4a63b1d4ddf"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-first-authority-ref.ts",
+      "digest": "sha256:f80f5ac0a6ecf4e61aa52b444051b6bb6f6755b593272006f9dbb5e2296a8290"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-first.ts",
+      "digest": "sha256:6441bfbacc9239647956dca073d14852ada11da6a7a2f87d6f33602a783fce99"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-result-authority-ref.ts",
+      "digest": "sha256:dcb21749412123767e44a333c14b2503f0e4491309450ee7c6fce12741061257"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-result-items.ts",
+      "digest": "sha256:e8b4d96c9f7067d84f9d6099e64a83703659aea2281dbd722ad6426e671367ae"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-result.ts",
+      "digest": "sha256:632c23619d062ab671875c38d106b0189c16a6f8c29c9541b14069ead58c6078"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-node-cell.ts",
+      "digest": "sha256:87b1c4b96cb9b038924741f00423f7180583fca36721261560bb15e5fb5380df"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-node-observability-contract-authority-ref.ts",
+      "digest": "sha256:f5ac668da23c51e39f7e5edd5f6ff54afac58991e5b92f81aaec0e5af9b47e9f"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-node-observability-contract-items.ts",
+      "digest": "sha256:f96574a4e177c665f0f55e83852f0dbd9a5c141ecbdf49bb65b22163a9e30cbb"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-node-observability-contract-sampling-authority-ref.ts",
+      "digest": "sha256:8f496e80f211c9cd556e5393f0d6f30b20ebce745a1aef9a241ac9132d086544"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-node-observability-contract-sampling.ts",
+      "digest": "sha256:8436092aa2f423f9b11265e68a6c9a416f18d7b3e2f7fe69cf3c7605e0d684a1"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-node-observability-contract.ts",
+      "digest": "sha256:6c149d9330398837003069da5794b781954b18950df2a1b45d2f5f12299f7ed2"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-node-provider-slot.ts",
+      "digest": "sha256:dc9c75638d0102db059d17c4542af1a02c39d0c171dff86a175740c060de66bf"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-node.ts",
+      "digest": "sha256:3aa7626c5c698498d8e3d71ab4ae96c7f11e2e8fceee7ba221a3b1321ebba08f"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-projection-authorities-authority-ref.ts",
+      "digest": "sha256:c967fa46c6f5b06973387919107e7520dfa78b0eae99f6e09f25af70474b3df6"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-projection-authorities.ts",
+      "digest": "sha256:cb5ba767b32b53d9167eac7e1299b5e1741469aa247242ccbda6a38a00c5a07b"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-service-level-items-authority-ref.ts",
+      "digest": "sha256:f50899b40bda0a18b168a0dcf5c01c81d75df48295bd06b7fb4176790731d030"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-service-level-items.ts",
+      "digest": "sha256:61057a965d3650da9ebbcfd69f3ad12e6829903f2e355b63e97ba07fb646def2"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-service-level-sla-boundary-authority-ref.ts",
+      "digest": "sha256:a934c8563ff25998303cc092ddb51d73b7831f78887ff5603438a1a9ccefc6ac"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-service-level-sla-boundary.ts",
+      "digest": "sha256:f5a0ef4d5897c97e96291b524847aa5f30714b86974ada99a83a6d8e2ad6d48b"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-service-level-sli-definition.ts",
+      "digest": "sha256:7e80bfb344222725dccfe0189040b506ecc89ca50b60b20d051c7c12e90d1319"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-service-level-slo-definition-authority-ref.ts",
+      "digest": "sha256:c212c1611fcb7720450c482e95735afc7632a00e4fad5ede3693e466b67a9df9"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-service-level-slo-definition-items-authority-ref.ts",
+      "digest": "sha256:39c33490e7672f1c41416150ef58685a4278f99518588283c7955fc723e14bb9"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-service-level-slo-definition-items.ts",
+      "digest": "sha256:31057e0eb4059eaf7cd9ec159037dc4f94169507805d1bb50f02e94c6cbe625e"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-service-level-slo-definition.ts",
+      "digest": "sha256:caf049ce2942eef29a1a37623c84431dd99bbc965aeb36ffddf8fdad2f3d3f7f"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-service-level.ts",
+      "digest": "sha256:0fbfe8c04f1a5c739068e69ee075775fa9ab50ffa77b0120f3198782bdc3d325"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-source-authority-authority-ref.ts",
+      "digest": "sha256:22337f4dcb751ee512443fb553728b6f74c5c44d301c38429c73264140c56e22"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-source-authority.ts",
+      "digest": "sha256:1cfda1de23b932713785e7798a1c457953417aad00778eaafb36a56ad6b9f7aa"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-structural-mapping-c4-mapping-authority-ref.ts",
+      "digest": "sha256:5d788d9f2a8b8a574445c240e86d9f40e8a90ddd63b71cf9fd85f0c3e42a0c8f"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-structural-mapping-c4-mapping.ts",
+      "digest": "sha256:4d71dd6d4f73e2e41429d4465faf3b356e4bed924913daba4af264b08fe8d230"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1-structural-mapping.ts",
+      "digest": "sha256:cfe1d29cd56645b3f39403534dc13b9d05f93852b336e92b2e482aa22ddfcd3c"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/canonical-circuit-blueprint-v1.ts",
+      "digest": "sha256:7498421572aedd78bc1d54538b3ce6fe01ec8d71b4e7165185db226c5b35ae06"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/contracts/index.ts",
+      "digest": "sha256:3c702a0413ef01cca91f47f1564458dca5ef46e086a6e9ef617633bcf312a5b8"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/dependencies.json",
+      "digest": "sha256:d6a2a09bc73ba944273f5fda883a31c567e7177a8607587aaf5d2cf74cb06805"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/package-lock.json",
+      "digest": "sha256:ad1d5e78e09bf26ff4eb818286356fd96d6c63727dd58513596a41d95e43bcf5"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/package.json",
+      "digest": "sha256:ff10b66f9f3b2a597bfd3a8a45e886694ffd965a5eccb93ec4c88715c33c6f17"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/providers/expression.mjs",
+      "digest": "sha256:34625a18a276fc51168c1c101e84df0129916da527a98364fc63794ebb2f134a"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/providers/mechanics.mjs",
+      "digest": "sha256:0443ec5fef42610d979e23c357d19c6dda1549ae0f36d3d414c3e1395388782d"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/providers/native-mechanic-primitives.mjs",
+      "digest": "sha256:1cc204869f0ce7b60ad03187d364db4a432b0b632ce4469a7cf37747d6a379d5"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/providers/port-0.mjs",
+      "digest": "sha256:1eee8907eb45ad0168b5ecc3b10f40033a1694a44bf6c62b5117413922e2a3a0"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/providers/sda/languages/typescript/dist/src/execution/contract-validator.js",
+      "digest": "sha256:9ee125e72ba67428097f6af28d9698d161db4c0f83f5e14918057b3faaf7be46"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/providers/sda/languages/typescript/dist/src/execution/disposition-resolver.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/providers/sda/languages/typescript/dist/src/execution/execution-authority-resolver.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/providers/sda/languages/typescript/dist/src/execution/execution-observer.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/providers/sda/languages/typescript/dist/src/execution/index.js",
+      "digest": "sha256:a83b3c4caa43ac6ab1996b708797e15cde6b5d4b036b95be1da918688142159d"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/providers/sda/languages/typescript/dist/src/execution/semantic-executor.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/providers/sda/languages/typescript/dist/src/kernel/disposition-resolver.js",
+      "digest": "sha256:7cdae956253d6a48de978f1191c044d999d515f8aac7427393fa9da735faa688"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/providers/sda/languages/typescript/dist/src/kernel/scenario-kernel.js",
+      "digest": "sha256:8a3cf0b6bac20fb514e631d27c29e5ec659625aaf885e2ccd64a7a340daa6384"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/providers/sda/languages/typescript/runtimes/node/schema-contract-admission-provider.mjs",
+      "digest": "sha256:b8b8b60d0023d2ab0bff2d1239a3e19d73ebe2d4405b47cef006004b370eac5a"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/scenario.mjs",
+      "digest": "sha256:5ee51515aa3aa901a6cd2899befe42ed45ae796bcecc1cdd9367db0aec625835"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/embodiment.receipt.json",
+      "digest": "sha256:dc9bf29ee720cb5fe9323dec94961c2dfc4b182b1cce0ebcd1c2269057a6349a"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/evidence/authority.json",
+      "digest": "sha256:0bcfd6cb0c7c4180630829fefb0c7000cf05a2645ae393f094b74fe0e991f356"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/evidence/canonical-execution-graph.json",
+      "digest": "sha256:9c5b91447f39b8044ec80003c9867683f3fac60e69e49f1e20b3334d0e246889"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/evidence/conformance.json",
+      "digest": "sha256:e708b3d192c4365334da10926c13db66358e416d6bf253296bae377fd27445db"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/evidence/contract-projection.json",
+      "digest": "sha256:d857066730bea0e7da6971cc1caf1a18e40cabf6140132e36a64db1e2315443d"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/evidence/embodiment-plan.json",
+      "digest": "sha256:71a168561628a94b186ff66fe454b9da5b2ebb62496fa683ca9bd9b875709700"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/evidence/fixture-authority.json",
+      "digest": "sha256:4e6c9d933657dc635f6b159e8296b8f2fdc20d955dadf93578bf31efbff8777a"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/evidence/fixture-results.json",
+      "digest": "sha256:a0d0278464970d65c5cc8e76c1d7b3b2c80b40f47d9eee13b2d5f249d501ecf0"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/evidence/mechanic-lineage.json",
+      "digest": "sha256:417d71393c242725247409b1f6b0cfb132180797c9de2d475cbee3592bff46a5"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/evidence/negative-checks.json",
+      "digest": "sha256:3c6cdd038006bc980a68d1b0d3c32840a2f0e7d169f2886d200b2bfd1dbd8e8d"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/evidence/reveal.json",
+      "digest": "sha256:82725911e3943ff5c163a78d51847b181eaaf7bd4378a16417665753a924b31e"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/evidence/target-readiness.json",
+      "digest": "sha256:abd9297ae03624601c6fc4b86434fa4b1211b50719753e849e8eda68f5a9baff"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/composition.mjs",
+      "digest": "sha256:31ee8c211c335524e0fbc748469022d16df79fd0fb70a2049fa4e7a21e92fa83"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload-admission-evidence.ts",
+      "digest": "sha256:565a23905b1a92816803c095a339a115d6576a13d82809effb434caea7d9a78f"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload-items.ts",
+      "digest": "sha256:e0c0a0d974f399e1b7f79807ee45da3344a3313100d6b6af90eaefcdb9db842a"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload-obligation-record-conformance.ts",
+      "digest": "sha256:c9e7580a583634a525e9c6060ed127359b251a4ae24d14b1822fcf2a1a07f0bd"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload-obligation-record-geometry.ts",
+      "digest": "sha256:0c3a5c3c64771ef5e26e2939138bfd7f39b983d121b2e90f54421840b8a9a9f6"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload-obligation-record-review.ts",
+      "digest": "sha256:a2139c37ae5087a2193ecea3d822e43a84683db6824458b118cb53feda7dea85"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload-obligation-record.ts",
+      "digest": "sha256:88bfcf679367c1bb4795d90622d4994aa09e8df8760d8080285ab8d74e8d2902"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload.ts",
+      "digest": "sha256:45647619b86318ca4c11e35cd664ccdac8ab6e6e366b361fdfe612bd337eb8f7"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/admitted-canonical-circuit-blueprint-v1.ts",
+      "digest": "sha256:4ca7a9c4ae205ab1d2075d8552b4c5d0e58f896515c43fb81a960dbe1319a424"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/authority.json",
+      "digest": "sha256:539e3d68736b71c2123b4abf2fe59b7c2fdece9fc84dcc91ac9b0461a5d3f7c3"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/blueprint-admission-obligation-disposition-v1-payload.ts",
+      "digest": "sha256:cf3717236a9d6831874f2e70d9f75d44e651d897423b5d1a0148e05d2d4be845"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/blueprint-admission-obligation-disposition-v1.ts",
+      "digest": "sha256:99bc60d101eedad32274ea627923b131c165afc7ba40cd654b741825e5ebbd4a"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-blueprint-admission-request-v1-payload.ts",
+      "digest": "sha256:df2b196685c703d364f08373eb3e6aa1b1e5383628a9d890257abd338b0e33e6"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-blueprint-admission-request-v1.ts",
+      "digest": "sha256:0184dd0ef6afe50f140b987c16e5c97e53f4eaaa538918eee945efddbb9f2fcd"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-blueprint-authority.ts",
+      "digest": "sha256:27cedd70ebcffffe701893cdd7778a1d2d4429dd83d0dc8fac9b0bc664fa92bd"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-capability.ts",
+      "digest": "sha256:4083c7ab02a63b41a39f44344969cbd95f824e22276b6068dbd2f6c9e7a12593"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-edge-authority-ref.ts",
+      "digest": "sha256:f3ebe2b29c43497ce262f49315d74bead4c24b583c61e7b446569b9400666b16"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-edge-bounded-return-authority-ref.ts",
+      "digest": "sha256:325460a6adbf114a7cadaa959257e6223c06dfa73cfd89ac37954de80cdc1c13"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-edge-bounded-return.ts",
+      "digest": "sha256:9b64f99a0c5047c51af645358cedce3be8578b6e82d2fd5d6f1826fbbd386a0d"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-edge-edge-observability-obligation-authority-ref.ts",
+      "digest": "sha256:d587aadf755e0e1ed0eb9eb48e4b8345d6c94c67ff83dbee9fbcc8c62a43014f"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-edge-edge-observability-obligation.ts",
+      "digest": "sha256:40d1f8d02da93f8afdde2827131b063a36aaa0f002e9005405fe49354159c845"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-edge.ts",
+      "digest": "sha256:e6fae5e1642bb6158fb9d3770a321fdeb612301ac99a8ef9a55296178687125a"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-energized-authority-ref.ts",
+      "digest": "sha256:870df92801344b7a618b43bc8a43bee09d9294fd6d89ea44adf008bf79bb647e"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-energized.ts",
+      "digest": "sha256:3d1ad7e42a24a39908d129f9c1d7fb36d0aa2f03382a4429104fa4a63b1d4ddf"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-first-authority-ref.ts",
+      "digest": "sha256:f80f5ac0a6ecf4e61aa52b444051b6bb6f6755b593272006f9dbb5e2296a8290"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-first.ts",
+      "digest": "sha256:6441bfbacc9239647956dca073d14852ada11da6a7a2f87d6f33602a783fce99"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-result-authority-ref.ts",
+      "digest": "sha256:dcb21749412123767e44a333c14b2503f0e4491309450ee7c6fce12741061257"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-result-items.ts",
+      "digest": "sha256:e8b4d96c9f7067d84f9d6099e64a83703659aea2281dbd722ad6426e671367ae"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-result.ts",
+      "digest": "sha256:632c23619d062ab671875c38d106b0189c16a6f8c29c9541b14069ead58c6078"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-node-cell.ts",
+      "digest": "sha256:87b1c4b96cb9b038924741f00423f7180583fca36721261560bb15e5fb5380df"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-node-observability-contract-authority-ref.ts",
+      "digest": "sha256:f5ac668da23c51e39f7e5edd5f6ff54afac58991e5b92f81aaec0e5af9b47e9f"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-node-observability-contract-items.ts",
+      "digest": "sha256:f96574a4e177c665f0f55e83852f0dbd9a5c141ecbdf49bb65b22163a9e30cbb"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-node-observability-contract-sampling-authority-ref.ts",
+      "digest": "sha256:8f496e80f211c9cd556e5393f0d6f30b20ebce745a1aef9a241ac9132d086544"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-node-observability-contract-sampling.ts",
+      "digest": "sha256:8436092aa2f423f9b11265e68a6c9a416f18d7b3e2f7fe69cf3c7605e0d684a1"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-node-observability-contract.ts",
+      "digest": "sha256:6c149d9330398837003069da5794b781954b18950df2a1b45d2f5f12299f7ed2"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-node-provider-slot.ts",
+      "digest": "sha256:dc9c75638d0102db059d17c4542af1a02c39d0c171dff86a175740c060de66bf"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-node.ts",
+      "digest": "sha256:3aa7626c5c698498d8e3d71ab4ae96c7f11e2e8fceee7ba221a3b1321ebba08f"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-projection-authorities-authority-ref.ts",
+      "digest": "sha256:c967fa46c6f5b06973387919107e7520dfa78b0eae99f6e09f25af70474b3df6"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-projection-authorities.ts",
+      "digest": "sha256:cb5ba767b32b53d9167eac7e1299b5e1741469aa247242ccbda6a38a00c5a07b"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-service-level-items-authority-ref.ts",
+      "digest": "sha256:f50899b40bda0a18b168a0dcf5c01c81d75df48295bd06b7fb4176790731d030"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-service-level-items.ts",
+      "digest": "sha256:61057a965d3650da9ebbcfd69f3ad12e6829903f2e355b63e97ba07fb646def2"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-service-level-sla-boundary-authority-ref.ts",
+      "digest": "sha256:a934c8563ff25998303cc092ddb51d73b7831f78887ff5603438a1a9ccefc6ac"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-service-level-sla-boundary.ts",
+      "digest": "sha256:f5a0ef4d5897c97e96291b524847aa5f30714b86974ada99a83a6d8e2ad6d48b"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-service-level-sli-definition.ts",
+      "digest": "sha256:7e80bfb344222725dccfe0189040b506ecc89ca50b60b20d051c7c12e90d1319"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-service-level-slo-definition-authority-ref.ts",
+      "digest": "sha256:c212c1611fcb7720450c482e95735afc7632a00e4fad5ede3693e466b67a9df9"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-service-level-slo-definition-items-authority-ref.ts",
+      "digest": "sha256:39c33490e7672f1c41416150ef58685a4278f99518588283c7955fc723e14bb9"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-service-level-slo-definition-items.ts",
+      "digest": "sha256:31057e0eb4059eaf7cd9ec159037dc4f94169507805d1bb50f02e94c6cbe625e"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-service-level-slo-definition.ts",
+      "digest": "sha256:caf049ce2942eef29a1a37623c84431dd99bbc965aeb36ffddf8fdad2f3d3f7f"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-service-level.ts",
+      "digest": "sha256:0fbfe8c04f1a5c739068e69ee075775fa9ab50ffa77b0120f3198782bdc3d325"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-source-authority-authority-ref.ts",
+      "digest": "sha256:22337f4dcb751ee512443fb553728b6f74c5c44d301c38429c73264140c56e22"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-source-authority.ts",
+      "digest": "sha256:1cfda1de23b932713785e7798a1c457953417aad00778eaafb36a56ad6b9f7aa"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-structural-mapping-c4-mapping-authority-ref.ts",
+      "digest": "sha256:5d788d9f2a8b8a574445c240e86d9f40e8a90ddd63b71cf9fd85f0c3e42a0c8f"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-structural-mapping-c4-mapping.ts",
+      "digest": "sha256:4d71dd6d4f73e2e41429d4465faf3b356e4bed924913daba4af264b08fe8d230"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1-structural-mapping.ts",
+      "digest": "sha256:cfe1d29cd56645b3f39403534dc13b9d05f93852b336e92b2e482aa22ddfcd3c"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/canonical-circuit-blueprint-v1.ts",
+      "digest": "sha256:7498421572aedd78bc1d54538b3ce6fe01ec8d71b4e7165185db226c5b35ae06"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/contracts/index.ts",
+      "digest": "sha256:3c702a0413ef01cca91f47f1564458dca5ef46e086a6e9ef617633bcf312a5b8"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/dependencies.json",
+      "digest": "sha256:2c393ae5f331d35407366dbb96ad0d41ae50dc712a8f0a064eef480f479f819f"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/package-lock.json",
+      "digest": "sha256:ad1d5e78e09bf26ff4eb818286356fd96d6c63727dd58513596a41d95e43bcf5"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/package.json",
+      "digest": "sha256:ff10b66f9f3b2a597bfd3a8a45e886694ffd965a5eccb93ec4c88715c33c6f17"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/expression.mjs",
+      "digest": "sha256:34625a18a276fc51168c1c101e84df0129916da527a98364fc63794ebb2f134a"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/mechanics.mjs",
+      "digest": "sha256:6349059e234b1d943d40e7d7a65050adc8f841e4d11a0d87f2b2be37ff5f228c"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/native-mechanic-primitives.mjs",
+      "digest": "sha256:1cc204869f0ce7b60ad03187d364db4a432b0b632ce4469a7cf37747d6a379d5"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/port-0.mjs",
+      "digest": "sha256:bd54a6f418bb44f48a34ce165cd72fb155f05c1037271d54e02a51038dbb825b"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/sda/languages/typescript/dist/src/execution/contract-validator.js",
+      "digest": "sha256:9ee125e72ba67428097f6af28d9698d161db4c0f83f5e14918057b3faaf7be46"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/sda/languages/typescript/dist/src/execution/disposition-resolver.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/sda/languages/typescript/dist/src/execution/execution-authority-resolver.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/sda/languages/typescript/dist/src/execution/execution-observer.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/sda/languages/typescript/dist/src/execution/index.js",
+      "digest": "sha256:a83b3c4caa43ac6ab1996b708797e15cde6b5d4b036b95be1da918688142159d"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/sda/languages/typescript/dist/src/execution/semantic-executor.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/sda/languages/typescript/dist/src/kernel/disposition-resolver.js",
+      "digest": "sha256:7cdae956253d6a48de978f1191c044d999d515f8aac7427393fa9da735faa688"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/sda/languages/typescript/dist/src/kernel/scenario-kernel.js",
+      "digest": "sha256:8a3cf0b6bac20fb514e631d27c29e5ec659625aaf885e2ccd64a7a340daa6384"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/sda/languages/typescript/runtimes/node/schema-contract-admission-provider.mjs",
+      "digest": "sha256:b8b8b60d0023d2ab0bff2d1239a3e19d73ebe2d4405b47cef006004b370eac5a"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/scenario.mjs",
+      "digest": "sha256:8f4ce804e690383e1d7212ef8c8151c09582a48202e8b9a148955137b3902e55"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/embodiment.receipt.json",
+      "digest": "sha256:8206337868e180e890e9321062f6ef26278dd4e31154c255d462addfdba2b987"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/evidence/authority.json",
+      "digest": "sha256:c7507da6cf2cf71fc886f02b0fa912956ba3520dd5ba48d0e8614e1cb3707301"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/evidence/canonical-execution-graph.json",
+      "digest": "sha256:9c5b91447f39b8044ec80003c9867683f3fac60e69e49f1e20b3334d0e246889"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/evidence/conformance.json",
+      "digest": "sha256:635709480e18cf0743a80caa66a392d81e41c12b38895f84f1a392b11061cf84"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/evidence/contract-projection.json",
+      "digest": "sha256:d857066730bea0e7da6971cc1caf1a18e40cabf6140132e36a64db1e2315443d"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/evidence/embodiment-plan.json",
+      "digest": "sha256:65a330a6c44ff77909d808ec0b5a8afa9824b83756fe1a724b0325e2b71bcee0"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/evidence/fixture-authority.json",
+      "digest": "sha256:4e6c9d933657dc635f6b159e8296b8f2fdc20d955dadf93578bf31efbff8777a"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/evidence/fixture-results.json",
+      "digest": "sha256:1942a92247f3b02c22cda40232938aafb2cf290555891d659439f7384190a700"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/evidence/mechanic-lineage.json",
+      "digest": "sha256:10fc793b12c16244a03ff38c1806f66025fb395e397b9c8710650affc2193929"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/evidence/reveal.json",
+      "digest": "sha256:9af358216ab81ff49b3062624fa93caacc254e17e1239978a2258f4749492d76"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/evidence/target-readiness.json",
+      "digest": "sha256:abd9297ae03624601c6fc4b86434fa4b1211b50719753e849e8eda68f5a9baff"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/composition.mjs",
+      "digest": "sha256:db21c4dd2861fb879f13de47c018b2e0e4eaf615d529d36e7bf85aab604d5d7d"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload-admission-evidence.ts",
+      "digest": "sha256:565a23905b1a92816803c095a339a115d6576a13d82809effb434caea7d9a78f"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload-items.ts",
+      "digest": "sha256:e0c0a0d974f399e1b7f79807ee45da3344a3313100d6b6af90eaefcdb9db842a"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload-obligation-record-conformance.ts",
+      "digest": "sha256:c9e7580a583634a525e9c6060ed127359b251a4ae24d14b1822fcf2a1a07f0bd"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload-obligation-record-geometry.ts",
+      "digest": "sha256:0c3a5c3c64771ef5e26e2939138bfd7f39b983d121b2e90f54421840b8a9a9f6"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload-obligation-record-review.ts",
+      "digest": "sha256:a2139c37ae5087a2193ecea3d822e43a84683db6824458b118cb53feda7dea85"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload-obligation-record.ts",
+      "digest": "sha256:88bfcf679367c1bb4795d90622d4994aa09e8df8760d8080285ab8d74e8d2902"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload.ts",
+      "digest": "sha256:45647619b86318ca4c11e35cd664ccdac8ab6e6e366b361fdfe612bd337eb8f7"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/admitted-canonical-circuit-blueprint-v1.ts",
+      "digest": "sha256:4ca7a9c4ae205ab1d2075d8552b4c5d0e58f896515c43fb81a960dbe1319a424"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/authority.json",
+      "digest": "sha256:539e3d68736b71c2123b4abf2fe59b7c2fdece9fc84dcc91ac9b0461a5d3f7c3"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/blueprint-admission-obligation-disposition-v1-payload.ts",
+      "digest": "sha256:cf3717236a9d6831874f2e70d9f75d44e651d897423b5d1a0148e05d2d4be845"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/blueprint-admission-obligation-disposition-v1.ts",
+      "digest": "sha256:99bc60d101eedad32274ea627923b131c165afc7ba40cd654b741825e5ebbd4a"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-blueprint-admission-request-v1-payload.ts",
+      "digest": "sha256:df2b196685c703d364f08373eb3e6aa1b1e5383628a9d890257abd338b0e33e6"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-blueprint-admission-request-v1.ts",
+      "digest": "sha256:0184dd0ef6afe50f140b987c16e5c97e53f4eaaa538918eee945efddbb9f2fcd"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-blueprint-authority.ts",
+      "digest": "sha256:27cedd70ebcffffe701893cdd7778a1d2d4429dd83d0dc8fac9b0bc664fa92bd"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-capability.ts",
+      "digest": "sha256:4083c7ab02a63b41a39f44344969cbd95f824e22276b6068dbd2f6c9e7a12593"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-edge-authority-ref.ts",
+      "digest": "sha256:f3ebe2b29c43497ce262f49315d74bead4c24b583c61e7b446569b9400666b16"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-edge-bounded-return-authority-ref.ts",
+      "digest": "sha256:325460a6adbf114a7cadaa959257e6223c06dfa73cfd89ac37954de80cdc1c13"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-edge-bounded-return.ts",
+      "digest": "sha256:9b64f99a0c5047c51af645358cedce3be8578b6e82d2fd5d6f1826fbbd386a0d"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-edge-edge-observability-obligation-authority-ref.ts",
+      "digest": "sha256:d587aadf755e0e1ed0eb9eb48e4b8345d6c94c67ff83dbee9fbcc8c62a43014f"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-edge-edge-observability-obligation.ts",
+      "digest": "sha256:40d1f8d02da93f8afdde2827131b063a36aaa0f002e9005405fe49354159c845"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-edge.ts",
+      "digest": "sha256:e6fae5e1642bb6158fb9d3770a321fdeb612301ac99a8ef9a55296178687125a"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-energized-authority-ref.ts",
+      "digest": "sha256:870df92801344b7a618b43bc8a43bee09d9294fd6d89ea44adf008bf79bb647e"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-energized.ts",
+      "digest": "sha256:3d1ad7e42a24a39908d129f9c1d7fb36d0aa2f03382a4429104fa4a63b1d4ddf"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-first-authority-ref.ts",
+      "digest": "sha256:f80f5ac0a6ecf4e61aa52b444051b6bb6f6755b593272006f9dbb5e2296a8290"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-first.ts",
+      "digest": "sha256:6441bfbacc9239647956dca073d14852ada11da6a7a2f87d6f33602a783fce99"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-result-authority-ref.ts",
+      "digest": "sha256:dcb21749412123767e44a333c14b2503f0e4491309450ee7c6fce12741061257"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-result-items.ts",
+      "digest": "sha256:e8b4d96c9f7067d84f9d6099e64a83703659aea2281dbd722ad6426e671367ae"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-result.ts",
+      "digest": "sha256:632c23619d062ab671875c38d106b0189c16a6f8c29c9541b14069ead58c6078"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-node-cell.ts",
+      "digest": "sha256:87b1c4b96cb9b038924741f00423f7180583fca36721261560bb15e5fb5380df"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-node-observability-contract-authority-ref.ts",
+      "digest": "sha256:f5ac668da23c51e39f7e5edd5f6ff54afac58991e5b92f81aaec0e5af9b47e9f"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-node-observability-contract-items.ts",
+      "digest": "sha256:f96574a4e177c665f0f55e83852f0dbd9a5c141ecbdf49bb65b22163a9e30cbb"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-node-observability-contract-sampling-authority-ref.ts",
+      "digest": "sha256:8f496e80f211c9cd556e5393f0d6f30b20ebce745a1aef9a241ac9132d086544"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-node-observability-contract-sampling.ts",
+      "digest": "sha256:8436092aa2f423f9b11265e68a6c9a416f18d7b3e2f7fe69cf3c7605e0d684a1"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-node-observability-contract.ts",
+      "digest": "sha256:6c149d9330398837003069da5794b781954b18950df2a1b45d2f5f12299f7ed2"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-node-provider-slot.ts",
+      "digest": "sha256:dc9c75638d0102db059d17c4542af1a02c39d0c171dff86a175740c060de66bf"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-node.ts",
+      "digest": "sha256:3aa7626c5c698498d8e3d71ab4ae96c7f11e2e8fceee7ba221a3b1321ebba08f"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-projection-authorities-authority-ref.ts",
+      "digest": "sha256:c967fa46c6f5b06973387919107e7520dfa78b0eae99f6e09f25af70474b3df6"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-projection-authorities.ts",
+      "digest": "sha256:cb5ba767b32b53d9167eac7e1299b5e1741469aa247242ccbda6a38a00c5a07b"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-service-level-items-authority-ref.ts",
+      "digest": "sha256:f50899b40bda0a18b168a0dcf5c01c81d75df48295bd06b7fb4176790731d030"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-service-level-items.ts",
+      "digest": "sha256:61057a965d3650da9ebbcfd69f3ad12e6829903f2e355b63e97ba07fb646def2"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-service-level-sla-boundary-authority-ref.ts",
+      "digest": "sha256:a934c8563ff25998303cc092ddb51d73b7831f78887ff5603438a1a9ccefc6ac"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-service-level-sla-boundary.ts",
+      "digest": "sha256:f5a0ef4d5897c97e96291b524847aa5f30714b86974ada99a83a6d8e2ad6d48b"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-service-level-sli-definition.ts",
+      "digest": "sha256:7e80bfb344222725dccfe0189040b506ecc89ca50b60b20d051c7c12e90d1319"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-service-level-slo-definition-authority-ref.ts",
+      "digest": "sha256:c212c1611fcb7720450c482e95735afc7632a00e4fad5ede3693e466b67a9df9"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-service-level-slo-definition-items-authority-ref.ts",
+      "digest": "sha256:39c33490e7672f1c41416150ef58685a4278f99518588283c7955fc723e14bb9"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-service-level-slo-definition-items.ts",
+      "digest": "sha256:31057e0eb4059eaf7cd9ec159037dc4f94169507805d1bb50f02e94c6cbe625e"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-service-level-slo-definition.ts",
+      "digest": "sha256:caf049ce2942eef29a1a37623c84431dd99bbc965aeb36ffddf8fdad2f3d3f7f"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-service-level.ts",
+      "digest": "sha256:0fbfe8c04f1a5c739068e69ee075775fa9ab50ffa77b0120f3198782bdc3d325"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-source-authority-authority-ref.ts",
+      "digest": "sha256:22337f4dcb751ee512443fb553728b6f74c5c44d301c38429c73264140c56e22"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-source-authority.ts",
+      "digest": "sha256:1cfda1de23b932713785e7798a1c457953417aad00778eaafb36a56ad6b9f7aa"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-structural-mapping-c4-mapping-authority-ref.ts",
+      "digest": "sha256:5d788d9f2a8b8a574445c240e86d9f40e8a90ddd63b71cf9fd85f0c3e42a0c8f"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-structural-mapping-c4-mapping.ts",
+      "digest": "sha256:4d71dd6d4f73e2e41429d4465faf3b356e4bed924913daba4af264b08fe8d230"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1-structural-mapping.ts",
+      "digest": "sha256:cfe1d29cd56645b3f39403534dc13b9d05f93852b336e92b2e482aa22ddfcd3c"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/canonical-circuit-blueprint-v1.ts",
+      "digest": "sha256:7498421572aedd78bc1d54538b3ce6fe01ec8d71b4e7165185db226c5b35ae06"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/contracts/index.ts",
+      "digest": "sha256:3c702a0413ef01cca91f47f1564458dca5ef46e086a6e9ef617633bcf312a5b8"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/dependencies.json",
+      "digest": "sha256:969281ef612396a8515b9e842b7a0eb4972915aece311d9e92b951e173f0a09d"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/package-lock.json",
+      "digest": "sha256:ad1d5e78e09bf26ff4eb818286356fd96d6c63727dd58513596a41d95e43bcf5"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/package.json",
+      "digest": "sha256:ff10b66f9f3b2a597bfd3a8a45e886694ffd965a5eccb93ec4c88715c33c6f17"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/providers/expression.mjs",
+      "digest": "sha256:34625a18a276fc51168c1c101e84df0129916da527a98364fc63794ebb2f134a"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/providers/mechanics.mjs",
+      "digest": "sha256:89c25b42945d27fcf54620b6aa5f4d436bbc4da53de4712eec7c4ae55edd0e1c"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/providers/native-mechanic-primitives.mjs",
+      "digest": "sha256:1cc204869f0ce7b60ad03187d364db4a432b0b632ce4469a7cf37747d6a379d5"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/providers/port-0.mjs",
+      "digest": "sha256:7c3ba9e0ed7015a2098569431d02493d986b5c572c406ae583ebc2c1ef76461d"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/providers/sda/languages/typescript/dist/src/execution/contract-validator.js",
+      "digest": "sha256:9ee125e72ba67428097f6af28d9698d161db4c0f83f5e14918057b3faaf7be46"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/providers/sda/languages/typescript/dist/src/execution/disposition-resolver.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/providers/sda/languages/typescript/dist/src/execution/execution-authority-resolver.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/providers/sda/languages/typescript/dist/src/execution/execution-observer.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/providers/sda/languages/typescript/dist/src/execution/index.js",
+      "digest": "sha256:a83b3c4caa43ac6ab1996b708797e15cde6b5d4b036b95be1da918688142159d"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/providers/sda/languages/typescript/dist/src/execution/semantic-executor.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/providers/sda/languages/typescript/dist/src/kernel/disposition-resolver.js",
+      "digest": "sha256:7cdae956253d6a48de978f1191c044d999d515f8aac7427393fa9da735faa688"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/providers/sda/languages/typescript/dist/src/kernel/scenario-kernel.js",
+      "digest": "sha256:8a3cf0b6bac20fb514e631d27c29e5ec659625aaf885e2ccd64a7a340daa6384"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/providers/sda/languages/typescript/runtimes/node/schema-contract-admission-provider.mjs",
+      "digest": "sha256:b8b8b60d0023d2ab0bff2d1239a3e19d73ebe2d4405b47cef006004b370eac5a"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/scenario.mjs",
+      "digest": "sha256:a89790433e432fa90e70432d9e8e18bd0d8c229e9f4b0263140ae9f020eb39b6"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/embodiment.receipt.json",
+      "digest": "sha256:1f5767a76283b2c0af776cb519c720d0e2b7446f8cd378c7c33125411fa4eaaf"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/evidence/authority.json",
+      "digest": "sha256:2bdd7af0e955420ca91bcdf5cf6fd6e6d43f3cd7dd56ecee242c0d1751626990"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/evidence/canonical-execution-graph.json",
+      "digest": "sha256:9c5b91447f39b8044ec80003c9867683f3fac60e69e49f1e20b3334d0e246889"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/evidence/conformance.json",
+      "digest": "sha256:900100c7804a2e8e0b1be888d5231be9f2fac726f2fb00c1d9684f4437665899"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/evidence/contract-projection.json",
+      "digest": "sha256:d857066730bea0e7da6971cc1caf1a18e40cabf6140132e36a64db1e2315443d"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/evidence/embodiment-plan.json",
+      "digest": "sha256:450531c6157e8df7d8b1dc75ee643d6e1d26320431fa1b3a0b7ffba18218d02e"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/evidence/fixture-authority.json",
+      "digest": "sha256:4e6c9d933657dc635f6b159e8296b8f2fdc20d955dadf93578bf31efbff8777a"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/evidence/fixture-results.json",
+      "digest": "sha256:2675650676a9ef8258815403ac358bd6abb6f6ed4d971636c9cd4fe0547e68af"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/evidence/mechanic-lineage.json",
+      "digest": "sha256:2605877768f953aacdc8a52594dcf1d841c521db1b488cd9a1fde38054445cc8"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/evidence/reveal.json",
+      "digest": "sha256:204d12112fff749189113a16d1327c49d52c53e5edcde5d858b0c5f50640d214"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/evidence/target-readiness.json",
+      "digest": "sha256:abd9297ae03624601c6fc4b86434fa4b1211b50719753e849e8eda68f5a9baff"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/composition.mjs",
+      "digest": "sha256:391d296b5e6e94f9af6c1826c866a8f2984683a8a35dd31c016106d77762ce47"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload-admission-evidence.ts",
+      "digest": "sha256:565a23905b1a92816803c095a339a115d6576a13d82809effb434caea7d9a78f"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload-items.ts",
+      "digest": "sha256:e0c0a0d974f399e1b7f79807ee45da3344a3313100d6b6af90eaefcdb9db842a"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload-obligation-record-conformance.ts",
+      "digest": "sha256:c9e7580a583634a525e9c6060ed127359b251a4ae24d14b1822fcf2a1a07f0bd"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload-obligation-record-geometry.ts",
+      "digest": "sha256:0c3a5c3c64771ef5e26e2939138bfd7f39b983d121b2e90f54421840b8a9a9f6"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload-obligation-record-review.ts",
+      "digest": "sha256:a2139c37ae5087a2193ecea3d822e43a84683db6824458b118cb53feda7dea85"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload-obligation-record.ts",
+      "digest": "sha256:88bfcf679367c1bb4795d90622d4994aa09e8df8760d8080285ab8d74e8d2902"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload.ts",
+      "digest": "sha256:45647619b86318ca4c11e35cd664ccdac8ab6e6e366b361fdfe612bd337eb8f7"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/admitted-canonical-circuit-blueprint-v1.ts",
+      "digest": "sha256:4ca7a9c4ae205ab1d2075d8552b4c5d0e58f896515c43fb81a960dbe1319a424"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/authority.json",
+      "digest": "sha256:539e3d68736b71c2123b4abf2fe59b7c2fdece9fc84dcc91ac9b0461a5d3f7c3"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/blueprint-admission-obligation-disposition-v1-payload.ts",
+      "digest": "sha256:cf3717236a9d6831874f2e70d9f75d44e651d897423b5d1a0148e05d2d4be845"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/blueprint-admission-obligation-disposition-v1.ts",
+      "digest": "sha256:99bc60d101eedad32274ea627923b131c165afc7ba40cd654b741825e5ebbd4a"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-blueprint-admission-request-v1-payload.ts",
+      "digest": "sha256:df2b196685c703d364f08373eb3e6aa1b1e5383628a9d890257abd338b0e33e6"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-blueprint-admission-request-v1.ts",
+      "digest": "sha256:0184dd0ef6afe50f140b987c16e5c97e53f4eaaa538918eee945efddbb9f2fcd"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-blueprint-authority.ts",
+      "digest": "sha256:27cedd70ebcffffe701893cdd7778a1d2d4429dd83d0dc8fac9b0bc664fa92bd"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-capability.ts",
+      "digest": "sha256:4083c7ab02a63b41a39f44344969cbd95f824e22276b6068dbd2f6c9e7a12593"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-edge-authority-ref.ts",
+      "digest": "sha256:f3ebe2b29c43497ce262f49315d74bead4c24b583c61e7b446569b9400666b16"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-edge-bounded-return-authority-ref.ts",
+      "digest": "sha256:325460a6adbf114a7cadaa959257e6223c06dfa73cfd89ac37954de80cdc1c13"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-edge-bounded-return.ts",
+      "digest": "sha256:9b64f99a0c5047c51af645358cedce3be8578b6e82d2fd5d6f1826fbbd386a0d"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-edge-edge-observability-obligation-authority-ref.ts",
+      "digest": "sha256:d587aadf755e0e1ed0eb9eb48e4b8345d6c94c67ff83dbee9fbcc8c62a43014f"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-edge-edge-observability-obligation.ts",
+      "digest": "sha256:40d1f8d02da93f8afdde2827131b063a36aaa0f002e9005405fe49354159c845"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-edge.ts",
+      "digest": "sha256:e6fae5e1642bb6158fb9d3770a321fdeb612301ac99a8ef9a55296178687125a"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-energized-authority-ref.ts",
+      "digest": "sha256:870df92801344b7a618b43bc8a43bee09d9294fd6d89ea44adf008bf79bb647e"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-energized.ts",
+      "digest": "sha256:3d1ad7e42a24a39908d129f9c1d7fb36d0aa2f03382a4429104fa4a63b1d4ddf"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-first-authority-ref.ts",
+      "digest": "sha256:f80f5ac0a6ecf4e61aa52b444051b6bb6f6755b593272006f9dbb5e2296a8290"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-first.ts",
+      "digest": "sha256:6441bfbacc9239647956dca073d14852ada11da6a7a2f87d6f33602a783fce99"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-result-authority-ref.ts",
+      "digest": "sha256:dcb21749412123767e44a333c14b2503f0e4491309450ee7c6fce12741061257"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-result-items.ts",
+      "digest": "sha256:e8b4d96c9f7067d84f9d6099e64a83703659aea2281dbd722ad6426e671367ae"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-result.ts",
+      "digest": "sha256:632c23619d062ab671875c38d106b0189c16a6f8c29c9541b14069ead58c6078"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-node-cell.ts",
+      "digest": "sha256:87b1c4b96cb9b038924741f00423f7180583fca36721261560bb15e5fb5380df"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-node-observability-contract-authority-ref.ts",
+      "digest": "sha256:f5ac668da23c51e39f7e5edd5f6ff54afac58991e5b92f81aaec0e5af9b47e9f"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-node-observability-contract-items.ts",
+      "digest": "sha256:f96574a4e177c665f0f55e83852f0dbd9a5c141ecbdf49bb65b22163a9e30cbb"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-node-observability-contract-sampling-authority-ref.ts",
+      "digest": "sha256:8f496e80f211c9cd556e5393f0d6f30b20ebce745a1aef9a241ac9132d086544"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-node-observability-contract-sampling.ts",
+      "digest": "sha256:8436092aa2f423f9b11265e68a6c9a416f18d7b3e2f7fe69cf3c7605e0d684a1"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-node-observability-contract.ts",
+      "digest": "sha256:6c149d9330398837003069da5794b781954b18950df2a1b45d2f5f12299f7ed2"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-node-provider-slot.ts",
+      "digest": "sha256:dc9c75638d0102db059d17c4542af1a02c39d0c171dff86a175740c060de66bf"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-node.ts",
+      "digest": "sha256:3aa7626c5c698498d8e3d71ab4ae96c7f11e2e8fceee7ba221a3b1321ebba08f"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-projection-authorities-authority-ref.ts",
+      "digest": "sha256:c967fa46c6f5b06973387919107e7520dfa78b0eae99f6e09f25af70474b3df6"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-projection-authorities.ts",
+      "digest": "sha256:cb5ba767b32b53d9167eac7e1299b5e1741469aa247242ccbda6a38a00c5a07b"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-service-level-items-authority-ref.ts",
+      "digest": "sha256:f50899b40bda0a18b168a0dcf5c01c81d75df48295bd06b7fb4176790731d030"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-service-level-items.ts",
+      "digest": "sha256:61057a965d3650da9ebbcfd69f3ad12e6829903f2e355b63e97ba07fb646def2"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-service-level-sla-boundary-authority-ref.ts",
+      "digest": "sha256:a934c8563ff25998303cc092ddb51d73b7831f78887ff5603438a1a9ccefc6ac"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-service-level-sla-boundary.ts",
+      "digest": "sha256:f5a0ef4d5897c97e96291b524847aa5f30714b86974ada99a83a6d8e2ad6d48b"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-service-level-sli-definition.ts",
+      "digest": "sha256:7e80bfb344222725dccfe0189040b506ecc89ca50b60b20d051c7c12e90d1319"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-service-level-slo-definition-authority-ref.ts",
+      "digest": "sha256:c212c1611fcb7720450c482e95735afc7632a00e4fad5ede3693e466b67a9df9"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-service-level-slo-definition-items-authority-ref.ts",
+      "digest": "sha256:39c33490e7672f1c41416150ef58685a4278f99518588283c7955fc723e14bb9"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-service-level-slo-definition-items.ts",
+      "digest": "sha256:31057e0eb4059eaf7cd9ec159037dc4f94169507805d1bb50f02e94c6cbe625e"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-service-level-slo-definition.ts",
+      "digest": "sha256:caf049ce2942eef29a1a37623c84431dd99bbc965aeb36ffddf8fdad2f3d3f7f"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-service-level.ts",
+      "digest": "sha256:0fbfe8c04f1a5c739068e69ee075775fa9ab50ffa77b0120f3198782bdc3d325"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-source-authority-authority-ref.ts",
+      "digest": "sha256:22337f4dcb751ee512443fb553728b6f74c5c44d301c38429c73264140c56e22"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-source-authority.ts",
+      "digest": "sha256:1cfda1de23b932713785e7798a1c457953417aad00778eaafb36a56ad6b9f7aa"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-structural-mapping-c4-mapping-authority-ref.ts",
+      "digest": "sha256:5d788d9f2a8b8a574445c240e86d9f40e8a90ddd63b71cf9fd85f0c3e42a0c8f"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-structural-mapping-c4-mapping.ts",
+      "digest": "sha256:4d71dd6d4f73e2e41429d4465faf3b356e4bed924913daba4af264b08fe8d230"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1-structural-mapping.ts",
+      "digest": "sha256:cfe1d29cd56645b3f39403534dc13b9d05f93852b336e92b2e482aa22ddfcd3c"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/canonical-circuit-blueprint-v1.ts",
+      "digest": "sha256:7498421572aedd78bc1d54538b3ce6fe01ec8d71b4e7165185db226c5b35ae06"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/contracts/index.ts",
+      "digest": "sha256:3c702a0413ef01cca91f47f1564458dca5ef46e086a6e9ef617633bcf312a5b8"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/dependencies.json",
+      "digest": "sha256:556d18f2bb119c3a269da6e6e2beca7fb6b86069a62c7cfcea54b1299169f875"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/package-lock.json",
+      "digest": "sha256:ad1d5e78e09bf26ff4eb818286356fd96d6c63727dd58513596a41d95e43bcf5"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/package.json",
+      "digest": "sha256:ff10b66f9f3b2a597bfd3a8a45e886694ffd965a5eccb93ec4c88715c33c6f17"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/expression.mjs",
+      "digest": "sha256:34625a18a276fc51168c1c101e84df0129916da527a98364fc63794ebb2f134a"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/mechanics.mjs",
+      "digest": "sha256:89c25b42945d27fcf54620b6aa5f4d436bbc4da53de4712eec7c4ae55edd0e1c"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/native-mechanic-primitives.mjs",
+      "digest": "sha256:1cc204869f0ce7b60ad03187d364db4a432b0b632ce4469a7cf37747d6a379d5"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/port-0.mjs",
+      "digest": "sha256:d22d21b3e790b4684512f42e6cfeae9cde2f83998749b6363d57e42dabf91c78"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/sda/languages/typescript/dist/src/execution/contract-validator.js",
+      "digest": "sha256:9ee125e72ba67428097f6af28d9698d161db4c0f83f5e14918057b3faaf7be46"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/sda/languages/typescript/dist/src/execution/disposition-resolver.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/sda/languages/typescript/dist/src/execution/execution-authority-resolver.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/sda/languages/typescript/dist/src/execution/execution-observer.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/sda/languages/typescript/dist/src/execution/index.js",
+      "digest": "sha256:a83b3c4caa43ac6ab1996b708797e15cde6b5d4b036b95be1da918688142159d"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/sda/languages/typescript/dist/src/execution/semantic-executor.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/sda/languages/typescript/dist/src/kernel/disposition-resolver.js",
+      "digest": "sha256:7cdae956253d6a48de978f1191c044d999d515f8aac7427393fa9da735faa688"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/sda/languages/typescript/dist/src/kernel/scenario-kernel.js",
+      "digest": "sha256:8a3cf0b6bac20fb514e631d27c29e5ec659625aaf885e2ccd64a7a340daa6384"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/sda/languages/typescript/runtimes/node/schema-contract-admission-provider.mjs",
+      "digest": "sha256:b8b8b60d0023d2ab0bff2d1239a3e19d73ebe2d4405b47cef006004b370eac5a"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/scenario.mjs",
+      "digest": "sha256:31e688bb4c81d09326759e92c9a105632aca8f8f3a473a0ab94fc5cc8e1498d3"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/embodiment.receipt.json",
+      "digest": "sha256:3978d7b368e02cf19ad7a20de15295a5a65ea69b06e950413e888df81f33a3a4"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/evidence/authority.json",
+      "digest": "sha256:4c8677b8f62a8bd37479aa1b536142da64f2e3fbc7996963817c3de648cc2c8a"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/evidence/canonical-execution-graph.json",
+      "digest": "sha256:9c5b91447f39b8044ec80003c9867683f3fac60e69e49f1e20b3334d0e246889"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/evidence/conformance.json",
+      "digest": "sha256:ea8646a561a5922c0a63ce53697b4d7ef93f0cd514d709125c9ae6d13f2d0c4c"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/evidence/contract-projection.json",
+      "digest": "sha256:d857066730bea0e7da6971cc1caf1a18e40cabf6140132e36a64db1e2315443d"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/evidence/embodiment-plan.json",
+      "digest": "sha256:5536d0400d0f3e126d27e935c43d24b351a4eb3378555c58285d8e1541c8f3f6"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/evidence/fixture-authority.json",
+      "digest": "sha256:4e6c9d933657dc635f6b159e8296b8f2fdc20d955dadf93578bf31efbff8777a"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/evidence/fixture-results.json",
+      "digest": "sha256:a309a84ca3879421ae11ccfaa8dc57a9fdc211b2d9879707618fa5e2d02e9b3a"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/evidence/mechanic-lineage.json",
+      "digest": "sha256:4247b77edf1fde8197b6b05bae187af7d1f13296fb020427ac92a0358a4e7158"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/evidence/reveal.json",
+      "digest": "sha256:ae87ff7e707972f8fc894a1f74b9757abed79d5a234cdc47390e7b140743cf54"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/evidence/target-readiness.json",
+      "digest": "sha256:abd9297ae03624601c6fc4b86434fa4b1211b50719753e849e8eda68f5a9baff"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/composition.mjs",
+      "digest": "sha256:eea1f9f4b5a347791a37591bcd3d2622a1a2037c16693e7c9dcc8a697192a3d9"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload-admission-evidence.ts",
+      "digest": "sha256:565a23905b1a92816803c095a339a115d6576a13d82809effb434caea7d9a78f"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload-items.ts",
+      "digest": "sha256:e0c0a0d974f399e1b7f79807ee45da3344a3313100d6b6af90eaefcdb9db842a"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload-obligation-record-conformance.ts",
+      "digest": "sha256:c9e7580a583634a525e9c6060ed127359b251a4ae24d14b1822fcf2a1a07f0bd"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload-obligation-record-geometry.ts",
+      "digest": "sha256:0c3a5c3c64771ef5e26e2939138bfd7f39b983d121b2e90f54421840b8a9a9f6"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload-obligation-record-review.ts",
+      "digest": "sha256:a2139c37ae5087a2193ecea3d822e43a84683db6824458b118cb53feda7dea85"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload-obligation-record.ts",
+      "digest": "sha256:88bfcf679367c1bb4795d90622d4994aa09e8df8760d8080285ab8d74e8d2902"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/admitted-canonical-circuit-blueprint-v1-payload.ts",
+      "digest": "sha256:45647619b86318ca4c11e35cd664ccdac8ab6e6e366b361fdfe612bd337eb8f7"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/admitted-canonical-circuit-blueprint-v1.ts",
+      "digest": "sha256:4ca7a9c4ae205ab1d2075d8552b4c5d0e58f896515c43fb81a960dbe1319a424"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/authority.json",
+      "digest": "sha256:539e3d68736b71c2123b4abf2fe59b7c2fdece9fc84dcc91ac9b0461a5d3f7c3"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/blueprint-admission-obligation-disposition-v1-payload.ts",
+      "digest": "sha256:cf3717236a9d6831874f2e70d9f75d44e651d897423b5d1a0148e05d2d4be845"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/blueprint-admission-obligation-disposition-v1.ts",
+      "digest": "sha256:99bc60d101eedad32274ea627923b131c165afc7ba40cd654b741825e5ebbd4a"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-blueprint-admission-request-v1-payload.ts",
+      "digest": "sha256:df2b196685c703d364f08373eb3e6aa1b1e5383628a9d890257abd338b0e33e6"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-blueprint-admission-request-v1.ts",
+      "digest": "sha256:0184dd0ef6afe50f140b987c16e5c97e53f4eaaa538918eee945efddbb9f2fcd"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-blueprint-authority.ts",
+      "digest": "sha256:27cedd70ebcffffe701893cdd7778a1d2d4429dd83d0dc8fac9b0bc664fa92bd"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-capability.ts",
+      "digest": "sha256:4083c7ab02a63b41a39f44344969cbd95f824e22276b6068dbd2f6c9e7a12593"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-edge-authority-ref.ts",
+      "digest": "sha256:f3ebe2b29c43497ce262f49315d74bead4c24b583c61e7b446569b9400666b16"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-edge-bounded-return-authority-ref.ts",
+      "digest": "sha256:325460a6adbf114a7cadaa959257e6223c06dfa73cfd89ac37954de80cdc1c13"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-edge-bounded-return.ts",
+      "digest": "sha256:9b64f99a0c5047c51af645358cedce3be8578b6e82d2fd5d6f1826fbbd386a0d"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-edge-edge-observability-obligation-authority-ref.ts",
+      "digest": "sha256:d587aadf755e0e1ed0eb9eb48e4b8345d6c94c67ff83dbee9fbcc8c62a43014f"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-edge-edge-observability-obligation.ts",
+      "digest": "sha256:40d1f8d02da93f8afdde2827131b063a36aaa0f002e9005405fe49354159c845"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-edge.ts",
+      "digest": "sha256:e6fae5e1642bb6158fb9d3770a321fdeb612301ac99a8ef9a55296178687125a"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-energized-authority-ref.ts",
+      "digest": "sha256:870df92801344b7a618b43bc8a43bee09d9294fd6d89ea44adf008bf79bb647e"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-energized.ts",
+      "digest": "sha256:3d1ad7e42a24a39908d129f9c1d7fb36d0aa2f03382a4429104fa4a63b1d4ddf"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-first-authority-ref.ts",
+      "digest": "sha256:f80f5ac0a6ecf4e61aa52b444051b6bb6f6755b593272006f9dbb5e2296a8290"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-first.ts",
+      "digest": "sha256:6441bfbacc9239647956dca073d14852ada11da6a7a2f87d6f33602a783fce99"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-result-authority-ref.ts",
+      "digest": "sha256:dcb21749412123767e44a333c14b2503f0e4491309450ee7c6fce12741061257"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-result-items.ts",
+      "digest": "sha256:e8b4d96c9f7067d84f9d6099e64a83703659aea2281dbd722ad6426e671367ae"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-node-cell-result.ts",
+      "digest": "sha256:632c23619d062ab671875c38d106b0189c16a6f8c29c9541b14069ead58c6078"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-node-cell.ts",
+      "digest": "sha256:87b1c4b96cb9b038924741f00423f7180583fca36721261560bb15e5fb5380df"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-node-observability-contract-authority-ref.ts",
+      "digest": "sha256:f5ac668da23c51e39f7e5edd5f6ff54afac58991e5b92f81aaec0e5af9b47e9f"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-node-observability-contract-items.ts",
+      "digest": "sha256:f96574a4e177c665f0f55e83852f0dbd9a5c141ecbdf49bb65b22163a9e30cbb"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-node-observability-contract-sampling-authority-ref.ts",
+      "digest": "sha256:8f496e80f211c9cd556e5393f0d6f30b20ebce745a1aef9a241ac9132d086544"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-node-observability-contract-sampling.ts",
+      "digest": "sha256:8436092aa2f423f9b11265e68a6c9a416f18d7b3e2f7fe69cf3c7605e0d684a1"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-node-observability-contract.ts",
+      "digest": "sha256:6c149d9330398837003069da5794b781954b18950df2a1b45d2f5f12299f7ed2"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-node-provider-slot.ts",
+      "digest": "sha256:dc9c75638d0102db059d17c4542af1a02c39d0c171dff86a175740c060de66bf"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-node.ts",
+      "digest": "sha256:3aa7626c5c698498d8e3d71ab4ae96c7f11e2e8fceee7ba221a3b1321ebba08f"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-projection-authorities-authority-ref.ts",
+      "digest": "sha256:c967fa46c6f5b06973387919107e7520dfa78b0eae99f6e09f25af70474b3df6"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-projection-authorities.ts",
+      "digest": "sha256:cb5ba767b32b53d9167eac7e1299b5e1741469aa247242ccbda6a38a00c5a07b"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-service-level-items-authority-ref.ts",
+      "digest": "sha256:f50899b40bda0a18b168a0dcf5c01c81d75df48295bd06b7fb4176790731d030"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-service-level-items.ts",
+      "digest": "sha256:61057a965d3650da9ebbcfd69f3ad12e6829903f2e355b63e97ba07fb646def2"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-service-level-sla-boundary-authority-ref.ts",
+      "digest": "sha256:a934c8563ff25998303cc092ddb51d73b7831f78887ff5603438a1a9ccefc6ac"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-service-level-sla-boundary.ts",
+      "digest": "sha256:f5a0ef4d5897c97e96291b524847aa5f30714b86974ada99a83a6d8e2ad6d48b"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-service-level-sli-definition.ts",
+      "digest": "sha256:7e80bfb344222725dccfe0189040b506ecc89ca50b60b20d051c7c12e90d1319"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-service-level-slo-definition-authority-ref.ts",
+      "digest": "sha256:c212c1611fcb7720450c482e95735afc7632a00e4fad5ede3693e466b67a9df9"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-service-level-slo-definition-items-authority-ref.ts",
+      "digest": "sha256:39c33490e7672f1c41416150ef58685a4278f99518588283c7955fc723e14bb9"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-service-level-slo-definition-items.ts",
+      "digest": "sha256:31057e0eb4059eaf7cd9ec159037dc4f94169507805d1bb50f02e94c6cbe625e"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-service-level-slo-definition.ts",
+      "digest": "sha256:caf049ce2942eef29a1a37623c84431dd99bbc965aeb36ffddf8fdad2f3d3f7f"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-service-level.ts",
+      "digest": "sha256:0fbfe8c04f1a5c739068e69ee075775fa9ab50ffa77b0120f3198782bdc3d325"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-source-authority-authority-ref.ts",
+      "digest": "sha256:22337f4dcb751ee512443fb553728b6f74c5c44d301c38429c73264140c56e22"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-source-authority.ts",
+      "digest": "sha256:1cfda1de23b932713785e7798a1c457953417aad00778eaafb36a56ad6b9f7aa"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-structural-mapping-c4-mapping-authority-ref.ts",
+      "digest": "sha256:5d788d9f2a8b8a574445c240e86d9f40e8a90ddd63b71cf9fd85f0c3e42a0c8f"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-structural-mapping-c4-mapping.ts",
+      "digest": "sha256:4d71dd6d4f73e2e41429d4465faf3b356e4bed924913daba4af264b08fe8d230"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1-structural-mapping.ts",
+      "digest": "sha256:cfe1d29cd56645b3f39403534dc13b9d05f93852b336e92b2e482aa22ddfcd3c"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/canonical-circuit-blueprint-v1.ts",
+      "digest": "sha256:7498421572aedd78bc1d54538b3ce6fe01ec8d71b4e7165185db226c5b35ae06"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/contracts/index.ts",
+      "digest": "sha256:3c702a0413ef01cca91f47f1564458dca5ef46e086a6e9ef617633bcf312a5b8"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/dependencies.json",
+      "digest": "sha256:318882e8c7b11a5856732f193ba31f4ddf6e4e4a1e7e50ce1298e0bba3cc44ef"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/package-lock.json",
+      "digest": "sha256:ad1d5e78e09bf26ff4eb818286356fd96d6c63727dd58513596a41d95e43bcf5"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/package.json",
+      "digest": "sha256:ff10b66f9f3b2a597bfd3a8a45e886694ffd965a5eccb93ec4c88715c33c6f17"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/providers/expression.mjs",
+      "digest": "sha256:34625a18a276fc51168c1c101e84df0129916da527a98364fc63794ebb2f134a"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/providers/mechanics.mjs",
+      "digest": "sha256:1f21d721342194165179021e068e99ce47aabf5edcb5aba2f380572859e86415"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/providers/native-mechanic-primitives.mjs",
+      "digest": "sha256:1cc204869f0ce7b60ad03187d364db4a432b0b632ce4469a7cf37747d6a379d5"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/providers/port-0.mjs",
+      "digest": "sha256:c06bcf4ac785ec70dff4c1756a53057ccd71a0ab608a52cf1d2cf9dba1eb7cb7"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/providers/sda/languages/typescript/dist/src/execution/contract-validator.js",
+      "digest": "sha256:9ee125e72ba67428097f6af28d9698d161db4c0f83f5e14918057b3faaf7be46"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/providers/sda/languages/typescript/dist/src/execution/disposition-resolver.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/providers/sda/languages/typescript/dist/src/execution/execution-authority-resolver.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/providers/sda/languages/typescript/dist/src/execution/execution-observer.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/providers/sda/languages/typescript/dist/src/execution/index.js",
+      "digest": "sha256:a83b3c4caa43ac6ab1996b708797e15cde6b5d4b036b95be1da918688142159d"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/providers/sda/languages/typescript/dist/src/execution/semantic-executor.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/providers/sda/languages/typescript/dist/src/kernel/disposition-resolver.js",
+      "digest": "sha256:7cdae956253d6a48de978f1191c044d999d515f8aac7427393fa9da735faa688"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/providers/sda/languages/typescript/dist/src/kernel/scenario-kernel.js",
+      "digest": "sha256:8a3cf0b6bac20fb514e631d27c29e5ec659625aaf885e2ccd64a7a340daa6384"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/providers/sda/languages/typescript/runtimes/node/schema-contract-admission-provider.mjs",
+      "digest": "sha256:b8b8b60d0023d2ab0bff2d1239a3e19d73ebe2d4405b47cef006004b370eac5a"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/scenario.mjs",
+      "digest": "sha256:d75a69279b91db51b73e0c8150f51ae16d7c04da989322291b134e2f0045f45b"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/embodiment.receipt.json",
+      "digest": "sha256:bfc89705c8ee6fe497b30685261fd151a28aa8235957330db63d1b3f20963701"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/evidence/authority.json",
+      "digest": "sha256:de271d6668feec87ba481d3eee297af4fde3825891673a32150b6daa346851c8"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/evidence/canonical-execution-graph.json",
+      "digest": "sha256:9c5b91447f39b8044ec80003c9867683f3fac60e69e49f1e20b3334d0e246889"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/evidence/conformance.json",
+      "digest": "sha256:31bba3fd690e569d38b2dbe11bc6bf37f0a9ff76e811953b10b9e7acb7f7064f"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/evidence/contract-projection.json",
+      "digest": "sha256:d857066730bea0e7da6971cc1caf1a18e40cabf6140132e36a64db1e2315443d"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/evidence/embodiment-plan.json",
+      "digest": "sha256:208fdda254c329dd29d14c8e2d4de6b9d70a9d20e1974c2c352791a2c57e0a7a"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/evidence/fixture-authority.json",
+      "digest": "sha256:4e6c9d933657dc635f6b159e8296b8f2fdc20d955dadf93578bf31efbff8777a"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/evidence/fixture-results.json",
+      "digest": "sha256:e196fcd782e7cc1f39229987f14466743cec284e83a0fb16e1d3390eb88d50d7"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/evidence/mechanic-lineage.json",
+      "digest": "sha256:0e579995755330235290c7d68d78dac96a8973d9c44fbdc728658578b37cd701"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/evidence/reveal.json",
+      "digest": "sha256:79f646fa459a8af6c180d2da3a79e8217a796008f97cf782081563187c7951ff"
+    },
+    {
+      "path": "embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/evidence/target-readiness.json",
+      "digest": "sha256:abd9297ae03624601c6fc4b86434fa4b1211b50719753e849e8eda68f5a9baff"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/composition.mjs",
+      "digest": "sha256:58e13c512d5d2d962db5143343b5781f4fbc96d7874ade54467f3f3e962db3c5"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/contracts/authority.json",
+      "digest": "sha256:a6660d0b0fd606d3950fc61a5c4f9e909009d9e4e4288d4dc8b15e1d2addd4eb"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/contracts/index.ts",
+      "digest": "sha256:602399b5f6c73c4890433ae3da46a45d158ab6126d6b26e01b9e3af76f862e59"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/contracts/sidefx-provider-resolution-request-v1-items-items.ts",
+      "digest": "sha256:0aa7d458a68a65f1138790fecc34ed9d18e578492a7a10017c8f69faa30cb0ad"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/contracts/sidefx-provider-resolution-request-v1-items.ts",
+      "digest": "sha256:de94981adb48d3815e1576aaf3ee62ee6289b270491851d279e5f398a9bd158d"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/contracts/sidefx-provider-resolution-request-v1.ts",
+      "digest": "sha256:9a8b6701ac9ab87ee13c7232845862113223313268b8f619a2eff8445f660a8a"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/contracts/sidefx-semantic-provider-resolution-v1-finding-source-position.ts",
+      "digest": "sha256:454abf51e3b7694a5e9caf26693d957e828683e738695d0d4de8e139d4fbed35"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/contracts/sidefx-semantic-provider-resolution-v1-finding.ts",
+      "digest": "sha256:0b9238cfcca0b0fc039f94875aa5f41464be0759f35f16959245063637b8b32a"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/contracts/sidefx-semantic-provider-resolution-v1-items-items.ts",
+      "digest": "sha256:47554ec936c1884b81195ac25b336cd3b2b596b1e990664e3dd05ab5c1ca17bc"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/contracts/sidefx-semantic-provider-resolution-v1-items.ts",
+      "digest": "sha256:e6a1bf2eb78892d59cb9e47a8cdf58cea212c4973058d1a7e43e1460a2d24f7c"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/contracts/sidefx-semantic-provider-resolution-v1.ts",
+      "digest": "sha256:227da1424ffbb9d8e6130851514e0c0ef04557f7c191fccbdf3144fe93702e18"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/dependencies.json",
+      "digest": "sha256:550fe9cc2dfc2f2e748c1016bf8f9d58a282cf1677b371e958d71b25cb612dde"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/package-lock.json",
+      "digest": "sha256:ad1d5e78e09bf26ff4eb818286356fd96d6c63727dd58513596a41d95e43bcf5"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/package.json",
+      "digest": "sha256:ff10b66f9f3b2a597bfd3a8a45e886694ffd965a5eccb93ec4c88715c33c6f17"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/providers/expression.mjs",
+      "digest": "sha256:34625a18a276fc51168c1c101e84df0129916da527a98364fc63794ebb2f134a"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/providers/mechanics.mjs",
+      "digest": "sha256:e4cfc59e9cef48c4066562fc65bda36460567eeb1c23b4ef5e205b329ea60cd7"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/providers/native-mechanic-primitives.mjs",
+      "digest": "sha256:1cc204869f0ce7b60ad03187d364db4a432b0b632ce4469a7cf37747d6a379d5"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/providers/port-0.mjs",
+      "digest": "sha256:fcfac681f46b360d57d2cb2121df416ab4d211b1cc5722c3b5ccd30ac679e561"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/providers/sda/languages/typescript/dist/src/execution/contract-validator.js",
+      "digest": "sha256:9ee125e72ba67428097f6af28d9698d161db4c0f83f5e14918057b3faaf7be46"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/providers/sda/languages/typescript/dist/src/execution/disposition-resolver.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/providers/sda/languages/typescript/dist/src/execution/execution-authority-resolver.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/providers/sda/languages/typescript/dist/src/execution/execution-observer.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/providers/sda/languages/typescript/dist/src/execution/index.js",
+      "digest": "sha256:a83b3c4caa43ac6ab1996b708797e15cde6b5d4b036b95be1da918688142159d"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/providers/sda/languages/typescript/dist/src/execution/semantic-executor.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/providers/sda/languages/typescript/dist/src/kernel/disposition-resolver.js",
+      "digest": "sha256:7cdae956253d6a48de978f1191c044d999d515f8aac7427393fa9da735faa688"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/providers/sda/languages/typescript/dist/src/kernel/scenario-kernel.js",
+      "digest": "sha256:8a3cf0b6bac20fb514e631d27c29e5ec659625aaf885e2ccd64a7a340daa6384"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/providers/sda/languages/typescript/runtimes/node/schema-contract-admission-provider.mjs",
+      "digest": "sha256:b8b8b60d0023d2ab0bff2d1239a3e19d73ebe2d4405b47cef006004b370eac5a"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/scenario.mjs",
+      "digest": "sha256:8d993250ae5b1e9cc2f788056f0e5051b45cb8ca9547943bbd158e111c0697bc"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/embodiment.receipt.json",
+      "digest": "sha256:c6679c9300006f2e0823f02b176d63c8a3025f94dacbdbdf102f33921138913f"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/evidence/authority.json",
+      "digest": "sha256:8c1bfa38ff17a5287b1354fa1f269d0729896ce19c0b3e142ffddc2024709e3f"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/evidence/canonical-execution-graph.json",
+      "digest": "sha256:48eb08aa04517dd8eb2b381148836bc356bbdeb80123bf0bffbe4b5ecb4f6e88"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/evidence/conformance.json",
+      "digest": "sha256:528e72d0dde012e68d45aa9279fdc9d0f378977d65a69028d498c5fd0276a469"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/evidence/contract-projection.json",
+      "digest": "sha256:21990831fc49a1bc1586f4ef8124b139f0fc316d30af494f9c7327a12a499a3c"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/evidence/embodiment-plan.json",
+      "digest": "sha256:d500ff72d760dea0a48dbc69e9bb7714968ba50d32ee3798ec93a6aaba1c51d2"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/evidence/fixture-authority.json",
+      "digest": "sha256:9bd371348cf4cf93a40d503849d0f913d7b750403e24d81dbfc84ae17a413c71"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/evidence/fixture-results.json",
+      "digest": "sha256:714831d6d43e8afc36e50178cb3cd0f13ff4645380d7c3afda7afc690ae74bda"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/evidence/mechanic-lineage.json",
+      "digest": "sha256:c453c9fc2a0604e9ef459204cac5e4f76af39b9a3ee9dd2b259c5fbc05bcadcd"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/evidence/negative-checks.json",
+      "digest": "sha256:e7a41057fc8f623dca510f94b631d043ae30d4c7e6b2c5372471f0a6c388df9a"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/evidence/reveal.json",
+      "digest": "sha256:d6b73a6f4c26518494fdff7bad0ecfc2d28768fdc09ceaa9f55b47124d915ded"
+    },
+    {
+      "path": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/evidence/target-readiness.json",
+      "digest": "sha256:1ddadc4cc8f9029417d63a4df5a73f0760ab5370e5b1b4c3d9bf8174998a5c3b"
+    },
+    {
+      "path": "materialize-node.mjs",
+      "digest": "sha256:7f4c4b2514d40ac35b7a118bd4d378cfec9fa7419fb95d398e91731a0c0efdf2"
+    },
+    {
+      "path": "package-lock.json",
+      "digest": "sha256:a69e63c791e41b4fe6e9b2f4f5bccbce4f63bc958776da36a2b05615754f65f7"
+    },
+    {
+      "path": "package.json",
+      "digest": "sha256:5564bbcd60a4a11d892ca87c3c7b1f5073b8c4e4c08aa072dbbed7f4c9cfeda4"
+    },
+    {
+      "path": "read-authority.mjs",
+      "digest": "sha256:9a131cc07d30ae2caf22fc9befb3b21617a84d1da58f0ec0c3476713abfd2c07"
+    },
+    {
+      "path": "regression-results.json",
+      "digest": "sha256:8628acb5cacf061f71ed61dade333ff79691a2adaaa4522912e2067a95e23c9f"
+    },
+    {
+      "path": "regression.cases.json",
+      "digest": "sha256:90c7ae300f28edcfabcd088abdcbbdea38e2c426caa15b8a57cf547d5dd140b5"
+    },
+    {
+      "path": "resolvers/node/consumer-object-provider.mjs",
+      "digest": "sha256:e7252960e4d9547ef77bb2d780356db8796ef1693e8ce69479bd52e05cf6b068"
+    },
+    {
+      "path": "review/contract-type-witness.result.json",
+      "digest": "sha256:e34681a554c120af2a85ad6281d9baabc0ddbc164b18e1265aedad4f78252e0b"
+    },
+    {
+      "path": "review/contract-type-witness.ts",
+      "digest": "sha256:10714d176ae512e9b6f5bea4dbc939d3425128036a345d33498b11a459b763c0"
+    },
+    {
+      "path": "review/semantic-expression-audit.json",
+      "digest": "sha256:115c202fd5dbb16045f4cf46ce4cc2ca8778bcb171fa867400046c2819a2834d"
+    },
+    {
+      "path": "review/semantic-expression-review.md",
+      "digest": "sha256:c6435c13e96fdd8367819673eff18c42c72b1bc71002b4ddd36cf1961e439406"
+    },
+    {
+      "path": "review/verify-contract-type-witness.mjs",
+      "digest": "sha256:f1bb46da227df8362cf68c4fea6bd11a7945649caf86f69bba852fc732918650"
+    },
+    {
+      "path": "second-root-authority-bundle.json",
+      "digest": "sha256:7dbcfc7144796c1a4e77872958c8d269e7a4caad39d9bc5879aeb8715169c92e"
+    },
+    {
+      "path": "second-root.input.json",
+      "digest": "sha256:31975e7e140a70df2a827871794fd4a042e13f4aef18c3efbc2c2b868d177951"
+    },
+    {
+      "path": "selection.json",
+      "digest": "sha256:728adfaa4c2fa629acbea81f634e2817a790cf9c0c22e9524e18a232ef48bb7a"
+    },
+    {
+      "path": "third-authority-bundle.json",
+      "digest": "sha256:7dd29c3fbbd80235f97cea59f81030cac358ef3936221bd590bdaf7880cae30d"
+    },
+    {
+      "path": "third-capability.input.json",
+      "digest": "sha256:9dbd3555078e4e750a73fdde0038d75cb1718d327a832a0ce0a56f7c1d5db3a3"
+    },
+    {
+      "path": "verify-node.mjs",
+      "digest": "sha256:ed742dc60ebcf2dff478b955c84cf55b169a6a34ec5114536d9157bb5be3d0ee"
+    }
+  ]
+}

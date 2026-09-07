@@ -1,0 +1,6126 @@
+{
+  "scenarioId": "require-current-approved-review-receipt",
+  "target": "node",
+  "nativeProvider": {
+    "file": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+    "digest": "sha256:21fb43c57817b8dc3c3d2dd5af13551ca03111cf99f5654989f490fda6732ac5"
+  },
+  "recovered": [
+    {
+      "portId": "require-current-approved-review-receipt-port",
+      "transformationId": "require-current-approved-review-receipt.v1",
+      "expression": {
+        "op": "let",
+        "bindings": {
+          "checksClosed": {
+            "op": "every",
+            "from": {
+              "op": "array",
+              "items": [
+                {
+                  "op": "equals",
+                  "left": {
+                    "op": "path",
+                    "from": "input",
+                    "path": "payload.projectionReceipt.capability.capabilityId"
+                  },
+                  "right": {
+                    "op": "path",
+                    "from": "input",
+                    "path": "payload.capabilityId"
+                  }
+                },
+                {
+                  "op": "equals",
+                  "left": {
+                    "op": "length",
+                    "value": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload.reviewBoundary.capabilities"
+                    }
+                  },
+                  "right": {
+                    "op": "literal",
+                    "value": 1
+                  }
+                },
+                {
+                  "op": "equals",
+                  "left": {
+                    "op": "path",
+                    "from": "input",
+                    "path": "payload.reviewBoundary.capabilities.0.capabilityId"
+                  },
+                  "right": {
+                    "op": "path",
+                    "from": "input",
+                    "path": "payload.capabilityId"
+                  }
+                },
+                {
+                  "op": "equals",
+                  "left": {
+                    "op": "path",
+                    "from": "input",
+                    "path": "payload.reviewBoundary.capabilities.0.capabilityAuthorityDigest"
+                  },
+                  "right": {
+                    "op": "path",
+                    "from": "input",
+                    "path": "payload.featureDigest"
+                  }
+                },
+                {
+                  "op": "equals",
+                  "left": {
+                    "op": "path",
+                    "from": "input",
+                    "path": "payload.reviewBoundary.capabilities.0.blueprintAuthorityDigest"
+                  },
+                  "right": {
+                    "op": "path",
+                    "from": "input",
+                    "path": "payload.candidate.blueprintAuthority.authorityDigest"
+                  }
+                },
+                {
+                  "op": "equals",
+                  "left": {
+                    "op": "path",
+                    "from": "input",
+                    "path": "payload.reviewBoundary.capabilities.0.carrierDigest"
+                  },
+                  "right": {
+                    "op": "path",
+                    "from": "input",
+                    "path": "payload.candidateCarrierDigest"
+                  }
+                },
+                {
+                  "op": "equals",
+                  "left": {
+                    "op": "path",
+                    "from": "input",
+                    "path": "payload.reviewBoundary.capabilities.0.projectionReceiptDigest"
+                  },
+                  "right": {
+                    "op": "path",
+                    "from": "input",
+                    "path": "payload.projectionReceiptDigest"
+                  }
+                },
+                {
+                  "op": "equals",
+                  "left": {
+                    "op": "path",
+                    "from": "input",
+                    "path": "payload.reviewBoundary.capabilities.0.geometryProofDigest"
+                  },
+                  "right": {
+                    "op": "path",
+                    "from": "input",
+                    "path": "payload.geometryProofDigest"
+                  }
+                },
+                {
+                  "op": "equals",
+                  "left": {
+                    "op": "path",
+                    "from": "input",
+                    "path": "payload.reviewBoundary.capabilities.0.geometryDisposition"
+                  },
+                  "right": {
+                    "op": "path",
+                    "from": "input",
+                    "path": "payload.geometryProof.disposition"
+                  }
+                },
+                {
+                  "op": "equals",
+                  "left": {
+                    "op": "path",
+                    "from": "input",
+                    "path": "payload.reviewBoundary.capabilities.0.geometryFindingCount"
+                  },
+                  "right": {
+                    "op": "length",
+                    "value": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload.geometryProof.findings"
+                    }
+                  }
+                },
+                {
+                  "op": "equals",
+                  "left": {
+                    "op": "path",
+                    "from": "input",
+                    "path": "payload.reviewReceipt.receiptVersion"
+                  },
+                  "right": {
+                    "op": "literal",
+                    "value": "canonical-blueprint-review-receipt.v1"
+                  }
+                },
+                {
+                  "op": "equals",
+                  "left": {
+                    "op": "path",
+                    "from": "input",
+                    "path": "payload.reviewReceipt.disposition"
+                  },
+                  "right": {
+                    "op": "literal",
+                    "value": "APPROVE"
+                  }
+                },
+                {
+                  "op": "equals",
+                  "left": {
+                    "op": "path",
+                    "from": "input",
+                    "path": "payload.reviewReceipt.capabilityAuthorityDigest"
+                  },
+                  "right": {
+                    "op": "path",
+                    "from": "input",
+                    "path": "payload.featureDigest"
+                  }
+                },
+                {
+                  "op": "equals",
+                  "left": {
+                    "op": "path",
+                    "from": "input",
+                    "path": "payload.reviewReceipt.blueprintAuthorityDigest"
+                  },
+                  "right": {
+                    "op": "path",
+                    "from": "input",
+                    "path": "payload.candidate.blueprintAuthority.authorityDigest"
+                  }
+                },
+                {
+                  "op": "equals",
+                  "left": {
+                    "op": "path",
+                    "from": "input",
+                    "path": "payload.reviewReceipt.carrierDigest"
+                  },
+                  "right": {
+                    "op": "path",
+                    "from": "input",
+                    "path": "payload.candidateCarrierDigest"
+                  }
+                },
+                {
+                  "op": "equals",
+                  "left": {
+                    "op": "path",
+                    "from": "input",
+                    "path": "payload.reviewReceipt.projectionReceiptDigest"
+                  },
+                  "right": {
+                    "op": "path",
+                    "from": "input",
+                    "path": "payload.projectionReceiptDigest"
+                  }
+                },
+                {
+                  "op": "equals",
+                  "left": {
+                    "op": "path",
+                    "from": "input",
+                    "path": "payload.reviewReceipt.rationaleReference.digest"
+                  },
+                  "right": {
+                    "op": "path",
+                    "from": "input",
+                    "path": "payload.reviewTestimonyDigest"
+                  }
+                },
+                {
+                  "op": "equals",
+                  "left": {
+                    "op": "path",
+                    "from": "input",
+                    "path": "payload.reviewTestimony.disposition"
+                  },
+                  "right": {
+                    "op": "literal",
+                    "value": "APPROVE"
+                  }
+                },
+                {
+                  "op": "equals",
+                  "left": {
+                    "op": "path",
+                    "from": "input",
+                    "path": "payload.reviewTestimony.reviewBoundaryDigest"
+                  },
+                  "right": {
+                    "op": "path",
+                    "from": "input",
+                    "path": "payload.reviewBoundaryDigest"
+                  }
+                },
+                {
+                  "op": "equals",
+                  "left": {
+                    "op": "path",
+                    "from": "input",
+                    "path": "payload.projectionReceipt.blueprintAuthorityDigest"
+                  },
+                  "right": {
+                    "op": "path",
+                    "from": "input",
+                    "path": "payload.candidate.blueprintAuthority.authorityDigest"
+                  }
+                },
+                {
+                  "op": "equals",
+                  "left": {
+                    "op": "path",
+                    "from": "input",
+                    "path": "payload.projectionReceipt.carrierDigest"
+                  },
+                  "right": {
+                    "op": "path",
+                    "from": "input",
+                    "path": "payload.candidateCarrierDigest"
+                  }
+                },
+                {
+                  "op": "equals",
+                  "left": {
+                    "op": "json-stringify",
+                    "value": {
+                      "op": "canonicalize",
+                      "value": {
+                        "op": "path",
+                        "from": "input",
+                        "path": "payload.projectionReceipt.sources"
+                      }
+                    }
+                  },
+                  "right": {
+                    "op": "json-stringify",
+                    "value": {
+                      "op": "canonicalize",
+                      "value": {
+                        "op": "object",
+                        "fields": {
+                          "ascii": {
+                            "op": "path",
+                            "from": "input",
+                            "path": "payload.reviewReceipt.reviewedSources.ascii"
+                          },
+                          "mermaid": {
+                            "op": "path",
+                            "from": "input",
+                            "path": "payload.reviewReceipt.reviewedSources.mermaid"
+                          },
+                          "additionalViews": {
+                            "op": "path",
+                            "from": "input",
+                            "path": "payload.reviewReceipt.reviewedSources.requiredViews"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "op": "equals",
+                  "left": {
+                    "op": "json-stringify",
+                    "value": {
+                      "op": "canonicalize",
+                      "value": {
+                        "op": "path",
+                        "from": "input",
+                        "path": "payload.reviewBoundary.capabilities.0.reviewedSources"
+                      }
+                    }
+                  },
+                  "right": {
+                    "op": "json-stringify",
+                    "value": {
+                      "op": "canonicalize",
+                      "value": {
+                        "op": "path",
+                        "from": "input",
+                        "path": "payload.reviewReceipt.reviewedSources"
+                      }
+                    }
+                  }
+                },
+                {
+                  "op": "equals",
+                  "left": {
+                    "op": "json-stringify",
+                    "value": {
+                      "op": "canonicalize",
+                      "value": {
+                        "op": "path",
+                        "from": "input",
+                        "path": "payload.reviewBoundary.projectionProfileDigests"
+                      }
+                    }
+                  },
+                  "right": {
+                    "op": "json-stringify",
+                    "value": {
+                      "op": "canonicalize",
+                      "value": {
+                        "op": "path",
+                        "from": "input",
+                        "path": "payload.reviewReceipt.projectionProfileDigests"
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            "as": "condition",
+            "where": {
+              "op": "path",
+              "from": "condition",
+              "path": ""
+            }
+          },
+          "obligationFindings": {
+            "op": "flat-map",
+            "from": {
+              "op": "array",
+              "items": [
+                {
+                  "op": "if",
+                  "when": {
+                    "op": "equals",
+                    "left": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload.projectionReceipt.capability.capabilityId"
+                    },
+                    "right": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload.capabilityId"
+                    }
+                  },
+                  "then": {
+                    "op": "array",
+                    "items": []
+                  },
+                  "else": {
+                    "op": "array",
+                    "items": [
+                      {
+                        "op": "object",
+                        "fields": {
+                          "code": {
+                            "op": "literal",
+                            "value": "PROJECTION_RECEIPT_CAPABILITY_ID_DIVERGED"
+                          },
+                          "blueprintCellId": {
+                            "op": "literal",
+                            "value": "require-current-approved-review-receipt"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "op": "if",
+                  "when": {
+                    "op": "equals",
+                    "left": {
+                      "op": "length",
+                      "value": {
+                        "op": "path",
+                        "from": "input",
+                        "path": "payload.reviewBoundary.capabilities"
+                      }
+                    },
+                    "right": {
+                      "op": "literal",
+                      "value": 1
+                    }
+                  },
+                  "then": {
+                    "op": "array",
+                    "items": []
+                  },
+                  "else": {
+                    "op": "array",
+                    "items": [
+                      {
+                        "op": "object",
+                        "fields": {
+                          "code": {
+                            "op": "literal",
+                            "value": "REVIEW_BOUNDARY_CAPABILITY_COUNT_DIVERGED"
+                          },
+                          "blueprintCellId": {
+                            "op": "literal",
+                            "value": "require-current-approved-review-receipt"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "op": "if",
+                  "when": {
+                    "op": "equals",
+                    "left": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload.reviewBoundary.capabilities.0.capabilityId"
+                    },
+                    "right": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload.capabilityId"
+                    }
+                  },
+                  "then": {
+                    "op": "array",
+                    "items": []
+                  },
+                  "else": {
+                    "op": "array",
+                    "items": [
+                      {
+                        "op": "object",
+                        "fields": {
+                          "code": {
+                            "op": "literal",
+                            "value": "REVIEW_BOUNDARY_CAPABILITY_ID_DIVERGED"
+                          },
+                          "blueprintCellId": {
+                            "op": "literal",
+                            "value": "require-current-approved-review-receipt"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "op": "if",
+                  "when": {
+                    "op": "equals",
+                    "left": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload.reviewBoundary.capabilities.0.capabilityAuthorityDigest"
+                    },
+                    "right": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload.featureDigest"
+                    }
+                  },
+                  "then": {
+                    "op": "array",
+                    "items": []
+                  },
+                  "else": {
+                    "op": "array",
+                    "items": [
+                      {
+                        "op": "object",
+                        "fields": {
+                          "code": {
+                            "op": "literal",
+                            "value": "REVIEW_BOUNDARY_FEATURE_DIGEST_DIVERGED"
+                          },
+                          "blueprintCellId": {
+                            "op": "literal",
+                            "value": "require-current-approved-review-receipt"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "op": "if",
+                  "when": {
+                    "op": "equals",
+                    "left": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload.reviewBoundary.capabilities.0.blueprintAuthorityDigest"
+                    },
+                    "right": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload.candidate.blueprintAuthority.authorityDigest"
+                    }
+                  },
+                  "then": {
+                    "op": "array",
+                    "items": []
+                  },
+                  "else": {
+                    "op": "array",
+                    "items": [
+                      {
+                        "op": "object",
+                        "fields": {
+                          "code": {
+                            "op": "literal",
+                            "value": "REVIEW_BOUNDARY_BLUEPRINT_DIGEST_DIVERGED"
+                          },
+                          "blueprintCellId": {
+                            "op": "literal",
+                            "value": "require-current-approved-review-receipt"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "op": "if",
+                  "when": {
+                    "op": "equals",
+                    "left": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload.reviewBoundary.capabilities.0.carrierDigest"
+                    },
+                    "right": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload.candidateCarrierDigest"
+                    }
+                  },
+                  "then": {
+                    "op": "array",
+                    "items": []
+                  },
+                  "else": {
+                    "op": "array",
+                    "items": [
+                      {
+                        "op": "object",
+                        "fields": {
+                          "code": {
+                            "op": "literal",
+                            "value": "REVIEW_BOUNDARY_CARRIER_DIGEST_DIVERGED"
+                          },
+                          "blueprintCellId": {
+                            "op": "literal",
+                            "value": "require-current-approved-review-receipt"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "op": "if",
+                  "when": {
+                    "op": "equals",
+                    "left": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload.reviewBoundary.capabilities.0.projectionReceiptDigest"
+                    },
+                    "right": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload.projectionReceiptDigest"
+                    }
+                  },
+                  "then": {
+                    "op": "array",
+                    "items": []
+                  },
+                  "else": {
+                    "op": "array",
+                    "items": [
+                      {
+                        "op": "object",
+                        "fields": {
+                          "code": {
+                            "op": "literal",
+                            "value": "REVIEW_BOUNDARY_PROJECTION_RECEIPT_DIGEST_DIVERGED"
+                          },
+                          "blueprintCellId": {
+                            "op": "literal",
+                            "value": "require-current-approved-review-receipt"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "op": "if",
+                  "when": {
+                    "op": "equals",
+                    "left": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload.reviewBoundary.capabilities.0.geometryProofDigest"
+                    },
+                    "right": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload.geometryProofDigest"
+                    }
+                  },
+                  "then": {
+                    "op": "array",
+                    "items": []
+                  },
+                  "else": {
+                    "op": "array",
+                    "items": [
+                      {
+                        "op": "object",
+                        "fields": {
+                          "code": {
+                            "op": "literal",
+                            "value": "REVIEW_BOUNDARY_GEOMETRY_PROOF_DIGEST_DIVERGED"
+                          },
+                          "blueprintCellId": {
+                            "op": "literal",
+                            "value": "require-current-approved-review-receipt"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "op": "if",
+                  "when": {
+                    "op": "equals",
+                    "left": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload.reviewBoundary.capabilities.0.geometryDisposition"
+                    },
+                    "right": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload.geometryProof.disposition"
+                    }
+                  },
+                  "then": {
+                    "op": "array",
+                    "items": []
+                  },
+                  "else": {
+                    "op": "array",
+                    "items": [
+                      {
+                        "op": "object",
+                        "fields": {
+                          "code": {
+                            "op": "literal",
+                            "value": "REVIEW_BOUNDARY_GEOMETRY_DISPOSITION_DIVERGED"
+                          },
+                          "blueprintCellId": {
+                            "op": "literal",
+                            "value": "require-current-approved-review-receipt"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "op": "if",
+                  "when": {
+                    "op": "equals",
+                    "left": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload.reviewBoundary.capabilities.0.geometryFindingCount"
+                    },
+                    "right": {
+                      "op": "length",
+                      "value": {
+                        "op": "path",
+                        "from": "input",
+                        "path": "payload.geometryProof.findings"
+                      }
+                    }
+                  },
+                  "then": {
+                    "op": "array",
+                    "items": []
+                  },
+                  "else": {
+                    "op": "array",
+                    "items": [
+                      {
+                        "op": "object",
+                        "fields": {
+                          "code": {
+                            "op": "literal",
+                            "value": "REVIEW_BOUNDARY_GEOMETRY_FINDING_COUNT_DIVERGED"
+                          },
+                          "blueprintCellId": {
+                            "op": "literal",
+                            "value": "require-current-approved-review-receipt"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "op": "if",
+                  "when": {
+                    "op": "equals",
+                    "left": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload.reviewReceipt.receiptVersion"
+                    },
+                    "right": {
+                      "op": "literal",
+                      "value": "canonical-blueprint-review-receipt.v1"
+                    }
+                  },
+                  "then": {
+                    "op": "array",
+                    "items": []
+                  },
+                  "else": {
+                    "op": "array",
+                    "items": [
+                      {
+                        "op": "object",
+                        "fields": {
+                          "code": {
+                            "op": "literal",
+                            "value": "REVIEW_RECEIPT_CONTRACT_DIVERGED"
+                          },
+                          "blueprintCellId": {
+                            "op": "literal",
+                            "value": "require-current-approved-review-receipt"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "op": "if",
+                  "when": {
+                    "op": "equals",
+                    "left": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload.reviewReceipt.disposition"
+                    },
+                    "right": {
+                      "op": "literal",
+                      "value": "APPROVE"
+                    }
+                  },
+                  "then": {
+                    "op": "array",
+                    "items": []
+                  },
+                  "else": {
+                    "op": "array",
+                    "items": [
+                      {
+                        "op": "object",
+                        "fields": {
+                          "code": {
+                            "op": "literal",
+                            "value": "REVIEW_DISPOSITION_NOT_APPROVED"
+                          },
+                          "blueprintCellId": {
+                            "op": "literal",
+                            "value": "require-current-approved-review-receipt"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "op": "if",
+                  "when": {
+                    "op": "equals",
+                    "left": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload.reviewReceipt.capabilityAuthorityDigest"
+                    },
+                    "right": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload.featureDigest"
+                    }
+                  },
+                  "then": {
+                    "op": "array",
+                    "items": []
+                  },
+                  "else": {
+                    "op": "array",
+                    "items": [
+                      {
+                        "op": "object",
+                        "fields": {
+                          "code": {
+                            "op": "literal",
+                            "value": "REVIEW_FEATURE_DIGEST_DIVERGED"
+                          },
+                          "blueprintCellId": {
+                            "op": "literal",
+                            "value": "require-current-approved-review-receipt"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "op": "if",
+                  "when": {
+                    "op": "equals",
+                    "left": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload.reviewReceipt.blueprintAuthorityDigest"
+                    },
+                    "right": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload.candidate.blueprintAuthority.authorityDigest"
+                    }
+                  },
+                  "then": {
+                    "op": "array",
+                    "items": []
+                  },
+                  "else": {
+                    "op": "array",
+                    "items": [
+                      {
+                        "op": "object",
+                        "fields": {
+                          "code": {
+                            "op": "literal",
+                            "value": "REVIEW_BLUEPRINT_DIGEST_DIVERGED"
+                          },
+                          "blueprintCellId": {
+                            "op": "literal",
+                            "value": "require-current-approved-review-receipt"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "op": "if",
+                  "when": {
+                    "op": "equals",
+                    "left": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload.reviewReceipt.carrierDigest"
+                    },
+                    "right": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload.candidateCarrierDigest"
+                    }
+                  },
+                  "then": {
+                    "op": "array",
+                    "items": []
+                  },
+                  "else": {
+                    "op": "array",
+                    "items": [
+                      {
+                        "op": "object",
+                        "fields": {
+                          "code": {
+                            "op": "literal",
+                            "value": "REVIEW_CARRIER_DIGEST_DIVERGED"
+                          },
+                          "blueprintCellId": {
+                            "op": "literal",
+                            "value": "require-current-approved-review-receipt"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "op": "if",
+                  "when": {
+                    "op": "equals",
+                    "left": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload.reviewReceipt.projectionReceiptDigest"
+                    },
+                    "right": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload.projectionReceiptDigest"
+                    }
+                  },
+                  "then": {
+                    "op": "array",
+                    "items": []
+                  },
+                  "else": {
+                    "op": "array",
+                    "items": [
+                      {
+                        "op": "object",
+                        "fields": {
+                          "code": {
+                            "op": "literal",
+                            "value": "REVIEW_PROJECTION_RECEIPT_DIGEST_DIVERGED"
+                          },
+                          "blueprintCellId": {
+                            "op": "literal",
+                            "value": "require-current-approved-review-receipt"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "op": "if",
+                  "when": {
+                    "op": "equals",
+                    "left": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload.reviewReceipt.rationaleReference.digest"
+                    },
+                    "right": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload.reviewTestimonyDigest"
+                    }
+                  },
+                  "then": {
+                    "op": "array",
+                    "items": []
+                  },
+                  "else": {
+                    "op": "array",
+                    "items": [
+                      {
+                        "op": "object",
+                        "fields": {
+                          "code": {
+                            "op": "literal",
+                            "value": "REVIEW_TESTIMONY_DIGEST_DIVERGED"
+                          },
+                          "blueprintCellId": {
+                            "op": "literal",
+                            "value": "require-current-approved-review-receipt"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "op": "if",
+                  "when": {
+                    "op": "equals",
+                    "left": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload.reviewTestimony.disposition"
+                    },
+                    "right": {
+                      "op": "literal",
+                      "value": "APPROVE"
+                    }
+                  },
+                  "then": {
+                    "op": "array",
+                    "items": []
+                  },
+                  "else": {
+                    "op": "array",
+                    "items": [
+                      {
+                        "op": "object",
+                        "fields": {
+                          "code": {
+                            "op": "literal",
+                            "value": "REVIEW_TESTIMONY_NOT_APPROVED"
+                          },
+                          "blueprintCellId": {
+                            "op": "literal",
+                            "value": "require-current-approved-review-receipt"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "op": "if",
+                  "when": {
+                    "op": "equals",
+                    "left": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload.reviewTestimony.reviewBoundaryDigest"
+                    },
+                    "right": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload.reviewBoundaryDigest"
+                    }
+                  },
+                  "then": {
+                    "op": "array",
+                    "items": []
+                  },
+                  "else": {
+                    "op": "array",
+                    "items": [
+                      {
+                        "op": "object",
+                        "fields": {
+                          "code": {
+                            "op": "literal",
+                            "value": "REVIEW_BOUNDARY_DIGEST_DIVERGED"
+                          },
+                          "blueprintCellId": {
+                            "op": "literal",
+                            "value": "require-current-approved-review-receipt"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "op": "if",
+                  "when": {
+                    "op": "equals",
+                    "left": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload.projectionReceipt.blueprintAuthorityDigest"
+                    },
+                    "right": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload.candidate.blueprintAuthority.authorityDigest"
+                    }
+                  },
+                  "then": {
+                    "op": "array",
+                    "items": []
+                  },
+                  "else": {
+                    "op": "array",
+                    "items": [
+                      {
+                        "op": "object",
+                        "fields": {
+                          "code": {
+                            "op": "literal",
+                            "value": "PROJECTION_RECEIPT_BLUEPRINT_DIGEST_DIVERGED"
+                          },
+                          "blueprintCellId": {
+                            "op": "literal",
+                            "value": "require-current-approved-review-receipt"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "op": "if",
+                  "when": {
+                    "op": "equals",
+                    "left": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload.projectionReceipt.carrierDigest"
+                    },
+                    "right": {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload.candidateCarrierDigest"
+                    }
+                  },
+                  "then": {
+                    "op": "array",
+                    "items": []
+                  },
+                  "else": {
+                    "op": "array",
+                    "items": [
+                      {
+                        "op": "object",
+                        "fields": {
+                          "code": {
+                            "op": "literal",
+                            "value": "PROJECTION_RECEIPT_CARRIER_DIGEST_DIVERGED"
+                          },
+                          "blueprintCellId": {
+                            "op": "literal",
+                            "value": "require-current-approved-review-receipt"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "op": "if",
+                  "when": {
+                    "op": "equals",
+                    "left": {
+                      "op": "json-stringify",
+                      "value": {
+                        "op": "canonicalize",
+                        "value": {
+                          "op": "path",
+                          "from": "input",
+                          "path": "payload.projectionReceipt.sources"
+                        }
+                      }
+                    },
+                    "right": {
+                      "op": "json-stringify",
+                      "value": {
+                        "op": "canonicalize",
+                        "value": {
+                          "op": "object",
+                          "fields": {
+                            "ascii": {
+                              "op": "path",
+                              "from": "input",
+                              "path": "payload.reviewReceipt.reviewedSources.ascii"
+                            },
+                            "mermaid": {
+                              "op": "path",
+                              "from": "input",
+                              "path": "payload.reviewReceipt.reviewedSources.mermaid"
+                            },
+                            "additionalViews": {
+                              "op": "path",
+                              "from": "input",
+                              "path": "payload.reviewReceipt.reviewedSources.requiredViews"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "then": {
+                    "op": "array",
+                    "items": []
+                  },
+                  "else": {
+                    "op": "array",
+                    "items": [
+                      {
+                        "op": "object",
+                        "fields": {
+                          "code": {
+                            "op": "literal",
+                            "value": "REVIEWED_SOURCE_DIGESTS_DIVERGED"
+                          },
+                          "blueprintCellId": {
+                            "op": "literal",
+                            "value": "require-current-approved-review-receipt"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "op": "if",
+                  "when": {
+                    "op": "equals",
+                    "left": {
+                      "op": "json-stringify",
+                      "value": {
+                        "op": "canonicalize",
+                        "value": {
+                          "op": "path",
+                          "from": "input",
+                          "path": "payload.reviewBoundary.capabilities.0.reviewedSources"
+                        }
+                      }
+                    },
+                    "right": {
+                      "op": "json-stringify",
+                      "value": {
+                        "op": "canonicalize",
+                        "value": {
+                          "op": "path",
+                          "from": "input",
+                          "path": "payload.reviewReceipt.reviewedSources"
+                        }
+                      }
+                    }
+                  },
+                  "then": {
+                    "op": "array",
+                    "items": []
+                  },
+                  "else": {
+                    "op": "array",
+                    "items": [
+                      {
+                        "op": "object",
+                        "fields": {
+                          "code": {
+                            "op": "literal",
+                            "value": "REVIEW_BOUNDARY_SOURCES_DIVERGED"
+                          },
+                          "blueprintCellId": {
+                            "op": "literal",
+                            "value": "require-current-approved-review-receipt"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "op": "if",
+                  "when": {
+                    "op": "equals",
+                    "left": {
+                      "op": "json-stringify",
+                      "value": {
+                        "op": "canonicalize",
+                        "value": {
+                          "op": "path",
+                          "from": "input",
+                          "path": "payload.reviewBoundary.projectionProfileDigests"
+                        }
+                      }
+                    },
+                    "right": {
+                      "op": "json-stringify",
+                      "value": {
+                        "op": "canonicalize",
+                        "value": {
+                          "op": "path",
+                          "from": "input",
+                          "path": "payload.reviewReceipt.projectionProfileDigests"
+                        }
+                      }
+                    }
+                  },
+                  "then": {
+                    "op": "array",
+                    "items": []
+                  },
+                  "else": {
+                    "op": "array",
+                    "items": [
+                      {
+                        "op": "object",
+                        "fields": {
+                          "code": {
+                            "op": "literal",
+                            "value": "REVIEW_PROFILE_DIGESTS_DIVERGED"
+                          },
+                          "blueprintCellId": {
+                            "op": "literal",
+                            "value": "require-current-approved-review-receipt"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "as": "findingGroup",
+            "value": {
+              "op": "path",
+              "from": "findingGroup",
+              "path": ""
+            }
+          }
+        },
+        "value": {
+          "op": "merge",
+          "values": [
+            {
+              "op": "path",
+              "from": "input",
+              "path": ""
+            },
+            {
+              "op": "object",
+              "fields": {
+                "payload": {
+                  "op": "merge",
+                  "values": [
+                    {
+                      "op": "path",
+                      "from": "input",
+                      "path": "payload"
+                    },
+                    {
+                      "op": "object",
+                      "fields": {
+                        "require-current-approved-review-receiptDisposition": {
+                          "op": "object",
+                          "fields": {
+                            "disposition": {
+                              "op": "if",
+                              "when": {
+                                "op": "path",
+                                "from": "checksClosed",
+                                "path": ""
+                              },
+                              "then": {
+                                "op": "literal",
+                                "value": "MET"
+                              },
+                              "else": {
+                                "op": "literal",
+                                "value": "UNMET"
+                              }
+                            },
+                            "blueprintCellId": {
+                              "op": "literal",
+                              "value": "require-current-approved-review-receipt"
+                            },
+                            "findings": {
+                              "op": "path",
+                              "from": "obligationFindings",
+                              "path": ""
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      },
+      "nodeCount": 342,
+      "sourceDigest": "sha256:edd662a3271af9b23645ff2b0c6e263a053ed6cfe149d09add4a8fe6f9b15f93",
+      "physicalDigest": "sha256:c3e3ac22b2a9b668eaa673c63aed244f04da07932e5037e8b32ccc6890f5ab00",
+      "mutationRejected": true
+    }
+  ],
+  "helperChecks": [
+    {
+      "name": "canonicalize",
+      "passed": true
+    }
+  ],
+  "mechanicCoverage": [
+    {
+      "operation": "literal",
+      "vectors": 152
+    },
+    {
+      "operation": "path",
+      "vectors": 52
+    },
+    {
+      "operation": "object",
+      "vectors": 1
+    },
+    {
+      "operation": "array",
+      "vectors": 9
+    },
+    {
+      "operation": "merge",
+      "vectors": 4
+    },
+    {
+      "operation": "map",
+      "vectors": 3
+    },
+    {
+      "operation": "flat-map",
+      "vectors": 3
+    },
+    {
+      "operation": "filter",
+      "vectors": 3
+    },
+    {
+      "operation": "find",
+      "vectors": 3
+    },
+    {
+      "operation": "some",
+      "vectors": 3
+    },
+    {
+      "operation": "every",
+      "vectors": 3
+    },
+    {
+      "operation": "includes",
+      "vectors": 4
+    },
+    {
+      "operation": "intersects",
+      "vectors": 4
+    },
+    {
+      "operation": "equals",
+      "vectors": 7
+    },
+    {
+      "operation": "length",
+      "vectors": 11
+    },
+    {
+      "operation": "greater-than",
+      "vectors": 5
+    },
+    {
+      "operation": "if",
+      "vectors": 18
+    },
+    {
+      "operation": "unique",
+      "vectors": 8
+    },
+    {
+      "operation": "object-values",
+      "vectors": 8
+    },
+    {
+      "operation": "join",
+      "vectors": 4
+    },
+    {
+      "operation": "format",
+      "vectors": 1
+    },
+    {
+      "operation": "trim",
+      "vectors": 8
+    },
+    {
+      "operation": "lower-case",
+      "vectors": 8
+    },
+    {
+      "operation": "escape-html",
+      "vectors": 8
+    },
+    {
+      "operation": "sha256",
+      "vectors": 8
+    },
+    {
+      "operation": "base64-decode-utf8",
+      "vectors": 8
+    },
+    {
+      "operation": "json-stringify",
+      "vectors": 8
+    },
+    {
+      "operation": "canonicalize",
+      "vectors": 8
+    },
+    {
+      "operation": "directed-graph-closure",
+      "vectors": 2
+    },
+    {
+      "operation": "parse-json",
+      "vectors": 14
+    },
+    {
+      "operation": "try-parse-json",
+      "vectors": 8
+    },
+    {
+      "operation": "let",
+      "vectors": 3
+    }
+  ],
+  "differentialVectors": [
+    {
+      "label": "literal allocation and value",
+      "expression": {
+        "op": "literal",
+        "value": null
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "literal allocation and value",
+      "expression": {
+        "op": "literal",
+        "value": false
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "literal allocation and value",
+      "expression": {
+        "op": "literal",
+        "value": 0
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "literal allocation and value",
+      "expression": {
+        "op": "literal",
+        "value": 0
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "literal allocation and value",
+      "expression": {
+        "op": "literal",
+        "value": ""
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "literal allocation and value",
+      "expression": {
+        "op": "literal",
+        "value": []
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "literal allocation and value",
+      "expression": {
+        "op": "literal",
+        "value": {
+          "nested": [
+            {
+              "op": "not-an-expression",
+              "value": 4
+            }
+          ]
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "literal allocation and value",
+      "expression": {
+        "op": "literal",
+        "value": {
+          "__proto__": {
+            "x": 1
+          }
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "path null and absence",
+      "expression": {
+        "op": "path",
+        "from": "input",
+        "path": ""
+      },
+      "input": null,
+      "root": null,
+      "operations": [
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "path null and absence",
+      "expression": {
+        "op": "path",
+        "from": "input",
+        "path": "a.b"
+      },
+      "input": null,
+      "root": null,
+      "operations": [
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "path null and absence",
+      "expression": {
+        "op": "path",
+        "from": "input",
+        "path": ".a..b."
+      },
+      "input": null,
+      "root": null,
+      "operations": [
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "path null and absence",
+      "expression": {
+        "op": "path",
+        "from": "input",
+        "path": "0"
+      },
+      "input": null,
+      "root": null,
+      "operations": [
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "path null and absence",
+      "expression": {
+        "op": "path",
+        "from": "input",
+        "path": "missing"
+      },
+      "input": null,
+      "root": null,
+      "operations": [
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "path null and absence",
+      "expression": {
+        "op": "path",
+        "from": "input",
+        "path": ""
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "path null and absence",
+      "expression": {
+        "op": "path",
+        "from": "input",
+        "path": "a.b"
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "path null and absence",
+      "expression": {
+        "op": "path",
+        "from": "input",
+        "path": ".a..b."
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "path null and absence",
+      "expression": {
+        "op": "path",
+        "from": "input",
+        "path": "0"
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "path null and absence",
+      "expression": {
+        "op": "path",
+        "from": "input",
+        "path": "missing"
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "path null and absence",
+      "expression": {
+        "op": "path",
+        "from": "input",
+        "path": ""
+      },
+      "input": {
+        "a": null
+      },
+      "root": {
+        "a": null
+      },
+      "operations": [
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "path null and absence",
+      "expression": {
+        "op": "path",
+        "from": "input",
+        "path": "a.b"
+      },
+      "input": {
+        "a": null
+      },
+      "root": {
+        "a": null
+      },
+      "operations": [
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "path null and absence",
+      "expression": {
+        "op": "path",
+        "from": "input",
+        "path": ".a..b."
+      },
+      "input": {
+        "a": null
+      },
+      "root": {
+        "a": null
+      },
+      "operations": [
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "path null and absence",
+      "expression": {
+        "op": "path",
+        "from": "input",
+        "path": "0"
+      },
+      "input": {
+        "a": null
+      },
+      "root": {
+        "a": null
+      },
+      "operations": [
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "path null and absence",
+      "expression": {
+        "op": "path",
+        "from": "input",
+        "path": "missing"
+      },
+      "input": {
+        "a": null
+      },
+      "root": {
+        "a": null
+      },
+      "operations": [
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "path null and absence",
+      "expression": {
+        "op": "path",
+        "from": "input",
+        "path": ""
+      },
+      "input": {
+        "a": {
+          "b": 3
+        }
+      },
+      "root": {
+        "a": {
+          "b": 3
+        }
+      },
+      "operations": [
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "path null and absence",
+      "expression": {
+        "op": "path",
+        "from": "input",
+        "path": "a.b"
+      },
+      "input": {
+        "a": {
+          "b": 3
+        }
+      },
+      "root": {
+        "a": {
+          "b": 3
+        }
+      },
+      "operations": [
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "path null and absence",
+      "expression": {
+        "op": "path",
+        "from": "input",
+        "path": ".a..b."
+      },
+      "input": {
+        "a": {
+          "b": 3
+        }
+      },
+      "root": {
+        "a": {
+          "b": 3
+        }
+      },
+      "operations": [
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "path null and absence",
+      "expression": {
+        "op": "path",
+        "from": "input",
+        "path": "0"
+      },
+      "input": {
+        "a": {
+          "b": 3
+        }
+      },
+      "root": {
+        "a": {
+          "b": 3
+        }
+      },
+      "operations": [
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "path null and absence",
+      "expression": {
+        "op": "path",
+        "from": "input",
+        "path": "missing"
+      },
+      "input": {
+        "a": {
+          "b": 3
+        }
+      },
+      "root": {
+        "a": {
+          "b": 3
+        }
+      },
+      "operations": [
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "path null and absence",
+      "expression": {
+        "op": "path",
+        "from": "input",
+        "path": ""
+      },
+      "input": [
+        "a"
+      ],
+      "root": [
+        "a"
+      ],
+      "operations": [
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "path null and absence",
+      "expression": {
+        "op": "path",
+        "from": "input",
+        "path": "a.b"
+      },
+      "input": [
+        "a"
+      ],
+      "root": [
+        "a"
+      ],
+      "operations": [
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "path null and absence",
+      "expression": {
+        "op": "path",
+        "from": "input",
+        "path": ".a..b."
+      },
+      "input": [
+        "a"
+      ],
+      "root": [
+        "a"
+      ],
+      "operations": [
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "path null and absence",
+      "expression": {
+        "op": "path",
+        "from": "input",
+        "path": "0"
+      },
+      "input": [
+        "a"
+      ],
+      "root": [
+        "a"
+      ],
+      "operations": [
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "path null and absence",
+      "expression": {
+        "op": "path",
+        "from": "input",
+        "path": "missing"
+      },
+      "input": [
+        "a"
+      ],
+      "root": [
+        "a"
+      ],
+      "operations": [
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "path root binding",
+      "expression": {
+        "op": "path",
+        "from": "root",
+        "path": "value"
+      },
+      "input": {
+        "value": 1
+      },
+      "root": {
+        "value": 2
+      },
+      "operations": [
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "path undeclared binding",
+      "expression": {
+        "op": "path",
+        "from": "absent",
+        "path": ""
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "object key and evaluation semantics",
+      "expression": {
+        "op": "object",
+        "fields": {
+          "2": {
+            "op": "literal",
+            "value": 2
+          },
+          "__proto__": {
+            "op": "literal",
+            "value": 1
+          },
+          "a": {
+            "op": "path",
+            "path": "missing"
+          }
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "object",
+        "literal",
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "array preserves undefined",
+      "expression": {
+        "op": "array",
+        "items": [
+          {
+            "op": "path",
+            "from": "input",
+            "path": "missing"
+          },
+          {
+            "op": "literal",
+            "value": null
+          },
+          {
+            "op": "literal",
+            "value": {
+              "value": 1
+            }
+          }
+        ]
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "array",
+        "path",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "merge order and prototype semantics",
+      "expression": {
+        "op": "merge",
+        "values": [
+          {
+            "op": "literal",
+            "value": null
+          },
+          {
+            "op": "literal",
+            "value": {
+              "a": 2
+            }
+          }
+        ]
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "merge",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "merge order and prototype semantics",
+      "expression": {
+        "op": "merge",
+        "values": [
+          {
+            "op": "literal",
+            "value": {}
+          },
+          {
+            "op": "literal",
+            "value": {
+              "a": 2
+            }
+          }
+        ]
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "merge",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "merge order and prototype semantics",
+      "expression": {
+        "op": "merge",
+        "values": [
+          {
+            "op": "literal",
+            "value": {
+              "a": 1
+            }
+          },
+          {
+            "op": "literal",
+            "value": {
+              "a": 2
+            }
+          }
+        ]
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "merge",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "merge order and prototype semantics",
+      "expression": {
+        "op": "merge",
+        "values": [
+          {
+            "op": "literal",
+            "value": {
+              "__proto__": {
+                "x": 1
+              }
+            }
+          },
+          {
+            "op": "literal",
+            "value": {
+              "a": 2
+            }
+          }
+        ]
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "merge",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "strict equality",
+      "expression": {
+        "op": "equals",
+        "left": {
+          "op": "literal",
+          "value": 0
+        },
+        "right": {
+          "op": "literal",
+          "value": false
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "equals",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "native comparison",
+      "expression": {
+        "op": "greater-than",
+        "left": {
+          "op": "literal",
+          "value": 0
+        },
+        "right": {
+          "op": "literal",
+          "value": false
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "greater-than",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "strict equality",
+      "expression": {
+        "op": "equals",
+        "left": {
+          "op": "literal",
+          "value": 0
+        },
+        "right": {
+          "op": "literal",
+          "value": 0
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "equals",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "native comparison",
+      "expression": {
+        "op": "greater-than",
+        "left": {
+          "op": "literal",
+          "value": 0
+        },
+        "right": {
+          "op": "literal",
+          "value": 0
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "greater-than",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "strict equality",
+      "expression": {
+        "op": "equals",
+        "left": {
+          "op": "literal",
+          "value": null
+        },
+        "right": {
+          "op": "literal",
+          "value": null
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "equals",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "native comparison",
+      "expression": {
+        "op": "greater-than",
+        "left": {
+          "op": "literal",
+          "value": null
+        },
+        "right": {
+          "op": "literal",
+          "value": null
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "greater-than",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "strict equality",
+      "expression": {
+        "op": "equals",
+        "left": {
+          "op": "literal",
+          "value": 1
+        },
+        "right": {
+          "op": "literal",
+          "value": "1"
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "equals",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "native comparison",
+      "expression": {
+        "op": "greater-than",
+        "left": {
+          "op": "literal",
+          "value": 1
+        },
+        "right": {
+          "op": "literal",
+          "value": "1"
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "greater-than",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "strict equality",
+      "expression": {
+        "op": "equals",
+        "left": {
+          "op": "literal",
+          "value": {}
+        },
+        "right": {
+          "op": "literal",
+          "value": {}
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "equals",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "native comparison",
+      "expression": {
+        "op": "greater-than",
+        "left": {
+          "op": "literal",
+          "value": {}
+        },
+        "right": {
+          "op": "literal",
+          "value": {}
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "greater-than",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "shared reference equality",
+      "expression": {
+        "op": "equals",
+        "left": {
+          "op": "path",
+          "from": "input",
+          "path": "shared"
+        },
+        "right": {
+          "op": "path",
+          "from": "input",
+          "path": "shared"
+        }
+      },
+      "input": {
+        "shared": {}
+      },
+      "root": {
+        "shared": {}
+      },
+      "operations": [
+        "equals",
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "distinct literal identities",
+      "expression": {
+        "op": "equals",
+        "left": {
+          "op": "literal",
+          "value": {}
+        },
+        "right": {
+          "op": "literal",
+          "value": {}
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "equals",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "length operand boundary",
+      "expression": {
+        "op": "length",
+        "value": {
+          "op": "literal",
+          "value": ""
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "length",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "length operand boundary",
+      "expression": {
+        "op": "length",
+        "value": {
+          "op": "literal",
+          "value": []
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "length",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "length operand boundary",
+      "expression": {
+        "op": "length",
+        "value": {
+          "op": "literal",
+          "value": [
+            1,
+            2
+          ]
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "length",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "length operand boundary",
+      "expression": {
+        "op": "length",
+        "value": {
+          "op": "literal",
+          "value": null
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "length",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "length operand boundary",
+      "expression": {
+        "op": "length",
+        "value": {
+          "op": "literal",
+          "value": {}
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "length",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "includes operand boundary",
+      "expression": {
+        "op": "includes",
+        "in": {
+          "op": "literal",
+          "value": []
+        },
+        "value": {
+          "op": "literal",
+          "value": 1
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "includes",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "includes operand boundary",
+      "expression": {
+        "op": "includes",
+        "in": {
+          "op": "literal",
+          "value": [
+            1,
+            "1"
+          ]
+        },
+        "value": {
+          "op": "literal",
+          "value": 1
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "includes",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "includes operand boundary",
+      "expression": {
+        "op": "includes",
+        "in": {
+          "op": "literal",
+          "value": "ab"
+        },
+        "value": {
+          "op": "literal",
+          "value": 1
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "includes",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "includes operand boundary",
+      "expression": {
+        "op": "includes",
+        "in": {
+          "op": "literal",
+          "value": null
+        },
+        "value": {
+          "op": "literal",
+          "value": 1
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "includes",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "conditional truthiness",
+      "expression": {
+        "op": "if",
+        "when": {
+          "op": "literal",
+          "value": true
+        },
+        "then": {
+          "op": "literal",
+          "value": "taken"
+        },
+        "else": {
+          "op": "literal",
+          "value": "alternative"
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "if",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "lazy conditional",
+      "expression": {
+        "op": "if",
+        "when": {
+          "op": "literal",
+          "value": true
+        },
+        "then": {
+          "op": "literal",
+          "value": "taken"
+        },
+        "else": {
+          "op": "parse-json",
+          "value": {
+            "op": "literal",
+            "value": "invalid json"
+          }
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "if",
+        "parse-json",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "lazy conditional missing length",
+      "expression": {
+        "op": "if",
+        "when": {
+          "op": "literal",
+          "value": true
+        },
+        "then": {
+          "op": "literal",
+          "value": "taken"
+        },
+        "else": {
+          "op": "length",
+          "value": {
+            "op": "literal",
+            "value": null
+          }
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "if",
+        "length",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "conditional truthiness",
+      "expression": {
+        "op": "if",
+        "when": {
+          "op": "literal",
+          "value": false
+        },
+        "then": {
+          "op": "literal",
+          "value": "taken"
+        },
+        "else": {
+          "op": "literal",
+          "value": "alternative"
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "if",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "lazy conditional",
+      "expression": {
+        "op": "if",
+        "when": {
+          "op": "literal",
+          "value": false
+        },
+        "then": {
+          "op": "literal",
+          "value": "taken"
+        },
+        "else": {
+          "op": "parse-json",
+          "value": {
+            "op": "literal",
+            "value": "invalid json"
+          }
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "if",
+        "parse-json",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "lazy conditional missing length",
+      "expression": {
+        "op": "if",
+        "when": {
+          "op": "literal",
+          "value": false
+        },
+        "then": {
+          "op": "literal",
+          "value": "taken"
+        },
+        "else": {
+          "op": "length",
+          "value": {
+            "op": "literal",
+            "value": null
+          }
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "if",
+        "length",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "conditional truthiness",
+      "expression": {
+        "op": "if",
+        "when": {
+          "op": "literal",
+          "value": null
+        },
+        "then": {
+          "op": "literal",
+          "value": "taken"
+        },
+        "else": {
+          "op": "literal",
+          "value": "alternative"
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "if",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "lazy conditional",
+      "expression": {
+        "op": "if",
+        "when": {
+          "op": "literal",
+          "value": null
+        },
+        "then": {
+          "op": "literal",
+          "value": "taken"
+        },
+        "else": {
+          "op": "parse-json",
+          "value": {
+            "op": "literal",
+            "value": "invalid json"
+          }
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "if",
+        "parse-json",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "lazy conditional missing length",
+      "expression": {
+        "op": "if",
+        "when": {
+          "op": "literal",
+          "value": null
+        },
+        "then": {
+          "op": "literal",
+          "value": "taken"
+        },
+        "else": {
+          "op": "length",
+          "value": {
+            "op": "literal",
+            "value": null
+          }
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "if",
+        "length",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "conditional truthiness",
+      "expression": {
+        "op": "if",
+        "when": {
+          "op": "literal",
+          "value": 0
+        },
+        "then": {
+          "op": "literal",
+          "value": "taken"
+        },
+        "else": {
+          "op": "literal",
+          "value": "alternative"
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "if",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "lazy conditional",
+      "expression": {
+        "op": "if",
+        "when": {
+          "op": "literal",
+          "value": 0
+        },
+        "then": {
+          "op": "literal",
+          "value": "taken"
+        },
+        "else": {
+          "op": "parse-json",
+          "value": {
+            "op": "literal",
+            "value": "invalid json"
+          }
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "if",
+        "parse-json",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "lazy conditional missing length",
+      "expression": {
+        "op": "if",
+        "when": {
+          "op": "literal",
+          "value": 0
+        },
+        "then": {
+          "op": "literal",
+          "value": "taken"
+        },
+        "else": {
+          "op": "length",
+          "value": {
+            "op": "literal",
+            "value": null
+          }
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "if",
+        "length",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "conditional truthiness",
+      "expression": {
+        "op": "if",
+        "when": {
+          "op": "literal",
+          "value": []
+        },
+        "then": {
+          "op": "literal",
+          "value": "taken"
+        },
+        "else": {
+          "op": "literal",
+          "value": "alternative"
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "if",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "lazy conditional",
+      "expression": {
+        "op": "if",
+        "when": {
+          "op": "literal",
+          "value": []
+        },
+        "then": {
+          "op": "literal",
+          "value": "taken"
+        },
+        "else": {
+          "op": "parse-json",
+          "value": {
+            "op": "literal",
+            "value": "invalid json"
+          }
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "if",
+        "parse-json",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "lazy conditional missing length",
+      "expression": {
+        "op": "if",
+        "when": {
+          "op": "literal",
+          "value": []
+        },
+        "then": {
+          "op": "literal",
+          "value": "taken"
+        },
+        "else": {
+          "op": "length",
+          "value": {
+            "op": "literal",
+            "value": null
+          }
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "if",
+        "length",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "conditional truthiness",
+      "expression": {
+        "op": "if",
+        "when": {
+          "op": "literal",
+          "value": {}
+        },
+        "then": {
+          "op": "literal",
+          "value": "taken"
+        },
+        "else": {
+          "op": "literal",
+          "value": "alternative"
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "if",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "lazy conditional",
+      "expression": {
+        "op": "if",
+        "when": {
+          "op": "literal",
+          "value": {}
+        },
+        "then": {
+          "op": "literal",
+          "value": "taken"
+        },
+        "else": {
+          "op": "parse-json",
+          "value": {
+            "op": "literal",
+            "value": "invalid json"
+          }
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "if",
+        "parse-json",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "lazy conditional missing length",
+      "expression": {
+        "op": "if",
+        "when": {
+          "op": "literal",
+          "value": {}
+        },
+        "then": {
+          "op": "literal",
+          "value": "taken"
+        },
+        "else": {
+          "op": "length",
+          "value": {
+            "op": "literal",
+            "value": null
+          }
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "if",
+        "length",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "iteration order, index and empty collection",
+      "expression": {
+        "op": "map",
+        "from": {
+          "op": "path",
+          "from": "input",
+          "path": ""
+        },
+        "as": "member",
+        "value": {
+          "op": "array",
+          "items": [
+            {
+              "op": "path",
+              "from": "member",
+              "path": ""
+            },
+            {
+              "op": "path",
+              "from": "memberIndex",
+              "path": ""
+            }
+          ]
+        }
+      },
+      "input": [],
+      "root": [],
+      "operations": [
+        "map",
+        "path",
+        "array"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "iteration order, index and empty collection",
+      "expression": {
+        "op": "map",
+        "from": {
+          "op": "path",
+          "from": "input",
+          "path": ""
+        },
+        "as": "member",
+        "value": {
+          "op": "array",
+          "items": [
+            {
+              "op": "path",
+              "from": "member",
+              "path": ""
+            },
+            {
+              "op": "path",
+              "from": "memberIndex",
+              "path": ""
+            }
+          ]
+        }
+      },
+      "input": [
+        0,
+        1,
+        2
+      ],
+      "root": [
+        0,
+        1,
+        2
+      ],
+      "operations": [
+        "map",
+        "path",
+        "array"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "iteration order, index and empty collection",
+      "expression": {
+        "op": "map",
+        "from": {
+          "op": "path",
+          "from": "input",
+          "path": ""
+        },
+        "as": "member",
+        "value": {
+          "op": "array",
+          "items": [
+            {
+              "op": "path",
+              "from": "member",
+              "path": ""
+            },
+            {
+              "op": "path",
+              "from": "memberIndex",
+              "path": ""
+            }
+          ]
+        }
+      },
+      "input": [
+        null,
+        {}
+      ],
+      "root": [
+        null,
+        {}
+      ],
+      "operations": [
+        "map",
+        "path",
+        "array"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "iteration order, index and empty collection",
+      "expression": {
+        "op": "flat-map",
+        "from": {
+          "op": "path",
+          "from": "input",
+          "path": ""
+        },
+        "as": "member",
+        "value": {
+          "op": "array",
+          "items": [
+            {
+              "op": "path",
+              "from": "member",
+              "path": ""
+            },
+            {
+              "op": "path",
+              "from": "memberIndex",
+              "path": ""
+            }
+          ]
+        }
+      },
+      "input": [],
+      "root": [],
+      "operations": [
+        "flat-map",
+        "path",
+        "array"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "iteration order, index and empty collection",
+      "expression": {
+        "op": "flat-map",
+        "from": {
+          "op": "path",
+          "from": "input",
+          "path": ""
+        },
+        "as": "member",
+        "value": {
+          "op": "array",
+          "items": [
+            {
+              "op": "path",
+              "from": "member",
+              "path": ""
+            },
+            {
+              "op": "path",
+              "from": "memberIndex",
+              "path": ""
+            }
+          ]
+        }
+      },
+      "input": [
+        0,
+        1,
+        2
+      ],
+      "root": [
+        0,
+        1,
+        2
+      ],
+      "operations": [
+        "flat-map",
+        "path",
+        "array"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "iteration order, index and empty collection",
+      "expression": {
+        "op": "flat-map",
+        "from": {
+          "op": "path",
+          "from": "input",
+          "path": ""
+        },
+        "as": "member",
+        "value": {
+          "op": "array",
+          "items": [
+            {
+              "op": "path",
+              "from": "member",
+              "path": ""
+            },
+            {
+              "op": "path",
+              "from": "memberIndex",
+              "path": ""
+            }
+          ]
+        }
+      },
+      "input": [
+        null,
+        {}
+      ],
+      "root": [
+        null,
+        {}
+      ],
+      "operations": [
+        "flat-map",
+        "path",
+        "array"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "iteration order, index and empty collection",
+      "expression": {
+        "op": "filter",
+        "from": {
+          "op": "path",
+          "from": "input",
+          "path": ""
+        },
+        "as": "member",
+        "where": {
+          "op": "path",
+          "from": "member",
+          "path": ""
+        }
+      },
+      "input": [],
+      "root": [],
+      "operations": [
+        "filter",
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "iteration order, index and empty collection",
+      "expression": {
+        "op": "filter",
+        "from": {
+          "op": "path",
+          "from": "input",
+          "path": ""
+        },
+        "as": "member",
+        "where": {
+          "op": "path",
+          "from": "member",
+          "path": ""
+        }
+      },
+      "input": [
+        0,
+        1,
+        2
+      ],
+      "root": [
+        0,
+        1,
+        2
+      ],
+      "operations": [
+        "filter",
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "iteration order, index and empty collection",
+      "expression": {
+        "op": "filter",
+        "from": {
+          "op": "path",
+          "from": "input",
+          "path": ""
+        },
+        "as": "member",
+        "where": {
+          "op": "path",
+          "from": "member",
+          "path": ""
+        }
+      },
+      "input": [
+        null,
+        {}
+      ],
+      "root": [
+        null,
+        {}
+      ],
+      "operations": [
+        "filter",
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "iteration order, index and empty collection",
+      "expression": {
+        "op": "every",
+        "from": {
+          "op": "path",
+          "from": "input",
+          "path": ""
+        },
+        "as": "member",
+        "where": {
+          "op": "path",
+          "from": "member",
+          "path": ""
+        }
+      },
+      "input": [],
+      "root": [],
+      "operations": [
+        "every",
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "iteration order, index and empty collection",
+      "expression": {
+        "op": "every",
+        "from": {
+          "op": "path",
+          "from": "input",
+          "path": ""
+        },
+        "as": "member",
+        "where": {
+          "op": "path",
+          "from": "member",
+          "path": ""
+        }
+      },
+      "input": [
+        0,
+        1,
+        2
+      ],
+      "root": [
+        0,
+        1,
+        2
+      ],
+      "operations": [
+        "every",
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "iteration order, index and empty collection",
+      "expression": {
+        "op": "every",
+        "from": {
+          "op": "path",
+          "from": "input",
+          "path": ""
+        },
+        "as": "member",
+        "where": {
+          "op": "path",
+          "from": "member",
+          "path": ""
+        }
+      },
+      "input": [
+        null,
+        {}
+      ],
+      "root": [
+        null,
+        {}
+      ],
+      "operations": [
+        "every",
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "iteration order, index and empty collection",
+      "expression": {
+        "op": "some",
+        "from": {
+          "op": "path",
+          "from": "input",
+          "path": ""
+        },
+        "as": "member",
+        "where": {
+          "op": "path",
+          "from": "member",
+          "path": ""
+        }
+      },
+      "input": [],
+      "root": [],
+      "operations": [
+        "some",
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "iteration order, index and empty collection",
+      "expression": {
+        "op": "some",
+        "from": {
+          "op": "path",
+          "from": "input",
+          "path": ""
+        },
+        "as": "member",
+        "where": {
+          "op": "path",
+          "from": "member",
+          "path": ""
+        }
+      },
+      "input": [
+        0,
+        1,
+        2
+      ],
+      "root": [
+        0,
+        1,
+        2
+      ],
+      "operations": [
+        "some",
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "iteration order, index and empty collection",
+      "expression": {
+        "op": "some",
+        "from": {
+          "op": "path",
+          "from": "input",
+          "path": ""
+        },
+        "as": "member",
+        "where": {
+          "op": "path",
+          "from": "member",
+          "path": ""
+        }
+      },
+      "input": [
+        null,
+        {}
+      ],
+      "root": [
+        null,
+        {}
+      ],
+      "operations": [
+        "some",
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "iteration order, index and empty collection",
+      "expression": {
+        "op": "find",
+        "from": {
+          "op": "path",
+          "from": "input",
+          "path": ""
+        },
+        "as": "member",
+        "where": {
+          "op": "path",
+          "from": "member",
+          "path": ""
+        }
+      },
+      "input": [],
+      "root": [],
+      "operations": [
+        "find",
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "iteration order, index and empty collection",
+      "expression": {
+        "op": "find",
+        "from": {
+          "op": "path",
+          "from": "input",
+          "path": ""
+        },
+        "as": "member",
+        "where": {
+          "op": "path",
+          "from": "member",
+          "path": ""
+        }
+      },
+      "input": [
+        0,
+        1,
+        2
+      ],
+      "root": [
+        0,
+        1,
+        2
+      ],
+      "operations": [
+        "find",
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "iteration order, index and empty collection",
+      "expression": {
+        "op": "find",
+        "from": {
+          "op": "path",
+          "from": "input",
+          "path": ""
+        },
+        "as": "member",
+        "where": {
+          "op": "path",
+          "from": "member",
+          "path": ""
+        }
+      },
+      "input": [
+        null,
+        {}
+      ],
+      "root": [
+        null,
+        {}
+      ],
+      "operations": [
+        "find",
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "sequential let and shadowing",
+      "expression": {
+        "op": "let",
+        "bindings": {
+          "input": {
+            "op": "path",
+            "from": "input",
+            "path": "initial"
+          },
+          "result": {
+            "op": "path",
+            "from": "input",
+            "path": ""
+          }
+        },
+        "value": {
+          "op": "path",
+          "from": "result",
+          "path": ""
+        }
+      },
+      "input": {
+        "initial": 7
+      },
+      "root": {
+        "initial": 7
+      },
+      "operations": [
+        "let",
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "nested let shadowing",
+      "expression": {
+        "op": "let",
+        "bindings": {
+          "result": {
+            "op": "literal",
+            "value": 1
+          },
+          "nested": {
+            "op": "let",
+            "bindings": {
+              "result": {
+                "op": "literal",
+                "value": 2
+              }
+            },
+            "value": {
+              "op": "path",
+              "from": "result",
+              "path": ""
+            }
+          }
+        },
+        "value": {
+          "op": "array",
+          "items": [
+            {
+              "op": "path",
+              "from": "result",
+              "path": ""
+            },
+            {
+              "op": "path",
+              "from": "nested",
+              "path": ""
+            }
+          ]
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "let",
+        "literal",
+        "path",
+        "array"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "escaped binding identities",
+      "expression": {
+        "op": "let",
+        "bindings": {
+          "x-y": {
+            "op": "literal",
+            "value": 2
+          },
+          "return": {
+            "op": "literal",
+            "value": 3
+          },
+          "Object": {
+            "op": "literal",
+            "value": 4
+          }
+        },
+        "value": {
+          "op": "array",
+          "items": [
+            {
+              "op": "path",
+              "from": "x-y",
+              "path": ""
+            },
+            {
+              "op": "path",
+              "from": "return",
+              "path": ""
+            },
+            {
+              "op": "path",
+              "from": "Object",
+              "path": ""
+            }
+          ]
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "let",
+        "literal",
+        "array",
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "join separators",
+      "expression": {
+        "op": "join",
+        "value": {
+          "op": "literal",
+          "value": []
+        },
+        "separator": ""
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "join",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "join separators",
+      "expression": {
+        "op": "join",
+        "value": {
+          "op": "literal",
+          "value": []
+        },
+        "separator": "|"
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "join",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "join separators",
+      "expression": {
+        "op": "join",
+        "value": {
+          "op": "literal",
+          "value": [
+            "a",
+            null,
+            "b"
+          ]
+        },
+        "separator": ""
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "join",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "join separators",
+      "expression": {
+        "op": "join",
+        "value": {
+          "op": "literal",
+          "value": [
+            "a",
+            null,
+            "b"
+          ]
+        },
+        "separator": "|"
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "join",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "format replacement order",
+      "expression": {
+        "op": "format",
+        "template": "{a}/{b}",
+        "values": {
+          "a": {
+            "op": "literal",
+            "value": "{b}"
+          },
+          "b": {
+            "op": "literal",
+            "value": "$&"
+          }
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "format",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "sha256 boundary",
+      "expression": {
+        "op": "sha256",
+        "value": {
+          "op": "literal",
+          "value": ""
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "sha256",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "sha256 boundary",
+      "expression": {
+        "op": "sha256",
+        "value": {
+          "op": "literal",
+          "value": "eA=="
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "sha256",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "sha256 boundary",
+      "expression": {
+        "op": "sha256",
+        "value": {
+          "op": "literal",
+          "value": "{\"x\":1}"
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "sha256",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "sha256 boundary",
+      "expression": {
+        "op": "sha256",
+        "value": {
+          "op": "literal",
+          "value": "{"
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "sha256",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "sha256 boundary",
+      "expression": {
+        "op": "sha256",
+        "value": {
+          "op": "literal",
+          "value": null
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "sha256",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "sha256 boundary",
+      "expression": {
+        "op": "sha256",
+        "value": {
+          "op": "literal",
+          "value": {
+            "b": 2,
+            "a": [
+              {
+                "z": 1,
+                "a": 2
+              }
+            ]
+          }
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "sha256",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "sha256 boundary",
+      "expression": {
+        "op": "sha256",
+        "value": {
+          "op": "literal",
+          "value": " <A&B>\"'  "
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "sha256",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "sha256 boundary",
+      "expression": {
+        "op": "sha256",
+        "value": {
+          "op": "literal",
+          "value": [
+            1,
+            1,
+            2
+          ]
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "sha256",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "base64-decode-utf8 boundary",
+      "expression": {
+        "op": "base64-decode-utf8",
+        "value": {
+          "op": "literal",
+          "value": ""
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "base64-decode-utf8",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "base64-decode-utf8 boundary",
+      "expression": {
+        "op": "base64-decode-utf8",
+        "value": {
+          "op": "literal",
+          "value": "eA=="
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "base64-decode-utf8",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "base64-decode-utf8 boundary",
+      "expression": {
+        "op": "base64-decode-utf8",
+        "value": {
+          "op": "literal",
+          "value": "{\"x\":1}"
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "base64-decode-utf8",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "base64-decode-utf8 boundary",
+      "expression": {
+        "op": "base64-decode-utf8",
+        "value": {
+          "op": "literal",
+          "value": "{"
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "base64-decode-utf8",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "base64-decode-utf8 boundary",
+      "expression": {
+        "op": "base64-decode-utf8",
+        "value": {
+          "op": "literal",
+          "value": null
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "base64-decode-utf8",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "base64-decode-utf8 boundary",
+      "expression": {
+        "op": "base64-decode-utf8",
+        "value": {
+          "op": "literal",
+          "value": {
+            "b": 2,
+            "a": [
+              {
+                "z": 1,
+                "a": 2
+              }
+            ]
+          }
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "base64-decode-utf8",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "base64-decode-utf8 boundary",
+      "expression": {
+        "op": "base64-decode-utf8",
+        "value": {
+          "op": "literal",
+          "value": " <A&B>\"'  "
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "base64-decode-utf8",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "base64-decode-utf8 boundary",
+      "expression": {
+        "op": "base64-decode-utf8",
+        "value": {
+          "op": "literal",
+          "value": [
+            1,
+            1,
+            2
+          ]
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "base64-decode-utf8",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "json-stringify boundary",
+      "expression": {
+        "op": "json-stringify",
+        "value": {
+          "op": "literal",
+          "value": ""
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "json-stringify",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "json-stringify boundary",
+      "expression": {
+        "op": "json-stringify",
+        "value": {
+          "op": "literal",
+          "value": "eA=="
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "json-stringify",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "json-stringify boundary",
+      "expression": {
+        "op": "json-stringify",
+        "value": {
+          "op": "literal",
+          "value": "{\"x\":1}"
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "json-stringify",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "json-stringify boundary",
+      "expression": {
+        "op": "json-stringify",
+        "value": {
+          "op": "literal",
+          "value": "{"
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "json-stringify",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "json-stringify boundary",
+      "expression": {
+        "op": "json-stringify",
+        "value": {
+          "op": "literal",
+          "value": null
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "json-stringify",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "json-stringify boundary",
+      "expression": {
+        "op": "json-stringify",
+        "value": {
+          "op": "literal",
+          "value": {
+            "b": 2,
+            "a": [
+              {
+                "z": 1,
+                "a": 2
+              }
+            ]
+          }
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "json-stringify",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "json-stringify boundary",
+      "expression": {
+        "op": "json-stringify",
+        "value": {
+          "op": "literal",
+          "value": " <A&B>\"'  "
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "json-stringify",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "json-stringify boundary",
+      "expression": {
+        "op": "json-stringify",
+        "value": {
+          "op": "literal",
+          "value": [
+            1,
+            1,
+            2
+          ]
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "json-stringify",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "parse-json boundary",
+      "expression": {
+        "op": "parse-json",
+        "value": {
+          "op": "literal",
+          "value": ""
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "parse-json",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "parse-json boundary",
+      "expression": {
+        "op": "parse-json",
+        "value": {
+          "op": "literal",
+          "value": "eA=="
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "parse-json",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "parse-json boundary",
+      "expression": {
+        "op": "parse-json",
+        "value": {
+          "op": "literal",
+          "value": "{\"x\":1}"
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "parse-json",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "parse-json boundary",
+      "expression": {
+        "op": "parse-json",
+        "value": {
+          "op": "literal",
+          "value": "{"
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "parse-json",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "parse-json boundary",
+      "expression": {
+        "op": "parse-json",
+        "value": {
+          "op": "literal",
+          "value": null
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "parse-json",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "parse-json boundary",
+      "expression": {
+        "op": "parse-json",
+        "value": {
+          "op": "literal",
+          "value": {
+            "b": 2,
+            "a": [
+              {
+                "z": 1,
+                "a": 2
+              }
+            ]
+          }
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "parse-json",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "parse-json boundary",
+      "expression": {
+        "op": "parse-json",
+        "value": {
+          "op": "literal",
+          "value": " <A&B>\"'  "
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "parse-json",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "parse-json boundary",
+      "expression": {
+        "op": "parse-json",
+        "value": {
+          "op": "literal",
+          "value": [
+            1,
+            1,
+            2
+          ]
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "parse-json",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "try-parse-json boundary",
+      "expression": {
+        "op": "try-parse-json",
+        "value": {
+          "op": "literal",
+          "value": ""
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "try-parse-json",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "try-parse-json boundary",
+      "expression": {
+        "op": "try-parse-json",
+        "value": {
+          "op": "literal",
+          "value": "eA=="
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "try-parse-json",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "try-parse-json boundary",
+      "expression": {
+        "op": "try-parse-json",
+        "value": {
+          "op": "literal",
+          "value": "{\"x\":1}"
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "try-parse-json",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "try-parse-json boundary",
+      "expression": {
+        "op": "try-parse-json",
+        "value": {
+          "op": "literal",
+          "value": "{"
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "try-parse-json",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "try-parse-json boundary",
+      "expression": {
+        "op": "try-parse-json",
+        "value": {
+          "op": "literal",
+          "value": null
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "try-parse-json",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "try-parse-json boundary",
+      "expression": {
+        "op": "try-parse-json",
+        "value": {
+          "op": "literal",
+          "value": {
+            "b": 2,
+            "a": [
+              {
+                "z": 1,
+                "a": 2
+              }
+            ]
+          }
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "try-parse-json",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "try-parse-json boundary",
+      "expression": {
+        "op": "try-parse-json",
+        "value": {
+          "op": "literal",
+          "value": " <A&B>\"'  "
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "try-parse-json",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "try-parse-json boundary",
+      "expression": {
+        "op": "try-parse-json",
+        "value": {
+          "op": "literal",
+          "value": [
+            1,
+            1,
+            2
+          ]
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "try-parse-json",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "canonicalize boundary",
+      "expression": {
+        "op": "canonicalize",
+        "value": {
+          "op": "literal",
+          "value": ""
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "canonicalize",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "canonicalize boundary",
+      "expression": {
+        "op": "canonicalize",
+        "value": {
+          "op": "literal",
+          "value": "eA=="
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "canonicalize",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "canonicalize boundary",
+      "expression": {
+        "op": "canonicalize",
+        "value": {
+          "op": "literal",
+          "value": "{\"x\":1}"
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "canonicalize",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "canonicalize boundary",
+      "expression": {
+        "op": "canonicalize",
+        "value": {
+          "op": "literal",
+          "value": "{"
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "canonicalize",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "canonicalize boundary",
+      "expression": {
+        "op": "canonicalize",
+        "value": {
+          "op": "literal",
+          "value": null
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "canonicalize",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "canonicalize boundary",
+      "expression": {
+        "op": "canonicalize",
+        "value": {
+          "op": "literal",
+          "value": {
+            "b": 2,
+            "a": [
+              {
+                "z": 1,
+                "a": 2
+              }
+            ]
+          }
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "canonicalize",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "canonicalize boundary",
+      "expression": {
+        "op": "canonicalize",
+        "value": {
+          "op": "literal",
+          "value": " <A&B>\"'  "
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "canonicalize",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "canonicalize boundary",
+      "expression": {
+        "op": "canonicalize",
+        "value": {
+          "op": "literal",
+          "value": [
+            1,
+            1,
+            2
+          ]
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "canonicalize",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "trim boundary",
+      "expression": {
+        "op": "trim",
+        "value": {
+          "op": "literal",
+          "value": ""
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "trim",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "trim boundary",
+      "expression": {
+        "op": "trim",
+        "value": {
+          "op": "literal",
+          "value": "eA=="
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "trim",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "trim boundary",
+      "expression": {
+        "op": "trim",
+        "value": {
+          "op": "literal",
+          "value": "{\"x\":1}"
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "trim",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "trim boundary",
+      "expression": {
+        "op": "trim",
+        "value": {
+          "op": "literal",
+          "value": "{"
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "trim",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "trim boundary",
+      "expression": {
+        "op": "trim",
+        "value": {
+          "op": "literal",
+          "value": null
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "trim",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "trim boundary",
+      "expression": {
+        "op": "trim",
+        "value": {
+          "op": "literal",
+          "value": {
+            "b": 2,
+            "a": [
+              {
+                "z": 1,
+                "a": 2
+              }
+            ]
+          }
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "trim",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "trim boundary",
+      "expression": {
+        "op": "trim",
+        "value": {
+          "op": "literal",
+          "value": " <A&B>\"'  "
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "trim",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "trim boundary",
+      "expression": {
+        "op": "trim",
+        "value": {
+          "op": "literal",
+          "value": [
+            1,
+            1,
+            2
+          ]
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "trim",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "lower-case boundary",
+      "expression": {
+        "op": "lower-case",
+        "value": {
+          "op": "literal",
+          "value": ""
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "lower-case",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "lower-case boundary",
+      "expression": {
+        "op": "lower-case",
+        "value": {
+          "op": "literal",
+          "value": "eA=="
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "lower-case",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "lower-case boundary",
+      "expression": {
+        "op": "lower-case",
+        "value": {
+          "op": "literal",
+          "value": "{\"x\":1}"
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "lower-case",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "lower-case boundary",
+      "expression": {
+        "op": "lower-case",
+        "value": {
+          "op": "literal",
+          "value": "{"
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "lower-case",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "lower-case boundary",
+      "expression": {
+        "op": "lower-case",
+        "value": {
+          "op": "literal",
+          "value": null
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "lower-case",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "lower-case boundary",
+      "expression": {
+        "op": "lower-case",
+        "value": {
+          "op": "literal",
+          "value": {
+            "b": 2,
+            "a": [
+              {
+                "z": 1,
+                "a": 2
+              }
+            ]
+          }
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "lower-case",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "lower-case boundary",
+      "expression": {
+        "op": "lower-case",
+        "value": {
+          "op": "literal",
+          "value": " <A&B>\"'  "
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "lower-case",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "lower-case boundary",
+      "expression": {
+        "op": "lower-case",
+        "value": {
+          "op": "literal",
+          "value": [
+            1,
+            1,
+            2
+          ]
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "lower-case",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "escape-html boundary",
+      "expression": {
+        "op": "escape-html",
+        "value": {
+          "op": "literal",
+          "value": ""
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "escape-html",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "escape-html boundary",
+      "expression": {
+        "op": "escape-html",
+        "value": {
+          "op": "literal",
+          "value": "eA=="
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "escape-html",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "escape-html boundary",
+      "expression": {
+        "op": "escape-html",
+        "value": {
+          "op": "literal",
+          "value": "{\"x\":1}"
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "escape-html",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "escape-html boundary",
+      "expression": {
+        "op": "escape-html",
+        "value": {
+          "op": "literal",
+          "value": "{"
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "escape-html",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "escape-html boundary",
+      "expression": {
+        "op": "escape-html",
+        "value": {
+          "op": "literal",
+          "value": null
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "escape-html",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "escape-html boundary",
+      "expression": {
+        "op": "escape-html",
+        "value": {
+          "op": "literal",
+          "value": {
+            "b": 2,
+            "a": [
+              {
+                "z": 1,
+                "a": 2
+              }
+            ]
+          }
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "escape-html",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "escape-html boundary",
+      "expression": {
+        "op": "escape-html",
+        "value": {
+          "op": "literal",
+          "value": " <A&B>\"'  "
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "escape-html",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "escape-html boundary",
+      "expression": {
+        "op": "escape-html",
+        "value": {
+          "op": "literal",
+          "value": [
+            1,
+            1,
+            2
+          ]
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "escape-html",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "object-values boundary",
+      "expression": {
+        "op": "object-values",
+        "value": {
+          "op": "literal",
+          "value": ""
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "object-values",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "object-values boundary",
+      "expression": {
+        "op": "object-values",
+        "value": {
+          "op": "literal",
+          "value": "eA=="
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "object-values",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "object-values boundary",
+      "expression": {
+        "op": "object-values",
+        "value": {
+          "op": "literal",
+          "value": "{\"x\":1}"
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "object-values",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "object-values boundary",
+      "expression": {
+        "op": "object-values",
+        "value": {
+          "op": "literal",
+          "value": "{"
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "object-values",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "object-values boundary",
+      "expression": {
+        "op": "object-values",
+        "value": {
+          "op": "literal",
+          "value": null
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "object-values",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "object-values boundary",
+      "expression": {
+        "op": "object-values",
+        "value": {
+          "op": "literal",
+          "value": {
+            "b": 2,
+            "a": [
+              {
+                "z": 1,
+                "a": 2
+              }
+            ]
+          }
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "object-values",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "object-values boundary",
+      "expression": {
+        "op": "object-values",
+        "value": {
+          "op": "literal",
+          "value": " <A&B>\"'  "
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "object-values",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "object-values boundary",
+      "expression": {
+        "op": "object-values",
+        "value": {
+          "op": "literal",
+          "value": [
+            1,
+            1,
+            2
+          ]
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "object-values",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "unique boundary",
+      "expression": {
+        "op": "unique",
+        "value": {
+          "op": "literal",
+          "value": ""
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "unique",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "unique boundary",
+      "expression": {
+        "op": "unique",
+        "value": {
+          "op": "literal",
+          "value": "eA=="
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "unique",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "unique boundary",
+      "expression": {
+        "op": "unique",
+        "value": {
+          "op": "literal",
+          "value": "{\"x\":1}"
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "unique",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "unique boundary",
+      "expression": {
+        "op": "unique",
+        "value": {
+          "op": "literal",
+          "value": "{"
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "unique",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "unique boundary",
+      "expression": {
+        "op": "unique",
+        "value": {
+          "op": "literal",
+          "value": null
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "unique",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "unique boundary",
+      "expression": {
+        "op": "unique",
+        "value": {
+          "op": "literal",
+          "value": {
+            "b": 2,
+            "a": [
+              {
+                "z": 1,
+                "a": 2
+              }
+            ]
+          }
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "unique",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "unique boundary",
+      "expression": {
+        "op": "unique",
+        "value": {
+          "op": "literal",
+          "value": " <A&B>\"'  "
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "unique",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "unique boundary",
+      "expression": {
+        "op": "unique",
+        "value": {
+          "op": "literal",
+          "value": [
+            1,
+            1,
+            2
+          ]
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "unique",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "intersection membership and operand order",
+      "expression": {
+        "op": "intersects",
+        "left": {
+          "op": "literal",
+          "value": []
+        },
+        "right": {
+          "op": "literal",
+          "value": []
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "intersects",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "intersection membership and operand order",
+      "expression": {
+        "op": "intersects",
+        "left": {
+          "op": "literal",
+          "value": [
+            1,
+            2
+          ]
+        },
+        "right": {
+          "op": "literal",
+          "value": [
+            2
+          ]
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "intersects",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "intersection membership and operand order",
+      "expression": {
+        "op": "intersects",
+        "left": {
+          "op": "literal",
+          "value": [
+            1
+          ]
+        },
+        "right": {
+          "op": "literal",
+          "value": [
+            "1"
+          ]
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "intersects",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "intersection membership and operand order",
+      "expression": {
+        "op": "intersects",
+        "left": {
+          "op": "literal",
+          "value": null
+        },
+        "right": {
+          "op": "literal",
+          "value": []
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "intersects",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "graph closure rejects malformed input",
+      "expression": {
+        "op": "directed-graph-closure",
+        "value": {
+          "op": "literal",
+          "value": null
+        }
+      },
+      "input": {},
+      "root": {},
+      "operations": [
+        "directed-graph-closure",
+        "literal"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    },
+    {
+      "label": "graph closure reachability and cycle",
+      "expression": {
+        "op": "directed-graph-closure",
+        "value": {
+          "op": "path",
+          "from": "input",
+          "path": ""
+        }
+      },
+      "input": {
+        "nodeIds": [
+          "root",
+          "terminal"
+        ],
+        "edges": [
+          {
+            "edgeId": "forward",
+            "from": "root",
+            "to": "terminal"
+          },
+          {
+            "edgeId": "return",
+            "from": "terminal",
+            "to": "root"
+          }
+        ],
+        "rootNodeIds": [
+          "root"
+        ],
+        "terminalNodeIds": [
+          "terminal"
+        ]
+      },
+      "root": {
+        "nodeIds": [
+          "root",
+          "terminal"
+        ],
+        "edges": [
+          {
+            "edgeId": "forward",
+            "from": "root",
+            "to": "terminal"
+          },
+          {
+            "edgeId": "return",
+            "from": "terminal",
+            "to": "root"
+          }
+        ],
+        "rootNodeIds": [
+          "root"
+        ],
+        "terminalNodeIds": [
+          "terminal"
+        ]
+      },
+      "operations": [
+        "directed-graph-closure",
+        "path"
+      ],
+      "passed": true,
+      "roundTripPassed": true
+    }
+  ],
+  "retainedFixturePortComparisons": [
+    {
+      "portId": "require-current-approved-review-receipt-port",
+      "inputDigest": "sha256:abfda0519f73393af93ed1a13442a4d922bf13cbeb5fe3261b58f5b26e993136",
+      "outcomeDigest": "sha256:4ac85f3f265cc2d98ba673744597bb5fa4e6f1063e84dec1702bd336b01f257b",
+      "passed": true
+    },
+    {
+      "portId": "require-current-approved-review-receipt-port",
+      "inputDigest": "sha256:880083cc5f8708a8246db39a46623fd555a32f795edce8c73c4e284e4b6740b1",
+      "outcomeDigest": "sha256:e2a508b6351a06c8127fad23a073168d5484f40620058296eeddbd9918164d47",
+      "passed": true
+    },
+    {
+      "portId": "require-current-approved-review-receipt-port",
+      "inputDigest": "sha256:788d893ac87e5b7be5a001db1e768804ab375174636a6da68fd381bc5761b799",
+      "outcomeDigest": "sha256:fde3390a7f33df49f91bc25bd99181312dca3db26fd35bea3f4fc6dc4c4d6554",
+      "passed": true
+    },
+    {
+      "portId": "require-current-approved-review-receipt-port",
+      "inputDigest": "sha256:8744e04e1f1c7c5a5b6661f7e855ec9aca62648e8ca1ec6476e2fc249f9fb595",
+      "outcomeDigest": "sha256:a845d53b81f2b02c9ee35f4b59a72267938d3bb231eaa4a57217745059f92730",
+      "passed": true
+    },
+    {
+      "portId": "require-current-approved-review-receipt-port",
+      "inputDigest": "sha256:568dd2dd0d1398ed850b3ac88433a59872abdb94be6da19b1379ef9ceaf87bd5",
+      "outcomeDigest": "sha256:fb0cafb59717bc02b2bada96b93cfbe157ca2182380fa7ba95bc68a7101b7f8c",
+      "passed": true
+    },
+    {
+      "portId": "require-current-approved-review-receipt-port",
+      "inputDigest": "sha256:83c5b249c26b5bf652f45b3569b2e216b5c9b9088a23f3be42c42356fee7fe13",
+      "outcomeDigest": "sha256:a193820da738c7d015d108e2e5764f9106776115b5d90c98d74086609a6dcd69",
+      "passed": true
+    },
+    {
+      "portId": "require-current-approved-review-receipt-port",
+      "inputDigest": "sha256:b5b86502869bc992b899c883ce832f5dc4e1a87c636bc64f9fac07d9411bd991",
+      "outcomeDigest": "sha256:0ed3907b6f6b9e1544d4cf8d735fe755c5d12e135cd508f9b8de0db947e192a5",
+      "passed": true
+    },
+    {
+      "portId": "require-current-approved-review-receipt-port",
+      "inputDigest": "sha256:2dfc6bb44b86f649184aaf885e30a0fb26fde2503786ab4c7709ac2bd47fa97f",
+      "outcomeDigest": "sha256:ab05c3ded4688e043dc31d9e69e81c9b5f899bc1fd34c5c08cf51c519bb10b3a",
+      "passed": true
+    }
+  ],
+  "disposition": "NATIVE_TRANSFORMATION_CHECKS_PASSED",
+  "scope": "Native transformation syntax round trip and tested provider semantics. Full Capability/Scenario authority round trip and Cross-Apply remain separate obligations.",
+  "managedAdmission": "NOT_REQUESTED"
+}

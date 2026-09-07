@@ -1,0 +1,26 @@
+{
+  "name": "sfx-embody",
+  "private": true,
+  "description": "Database-driven Capability and Scenario embodiments with executable native bodies and retained evidence.",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BPMSoftwareSolutions/sfx-embody.git"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test node-resolver.test.mjs",
+    "verify:estate": "node verify-estate.mjs regression.cases.json",
+    "audit:source": "node audit-semantic-expression.mjs",
+    "audit:lowering": "node audit-lowering-evidence.mjs",
+    "report": "node review/report-native-repair.mjs"
+  },
+  "dependencies": {
+    "ajv": "8.20.0",
+    "json-schema-traverse": "1.0.0",
+    "prettier": "3.6.2",
+    "typescript": "5.9.3"
+  }
+}

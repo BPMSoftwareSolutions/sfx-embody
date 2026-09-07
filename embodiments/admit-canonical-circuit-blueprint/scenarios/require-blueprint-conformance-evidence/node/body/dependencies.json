@@ -1,0 +1,8 @@
+[
+  {
+    "id": "require-blueprint-conformance-evidence-port",
+    "module": "./providers/require-blueprint-conformance-evidence-port.mjs",
+    "className": "RequireBlueprintConformanceEvidencePort",
+    "kind": "invoke-port"
+  }
+]

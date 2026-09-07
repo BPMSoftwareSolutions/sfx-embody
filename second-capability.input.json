@@ -1,0 +1,5 @@
+{
+  "capabilityId": "admit-canonical-circuit-blueprint",
+  "scenarioId": "require-blueprint-geometry-proof",
+  "target": "node"
+}

@@ -1,0 +1,116 @@
+{
+  "fixtureType": "consumer-capability-fixtures.v1",
+  "fixtures": [
+    {
+      "fixtureId": "real-jmi-signal-record-adapted",
+      "input": {
+        "contractId": "job-market-intelligence-adapter-record.v1",
+        "jmiRecordRef": "features/resolve-market-signals.feature",
+        "jmiRecordType": "job-market-intelligence-state.v1",
+        "jmiRecordDigest": "sha256:40c49cfd3fe8f4b201a7742d867db97ac270214d593372c8b19d15c15b4cc141",
+        "adapterAuthorityId": "sidefx-jmi-adapter-authority.v1",
+        "adapterAuthorityDigest": "sha256:3a4fb77d237ae56da1c6762ba4387403c35224980d3995907fd87443b0d82de1",
+        "observedWindow": "2026-01-01/2026-08-18"
+      },
+      "portOutcomes": {"authority-driven-composition": {"authority": "interfaces.authority.json"}},
+      "expected": {
+        "disposition": "terminated",
+        "terminalScenarioId": "adapt-job-market-intelligence-evidence",
+        "scenarioSequence": ["adapt-job-market-intelligence-evidence"],
+        "outcomeAssertions": [
+          {"conditionId": "adapted", "path": "adaptationDisposition", "operator": "equals", "value": "ADAPTED_EVIDENCE_BINDING"},
+          {"conditionId": "no-findings", "path": "findingCodes", "operator": "equals", "value": []},
+          {"conditionId": "adapter-receipt-bound", "path": "adapterReceiptDigest", "operator": "equals", "value": "sha256:1778c6cea17361c878efa00a01bcf2ac500fe31784ab710c08b64e54d3612111"}
+        ]
+      }
+    },
+    {
+      "fixtureId": "unadmitted-type-held",
+      "input": {
+        "contractId": "job-market-intelligence-adapter-record.v1",
+        "jmiRecordRef": "features/job-market-intelligence.feature",
+        "jmiRecordType": "unknown-jmi-record.v9",
+        "jmiRecordDigest": "sha256:e593929a9fdacaa6eb6e2d78686a01872c11587314749e7c5247849bc8eddc77",
+        "adapterAuthorityId": "sidefx-jmi-adapter-authority.v1",
+        "adapterAuthorityDigest": "sha256:3a4fb77d237ae56da1c6762ba4387403c35224980d3995907fd87443b0d82de1",
+        "observedWindow": "2026-01-01/2026-08-18"
+      },
+      "portOutcomes": {"authority-driven-composition": {"authority": "interfaces.authority.json"}},
+      "expected": {
+        "disposition": "terminated",
+        "terminalScenarioId": "adapt-job-market-intelligence-evidence",
+        "scenarioSequence": ["adapt-job-market-intelligence-evidence"],
+        "outcomeAssertions": [
+          {"conditionId": "held", "path": "adaptationDisposition", "operator": "equals", "value": "ADAPTATION_HELD"},
+          {"conditionId": "type-unadmitted-named", "path": "findingCodes.0", "operator": "equals", "value": "JMI_RECORD_TYPE_UNADMITTED"}
+        ]
+      }
+    },
+    {
+      "fixtureId": "unadmitted-authority-held",
+      "input": {
+        "contractId": "job-market-intelligence-adapter-record.v1",
+        "jmiRecordRef": "features/detect-established-market-patterns.feature",
+        "jmiRecordType": "job-market-intelligence-state.v1",
+        "jmiRecordDigest": "sha256:e0f70104aeb3fa01f36fbaf22364a64ecc2fc255d8db95796bc6bfdfce842dfd",
+        "adapterAuthorityId": "unknown-adapter-authority.v1",
+        "adapterAuthorityDigest": "sha256:3a4fb77d237ae56da1c6762ba4387403c35224980d3995907fd87443b0d82de1",
+        "observedWindow": "2026-01-01/2026-08-18"
+      },
+      "portOutcomes": {"authority-driven-composition": {"authority": "interfaces.authority.json"}},
+      "expected": {
+        "disposition": "terminated",
+        "terminalScenarioId": "adapt-job-market-intelligence-evidence",
+        "scenarioSequence": ["adapt-job-market-intelligence-evidence"],
+        "outcomeAssertions": [
+          {"conditionId": "held", "path": "adaptationDisposition", "operator": "equals", "value": "ADAPTATION_HELD"},
+          {"conditionId": "authority-unadmitted-named", "path": "findingCodes.0", "operator": "equals", "value": "ADAPTER_AUTHORITY_UNADMITTED"}
+        ]
+      }
+    },
+    {
+      "fixtureId": "unbound-record-held",
+      "input": {
+        "contractId": "job-market-intelligence-adapter-record.v1",
+        "jmiRecordRef": "",
+        "jmiRecordType": "job-market-intelligence-state.v1",
+        "jmiRecordDigest": "sha256:cf1bdb204ee933f79681d44225b59f8da4456c2c739741b26dd36a86ee87e67e",
+        "adapterAuthorityId": "sidefx-jmi-adapter-authority.v1",
+        "adapterAuthorityDigest": "sha256:3a4fb77d237ae56da1c6762ba4387403c35224980d3995907fd87443b0d82de1",
+        "observedWindow": "2026-01-01/2026-08-18"
+      },
+      "portOutcomes": {"authority-driven-composition": {"authority": "interfaces.authority.json"}},
+      "expected": {
+        "disposition": "terminated",
+        "terminalScenarioId": "adapt-job-market-intelligence-evidence",
+        "scenarioSequence": ["adapt-job-market-intelligence-evidence"],
+        "outcomeAssertions": [
+          {"conditionId": "held", "path": "adaptationDisposition", "operator": "equals", "value": "ADAPTATION_HELD"},
+          {"conditionId": "record-unbound-named", "path": "findingCodes.0", "operator": "equals", "value": "JMI_RECORD_UNBOUND"}
+        ]
+      }
+    },
+    {
+      "fixtureId": "missing-window-held",
+      "input": {
+        "contractId": "job-market-intelligence-adapter-record.v1",
+        "jmiRecordRef": "features/public-job-market-observation.feature",
+        "jmiRecordType": "public-job-market-observation-state.v1",
+        "jmiRecordDigest": "sha256:cf1bdb204ee933f79681d44225b59f8da4456c2c739741b26dd36a86ee87e67e",
+        "adapterAuthorityId": "sidefx-jmi-adapter-authority.v1",
+        "adapterAuthorityDigest": "sha256:3a4fb77d237ae56da1c6762ba4387403c35224980d3995907fd87443b0d82de1",
+        "observedWindow": ""
+      },
+      "portOutcomes": {"authority-driven-composition": {"authority": "interfaces.authority.json"}},
+      "expected": {
+        "disposition": "terminated",
+        "terminalScenarioId": "adapt-job-market-intelligence-evidence",
+        "scenarioSequence": ["adapt-job-market-intelligence-evidence"],
+        "outcomeAssertions": [
+          {"conditionId": "held", "path": "adaptationDisposition", "operator": "equals", "value": "ADAPTATION_HELD"},
+          {"conditionId": "window-absent-named", "path": "findingCodes.0", "operator": "equals", "value": "OBSERVATION_WINDOW_ABSENT"}
+        ]
+      }
+    }
+  ]
+}

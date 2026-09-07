@@ -1,0 +1,25 @@
+{
+  "capabilityId": "admit-canonical-circuit-blueprint",
+  "scenarioId": "require-blueprint-conformance-evidence",
+  "target": "node",
+  "profile": "full-mechanics",
+  "scenarioDefinitionDigest": "sha256:fbd86532042548e756426b62d6d3ee4e100a06ec799a64f181970ae7bbe12a4f",
+  "embodimentPlanDigest": "sha256:f305982e10f9b7ac0dd7f2960e2a1f4afdb1401d50c27702767c3d4f391062d2",
+  "resolverVersion": "sha256:7904530b58fb037db34446b40f4ef1c025dd52dff2991491853a8f96bf59bc20",
+  "pinnedPlatformCommit": "6fcb8b34f0b85c70a8984940cc21a20cfdb507dd",
+  "providers": [
+    "node-deterministic-semantic-value-provider.v1",
+    "ScenarioKernel.NodePlatform.Execution.AuthorityTransformation"
+  ],
+  "artifactDigest": "sha256:9ba5d53a74c28495a68677d54aaf22a65f1e25ba544f0fab638f56fb9a7d8178",
+  "revealDigest": "sha256:f94b106eee946c2213df978e08eea4f04e6446fd666750deca98ff5ad03a3a90",
+  "disposition": "EXECUTION_CHECKS_PASSED",
+  "managedAdmission": "NOT_REQUESTED",
+  "resolverStatus": "CANDIDATE_PHYSICAL_PROVIDER",
+  "nativeProjectionDigest": "sha256:3e8241341cb936674fa232d0483fa415fa1b535e37799cc24fad515a79042c3e",
+  "contractFidelityDigest": "sha256:6625474bf2a8007beef1714720f77ec6a125c9aa410134f8fb372085747f4901",
+  "lineageDigest": "sha256:52c6cd6cddf12baf7169cbc4bd90695327b0197533c83677a7ee6a5cd6898388",
+  "dependencyLockDigest": "sha256:ad1d5e78e09bf26ff4eb818286356fd96d6c63727dd58513596a41d95e43bcf5",
+  "fixtureResultsDigest": "sha256:b2dac2e1021b2d9e905533b955671a525f3e44a0450366a7452571efd0addeb8",
+  "conformanceDigest": "sha256:e9af6727e2de2548937bfbf6912158869449739066031158a5f00f836736ef40"
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "adapt-job-market-intelligence-evidence-port",
+    "module": "./providers/adapt-job-market-intelligence-evidence-port.mjs",
+    "className": "AdaptJobMarketIntelligenceEvidencePort",
+    "kind": "invoke-port"
+  },
+  {
+    "id": "verify-jmi-record-binding",
+    "module": "../../../verify-jmi-record-binding/node/body/scenario.mjs",
+    "className": "VerifyJmiRecordBindingScenario",
+    "kind": "invoke-scenario"
+  },
+  {
+    "id": "verify-jmi-type-admission",
+    "module": "../../../verify-jmi-type-admission/node/body/scenario.mjs",
+    "className": "VerifyJmiTypeAdmissionScenario",
+    "kind": "invoke-scenario"
+  },
+  {
+    "id": "bind-jmi-adapter-receipt",
+    "module": "../../../bind-jmi-adapter-receipt/node/body/scenario.mjs",
+    "className": "BindJmiAdapterReceiptScenario",
+    "kind": "invoke-scenario"
+  }
+]

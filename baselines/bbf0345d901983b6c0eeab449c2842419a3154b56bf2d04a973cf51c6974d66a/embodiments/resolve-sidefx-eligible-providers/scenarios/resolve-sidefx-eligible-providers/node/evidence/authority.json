@@ -1,0 +1,365 @@
+{
+  "selection": {
+    "capabilityId": "resolve-sidefx-eligible-providers",
+    "scenarioId": "resolve-sidefx-eligible-providers",
+    "target": "node"
+  },
+  "selected": {
+    "capability_id": "resolve-sidefx-eligible-providers",
+    "namespace_id": "sidefx:capabilities",
+    "scenario_id": "resolve-sidefx-eligible-providers",
+    "input_id": "sidefx-provider-resolution-request",
+    "input_contract_state": "RESOLVED",
+    "event_id": "sidefx-provider-resolution-requested",
+    "responsibility": "each binding is checked for capability match, admission, conformance evidence, and declared target",
+    "event_authority_state": "RESOLVED",
+    "outcome_id": "sidefx-semantic-provider-resolution",
+    "outcome_contract_version_pk": "518",
+    "capability_definition_digest": "sha256:3233f0d608b55391e5c1fe49a14cded932b682817e9971e8ec49473e0731f5bb",
+    "scenario_definition_digest": "sha256:a18c0e606e1a70c22c5efd173e130016747bbaaf14f3f875bcc6428d9cc6a93f",
+    "capsule_digest": "sha256:05422cf40a66231d95f6d46e94bd23765a00773b4ecc0c413f4e40608d9461fd"
+  },
+  "snapshotId": "sha256:38debec6dbfa1266f68d903166f69b831c178ffe967208900efcddd9ce2973bc",
+  "projectionDigest": "sha256:81eb41f0faeadcb413d1b5bae9ba991f2d9d753489cfb3a8919c5f72e71f7d28",
+  "query": {
+    "inputDigest": "sha256:7fca552e4385e188d126858bab6ea6d94472b0f0ed881e93b9629da9f5483fa2",
+    "resultDigest": "sha256:c9668564d343c227000e4e44cfdf227d47b846381273884c41ab8e9ac2fe2a2c",
+    "resolutionDigest": "sha256:9ddaf803b07dfdc1d4ea2badaf1e536adefff492e3431d7b4c4a25cdc6b87e9d"
+  },
+  "sources": [
+    {
+      "source_path": "authority/sidefx-semantic-brain/capabilities/resolve-sidefx-eligible-providers/capability.feature",
+      "entry_id": "features/{id}.feature.sidefx",
+      "container_locator": "capsules/resolve-sidefx-eligible-providers.sfxcap",
+      "byte_length": "1824",
+      "content_digest": "sha256:e212e48064a8e7598da5fbc6b6c7d8b7084102808d3798b13d76872c271026ae"
+    },
+    {
+      "source_path": "authority/sidefx-semantic-brain/capabilities/resolve-sidefx-eligible-providers/contracts/sidefx-provider-resolution-request.schema.json",
+      "entry_id": "authority/sidefx-semantic-brain/capabilities/resolve-sidefx-eligible-providers/contracts/sidefx-provider-resolution-request.schema.json",
+      "container_locator": "capsules/resolve-sidefx-eligible-providers.sfxcap",
+      "byte_length": "2660",
+      "content_digest": "sha256:40f6fb9a386c4db5c230acb03293e2d7c129898f689d991eb965b06a572997a2"
+    },
+    {
+      "source_path": "authority/sidefx-semantic-brain/contracts/sidefx-semantic-common.schema.json",
+      "entry_id": "authority/sidefx-semantic-brain/contracts/sidefx-semantic-common.schema.json",
+      "container_locator": "capsules/resolve-sidefx-eligible-providers.sfxcap",
+      "byte_length": "3752",
+      "content_digest": "sha256:529e7fce98565584097ca9c6dbf6f395c2561123a48da06ec16a0ac9905679c6"
+    },
+    {
+      "source_path": "authority/sidefx-semantic-brain/contracts/sidefx-semantic-provider-resolution.schema.json",
+      "entry_id": "authority/sidefx-semantic-brain/contracts/sidefx-semantic-provider-resolution.schema.json",
+      "container_locator": "capsules/resolve-sidefx-eligible-providers.sfxcap",
+      "byte_length": "3005",
+      "content_digest": "sha256:7e62ab89e4058fc1c550d0e77401db57b463de2294b391d8983c0825993525a9"
+    },
+    {
+      "source_path": "capabilities/resolve-sidefx-eligible-providers/capability.authority.json",
+      "entry_id": "capability.authority.json",
+      "container_locator": "capsules/resolve-sidefx-eligible-providers.sfxcap",
+      "byte_length": "1013",
+      "content_digest": "sha256:e5230afac6ee9d421e2c0a372220f8d0febeb18d744e9a1d8c588053f0db6bf8"
+    },
+    {
+      "source_path": "capabilities/resolve-sidefx-eligible-providers/consumer-workspace.authority.json",
+      "entry_id": "consumer-workspace.authority.json",
+      "container_locator": "capsules/resolve-sidefx-eligible-providers.sfxcap",
+      "byte_length": "1523",
+      "content_digest": "sha256:f233120895933b0c74b65c17ea21262b1a8f58690281f16aff176bca3d41af28"
+    },
+    {
+      "source_path": "capabilities/resolve-sidefx-eligible-providers/contracts/contract-catalog.json",
+      "entry_id": "contracts/contract-catalog.json",
+      "container_locator": "capsules/resolve-sidefx-eligible-providers.sfxcap",
+      "byte_length": "460",
+      "content_digest": "sha256:744a78b04c366a2555665a1e9a819f2e409218c8f9327cbb3d9cce36f9d39bc7"
+    },
+    {
+      "source_path": "capabilities/resolve-sidefx-eligible-providers/execution-authorities.authority.json",
+      "entry_id": "execution-authorities.authority.json",
+      "container_locator": "capsules/resolve-sidefx-eligible-providers.sfxcap",
+      "byte_length": "324",
+      "content_digest": "sha256:034d7a1ae731fea7f5377dbc0cb363007699eb352521a942381e79c8524a08de"
+    },
+    {
+      "source_path": "capabilities/resolve-sidefx-eligible-providers/fixtures.authority.json",
+      "entry_id": "fixtures.authority.json",
+      "container_locator": "capsules/resolve-sidefx-eligible-providers.sfxcap",
+      "byte_length": "39197",
+      "content_digest": "sha256:9bd371348cf4cf93a40d503849d0f913d7b750403e24d81dbfc84ae17a413c71"
+    },
+    {
+      "source_path": "capabilities/resolve-sidefx-eligible-providers/interfaces.authority.json",
+      "entry_id": "interfaces.authority.json",
+      "container_locator": "capsules/resolve-sidefx-eligible-providers.sfxcap",
+      "byte_length": "897",
+      "content_digest": "sha256:4615e4db6136d33745d30025123e2dff6390f5625ed32040f3dea743ee8bbce1"
+    },
+    {
+      "source_path": "capabilities/resolve-sidefx-eligible-providers/projection-authorities.authority.json",
+      "entry_id": "projection-authorities.authority.json",
+      "container_locator": "capsules/resolve-sidefx-eligible-providers.sfxcap",
+      "byte_length": "76",
+      "content_digest": "sha256:b7510defae62036b6c8eca4900c4d2859f865a55466eebdfdd18602fe53494d2"
+    },
+    {
+      "source_path": "capabilities/resolve-sidefx-eligible-providers/semantic-graph.authority.json",
+      "entry_id": "semantic-graph.authority.json",
+      "container_locator": "capsules/resolve-sidefx-eligible-providers.sfxcap",
+      "byte_length": "20",
+      "content_digest": "sha256:b24a3e03e4ede34a7c1f96f21b994604476859c63b4c820761e9774bc3262cff"
+    },
+    {
+      "source_path": "capabilities/resolve-sidefx-eligible-providers/semantic-transformation.authority.json",
+      "entry_id": "semantic-transformation.authority.json",
+      "container_locator": "capsules/resolve-sidefx-eligible-providers.sfxcap",
+      "byte_length": "9551",
+      "content_digest": "sha256:27abab599fb60064581bd8ef647a054059d157a4659503178a679e96169ff89d"
+    },
+    {
+      "source_path": "contracts/agentic-contract-catalog.json",
+      "entry_id": "contracts/agentic-contract-catalog.json",
+      "container_locator": "capsules/resolve-sidefx-eligible-providers.sfxcap",
+      "byte_length": "189",
+      "content_digest": "sha256:7569372db59c3cb374d497adc645277f416ca7bcb01d6cf25e37f9f6a6a28ea9"
+    },
+    {
+      "source_path": "contracts/feature-authoring-contract-catalog.json",
+      "entry_id": "contracts/feature-authoring-contract-catalog.json",
+      "container_locator": "capsules/resolve-sidefx-eligible-providers.sfxcap",
+      "byte_length": "197",
+      "content_digest": "sha256:289a368ca2e53a376d87a3202da4fa2f7d4d481a78c9d022a2ac033b19b72317"
+    },
+    {
+      "source_path": "contracts/governed-agent-execution-context.schema.json",
+      "entry_id": "contracts/governed-agent-execution-context.schema.json",
+      "container_locator": "capsules/resolve-sidefx-eligible-providers.sfxcap",
+      "byte_length": "2546",
+      "content_digest": "sha256:a5139e02052cdad068e44c28ab525cc125069039cd3fae86a1ff73b8d59037c2"
+    },
+    {
+      "source_path": "contracts/governed-agent-execution-testimony.schema.json",
+      "entry_id": "contracts/governed-agent-execution-testimony.schema.json",
+      "container_locator": "capsules/resolve-sidefx-eligible-providers.sfxcap",
+      "byte_length": "1583",
+      "content_digest": "sha256:aba32320cab73aba0f744c539cea5df86522e224816ade2e5713f22367f89222"
+    },
+    {
+      "source_path": "contracts/governed-feature-authoring-context.schema.json",
+      "entry_id": "contracts/governed-feature-authoring-context.schema.json",
+      "container_locator": "capsules/resolve-sidefx-eligible-providers.sfxcap",
+      "byte_length": "2866",
+      "content_digest": "sha256:40b787f077ae8c9e23e5b5c5d796eb9000a201687a7c8dbe2856172db7feb625"
+    },
+    {
+      "source_path": "contracts/governed-feature-authoring-testimony.schema.json",
+      "entry_id": "contracts/governed-feature-authoring-testimony.schema.json",
+      "container_locator": "capsules/resolve-sidefx-eligible-providers.sfxcap",
+      "byte_length": "4086",
+      "content_digest": "sha256:d7619dc82bc2f6e71f30e6c04352efd57dcf73a79c33a58707bc0fb009798228"
+    },
+    {
+      "source_path": "fixtures/agentic-fixtures.authority.json",
+      "entry_id": "fixtures/agentic-fixtures.authority.json",
+      "container_locator": "capsules/resolve-sidefx-eligible-providers.sfxcap",
+      "byte_length": "34453",
+      "content_digest": "sha256:d7cba1a5098773147fb7bd23eff6d557db220a70d33053e49db81e9cbde7b237"
+    },
+    {
+      "source_path": "fixtures/feature-authoring-fixtures.authority.json",
+      "entry_id": "fixtures/feature-authoring-fixtures.authority.json",
+      "container_locator": "capsules/resolve-sidefx-eligible-providers.sfxcap",
+      "byte_length": "3565",
+      "content_digest": "sha256:79bb74cd93deb43f2ba549d8edbb8f7771f07d398488da656d493491254630d6"
+    },
+    {
+      "source_path": "semantic-authority/agentic-execution-authorities.authority.json",
+      "entry_id": "semantic-authority/agentic-execution-authorities.authority.json",
+      "container_locator": "capsules/resolve-sidefx-eligible-providers.sfxcap",
+      "byte_length": "309",
+      "content_digest": "sha256:53a88acc6d059d39c4c9b28d43247e491d470ec822ec22c31b9a48a9b93707f1"
+    },
+    {
+      "source_path": "semantic-authority/agentic-interfaces.authority.json",
+      "entry_id": "semantic-authority/agentic-interfaces.authority.json",
+      "container_locator": "capsules/resolve-sidefx-eligible-providers.sfxcap",
+      "byte_length": "918",
+      "content_digest": "sha256:1ac4c9cef57096899986037e368717fc8f8ca09e81ba5fd359f4ed7243015361"
+    },
+    {
+      "source_path": "semantic-authority/agentic-scenario-graph.authority.json",
+      "entry_id": "semantic-authority/agentic-scenario-graph.authority.json",
+      "container_locator": "capsules/resolve-sidefx-eligible-providers.sfxcap",
+      "byte_length": "27",
+      "content_digest": "sha256:80bc17f4f6bdc929fd975ac0086d0bdaa13852881c818860c7df1933ac8e968d"
+    },
+    {
+      "source_path": "semantic-authority/agentic-transformations.authority.json",
+      "entry_id": "semantic-authority/agentic-transformations.authority.json",
+      "container_locator": "capsules/resolve-sidefx-eligible-providers.sfxcap",
+      "byte_length": "18091",
+      "content_digest": "sha256:9faca11953fe6325958997c978a4d6295d0a7b27b029e0de3551620b03cc859c"
+    },
+    {
+      "source_path": "semantic-authority/feature-authoring-execution-authorities.authority.json",
+      "entry_id": "semantic-authority/feature-authoring-execution-authorities.authority.json",
+      "container_locator": "capsules/resolve-sidefx-eligible-providers.sfxcap",
+      "byte_length": "1442",
+      "content_digest": "sha256:184f301e44c9bfec46be8ec2032df570fec90c0fa435507ae7a7f42e02f0165f"
+    },
+    {
+      "source_path": "semantic-authority/feature-authoring-interfaces.authority.json",
+      "entry_id": "semantic-authority/feature-authoring-interfaces.authority.json",
+      "container_locator": "capsules/resolve-sidefx-eligible-providers.sfxcap",
+      "byte_length": "7067",
+      "content_digest": "sha256:554874551b7e5b5c7c5e9869de4af50d7789bc094c8b7fd6a03b97dad8392bfa"
+    },
+    {
+      "source_path": "semantic-authority/feature-authoring-scenario-graph.authority.json",
+      "entry_id": "semantic-authority/feature-authoring-scenario-graph.authority.json",
+      "container_locator": "capsules/resolve-sidefx-eligible-providers.sfxcap",
+      "byte_length": "27",
+      "content_digest": "sha256:80bc17f4f6bdc929fd975ac0086d0bdaa13852881c818860c7df1933ac8e968d"
+    },
+    {
+      "source_path": "semantic-authority/feature-authoring-transformations.authority.json",
+      "entry_id": "semantic-authority/feature-authoring-transformations.authority.json",
+      "container_locator": "capsules/resolve-sidefx-eligible-providers.sfxcap",
+      "byte_length": "33543",
+      "content_digest": "sha256:407349ac09bb1dd413bece30926e16fcb76bfdd8955e6381da72b4c106a9b867"
+    },
+    {
+      "source_path": "sda-bootstrap@87ae918ce46fe4acadd0aecbdcb030c9b55043d9/package.json",
+      "entry_id": "package.json",
+      "container_locator": "https://github.com/BPMSoftwareSolutions/sda-bootstrap/archive/87ae918ce46fe4acadd0aecbdcb030c9b55043d9.tar.gz",
+      "byte_length": "1363",
+      "content_digest": "sha256:638535c87a60c152b269507779b22f023d2975d1f3ec67b9a07dcf13d51aa3af"
+    },
+    {
+      "source_path": "sda-bootstrap@87ae918ce46fe4acadd0aecbdcb030c9b55043d9/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+      "entry_id": "platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+      "container_locator": "https://github.com/BPMSoftwareSolutions/sda-bootstrap/archive/87ae918ce46fe4acadd0aecbdcb030c9b55043d9.tar.gz",
+      "byte_length": "14741",
+      "content_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd"
+    },
+    {
+      "source_path": "sda-bootstrap@87ae918ce46fe4acadd0aecbdcb030c9b55043d9/platform/kernel/semantic-authority/consumer/platform-effect-mechanics.authority.v1.json",
+      "entry_id": "platform/kernel/semantic-authority/consumer/platform-effect-mechanics.authority.v1.json",
+      "container_locator": "https://github.com/BPMSoftwareSolutions/sda-bootstrap/archive/87ae918ce46fe4acadd0aecbdcb030c9b55043d9.tar.gz",
+      "byte_length": "12555",
+      "content_digest": "sha256:526b4ee403120209fa446b1607f49b52bd2035f229917a2009447ca45b63a997"
+    },
+    {
+      "source_path": "sda-bootstrap@87ae918ce46fe4acadd0aecbdcb030c9b55043d9/platform/kernel/semantic-authority/consumer/sda-platform-capabilities.semantic-authority.json",
+      "entry_id": "platform/kernel/semantic-authority/consumer/sda-platform-capabilities.semantic-authority.json",
+      "container_locator": "https://github.com/BPMSoftwareSolutions/sda-bootstrap/archive/87ae918ce46fe4acadd0aecbdcb030c9b55043d9.tar.gz",
+      "byte_length": "55493",
+      "content_digest": "sha256:83ee13064798b2ad7effc17086b7c3e3f2e9da478cb583f283b8c9bfc79ddc72"
+    },
+    {
+      "source_path": "sda-bootstrap@87ae918ce46fe4acadd0aecbdcb030c9b55043d9/platform/kernel/semantic-authority/consumer/semantic-value-mechanics.authority.v1.json",
+      "entry_id": "platform/kernel/semantic-authority/consumer/semantic-value-mechanics.authority.v1.json",
+      "container_locator": "https://github.com/BPMSoftwareSolutions/sda-bootstrap/archive/87ae918ce46fe4acadd0aecbdcb030c9b55043d9.tar.gz",
+      "byte_length": "36670",
+      "content_digest": "sha256:0604d867c42c7eb9721449c0bc95200114cf6f7ce00924e1c4636eba224b911d"
+    }
+  ],
+  "scenario": {
+    "scenarioId": "resolve-sidefx-eligible-providers",
+    "input": {
+      "inputId": "sidefx-provider-resolution-request",
+      "contract": {
+        "contractId": "sidefx-provider-resolution-request.v1"
+      }
+    },
+    "event": {
+      "eventId": "sidefx-provider-resolution-requested",
+      "executionAuthorityId": "resolve-sidefx-eligible-providers.v1"
+    },
+    "outcome": {
+      "outcomeId": "sidefx-semantic-provider-resolution",
+      "contract": {
+        "contractId": "sidefx-semantic-provider-resolution.v1"
+      },
+      "experience": {
+        "statement": "eligible providers cite exact binding, profile, policy, authority, and conformance evidence and every other provider is NOT_OBSERVABLE, INELIGIBLE, or NOT_APPLICABLE with its reason"
+      },
+      "terminal": true
+    },
+    "gherkin": {
+      "given": {
+        "semanticRef": "resolve-sidefx-eligible-providers.given",
+        "text": "declared provider bindings, a requested platform capability, a requested target, and the admitted conformant dispositions"
+      },
+      "when": {
+        "semanticRef": "resolve-sidefx-eligible-providers.when",
+        "text": "each binding is checked for capability match, admission, conformance evidence, and declared target"
+      },
+      "then": {
+        "semanticRef": "resolve-sidefx-eligible-providers.then",
+        "text": "eligible providers cite exact binding, profile, policy, authority, and conformance evidence and every other provider is NOT_OBSERVABLE, INELIGIBLE, or NOT_APPLICABLE with its reason"
+      }
+    },
+    "name": "Admit only providers whose binding, conformance, and target are declared"
+  },
+  "executionAuthorities": [
+    {
+      "id": "resolve-sidefx-eligible-providers.v1",
+      "owningScenarioId": "resolve-sidefx-eligible-providers",
+      "operations": [
+        {
+          "kind": "invoke-port",
+          "portId": "resolve-sidefx-eligible-providers-port"
+        }
+      ]
+    }
+  ],
+  "nativeBinding": {
+    "capability_id": "resolve-sidefx-eligible-providers",
+    "scenario_id": "resolve-sidefx-eligible-providers",
+    "downstream_scenario_id": "resolve-sidefx-eligible-providers",
+    "altitude": "MECHANIC",
+    "requirement_kind": "MECHANIC",
+    "requirement_id": "path",
+    "requirement_use": "expression:1291:92192",
+    "target_language": "node",
+    "provenance_class": "DECLARED_AUTHORITY",
+    "source_definition_pk": "7322",
+    "source_pointer": "/semantics/expression/value/values/1/fields/resolutionDigest",
+    "requirement_definition_pk": "8717",
+    "requirement_definition_digest": {
+      "sqlType": "varbinary",
+      "base64": "xCVsyYdWgB72bQCvVTgPgdhtbhq5cIU/Q9Lk3ZxBDys="
+    },
+    "resolver_id": "node-mechanic-registry-authority.v1",
+    "provider_id": null,
+    "provider_definition_pk": null,
+    "provider_profile_id": "node-deterministic-semantic-value-provider.v1",
+    "profile_definition_pk": "9064",
+    "implementation_id": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+    "implementation_export": "evaluateExpression",
+    "resolution_candidate_count": "1",
+    "mechanic_source_digest": {
+      "sqlType": "varbinary",
+      "base64": "BgTYZ8QsfrlyFEnAvJUgARTPb3zgCSThxGNuuiJLkR0="
+    },
+    "registry_source_digest": {
+      "sqlType": "varbinary",
+      "base64": "hbMKj6/YvmPh4f8FDSjqWB6fH4sfI5PiWJ/GZjgz3s0="
+    },
+    "declared_authority_digest": "sha256:533b856ded71d2e6334dd2f4911b1ec5edb265c4cdc3e79620584fe4cdca1877",
+    "resolution_status": "RESOLVED",
+    "diagnostic": "DECLARED_REQUIREMENT_ACCOUNTED_FOR",
+    "repair_boundary": null,
+    "implementation_evidence_state": "DECLARATION_ONLY",
+    "conformance_status": "NOT_EVALUATED"
+  },
+  "pinnedPlatformCommit": "6fcb8b34f0b85c70a8984940cc21a20cfdb507dd",
+  "resolver": {
+    "path": "C:\\lab\\experiments\\sidefx-embodiment\\resolvers\\node\\consumer-object-provider.mjs",
+    "digest": "sha256:e7252960e4d9547ef77bb2d780356db8796ef1693e8ce69479bd52e05cf6b068",
+    "status": "CANDIDATE_PHYSICAL_PROVIDER"
+  }
+}

@@ -1,0 +1,764 @@
+[
+  {
+    "scenarioId": "adapt-job-market-intelligence-evidence",
+    "operationOrdinal": 0,
+    "portId": "adapt-job-market-intelligence-evidence-port",
+    "transformationId": "adapt-job-market-intelligence-evidence.v1",
+    "sourceRef": "capabilities/adapt-job-market-intelligence-evidence/semantic-transformation.authority.json",
+    "sourceDigest": "sha256:2b167eaf1093228810925754bece447ce574863a6ca8f5459be9e681f3972803",
+    "nodes": [
+      {
+        "sourcePointer": "",
+        "mechanicId": "let",
+        "operation": "let",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 12396,
+        "providerSourceEnd": 12644
+      },
+      {
+        "sourcePointer": "/bindings/recordBound",
+        "mechanicId": "every",
+        "operation": "every",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 10055,
+        "providerSourceEnd": 10192
+      },
+      {
+        "sourcePointer": "/bindings/recordBound/from",
+        "mechanicId": "array",
+        "operation": "array",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 9027,
+        "providerSourceEnd": 9095
+      },
+      {
+        "sourcePointer": "/bindings/recordBound/from/items/0",
+        "mechanicId": "if",
+        "operation": "if",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 10691,
+        "providerSourceEnd": 10791
+      },
+      {
+        "sourcePointer": "/bindings/recordBound/from/items/0/when",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534
+      },
+      {
+        "sourcePointer": "/bindings/recordBound/from/items/0/when/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893
+      },
+      {
+        "sourcePointer": "/bindings/recordBound/from/items/0/when/right",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807
+      },
+      {
+        "sourcePointer": "/bindings/recordBound/from/items/0/then",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807
+      },
+      {
+        "sourcePointer": "/bindings/recordBound/from/items/0/else",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807
+      },
+      {
+        "sourcePointer": "/bindings/recordBound/from/items/1",
+        "mechanicId": "if",
+        "operation": "if",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 10691,
+        "providerSourceEnd": 10791
+      },
+      {
+        "sourcePointer": "/bindings/recordBound/from/items/1/when",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534
+      },
+      {
+        "sourcePointer": "/bindings/recordBound/from/items/1/when/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893
+      },
+      {
+        "sourcePointer": "/bindings/recordBound/from/items/1/when/right",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807
+      },
+      {
+        "sourcePointer": "/bindings/recordBound/from/items/1/then",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807
+      },
+      {
+        "sourcePointer": "/bindings/recordBound/from/items/1/else",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807
+      },
+      {
+        "sourcePointer": "/bindings/recordBound/where",
+        "mechanicId": "path",
+        "operation": "path",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893
+      },
+      {
+        "sourcePointer": "/bindings/typeAdmitted",
+        "mechanicId": "includes",
+        "operation": "includes",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 10198,
+        "providerSourceEnd": 10283
+      },
+      {
+        "sourcePointer": "/bindings/typeAdmitted/in",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807
+      },
+      {
+        "sourcePointer": "/bindings/typeAdmitted/value",
+        "mechanicId": "path",
+        "operation": "path",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893
+      },
+      {
+        "sourcePointer": "/bindings/authorityBound",
+        "mechanicId": "every",
+        "operation": "every",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 10055,
+        "providerSourceEnd": 10192
+      },
+      {
+        "sourcePointer": "/bindings/authorityBound/from",
+        "mechanicId": "array",
+        "operation": "array",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 9027,
+        "providerSourceEnd": 9095
+      },
+      {
+        "sourcePointer": "/bindings/authorityBound/from/items/0",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534
+      },
+      {
+        "sourcePointer": "/bindings/authorityBound/from/items/0/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893
+      },
+      {
+        "sourcePointer": "/bindings/authorityBound/from/items/0/right",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807
+      },
+      {
+        "sourcePointer": "/bindings/authorityBound/from/items/1",
+        "mechanicId": "if",
+        "operation": "if",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 10691,
+        "providerSourceEnd": 10791
+      },
+      {
+        "sourcePointer": "/bindings/authorityBound/from/items/1/when",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534
+      },
+      {
+        "sourcePointer": "/bindings/authorityBound/from/items/1/when/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893
+      },
+      {
+        "sourcePointer": "/bindings/authorityBound/from/items/1/when/right",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807
+      },
+      {
+        "sourcePointer": "/bindings/authorityBound/from/items/1/then",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807
+      },
+      {
+        "sourcePointer": "/bindings/authorityBound/from/items/1/else",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807
+      },
+      {
+        "sourcePointer": "/bindings/authorityBound/where",
+        "mechanicId": "path",
+        "operation": "path",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893
+      },
+      {
+        "sourcePointer": "/bindings/windowDeclared",
+        "mechanicId": "if",
+        "operation": "if",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 10691,
+        "providerSourceEnd": 10791
+      },
+      {
+        "sourcePointer": "/bindings/windowDeclared/when",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534
+      },
+      {
+        "sourcePointer": "/bindings/windowDeclared/when/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893
+      },
+      {
+        "sourcePointer": "/bindings/windowDeclared/when/right",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807
+      },
+      {
+        "sourcePointer": "/bindings/windowDeclared/then",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807
+      },
+      {
+        "sourcePointer": "/bindings/windowDeclared/else",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition",
+        "mechanicId": "if",
+        "operation": "if",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 10691,
+        "providerSourceEnd": 10791
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/when",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/when/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/when/right",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/then",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/else",
+        "mechanicId": "if",
+        "operation": "if",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 10691,
+        "providerSourceEnd": 10791
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/else/when",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/else/when/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/else/when/right",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/else/then",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/else/else",
+        "mechanicId": "if",
+        "operation": "if",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 10691,
+        "providerSourceEnd": 10791
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/else/else/when",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/else/else/when/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/else/else/when/right",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/else/else/then",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/else/else/else",
+        "mechanicId": "if",
+        "operation": "if",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 10691,
+        "providerSourceEnd": 10791
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/else/else/else/when",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/else/else/else/when/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/else/else/else/when/right",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/else/else/else/then",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807
+      },
+      {
+        "sourcePointer": "/bindings/adaptationDisposition/else/else/else/else",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes",
+        "mechanicId": "if",
+        "operation": "if",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 10691,
+        "providerSourceEnd": 10791
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/when",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/when/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/when/right",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/then",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/else",
+        "mechanicId": "if",
+        "operation": "if",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 10691,
+        "providerSourceEnd": 10791
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/else/when",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/else/when/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/else/when/right",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/else/then",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/else/else",
+        "mechanicId": "if",
+        "operation": "if",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 10691,
+        "providerSourceEnd": 10791
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/else/else/when",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/else/else/when/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/else/else/when/right",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/else/else/then",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/else/else/else",
+        "mechanicId": "if",
+        "operation": "if",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 10691,
+        "providerSourceEnd": 10791
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/else/else/else/when",
+        "mechanicId": "equals",
+        "operation": "equals",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 10455,
+        "providerSourceEnd": 10534
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/else/else/else/when/left",
+        "mechanicId": "path",
+        "operation": "path",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/else/else/else/when/right",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/else/else/else/then",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807
+      },
+      {
+        "sourcePointer": "/bindings/findingCodes/else/else/else/else",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807
+      },
+      {
+        "sourcePointer": "/bindings/adapterReceiptDigest",
+        "mechanicId": "format",
+        "operation": "format",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 11103,
+        "providerSourceEnd": 11286
+      },
+      {
+        "sourcePointer": "/bindings/adapterReceiptDigest/values/digest",
+        "mechanicId": "sha256",
+        "operation": "sha256",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 11649,
+        "providerSourceEnd": 11756
+      },
+      {
+        "sourcePointer": "/bindings/adapterReceiptDigest/values/digest/value",
+        "mechanicId": "json-stringify",
+        "operation": "json-stringify",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 11877,
+        "providerSourceEnd": 11950
+      },
+      {
+        "sourcePointer": "/bindings/adapterReceiptDigest/values/digest/value/value",
+        "mechanicId": "object",
+        "operation": "object",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8899,
+        "providerSourceEnd": 9021
+      },
+      {
+        "sourcePointer": "/bindings/adapterReceiptDigest/values/digest/value/value/fields/jmiRecordRef",
+        "mechanicId": "path",
+        "operation": "path",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893
+      },
+      {
+        "sourcePointer": "/bindings/adapterReceiptDigest/values/digest/value/value/fields/jmiRecordType",
+        "mechanicId": "path",
+        "operation": "path",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893
+      },
+      {
+        "sourcePointer": "/bindings/adapterReceiptDigest/values/digest/value/value/fields/jmiRecordDigest",
+        "mechanicId": "path",
+        "operation": "path",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893
+      },
+      {
+        "sourcePointer": "/bindings/adapterReceiptDigest/values/digest/value/value/fields/adaptationDisposition",
+        "mechanicId": "path",
+        "operation": "path",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893
+      },
+      {
+        "sourcePointer": "/value",
+        "mechanicId": "merge",
+        "operation": "merge",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 9101,
+        "providerSourceEnd": 9194
+      },
+      {
+        "sourcePointer": "/value/values/0",
+        "mechanicId": "path",
+        "operation": "path",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893
+      },
+      {
+        "sourcePointer": "/value/values/1",
+        "mechanicId": "object",
+        "operation": "object",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8899,
+        "providerSourceEnd": 9021
+      },
+      {
+        "sourcePointer": "/value/values/1/fields/contractId",
+        "mechanicId": "literal",
+        "operation": "literal",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8750,
+        "providerSourceEnd": 8807
+      },
+      {
+        "sourcePointer": "/value/values/1/fields/adaptationDisposition",
+        "mechanicId": "path",
+        "operation": "path",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893
+      },
+      {
+        "sourcePointer": "/value/values/1/fields/findingCodes",
+        "mechanicId": "path",
+        "operation": "path",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893
+      },
+      {
+        "sourcePointer": "/value/values/1/fields/adapterReceiptDigest",
+        "mechanicId": "path",
+        "operation": "path",
+        "providerSourceRef": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+        "providerSourceStart": 8813,
+        "providerSourceEnd": 8893
+      }
+    ]
+  }
+]

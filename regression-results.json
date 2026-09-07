@@ -1,0 +1,299 @@
+{
+  "executedAt": "2026-09-07T20:09:19.098Z",
+  "command": "node verify-estate.mjs regression.cases.json",
+  "implementationDigest": "sha256:10c590a2e449ae7b146d9e3851561a0cc4571ec0bb3f1496bdc227435afa756f",
+  "components": [
+    {
+      "name": "package.json",
+      "digest": "sha256:d568e04d73287f42dbc58c3f032ed78afcd9c7ca05a4a7e27235ae0579f9192a"
+    },
+    {
+      "name": "package-lock.json",
+      "digest": "sha256:a96fad95f8879d56474a30d431b51f316754e59bb5a62164aba349af4dc9d79c"
+    },
+    {
+      "name": "read-workspace-config.mjs",
+      "digest": "sha256:7af7d437b8689bb5b196f85de45decfe36e9ed521c3911f368f914cac3dc1139"
+    },
+    {
+      "name": "read-authority.mjs",
+      "digest": "sha256:9a131cc07d30ae2caf22fc9befb3b21617a84d1da58f0ec0c3476713abfd2c07"
+    },
+    {
+      "name": "materialize-node.mjs",
+      "digest": "sha256:07682e28bee0c90da40213a3776c5e122cd8e26160d1a88bb0e0335ba7ab5454"
+    },
+    {
+      "name": "verify-node.mjs",
+      "digest": "sha256:f89a20dbcb4d4de7d8bf9a9eef05b8f1917b7341abfad15e400b9dc9b4b25044"
+    },
+    {
+      "name": "verify-contract-fidelity.mjs",
+      "digest": "sha256:6f93547744680b7dcc1d6422daab067d8dba6f877513e165d014333f0d470ccd"
+    },
+    {
+      "name": "verify-native-projection.mjs",
+      "digest": "sha256:a2c6f83e71b93eb46ea1ce33fc7bad516f48c170017b5682adcc4f0a7edbe7bf"
+    },
+    {
+      "name": "reveal-native-expressions.mjs",
+      "digest": "sha256:a6d7a9107ac9bda4aada2c6decb8b6f803b8b3db17dda3a484586d6ee830cb24"
+    },
+    {
+      "name": "resolvers/node/consumer-object-provider.mjs",
+      "digest": "sha256:d31fefccc9caa1e6424890aa36e83329e2ac765e9e540e64da0cf480f843538b"
+    },
+    {
+      "name": "resolvers/node/native-expression-projection.mjs",
+      "digest": "sha256:9f8f31362b683cea0ac58a2ac414be9eb96b0fa113ca8254483d57ded4666198"
+    }
+  ],
+  "snapshotId": "sha256:38debec6dbfa1266f68d903166f69b831c178ffe967208900efcddd9ce2973bc",
+  "projectionDigest": "sha256:81eb41f0faeadcb413d1b5bae9ba991f2d9d753489cfb3a8919c5f72e71f7d28",
+  "cases": [
+    {
+      "selection": {
+        "capabilityId": "adapt-job-market-intelligence-evidence",
+        "scenarioId": "adapt-job-market-intelligence-evidence"
+      },
+      "implementationDigest": "sha256:10c590a2e449ae7b146d9e3851561a0cc4571ec0bb3f1496bdc227435afa756f",
+      "installations": [
+        {
+          "scenarioId": "adapt-job-market-intelligence-evidence",
+          "command": "npm ci --ignore-scripts --no-audit --no-fund",
+          "cwd": "C:\\lab\\repos\\sfx-embody\\embodiments\\adapt-job-market-intelligence-evidence\\scenarios\\adapt-job-market-intelligence-evidence\\node\\body",
+          "exitStatus": 0,
+          "stdout": "\nadded 5 packages in 764ms\n",
+          "stderr": ""
+        },
+        {
+          "scenarioId": "bind-jmi-adapter-receipt",
+          "command": "npm ci --ignore-scripts --no-audit --no-fund",
+          "cwd": "C:\\lab\\repos\\sfx-embody\\embodiments\\adapt-job-market-intelligence-evidence\\scenarios\\bind-jmi-adapter-receipt\\node\\body",
+          "exitStatus": 0,
+          "stdout": "\nadded 5 packages in 754ms\n",
+          "stderr": ""
+        },
+        {
+          "scenarioId": "verify-jmi-record-binding",
+          "command": "npm ci --ignore-scripts --no-audit --no-fund",
+          "cwd": "C:\\lab\\repos\\sfx-embody\\embodiments\\adapt-job-market-intelligence-evidence\\scenarios\\verify-jmi-record-binding\\node\\body",
+          "exitStatus": 0,
+          "stdout": "\nadded 5 packages in 770ms\n",
+          "stderr": ""
+        },
+        {
+          "scenarioId": "verify-jmi-type-admission",
+          "command": "npm ci --ignore-scripts --no-audit --no-fund",
+          "cwd": "C:\\lab\\repos\\sfx-embody\\embodiments\\adapt-job-market-intelligence-evidence\\scenarios\\verify-jmi-type-admission\\node\\body",
+          "exitStatus": 0,
+          "stdout": "\nadded 5 packages in 748ms\n",
+          "stderr": ""
+        }
+      ],
+      "verification": {
+        "capabilityId": "adapt-job-market-intelligence-evidence",
+        "scenarioId": "adapt-job-market-intelligence-evidence",
+        "fixtures": 5,
+        "passed": 5,
+        "scenarioBodies": 4,
+        "bodyFiles": 84,
+        "mechanicClasses": 0,
+        "kernelObservations": 100,
+        "mechanicInvocations": 0,
+        "nativeExpressionNodes": 154,
+        "nativePortComparisons": 20,
+        "negativeChecks": 2
+      },
+      "receipts": [
+        {
+          "file": "C:\\lab\\repos\\sfx-embody\\embodiments\\adapt-job-market-intelligence-evidence\\scenarios\\adapt-job-market-intelligence-evidence\\node\\embodiment.receipt.json",
+          "digest": "sha256:cac4d2b93c642a9e22a6927218df0953a90bee91bc24dfd4f8ea45db8db22d04",
+          "scenarioId": "adapt-job-market-intelligence-evidence",
+          "resolverVersion": "sha256:7904530b58fb037db34446b40f4ef1c025dd52dff2991491853a8f96bf59bc20",
+          "artifactDigest": "sha256:7e24000955146be24504a8694043fc83aece84d7fbca12fb5588e1ea5afba708"
+        },
+        {
+          "file": "C:\\lab\\repos\\sfx-embody\\embodiments\\adapt-job-market-intelligence-evidence\\scenarios\\bind-jmi-adapter-receipt\\node\\embodiment.receipt.json",
+          "digest": "sha256:2ed338fda0772b3120ea7251fb809bd300a32e1076859e4bdced83cc5ca71870",
+          "scenarioId": "bind-jmi-adapter-receipt",
+          "resolverVersion": "sha256:7904530b58fb037db34446b40f4ef1c025dd52dff2991491853a8f96bf59bc20",
+          "artifactDigest": "sha256:256521518ef450da3970f33df0ae3079eb03d8666d8f3a2f16dda899a49e8ce7"
+        },
+        {
+          "file": "C:\\lab\\repos\\sfx-embody\\embodiments\\adapt-job-market-intelligence-evidence\\scenarios\\verify-jmi-record-binding\\node\\embodiment.receipt.json",
+          "digest": "sha256:7c67706172ae822eb7e90ef7d6ba3215fc8785e5a67e8246234f6a86c79a0492",
+          "scenarioId": "verify-jmi-record-binding",
+          "resolverVersion": "sha256:7904530b58fb037db34446b40f4ef1c025dd52dff2991491853a8f96bf59bc20",
+          "artifactDigest": "sha256:97ed304f80fd618b6f0550c7820e44d8598d83723033ff2aaadbe0b9cb25ab03"
+        },
+        {
+          "file": "C:\\lab\\repos\\sfx-embody\\embodiments\\adapt-job-market-intelligence-evidence\\scenarios\\verify-jmi-type-admission\\node\\embodiment.receipt.json",
+          "digest": "sha256:ebb74f11d80d1124eb28d786f62205619d6986ddbdb247f47399f82bb960525d",
+          "scenarioId": "verify-jmi-type-admission",
+          "resolverVersion": "sha256:7904530b58fb037db34446b40f4ef1c025dd52dff2991491853a8f96bf59bc20",
+          "artifactDigest": "sha256:409b96765f9b692b368d9ff99b2e01f5caa7156f203ebd790fa95b0edd43d307"
+        }
+      ],
+      "disposition": "PASSED"
+    },
+    {
+      "selection": {
+        "capabilityId": "admit-canonical-circuit-blueprint",
+        "scenarioId": "admit-canonical-circuit-blueprint",
+        "target": "node"
+      },
+      "implementationDigest": "sha256:10c590a2e449ae7b146d9e3851561a0cc4571ec0bb3f1496bdc227435afa756f",
+      "installations": [
+        {
+          "scenarioId": "admit-canonical-circuit-blueprint",
+          "command": "npm ci --ignore-scripts --no-audit --no-fund",
+          "cwd": "C:\\lab\\repos\\sfx-embody\\embodiments\\admit-canonical-circuit-blueprint\\scenarios\\admit-canonical-circuit-blueprint\\node\\body",
+          "exitStatus": 0,
+          "stdout": "\nadded 5 packages in 764ms\n",
+          "stderr": ""
+        },
+        {
+          "scenarioId": "emit-immutable-blueprint-authority",
+          "command": "npm ci --ignore-scripts --no-audit --no-fund",
+          "cwd": "C:\\lab\\repos\\sfx-embody\\embodiments\\admit-canonical-circuit-blueprint\\scenarios\\emit-immutable-blueprint-authority\\node\\body",
+          "exitStatus": 0,
+          "stdout": "\nadded 5 packages in 892ms\n",
+          "stderr": ""
+        },
+        {
+          "scenarioId": "require-blueprint-conformance-evidence",
+          "command": "npm ci --ignore-scripts --no-audit --no-fund",
+          "cwd": "C:\\lab\\repos\\sfx-embody\\embodiments\\admit-canonical-circuit-blueprint\\scenarios\\require-blueprint-conformance-evidence\\node\\body",
+          "exitStatus": 0,
+          "stdout": "\nadded 5 packages in 872ms\n",
+          "stderr": ""
+        },
+        {
+          "scenarioId": "require-blueprint-geometry-proof",
+          "command": "npm ci --ignore-scripts --no-audit --no-fund",
+          "cwd": "C:\\lab\\repos\\sfx-embody\\embodiments\\admit-canonical-circuit-blueprint\\scenarios\\require-blueprint-geometry-proof\\node\\body",
+          "exitStatus": 0,
+          "stdout": "\nadded 5 packages in 1s\n",
+          "stderr": ""
+        },
+        {
+          "scenarioId": "require-current-approved-review-receipt",
+          "command": "npm ci --ignore-scripts --no-audit --no-fund",
+          "cwd": "C:\\lab\\repos\\sfx-embody\\embodiments\\admit-canonical-circuit-blueprint\\scenarios\\require-current-approved-review-receipt\\node\\body",
+          "exitStatus": 0,
+          "stdout": "\nadded 5 packages in 999ms\n",
+          "stderr": ""
+        }
+      ],
+      "verification": {
+        "capabilityId": "admit-canonical-circuit-blueprint",
+        "scenarioId": "admit-canonical-circuit-blueprint",
+        "fixtures": 8,
+        "passed": 8,
+        "scenarioBodies": 5,
+        "bodyFiles": 355,
+        "mechanicClasses": 0,
+        "kernelObservations": 200,
+        "mechanicInvocations": 0,
+        "nativeExpressionNodes": 741,
+        "nativePortComparisons": 40,
+        "negativeChecks": 2
+      },
+      "receipts": [
+        {
+          "file": "C:\\lab\\repos\\sfx-embody\\embodiments\\admit-canonical-circuit-blueprint\\scenarios\\admit-canonical-circuit-blueprint\\node\\embodiment.receipt.json",
+          "digest": "sha256:d6df41fd2fe9879448454d5cedcb48b44995d618aa9f0834169b6432afac5c2e",
+          "scenarioId": "admit-canonical-circuit-blueprint",
+          "resolverVersion": "sha256:7904530b58fb037db34446b40f4ef1c025dd52dff2991491853a8f96bf59bc20",
+          "artifactDigest": "sha256:d40db45208b06c231fff3f0b327457ce62365b5f846e9ba9da5a50e3d5a6b3fd"
+        },
+        {
+          "file": "C:\\lab\\repos\\sfx-embody\\embodiments\\admit-canonical-circuit-blueprint\\scenarios\\emit-immutable-blueprint-authority\\node\\embodiment.receipt.json",
+          "digest": "sha256:f0f01b383a208fb7004731c56284b2b6f41ba0c95cd9aba7e5a671ca6cca2662",
+          "scenarioId": "emit-immutable-blueprint-authority",
+          "resolverVersion": "sha256:7904530b58fb037db34446b40f4ef1c025dd52dff2991491853a8f96bf59bc20",
+          "artifactDigest": "sha256:333423fcb46d2b7f441b77a4bfc196e8d3c87fc3546d79ff219f8dec0c63a7f6"
+        },
+        {
+          "file": "C:\\lab\\repos\\sfx-embody\\embodiments\\admit-canonical-circuit-blueprint\\scenarios\\require-blueprint-conformance-evidence\\node\\embodiment.receipt.json",
+          "digest": "sha256:7a737b749dfb66b2ec5ff81e319373cb42418605b97947491c55115f9665a059",
+          "scenarioId": "require-blueprint-conformance-evidence",
+          "resolverVersion": "sha256:7904530b58fb037db34446b40f4ef1c025dd52dff2991491853a8f96bf59bc20",
+          "artifactDigest": "sha256:9ba5d53a74c28495a68677d54aaf22a65f1e25ba544f0fab638f56fb9a7d8178"
+        },
+        {
+          "file": "C:\\lab\\repos\\sfx-embody\\embodiments\\admit-canonical-circuit-blueprint\\scenarios\\require-blueprint-geometry-proof\\node\\embodiment.receipt.json",
+          "digest": "sha256:de5b21e37ad538c6f1d4cb00015c91350d59b133633eec09f837f4dc5b41d838",
+          "scenarioId": "require-blueprint-geometry-proof",
+          "resolverVersion": "sha256:7904530b58fb037db34446b40f4ef1c025dd52dff2991491853a8f96bf59bc20",
+          "artifactDigest": "sha256:74e2c1d1bf2ab74ba9fb2eb8a3c8154fb7b27b0b30ee571c1b1a2e3de4a9faca"
+        },
+        {
+          "file": "C:\\lab\\repos\\sfx-embody\\embodiments\\admit-canonical-circuit-blueprint\\scenarios\\require-current-approved-review-receipt\\node\\embodiment.receipt.json",
+          "digest": "sha256:ee86e2782d934271ac0d762f3ee7ec04bd5d55f3702b831e7c65fe1916552c82",
+          "scenarioId": "require-current-approved-review-receipt",
+          "resolverVersion": "sha256:7904530b58fb037db34446b40f4ef1c025dd52dff2991491853a8f96bf59bc20",
+          "artifactDigest": "sha256:a77fa7a296b5a8667a0ef8fc7b5bd4105c3eedf95352732fb4aa5c7f48db6acd"
+        }
+      ],
+      "disposition": "PASSED"
+    },
+    {
+      "selection": {
+        "capabilityId": "resolve-sidefx-eligible-providers",
+        "scenarioId": "resolve-sidefx-eligible-providers",
+        "target": "node"
+      },
+      "implementationDigest": "sha256:10c590a2e449ae7b146d9e3851561a0cc4571ec0bb3f1496bdc227435afa756f",
+      "installations": [
+        {
+          "scenarioId": "resolve-sidefx-eligible-providers",
+          "command": "npm ci --ignore-scripts --no-audit --no-fund",
+          "cwd": "C:\\lab\\repos\\sfx-embody\\embodiments\\resolve-sidefx-eligible-providers\\scenarios\\resolve-sidefx-eligible-providers\\node\\body",
+          "exitStatus": 0,
+          "stdout": "\nadded 5 packages in 1s\n",
+          "stderr": ""
+        }
+      ],
+      "verification": {
+        "capabilityId": "resolve-sidefx-eligible-providers",
+        "scenarioId": "resolve-sidefx-eligible-providers",
+        "fixtures": 4,
+        "passed": 4,
+        "scenarioBodies": 1,
+        "bodyFiles": 26,
+        "mechanicClasses": 0,
+        "kernelObservations": 20,
+        "mechanicInvocations": 0,
+        "nativeExpressionNodes": 99,
+        "nativePortComparisons": 4,
+        "negativeChecks": 1
+      },
+      "receipts": [
+        {
+          "file": "C:\\lab\\repos\\sfx-embody\\embodiments\\resolve-sidefx-eligible-providers\\scenarios\\resolve-sidefx-eligible-providers\\node\\embodiment.receipt.json",
+          "digest": "sha256:3754779336f34c61a15cea4de40e05ab2978f83e278a1bdb3411489503404ca1",
+          "scenarioId": "resolve-sidefx-eligible-providers",
+          "resolverVersion": "sha256:7904530b58fb037db34446b40f4ef1c025dd52dff2991491853a8f96bf59bc20",
+          "artifactDigest": "sha256:d81fe0ab03931350419bdad39ee9680014096959b4d1102e51d7414fbf50bccc"
+        }
+      ],
+      "disposition": "PASSED"
+    }
+  ],
+  "totals": {
+    "fixtures": 17,
+    "passed": 17,
+    "scenarioBodies": 10,
+    "mechanicClasses": 0,
+    "kernelObservations": 320,
+    "mechanicInvocations": 0,
+    "nativeExpressionNodes": 994,
+    "nativePortComparisons": 64,
+    "negativeChecks": 5
+  },
+  "disposition": "PASSED",
+  "scope": "NODE_EXECUTION_OF_RETAINED_FIXTURES_FOR_DECLARED_REGRESSION_CASES",
+  "managedAdmission": "NOT_REQUESTED"
+}

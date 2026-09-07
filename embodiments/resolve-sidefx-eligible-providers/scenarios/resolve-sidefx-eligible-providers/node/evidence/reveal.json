@@ -1,0 +1,229 @@
+{
+  "capabilityId": "resolve-sidefx-eligible-providers",
+  "scenarioId": "resolve-sidefx-eligible-providers",
+  "target": "node",
+  "method": "Recover transformations from native syntax and checked binding lineage; compare with retained authority and selected-provider execution",
+  "files": [
+    {
+      "relativePath": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/providers/resolve-sidefx-eligible-providers-port.mjs",
+      "digest": "sha256:63a96e1b5dfe17fcbec23af7921a260de387bd1b990e7c772d1460a6ecb9a095",
+      "classes": [
+        {
+          "name": "ResolveSidefxEligibleProvidersPort",
+          "line": 3,
+          "methods": [
+            "execute"
+          ]
+        }
+      ]
+    },
+    {
+      "relativePath": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/providers/native-mechanics.mjs",
+      "digest": "sha256:0129b1ee8e210119ea1d659991e9b1c30f4dd1a200960c932ea023eb57583da5",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/scenario.mjs",
+      "digest": "sha256:3a11888cf7448bd136fdba9b145d2766637c4bf19fc1d07e352ededa991ff3a8",
+      "classes": [
+        {
+          "name": "ResolveSidefxEligibleProvidersScenario",
+          "line": 42,
+          "methods": [
+            "perform",
+            "execute",
+            "invoke"
+          ]
+        }
+      ]
+    },
+    {
+      "relativePath": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/dependencies.json",
+      "digest": "sha256:c2fa2bb8340c55c256380791180d3175db2b62141e301fb45a00d8a05c24ef8b"
+    },
+    {
+      "relativePath": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/contracts/sidefx-provider-resolution-request-v1-items-items.ts",
+      "digest": "sha256:0aa7d458a68a65f1138790fecc34ed9d18e578492a7a10017c8f69faa30cb0ad",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/contracts/sidefx-provider-resolution-request-v1-items.ts",
+      "digest": "sha256:0ff31fdadfdaa13a4933918efecd6087134e9910e8e0e602db4771fb9cee4619",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/contracts/sidefx-provider-resolution-request-v1.ts",
+      "digest": "sha256:5ad59082cb57ab5be807f0d4239205114023ba27e3040deb84f5a5b10e2b46bb",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/contracts/sidefx-semantic-provider-resolution-v1-items-items.ts",
+      "digest": "sha256:47554ec936c1884b81195ac25b336cd3b2b596b1e990664e3dd05ab5c1ca17bc",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/contracts/sidefx-semantic-provider-resolution-v1-items.ts",
+      "digest": "sha256:1c16c57b35cdca25b2326b2850d5f9558bd60dc36e76be9a353368201fa576f6",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/contracts/sidefx-semantic-provider-resolution-v1-finding-source-position.ts",
+      "digest": "sha256:454abf51e3b7694a5e9caf26693d957e828683e738695d0d4de8e139d4fbed35",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/contracts/sidefx-semantic-provider-resolution-v1-finding.ts",
+      "digest": "sha256:8fbb8854fe402dff3cd7347c176866d6ef6e98262dbbbc717e867657173f2f8c",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/contracts/sidefx-semantic-provider-resolution-v1.ts",
+      "digest": "sha256:7a66010d4cd064140290a72c6a14c6a80236b688ba59b80611fe70089d1e8a5e",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/contracts/index.ts",
+      "digest": "sha256:602399b5f6c73c4890433ae3da46a45d158ab6126d6b26e01b9e3af76f862e59",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/contracts/authority.json",
+      "digest": "sha256:a6660d0b0fd606d3950fc61a5c4f9e909009d9e4e4288d4dc8b15e1d2addd4eb"
+    },
+    {
+      "relativePath": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/providers/native-mechanic-primitives.mjs",
+      "digest": "sha256:1cc204869f0ce7b60ad03187d364db4a432b0b632ce4469a7cf37747d6a379d5",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/providers/sda/languages/typescript/dist/src/kernel/scenario-kernel.js",
+      "digest": "sha256:8a3cf0b6bac20fb514e631d27c29e5ec659625aaf885e2ccd64a7a340daa6384",
+      "classes": [
+        {
+          "name": "ScenarioKernel",
+          "line": 33,
+          "methods": [
+            "execute"
+          ]
+        }
+      ]
+    },
+    {
+      "relativePath": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/providers/sda/languages/typescript/dist/src/execution/index.js",
+      "digest": "sha256:a83b3c4caa43ac6ab1996b708797e15cde6b5d4b036b95be1da918688142159d",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/providers/sda/languages/typescript/dist/src/execution/contract-validator.js",
+      "digest": "sha256:9ee125e72ba67428097f6af28d9698d161db4c0f83f5e14918057b3faaf7be46",
+      "classes": [
+        {
+          "name": "ContractAdmissionException",
+          "line": 6,
+          "methods": []
+        }
+      ]
+    },
+    {
+      "relativePath": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/providers/sda/languages/typescript/dist/src/execution/execution-authority-resolver.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/providers/sda/languages/typescript/dist/src/execution/semantic-executor.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/providers/sda/languages/typescript/dist/src/execution/disposition-resolver.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/providers/sda/languages/typescript/dist/src/execution/execution-observer.js",
+      "digest": "sha256:8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/providers/sda/languages/typescript/dist/src/kernel/disposition-resolver.js",
+      "digest": "sha256:7cdae956253d6a48de978f1191c044d999d515f8aac7427393fa9da735faa688",
+      "classes": [
+        {
+          "name": "DispositionResolver",
+          "line": 11,
+          "methods": [
+            "resolve"
+          ]
+        }
+      ]
+    },
+    {
+      "relativePath": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/providers/sda/languages/typescript/runtimes/node/schema-contract-admission-provider.mjs",
+      "digest": "sha256:b8b8b60d0023d2ab0bff2d1239a3e19d73ebe2d4405b47cef006004b370eac5a",
+      "classes": []
+    },
+    {
+      "relativePath": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/package.json",
+      "digest": "sha256:ff10b66f9f3b2a597bfd3a8a45e886694ffd965a5eccb93ec4c88715c33c6f17"
+    },
+    {
+      "relativePath": "embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/composition.mjs",
+      "digest": "sha256:40f01f4a0e8d5ae20e8ff29842c16bf38d3864cc98951b98358bc2c41225ea4f",
+      "classes": []
+    }
+  ],
+  "nativeSource": {
+    "path": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+    "digest": "sha256:21fb43c57817b8dc3c3d2dd5af13551ca03111cf99f5654989f490fda6732ac5"
+  },
+  "contractTypeCheck": {
+    "files": 9,
+    "diagnostics": 0
+  },
+  "nativeProjection": {
+    "transformations": 1,
+    "mechanics": 15,
+    "nodes": 99,
+    "vectors": 200,
+    "portComparisons": 4,
+    "mutationChecks": 1,
+    "helperChecks": 1
+  },
+  "observedClasses": [
+    {
+      "name": "ResolveSidefxEligibleProvidersPort",
+      "line": 3,
+      "methods": [
+        "execute"
+      ]
+    },
+    {
+      "name": "ResolveSidefxEligibleProvidersScenario",
+      "line": 42,
+      "methods": [
+        "perform",
+        "execute",
+        "invoke"
+      ]
+    },
+    {
+      "name": "ScenarioKernel",
+      "line": 33,
+      "methods": [
+        "execute"
+      ]
+    },
+    {
+      "name": "ContractAdmissionException",
+      "line": 6,
+      "methods": []
+    },
+    {
+      "name": "DispositionResolver",
+      "line": 11,
+      "methods": [
+        "resolve"
+      ]
+    }
+  ]
+}

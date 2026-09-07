@@ -1,0 +1,18 @@
+{
+  "purpose": "Witness of generated-type versus original-contract divergence",
+  "typeScriptDiagnostics": 0,
+  "results": [
+    {
+      "description": "Required constant fields omitted",
+      "generatedType": "ACCEPTED",
+      "runtimeSchema": "REJECTED",
+      "admissionMessage": "CONTRACT_ADMISSION_FAILED: 'sidefx-provider-resolution-request.v1' data must have required property 'contractId', data must have required property 'evaluationBoundary'"
+    },
+    {
+      "description": "Non-enumerated numeric disposition accepted by generated type",
+      "generatedType": "ACCEPTED",
+      "runtimeSchema": "REJECTED",
+      "admissionMessage": "CONTRACT_ADMISSION_FAILED: 'sidefx-semantic-provider-resolution.v1' data/disposition must be equal to one of the allowed values"
+    }
+  ]
+}

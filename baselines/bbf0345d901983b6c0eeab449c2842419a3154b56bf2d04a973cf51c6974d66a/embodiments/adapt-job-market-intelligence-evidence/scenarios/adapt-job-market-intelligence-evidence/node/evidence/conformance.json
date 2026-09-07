@@ -1,0 +1,16 @@
+{
+  "capabilityId": "adapt-job-market-intelligence-evidence",
+  "scenarioId": "adapt-job-market-intelligence-evidence",
+  "target": "node",
+  "scope": "RETAINED_CAPABILITY_FIXTURES",
+  "fixtureCount": 5,
+  "fixturePassCount": 5,
+  "nativeBodyChecks": 13,
+  "negativeChecks": "negative-checks.json",
+  "disposition": "EXECUTION_CHECKS_PASSED",
+  "managedAdmission": "NOT_REQUESTED",
+  "limitations": [
+    "Candidate projection provider has not been admitted.",
+    "Passing these fixtures is not proof for untested inputs or other language targets."
+  ]
+}

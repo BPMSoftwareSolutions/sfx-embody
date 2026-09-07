@@ -1,0 +1,340 @@
+{
+  "selection": {
+    "capabilityId": "admit-canonical-circuit-blueprint",
+    "scenarioId": "admit-canonical-circuit-blueprint",
+    "target": "node"
+  },
+  "selected": {
+    "capability_id": "admit-canonical-circuit-blueprint",
+    "namespace_id": "sidefx:capabilities",
+    "scenario_id": "admit-canonical-circuit-blueprint",
+    "input_id": "canonical-blueprint-admission-request",
+    "input_contract_state": "RESOLVED",
+    "event_id": "admit-canonical-circuit-blueprint",
+    "responsibility": "each required obligation is resolved and the reviewed digests are compared with the candidate authority",
+    "event_authority_state": "RESOLVED",
+    "outcome_id": "admitted-canonical-circuit-blueprint",
+    "outcome_contract_version_pk": "4",
+    "capability_definition_digest": "sha256:eac40d649a770f104853afb899453b377a09a13f1cf3f051e4461b9afb621781",
+    "scenario_definition_digest": "sha256:414c2ff3b6dd4d5693d30efc14a35a61e7d8f000d0aa398c20184bfec0120b6e",
+    "capsule_digest": "sha256:3402da405d8f869200cde168f15f9293c086fb9435dbacd564e588477c81cbf3"
+  },
+  "snapshotId": "sha256:38debec6dbfa1266f68d903166f69b831c178ffe967208900efcddd9ce2973bc",
+  "projectionDigest": "sha256:81eb41f0faeadcb413d1b5bae9ba991f2d9d753489cfb3a8919c5f72e71f7d28",
+  "query": {
+    "inputDigest": "sha256:c61082d37001d25e815ae8248de402b35910074bac6d092a05cc51ea0e9c4479",
+    "resultDigest": "sha256:9c04d62acc4bf837cae4c0925c9c540cdbbc3cb8c514fe5cfda14cd534dd779f",
+    "resolutionDigest": "sha256:571f8be8eb2096224b0b642c9113b2465060dd5412121c6f32f6db6b368d886a"
+  },
+  "sources": [
+    {
+      "source_path": "capabilities/admit-canonical-circuit-blueprint/blueprint.authority.json",
+      "entry_id": "blueprint.authority.json",
+      "container_locator": "capsules/admit-canonical-circuit-blueprint.sfxcap",
+      "byte_length": "21353",
+      "content_digest": "sha256:bd2b17194c127ff9f437d959fcbcb9c1fbc987fc0fb50c597cc907ee4abde550"
+    },
+    {
+      "source_path": "capabilities/admit-canonical-circuit-blueprint/blueprint-cell-authoring.receipt.json",
+      "entry_id": "blueprint-cell-authoring.receipt.json",
+      "container_locator": "capsules/admit-canonical-circuit-blueprint.sfxcap",
+      "byte_length": "5395",
+      "content_digest": "sha256:b279f9c937c1cc3c97268dcd7faacaf153756d9b229a30744342f2cc4479ff3d"
+    },
+    {
+      "source_path": "capabilities/admit-canonical-circuit-blueprint/capability.authority.json",
+      "entry_id": "capability.authority.json",
+      "container_locator": "capsules/admit-canonical-circuit-blueprint.sfxcap",
+      "byte_length": "543",
+      "content_digest": "sha256:bb91e9defc17b7649a0a68926c601e164e78f8364587193caa035ebae45d1b77"
+    },
+    {
+      "source_path": "capabilities/admit-canonical-circuit-blueprint/consumer-workspace.authority.json",
+      "entry_id": "consumer-workspace.authority.json",
+      "container_locator": "capsules/admit-canonical-circuit-blueprint.sfxcap",
+      "byte_length": "1325",
+      "content_digest": "sha256:19863bbe3f11d52a5a6bf3ced02885a5176e72d7cfbe3bf6d30ecc86ca4f2fe4"
+    },
+    {
+      "source_path": "capabilities/admit-canonical-circuit-blueprint/contracts/canonical-circuit-blueprint.schema.json",
+      "entry_id": "contracts/canonical-circuit-blueprint.schema.json",
+      "container_locator": "capsules/admit-canonical-circuit-blueprint.sfxcap",
+      "byte_length": "21951",
+      "content_digest": "sha256:dc3a4cf1c75ca3ebdf51e83b6047bde6c5cd45674798cb31a7e14d1585a12d02"
+    },
+    {
+      "source_path": "capabilities/admit-canonical-circuit-blueprint/contracts/contract-catalog.json",
+      "entry_id": "contracts/contract-catalog.json",
+      "container_locator": "capsules/admit-canonical-circuit-blueprint.sfxcap",
+      "byte_length": "279",
+      "content_digest": "sha256:b0c777f17b4df90b1276ccaaf980eeac7ff76b17381ed555fd2cf79b5e10f65a"
+    },
+    {
+      "source_path": "capabilities/admit-canonical-circuit-blueprint/contracts/input.schema.json",
+      "entry_id": "contracts/input.schema.json",
+      "container_locator": "capsules/admit-canonical-circuit-blueprint.sfxcap",
+      "byte_length": "3204",
+      "content_digest": "sha256:342b1ae7d69f21dfd72430b6b1c498d93682162612fea639336cdd1d7a94e1c3"
+    },
+    {
+      "source_path": "capabilities/admit-canonical-circuit-blueprint/contracts/intermediate.schema.json",
+      "entry_id": "contracts/intermediate.schema.json",
+      "container_locator": "capsules/admit-canonical-circuit-blueprint.sfxcap",
+      "byte_length": "356",
+      "content_digest": "sha256:bd1588bdfcd1739f651d31fdeda88743a74ce151b09277ae31ac3455ab291dcb"
+    },
+    {
+      "source_path": "capabilities/admit-canonical-circuit-blueprint/contracts/outcome.schema.json",
+      "entry_id": "contracts/outcome.schema.json",
+      "container_locator": "capsules/admit-canonical-circuit-blueprint.sfxcap",
+      "byte_length": "1805",
+      "content_digest": "sha256:09cc9a828195881df9b13edf33c252f2ea0dace490ce6dd013e9a555861b3703"
+    },
+    {
+      "source_path": "capabilities/admit-canonical-circuit-blueprint/execution-authorities.authority.json",
+      "entry_id": "execution-authorities.authority.json",
+      "container_locator": "capsules/admit-canonical-circuit-blueprint.sfxcap",
+      "byte_length": "1363",
+      "content_digest": "sha256:6b72ab96b6be0636d32e4a6f81c7f324aedd5c80d5e20453bfbe785561d96b7d"
+    },
+    {
+      "source_path": "capabilities/admit-canonical-circuit-blueprint/fixtures.authority.json",
+      "entry_id": "fixtures.authority.json",
+      "container_locator": "capsules/admit-canonical-circuit-blueprint.sfxcap",
+      "byte_length": "547152",
+      "content_digest": "sha256:4e6c9d933657dc635f6b159e8296b8f2fdc20d955dadf93578bf31efbff8777a"
+    },
+    {
+      "source_path": "capabilities/admit-canonical-circuit-blueprint/interfaces.authority.json",
+      "entry_id": "interfaces.authority.json",
+      "container_locator": "capsules/admit-canonical-circuit-blueprint.sfxcap",
+      "byte_length": "1838",
+      "content_digest": "sha256:3db560344252ee9b0b0613c90eb8efeaf9e81a30a6655879b2c58be23e4b3dc9"
+    },
+    {
+      "source_path": "capabilities/admit-canonical-circuit-blueprint/projection-authorities.authority.json",
+      "entry_id": "projection-authorities.authority.json",
+      "container_locator": "capsules/admit-canonical-circuit-blueprint.sfxcap",
+      "byte_length": "72",
+      "content_digest": "sha256:61c3c7dfe158b48b5f3a7a9dab5f7573bd6111b87eb7edff3922a1588e891914"
+    },
+    {
+      "source_path": "capabilities/admit-canonical-circuit-blueprint/semantic-graph.authority.json",
+      "entry_id": "semantic-graph.authority.json",
+      "container_locator": "capsules/admit-canonical-circuit-blueprint.sfxcap",
+      "byte_length": "18",
+      "content_digest": "sha256:38d1298dc6352e552ee210338ce037d33f820685012e7dfbfee3b586278cab1b"
+    },
+    {
+      "source_path": "capabilities/admit-canonical-circuit-blueprint/semantic-transformation.authority.json",
+      "entry_id": "semantic-transformation.authority.json",
+      "container_locator": "capsules/admit-canonical-circuit-blueprint.sfxcap",
+      "byte_length": "100585",
+      "content_digest": "sha256:edd662a3271af9b23645ff2b0c6e263a053ed6cfe149d09add4a8fe6f9b15f93"
+    },
+    {
+      "source_path": "features/admit-canonical-circuit-blueprint.feature",
+      "entry_id": "features/{id}.feature",
+      "container_locator": "capsules/admit-canonical-circuit-blueprint.sfxcap",
+      "byte_length": "4865",
+      "content_digest": "sha256:66ce0c6ce0e0b73b5af92c56febe31ead9a52370f4826fee7bf410e46647f87b"
+    },
+    {
+      "source_path": "sda-bootstrap@87ae918ce46fe4acadd0aecbdcb030c9b55043d9/package.json",
+      "entry_id": "package.json",
+      "container_locator": "https://github.com/BPMSoftwareSolutions/sda-bootstrap/archive/87ae918ce46fe4acadd0aecbdcb030c9b55043d9.tar.gz",
+      "byte_length": "1363",
+      "content_digest": "sha256:638535c87a60c152b269507779b22f023d2975d1f3ec67b9a07dcf13d51aa3af"
+    },
+    {
+      "source_path": "sda-bootstrap@87ae918ce46fe4acadd0aecbdcb030c9b55043d9/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+      "entry_id": "platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+      "container_locator": "https://github.com/BPMSoftwareSolutions/sda-bootstrap/archive/87ae918ce46fe4acadd0aecbdcb030c9b55043d9.tar.gz",
+      "byte_length": "14741",
+      "content_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd"
+    },
+    {
+      "source_path": "sda-bootstrap@87ae918ce46fe4acadd0aecbdcb030c9b55043d9/platform/kernel/semantic-authority/consumer/platform-effect-mechanics.authority.v1.json",
+      "entry_id": "platform/kernel/semantic-authority/consumer/platform-effect-mechanics.authority.v1.json",
+      "container_locator": "https://github.com/BPMSoftwareSolutions/sda-bootstrap/archive/87ae918ce46fe4acadd0aecbdcb030c9b55043d9.tar.gz",
+      "byte_length": "12555",
+      "content_digest": "sha256:526b4ee403120209fa446b1607f49b52bd2035f229917a2009447ca45b63a997"
+    },
+    {
+      "source_path": "sda-bootstrap@87ae918ce46fe4acadd0aecbdcb030c9b55043d9/platform/kernel/semantic-authority/consumer/sda-platform-capabilities.semantic-authority.json",
+      "entry_id": "platform/kernel/semantic-authority/consumer/sda-platform-capabilities.semantic-authority.json",
+      "container_locator": "https://github.com/BPMSoftwareSolutions/sda-bootstrap/archive/87ae918ce46fe4acadd0aecbdcb030c9b55043d9.tar.gz",
+      "byte_length": "55493",
+      "content_digest": "sha256:83ee13064798b2ad7effc17086b7c3e3f2e9da478cb583f283b8c9bfc79ddc72"
+    },
+    {
+      "source_path": "sda-bootstrap@87ae918ce46fe4acadd0aecbdcb030c9b55043d9/platform/kernel/semantic-authority/consumer/semantic-value-mechanics.authority.v1.json",
+      "entry_id": "platform/kernel/semantic-authority/consumer/semantic-value-mechanics.authority.v1.json",
+      "container_locator": "https://github.com/BPMSoftwareSolutions/sda-bootstrap/archive/87ae918ce46fe4acadd0aecbdcb030c9b55043d9.tar.gz",
+      "byte_length": "36670",
+      "content_digest": "sha256:0604d867c42c7eb9721449c0bc95200114cf6f7ce00924e1c4636eba224b911d"
+    }
+  ],
+  "scenario": {
+    "scenarioId": "admit-canonical-circuit-blueprint",
+    "input": {
+      "inputId": "canonical-blueprint-admission-request",
+      "contract": {
+        "contractId": "canonical-blueprint-admission-request.v1"
+      }
+    },
+    "event": {
+      "eventId": "admit-canonical-circuit-blueprint",
+      "executionAuthorityId": "admit-canonical-circuit-blueprint.v1"
+    },
+    "outcome": {
+      "outcomeId": "admitted-canonical-circuit-blueprint",
+      "contract": {
+        "contractId": "admitted-canonical-circuit-blueprint.v1"
+      },
+      "experience": {
+        "statement": "immutable blueprint authority with a stable digest is emitted only when every obligation closes, and otherwise an exact rejection naming the unmet obligation is returned"
+      },
+      "terminal": true
+    },
+    "gherkin": {
+      "given": {
+        "semanticRef": "admit-canonical-circuit-blueprint.given",
+        "text": "one blueprint candidate with its conformance evidence, geometry proof, and review receipt"
+      },
+      "when": {
+        "semanticRef": "admit-canonical-circuit-blueprint.when",
+        "text": "each required obligation is resolved and the reviewed digests are compared with the candidate authority"
+      },
+      "then": {
+        "semanticRef": "admit-canonical-circuit-blueprint.then",
+        "text": "immutable blueprint authority with a stable digest is emitted only when every obligation closes, and otherwise an exact rejection naming the unmet obligation is returned"
+      }
+    },
+    "name": "Emit immutable blueprint authority only when every admission obligation closes"
+  },
+  "executionAuthorities": [
+    {
+      "id": "admit-canonical-circuit-blueprint.v1",
+      "owningScenarioId": "admit-canonical-circuit-blueprint",
+      "operations": [
+        {
+          "kind": "invoke-port",
+          "portId": "admit-canonical-circuit-blueprint-port"
+        },
+        {
+          "kind": "invoke-scenario",
+          "scenarioId": "require-blueprint-conformance-evidence"
+        },
+        {
+          "kind": "invoke-scenario",
+          "scenarioId": "require-blueprint-geometry-proof"
+        },
+        {
+          "kind": "invoke-scenario",
+          "scenarioId": "require-current-approved-review-receipt"
+        },
+        {
+          "kind": "invoke-scenario",
+          "scenarioId": "emit-immutable-blueprint-authority"
+        }
+      ]
+    },
+    {
+      "id": "emit-immutable-blueprint-authority.v1",
+      "owningScenarioId": "emit-immutable-blueprint-authority",
+      "operations": [
+        {
+          "kind": "invoke-port",
+          "portId": "emit-immutable-blueprint-authority-port"
+        }
+      ]
+    },
+    {
+      "id": "require-blueprint-conformance-evidence.v1",
+      "owningScenarioId": "require-blueprint-conformance-evidence",
+      "operations": [
+        {
+          "kind": "invoke-port",
+          "portId": "require-blueprint-conformance-evidence-port"
+        }
+      ]
+    },
+    {
+      "id": "require-blueprint-geometry-proof.v1",
+      "owningScenarioId": "require-blueprint-geometry-proof",
+      "operations": [
+        {
+          "kind": "invoke-port",
+          "portId": "require-blueprint-geometry-proof-port"
+        }
+      ]
+    },
+    {
+      "id": "require-current-approved-review-receipt.v1",
+      "owningScenarioId": "require-current-approved-review-receipt",
+      "operations": [
+        {
+          "kind": "invoke-port",
+          "portId": "require-current-approved-review-receipt-port"
+        }
+      ]
+    }
+  ],
+  "nativeBinding": {
+    "capability_id": "admit-canonical-circuit-blueprint",
+    "scenario_id": "admit-canonical-circuit-blueprint",
+    "downstream_scenario_id": "require-current-approved-review-receipt",
+    "altitude": "MECHANIC",
+    "requirement_kind": "MECHANIC",
+    "requirement_id": "path",
+    "requirement_use": "expression:15:2481",
+    "target_language": "node",
+    "provenance_class": "DECLARED_AUTHORITY",
+    "source_definition_pk": "53",
+    "source_pointer": "/semantics/expression/value/values/1/fields/payload/values/1/fields/require-current-approved-review-receiptDisposition/fields/findings",
+    "requirement_definition_pk": "8717",
+    "requirement_definition_digest": {
+      "sqlType": "varbinary",
+      "base64": "xCVsyYdWgB72bQCvVTgPgdhtbhq5cIU/Q9Lk3ZxBDys="
+    },
+    "resolver_id": "node-mechanic-registry-authority.v1",
+    "provider_id": null,
+    "provider_definition_pk": null,
+    "provider_profile_id": "node-deterministic-semantic-value-provider.v1",
+    "profile_definition_pk": "9064",
+    "implementation_id": "languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs",
+    "implementation_export": "evaluateExpression",
+    "resolution_candidate_count": "1",
+    "mechanic_source_digest": {
+      "sqlType": "varbinary",
+      "base64": "BgTYZ8QsfrlyFEnAvJUgARTPb3zgCSThxGNuuiJLkR0="
+    },
+    "registry_source_digest": {
+      "sqlType": "varbinary",
+      "base64": "hbMKj6/YvmPh4f8FDSjqWB6fH4sfI5PiWJ/GZjgz3s0="
+    },
+    "declared_authority_digest": "sha256:533b856ded71d2e6334dd2f4911b1ec5edb265c4cdc3e79620584fe4cdca1877",
+    "resolution_status": "RESOLVED",
+    "diagnostic": "DECLARED_REQUIREMENT_ACCOUNTED_FOR",
+    "repair_boundary": null,
+    "implementation_evidence_state": "DECLARATION_ONLY",
+    "conformance_status": "NOT_EVALUATED"
+  },
+  "pinnedPlatformCommit": "6fcb8b34f0b85c70a8984940cc21a20cfdb507dd",
+  "resolver": {
+    "path": "C:\\lab\\repos\\sfx-embody\\resolvers\\node\\consumer-object-provider.mjs",
+    "digest": "sha256:7904530b58fb037db34446b40f4ef1c025dd52dff2991491853a8f96bf59bc20",
+    "components": [
+      {
+        "name": "resolvers/node/consumer-object-provider.mjs",
+        "digest": "sha256:d31fefccc9caa1e6424890aa36e83329e2ac765e9e540e64da0cf480f843538b"
+      },
+      {
+        "name": "resolvers/node/native-expression-projection.mjs",
+        "digest": "sha256:9f8f31362b683cea0ac58a2ac414be9eb96b0fa113ca8254483d57ded4666198"
+      }
+    ],
+    "status": "CANDIDATE_PHYSICAL_PROVIDER"
+  }
+}

@@ -1,0 +1,8 @@
+[
+  {
+    "id": "require-current-approved-review-receipt-port",
+    "module": "./providers/require-current-approved-review-receipt-port.mjs",
+    "className": "RequireCurrentApprovedReviewReceiptPort",
+    "kind": "invoke-port"
+  }
+]
