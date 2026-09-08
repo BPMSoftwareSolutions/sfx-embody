@@ -26,7 +26,10 @@ try {
   const { connectionEnvironmentVariable } = await readDatabaseConfig();
   process.env[connectionEnvironmentVariable] = connectionString(connectionEnvironmentVariable);
   const processEvidence = restrictMemoryProcess(config);
+  const setupTime = performance.now();
   const result = await invokeDatabaseCapability(envelope, config);
+  result.outcome.evidence.timings.processSetup = setupTime;
+  result.outcome.evidence.timings.processTotal = performance.now();
   result.outcome.evidence.process = processEvidence;
   process.stdout.write(JSON.stringify(result) + '\n');
 } catch (error) {

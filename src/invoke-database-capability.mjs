@@ -20,23 +20,29 @@ export function validateDatabaseCommand(envelope) {
 }
 
 export async function invokeDatabaseCapability(envelope, { databaseRoot, sdaRoot }) {
+  const timings = { unit: 'milliseconds', queries: {} };
+  const measure = async (name, work) => {
+    const start = performance.now();
+    try { return await work(); }
+    finally { timings[name] = performance.now() - start; }
+  };
   const request = structuredClone(validateDatabaseCommand(envelope));
-  const bundle = await readAuthority(databaseRoot, { capabilityId: request.subject, target: 'node',
-    ...(request.namespace === undefined ? {} : { namespaceId: request.namespace }) }, { retainObjects: false });
-  const plan = await planNode({ bundle, sdaRoot });
-  const runtime = await loadMemoryScenario(plan);
+  const bundle = await measure('readAuthority', () => readAuthority(databaseRoot, { capabilityId: request.subject, target: 'node',
+    ...(request.namespace === undefined ? {} : { namespaceId: request.namespace }) }, { retainObjects: false, timings: timings.queries }));
+  const plan = await measure('planNativeBody', () => planNode({ bundle, sdaRoot }));
+  const runtime = await measure('loadMemoryModules', () => loadMemoryScenario(plan));
   const executions = [], observations = [];
-  const scenario = runtime.createScenario({ observer: { observe: value => observations.push(value) },
-    clock: { now: () => new Date().toISOString() } });
+  const scenario = await measure('createScenario', () => runtime.createScenario({ observer: { observe: value => observations.push(value) },
+    clock: { now: () => new Date().toISOString() } }));
   const executionId = randomUUID();
   const input = structuredClone(request.input);
-  const result = await scenario.execute(input, { executionId, rootExecutionId: executionId,
-    rootInput: structuredClone(input), ancestry: [plan.selectedScenarioId], collect: value => executions.push(value) });
+  const result = await measure('executeScenario', () => scenario.execute(input, { executionId, rootExecutionId: executionId,
+    rootInput: structuredClone(input), ancestry: [plan.selectedScenarioId], collect: value => executions.push(value) }));
   const entry = plan.receipts.find(r => r.plan.scenarioId === plan.selectedScenarioId);
   return { disposition: result.disposition === 'failed' ? 'failed' : 'terminated',
     ...(result.disposition === 'failed' ? { errorCode: 'CAPABILITY_EXECUTION_FAILED' } : {}),
     outcome: { capabilityId: plan.capabilityId, scenarioId: plan.selectedScenarioId, result, executions, observations,
-      evidence: { authoritySource: 'DATABASE', bodyStorage: 'MEMORY_ONLY', managedAdmission: 'NOT_REQUESTED',
+      evidence: { timings, authoritySource: 'DATABASE', bodyStorage: 'MEMORY_ONLY', managedAdmission: 'NOT_REQUESTED',
         providerStatus: 'CANDIDATE_PHYSICAL_PROVIDER', inputDigest: digest(request.input), resultDigest: digest(result),
         snapshotId: bundle.authority.snapshotId, projectionDigest: bundle.authority.projectionDigest,
         authorityIdentity: Object.fromEntries(['scenarioDefinitionDigest', 'pinnedPlatformCommit', 'platformDigest', 'resolverVersion', 'artifactDigest'].map(key => [key, entry.receipt[key]])),
