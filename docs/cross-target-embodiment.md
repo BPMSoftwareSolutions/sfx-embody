@@ -15,14 +15,14 @@ Every one of the 154 open requirements for python and csharp carries the same di
 
 ## What already exists for python and csharp
 
-More than expected. The platform carries, for both languages, a Scenario Kernel, a structural projection provider under `artifacts/tools/dist/projection/providers/`, and a projection profile. Contract projection is therefore not the gap. Only the semantic transformation evaluator and its registry are missing, and beneath them, the thing that would tell anyone what to implement.
+More than expected. The platform carries, for both languages, a Scenario Kernel, a structural projection provider under `artifacts/tools/dist/projection/providers/`, and a projection profile. Contract projection is therefore not the gap. The semantic transformation evaluators were the gap, and beneath them, the thing that would tell anyone what to implement — which the vectors now are.
 
 ## The chain, and the layer that owns the defect
 
 | Layer | State at the pinned commit |
 | --- | --- |
-| 0. Declared mechanic conformance vectors | **Absent.** 36 mechanics declare a `conformanceRef`; none resolved; the directory did not exist |
-| 1. Python and C# transformation evaluators | Absent; only typescript/node has one |
+| 0. Declared mechanic conformance vectors | **Authored, unpinned branch.** 157 vectors, 17 decisions, 32/36 mechanics |
+| 1. Python and C# transformation evaluators | **Present on the unpinned branch.** Node, Python and C# all conformant: 157/157 vectors, 32/32 mechanics |
 | 2. Per-language mechanic registry authority | Only `node-mechanic-registry.authority.v1.json` |
 | 3. Database mechanic-to-target bindings | Held, as above |
 | 4. sfx-embody target neutrality | Node-specific materializer, projection and reveal |
@@ -85,7 +85,7 @@ The 200-vector differential corpus in `verify-native-projection.mjs` establishes
 ## Remaining, in order
 
 1. ~~Repair the Node evaluator against its vectors — 24 fixes.~~ Done on the platform branch: 157/157 vectors, 32/32 mechanics conformant, and the 17 fixtures verified not to move. See Step 1 above.
-2. Write the Python and C# evaluators against the vectors rather than against Node.
+2. ~~Write the Python and C# evaluators against the vectors rather than against Node.~~ Done on the platform branch (`7cdb9fe`): `languages/python/src/scenario_kernel/adapters/semantic_transformation_evaluator.py` and the repaired `SemanticTransformationEngine.cs` (with a vector host) both pass 157/157 vectors and 32/32 mechanics through the same runner; the existing C# kernel conformance suite still passes 32/32.
 3. Per-language mechanic registry authority, then the database bindings, which is what moves readiness off `NOT_OBSERVABLE`.
 4. sfx-embody target neutrality, so the target is data rather than a branch in the materializer.
 5. Re-pin the platform in one step, and re-establish the platform digest boundary against the new bytes.
