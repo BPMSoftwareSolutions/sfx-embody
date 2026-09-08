@@ -68,6 +68,12 @@ Running the existing Node evaluator against those vectors:
 
 The 24 failures are real and fall into three families: absence represented as a second empty value, a silent answer where the declaration admits no operand, and empty collections treated as true.
 
+## Step 1 — the Node evaluator repair
+
+The Node evaluator on the branch is now repaired against those vectors: `157/157` vectors pass and all `32/32` mechanics are conformant (`4f727b2`, "Bring the Node transformation evaluator into conformance with the declared mechanic vectors"). The contested mechanics delegate to named helper declarations in the evaluator module, so an embodied port ships the same bytes the provider executes.
+
+The prediction that the 17 fixtures do not move was verified, not assumed. An experimental run of the full sfx-embody verification against the repaired branch — with the Node lowering, inverse reader and mutation set adapted to the declared semantics — passed with byte-identical fixture outcomes across all 10 Scenario bodies: 17/17 fixtures, 320 kernel observations, 994 expression regions, 64 native port comparisons, the 200-vector corpus, and the contract gate unchanged at 2337 assignments, 976 required rejections and 25764 runtime vectors. Those sfx-embody adaptations live on branch `cross-target-step-1` (`a596d0e`) and are deliberately not on main: main still materializes against the pinned commit, where the old provider semantics are the truth, and the adaptations land together with the re-pin.
+
 ## What this changes about the existing evidence
 
 Nothing already claimed becomes false, but one distinction now has to be stated rather than assumed.
@@ -78,10 +84,10 @@ The 200-vector differential corpus in `verify-native-projection.mjs` establishes
 
 ## Remaining, in order
 
-1. Repair the Node evaluator against its vectors — 24 fixes. The measurements above predict the 17 fixtures do not move, and that gets verified rather than assumed.
+1. ~~Repair the Node evaluator against its vectors — 24 fixes.~~ Done on the platform branch: 157/157 vectors, 32/32 mechanics conformant, and the 17 fixtures verified not to move. See Step 1 above.
 2. Write the Python and C# evaluators against the vectors rather than against Node.
 3. Per-language mechanic registry authority, then the database bindings, which is what moves readiness off `NOT_OBSERVABLE`.
 4. sfx-embody target neutrality, so the target is data rather than a branch in the materializer.
 5. Re-pin the platform in one step, and re-establish the platform digest boundary against the new bytes.
 
-Two consequences are already known. Adopting the declared `if` ruling means the Node lowering must emit an explicit truthiness helper instead of a bare conditional, which touches both the projection and its inverse reader. And re-pinning changes the platform digest recorded in every receipt, which is the step deliberately deferred to last.
+Two consequences are already known. Adopting the declared `if` ruling means the Node lowering must emit an explicit truthiness helper instead of a bare conditional, which touches both the projection and its inverse reader — developed and experimentally verified as part of Step 1, on branch `cross-target-step-1` until the re-pin. And re-pinning changes the platform digest recorded in every receipt, which is the step deliberately deferred to last.
