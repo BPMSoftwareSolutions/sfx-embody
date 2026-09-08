@@ -13,8 +13,9 @@ const pretty = value => JSON.stringify(value, null, 2) + '\n';
 const one = (items, reason) => { if (items.length !== 1) throw new Error(reason + ':' + items.length); return items[0]; };
 const name = id => id.split(/[^A-Za-z0-9]+/).filter(Boolean).map(x => x[0].toUpperCase() + x.slice(1)).join('');
 
-export async function materializeNode({ bundleFile, sdaRoot, outputRoot }) {
-  const bundle = json(await fs.readFile(bundleFile, 'utf8'));
+// Planning produces native source and authority bytes in memory. Persistence is
+// a separate consumer of the plan, not a prerequisite for execution.
+export async function planNode({ bundle, sdaRoot }) {
   const { selection, authority, resolutions } = bundle;
   const selected = one(authority.recordsets[0], 'CAPABILITY_SCENARIO_SELECTION');
   const capabilityId = selected.capability_id;
@@ -230,6 +231,28 @@ export async function materializeNode({ bundleFile, sdaRoot, outputRoot }) {
     }
   }
   if (new Set(files.map(f => f.relativePath.toLowerCase())).size !== files.length) throw new Error('PHYSICAL_OUTPUT_COLLISION');
+  const receipts = outputBases.map(base => {
+    const body = files.filter(f => f.relativePath.startsWith(base + '/body/')).map(({ content, ...file }) => file);
+    const scenarioId = one(scenarios.filter(s => base === `embodiments/${encodeURIComponent(capabilityId)}/scenarios/${encodeURIComponent(s.scenarioId)}/node`), 'PHYSICAL_SCENARIO_BINDING').scenarioId;
+    const plan = { capabilityId, scenarioId, target: 'node', resolverDigest, files: body };
+    const receipt = { capabilityId, scenarioId, target: 'node',
+      profile: 'full-mechanics', scenarioDefinitionDigest: 'sha256:' + Buffer.from(one(closure.filter(r => r.downstream_scenario_id === scenarioId), 'SCENARIO_DIGEST').scenario_definition_digest.base64, 'base64').toString('hex'),
+      embodimentPlanDigest: hash(pretty(plan)), resolverVersion: resolverDigest, pinnedPlatformCommit: commit, platformDigest,
+      providers: [...new Set(requirements.filter(r => r.downstream_scenario_id === scenarioId).flatMap(r => [r.provider_id, r.provider_profile_id]).filter(Boolean))],
+      artifactDigest: hash(pretty(body)), revealDigest: null, disposition: 'PLANNED_AWAITING_EXECUTION',
+      managedAdmission: 'NOT_REQUESTED', resolverStatus: 'CANDIDATE_PHYSICAL_PROVIDER' };
+    return { base, plan, receipt };
+  });
+  return { capabilityId, selectedScenarioId: selection.scenarioId, outputBases, files, receipts };
+}
+
+export async function materializeNode({ bundleFile, sdaRoot, outputRoot }) {
+  const bundle = json(await fs.readFile(bundleFile, 'utf8'));
+  return writeNodePlan({ plan: await planNode({ bundle, sdaRoot }), outputRoot });
+}
+
+export async function writeNodePlan({ plan, outputRoot }) {
+  const { capabilityId, selectedScenarioId, outputBases, files, receipts } = plan;
   const write = async (relative, content) => {
     const target = path.resolve(outputRoot, relative);
     if (!target.startsWith(path.resolve(outputRoot) + path.sep)) throw new Error('OUTPUT_OUTSIDE_EMBODIMENT_LOCATION');
@@ -251,19 +274,11 @@ export async function materializeNode({ bundleFile, sdaRoot, outputRoot }) {
   }
   for (const file of files) await write(file.relativePath, file.content);
   for (const target of stale) await fs.unlink(target);
-  for (const base of outputBases) {
-    const body = files.filter(f => f.relativePath.startsWith(base + '/body/')).map(({ content, ...file }) => file);
-    const scenarioId = one(scenarios.filter(s => base === `embodiments/${encodeURIComponent(capabilityId)}/scenarios/${encodeURIComponent(s.scenarioId)}/node`), 'PHYSICAL_SCENARIO_BINDING').scenarioId;
-    const plan = { capabilityId, scenarioId, target: 'node', resolverDigest, files: body };
+  for (const { base, plan, receipt } of receipts) {
     await write(base + '/evidence/embodiment-plan.json', pretty(plan));
-    await write(base + '/embodiment.receipt.json', pretty({ capabilityId, scenarioId, target: 'node',
-      profile: 'full-mechanics', scenarioDefinitionDigest: 'sha256:' + Buffer.from(one(closure.filter(r => r.downstream_scenario_id === scenarioId), 'SCENARIO_DIGEST').scenario_definition_digest.base64, 'base64').toString('hex'),
-      embodimentPlanDigest: hash(pretty(plan)), resolverVersion: resolverDigest, pinnedPlatformCommit: commit, platformDigest,
-      providers: [...new Set(requirements.filter(r => r.downstream_scenario_id === scenarioId).flatMap(r => [r.provider_id, r.provider_profile_id]).filter(Boolean))],
-      artifactDigest: hash(pretty(body)), revealDigest: null, disposition: 'MATERIALIZED_AWAITING_EXECUTION',
-      managedAdmission: 'NOT_REQUESTED', resolverStatus: 'CANDIDATE_PHYSICAL_PROVIDER' }));
+    await write(base + '/embodiment.receipt.json', pretty({ ...receipt, disposition: 'MATERIALIZED_AWAITING_EXECUTION' }));
   }
-  return { capabilityId, selectedScenarioId: selection.scenarioId, outputBases: outputBases.map(b => path.resolve(outputRoot, b)), files: files.length };
+  return { capabilityId, selectedScenarioId, outputBases: outputBases.map(b => path.resolve(outputRoot, b)), files: files.length };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {

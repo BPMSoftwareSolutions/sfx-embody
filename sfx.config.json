@@ -1,0 +1,27 @@
+{
+  "configurationType": "sfx-project.v1",
+  "commands": "config/sfx.commands.json",
+  "deliveries": {
+    "database-memory": {
+      "type": "process",
+      "command": "node",
+      "cwd": ".",
+      "args": [
+        "--experimental-vm-modules",
+        "--experimental-permission",
+        "--allow-child-process",
+        "--allow-fs-read=./src",
+        "--allow-fs-read=./config",
+        "--allow-fs-read=./node_modules",
+        "--allow-fs-read=./package.json",
+        "--allow-fs-read=../scenario-driven-architecture",
+        "--allow-fs-read=../../sidefx-database/src",
+        "--allow-fs-read=../../sidefx-database/config",
+        "--allow-fs-read=../../sidefx-database/sql",
+        "--allow-fs-read=../../sidefx-database/node_modules",
+        "--allow-fs-read=../../sidefx-database/package.json",
+        "src/database-delivery.mjs", "config/database-runtime.json"
+      ]
+    }
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "configurationType": "sfx-database-memory-runtime.v1",
+  "databaseRoot": "../../../sidefx-database",
+  "sdaRoot": "../../scenario-driven-architecture"
+}

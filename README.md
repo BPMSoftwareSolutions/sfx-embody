@@ -16,6 +16,23 @@ sfx-embody materializes executable Capability and Scenario bodies from database 
 
 Every directory named evidence and every embodiment.receipt.json file is ignored by Git, including those inside Scenarios and frozen baselines. Generated bodies remain version controlled. Verification and audit commands recreate current evidence and receipts locally; historical baseline verification requires its saved local evidence and receipts.
 
+[Database invocation investigation](docs/database-direct-invocation.md) follows expanded execution through to live SQL-to-memory invocation. `planNode` produces the same native bytes in memory; `writeNodePlan` is an optional persistence step. The candidate memory loader runs those unchanged bytes and resolves contracts from the in-memory resource map. A restricted-process live proof passed for the provider resolver, and `npm run verify:memory` checks retained-fixture parity across the three configured capabilities. This is a bounded execution proof, not a completed database-native change or capsulization surface.
+
+Invoke from this directory using the project's explicit database process binding:
+
+```powershell
+sfx capability invoke resolve-sidefx-eligible-providers --input '@examples/provider-resolution.request.json' --json
+```
+
+The exercised command returned exit 0 and `PROVIDERS_RESOLVED`. It reads the
+capability and declared root Scenario from SQL, executes the selected native body
+in memory, and returns the kernel result and authority/storage evidence. Install
+the current `sidefx-cli` and prepare the dependencies described below first.
+`scripts/verify-sfx-invocation.ps1` repeats the native success and failure checks.
+The sample input is retained fixture authority for the pure provider resolver;
+it does not call or admit an external provider. Database revision authoring and
+capsulization are still separate work.
+
 | Scenario | Executable code |
 | --- | --- |
 | adapt-job-market-intelligence-evidence | [Scenario](embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/scenario.mjs), [port](embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs), [composition](embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/composition.mjs) |
@@ -52,6 +69,6 @@ npm run report
 
 The regression and four resolver tests passed with exit code 0. The local evidence/regression-results.json retains exact component digests, database pins, dependency installation results and receipt hashes. Selection inputs live under config/selections/, and local database bundles live under evidence/authority/. Regeneration holds on unsupported topology or unavailable/ambiguous providers and protects edits to previously generated files. Historical specimens under evidence/history/ retain the context of their original run and are not current verification commands.
 
-Receipts state EXECUTION_CHECKS_PASSED and NOT_REQUESTED for managed admission. They bind contract, native projection and lineage proof digests. Child Scenario testimony identifies its parent-fixture scope. These results do not claim universal Capability coverage, full governed Reveal/Compare, authority/database round trips or Cross-Apply to other languages. No sfx invocation or database admission write is claimed.
+Receipts state EXECUTION_CHECKS_PASSED and NOT_REQUESTED for managed admission. They bind contract, native projection and lineage proof digests. Child Scenario testimony identifies its parent-fixture scope. These results do not claim universal Capability coverage, full governed Reveal/Compare, authority/database round trips or Cross-Apply to other languages. The separate sfx invocation above exercises the candidate database provider; no database admission write is claimed.
 
 [Frozen original baseline](baselines/bbf0345d901983b6c0eeab449c2842419a3154b56bf2d04a973cf51c6974d66a/baseline.manifest.json). Its 17-fixture evidence and original bodies remain inspectable.
