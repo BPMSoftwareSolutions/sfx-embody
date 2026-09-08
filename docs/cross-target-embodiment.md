@@ -4,14 +4,14 @@ This records what supporting a second and third target actually requires, and th
 
 Target readiness is declared, not guessed. For every Capability in `config/selections/`:
 
-| Target | Requirements | Open | Readiness |
-| --- | ---: | ---: | --- |
-| node | 188 | 0 | `CAN_ATTEMPT_EMBODIMENT` |
-| python | 188 | 154 | `NOT_OBSERVABLE` |
-| csharp | 188 | 154 | `NOT_OBSERVABLE` |
-| cpp, go, java | 188 | 158 | `NOT_OBSERVABLE` |
+| Target | Readiness |
+| --- | --- |
+| node | `CAN_ATTEMPT_EMBODIMENT` — all 10 selected scenarios |
+| python | `CAN_ATTEMPT_EMBODIMENT` — all 10 selected scenarios (step 3) |
+| csharp | `CAN_ATTEMPT_EMBODIMENT` — all 10 selected scenarios (step 3) |
+| cpp, go, java | `NOT_OBSERVABLE` — no mechanic registries yet; only the language-independent rows resolve |
 
-Every one of the 154 open requirements for python and csharp carries the same diagnostic, `EXACT_MECHANIC_TARGET_BINDING_NOT_ESTABLISHED`, at repair boundary `DECLARATION_AND_BINDING_EVIDENCE`. They resolve to 13 distinct mechanics for that Capability and 32 across the estate. The materializer's `NODE_BINDINGS_HELD` is that declaration being honoured; it is the system working, not a defect to route around.
+Before step 3, python and csharp carried 154 open requirements per selected Capability, every one with the diagnostic `EXACT_MECHANIC_TARGET_BINDING_NOT_ESTABLISHED` at repair boundary `DECLARATION_AND_BINDING_EVIDENCE`, resolving to 13 distinct mechanics for one Capability and 32 across the estate. The materializer's `NODE_BINDINGS_HELD` is that declaration being honoured; it is the system working, not a defect to route around.
 
 ## What already exists for python and csharp
 
@@ -23,8 +23,8 @@ More than expected. The platform carries, for both languages, a Scenario Kernel,
 | --- | --- |
 | 0. Declared mechanic conformance vectors | **Authored, unpinned branch.** 157 vectors, 17 decisions, 32/36 mechanics |
 | 1. Python and C# transformation evaluators | **Present on the unpinned branch.** Node, Python and C# all conformant: 157/157 vectors, 32/32 mechanics |
-| 2. Per-language mechanic registry authority | Only `node-mechanic-registry.authority.v1.json` |
-| 3. Database mechanic-to-target bindings | Held, as above |
+| 2. Per-language mechanic registry authority | **Present on the unpinned branch and bundled into sda-bootstrap** (`0e52d24`, `78e23b6`): python- and csharp-mechanic-registry.authority.v1.json |
+| 3. Database mechanic-to-target bindings | **Held.** New database generation loaded and selected (`sha256:98473983…`); python and csharp now report `CAN_ATTEMPT_EMBODIMENT` on all 10 selected scenarios, with no ambiguous multi-candidate bindings |
 | 4. sfx-embody target neutrality | Node-specific materializer, projection and reveal |
 
 The intent's law decides the order: *repair the lowest authoritative layer that actually owns the defect, and never manufacture semantic authority to justify physical output.* Layer 0 owns it. Writing a Python evaluator before those vectors exist means choosing, without authority, what each mechanic means.
@@ -86,7 +86,7 @@ The 200-vector differential corpus in `verify-native-projection.mjs` establishes
 
 1. ~~Repair the Node evaluator against its vectors — 24 fixes.~~ Done on the platform branch: 157/157 vectors, 32/32 mechanics conformant, and the 17 fixtures verified not to move. See Step 1 above.
 2. ~~Write the Python and C# evaluators against the vectors rather than against Node.~~ Done on the platform branch (`7cdb9fe`): `languages/python/src/scenario_kernel/adapters/semantic_transformation_evaluator.py` and the repaired `SemanticTransformationEngine.cs` (with a vector host) both pass 157/157 vectors and 32/32 mechanics through the same runner; the existing C# kernel conformance suite still passes 32/32.
-3. Per-language mechanic registry authority, then the database bindings, which is what moves readiness off `NOT_OBSERVABLE`.
+3. ~~Per-language mechanic registry authority, then the database bindings, which is what moves readiness off `NOT_OBSERVABLE`.~~ Done. Registry authorities declared on the platform branch (`0e52d24`), bundled into sda-bootstrap (`78e23b6`), and ingested as a new database generation (`sha256:98473983…`, selected). Measured against every selected scenario: python and csharp now account for 100% of requirements and report `CAN_ATTEMPT_EMBODIMENT` on all 10, with zero multi-candidate ambiguities; cpp, go and java remain `NOT_OBSERVABLE` until their registries exist.
 4. sfx-embody target neutrality, so the target is data rather than a branch in the materializer.
 5. Re-pin the platform in one step, and re-establish the platform digest boundary against the new bytes.
 
