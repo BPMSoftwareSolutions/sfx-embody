@@ -1,25 +1,44 @@
 // Generated from capabilities/admit-canonical-circuit-blueprint/semantic-transformation.authority.json; sha256:edd662a3271af9b23645ff2b0c6e263a053ed6cfe149d09add4a8fe6f9b15f93
+import { sfxEquals, sfxLength, sfxMerge, sfxTruthy, sfxValueAt } from "./native-mechanics.mjs";
 export class RequireBlueprintConformanceEvidencePort {
   execute(input, root = input) {
     return (() => {
       const checksClosed = [
-        input?.payload?.capabilityId === input?.payload?.candidate?.capability?.capabilityId,
-        input?.payload?.featureDigest ===
-          input?.payload?.candidate?.sourceAuthority?.featureAuthorityRef?.digest,
-        input?.payload?.candidate?.sourceAuthority?.disposition === "CANDIDATE",
-        input?.payload?.conformanceEvidence?.evidenceVersion ===
+        sfxEquals(
+          sfxValueAt(input, "payload.capabilityId"),
+          sfxValueAt(input, "payload.candidate.capability.capabilityId"),
+        ),
+        sfxEquals(
+          sfxValueAt(input, "payload.featureDigest"),
+          sfxValueAt(input, "payload.candidate.sourceAuthority.featureAuthorityRef.digest"),
+        ),
+        sfxEquals(sfxValueAt(input, "payload.candidate.sourceAuthority.disposition"), "CANDIDATE"),
+        sfxEquals(
+          sfxValueAt(input, "payload.conformanceEvidence.evidenceVersion"),
           "canonical-blueprint-conformance-evidence.v1",
-        input?.payload?.conformanceEvidence?.blueprintAuthorityDigest ===
-          input?.payload?.candidate?.blueprintAuthority?.authorityDigest,
-        input?.payload?.conformanceEvidence?.carrierDigest ===
-          input?.payload?.candidateCarrierDigest,
-        input?.payload?.conformanceEvidence?.schemaAuthority?.digest ===
-          input?.payload?.canonicalSchemaDigest,
-        input?.payload?.conformanceEvidence?.disposition === "CONFORMS",
-        (input?.payload?.conformanceEvidence?.findings).length === 0,
-      ].every((condition) => Boolean(condition));
+        ),
+        sfxEquals(
+          sfxValueAt(input, "payload.conformanceEvidence.blueprintAuthorityDigest"),
+          sfxValueAt(input, "payload.candidate.blueprintAuthority.authorityDigest"),
+        ),
+        sfxEquals(
+          sfxValueAt(input, "payload.conformanceEvidence.carrierDigest"),
+          sfxValueAt(input, "payload.candidateCarrierDigest"),
+        ),
+        sfxEquals(
+          sfxValueAt(input, "payload.conformanceEvidence.schemaAuthority.digest"),
+          sfxValueAt(input, "payload.canonicalSchemaDigest"),
+        ),
+        sfxEquals(sfxValueAt(input, "payload.conformanceEvidence.disposition"), "CONFORMS"),
+        sfxEquals(sfxLength(sfxValueAt(input, "payload.conformanceEvidence.findings")), 0),
+      ].every((condition) => sfxTruthy(sfxValueAt(condition, "")));
       const obligationFindings = [
-        input?.payload?.capabilityId === input?.payload?.candidate?.capability?.capabilityId
+        sfxTruthy(
+          sfxEquals(
+            sfxValueAt(input, "payload.capabilityId"),
+            sfxValueAt(input, "payload.candidate.capability.capabilityId"),
+          ),
+        )
           ? []
           : [
               {
@@ -27,8 +46,12 @@ export class RequireBlueprintConformanceEvidencePort {
                 ["blueprintCellId"]: "require-blueprint-conformance-evidence",
               },
             ],
-        input?.payload?.featureDigest ===
-        input?.payload?.candidate?.sourceAuthority?.featureAuthorityRef?.digest
+        sfxTruthy(
+          sfxEquals(
+            sfxValueAt(input, "payload.featureDigest"),
+            sfxValueAt(input, "payload.candidate.sourceAuthority.featureAuthorityRef.digest"),
+          ),
+        )
           ? []
           : [
               {
@@ -36,7 +59,12 @@ export class RequireBlueprintConformanceEvidencePort {
                 ["blueprintCellId"]: "require-blueprint-conformance-evidence",
               },
             ],
-        input?.payload?.candidate?.sourceAuthority?.disposition === "CANDIDATE"
+        sfxTruthy(
+          sfxEquals(
+            sfxValueAt(input, "payload.candidate.sourceAuthority.disposition"),
+            "CANDIDATE",
+          ),
+        )
           ? []
           : [
               {
@@ -44,8 +72,12 @@ export class RequireBlueprintConformanceEvidencePort {
                 ["blueprintCellId"]: "require-blueprint-conformance-evidence",
               },
             ],
-        input?.payload?.conformanceEvidence?.evidenceVersion ===
-        "canonical-blueprint-conformance-evidence.v1"
+        sfxTruthy(
+          sfxEquals(
+            sfxValueAt(input, "payload.conformanceEvidence.evidenceVersion"),
+            "canonical-blueprint-conformance-evidence.v1",
+          ),
+        )
           ? []
           : [
               {
@@ -53,8 +85,12 @@ export class RequireBlueprintConformanceEvidencePort {
                 ["blueprintCellId"]: "require-blueprint-conformance-evidence",
               },
             ],
-        input?.payload?.conformanceEvidence?.blueprintAuthorityDigest ===
-        input?.payload?.candidate?.blueprintAuthority?.authorityDigest
+        sfxTruthy(
+          sfxEquals(
+            sfxValueAt(input, "payload.conformanceEvidence.blueprintAuthorityDigest"),
+            sfxValueAt(input, "payload.candidate.blueprintAuthority.authorityDigest"),
+          ),
+        )
           ? []
           : [
               {
@@ -62,8 +98,12 @@ export class RequireBlueprintConformanceEvidencePort {
                 ["blueprintCellId"]: "require-blueprint-conformance-evidence",
               },
             ],
-        input?.payload?.conformanceEvidence?.carrierDigest ===
-        input?.payload?.candidateCarrierDigest
+        sfxTruthy(
+          sfxEquals(
+            sfxValueAt(input, "payload.conformanceEvidence.carrierDigest"),
+            sfxValueAt(input, "payload.candidateCarrierDigest"),
+          ),
+        )
           ? []
           : [
               {
@@ -71,8 +111,12 @@ export class RequireBlueprintConformanceEvidencePort {
                 ["blueprintCellId"]: "require-blueprint-conformance-evidence",
               },
             ],
-        input?.payload?.conformanceEvidence?.schemaAuthority?.digest ===
-        input?.payload?.canonicalSchemaDigest
+        sfxTruthy(
+          sfxEquals(
+            sfxValueAt(input, "payload.conformanceEvidence.schemaAuthority.digest"),
+            sfxValueAt(input, "payload.canonicalSchemaDigest"),
+          ),
+        )
           ? []
           : [
               {
@@ -80,7 +124,9 @@ export class RequireBlueprintConformanceEvidencePort {
                 ["blueprintCellId"]: "require-blueprint-conformance-evidence",
               },
             ],
-        input?.payload?.conformanceEvidence?.disposition === "CONFORMS"
+        sfxTruthy(
+          sfxEquals(sfxValueAt(input, "payload.conformanceEvidence.disposition"), "CONFORMS"),
+        )
           ? []
           : [
               {
@@ -88,7 +134,9 @@ export class RequireBlueprintConformanceEvidencePort {
                 ["blueprintCellId"]: "require-blueprint-conformance-evidence",
               },
             ],
-        (input?.payload?.conformanceEvidence?.findings).length === 0
+        sfxTruthy(
+          sfxEquals(sfxLength(sfxValueAt(input, "payload.conformanceEvidence.findings")), 0),
+        )
           ? []
           : [
               {
@@ -96,13 +144,13 @@ export class RequireBlueprintConformanceEvidencePort {
                 ["blueprintCellId"]: "require-blueprint-conformance-evidence",
               },
             ],
-      ].flatMap((findingGroup, findingGroupIndex) => findingGroup);
-      return Object.assign({}, input, {
-        ["payload"]: Object.assign({}, input?.payload, {
+      ].flatMap((findingGroup, findingGroupIndex) => sfxValueAt(findingGroup, ""));
+      return sfxMerge(sfxValueAt(input, ""), {
+        ["payload"]: sfxMerge(sfxValueAt(input, "payload"), {
           ["require-blueprint-conformance-evidenceDisposition"]: {
-            ["disposition"]: checksClosed ? "MET" : "UNMET",
+            ["disposition"]: sfxTruthy(sfxValueAt(checksClosed, "")) ? "MET" : "UNMET",
             ["blueprintCellId"]: "require-blueprint-conformance-evidence",
-            ["findings"]: obligationFindings,
+            ["findings"]: sfxValueAt(obligationFindings, ""),
           },
         }),
       });

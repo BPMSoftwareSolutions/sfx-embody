@@ -21,7 +21,7 @@ The load-bearing risk in this design is that [native-expression-projection.mjs](
 
 The comparison at [:100](../src/verification/verify-native-projection.mjs#L100) uses `observeGraph`, which distinguishes prototypes, reference identity, `-0` and post-call scope mutation. The independent anchor is [:151](../src/verification/verify-native-projection.mjs#L151), comparing the revealed expression against digest-checked database bytes rather than against lineage. The whole-expression structural comparison at [:178](../src/verification/verify-native-projection.mjs#L178) and the single-class, single-return constraints at [:154-173](../src/verification/verify-native-projection.mjs#L154-L173) leave no room for unmapped executable code in a port body. These parts need no goal; they are the standard the rest should meet.
 
-One boundary on that praise, learned later and recorded in [cross-target-embodiment.md](cross-target-embodiment.md): the corpus establishes that the lowering agrees with the *selected provider*, not that either conforms to declared mechanic meaning. Measured against the declared conformance vectors, the provider is conformant for 16 of its 32 pure mechanics. Both hold at once — the bodies faithfully embody the provider they were resolved to, and that provider diverges from the declaration in 24 measured ways. Nothing in this review is invalidated by that; the distinction simply has to be stated rather than assumed.
+One boundary on that praise, learned later and recorded in [cross-target-embodiment.md](cross-target-embodiment.md): the corpus establishes that the lowering agrees with the *selected provider*, not that either conforms to declared mechanic meaning. Measured against the declared conformance vectors, the provider was conformant for 16 of its 32 pure mechanics at the commit reviewed here. Both held at once — the bodies faithfully embodied the provider they were resolved to, and that provider diverged from the declaration in 24 measured ways. The evaluator has since been repaired and the platform re-pinned, so the divergence is closed; the distinction it forced is permanent, and still has to be stated rather than assumed.
 
 ## Finding 1 — The platform pin does not cover the tools that shape the output
 
@@ -146,9 +146,9 @@ The 994 counts regions across ten physical bodies that embody ten transformation
 
 ## State after these changes
 
-The implementation digest is now `sha256:ac9107227a3731982a54f9dc6a8ed2d6d39f148c3b4affb433f75b5a3a1da610`.
+The implementation digest at the time these findings were closed was `sha256:ac910722…`, against database snapshot `sha256:38debec6…` and pinned platform checkout `6fcb8b34…`. Both have since moved with the platform re-pin; the current values are in [native-embodiment-repair.md](native-embodiment-repair.md), which is generated from each run rather than restated here.
 
-`npm run verify:estate` was run against the loaded database and passed for all three Capabilities, at database snapshot `sha256:38debec6…` — the snapshot [native-embodiment-repair.md](native-embodiment-repair.md) records — and pinned platform checkout `6fcb8b34…`. The documented command sequence (`npm test`, `verify:estate`, `audit:source`, `audit:lowering`, `report`) runs clean in order.
+`npm run verify:estate` was run against the loaded database and passed for all three Capabilities at that generation. The documented command sequence (`npm test`, `verify:estate`, `audit:source`, `audit:lowering`, `report`) runs clean in order.
 
 | Measure | Before | After |
 | --- | ---: | ---: |
@@ -165,7 +165,7 @@ The totals are unchanged because the changes strengthen what is checked rather t
 
 `evidence/regression-results.json` is no longer stale: the run above refreshed it, so it now records the current implementation digest and carries no retired counters. It was never rewritten by hand — it is the receipt of a database-backed run, and hand-editing it would have made it exactly the kind of unearned evidence Finding 3 objects to.
 
-The contract gate reports 2337 TypeScript assignments, 976 required compiler rejections and 25764 runtime vectors, with no catalog contract lacking positive coverage. `audit:lowering` continues to report `DECLARED_CONFORMANCE_REFERENCES_NOT_CLOSED` across 21 mechanics, which is the pre-existing and correctly reported state of the declared conformance references, untouched by this work.
+The contract gate reports 2337 TypeScript assignments, 976 required compiler rejections and 25764 runtime vectors, with no catalog contract lacking positive coverage. `audit:lowering` reported `DECLARED_CONFORMANCE_REFERENCES_NOT_CLOSED` across 21 mechanics, which was the pre-existing and correctly reported state of the declared conformance references, untouched by this work. It has since closed: after the platform re-pin all 21 resolve, and the audit reports `DECLARED_CONFORMANCE_REFERENCES_RESOLVED_REQUIRING_VECTOR_BINDING`.
 
 Nothing in this review remains open. The acceptance dimensions that were `NOT_PROVEN` before — full Capability/Scenario round trip, authority/database round trip, Cross-Apply — are unchanged and remain outside the scope of these findings.
 

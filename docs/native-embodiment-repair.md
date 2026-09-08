@@ -12,9 +12,9 @@ The same resolver was used without modification for all three capabilities:
 
 There are 0 numbered expression variables, 0 numbered state variables and 0 numbered dependency aliases in 465 planned files. The previous Expression runtime and mechanic dictionary are retired. Original runtime dependencies and the five-step Scenario Kernel remain real platform implementations.
 
-The native resolver and inverse reader cover all 32 pure mechanics implemented by the selected Node provider. A 200-vector corpus checks execution against that provider and recovers each vector from emitted native syntax; a vector passes only when the lowering and the provider are indistinguishable in result, in scope mutation, and in how they fail. What that establishes is agreement with the selected provider, not conformance to declared mechanic meaning; those are different claims and only the first is tested here. Measured against the declared conformance vectors, the selected provider is conformant for 16 of its 32 pure mechanics, so the bodies faithfully embody a provider that itself diverges from the declaration in 24 named ways. Cross-Apply to another target needs the second property. See [cross-target-embodiment.md](cross-target-embodiment.md). The actual capability fixtures separately exercised 64 native port comparisons and 320 kernel observations. All 994 expression regions across 10 transformations round-trip to their retained transformation declarations, modulo path-spelling normalization of empty segments; the un-normalized spelling is retained as `pathSpelling` in lineage. A declared 8-class mutation set is applied to every emitted port body; the reveal rejected all 28 mutations the bodies admitted, and the classes a body does not exercise are reported per port as unmeasured rather than counted as passing.
+The native resolver and inverse reader cover all 32 pure mechanics implemented by the selected Node provider. A 200-vector corpus checks execution against that provider and recovers each vector from emitted native syntax; a vector passes only when the lowering and the provider are indistinguishable in result, in scope mutation, and in how they fail. What that establishes is agreement with the selected provider, not conformance to declared mechanic meaning; those are different claims and only the first is tested here. All 21 declared conformance references across 21 mechanics resolve at this pinned commit, so declared mechanic meaning is now addressable; binding each reference to its vectors remains outstanding. Cross-Apply to another target needs the second property. See [cross-target-embodiment.md](cross-target-embodiment.md). The actual capability fixtures separately exercised 64 native port comparisons and 320 kernel observations. All 994 expression regions across 10 transformations round-trip to their retained transformation declarations. A declared 9-class mutation set is applied to every emitted port body; the reveal rejected all 36 mutations the bodies admitted, and the classes a body does not exercise are reported per port as unmeasured rather than counted as passing.
 
-Platform integrity does not rest on the commit pin alone. Built output is ignored in the platform repository, so neither the compiler chain nor the kernel copied into each body is under revision control there. Every platform byte this materializer reads is digested as it is read, and module loads walk their transitive relative imports, so the verified set is the set that executed. 34 platform files are recorded per run as the platform surface in each body's evidence, bound into every receipt as platformDigest sha256:c0296992bc824105288ab4172aa3633a6c69a863a8dd63e7b8ddc0e09117e289.
+Platform integrity does not rest on the commit pin alone. Built output is ignored in the platform repository, so neither the compiler chain nor the kernel copied into each body is under revision control there. Every platform byte this materializer reads is digested as it is read, and module loads walk their transitive relative imports, so the verified set is the set that executed. 34 platform files are recorded per run as the platform surface in each body's evidence, bound into every receipt as platformDigest sha256:4a9ce9d7b96c39aeadba21c7e65e7a2a3a7b4a545b8fe6dbf041c18f7b7cd9de.
 
 The inverse reader obtains literals, operators, operands, field names, paths and lexical bindings from the native AST. Source maps supply semantic addresses and reversible identifier mappings. The recovered expressions are compared against separately retained, digest-checked authority. Binding and evaluation order remain significant. Formatting is ignored. The verifier rejects extra executable statements in port bodies and checks native helper implementations against the selected provider.
 
@@ -25,7 +25,7 @@ Contract projection now retains required const-valued members, closed enum types
 | Retained behavioral fixtures | 17/17 pass |
 | Native mechanic differential and inverse checks | 200 vectors; all selected-provider pure mechanics covered |
 | Lowering ↔ selected provider | Agreement tested and passing |
-| Selected provider ↔ declared mechanic meaning | Not established at the pinned commit; declared conformance references remain unresolved |
+| Selected provider ↔ declared mechanic meaning | References resolved at the pinned commit; vector binding outstanding (DECLARED_CONFORMANCE_REFERENCES_RESOLVED_REQUIRING_VECTOR_BINDING) |
 | Transformation authority ↔ native syntax | 10 transformations, 994 regions pass |
 | Platform surface under digest | 34 files bound into every receipt |
 | Contract fidelity | Structural type witnesses and original-schema runtime vectors pass |
@@ -34,7 +34,7 @@ Contract projection now retains required const-valued members, closed enum types
 | Cross-Apply ↔ other languages | Not yet proven |
 | Managed admission | Not requested |
 
-The declared conformance references for every pure mechanic remain unresolved at this pinned commit, which npm run audit:lowering reports as DECLARED_CONFORMANCE_REFERENCES_NOT_CLOSED. Until they resolve, the meaning of a mechanic is only as pinned as its prose, and a second target cannot be embodied without choosing that meaning for it.
+npm run audit:lowering reports DECLARED_CONFORMANCE_REFERENCES_RESOLVED_REQUIRING_VECTOR_BINDING for the 21 mechanics the retained lineage uses, with 0 unresolved references. A reference that resolves pins a mechanic's meaning to bytes rather than to prose; until each is bound to its vectors, that meaning is addressable rather than proven.
 
 The user's acceptance law remains the bar. Transformation recovery is one part of full semantic recovery. These results do not award CONFORMS to the whole embodiment, and they do not claim support for every capability or language merely because these cases pass. Unsupported topology or unresolved provider bindings remain explicit holds.
 
@@ -42,6 +42,6 @@ The original 17-fixture baseline, source, lockfiles, authority bundles and evide
 
 Review findings and the architectural goals behind the current checks: [embodiment-review-findings.md](embodiment-review-findings.md). What a second and third target require, and the conformance-vector work that precedes them: [cross-target-embodiment.md](cross-target-embodiment.md).
 
-Implementation: sha256:ac9107227a3731982a54f9dc6a8ed2d6d39f148c3b4affb433f75b5a3a1da610
+Implementation: sha256:e2f81c21be45c3671f04ac01dccb4fea0b8d8ef38a3bf09de1bd20e4c9ec08db
 
-Database snapshot: sha256:38debec6dbfa1266f68d903166f69b831c178ffe967208900efcddd9ce2973bc
+Database snapshot: sha256:1a770ac0795d10665a88166f8d8c968dc5b2d030fdfab2b837aa6071d135f9e9

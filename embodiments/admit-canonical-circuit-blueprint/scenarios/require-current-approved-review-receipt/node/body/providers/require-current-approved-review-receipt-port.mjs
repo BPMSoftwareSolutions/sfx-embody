@@ -1,60 +1,128 @@
 // Generated from capabilities/admit-canonical-circuit-blueprint/semantic-transformation.authority.json; sha256:edd662a3271af9b23645ff2b0c6e263a053ed6cfe149d09add4a8fe6f9b15f93
-import { canonicalize } from "./native-mechanics.mjs";
+import {
+  canonicalize,
+  sfxEquals,
+  sfxLength,
+  sfxMerge,
+  sfxTruthy,
+  sfxValueAt,
+} from "./native-mechanics.mjs";
 export class RequireCurrentApprovedReviewReceiptPort {
   execute(input, root = input) {
     return (() => {
       const checksClosed = [
-        input?.payload?.projectionReceipt?.capability?.capabilityId ===
-          input?.payload?.capabilityId,
-        (input?.payload?.reviewBoundary?.capabilities).length === 1,
-        input?.payload?.reviewBoundary?.capabilities?.["0"]?.capabilityId ===
-          input?.payload?.capabilityId,
-        input?.payload?.reviewBoundary?.capabilities?.["0"]?.capabilityAuthorityDigest ===
-          input?.payload?.featureDigest,
-        input?.payload?.reviewBoundary?.capabilities?.["0"]?.blueprintAuthorityDigest ===
-          input?.payload?.candidate?.blueprintAuthority?.authorityDigest,
-        input?.payload?.reviewBoundary?.capabilities?.["0"]?.carrierDigest ===
-          input?.payload?.candidateCarrierDigest,
-        input?.payload?.reviewBoundary?.capabilities?.["0"]?.projectionReceiptDigest ===
-          input?.payload?.projectionReceiptDigest,
-        input?.payload?.reviewBoundary?.capabilities?.["0"]?.geometryProofDigest ===
-          input?.payload?.geometryProofDigest,
-        input?.payload?.reviewBoundary?.capabilities?.["0"]?.geometryDisposition ===
-          input?.payload?.geometryProof?.disposition,
-        input?.payload?.reviewBoundary?.capabilities?.["0"]?.geometryFindingCount ===
-          (input?.payload?.geometryProof?.findings).length,
-        input?.payload?.reviewReceipt?.receiptVersion === "canonical-blueprint-review-receipt.v1",
-        input?.payload?.reviewReceipt?.disposition === "APPROVE",
-        input?.payload?.reviewReceipt?.capabilityAuthorityDigest === input?.payload?.featureDigest,
-        input?.payload?.reviewReceipt?.blueprintAuthorityDigest ===
-          input?.payload?.candidate?.blueprintAuthority?.authorityDigest,
-        input?.payload?.reviewReceipt?.carrierDigest === input?.payload?.candidateCarrierDigest,
-        input?.payload?.reviewReceipt?.projectionReceiptDigest ===
-          input?.payload?.projectionReceiptDigest,
-        input?.payload?.reviewReceipt?.rationaleReference?.digest ===
-          input?.payload?.reviewTestimonyDigest,
-        input?.payload?.reviewTestimony?.disposition === "APPROVE",
-        input?.payload?.reviewTestimony?.reviewBoundaryDigest ===
-          input?.payload?.reviewBoundaryDigest,
-        input?.payload?.projectionReceipt?.blueprintAuthorityDigest ===
-          input?.payload?.candidate?.blueprintAuthority?.authorityDigest,
-        input?.payload?.projectionReceipt?.carrierDigest === input?.payload?.candidateCarrierDigest,
-        JSON.stringify(canonicalize(input?.payload?.projectionReceipt?.sources)) ===
+        sfxEquals(
+          sfxValueAt(input, "payload.projectionReceipt.capability.capabilityId"),
+          sfxValueAt(input, "payload.capabilityId"),
+        ),
+        sfxEquals(sfxLength(sfxValueAt(input, "payload.reviewBoundary.capabilities")), 1),
+        sfxEquals(
+          sfxValueAt(input, "payload.reviewBoundary.capabilities.0.capabilityId"),
+          sfxValueAt(input, "payload.capabilityId"),
+        ),
+        sfxEquals(
+          sfxValueAt(input, "payload.reviewBoundary.capabilities.0.capabilityAuthorityDigest"),
+          sfxValueAt(input, "payload.featureDigest"),
+        ),
+        sfxEquals(
+          sfxValueAt(input, "payload.reviewBoundary.capabilities.0.blueprintAuthorityDigest"),
+          sfxValueAt(input, "payload.candidate.blueprintAuthority.authorityDigest"),
+        ),
+        sfxEquals(
+          sfxValueAt(input, "payload.reviewBoundary.capabilities.0.carrierDigest"),
+          sfxValueAt(input, "payload.candidateCarrierDigest"),
+        ),
+        sfxEquals(
+          sfxValueAt(input, "payload.reviewBoundary.capabilities.0.projectionReceiptDigest"),
+          sfxValueAt(input, "payload.projectionReceiptDigest"),
+        ),
+        sfxEquals(
+          sfxValueAt(input, "payload.reviewBoundary.capabilities.0.geometryProofDigest"),
+          sfxValueAt(input, "payload.geometryProofDigest"),
+        ),
+        sfxEquals(
+          sfxValueAt(input, "payload.reviewBoundary.capabilities.0.geometryDisposition"),
+          sfxValueAt(input, "payload.geometryProof.disposition"),
+        ),
+        sfxEquals(
+          sfxValueAt(input, "payload.reviewBoundary.capabilities.0.geometryFindingCount"),
+          sfxLength(sfxValueAt(input, "payload.geometryProof.findings")),
+        ),
+        sfxEquals(
+          sfxValueAt(input, "payload.reviewReceipt.receiptVersion"),
+          "canonical-blueprint-review-receipt.v1",
+        ),
+        sfxEquals(sfxValueAt(input, "payload.reviewReceipt.disposition"), "APPROVE"),
+        sfxEquals(
+          sfxValueAt(input, "payload.reviewReceipt.capabilityAuthorityDigest"),
+          sfxValueAt(input, "payload.featureDigest"),
+        ),
+        sfxEquals(
+          sfxValueAt(input, "payload.reviewReceipt.blueprintAuthorityDigest"),
+          sfxValueAt(input, "payload.candidate.blueprintAuthority.authorityDigest"),
+        ),
+        sfxEquals(
+          sfxValueAt(input, "payload.reviewReceipt.carrierDigest"),
+          sfxValueAt(input, "payload.candidateCarrierDigest"),
+        ),
+        sfxEquals(
+          sfxValueAt(input, "payload.reviewReceipt.projectionReceiptDigest"),
+          sfxValueAt(input, "payload.projectionReceiptDigest"),
+        ),
+        sfxEquals(
+          sfxValueAt(input, "payload.reviewReceipt.rationaleReference.digest"),
+          sfxValueAt(input, "payload.reviewTestimonyDigest"),
+        ),
+        sfxEquals(sfxValueAt(input, "payload.reviewTestimony.disposition"), "APPROVE"),
+        sfxEquals(
+          sfxValueAt(input, "payload.reviewTestimony.reviewBoundaryDigest"),
+          sfxValueAt(input, "payload.reviewBoundaryDigest"),
+        ),
+        sfxEquals(
+          sfxValueAt(input, "payload.projectionReceipt.blueprintAuthorityDigest"),
+          sfxValueAt(input, "payload.candidate.blueprintAuthority.authorityDigest"),
+        ),
+        sfxEquals(
+          sfxValueAt(input, "payload.projectionReceipt.carrierDigest"),
+          sfxValueAt(input, "payload.candidateCarrierDigest"),
+        ),
+        sfxEquals(
+          JSON.stringify(canonicalize(sfxValueAt(input, "payload.projectionReceipt.sources"))),
           JSON.stringify(
             canonicalize({
-              ["ascii"]: input?.payload?.reviewReceipt?.reviewedSources?.ascii,
-              ["mermaid"]: input?.payload?.reviewReceipt?.reviewedSources?.mermaid,
-              ["additionalViews"]: input?.payload?.reviewReceipt?.reviewedSources?.requiredViews,
+              ["ascii"]: sfxValueAt(input, "payload.reviewReceipt.reviewedSources.ascii"),
+              ["mermaid"]: sfxValueAt(input, "payload.reviewReceipt.reviewedSources.mermaid"),
+              ["additionalViews"]: sfxValueAt(
+                input,
+                "payload.reviewReceipt.reviewedSources.requiredViews",
+              ),
             }),
           ),
-        JSON.stringify(
-          canonicalize(input?.payload?.reviewBoundary?.capabilities?.["0"]?.reviewedSources),
-        ) === JSON.stringify(canonicalize(input?.payload?.reviewReceipt?.reviewedSources)),
-        JSON.stringify(canonicalize(input?.payload?.reviewBoundary?.projectionProfileDigests)) ===
-          JSON.stringify(canonicalize(input?.payload?.reviewReceipt?.projectionProfileDigests)),
-      ].every((condition) => Boolean(condition));
+        ),
+        sfxEquals(
+          JSON.stringify(
+            canonicalize(
+              sfxValueAt(input, "payload.reviewBoundary.capabilities.0.reviewedSources"),
+            ),
+          ),
+          JSON.stringify(canonicalize(sfxValueAt(input, "payload.reviewReceipt.reviewedSources"))),
+        ),
+        sfxEquals(
+          JSON.stringify(
+            canonicalize(sfxValueAt(input, "payload.reviewBoundary.projectionProfileDigests")),
+          ),
+          JSON.stringify(
+            canonicalize(sfxValueAt(input, "payload.reviewReceipt.projectionProfileDigests")),
+          ),
+        ),
+      ].every((condition) => sfxTruthy(sfxValueAt(condition, "")));
       const obligationFindings = [
-        input?.payload?.projectionReceipt?.capability?.capabilityId === input?.payload?.capabilityId
+        sfxTruthy(
+          sfxEquals(
+            sfxValueAt(input, "payload.projectionReceipt.capability.capabilityId"),
+            sfxValueAt(input, "payload.capabilityId"),
+          ),
+        )
           ? []
           : [
               {
@@ -62,7 +130,7 @@ export class RequireCurrentApprovedReviewReceiptPort {
                 ["blueprintCellId"]: "require-current-approved-review-receipt",
               },
             ],
-        (input?.payload?.reviewBoundary?.capabilities).length === 1
+        sfxTruthy(sfxEquals(sfxLength(sfxValueAt(input, "payload.reviewBoundary.capabilities")), 1))
           ? []
           : [
               {
@@ -70,8 +138,12 @@ export class RequireCurrentApprovedReviewReceiptPort {
                 ["blueprintCellId"]: "require-current-approved-review-receipt",
               },
             ],
-        input?.payload?.reviewBoundary?.capabilities?.["0"]?.capabilityId ===
-        input?.payload?.capabilityId
+        sfxTruthy(
+          sfxEquals(
+            sfxValueAt(input, "payload.reviewBoundary.capabilities.0.capabilityId"),
+            sfxValueAt(input, "payload.capabilityId"),
+          ),
+        )
           ? []
           : [
               {
@@ -79,8 +151,12 @@ export class RequireCurrentApprovedReviewReceiptPort {
                 ["blueprintCellId"]: "require-current-approved-review-receipt",
               },
             ],
-        input?.payload?.reviewBoundary?.capabilities?.["0"]?.capabilityAuthorityDigest ===
-        input?.payload?.featureDigest
+        sfxTruthy(
+          sfxEquals(
+            sfxValueAt(input, "payload.reviewBoundary.capabilities.0.capabilityAuthorityDigest"),
+            sfxValueAt(input, "payload.featureDigest"),
+          ),
+        )
           ? []
           : [
               {
@@ -88,8 +164,12 @@ export class RequireCurrentApprovedReviewReceiptPort {
                 ["blueprintCellId"]: "require-current-approved-review-receipt",
               },
             ],
-        input?.payload?.reviewBoundary?.capabilities?.["0"]?.blueprintAuthorityDigest ===
-        input?.payload?.candidate?.blueprintAuthority?.authorityDigest
+        sfxTruthy(
+          sfxEquals(
+            sfxValueAt(input, "payload.reviewBoundary.capabilities.0.blueprintAuthorityDigest"),
+            sfxValueAt(input, "payload.candidate.blueprintAuthority.authorityDigest"),
+          ),
+        )
           ? []
           : [
               {
@@ -97,8 +177,12 @@ export class RequireCurrentApprovedReviewReceiptPort {
                 ["blueprintCellId"]: "require-current-approved-review-receipt",
               },
             ],
-        input?.payload?.reviewBoundary?.capabilities?.["0"]?.carrierDigest ===
-        input?.payload?.candidateCarrierDigest
+        sfxTruthy(
+          sfxEquals(
+            sfxValueAt(input, "payload.reviewBoundary.capabilities.0.carrierDigest"),
+            sfxValueAt(input, "payload.candidateCarrierDigest"),
+          ),
+        )
           ? []
           : [
               {
@@ -106,8 +190,12 @@ export class RequireCurrentApprovedReviewReceiptPort {
                 ["blueprintCellId"]: "require-current-approved-review-receipt",
               },
             ],
-        input?.payload?.reviewBoundary?.capabilities?.["0"]?.projectionReceiptDigest ===
-        input?.payload?.projectionReceiptDigest
+        sfxTruthy(
+          sfxEquals(
+            sfxValueAt(input, "payload.reviewBoundary.capabilities.0.projectionReceiptDigest"),
+            sfxValueAt(input, "payload.projectionReceiptDigest"),
+          ),
+        )
           ? []
           : [
               {
@@ -115,8 +203,12 @@ export class RequireCurrentApprovedReviewReceiptPort {
                 ["blueprintCellId"]: "require-current-approved-review-receipt",
               },
             ],
-        input?.payload?.reviewBoundary?.capabilities?.["0"]?.geometryProofDigest ===
-        input?.payload?.geometryProofDigest
+        sfxTruthy(
+          sfxEquals(
+            sfxValueAt(input, "payload.reviewBoundary.capabilities.0.geometryProofDigest"),
+            sfxValueAt(input, "payload.geometryProofDigest"),
+          ),
+        )
           ? []
           : [
               {
@@ -124,8 +216,12 @@ export class RequireCurrentApprovedReviewReceiptPort {
                 ["blueprintCellId"]: "require-current-approved-review-receipt",
               },
             ],
-        input?.payload?.reviewBoundary?.capabilities?.["0"]?.geometryDisposition ===
-        input?.payload?.geometryProof?.disposition
+        sfxTruthy(
+          sfxEquals(
+            sfxValueAt(input, "payload.reviewBoundary.capabilities.0.geometryDisposition"),
+            sfxValueAt(input, "payload.geometryProof.disposition"),
+          ),
+        )
           ? []
           : [
               {
@@ -133,8 +229,12 @@ export class RequireCurrentApprovedReviewReceiptPort {
                 ["blueprintCellId"]: "require-current-approved-review-receipt",
               },
             ],
-        input?.payload?.reviewBoundary?.capabilities?.["0"]?.geometryFindingCount ===
-        (input?.payload?.geometryProof?.findings).length
+        sfxTruthy(
+          sfxEquals(
+            sfxValueAt(input, "payload.reviewBoundary.capabilities.0.geometryFindingCount"),
+            sfxLength(sfxValueAt(input, "payload.geometryProof.findings")),
+          ),
+        )
           ? []
           : [
               {
@@ -142,7 +242,12 @@ export class RequireCurrentApprovedReviewReceiptPort {
                 ["blueprintCellId"]: "require-current-approved-review-receipt",
               },
             ],
-        input?.payload?.reviewReceipt?.receiptVersion === "canonical-blueprint-review-receipt.v1"
+        sfxTruthy(
+          sfxEquals(
+            sfxValueAt(input, "payload.reviewReceipt.receiptVersion"),
+            "canonical-blueprint-review-receipt.v1",
+          ),
+        )
           ? []
           : [
               {
@@ -150,7 +255,7 @@ export class RequireCurrentApprovedReviewReceiptPort {
                 ["blueprintCellId"]: "require-current-approved-review-receipt",
               },
             ],
-        input?.payload?.reviewReceipt?.disposition === "APPROVE"
+        sfxTruthy(sfxEquals(sfxValueAt(input, "payload.reviewReceipt.disposition"), "APPROVE"))
           ? []
           : [
               {
@@ -158,7 +263,12 @@ export class RequireCurrentApprovedReviewReceiptPort {
                 ["blueprintCellId"]: "require-current-approved-review-receipt",
               },
             ],
-        input?.payload?.reviewReceipt?.capabilityAuthorityDigest === input?.payload?.featureDigest
+        sfxTruthy(
+          sfxEquals(
+            sfxValueAt(input, "payload.reviewReceipt.capabilityAuthorityDigest"),
+            sfxValueAt(input, "payload.featureDigest"),
+          ),
+        )
           ? []
           : [
               {
@@ -166,8 +276,12 @@ export class RequireCurrentApprovedReviewReceiptPort {
                 ["blueprintCellId"]: "require-current-approved-review-receipt",
               },
             ],
-        input?.payload?.reviewReceipt?.blueprintAuthorityDigest ===
-        input?.payload?.candidate?.blueprintAuthority?.authorityDigest
+        sfxTruthy(
+          sfxEquals(
+            sfxValueAt(input, "payload.reviewReceipt.blueprintAuthorityDigest"),
+            sfxValueAt(input, "payload.candidate.blueprintAuthority.authorityDigest"),
+          ),
+        )
           ? []
           : [
               {
@@ -175,7 +289,12 @@ export class RequireCurrentApprovedReviewReceiptPort {
                 ["blueprintCellId"]: "require-current-approved-review-receipt",
               },
             ],
-        input?.payload?.reviewReceipt?.carrierDigest === input?.payload?.candidateCarrierDigest
+        sfxTruthy(
+          sfxEquals(
+            sfxValueAt(input, "payload.reviewReceipt.carrierDigest"),
+            sfxValueAt(input, "payload.candidateCarrierDigest"),
+          ),
+        )
           ? []
           : [
               {
@@ -183,8 +302,12 @@ export class RequireCurrentApprovedReviewReceiptPort {
                 ["blueprintCellId"]: "require-current-approved-review-receipt",
               },
             ],
-        input?.payload?.reviewReceipt?.projectionReceiptDigest ===
-        input?.payload?.projectionReceiptDigest
+        sfxTruthy(
+          sfxEquals(
+            sfxValueAt(input, "payload.reviewReceipt.projectionReceiptDigest"),
+            sfxValueAt(input, "payload.projectionReceiptDigest"),
+          ),
+        )
           ? []
           : [
               {
@@ -192,8 +315,12 @@ export class RequireCurrentApprovedReviewReceiptPort {
                 ["blueprintCellId"]: "require-current-approved-review-receipt",
               },
             ],
-        input?.payload?.reviewReceipt?.rationaleReference?.digest ===
-        input?.payload?.reviewTestimonyDigest
+        sfxTruthy(
+          sfxEquals(
+            sfxValueAt(input, "payload.reviewReceipt.rationaleReference.digest"),
+            sfxValueAt(input, "payload.reviewTestimonyDigest"),
+          ),
+        )
           ? []
           : [
               {
@@ -201,7 +328,7 @@ export class RequireCurrentApprovedReviewReceiptPort {
                 ["blueprintCellId"]: "require-current-approved-review-receipt",
               },
             ],
-        input?.payload?.reviewTestimony?.disposition === "APPROVE"
+        sfxTruthy(sfxEquals(sfxValueAt(input, "payload.reviewTestimony.disposition"), "APPROVE"))
           ? []
           : [
               {
@@ -209,8 +336,12 @@ export class RequireCurrentApprovedReviewReceiptPort {
                 ["blueprintCellId"]: "require-current-approved-review-receipt",
               },
             ],
-        input?.payload?.reviewTestimony?.reviewBoundaryDigest ===
-        input?.payload?.reviewBoundaryDigest
+        sfxTruthy(
+          sfxEquals(
+            sfxValueAt(input, "payload.reviewTestimony.reviewBoundaryDigest"),
+            sfxValueAt(input, "payload.reviewBoundaryDigest"),
+          ),
+        )
           ? []
           : [
               {
@@ -218,8 +349,12 @@ export class RequireCurrentApprovedReviewReceiptPort {
                 ["blueprintCellId"]: "require-current-approved-review-receipt",
               },
             ],
-        input?.payload?.projectionReceipt?.blueprintAuthorityDigest ===
-        input?.payload?.candidate?.blueprintAuthority?.authorityDigest
+        sfxTruthy(
+          sfxEquals(
+            sfxValueAt(input, "payload.projectionReceipt.blueprintAuthorityDigest"),
+            sfxValueAt(input, "payload.candidate.blueprintAuthority.authorityDigest"),
+          ),
+        )
           ? []
           : [
               {
@@ -227,7 +362,12 @@ export class RequireCurrentApprovedReviewReceiptPort {
                 ["blueprintCellId"]: "require-current-approved-review-receipt",
               },
             ],
-        input?.payload?.projectionReceipt?.carrierDigest === input?.payload?.candidateCarrierDigest
+        sfxTruthy(
+          sfxEquals(
+            sfxValueAt(input, "payload.projectionReceipt.carrierDigest"),
+            sfxValueAt(input, "payload.candidateCarrierDigest"),
+          ),
+        )
           ? []
           : [
               {
@@ -235,13 +375,20 @@ export class RequireCurrentApprovedReviewReceiptPort {
                 ["blueprintCellId"]: "require-current-approved-review-receipt",
               },
             ],
-        JSON.stringify(canonicalize(input?.payload?.projectionReceipt?.sources)) ===
-        JSON.stringify(
-          canonicalize({
-            ["ascii"]: input?.payload?.reviewReceipt?.reviewedSources?.ascii,
-            ["mermaid"]: input?.payload?.reviewReceipt?.reviewedSources?.mermaid,
-            ["additionalViews"]: input?.payload?.reviewReceipt?.reviewedSources?.requiredViews,
-          }),
+        sfxTruthy(
+          sfxEquals(
+            JSON.stringify(canonicalize(sfxValueAt(input, "payload.projectionReceipt.sources"))),
+            JSON.stringify(
+              canonicalize({
+                ["ascii"]: sfxValueAt(input, "payload.reviewReceipt.reviewedSources.ascii"),
+                ["mermaid"]: sfxValueAt(input, "payload.reviewReceipt.reviewedSources.mermaid"),
+                ["additionalViews"]: sfxValueAt(
+                  input,
+                  "payload.reviewReceipt.reviewedSources.requiredViews",
+                ),
+              }),
+            ),
+          ),
         )
           ? []
           : [
@@ -250,9 +397,18 @@ export class RequireCurrentApprovedReviewReceiptPort {
                 ["blueprintCellId"]: "require-current-approved-review-receipt",
               },
             ],
-        JSON.stringify(
-          canonicalize(input?.payload?.reviewBoundary?.capabilities?.["0"]?.reviewedSources),
-        ) === JSON.stringify(canonicalize(input?.payload?.reviewReceipt?.reviewedSources))
+        sfxTruthy(
+          sfxEquals(
+            JSON.stringify(
+              canonicalize(
+                sfxValueAt(input, "payload.reviewBoundary.capabilities.0.reviewedSources"),
+              ),
+            ),
+            JSON.stringify(
+              canonicalize(sfxValueAt(input, "payload.reviewReceipt.reviewedSources")),
+            ),
+          ),
+        )
           ? []
           : [
               {
@@ -260,8 +416,16 @@ export class RequireCurrentApprovedReviewReceiptPort {
                 ["blueprintCellId"]: "require-current-approved-review-receipt",
               },
             ],
-        JSON.stringify(canonicalize(input?.payload?.reviewBoundary?.projectionProfileDigests)) ===
-        JSON.stringify(canonicalize(input?.payload?.reviewReceipt?.projectionProfileDigests))
+        sfxTruthy(
+          sfxEquals(
+            JSON.stringify(
+              canonicalize(sfxValueAt(input, "payload.reviewBoundary.projectionProfileDigests")),
+            ),
+            JSON.stringify(
+              canonicalize(sfxValueAt(input, "payload.reviewReceipt.projectionProfileDigests")),
+            ),
+          ),
+        )
           ? []
           : [
               {
@@ -269,13 +433,13 @@ export class RequireCurrentApprovedReviewReceiptPort {
                 ["blueprintCellId"]: "require-current-approved-review-receipt",
               },
             ],
-      ].flatMap((findingGroup, findingGroupIndex) => findingGroup);
-      return Object.assign({}, input, {
-        ["payload"]: Object.assign({}, input?.payload, {
+      ].flatMap((findingGroup, findingGroupIndex) => sfxValueAt(findingGroup, ""));
+      return sfxMerge(sfxValueAt(input, ""), {
+        ["payload"]: sfxMerge(sfxValueAt(input, "payload"), {
           ["require-current-approved-review-receiptDisposition"]: {
-            ["disposition"]: checksClosed ? "MET" : "UNMET",
+            ["disposition"]: sfxTruthy(sfxValueAt(checksClosed, "")) ? "MET" : "UNMET",
             ["blueprintCellId"]: "require-current-approved-review-receipt",
-            ["findings"]: obligationFindings,
+            ["findings"]: sfxValueAt(obligationFindings, ""),
           },
         }),
       });

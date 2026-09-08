@@ -1,4 +1,4 @@
-This records what supporting a second and third target actually requires, and the one thing that turned out to block it. It is written against the pinned platform commit `6fcb8b34`. Where an artifact exists only on an unpinned platform branch, this says so; nothing here claims that branch's work is in force.
+This records what supporting a second and third target actually requires, and the one thing that turned out to block it. It was written against the pinned platform commit `6fcb8b34`, while layers 0 through 2 still lived on an unmerged branch. That branch is now merged and the platform re-pinned to `7168110`, so everything below is in force; the layer table records where each piece landed.
 
 ## The database already answers the question
 
@@ -21,11 +21,11 @@ More than expected. The platform carries, for both languages, a Scenario Kernel,
 
 | Layer | State at the pinned commit |
 | --- | --- |
-| 0. Declared mechanic conformance vectors | **Authored, unpinned branch.** 157 vectors, 17 decisions, 32/36 mechanics |
-| 1. Python and C# transformation evaluators | **Present on the unpinned branch.** Node, Python and C# all conformant: 157/157 vectors, 32/32 mechanics |
-| 2. Per-language mechanic registry authority | **Present on the unpinned branch and bundled into sda-bootstrap** (`0e52d24`, `78e23b6`): python- and csharp-mechanic-registry.authority.v1.json |
+| 0. Declared mechanic conformance vectors | **Merged and pinned.** 157 vectors, 17 decisions, 32/36 mechanics |
+| 1. Python and C# transformation evaluators | **Merged and pinned.** Node, Python and C# all conformant: 157/157 vectors, 32/32 mechanics |
+| 2. Per-language mechanic registry authority | **Merged and pinned**, bundled into sda-bootstrap (`0e52d24`, now carried by `952de6b`): python- and csharp-mechanic-registry.authority.v1.json |
 | 3. Database mechanic-to-target bindings | **Held.** New database generation loaded and selected (`sha256:98473983…`); python and csharp now report `CAN_ATTEMPT_EMBODIMENT` on all 10 selected scenarios, with no ambiguous multi-candidate bindings |
-| 4. sfx-embody target neutrality | Node-specific materializer, projection and reveal |
+| 4. sfx-embody target neutrality | Node-specific materializer, projection and reveal — the remaining step |
 
 The intent's law decides the order: *repair the lowest authoritative layer that actually owns the defect, and never manufacture semantic authority to justify physical output.* Layer 0 owns it. Writing a Python evaluator before those vectors exist means choosing, without authority, what each mechanic means.
 
@@ -57,7 +57,7 @@ So the strict rulings cost nothing against the current estate. That is the point
 
 ## What was produced, and where it lives
 
-On platform branch `embody-python-csharp-mechanics`, based on `6fcb8b34` and **not pinned**: 157 vectors across the 32 mechanics that have an observing embodiment, a runner that tests any target's evaluator, and 17 recorded decisions. Each decision states the question, the ruling, the rationale and the measurement that grounded it. Of the four mechanics excluded, three declare in their own authoring notes that no embodiment observes them; `bind-path` has no observing embodiment at all.
+Authored on platform branch `embody-python-csharp-mechanics`, since merged to platform main and pinned as `7168110`: 157 vectors across the 32 mechanics that have an observing embodiment, a runner that tests any target's evaluator, and 17 recorded decisions. Each decision states the question, the ruling, the rationale and the measurement that grounded it. Of the four mechanics excluded, three declare in their own authoring notes that no embodiment observes them; `bind-path` has no observing embodiment at all.
 
 Running the existing Node evaluator against those vectors:
 
@@ -88,6 +88,6 @@ The 200-vector differential corpus in `verify-native-projection.mjs` establishes
 2. ~~Write the Python and C# evaluators against the vectors rather than against Node.~~ Done on the platform branch (`7cdb9fe`): `languages/python/src/scenario_kernel/adapters/semantic_transformation_evaluator.py` and the repaired `SemanticTransformationEngine.cs` (with a vector host) both pass 157/157 vectors and 32/32 mechanics through the same runner; the existing C# kernel conformance suite still passes 32/32.
 3. ~~Per-language mechanic registry authority, then the database bindings, which is what moves readiness off `NOT_OBSERVABLE`.~~ Done. Registry authorities declared on the platform branch (`0e52d24`), bundled into sda-bootstrap (`78e23b6`), and ingested as a new database generation (`sha256:98473983…`, selected). Measured against every selected scenario: python and csharp now account for 100% of requirements and report `CAN_ATTEMPT_EMBODIMENT` on all 10, with zero multi-candidate ambiguities; cpp, go and java remain `NOT_OBSERVABLE` until their registries exist.
 4. sfx-embody target neutrality, so the target is data rather than a branch in the materializer.
-5. Re-pin the platform in one step, and re-establish the platform digest boundary against the new bytes.
+5. ~~Re-pin the platform in one step, and re-establish the platform digest boundary against the new bytes.~~ Done, ahead of step 4, because the pin forced every platform change onto a long-lived branch. Platform main is `7168110`; sda-bootstrap `952de6b` carries the pin; the harness lockfile authorizes that revision; database generation five (`sha256:1a770ac0…`) is loaded, selected and `VERIFIED`. `verify:estate` passes unchanged — 17/17 fixtures, 320 kernel observations, 994 expression regions, 64 port comparisons — at implementation digest `sha256:e2f81c21…` and platform surface `sha256:4a9ce9d7…`. `audit:lowering` now reports `DECLARED_CONFORMANCE_REFERENCES_RESOLVED_REQUIRING_VECTOR_BINDING` with 0 unresolved references across the 21 mechanics the retained lineage uses, closing the diagnostic that stood throughout this work.
 
-Two consequences are already known. Adopting the declared `if` ruling means the Node lowering must emit an explicit truthiness helper instead of a bare conditional, which touches both the projection and its inverse reader — developed and experimentally verified as part of Step 1, on branch `cross-target-step-1` until the re-pin. And re-pinning changes the platform digest recorded in every receipt, which is the step deliberately deferred to last.
+Both known consequences landed as predicted. The declared `if` ruling required the Node lowering to emit an explicit truthiness helper instead of a bare conditional, touching the projection and its inverse reader; that work merged from `cross-target-step-1` and the fixtures did not move. Re-pinning changed the platform digest in every receipt, as expected — it is now `sha256:4a9ce9d7…`.

@@ -1,24 +1,43 @@
 // Generated from capabilities/admit-canonical-circuit-blueprint/semantic-transformation.authority.json; sha256:edd662a3271af9b23645ff2b0c6e263a053ed6cfe149d09add4a8fe6f9b15f93
+import { sfxEquals, sfxLength, sfxMerge, sfxTruthy, sfxValueAt } from "./native-mechanics.mjs";
 export class RequireBlueprintGeometryProofPort {
   execute(input, root = input) {
     return (() => {
       const checksClosed = [
-        input?.payload?.geometryProof?.proofType === "canonical-blueprint-geometry-proof.v1",
-        input?.payload?.geometryProof?.blueprintDigest ===
-          input?.payload?.candidate?.blueprintAuthority?.authorityDigest,
-        input?.payload?.geometryProof?.disposition === "CONFORMS",
-        input?.payload?.geometryProof?.summary?.nodeCount ===
-          (input?.payload?.candidate?.nodes).length,
-        input?.payload?.geometryProof?.summary?.edgeCount ===
-          (input?.payload?.candidate?.edges).length,
-        input?.payload?.geometryProof?.summary?.featureScenarioCount ===
-          input?.payload?.featureScenarioCount,
-        input?.payload?.geometryProof?.summary?.findingCount ===
-          (input?.payload?.geometryProof?.findings).length,
-        (input?.payload?.geometryProof?.findings).length === 0,
-      ].every((condition) => Boolean(condition));
+        sfxEquals(
+          sfxValueAt(input, "payload.geometryProof.proofType"),
+          "canonical-blueprint-geometry-proof.v1",
+        ),
+        sfxEquals(
+          sfxValueAt(input, "payload.geometryProof.blueprintDigest"),
+          sfxValueAt(input, "payload.candidate.blueprintAuthority.authorityDigest"),
+        ),
+        sfxEquals(sfxValueAt(input, "payload.geometryProof.disposition"), "CONFORMS"),
+        sfxEquals(
+          sfxValueAt(input, "payload.geometryProof.summary.nodeCount"),
+          sfxLength(sfxValueAt(input, "payload.candidate.nodes")),
+        ),
+        sfxEquals(
+          sfxValueAt(input, "payload.geometryProof.summary.edgeCount"),
+          sfxLength(sfxValueAt(input, "payload.candidate.edges")),
+        ),
+        sfxEquals(
+          sfxValueAt(input, "payload.geometryProof.summary.featureScenarioCount"),
+          sfxValueAt(input, "payload.featureScenarioCount"),
+        ),
+        sfxEquals(
+          sfxValueAt(input, "payload.geometryProof.summary.findingCount"),
+          sfxLength(sfxValueAt(input, "payload.geometryProof.findings")),
+        ),
+        sfxEquals(sfxLength(sfxValueAt(input, "payload.geometryProof.findings")), 0),
+      ].every((condition) => sfxTruthy(sfxValueAt(condition, "")));
       const obligationFindings = [
-        input?.payload?.geometryProof?.proofType === "canonical-blueprint-geometry-proof.v1"
+        sfxTruthy(
+          sfxEquals(
+            sfxValueAt(input, "payload.geometryProof.proofType"),
+            "canonical-blueprint-geometry-proof.v1",
+          ),
+        )
           ? []
           : [
               {
@@ -26,8 +45,12 @@ export class RequireBlueprintGeometryProofPort {
                 ["blueprintCellId"]: "require-blueprint-geometry-proof",
               },
             ],
-        input?.payload?.geometryProof?.blueprintDigest ===
-        input?.payload?.candidate?.blueprintAuthority?.authorityDigest
+        sfxTruthy(
+          sfxEquals(
+            sfxValueAt(input, "payload.geometryProof.blueprintDigest"),
+            sfxValueAt(input, "payload.candidate.blueprintAuthority.authorityDigest"),
+          ),
+        )
           ? []
           : [
               {
@@ -35,7 +58,7 @@ export class RequireBlueprintGeometryProofPort {
                 ["blueprintCellId"]: "require-blueprint-geometry-proof",
               },
             ],
-        input?.payload?.geometryProof?.disposition === "CONFORMS"
+        sfxTruthy(sfxEquals(sfxValueAt(input, "payload.geometryProof.disposition"), "CONFORMS"))
           ? []
           : [
               {
@@ -43,8 +66,12 @@ export class RequireBlueprintGeometryProofPort {
                 ["blueprintCellId"]: "require-blueprint-geometry-proof",
               },
             ],
-        input?.payload?.geometryProof?.summary?.nodeCount ===
-        (input?.payload?.candidate?.nodes).length
+        sfxTruthy(
+          sfxEquals(
+            sfxValueAt(input, "payload.geometryProof.summary.nodeCount"),
+            sfxLength(sfxValueAt(input, "payload.candidate.nodes")),
+          ),
+        )
           ? []
           : [
               {
@@ -52,8 +79,12 @@ export class RequireBlueprintGeometryProofPort {
                 ["blueprintCellId"]: "require-blueprint-geometry-proof",
               },
             ],
-        input?.payload?.geometryProof?.summary?.edgeCount ===
-        (input?.payload?.candidate?.edges).length
+        sfxTruthy(
+          sfxEquals(
+            sfxValueAt(input, "payload.geometryProof.summary.edgeCount"),
+            sfxLength(sfxValueAt(input, "payload.candidate.edges")),
+          ),
+        )
           ? []
           : [
               {
@@ -61,8 +92,12 @@ export class RequireBlueprintGeometryProofPort {
                 ["blueprintCellId"]: "require-blueprint-geometry-proof",
               },
             ],
-        input?.payload?.geometryProof?.summary?.featureScenarioCount ===
-        input?.payload?.featureScenarioCount
+        sfxTruthy(
+          sfxEquals(
+            sfxValueAt(input, "payload.geometryProof.summary.featureScenarioCount"),
+            sfxValueAt(input, "payload.featureScenarioCount"),
+          ),
+        )
           ? []
           : [
               {
@@ -70,8 +105,12 @@ export class RequireBlueprintGeometryProofPort {
                 ["blueprintCellId"]: "require-blueprint-geometry-proof",
               },
             ],
-        input?.payload?.geometryProof?.summary?.findingCount ===
-        (input?.payload?.geometryProof?.findings).length
+        sfxTruthy(
+          sfxEquals(
+            sfxValueAt(input, "payload.geometryProof.summary.findingCount"),
+            sfxLength(sfxValueAt(input, "payload.geometryProof.findings")),
+          ),
+        )
           ? []
           : [
               {
@@ -79,7 +118,7 @@ export class RequireBlueprintGeometryProofPort {
                 ["blueprintCellId"]: "require-blueprint-geometry-proof",
               },
             ],
-        (input?.payload?.geometryProof?.findings).length === 0
+        sfxTruthy(sfxEquals(sfxLength(sfxValueAt(input, "payload.geometryProof.findings")), 0))
           ? []
           : [
               {
@@ -87,13 +126,13 @@ export class RequireBlueprintGeometryProofPort {
                 ["blueprintCellId"]: "require-blueprint-geometry-proof",
               },
             ],
-      ].flatMap((findingGroup, findingGroupIndex) => findingGroup);
-      return Object.assign({}, input, {
-        ["payload"]: Object.assign({}, input?.payload, {
+      ].flatMap((findingGroup, findingGroupIndex) => sfxValueAt(findingGroup, ""));
+      return sfxMerge(sfxValueAt(input, ""), {
+        ["payload"]: sfxMerge(sfxValueAt(input, "payload"), {
           ["require-blueprint-geometry-proofDisposition"]: {
-            ["disposition"]: checksClosed ? "MET" : "UNMET",
+            ["disposition"]: sfxTruthy(sfxValueAt(checksClosed, "")) ? "MET" : "UNMET",
             ["blueprintCellId"]: "require-blueprint-geometry-proof",
-            ["findings"]: obligationFindings,
+            ["findings"]: sfxValueAt(obligationFindings, ""),
           },
         }),
       });

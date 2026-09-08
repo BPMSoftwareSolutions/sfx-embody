@@ -1,4 +1,5 @@
 // Generated from capabilities/adapt-job-market-intelligence-evidence/semantic-transformation.authority.json; sha256:2b167eaf1093228810925754bece447ce574863a6ca8f5459be9e681f3972803
+import { sfxEquals, sfxMerge, sfxTruthy, sfxValueAt } from "./native-mechanics.mjs";
 export class VerifyJmiTypeAdmissionPort {
   execute(input, root = input) {
     return (() => {
@@ -11,15 +12,17 @@ export class VerifyJmiTypeAdmissionPort {
         "experience-gap-resolution-scope.v1",
         "market-driven-experience-acquisition-scope.v1",
         "experience-mission-planning-scope.v1",
-      ].includes(input?.jmiRecordType);
+      ].includes(sfxValueAt(input, "jmiRecordType"));
       const authorityBound = [
-        input?.adapterAuthorityId === "sidefx-jmi-adapter-authority.v1",
-        input?.adapterAuthorityDigest === "" ? false : true,
-      ].every((check) => Boolean(check));
-      const admitted = [typeAdmitted, authorityBound].every((check$binding) =>
-        Boolean(check$binding),
+        sfxEquals(sfxValueAt(input, "adapterAuthorityId"), "sidefx-jmi-adapter-authority.v1"),
+        sfxTruthy(sfxEquals(sfxValueAt(input, "adapterAuthorityDigest"), "")) ? false : true,
+      ].every((check) => sfxTruthy(sfxValueAt(check, "")));
+      const admitted = [sfxValueAt(typeAdmitted, ""), sfxValueAt(authorityBound, "")].every(
+        (check$binding) => sfxTruthy(sfxValueAt(check$binding, "")),
       );
-      return Object.assign({}, input, { ["typeAdmissionResult"]: { ["admitted"]: admitted } });
+      return sfxMerge(sfxValueAt(input, ""), {
+        ["typeAdmissionResult"]: { ["admitted"]: sfxValueAt(admitted, "") },
+      });
     })();
   }
 }

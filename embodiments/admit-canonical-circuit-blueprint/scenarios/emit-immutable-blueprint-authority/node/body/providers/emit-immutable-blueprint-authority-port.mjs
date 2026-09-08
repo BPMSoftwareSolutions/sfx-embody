@@ -1,74 +1,95 @@
 // Generated from capabilities/admit-canonical-circuit-blueprint/semantic-transformation.authority.json; sha256:edd662a3271af9b23645ff2b0c6e263a053ed6cfe149d09add4a8fe6f9b15f93
-import { canonicalize, crypto } from "./native-mechanics.mjs";
+import {
+  canonicalize,
+  crypto,
+  sfxEquals,
+  sfxFormat,
+  sfxMerge,
+  sfxTruthy,
+  sfxValueAt,
+} from "./native-mechanics.mjs";
 export class EmitImmutableBlueprintAuthorityPort {
   execute(input, root = input) {
     return (() => {
-      const conformance = input?.payload?.["require-blueprint-conformance-evidenceDisposition"];
-      const geometry = input?.payload?.["require-blueprint-geometry-proofDisposition"];
-      const review = input?.payload?.["require-current-approved-review-receiptDisposition"];
-      const allFindings = [conformance?.findings, geometry?.findings, review?.findings].flatMap(
-        (findingGroup, findingGroupIndex) => findingGroup,
+      const conformance = sfxValueAt(
+        input,
+        "payload.require-blueprint-conformance-evidenceDisposition",
       );
+      const geometry = sfxValueAt(input, "payload.require-blueprint-geometry-proofDisposition");
+      const review = sfxValueAt(
+        input,
+        "payload.require-current-approved-review-receiptDisposition",
+      );
+      const allFindings = [
+        sfxValueAt(conformance, "findings"),
+        sfxValueAt(geometry, "findings"),
+        sfxValueAt(review, "findings"),
+      ].flatMap((findingGroup, findingGroupIndex) => sfxValueAt(findingGroup, ""));
       const closed = [
-        conformance?.disposition === "MET",
-        geometry?.disposition === "MET",
-        review?.disposition === "MET",
-      ].every((condition) => Boolean(condition));
+        sfxEquals(sfxValueAt(conformance, "disposition"), "MET"),
+        sfxEquals(sfxValueAt(geometry, "disposition"), "MET"),
+        sfxEquals(sfxValueAt(review, "disposition"), "MET"),
+      ].every((condition) => sfxTruthy(sfxValueAt(condition, "")));
       const admittedLineage = [
-        input?.payload?.candidate?.sourceAuthority?.lineage,
+        sfxValueAt(input, "payload.candidate.sourceAuthority.lineage"),
         [
           {
             ["authorityId"]: "canonical-blueprint-conformance-evidence.v1",
-            ["digest"]: input?.payload?.conformanceEvidenceDigest,
+            ["digest"]: sfxValueAt(input, "payload.conformanceEvidenceDigest"),
           },
           {
             ["authorityId"]: "canonical-blueprint-geometry-proof.v1",
-            ["digest"]: input?.payload?.geometryProofDigest,
+            ["digest"]: sfxValueAt(input, "payload.geometryProofDigest"),
           },
           {
             ["authorityId"]: "canonical-blueprint-review-receipt.v1",
-            ["digest"]: input?.payload?.reviewReceiptDigest,
+            ["digest"]: sfxValueAt(input, "payload.reviewReceiptDigest"),
           },
         ],
-      ].flatMap((lineageGroup, lineageGroupIndex) => lineageGroup);
-      const admittedBlueprint = Object.assign({}, input?.payload?.candidate, {
-        ["capability"]: Object.assign({}, input?.payload?.candidate?.capability, {
-          ["capabilityAuthorityDigest"]: input?.payload?.featureDigest,
+      ].flatMap((lineageGroup, lineageGroupIndex) => sfxValueAt(lineageGroup, ""));
+      const admittedBlueprint = sfxMerge(sfxValueAt(input, "payload.candidate"), {
+        ["capability"]: sfxMerge(sfxValueAt(input, "payload.candidate.capability"), {
+          ["capabilityAuthorityDigest"]: sfxValueAt(input, "payload.featureDigest"),
         }),
-        ["sourceAuthority"]: Object.assign({}, input?.payload?.candidate?.sourceAuthority, {
+        ["sourceAuthority"]: sfxMerge(sfxValueAt(input, "payload.candidate.sourceAuthority"), {
           ["disposition"]: "ADMITTED",
-          ["lineage"]: admittedLineage,
+          ["lineage"]: sfxValueAt(admittedLineage, ""),
         }),
       });
-      const admittedCarrierDigest = "sha256:{hash}".replaceAll(
-        "{hash}",
-        String(
-          crypto
-            .createHash("sha256")
-            .update(String(JSON.stringify(canonicalize(admittedBlueprint))))
-            .digest("hex"),
-        ),
-      );
+      const admittedCarrierDigest = sfxFormat("sha256:{hash}", {
+        ["hash"]: crypto
+          .createHash("sha256")
+          .update(String(JSON.stringify(canonicalize(sfxValueAt(admittedBlueprint, "")))))
+          .digest("hex"),
+      });
       return {
         ["contractId"]: "admitted-canonical-circuit-blueprint.v1",
         ["payload"]: {
-          ["disposition"]: closed ? "BLUEPRINT_AUTHORITY_ADMITTED" : "BLUEPRINT_ADMISSION_REJECTED",
-          ["blueprint"]: closed ? admittedBlueprint : null,
-          ["blueprintAuthorityDigest"]:
-            input?.payload?.candidate?.blueprintAuthority?.authorityDigest,
-          ["candidateCarrierDigest"]: input?.payload?.candidateCarrierDigest,
-          ["admittedCarrierDigest"]: closed ? admittedCarrierDigest : null,
+          ["disposition"]: sfxTruthy(sfxValueAt(closed, ""))
+            ? "BLUEPRINT_AUTHORITY_ADMITTED"
+            : "BLUEPRINT_ADMISSION_REJECTED",
+          ["blueprint"]: sfxTruthy(sfxValueAt(closed, ""))
+            ? sfxValueAt(admittedBlueprint, "")
+            : null,
+          ["blueprintAuthorityDigest"]: sfxValueAt(
+            input,
+            "payload.candidate.blueprintAuthority.authorityDigest",
+          ),
+          ["candidateCarrierDigest"]: sfxValueAt(input, "payload.candidateCarrierDigest"),
+          ["admittedCarrierDigest"]: sfxTruthy(sfxValueAt(closed, ""))
+            ? sfxValueAt(admittedCarrierDigest, "")
+            : null,
           ["admissionEvidence"]: {
-            ["conformanceEvidenceDigest"]: input?.payload?.conformanceEvidenceDigest,
-            ["geometryProofDigest"]: input?.payload?.geometryProofDigest,
-            ["reviewReceiptDigest"]: input?.payload?.reviewReceiptDigest,
+            ["conformanceEvidenceDigest"]: sfxValueAt(input, "payload.conformanceEvidenceDigest"),
+            ["geometryProofDigest"]: sfxValueAt(input, "payload.geometryProofDigest"),
+            ["reviewReceiptDigest"]: sfxValueAt(input, "payload.reviewReceiptDigest"),
           },
           ["obligationRecord"]: {
-            ["conformance"]: conformance,
-            ["geometry"]: geometry,
-            ["review"]: review,
+            ["conformance"]: sfxValueAt(conformance, ""),
+            ["geometry"]: sfxValueAt(geometry, ""),
+            ["review"]: sfxValueAt(review, ""),
           },
-          ["findings"]: allFindings,
+          ["findings"]: sfxValueAt(allFindings, ""),
           ["blueprintRouteDisposition"]: "CLOSED",
         },
       };

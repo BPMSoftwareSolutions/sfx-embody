@@ -7,6 +7,7 @@ const read = async file => JSON.parse(await fs.readFile(path.resolve(root, file)
 const regression = await read('evidence/regression-results.json');
 if (regression.disposition !== 'PASSED') throw new Error('REPORT_REQUIRES_COMPLETED_PASSING_REGRESSION');
 const audit = await read('evidence/review/semantic-expression-audit.json');
+const lowering = await read('evidence/review/lowering-evidence-readiness.json');
 if (audit.implementationDigest !== regression.implementationDigest) throw new Error('AUDIT_IS_NOT_CURRENT');
 const results = [];
 for (const c of regression.cases) for (const r of c.receipts) {
@@ -25,6 +26,18 @@ if (results.some(r => r.platform.digest !== platform.digest)) throw new Error('P
 const transformations = results.reduce((n, r) => n + r.native.transformations, 0);
 const mutationsApplied = results.reduce((n, r) => n + r.mutationsApplied, 0);
 const vectors = results[0].native.vectors, mutationClasses = results[0].native.mutationSetSize;
+// Declared-conformance state is read from the audit that measured it, so this
+// document cannot claim a disposition the run did not produce.
+if (lowering.snapshotId !== regression.snapshotId) throw new Error('LOWERING_AUDIT_IS_NOT_CURRENT');
+if (lowering.inspectedPlatformCommit !== platform.commit) throw new Error('LOWERING_AUDIT_PLATFORM_MISMATCH');
+const loweringRefs = lowering.mechanics.flatMap(m => m.references);
+const unresolvedRefs = loweringRefs.filter(r => r.disposition === 'REFERENCE_NOT_RESOLVED').length;
+const conformanceSentence = unresolvedRefs
+  ? `Measured against the declared conformance vectors, ${unresolvedRefs} of ${loweringRefs.length} declared conformance references across ${lowering.mechanics.length} mechanics do not resolve, so declared mechanic meaning is not established here.`
+  : `All ${loweringRefs.length} declared conformance references across ${lowering.mechanics.length} mechanics resolve at this pinned commit, so declared mechanic meaning is now addressable; binding each reference to its vectors remains outstanding.`;
+const conformanceRow = unresolvedRefs
+  ? `Not established at the pinned commit; ${unresolvedRefs} declared conformance references unresolved`
+  : `References resolved at the pinned commit; vector binding outstanding (${lowering.disposition})`;
 const status = { implementationDigest: regression.implementationDigest, platform, snapshotId: regression.snapshotId, projectionDigest: regression.projectionDigest,
   criterion: 'Reveal(Embody(A)) must recover semantically equivalent authority, alongside correct execution.',
   disposition: 'FULL_EMBODIMENT_ACCEPTANCE_NOT_YET_PROVEN', fixtures: regression.totals, contracts, sourceAudit: audit.totals, results,
@@ -46,7 +59,7 @@ ${regression.cases.map(c => `| ${c.selection.capabilityId} | ${c.verification.sc
 
 There are ${audit.totals.numberedExpressions} numbered expression variables, ${audit.totals.numberedStates} numbered state variables and ${audit.totals.numberedDependencyImports} numbered dependency aliases in ${audit.totals.bodyFiles} planned files. The previous Expression runtime and mechanic dictionary are retired. Original runtime dependencies and the five-step Scenario Kernel remain real platform implementations.
 
-The native resolver and inverse reader cover all ${results[0].providerMechanics} pure mechanics implemented by the selected Node provider. A ${vectors}-vector corpus checks execution against that provider and recovers each vector from emitted native syntax; a vector passes only when the lowering and the provider are indistinguishable in result, in scope mutation, and in how they fail. What that establishes is agreement with the selected provider, not conformance to declared mechanic meaning; those are different claims and only the first is tested here. Measured against the declared conformance vectors, the selected provider is conformant for 16 of its 32 pure mechanics, so the bodies faithfully embody a provider that itself diverges from the declaration in 24 named ways. Cross-Apply to another target needs the second property. See [cross-target-embodiment.md](cross-target-embodiment.md). The actual capability fixtures separately exercised ${regression.totals.nativePortComparisons} native port comparisons and ${regression.totals.kernelObservations} kernel observations. All ${regression.totals.nativeExpressionNodes} expression regions across ${transformations} transformations round-trip to their retained transformation declarations. A declared ${mutationClasses}-class mutation set is applied to every emitted port body; the reveal rejected all ${mutationsApplied} mutations the bodies admitted, and the classes a body does not exercise are reported per port as unmeasured rather than counted as passing.
+The native resolver and inverse reader cover all ${results[0].providerMechanics} pure mechanics implemented by the selected Node provider. A ${vectors}-vector corpus checks execution against that provider and recovers each vector from emitted native syntax; a vector passes only when the lowering and the provider are indistinguishable in result, in scope mutation, and in how they fail. What that establishes is agreement with the selected provider, not conformance to declared mechanic meaning; those are different claims and only the first is tested here. ${conformanceSentence} Cross-Apply to another target needs the second property. See [cross-target-embodiment.md](cross-target-embodiment.md). The actual capability fixtures separately exercised ${regression.totals.nativePortComparisons} native port comparisons and ${regression.totals.kernelObservations} kernel observations. All ${regression.totals.nativeExpressionNodes} expression regions across ${transformations} transformations round-trip to their retained transformation declarations. A declared ${mutationClasses}-class mutation set is applied to every emitted port body; the reveal rejected all ${mutationsApplied} mutations the bodies admitted, and the classes a body does not exercise are reported per port as unmeasured rather than counted as passing.
 
 Platform integrity does not rest on the commit pin alone. Built output is ignored in the platform repository, so neither the compiler chain nor the kernel copied into each body is under revision control there. Every platform byte this materializer reads is digested as it is read, and module loads walk their transitive relative imports, so the verified set is the set that executed. ${platform.files.length} platform files are recorded per run as the platform surface in each body's evidence, bound into every receipt as platformDigest ${platform.digest}.
 
@@ -59,7 +72,7 @@ Contract projection now retains required const-valued members, closed enum types
 | Retained behavioral fixtures | ${regression.totals.passed}/${regression.totals.fixtures} pass |
 | Native mechanic differential and inverse checks | ${vectors} vectors; all selected-provider pure mechanics covered |
 | Lowering ↔ selected provider | Agreement tested and passing |
-| Selected provider ↔ declared mechanic meaning | Not established at the pinned commit; declared conformance references remain unresolved |
+| Selected provider ↔ declared mechanic meaning | ${conformanceRow} |
 | Transformation authority ↔ native syntax | ${transformations} transformations, ${regression.totals.nativeExpressionNodes} regions pass |
 | Platform surface under digest | ${platform.files.length} files bound into every receipt |
 | Contract fidelity | Structural type witnesses and original-schema runtime vectors pass |
@@ -68,7 +81,7 @@ Contract projection now retains required const-valued members, closed enum types
 | Cross-Apply ↔ other languages | Not yet proven |
 | Managed admission | Not requested |
 
-The declared conformance references for every pure mechanic remain unresolved at this pinned commit, which npm run audit:lowering reports as DECLARED_CONFORMANCE_REFERENCES_NOT_CLOSED. Until they resolve, the meaning of a mechanic is only as pinned as its prose, and a second target cannot be embodied without choosing that meaning for it.
+npm run audit:lowering reports ${lowering.disposition} for the ${lowering.mechanics.length} mechanics the retained lineage uses, with ${unresolvedRefs} unresolved references. A reference that resolves pins a mechanic's meaning to bytes rather than to prose; until each is bound to its vectors, that meaning is addressable rather than proven.
 
 The user's acceptance law remains the bar. Transformation recovery is one part of full semantic recovery. These results do not award CONFORMS to the whole embodiment, and they do not claim support for every capability or language merely because these cases pass. Unsupported topology or unresolved provider bindings remain explicit holds.
 
