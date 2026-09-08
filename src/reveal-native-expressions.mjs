@@ -57,24 +57,22 @@ export function revealNativeExpressions(ts, source, port) {
     switch (n.operation) {
       case 'literal': e.value = literal(s); break;
       case 'path': {
-        const segments = [];
-        while ((ts.isElementAccessExpression(s) || ts.isPropertyAccessExpression(s)) && s.questionDotToken) {
-          segments.unshift(ts.isElementAccessExpression(s) ? literal(s.argumentExpression) : s.name.text); s = unwrap(ts, s.expression);
-        }
+        const call = assertCall(s, 'sfxValueAt'); assert.equal(call.arguments.length, 2);
+        const argument = unwrap(ts, call.arguments[0]);
         let from;
-        if (ts.isIdentifier(s)) {
-          const matches = Object.entries(n.scope).filter(([, native]) => native === s.text);
+        if (ts.isIdentifier(argument)) {
+          const matches = Object.entries(n.scope).filter(([, native]) => native === argument.text);
           assert.equal(matches.length, 1, 'Native path binding');
           from = matches[0][0];
         } else {
-          assert.ok(ts.isElementAccessExpression(s));
-          const environment = unwrap(ts, s.expression);
+          assert.ok(ts.isElementAccessExpression(argument));
+          const environment = unwrap(ts, argument.expression);
           assert.ok(ts.isObjectLiteralExpression(environment) && environment.properties.every(ts.isShorthandPropertyAssignment));
           assert.deepEqual(environment.properties.map(p => p.name.text), ['input', 'root']);
-          from = literal(s.argumentExpression);
+          from = literal(argument.argumentExpression);
         }
         optional('from', from);
-        optional('path', segments.join('.'));
+        optional('path', literal(call.arguments[1]));
         break;
       }
       case 'object': {
@@ -87,19 +85,19 @@ export function revealNativeExpressions(ts, source, port) {
       }
       case 'array': assert.ok(ts.isArrayLiteralExpression(s)); e.items = s.elements.map(child); break;
       case 'merge': {
-        const call = assertCall(s, 'Object.assign');
-        assert.deepEqual(literal(call.arguments[0]), {});
-        e.values = call.arguments.slice(1).map(child); break;
+        const call = assertCall(s, 'sfxMerge'); e.values = call.arguments.map(child); break;
       }
-      case 'equals': case 'greater-than':
-        assert.ok(ts.isBinaryExpression(s));
-        assert.equal(s.operatorToken.kind, n.operation === 'equals' ? ts.SyntaxKind.EqualsEqualsEqualsToken : ts.SyntaxKind.GreaterThanToken);
-        e.left = child(s.left); e.right = child(s.right); break;
-      case 'if':
+      case 'equals': case 'greater-than': {
+        const call = assertCall(s, n.operation === 'equals' ? 'sfxEquals' : 'sfxGreaterThan'); assert.equal(call.arguments.length, 2);
+        e.left = child(call.arguments[0]); e.right = child(call.arguments[1]); break;
+      }
+      case 'if': {
         assert.ok(ts.isConditionalExpression(s));
-        e.when = child(s.condition); e.then = child(s.whenTrue); e.else = child(s.whenFalse); break;
-      case 'length':
-        assert.ok(ts.isPropertyAccessExpression(s)); assert.equal(s.name.text, 'length'); e.value = child(s.expression); break;
+        e.when = child(assertCall(s.condition, 'sfxTruthy').arguments[0]); e.then = child(s.whenTrue); e.else = child(s.whenFalse); break;
+      }
+      case 'length': {
+        const call = assertCall(s, 'sfxLength'); assert.equal(call.arguments.length, 1); e.value = child(call.arguments[0]); break;
+      }
       case 'includes': {
         const call = method(s, 'includes'); assert.equal(call.args.length, 1); e.in = child(call.receiver); e.value = child(call.args[0]); break;
       }
@@ -126,6 +124,11 @@ export function revealNativeExpressions(ts, source, port) {
         e.value = child(returned.expression); break;
       }
       case 'map': case 'flat-map': case 'filter': case 'find': case 'some': case 'every': {
+        if (n.operation === 'find' && ts.isBinaryExpression(s)) {
+          assert.equal(s.operatorToken.kind, ts.SyntaxKind.QuestionQuestionToken, 'Native find absence');
+          assert.ok(unwrap(ts, s.right).kind === ts.SyntaxKind.NullKeyword, 'Native find absence');
+          s = s.left;
+        }
         const call = method(s, n.operation === 'flat-map' ? 'flatMap' : n.operation);
         assert.equal(call.args.length, 1);
         const arrow = unwrap(ts, call.args[0]); assert.ok(ts.isArrowFunction(arrow));
@@ -134,24 +137,25 @@ export function revealNativeExpressions(ts, source, port) {
         e.from = child(call.receiver); e.as = binding(arrow.parameters[0].name.text, n.sourcePointer);
         if (indexed) assert.equal(binding(arrow.parameters[1].name.text, n.sourcePointer), e.as + 'Index');
         const mapping = ['map', 'flat-map'].includes(n.operation);
-        e[mapping ? 'value' : 'where'] = child(mapping ? arrow.body : assertCall(arrow.body, 'Boolean').arguments[0]);
+        e[mapping ? 'value' : 'where'] = child(mapping ? arrow.body : assertCall(arrow.body, 'sfxTruthy').arguments[0]);
         break;
       }
       case 'join': {
-        const call = method(s, 'join'); assert.equal(call.args.length, 1); e.value = child(call.receiver); optional('separator', literal(call.args[0])); break;
+        const call = assertCall(s, 'sfxJoin'); assert.equal(call.arguments.length, 2);
+        e.value = child(call.arguments[0]); optional('separator', literal(call.arguments[1])); break;
       }
       case 'format': {
-        const entries = [];
-        while (ts.isCallExpression(unwrap(ts, s))) {
-          const call = method(s, 'replaceAll'); assert.equal(call.args.length, 2);
-          const key = literal(call.args[0]); assert.ok(key.startsWith('{') && key.endsWith('}'));
-          entries.unshift([key.slice(1, -1), child(assertCall(call.args[1], 'String').arguments[0])]);
-          s = unwrap(ts, call.receiver);
-        }
-        e.template = literal(s); e.values = Object.fromEntries(entries); break;
+        const call = assertCall(s, 'sfxFormat'); assert.equal(call.arguments.length, 2);
+        e.template = literal(call.arguments[0]);
+        const values = unwrap(ts, call.arguments[1]); assert.ok(ts.isObjectLiteralExpression(values));
+        e.values = Object.fromEntries(values.properties.map(p => {
+          assert.ok(ts.isPropertyAssignment(p) && ts.isComputedPropertyName(p.name));
+          return [literal(p.name.expression), child(p.initializer)];
+        }));
+        break;
       }
       case 'json-stringify': e.value = child(assertCall(s, 'JSON.stringify').arguments[0]); break;
-      case 'parse-json': e.value = child(assertCall(s, 'JSON.parse').arguments[0]); break;
+      case 'parse-json': e.value = child(assertCall(s, 'sfxParseJson').arguments[0]); break;
       case 'canonicalize': e.value = child(assertCall(s, 'canonicalize').arguments[0]); break;
       case 'directed-graph-closure': e.value = child(assertCall(s, 'directedGraphClosure').arguments[0]); break;
       case 'trim': case 'lower-case': {
@@ -170,18 +174,10 @@ export function revealNativeExpressions(ts, source, port) {
         e.value = child(assertCall(from.arguments[0], 'String').arguments[0]); break;
       }
       case 'unique': {
-        assert.ok(ts.isArrayLiteralExpression(s) && s.elements.length === 1 && ts.isSpreadElement(s.elements[0]));
-        const set = unwrap(ts, s.elements[0].expression); assert.ok(ts.isNewExpression(set)); assert.equal(set.expression.getText(ast), 'Set');
-        e.value = child(set.arguments[0]); break;
+        const call = assertCall(s, 'sfxUnique'); assert.equal(call.arguments.length, 1); e.value = child(call.arguments[0]); break;
       }
-      case 'object-values': e.value = child(assertCall(s).arguments[0]); break;
-      case 'try-parse-json': {
-        const arrow = unwrap(ts, assertCall(s).expression); assert.ok(ts.isArrowFunction(arrow) && ts.isBlock(arrow.body));
-        const attempt = arrow.body.statements[0]; assert.ok(ts.isTryStatement(attempt));
-        const returned = attempt.tryBlock.statements[0].expression;
-        const value = returned.properties.find(p => p.name.text === 'value');
-        e.value = child(assertCall(value.initializer, 'JSON.parse').arguments[0]); break;
-      }
+      case 'object-values': e.value = child(assertCall(s, 'sfxObjectValues').arguments[0]); break;
+      case 'try-parse-json': e.value = child(assertCall(s, 'sfxTryParseJson').arguments[0]); break;
       case 'escape-html': {
         for (let i = 0; i < 5; i++) s = unwrap(ts, method(s, 'replaceAll').receiver);
         e.value = child(assertCall(s, 'String').arguments[0]); break;

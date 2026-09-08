@@ -23,7 +23,8 @@ export class NativeExpressionProjection {
     this.nodes = [];
     this.bindings = [];
     this.helpers = new Set();
-    this.names = new Set(['input', 'root', 'Object', 'Array', 'String', 'Boolean', 'JSON', 'Buffer', 'Set', 'crypto', 'canonicalize', 'directedGraphClosure', 'undefined', '$nativeRightSet']);
+    this.names = new Set(['input', 'root', 'Object', 'Array', 'String', 'Boolean', 'JSON', 'Buffer', 'Set', 'crypto', 'canonicalize', 'directedGraphClosure', 'undefined', '$nativeRightSet', 'valueAt',
+      'sfxValueAt', 'sfxTruthy', 'sfxNotAdmitted', 'sfxIsPrimitive', 'sfxIsObject', 'sfxEquals', 'sfxGreaterThan', 'sfxLength', 'sfxMerge', 'sfxJoin', 'sfxFormat', 'sfxUnique', 'sfxObjectValues', 'sfxParseJson', 'sfxTryParseJson']);
   }
   name(value, scope) {
     let candidate = value;
@@ -56,25 +57,26 @@ export class NativeExpressionProjection {
       case 'path': {
         const from = expression.from ?? 'input', path = expression.path ?? '';
         if (typeof from !== 'string' || typeof path !== 'string' || expression.path === null) throw new Error('PATH_ARGUMENT_DOMAIN_NOT_SUPPORTED:' + location);
-        code = scope.get(from) ?? `({input, root})[${nativeLiteral(from)}]`;
-        for (const segment of path.split('.').filter(Boolean)) code += this.ts.isIdentifierText(segment, this.ts.ScriptTarget.Latest) ? `?.${segment}` : `?.[${nativeLiteral(segment)}]`;
-        // Empty path segments have no semantic effect in the selected provider.
+        this.helpers.add('sfxValueAt');
+        code = `sfxValueAt(${scope.get(from) ?? `({input, root})[${nativeLiteral(from)}]`}, ${nativeLiteral(path)})`;
+        // Path semantics are verified against the selected provider; the exact
+        // spelling is retained here and normalized away only in comparison.
         node.pathSpelling = path;
         break;
       }
       case 'object': code = '({' + Object.keys(expression.fields).map(key => `[${nativeLiteral(key)}]: ${member('fields', key)}`).join(', ') + '})'; break;
       case 'array': code = '[' + list('items').join(', ') + ']'; break;
-      case 'merge': code = 'Object.assign({}, ' + list('values').join(', ') + ')'; break;
-      case 'equals': code = `${child('left')} === ${child('right')}`; break;
-      case 'greater-than': code = `${child('left')} > ${child('right')}`; break;
-      case 'length': code = `${child('value')}.length`; break;
+      case 'merge': this.helpers.add('sfxMerge'); code = `sfxMerge(${list('values').join(', ')})`; break;
+      case 'equals': this.helpers.add('sfxEquals'); code = `sfxEquals(${child('left')}, ${child('right')})`; break;
+      case 'greater-than': this.helpers.add('sfxGreaterThan'); code = `sfxGreaterThan(${child('left')}, ${child('right')})`; break;
+      case 'length': this.helpers.add('sfxLength'); code = `sfxLength(${child('value')})`; break;
       case 'includes': code = `${child('in')}.includes(${child('value')})`; break;
       case 'intersects': {
         const right = child('right'), left = child('left');
         code = `(() => { const $nativeRightSet = new Set(${right}); return ${left}.some((value) => $nativeRightSet.has(value)); })()`;
         break;
       }
-      case 'if': code = `${child('when')} ? ${child('then')} : ${child('else')}`; break;
+      case 'if': this.helpers.add('sfxTruthy'); code = `sfxTruthy(${child('when')}) ? ${child('then')} : ${child('else')}`; break;
       case 'let': {
         const next = new Map(scope), statements = [];
         for (const key of Object.keys(expression.bindings)) {
@@ -96,29 +98,31 @@ export class NativeExpressionProjection {
         const mapping = ['map', 'flat-map'].includes(expression.op);
         const value = child(mapping ? 'value' : 'where', next);
         const method = expression.op === 'flat-map' ? 'flatMap' : expression.op;
-        code = `${from}.${method}((${binding}${indexed ? ', ' + indexName : ''}) => ${mapping ? value : `Boolean(${value})`})`;
+        if (!mapping) this.helpers.add('sfxTruthy');
+        code = `${from}.${method}((${binding}${indexed ? ', ' + indexName : ''}) => ${mapping ? value : `sfxTruthy(${value})`})`;
+        if (expression.op === 'find') code += ' ?? null';
         break;
       }
-      case 'join': code = `${child('value')}.join(${nativeLiteral(expression.separator ?? '')})`; break;
+      case 'join': this.helpers.add('sfxJoin'); code = `sfxJoin(${child('value')}, ${nativeLiteral(expression.separator ?? '')})`; break;
       case 'format': {
-        code = `(${nativeLiteral(expression.template)})`;
-        for (const key of Object.keys(expression.values)) code += `.replaceAll(${nativeLiteral('{' + key + '}')}, String(${member('values', key)}))`;
+        this.helpers.add('sfxFormat');
+        code = `sfxFormat(${nativeLiteral(expression.template)}, ({ ${Object.keys(expression.values).map(key => `[${nativeLiteral(key)}]: ${member('values', key)}`).join(', ')} }))`;
         break;
       }
       case 'sha256': this.helpers.add('crypto'); code = `crypto.createHash('sha256').update(String(${child('value')})).digest('hex')`; break;
       case 'base64-decode-utf8': code = `Buffer.from(String(${child('value')}), 'base64').toString('utf8')`; break;
       case 'json-stringify': code = `JSON.stringify(${child('value')})`; break;
-      case 'parse-json': code = `JSON.parse(${child('value')})`; break;
+      case 'parse-json': this.helpers.add('sfxParseJson'); code = `sfxParseJson(${child('value')})`; break;
       case 'canonicalize': this.helpers.add('canonicalize'); code = `canonicalize(${child('value')})`; break;
       case 'directed-graph-closure': this.helpers.add('directedGraphClosure'); code = `directedGraphClosure(${child('value')})`; break;
       case 'trim': code = `String(${child('value')}).trim()`; break;
       case 'lower-case': code = `String(${child('value')}).toLowerCase()`; break;
       case 'escape-html': code = `String(${child('value')}).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;')`; break;
-      case 'unique': code = `[...new Set(${child('value')})]`; break;
+      case 'unique': this.helpers.add('sfxUnique'); code = `sfxUnique(${child('value')})`; break;
       // These mechanics have native blocks with local temporaries. Their names
       // belong to the native provider, not to a new business declaration.
-      case 'object-values': code = `((value) => Object.keys(value).sort().map((key) => value[key]))(${child('value')})`; break;
-      case 'try-parse-json': code = `(() => { try { return { disposition: 'PARSED', value: JSON.parse(${child('value')}) }; } catch { return { disposition: 'NOT_PARSED', value: null }; } })()`; break;
+      case 'object-values': this.helpers.add('sfxObjectValues'); code = `sfxObjectValues(${child('value')})`; break;
+      case 'try-parse-json': this.helpers.add('sfxTryParseJson'); code = `sfxTryParseJson(${child('value')})`; break;
       default: throw new Error('NATIVE_LOWERING_NOT_IMPLEMENTED:' + expression.op);
     }
     return `(/*@sfx-node:${index}*/ ${code})`;

@@ -18,9 +18,10 @@ const vectorProofCache = new Map();
 // Each entry names a semantic distinction the reveal asserts. Textual so it can
 // be applied to any emitted body without re-deriving its AST.
 const mutationSet = [
-  { label: 'strict equality', from: ' === ', to: ' !== ' },
-  { label: 'ordering comparison', from: ' > ', to: ' < ' },
-  { label: 'path optionality', from: '?.', to: '.' },
+  { label: 'strict equality', from: 'sfxEquals(', to: 'sfxGreaterThan(' },
+  { label: 'ordering comparison', from: 'sfxGreaterThan(', to: 'sfxEquals(' },
+  { label: 'path absence normalization', from: 'sfxValueAt(', to: 'valueAt(' },
+  { label: 'collection truthiness', from: 'sfxTruthy(', to: 'Boolean(' },
   { label: 'mechanic identity', from: 'JSON.stringify(', to: 'JSON.parse(' },
   { label: 'collection mapping', from: '.flatMap(', to: '.map(' },
   { label: 'collection quantifier', from: '.some(', to: '.every(' },
