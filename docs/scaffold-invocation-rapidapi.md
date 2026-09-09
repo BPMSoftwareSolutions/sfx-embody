@@ -125,11 +125,40 @@ via the ingest pipeline. The estate-wide row inventory is
 
 ## Remaining findings
 
-`CONTRACT_ID_NOT_JSON_SAFE` appears on the successful run, and the emitted
-`contract-catalog.json` maps both `equity-market-price-evidence-request.v1` and
-`equity-market-price-evidence.v1` to `input.schema.json`. That aliasing has the
-same shape as defect 1 in the scaffold defect record and is a separate data
-finding from the `"undefined"` literals above.
+`CONTRACT_ID_NOT_JSON_SAFE` appears on the successful runs, and the emitted
+`contracts/contract-catalog.json` names five schema files while emitting none:
+
+```text
+equity-market-price-evidence-request.v1          -> input.schema.json
+native-equity-market-price-testimony.v1          -> input.schema.json
+equity-market-price-provider-unavailable.v1      -> outcome.schema.json
+native-equity-market-price-testimony-rejection.v1 -> outcome.schema.json
+equity-market-price-evidence.v1                  -> carrier.schema.json
+```
+
+Five catalog entries alias to three file names; the four input/outcome ids
+alias pairwise. Nothing can be admitted until the five contract schemas exist
+and each id resolves its own schema. That aliasing has the same shape as
+defect 1 in the scaffold defect record and is a separate data finding from the
+`"undefined"` literals above.
+
+The authored `transform-resolve-equity-market-price-evidence` selects provider
+shape by presence, never by provider identity, and evaluates under the
+canonical `semantic-transformation-evaluator.mjs`: both the
+`quoteSummary.result.0.price` shape and the `quoteResponse.result.0` shape
+resolve to `EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED`; an empty testimony resolves
+to `NATIVE_MARKET_PRICE_TESTIMONY_REJECTED` with
+`REQUIRED_NATIVE_FIELDS_ABSENT` (absent count is input-dependent: 7 for a fully
+empty testimony). The three mechanic resolutions remain scaffold-emitted
+preserve passthroughs until real bodies are authored, and
+`select-equity-market-price-provider` is not started.
+
+Provider-parity finding: byte-identical canonical evidence is not a valid
+assertion against a live market. Two live runs two seconds apart moved
+`observedPrice` (313.73 vs 313.725) and `observedMarketTime` (1788971619 vs
+1788971621) while the six other fields matched. Parity must be asserted on the
+non-volatile fields (symbol, region, currency, exchange, marketState,
+sourceAttribution), or against a frozen payload pair.
 
 ## Boundaries
 
