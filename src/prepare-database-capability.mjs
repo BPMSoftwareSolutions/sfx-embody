@@ -38,13 +38,6 @@ export function planArtifacts(plan) {
   })).sort((a, b) => a.scenarioId < b.scenarioId ? -1 : 1);
 }
 
-export function verifyPreparedPlan(plan, proof) {
-  try {
-    assert.equal(proof?.status, 'PASSED');
-    assert.deepEqual(planArtifacts(plan), proof.artifacts);
-  } catch { throw new Error('CAPABILITY_PREPARATION_STALE: native body or platform differs from the prepared proof'); }
-}
-
 export async function proveMemoryPlan(plan, sdaRoot) {
   const entry = plan.receipts.find(r => r.plan.scenarioId === plan.selectedScenarioId);
   const fixtures = JSON.parse(plan.files.find(f => f.relativePath === entry.base + '/evidence/fixture-authority.json').content).fixtures;

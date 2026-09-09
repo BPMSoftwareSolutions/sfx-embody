@@ -1,11 +1,14 @@
 # From expanded capability to database invocation
 
-The current CLI uses explicit [database preparation](database-preparation.md):
-`sfx capability prepare <identity>` resolves and proves a revision once, then
-`sfx capability invoke <identity> --input ...` reads that preparation from SQL.
-The provider-resolution acceptance case now completes in about three seconds
-through the native CLI. The investigation stages below record how the original
-database-to-memory path was established; per-invocation analysis is superseded.
+The current CLI invokes directly from the database: `sfx capability invoke
+<identity> --input ...` resolves the selected authority, plans the native body
+and executes it in memory on every call. There is no preparation prerequisite;
+[optional preparation](database-preparation.md) remains available as a separate
+retained proof and is never consumed by invocation. The provider-resolution
+acceptance case now completes in about six seconds through the native CLI. The
+investigation stages below record how the original database-to-memory path was
+established and how the earlier per-invocation analysis and the intermediate
+prepared-invocation design were superseded.
 
 The live SQL-to-memory path executed `resolve-sidefx-eligible-providers` without writing its authority bundle or executable body to disk. Its four complete fixture results match expanded execution, including all 28 outcome assertions. This establishes the requested execution bar for that capability through a candidate Node loading provider. It does not yet establish database-native candidate editing, capsulization, or universal capability coverage.
 
@@ -119,15 +122,16 @@ A separate limit, independent of the change surface, is recorded in [scaffold in
 From this project directory, the native command is:
 
 ```powershell
-sfx capability prepare resolve-sidefx-eligible-providers --timeout 600000 --json
 sfx capability invoke resolve-sidefx-eligible-providers --input '@examples/provider-resolution.request.json' --json
 ```
 
-Preparation is required once per revision and implementation context; it is
-already stored for the exercised capability. Invocation rejects a missing or
-stale preparation. See [the preparation record](database-preparation.md) for the
-current lookup, proof and timing evidence. The remainder of this section records
-the earlier CLI acceptance, which performed analysis during each invocation.
+Invocation is direct and needs no preparation: the provider resolves the
+selected authority, plans the native body and executes it in memory on every
+call. A stored preparation is neither required nor read; it exists only if
+explicitly published with `sfx capability prepare` and remains available for a
+future capsulization consumer. The remainder of this section records the same
+CLI acceptance, which originally ran with analysis during each invocation and
+later required a preparation step.
 
 The project's [sfx.config.json](../sfx.config.json) selects an explicit process
 binding from [the command mapping](../config/sfx.commands.json). The CLI forwards

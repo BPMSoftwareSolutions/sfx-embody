@@ -1,5 +1,4 @@
 import type { AdmittedCanonicalCircuitBlueprintV1PayloadAdmissionEvidence } from "./admitted-canonical-circuit-blueprint-v1-payload-admission-evidence.js";
-import type { AdmittedCanonicalCircuitBlueprintV1PayloadItems } from "./admitted-canonical-circuit-blueprint-v1-payload-items.js";
 import type { AdmittedCanonicalCircuitBlueprintV1PayloadObligationRecord } from "./admitted-canonical-circuit-blueprint-v1-payload-obligation-record.js";
 import type { CanonicalCircuitBlueprintV1 } from "./canonical-circuit-blueprint-v1.js";
 
@@ -15,6 +14,6 @@ export interface AdmittedCanonicalCircuitBlueprintV1Payload {
   "admittedCarrierDigest": (string) | null;
   "admissionEvidence": AdmittedCanonicalCircuitBlueprintV1PayloadAdmissionEvidence;
   "obligationRecord": AdmittedCanonicalCircuitBlueprintV1PayloadObligationRecord;
-  "findings": (AdmittedCanonicalCircuitBlueprintV1PayloadItems)[];
+  "findings": (Record<string, unknown>)[];
   "blueprintRouteDisposition": "CLOSED";
 }

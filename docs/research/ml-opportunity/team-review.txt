@@ -1,0 +1,630 @@
+Oh **absolutely** — and ML may actually be one of the cleanest places to apply this architecture.
+
+The translation is not:
+
+> “Turn JSON Schema into a neural network.”
+
+It is:
+
+> **Treat an ML model as one possible provider for a governed capability, while keeping the meaning, admissible data, expected outcome, evaluation, and human experience outside the model.**
+
+That gives you something much stronger than a normal ML pipeline.
+
+## The SDA → ML translation
+
+At scenario altitude:
+
+```text
+GIVEN              WHEN                 THEN
+Input              Event                Outcome
+Data               Action               Experience
+```
+
+At ML altitude:
+
+```text
+FEATURE / CONTEXT
+       ↓
+MODEL INFERENCE
+       ↓
+PREDICTION / GENERATION
+       ↓
+ADMISSION / INTERPRETATION
+       ↓
+EXPERIENCE
+```
+
+The critical point is that **the model output is not automatically the Scenario Outcome**.
+
+It is testimony.
+
+```text
+Scenario Input
+      ↓
+ML Responsibility
+      ↓
+Model Provider
+      ↓
+Model Output
+      ↓
+deterministic evaluation
+      ↓
+admitted semantic result
+      ↓
+Scenario Outcome
+      ↓
+Experience
+```
+
+That is almost perfectly aligned with the rest of SideFX.
+
+---
+
+## Example: classify a mortgage document
+
+Traditional ML architecture might look like:
+
+```text
+document
+   ↓
+classification model
+   ↓
+"pay stub"
+```
+
+SideFX would model it more rigorously:
+
+```text
+SCENARIO
+
+Input
+─────
+Admitted mortgage document
+
+Event
+─────
+Resolve document classification
+
+Outcome
+───────
+The document's usable mortgage-document
+classification is established
+```
+
+Now descend into the event:
+
+```text
+Resolve Document Classification
+        ↓
+prepare model input
+        ↓
+invoke classification provider
+        ↓
+Model Testimony
+
+{
+  label: "pay_stub",
+  confidence: 0.93,
+  model: "...",
+  ...
+}
+
+        ↓
+evaluate admitted labels
+evaluate confidence
+evaluate evidence requirements
+evaluate policy
+        ↓
+Classification Admission
+
+        ↓
+DocumentClassification
+```
+
+So:
+
+```text
+MODEL SAYS
+"pay_stub"
+
+≠
+
+ENTERPRISE KNOWS
+"this is an admitted pay stub"
+```
+
+That distinction is **huge**.
+
+---
+
+# Your existing contract work becomes ML feature authority
+
+This part is particularly sweet.
+
+The same distinction we just found for experiences:
+
+```text
+Contract Authority
+Interaction Authority
+Experience Plan
+Target Realization
+```
+
+can become:
+
+```text
+Contract Authority
+Feature Authority
+Inference Plan
+Model Realization
+```
+
+So:
+
+```text
+INPUT CONTRACT
+    ↓
+FEATURE PROJECTION
+    ↓
+MODEL INPUT PLAN
+    ↓
+MODEL PROVIDER
+```
+
+Instead of hand-written ML glue quietly deciding:
+
+```python
+x = [
+    normalize(age),
+    encode(job_title),
+    transform(income),
+    ...
+]
+```
+
+you can have explicit authority saying:
+
+```text
+FeatureProjection
+
+source:
+  /borrower/annualIncome
+
+semanticRole:
+  annual-borrower-income
+
+transformation:
+  normalize-currency
+
+destination:
+  model-feature:borrower-income
+```
+
+Now feature engineering becomes **inspectable architecture**.
+
+That's nasty—in the good way.
+
+---
+
+# Training fits too
+
+You can use the exact same capability geometry for training.
+
+```text
+TRAINING CAPABILITY
+
+Input
+─────
+Admitted training corpus
++
+model profile
++
+training objective
+
+Event
+─────
+Train candidate model
+
+Outcome
+───────
+A candidate model satisfying
+the declared training obligations
+is available for evaluation
+```
+
+But again:
+
+```text
+training finished
+≠
+model admitted
+```
+
+The training provider produces something:
+
+```text
+CandidateModel
+├── model identity
+├── weights/artifact
+├── training-data identity
+├── hyperparameters
+├── metrics
+└── provenance
+```
+
+Then separate capabilities do:
+
+```text
+evaluate-model
+        ↓
+compare-model
+        ↓
+adversarially-test-model
+        ↓
+evaluate-bias/risk
+        ↓
+evaluate-cost
+        ↓
+evaluate-latency
+        ↓
+resolve-model-role-provider
+        ↓
+admit-model
+```
+
+So ML becomes another **Capability Data Center supplier ecosystem**.
+
+---
+
+# And model swapping becomes incredibly clean
+
+This might be one of the biggest practical benefits.
+
+Suppose the scenario is:
+
+```text
+Capability:
+Resolve document classification
+```
+
+It requires:
+
+```text
+provider requirement:
+document-classification
+```
+
+Today:
+
+```text
+Provider A
+→ Gemini model
+```
+
+Tomorrow:
+
+```text
+Provider B
+→ OpenAI model
+```
+
+Later:
+
+```text
+Provider C
+→ local ONNX model
+```
+
+or:
+
+```text
+Provider D
+→ deterministic rules
+```
+
+The scenario doesn't give a damn.
+
+```text
+                         CAPABILITY
+            resolve-document-classification
+                             │
+                             ▼
+                  PROVIDER REQUIREMENT
+                  document-classification
+                             │
+                ┌────────────┼────────────┐
+                ▼            ▼            ▼
+             Gemini        OpenAI       ONNX
+                │            │            │
+                └────────────┼────────────┘
+                             ▼
+                        TESTIMONY
+                             ▼
+                         ADMISSION
+                             ▼
+                         OUTCOME
+```
+
+**The model becomes replaceable without the capability becoming replaceable.**
+
+That's exactly the architectural sovereignty we've wanted all along.
+
+---
+
+# It gets even sweeter with evaluation
+
+ML already has this ugly problem:
+
+```text
+accuracy = 91%
+```
+
+Okay.
+
+**91% at what?**
+
+SideFX can attach evaluation directly to scenarios.
+
+Instead of only:
+
+```text
+MODEL BENCHMARK
+F1 = .91
+```
+
+you get:
+
+```text
+CAPABILITY EVALUATION
+
+Scenario:
+classify-clean-pay-stub
+PASS
+
+Scenario:
+classify-blurry-pay-stub
+PASS
+
+Scenario:
+detect-bank-statement
+PASS
+
+Scenario:
+reject-unsupported-document
+FAIL
+
+Scenario:
+abstain-on-insufficient-evidence
+FAIL
+
+Scenario:
+preserve-sensitive-field-boundary
+PASS
+```
+
+That's materially more useful because the model is being evaluated against **capability meaning**, not merely mathematical aggregates.
+
+Then you can still roll those up:
+
+```text
+Model Provider A
+
+Capability Coverage       47/50
+Critical Scenarios        18/20
+Unsupported Cases          2
+Safety Holds               1
+p95 latency             380ms
+Cost / 1k invocations     ...
+```
+
+Now model evaluation plugs directly into your managed capability marketplace.
+
+---
+
+# And the 824-scenario estate could become an ML/evaluation gold mine
+
+This is where the work you just reviewed gets really interesting.
+
+You already have **824 normalized scenarios**, each with an Input face and Outcome face, and most have resolvable structural contracts. 
+
+Those scenarios can become sources for:
+
+```text
+training examples
+evaluation vectors
+synthetic variants
+adversarial examples
+classification targets
+model-role benchmarks
+provider comparisons
+```
+
+Not every scenario should involve ML, obviously.
+
+But for the subset that does, the structure is extremely useful:
+
+```text
+Input contract
+      ↓
+candidate input generation
+
+Event responsibility
+      ↓
+model role
+
+Outcome contract
+      ↓
+expected semantic result
+
+Outcome variants
+      ↓
+classification / disposition space
+
+Fixtures
+      ↓
+evaluation corpus
+
+Evidence obligations
+      ↓
+evaluation requirements
+```
+
+So the capability estate itself can become an **ML evaluation ontology**.
+
+---
+
+# There are really three places ML fits
+
+### 1. **ML as provider**
+
+Probably the most important.
+
+```text
+Capability
+→ responsibility
+→ model provider
+→ testimony
+→ admission
+```
+
+Models remain subordinate to capability authority.
+
+### 2. **ML as authoring intelligence**
+
+Use models to propose:
+
+```text
+feature semantics
+presentation profiles
+scenario variants
+provider candidates
+synthetic cases
+training data
+evaluation cases
+```
+
+Then deterministically govern what becomes durable.
+
+### 3. **ML as learning over the Capability Data Center**
+
+This one gets wild.
+
+Once SideFX has enough structured evidence, you could train models over:
+
+```text
+capabilities
+scenarios
+contracts
+mechanics
+providers
+execution receipts
+failures
+repairs
+cross-apply results
+model evaluations
+human corrections
+```
+
+Then the ML problem becomes:
+
+> **Given this new capability/scenario, what precedent is most likely to help close it?**
+
+Or:
+
+> **Which provider is most likely to satisfy this responsibility under this workload profile?**
+
+Or:
+
+> **Where is this candidate architecture likely to fail conformance?**
+
+But again:
+
+```text
+ML predicts
+↓
+SideFX evaluates
+↓
+authority decides
+```
+
+Never:
+
+```text
+ML predicts
+=
+truth
+```
+
+---
+
+# I think there is a very strong SideFX ML stack hiding here
+
+```text
+                    SIDEFX ML
+
+CANONICAL CAPABILITY AUTHORITY
+              │
+              ▼
+         ML RESPONSIBILITY
+              │
+              ▼
+       FEATURE PROJECTION
+              │
+              ▼
+        MODEL ROLE PROFILE
+              │
+              ▼
+      PROVIDER RESOLUTION
+              │
+        ┌─────┼─────┐
+        ▼     ▼     ▼
+      LLM   ML    Rules
+        │     │     │
+        └─────┼─────┘
+              ▼
+          TESTIMONY
+              ▼
+     EVALUATION / ADMISSION
+              ▼
+       CANONICAL OUTCOME
+              ▼
+          EXPERIENCE
+              │
+              ▼
+           EVIDENCE
+              │
+              ▼
+       PROVIDER LEARNING
+```
+
+And training runs beside it:
+
+```text
+CORPUS
+  ↓
+TRAIN
+  ↓
+CANDIDATE MODEL
+  ↓
+SCENARIO EVALUATION
+  ↓
+CROSS-PROVIDER COMPARISON
+  ↓
+ADMISSION
+  ↓
+MODEL PROVIDER
+```
+
+That's a legitimate **Managed ML Capability Platform**.
+
+## The killer principle
+
+I think the ML version of your architecture can be reduced to one line:
+
+> **Models provide intelligence; capabilities own meaning.**
+
+That keeps model training, inference, replacement, evaluation, explainability, cost, drift, and provider choice underneath a stable semantic boundary.
+
+And because the Scenario contract gives you **Input → Event → Outcome**, you already have a natural unit for ML training and evaluation that is much richer than “prompt in, string out.”
+
+That could become one of SideFX's strongest applications.

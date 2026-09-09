@@ -1,29 +1,35 @@
-# Prepared database invocation
+# Optional database preparation, direct invocation
 
-The native CLI now reads one prepared capability bundle from SQL, builds its
-body in memory, checks that it matches the prepared proof and executes it.
-Requirement derivation and binding resolution run only during explicit
-preparation. Neither operation writes the capability body to disk.
+`sfx capability invoke` is now direct: it resolves the selected authority,
+plans the native body and executes it in memory on every call. It never reads
+a stored preparation, never checks a preparation recipe and never runs retained
+fixtures. `sfx capability prepare` remains available as an optional operation
+that resolves and proves one revision and retains that proof in SQL; invocation
+does not consume it, and nothing else in this repository does either. The
+retained proof stays available for a future capsulization consumer.
 
 From the project directory:
 
 ```powershell
-sfx capability prepare resolve-sidefx-eligible-providers --timeout 600000 --json
 sfx capability invoke resolve-sidefx-eligible-providers --input '@examples/provider-resolution.request.json' --json
 ```
 
-The first command prepares the selected revision and executes its retained
-fixtures. The second command uses that preparation; this example is already
-prepared in the live database. `@examples/...` supplies the invocation's JSON
-input file. It does not identify a capability implementation. Inline JSON and
-stdin remain supported by the CLI.
+The command reads the capability and declared root Scenario from SQL, plans the
+native body in memory, executes it, and returns the kernel result and
+authority/storage evidence. Any selected capability can be invoked this way;
+there is no preparation prerequisite. `@examples/...` supplies the invocation's
+JSON input file. Inline JSON and stdin remain supported by the CLI.
 
-Setup requires database migration 005, applied with
-`node src/migration/capability-preparation.mjs` in `C:\lab\sidefx-database`.
-The existing project process binding offers both operations without adding
-capability-specific routing to the CLI. `--namespace` remains selection data.
-Preparation has no invocation input; its tests come from retained authority.
-The extended timeout is explicit on preparation only.
+The optional preparation command is unchanged in behavior:
+
+```powershell
+sfx capability prepare resolve-sidefx-eligible-providers --timeout 600000 --json
+```
+
+It derives the preparation recipe, resolves authority, proves the retained
+fixtures and stores an immutable preparation record in SQL. Repeating an
+identical preparation is idempotent. The extended timeout is explicit on
+preparation only; direct invocation uses the CLI default.
 
 ## Retained execution identity
 
@@ -42,71 +48,50 @@ insert-only writer publishes a preparation. Publication rechecks the database
 generation and SQL definitions. Repeating an identical preparation is idempotent,
 including when a previously omitted namespace is supplied explicitly.
 
-Invocation performs one restricted query against the current model and prepared
-context. It verifies the payload and authority result digests, rebuilds the body
-in memory, and checks every Scenario's artifact, source revision, resolver and
-physical platform digest against the stored proof before loading it. The result
-includes the preparation digest and its proof. Capability execution still uses
-the actual Scenario Kernel and unchanged canonical input.
+Invocation performs the same three restricted queries as preparation, against
+the current model, and rebuilds the body in memory. The result carries the
+authority query identities, snapshot and projection digests, the planned
+artifact identities, and the module/resource access evidence. Capability
+execution still uses the actual Scenario Kernel and unchanged canonical input.
 
-Missing preparation returns `CAPABILITY_PREPARATION_REQUIRED`; a context change
-returns `CAPABILITY_PREPARATION_STALE`. Both are native CLI exit 4. They never
-start analysis or fall back to an expanded directory. Unknown authority retains
-`CAPABILITY_NOT_FOUND`. Invalid invocation input reaches the capability contract
-and returns its rejected disposition.
+Unknown authority retains `CAPABILITY_NOT_FOUND` (exit 4); there is no
+bootstrap or disk fallback. Invalid invocation input reaches the capability
+contract and returns its rejected disposition (exit 0). A capability whose own
+admitted transformation fails reports `CAPABILITY_EXECUTION_FAILED`, exactly
+as the canonical evaluator would.
 
-Generation-level invalidation is conservative: a new selected model requires
-preparation again even when an unrelated declaration caused the change.
-Unresolved bindings and missing/failing fixtures cannot establish a prepared
-execution claim. Candidate editing, managed admission and a capsulization
-adapter remain separate work. This preparation retains the exact authority and
-proof identity that a future capsulization operation must consume.
+## Native acceptance on 2026-09-09
 
-## Native acceptance on 2026-09-08
+Direct invocation of `resolve-sidefx-eligible-providers` completed in about six
+seconds from PowerShell (4.5 seconds of live authority resolution, 0.4 seconds
+of body planning) and returned `PROVIDERS_RESOLVED`: two considered bindings,
+one eligible provider. Its evidence contains the three live SQL queries
+(capability-embodiment, scenario-resolver-map, mechanic-definitions), 14
+modules loaded from memory, and denied filesystem writes, expanded-body reads
+and local database-cache reads. No preparation is read or verified anywhere on
+the path.
 
-The final tested provider-resolution preparation stored 670,888 bytes, passed
-four fixtures and 28 outcome assertions, and retained 20 kernel observations in
-its proof summary. Its preparation digest is
-`sha256:9c1b84fa02afc8efcf0833dd010bf2edc59fbb767cd93a5f65521f6a176c5757`.
+The earlier resolver measurement exceeded 120 seconds under shared load; the
+direct runs above resolve in 2.3–7.7 seconds per query stage. These are observed
+wall times, not an isolated performance ratio.
 
-The measured prepared invocation took approximately 2.9 seconds from PowerShell
-and 2.56 seconds inside the provider process:
-
-| Stage | Milliseconds |
-| --- | ---: |
-| Prepared SQL lookup and validation | 1289.0 |
-| Native body planning | 363.1 |
-| Memory module loading | 35.0 |
-| Scenario construction | 42.0 |
-| Capability execution | 2.0 |
-
-It returned `PROVIDERS_RESOLVED`, considered two bindings and selected one
-eligible provider. Its evidence contains one live SQL query, 14 modules loaded
-from memory, and denied filesystem writes, expanded-body reads and local
-database-cache reads.
-
-The earlier resolver measurement exceeded 120 seconds under shared load. In
-these preparation runs the same resolver took 2.3–5.4 seconds. These are observed
-wall times, not an isolated performance ratio. The established improvement is
-that the resolver is absent from the invocation path.
+The optional preparation record behaves as before: the current provider-resolution
+preparation stores 670,888 bytes, passes four fixtures and 28 outcome assertions,
+and retains 20 kernel observations in its proof summary. Its preparation digest is
+`sha256:4cb9c0f38150c88f160ec61e4e88d40bf33483b7bb398d79ef2433f45d17ec62`;
+the recipe deliberately covers the provider implementation bytes, so any
+embodiment change produces a new digest.
 
 The [native records](verification/database-preparation-20260908.json) retain
-commands, exit codes and complete output streams. Acceptance covers missing
-preparation, successful preparation, repeat preparation with an explicit
-namespace, invocation, stale recipe rejection, restored invocation, invalid
-input and missing authority. The stale-recipe test changes a local query comment
-and restores the exact original bytes in `finally`; it does not alter database
-authority or resolver definitions.
-
-Validation passed: eight embodiment tests, 22 default database tests (ten optional
-integration tests skipped), eight explicitly enabled live query tests, and two
-live preparation integration tests. The latter cover concurrent idempotence,
-conflict and stale rejection, denied reader writes, payload integrity and trusted
-constraints. The existing memory/expanded regression still matches all 17
-fixtures and 465 generated body files.
+commands, exit codes and complete output streams. The current acceptance runs
+are retained under `evidence/direct-invocation-20260909/`. Validation passed:
+eight embodiment tests, the full estate verification (17/17 fixtures, 320
+kernel observations, five negative checks across ten scenario bodies), memory
+parity across all retained bundles, and the native sfx invocation checks,
+including a capability with no preparation at all.
 
 Repeat native checks with `scripts/verify-sfx-preparation.ps1 -Mode Prepare`,
-then `PrepareExplicit`, `Invoke`, and `Stale`. `Unprepared` expects the separate
-`adapt-job-market-intelligence-evidence` capability to have no preparation.
-`scripts/verify-sfx-invocation.ps1`
-retains the valid-input, rejected-input and missing-authority cases.
+`PrepareExplicit` (optional preparation), `Invoke` (direct invocation evidence)
+and `AnyCapability` (a capability with no preparation invokes directly).
+`scripts/verify-sfx-invocation.ps1` retains the valid-input, rejected-input and
+missing-authority cases.

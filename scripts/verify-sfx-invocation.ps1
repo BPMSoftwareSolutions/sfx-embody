@@ -13,10 +13,17 @@ try {
         $command = "sfx capability invoke $($case.identity) --input '$($case.input)' --json"
         $stdoutFile = Join-Path $EvidenceDirectory "$($case.name).stdout.json"
         $stderrFile = Join-Path $EvidenceDirectory "$($case.name).stderr.txt"
-        & sfx capability invoke $case.identity --input $case.input --json 1> $stdoutFile 2> $stderrFile
+        # Windows PowerShell 5.1 rewraps redirected native stderr into formatted
+        # error records; capturing 2>&1 and reading Exception.Message keeps the
+        # exact JSON the CLI wrote.
+        $previousPreference = $ErrorActionPreference
+        $ErrorActionPreference = 'Continue'
+        try { $output = & sfx capability invoke $case.identity --input $case.input --json 2>&1 } finally { $ErrorActionPreference = $previousPreference }
         $nativeExit = $LASTEXITCODE
-        $stdout = [System.IO.File]::ReadAllText((Resolve-Path $stdoutFile))
-        $stderr = [System.IO.File]::ReadAllText((Resolve-Path $stderrFile))
+        $stdout = ($output | Where-Object { $_ -isnot [System.Management.Automation.ErrorRecord] }) -join "`n"
+        $stderr = ($output | Where-Object { $_ -is [System.Management.Automation.ErrorRecord] } | ForEach-Object { $_.Exception.Message }) -join "`n"
+        [System.IO.File]::WriteAllText($stdoutFile, $stdout)
+        [System.IO.File]::WriteAllText($stderrFile, $stderr)
         $records += @{ command = $command; exitCode = $nativeExit; stdout = $stdout; stderr = $stderr }
         $records | ConvertTo-Json -Depth 100 | Set-Content -Encoding utf8 (Join-Path $EvidenceDirectory 'native-commands.json')
         if ($nativeExit -ne $case.exit) { throw "Unexpected native exit for $($case.name): $nativeExit. $stderr" }

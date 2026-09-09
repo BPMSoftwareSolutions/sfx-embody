@@ -7,21 +7,23 @@
     "uniqueScenarios": 824,
     "contractRecords": 630,
     "retainedSchemaExamplePointers": 25461,
-    "localReportLinks": 36,
+    "localReportLinks": 38,
     "footnotes": 16,
     "metaSchemaValidContracts": 630
   },
   "artifactDigests": {
-    "README.md": "sha256:c25342e8f2f529577f316af93f64295a9db8eef4ebfcb82a7b6d9c20fa47be4d",
+    "README.md": "sha256:dd57f544bfe28a1e62c4619a8a517329bbffb5644b275822d75d1facb18823d6",
     "analyze-inventory.mjs": "sha256:3a8e7ab45063f633fad9a6fb4b9962409b05e7552e974dc0ad2d35a050c2b8f7",
     "contract-taxonomy.json": "sha256:1bbe27db493ff229332c98b2260583dde7ece6371b6b5666bff49129041b9603",
     "existing-form-probes.json": "sha256:ed85c00310ab572a2f1a0b0b404117c6388256b2fc347fb2a19de7cf6fd60068",
     "inventory.sql": "sha256:329558b394a20e5c16f2c93f5108ee1a1837695e9fb932b0f68cf48293c56ab6",
+    "opportunity.md": "sha256:9d2b169f37f8fc7958e11cd255d38f4745555e47d835488816736b81e623f008",
     "probe-existing-form.mjs": "sha256:2d2bf9d02eae523fa8144a2dc03769fcd59b5dce361f7c4766a7cbfbe8abc192",
     "read-inventory.mjs": "sha256:6f1c04955d8ece68cfad22cfb25c27272978d23f4a72953c4ff1b292e365effc",
     "scenario-bindings.json": "sha256:a11850d703b19703a0c27a99bc51acf05608e5a366d5738843ec673b7d48e595",
     "scenario-inventory.md": "sha256:576a4baa46606bdf8013864457a625f6c1e67c2f35289b0e2de8a8aa332dd31a",
     "summary.json": "sha256:015bf20808a9cc016e00ace5bf1d95b45114355f8f15f7db331135ec5ae7a7ca",
+    "team-review.txt": "sha256:712bd914581744b67b586f93abaf564dc330090cf59c294347f82bf827360993",
     "verify-research.mjs": "sha256:fa47e58bd94622204a0ecac9e350ce48d6b883c22b1b91d7ec98a2e96bbb500d"
   },
   "limitations": "Research artifact consistency only; does not certify a renderer or execute capabilities."

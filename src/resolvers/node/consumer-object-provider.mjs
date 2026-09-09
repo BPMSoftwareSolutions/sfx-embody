@@ -35,6 +35,26 @@ export class NodeConsumerObjectProvider {
         else node.$ref = path.posix.normalize(path.posix.join(path.posix.dirname(sourceRef), original));
         if (node.$ref !== original) changes.push({ sourcePointer: sourcePointer + '/$ref', from: original, to: node.$ref });
       }
+      // Deliberately open positions admit any value at runtime; the type graph
+      // has no declared shape to project. An item-less array becomes unknown[],
+      // an object without properties loses its object typing so the planner can
+      // map it to Record<string, unknown>. The original schema bytes remain the
+      // runtime admission authority either way.
+      if (node.type === 'array' && (!node.items || typeof node.items !== 'object' || Array.isArray(node.items))) {
+        node.items = {};
+        changes.push({ sourcePointer, from: 'open-array', to: 'unknown-item-projection' });
+      }
+      if (node.type === 'object') {
+        const properties = node.properties;
+        const open = properties === undefined || (typeof properties === 'object' && !Array.isArray(properties) && Object.keys(properties).length === 0);
+        // A contract root must remain an object type for the target graph; its
+        // open shape projects as an interface without declared fields. Nested
+        // open objects have no declared shape to project and become unknown.
+        if (open && sourcePointer !== '') {
+          delete node.type;
+          changes.push({ sourcePointer, from: 'open-object', to: 'unknown-projection' });
+        }
+      }
       if (!Array.isArray(node.type)) return;
       if (node.type.length !== 2 || !node.type.includes('null') || node.oneOf) throw new Error('SCHEMA_TYPE_UNION_NOT_SUPPORTED:' + sourcePointer);
       const valueType = node.type.find(type => type !== 'null');
@@ -46,7 +66,7 @@ export class NodeConsumerObjectProvider {
     return { schema, changes };
   }
 
-  static renderContracts(graph, profile, structuralProvider, typescript, canonical, schemaAt) {
+  static renderContracts(graph, profile, structuralProvider, typescript, canonical, schemaAt, openObjectPointers) {
     const definitions = new Map(canonical.definitions.map(d => [d.sourcePointer, d.node]));
     const visit = node => {
       if (node.kind === 'nullable') { visit(node.value); return; }
@@ -59,6 +79,7 @@ export class NodeConsumerObjectProvider {
     // declarations are also instance members; enum values are closed literals.
     // Runtime-only predicates remain enforced by the original schema admission.
     const refine = (node, fallback, seen = new Set()) => {
+      if (openObjectPointers?.has(node.sourcePointer)) return 'Record<string, unknown>';
       const schema = schemaAt(node.sourcePointer);
       if (Object.hasOwn(schema, 'const')) return JSON.stringify(schema.const);
       if (schema.enum) return schema.enum.map(value => JSON.stringify(value)).join(' | ');

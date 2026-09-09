@@ -1,5 +1,7 @@
 # Deterministic scenario input and outcome experiences
 
+The [opportunity assessment and team-review response](opportunity.md) develops the architectural and product implications of this research, identifies which review claims the evidence supports, and defines the remaining proof. The [original team review](team-review.txt) is retained alongside it.
+
 **SideFX can generate scenario input forms and outcome views deterministically.** The current database provides enough structural authority to begin, and the platform already contains a basic input renderer and a substantial vocabulary of presentation capabilities. A dependable solution should compile contracts into a versioned presentation plan, bind that plan to interaction state, and render it through the design system. AI is optional during design authoring; it is unnecessary in this execution path.
 
 **Contract shape can determine structure, but it does not uniquely determine experience.** Two strings could be a login, a search request, or a pair of artifact references. An array of numbers could represent prices, measurements, or identifiers. Reproducible choices are possible in every case; semantically correct specialized choices require declared meaning. The recommended design combines structural defaults with explicit field ownership and presentation profiles. This also matches the existing SideFX presentation declarations, which preserve authored meaning rather than infer it from property names.[^1][^5]

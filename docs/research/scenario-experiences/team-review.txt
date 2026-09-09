@@ -1,0 +1,811 @@
+Yeah — **this is cold.** The research has uncovered something much bigger than “dynamic forms.”
+
+What you have here is the beginning of the **deterministic experience projection plane for SideFX**.
+
+The README’s most important conclusion is not that SideFX can render JSON Schema. It is this:
+
+> **A Scenario can carry enough governed authority to deterministically project both the interaction that supplies its Input and the experience that reveals its Outcome — without putting AI in the runtime path.**
+
+And the 824-scenario inventory gives that claim real teeth rather than making it a design fantasy.  
+
+# The architectural breakthrough
+
+We already had:
+
+```text
+SCENARIO
+
+Input
+  ↓
+Event
+  ↓
+Outcome
+
+Data
+  ↓
+Action
+  ↓
+Experience
+```
+
+Now this research is effectively saying:
+
+```text
+                         SCENARIO AUTHORITY
+                                │
+                ┌───────────────┴───────────────┐
+                ▼                               ▼
+         INPUT CONTRACT                  OUTCOME CONTRACT
+                │                               │
+                │ + semantic roles              │ + variants
+                │ + ownership                   │ + interpretation
+                │ + presentation profile        │ + presentation profile
+                │                               │
+                └───────────────┬───────────────┘
+                                ▼
+                    EXPERIENCE COMPILER
+                                │
+                                ▼
+                   SCENARIO EXPERIENCE PLAN
+                                │
+              ┌─────────────────┼──────────────────┐
+              ▼                 ▼                  ▼
+            React              WPF             future targets
+              │                 │                  │
+              └─────────────────┼──────────────────┘
+                                ▼
+                         HUMAN EXPERIENCE
+```
+
+**That's the model.**
+
+Not:
+
+```text
+JSON Schema
+→ React form
+```
+
+But:
+
+```text
+Scenario Authority
+→ Experience Plan
+→ Target-native realization
+```
+
+That difference is enormous.
+
+---
+
+# 1. The census gives you enough authority to start right now
+
+The numbers are unusually strong.
+
+You have:
+
+* **824 scenarios**
+* **824 Input faces**
+* **824 Outcome faces**
+* **812/824 resolved Input contracts**
+* **809/824 resolved Outcome contracts**
+* **218 root scenarios**
+* **216/218 root Inputs resolved**
+* **216/218 root Outcomes resolved**
+* **630 selected contract definitions**
+
+So the structural authority isn't some future prerequisite. It is already overwhelmingly present. 
+
+And I especially like that the research refuses to bullshit us about what those numbers mean.
+
+It explicitly says:
+
+> Those are structural availability numbers, **not production-ready experience coverage**.
+
+Perfect.
+
+That distinction protects the architecture.
+
+---
+
+# 2. The 239 same-contract scenarios prove why this cannot be “schema → form”
+
+This might be the single most important empirical result.
+
+There are **239 scenarios where Input and Outcome use the same contract**. 
+
+Think about what that destroys immediately:
+
+```text
+"This property is in an input schema,
+therefore the user should edit it."
+```
+
+Nope.
+
+A carrier may contain:
+
+* user-provided facts,
+* accumulated evidence,
+* existing findings,
+* system context,
+* derived values,
+* terminal values,
+* prior state.
+
+The same JSON shape may travel through the circuit.
+
+So the report's five-way ownership model is absolutely foundational:
+
+```text
+FIELD OWNERSHIP
+
+human-supplied
+system-bound
+fixed
+derived
+unclassified
+
+      +
+
+sensitivity
+```
+
+That is **interaction authority**.
+
+JSON Schema can't tell you that.
+
+And now we've got a really elegant architectural separation:
+
+```text
+DATA CONTRACT
+What values are admissible?
+
+INTERACTION AUTHORITY
+Who may supply or change them?
+
+PRESENTATION AUTHORITY
+How should people interact with or perceive them?
+
+TARGET REALIZATION
+How does React/WPF/etc physically render them?
+```
+
+That separation is beautiful.
+
+---
+
+# 3. This concretizes `Outcome = Experience`
+
+We've spent a lot of time saying:
+
+```text
+THEN
+=
+OUTCOME
+=
+EXPERIENCE
+```
+
+This research finally starts giving that statement a **physical delivery mechanism**.
+
+Today the platform effectively does:
+
+```text
+execute capability
+      ↓
+get outcome
+      ↓
+<pre>{JSON}</pre>
+```
+
+That's testimony.
+
+It's not necessarily an experience.
+
+The new path is:
+
+```text
+Scenario Outcome
+      ↓
+Outcome Contract
+      +
+Outcome Variants
+      +
+Experience semantics
+      +
+Presentation Profile
+      ↓
+OUTCOME EXPERIENCE PLAN
+      ↓
+Result realization
+```
+
+And now a capability like:
+
+```text
+resolve-sidefx-eligible-providers
+```
+
+should not merely dump a JSON object.
+
+Its experience can intentionally communicate:
+
+```text
+Requested capability
+Target environment
+Eligible providers
+Rejected providers
+Reasons
+Evidence
+Counts
+Resolution disposition
+```
+
+Similarly, `read-authorized-file` has a composed outcome; `generate-governed-narration` produces media-oriented results; and `observe-governed-http-exchange` has transport states that must not masquerade as business success. Those are materially different experience families already present in the scenario estate. 
+
+**That is the SideFX experience plane emerging from actual capability semantics.**
+
+---
+
+# 4. The examples prove this isn't one renderer problem
+
+Look at the spectrum already sitting in the estate:
+
+```text
+greet-by-name
+→ simple human value
+
+say-hello-world
+→ no editable value at all
+
+resolve-sidefx-semantic-knowledge-request
+→ search/query interaction
+
+resolve-sidefx-eligible-providers
+→ provider selection / inspection
+
+generate-executable-capability-scaffold
+→ sophisticated authoring surface
+
+bind-external-credential-reference
+→ reference selection, NOT secret entry
+
+observe-governed-http-exchange
+→ governed HTTP request + transport testimony
+
+read-authorized-file
+→ acquisition / artifact interaction
+
+generate-governed-narration
+→ scene authority → media outcome
+```
+
+The inventory confirms that these aren't invented examples; they're concrete scenario/contract pairs in the selected estate. 
+
+So there is no sane universal component such as:
+
+```text
+<JsonSchemaForm />
+```
+
+that solves this.
+
+But there **can** be a universal compiler:
+
+```text
+Scenario
++
+Contract
++
+Interaction Meaning
++
+Experience Profile
+      ↓
+Presentation Plan
+```
+
+That's the abstraction worth investing in.
+
+---
+
+# 5. I would elevate `Presentation Plan` into a major SideFX object
+
+The README calls it a target-neutral presentation plan. I think that's exactly right, but architecturally I would treat this as much more important than an implementation detail.
+
+Conceptually:
+
+```text
+SCENARIO EXPERIENCE PLAN
+
+identity
+source authority digests
+
+input
+├── fields
+├── ownership
+├── state paths
+├── semantic roles
+├── ordering
+├── constraints
+├── branch behavior
+├── commit events
+└── accessibility
+
+outcome
+├── interpretation
+├── variants
+├── regions
+├── collections
+├── artifacts
+├── feedback
+├── evidence
+└── accessibility
+
+presentation
+├── semantic component roles
+├── design token profile
+├── target-independent geometry
+└── formatting semantics
+
+coverage
+├── edited
+├── displayed
+├── fixed
+├── system-bound
+├── derived
+├── intentionally omitted
+└── unsupported
+```
+
+Then:
+
+```text
+Experience Plan
+     ↓
+Target Provider
+
+React
+WPF
+HTML
+SwiftUI
+Compose
+...
+```
+
+This plugs directly into your Cross-Apply work.
+
+You could eventually prove:
+
+```text
+Same Experience Plan
+
+React       PASS
+WPF         PASS
+HTML        PASS
+JavaFX      PASS
+
+Input parity          PASS
+Validation parity     PASS
+State parity          PASS
+Outcome parity        PASS
+Experience parity     PASS
+```
+
+**Now UI cross-apply has a compiler-generated semantic center.**
+
+That's fucking strong.
+
+---
+
+# 6. This means the capsule can eventually become self-interactive
+
+This is where I think the product consequence gets wild.
+
+We already have:
+
+```text
+CAPSULE
+├── Feature
+├── Blueprint
+├── Contracts
+├── Execution Authority
+├── Evidence Authority
+└── ...
+```
+
+Add compatible experience/presentation authority, and conceptually:
+
+```text
+CAPSULE
+   │
+   ├── reveal as blueprint
+   ├── reveal as Gherkin
+   ├── reveal as execution
+   ├── reveal as evidence
+   │
+   └── reveal as INTERACTION
+```
+
+So an admitted capability can increasingly answer:
+
+> **“What experience should a human receive when invoking me?”**
+
+without some product team hand-coding a dedicated page.
+
+Not necessarily a gorgeous bespoke interface automatically.
+
+The research correctly identifies three levels:
+
+```text
+1. STRUCTURAL INSPECTION
+2. DETERMINISTIC INTERACTION
+3. DESIGNED EXPERIENCE
+```
+
+That's exactly the maturity ladder I would preserve. 
+
+And critically:
+
+```text
+Level 3
+≠
+AI guess at runtime
+```
+
+It becomes:
+
+```text
+authored experience meaning
+→ deterministic projection
+```
+
+**That's much more SideFX.**
+
+---
+
+# 7. AI is sitting in exactly the right place
+
+The document nails this.
+
+AI can help a designer create:
+
+```text
+presentation profile
+semantic roles
+labels
+groupings
+visual assets
+experience suggestions
+```
+
+Maybe Nano Banana helps create:
+
+```text
+illustration
+media
+background
+visual identity
+specialized explanatory asset
+```
+
+Fine.
+
+Once admitted:
+
+```text
+AUTHORED / AI-ASSISTED CANDIDATE
+              ↓
+          REVIEW
+              ↓
+       PRESENTATION AUTHORITY
+              ↓
+      deterministic compiler
+              ↓
+           runtime UI
+```
+
+No model needs to look at this at runtime and say:
+
+> “Hmm, `identifier` probably looks like an email field.”
+
+That's exactly the kind of semantic rediscovery we're trying to eliminate.
+
+**Eventual Determinism strikes again.**
+
+The first time intelligence helps us understand:
+
+```text
+/identifier
+=
+account identity
+```
+
+we retain that meaning.
+
+We don't repay model tokens forever to rediscover it.
+
+---
+
+# 8. The `$id` collision finding is not a footnote — it's a red wall
+
+This part deserves architectural treatment immediately.
+
+You found:
+
+* **44 repeated root `$id` values**
+* **12 IDs associated with multiple different source digests**
+* one generic `input.schema.json` ID representing **91 distinct schema byte identities**
+* one `outcome.schema.json` ID representing **88 distinct byte identities**. 
+
+So:
+
+```text
+globalSchemaRegistry[$id]
+```
+
+is dead on arrival.
+
+And:
+
+```text
+first schema wins
+```
+
+cannot be part of the experience compiler.
+
+The report's answer is correct:
+
+```text
+SCENARIO / CAPABILITY
+        ↓
+SCOPED RESOURCE BUNDLE
+        ↓
+URI + lineage + content identity
+        ↓
+UNIQUE RESOLUTION
+```
+
+If not:
+
+```text
+AMBIGUOUS_REFERENCE
+→ HOLD
+```
+
+No guessing.
+
+This is exactly aligned with the rest of SDA:
+
+> **Identity resolution is authority resolution.**
+
+---
+
+# 9. I especially like that internal scenarios do NOT automatically become forms
+
+This avoids another potential mess.
+
+There are 824 scenarios, but only **218 capability roots**.
+
+Good.
+
+The default product model should be:
+
+```text
+ROOT SCENARIO
+=
+candidate user entry experience
+```
+
+while:
+
+```text
+INTERNAL SCENARIO
+=
+execution circuit
+```
+
+unless some interface authority explicitly exposes that internal scenario.
+
+Otherwise you'd accidentally produce an admin console with 824 buttons exposing internal mechanics. 😂
+
+The report explicitly makes this distinction, and that's exactly right. 
+
+---
+
+# 10. One gap I think this research exposes for the architecture
+
+This line is important:
+
+> **Outcome-product / variant-product relationships: 0 / 0.** 
+
+We've been developing:
+
+```text
+Outcome
+  ↓ realizes
+Capability Product
+  ↓ becomes consumable Input
+```
+
+The database has outcome contracts and variants, but apparently **does not yet carry normalized outcome-product relationships**.
+
+That's not necessary for the first renderer.
+
+But longer term, I think it's the missing semantic bridge for richer result experiences.
+
+Because eventually:
+
+```text
+Outcome
+"the report is available"
+      ↓
+
+Product
+ReportArtifact
+      ↓
+
+Presentation role
+document
+      ↓
+
+Target realization
+PDF viewer / download / preview
+```
+
+is much stronger than:
+
+```text
+schema has string property named artifactPath
+→ maybe show download button?
+```
+
+**Absolutely do not infer the latter.**
+
+So I would keep the first implementation profile-driven, but flag normalized **Outcome → Product → Presentation** as an architectural opportunity.
+
+---
+
+# I would freeze this four-layer model
+
+This research is cleanest to me when reduced to:
+
+```text
+1. CONTRACT AUTHORITY
+   What data is valid?
+
+           ↓
+
+2. INTERACTION / EXPERIENCE AUTHORITY
+   Who supplies what?
+   What does it mean?
+   What experience is intended?
+
+           ↓
+
+3. EXPERIENCE PLAN
+   Deterministic target-neutral compilation
+
+           ↓
+
+4. TARGET REALIZATION
+   React / WPF / HTML / etc.
+```
+
+And the inverse evidence direction:
+
+```text
+Human interaction
+      ↑
+target testimony
+      ↑
+experience-plan testimony
+      ↑
+scenario execution
+      ↑
+outcome admission
+      ↑
+promised experience
+```
+
+That fits the entire architecture almost suspiciously well.
+
+---
+
+# The first slice is also beautifully bounded
+
+I would **not** begin by “building SideFX UI.”
+
+I would do exactly what the report points toward:
+
+```text
+                FIRST EXPERIENCE COMPILER PROOF
+
+greet-by-name
+say-hello-world
+resolve-sidefx-eligible-providers
+generate-executable-capability-scaffold
+bind-external-credential-reference
+observe-governed-http-exchange
+read-authorized-file
+generate-governed-narration
+```
+
+Those eight force the compiler through:
+
+```text
+simple scalar
+empty payload
+nested structure
+composed roots
+system-owned values
+credential reference
+provider interaction
+variants
+artifacts
+media
+collections
+outcome interpretation
+```
+
+Then add adversarial synthetic cases for:
+
+```text
+missing ≠ null
+null ≠ empty
+false ≠ untouched
+0 ≠ absent
+
+oneOf ambiguity
+anyOf overlap
+$ref sibling constraints
+$id collision
+additional properties
+untyped array items
+```
+
+If one canonical compiler survives **that** set while preserving every value and producing complete coverage testimony, we know we've got the right abstraction.
+
+---
+
+# And the product story is fantastic
+
+We're getting very close to being able to say:
+
+> **A SideFX capability does not merely know how to execute. It knows enough about its governed Input and Outcome to project an appropriate interaction experience into an admitted target environment.**
+
+Then:
+
+```text
+CAPABILITY
+    ↓
+project execution
+    ↓
+C# / Node / Python / Java / Go
+
+CAPABILITY
+    ↓
+project interaction
+    ↓
+React / WPF / HTML / native UI
+
+CAPABILITY
+    ↓
+project understanding
+    ↓
+Blueprint / Docs / Video / Training
+```
+
+**Same semantic asset.**
+
+Different projections.
+
+That's the fucking cold part.
+
+We're no longer talking about a backend that automatically makes some forms.
+
+We're getting to:
+
+> **A capability can increasingly carry its execution, interaction, explanation, evidence, and experience potential as durable meaning — and SideFX resolves the embodiment required at the moment.**
+
+That fits the entire trajectory of the Capability Data Center almost perfectly.

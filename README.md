@@ -2,6 +2,8 @@ sfx-embody materializes executable Capability and Scenario bodies from database 
 
 [Deterministic scenario experience research](docs/research/scenario-experiences/README.md) inventories all 824 selected scenarios and 630 contracts, analyzes input-form and outcome-view generation, and proposes a presentation architecture and acceptance criteria. The accompanying census and renderer probes are research artifacts; the proposed capability is not implemented.
 
+[Scenario experience opportunity](docs/research/scenario-experiences/opportunity.md) assesses the team's review and documents the proposed four-layer architecture, the role of a Scenario Experience Plan, product implications, and the evidence needed for experience delivery and cross-target parity.
+
 [Current repair and acceptance evidence](docs/native-embodiment-repair.md), and [bounded execution closure](docs/bounded-execution-closure.md) records why invoking one capability must expand only the capabilities it declares a dependency on. [Review findings and architectural goals](docs/embodiment-review-findings.md) record the properties the current integrity boundary and oracles are built to hold, and [cross-target embodiment](docs/cross-target-embodiment.md) records what Python and C# require and why declared mechanic meaning had to be closed first. The required meaning already existed. This repair replaces the Expression runtime with native expressions, retains declared lexical bindings, fixes weakened contract types, and adds inverse transformation checks. Full Capability/Scenario round-trip equivalence remains an explicit acceptance obligation.
 
 | Directory | Contents |
@@ -27,13 +29,20 @@ sfx capability invoke resolve-sidefx-eligible-providers --input '@examples/provi
 ```
 
 The exercised command returned exit 0 and `PROVIDERS_RESOLVED`. It reads the
-capability and declared root Scenario from SQL, executes the selected native body
-in memory, and returns the kernel result and authority/storage evidence. Install
+capability and declared root Scenario from SQL, plans the selected native body,
+executes it in memory, and returns the kernel result and authority/storage
+evidence. Invocation is direct: any selected capability can be invoked without
+a preparation prerequisite. The optional `sfx capability prepare` retains a
+proved preparation in SQL but is never consumed by invocation; deliberately open
+contract positions now project as `unknown[]` or `Record<string, unknown>`
+instead of blocking planning. Install
 the current `sidefx-cli` and prepare the dependencies described below first.
 `scripts/verify-sfx-invocation.ps1` repeats the native success and failure checks.
 The sample input is retained fixture authority for the pure provider resolver;
 it does not call or admit an external provider. Database revision authoring and
-capsulization are still separate work.
+capsulization are still separate work. The [scaffold assessment](docs/scaffold-invocation-rapidapi.md)
+records how far direct invocation carries the scaffold capability and what the
+remaining hold is.
 
 | Scenario | Executable code |
 | --- | --- |

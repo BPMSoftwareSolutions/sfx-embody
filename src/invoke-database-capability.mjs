@@ -1,7 +1,8 @@
 import { createHash, randomUUID } from 'node:crypto';
-import { preparationApi, preparationRecipe, prepareDatabaseCapability, verifyPreparedPlan } from './prepare-database-capability.mjs';
+import { prepareDatabaseCapability } from './prepare-database-capability.mjs';
 import { planNode } from './materialize-node.mjs';
 import { loadMemoryScenario } from './load-memory-scenario.mjs';
+import { readAuthority } from './read-authority.mjs';
 
 const digest = value => 'sha256:' + createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -31,12 +32,11 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot }
   const selection = { capabilityId: request.subject, target: 'node', ...(request.namespace === undefined ? {} : { namespaceId: request.namespace }) };
   const config = { databaseRoot, sdaRoot };
   if (request.verb === 'prepare') return prepareDatabaseCapability(selection, config, measure, timings);
-  const recipeDigest = await measure('identifyPreparationRecipe', () => preparationRecipe(config));
-  const { readPreparation } = await preparationApi(databaseRoot);
-  const prepared = await measure('readPreparedAuthority', () => readPreparation(selection, recipeDigest));
-  const { bundle, proof } = prepared.preparation;
+  // Invocation is direct: it resolves the selected authority, plans the native
+  // body and executes it in memory on every call. Preparation is an optional,
+  // separately invoked retained proof and is never consumed here.
+  const bundle = await measure('readAuthority', () => readAuthority(databaseRoot, selection, { retainObjects: false, timings: timings.queries }));
   const plan = await measure('planNativeBody', () => planNode({ bundle, sdaRoot }));
-  verifyPreparedPlan(plan, proof);
   const runtime = await measure('loadMemoryModules', () => loadMemoryScenario(plan));
   const executions = [], observations = [];
   const scenario = await measure('createScenario', () => runtime.createScenario({ observer: { observe: value => observations.push(value) },
@@ -53,7 +53,6 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot }
         providerStatus: 'CANDIDATE_PHYSICAL_PROVIDER', inputDigest: digest(request.input), resultDigest: digest(result),
         snapshotId: bundle.authority.snapshotId, projectionDigest: bundle.authority.projectionDigest,
         authorityIdentity: Object.fromEntries(['scenarioDefinitionDigest', 'pinnedPlatformCommit', 'platformDigest', 'resolverVersion', 'artifactDigest'].map(key => [key, entry.receipt[key]])),
-        preparation: { digest: prepared.preparationDigest, preparedAt: prepared.preparedAt, recipeDigest, proof },
-        queries: [prepared.queryEvidence],
+        queries: [bundle.authority, bundle.resolutions, bundle.mechanics].map(({ recordsets, ...identity }) => identity),
         modules: runtime.modules, resources: runtime.accesses, externalDependencies: runtime.externalDependencies } } };
 }

@@ -1,13 +1,16 @@
-# Invoking the scaffold capability from the database: what it looks like, and why it holds
+# Invoking the scaffold capability from the database: projection resolved, execution held by the admitted transformation
 
 Assessment: 2026-09-09. Subject: invoking `generate-executable-capability-scaffold`
-through the database path in [database-direct-invocation.md](database-direct-invocation.md)
+through the direct database path in [database-direct-invocation.md](database-direct-invocation.md)
 to scaffold a RapidAPI provider capability.
 
-Disposition: **HELD — CONTRACT_TYPE_OPENNESS_UNPROJECTABLE**. The capability, its
-root scenario and its complete capsule authority are present and selectable in SQL.
-The node planner rejects it before any body is produced. Nothing about the request
-was wrong, and nothing was retained by the failed attempt.
+The contract-openness blocker recorded in the previous assessment is resolved.
+`sfx capability invoke` no longer requires preparation, and the node type
+projection now admits deliberately open contract positions instead of throwing.
+The scaffold now resolves, plans all sixteen scenario bodies in memory, loads
+224 modules, and reaches kernel execution. The remaining hold is in the
+capability's own admitted semantic transformation, which fails for
+blueprint-absent requests identically under the canonical SDA evaluator.
 
 ## The command
 
@@ -17,7 +20,6 @@ scaffold whose invocation terminates at `PROVIDER_REQUIRED`; it is exactly the c
 scaffold capability exists to serve.
 
 ```powershell
-sfx capability prepare generate-executable-capability-scaffold --timeout 600000 --json
 sfx capability invoke generate-executable-capability-scaffold --input '@examples/rapidapi-scaffold.request.json' --json
 ```
 
@@ -39,9 +41,7 @@ The topology is the one part that is authored rather than read. The scaffold ref
 invent geometry — a request carrying no declared topology returns
 `BLUEPRINT_TOPOLOGY_NOT_DECLARED` — so a candidate topology has to be supplied by a human
 or by the design resolver. No admitted canonical blueprint exists for this capability yet,
-so the request is `DESIGN_RESOLVER_CANDIDATE` rather than blueprint-conditioned, and the
-scaffold would report completeness level `TOPOLOGY_RESOLVED` rather than
-`COMPOSITION_RESOLVED`.
+so the request is `DESIGN_RESOLVER_CANDIDATE` rather than blueprint-conditioned.
 
 Three of the four declared capability slots — `bind-external-credential-reference`,
 `project-governed-http-request-body`, `observe-governed-http-exchange` — are present in
@@ -50,7 +50,7 @@ is not in the estate and would resolve `NOT_FOUND`, becoming the next bounded au
 obligation. That asymmetry is the useful part of the answer and is the reason the
 inventory is supplied in full rather than summarized.
 
-## What the database already supports
+## What the direct invocation now reaches
 
 The authority read succeeds completely. Selecting only `capabilityId` resolves the root
 scenario without an identity heuristic:
@@ -60,114 +60,78 @@ capability                generate-executable-capability-scaffold   (sidefx:capa
 root scenario             generate-executable-capability-scaffold
 input / event / outcome   executable-scaffold-request / … / executable-capability-scaffold
                           both RESOLVED
-capsule digest            sha256:1964af7aa6efd80dc21e9699e1a84eafb368899da0838e2f695cfad38b6b81aa
-retained entries          24 capsule sources + 7 pinned platform declarations
-node readiness            CAN_ATTEMPT_EMBODIMENT, 0 of 1074 requirements open
 ```
 
-`csharp` and `python` report the same readiness; `cpp`, `go` and `java` report
-`NOT_OBSERVABLE` with 948 open requirements. All SQL responses report `MEMORY_ONLY`. So
-the readiness view says this capability is embodiable, and the selection, retention and
-coherence guarantees all hold for it.
+The node planner now projects the scaffold's deliberately open contract positions instead
+of throwing on them. Three projection rules cover the estate-wide scan from the previous
+assessment:
 
-## Where it stops
+| Declared shape | Projection |
+| --- | --- |
+| `type: array` without `items` | `unknown[]` — items admit any value, exactly as the schema admits |
+| `type: object` without `properties` (nested) | `Record<string, unknown>` — admits any object, rejects null, scalars and arrays, exactly as JSON Schema `type: object` |
+| `type: object` without `properties` (contract root) | an interface without declared fields; a root must stay an object type for the target graph |
 
-Planning throws, and the CLI surfaces the throw verbatim:
+The derived type-projection view records every such change in the
+`contract-projection.json` evidence with `runtimeAdmission: ORIGINAL_SCHEMA_UNCHANGED`;
+the original schema bytes remain the runtime admission authority. All 16 scenario
+bodies plan, and 224 modules load from memory.
 
-```json
-{"error":{"code":"DATABASE_INVOCATION_FAILED","details":{"operation":"prepare",
- "result":{"error":{"message":"Array schema at 'https://schemas.agentic-harness.local/contracts/carrier.schema.json#/properties/findings' has no admitted item schema."}}}}}
+Execution then fails with `CAPABILITY_EXECUTION_FAILED` (exit 4) during
+`execute-event-authority`, before outcome admission. The root port throws
+`TypeError: Cannot read properties of null (reading 'filter')` at its first
+blueprint-derived slot resolution.
+
+## The remaining hold: the admitted transformation assumes a forbidden absence value
+
+The failure is not in the embodiment. The scaffold's `semantic-transformation.authority.json`
+detects a missing `canonicalBlueprint` with:
+
+```text
+equals(format("{t}", { t: json-stringify(path(input, "payload.canonicalBlueprint.nodes")) }), "undefined")
 ```
 
-Exit code 4. `sfx capability invoke` then returns `CAPABILITY_PREPARATION_REQUIRED`,
-confirming the failed prepare retained no preparation.
+The declared transformation semantics make this comparison impossible to satisfy:
+a missing path evaluates to `null` (absence is one value, and a target-specific
+second empty value such as JavaScript `undefined` is declared non-portable), and
+`json-stringify(null)` is the string `"null"`. The comparison therefore always
+fails, the `[]` branch is dead code, and the blueprint-derived slots are computed
+from `null`, which the subsequent `filter` refuses.
 
-The cause is in the contract, not in the planner's handling of it. The scaffold's
-`carrier.schema.json` declares its accumulating fields as bare arrays:
-
-```json
-"findings":       { "type": "array" },
-"mechanicSlots":  { "type": "array" },
-"executionShell": { "type": "object" }
-```
-
-`JsonSchemaTypeGraphBuilder.buildNode` requires an admitted `items` schema for every array
-and throws when there is none. Sixteen such open positions exist across the scaffold's
-three contracts: seven open arrays and one open object in the carrier, two open arrays and
-five open objects in the input, one open object in the outcome.
-
-This openness is deliberate rather than sloppy. `generate-executable-capability-scaffold`
-is generic over every capability in the estate — it emits slots, findings and authored
-artifacts whose shapes belong to the capability being scaffolded, not to the scaffold.
-Ajv admits these documents at runtime exactly as intended. The conflict is that the node
-embodiment path does not merely admit contracts, it projects them into TypeScript types,
-and an unconstrained array has no type to project.
-
-The three capabilities that work through this path today —
-`resolve-sidefx-eligible-providers`, `admit-canonical-circuit-blueprint`,
-`adapt-job-market-intelligence-evidence` — all carry fully closed contracts. The path has
-therefore only ever been exercised against closed-contract capabilities.
+The same expression fails identically under the canonical
+`semantic-transformation-evaluator.mjs` from the pinned SDA checkout with the same
+input, so the native lowering is faithful and there is nothing an embodiment
+provider may legally change. The defect belongs to the admitted transformation
+authority: its absence detection should compare against `"null"` (or use a
+declared try/parse form) rather than `"undefined"`. Correcting it is a database
+change-surface operation — a corrected capsule generation with honest lineage —
+not an embodiment edit. The transformation's blueprint-present branch is not
+exercised by this assessment.
 
 ## How far this reaches
 
-Scanning all 1,114 `contracts/*.schema.json` documents retained for `MANAGED_CAPSULE`
-sources in the selected snapshot separates two distinct conditions:
+The previous blocker is gone: no contract shape on the invocation path throws
+during planning, so any capability whose contracts were previously rejected for
+open arrays now plans. The regeneration of the three regression capabilities
+passed the full estate verification (17/17 fixtures, 320 kernel observations,
+five negative checks across ten scenario bodies) and memory parity; the changed
+contract projections are confined to `Record<string, unknown>` replacements for
+previously silent empty interfaces in `admit-canonical-circuit-blueprint`.
 
-| Condition | Builder behavior | Documents | Capsules |
-| --- | --- | ---: | ---: |
-| `type: array` with no `items` | throws `has no admitted item schema` | 49 | 30 |
-| `type: object` with no `properties` | projects an object type with zero properties | 184 | 102 |
-
-The first row is the blocker the scaffold hit. The second is worse in kind and quieter:
-`buildObject` reads a missing `properties` as an empty property map and emits a type
-carrying none of the document's fields, with no finding and no hold. Any capability whose
-contract declares an open object is already projectable in a way that silently discards
-contract meaning, and 102 capsules carry at least one.
-
-Two caveats on these counts. The builder only walks contracts reachable from the catalog
-of the scenarios being projected, so 30 capsules is an upper bound on capabilities blocked
-by their own contracts rather than a confirmed count. And a capsule digest is not a
-capability identity; a capability with several retained revisions contributes more than
-once.
-
-## What this owes
-
-The scaffold is not blocked on database candidate authoring, capsulization, or broader
-provider profiles — the work [database-direct-invocation.md](database-direct-invocation.md)
-already names as outstanding. It is blocked on a narrower and more specific question: what
-a node embodiment should do with a contract that is deliberately open.
-
-Three candidate resolutions, none of which this assessment admits:
-
-1. **Project openness explicitly.** Give the type graph an admitted unknown/JSON node so an
-   unconstrained array becomes `unknown[]` rather than a throw. `buildNode` already returns
-   `{ kind: "primitive", primitive: "unknown" }` for a typeless schema, so the vocabulary
-   exists; it is simply not reachable from `type: array`. This also repairs the silent
-   open-object case, which should become an explicit unknown rather than an empty object.
-2. **Close the scaffold's contracts.** Constrain `findings`, `mechanicSlots` and the rest to
-   item schemas. This changes admitted contract authority for a published capability, and
-   the openness is load-bearing for a capability generic over the estate, so it trades a
-   planner limit for a design loss.
-3. **Hold explicitly.** Have the planner report `CONTRACT_TYPE_OPENNESS_UNPROJECTABLE`
-   naming every open position, rather than throwing the first one it meets. This resolves
-   nothing on its own but converts a stack trace into a finding, and would have surfaced
-   all 16 positions in one read instead of one per attempt.
-
-Option 1 carrying option 3's reporting is the smaller and more honest change: it keeps
-admitted contract authority untouched, makes the existing unknown vocabulary reachable,
-and turns both the loud and the silent openness cases into declared dispositions. It would
-need its own parity evidence before any claim that a scaffolded capability projects
-correctly, because an unknown-typed projection is exactly the shape that
-`npm run verify:memory` cannot distinguish from a correct one.
+The scaffold itself remains uninvokable end-to-end only because its own
+transformation defects on the blueprint-absent request. A request carrying an
+admitted canonical blueprint would exercise the blueprint-present branch, which
+this assessment does not run.
 
 ## Boundaries
 
-The scaffold capability was never executed. No scaffold, blueprint carrier, or authoring
-artifact was produced for `resolve-equity-market-price-evidence`, and none of its four
-open event-mechanic slots were resolved. The RapidAPI provider was not called; no
-credential was resolved and no HTTP exchange was attempted. No database write was made:
-the single `prepare` attempt failed during proving and retained nothing, which the
-subsequent `CAPABILITY_PREPARATION_REQUIRED` confirms. The estate-wide contract scan is a
-read over one snapshot and reports document and capsule counts, not capability counts.
-The slot dispositions described above are what the scaffold's declared contract requires
-of a conforming run; they are expectations from reading the authority, not observed output.
+The scaffold capability was never executed to a terminal outcome. No scaffold,
+blueprint carrier, or authoring artifact was produced for
+`resolve-equity-market-price-evidence`, and none of its four open event-mechanic
+slots were resolved. The RapidAPI provider was not called; no credential was
+resolved and no HTTP exchange was attempted. No database write was made: direct
+invocation performs three restricted reads and executes in memory. The estate-wide
+contract scan from the previous assessment is a read over one snapshot and reports
+document and capsule counts, not capability counts. The slot dispositions described
+above are what the scaffold's declared contract requires of a conforming run; they
+are expectations from reading the authority, not observed output.

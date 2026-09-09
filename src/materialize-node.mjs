@@ -143,6 +143,10 @@ export async function planNode({ bundle, sdaRoot }) {
   const structuralProfile = json((await readPlatform('languages/typescript/projection/scenario-kernel-node.projection.json')).toString('utf8'));
   const schemaRef = source => source.value.$id ?? source.source_path;
   const schemaViews = contractSources.map(c => ({ ...c, ...NodeConsumerObjectProvider.schemaForTypeProjection(c.source.value, c.source.source_path) }));
+  // Open objects project as Record<string, unknown>: any object is admitted,
+  // null, scalars and arrays are not, exactly as JSON Schema type "object".
+  const openObjectPointers = new Set(schemaViews.flatMap(c => c.changes.filter(change => change.from === 'open-object')
+    .map(change => `${schemaRef(c.source)}#${change.sourcePointer}`)));
   const profile = { ...structuralProfile, objects: contractSources.map(({ id, source }) => ({ schemaRef: schemaRef(source), typeName: name(id) })), outputDirectory: 'contracts' };
   const typeRoots = schemaViews.filter(c => requiredContracts.has(c.id) || c.schema.type === 'object').map(c => schemaRef(c.source));
   const canonicalTypes = new JsonSchemaTypeGraphBuilder(ref => one(schemaViews.filter(c => c.source.source_path === ref || c.source.value.$id === ref), 'CONTRACT_SCHEMA_SOURCE:' + ref).schema).build(typeRoots);
@@ -152,7 +156,7 @@ export async function planNode({ bundle, sdaRoot }) {
     const source = one(schemaViews.filter(c => c.source.source_path === ref || c.source.value.$id === ref), 'CONTRACT_POINTER_SOURCE:' + ref);
     return fragment.split('/').filter(Boolean).reduce((value, segment) => value[segment.replaceAll('~1', '/').replaceAll('~0', '~')], source.schema);
   };
-  const contractPlan = NodeConsumerObjectProvider.renderContracts(new TargetProjectionGraphBuilder(canonicalTypes, profile).build(), profile, new NodeStructuralProjectionProvider(), ts, canonicalTypes, schemaAt);
+  const contractPlan = NodeConsumerObjectProvider.renderContracts(new TargetProjectionGraphBuilder(canonicalTypes, profile).build(), profile, new NodeStructuralProjectionProvider(), ts, canonicalTypes, schemaAt, openObjectPointers);
   const copied = new Map();
   const copyRuntime = async relative => {
     if (copied.has(relative)) return;
