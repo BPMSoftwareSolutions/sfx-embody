@@ -43,8 +43,8 @@ try {
     syncBuiltinESMExports();
   }
   console.error(JSON.stringify({ stage: 'read-database', capabilityId, mode }));
-  const bundle = await readAuthority(config.databaseRoot, selection, { retainObjects: false });
-  for (const result of [bundle.authority, bundle.resolutions, bundle.mechanics]) assert.equal(result.objectRetention, 'MEMORY_ONLY');
+  const bundle = await readAuthority(config.databaseRoot, selection, { retainObjects: false, resolution: 'requirements' });
+  for (const result of [bundle.authority, bundle.closure, bundle.resolutions, bundle.mechanics]) assert.equal(result.objectRetention, 'MEMORY_ONLY');
   console.error(JSON.stringify({ stage: 'plan-native-body', capabilityId, mode }));
   const plan = await planNode({ bundle, sdaRoot: config.sdaRoot });
   const entry = plan.receipts.find(r => r.plan.scenarioId === selection.scenarioId);
@@ -91,7 +91,7 @@ try {
   console.log(JSON.stringify({ disposition: 'PASSED', mode, capabilityId, scenarioId: selection.scenarioId,
     snapshotId: bundle.authority.snapshotId, projectionDigest: bundle.authority.projectionDigest,
     authorityIdentity: Object.fromEntries(['scenarioDefinitionDigest', 'pinnedPlatformCommit', 'platformDigest', 'resolverVersion', 'artifactDigest'].map(key => [key, entry.receipt[key]])),
-    queryEvidence: [bundle.authority, bundle.resolutions, bundle.mechanics].map(({ recordsets, ...evidence }) => evidence),
+    queryEvidence: [bundle.authority, bundle.closure, bundle.resolutions, bundle.mechanics].map(({ recordsets, ...evidence }) => evidence),
     sourceScope: { retainedCapabilitySources: bundle.authority.recordsets[1].length, retainedPlatformSources: bundle.authority.recordsets[2].length },
     bodyFiles: plan.files.filter(f => f.relativePath.includes('/body/')).map(({ content, ...file }) => file),
     fixtureCount: results.length, assertionCount: results.reduce((n, r) => n + r.assertions.length, 0),

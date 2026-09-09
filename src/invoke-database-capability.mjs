@@ -53,6 +53,6 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot }
         providerStatus: 'CANDIDATE_PHYSICAL_PROVIDER', inputDigest: digest(request.input), resultDigest: digest(result),
         snapshotId: bundle.authority.snapshotId, projectionDigest: bundle.authority.projectionDigest,
         authorityIdentity: Object.fromEntries(['scenarioDefinitionDigest', 'pinnedPlatformCommit', 'platformDigest', 'resolverVersion', 'artifactDigest'].map(key => [key, entry.receipt[key]])),
-        queries: [bundle.authority, bundle.resolutions, bundle.mechanics].map(({ recordsets, ...identity }) => identity),
+        queries: [bundle.authority, bundle.closure, bundle.resolutions, bundle.mechanics].filter(Boolean).map(({ recordsets, ...identity }) => identity),
         modules: runtime.modules, resources: runtime.accesses, externalDependencies: runtime.externalDependencies } } };
 }

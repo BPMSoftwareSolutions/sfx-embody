@@ -22,7 +22,7 @@ for (const request of config.cases) {
   const selection = json(await fs.readFile(request.selectionFile, 'utf8'));
   const result = { selection, implementationDigest, installations: [] };
   try {
-    const bundle = await readAuthority(config.databaseRoot, selection);
+    const bundle = await readAuthority(config.databaseRoot, selection, { resolution: 'requirements' });
     snapshotId ??= bundle.authority.snapshotId;
     projectionDigest ??= bundle.authority.projectionDigest;
     if (snapshotId !== bundle.authority.snapshotId || projectionDigest !== bundle.authority.projectionDigest) throw new Error('DATABASE_AUTHORITY_CHANGED_DURING_REGRESSION');

@@ -20,10 +20,16 @@ export async function planNode({ bundle, sdaRoot }) {
   const selected = one(authority.recordsets[0], 'CAPABILITY_SCENARIO_SELECTION');
   const capabilityId = selected.capability_id;
   if (capabilityId !== selection.capabilityId || selected.scenario_id !== selection.scenarioId) throw new Error('SELECTION_DIVERGENCE');
-  if ([authority, resolutions, bundle.mechanics].some(r => r.truncated || r.snapshotId !== authority.snapshotId || r.projectionDigest !== authority.projectionDigest)) throw new Error('MIXED_DATABASE_AUTHORITY');
-  const readiness = one(resolutions.recordsets[1].filter(r => r.target_language === 'node'), 'NODE_READINESS');
-  if (readiness.readiness !== 'CAN_ATTEMPT_EMBODIMENT') throw new Error('NODE_BINDINGS_HELD');
-  const requirements = resolutions.recordsets[0].filter(r => r.target_language === 'node');
+  // Reads actually taken must agree on snapshot and projection. The resolver map
+  // is optional, so it is checked only when it was read.
+  if ([authority, bundle.closure, resolutions, bundle.mechanics].filter(Boolean)
+    .some(r => r.truncated || r.snapshotId !== authority.snapshotId || r.projectionDigest !== authority.projectionDigest)) throw new Error('MIXED_DATABASE_AUTHORITY');
+  // The resolver readiness aggregate is not consulted here. It pre-answered a
+  // question this planner answers below with a more specific error -- an
+  // unresolved port reports PORT_IMPLEMENTATION_NOT_RESOLVED naming the port,
+  // where the gate reported only NODE_BINDINGS_HELD -- and producing it required
+  // the whole per-requirement matrix. Callers wanting readiness read the resolver
+  // map explicitly via readAuthority({ resolution: 'requirements' }).
   const records = [...authority.recordsets[1], ...authority.recordsets[2]].map(record => {
     const bytes = Buffer.from(record.content_bytes.base64, 'base64');
     if (hash(bytes) !== record.content_digest) throw new Error('SOURCE_BYTES_DIGEST_MISMATCH:' + record.source_path);
@@ -89,7 +95,7 @@ export async function planNode({ bundle, sdaRoot }) {
   const { SemanticTransitionGraphBuilder } = await load('artifacts/tools/dist/consumer-projection/authority/semantic-transition-graph-builder.js');
   const { SemanticExecutionGraphCompiler } = await load('languages/typescript/runtimes/node/semantic-execution-graph/index.js');
   const allScenarios = new GherkinScenarioGraphBuilder(new AnnotatedGherkinParser()).build(feature.text);
-  const closure = resolutions.recordsets[2];
+  const closure = bundle.closure.recordsets[0];
   if (closure.some(r => r.cycle_detected)) throw new Error('SCENARIO_INVOCATION_CYCLE');
   const scenarios = closure.map(r => one(allScenarios.filter(s => s.scenarioId === r.downstream_scenario_id), 'SCENARIO_SOURCE_RESOLUTION'));
   const executionAuthorities = scenarios.map(s => one(execution.value.executionAuthorities.filter(a => a.id === s.event.executionAuthorityId && a.owningScenarioId === s.scenarioId), 'EVENT_AUTHORITY_RESOLUTION'));
@@ -112,8 +118,24 @@ export async function planNode({ bundle, sdaRoot }) {
     executionAuthorities: execution.value.executionAuthorities, interfaceAuthority, semanticTransformations,
     sourceRefs: [capability.source_path, feature.source_path, execution.source_path, graphAuthority.source_path, interfaces.source_path, ...new Set(Object.values(provenance.ports).map(p => p.sourceRef))] };
   const compiledGraph = new SemanticExecutionGraphCompiler().compile(graphInput);
-  const nativeBindings = [...new Map(requirements.filter(r => r.requirement_kind === 'MECHANIC').map(r => [r.implementation_id + ':' + r.implementation_export, r])).values()];
-  const native = one(nativeBindings, 'NATIVE_MECHANIC_PROVIDER');
+  // The native mechanic provider is declared by the pinned mechanic registry
+  // already carried in this bundle, so it is read from there rather than
+  // re-derived from the resolver map. one() still refuses a registry that
+  // declares zero or several transformation ports.
+  const transformationPort = one(registry.value.eventPorts.filter(p => p.invocation === 'transformation'), 'NATIVE_MECHANIC_PROVIDER');
+  const native = { implementation_id: path.posix.join(registry.value.providerModuleRoot, transformationPort.providerModule),
+    implementation_export: transformationPort.providerExport };
+  // Sourcing the pair from the registry would make the old comparison against the
+  // database's own resolution a tautology. Where the requirement matrix was read
+  // -- prepare, verify:estate, the probe -- the original derivation is still
+  // performed and the two must agree. The invoke path does not read the matrix,
+  // so it cannot make this comparison; that is the cost this change accepts.
+  if (resolutions) {
+    const declared = one([...new Map(resolutions.recordsets[0].filter(r => r.target_language === 'node' && r.requirement_kind === 'MECHANIC')
+      .map(r => [r.implementation_id + ':' + r.implementation_export, r])).values()], 'NATIVE_MECHANIC_PROVIDER');
+    if (declared.implementation_id !== native.implementation_id || declared.implementation_export !== native.implementation_export)
+      throw new Error('NATIVE_MECHANIC_PROVIDER_DIVERGENCE:' + declared.implementation_id + '#' + declared.implementation_export);
+  }
   const mechanicSource = (await readPlatform(native.implementation_id)).toString('utf8');
   const provider = new NodeConsumerObjectProvider({ typescript: ts, mechanicSource, mechanicSourceRef: native.implementation_id,
     mechanicExport: native.implementation_export,
@@ -191,7 +213,11 @@ export async function planNode({ bundle, sdaRoot }) {
       : `import { createScenario as create${d.className} } from ${JSON.stringify(d.module.replace(/scenario\.mjs$/, 'composition.mjs'))};`).join('\n');
     add(`${base}/body/composition.mjs`, `import fs from 'node:fs';\nimport { ${name(scenario.scenarioId)}Scenario } from './scenario.mjs';\nimport { ${admission.providerExport} } from './providers/sda/${admissionModule}';\n${imports}\n\nexport function createScenario({ observer, clock }) {\n  const contracts = ${admission.providerExport}(JSON.parse(fs.readFileSync(new URL('./contracts/authority.json', import.meta.url), 'utf8')));\n  return new ${name(scenario.scenarioId)}Scenario({\n${dependencies.map(d => `    ${JSON.stringify(d.id)}: ${d.kind === 'invoke-port' ? `new ${d.className}()` : `create${d.className}({ observer, clock })`}`).join(',\n')}\n  }, contracts, observer, clock);\n}\n`, [interfaces.source_path, execution.source_path, registry.source_path]);
     add(`${base}/evidence/authority.json`, pretty({ selection, selected, snapshotId: authority.snapshotId, projectionDigest: authority.projectionDigest,
-      query: { inputDigest: authority.inputDigest, resultDigest: authority.resultDigest, resolutionDigest: resolutions.resultDigest },
+      // The closure read is always taken and is what planning consumed. The
+      // requirement matrix is optional, so its digest is recorded when it was
+      // read and named as absent when it was not, rather than reading as empty.
+      query: { inputDigest: authority.inputDigest, resultDigest: authority.resultDigest, closureDigest: bundle.closure.resultDigest,
+        resolutionDigest: resolutions ? resolutions.resultDigest : 'NOT_READ_WITHOUT_REQUIREMENT_MATRIX' },
       sources: records.map(({ text, bytes, content_bytes, ...r }) => r), scenario, executionAuthorities, nativeBinding: native,
       pinnedPlatformCommit: commit, platform: { commit, digest: platformDigest, files: platformSurface },
       resolver: { path: resolverFile, digest: resolverDigest, components: resolverComponents, status: 'CANDIDATE_PHYSICAL_PROVIDER' } }));
@@ -208,7 +234,7 @@ export async function planNode({ bundle, sdaRoot }) {
       return { portId: l.portId, transformationId: l.transformationId, sourceRef: l.sourceRef, sourceDigest: l.sourceDigest, contentBase64: source.bytes.toString('base64') };
     })));
     add(`${base}/evidence/canonical-execution-graph.json`, pretty(compiledGraph));
-    add(`${base}/evidence/target-readiness.json`, pretty(resolutions.recordsets[1]));
+    if (resolutions) add(`${base}/evidence/target-readiness.json`, pretty(resolutions.recordsets[1]));
   }
   const printer = ts.createPrinter({ newLine: ts.NewLineKind.LineFeed });
   // Format generated code for inspection; copied native runtime bytes stay exact.
@@ -242,7 +268,13 @@ export async function planNode({ bundle, sdaRoot }) {
     const receipt = { capabilityId, scenarioId, target: 'node',
       profile: 'full-mechanics', scenarioDefinitionDigest: 'sha256:' + Buffer.from(one(closure.filter(r => r.downstream_scenario_id === scenarioId), 'SCENARIO_DIGEST').scenario_definition_digest.base64, 'base64').toString('hex'),
       embodimentPlanDigest: hash(pretty(plan)), resolverVersion: resolverDigest, pinnedPlatformCommit: commit, platformDigest,
-      providers: [...new Set(requirements.filter(r => r.downstream_scenario_id === scenarioId).flatMap(r => [r.provider_id, r.provider_profile_id]).filter(Boolean))],
+      // Provider lineage is resolver-map testimony. It is recorded when the
+      // matrix was read and reported as unresolved when it was not, rather than
+      // emitting an empty set that would read as "no providers".
+      providers: resolutions
+        ? [...new Set(resolutions.recordsets[0].filter(r => r.target_language === 'node' && r.downstream_scenario_id === scenarioId)
+            .flatMap(r => [r.provider_id, r.provider_profile_id]).filter(Boolean))]
+        : 'NOT_RESOLVED_WITHOUT_REQUIREMENT_MATRIX',
       artifactDigest: hash(pretty(body)), revealDigest: null, disposition: 'PLANNED_AWAITING_EXECUTION',
       managedAdmission: 'NOT_REQUESTED', resolverStatus: 'CANDIDATE_PHYSICAL_PROVIDER' };
     return { base, plan, receipt };

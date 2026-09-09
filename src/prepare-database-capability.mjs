@@ -70,7 +70,7 @@ export async function proveMemoryPlan(plan, sdaRoot) {
 
 export async function prepareDatabaseCapability(selection, config, measure, timings) {
   const recipeDigest = await preparationRecipe(config);
-  const bundle = await measure('readAuthority', () => readAuthority(config.databaseRoot, selection, { retainObjects: false, timings: timings.queries }));
+  const bundle = await measure('readAuthority', () => readAuthority(config.databaseRoot, selection, { retainObjects: false, timings: timings.queries, resolution: 'requirements' }));
   const plan = await measure('planNativeBody', () => planNode({ bundle, sdaRoot: config.sdaRoot }));
   const proof = await measure('proveRetainedFixtures', () => proveMemoryPlan(plan, config.sdaRoot));
   // Do not publish if the local implementation changed during a long derivation.
@@ -82,5 +82,5 @@ export async function prepareDatabaseCapability(selection, config, measure, timi
     evidence: { timings, authoritySource: 'DATABASE', preparationStorage: 'DATABASE', bodyStorage: 'MEMORY_ONLY',
       managedAdmission: 'NOT_REQUESTED', providerStatus: 'CANDIDATE_PHYSICAL_PROVIDER', recipeDigest,
       snapshotId: bundle.authority.snapshotId, projectionDigest: bundle.authority.projectionDigest,
-      queries: [bundle.authority, bundle.resolutions, bundle.mechanics].map(({ recordsets, ...identity }) => identity) } } };
+      queries: [bundle.authority, bundle.closure, bundle.resolutions, bundle.mechanics].map(({ recordsets, ...identity }) => identity) } } };
 }
