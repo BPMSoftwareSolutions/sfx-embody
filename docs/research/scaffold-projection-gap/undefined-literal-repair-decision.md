@@ -1,9 +1,10 @@
 # Repair decision: the `"undefined"` absence-comparison literals
 
-Status: **pre-fix decision record.** The repair has been executed end-to-end
-with ROLLBACK (dry run) and verified clean. This document nails down the
-defect, the complete repair inventory, the verification matrix, the residues,
-and the post-commit acceptance before anyone flips the script to COMMIT.
+Status: **applied 2026-09-09.** The repair was executed as an owner login with
+the verification matrix clean, then committed. The post-fix acceptance —
+invoking `generate-executable-capability-scaffold` with the plain request, no
+blueprint, no padding — passes: exit 0, `SCENARIO_DECLARED`,
+`TOPOLOGY_RESOLVED`. The residues listed below stand as recorded.
 
 The fix artifact is
 [`apply-undefined-literal-fix.sql`](apply-undefined-literal-fix.sql), which
@@ -106,6 +107,29 @@ Measurement note: occurrence counting must happen in byte/varchar space. A
 encoding artifact of the cast, not a property of the data); the authoritative
 counts are 12/8/8/4/3 in byte space, and the script never counts through
 nvarchar.
+
+## Execution record (2026-09-09)
+
+The script was run twice through the dbo connection (`cmsappaccount`, db_owner):
+
+1. Dry run ending in ROLLBACK — all five verification recordsets matched the
+   matrix above; new objects 53002–53006 were discarded.
+2. Commit run — the final lines were flipped (`ROLLBACK` commented,
+   `COMMIT` active) and the transaction committed. New document objects
+   53013–53017 (`DIGEST_OK` each), byte lengths 35,433 / 138,613 / 44,985 /
+   30,309 / 24,044 — deltas exactly 5 × occurrences.
+
+Independent post-fix state check: 0 nodes on 5029, 35 nodes on the `"null"`
+literal object, 0 guards disabled, FK trusted, 0 definitions carrying
+`"undefined"`, 0 stale definition digests.
+
+Acceptance:
+
+| Run | Exit | Result |
+| --- | --- | --- |
+| `sfx capability invoke generate-executable-capability-scaffold --input '@examples/rapidapi-scaffold.request.json'` (plain request, the defect's own test) | 0 | terminated, `SCENARIO_DECLARED`, `TOPOLOGY_RESOLVED`, `SCAFFOLD_INCOMPLETE`, 3 FOUND / 1 NOT_FOUND, 8-item queue |
+| same capability, blueprint-conditioned request | 0 | HELD, `COMPOSITION_RESOLVED` — unchanged |
+| `resolve-sidefx-eligible-providers` (untouched capability) | 0 | `PROVIDERS_RESOLVED` — estate unaffected |
 
 ## Residues (unchanged by the fix, recorded not fixed)
 

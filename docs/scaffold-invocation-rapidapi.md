@@ -5,13 +5,12 @@ through the direct database path in [database-direct-invocation.md](database-dir
 to scaffold a RapidAPI provider capability.
 
 The contract-openness blocker recorded in the previous assessment is resolved,
-and the capability now runs end-to-end through the direct invocation. The
-blueprint-conditioned path completes with exit 0. The remaining data defect is
-exactly located: 35 literal rows across 5 transformations that compare
-`json-stringify(...)` against `"undefined"`, a value that comparison can never
-produce. The blueprint-absent path still fails on the first of those rows; the
-blueprint-conditioned path survives all but one, which it works around with a
-fully-populated request.
+and the capability now runs end-to-end through the direct invocation on both
+paths. The blueprint-conditioned request completes with exit 0 and
+`COMPOSITION_RESOLVED`. The plain request — no blueprint, no padded fields —
+now takes the authored absence branch and completes with exit 0,
+`SCENARIO_DECLARED` and `TOPOLOGY_RESOLVED`, after a one-time repair of the
+`"undefined"` absence literals described below.
 
 ## The successful run
 
@@ -76,7 +75,7 @@ Two example corrections were required before the run above could exist.
 
 ## The data defect: rows, not architecture
 
-The transformation detects absent input with comparisons of the form
+The transformation detected absent input with comparisons of the form
 
 ```text
 equals(format("{t}", { t: json-stringify(path(input, …)) }), "undefined")
@@ -85,59 +84,44 @@ equals(format("{t}", { t: json-stringify(path(input, …)) }), "undefined")
 The declared semantics make that comparison unsatisfiable: a missing path
 evaluates to `null` (absence is one value; a target-specific second empty value
 such as JavaScript `undefined` is non-portable), and `json-stringify(null)` is
-the string `"null"`. Every one of these guards is false on absence, the empty
-branch is unreachable, and the absent value proceeds to the next mechanic —
-`filter` throws on null, `length` throws `OPERAND_NOT_MEASURABLE`.
+the string `"null"`. Every one of these guards was false on absence, the empty
+branch unreachable, and the absent value proceeded to the next mechanic —
+`filter` threw on null, `length` threw `OPERAND_NOT_MEASURABLE`.
 
 Location 1 — the normalized expression nodes:
 
 ```text
 table   model.transformation_expression_node
 column  literal_content_pk  ->  source.content_object.content_bytes
-value   "undefined"  (content_object_pk 5029, 11 bytes, sha256:cf939b39…)
+value   "undefined"  (content_object_pk 5029, 11 bytes)
 refs    35 expression nodes, 0 other references
 ```
 
-All 35 are the right operand of such a comparison; there is no legitimate use
-of the shared bytes mixed in. Rows by namespace:
+All 35 were the right operand of such a comparison, spanning 5 namespaces
+(12/8/8/4/3). Location 2 — the five `semantic-transformation.authority.json`
+source documents, which `planNode` actually reads — carried the same 35
+occurrences, and a third copy existed in the derived canonical definition
+envelopes.
+
+**Repaired 2026-09-09.** [`apply-undefined-literal-fix.sql`](research/scaffold-projection-gap/apply-undefined-literal-fix.sql)
+rewrites all three locations (documents, expression nodes, canonical
+envelopes), recomputes the derived digests, and records its verification
+matrix; the [decision record](research/scaffold-projection-gap/undefined-literal-repair-decision.md)
+documents the execution and acceptance. The plain request now takes the
+authored absence branch:
 
 ```text
-sidefx:capability:generate-executable-capability-scaffold  12  (expression_node_pk 28589, 28612, 28636, 28718,
-                                                              28742, 28774, 28798, 28822, 29833, 29888, 30107, 30169)
-sidefx:capability:provision-capability-artifacts            8
-sidefx:capability:admit-registry-asset                      8
-sidefx:capability:resolve-capability-proof-obligations      4
-sidefx:capability:resolve-estate-dependency-closure         3
+sfx capability invoke generate-executable-capability-scaffold --input '@examples/rapidapi-scaffold.request.json'
+exit 0 | SCENARIO_DECLARED | TOPOLOGY_RESOLVED | SCAFFOLD_INCOMPLETE
 ```
 
-Location 2 — the source documents:
-
-```text
-table   source.source_appearance.entry_id = 'semantic-transformation.authority.json'  ->  source.content_object
-```
-
-Five documents carry the same literal with the same per-namespace counts
-(12/8/8/4/3; 35 total, reconciled against the normalized rows). The scaffold's
-document is content_object_pk 2123, sha256:24d056c4…, 138,673 bytes. `planNode`
-reads these bytes, not the normalized nodes, so Location 2 is the one that
-changes invocation behavior; Location 1 keeps the normalized model honest and
-both must agree.
-
-## What a repair touches
-
-The correct value is `"null"`, not `"undefined"`. The bytes exist in both
-locations, and `source.content_object` is shared by digest, so a repair inserts
-corrected bytes rather than editing shared ones. The live inventory is
+Two residues remain and are recorded, not fixed: the affected
+`source.source_appearance.capsule_digest` values still name the pre-fix
+capsules (nothing in SQL validates or recomputes them; they stay wrong until
+the capsules are repacked), and re-running capture/derive would reproduce the
+original bytes — the repaired state is hand-reproducible via the script, not
+via the ingest pipeline. The estate-wide row inventory is
 `docs/research/scaffold-projection-gap/undefined-literal-inventory.sql`.
-
-The route is a new generation, not an in-place update: all three guards
-(`model.guard_transformation_expression_node`, `source.guard_content_object`,
-`source.guard_source_appearance`) are enabled and reject UPDATE with 51003
-IMMUTABLE_INSPECTION_DATA. Corrected source capsules flow through the ingest
-pipeline into a new snapshot and a new published model, exactly as
-apply-contract-fix.sql concluded for the contract bytes. The "repoint" shape is
-what the derivation produces inside that new generation — new appearance rows
-and new literal references — never an edit of the published rows.
 
 ## Remaining findings
 
@@ -150,10 +134,10 @@ finding from the `"undefined"` literals above.
 ## Boundaries
 
 The blueprint-conditioned run is a completed scaffold outcome; it is not a
-published capability. The scaffold was executed with `DESIGN_RESOLVER_CANDIDATE`
-topology; no database write was made (direct invocation performs three
-restricted reads and executes in memory). The RapidAPI provider was not called;
-no credential was resolved and no HTTP exchange was attempted. The
-blueprint-absent path still fails on the first `"undefined"` guard; until the
-35 literal rows are corrected through a new generation, absence remains
-unhandled and requests must be fully populated.
+published capability. The plain-request run is the authored absence branch and
+now completes the same way. The scaffold was executed with
+`DESIGN_RESOLVER_CANDIDATE` topology; no database write was made by invocation
+(direct invocation performs three restricted reads and executes in memory; the
+literal repair above is a separate, recorded one-time database operation). The
+RapidAPI provider was not called; no credential was resolved and no HTTP
+exchange was attempted.
