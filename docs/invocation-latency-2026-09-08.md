@@ -1,5 +1,10 @@
 # Database invocation latency
 
+This is the original diagnostic record. [Database preparation](database-preparation.md)
+now removes the resolver query from invocation; native `sfx` acceptance completes
+in about three seconds using one SQL lookup. The earlier shared-load timings
+below are not an isolated before/after benchmark.
+
 The resolver query dominates invocation time. A measured executor run on
 2026-09-08 spent 120.912 seconds in `scenario-resolver-map.sql`. Generating the
 native body took 0.469 seconds; the capability itself executed in 2.639 ms.

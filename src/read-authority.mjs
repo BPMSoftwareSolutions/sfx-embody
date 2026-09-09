@@ -16,11 +16,13 @@ export async function readAuthority(databaseRoot, selection, { retainObjects = t
     if (authority.truncated || authority.recordsets[0].length !== 1) throw new Error('CAPABILITY_ROOT_SCENARIO_UNRESOLVED');
     selection = { ...selection, scenarioId: authority.recordsets[0][0].scenario_id };
   }
+  selection = { ...selection, namespaceId: authority.recordsets[0][0].namespace_id };
   const resolutions = await read('scenario-resolver-map.sql');
   const mechanics = await measure('mechanic-definitions.sql', () => query(`SELECT definition_json FROM analysis.v_selected_semantic_definition
     WHERE estate_model_pk=@estate_model_pk AND object_kind='MECHANIC'`, { rowLimit: 100000, retainObjects }));
   for (const result of [authority, resolutions, mechanics]) {
-    if (result.truncated || result.snapshotId !== authority.snapshotId || result.projectionDigest !== authority.projectionDigest)
+    if (result.truncated || result.snapshotId !== authority.snapshotId || result.projectionDigest !== authority.projectionDigest
+      || result.viewDefinitionDigest !== authority.viewDefinitionDigest)
       throw new Error('DATABASE_AUTHORITY_NOT_COHERENT');
   }
   return { selection, authority, resolutions, mechanics };

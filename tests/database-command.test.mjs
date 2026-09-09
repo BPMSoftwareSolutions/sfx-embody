@@ -19,3 +19,10 @@ test('the database boundary cannot reinterpret a different entity or unknown com
   assert.throws(() => validateDatabaseCommand(envelope(missing)), /CAPABILITY_INPUT_REQUIRED/);
   assert.throws(() => validateDatabaseCommand({ ...envelope(request), fallback: 'disk' }), /DELIVERY_PROTOCOL_REJECTED/);
 });
+
+test('preparation is explicit, selects authority and does not accept invocation input', () => {
+  const prepare = { deliveryType: 'sfx-command-delivery.v1', operation: 'prepare', request: { object: 'capability', verb: 'prepare', subject: 'example' } };
+  assert.equal(validateDatabaseCommand(prepare), prepare.request);
+  assert.throws(() => validateDatabaseCommand({ ...prepare, request: { ...prepare.request, input: null } }), /PREPARATION_INPUT_NOT_OFFERED/);
+  assert.throws(() => validateDatabaseCommand({ ...prepare, operation: 'invoke' }), /DATABASE_OPERATION_NOT_OFFERED/);
+});

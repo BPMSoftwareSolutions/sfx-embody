@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { invokeDatabaseCapability, validateDatabaseCommand } from './invoke-database-capability.mjs';
+import { executeDatabaseCommand, validateDatabaseCommand } from './invoke-database-capability.mjs';
 import { restrictMemoryProcess } from './restrict-memory-process.mjs';
 
 try {
@@ -27,7 +27,7 @@ try {
   process.env[connectionEnvironmentVariable] = connectionString(connectionEnvironmentVariable);
   const processEvidence = restrictMemoryProcess(config);
   const setupTime = performance.now();
-  const result = await invokeDatabaseCapability(envelope, config);
+  const result = await executeDatabaseCommand(envelope, config);
   result.outcome.evidence.timings.processSetup = setupTime;
   result.outcome.evidence.timings.processTotal = performance.now();
   result.outcome.evidence.process = processEvidence;
