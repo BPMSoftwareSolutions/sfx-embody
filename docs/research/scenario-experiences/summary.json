@@ -1,0 +1,2219 @@
+{
+  "observedAt": "2026-09-09T11:52:50.141Z",
+  "proof": {
+    "snapshotId": "sha256:1a770ac0795d10665a88166f8d8c968dc5b2d030fdfab2b837aa6071d135f9e9",
+    "projectionDigest": "sha256:e036610730972f246d8e33cd882e45dd793013076aea2e401086b93d4993a7ee",
+    "viewDefinitionDigest": "sha256:b574443a65db450c9f269105d725acb98087cfc0e524f6982a27d5169a110564",
+    "queryDigest": "sha256:329558b394a20e5c16f2c93f5108ee1a1837695e9fb932b0f68cf48293c56ab6",
+    "resultDigest": "sha256:9e6c192905ac8562247d5885476a85666da712f7359f08d9520b9213751012b1",
+    "resultObjectDigest": "sha256:4aca416f6cd2ff110b50bd3652b255eaf2e2881da041b16ff4f680bac8b9ce69",
+    "resultCanonicalization": "sorted-multiset-per-recordset.v1",
+    "rowLimit": 100000,
+    "truncated": false,
+    "rowCounts": [
+      16,
+      824,
+      630,
+      2472,
+      160,
+      2,
+      219
+    ],
+    "disposition": "READ_QUERY_COMPLETE",
+    "objectRetention": "MEMORY_ONLY"
+  },
+  "method": "Schema-position census including $defs and conditional branches; no runtime coverage or satisfiability claim. Boolean additionalProperties is counted as a subschema; same schema reused by scenarios is counted at each scenario binding. Object openness features describe missing LOCAL closure keywords, not effective admission after allOf, references, conditions or unevaluatedProperties. Root class precedence is reference, composition, record envelope, direct record, other type.",
+  "counts": {
+    "selectedDefinitions": [
+      {
+        "object_kind": "AUTHORITY",
+        "definition_count": "36"
+      },
+      {
+        "object_kind": "BLUEPRINT",
+        "definition_count": "35"
+      },
+      {
+        "object_kind": "CAPABILITY",
+        "definition_count": "304"
+      },
+      {
+        "object_kind": "CONTRACT",
+        "definition_count": "630"
+      },
+      {
+        "object_kind": "EXECUTION_AUTHORITY",
+        "definition_count": "832"
+      },
+      {
+        "object_kind": "FIXTURE",
+        "definition_count": "1155"
+      },
+      {
+        "object_kind": "MECHANIC",
+        "definition_count": "191"
+      },
+      {
+        "object_kind": "OBSERVABLE_CONDITION",
+        "definition_count": "585"
+      },
+      {
+        "object_kind": "PORT",
+        "definition_count": "1013"
+      },
+      {
+        "object_kind": "PROVIDER",
+        "definition_count": "74"
+      },
+      {
+        "object_kind": "PROVIDER_PROFILE",
+        "definition_count": "6"
+      },
+      {
+        "object_kind": "SCENARIO",
+        "definition_count": "824"
+      },
+      {
+        "object_kind": "SCENARIO_EVENT",
+        "definition_count": "824"
+      },
+      {
+        "object_kind": "SCENARIO_INPUT",
+        "definition_count": "824"
+      },
+      {
+        "object_kind": "SCENARIO_OUTCOME",
+        "definition_count": "824"
+      },
+      {
+        "object_kind": "TRANSFORMATION",
+        "definition_count": "914"
+      }
+    ],
+    "scenarios": 824,
+    "scenarioCapabilities": 218,
+    "rootScenarios": 218,
+    "contracts": 630,
+    "distinctSchemaBytes": 497,
+    "inputContracts": 365,
+    "outcomeContracts": 381,
+    "sharedBetweenInputAndOutcome": 153,
+    "unboundToScenario": 37,
+    "resolvedInputs": 812,
+    "resolvedOutcomes": 809,
+    "resolvedRootInputs": 216,
+    "resolvedRootOutcomes": 216,
+    "sameInputOutcomeContract": 239,
+    "outcomeVariants": 160,
+    "scenariosWithVariants": 62,
+    "productRelationships": [
+      {
+        "relationship": "outcome_product",
+        "relationship_count": "0"
+      },
+      {
+        "relationship": "outcome_variant_product",
+        "relationship_count": "0"
+      }
+    ],
+    "normalizedCapabilities": 219
+  },
+  "rootClasses": {
+    "contracts": {
+      "direct-record": 243,
+      "enveloped-record": 270,
+      "composed-root": 113,
+      "reference-root": 1,
+      "open-object-root": 1,
+      "string": 1,
+      "typeless-root": 1
+    },
+    "inputs": {
+      "direct-record": 285,
+      "enveloped-record": 250,
+      "composed-root": 275,
+      "unresolved": 12,
+      "reference-root": 1,
+      "string": 1
+    },
+    "outcomes": {
+      "direct-record": 441,
+      "enveloped-record": 236,
+      "composed-root": 130,
+      "unresolved": 15,
+      "reference-root": 2
+    },
+    "rootInputs": {
+      "direct-record": 66,
+      "enveloped-record": 107,
+      "composed-root": 42,
+      "unresolved": 2,
+      "string": 1
+    },
+    "rootOutcomes": {
+      "direct-record": 131,
+      "enveloped-record": 50,
+      "composed-root": 35,
+      "unresolved": 2
+    }
+  },
+  "featureCounts": {
+    "array": {
+      "contracts": 406,
+      "nodes": 1360,
+      "inputScenarios": 608,
+      "outcomeScenarios": 550,
+      "rootInputs": 172,
+      "rootOutcomes": 172
+    },
+    "arrayWithoutItems": {
+      "contracts": 59,
+      "nodes": 167,
+      "inputScenarios": 101,
+      "outcomeScenarios": 109,
+      "rootInputs": 8,
+      "rootOutcomes": 21
+    },
+    "closedEmptyObject": {
+      "contracts": 3,
+      "nodes": 3,
+      "inputScenarios": 4,
+      "outcomeScenarios": 1,
+      "rootInputs": 3,
+      "rootOutcomes": 1
+    },
+    "conditional": {
+      "contracts": 31,
+      "nodes": 94,
+      "inputScenarios": 62,
+      "outcomeScenarios": 69,
+      "rootInputs": 14,
+      "rootOutcomes": 17
+    },
+    "emptySchema": {
+      "contracts": 27,
+      "nodes": 170,
+      "inputScenarios": 46,
+      "outcomeScenarios": 29,
+      "rootInputs": 13,
+      "rootOutcomes": 11
+    },
+    "externalRef": {
+      "contracts": 41,
+      "nodes": 174,
+      "inputScenarios": 12,
+      "outcomeScenarios": 34,
+      "rootInputs": 5,
+      "rootOutcomes": 25
+    },
+    "falseSchema": {
+      "contracts": 356,
+      "nodes": 1142,
+      "inputScenarios": 453,
+      "outcomeScenarios": 438,
+      "rootInputs": 117,
+      "rootOutcomes": 119
+    },
+    "keyword:$comment": {
+      "contracts": 5,
+      "nodes": 52,
+      "inputScenarios": 5,
+      "outcomeScenarios": 7,
+      "rootInputs": 1,
+      "rootOutcomes": 2
+    },
+    "keyword:$defs": {
+      "contracts": 133,
+      "nodes": 133,
+      "inputScenarios": 163,
+      "outcomeScenarios": 152,
+      "rootInputs": 48,
+      "rootOutcomes": 33
+    },
+    "keyword:$id": {
+      "contracts": 630,
+      "nodes": 630,
+      "inputScenarios": 812,
+      "outcomeScenarios": 809,
+      "rootInputs": 216,
+      "rootOutcomes": 216
+    },
+    "keyword:$ref": {
+      "contracts": 155,
+      "nodes": 1129,
+      "inputScenarios": 147,
+      "outcomeScenarios": 157,
+      "rootInputs": 46,
+      "rootOutcomes": 53
+    },
+    "keyword:$schema": {
+      "contracts": 630,
+      "nodes": 630,
+      "inputScenarios": 812,
+      "outcomeScenarios": 809,
+      "rootInputs": 216,
+      "rootOutcomes": 216
+    },
+    "keyword:additionalProperties": {
+      "contracts": 366,
+      "nodes": 1300,
+      "inputScenarios": 469,
+      "outcomeScenarios": 455,
+      "rootInputs": 120,
+      "rootOutcomes": 122
+    },
+    "keyword:allOf": {
+      "contracts": 40,
+      "nodes": 53,
+      "inputScenarios": 66,
+      "outcomeScenarios": 73,
+      "rootInputs": 16,
+      "rootOutcomes": 20
+    },
+    "keyword:anyOf": {
+      "contracts": 28,
+      "nodes": 35,
+      "inputScenarios": 181,
+      "outcomeScenarios": 23,
+      "rootInputs": 20,
+      "rootOutcomes": 5
+    },
+    "keyword:const": {
+      "contracts": 462,
+      "nodes": 1418,
+      "inputScenarios": 635,
+      "outcomeScenarios": 544,
+      "rootInputs": 206,
+      "rootOutcomes": 183
+    },
+    "keyword:contains": {
+      "contracts": 6,
+      "nodes": 32,
+      "inputScenarios": 12,
+      "outcomeScenarios": 14,
+      "rootInputs": 2,
+      "rootOutcomes": 4
+    },
+    "keyword:contentEncoding": {
+      "contracts": 8,
+      "nodes": 20,
+      "inputScenarios": 23,
+      "outcomeScenarios": 11,
+      "rootInputs": 6,
+      "rootOutcomes": 2
+    },
+    "keyword:dependentRequired": {
+      "contracts": 4,
+      "nodes": 4,
+      "inputScenarios": 11,
+      "outcomeScenarios": 11,
+      "rootInputs": 2,
+      "rootOutcomes": 2
+    },
+    "keyword:description": {
+      "contracts": 32,
+      "nodes": 83,
+      "inputScenarios": 69,
+      "outcomeScenarios": 69,
+      "rootInputs": 8,
+      "rootOutcomes": 6
+    },
+    "keyword:enum": {
+      "contracts": 409,
+      "nodes": 778,
+      "inputScenarios": 529,
+      "outcomeScenarios": 586,
+      "rootInputs": 107,
+      "rootOutcomes": 147
+    },
+    "keyword:if": {
+      "contracts": 31,
+      "nodes": 90,
+      "inputScenarios": 62,
+      "outcomeScenarios": 69,
+      "rootInputs": 14,
+      "rootOutcomes": 17
+    },
+    "keyword:items": {
+      "contracts": 381,
+      "nodes": 1193,
+      "inputScenarios": 546,
+      "outcomeScenarios": 492,
+      "rootInputs": 169,
+      "rootOutcomes": 166
+    },
+    "keyword:maxContains": {
+      "contracts": 2,
+      "nodes": 14,
+      "inputScenarios": 1,
+      "outcomeScenarios": 1,
+      "rootInputs": 1,
+      "rootOutcomes": 1
+    },
+    "keyword:maxItems": {
+      "contracts": 44,
+      "nodes": 78,
+      "inputScenarios": 38,
+      "outcomeScenarios": 49,
+      "rootInputs": 14,
+      "rootOutcomes": 16
+    },
+    "keyword:maxLength": {
+      "contracts": 3,
+      "nodes": 3,
+      "inputScenarios": 1,
+      "outcomeScenarios": 0,
+      "rootInputs": 1,
+      "rootOutcomes": 0
+    },
+    "keyword:maximum": {
+      "contracts": 11,
+      "nodes": 16,
+      "inputScenarios": 44,
+      "outcomeScenarios": 13,
+      "rootInputs": 5,
+      "rootOutcomes": 3
+    },
+    "keyword:minContains": {
+      "contracts": 4,
+      "nodes": 18,
+      "inputScenarios": 10,
+      "outcomeScenarios": 12,
+      "rootInputs": 1,
+      "rootOutcomes": 3
+    },
+    "keyword:minItems": {
+      "contracts": 113,
+      "nodes": 248,
+      "inputScenarios": 147,
+      "outcomeScenarios": 119,
+      "rootInputs": 43,
+      "rootOutcomes": 36
+    },
+    "keyword:minLength": {
+      "contracts": 250,
+      "nodes": 1261,
+      "inputScenarios": 401,
+      "outcomeScenarios": 358,
+      "rootInputs": 109,
+      "rootOutcomes": 87
+    },
+    "keyword:minProperties": {
+      "contracts": 1,
+      "nodes": 1,
+      "inputScenarios": 2,
+      "outcomeScenarios": 0,
+      "rootInputs": 1,
+      "rootOutcomes": 0
+    },
+    "keyword:minimum": {
+      "contracts": 121,
+      "nodes": 274,
+      "inputScenarios": 153,
+      "outcomeScenarios": 104,
+      "rootInputs": 38,
+      "rootOutcomes": 47
+    },
+    "keyword:not": {
+      "contracts": 8,
+      "nodes": 16,
+      "inputScenarios": 9,
+      "outcomeScenarios": 15,
+      "rootInputs": 0,
+      "rootOutcomes": 3
+    },
+    "keyword:oneOf": {
+      "contracts": 79,
+      "nodes": 94,
+      "inputScenarios": 65,
+      "outcomeScenarios": 83,
+      "rootInputs": 14,
+      "rootOutcomes": 28
+    },
+    "keyword:pattern": {
+      "contracts": 191,
+      "nodes": 491,
+      "inputScenarios": 392,
+      "outcomeScenarios": 319,
+      "rootInputs": 98,
+      "rootOutcomes": 70
+    },
+    "keyword:prefixItems": {
+      "contracts": 1,
+      "nodes": 1,
+      "inputScenarios": 2,
+      "outcomeScenarios": 0,
+      "rootInputs": 1,
+      "rootOutcomes": 0
+    },
+    "keyword:properties": {
+      "contracts": 627,
+      "nodes": 2158,
+      "inputScenarios": 811,
+      "outcomeScenarios": 809,
+      "rootInputs": 215,
+      "rootOutcomes": 216
+    },
+    "keyword:required": {
+      "contracts": 627,
+      "nodes": 2154,
+      "inputScenarios": 811,
+      "outcomeScenarios": 809,
+      "rootInputs": 215,
+      "rootOutcomes": 216
+    },
+    "keyword:then": {
+      "contracts": 31,
+      "nodes": 90,
+      "inputScenarios": 62,
+      "outcomeScenarios": 69,
+      "rootInputs": 14,
+      "rootOutcomes": 17
+    },
+    "keyword:title": {
+      "contracts": 109,
+      "nodes": 109,
+      "inputScenarios": 255,
+      "outcomeScenarios": 260,
+      "rootInputs": 45,
+      "rootOutcomes": 46
+    },
+    "keyword:type": {
+      "contracts": 629,
+      "nodes": 8784,
+      "inputScenarios": 812,
+      "outcomeScenarios": 809,
+      "rootInputs": 216,
+      "rootOutcomes": 216
+    },
+    "keyword:uniqueItems": {
+      "contracts": 67,
+      "nodes": 146,
+      "inputScenarios": 198,
+      "outcomeScenarios": 171,
+      "rootInputs": 48,
+      "rootOutcomes": 38
+    },
+    "keyword:x-declared-intermediate-contracts": {
+      "contracts": 92,
+      "nodes": 92,
+      "inputScenarios": 74,
+      "outcomeScenarios": 87,
+      "rootInputs": 0,
+      "rootOutcomes": 1
+    },
+    "keyword:x-derivedFromAdmittedContract": {
+      "contracts": 1,
+      "nodes": 1,
+      "inputScenarios": 1,
+      "outcomeScenarios": 0,
+      "rootInputs": 1,
+      "rootOutcomes": 0
+    },
+    "keyword:x-reviewed-feature-authority": {
+      "contracts": 1,
+      "nodes": 1,
+      "inputScenarios": 0,
+      "outcomeScenarios": 0,
+      "rootInputs": 0,
+      "rootOutcomes": 0
+    },
+    "localRef": {
+      "contracts": 122,
+      "nodes": 955,
+      "inputScenarios": 139,
+      "outcomeScenarios": 127,
+      "rootInputs": 45,
+      "rootOutcomes": 29
+    },
+    "multiTypeUnion": {
+      "contracts": 12,
+      "nodes": 38,
+      "inputScenarios": 15,
+      "outcomeScenarios": 9,
+      "rootInputs": 4,
+      "rootOutcomes": 1
+    },
+    "namedObjectAllowsAdditionalKeys": {
+      "contracts": 353,
+      "nodes": 1019,
+      "inputScenarios": 507,
+      "outcomeScenarios": 487,
+      "rootInputs": 133,
+      "rootOutcomes": 131
+    },
+    "nullable": {
+      "contracts": 82,
+      "nodes": 220,
+      "inputScenarios": 129,
+      "outcomeScenarios": 173,
+      "rootInputs": 27,
+      "rootOutcomes": 46
+    },
+    "object": {
+      "contracts": 628,
+      "nodes": 2803,
+      "inputScenarios": 811,
+      "outcomeScenarios": 809,
+      "rootInputs": 215,
+      "rootOutcomes": 216
+    },
+    "objectAllowsAdditionalKeys": {
+      "contracts": 496,
+      "nodes": 1662,
+      "inputScenarios": 630,
+      "outcomeScenarios": 643,
+      "rootInputs": 152,
+      "rootOutcomes": 156
+    },
+    "objectImplicitAdditionalKeys": {
+      "contracts": 398,
+      "nodes": 1503,
+      "inputScenarios": 551,
+      "outcomeScenarios": 552,
+      "rootInputs": 144,
+      "rootOutcomes": 148
+    },
+    "objectOver12Properties": {
+      "contracts": 84,
+      "nodes": 100,
+      "inputScenarios": 223,
+      "outcomeScenarios": 203,
+      "rootInputs": 42,
+      "rootOutcomes": 49
+    },
+    "openObjectWithoutNamedProperties": {
+      "contracts": 288,
+      "nodes": 638,
+      "inputScenarios": 403,
+      "outcomeScenarios": 386,
+      "rootInputs": 65,
+      "rootOutcomes": 67
+    },
+    "refWithSiblings": {
+      "contracts": 1,
+      "nodes": 1,
+      "inputScenarios": 1,
+      "outcomeScenarios": 2,
+      "rootInputs": 0,
+      "rootOutcomes": 0
+    },
+    "trueSchema": {
+      "contracts": 124,
+      "nodes": 154,
+      "inputScenarios": 120,
+      "outcomeScenarios": 124,
+      "rootInputs": 16,
+      "rootOutcomes": 18
+    },
+    "tuple": {
+      "contracts": 1,
+      "nodes": 1,
+      "inputScenarios": 2,
+      "outcomeScenarios": 0,
+      "rootInputs": 1,
+      "rootOutcomes": 0
+    },
+    "type:array": {
+      "contracts": 406,
+      "nodes": 1360,
+      "inputScenarios": 608,
+      "outcomeScenarios": 550,
+      "rootInputs": 172,
+      "rootOutcomes": 172
+    },
+    "type:boolean": {
+      "contracts": 194,
+      "nodes": 427,
+      "inputScenarios": 305,
+      "outcomeScenarios": 323,
+      "rootInputs": 86,
+      "rootOutcomes": 100
+    },
+    "type:integer": {
+      "contracts": 168,
+      "nodes": 359,
+      "inputScenarios": 233,
+      "outcomeScenarios": 219,
+      "rootInputs": 57,
+      "rootOutcomes": 74
+    },
+    "type:null": {
+      "contracts": 82,
+      "nodes": 220,
+      "inputScenarios": 129,
+      "outcomeScenarios": 173,
+      "rootInputs": 27,
+      "rootOutcomes": 46
+    },
+    "type:number": {
+      "contracts": 21,
+      "nodes": 64,
+      "inputScenarios": 30,
+      "outcomeScenarios": 23,
+      "rootInputs": 8,
+      "rootOutcomes": 4
+    },
+    "type:object": {
+      "contracts": 628,
+      "nodes": 2631,
+      "inputScenarios": 811,
+      "outcomeScenarios": 809,
+      "rootInputs": 215,
+      "rootOutcomes": 216
+    },
+    "type:string": {
+      "contracts": 568,
+      "nodes": 3974,
+      "inputScenarios": 769,
+      "outcomeScenarios": 779,
+      "rootInputs": 205,
+      "rootOutcomes": 203
+    },
+    "typedDictionary": {
+      "contracts": 5,
+      "nodes": 5,
+      "inputScenarios": 19,
+      "outcomeScenarios": 19,
+      "rootInputs": 3,
+      "rootOutcomes": 3
+    },
+    "underPropertyPath": {
+      "contracts": 627,
+      "nodes": 10776,
+      "inputScenarios": 811,
+      "outcomeScenarios": 809,
+      "rootInputs": 215,
+      "rootOutcomes": 216
+    }
+  },
+  "repeatedSchemaIds": [
+    {
+      "id": "https://schemas.agentic-harness.local/contracts/outcome.schema.json",
+      "contracts": 97,
+      "distinctDigests": 88
+    },
+    {
+      "id": "https://schemas.agentic-harness.local/contracts/input.schema.json",
+      "contracts": 100,
+      "distinctDigests": 91
+    },
+    {
+      "id": "https://schemas.agentic-harness.local/contracts/admitted-bounded-process-request.v1.schema.json",
+      "contracts": 2,
+      "distinctDigests": 1
+    },
+    {
+      "id": "https://schemas.agentic-harness.local/contracts/author-tooling-capability-candidate-intermediate.schema.json",
+      "contracts": 17,
+      "distinctDigests": 1
+    },
+    {
+      "id": "https://schemas.agentic-harness.local/contracts/reveal-and-refine-capability-meaning-intermediate.schema.json",
+      "contracts": 18,
+      "distinctDigests": 1
+    },
+    {
+      "id": "https://schemas.agentic-harness.local/contracts/route-aware-consumer-execution-surface-intermediate.schema.json",
+      "contracts": 3,
+      "distinctDigests": 1
+    },
+    {
+      "id": "https://agentic-harness.local/contracts/authorized-file-read-outcome.v2.schema.json",
+      "contracts": 5,
+      "distinctDigests": 1
+    },
+    {
+      "id": "https://agentic-harness.local/contracts/authorized-file-batch-materialization-effect.v1.schema.json",
+      "contracts": 2,
+      "distinctDigests": 1
+    },
+    {
+      "id": "https://schemas.agentic-harness.local/contracts/authorized-narration-generation-request.v1.schema.json",
+      "contracts": 2,
+      "distinctDigests": 2
+    },
+    {
+      "id": "https://schemas.agentic-harness.local/contracts/blueprint-bound-capability-authoring-intermediate.schema.json",
+      "contracts": 5,
+      "distinctDigests": 1
+    },
+    {
+      "id": "https://schemas.agentic-harness.local/contracts/intermediate.schema.json",
+      "contracts": 7,
+      "distinctDigests": 2
+    },
+    {
+      "id": "https://schemas.agentic-harness.local/contracts/blueprint-inspection-intermediate.v1.schema.json",
+      "contracts": 3,
+      "distinctDigests": 1
+    },
+    {
+      "id": "https://schemas.agentic-harness.local/capability-author-delegate-construction-request.schema.json",
+      "contracts": 3,
+      "distinctDigests": 1
+    },
+    {
+      "id": "https://schemas.agentic-harness.local/capability-authoring-lineage-verification-request.schema.json",
+      "contracts": 2,
+      "distinctDigests": 1
+    },
+    {
+      "id": "https://schemas.agentic-harness.local/projected-tooling-migration-oracle-comparison-request.schema.json",
+      "contracts": 2,
+      "distinctDigests": 1
+    },
+    {
+      "id": "https://schemas.agentic-harness.local/governed-repository-observation-request.schema.json",
+      "contracts": 2,
+      "distinctDigests": 1
+    },
+    {
+      "id": "https://schemas.agentic-harness.local/execute-governed-serial-tooling-migration/outcome.schema.json",
+      "contracts": 3,
+      "distinctDigests": 1
+    },
+    {
+      "id": "https://schemas.agentic-harness.local/input.schema.json",
+      "contracts": 2,
+      "distinctDigests": 1
+    },
+    {
+      "id": "https://schemas.agentic-harness.local/contracts/resolve-governed-scenario-route-intermediate.schema.json",
+      "contracts": 9,
+      "distinctDigests": 1
+    },
+    {
+      "id": "https://schemas.agentic-harness.local/bounded-tooling-migration-evidence-publication-input.v1.schema.json",
+      "contracts": 2,
+      "distinctDigests": 1
+    },
+    {
+      "id": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json",
+      "contracts": 2,
+      "distinctDigests": 2
+    },
+    {
+      "id": "https://schemas.agentic-harness.local/capability-authoring-lineage-evidence.schema.json",
+      "contracts": 2,
+      "distinctDigests": 1
+    },
+    {
+      "id": "https://schemas.agentic-harness.local/contracts/deliver-capability-change-api-intermediate.schema.json",
+      "contracts": 3,
+      "distinctDigests": 1
+    },
+    {
+      "id": "https://schemas.agentic-harness.local/contracts/open-capability-change-intermediate.schema.json",
+      "contracts": 6,
+      "distinctDigests": 1
+    },
+    {
+      "id": "https://schemas.agentic-harness.local/contracts/publish-capability-change-intermediate.schema.json",
+      "contracts": 5,
+      "distinctDigests": 1
+    },
+    {
+      "id": "https://schemas.agentic-harness.local/contracts/seal-capability-change-intermediate.schema.json",
+      "contracts": 5,
+      "distinctDigests": 1
+    },
+    {
+      "id": "https://schemas.agentic-harness.local/contracts/observe-capability-change-intermediate.schema.json",
+      "contracts": 5,
+      "distinctDigests": 1
+    },
+    {
+      "id": "https://schemas.agentic-harness.local/contracts/deliver-capability-change-mcp-intermediate.schema.json",
+      "contracts": 3,
+      "distinctDigests": 1
+    },
+    {
+      "id": "https://schemas.agentic-harness.local/contracts/deliver-capability-change-cli-intermediate.schema.json",
+      "contracts": 2,
+      "distinctDigests": 1
+    },
+    {
+      "id": "https://schemas.agentic-harness.local/contracts/capability-change-set.v1.schema.json",
+      "contracts": 2,
+      "distinctDigests": 2
+    },
+    {
+      "id": "https://schemas.scenario-driven.dev/semantic-carrier/semantic-carrier-validation-result.v1.schema.json",
+      "contracts": 2,
+      "distinctDigests": 1
+    },
+    {
+      "id": "https://schemas.agentic-harness.local/contracts/carrier.schema.json",
+      "contracts": 13,
+      "distinctDigests": 6
+    },
+    {
+      "id": "https://schemas.agentic-harness.local/operate-tooling-migration-inventory/outcome.schema.json",
+      "contracts": 4,
+      "distinctDigests": 1
+    },
+    {
+      "id": "https://schemas.agentic-harness.local/operate-tooling-migration-conveyor/outcome.schema.json",
+      "contracts": 6,
+      "distinctDigests": 1
+    },
+    {
+      "id": "https://agentic-harness.local/contracts/governed-agent-execution-context.v1.schema.json",
+      "contracts": 2,
+      "distinctDigests": 2
+    },
+    {
+      "id": "https://agentic-harness.local/contracts/governed-agent-execution-testimony.v1.schema.json",
+      "contracts": 2,
+      "distinctDigests": 2
+    },
+    {
+      "id": "https://schemas.agentic-harness.local/published-capability-author-delegate-request.schema.json",
+      "contracts": 2,
+      "distinctDigests": 1
+    },
+    {
+      "id": "https://agentic-harness.local/contracts/governed-feature-authoring-context.v1.schema.json",
+      "contracts": 2,
+      "distinctDigests": 2
+    },
+    {
+      "id": "https://schemas.agentic-harness.local/outcome.schema.json",
+      "contracts": 4,
+      "distinctDigests": 1
+    },
+    {
+      "id": "https://schemas.agentic-harness.local/contracts/mechanic.execute-bounded-process.outcome.v1.schema.json",
+      "contracts": 2,
+      "distinctDigests": 1
+    },
+    {
+      "id": "https://schemas.agentic-harness.local/contracts/narration-media-testimony.v1.schema.json",
+      "contracts": 2,
+      "distinctDigests": 2
+    },
+    {
+      "id": "https://schemas.agentic-harness.local/contracts/sealed-capability-change-set.v1.schema.json",
+      "contracts": 2,
+      "distinctDigests": 2
+    },
+    {
+      "id": "https://schemas.scenario-driven.dev/semantic-carrier/semantic-carrier-compilation-evaluation-result.v1.schema.json",
+      "contracts": 2,
+      "distinctDigests": 1
+    },
+    {
+      "id": "https://schemas.scenario-driven.dev/semantic-carrier/semantic-carrier-extraction-result.v1.schema.json",
+      "contracts": 2,
+      "distinctDigests": 1
+    }
+  ],
+  "unresolved": [
+    {
+      "namespace": "sidefx:capabilities",
+      "capabilityId": "author-canonical-feature",
+      "scenarioId": "author-canonical-feature",
+      "scenarioVersionPk": "51",
+      "isRoot": true,
+      "direction": "input",
+      "contractVersionPk": null,
+      "contractId": null,
+      "schemaDigest": null,
+      "rootClass": "unresolved",
+      "features": []
+    },
+    {
+      "namespace": "sidefx:capabilities",
+      "capabilityId": "author-canonical-feature",
+      "scenarioId": "author-canonical-feature",
+      "scenarioVersionPk": "51",
+      "isRoot": true,
+      "direction": "outcome",
+      "contractVersionPk": null,
+      "contractId": null,
+      "schemaDigest": null,
+      "rootClass": "unresolved",
+      "features": []
+    },
+    {
+      "namespace": "sidefx:capabilities",
+      "capabilityId": "operate-tooling-migration-promote",
+      "scenarioId": "project-and-observe-tooling-candidate",
+      "scenarioVersionPk": "481",
+      "isRoot": false,
+      "direction": "input",
+      "contractVersionPk": null,
+      "contractId": null,
+      "schemaDigest": null,
+      "rootClass": "unresolved",
+      "features": []
+    },
+    {
+      "namespace": "sidefx:capabilities",
+      "capabilityId": "operate-tooling-migration-promote",
+      "scenarioId": "project-and-observe-tooling-candidate",
+      "scenarioVersionPk": "481",
+      "isRoot": false,
+      "direction": "outcome",
+      "contractVersionPk": null,
+      "contractId": null,
+      "schemaDigest": null,
+      "rootClass": "unresolved",
+      "features": []
+    },
+    {
+      "namespace": "sidefx:capabilities",
+      "capabilityId": "operate-tooling-migration-promote",
+      "scenarioId": "prove-tooling-candidate-oracle-equivalence",
+      "scenarioVersionPk": "482",
+      "isRoot": false,
+      "direction": "input",
+      "contractVersionPk": null,
+      "contractId": null,
+      "schemaDigest": null,
+      "rootClass": "unresolved",
+      "features": []
+    },
+    {
+      "namespace": "sidefx:capabilities",
+      "capabilityId": "operate-tooling-migration-promote",
+      "scenarioId": "prove-tooling-candidate-oracle-equivalence",
+      "scenarioVersionPk": "482",
+      "isRoot": false,
+      "direction": "outcome",
+      "contractVersionPk": null,
+      "contractId": null,
+      "schemaDigest": null,
+      "rootClass": "unresolved",
+      "features": []
+    },
+    {
+      "namespace": "sidefx:capabilities",
+      "capabilityId": "operate-tooling-migration-promote",
+      "scenarioId": "resolve-tooling-candidate-verification",
+      "scenarioVersionPk": "483",
+      "isRoot": false,
+      "direction": "input",
+      "contractVersionPk": null,
+      "contractId": null,
+      "schemaDigest": null,
+      "rootClass": "unresolved",
+      "features": []
+    },
+    {
+      "namespace": "sidefx:capabilities",
+      "capabilityId": "operate-tooling-migration-promote",
+      "scenarioId": "resolve-tooling-candidate-verification",
+      "scenarioVersionPk": "483",
+      "isRoot": false,
+      "direction": "outcome",
+      "contractVersionPk": null,
+      "contractId": null,
+      "schemaDigest": null,
+      "rootClass": "unresolved",
+      "features": []
+    },
+    {
+      "namespace": "sidefx:capabilities",
+      "capabilityId": "operate-tooling-migration-promote",
+      "scenarioId": "resolve-tooling-migration-promote-operation",
+      "scenarioVersionPk": "479",
+      "isRoot": false,
+      "direction": "outcome",
+      "contractVersionPk": null,
+      "contractId": null,
+      "schemaDigest": null,
+      "rootClass": "unresolved",
+      "features": []
+    },
+    {
+      "namespace": "sidefx:capabilities",
+      "capabilityId": "operate-tooling-migration-promote",
+      "scenarioId": "transact-tooling-provider-promotion",
+      "scenarioVersionPk": "484",
+      "isRoot": false,
+      "direction": "input",
+      "contractVersionPk": null,
+      "contractId": null,
+      "schemaDigest": null,
+      "rootClass": "unresolved",
+      "features": []
+    },
+    {
+      "namespace": "sidefx:capabilities",
+      "capabilityId": "operate-tooling-migration-promote",
+      "scenarioId": "transact-tooling-provider-promotion",
+      "scenarioVersionPk": "484",
+      "isRoot": false,
+      "direction": "outcome",
+      "contractVersionPk": null,
+      "contractId": null,
+      "schemaDigest": null,
+      "rootClass": "unresolved",
+      "features": []
+    },
+    {
+      "namespace": "sidefx:capabilities",
+      "capabilityId": "operate-tooling-migration-promote",
+      "scenarioId": "verify-tooling-candidate-authoring-lineage",
+      "scenarioVersionPk": "480",
+      "isRoot": false,
+      "direction": "input",
+      "contractVersionPk": null,
+      "contractId": null,
+      "schemaDigest": null,
+      "rootClass": "unresolved",
+      "features": []
+    },
+    {
+      "namespace": "sidefx:capabilities",
+      "capabilityId": "operate-tooling-migration-promote",
+      "scenarioId": "verify-tooling-candidate-authoring-lineage",
+      "scenarioVersionPk": "480",
+      "isRoot": false,
+      "direction": "outcome",
+      "contractVersionPk": null,
+      "contractId": null,
+      "schemaDigest": null,
+      "rootClass": "unresolved",
+      "features": []
+    },
+    {
+      "namespace": "sidefx:capabilities",
+      "capabilityId": "operate-tooling-migration-run",
+      "scenarioId": "execute-serial-tooling-migration-run",
+      "scenarioVersionPk": "487",
+      "isRoot": false,
+      "direction": "input",
+      "contractVersionPk": null,
+      "contractId": null,
+      "schemaDigest": null,
+      "rootClass": "unresolved",
+      "features": []
+    },
+    {
+      "namespace": "sidefx:capabilities",
+      "capabilityId": "operate-tooling-migration-run",
+      "scenarioId": "execute-serial-tooling-migration-run",
+      "scenarioVersionPk": "487",
+      "isRoot": false,
+      "direction": "outcome",
+      "contractVersionPk": null,
+      "contractId": null,
+      "schemaDigest": null,
+      "rootClass": "unresolved",
+      "features": []
+    },
+    {
+      "namespace": "sidefx:capabilities",
+      "capabilityId": "operate-tooling-migration-run",
+      "scenarioId": "resolve-tooling-migration-run-operation",
+      "scenarioVersionPk": "486",
+      "isRoot": false,
+      "direction": "outcome",
+      "contractVersionPk": null,
+      "contractId": null,
+      "schemaDigest": null,
+      "rootClass": "unresolved",
+      "features": []
+    },
+    {
+      "namespace": "sidefx:capabilities",
+      "capabilityId": "operate-tooling-migration-verify",
+      "scenarioId": "project-and-observe-tooling-candidate",
+      "scenarioVersionPk": "491",
+      "isRoot": false,
+      "direction": "input",
+      "contractVersionPk": null,
+      "contractId": null,
+      "schemaDigest": null,
+      "rootClass": "unresolved",
+      "features": []
+    },
+    {
+      "namespace": "sidefx:capabilities",
+      "capabilityId": "operate-tooling-migration-verify",
+      "scenarioId": "project-and-observe-tooling-candidate",
+      "scenarioVersionPk": "491",
+      "isRoot": false,
+      "direction": "outcome",
+      "contractVersionPk": null,
+      "contractId": null,
+      "schemaDigest": null,
+      "rootClass": "unresolved",
+      "features": []
+    },
+    {
+      "namespace": "sidefx:capabilities",
+      "capabilityId": "operate-tooling-migration-verify",
+      "scenarioId": "prove-tooling-candidate-oracle-equivalence",
+      "scenarioVersionPk": "492",
+      "isRoot": false,
+      "direction": "input",
+      "contractVersionPk": null,
+      "contractId": null,
+      "schemaDigest": null,
+      "rootClass": "unresolved",
+      "features": []
+    },
+    {
+      "namespace": "sidefx:capabilities",
+      "capabilityId": "operate-tooling-migration-verify",
+      "scenarioId": "prove-tooling-candidate-oracle-equivalence",
+      "scenarioVersionPk": "492",
+      "isRoot": false,
+      "direction": "outcome",
+      "contractVersionPk": null,
+      "contractId": null,
+      "schemaDigest": null,
+      "rootClass": "unresolved",
+      "features": []
+    },
+    {
+      "namespace": "sidefx:capabilities",
+      "capabilityId": "operate-tooling-migration-verify",
+      "scenarioId": "resolve-tooling-candidate-verification",
+      "scenarioVersionPk": "493",
+      "isRoot": false,
+      "direction": "input",
+      "contractVersionPk": null,
+      "contractId": null,
+      "schemaDigest": null,
+      "rootClass": "unresolved",
+      "features": []
+    },
+    {
+      "namespace": "sidefx:capabilities",
+      "capabilityId": "operate-tooling-migration-verify",
+      "scenarioId": "resolve-tooling-candidate-verification",
+      "scenarioVersionPk": "493",
+      "isRoot": false,
+      "direction": "outcome",
+      "contractVersionPk": null,
+      "contractId": null,
+      "schemaDigest": null,
+      "rootClass": "unresolved",
+      "features": []
+    },
+    {
+      "namespace": "sidefx:capabilities",
+      "capabilityId": "operate-tooling-migration-verify",
+      "scenarioId": "resolve-tooling-migration-verify-operation",
+      "scenarioVersionPk": "489",
+      "isRoot": false,
+      "direction": "outcome",
+      "contractVersionPk": null,
+      "contractId": null,
+      "schemaDigest": null,
+      "rootClass": "unresolved",
+      "features": []
+    },
+    {
+      "namespace": "sidefx:capabilities",
+      "capabilityId": "operate-tooling-migration-verify",
+      "scenarioId": "verify-tooling-candidate-authoring-lineage",
+      "scenarioVersionPk": "490",
+      "isRoot": false,
+      "direction": "input",
+      "contractVersionPk": null,
+      "contractId": null,
+      "schemaDigest": null,
+      "rootClass": "unresolved",
+      "features": []
+    },
+    {
+      "namespace": "sidefx:capabilities",
+      "capabilityId": "operate-tooling-migration-verify",
+      "scenarioId": "verify-tooling-candidate-authoring-lineage",
+      "scenarioVersionPk": "490",
+      "isRoot": false,
+      "direction": "outcome",
+      "contractVersionPk": null,
+      "contractId": null,
+      "schemaDigest": null,
+      "rootClass": "unresolved",
+      "features": []
+    },
+    {
+      "namespace": "sidefx:capabilities",
+      "capabilityId": "resolve-governed-task",
+      "scenarioId": "resolve-governed-task",
+      "scenarioVersionPk": "680",
+      "isRoot": true,
+      "direction": "input",
+      "contractVersionPk": null,
+      "contractId": null,
+      "schemaDigest": null,
+      "rootClass": "unresolved",
+      "features": []
+    },
+    {
+      "namespace": "sidefx:capabilities",
+      "capabilityId": "resolve-governed-task",
+      "scenarioId": "resolve-governed-task",
+      "scenarioVersionPk": "680",
+      "isRoot": true,
+      "direction": "outcome",
+      "contractVersionPk": null,
+      "contractId": null,
+      "schemaDigest": null,
+      "rootClass": "unresolved",
+      "features": []
+    }
+  ],
+  "externalRefs": [
+    {
+      "contractId": "admitted-blueprint-review-boundary.v2",
+      "pointer": "#/allOf/0",
+      "ref": "https://agentic-harness.local/contracts/canonical-blueprint-review-binding-request.v2.schema.json#/$defs/admittedBoundary"
+    },
+    {
+      "contractId": "admitted-blueprint-review-boundary.v2",
+      "pointer": "#/allOf/1/properties/submittedTestimony",
+      "ref": "https://agentic-harness.local/contracts/canonical-blueprint-review-binding-request.v2.schema.json#/$defs/submittedTestimony"
+    },
+    {
+      "contractId": "admitted-canonical-circuit-blueprint.v1",
+      "pointer": "#/properties/payload/properties/blueprint/oneOf/0",
+      "ref": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json"
+    },
+    {
+      "contractId": "admitted-consumer-execution-embodiment-projection-context.v1",
+      "pointer": "#/properties/context",
+      "ref": "https://schemas.agentic-harness.local/consumer-execution-embodiment-projection-context.v1.schema.json"
+    },
+    {
+      "contractId": "admitted-human-blueprint-review-testimony.v2",
+      "pointer": "#/properties/boundary",
+      "ref": "https://agentic-harness.local/contracts/canonical-blueprint-review-binding-request.v2.schema.json#/$defs/admittedBoundary"
+    },
+    {
+      "contractId": "admitted-human-blueprint-review-testimony.v2",
+      "pointer": "#/properties/testimony",
+      "ref": "https://agentic-harness.local/contracts/canonical-blueprint-review-binding-request.v2.schema.json#/$defs/submittedTestimony"
+    },
+    {
+      "contractId": "blueprint-review-boundary-admission.v2",
+      "pointer": "#/properties/admittedBoundary",
+      "ref": "https://agentic-harness.local/contracts/canonical-blueprint-review-binding-request.v2.schema.json#/$defs/admittedBoundary"
+    },
+    {
+      "contractId": "blueprint-review-disposition-binding.v2",
+      "pointer": "#/properties/boundDisposition",
+      "ref": "https://agentic-harness.local/contracts/bound-blueprint-review-disposition.v2.schema.json"
+    },
+    {
+      "contractId": "bound-blueprint-review-disposition.v2",
+      "pointer": "#/properties/boundary",
+      "ref": "https://agentic-harness.local/contracts/canonical-blueprint-review-binding-request.v2.schema.json#/$defs/admittedBoundary"
+    },
+    {
+      "contractId": "bound-blueprint-review-disposition.v2",
+      "pointer": "#/properties/reviewer",
+      "ref": "https://agentic-harness.local/contracts/canonical-blueprint-review-binding-request.v2.schema.json#/$defs/authorityRef"
+    },
+    {
+      "contractId": "bound-blueprint-review-disposition.v2",
+      "pointer": "#/properties/findings/items",
+      "ref": "https://agentic-harness.local/contracts/canonical-blueprint-review-binding-request.v2.schema.json#/$defs/finding"
+    },
+    {
+      "contractId": "bound-blueprint-review-disposition.v2",
+      "pointer": "#/properties/rationaleReference",
+      "ref": "https://agentic-harness.local/contracts/canonical-blueprint-review-binding-request.v2.schema.json#/$defs/authorityRef"
+    },
+    {
+      "contractId": "canonical-blueprint-authoring-result.v2",
+      "pointer": "#/oneOf/0/properties/candidate",
+      "ref": "https://agentic-harness.local/contracts/canonical-circuit-blueprint.v1.schema.json"
+    },
+    {
+      "contractId": "consumer-execution-embodiment-projection-context.v1",
+      "pointer": "#/properties/protocol/properties/contractDigest",
+      "ref": "https://schemas.agentic-harness.local/consumer-execution-embodiment-projection-context.v1.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "consumer-execution-embodiment-projection-context.v1",
+      "pointer": "#/properties/capabilityAuthority/properties/authorityDigest",
+      "ref": "https://schemas.agentic-harness.local/consumer-execution-embodiment-projection-context.v1.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "consumer-execution-embodiment-projection-context.v1",
+      "pointer": "#/properties/fixtureAuthority/properties/fixtureDigest",
+      "ref": "https://schemas.agentic-harness.local/consumer-execution-embodiment-projection-context.v1.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "consumer-execution-embodiment-projection-context.v1",
+      "pointer": "#/properties/targets/prefixItems/0",
+      "ref": "https://schemas.agentic-harness.local/consumer-execution-embodiment-projection-context.v1.schema.json#/$defs/nodeTarget"
+    },
+    {
+      "contractId": "consumer-execution-embodiment-projection-context.v1",
+      "pointer": "#/properties/targets/prefixItems/1",
+      "ref": "https://schemas.agentic-harness.local/consumer-execution-embodiment-projection-context.v1.schema.json#/$defs/csharpTarget"
+    },
+    {
+      "contractId": "consumer-execution-embodiment-projection-context.v1",
+      "pointer": "#/properties/targets/prefixItems/2",
+      "ref": "https://schemas.agentic-harness.local/consumer-execution-embodiment-projection-context.v1.schema.json#/$defs/pythonTarget"
+    },
+    {
+      "contractId": "consumer-execution-embodiment-projection-context.v1",
+      "pointer": "#/$defs/targetBase/properties/projectionAuthorityDigest",
+      "ref": "https://schemas.agentic-harness.local/consumer-execution-embodiment-projection-context.v1.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "consumer-execution-embodiment-projection-context.v1",
+      "pointer": "#/$defs/nodeTarget/allOf/0",
+      "ref": "https://schemas.agentic-harness.local/consumer-execution-embodiment-projection-context.v1.schema.json#/$defs/targetBase"
+    },
+    {
+      "contractId": "consumer-execution-embodiment-projection-context.v1",
+      "pointer": "#/$defs/csharpTarget/allOf/0",
+      "ref": "https://schemas.agentic-harness.local/consumer-execution-embodiment-projection-context.v1.schema.json#/$defs/targetBase"
+    },
+    {
+      "contractId": "consumer-execution-embodiment-projection-context.v1",
+      "pointer": "#/$defs/pythonTarget/allOf/0",
+      "ref": "https://schemas.agentic-harness.local/consumer-execution-embodiment-projection-context.v1.schema.json#/$defs/targetBase"
+    },
+    {
+      "contractId": "consumer-execution-embodiment-projection-graph.v1",
+      "pointer": "#/properties/protocol",
+      "ref": "https://schemas.agentic-harness.local/consumer-execution-embodiment-projection-context.v1.schema.json#/properties/protocol"
+    },
+    {
+      "contractId": "consumer-execution-embodiment-projection-graph.v1",
+      "pointer": "#/properties/fixtureAuthority",
+      "ref": "https://schemas.agentic-harness.local/consumer-execution-embodiment-projection-context.v1.schema.json#/properties/fixtureAuthority"
+    },
+    {
+      "contractId": "consumer-execution-embodiment-projection-graph.v1",
+      "pointer": "#/properties/targets",
+      "ref": "https://schemas.agentic-harness.local/consumer-execution-embodiment-projection-context.v1.schema.json#/properties/targets"
+    },
+    {
+      "contractId": "human-blueprint-review-testimony-admission.v2",
+      "pointer": "#/properties/admittedTestimony",
+      "ref": "https://agentic-harness.local/contracts/admitted-human-blueprint-review-testimony.v2.schema.json"
+    },
+    {
+      "contractId": "model-provider-protocol-route.v1",
+      "pointer": "#/properties/request",
+      "ref": "https://schemas.agentic-harness.local/contracts/input.schema.json"
+    },
+    {
+      "contractId": "projectable-capability-authoring-result.v1",
+      "pointer": "#/oneOf/0",
+      "ref": "https://schemas.agentic-harness.local/projectable-capability-candidate.v1.schema.json"
+    },
+    {
+      "contractId": "projectable-capability-authoring-result.v1",
+      "pointer": "#/oneOf/1",
+      "ref": "https://schemas.agentic-harness.local/capability-ontology-testimony-rejection.v1.schema.json"
+    },
+    {
+      "contractId": "projected-consumer-execution-embodiment-bundle.v1",
+      "pointer": "#/properties/graph",
+      "ref": "https://schemas.agentic-harness.local/consumer-execution-embodiment-projection-graph.v1.schema.json"
+    },
+    {
+      "contractId": "projected-consumer-execution-embodiment-bundle.v1",
+      "pointer": "#/properties/targetCandidates/items",
+      "ref": "https://schemas.agentic-harness.local/projected-consumer-execution-embodiment-bundle.v1.schema.json#/$defs/targetCandidate"
+    },
+    {
+      "contractId": "projected-consumer-execution-embodiment-bundle.v1",
+      "pointer": "#/properties/fixtureAuthority",
+      "ref": "https://schemas.agentic-harness.local/consumer-execution-embodiment-projection-context.v1.schema.json#/properties/fixtureAuthority"
+    },
+    {
+      "contractId": "projected-consumer-execution-embodiment-bundle.v1",
+      "pointer": "#/$defs/targetCandidate/properties/projectionAuthorityDigest",
+      "ref": "https://schemas.agentic-harness.local/projected-consumer-execution-embodiment-bundle.v1.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "projected-consumer-execution-embodiment-bundle.v1",
+      "pointer": "#/$defs/targetCandidate/properties/artifactDescriptors/items",
+      "ref": "https://schemas.agentic-harness.local/projected-consumer-execution-embodiment-bundle.v1.schema.json#/$defs/artifactDescriptor"
+    },
+    {
+      "contractId": "projected-consumer-execution-embodiment-bundle.v1",
+      "pointer": "#/$defs/targetCandidate/properties/candidateAuthorityDigest",
+      "ref": "https://schemas.agentic-harness.local/projected-consumer-execution-embodiment-bundle.v1.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "projected-consumer-execution-embodiment-candidate.v1",
+      "pointer": "#/properties/bundle",
+      "ref": "https://schemas.agentic-harness.local/projected-consumer-execution-embodiment-bundle.v1.schema.json"
+    },
+    {
+      "contractId": "projected-consumer-execution-embodiment-candidate.v1",
+      "pointer": "#/properties/targetObservations/items",
+      "ref": "https://schemas.agentic-harness.local/projected-consumer-execution-embodiment-candidate.v1.schema.json#/$defs/targetObservation"
+    },
+    {
+      "contractId": "projected-consumer-execution-embodiment-candidate.v1",
+      "pointer": "#/$defs/targetObservation/properties/fixtureObservations/items",
+      "ref": "https://schemas.agentic-harness.local/projected-consumer-execution-embodiment-candidate.v1.schema.json#/$defs/fixtureObservation"
+    },
+    {
+      "contractId": "sidefx-authoring-context-request.v1",
+      "pointer": "#/properties/candidateItems/items/properties/sourceClass",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/sourceClass"
+    },
+    {
+      "contractId": "sidefx-authoring-disposition-request.v1",
+      "pointer": "#/properties/precedentSet",
+      "ref": "sidefx-semantic-precedent-set.schema.json"
+    },
+    {
+      "contractId": "sidefx-authoring-disposition-request.v1",
+      "pointer": "#/properties/patternCandidateSet",
+      "ref": "sidefx-semantic-pattern-candidate-set.schema.json"
+    },
+    {
+      "contractId": "sidefx-capability-authoring-context-pack.v1",
+      "pointer": "#/properties/snapshotDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-capability-authoring-context-pack.v1",
+      "pointer": "#/properties/requestDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-capability-authoring-context-pack.v1",
+      "pointer": "#/properties/authoringDispositionDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-capability-authoring-context-pack.v1",
+      "pointer": "#/properties/items/items/properties/sourceClass",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/sourceClass"
+    },
+    {
+      "contractId": "sidefx-capability-authoring-context-pack.v1",
+      "pointer": "#/properties/items/items/properties/contentDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-capability-authoring-context-pack.v1",
+      "pointer": "#/properties/items/items/properties/sourceLocator",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/sourceLocator"
+    },
+    {
+      "contractId": "sidefx-capability-authoring-context-pack.v1",
+      "pointer": "#/properties/findings/items",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/finding"
+    },
+    {
+      "contractId": "sidefx-capability-authoring-context-pack.v1",
+      "pointer": "#/properties/contextPackDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-capability-authoring-disposition.v1",
+      "pointer": "#/properties/snapshotDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-capability-authoring-disposition.v1",
+      "pointer": "#/properties/requestDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-capability-authoring-disposition.v1",
+      "pointer": "#/properties/precedentSetDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-capability-authoring-disposition.v1",
+      "pointer": "#/properties/findings/items",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/finding"
+    },
+    {
+      "contractId": "sidefx-capability-authoring-disposition.v1",
+      "pointer": "#/properties/decisionReceiptDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-candidate-retrieval-request.v1",
+      "pointer": "#/properties/plan",
+      "ref": "sidefx-semantic-query-plan.schema.json"
+    },
+    {
+      "contractId": "sidefx-semantic-candidate-retrieval-request.v1",
+      "pointer": "#/properties/vectorTestimony",
+      "ref": "sidefx-semantic-vector-testimony.schema.json"
+    },
+    {
+      "contractId": "sidefx-semantic-candidate-set.v1",
+      "pointer": "#/properties/snapshotDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-candidate-set.v1",
+      "pointer": "#/properties/catalogDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-candidate-set.v1",
+      "pointer": "#/properties/relationshipGraphDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-candidate-set.v1",
+      "pointer": "#/properties/identityIndexDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-candidate-set.v1",
+      "pointer": "#/properties/lexicalIndexDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-candidate-set.v1",
+      "pointer": "#/properties/planDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-candidate-set.v1",
+      "pointer": "#/properties/vectorTestimony/oneOf/1",
+      "ref": "sidefx-semantic-vector-testimony.schema.json"
+    },
+    {
+      "contractId": "sidefx-semantic-candidate-set.v1",
+      "pointer": "#/properties/findings/items",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/finding"
+    },
+    {
+      "contractId": "sidefx-semantic-candidate-set.v1",
+      "pointer": "#/properties/candidateSetDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-corpus-closure.v1",
+      "pointer": "#/properties/findings/items",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/finding"
+    },
+    {
+      "contractId": "sidefx-semantic-corpus-closure.v1",
+      "pointer": "#/properties/receiptDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-corpus-snapshot.v1",
+      "pointer": "#/properties/manifestDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-corpus-snapshot.v1",
+      "pointer": "#/properties/ingestionReceiptDigests/items",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-corpus-snapshot.v1",
+      "pointer": "#/properties/resources/items/properties/sourceClass",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/sourceClass"
+    },
+    {
+      "contractId": "sidefx-semantic-corpus-snapshot.v1",
+      "pointer": "#/properties/resources/items/properties/sourceDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-corpus-snapshot.v1",
+      "pointer": "#/properties/derivationProfileDigests/items",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-corpus-snapshot.v1",
+      "pointer": "#/properties/createdFrom/properties/dirtyStateDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-corpus-snapshot.v1",
+      "pointer": "#/properties/snapshotDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-gap-analysis.v1",
+      "pointer": "#/properties/snapshotDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-gap-analysis.v1",
+      "pointer": "#/properties/catalogDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-gap-analysis.v1",
+      "pointer": "#/properties/relationshipGraphDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-gap-analysis.v1",
+      "pointer": "#/properties/analysisDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-grounded-result.v1",
+      "pointer": "#/properties/snapshotDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-grounded-result.v1",
+      "pointer": "#/properties/catalogDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-grounded-result.v1",
+      "pointer": "#/properties/planDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-grounded-result.v1",
+      "pointer": "#/properties/candidateSetDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-grounded-result.v1",
+      "pointer": "#/properties/groundedResultDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-identity-index.v1",
+      "pointer": "#/properties/snapshotDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-identity-index.v1",
+      "pointer": "#/properties/catalogDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-identity-index.v1",
+      "pointer": "#/properties/entries/items/properties/kind",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/objectKind"
+    },
+    {
+      "contractId": "sidefx-semantic-identity-index.v1",
+      "pointer": "#/properties/entries/items/properties/sourceClass",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/sourceClass"
+    },
+    {
+      "contractId": "sidefx-semantic-identity-index.v1",
+      "pointer": "#/properties/findings/items",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/finding"
+    },
+    {
+      "contractId": "sidefx-semantic-identity-index.v1",
+      "pointer": "#/properties/indexDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-identity-index.v1",
+      "pointer": "#/properties/derivationReceiptDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-impact-analysis.v1",
+      "pointer": "#/properties/snapshotDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-impact-analysis.v1",
+      "pointer": "#/properties/planDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-impact-analysis.v1",
+      "pointer": "#/properties/findings/items",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/finding"
+    },
+    {
+      "contractId": "sidefx-semantic-impact-analysis.v1",
+      "pointer": "#/properties/receipt",
+      "ref": "sidefx-semantic-query-receipt.schema.json"
+    },
+    {
+      "contractId": "sidefx-semantic-impact-analysis.v1",
+      "pointer": "#/properties/impactDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-knowledge-outcome.v1",
+      "pointer": "#/properties/snapshotDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-knowledge-outcome.v1",
+      "pointer": "#/properties/planDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-knowledge-outcome.v1",
+      "pointer": "#/properties/candidateSetDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-knowledge-outcome.v1",
+      "pointer": "#/properties/groundedResultDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-knowledge-outcome.v1",
+      "pointer": "#/properties/receipt",
+      "ref": "sidefx-semantic-query-receipt.schema.json"
+    },
+    {
+      "contractId": "sidefx-semantic-lexical-index.v1",
+      "pointer": "#/properties/snapshotDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-lexical-index.v1",
+      "pointer": "#/properties/catalogDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-lexical-index.v1",
+      "pointer": "#/properties/findings/items",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/finding"
+    },
+    {
+      "contractId": "sidefx-semantic-lexical-index.v1",
+      "pointer": "#/properties/indexDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-lexical-index.v1",
+      "pointer": "#/properties/derivationReceiptDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-object-catalog.v1",
+      "pointer": "#/properties/snapshotDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-object-catalog.v1",
+      "pointer": "#/properties/objects/items/properties/kind",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/objectKind"
+    },
+    {
+      "contractId": "sidefx-semantic-object-catalog.v1",
+      "pointer": "#/properties/objects/items/properties/sourceClass",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/sourceClass"
+    },
+    {
+      "contractId": "sidefx-semantic-object-catalog.v1",
+      "pointer": "#/properties/objects/items/properties/sourceAttestations/items",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/sourceLocator"
+    },
+    {
+      "contractId": "sidefx-semantic-object-catalog.v1",
+      "pointer": "#/properties/objects/items/properties/snapshotDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-object-catalog.v1",
+      "pointer": "#/properties/findings/items",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/finding"
+    },
+    {
+      "contractId": "sidefx-semantic-object-catalog.v1",
+      "pointer": "#/properties/catalogDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-object-catalog.v1",
+      "pointer": "#/properties/derivationReceiptDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-pattern-candidate-set.v1",
+      "pointer": "#/properties/snapshotDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-pattern-candidate-set.v1",
+      "pointer": "#/properties/requestDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-pattern-candidate-set.v1",
+      "pointer": "#/properties/candidates/items/properties/patternDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-pattern-candidate-set.v1",
+      "pointer": "#/properties/candidates/items/properties/sourceLocator",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/sourceLocator"
+    },
+    {
+      "contractId": "sidefx-semantic-pattern-candidate-set.v1",
+      "pointer": "#/properties/candidateSetDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-precedent-set.v1",
+      "pointer": "#/properties/snapshotDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-precedent-set.v1",
+      "pointer": "#/properties/requestDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-precedent-set.v1",
+      "pointer": "#/properties/classes/items/properties/results/items/properties/sourceClass",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/sourceClass"
+    },
+    {
+      "contractId": "sidefx-semantic-precedent-set.v1",
+      "pointer": "#/properties/classes/items/properties/results/items/properties/queryReceiptDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-precedent-set.v1",
+      "pointer": "#/properties/queryReceiptDigests/items",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-precedent-set.v1",
+      "pointer": "#/properties/precedentSetDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-provider-resolution.v1",
+      "pointer": "#/properties/snapshotDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-provider-resolution.v1",
+      "pointer": "#/properties/providers/items/properties/providerBindingDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-provider-resolution.v1",
+      "pointer": "#/properties/providers/items/properties/authorityBindings/items/properties/sourceDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-provider-resolution.v1",
+      "pointer": "#/properties/findings/items",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/finding"
+    },
+    {
+      "contractId": "sidefx-semantic-provider-resolution.v1",
+      "pointer": "#/properties/resolutionDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-query-plan-construction-outcome.v1",
+      "pointer": "#/properties/snapshotDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-query-plan-construction-outcome.v1",
+      "pointer": "#/properties/plan/oneOf/1",
+      "ref": "sidefx-semantic-query-plan.schema.json"
+    },
+    {
+      "contractId": "sidefx-semantic-query-plan-construction-outcome.v1",
+      "pointer": "#/properties/findings/items",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/finding"
+    },
+    {
+      "contractId": "sidefx-semantic-query-plan-construction-outcome.v1",
+      "pointer": "#/properties/planDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-query-plan.v1",
+      "pointer": "#/properties/snapshotDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-query-plan.v1",
+      "pointer": "#/properties/subject/properties/kind",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/objectKind"
+    },
+    {
+      "contractId": "sidefx-semantic-query-plan.v1",
+      "pointer": "#/properties/relationshipKinds/items",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/relationshipKind"
+    },
+    {
+      "contractId": "sidefx-semantic-query-plan.v1",
+      "pointer": "#/properties/planDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-query-receipt-binding-request.v1",
+      "pointer": "#/properties/vectorTestimony/oneOf/1",
+      "ref": "sidefx-semantic-vector-testimony.schema.json"
+    },
+    {
+      "contractId": "sidefx-semantic-query-receipt.v1",
+      "pointer": "#/properties/requestDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-query-receipt.v1",
+      "pointer": "#/properties/planDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-query-receipt.v1",
+      "pointer": "#/properties/snapshotDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-query-receipt.v1",
+      "pointer": "#/properties/catalogDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-query-receipt.v1",
+      "pointer": "#/properties/relationshipGraphDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-query-receipt.v1",
+      "pointer": "#/properties/indexDigests/items",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-query-receipt.v1",
+      "pointer": "#/properties/vectorTestimony/oneOf/1",
+      "ref": "sidefx-semantic-vector-testimony.schema.json"
+    },
+    {
+      "contractId": "sidefx-semantic-query-receipt.v1",
+      "pointer": "#/properties/candidateSetDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-query-receipt.v1",
+      "pointer": "#/properties/groundedResultDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-query-receipt.v1",
+      "pointer": "#/properties/policyDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-query-receipt.v1",
+      "pointer": "#/properties/citations/items",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/sourceLocator"
+    },
+    {
+      "contractId": "sidefx-semantic-query-receipt.v1",
+      "pointer": "#/properties/findings/items",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/finding"
+    },
+    {
+      "contractId": "sidefx-semantic-query-receipt.v1",
+      "pointer": "#/properties/receiptDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-relationship-graph.v1",
+      "pointer": "#/properties/snapshotDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-relationship-graph.v1",
+      "pointer": "#/properties/catalogDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-relationship-graph.v1",
+      "pointer": "#/properties/relationships/items/properties/kind",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/relationshipKind"
+    },
+    {
+      "contractId": "sidefx-semantic-relationship-graph.v1",
+      "pointer": "#/properties/relationships/items/properties/sourceLocator",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/sourceLocator"
+    },
+    {
+      "contractId": "sidefx-semantic-relationship-graph.v1",
+      "pointer": "#/properties/openReferences/items",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/finding"
+    },
+    {
+      "contractId": "sidefx-semantic-relationship-graph.v1",
+      "pointer": "#/properties/graphDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-relationship-graph.v1",
+      "pointer": "#/properties/derivationReceiptDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-scenario-lineage.v1",
+      "pointer": "#/properties/snapshotDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-scenario-lineage.v1",
+      "pointer": "#/properties/planDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-scenario-lineage.v1",
+      "pointer": "#/properties/findings/items",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/finding"
+    },
+    {
+      "contractId": "sidefx-semantic-scenario-lineage.v1",
+      "pointer": "#/properties/receipt",
+      "ref": "sidefx-semantic-query-receipt.schema.json"
+    },
+    {
+      "contractId": "sidefx-semantic-scenario-lineage.v1",
+      "pointer": "#/properties/lineageDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-source-manifest.v1",
+      "pointer": "#/properties/observationDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-source-manifest.v1",
+      "pointer": "#/properties/resources/items/properties/sourceDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-source-manifest.v1",
+      "pointer": "#/properties/resources/items/properties/sourceClass",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/sourceClass"
+    },
+    {
+      "contractId": "sidefx-semantic-source-manifest.v1",
+      "pointer": "#/properties/findings/items",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/finding"
+    },
+    {
+      "contractId": "sidefx-semantic-source-manifest.v1",
+      "pointer": "#/properties/manifestDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-verification-coverage.v1",
+      "pointer": "#/properties/snapshotDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-verification-coverage.v1",
+      "pointer": "#/properties/catalogDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-verification-coverage.v1",
+      "pointer": "#/properties/relationshipGraphDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    },
+    {
+      "contractId": "sidefx-semantic-verification-coverage.v1",
+      "pointer": "#/properties/findings/items",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/finding"
+    },
+    {
+      "contractId": "sidefx-semantic-verification-coverage.v1",
+      "pointer": "#/properties/coverageDigest",
+      "ref": "sidefx-semantic-common.schema.json#/$defs/digest"
+    }
+  ],
+  "capabilitiesWithoutScenarios": [
+    {
+      "capability_id": "manage-capsule-estate",
+      "namespace_id": "sidefx:capabilities",
+      "scenario_count": "0",
+      "root_count": "0"
+    }
+  ],
+  "annotationCounts": {
+    "title": {
+      "contracts": 109,
+      "nodes": 109,
+      "inputScenarios": 255,
+      "outcomeScenarios": 260,
+      "rootInputs": 45,
+      "rootOutcomes": 46
+    },
+    "description": {
+      "contracts": 32,
+      "nodes": 83,
+      "inputScenarios": 69,
+      "outcomeScenarios": 69,
+      "rootInputs": 8,
+      "rootOutcomes": 6
+    },
+    "format": {
+      "contracts": 0,
+      "nodes": 0,
+      "inputScenarios": 0,
+      "outcomeScenarios": 0,
+      "rootInputs": 0,
+      "rootOutcomes": 0
+    },
+    "default": {
+      "contracts": 0,
+      "nodes": 0,
+      "inputScenarios": 0,
+      "outcomeScenarios": 0,
+      "rootInputs": 0,
+      "rootOutcomes": 0
+    },
+    "examples": {
+      "contracts": 0,
+      "nodes": 0,
+      "inputScenarios": 0,
+      "outcomeScenarios": 0,
+      "rootInputs": 0,
+      "rootOutcomes": 0
+    },
+    "writeOnly": {
+      "contracts": 0,
+      "nodes": 0,
+      "inputScenarios": 0,
+      "outcomeScenarios": 0,
+      "rootInputs": 0,
+      "rootOutcomes": 0
+    },
+    "readOnly": {
+      "contracts": 0,
+      "nodes": 0,
+      "inputScenarios": 0,
+      "outcomeScenarios": 0,
+      "rootInputs": 0,
+      "rootOutcomes": 0
+    },
+    "contentMediaType": {
+      "contracts": 0,
+      "nodes": 0,
+      "inputScenarios": 0,
+      "outcomeScenarios": 0,
+      "rootInputs": 0,
+      "rootOutcomes": 0
+    },
+    "contentEncoding": {
+      "contracts": 8,
+      "nodes": 20,
+      "inputScenarios": 23,
+      "outcomeScenarios": 11,
+      "rootInputs": 6,
+      "rootOutcomes": 2
+    }
+  }
+}

@@ -1,0 +1,326 @@
+{
+  "source": {
+    "path": "C:\\lab\\repos\\sfx-platform\\lib\\json-schema-form.ts",
+    "digest": "sha256:e5b5cc05c19d4eb362fc6cd3282bd4f54b11c23189a53927d77f1a2fafc36775"
+  },
+  "snapshotId": "sha256:1a770ac0795d10665a88166f8d8c968dc5b2d030fdfab2b837aa6071d135f9e9",
+  "resolvedRootInputs": 216,
+  "noTopLevelFields": [
+    {
+      "capabilityId": "admit-registry-asset",
+      "contractId": "registry-asset-admission-request.v1"
+    },
+    {
+      "capabilityId": "bind-external-credential-reference",
+      "contractId": "bind-external-credential-reference-input.v1"
+    },
+    {
+      "capabilityId": "compare-projected-tooling-migration-oracle",
+      "contractId": "projected-tooling-migration-oracle-comparison-request.v1"
+    },
+    {
+      "capabilityId": "construct-capability-author-delegate-request",
+      "contractId": "capability-author-delegate-construction-request.v1"
+    },
+    {
+      "capabilityId": "construct-model-connection-runtime-closure",
+      "contractId": "construct-model-connection-runtime-closure-input.v1"
+    },
+    {
+      "capabilityId": "construct-model-role-conveyor-plan",
+      "contractId": "construct-model-role-conveyor-plan-input.v1"
+    },
+    {
+      "capabilityId": "determine-model-role-provider-switch",
+      "contractId": "determine-model-role-provider-switch-input.v1"
+    },
+    {
+      "capabilityId": "execute-governed-model-invocation",
+      "contractId": "execute-governed-model-invocation-input.v1"
+    },
+    {
+      "capabilityId": "execute-governed-model-role-conveyor",
+      "contractId": "execute-governed-model-role-conveyor-input.v1"
+    },
+    {
+      "capabilityId": "execute-governed-serial-tooling-migration",
+      "contractId": "governed-serial-tooling-migration-request.v1"
+    },
+    {
+      "capabilityId": "generate-executable-capability-scaffold",
+      "contractId": "executable-scaffold-request.v1"
+    },
+    {
+      "capabilityId": "govern-model-provider-binding",
+      "contractId": "govern-model-provider-binding-input.v1"
+    },
+    {
+      "capabilityId": "inspect-delegated-capability-candidate",
+      "contractId": "delegated-capability-candidate-inspection-request.v1"
+    },
+    {
+      "capabilityId": "observe-governed-http-exchange",
+      "contractId": "observe-governed-http-exchange-input.v1"
+    },
+    {
+      "capabilityId": "observe-governed-repository",
+      "contractId": "governed-repository-observation-request.v1"
+    },
+    {
+      "capabilityId": "observe-live-model-connection",
+      "contractId": "observe-live-model-connection-input.v1"
+    },
+    {
+      "capabilityId": "observe-projected-target-execution",
+      "contractId": "projected-target-execution-request.v1"
+    },
+    {
+      "capabilityId": "obtain-governed-model-response",
+      "contractId": "governed-model-invocation-request.v1"
+    },
+    {
+      "capabilityId": "operate-tooling-migration-conveyor",
+      "contractId": "tooling-migration-operation-request.v1"
+    },
+    {
+      "capabilityId": "operate-tooling-migration-promote",
+      "contractId": "tooling-migration-promote-request.v1"
+    },
+    {
+      "capabilityId": "operate-tooling-migration-verify",
+      "contractId": "tooling-migration-verify-request.v1"
+    },
+    {
+      "capabilityId": "project-canonical-circuit-blueprint",
+      "contractId": "canonical-circuit-blueprint-projection-request.v1"
+    },
+    {
+      "capabilityId": "project-model-provider-protocol",
+      "contractId": "project-model-provider-protocol-input.v1"
+    },
+    {
+      "capabilityId": "provision-capability-artifacts",
+      "contractId": "capability-provisioning-request.v1"
+    },
+    {
+      "capabilityId": "publish-bounded-tooling-migration-evidence",
+      "contractId": "bounded-tooling-migration-evidence-publication-request.v1"
+    },
+    {
+      "capabilityId": "qualify-provider-candidate-completeness",
+      "contractId": "provider-candidate-completeness-request.v1"
+    },
+    {
+      "capabilityId": "resolve-capability-proof-obligations",
+      "contractId": "proof-obligation-request.v1"
+    },
+    {
+      "capabilityId": "resolve-estate-dependency-closure",
+      "contractId": "estate-dependency-closure-request.v1"
+    },
+    {
+      "capabilityId": "transact-governed-tooling-responsibility-binding",
+      "contractId": "governed-tooling-binding-transaction-request.v1"
+    },
+    {
+      "capabilityId": "validate-semantic-carrier",
+      "contractId": "semantic-carrier-source.v1"
+    },
+    {
+      "capabilityId": "verify-capability-authoring-lineage",
+      "contractId": "capability-authoring-lineage-verification-request.v1"
+    },
+    {
+      "capabilityId": "verify-model-connection-conformance",
+      "contractId": "verify-model-connection-conformance-input.v1"
+    },
+    {
+      "capabilityId": "verify-model-role-conveyor-closure",
+      "contractId": "verify-model-role-conveyor-closure-input.v1"
+    }
+  ],
+  "noTopLevelFieldsCount": 33,
+  "helperProbes": [
+    {
+      "name": "required boolean has no declared default",
+      "schema": {
+        "type": "object",
+        "required": [
+          "consent"
+        ],
+        "properties": {
+          "consent": {
+            "type": "boolean"
+          }
+        }
+      },
+      "field": {
+        "kind": "object",
+        "schema": {
+          "type": "object",
+          "required": [
+            "consent"
+          ],
+          "properties": {
+            "consent": {
+              "type": "boolean"
+            }
+          }
+        },
+        "nullable": false
+      },
+      "initial": {
+        "consent": false
+      },
+      "propertyKeys": [
+        "consent"
+      ]
+    },
+    {
+      "name": "optional const still seeded",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "optional": {
+            "const": "x"
+          }
+        }
+      },
+      "field": {
+        "kind": "object",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "optional": {
+              "const": "x"
+            }
+          }
+        },
+        "nullable": false
+      },
+      "initial": {
+        "optional": "x"
+      },
+      "propertyKeys": [
+        "optional"
+      ]
+    },
+    {
+      "name": "closed empty object is a valid no-field payload",
+      "schema": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "field": {
+        "kind": "object",
+        "schema": {
+          "type": "object",
+          "additionalProperties": false
+        },
+        "nullable": false
+      },
+      "initial": {},
+      "propertyKeys": []
+    },
+    {
+      "name": "root union has no direct properties",
+      "schema": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "x": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "y": {
+                "type": "integer"
+              }
+            }
+          }
+        ]
+      },
+      "field": {
+        "kind": "raw",
+        "schema": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "x": {
+                  "type": "string"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "properties": {
+                "y": {
+                  "type": "integer"
+                }
+              }
+            }
+          ]
+        },
+        "nullable": false
+      },
+      "initial": "",
+      "propertyKeys": []
+    },
+    {
+      "name": "boolean property schemas are omitted",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "arbitrary": true,
+          "forbidden": false
+        }
+      },
+      "field": {
+        "kind": "object",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "arbitrary": true,
+            "forbidden": false
+          }
+        },
+        "nullable": false
+      },
+      "initial": {},
+      "propertyKeys": []
+    },
+    {
+      "name": "reference sibling constraint",
+      "schema": {
+        "$defs": {
+          "text": {
+            "type": "string"
+          }
+        },
+        "$ref": "#/$defs/text",
+        "minLength": 4
+      },
+      "field": {
+        "kind": "string",
+        "schema": {
+          "type": "string"
+        },
+        "nullable": false
+      },
+      "initial": "",
+      "propertyKeys": []
+    }
+  ],
+  "metaSchemaValidation": {
+    "validator": "Ajv 8.20.0 / Ajv2020",
+    "contracts": 630,
+    "passed": 630,
+    "failures": []
+  },
+  "limitations": "Helper probes and JSON Schema meta-schema validation only. No browser interaction, instance admission, external-reference closure, output renderer or capability execution proof."
+}
