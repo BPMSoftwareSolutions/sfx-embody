@@ -1,137 +1,159 @@
-# Invoking the scaffold capability from the database: projection resolved, execution held by the admitted transformation
+# Invoking the scaffold capability from the database
 
 Assessment: 2026-09-09. Subject: invoking `generate-executable-capability-scaffold`
 through the direct database path in [database-direct-invocation.md](database-direct-invocation.md)
 to scaffold a RapidAPI provider capability.
 
-The contract-openness blocker recorded in the previous assessment is resolved.
-`sfx capability invoke` no longer requires preparation, and the node type
-projection now admits deliberately open contract positions instead of throwing.
-The scaffold now resolves, plans all sixteen scenario bodies in memory, loads
-224 modules, and reaches kernel execution. The remaining hold is in the
-capability's own admitted semantic transformation, which fails for
-blueprint-absent requests identically under the canonical SDA evaluator.
+The contract-openness blocker recorded in the previous assessment is resolved,
+and the capability now runs end-to-end through the direct invocation. The
+blueprint-conditioned path completes with exit 0. The remaining data defect is
+exactly located: 35 literal rows across 5 transformations that compare
+`json-stringify(...)` against `"undefined"`, a value that comparison can never
+produce. The blueprint-absent path still fails on the first of those rows; the
+blueprint-conditioned path survives all but one, which it works around with a
+fully-populated request.
 
-## The command
-
-The capability being scaffolded is `resolve-equity-market-price-evidence`, the finance
-resolver from the RapidAPI provider-swap status record. That capability is a provisioned
-scaffold whose invocation terminates at `PROVIDER_REQUIRED`; it is exactly the case the
-scaffold capability exists to serve.
+## The successful run
 
 ```powershell
-sfx capability invoke generate-executable-capability-scaffold --input '@examples/rapidapi-scaffold.request.json' --json
+sfx capability invoke generate-executable-capability-scaffold --input '@examples/rapidapi-scaffold-blueprint.request.json' --json
 ```
 
-[The request](../examples/rapidapi-scaffold.request.json) is a real
-`executable-scaffold-request.v1`. It validates against the `contracts/input.schema.json`
-retained in the selected capsule, using the same Ajv 8.20.0 the runtime admits with.
-Its contents are read from declared authority rather than composed for the example:
-
-| Field | Source |
-| --- | --- |
-| `capabilityId`, `declaredScenarios`, `terminalNodes` | The four declared scenarios of `features/resolve-equity-market-price-evidence.feature` |
-| `featureDigest` | `sha256:2cef921f…` over those exact 3,680 feature bytes |
-| `declaredProviderSlots` | The two bindings in `rapidapi-finance.provider-connections.candidate.json` |
-| `estateInventory.capabilities` | All 219 managed capabilities selected from the same database snapshot |
-| `mechanicCatalog.mechanics` | All 191 `MECHANIC` definitions returned by the same authority read |
-| `declaredTopology` | Authored design testimony, marked `DESIGN_RESOLVER_CANDIDATE` |
-
-The topology is the one part that is authored rather than read. The scaffold refuses to
-invent geometry — a request carrying no declared topology returns
-`BLUEPRINT_TOPOLOGY_NOT_DECLARED` — so a candidate topology has to be supplied by a human
-or by the design resolver. No admitted canonical blueprint exists for this capability yet,
-so the request is `DESIGN_RESOLVER_CANDIDATE` rather than blueprint-conditioned.
-
-Three of the four declared capability slots — `bind-external-credential-reference`,
-`project-governed-http-request-body`, `observe-governed-http-exchange` — are present in
-the supplied inventory and would resolve `FOUND`. `select-equity-market-price-provider`
-is not in the estate and would resolve `NOT_FOUND`, becoming the next bounded authoring
-obligation. That asymmetry is the useful part of the answer and is the reason the
-inventory is supplied in full rather than summarized.
-
-## What the direct invocation now reaches
-
-The authority read succeeds completely. Selecting only `capabilityId` resolves the root
-scenario without an identity heuristic:
+Exit 0. The kernel completed; the scaffold's own disposition is `HELD`:
 
 ```text
-capability                generate-executable-capability-scaffold   (sidefx:capabilities)
-root scenario             generate-executable-capability-scaffold
-input / event / outcome   executable-scaffold-request / … / executable-capability-scaffold
-                          both RESOLVED
+disposition: rejected | scaffold: HELD | completenessLevel: COMPOSITION_RESOLVED
+conditioning: BLUEPRINT_CONDITIONED / CANDIDATE_CONDITIONED, contradictions: []
+embodiment:   4/4 cells, 4/4 terminals, 7/7 edges, unembodied: []
+
+executionShell (GENERATED):
+  admit-input → validate-input-contract → resolve-event-authority
+  → resolve-required-mechanics → resolve-capability-dependencies → resolve-providers
+  → execute → collect-testimony → admit-outcome → evaluate-disposition
+
+capabilitySlots:
+  bind-external-credential-reference    FOUND
+  project-governed-http-request-body    FOUND
+  observe-governed-http-exchange        FOUND
+  select-equity-market-price-provider   NOT_FOUND
+
+findings: CONTRACT_ID_NOT_JSON_SAFE
+authoringWorkQueue (6):
+  AUTHOR_CAPABILITY               select-equity-market-price-provider
+  RESOLVE_MECHANIC                resolve-equity-market-price-evidence.v1
+  RESOLVE_MECHANIC                retain-equity-market-price-provider-testimony.v1
+  RESOLVE_MECHANIC                hold-unavailable-equity-market-price-provider.v1
+  RESOLVE_MECHANIC                reject-nonconforming-native-market-price-testimony.v1
+  AUTHOR_SEMANTIC_TRANSFORMATION  transform-resolve-equity-market-price-evidence
 ```
 
-The node planner now projects the scaffold's deliberately open contract positions instead
-of throwing on them. Three projection rules cover the estate-wide scan from the previous
-assessment:
+It emitted 7 authoring artifacts for `resolve-equity-market-price-evidence`:
+capability.authority.json, interfaces.authority.json,
+execution-authorities.authority.json, semantic-graph.authority.json,
+projection-authorities.authority.json, contracts/contract-catalog.json,
+semantic-transformation.authority.json.
 
-| Declared shape | Projection |
-| --- | --- |
-| `type: array` without `items` | `unknown[]` — items admit any value, exactly as the schema admits |
-| `type: object` without `properties` (nested) | `Record<string, unknown>` — admits any object, rejects null, scalars and arrays, exactly as JSON Schema `type: object` |
-| `type: object` without `properties` (contract root) | an interface without declared fields; a root must stay an object type for the target graph |
+The work queue is the missing-finance-semantics gap derived by the capability
+rather than asserted by an author. Evidence for both runs is retained under
+`evidence/direct-invocation-20260909/`.
 
-The derived type-projection view records every such change in the
-`contract-projection.json` evidence with `runtimeAdmission: ORIGINAL_SCHEMA_UNCHANGED`;
-the original schema bytes remain the runtime admission authority. All 16 scenario
-bodies plan, and 224 modules load from memory.
+## The request shape matters
 
-Execution then fails with `CAPABILITY_EXECUTION_FAILED` (exit 4) during
-`execute-event-authority`, before outcome admission. The root port throws
-`TypeError: Cannot read properties of null (reading 'filter')` at its first
-blueprint-derived slot resolution.
+Two example corrections were required before the run above could exist.
 
-## The remaining hold: the admitted transformation assumes a forbidden absence value
+1. `estateInventory.capabilities` and `mechanicCatalog.mechanics` must be
+   objects carrying `capabilityId` / `mechanicId`. The earlier example carried
+   bare strings; the transformation then mapped `c.capabilityId` over strings,
+   produced nulls, reported every slot `NOT_FOUND`, and returned a 9-item work
+   queue — a plausible wrong answer rather than an error. Both example files now
+   carry the correct shape.
 
-The failure is not in the embodiment. The scaffold's `semantic-transformation.authority.json`
-detects a missing `canonicalBlueprint` with:
+2. The blueprint-absent request still fails on the first guard below. The
+   capability reads 23 input paths; a conforming run must supply
+   `canonicalBlueprint` including `projectionAuthorities` and the three
+   `declaredTopology.provenance.archetype*` fields. Absence is unhandled, which
+   is the data defect, not a request-authoring rule.
+
+## The data defect: rows, not architecture
+
+The transformation detects absent input with comparisons of the form
 
 ```text
-equals(format("{t}", { t: json-stringify(path(input, "payload.canonicalBlueprint.nodes")) }), "undefined")
+equals(format("{t}", { t: json-stringify(path(input, …)) }), "undefined")
 ```
 
-The declared transformation semantics make this comparison impossible to satisfy:
-a missing path evaluates to `null` (absence is one value, and a target-specific
-second empty value such as JavaScript `undefined` is declared non-portable), and
-`json-stringify(null)` is the string `"null"`. The comparison therefore always
-fails, the `[]` branch is dead code, and the blueprint-derived slots are computed
-from `null`, which the subsequent `filter` refuses.
+The declared semantics make that comparison unsatisfiable: a missing path
+evaluates to `null` (absence is one value; a target-specific second empty value
+such as JavaScript `undefined` is non-portable), and `json-stringify(null)` is
+the string `"null"`. Every one of these guards is false on absence, the empty
+branch is unreachable, and the absent value proceeds to the next mechanic —
+`filter` throws on null, `length` throws `OPERAND_NOT_MEASURABLE`.
 
-The same expression fails identically under the canonical
-`semantic-transformation-evaluator.mjs` from the pinned SDA checkout with the same
-input, so the native lowering is faithful and there is nothing an embodiment
-provider may legally change. The defect belongs to the admitted transformation
-authority: its absence detection should compare against `"null"` (or use a
-declared try/parse form) rather than `"undefined"`. Correcting it is a database
-change-surface operation — a corrected capsule generation with honest lineage —
-not an embodiment edit. The transformation's blueprint-present branch is not
-exercised by this assessment.
+Location 1 — the normalized expression nodes:
 
-## How far this reaches
+```text
+table   model.transformation_expression_node
+column  literal_content_pk  ->  source.content_object.content_bytes
+value   "undefined"  (content_object_pk 5029, 11 bytes, sha256:cf939b39…)
+refs    35 expression nodes, 0 other references
+```
 
-The previous blocker is gone: no contract shape on the invocation path throws
-during planning, so any capability whose contracts were previously rejected for
-open arrays now plans. The regeneration of the three regression capabilities
-passed the full estate verification (17/17 fixtures, 320 kernel observations,
-five negative checks across ten scenario bodies) and memory parity; the changed
-contract projections are confined to `Record<string, unknown>` replacements for
-previously silent empty interfaces in `admit-canonical-circuit-blueprint`.
+All 35 are the right operand of such a comparison; there is no legitimate use
+of the shared bytes mixed in. Rows by namespace:
 
-The scaffold itself remains uninvokable end-to-end only because its own
-transformation defects on the blueprint-absent request. A request carrying an
-admitted canonical blueprint would exercise the blueprint-present branch, which
-this assessment does not run.
+```text
+sidefx:capability:generate-executable-capability-scaffold  12  (expression_node_pk 28589, 28612, 28636, 28718,
+                                                              28742, 28774, 28798, 28822, 29833, 29888, 30107, 30169)
+sidefx:capability:provision-capability-artifacts            8
+sidefx:capability:admit-registry-asset                      8
+sidefx:capability:resolve-capability-proof-obligations      4
+sidefx:capability:resolve-estate-dependency-closure         3
+```
+
+Location 2 — the source documents:
+
+```text
+table   source.source_appearance.entry_id = 'semantic-transformation.authority.json'  ->  source.content_object
+```
+
+Five documents carry the same literal with the same per-namespace counts
+(12/8/8/4/3; 35 total, reconciled against the normalized rows). The scaffold's
+document is content_object_pk 2123, sha256:24d056c4…, 138,673 bytes. `planNode`
+reads these bytes, not the normalized nodes, so Location 2 is the one that
+changes invocation behavior; Location 1 keeps the normalized model honest and
+both must agree.
+
+## What a repair touches
+
+The correct value is `"null"`, not `"undefined"`. The bytes exist in both
+locations, and `source.content_object` is shared by digest, so a repair inserts
+corrected bytes rather than editing shared ones. The live inventory is
+`docs/research/scaffold-projection-gap/undefined-literal-inventory.sql`.
+
+The route is a new generation, not an in-place update: all three guards
+(`model.guard_transformation_expression_node`, `source.guard_content_object`,
+`source.guard_source_appearance`) are enabled and reject UPDATE with 51003
+IMMUTABLE_INSPECTION_DATA. Corrected source capsules flow through the ingest
+pipeline into a new snapshot and a new published model, exactly as
+apply-contract-fix.sql concluded for the contract bytes. The "repoint" shape is
+what the derivation produces inside that new generation — new appearance rows
+and new literal references — never an edit of the published rows.
+
+## Remaining findings
+
+`CONTRACT_ID_NOT_JSON_SAFE` appears on the successful run, and the emitted
+`contract-catalog.json` maps both `equity-market-price-evidence-request.v1` and
+`equity-market-price-evidence.v1` to `input.schema.json`. That aliasing has the
+same shape as defect 1 in the scaffold defect record and is a separate data
+finding from the `"undefined"` literals above.
 
 ## Boundaries
 
-The scaffold capability was never executed to a terminal outcome. No scaffold,
-blueprint carrier, or authoring artifact was produced for
-`resolve-equity-market-price-evidence`, and none of its four open event-mechanic
-slots were resolved. The RapidAPI provider was not called; no credential was
-resolved and no HTTP exchange was attempted. No database write was made: direct
-invocation performs three restricted reads and executes in memory. The estate-wide
-contract scan from the previous assessment is a read over one snapshot and reports
-document and capsule counts, not capability counts. The slot dispositions described
-above are what the scaffold's declared contract requires of a conforming run; they
-are expectations from reading the authority, not observed output.
+The blueprint-conditioned run is a completed scaffold outcome; it is not a
+published capability. The scaffold was executed with `DESIGN_RESOLVER_CANDIDATE`
+topology; no database write was made (direct invocation performs three
+restricted reads and executes in memory). The RapidAPI provider was not called;
+no credential was resolved and no HTTP exchange was attempted. The
+blueprint-absent path still fails on the first `"undefined"` guard; until the
+35 literal rows are corrected through a new generation, absence remains
+unhandled and requests must be fully populated.
