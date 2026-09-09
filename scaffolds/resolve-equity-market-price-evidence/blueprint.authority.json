@@ -1,0 +1,265 @@
+{
+  "carrierVersion": "canonical-circuit-blueprint.v1",
+  "capability": {
+    "capabilityId": "resolve-equity-market-price-evidence",
+    "version": "0.1.0",
+    "rootExperience": "resolve-equity-market-price-evidence",
+    "capabilityAuthorityDigest": "sha256:2cef921f310859afce813f5f35a8dc5362c738ec7a819ed50540a3c4dea150c8"
+  },
+  "sourceAuthority": {
+    "disposition": "CANDIDATE",
+    "featureAuthorityRef": {
+      "authorityId": "resolve-equity-market-price-evidence-feature.v1",
+      "digest": "sha256:2cef921f310859afce813f5f35a8dc5362c738ec7a819ed50540a3c4dea150c8"
+    }
+  },
+  "topologyProvenance": {
+    "kind": "DESIGN_RESOLVER_CANDIDATE",
+    "archetypeId": null,
+    "archetypeDigest": null,
+    "archetypes": null,
+    "geometryPreserved": true
+  },
+  "admissionState": "REQUIRES_CONFORMANCE_AND_HUMAN_BLUEPRINT_ADMISSION",
+  "blueprintAuthority": {
+    "blueprintId": "resolve-equity-market-price-evidence-blueprint.v1",
+    "authorityDigest": "sha256:2d393d82a3468b4150a6a1bed25df9b875f62bdb2ceb88cc0a495b798161e09e"
+  },
+  "nodes": [
+    {
+      "nodeId": "resolve-equity-market-price-evidence",
+      "kind": "responsibility",
+      "altitude": "CAPABILITY",
+      "projectionOrdinal": 0,
+      "cell": {
+        "first": {
+          "identity": "equity-market-price-evidence-request",
+          "contract": {
+            "authorityId": "equity-market-price-evidence-request.v1",
+            "digest": "sha256:2cef921f310859afce813f5f35a8dc5362c738ec7a819ed50540a3c4dea150c8"
+          }
+        },
+        "energized": {
+          "identity": "resolve-equity-market-price-evidence",
+          "authority": {
+            "authorityId": "resolve-equity-market-price-evidence.v1",
+            "digest": "sha256:2cef921f310859afce813f5f35a8dc5362c738ec7a819ed50540a3c4dea150c8"
+          }
+        },
+        "result": {
+          "identity": "equity-market-price-evidence",
+          "contract": {
+            "authorityId": "equity-market-price-evidence.v1",
+            "digest": "sha256:2cef921f310859afce813f5f35a8dc5362c738ec7a819ed50540a3c4dea150c8"
+          }
+        }
+      }
+    },
+    {
+      "nodeId": "retain-provider-realization-outside-market-price-semantics",
+      "kind": "responsibility",
+      "altitude": "CAPABILITY",
+      "projectionOrdinal": 1,
+      "cell": {
+        "first": {
+          "identity": "equity-market-price-evidence",
+          "contract": {
+            "authorityId": "equity-market-price-evidence.v1",
+            "digest": "sha256:2cef921f310859afce813f5f35a8dc5362c738ec7a819ed50540a3c4dea150c8"
+          }
+        },
+        "energized": {
+          "identity": "retain-provider-realization-outside-market-price-semantics",
+          "authority": {
+            "authorityId": "retain-equity-market-price-provider-testimony.v1",
+            "digest": "sha256:2cef921f310859afce813f5f35a8dc5362c738ec7a819ed50540a3c4dea150c8"
+          }
+        },
+        "result": {
+          "identity": "equity-market-price-evidence",
+          "contract": {
+            "authorityId": "equity-market-price-evidence.v1",
+            "digest": "sha256:2cef921f310859afce813f5f35a8dc5362c738ec7a819ed50540a3c4dea150c8"
+          }
+        }
+      }
+    },
+    {
+      "nodeId": "hold-unavailable-equity-market-price-provider",
+      "kind": "responsibility",
+      "altitude": "CAPABILITY",
+      "projectionOrdinal": 2,
+      "cell": {
+        "first": {
+          "identity": "equity-market-price-evidence-request",
+          "contract": {
+            "authorityId": "equity-market-price-evidence-request.v1",
+            "digest": "sha256:2cef921f310859afce813f5f35a8dc5362c738ec7a819ed50540a3c4dea150c8"
+          }
+        },
+        "energized": {
+          "identity": "hold-unavailable-equity-market-price-provider",
+          "authority": {
+            "authorityId": "hold-unavailable-equity-market-price-provider.v1",
+            "digest": "sha256:2cef921f310859afce813f5f35a8dc5362c738ec7a819ed50540a3c4dea150c8"
+          }
+        },
+        "result": {
+          "identity": "equity-market-price-provider-unavailable",
+          "contract": {
+            "authorityId": "equity-market-price-provider-unavailable.v1",
+            "digest": "sha256:2cef921f310859afce813f5f35a8dc5362c738ec7a819ed50540a3c4dea150c8"
+          }
+        }
+      }
+    },
+    {
+      "nodeId": "reject-nonconforming-native-market-price-testimony",
+      "kind": "responsibility",
+      "altitude": "CAPABILITY",
+      "projectionOrdinal": 3,
+      "cell": {
+        "first": {
+          "identity": "native-equity-market-price-testimony",
+          "contract": {
+            "authorityId": "native-equity-market-price-testimony.v1",
+            "digest": "sha256:2cef921f310859afce813f5f35a8dc5362c738ec7a819ed50540a3c4dea150c8"
+          }
+        },
+        "energized": {
+          "identity": "reject-nonconforming-native-market-price-testimony",
+          "authority": {
+            "authorityId": "reject-nonconforming-native-market-price-testimony.v1",
+            "digest": "sha256:2cef921f310859afce813f5f35a8dc5362c738ec7a819ed50540a3c4dea150c8"
+          }
+        },
+        "result": {
+          "identity": "native-equity-market-price-testimony-rejected",
+          "contract": {
+            "authorityId": "native-equity-market-price-testimony-rejection.v1",
+            "digest": "sha256:2cef921f310859afce813f5f35a8dc5362c738ec7a819ed50540a3c4dea150c8"
+          }
+        }
+      }
+    },
+    {
+      "nodeId": "bind-resolve-equity-market-price-evidence-disposition",
+      "kind": "junction",
+      "altitude": "CAPABILITY",
+      "projectionOrdinal": 4,
+      "cell": {
+        "first": {
+          "identity": "equity-market-price-evidence-request",
+          "contract": {
+            "authorityId": "equity-market-price-evidence-request.v1",
+            "digest": "sha256:2cef921f310859afce813f5f35a8dc5362c738ec7a819ed50540a3c4dea150c8"
+          }
+        },
+        "energized": {
+          "identity": "resolve-equity-market-price-evidence",
+          "authority": {
+            "authorityId": "resolve-equity-market-price-evidence.v1",
+            "digest": "sha256:2cef921f310859afce813f5f35a8dc5362c738ec7a819ed50540a3c4dea150c8"
+          }
+        },
+        "result": {
+          "identity": "equity-market-price-evidence",
+          "contract": {
+            "authorityId": "equity-market-price-evidence.v1",
+            "digest": "sha256:2cef921f310859afce813f5f35a8dc5362c738ec7a819ed50540a3c4dea150c8"
+          }
+        }
+      }
+    },
+    {
+      "nodeId": "terminal-equity-market-price-evidence",
+      "kind": "terminal",
+      "altitude": "CAPABILITY",
+      "terminalDisposition": "EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED"
+    },
+    {
+      "nodeId": "terminal-provider-testimony-retained",
+      "kind": "terminal",
+      "altitude": "CAPABILITY",
+      "terminalDisposition": "PROVIDER_TESTIMONY_RETAINED"
+    },
+    {
+      "nodeId": "terminal-provider-unavailable",
+      "kind": "terminal",
+      "altitude": "CAPABILITY",
+      "terminalDisposition": "EQUITY_MARKET_PRICE_PROVIDER_UNAVAILABLE"
+    },
+    {
+      "nodeId": "terminal-native-testimony-rejected",
+      "kind": "terminal",
+      "altitude": "CAPABILITY",
+      "terminalDisposition": "NATIVE_MARKET_PRICE_TESTIMONY_REJECTED"
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "resolve-to-price-evidence",
+      "from": "resolve-equity-market-price-evidence",
+      "to": "terminal-equity-market-price-evidence",
+      "topology": "VARIANT",
+      "semanticProgress": "ADVANCES",
+      "semanticPrecedence": "PRIMARY",
+      "selectingVariant": "PROVIDER_ROUTE_COMPLETED"
+    },
+    {
+      "edgeId": "resolve-to-provider-hold",
+      "from": "resolve-equity-market-price-evidence",
+      "to": "hold-unavailable-equity-market-price-provider",
+      "topology": "VARIANT",
+      "semanticProgress": "ADVANCES",
+      "semanticPrecedence": "FALLBACK",
+      "selectingVariant": "PROVIDER_ROUTES_EXHAUSTED"
+    },
+    {
+      "edgeId": "hold-to-terminal",
+      "from": "hold-unavailable-equity-market-price-provider",
+      "to": "terminal-provider-unavailable",
+      "topology": "SEQUENCE",
+      "semanticProgress": "ADVANCES",
+      "semanticPrecedence": "PRIMARY",
+      "selectingVariant": null
+    },
+    {
+      "edgeId": "resolve-to-native-interpretation",
+      "from": "resolve-equity-market-price-evidence",
+      "to": "reject-nonconforming-native-market-price-testimony",
+      "topology": "VARIANT",
+      "semanticProgress": "ADVANCES",
+      "semanticPrecedence": "GUARD",
+      "selectingVariant": "NATIVE_TESTIMONY_NONCONFORMING"
+    },
+    {
+      "edgeId": "reject-to-terminal",
+      "from": "reject-nonconforming-native-market-price-testimony",
+      "to": "terminal-native-testimony-rejected",
+      "topology": "SEQUENCE",
+      "semanticProgress": "ADVANCES",
+      "semanticPrecedence": "PRIMARY",
+      "selectingVariant": null
+    },
+    {
+      "edgeId": "price-evidence-to-testimony",
+      "from": "terminal-equity-market-price-evidence",
+      "to": "retain-provider-realization-outside-market-price-semantics",
+      "topology": "SEQUENCE",
+      "semanticProgress": "ADVANCES",
+      "semanticPrecedence": "PRIMARY",
+      "selectingVariant": null
+    },
+    {
+      "edgeId": "testimony-to-terminal",
+      "from": "retain-provider-realization-outside-market-price-semantics",
+      "to": "terminal-provider-testimony-retained",
+      "topology": "SEQUENCE",
+      "semanticProgress": "ADVANCES",
+      "semanticPrecedence": "PRIMARY",
+      "selectingVariant": null
+    }
+  ],
+  "projectionAuthorities": []
+}

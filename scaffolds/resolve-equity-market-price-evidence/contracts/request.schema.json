@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.sidefx.local/contracts/request.schema.json",
+  "title": "equity-market-price-evidence-request",
+  "type": "object",
+  "required": [
+    "payload"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "contractId": {
+      "const": "equity-market-price-evidence-request.v1"
+    },
+    "payload": {
+      "type": "object",
+      "required": [
+        "symbol",
+        "region"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "minLength": 1
+        },
+        "region": {
+          "type": "string",
+          "minLength": 1
+        },
+        "nativeTestimony": {
+          "type": "object",
+          "description": "Exact native supplier response. Shape belongs to the supplier."
+        },
+        "providerBinding": {
+          "type": "object",
+          "required": [
+            "bindingId"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "bindingId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "providerId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "gateway": {
+              "type": "string",
+              "minLength": 1
+            },
+            "host": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "attemptedBindings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "bindingId"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "bindingId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "providerId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "gateway": {
+                "type": "string",
+                "minLength": 1
+              },
+              "host": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

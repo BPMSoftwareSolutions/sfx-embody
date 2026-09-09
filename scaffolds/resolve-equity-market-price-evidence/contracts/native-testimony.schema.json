@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.sidefx.local/contracts/native-testimony.schema.json",
+  "title": "native-equity-market-price-testimony",
+  "type": "object",
+  "required": [
+    "payload"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "contractId": {
+      "const": "native-equity-market-price-testimony.v1"
+    },
+    "payload": {
+      "type": "object",
+      "required": [
+        "nativeTestimony"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "nativeTestimony": {
+          "type": "object",
+          "description": "Exact native supplier response. Shape belongs to the supplier."
+        },
+        "providerBinding": {
+          "type": "object",
+          "required": [
+            "bindingId"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "bindingId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "providerId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "gateway": {
+              "type": "string",
+              "minLength": 1
+            },
+            "host": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "symbol": {
+          "type": "string",
+          "minLength": 1
+        },
+        "region": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.agentic-harness.local/contracts/equity-market-price-provider-unavailable.v1.schema.json",
+  "title": "Equity market price provider unavailable",
+  "description": "Resolution is held with attributable provider attempt evidence and no price evidence is invented.",
+  "type": "object",
+  "required": ["contractId", "disposition"],
+  "properties": {
+    "contractId": {
+      "const": "equity-market-price-provider-unavailable.v1"
+    },
+    "disposition": {
+      "const": "EQUITY_MARKET_PRICE_PROVIDER_UNAVAILABLE"
+    },
+    "providerAttemptEvidence": {
+      "type": "object"
+    }
+  }
+}

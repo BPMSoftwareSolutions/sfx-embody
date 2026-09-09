@@ -1,0 +1,19 @@
+{
+  "workspaceType": "consumer-workspace-authority.v1",
+  "consumerId": "resolve-equity-market-price-evidence",
+  "projectionTargets": [
+    "node"
+  ],
+  "capabilities": [
+    {
+      "featureId": "resolve-equity-market-price-evidence.feature",
+      "feature": "../../features/resolve-equity-market-price-evidence.feature",
+      "capability": "capability.authority.json",
+      "semanticGraph": "semantic-graph.authority.json",
+      "executionAuthorities": "execution-authorities.authority.json",
+      "projectionAuthorities": "projection-authorities.authority.json",
+      "interfaces": "interfaces.authority.json",
+      "fixtures": "fixtures.authority.json"
+    }
+  ]
+}

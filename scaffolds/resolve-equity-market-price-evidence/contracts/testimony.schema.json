@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.agentic-harness.local/contracts/native-equity-market-price-testimony.v1.schema.json",
+  "title": "Native equity market price testimony",
+  "description": "The raw supplier payload admitted at the native testimony boundary. Its shape is selected by presence, never by provider identity; the canonical mapping reads either declared native shape.",
+  "type": "object"
+}

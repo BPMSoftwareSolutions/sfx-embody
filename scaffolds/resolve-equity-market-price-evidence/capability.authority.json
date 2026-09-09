@@ -1,0 +1,7 @@
+{
+  "capabilityId": "resolve-equity-market-price-evidence",
+  "name": "resolve-equity-market-price-evidence",
+  "mode": "capability",
+  "rootScenarioId": "resolve-equity-market-price-evidence",
+  "capabilityVersion": "0.1.0"
+}

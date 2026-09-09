@@ -1,0 +1,15 @@
+{
+  "authorityType": "execution-authorities.v1",
+  "executionAuthorities": [
+    {
+      "id": "resolve-equity-market-price-evidence.v1",
+      "owningScenarioId": "resolve-equity-market-price-evidence",
+      "operations": [
+        {
+          "kind": "invoke-port",
+          "portId": "resolve-equity-market-price-evidence-port"
+        }
+      ]
+    }
+  ]
+}
