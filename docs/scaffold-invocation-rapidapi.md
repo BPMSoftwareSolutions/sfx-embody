@@ -123,6 +123,32 @@ original bytes — the repaired state is hand-reproducible via the script, not
 via the ingest pipeline. The estate-wide row inventory is
 `docs/research/scaffold-projection-gap/undefined-literal-inventory.sql`.
 
+## Registration state (model 14)
+
+The scaffolded artifacts were registered and published as generation 14
+(220 capabilities, `source.validate_model` passed, capsule digest matches the
+packer's output). Registration normalized identity only: all four scenarios
+have NULL `scenario_input.input_contract_version_pk` and
+`scenario_event.execution_authority_version_pk`, zero
+`scenario_outcome_contract` rows, and zero rows for any referenced authority
+(no execution authorities, ports, transformations, contracts, or operation
+links). The resolver reports `NOT_OBSERVABLE` with three open face requirements
+and a closure containing only the root scenario.
+
+Closing it requires one new generation that promotes the whole referenced
+chain from the capsule bytes: the five contract schemas (to be authored) plus
+`schema_object`, the four execution authorities with their operations
+(`operation_port_invocation`, `operation_scenario_invocation`), the four ports
+and four transformations with their expression trees, the
+`operation_transformation` links, and the face links with reference-state
+flips. The scaffolded interfaces authority already uses the existing platform
+vocabulary (`sda-authority-transformation-port.v1`,
+`sda-schema-contract-admission.v1`), so the mechanic requirements should
+resolve against the established platform registry once promoted. Acceptance:
+readiness `CAN_ATTEMPT_EMBODIMENT` with zero open requirements and a
+four-scenario closure before attempting invocation. Generation 3 remains the
+fallback pointer.
+
 ## Remaining findings
 
 `CONTRACT_ID_NOT_JSON_SAFE` appears on the successful runs, and the emitted
