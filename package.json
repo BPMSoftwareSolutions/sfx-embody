@@ -14,6 +14,7 @@
     "test": "node --test tests",
     "verify:estate": "node scripts/verify-estate.mjs config/regression.cases.json",
     "verify:memory": "node --experimental-vm-modules scripts/verify-memory-parity.mjs config/regression.cases.json",
+    "validate:scaffold": "node --experimental-vm-modules scripts/validate-scaffold.mjs",
     "audit:source": "node scripts/audit-semantic-expression.mjs",
     "audit:lowering": "node scripts/audit-lowering-evidence.mjs",
     "report": "node scripts/report-native-repair.mjs"
