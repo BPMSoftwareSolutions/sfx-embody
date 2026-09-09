@@ -1,0 +1,27 @@
+{
+  "contractId": "equity-market-price-evidence-request.v1",
+  "payload": {
+    "nativeTestimony": {
+      "quoteSummary": {
+        "result": [
+          {
+            "price": {
+              "symbol": "AAPL",
+              "currency": "USD",
+              "regularMarketPrice": { "raw": 313.73 },
+              "regularMarketTime": 1788971619,
+              "marketState": "REGULAR",
+              "exchange": "NMS",
+              "quoteSourceName": "Nasdaq Real Time Price"
+            }
+          }
+        ]
+      }
+    },
+    "region": "US",
+    "providerBinding": {
+      "bindingId": "synthetic-acceptance",
+      "providerId": "yahoo-finance-synthetic"
+    }
+  }
+}

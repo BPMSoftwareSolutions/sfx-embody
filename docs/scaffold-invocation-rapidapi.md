@@ -135,19 +135,18 @@ have NULL `scenario_input.input_contract_version_pk` and
 links). The resolver reports `NOT_OBSERVABLE` with three open face requirements
 and a closure containing only the root scenario.
 
-Closing it requires one new generation that promotes the whole referenced
-chain from the capsule bytes: the five contract schemas (to be authored) plus
-`schema_object`, the four execution authorities with their operations
-(`operation_port_invocation`, `operation_scenario_invocation`), the four ports
-and four transformations with their expression trees, the
-`operation_transformation` links, and the face links with reference-state
-flips. The scaffolded interfaces authority already uses the existing platform
-vocabulary (`sda-authority-transformation-port.v1`,
-`sda-schema-contract-admission.v1`), so the mechanic requirements should
-resolve against the established platform registry once promoted. Acceptance:
-readiness `CAN_ATTEMPT_EMBODIMENT` with zero open requirements and a
-four-scenario closure before attempting invocation. Generation 3 remains the
-fallback pointer.
+**Resolved.** The registration lane in sidefx-database now promotes the full
+referenced chain from the capsule bytes — contracts and schemas, ports,
+transformations with expression trees, execution authorities with operations,
+and face links — and commits in observable, resumable phases; `publish_model`
+no longer audits the whole estate (validation moved to `node src/cli.mjs
+validate --model N` for CI/CD). The corrected registration published, the
+resolver reports `CAN_ATTEMPT_EMBODIMENT` with 0 of 187 requirements open and a
+four-scenario closure, and `sfx capability invoke
+resolve-equity-market-price-evidence` completes end-to-end with a canonical
+provider payload, returning `EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED`. The
+platform package and registries resolve from the snapshot-level estate records,
+not from the capsule.
 
 ## Remaining findings
 
