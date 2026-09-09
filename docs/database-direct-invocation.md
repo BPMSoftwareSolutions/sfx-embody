@@ -112,6 +112,8 @@ Capsule packing is already byte-oriented in the installed provisioner: it constr
 
 The achieved result is direct database-to-memory execution of an existing capability. Candidate authoring, proof persistence in the database, capsulization, and broader provider profiles remain separate work. The `sfx` connection is now implemented as described below.
 
+A separate limit, independent of the change surface, is recorded in [scaffold invocation for a RapidAPI provider capability](scaffold-invocation-rapidapi.md). Contracts that deliberately leave an array or object open are admitted by Ajv at runtime but are not projectable into node types: an array without `items` throws during planning, and an object without `properties` projects silently as an empty type. Every capability exercised through this path so far carries fully closed contracts.
+
 ## 4. Invoke through sfx
 
 From this project directory, the native command is:
