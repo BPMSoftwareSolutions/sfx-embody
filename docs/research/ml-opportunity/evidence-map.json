@@ -1,0 +1,296 @@
+{
+  "generatedAt": "2026-09-09T14:14:47.708Z",
+  "evidenceKind": "CURATED_DECLARATION_AND_CONTRACT_MAP",
+  "censusObservedAt": "2026-09-09T11:52:50.141Z",
+  "censusProof": {
+    "snapshotId": "sha256:1a770ac0795d10665a88166f8d8c968dc5b2d030fdfab2b837aa6071d135f9e9",
+    "projectionDigest": "sha256:e036610730972f246d8e33cd882e45dd793013076aea2e401086b93d4993a7ee",
+    "viewDefinitionDigest": "sha256:b574443a65db450c9f269105d725acb98087cfc0e524f6982a27d5169a110564",
+    "queryDigest": "sha256:329558b394a20e5c16f2c93f5108ee1a1837695e9fb932b0f68cf48293c56ab6",
+    "resultDigest": "sha256:9e6c192905ac8562247d5885476a85666da712f7359f08d9520b9213751012b1",
+    "resultObjectDigest": "sha256:4aca416f6cd2ff110b50bd3652b255eaf2e2881da041b16ff4f680bac8b9ce69",
+    "resultCanonicalization": "sorted-multiset-per-recordset.v1",
+    "rowLimit": 100000,
+    "truncated": false,
+    "rowCounts": [
+      16,
+      824,
+      630,
+      2472,
+      160,
+      2,
+      219
+    ],
+    "disposition": "READ_QUERY_COMPLETE",
+    "objectRetention": "MEMORY_ONLY"
+  },
+  "baselineArtifacts": {
+    "../scenario-experiences/summary.json": "sha256:015bf20808a9cc016e00ace5bf1d95b45114355f8f15f7db331135ec5ae7a7ca",
+    "../scenario-experiences/scenario-bindings.json": "sha256:a11850d703b19703a0c27a99bc51acf05608e5a366d5738843ec673b7d48e595",
+    "../scenario-experiences/contract-taxonomy.json": "sha256:1bbe27db493ff229332c98b2260583dde7ece6371b6b5666bff49129041b9603"
+  },
+  "limits": [
+    "Reuses the retained census; no fresh database query.",
+    "Twelve selected roots are integration examples, not an ML-readiness census.",
+    "Contract identities/digests are retained research bindings; selected schema bytes are not revalidated here.",
+    "Local feature declarations corroborate intent and root contract IDs; source bytes may differ from database-selected revisions.",
+    "No provider execution, domain evaluation, training, dataset audit, promotion, or deployment was performed.",
+    "bind-model-testimony-evidence currently specifies Gemini, exactly one attempt, and a structured candidate."
+  ],
+  "records": [
+    {
+      "capabilityId": "govern-model-provider-binding",
+      "namespace": "sidefx:capabilities",
+      "scenarioVersionPk": "350",
+      "input": {
+        "contractId": "govern-model-provider-binding-input.v1",
+        "contractVersionPk": "235",
+        "schemaDigest": "sha256:c5f4b0972666519fe86ab851ba43b8ff4014211505e0ba7856a4b21e4bc3781a"
+      },
+      "outcome": {
+        "contractId": "governed-model-provider-binding-evidence.v1",
+        "contractVersionPk": "236",
+        "schemaDigest": "sha256:b6b752ecc4c7c0ab6417fcdeaf9df346d0168eca53190c008379174177a66580"
+      },
+      "corroboratingFeature": {
+        "file": "../../../../agentic-harness/features/govern-model-provider-binding.feature",
+        "sha256": "sha256:60c95b8af51570ae9c332dfc93fadf3cb4ff96574aa2600e4270b4146a2ff194",
+        "declaredIntentExcerpt": "@capability:govern-model-provider-binding\n@root-scenario:govern-model-provider-binding\nFeature: Govern model provider bindings\n\n  # Legacy oracles:\n  # generic-llm-connector/authority/provider-authority.schema.v1.json\n  # generic-llm-connector/src/obtains-model-response/resolves-provider-authority.ts\n  # generic-llm-connector/src/obtains-model-response/resolves-model-alias.ts\n  # generic-llm-connector/src/obtains-model-response/invokes-provider-adapter.ts\n\n  This capability admits credential-free provider authority and a projected\n  adapter registry, then resolves exactly the provider and model named by an\n  admitted request. Its execution objective includes every successful,\n  unresolved, incompatible, ambiguous, stale, and unauthorized binding case.\n\n  A binding preserves provider identity and kind, concrete model identity,\n  interaction-mode support, endpoint policy, credential reference name,\n  request-projection and testimony-normalization capability identities, host\n  coverage, and source digests. It never carries credential values, executable\n  module paths, implicit defaults, fallback order, or substitution authority.",
+        "scope": "Local working-tree declaration, not an execution result or proof of byte identity with the database-selected source revision."
+      },
+      "declarationCoverage": "LOCAL_DECLARATION_INSPECTED"
+    },
+    {
+      "capabilityId": "resolve-governed-model-invocation-profile",
+      "namespace": "sidefx:capabilities",
+      "scenarioVersionPk": "668",
+      "input": {
+        "contractId": "governed-model-invocation-profile-request.v1",
+        "contractVersionPk": "489",
+        "schemaDigest": "sha256:863205af622cbbda23996bab1a9a98b86ee6cd6939107404d5dfd5d1c86965d5"
+      },
+      "outcome": {
+        "contractId": "governed-model-invocation-profile.v1",
+        "contractVersionPk": "492",
+        "schemaDigest": "sha256:830558c6432d7b58a57116baf54e243dfca0160b07b7f114ac92ebb3caf52164"
+      },
+      "corroboratingFeature": {
+        "file": "../../../../agentic-harness/features/resolve-governed-model-invocation-profile.feature",
+        "sha256": "sha256:ff868e35337b3ce0a6e83da15446f0b9eeb988cffbe7c2028a42372e349c0505",
+        "declaredIntentExcerpt": "@capability:resolve-governed-model-invocation-profile\n@root-scenario:resolve-governed-model-invocation-profile\nFeature: Resolve the governed model invocation profile\n\n  Every capability that invokes a model needs the same governed terms of\n  invocation. Those terms are upstream meaning. They are established once,\n  here, and consumed downstream by identity.\n\n  This capability admits one model invocation authority and resolves it into\n  one product: the terms that are fixed for every caller, and the parameters a\n  caller is permitted to choose, each with the bounds the authority admits.\n\n  A caller does not restate a fixed term. A caller chooses only among the\n  declared permitted parameters, within their declared bounds. A term that is\n  neither fixed nor permitted is not available to a caller at all.\n\n  The product carries its own identity. A downstream capability references that\n  identity rather than copying the terms, so two callers cannot hold divergent\n  copies of the same governed meaning.\n\n  Resolution observes authority only. It selects no provider, reads no\n  credential, contacts no provider, and claims no acceptance. An authority that\n  cannot be observed, or that fixes and permits the same term, is held with\n  exact findings rather than resolved into a profile.",
+        "scope": "Local working-tree declaration, not an execution result or proof of byte identity with the database-selected source revision."
+      },
+      "declarationCoverage": "LOCAL_DECLARATION_INSPECTED"
+    },
+    {
+      "capabilityId": "construct-model-connection-runtime-closure",
+      "namespace": "sidefx:capabilities",
+      "scenarioVersionPk": "147",
+      "input": {
+        "contractId": "construct-model-connection-runtime-closure-input.v1",
+        "contractVersionPk": "113",
+        "schemaDigest": "sha256:f67ef40de34e198abd63a786215d285dc6ccbccfeb6df8c2efc1bd3783c4f6a2"
+      },
+      "outcome": {
+        "contractId": "model-connection-runtime-closure-evidence.v1",
+        "contractVersionPk": "114",
+        "schemaDigest": "sha256:a7ee923141f652ab0920d24d8f650443d60acc8d53d554ad672367fbb908f6e7"
+      },
+      "corroboratingFeature": {
+        "file": "../../../../agentic-harness/features/construct-model-connection-runtime-closure.feature",
+        "sha256": "sha256:28057b8b9c0563b4940a93f87421c47299b457b1274912e5084d44aa5de72f89",
+        "declaredIntentExcerpt": "@capability:construct-model-connection-runtime-closure\n@root-scenario:construct-model-connection-runtime-closure\nFeature: Construct model connection runtime closures\n\n  # Legacy dependencies:\n  # sibling scenario-driven-architecture checkout\n  # sibling generic-llm-connector checkout\n  # connector-local tsx loading of TypeScript source\n\n  This capability constructs and proves the complete content-addressed runtime\n  closure needed by a projected model connection. Its objective covers a valid\n  closure, explicit external-host obligations, sibling and absolute path\n  rejection, source-loader and development-dependency rejection, package\n  pinning, artifact cardinality, digest integrity, and target-host coverage.\n\n  The closure contains projected executable mechanics, admitted configuration,\n  schemas, protocol profiles, packages, and stable logical paths. Operating\n  system processes, target runtimes, credential stores, clocks, entropy, DNS,\n  TLS, sockets, and remote providers remain classified external substrates.\n  Existing publication capabilities retain sole write authority.",
+        "scope": "Local working-tree declaration, not an execution result or proof of byte identity with the database-selected source revision."
+      },
+      "declarationCoverage": "LOCAL_DECLARATION_INSPECTED"
+    },
+    {
+      "capabilityId": "execute-governed-model-invocation",
+      "namespace": "sidefx:capabilities",
+      "scenarioVersionPk": "278",
+      "input": {
+        "contractId": "execute-governed-model-invocation-input.v1",
+        "contractVersionPk": "213",
+        "schemaDigest": "sha256:192ce0c6b88c3c4a4c5d745012ecd07a56fc783de1361d80e1a73a2e3e71a931"
+      },
+      "outcome": {
+        "contractId": "governed-model-invocation-evidence.v1",
+        "contractVersionPk": "214",
+        "schemaDigest": "sha256:4f0be857274af75f97d1c6741ab35fea2f1961d6d1d277b8ad7d769df740d120"
+      },
+      "corroboratingFeature": {
+        "file": "../../../../agentic-harness/features/execute-governed-model-invocation.feature",
+        "sha256": "sha256:9e03eedf3fd8f760351e3355eca10a93650a8010a0d67dacb472f78029c381da",
+        "declaredIntentExcerpt": "@capability:execute-governed-model-invocation\n@root-scenario:execute-governed-model-invocation\nFeature: Execute governed model invocations\n\n  # Legacy oracles:\n  # generic-llm-connector/acceptance/obtains-model-response.feature\n  # generic-llm-connector/src/obtains-model-response\n  # generic-llm-connector/providers/gemini\n  # generic-llm-connector/providers/openai\n\n  This capability obtains one normalized model response under an admitted\n  provider-neutral request, governed provider binding, projected adapter\n  capabilities, narrow credential and HTTP effects, attempt authority, and\n  evidence policy. Its execution objective includes text and structured\n  success, every pre-invocation rejection, every provider and transport\n  disposition, format enforcement, continuation and exhaustion, cancellation,\n  evidence-policy variants, and a receipt on every exit.\n\n  It does not author prompts, select providers, infer fallback, expose secrets,\n  hide retries, repair responses, validate domain meaning, accept candidates,\n  or promote implementations. Model content remains untrusted testimony.",
+        "scope": "Local working-tree declaration, not an execution result or proof of byte identity with the database-selected source revision."
+      },
+      "declarationCoverage": "LOCAL_DECLARATION_INSPECTED"
+    },
+    {
+      "capabilityId": "obtain-governed-model-response",
+      "namespace": "sidefx:capabilities",
+      "scenarioVersionPk": "446",
+      "input": {
+        "contractId": "governed-model-invocation-request.v1",
+        "contractVersionPk": "305",
+        "schemaDigest": "sha256:76171a2d0592ba2f5dc41220db5c3e53ff8c7833ab4a0573653d7cad22034f45"
+      },
+      "outcome": {
+        "contractId": "governed-model-response-evidence.v1",
+        "contractVersionPk": "307",
+        "schemaDigest": "sha256:ec9d406b62f4d23b759cd418df77d7815e789e90f23226f692be2ab49c81c104"
+      },
+      "corroboratingFeature": {
+        "file": "../../../../agentic-harness/features/obtain-governed-model-response.feature",
+        "sha256": "sha256:ac3457fe14509d9488106b04ec22d1a4d1e828a91dca708388490a631d3c02c2",
+        "declaredIntentExcerpt": "@capability:obtain-governed-model-response\n@root-scenario:obtain-governed-model-response\nFeature: Obtain one governed model response as untrusted testimony\n\n  A downstream authoring capability needs model assistance without granting the\n  model authority over source admission, projection, acceptance, or promotion.\n  The invocation request fixes the provider authority, model alias, response\n  contract, attempt limit, substitution policy, and evidence policy before any\n  external model is contacted.\n\n  Every model alias a caller may name is bound to an exact admitted provider\n  and model embodiment in the model-provider conveyor authority. A declared\n  alias without an admitted embodiment is rejected with exact identities —\n  never defaulted to another alias, never substituted by guessing, and never\n  satisfied by a partial carrier.\n\n  The admitted generic LLM connector owns provider resolution and invocation.\n  Credentials remain outside scenario facts and evidence. The response is\n  normalized, attributed, and hash-bound so a consuming capability can admit or\n  reject its contents independently.\n\n  Provider rejection, timeout, malformed structured output, and policy failure\n  remain exact governed dispositions. A response obtained from Gemini is still\n  candidate testimony and cannot claim that any generated artifact conforms.\n\n  For structured generation, the caller supplies one provider-neutral response\n  schema. The conveyor carries that same schema into provider-protocol\n  projection. Provider-specific schema translation remains owned by\n  project-model-provider-protocol and is never pushed back into the caller.",
+        "scope": "Local working-tree declaration, not an execution result or proof of byte identity with the database-selected source revision."
+      },
+      "declarationCoverage": "LOCAL_DECLARATION_INSPECTED"
+    },
+    {
+      "capabilityId": "verify-governed-model-invocation-parity",
+      "namespace": "sidefx:capabilities",
+      "scenarioVersionPk": "781",
+      "input": {
+        "contractId": "governed-model-invocation-parity-request.v1",
+        "contractVersionPk": "600",
+        "schemaDigest": "sha256:ae8dca2a90f2d96ac19759303b5afe04894255f8ce749476c6dcbbaf77f6ff2b"
+      },
+      "outcome": {
+        "contractId": "governed-model-invocation-parity-evidence.v1",
+        "contractVersionPk": "603",
+        "schemaDigest": "sha256:5ebc66a1a0ae783aafc16622904e7bb519371970c7cd144d2285c041002cf8ea"
+      },
+      "corroboratingFeature": {
+        "file": "../../../../agentic-harness/features/verify-governed-model-invocation-parity.feature",
+        "sha256": "sha256:0207312e5093246a895b2e5a878d9e3e18191b367f5f228d4c55ba4f1904ff22",
+        "declaredIntentExcerpt": "@capability:verify-governed-model-invocation-parity\n@root-scenario:verify-governed-model-invocation-parity\nFeature: Verify governed model invocation parity\n\n  Capabilities that invoke the same governed model capability under the same\n  admitted invocation profile must not each reinvent the terms of that\n  invocation.\n\n  This capability compares the declared invocations of two or more capabilities\n  against the admitted invocation authority they share.\n\n  What each capability asks the model is its own product and may differ. How the\n  invocation is governed may not.\n\n  A divergence is reported as an exact finding before any external effect\n  occurs, rather than discovered by invoking a provider.",
+        "scope": "Local working-tree declaration, not an execution result or proof of byte identity with the database-selected source revision."
+      },
+      "declarationCoverage": "LOCAL_DECLARATION_INSPECTED"
+    },
+    {
+      "capabilityId": "determine-model-role-provider-switch",
+      "namespace": "sidefx:capabilities",
+      "scenarioVersionPk": "226",
+      "input": {
+        "contractId": "determine-model-role-provider-switch-input.v1",
+        "contractVersionPk": "179",
+        "schemaDigest": "sha256:2606461d4c26434186978e644fd92fce881a2133d4c70dc9f5758afa9d55bc85"
+      },
+      "outcome": {
+        "contractId": "model-role-provider-switch-decision-evidence.v1",
+        "contractVersionPk": "180",
+        "schemaDigest": "sha256:ec6f10c6e2ba0a728ee6f4e2b67f4b43f0ed9874c9be6132a2b35dd0bcafd02b"
+      },
+      "corroboratingFeature": {
+        "file": "../../../../agentic-harness/features/determine-model-role-provider-switch.feature",
+        "sha256": "sha256:8ae1ecb112a5d62b0bda75ae323c4876de1022d15961cf07e8f2bd88194475f6",
+        "declaredIntentExcerpt": "@capability:determine-model-role-provider-switch\n@root-scenario:determine-model-role-provider-switch\nFeature: Determine model role provider switches\n\n  A model-role stage may declare an ordered set of compatible model bindings\n  from multiple providers and exact conditions under which the conveyor may\n  switch. This capability makes that switch decision from normalized execution\n  testimony, stage authority, remaining alternatives, compatibility evidence,\n  privacy and effect policy, and remaining budget. Models and provider adapters\n  cannot select their successor.\n\n  Switching preserves the stage, role, responsibility, semantic request,\n  context-pack digest, output contract, evidence requirements, and user-facing\n  stage identity. Provider and concrete-model changes remain explicit internal\n  lineage. The decision never invokes a model or mutates prior testimony.",
+        "scope": "Local working-tree declaration, not an execution result or proof of byte identity with the database-selected source revision."
+      },
+      "declarationCoverage": "LOCAL_DECLARATION_INSPECTED"
+    },
+    {
+      "capabilityId": "resolve-sidefx-eligible-providers",
+      "namespace": "sidefx:capabilities",
+      "scenarioVersionPk": "701",
+      "input": {
+        "contractId": "sidefx-provider-resolution-request.v1",
+        "contractVersionPk": "517",
+        "schemaDigest": "sha256:40f6fb9a386c4db5c230acb03293e2d7c129898f689d991eb965b06a572997a2"
+      },
+      "outcome": {
+        "contractId": "sidefx-semantic-provider-resolution.v1",
+        "contractVersionPk": "518",
+        "schemaDigest": "sha256:7e62ab89e4058fc1c550d0e77401db57b463de2294b391d8983c0825993525a9"
+      },
+      "corroboratingFeature": null,
+      "declarationCoverage": "RETAINED_CENSUS_ONLY: no corresponding feature at the inspected agentic-harness feature root."
+    },
+    {
+      "capabilityId": "bind-model-testimony-evidence",
+      "namespace": "sidefx:capabilities",
+      "scenarioVersionPk": "129",
+      "input": {
+        "contractId": "model-testimony-binding-request.v1",
+        "contractVersionPk": "92",
+        "schemaDigest": "sha256:94b9415076c03d5dabdf1eb1c623aee4116bc892174ce8eca439067766fa33ea"
+      },
+      "outcome": {
+        "contractId": "model-testimony-binding-evidence.v1",
+        "contractVersionPk": "93",
+        "schemaDigest": "sha256:189053b7ae63d64d9c7dfd4a1049b16419adbaca054a8bd054f9c025cc5f051c"
+      },
+      "corroboratingFeature": {
+        "file": "../../../../agentic-harness/features/bind-model-testimony-evidence.feature",
+        "sha256": "sha256:ec472d06c1a8484ed2d27d325f867723e503a1e9c129d51a08d9771da6bf0fc8",
+        "declaredIntentExcerpt": "@capability:bind-model-testimony-evidence\n@root-scenario:bind-model-testimony-evidence\nFeature: Bind immutable model testimony to deterministic evidence\n\n  A downstream consumer supplies governed references to one exact model request\n  and one exact model response. The capability observes their bytes through an\n  admitted file-observation port, validates that the response is obtained from\n  Gemini in exactly one attempt and contains one structured candidate object,\n  and returns content digests plus retained provider lineage. It never obtains\n  a new model response, alters testimony, accepts a candidate, or writes code.\n\n  Missing files, malformed JSON, a non-obtained disposition, a non-Gemini\n  provider, an attempt count other than one, or a missing structured value are\n  returned as attributable rejection evidence. Candidate hashing uses the\n  canonical compact JSON serialization of the structured value. Request and\n  response hashing uses the exact observed bytes.\n\n  The execution authority must first transform the input into a bounded\n  `sda-governed-repository-observation-port.v1` request for exactly the two\n  declared resources, then decode each returned `exactBytes` value with the\n  admitted `base64-decode-utf8` transformation, parse the response with\n  `parse-json`, serialize `result.structuredValue` with `json-stringify`, and\n  hash that serialization with `sha256`. A pure transformation port must not\n  stand in for repository observation.",
+        "scope": "Local working-tree declaration, not an execution result or proof of byte identity with the database-selected source revision."
+      },
+      "declarationCoverage": "LOCAL_DECLARATION_INSPECTED"
+    },
+    {
+      "capabilityId": "verify-model-connection-conformance",
+      "namespace": "sidefx:capabilities",
+      "scenarioVersionPk": "786",
+      "input": {
+        "contractId": "verify-model-connection-conformance-input.v1",
+        "contractVersionPk": "606",
+        "schemaDigest": "sha256:63308d5d7d8e29e66e93f765b92d37e35d36d45982cfc7de02f0b206320006bd"
+      },
+      "outcome": {
+        "contractId": "model-connection-conformance-evidence.v1",
+        "contractVersionPk": "607",
+        "schemaDigest": "sha256:6d2c9921ab669d5275da4a5c0d10378fca7c5d06e0cad0b919cd31f059e2e2f8"
+      },
+      "corroboratingFeature": {
+        "file": "../../../../agentic-harness/features/verify-model-connection-conformance.feature",
+        "sha256": "sha256:1bfeca3f23d0f86fc3b71377aca4182475c6bd2d833340c3cd95f51bf577c94c",
+        "declaredIntentExcerpt": "@capability:verify-model-connection-conformance\n@root-scenario:verify-model-connection-conformance\nFeature: Verify model connection conformance\n\n  # Legacy oracles:\n  # generic-llm-connector/tests/acceptance\n  # generic-llm-connector/tests/conformance\n  # generic-llm-connector/tests/adapters\n  # scenario-driven-architecture/languages/typescript/runtimes/node/generic-llm-connector-port.conformance.test.mjs\n\n  This capability verifies every admitted provider adapter and every projected\n  host path with portable deterministic fixtures. Its execution objective\n  covers complete conformance, provider and adapter coverage, protocol request\n  mapping, provider testimony normalization, attempts and receipts, secret\n  exclusion, host equivalence, runtime closure, and test isolation from live\n  credentials, networks, clocks, entropy, and provider availability.\n\n  Live testimony cannot make a failed deterministic partition pass.",
+        "scope": "Local working-tree declaration, not an execution result or proof of byte identity with the database-selected source revision."
+      },
+      "declarationCoverage": "LOCAL_DECLARATION_INSPECTED"
+    },
+    {
+      "capabilityId": "execute-governed-model-role-conveyor",
+      "namespace": "sidefx:capabilities",
+      "scenarioVersionPk": "298",
+      "input": {
+        "contractId": "execute-governed-model-role-conveyor-input.v1",
+        "contractVersionPk": "215",
+        "schemaDigest": "sha256:4d7b53b68749832b263ca9fce6360fb75067ccf2bb57ee2a319eedd80f90e3d4"
+      },
+      "outcome": {
+        "contractId": "governed-model-role-conveyor-evidence.v1",
+        "contractVersionPk": "216",
+        "schemaDigest": "sha256:be22b4f3aeb40a1df11f5bc8ad2a654d5a0b29649c94f256a8f15b9a10b439a2"
+      },
+      "corroboratingFeature": {
+        "file": "../../../../agentic-harness/features/execute-governed-model-role-conveyor.feature",
+        "sha256": "sha256:f009039ca2591e509050d7cae066d1cf3b27b6ba9fe1ceebdae562a03c5a1f83",
+        "declaredIntentExcerpt": "@capability:execute-governed-model-role-conveyor\n@root-scenario:execute-governed-model-role-conveyor\nFeature: Execute governed multi-model multi-provider role conveyors\n\n  The conveyor executes one admitted role plan through independently governed\n  model bindings. A stage becomes eligible only after its declared inputs and\n  predecessors close. It invokes the exact model and provider bound to that\n  role, validates the role-specific output contract, retains immutable\n  testimony, consults deterministic continuation and provider-switch authority,\n  and advances only the declared graph.\n\n  Usage, quota, rate-limit, timeout, or provider-availability testimony may\n  switch a role stage to a compatible declared model from another provider.\n  Switching preserves role and semantic stage identity and does not expose\n  avoidable provider churn through the user-facing operation. No model can plan\n  the conveyor, choose its successor, edit another model's testimony, act as a\n  deterministic gate, or promote an implementation.",
+        "scope": "Local working-tree declaration, not an execution result or proof of byte identity with the database-selected source revision."
+      },
+      "declarationCoverage": "LOCAL_DECLARATION_INSPECTED"
+    },
+    {
+      "capabilityId": "resolve-sidefx-capability-precedents",
+      "namespace": "sidefx:capabilities",
+      "scenarioVersionPk": "697",
+      "input": {
+        "contractId": "sidefx-capability-precedent-request.v1",
+        "contractVersionPk": "515",
+        "schemaDigest": "sha256:001464f3af76665e3d35cfe3499e5ca25bb2d35d6b678e40d97bc9ccea53dd9c"
+      },
+      "outcome": {
+        "contractId": "sidefx-semantic-precedent-set.v1",
+        "contractVersionPk": "190",
+        "schemaDigest": "sha256:2d22c64575c4d9fd8cf412cd54a720ff39d0812b17f6ea109726ff92ea3b1ede"
+      },
+      "corroboratingFeature": null,
+      "declarationCoverage": "RETAINED_CENSUS_ONLY: no corresponding feature at the inspected agentic-harness feature root."
+    }
+  ]
+}

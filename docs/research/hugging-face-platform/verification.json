@@ -1,0 +1,117 @@
+{
+  "verifiedAt": "2026-09-09T19:05:16.140Z",
+  "disposition": "DOCUMENT_CONSISTENCY_CHECKS_PASSED",
+  "scope": "Local documentation links, file integrity, retained root-binding intersection, source hashes, and optional-preparation wording. No runtime, ML, hosted service, or admission validation.",
+  "checks": {
+    "localLinks": 24,
+    "inspectedSourceHashes": 20,
+    "externalUrlSyntax": 16,
+    "retainedRoots": 218,
+    "retainedRootsBothResolved": 216,
+    "optionalPreparationExplicit": true
+  },
+  "artifactHashes": {
+    "docs/hugging-face-platform-plan.md": "sha256:18294e32a0c67490596b74c2197cdb874197deae235a0c7703d1ce5517e802d4",
+    "docs/research/hugging-face-platform/README.md": "sha256:d426eb5ae00cb1ad95af68a7704887d6c17cdce3fd25602ef30f7e95be5bc1eb",
+    "docs/research/hugging-face-platform/strategic-direction.txt": "sha256:5e01830ff14144b5db85fd19a8cbf52c2091e8254538798b0c63cff24442e3e6",
+    "docs/research/hugging-face-platform/source-map.json": "sha256:3461556047a17bf7444d28355740ccaa2726bfc5b51487a8633b90841b361fac"
+  },
+  "localLinks": [
+    {
+      "from": "docs/hugging-face-platform-plan.md",
+      "to": "research/scenario-experiences/opportunity.md"
+    },
+    {
+      "from": "docs/hugging-face-platform-plan.md",
+      "to": "research/ml-opportunity/README.md"
+    },
+    {
+      "from": "docs/hugging-face-platform-plan.md",
+      "to": "research/hugging-face-platform/README.md"
+    },
+    {
+      "from": "docs/hugging-face-platform-plan.md",
+      "to": "research/hugging-face-platform/strategic-direction.txt"
+    },
+    {
+      "from": "docs/hugging-face-platform-plan.md",
+      "to": "research/scenario-experiences/summary.json"
+    },
+    {
+      "from": "docs/hugging-face-platform-plan.md",
+      "to": "research/scenario-experiences/scenario-bindings.json"
+    },
+    {
+      "from": "docs/hugging-face-platform-plan.md",
+      "to": "../src/invoke-database-capability.mjs"
+    },
+    {
+      "from": "docs/hugging-face-platform-plan.md",
+      "to": "../src/load-memory-scenario.mjs"
+    },
+    {
+      "from": "docs/research/hugging-face-platform/README.md",
+      "to": "../../hugging-face-platform-plan.md"
+    },
+    {
+      "from": "docs/research/hugging-face-platform/README.md",
+      "to": "strategic-direction.txt"
+    },
+    {
+      "from": "docs/research/hugging-face-platform/README.md",
+      "to": "source-map.json"
+    },
+    {
+      "from": "docs/research/hugging-face-platform/README.md",
+      "to": "verification.json"
+    },
+    {
+      "from": "docs/research/hugging-face-platform/README.md",
+      "to": "../scenario-experiences/summary.json"
+    },
+    {
+      "from": "docs/research/hugging-face-platform/README.md",
+      "to": "../scenario-experiences/scenario-bindings.json"
+    },
+    {
+      "from": "docs/research/hugging-face-platform/README.md",
+      "to": "../scenario-experiences/opportunity.md"
+    },
+    {
+      "from": "docs/research/hugging-face-platform/README.md",
+      "to": "../ml-opportunity/README.md"
+    },
+    {
+      "from": "docs/research/hugging-face-platform/README.md",
+      "to": "../../../src/invoke-database-capability.mjs"
+    },
+    {
+      "from": "docs/research/hugging-face-platform/README.md",
+      "to": "../../../src/load-memory-scenario.mjs"
+    },
+    {
+      "from": "docs/research/hugging-face-platform/README.md",
+      "to": "C:/lab/repos/sfx-platform/services/capability-api/http-server.mjs"
+    },
+    {
+      "from": "docs/research/hugging-face-platform/README.md",
+      "to": "C:/lab/repos/sfx-platform/services/capability-api/README.md"
+    },
+    {
+      "from": "docs/research/hugging-face-platform/README.md",
+      "to": "C:/lab/repos/sfx-platform/docs/capability-execution.md"
+    },
+    {
+      "from": "docs/research/hugging-face-platform/README.md",
+      "to": "C:/lab/sidefx-database/docs/data-architecture-strategy.md"
+    },
+    {
+      "from": "docs/research/hugging-face-platform/README.md",
+      "to": "C:/lab/repos/content-creation-mission/README.md"
+    },
+    {
+      "from": "docs/research/hugging-face-platform/README.md",
+      "to": "C:/lab/repos/sidefx-cli/AGENTS.md"
+    }
+  ]
+}

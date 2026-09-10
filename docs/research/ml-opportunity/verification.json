@@ -1,0 +1,36 @@
+{
+  "verifiedAt": "2026-09-09T14:14:47.708Z",
+  "disposition": "DOCUMENT_PROVENANCE_CHECKS_PASSED",
+  "reviewIdentity": "sha256:7c64aa40bf0082a82801e78933aee289faa1ff692d684ab41257de172403fb64",
+  "curatedRoots": 12,
+  "resolvedContractFaces": 24,
+  "localDeclarationsInspected": 10,
+  "rootContractTagsMatchCorroboratingDeclarations": true,
+  "localLinksChecked": [
+    "team-review.txt",
+    "../scenario-experiences/opportunity.md",
+    "../scenario-experiences/summary.json",
+    "evidence-map.json",
+    "team-review.txt",
+    "evidence-map.json",
+    "collect-evidence.mjs",
+    "verification.json",
+    "../scenario-experiences/README.md",
+    "../scenario-experiences/summary.json",
+    "../scenario-experiences/scenario-bindings.json",
+    "../scenario-experiences/opportunity.md"
+  ],
+  "externalReferences": [
+    "https://scikit-learn.org/stable/common_pitfalls.html",
+    "https://scikit-learn.org/stable/modules/calibration.html",
+    "https://docs.pytorch.org/docs/2.14/notes/randomness.html"
+  ],
+  "externalReferenceCheck": "Consulted during authoring; this script does not fetch external pages.",
+  "artifactHashes": {
+    "README.md": "sha256:9c2b473c33e4b4f52bca13f9d6c552b00f542d1f4e99cae9f7b1c3f0eb30a8bd",
+    "team-review.txt": "sha256:7c64aa40bf0082a82801e78933aee289faa1ff692d684ab41257de172403fb64",
+    "collect-evidence.mjs": "sha256:8edc7177dfbd99f2732cdced53fdf7e15470098d07dcbf6ca2dc95c1855641db",
+    "evidence-map.json": "sha256:5a12934bb280477c7d7e1ddb035131179148ff1641fe5a7ba38f2ac9f8f8d5f1"
+  },
+  "scope": "Document provenance and internal consistency only. Not capability execution, model quality, corpus suitability, or managed admission evidence."
+}

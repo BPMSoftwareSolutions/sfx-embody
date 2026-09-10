@@ -1,0 +1,328 @@
+{
+  "recordType": "sidefx-hugging-face-platform-research-sources.v1",
+  "researchedOn": "2026-09-09",
+  "recordedAt": "2026-09-09T19:04:22.936Z",
+  "scope": "Local source inspection and primary external documentation research. No live SQL refresh, deployment check, capability invocation, model evaluation, or publication.",
+  "strategicDirection": {
+    "file": "strategic-direction.txt",
+    "sha256": "sha256:5e01830ff14144b5db85fd19a8cbf52c2091e8254538798b0c63cff24442e3e6"
+  },
+  "repositoryObservations": [
+    {
+      "path": "C:/lab/repos/sfx-embody",
+      "head": "8bb8ef039828e550f6a3757676924df1b28f6764",
+      "inspectedWorkingCopyStatus": [
+        "M README.md",
+        "?? docs/research/ml-opportunity/README.md"
+      ]
+    },
+    {
+      "path": "C:/lab/repos/sfx-platform",
+      "head": "c025299f2a12d7191d4c5819b47eb50421d02350",
+      "inspectedWorkingCopyStatus": []
+    },
+    {
+      "path": "C:/lab/repos/sidefx-cli",
+      "head": "8261bd02d0449765f247c71fde3f775ce1758e92",
+      "inspectedWorkingCopyStatus": []
+    },
+    {
+      "path": "C:/lab/repos/content-creation-mission",
+      "head": "da288f58d68abed6e60d54ff0db79a001e64f652",
+      "inspectedWorkingCopyStatus": []
+    },
+    {
+      "path": "C:/lab/sidefx-database",
+      "head": "334beeaa34e0c7014806965f348a17f4a86c03fc",
+      "inspectedWorkingCopyStatus": []
+    }
+  ],
+  "inspectedLocalSources": [
+    {
+      "path": "C:/lab/repos/sfx-embody/README.md",
+      "sha256": "sha256:614bb3fdff104e16b794ba478c2cfdb01db0a18fc5d4a75447d7072b9133cd14"
+    },
+    {
+      "path": "C:/lab/repos/sfx-embody/src/invoke-database-capability.mjs",
+      "sha256": "sha256:fdd866c6fdfb6cdcd587563336552617c3463c699b2cec24afbacf5f8bd16425"
+    },
+    {
+      "path": "C:/lab/repos/sfx-embody/src/load-memory-scenario.mjs",
+      "sha256": "sha256:d71c6befd31b056d6ea189803e6ff692d059bb90e5b9998fc561b87e4862ce27"
+    },
+    {
+      "path": "C:/lab/repos/sfx-embody/docs/database-direct-invocation.md",
+      "sha256": "sha256:8605e0b6ebe1c051e750cdc62a83038490ea41dfd0b23034129e34adff4d3bbe"
+    },
+    {
+      "path": "C:/lab/repos/sfx-embody/docs/research/scenario-experiences/README.md",
+      "sha256": "sha256:dd57f544bfe28a1e62c4619a8a517329bbffb5644b275822d75d1facb18823d6"
+    },
+    {
+      "path": "C:/lab/repos/sfx-embody/docs/research/scenario-experiences/summary.json",
+      "sha256": "sha256:015bf20808a9cc016e00ace5bf1d95b45114355f8f15f7db331135ec5ae7a7ca"
+    },
+    {
+      "path": "C:/lab/repos/sfx-embody/docs/research/scenario-experiences/scenario-bindings.json",
+      "sha256": "sha256:a11850d703b19703a0c27a99bc51acf05608e5a366d5738843ec673b7d48e595"
+    },
+    {
+      "path": "C:/lab/repos/sfx-embody/docs/research/scenario-experiences/opportunity.md",
+      "sha256": "sha256:9d2b169f37f8fc7958e11cd255d38f4745555e47d835488816736b81e623f008"
+    },
+    {
+      "path": "C:/lab/repos/sfx-embody/docs/research/ml-opportunity/README.md",
+      "sha256": "sha256:9c2b473c33e4b4f52bca13f9d6c552b00f542d1f4e99cae9f7b1c3f0eb30a8bd"
+    },
+    {
+      "path": "C:/lab/repos/sfx-platform/README.md",
+      "sha256": "sha256:6ef48540e929c2e362dbd0c62d310991ef2a208c07d7ceb97abf2674071517de"
+    },
+    {
+      "path": "C:/lab/repos/sfx-platform/docs/capability-execution.md",
+      "sha256": "sha256:473f495526c034ebcb779463e52618b935fe6209c68985790d17320c3dd8f99a"
+    },
+    {
+      "path": "C:/lab/repos/sfx-platform/services/capability-api/http-server.mjs",
+      "sha256": "sha256:3f7549dae5988c4ce253d90604d914984225a9e52ef7ee972dc4d1e07b4ad6ec"
+    },
+    {
+      "path": "C:/lab/repos/sfx-platform/services/capability-api/server.mjs",
+      "sha256": "sha256:2d62d2b806346f1a5c576e5bd954183d6fac9092d5436cdc71695454dcb4ff42"
+    },
+    {
+      "path": "C:/lab/repos/sfx-platform/services/capability-api/web-commands.json",
+      "sha256": "sha256:f05d7072ebda218969bd49b7d6278c210aa91d884c06aa0e2ef820a087b13f84"
+    },
+    {
+      "path": "C:/lab/repos/sfx-platform/services/capability-api/README.md",
+      "sha256": "sha256:de45d17d98c98af19a7195a27aa7cc7b47dfefe2e82c4f7bb00b1be043215ab1"
+    },
+    {
+      "path": "C:/lab/repos/sfx-platform/services/capability-api/package.json",
+      "sha256": "sha256:a79a7d66b6924da0f6dd231d8ce943def1f5b19c4c7aefcadb2112b37f9f8de8"
+    },
+    {
+      "path": "C:/lab/repos/sidefx-cli/AGENTS.md",
+      "sha256": "sha256:b38bfdb50c10ccc592d9ccd18ab814d8e157bb60ffd0a4dccef3b00cdd818755"
+    },
+    {
+      "path": "C:/lab/repos/content-creation-mission/README.md",
+      "sha256": "sha256:c0d60d43a71a2549f9fc70f7bde46bfd820e3139c8bd6a34086e465452018432"
+    },
+    {
+      "path": "C:/lab/sidefx-database/README.md",
+      "sha256": "sha256:1ffbb6b5db710f2abee1ba84d31e432509ca26738a6ca17d2333248dd2f65b5c"
+    },
+    {
+      "path": "C:/lab/sidefx-database/docs/data-architecture-strategy.md",
+      "sha256": "sha256:25083d76c4a00e2c4fd3c5c14164f17e192ff6b20f2e7260d4fbd00db0a374ac"
+    }
+  ],
+  "retainedCensus": {
+    "observedAt": "2026-09-09T11:52:50.141Z",
+    "proof": {
+      "snapshotId": "sha256:1a770ac0795d10665a88166f8d8c968dc5b2d030fdfab2b837aa6071d135f9e9",
+      "projectionDigest": "sha256:e036610730972f246d8e33cd882e45dd793013076aea2e401086b93d4993a7ee",
+      "viewDefinitionDigest": "sha256:b574443a65db450c9f269105d725acb98087cfc0e524f6982a27d5169a110564",
+      "queryDigest": "sha256:329558b394a20e5c16f2c93f5108ee1a1837695e9fb932b0f68cf48293c56ab6",
+      "resultDigest": "sha256:9e6c192905ac8562247d5885476a85666da712f7359f08d9520b9213751012b1",
+      "resultObjectDigest": "sha256:4aca416f6cd2ff110b50bd3652b255eaf2e2881da041b16ff4f680bac8b9ce69",
+      "resultCanonicalization": "sorted-multiset-per-recordset.v1",
+      "rowLimit": 100000,
+      "truncated": false,
+      "rowCounts": [
+        16,
+        824,
+        630,
+        2472,
+        160,
+        2,
+        219
+      ],
+      "disposition": "READ_QUERY_COMPLETE",
+      "objectRetention": "MEMORY_ONLY"
+    },
+    "counts": {
+      "selectedDefinitions": [
+        {
+          "object_kind": "AUTHORITY",
+          "definition_count": "36"
+        },
+        {
+          "object_kind": "BLUEPRINT",
+          "definition_count": "35"
+        },
+        {
+          "object_kind": "CAPABILITY",
+          "definition_count": "304"
+        },
+        {
+          "object_kind": "CONTRACT",
+          "definition_count": "630"
+        },
+        {
+          "object_kind": "EXECUTION_AUTHORITY",
+          "definition_count": "832"
+        },
+        {
+          "object_kind": "FIXTURE",
+          "definition_count": "1155"
+        },
+        {
+          "object_kind": "MECHANIC",
+          "definition_count": "191"
+        },
+        {
+          "object_kind": "OBSERVABLE_CONDITION",
+          "definition_count": "585"
+        },
+        {
+          "object_kind": "PORT",
+          "definition_count": "1013"
+        },
+        {
+          "object_kind": "PROVIDER",
+          "definition_count": "74"
+        },
+        {
+          "object_kind": "PROVIDER_PROFILE",
+          "definition_count": "6"
+        },
+        {
+          "object_kind": "SCENARIO",
+          "definition_count": "824"
+        },
+        {
+          "object_kind": "SCENARIO_EVENT",
+          "definition_count": "824"
+        },
+        {
+          "object_kind": "SCENARIO_INPUT",
+          "definition_count": "824"
+        },
+        {
+          "object_kind": "SCENARIO_OUTCOME",
+          "definition_count": "824"
+        },
+        {
+          "object_kind": "TRANSFORMATION",
+          "definition_count": "914"
+        }
+      ],
+      "scenarios": 824,
+      "scenarioCapabilities": 218,
+      "rootScenarios": 218,
+      "contracts": 630,
+      "distinctSchemaBytes": 497,
+      "inputContracts": 365,
+      "outcomeContracts": 381,
+      "sharedBetweenInputAndOutcome": 153,
+      "unboundToScenario": 37,
+      "resolvedInputs": 812,
+      "resolvedOutcomes": 809,
+      "resolvedRootInputs": 216,
+      "resolvedRootOutcomes": 216,
+      "sameInputOutcomeContract": 239,
+      "outcomeVariants": 160,
+      "scenariosWithVariants": 62,
+      "productRelationships": [
+        {
+          "relationship": "outcome_product",
+          "relationship_count": "0"
+        },
+        {
+          "relationship": "outcome_variant_product",
+          "relationship_count": "0"
+        }
+      ],
+      "normalizedCapabilities": 219
+    },
+    "recomputedRoots": 218,
+    "recomputedRootsWithBothResolved": 216,
+    "method": "Group retained isRoot rows by namespace and scenarioVersionPk; require nonempty input and outcome schemaDigest."
+  },
+  "externalSources": [
+    {
+      "url": "https://huggingface.co/docs/hub/spaces",
+      "consultedOn": "2026-09-09",
+      "evidence": "Primary webpage consulted using web research; remote bytes are not archived or hashed."
+    },
+    {
+      "url": "https://huggingface.co/docs/hub/spaces-sdks-docker",
+      "consultedOn": "2026-09-09",
+      "evidence": "Primary webpage consulted using web research; remote bytes are not archived or hashed."
+    },
+    {
+      "url": "https://huggingface.co/docs/hub/security-tokens",
+      "consultedOn": "2026-09-09",
+      "evidence": "Primary webpage consulted using web research; remote bytes are not archived or hashed."
+    },
+    {
+      "url": "https://huggingface.co/docs/hub/spaces-storage",
+      "consultedOn": "2026-09-09",
+      "evidence": "Primary webpage consulted using web research; remote bytes are not archived or hashed."
+    },
+    {
+      "url": "https://huggingface.co/docs/inference-providers/index",
+      "consultedOn": "2026-09-09",
+      "evidence": "Primary webpage consulted using web research; remote bytes are not archived or hashed."
+    },
+    {
+      "url": "https://huggingface.co/docs/hub/en/datasets-cards",
+      "consultedOn": "2026-09-09",
+      "evidence": "Primary webpage consulted using web research; remote bytes are not archived or hashed."
+    },
+    {
+      "url": "https://inspect.aisi.org.uk/",
+      "consultedOn": "2026-09-09",
+      "evidence": "Primary webpage consulted using web research; remote bytes are not archived or hashed."
+    },
+    {
+      "url": "https://huggingface.co/docs/hub/eval-results",
+      "consultedOn": "2026-09-09",
+      "evidence": "Primary webpage consulted using web research; remote bytes are not archived or hashed."
+    },
+    {
+      "url": "https://huggingface.co/docs/huggingface_hub/guides/search",
+      "consultedOn": "2026-09-09",
+      "evidence": "Primary webpage consulted using web research; remote bytes are not archived or hashed."
+    },
+    {
+      "url": "https://huggingface.co/pricing",
+      "consultedOn": "2026-09-09",
+      "evidence": "Primary webpage consulted using web research; remote bytes are not archived or hashed."
+    },
+    {
+      "url": "https://huggingface.co/enterprise",
+      "consultedOn": "2026-09-09",
+      "evidence": "Primary webpage consulted using web research; remote bytes are not archived or hashed."
+    },
+    {
+      "url": "https://huggingface.co/docs/hub/spaces-overview",
+      "consultedOn": "2026-09-09",
+      "evidence": "Primary webpage consulted using web research; remote bytes are not archived or hashed."
+    },
+    {
+      "url": "https://huggingface.co/docs/inference-providers/pricing",
+      "consultedOn": "2026-09-09",
+      "evidence": "Primary webpage consulted using web research; remote bytes are not archived or hashed."
+    },
+    {
+      "url": "https://blogs.nvidia.com/blog/nvidia-to-acquire-hugging-face/",
+      "consultedOn": "2026-09-09",
+      "evidence": "Primary webpage consulted using web research; remote bytes are not archived or hashed."
+    },
+    {
+      "url": "https://openai.com/index/hugging-face-model-evaluation-security-incident/",
+      "consultedOn": "2026-09-09",
+      "evidence": "Primary webpage consulted using web research; remote bytes are not archived or hashed."
+    },
+    {
+      "url": "https://huggingface.co/docs/hub/spaces-api-endpoints",
+      "consultedOn": "2026-09-09",
+      "evidence": "Primary webpage consulted using web research; remote bytes are not archived or hashed."
+    }
+  ],
+  "ownerClarification": "Preparation before invocation is optional and is not enforced. Direct invocation is the planned path."
+}

@@ -1,0 +1,118 @@
+{
+  "contractId": "equity-market-price-evidence-request.v1",
+  "payload": {
+    "symbol": "AAPL",
+    "region": "US",
+    "nativeTestimony": {
+      "quoteSummary": {
+        "result": [
+          {
+            "price": {
+              "maxAge": 1,
+              "preMarketChangePercent": {
+                "raw": -0.002059372,
+                "fmt": "-0.21%"
+              },
+              "preMarketChange": {
+                "raw": -0.6512146,
+                "fmt": "-0.65"
+              },
+              "preMarketTime": 1788960595,
+              "preMarketPrice": {
+                "raw": 315.5688,
+                "fmt": "315.57"
+              },
+              "preMarketSource": "DELAYED",
+              "postMarketChange": {},
+              "postMarketPrice": {},
+              "regularMarketChangePercent": {
+                "raw": -0.011906314,
+                "fmt": "-1.19%"
+              },
+              "regularMarketChange": {
+                "raw": -3.7650146,
+                "fmt": "-3.77"
+              },
+              "regularMarketTime": 1788976333,
+              "priceHint": {
+                "raw": 2,
+                "fmt": "2",
+                "longFmt": "2"
+              },
+              "regularMarketPrice": {
+                "raw": 312.455,
+                "fmt": "312.45"
+              },
+              "regularMarketDayHigh": {
+                "raw": 318.13,
+                "fmt": "318.13"
+              },
+              "regularMarketDayLow": {
+                "raw": 310.97,
+                "fmt": "310.97"
+              },
+              "regularMarketVolume": {
+                "raw": 29095543,
+                "fmt": "29.10M",
+                "longFmt": "29,095,543.00"
+              },
+              "averageDailyVolume10Day": {},
+              "averageDailyVolume3Month": {},
+              "regularMarketPreviousClose": {
+                "raw": 316.22,
+                "fmt": "316.22"
+              },
+              "regularMarketSource": "FREE_REALTIME",
+              "regularMarketOpen": {
+                "raw": 315.4106,
+                "fmt": "315.41"
+              },
+              "strikePrice": {},
+              "openInterest": {},
+              "fulldayChangePercent": {
+                "raw": -0.011906314,
+                "fmt": "-1.19%"
+              },
+              "fulldayChange": {
+                "raw": -3.7650146,
+                "fmt": "-3.77"
+              },
+              "fulldayPrice": {
+                "raw": 312.455,
+                "fmt": "312.45"
+              },
+              "exchange": "NMS",
+              "exchangeName": "NasdaqGS",
+              "exchangeDataDelayedBy": 0,
+              "marketState": "REGULAR",
+              "quoteType": "EQUITY",
+              "symbol": "AAPL",
+              "underlyingSymbol": null,
+              "shortName": "Apple Inc.",
+              "longName": "Apple Inc.",
+              "currency": "USD",
+              "quoteSourceName": "Nasdaq Real Time Price",
+              "currencySymbol": "$",
+              "fromCurrency": null,
+              "toCurrency": null,
+              "lastMarket": null,
+              "volume24Hr": {},
+              "volumeAllCurrencies": {},
+              "circulatingSupply": {},
+              "marketCap": {
+                "raw": 4560024240128,
+                "fmt": "4.56T",
+                "longFmt": "4,560,024,240,128.00"
+              }
+            }
+          }
+        ],
+        "error": null
+      }
+    },
+    "providerBinding": {
+      "bindingId": "rapidapi-davethebeast-yahoo-finance166-stock-price.v1",
+      "providerId": "rapidapi/davethebeast/yahoo-finance166"
+    }
+  }
+}
