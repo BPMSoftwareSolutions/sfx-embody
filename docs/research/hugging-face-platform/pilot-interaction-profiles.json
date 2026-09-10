@@ -1,0 +1,183 @@
+{
+  "status": "COMPILED_AND_ENFORCED_BY_LOCAL_LAB",
+  "qualification": "pilot-qualification.json",
+  "scope": "Private deterministic Lab pilots. Compiled against retained schema and fixture digests; enforced by the local Lab adapter. Not registered estate authority or remote authentication.",
+  "defaults": {
+    "unmappedInput": "unsupported",
+    "unknownReference": "hold",
+    "ambiguousReference": "hold",
+    "rawJsonInput": "not-offered",
+    "runTrigger": "explicit-user-action",
+    "textRendering": "escaped-text",
+    "automaticRetry": false
+  },
+  "profiles": [
+    {
+      "subject": "say-hello-world",
+      "namespace": "sidefx:capabilities",
+      "inputContract": "hello-world-request.v1",
+      "inputSchemaDigest": "sha256:0cb0cff2850d0636dd684850c859b4216e4b65e3ebb1f646fcb7c34771a08eb0",
+      "interaction": "action",
+      "inputs": [
+        {
+          "pointer": "/contractId",
+          "ownership": "fixed",
+          "value": "hello-world-request.v1"
+        },
+        {
+          "pointer": "/payload",
+          "ownership": "fixed",
+          "value": {}
+        }
+      ],
+      "outcome": {
+        "contract": "hello-world-greeting.v1",
+        "view": "text",
+        "pointer": "/payload/message",
+        "schemaDigest": "sha256:032a564e36eb1123f46c112386f96eded1a50c074537eb5e0f40c8beb7ba83c8"
+      },
+      "label": "Hello World",
+      "description": "Request the canonical greeting with one explicit action."
+    },
+    {
+      "subject": "greet-by-name",
+      "namespace": "sidefx:capabilities",
+      "inputContract": "personal-greeting-request.v1",
+      "inputSchemaDigest": "sha256:b800857e3c2d721221a37b98ef2fb2daf2e761df365e89a92359b5a6eabee1fb",
+      "interaction": "form",
+      "inputs": [
+        {
+          "pointer": "/contractId",
+          "ownership": "fixed",
+          "value": "personal-greeting-request.v1"
+        },
+        {
+          "pointer": "/payload",
+          "ownership": "derived",
+          "construction": "object-from-declared-children"
+        },
+        {
+          "pointer": "/payload/name",
+          "ownership": "editable",
+          "control": "text",
+          "label": "Name",
+          "required": true,
+          "minLength": 1,
+          "maxLength": 100,
+          "trim": false,
+          "unicodeNormalization": "none",
+          "emptyHandling": "refuse",
+          "missingHandling": "refuse",
+          "nullHandling": "refuse"
+        }
+      ],
+      "outcome": {
+        "contract": "personal-greeting.v1",
+        "view": "text",
+        "pointer": "/payload/message",
+        "schemaDigest": "sha256:18489ffe8c38d0181db073af4e471ac1329a76a4441fb53037208800a5439424"
+      },
+      "label": "Personal greeting",
+      "description": "Enter a name to receive a greeting. Your name is preserved exactly as supplied."
+    },
+    {
+      "subject": "resolve-sidefx-eligible-providers",
+      "namespace": "sidefx:capabilities",
+      "inputContract": "sidefx-provider-resolution-request.v1",
+      "inputSchemaDigest": "sha256:40f6fb9a386c4db5c230acb03293e2d7c129898f689d991eb965b06a572997a2",
+      "interaction": "retained-example-selection",
+      "label": "Provider fixture demonstration",
+      "inputs": [
+        {
+          "pointer": "/contractId",
+          "ownership": "fixed",
+          "value": "sidefx-provider-resolution-request.v1"
+        },
+        {
+          "pointer": "/evaluationBoundary",
+          "ownership": "fixed",
+          "value": "NON_PRODUCTION_WAVE3_SPECIALIST_ASK"
+        },
+        {
+          "pointer": "/snapshotDigest",
+          "ownership": "system-bound",
+          "source": "selected-retained-fixture"
+        },
+        {
+          "pointer": "/requestedPlatformCapabilityId",
+          "ownership": "system-bound",
+          "source": "selected-retained-fixture"
+        },
+        {
+          "pointer": "/requestedTarget",
+          "ownership": "system-bound",
+          "source": "selected-retained-fixture"
+        },
+        {
+          "pointer": "/conformantDispositions",
+          "ownership": "system-bound",
+          "source": "selected-retained-fixture"
+        },
+        {
+          "pointer": "/providerBindings",
+          "ownership": "system-bound",
+          "includesDescendants": true,
+          "source": "selected-retained-fixture"
+        }
+      ],
+      "exampleSource": {
+        "sourcePath": "capabilities/resolve-sidefx-eligible-providers/fixtures.authority.json",
+        "digest": "sha256:9bd371348cf4cf93a40d503849d0f913d7b750403e24d81dbfc84ae17a413c71",
+        "allowedFixtureIds": [
+          "hold-admitted-providers-that-declare-no-target",
+          "admit-provider-once-its-target-is-declared",
+          "refuse-target-the-binding-does-not-declare",
+          "refuse-unadmitted-and-unconformed-providers"
+        ]
+      },
+      "outcome": {
+        "contract": "sidefx-semantic-provider-resolution.v1",
+        "view": "structured-result",
+        "summaryPointers": [
+          "/disposition",
+          "/consideredCount",
+          "/eligibleCount"
+        ],
+        "collectionPointers": [
+          "/providers",
+          "/findings"
+        ],
+        "tracePointers": [
+          "/snapshotDigest",
+          "/resolutionDigest"
+        ],
+        "domainLabels": {
+          "PROVIDERS_RESOLVED": "Eligible providers found in this fixture",
+          "NOT_OBSERVABLE": "Eligibility is not established for this fixture"
+        },
+        "managedAdmission": "NOT_REQUESTED",
+        "externalProviderInvoked": false,
+        "schemaDigest": "sha256:7e62ab89e4058fc1c550d0e77401db57b463de2294b391d8983c0825993525a9",
+        "collectionFields": {
+          "/providers": [
+            "providerAuthorityId",
+            "eligibilityDisposition",
+            "reasonCode"
+          ],
+          "/findings": [
+            "code",
+            "message",
+            "severity"
+          ]
+        }
+      },
+      "description": "Explore how target declarations and assurance evidence affect provider eligibility.",
+      "exampleLabels": {
+        "hold-admitted-providers-that-declare-no-target": "No target declared — eligibility held",
+        "admit-provider-once-its-target-is-declared": "Matching target declared — eligible provider",
+        "refuse-target-the-binding-does-not-declare": "Different target requested — eligibility held",
+        "refuse-unadmitted-and-unconformed-providers": "Admission or conformance missing — eligibility held"
+      }
+    }
+  ]
+}

@@ -21,11 +21,21 @@ export function validateDatabaseCommand(envelope) {
   return request;
 }
 
-export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot }) {
+export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, onObservation }) {
   const timings = { unit: 'milliseconds', queries: {} };
+  const observe = value => { try { onObservation?.(value); } catch { /* Observation is not execution authority. */ } };
   const measure = async (name, work) => {
     const start = performance.now();
-    try { return await work(); }
+    observe({ observationType: 'delivery-phase', phase: name, status: 'started', observedAt: new Date().toISOString() });
+    try {
+      const result = await work();
+      observe({ observationType: 'delivery-phase', phase: name, status: 'completed', observedAt: new Date().toISOString() });
+      return result;
+    }
+    catch (error) {
+      observe({ observationType: 'delivery-phase', phase: name, status: 'failed', observedAt: new Date().toISOString() });
+      throw error;
+    }
     finally { timings[name] = performance.now() - start; }
   };
   const request = structuredClone(validateDatabaseCommand(envelope));
@@ -39,7 +49,7 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot }
   const plan = await measure('planNativeBody', () => planNode({ bundle, sdaRoot }));
   const runtime = await measure('loadMemoryModules', () => loadMemoryScenario(plan));
   const executions = [], observations = [];
-  const scenario = await measure('createScenario', () => runtime.createScenario({ observer: { observe: value => observations.push(value) },
+  const scenario = await measure('createScenario', () => runtime.createScenario({ observer: { observe: value => { observations.push(value); observe(value); } },
     clock: { now: () => new Date().toISOString() } }));
   const executionId = randomUUID();
   const input = structuredClone(request.input);

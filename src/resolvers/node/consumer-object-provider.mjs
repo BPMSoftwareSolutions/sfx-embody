@@ -127,13 +127,17 @@ export class NodeConsumerObjectProvider {
     return plan;
   }
 
-  constructor({ typescript, mechanicSource, mechanicSourceRef, mechanicExport, mechanicDeclarations, provenance, resolvedTransformationPorts }) {
+  constructor({ typescript, mechanicSource, mechanicSourceRef, mechanicExport, mechanicDeclarations, provenance, resolvedTransformationPorts, effectPorts = [] }) {
     this.ts = typescript;
     this.source = mechanicSource;
     this.sourceRef = mechanicSourceRef;
     this.sourceDigest = digest(mechanicSource);
     this.provenance = provenance;
     this.resolvedTransformationPorts = resolvedTransformationPorts;
+    // Effects are declared platform ports, not transformations. Each entry names
+    // the pinned provider module that implements it. The candidate resolves them
+    // from authority like any other mechanic; nothing is selected by port name.
+    this.effectPorts = new Map(effectPorts.map(port => [port.platformCapabilityId, port]));
     this.emittedImports = new Set();
     this.mechanics = new Map();
     for (const declaration of mechanicDeclarations) {
@@ -181,24 +185,44 @@ export class NodeConsumerObjectProvider {
         resultNames.add(next);
         if (operation.kind === 'invoke-port') {
           const binding = interfaceAuthority.portBindings.find(p => p.portId === operation.portId);
-          const provenance = this.provenance.ports[operation.portId];
-          if (!binding || !provenance || !binding.configuration?.expression) throw new Error('PORT_IMPLEMENTATION_NOT_RESOLVED:' + operation.portId);
-          const transformation = { ...provenance, expression: binding.configuration.expression };
-          if (!this.resolvedTransformationPorts.includes(binding.platformCapabilityId)) throw new Error('PORT_PROVIDER_NOT_SELECTED:' + operation.portId);
-          const lowering = new NativeExpressionProjection(this.ts, this.mechanics, this.bodies);
-          const expression = lowering.emit(transformation.expression);
-          const nodes = lowering.nodes;
-          nodes.forEach(n => { n.providerSourceRef = this.sourceRef; });
-          lowering.helpers.forEach(helper => helpers.add(helper));
-          const module = `providers/${physicalSegment(operation.portId)}.mjs`;
-          output(`${base}/${module}`, `// Generated from ${transformation.sourceRef}; ${transformation.sourceDigest}\n` +
-            (lowering.helpers.size ? `import { ${[...lowering.helpers].sort().join(', ')} } from './native-mechanics.mjs';\n\n` : '') +
-            `export class ${identifier(operation.portId)} {\n  execute(input, root = input) {\n    return ${expression};\n  }\n}\n`, [transformation.sourceRef]);
-          dependencies.push({ id: operation.portId, module: './' + module, className: identifier(operation.portId), kind: operation.kind });
-          statements.push(`    const ${next} = await this.dependencies[${JSON.stringify(operation.portId)}].execute(${state}, root);`);
-          lineage.push({ scenarioId: scenario.scenarioId, operationOrdinal: ordinal, portId: operation.portId,
-            transformationId: transformation.id, sourceRef: transformation.sourceRef, sourceDigest: transformation.sourceDigest,
-            physicalFile: `${base}/${module}`, bindings: lowering.bindings, helpers: [...lowering.helpers], nodes });
+          if (!binding) throw new Error('PORT_IMPLEMENTATION_NOT_RESOLVED:' + operation.portId);
+          const effect = this.effectPorts.get(binding.platformCapabilityId);
+          if (effect) {
+            // A declared effect port. The pinned provider module is carried into
+            // the body from the registry, and the port configuration is the
+            // authority-declared data it runs with. The shared governed effect
+            // context is what lets one port's opaque credential binding reach the
+            // exchange that consumes it without either leaving the boundary.
+            const module = `providers/${physicalSegment(operation.portId)}.mjs`;
+            const providerImport = './sda/' + effect.providerModule;
+            output(`${base}/${module}`,
+              `import { ${effect.providerExport} } from ${JSON.stringify(providerImport)};\n\n` +
+              `const configuration = ${dataLiteral(binding.configuration ?? {})};\n\n` +
+              `export class ${identifier(operation.portId)} {\n  constructor(effectContext) {\n    this.effectContext = effectContext;\n  }\n\n` +
+              `  execute(input, root, context) {\n    return ${effect.providerExport}(configuration, input, context, this.effectContext);\n  }\n}\n`,
+              [this.provenance.interfaceSourceRef]);
+            dependencies.push({ id: operation.portId, module: './' + module, className: identifier(operation.portId), kind: 'invoke-effect' });
+            statements.push(`    const ${next} = await this.dependencies[${JSON.stringify(operation.portId)}].execute(${state}, root, context, this.effectContext);`);
+          } else {
+            const provenance = this.provenance.ports[operation.portId];
+            if (!provenance || !binding.configuration?.expression) throw new Error('PORT_IMPLEMENTATION_NOT_RESOLVED:' + operation.portId);
+            const transformation = { ...provenance, expression: binding.configuration.expression };
+            if (!this.resolvedTransformationPorts.includes(binding.platformCapabilityId)) throw new Error('PORT_PROVIDER_NOT_SELECTED:' + operation.portId);
+            const lowering = new NativeExpressionProjection(this.ts, this.mechanics, this.bodies);
+            const expression = lowering.emit(transformation.expression);
+            const nodes = lowering.nodes;
+            nodes.forEach(n => { n.providerSourceRef = this.sourceRef; });
+            lowering.helpers.forEach(helper => helpers.add(helper));
+            const module = `providers/${physicalSegment(operation.portId)}.mjs`;
+            output(`${base}/${module}`, `// Generated from ${transformation.sourceRef}; ${transformation.sourceDigest}\n` +
+              (lowering.helpers.size ? `import { ${[...lowering.helpers].sort().join(', ')} } from './native-mechanics.mjs';\n\n` : '') +
+              `export class ${identifier(operation.portId)} {\n  execute(input, root = input) {\n    return ${expression};\n  }\n}\n`, [transformation.sourceRef]);
+            dependencies.push({ id: operation.portId, module: './' + module, className: identifier(operation.portId), kind: operation.kind });
+            statements.push(`    const ${next} = await this.dependencies[${JSON.stringify(operation.portId)}].execute(${state}, root);`);
+            lineage.push({ scenarioId: scenario.scenarioId, operationOrdinal: ordinal, portId: operation.portId,
+              transformationId: transformation.id, sourceRef: transformation.sourceRef, sourceDigest: transformation.sourceDigest,
+              physicalFile: `${base}/${module}`, bindings: lowering.bindings, helpers: [...lowering.helpers], nodes });
+          }
         } else if (operation.kind === 'invoke-scenario') {
           if (!scenarios.some(s => s.scenarioId === operation.scenarioId)) throw new Error('CHILD_SCENARIO_NOT_RESOLVED:' + operation.scenarioId);
           const child = `embodiments/${physicalSegment(capabilityId)}/scenarios/${physicalSegment(operation.scenarioId)}/node/body/scenario.mjs`;
@@ -234,7 +258,7 @@ export class NodeConsumerObjectProvider {
       // admitted input rather than from caller-supplied context also removes the
       // last place where a caller could supply a different object, so root is
       // never a clone of input in one position and input itself in another.
-      const rootBinding = dependencies.some(d => d.kind === 'invoke-port') ? '    const root = input;\n' : '';
+      const rootBinding = dependencies.some(d => d.kind === 'invoke-port' || d.kind === 'invoke-effect') ? '    const root = input;\n' : '';
       const scenarioClass = identifier(scenario.scenarioId) + 'Scenario';
       const declaration = dataLiteral(scenario);
       const content = `// Generated from database-retained Scenario and execution authority.\n` +
@@ -242,7 +266,7 @@ export class NodeConsumerObjectProvider {
         `import { DispositionResolver } from './providers/sda/languages/typescript/dist/src/kernel/disposition-resolver.js';\n\n` +
         `const declaration = ${declaration};\n\nexport class ${scenarioClass} {\n` +
         `  static capabilityId = ${JSON.stringify(capabilityId)};\n  static scenarioId = ${JSON.stringify(scenario.scenarioId)};\n` +
-        `  constructor(dependencies, contracts, observer, clock) {\n    this.dependencies = dependencies;\n    this.contracts = contracts;\n    this.observer = observer;\n    this.clock = clock;\n  }\n\n` +
+        `  constructor(dependencies, contracts, observer, clock, effectContext) {\n    this.dependencies = dependencies;\n    this.contracts = contracts;\n    this.observer = observer;\n    this.clock = clock;\n    this.effectContext = effectContext;\n  }\n\n` +
         `  async perform(input, context) {\n${rootBinding}${statements.join('\n')}\n    return ${state};\n  }\n\n` +
         `  async execute(input, context) {\n    const kernel = new ScenarioKernel(this.contracts, {\n      async resolve(event) {\n        if (event.executionAuthorityId !== declaration.event.executionAuthorityId) throw new Error('EXECUTION_AUTHORITY_DIVERGENCE');\n        return { executionAuthorityId: event.executionAuthorityId, handler: declaration.event };\n      }\n    }, { execute: async (_authority, value) => this.perform(value, context) }, new DispositionResolver(), this.observer, this.clock);\n` +
         `    const execution = await kernel.execute(declaration, { ...context, input });\n    context.collect?.(execution);\n    return execution;\n  }\n\n` +

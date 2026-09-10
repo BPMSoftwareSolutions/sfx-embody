@@ -5,10 +5,11 @@
       "id": "resolve-equity-market-price-evidence.v1",
       "owningScenarioId": "resolve-equity-market-price-evidence",
       "operations": [
-        {
-          "kind": "invoke-port",
-          "portId": "resolve-equity-market-price-evidence-port"
-        }
+        { "kind": "invoke-port", "portId": "build-equity-price-binding-request" },
+        { "kind": "invoke-port", "portId": "bind-equity-price-provider-credential" },
+        { "kind": "invoke-port", "portId": "build-equity-price-exchange-request" },
+        { "kind": "invoke-port", "portId": "observe-equity-price-exchange" },
+        { "kind": "invoke-port", "portId": "normalize-equity-price-evidence" }
       ]
     }
   ]

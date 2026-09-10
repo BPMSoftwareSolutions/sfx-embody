@@ -6,9 +6,13 @@ SideFX should make an exposed capability usable, evaluable, and explainable from
 
 The recommendation is to fund a bounded first release, then expand when its evidence and user value justify it. Start with existing deterministic capabilities to prove the shared experience and remote execution path. Add the document-classification proof already proposed in the ML lane. Publish results and an interactive companion through one reusable application. Build advisory provider intelligence after comparable evaluations exist.
 
-This document combines the [scenario experience proposal](research/scenario-experiences/opportunity.md), [ML opportunity](research/ml-opportunity/README.md), current runtime and API code, and external research. [Research notes and sources](research/hugging-face-platform/README.md) record factual checks, implementation limits, and competing approaches. The attached strategic direction is retained as [source material](research/hugging-face-platform/strategic-direction.txt). This is a plan for review; no deployment, account purchase, model evaluation, or database change was performed.
+This document combines the [scenario experience proposal](research/scenario-experiences/opportunity.md), [ML opportunity](research/ml-opportunity/README.md), current runtime and API code, and external research. [Research notes and sources](research/hugging-face-platform/README.md) record factual checks, implementation limits, and competing approaches. The attached strategic direction is retained as [source material](research/hugging-face-platform/strategic-direction.txt). The original research did not perform deployment, account purchase, model evaluation, or database changes.
+
+**Implementation update, 9 September 2026 (local time):** the private Hugging Face Space is now running the shared SideFX Lab. All three original interactions and actual RapidAPI stock-price retrieval passed through the authenticated Azure service and selected database authority. The [deployment report](../../sfx-platform/docs/live-finance-deployment.md) records the HF commit, pinned service image, native execution identities and hosted verification. The research roadmap below retains its wider proposed scope.
 
 ## 1. Decisions for this review
+
+**Mandatory next-run direction from the user:** deploy the Lab to the private Hugging Face Space `BPMSoftwareSolutions/SideFX`, keep all three existing interactions working there, and complete a live stock-price request from that Space through the remotely hosted SideFX service/database authority and RapidAPI. Local execution cannot satisfy completion. The [live finance handoff](research/hugging-face-platform/next-run-live-finance.md) defines the deployment work and acceptance evidence.
 
 | Decision | Recommended position | Accountable role |
 |---|---|---|
@@ -47,7 +51,7 @@ The September 9 census contains 824 scenarios, 630 contracts, 812 resolved input
 | Knowledge | Database separates semantic definitions, source provenance, and scoped analysis | Define observation and assessment records without promoting model-card claims or test logs into authority |
 | Content | Existing content workspace has versioned production records, reusable capability editions, evidence checks, and published-video records | Bind an HF companion and evaluation release into those records; editorial and learner review remain necessary |
 
-Two architectural facts affect implementation. First, the current [invocation code](../src/invoke-database-capability.mjs) does **not** consume a retained preparation: preparation is an optional separate proof. Older `sfx-platform` execution documentation still describes mandatory preparation and historical 94/219 coverage; those figures must not become this program's readiness baseline. Second, the [memory loader](../src/load-memory-scenario.mjs) explicitly states it is not a security sandbox. Remote execution needs an actual isolation boundary.
+Two architectural facts affect implementation. First, the current [invocation code](../src/invoke-database-capability.mjs) does **not** consume a retained preparation: preparation is an optional separate proof. The `sfx-platform` execution documentation has been reconciled with this behavior; its historical 94/219 preparation coverage remains historical and is not this program's readiness baseline. Second, the [memory loader](../src/load-memory-scenario.mjs) explicitly states it is not a security sandbox. Remote execution needs an actual isolation boundary.
 
 ## 4. Proposed architecture
 

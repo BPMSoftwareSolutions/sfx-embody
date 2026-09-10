@@ -1,0 +1,34 @@
+{
+  "runtimeConfig": "database-runtime.json",
+  "projectRoot": "..",
+  "outputRoot": "../evidence/hugging-face-pilots",
+  "pilots": [
+    {
+      "capabilityId": "say-hello-world",
+      "namespaceId": "sidefx:capabilities",
+      "probes": [
+        { "fixtureId": "reject-missing-envelope", "input": {}, "expected": { "disposition": "rejected" } },
+        { "fixtureId": "reject-extra-domain-input", "input": { "contractId": "hello-world-request.v1", "payload": { "name": "Sidney" } }, "expected": { "disposition": "rejected" } }
+      ]
+    },
+    {
+      "capabilityId": "greet-by-name",
+      "namespaceId": "sidefx:capabilities",
+      "probes": [
+        { "fixtureId": "reject-absent-name", "input": { "contractId": "personal-greeting-request.v1", "payload": {} }, "expected": { "disposition": "rejected" } },
+        { "fixtureId": "reject-empty-name", "input": { "contractId": "personal-greeting-request.v1", "payload": { "name": "" } }, "expected": { "disposition": "rejected" } },
+        { "fixtureId": "reject-null-name", "input": { "contractId": "personal-greeting-request.v1", "payload": { "name": null } }, "expected": { "disposition": "rejected" } },
+        { "fixtureId": "reject-oversized-name", "input": { "contractId": "personal-greeting-request.v1", "payload": { "name": "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvw" } }, "expected": { "disposition": "rejected" } },
+        { "fixtureId": "preserve-markup-as-text", "input": { "contractId": "personal-greeting-request.v1", "payload": { "name": "<script>alert(1)</script>" } }, "expected": { "disposition": "terminated", "outcomeAssertions": [{ "conditionId": "exact-text", "path": "payload.message", "operator": "equals", "value": "Hello, <script>alert(1)</script>!" }] } },
+        { "fixtureId": "preserve-whitespace", "input": { "contractId": "personal-greeting-request.v1", "payload": { "name": " " } }, "expected": { "disposition": "terminated", "outcomeAssertions": [{ "conditionId": "no-undeclared-trimming", "path": "payload.message", "operator": "equals", "value": "Hello,  !" }] } }
+      ]
+    },
+    {
+      "capabilityId": "resolve-sidefx-eligible-providers",
+      "namespaceId": "sidefx:capabilities",
+      "probes": [
+        { "fixtureId": "reject-null-request", "input": null, "expected": { "disposition": "rejected" } }
+      ]
+    }
+  ]
+}

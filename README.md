@@ -6,6 +6,8 @@ sfx-embody materializes executable Capability and Scenario bodies from database 
 
 [SideFX ML opportunity](docs/research/ml-opportunity/README.md) documents a separate lane for models as capability providers, scenario evaluation, training and promotion, authoring assistance, and learning from execution evidence. It maps existing model-related declarations to the proposed architecture and defines a bounded first proof.
 
+[Hugging Face pilot qualification](docs/research/hugging-face-platform/pilot-qualification.md) records the initial 16 installed-CLI runs and Linux parity. The [live finance deployment](../sfx-platform/docs/live-finance-deployment.md) now runs all three pilots and an actual RapidAPI stock-price request in the private Hugging Face Space through the authenticated Azure service and this database delivery.
+
 [Current repair and acceptance evidence](docs/native-embodiment-repair.md), and [bounded execution closure](docs/bounded-execution-closure.md) records why invoking one capability must expand only the capabilities it declares a dependency on. [Review findings and architectural goals](docs/embodiment-review-findings.md) record the properties the current integrity boundary and oracles are built to hold, and [cross-target embodiment](docs/cross-target-embodiment.md) records what Python and C# require and why declared mechanic meaning had to be closed first. The required meaning already existed. This repair replaces the Expression runtime with native expressions, retains declared lexical bindings, fixes weakened contract types, and adds inverse transformation checks. Full Capability/Scenario round-trip equivalence remains an explicit acceptance obligation.
 
 | Directory | Contents |

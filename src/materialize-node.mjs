@@ -137,9 +137,17 @@ export async function planNode({ bundle, sdaRoot }) {
       throw new Error('NATIVE_MECHANIC_PROVIDER_DIVERGENCE:' + declared.implementation_id + '#' + declared.implementation_export);
   }
   const mechanicSource = (await readPlatform(native.implementation_id)).toString('utf8');
+  // Declared effect ports execute the pinned provider module the registry names,
+  // the same way the native mechanic provider does. They are resolved from
+  // authority, never selected by port name, and their modules are carried into
+  // the body rather than imported from disk at invocation.
+  const effectPorts = registry.value.eventPorts.filter(p => p.invocation === 'effects').map(p => ({
+    platformCapabilityId: p.platformCapabilityId, providerModuleRoot: registry.value.providerModuleRoot,
+    providerModule: path.posix.join(registry.value.providerModuleRoot, p.providerModule), providerExport: p.providerExport }));
   const provider = new NodeConsumerObjectProvider({ typescript: ts, mechanicSource, mechanicSourceRef: native.implementation_id,
     mechanicExport: native.implementation_export,
     mechanicDeclarations: bundle.mechanics.recordsets[0].map(r => json(r.definition_json)), provenance,
+    effectPorts,
     resolvedTransformationPorts: registry.value.eventPorts.filter(p => p.invocation === 'transformation' && p.providerExport === native.implementation_export && path.posix.join(registry.value.providerModuleRoot, p.providerModule) === native.implementation_id).map(p => p.platformCapabilityId) });
   const files = provider.render({ repositoryRoot: sdaRoot, workspaceRoot: path.posix.dirname(workspace.source_path), capabilityId,
     interfaceAuthority, query: { authorityGraph: { scenarios, executionAuthorities } } });
@@ -189,6 +197,12 @@ export async function planNode({ bundle, sdaRoot }) {
   };
   const kernelPaths = ['languages/typescript/dist/src/kernel/scenario-kernel.js', 'languages/typescript/dist/src/kernel/disposition-resolver.js', admissionModule];
   for (const relative of kernelPaths) await copyRuntime(relative);
+  // Carry every declared effect provider named by this capability's interface
+  // authority into the body. Nothing is loaded from sdaRoot at invocation.
+  for (const binding of interfaceAuthority.portBindings) {
+    const effect = effectPorts.find(port => port.platformCapabilityId === binding.platformCapabilityId);
+    if (effect) await copyRuntime(effect.providerModule);
+  }
   const primitivesRef = path.posix.join(path.posix.dirname(native.implementation_id), 'native-mechanic-primitives.mjs');
   const primitives = (await readPlatform(primitivesRef)).toString('utf8');
   const add = (relativePath, content, sourcePointers = []) => files.push({ relativePath, content, digest: hash(content), sourcePointers, target: 'node' });
@@ -208,10 +222,10 @@ export async function planNode({ bundle, sdaRoot }) {
     add(`${base}/body/providers/native-mechanic-primitives.mjs`, primitives, [primitivesRef]);
     for (const [ref, content] of copied) add(`${base}/body/providers/sda/${ref}`, content, [ref]);
     add(`${base}/body/package.json`, pretty({ private: true, type: 'module', engines: platform.value.engines, dependencies: { ajv: platform.value.dependencies.ajv } }), [platform.source_path]);
-    const imports = dependencies.map(d => d.kind === 'invoke-port'
+    const imports = dependencies.map(d => d.kind === 'invoke-port' || d.kind === 'invoke-effect'
       ? `import { ${d.className} } from ${JSON.stringify(d.module)};`
       : `import { createScenario as create${d.className} } from ${JSON.stringify(d.module.replace(/scenario\.mjs$/, 'composition.mjs'))};`).join('\n');
-    add(`${base}/body/composition.mjs`, `import fs from 'node:fs';\nimport { ${name(scenario.scenarioId)}Scenario } from './scenario.mjs';\nimport { ${admission.providerExport} } from './providers/sda/${admissionModule}';\n${imports}\n\nexport function createScenario({ observer, clock }) {\n  const contracts = ${admission.providerExport}(JSON.parse(fs.readFileSync(new URL('./contracts/authority.json', import.meta.url), 'utf8')));\n  return new ${name(scenario.scenarioId)}Scenario({\n${dependencies.map(d => `    ${JSON.stringify(d.id)}: ${d.kind === 'invoke-port' ? `new ${d.className}()` : `create${d.className}({ observer, clock })`}`).join(',\n')}\n  }, contracts, observer, clock);\n}\n`, [interfaces.source_path, execution.source_path, registry.source_path]);
+    add(`${base}/body/composition.mjs`, `import fs from 'node:fs';\nimport { ${name(scenario.scenarioId)}Scenario } from './scenario.mjs';\nimport { ${admission.providerExport} } from './providers/sda/${admissionModule}';\nimport { createGovernedEffectContext } from './providers/native-mechanic-primitives.mjs';\n${imports}\n\nexport function createScenario({ observer, clock, effectContext }) {\n  const contracts = ${admission.providerExport}(JSON.parse(fs.readFileSync(new URL('./contracts/authority.json', import.meta.url), 'utf8')));\n  const effects = effectContext ?? createGovernedEffectContext();\n  return new ${name(scenario.scenarioId)}Scenario({\n${dependencies.map(d => `    ${JSON.stringify(d.id)}: ${d.kind === 'invoke-effect' ? `new ${d.className}(effects)` : d.kind === 'invoke-port' ? `new ${d.className}()` : `create${d.className}({ observer, clock, effectContext: effects })`}`).join(',\n')}\n  }, contracts, observer, clock, effects);\n}\n`, [interfaces.source_path, execution.source_path, registry.source_path]);
     add(`${base}/evidence/authority.json`, pretty({ selection, selected, snapshotId: authority.snapshotId, projectionDigest: authority.projectionDigest,
       // The closure read is always taken and is what planning consumed. The
       // requirement matrix is optional, so its digest is recorded when it was

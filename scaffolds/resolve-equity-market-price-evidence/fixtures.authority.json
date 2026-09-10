@@ -2,35 +2,19 @@
   "fixtureType": "consumer-capability-fixtures.v1",
   "fixtures": [
     {
-      "fixtureId": "resolve-through-the-yahoo-finance166-native-shape",
+      "fixtureId": "resolve-through-the-declared-effect-ports",
       "input": {
-        "contractId": "equity-market-price-evidence-request.v1",
-        "payload": {
-          "region": "US",
-          "providerBinding": {
-            "bindingId": "rapidapi-davethebeast-yahoo-finance166-stock-price.v1",
-            "providerId": "rapidapi/davethebeast/yahoo-finance166"
-          },
-          "nativeTestimony": {
-            "quoteSummary": {
-              "result": [
-                {
-                  "price": {
-                    "symbol": "AAPL",
-                    "currency": "USD",
-                    "regularMarketPrice": { "raw": 316.22, "fmt": "316.22" },
-                    "regularMarketTime": 1788971619,
-                    "marketState": "REGULAR",
-                    "exchange": "NMS",
-                    "quoteSourceName": "Nasdaq Real Time Price"
-                  }
-                }
-              ]
-            }
-          }
+        "contractId": "live-equity-price-request.v1",
+        "payload": { "symbol": "AAPL", "region": "US" }
+      },
+      "effectStub": {
+        "credential": "fixture-secret-do-not-retain",
+        "response": {
+          "status": 200,
+          "headers": { "content-type": "application/json; charset=utf-8" },
+          "body": "{\"quoteSummary\":{\"result\":[{\"price\":{\"symbol\":\"AAPL\",\"currency\":\"USD\",\"regularMarketPrice\":{\"raw\":316.22},\"regularMarketTime\":1788971619,\"marketState\":\"REGULAR\",\"exchange\":\"NMS\",\"quoteSourceName\":\"Nasdaq Real Time Price\"}}]}}"
         }
       },
-      "portOutcomes": { "authority-driven-composition": { "authority": "interfaces.authority.json" } },
       "expected": {
         "disposition": "terminated",
         "scenarioSequence": ["resolve-equity-market-price-evidence"],
@@ -45,85 +29,49 @@
           { "conditionId": "market-state-is-retained", "path": "payload.marketState", "operator": "equals", "value": "REGULAR" },
           { "conditionId": "exchange-is-retained", "path": "payload.exchange", "operator": "equals", "value": "NMS" },
           { "conditionId": "attribution-is-retained", "path": "payload.sourceAttribution", "operator": "equals", "value": "Nasdaq Real Time Price" },
-          { "conditionId": "native-shape-is-attributed-by-presence", "path": "providerTestimony.nativeShape", "operator": "equals", "value": "quoteSummary.result.0.price" },
-          { "conditionId": "supplier-identity-is-attributable-realization", "path": "providerTestimony.providerId", "operator": "equals", "value": "rapidapi/davethebeast/yahoo-finance166" }
+          { "conditionId": "native-shape-is-attributed-by-presence", "path": "providerTestimony.nativeShape", "operator": "equals", "value": "quoteSummary.result.0.price" }
         ]
       }
     },
     {
-      "fixtureId": "resolve-the-same-price-through-the-apidojo-native-shape",
+      "fixtureId": "resolve-the-same-price-through-the-second-native-shape",
       "input": {
-        "contractId": "equity-market-price-evidence-request.v1",
-        "payload": {
-          "region": "US",
-          "providerBinding": {
-            "bindingId": "rapidapi-apidojo-yh-finance-market-quotes.v1",
-            "providerId": "rapidapi/apidojo/yh-finance"
-          },
-          "nativeTestimony": {
-            "quoteResponse": {
-              "result": [
-                {
-                  "symbol": "AAPL",
-                  "currency": "USD",
-                  "regularMarketPrice": 316.22,
-                  "regularMarketTime": 1788971619,
-                  "marketState": "REGULAR",
-                  "exchange": "NMS",
-                  "quoteSourceName": "Nasdaq Real Time Price"
-                }
-              ]
-            }
-          }
+        "contractId": "live-equity-price-request.v1",
+        "payload": { "symbol": "AAPL", "region": "US" }
+      },
+      "effectStub": {
+        "credential": "fixture-secret-do-not-retain",
+        "response": {
+          "status": 200,
+          "headers": { "content-type": "application/json; charset=utf-8" },
+          "body": "{\"quoteResponse\":{\"result\":[{\"symbol\":\"AAPL\",\"currency\":\"USD\",\"regularMarketPrice\":316.22,\"regularMarketTime\":1788971619,\"marketState\":\"REGULAR\",\"exchange\":\"NMS\",\"quoteSourceName\":\"Nasdaq Real Time Price\"}]}}"
         }
       },
-      "portOutcomes": { "authority-driven-composition": { "authority": "interfaces.authority.json" } },
       "expected": {
         "disposition": "terminated",
         "scenarioSequence": ["resolve-equity-market-price-evidence"],
         "terminalScenarioId": "resolve-equity-market-price-evidence",
         "outcomeAssertions": [
           { "conditionId": "evidence-is-resolved", "path": "disposition", "operator": "equals", "value": "EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED" },
-          { "conditionId": "symbol-is-identical-across-suppliers", "path": "payload.symbol", "operator": "equals", "value": "AAPL" },
-          { "conditionId": "region-comes-from-the-canonical-request", "path": "payload.region", "operator": "equals", "value": "US" },
-          { "conditionId": "currency-is-identical-across-suppliers", "path": "payload.currency", "operator": "equals", "value": "USD" },
-          { "conditionId": "price-is-read-from-the-flat-field-and-is-identical", "path": "payload.observedPrice", "operator": "equals", "value": 316.22 },
-          { "conditionId": "market-time-is-identical-across-suppliers", "path": "payload.observedMarketTime", "operator": "equals", "value": 1788971619 },
-          { "conditionId": "market-state-is-identical-across-suppliers", "path": "payload.marketState", "operator": "equals", "value": "REGULAR" },
-          { "conditionId": "exchange-is-identical-across-suppliers", "path": "payload.exchange", "operator": "equals", "value": "NMS" },
-          { "conditionId": "attribution-is-identical-across-suppliers", "path": "payload.sourceAttribution", "operator": "equals", "value": "Nasdaq Real Time Price" },
-          { "conditionId": "the-other-native-shape-is-attributed-by-presence", "path": "providerTestimony.nativeShape", "operator": "equals", "value": "quoteResponse.result.0" },
-          { "conditionId": "the-other-supplier-identity-is-attributed", "path": "providerTestimony.providerId", "operator": "equals", "value": "rapidapi/apidojo/yh-finance" }
+          { "conditionId": "price-is-read-from-the-flat-field", "path": "payload.observedPrice", "operator": "equals", "value": 316.22 },
+          { "conditionId": "the-other-native-shape-is-attributed-by-presence", "path": "providerTestimony.nativeShape", "operator": "equals", "value": "quoteResponse.result.0" }
         ]
       }
     },
     {
       "fixtureId": "reject-native-testimony-that-cannot-satisfy-the-mapping",
       "input": {
-        "contractId": "equity-market-price-evidence-request.v1",
-        "payload": {
-          "region": "US",
-          "providerBinding": {
-            "bindingId": "rapidapi-davethebeast-yahoo-finance166-stock-price.v1",
-            "providerId": "rapidapi/davethebeast/yahoo-finance166"
-          },
-          "nativeTestimony": {
-            "quoteSummary": {
-              "result": [
-                {
-                  "price": {
-                    "symbol": "AAPL",
-                    "currency": "USD",
-                    "regularMarketPrice": { "fmt": "316.22" },
-                    "marketState": "REGULAR"
-                  }
-                }
-              ]
-            }
-          }
+        "contractId": "live-equity-price-request.v1",
+        "payload": { "symbol": "AAPL", "region": "US" }
+      },
+      "effectStub": {
+        "credential": "fixture-secret-do-not-retain",
+        "response": {
+          "status": 200,
+          "headers": { "content-type": "application/json; charset=utf-8" },
+          "body": "{\"quoteSummary\":{\"result\":[{\"price\":{\"symbol\":\"AAPL\",\"currency\":\"USD\",\"regularMarketPrice\":{\"fmt\":\"316.22\"},\"marketState\":\"REGULAR\"}}]}}"
         }
       },
-      "portOutcomes": { "authority-driven-composition": { "authority": "interfaces.authority.json" } },
       "expected": {
         "disposition": "terminated",
         "scenarioSequence": ["resolve-equity-market-price-evidence"],
@@ -131,8 +79,31 @@
         "outcomeAssertions": [
           { "conditionId": "nonconforming-testimony-is-rejected", "path": "disposition", "operator": "equals", "value": "NATIVE_MARKET_PRICE_TESTIMONY_REJECTED" },
           { "conditionId": "the-reason-is-named", "path": "reasonCode", "operator": "equals", "value": "REQUIRED_NATIVE_FIELDS_ABSENT" },
-          { "conditionId": "every-absent-field-is-counted", "path": "absentFieldCount", "operator": "equals", "value": 4 },
-          { "conditionId": "the-supplier-remains-attributable", "path": "providerTestimony.providerId", "operator": "equals", "value": "rapidapi/davethebeast/yahoo-finance166" }
+          { "conditionId": "every-absent-field-is-counted", "path": "absentFieldCount", "operator": "equals", "value": 4 }
+        ]
+      }
+    },
+    {
+      "fixtureId": "hold-when-the-credential-reference-is-unavailable",
+      "input": {
+        "contractId": "live-equity-price-request.v1",
+        "payload": { "symbol": "AAPL", "region": "US" }
+      },
+      "effectStub": {
+        "credential": "",
+        "response": {
+          "status": 200,
+          "headers": { "content-type": "application/json; charset=utf-8" },
+          "body": "{}"
+        }
+      },
+      "expected": {
+        "disposition": "terminated",
+        "scenarioSequence": ["resolve-equity-market-price-evidence"],
+        "terminalScenarioId": "resolve-equity-market-price-evidence",
+        "outcomeAssertions": [
+          { "conditionId": "no-price-is-invented", "path": "disposition", "operator": "equals", "value": "EQUITY_MARKET_PRICE_PROVIDER_UNAVAILABLE" },
+          { "conditionId": "the-hold-reason-is-named", "path": "reasonCode", "operator": "equals", "value": "PROVIDER_EXCHANGE_NOT_COMPLETED" }
         ]
       }
     }

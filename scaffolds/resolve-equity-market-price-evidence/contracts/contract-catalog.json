@@ -1,7 +1,4 @@
 {
-  "equity-market-price-evidence-request.v1": "input.schema.json",
-  "native-equity-market-price-testimony.v1": "testimony.schema.json",
-  "equity-market-price-evidence.v1": "evidence.schema.json",
-  "equity-market-price-provider-unavailable.v1": "provider-unavailable.schema.json",
-  "native-equity-market-price-testimony-rejection.v1": "testimony-rejection.schema.json"
+  "live-equity-price-request.v1": "live-request.schema.json",
+  "equity-market-price-evidence.v1": "evidence.schema.json"
 }

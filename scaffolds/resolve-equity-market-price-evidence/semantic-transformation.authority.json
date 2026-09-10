@@ -2,324 +2,202 @@
   "authorityType": "semantic-transformation-authority.v1",
   "transformations": [
     {
-      "id": "transform-resolve-equity-market-price-evidence",
+      "id": "build-equity-price-binding-request",
+      "expression": {
+        "op": "object",
+        "fields": {
+          "credentialReference": { "op": "literal", "value": "RAPID_API_KEY" },
+          "invocationIdentity": { "op": "literal", "value": "equity-market-price-evidence.v1" },
+          "requestingCapabilityId": { "op": "literal", "value": "resolve-equity-market-price-evidence" },
+          "endpointAuthorityDigest": { "op": "literal", "value": "sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b" },
+          "effectScope": { "op": "literal", "value": "ONE_BOUNDED_HTTPS_EXCHANGE_NO_REDIRECT_NO_RETRY" },
+          "effectLineage": { "op": "array", "items": [] }
+        }
+      }
+    },
+    {
+      "id": "build-equity-price-exchange-request",
+      "expression": {
+        "op": "object",
+        "fields": {
+          "exchangeKind": { "op": "literal", "value": "live-provider-input" },
+          "invocationIdentity": { "op": "literal", "value": "equity-market-price-evidence.v1" },
+          "endpointAuthorityDigest": { "op": "literal", "value": "sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b" },
+          "requestUrl": {
+            "op": "format",
+            "template": "https://yahoo-finance166.p.rapidapi.com/api/stock/get-price?symbol={symbol}&region={region}",
+            "values": {
+              "symbol": { "op": "path", "from": "root", "path": "payload.symbol" },
+              "region": { "op": "path", "from": "root", "path": "payload.region" }
+            }
+          },
+          "method": { "op": "literal", "value": "GET" },
+          "safeHeaders": {
+            "op": "object",
+            "fields": { "X-RapidAPI-Host": { "op": "literal", "value": "yahoo-finance166.p.rapidapi.com" } }
+          },
+          "requestBodyText": { "op": "literal", "value": "" },
+          "opaqueCredentialBinding": {
+            "op": "object",
+            "fields": {
+              "bindingId": { "op": "path", "from": "input", "path": "opaqueBindingId" },
+              "credentialInjectionRuleId": { "op": "path", "from": "input", "path": "credentialInjectionRuleId" }
+            }
+          },
+          "credentialInjectionRuleId": { "op": "path", "from": "input", "path": "credentialInjectionRuleId" },
+          "timeoutMilliseconds": { "op": "literal", "value": 12000 },
+          "cancellationScopeReference": { "op": "literal", "value": "equity-market-price-evidence.v1" },
+          "maxResponseBytes": { "op": "literal", "value": 262144 },
+          "redirectPolicy": { "op": "literal", "value": "manual" },
+          "allowedResponseHeaders": {
+            "op": "array",
+            "items": [{ "op": "literal", "value": "content-type" }, { "op": "literal", "value": "retry-after" }]
+          },
+          "lineageId": { "op": "literal", "value": "equity-market-price-evidence.v1" }
+        }
+      }
+    },
+    {
+      "id": "normalize-equity-price-evidence",
       "expression": {
         "op": "let",
         "bindings": {
-          "native": {
-            "op": "path",
-            "from": "input",
-            "path": "payload.nativeTestimony"
+          "completed": {
+            "op": "equals",
+            "left": { "op": "path", "from": "input", "path": "disposition" },
+            "right": { "op": "literal", "value": "completed" }
           },
-          "summaryQuote": {
-            "op": "path",
-            "from": "native",
-            "path": "quoteSummary.result.0.price"
-          },
-          "responseQuote": {
-            "op": "path",
-            "from": "native",
-            "path": "quoteResponse.result.0"
-          },
+          "bodyText": { "op": "base64-decode-utf8", "value": { "op": "path", "from": "input", "path": "responseBodyBytes" } },
+          "parsed": { "op": "try-parse-json", "value": { "op": "path", "from": "bodyText", "path": "" } },
+          "native": { "op": "path", "from": "parsed", "path": "value" },
+          "summaryQuote": { "op": "path", "from": "native", "path": "quoteSummary.result.0.price" },
+          "responseQuote": { "op": "path", "from": "native", "path": "quoteResponse.result.0" },
           "symbol": {
             "op": "if",
-            "when": {
-              "op": "path",
-              "from": "summaryQuote",
-              "path": ""
-            },
-            "then": {
-              "op": "path",
-              "from": "summaryQuote",
-              "path": "symbol"
-            },
-            "else": {
-              "op": "path",
-              "from": "responseQuote",
-              "path": "symbol"
-            }
+            "when": { "op": "path", "from": "summaryQuote", "path": "" },
+            "then": { "op": "path", "from": "summaryQuote", "path": "symbol" },
+            "else": { "op": "path", "from": "responseQuote", "path": "symbol" }
           },
           "currency": {
             "op": "if",
-            "when": {
-              "op": "path",
-              "from": "summaryQuote",
-              "path": ""
-            },
-            "then": {
-              "op": "path",
-              "from": "summaryQuote",
-              "path": "currency"
-            },
-            "else": {
-              "op": "path",
-              "from": "responseQuote",
-              "path": "currency"
-            }
+            "when": { "op": "path", "from": "summaryQuote", "path": "" },
+            "then": { "op": "path", "from": "summaryQuote", "path": "currency" },
+            "else": { "op": "path", "from": "responseQuote", "path": "currency" }
           },
           "observedPrice": {
             "op": "if",
-            "when": {
-              "op": "path",
-              "from": "summaryQuote",
-              "path": ""
-            },
-            "then": {
-              "op": "path",
-              "from": "summaryQuote",
-              "path": "regularMarketPrice.raw"
-            },
-            "else": {
-              "op": "path",
-              "from": "responseQuote",
-              "path": "regularMarketPrice"
-            }
+            "when": { "op": "path", "from": "summaryQuote", "path": "" },
+            "then": { "op": "path", "from": "summaryQuote", "path": "regularMarketPrice.raw" },
+            "else": { "op": "path", "from": "responseQuote", "path": "regularMarketPrice" }
           },
           "observedMarketTime": {
             "op": "if",
-            "when": {
-              "op": "path",
-              "from": "summaryQuote",
-              "path": ""
-            },
-            "then": {
-              "op": "path",
-              "from": "summaryQuote",
-              "path": "regularMarketTime"
-            },
-            "else": {
-              "op": "path",
-              "from": "responseQuote",
-              "path": "regularMarketTime"
-            }
+            "when": { "op": "path", "from": "summaryQuote", "path": "" },
+            "then": { "op": "path", "from": "summaryQuote", "path": "regularMarketTime" },
+            "else": { "op": "path", "from": "responseQuote", "path": "regularMarketTime" }
           },
           "marketState": {
             "op": "if",
-            "when": {
-              "op": "path",
-              "from": "summaryQuote",
-              "path": ""
-            },
-            "then": {
-              "op": "path",
-              "from": "summaryQuote",
-              "path": "marketState"
-            },
-            "else": {
-              "op": "path",
-              "from": "responseQuote",
-              "path": "marketState"
-            }
+            "when": { "op": "path", "from": "summaryQuote", "path": "" },
+            "then": { "op": "path", "from": "summaryQuote", "path": "marketState" },
+            "else": { "op": "path", "from": "responseQuote", "path": "marketState" }
           },
           "exchange": {
             "op": "if",
-            "when": {
-              "op": "path",
-              "from": "summaryQuote",
-              "path": ""
-            },
-            "then": {
-              "op": "path",
-              "from": "summaryQuote",
-              "path": "exchange"
-            },
-            "else": {
-              "op": "path",
-              "from": "responseQuote",
-              "path": "exchange"
-            }
+            "when": { "op": "path", "from": "summaryQuote", "path": "" },
+            "then": { "op": "path", "from": "summaryQuote", "path": "exchange" },
+            "else": { "op": "path", "from": "responseQuote", "path": "exchange" }
           },
           "sourceAttribution": {
             "op": "if",
-            "when": {
-              "op": "path",
-              "from": "summaryQuote",
-              "path": ""
-            },
-            "then": {
-              "op": "path",
-              "from": "summaryQuote",
-              "path": "quoteSourceName"
-            },
-            "else": {
-              "op": "path",
-              "from": "responseQuote",
-              "path": "quoteSourceName"
-            }
+            "when": { "op": "path", "from": "summaryQuote", "path": "" },
+            "then": { "op": "path", "from": "summaryQuote", "path": "quoteSourceName" },
+            "else": { "op": "path", "from": "responseQuote", "path": "quoteSourceName" }
           },
           "requiredValues": {
             "op": "array",
             "items": [
-              {
-                "op": "path",
-                "from": "symbol",
-                "path": ""
-              },
-              {
-                "op": "path",
-                "from": "currency",
-                "path": ""
-              },
-              {
-                "op": "path",
-                "from": "observedPrice",
-                "path": ""
-              },
-              {
-                "op": "path",
-                "from": "observedMarketTime",
-                "path": ""
-              },
-              {
-                "op": "path",
-                "from": "marketState",
-                "path": ""
-              },
-              {
-                "op": "path",
-                "from": "exchange",
-                "path": ""
-              },
-              {
-                "op": "path",
-                "from": "sourceAttribution",
-                "path": ""
-              }
+              { "op": "path", "from": "symbol", "path": "" },
+              { "op": "path", "from": "currency", "path": "" },
+              { "op": "path", "from": "observedPrice", "path": "" },
+              { "op": "path", "from": "observedMarketTime", "path": "" },
+              { "op": "path", "from": "marketState", "path": "" },
+              { "op": "path", "from": "exchange", "path": "" },
+              { "op": "path", "from": "sourceAttribution", "path": "" }
             ]
           },
           "missing": {
             "op": "filter",
-            "from": {
-              "op": "path",
-              "from": "requiredValues",
-              "path": ""
-            },
+            "from": { "op": "path", "from": "requiredValues", "path": "" },
             "as": "v",
             "where": {
               "op": "equals",
-              "left": {
-                "op": "path",
-                "from": "v",
-                "path": ""
-              },
-              "right": {
-                "op": "literal",
-                "value": null
-              }
+              "left": { "op": "path", "from": "v", "path": "" },
+              "right": { "op": "literal", "value": null }
             }
           },
-          "missingCount": {
-            "op": "length",
-            "value": {
-              "op": "path",
-              "from": "missing",
-              "path": ""
-            }
-          },
+          "missingCount": { "op": "length", "value": { "op": "path", "from": "missing", "path": "" } },
           "conforming": {
             "op": "equals",
-            "left": {
-              "op": "path",
-              "from": "missingCount",
-              "path": ""
-            },
-            "right": {
-              "op": "literal",
-              "value": 0
-            }
-          }
+            "left": { "op": "path", "from": "missingCount", "path": "" },
+            "right": { "op": "literal", "value": 0 }
+          },
+          "nativeShape": {
+            "op": "if",
+            "when": { "op": "path", "from": "summaryQuote", "path": "" },
+            "then": { "op": "literal", "value": "quoteSummary.result.0.price" },
+            "else": { "op": "literal", "value": "quoteResponse.result.0" }
+          },
+          "bindingId": { "op": "literal", "value": "rapidapi-davethebeast-yahoo-finance166-stock-price.v1" },
+          "providerId": { "op": "literal", "value": "rapidapi/davethebeast/yahoo-finance166" }
         },
         "value": {
           "op": "if",
-          "when": {
-            "op": "path",
-            "from": "conforming",
-            "path": ""
-          },
+          "when": { "op": "path", "from": "completed", "path": "" },
           "then": {
-            "op": "object",
-            "fields": {
-              "contractId": {
-                "op": "literal",
-                "value": "equity-market-price-evidence.v1"
-              },
-              "disposition": {
-                "op": "literal",
-                "value": "EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED"
-              },
-              "payload": {
-                "op": "object",
-                "fields": {
-                  "symbol": {
-                    "op": "path",
-                    "from": "symbol",
-                    "path": ""
-                  },
-                  "region": {
-                    "op": "path",
-                    "from": "input",
-                    "path": "payload.region"
-                  },
-                  "currency": {
-                    "op": "path",
-                    "from": "currency",
-                    "path": ""
-                  },
-                  "observedPrice": {
-                    "op": "path",
-                    "from": "observedPrice",
-                    "path": ""
-                  },
-                  "observedMarketTime": {
-                    "op": "path",
-                    "from": "observedMarketTime",
-                    "path": ""
-                  },
-                  "marketState": {
-                    "op": "path",
-                    "from": "marketState",
-                    "path": ""
-                  },
-                  "exchange": {
-                    "op": "path",
-                    "from": "exchange",
-                    "path": ""
-                  },
-                  "sourceAttribution": {
-                    "op": "path",
-                    "from": "sourceAttribution",
-                    "path": ""
+            "op": "if",
+            "when": { "op": "path", "from": "conforming", "path": "" },
+            "then": {
+              "op": "object",
+              "fields": {
+                "contractId": { "op": "literal", "value": "equity-market-price-evidence.v1" },
+                "disposition": { "op": "literal", "value": "EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED" },
+                "payload": {
+                  "op": "object",
+                  "fields": {
+                    "symbol": { "op": "path", "from": "symbol", "path": "" },
+                    "region": { "op": "path", "from": "root", "path": "payload.region" },
+                    "currency": { "op": "path", "from": "currency", "path": "" },
+                    "observedPrice": { "op": "path", "from": "observedPrice", "path": "" },
+                    "observedMarketTime": { "op": "path", "from": "observedMarketTime", "path": "" },
+                    "marketState": { "op": "path", "from": "marketState", "path": "" },
+                    "exchange": { "op": "path", "from": "exchange", "path": "" },
+                    "sourceAttribution": { "op": "path", "from": "sourceAttribution", "path": "" }
+                  }
+                },
+                "providerTestimony": {
+                  "op": "object",
+                  "fields": {
+                    "bindingId": { "op": "path", "from": "bindingId", "path": "" },
+                    "providerId": { "op": "path", "from": "providerId", "path": "" },
+                    "nativeShape": { "op": "path", "from": "nativeShape", "path": "" }
                   }
                 }
-              },
-              "providerTestimony": {
-                "op": "object",
-                "fields": {
-                  "bindingId": {
-                    "op": "path",
-                    "from": "input",
-                    "path": "payload.providerBinding.bindingId"
-                  },
-                  "providerId": {
-                    "op": "path",
-                    "from": "input",
-                    "path": "payload.providerBinding.providerId"
-                  },
-                  "nativeShape": {
-                    "op": "if",
-                    "when": {
-                      "op": "path",
-                      "from": "summaryQuote",
-                      "path": ""
-                    },
-                    "then": {
-                      "op": "literal",
-                      "value": "quoteSummary.result.0.price"
-                    },
-                    "else": {
-                      "op": "literal",
-                      "value": "quoteResponse.result.0"
-                    }
+              }
+            },
+            "else": {
+              "op": "object",
+              "fields": {
+                "contractId": { "op": "literal", "value": "equity-market-price-evidence.v1" },
+                "disposition": { "op": "literal", "value": "NATIVE_MARKET_PRICE_TESTIMONY_REJECTED" },
+                "reasonCode": { "op": "literal", "value": "REQUIRED_NATIVE_FIELDS_ABSENT" },
+                "absentFieldCount": { "op": "path", "from": "missingCount", "path": "" },
+                "providerTestimony": {
+                  "op": "object",
+                  "fields": {
+                    "bindingId": { "op": "path", "from": "bindingId", "path": "" },
+                    "providerId": { "op": "path", "from": "providerId", "path": "" },
+                    "nativeShape": { "op": "path", "from": "nativeShape", "path": "" }
                   }
                 }
               }
@@ -328,52 +206,14 @@
           "else": {
             "op": "object",
             "fields": {
-              "contractId": {
-                "op": "literal",
-                "value": "equity-market-price-evidence.v1"
-              },
-              "disposition": {
-                "op": "literal",
-                "value": "NATIVE_MARKET_PRICE_TESTIMONY_REJECTED"
-              },
-              "reasonCode": {
-                "op": "literal",
-                "value": "REQUIRED_NATIVE_FIELDS_ABSENT"
-              },
-              "absentFieldCount": {
-                "op": "path",
-                "from": "missingCount",
-                "path": ""
-              },
+              "contractId": { "op": "literal", "value": "equity-market-price-evidence.v1" },
+              "disposition": { "op": "literal", "value": "EQUITY_MARKET_PRICE_PROVIDER_UNAVAILABLE" },
+              "reasonCode": { "op": "literal", "value": "PROVIDER_EXCHANGE_NOT_COMPLETED" },
               "providerTestimony": {
                 "op": "object",
                 "fields": {
-                  "bindingId": {
-                    "op": "path",
-                    "from": "input",
-                    "path": "payload.providerBinding.bindingId"
-                  },
-                  "providerId": {
-                    "op": "path",
-                    "from": "input",
-                    "path": "payload.providerBinding.providerId"
-                  },
-                  "nativeShape": {
-                    "op": "if",
-                    "when": {
-                      "op": "path",
-                      "from": "summaryQuote",
-                      "path": ""
-                    },
-                    "then": {
-                      "op": "literal",
-                      "value": "quoteSummary.result.0.price"
-                    },
-                    "else": {
-                      "op": "literal",
-                      "value": "quoteResponse.result.0"
-                    }
-                  }
+                  "bindingId": { "op": "path", "from": "bindingId", "path": "" },
+                  "providerId": { "op": "path", "from": "providerId", "path": "" }
                 }
               }
             }

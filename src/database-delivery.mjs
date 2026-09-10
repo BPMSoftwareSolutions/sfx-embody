@@ -26,11 +26,24 @@ try {
   const { connectionEnvironmentVariable } = await readDatabaseConfig();
   process.env[connectionEnvironmentVariable] = connectionString(connectionEnvironmentVariable);
   const processEvidence = restrictMemoryProcess(config);
+  if (process.env.SIDEFX_OBSERVE === '1') {
+    config.onObservation = observation => {
+      // Only telemetry leaves this channel. Inputs, provider bodies and secrets
+      // remain in their existing execution/evidence boundaries.
+      const safe = Object.fromEntries(['observationType', 'phase', 'status', 'observedAt',
+        'executionId', 'rootExecutionId', 'parentExecutionId', 'scenarioId', 'stepId', 'sequence']
+        .filter(key => ['string', 'number'].includes(typeof observation[key]) || observation[key] === null)
+        .map(key => [key, observation[key]]));
+      process.stderr.write('SFX_OBSERVATION ' + JSON.stringify(safe) + '\n');
+    };
+  }
   const setupTime = performance.now();
   const result = await executeDatabaseCommand(envelope, config);
-  result.outcome.evidence.timings.processSetup = setupTime;
-  result.outcome.evidence.timings.processTotal = performance.now();
-  result.outcome.evidence.process = processEvidence;
+  if (result.outcome?.evidence) {
+    result.outcome.evidence.timings.processSetup = setupTime;
+    result.outcome.evidence.timings.processTotal = performance.now();
+    result.outcome.evidence.process = processEvidence;
+  }
   process.stdout.write(JSON.stringify(result) + '\n');
 } catch (error) {
   const message = error.message ?? 'DATABASE_INVOCATION_FAILED';

@@ -1,0 +1,1476 @@
+{
+  "recordType": "research-observation",
+  "observedAt": "2026-09-10T00:23:21.386Z",
+  "scope": "Local database-to-memory CLI execution; not remote hosting, UI conformance, external provider invocation or managed admission.",
+  "sourceQualification": "C:\\lab\\repos\\sfx-embody\\evidence\\hugging-face-pilots\\2026-09-10T00-23-20.815Z\\qualification.json",
+  "sourceQualificationDigest": "sha256:1b20f68c31854f46fffe7fea574b1cb239427eab006f412d5cf72120ae2f19d7",
+  "cli": "C:\\nvm4w\\nodejs\\sfx.ps1",
+  "configDigest": "sha256:4712a463aeb000846f23fc08fe2ee9345f81331aafbeafa358e564494fe885c1",
+  "runtimeConfigDigest": "sha256:77d5561ef2c576f0718cd9be252c37c220e4c3978e4bf6acf20d4a0f0930d2aa",
+  "projectConfigDigest": "sha256:2b5c7483b9f69544bc453dc07c00cef25ec4f06368e111feac6813c492fb89d8",
+  "revisions": {
+    "embody": "d54692aba4c0978c994c1b2fd4ee5f30d51fc828",
+    "database": "23f3747c1f11faae3591f5dd3fa29bb550db1a0e",
+    "platform": "716811046f52dd2a67f9ff308a50d755571cbbad"
+  },
+  "passed": 16,
+  "failed": 0,
+  "outcomeAssertions": 36,
+  "pilots": [
+    {
+      "capabilityId": "say-hello-world",
+      "selected": {
+        "capability_id": "say-hello-world",
+        "namespace_id": "sidefx:capabilities",
+        "scenario_id": "say-hello-world",
+        "input_id": "hello-world-request",
+        "input_contract_state": "RESOLVED",
+        "event_id": "say-hello-world",
+        "responsibility": "the canonical Hello World greeting is requested",
+        "event_authority_state": "RESOLVED",
+        "outcome_id": "hello-world-greeting",
+        "outcome_contract_version_pk": "553",
+        "capability_definition_digest": "sha256:91bd3b021d67fcc2149b23def6bd75da8b89a7f5eab7f844a0395568b4200373",
+        "scenario_definition_digest": "sha256:123b5017f236eae5d2cfcd3b0f7a27a1f85b01119bf2e1fe440dd65f7c539e8c",
+        "capsule_digest": "sha256:051a2aa991be769451f5def3cd6f13ddcb856a9d16d483d6dc9c1a9d2333228d"
+      },
+      "snapshotId": "sha256:1a770ac0795d10665a88166f8d8c968dc5b2d030fdfab2b837aa6071d135f9e9",
+      "projectionDigest": "sha256:4b8fca785f5f6f121d6274fc480187219e5662778459ca2ce2a1d098e337fa3f",
+      "viewDefinitionDigest": "sha256:9f945b0eca42156e6d70ee210e8babc2102b4e8dbd8b2369ea93694fc8549155",
+      "closure": [
+        "say-hello-world"
+      ],
+      "fixtures": {
+        "sourcePath": "capabilities/say-hello-world/fixtures.authority.json",
+        "digest": "sha256:6d4cd5e92c03ca41c42307b1dc18c4de522d6a9bd4cdaeb8a37583567c7e898d"
+      },
+      "contracts": [
+        {
+          "capability_id": "say-hello-world",
+          "capability_version_pk": "200",
+          "scenario_version_pk": "739",
+          "direction": "input",
+          "contract_version_pk": "552",
+          "contract_id": "hello-world-request.v1",
+          "schema_digest": "sha256:0cb0cff2850d0636dd684850c859b4216e4b65e3ebb1f646fcb7c34771a08eb0"
+        },
+        {
+          "capability_id": "say-hello-world",
+          "capability_version_pk": "200",
+          "scenario_version_pk": "739",
+          "direction": "outcome",
+          "contract_version_pk": "553",
+          "contract_id": "hello-world-greeting.v1",
+          "schema_digest": "sha256:032a564e36eb1123f46c112386f96eded1a50c074537eb5e0f40c8beb7ba83c8"
+        }
+      ],
+      "authorityIdentity": {
+        "scenarioDefinitionDigest": "sha256:123b5017f236eae5d2cfcd3b0f7a27a1f85b01119bf2e1fe440dd65f7c539e8c",
+        "pinnedPlatformCommit": "716811046f52dd2a67f9ff308a50d755571cbbad",
+        "platformDigest": "sha256:4a9ce9d7b96c39aeadba21c7e65e7a2a3a7b4a545b8fe6dbf041c18f7b7cd9de",
+        "resolverVersion": "sha256:bf39e0a6ad0058b05ff479ae59d892d29a248a48a3ca67ae58f8b9e39eb19ffe",
+        "artifactDigest": "sha256:e50a0e7e3a982c3bfc25e68bf79a0045529181641936813f41ce0ebe1b953645"
+      },
+      "externalDependencies": [
+        {
+          "name": "ajv",
+          "version": "8.20.0"
+        }
+      ],
+      "moduleCount": 12,
+      "moduleManifestDigest": "sha256:a723c840d84898b56da73941a914d4fa4d2d29b6fc5628b20815355850d6f945",
+      "cases": [
+        {
+          "fixtureId": "returns-the-exact-canonical-greeting-without-domain-input",
+          "provenance": "SELECTED_FIXTURE_AUTHORITY",
+          "command": "sfx 'capability' 'invoke' 'say-hello-world' '--namespace' 'sidefx:capabilities' '--input' '@C:\\lab\\repos\\sfx-embody\\evidence\\hugging-face-pilots\\2026-09-10T00-23-20.815Z\\say-hello-world\\returns-the-exact-canonical-greeting-without-domain-input.input.json' '--json'",
+          "cwd": "C:\\lab\\repos\\sfx-embody",
+          "exitCode": 0,
+          "signal": null,
+          "milliseconds": 6644,
+          "inputFile": "returns-the-exact-canonical-greeting-without-domain-input.input.json",
+          "stdoutFile": "returns-the-exact-canonical-greeting-without-domain-input.stdout.json",
+          "stderrFile": "returns-the-exact-canonical-greeting-without-domain-input.stderr.txt",
+          "inputFileDigest": "sha256:1efc75855340cbbdda305fd474daa07cbe6d2540e4be38f8a1b33dad4b08094a",
+          "stdoutDigest": "sha256:65936c884d178f86c965e7f1825ff743b0aafe48be86b32586f9a5a9de3366fd",
+          "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "expected": {
+            "disposition": "terminated",
+            "terminalScenarioId": "say-hello-world",
+            "scenarioSequence": [
+              "say-hello-world"
+            ],
+            "outcomeAssertions": [
+              {
+                "conditionId": "exact-contract",
+                "path": "contractId",
+                "operator": "equals",
+                "value": "hello-world-greeting.v1"
+              },
+              {
+                "conditionId": "exact-message",
+                "path": "payload.message",
+                "operator": "equals",
+                "value": "Hello, World!"
+              }
+            ]
+          },
+          "assertionCount": 2,
+          "status": "PASSED",
+          "problems": [],
+          "kernelDisposition": "terminated",
+          "domainDisposition": null,
+          "outcome": {
+            "contractId": "hello-world-greeting.v1",
+            "payload": {
+              "message": "Hello, World!"
+            }
+          }
+        },
+        {
+          "fixtureId": "reject-missing-envelope",
+          "provenance": "LOCAL_INPUT_PROBE",
+          "command": "sfx 'capability' 'invoke' 'say-hello-world' '--namespace' 'sidefx:capabilities' '--input' '@C:\\lab\\repos\\sfx-embody\\evidence\\hugging-face-pilots\\2026-09-10T00-23-20.815Z\\say-hello-world\\reject-missing-envelope.input.json' '--json'",
+          "cwd": "C:\\lab\\repos\\sfx-embody",
+          "exitCode": 0,
+          "signal": null,
+          "milliseconds": 6425,
+          "inputFile": "reject-missing-envelope.input.json",
+          "stdoutFile": "reject-missing-envelope.stdout.json",
+          "stderrFile": "reject-missing-envelope.stderr.txt",
+          "inputFileDigest": "sha256:ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+          "stdoutDigest": "sha256:daf3fe6c890b81a526776c082332509d6ed33889ee38c3db1cd3f2ff4f18f9c9",
+          "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "expected": {
+            "disposition": "rejected"
+          },
+          "assertionCount": 0,
+          "status": "PASSED",
+          "problems": [],
+          "kernelDisposition": "rejected",
+          "domainDisposition": null,
+          "outcome": null
+        },
+        {
+          "fixtureId": "reject-extra-domain-input",
+          "provenance": "LOCAL_INPUT_PROBE",
+          "command": "sfx 'capability' 'invoke' 'say-hello-world' '--namespace' 'sidefx:capabilities' '--input' '@C:\\lab\\repos\\sfx-embody\\evidence\\hugging-face-pilots\\2026-09-10T00-23-20.815Z\\say-hello-world\\reject-extra-domain-input.input.json' '--json'",
+          "cwd": "C:\\lab\\repos\\sfx-embody",
+          "exitCode": 0,
+          "signal": null,
+          "milliseconds": 6574,
+          "inputFile": "reject-extra-domain-input.input.json",
+          "stdoutFile": "reject-extra-domain-input.stdout.json",
+          "stderrFile": "reject-extra-domain-input.stderr.txt",
+          "inputFileDigest": "sha256:b061c0f5d34fa84d010d0b03551c92950772f139b01df56c37ce5aa964048016",
+          "stdoutDigest": "sha256:ef9bb957bb4884193995ce29310289d9afe37b2b01066b85d05fbc02b417c090",
+          "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "expected": {
+            "disposition": "rejected"
+          },
+          "assertionCount": 0,
+          "status": "PASSED",
+          "problems": [],
+          "kernelDisposition": "rejected",
+          "domainDisposition": null,
+          "outcome": null
+        }
+      ]
+    },
+    {
+      "capabilityId": "greet-by-name",
+      "selected": {
+        "capability_id": "greet-by-name",
+        "namespace_id": "sidefx:capabilities",
+        "scenario_id": "greet-by-name",
+        "input_id": "personal-greeting-request",
+        "input_contract_state": "RESOLVED",
+        "event_id": "greet-by-name",
+        "responsibility": "a personalized greeting is requested",
+        "event_authority_state": "RESOLVED",
+        "outcome_id": "personal-greeting",
+        "outcome_contract_version_pk": "240",
+        "capability_definition_digest": "sha256:8de7bf4a1ab2d4cc8914c25638263eb93841b2a9f1b1b899471da6b820071d85",
+        "scenario_definition_digest": "sha256:07f4cbb2048538eb88e3a73b6d60d1fa15e08bc49293a00f6e6da055a9b08b54",
+        "capsule_digest": "sha256:38ba62f8ef4dda45033d71068a3a288ccac22aac79f10244eb85b2d626e19aec"
+      },
+      "snapshotId": "sha256:1a770ac0795d10665a88166f8d8c968dc5b2d030fdfab2b837aa6071d135f9e9",
+      "projectionDigest": "sha256:4b8fca785f5f6f121d6274fc480187219e5662778459ca2ce2a1d098e337fa3f",
+      "viewDefinitionDigest": "sha256:9f945b0eca42156e6d70ee210e8babc2102b4e8dbd8b2369ea93694fc8549155",
+      "closure": [
+        "greet-by-name"
+      ],
+      "fixtures": {
+        "sourcePath": "capabilities/greet-by-name/fixtures.authority.json",
+        "digest": "sha256:a1264446e9aeabf02fadc28aa93282cd2f0f5383996f7b04b5558554b769c451"
+      },
+      "contracts": [
+        {
+          "capability_id": "greet-by-name",
+          "capability_version_pk": "92",
+          "scenario_version_pk": "372",
+          "direction": "input",
+          "contract_version_pk": "239",
+          "contract_id": "personal-greeting-request.v1",
+          "schema_digest": "sha256:b800857e3c2d721221a37b98ef2fb2daf2e761df365e89a92359b5a6eabee1fb"
+        },
+        {
+          "capability_id": "greet-by-name",
+          "capability_version_pk": "92",
+          "scenario_version_pk": "372",
+          "direction": "outcome",
+          "contract_version_pk": "240",
+          "contract_id": "personal-greeting.v1",
+          "schema_digest": "sha256:18489ffe8c38d0181db073af4e471ac1329a76a4441fb53037208800a5439424"
+        }
+      ],
+      "authorityIdentity": {
+        "scenarioDefinitionDigest": "sha256:07f4cbb2048538eb88e3a73b6d60d1fa15e08bc49293a00f6e6da055a9b08b54",
+        "pinnedPlatformCommit": "716811046f52dd2a67f9ff308a50d755571cbbad",
+        "platformDigest": "sha256:4a9ce9d7b96c39aeadba21c7e65e7a2a3a7b4a545b8fe6dbf041c18f7b7cd9de",
+        "resolverVersion": "sha256:bf39e0a6ad0058b05ff479ae59d892d29a248a48a3ca67ae58f8b9e39eb19ffe",
+        "artifactDigest": "sha256:71f77a3826aefd69e59a0e683376256e30eb30898825ffe5f784383e4398bc30"
+      },
+      "externalDependencies": [
+        {
+          "name": "ajv",
+          "version": "8.20.0"
+        }
+      ],
+      "moduleCount": 14,
+      "moduleManifestDigest": "sha256:dd0b90afbc172bfce3c00bc07dfb99a7dad2735f9340eb442c88fb31f548daff",
+      "cases": [
+        {
+          "fixtureId": "constructs-greeting-for-sidney",
+          "provenance": "SELECTED_FIXTURE_AUTHORITY",
+          "command": "sfx 'capability' 'invoke' 'greet-by-name' '--namespace' 'sidefx:capabilities' '--input' '@C:\\lab\\repos\\sfx-embody\\evidence\\hugging-face-pilots\\2026-09-10T00-23-20.815Z\\greet-by-name\\constructs-greeting-for-sidney.input.json' '--json'",
+          "cwd": "C:\\lab\\repos\\sfx-embody",
+          "exitCode": 0,
+          "signal": null,
+          "milliseconds": 6604,
+          "inputFile": "constructs-greeting-for-sidney.input.json",
+          "stdoutFile": "constructs-greeting-for-sidney.stdout.json",
+          "stderrFile": "constructs-greeting-for-sidney.stderr.txt",
+          "inputFileDigest": "sha256:01c8a5f53689d80fd72bd2dfb4f4a89d56a3d732e58df4efb2c5397d6d79d6aa",
+          "stdoutDigest": "sha256:eaa0b64a55b79c6e1120424afefeaacdac51a638cd418ae3a516a6b575cf16c2",
+          "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "expected": {
+            "disposition": "terminated",
+            "outcomeAssertions": [
+              {
+                "conditionId": "exact-contract",
+                "operator": "equals",
+                "path": "contractId",
+                "value": "personal-greeting.v1"
+              },
+              {
+                "conditionId": "exact-message",
+                "operator": "equals",
+                "path": "payload.message",
+                "value": "Hello, Sidney!"
+              }
+            ],
+            "scenarioSequence": [
+              "greet-by-name"
+            ],
+            "terminalScenarioId": "greet-by-name"
+          },
+          "assertionCount": 2,
+          "status": "PASSED",
+          "problems": [],
+          "kernelDisposition": "terminated",
+          "domainDisposition": null,
+          "outcome": {
+            "contractId": "personal-greeting.v1",
+            "payload": {
+              "message": "Hello, Sidney!"
+            }
+          }
+        },
+        {
+          "fixtureId": "preserves-multibyte-name",
+          "provenance": "SELECTED_FIXTURE_AUTHORITY",
+          "command": "sfx 'capability' 'invoke' 'greet-by-name' '--namespace' 'sidefx:capabilities' '--input' '@C:\\lab\\repos\\sfx-embody\\evidence\\hugging-face-pilots\\2026-09-10T00-23-20.815Z\\greet-by-name\\preserves-multibyte-name.input.json' '--json'",
+          "cwd": "C:\\lab\\repos\\sfx-embody",
+          "exitCode": 0,
+          "signal": null,
+          "milliseconds": 6481,
+          "inputFile": "preserves-multibyte-name.input.json",
+          "stdoutFile": "preserves-multibyte-name.stdout.json",
+          "stderrFile": "preserves-multibyte-name.stderr.txt",
+          "inputFileDigest": "sha256:59888fd6f2b3805deee2fd46119eef964b0cca877bbc5a173d2528f88385ec9f",
+          "stdoutDigest": "sha256:5e858934369be044ab02806c65bb6000228cdfa727e5b9e5f1d3163591118bd7",
+          "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "expected": {
+            "disposition": "terminated",
+            "outcomeAssertions": [
+              {
+                "conditionId": "exact-contract",
+                "operator": "equals",
+                "path": "contractId",
+                "value": "personal-greeting.v1"
+              },
+              {
+                "conditionId": "exact-message",
+                "operator": "equals",
+                "path": "payload.message",
+                "value": "Hello, Zoë!"
+              }
+            ],
+            "scenarioSequence": [
+              "greet-by-name"
+            ],
+            "terminalScenarioId": "greet-by-name"
+          },
+          "assertionCount": 2,
+          "status": "PASSED",
+          "problems": [],
+          "kernelDisposition": "terminated",
+          "domainDisposition": null,
+          "outcome": {
+            "contractId": "personal-greeting.v1",
+            "payload": {
+              "message": "Hello, Zoë!"
+            }
+          }
+        },
+        {
+          "fixtureId": "reject-absent-name",
+          "provenance": "LOCAL_INPUT_PROBE",
+          "command": "sfx 'capability' 'invoke' 'greet-by-name' '--namespace' 'sidefx:capabilities' '--input' '@C:\\lab\\repos\\sfx-embody\\evidence\\hugging-face-pilots\\2026-09-10T00-23-20.815Z\\greet-by-name\\reject-absent-name.input.json' '--json'",
+          "cwd": "C:\\lab\\repos\\sfx-embody",
+          "exitCode": 0,
+          "signal": null,
+          "milliseconds": 6637,
+          "inputFile": "reject-absent-name.input.json",
+          "stdoutFile": "reject-absent-name.stdout.json",
+          "stderrFile": "reject-absent-name.stderr.txt",
+          "inputFileDigest": "sha256:a7eafe69a9959be1ef3b07c55e1ece577d50ed6eb21eead66b9fce3ea9f9ef8e",
+          "stdoutDigest": "sha256:35695a4216c9c8dc9ac0fc871e797be7b77db22b6270c89c42fc48499e1fb6e9",
+          "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "expected": {
+            "disposition": "rejected"
+          },
+          "assertionCount": 0,
+          "status": "PASSED",
+          "problems": [],
+          "kernelDisposition": "rejected",
+          "domainDisposition": null,
+          "outcome": null
+        },
+        {
+          "fixtureId": "reject-empty-name",
+          "provenance": "LOCAL_INPUT_PROBE",
+          "command": "sfx 'capability' 'invoke' 'greet-by-name' '--namespace' 'sidefx:capabilities' '--input' '@C:\\lab\\repos\\sfx-embody\\evidence\\hugging-face-pilots\\2026-09-10T00-23-20.815Z\\greet-by-name\\reject-empty-name.input.json' '--json'",
+          "cwd": "C:\\lab\\repos\\sfx-embody",
+          "exitCode": 0,
+          "signal": null,
+          "milliseconds": 6598,
+          "inputFile": "reject-empty-name.input.json",
+          "stdoutFile": "reject-empty-name.stdout.json",
+          "stderrFile": "reject-empty-name.stderr.txt",
+          "inputFileDigest": "sha256:4bb9c63bac9fbd56aad1bc4e8b63e4b25f4c91472a8ca8048b16ca92c6f6d289",
+          "stdoutDigest": "sha256:c1c907b29e52d4aa314589570a0d6597f7ce30d94c132165132e5a846dacabc1",
+          "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "expected": {
+            "disposition": "rejected"
+          },
+          "assertionCount": 0,
+          "status": "PASSED",
+          "problems": [],
+          "kernelDisposition": "rejected",
+          "domainDisposition": null,
+          "outcome": null
+        },
+        {
+          "fixtureId": "reject-null-name",
+          "provenance": "LOCAL_INPUT_PROBE",
+          "command": "sfx 'capability' 'invoke' 'greet-by-name' '--namespace' 'sidefx:capabilities' '--input' '@C:\\lab\\repos\\sfx-embody\\evidence\\hugging-face-pilots\\2026-09-10T00-23-20.815Z\\greet-by-name\\reject-null-name.input.json' '--json'",
+          "cwd": "C:\\lab\\repos\\sfx-embody",
+          "exitCode": 0,
+          "signal": null,
+          "milliseconds": 6500,
+          "inputFile": "reject-null-name.input.json",
+          "stdoutFile": "reject-null-name.stdout.json",
+          "stderrFile": "reject-null-name.stderr.txt",
+          "inputFileDigest": "sha256:37127d95c8b90accd723aa507cd60db55d01578617f181741bead388e0727a57",
+          "stdoutDigest": "sha256:16168e79454ef8e0175ee27649c1f36b70c417e12888edc065663d38ed886676",
+          "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "expected": {
+            "disposition": "rejected"
+          },
+          "assertionCount": 0,
+          "status": "PASSED",
+          "problems": [],
+          "kernelDisposition": "rejected",
+          "domainDisposition": null,
+          "outcome": null
+        },
+        {
+          "fixtureId": "reject-oversized-name",
+          "provenance": "LOCAL_INPUT_PROBE",
+          "command": "sfx 'capability' 'invoke' 'greet-by-name' '--namespace' 'sidefx:capabilities' '--input' '@C:\\lab\\repos\\sfx-embody\\evidence\\hugging-face-pilots\\2026-09-10T00-23-20.815Z\\greet-by-name\\reject-oversized-name.input.json' '--json'",
+          "cwd": "C:\\lab\\repos\\sfx-embody",
+          "exitCode": 0,
+          "signal": null,
+          "milliseconds": 6459,
+          "inputFile": "reject-oversized-name.input.json",
+          "stdoutFile": "reject-oversized-name.stdout.json",
+          "stderrFile": "reject-oversized-name.stderr.txt",
+          "inputFileDigest": "sha256:8a7e351543fb82f25cdcfb9493d9b9100036517ca0e4bae4b76a69e3cc12fdc7",
+          "stdoutDigest": "sha256:a25e3d5bad86a465e614fbe743466d0d7c3c016d5db12ef044ff9a548ff71d71",
+          "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "expected": {
+            "disposition": "rejected"
+          },
+          "assertionCount": 0,
+          "status": "PASSED",
+          "problems": [],
+          "kernelDisposition": "rejected",
+          "domainDisposition": null,
+          "outcome": null
+        },
+        {
+          "fixtureId": "preserve-markup-as-text",
+          "provenance": "LOCAL_INPUT_PROBE",
+          "command": "sfx 'capability' 'invoke' 'greet-by-name' '--namespace' 'sidefx:capabilities' '--input' '@C:\\lab\\repos\\sfx-embody\\evidence\\hugging-face-pilots\\2026-09-10T00-23-20.815Z\\greet-by-name\\preserve-markup-as-text.input.json' '--json'",
+          "cwd": "C:\\lab\\repos\\sfx-embody",
+          "exitCode": 0,
+          "signal": null,
+          "milliseconds": 6477,
+          "inputFile": "preserve-markup-as-text.input.json",
+          "stdoutFile": "preserve-markup-as-text.stdout.json",
+          "stderrFile": "preserve-markup-as-text.stderr.txt",
+          "inputFileDigest": "sha256:f1d0c442a7e49daad4e668d5374474464d69dc82d7650f4760a6b21dcae5cfc4",
+          "stdoutDigest": "sha256:d8c5a12de5bd4bd28af0d659d2aaa0cdd826682b776a5a9967fe96193ae94cfa",
+          "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "expected": {
+            "disposition": "terminated",
+            "outcomeAssertions": [
+              {
+                "conditionId": "exact-text",
+                "path": "payload.message",
+                "operator": "equals",
+                "value": "Hello, <script>alert(1)</script>!"
+              }
+            ]
+          },
+          "assertionCount": 1,
+          "status": "PASSED",
+          "problems": [],
+          "kernelDisposition": "terminated",
+          "domainDisposition": null,
+          "outcome": {
+            "contractId": "personal-greeting.v1",
+            "payload": {
+              "message": "Hello, <script>alert(1)</script>!"
+            }
+          }
+        },
+        {
+          "fixtureId": "preserve-whitespace",
+          "provenance": "LOCAL_INPUT_PROBE",
+          "command": "sfx 'capability' 'invoke' 'greet-by-name' '--namespace' 'sidefx:capabilities' '--input' '@C:\\lab\\repos\\sfx-embody\\evidence\\hugging-face-pilots\\2026-09-10T00-23-20.815Z\\greet-by-name\\preserve-whitespace.input.json' '--json'",
+          "cwd": "C:\\lab\\repos\\sfx-embody",
+          "exitCode": 0,
+          "signal": null,
+          "milliseconds": 6545,
+          "inputFile": "preserve-whitespace.input.json",
+          "stdoutFile": "preserve-whitespace.stdout.json",
+          "stderrFile": "preserve-whitespace.stderr.txt",
+          "inputFileDigest": "sha256:92acaae6d146bd55203eb054cddb1257df9894e59a484772553a616a74b6aafe",
+          "stdoutDigest": "sha256:0313dd73fa92bf8cf366259ba682a622c714e4f421651cf79943894241518b9e",
+          "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "expected": {
+            "disposition": "terminated",
+            "outcomeAssertions": [
+              {
+                "conditionId": "no-undeclared-trimming",
+                "path": "payload.message",
+                "operator": "equals",
+                "value": "Hello,  !"
+              }
+            ]
+          },
+          "assertionCount": 1,
+          "status": "PASSED",
+          "problems": [],
+          "kernelDisposition": "terminated",
+          "domainDisposition": null,
+          "outcome": {
+            "contractId": "personal-greeting.v1",
+            "payload": {
+              "message": "Hello,  !"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "capabilityId": "resolve-sidefx-eligible-providers",
+      "selected": {
+        "capability_id": "resolve-sidefx-eligible-providers",
+        "namespace_id": "sidefx:capabilities",
+        "scenario_id": "resolve-sidefx-eligible-providers",
+        "input_id": "sidefx-provider-resolution-request",
+        "input_contract_state": "RESOLVED",
+        "event_id": "sidefx-provider-resolution-requested",
+        "responsibility": "each binding is checked for capability match, admission, conformance evidence, and declared target",
+        "event_authority_state": "RESOLVED",
+        "outcome_id": "sidefx-semantic-provider-resolution",
+        "outcome_contract_version_pk": "518",
+        "capability_definition_digest": "sha256:3233f0d608b55391e5c1fe49a14cded932b682817e9971e8ec49473e0731f5bb",
+        "scenario_definition_digest": "sha256:a18c0e606e1a70c22c5efd173e130016747bbaaf14f3f875bcc6428d9cc6a93f",
+        "capsule_digest": "sha256:05422cf40a66231d95f6d46e94bd23765a00773b4ecc0c413f4e40608d9461fd"
+      },
+      "snapshotId": "sha256:1a770ac0795d10665a88166f8d8c968dc5b2d030fdfab2b837aa6071d135f9e9",
+      "projectionDigest": "sha256:4b8fca785f5f6f121d6274fc480187219e5662778459ca2ce2a1d098e337fa3f",
+      "viewDefinitionDigest": "sha256:9f945b0eca42156e6d70ee210e8babc2102b4e8dbd8b2369ea93694fc8549155",
+      "closure": [
+        "resolve-sidefx-eligible-providers"
+      ],
+      "fixtures": {
+        "sourcePath": "capabilities/resolve-sidefx-eligible-providers/fixtures.authority.json",
+        "digest": "sha256:9bd371348cf4cf93a40d503849d0f913d7b750403e24d81dbfc84ae17a413c71"
+      },
+      "contracts": [
+        {
+          "capability_id": "resolve-sidefx-eligible-providers",
+          "capability_version_pk": "191",
+          "scenario_version_pk": "701",
+          "direction": "input",
+          "contract_version_pk": "517",
+          "contract_id": "sidefx-provider-resolution-request.v1",
+          "schema_digest": "sha256:40f6fb9a386c4db5c230acb03293e2d7c129898f689d991eb965b06a572997a2"
+        },
+        {
+          "capability_id": "resolve-sidefx-eligible-providers",
+          "capability_version_pk": "191",
+          "scenario_version_pk": "701",
+          "direction": "outcome",
+          "contract_version_pk": "518",
+          "contract_id": "sidefx-semantic-provider-resolution.v1",
+          "schema_digest": "sha256:7e62ab89e4058fc1c550d0e77401db57b463de2294b391d8983c0825993525a9"
+        }
+      ],
+      "authorityIdentity": {
+        "scenarioDefinitionDigest": "sha256:a18c0e606e1a70c22c5efd173e130016747bbaaf14f3f875bcc6428d9cc6a93f",
+        "pinnedPlatformCommit": "716811046f52dd2a67f9ff308a50d755571cbbad",
+        "platformDigest": "sha256:4a9ce9d7b96c39aeadba21c7e65e7a2a3a7b4a545b8fe6dbf041c18f7b7cd9de",
+        "resolverVersion": "sha256:bf39e0a6ad0058b05ff479ae59d892d29a248a48a3ca67ae58f8b9e39eb19ffe",
+        "artifactDigest": "sha256:a7335b6046a87c87cb70ed19a7857b0a95823dccadfb3420c1c3883db1570de8"
+      },
+      "externalDependencies": [
+        {
+          "name": "ajv",
+          "version": "8.20.0"
+        }
+      ],
+      "moduleCount": 14,
+      "moduleManifestDigest": "sha256:0e7017f904a7bef89979794d26581e63629d20de33922e0abb1ae07488afddbb",
+      "cases": [
+        {
+          "fixtureId": "hold-admitted-providers-that-declare-no-target",
+          "provenance": "SELECTED_FIXTURE_AUTHORITY",
+          "command": "sfx 'capability' 'invoke' 'resolve-sidefx-eligible-providers' '--namespace' 'sidefx:capabilities' '--input' '@C:\\lab\\repos\\sfx-embody\\evidence\\hugging-face-pilots\\2026-09-10T00-23-20.815Z\\resolve-sidefx-eligible-providers\\hold-admitted-providers-that-declare-no-target.input.json' '--json'",
+          "cwd": "C:\\lab\\repos\\sfx-embody",
+          "exitCode": 0,
+          "signal": null,
+          "milliseconds": 7157,
+          "inputFile": "hold-admitted-providers-that-declare-no-target.input.json",
+          "stdoutFile": "hold-admitted-providers-that-declare-no-target.stdout.json",
+          "stderrFile": "hold-admitted-providers-that-declare-no-target.stderr.txt",
+          "inputFileDigest": "sha256:fc6b129efb973e490b6bb6edd1ab90cd772b265c1f2eadbd6281f366c037d839",
+          "stdoutDigest": "sha256:bdcb510a04e56ad531be1fde7c17b57414d1e5642136bff18ec25e396ffa2d16",
+          "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "expected": {
+            "disposition": "terminated",
+            "scenarioSequence": [
+              "resolve-sidefx-eligible-providers"
+            ],
+            "terminalScenarioId": "resolve-sidefx-eligible-providers",
+            "outcomeAssertions": [
+              {
+                "conditionId": "undeclared-target-is-not-assumed",
+                "path": "disposition",
+                "operator": "equals",
+                "value": "NOT_OBSERVABLE"
+              },
+              {
+                "conditionId": "reason-is-named",
+                "path": "providers.0.reasonCode",
+                "operator": "equals",
+                "value": "TARGET_NOT_DECLARED_BY_BINDING"
+              },
+              {
+                "conditionId": "estate-gap-is-reported",
+                "path": "findings.0.code",
+                "operator": "equals",
+                "value": "PROVIDER_TARGET_NOT_DECLARED"
+              },
+              {
+                "conditionId": "other-capability-is-not-applicable",
+                "path": "providers.1.eligibilityDisposition",
+                "operator": "equals",
+                "value": "NOT_APPLICABLE"
+              },
+              {
+                "conditionId": "nothing-was-admitted",
+                "path": "eligibleCount",
+                "operator": "equals",
+                "value": 0
+              },
+              {
+                "conditionId": "resolution-digest-derived",
+                "path": "resolutionDigest",
+                "operator": "equals",
+                "value": "sha256:c8c00494cf386aa1001bf850feef83638a847ed5d7f324e6e61c6d8438825bc3"
+              }
+            ]
+          },
+          "assertionCount": 6,
+          "status": "PASSED",
+          "problems": [],
+          "kernelDisposition": "terminated",
+          "domainDisposition": "NOT_OBSERVABLE",
+          "outcome": {
+            "consideredCount": 2,
+            "disposition": "NOT_OBSERVABLE",
+            "eligibleCount": 0,
+            "findings": [
+              {
+                "code": "PROVIDER_TARGET_NOT_DECLARED",
+                "message": "Provider authority profile-governed-json-authority-ingestor.v1 is admitted and conformant but declares no projection target, so its eligibility for the requested target is not observable.",
+                "ruleId": "sidefx-semantic-provider-eligibility.v1",
+                "severity": "WARNING",
+                "sourcePointer": "",
+                "sourceRef": "authority/sidefx-semantic-brain/platform/json-authority-ingestion-provider.binding.json"
+              }
+            ],
+            "providers": [
+              {
+                "authorityBindings": [
+                  {
+                    "bindingId": "profile",
+                    "sourceRef": "../profiles/sidefx-json-authority-ingestion-profile.v1.json",
+                    "sourceDigest": "sha256:70c9328b32201a6ac86ec14422892057af130f31550757e9d1a465c11efed223"
+                  },
+                  {
+                    "bindingId": "membership-policy",
+                    "sourceRef": "../policies/sidefx-semantic-corpus-membership-policy.v1.json",
+                    "sourceDigest": "sha256:0b3ff298fd68707b37c6827b4d527bafc05528fa9704a043eadb85ab76316b33"
+                  },
+                  {
+                    "bindingId": "canonicalization-policy",
+                    "sourceRef": "../policies/sidefx-semantic-canonicalization-policy.v1.json",
+                    "sourceDigest": "sha256:3372aa03fd1f644d626045d469ed228904c97e2a566dd94904942ec7084870c6"
+                  },
+                  {
+                    "bindingId": "request-contract",
+                    "sourceRef": "../capabilities/ingest-sidefx-json-authority/contracts/sidefx-json-authority-ingestion-request.schema.json",
+                    "sourceDigest": "sha256:bfaeb6b53f9cae6ff74c700e2ecce2b6de61433bb3e53a6e495c155af2ade947"
+                  },
+                  {
+                    "bindingId": "receipt-contract",
+                    "sourceRef": "../contracts/sidefx-json-authority-ingestion-receipt.schema.json",
+                    "sourceDigest": "sha256:83a28ed29c7735e786493c0e40301b95ecc0171bbc4e31d6d716d4a1a1d95950"
+                  },
+                  {
+                    "bindingId": "fixture-manifest",
+                    "sourceRef": "../capabilities/ingest-sidefx-json-authority/fixtures/fixture-manifest.authority.json",
+                    "sourceDigest": "sha256:4d604f6cc7cdbed670a8af3215557a8335e80f5af744e500b5243037a3a3bf54"
+                  },
+                  {
+                    "bindingId": "fixture-manifest-schema",
+                    "sourceRef": "../capabilities/ingest-sidefx-json-authority/fixtures/fixture-manifest.authority.schema.json",
+                    "sourceDigest": "sha256:5ab5cde17736cc08f07b8885aee030f6fcc608a981a4a7a212276c9ac5ab5798"
+                  },
+                  {
+                    "bindingId": "schema-catalog",
+                    "sourceRef": "../capabilities/ingest-sidefx-json-authority/authorities/declared-schema-catalog.v1.json",
+                    "sourceDigest": "sha256:07f778ea7a72ef7083583bb00ee34a405f72538dd887756ae2aa36f761342b2b"
+                  },
+                  {
+                    "bindingId": "reference-scope",
+                    "sourceRef": "../capabilities/ingest-sidefx-json-authority/authorities/content-reference-scope.v1.json",
+                    "sourceDigest": "sha256:3612cf2cfafa0c1a58b4d941d962350009404720d82211ab8cc34fed74675ec4"
+                  },
+                  {
+                    "bindingId": "version-policy",
+                    "sourceRef": "../capabilities/ingest-sidefx-json-authority/authorities/version-policy.v1.json",
+                    "sourceDigest": "sha256:5b49ce679fe59c5f98b6a12ffeff7c06235cba053497fa670e8cc8bcf15340f0"
+                  }
+                ],
+                "conformanceDisposition": "SDA_JSON_AUTHORITY_INGESTION_PROVIDER_CONFORMANT",
+                "conformanceReceiptDigest": "sha256:95fe7e8ddc70cad84a307a6670b455a65e35a2f3d5b3d365d685e6de77bb5502",
+                "conformanceReceiptRef": "../../../../scenario-driven-architecture/capabilities/sda-platform/verify-json-authority-ingestion-conformance/conformance/json-authority-ingestion-provider-conformance.v1.json",
+                "eligibilityDisposition": "NOT_OBSERVABLE",
+                "lifecycle": "ADMITTED",
+                "platformCapabilityId": "sda-json-authority-ingestion-port.v1",
+                "providerAuthorityDigest": "sha256:f39fb91732ee448ac56db23b8728add4b1477df2cf27a81740b6058e4c231546",
+                "providerAuthorityId": "profile-governed-json-authority-ingestor.v1",
+                "providerAuthorityRef": "../../../../scenario-driven-architecture/capabilities/sda-platform/bind-profile-governed-json-authority-ingestion/profile-governed-json-authority-ingestor.authority.json",
+                "providerBindingDigest": "sha256:4cadcff2bf76f5e7d0cb1b7fec511bf6317a37c5a161f9a33e3c197f0c18af22",
+                "providerBindingRef": "authority/sidefx-semantic-brain/platform/json-authority-ingestion-provider.binding.json",
+                "reasonCode": "TARGET_NOT_DECLARED_BY_BINDING"
+              },
+              {
+                "authorityBindings": [
+                  {
+                    "bindingId": "profile",
+                    "sourceRef": "../profiles/sidefx-proof-binding-profile.v1.json",
+                    "sourceDigest": "sha256:d0821f66297b53127e5312a4c6de59fb4b31a3e26d641847d6dc6de00e41dd24"
+                  },
+                  {
+                    "bindingId": "profile-schema",
+                    "sourceRef": "../profiles/sidefx-proof-binding-profile.schema.json",
+                    "sourceDigest": "sha256:837f526277ddbff62ad638353f245674650fbc70fcdfc9044a23717138defac3"
+                  },
+                  {
+                    "bindingId": "input-contract",
+                    "sourceRef": "../capabilities/evaluate-sidefx-proof-binding/contracts/sidefx-proof-binding-evaluation-input.schema.json",
+                    "sourceDigest": "sha256:ea2e23348d86bf82375f6e716f2e344b902c29b25757b46ec23d43217581a05f"
+                  },
+                  {
+                    "bindingId": "record-contract",
+                    "sourceRef": "../capabilities/evaluate-sidefx-proof-binding/contracts/sidefx-proof-binding-evaluation-record.schema.json",
+                    "sourceDigest": "sha256:d3506d49a4139ca3f2637b7fbd4e9891c0a77cb4e7a2f6e1cc70847ba045ec7d"
+                  },
+                  {
+                    "bindingId": "conformance-contract",
+                    "sourceRef": "../contracts/sidefx-proof-binding-conformance.schema.json",
+                    "sourceDigest": "sha256:7daf705aa66e1dcbaad638c9c6d1ecc9a1e5466475de71075670d0192f918613"
+                  },
+                  {
+                    "bindingId": "common-contract",
+                    "sourceRef": "../contracts/sidefx-semantic-common.schema.json",
+                    "sourceDigest": "sha256:529e7fce98565584097ca9c6dbf6f395c2561123a48da06ec16a0ac9905679c6"
+                  },
+                  {
+                    "bindingId": "fixture-corpus",
+                    "sourceRef": "../capabilities/evaluate-sidefx-proof-binding/fixtures/proof-binding-evaluation-fixtures.v1.json",
+                    "sourceDigest": "sha256:2ae57d193d679058c86d9232081bdbca35287330834801ae4d58d2443b928bc3"
+                  },
+                  {
+                    "bindingId": "fixture-corpus-schema",
+                    "sourceRef": "../capabilities/evaluate-sidefx-proof-binding/fixtures/proof-binding-evaluation-fixtures.v1.schema.json",
+                    "sourceDigest": "sha256:ff1e875fc8ecfa0a6fad0f9a77b5e85ed645fc405b71bb0fed7f652363f14d8b"
+                  }
+                ],
+                "conformanceDisposition": "SDA_PROOF_BINDING_EVALUATION_PROVIDER_CONFORMANT",
+                "conformanceReceiptDigest": "sha256:c5febeb91935f015fc996ee7bc600ecfaf6c6ff1c681d1505907d0146c4c75da",
+                "conformanceReceiptRef": "../../../../scenario-driven-architecture/capabilities/sda-platform/verify-proof-binding-evaluation-conformance/conformance/proof-binding-evaluation-provider-conformance.v1.json",
+                "eligibilityDisposition": "NOT_APPLICABLE",
+                "lifecycle": "ADMITTED",
+                "platformCapabilityId": "sda-proof-binding-evaluation-port.v1",
+                "providerAuthorityDigest": "sha256:511ad3bba2ba7cabab021ffe6daf10b1b41fc385d0a69e29abdb71b0c0ed240b",
+                "providerAuthorityId": "profile-governed-proof-binding-evaluator.v1",
+                "providerAuthorityRef": "../../../../scenario-driven-architecture/capabilities/sda-platform/bind-profile-governed-proof-binding-evaluation/profile-governed-proof-binding-evaluator.authority.json",
+                "providerBindingDigest": "sha256:337c815f7981b598cede9bc522d69eea3216b6c73e435418e0405755710222f9",
+                "providerBindingRef": "authority/sidefx-semantic-brain/platform/proof-binding-evaluation-provider.binding.json",
+                "reasonCode": "PLATFORM_CAPABILITY_MISMATCH"
+              }
+            ],
+            "requestedPlatformCapabilityId": "sda-json-authority-ingestion-port.v1",
+            "requestedTarget": "node",
+            "resolutionType": "sidefx-semantic-provider-resolution.v1",
+            "snapshotDigest": "sha256:b1d87d6f3b5969df31c5f2683e606ef8bca64df463abcf2b74f050039d373ff4",
+            "resolutionDigest": "sha256:c8c00494cf386aa1001bf850feef83638a847ed5d7f324e6e61c6d8438825bc3"
+          }
+        },
+        {
+          "fixtureId": "admit-provider-once-its-target-is-declared",
+          "provenance": "SELECTED_FIXTURE_AUTHORITY",
+          "command": "sfx 'capability' 'invoke' 'resolve-sidefx-eligible-providers' '--namespace' 'sidefx:capabilities' '--input' '@C:\\lab\\repos\\sfx-embody\\evidence\\hugging-face-pilots\\2026-09-10T00-23-20.815Z\\resolve-sidefx-eligible-providers\\admit-provider-once-its-target-is-declared.input.json' '--json'",
+          "cwd": "C:\\lab\\repos\\sfx-embody",
+          "exitCode": 0,
+          "signal": null,
+          "milliseconds": 6572,
+          "inputFile": "admit-provider-once-its-target-is-declared.input.json",
+          "stdoutFile": "admit-provider-once-its-target-is-declared.stdout.json",
+          "stderrFile": "admit-provider-once-its-target-is-declared.stderr.txt",
+          "inputFileDigest": "sha256:a928d3122e6cd5bb65faefe285aa4165194fdbd6ac2f7014427a3f4810a16f04",
+          "stdoutDigest": "sha256:aeb68fd85a32b613a4c4fa656763b50b792389d1d72d141174618cc9c7ab9a53",
+          "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "expected": {
+            "disposition": "terminated",
+            "scenarioSequence": [
+              "resolve-sidefx-eligible-providers"
+            ],
+            "terminalScenarioId": "resolve-sidefx-eligible-providers",
+            "outcomeAssertions": [
+              {
+                "conditionId": "providers-resolve",
+                "path": "disposition",
+                "operator": "equals",
+                "value": "PROVIDERS_RESOLVED"
+              },
+              {
+                "conditionId": "provider-is-eligible",
+                "path": "providers.0.eligibilityDisposition",
+                "operator": "equals",
+                "value": "ELIGIBLE"
+              },
+              {
+                "conditionId": "eligibility-cites-authority-digest",
+                "path": "providers.0.providerAuthorityDigest",
+                "operator": "equals",
+                "value": "sha256:f39fb91732ee448ac56db23b8728add4b1477df2cf27a81740b6058e4c231546"
+              },
+              {
+                "conditionId": "eligibility-cites-conformance-receipt",
+                "path": "providers.0.conformanceReceiptDigest",
+                "operator": "equals",
+                "value": "sha256:95fe7e8ddc70cad84a307a6670b455a65e35a2f3d5b3d365d685e6de77bb5502"
+              },
+              {
+                "conditionId": "eligibility-cites-authority-reference",
+                "path": "providers.0.providerAuthorityRef",
+                "operator": "equals",
+                "value": "../../../../scenario-driven-architecture/capabilities/sda-platform/bind-profile-governed-json-authority-ingestion/profile-governed-json-authority-ingestor.authority.json"
+              },
+              {
+                "conditionId": "eligibility-cites-binding-digest",
+                "path": "providers.0.providerBindingDigest",
+                "operator": "equals",
+                "value": "sha256:4cadcff2bf76f5e7d0cb1b7fec511bf6317a37c5a161f9a33e3c197f0c18af22"
+              },
+              {
+                "conditionId": "eligibility-cites-binding-reference",
+                "path": "providers.0.providerBindingRef",
+                "operator": "equals",
+                "value": "authority/sidefx-semantic-brain/platform/json-authority-ingestion-provider.binding.json"
+              },
+              {
+                "conditionId": "eligibility-cites-profile-binding",
+                "path": "providers.0.authorityBindings.0.bindingId",
+                "operator": "equals",
+                "value": "profile"
+              },
+              {
+                "conditionId": "eligibility-cites-membership-policy-binding",
+                "path": "providers.0.authorityBindings.1.bindingId",
+                "operator": "equals",
+                "value": "membership-policy"
+              },
+              {
+                "conditionId": "eligibility-cites-canonicalization-policy-binding",
+                "path": "providers.0.authorityBindings.2.bindingId",
+                "operator": "equals",
+                "value": "canonicalization-policy"
+              },
+              {
+                "conditionId": "one-provider-is-admitted",
+                "path": "eligibleCount",
+                "operator": "equals",
+                "value": 1
+              },
+              {
+                "conditionId": "resolution-digest-derived",
+                "path": "resolutionDigest",
+                "operator": "equals",
+                "value": "sha256:02d4e6e01b2fe6c49f76d97c8af407dc03b2dbc12cad245b8aaff95b7b810ca5"
+              }
+            ]
+          },
+          "assertionCount": 12,
+          "status": "PASSED",
+          "problems": [],
+          "kernelDisposition": "terminated",
+          "domainDisposition": "PROVIDERS_RESOLVED",
+          "outcome": {
+            "consideredCount": 2,
+            "disposition": "PROVIDERS_RESOLVED",
+            "eligibleCount": 1,
+            "findings": [],
+            "providers": [
+              {
+                "authorityBindings": [
+                  {
+                    "bindingId": "profile",
+                    "sourceRef": "../profiles/sidefx-json-authority-ingestion-profile.v1.json",
+                    "sourceDigest": "sha256:70c9328b32201a6ac86ec14422892057af130f31550757e9d1a465c11efed223"
+                  },
+                  {
+                    "bindingId": "membership-policy",
+                    "sourceRef": "../policies/sidefx-semantic-corpus-membership-policy.v1.json",
+                    "sourceDigest": "sha256:0b3ff298fd68707b37c6827b4d527bafc05528fa9704a043eadb85ab76316b33"
+                  },
+                  {
+                    "bindingId": "canonicalization-policy",
+                    "sourceRef": "../policies/sidefx-semantic-canonicalization-policy.v1.json",
+                    "sourceDigest": "sha256:3372aa03fd1f644d626045d469ed228904c97e2a566dd94904942ec7084870c6"
+                  },
+                  {
+                    "bindingId": "request-contract",
+                    "sourceRef": "../capabilities/ingest-sidefx-json-authority/contracts/sidefx-json-authority-ingestion-request.schema.json",
+                    "sourceDigest": "sha256:bfaeb6b53f9cae6ff74c700e2ecce2b6de61433bb3e53a6e495c155af2ade947"
+                  },
+                  {
+                    "bindingId": "receipt-contract",
+                    "sourceRef": "../contracts/sidefx-json-authority-ingestion-receipt.schema.json",
+                    "sourceDigest": "sha256:83a28ed29c7735e786493c0e40301b95ecc0171bbc4e31d6d716d4a1a1d95950"
+                  },
+                  {
+                    "bindingId": "fixture-manifest",
+                    "sourceRef": "../capabilities/ingest-sidefx-json-authority/fixtures/fixture-manifest.authority.json",
+                    "sourceDigest": "sha256:4d604f6cc7cdbed670a8af3215557a8335e80f5af744e500b5243037a3a3bf54"
+                  },
+                  {
+                    "bindingId": "fixture-manifest-schema",
+                    "sourceRef": "../capabilities/ingest-sidefx-json-authority/fixtures/fixture-manifest.authority.schema.json",
+                    "sourceDigest": "sha256:5ab5cde17736cc08f07b8885aee030f6fcc608a981a4a7a212276c9ac5ab5798"
+                  },
+                  {
+                    "bindingId": "schema-catalog",
+                    "sourceRef": "../capabilities/ingest-sidefx-json-authority/authorities/declared-schema-catalog.v1.json",
+                    "sourceDigest": "sha256:07f778ea7a72ef7083583bb00ee34a405f72538dd887756ae2aa36f761342b2b"
+                  },
+                  {
+                    "bindingId": "reference-scope",
+                    "sourceRef": "../capabilities/ingest-sidefx-json-authority/authorities/content-reference-scope.v1.json",
+                    "sourceDigest": "sha256:3612cf2cfafa0c1a58b4d941d962350009404720d82211ab8cc34fed74675ec4"
+                  },
+                  {
+                    "bindingId": "version-policy",
+                    "sourceRef": "../capabilities/ingest-sidefx-json-authority/authorities/version-policy.v1.json",
+                    "sourceDigest": "sha256:5b49ce679fe59c5f98b6a12ffeff7c06235cba053497fa670e8cc8bcf15340f0"
+                  }
+                ],
+                "conformanceDisposition": "SDA_JSON_AUTHORITY_INGESTION_PROVIDER_CONFORMANT",
+                "conformanceReceiptDigest": "sha256:95fe7e8ddc70cad84a307a6670b455a65e35a2f3d5b3d365d685e6de77bb5502",
+                "conformanceReceiptRef": "../../../../scenario-driven-architecture/capabilities/sda-platform/verify-json-authority-ingestion-conformance/conformance/json-authority-ingestion-provider-conformance.v1.json",
+                "eligibilityDisposition": "ELIGIBLE",
+                "lifecycle": "ADMITTED",
+                "platformCapabilityId": "sda-json-authority-ingestion-port.v1",
+                "providerAuthorityDigest": "sha256:f39fb91732ee448ac56db23b8728add4b1477df2cf27a81740b6058e4c231546",
+                "providerAuthorityId": "profile-governed-json-authority-ingestor.v1",
+                "providerAuthorityRef": "../../../../scenario-driven-architecture/capabilities/sda-platform/bind-profile-governed-json-authority-ingestion/profile-governed-json-authority-ingestor.authority.json",
+                "providerBindingDigest": "sha256:4cadcff2bf76f5e7d0cb1b7fec511bf6317a37c5a161f9a33e3c197f0c18af22",
+                "providerBindingRef": "authority/sidefx-semantic-brain/platform/json-authority-ingestion-provider.binding.json",
+                "reasonCode": "ADMITTED_CONFORMANT_AND_TARGET_DECLARED"
+              },
+              {
+                "authorityBindings": [
+                  {
+                    "bindingId": "profile",
+                    "sourceRef": "../profiles/sidefx-proof-binding-profile.v1.json",
+                    "sourceDigest": "sha256:d0821f66297b53127e5312a4c6de59fb4b31a3e26d641847d6dc6de00e41dd24"
+                  },
+                  {
+                    "bindingId": "profile-schema",
+                    "sourceRef": "../profiles/sidefx-proof-binding-profile.schema.json",
+                    "sourceDigest": "sha256:837f526277ddbff62ad638353f245674650fbc70fcdfc9044a23717138defac3"
+                  },
+                  {
+                    "bindingId": "input-contract",
+                    "sourceRef": "../capabilities/evaluate-sidefx-proof-binding/contracts/sidefx-proof-binding-evaluation-input.schema.json",
+                    "sourceDigest": "sha256:ea2e23348d86bf82375f6e716f2e344b902c29b25757b46ec23d43217581a05f"
+                  },
+                  {
+                    "bindingId": "record-contract",
+                    "sourceRef": "../capabilities/evaluate-sidefx-proof-binding/contracts/sidefx-proof-binding-evaluation-record.schema.json",
+                    "sourceDigest": "sha256:d3506d49a4139ca3f2637b7fbd4e9891c0a77cb4e7a2f6e1cc70847ba045ec7d"
+                  },
+                  {
+                    "bindingId": "conformance-contract",
+                    "sourceRef": "../contracts/sidefx-proof-binding-conformance.schema.json",
+                    "sourceDigest": "sha256:7daf705aa66e1dcbaad638c9c6d1ecc9a1e5466475de71075670d0192f918613"
+                  },
+                  {
+                    "bindingId": "common-contract",
+                    "sourceRef": "../contracts/sidefx-semantic-common.schema.json",
+                    "sourceDigest": "sha256:529e7fce98565584097ca9c6dbf6f395c2561123a48da06ec16a0ac9905679c6"
+                  },
+                  {
+                    "bindingId": "fixture-corpus",
+                    "sourceRef": "../capabilities/evaluate-sidefx-proof-binding/fixtures/proof-binding-evaluation-fixtures.v1.json",
+                    "sourceDigest": "sha256:2ae57d193d679058c86d9232081bdbca35287330834801ae4d58d2443b928bc3"
+                  },
+                  {
+                    "bindingId": "fixture-corpus-schema",
+                    "sourceRef": "../capabilities/evaluate-sidefx-proof-binding/fixtures/proof-binding-evaluation-fixtures.v1.schema.json",
+                    "sourceDigest": "sha256:ff1e875fc8ecfa0a6fad0f9a77b5e85ed645fc405b71bb0fed7f652363f14d8b"
+                  }
+                ],
+                "conformanceDisposition": "SDA_PROOF_BINDING_EVALUATION_PROVIDER_CONFORMANT",
+                "conformanceReceiptDigest": "sha256:c5febeb91935f015fc996ee7bc600ecfaf6c6ff1c681d1505907d0146c4c75da",
+                "conformanceReceiptRef": "../../../../scenario-driven-architecture/capabilities/sda-platform/verify-proof-binding-evaluation-conformance/conformance/proof-binding-evaluation-provider-conformance.v1.json",
+                "eligibilityDisposition": "NOT_APPLICABLE",
+                "lifecycle": "ADMITTED",
+                "platformCapabilityId": "sda-proof-binding-evaluation-port.v1",
+                "providerAuthorityDigest": "sha256:511ad3bba2ba7cabab021ffe6daf10b1b41fc385d0a69e29abdb71b0c0ed240b",
+                "providerAuthorityId": "profile-governed-proof-binding-evaluator.v1",
+                "providerAuthorityRef": "../../../../scenario-driven-architecture/capabilities/sda-platform/bind-profile-governed-proof-binding-evaluation/profile-governed-proof-binding-evaluator.authority.json",
+                "providerBindingDigest": "sha256:337c815f7981b598cede9bc522d69eea3216b6c73e435418e0405755710222f9",
+                "providerBindingRef": "authority/sidefx-semantic-brain/platform/proof-binding-evaluation-provider.binding.json",
+                "reasonCode": "PLATFORM_CAPABILITY_MISMATCH"
+              }
+            ],
+            "requestedPlatformCapabilityId": "sda-json-authority-ingestion-port.v1",
+            "requestedTarget": "node",
+            "resolutionType": "sidefx-semantic-provider-resolution.v1",
+            "snapshotDigest": "sha256:b1d87d6f3b5969df31c5f2683e606ef8bca64df463abcf2b74f050039d373ff4",
+            "resolutionDigest": "sha256:02d4e6e01b2fe6c49f76d97c8af407dc03b2dbc12cad245b8aaff95b7b810ca5"
+          }
+        },
+        {
+          "fixtureId": "refuse-target-the-binding-does-not-declare",
+          "provenance": "SELECTED_FIXTURE_AUTHORITY",
+          "command": "sfx 'capability' 'invoke' 'resolve-sidefx-eligible-providers' '--namespace' 'sidefx:capabilities' '--input' '@C:\\lab\\repos\\sfx-embody\\evidence\\hugging-face-pilots\\2026-09-10T00-23-20.815Z\\resolve-sidefx-eligible-providers\\refuse-target-the-binding-does-not-declare.input.json' '--json'",
+          "cwd": "C:\\lab\\repos\\sfx-embody",
+          "exitCode": 0,
+          "signal": null,
+          "milliseconds": 6602,
+          "inputFile": "refuse-target-the-binding-does-not-declare.input.json",
+          "stdoutFile": "refuse-target-the-binding-does-not-declare.stdout.json",
+          "stderrFile": "refuse-target-the-binding-does-not-declare.stderr.txt",
+          "inputFileDigest": "sha256:cfee38422aefffba55d39f47491af60d349b705b1fca3b600d5cd88289c10f37",
+          "stdoutDigest": "sha256:3b6aa602de40bf1af16095f38c3d1a9f526e300aa83837779210b68b28419c78",
+          "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "expected": {
+            "disposition": "terminated",
+            "scenarioSequence": [
+              "resolve-sidefx-eligible-providers"
+            ],
+            "terminalScenarioId": "resolve-sidefx-eligible-providers",
+            "outcomeAssertions": [
+              {
+                "conditionId": "undeclared-target-is-not-observable",
+                "path": "providers.0.eligibilityDisposition",
+                "operator": "equals",
+                "value": "NOT_OBSERVABLE"
+              },
+              {
+                "conditionId": "reason-is-named",
+                "path": "providers.0.reasonCode",
+                "operator": "equals",
+                "value": "TARGET_NOT_DECLARED_BY_BINDING"
+              },
+              {
+                "conditionId": "nothing-was-admitted",
+                "path": "eligibleCount",
+                "operator": "equals",
+                "value": 0
+              },
+              {
+                "conditionId": "resolution-digest-derived",
+                "path": "resolutionDigest",
+                "operator": "equals",
+                "value": "sha256:ef376456908c123346ed9f0d8c77cfc38a02051ebd7c38142ccbf4a0ddc16d3e"
+              }
+            ]
+          },
+          "assertionCount": 4,
+          "status": "PASSED",
+          "problems": [],
+          "kernelDisposition": "terminated",
+          "domainDisposition": "NOT_OBSERVABLE",
+          "outcome": {
+            "consideredCount": 1,
+            "disposition": "NOT_OBSERVABLE",
+            "eligibleCount": 0,
+            "findings": [
+              {
+                "code": "PROVIDER_TARGET_NOT_DECLARED",
+                "message": "Provider authority profile-governed-json-authority-ingestor.v1 is admitted and conformant but declares no projection target, so its eligibility for the requested target is not observable.",
+                "ruleId": "sidefx-semantic-provider-eligibility.v1",
+                "severity": "WARNING",
+                "sourcePointer": "",
+                "sourceRef": "authority/sidefx-semantic-brain/platform/json-authority-ingestion-provider.binding.json"
+              }
+            ],
+            "providers": [
+              {
+                "authorityBindings": [
+                  {
+                    "bindingId": "profile",
+                    "sourceRef": "../profiles/sidefx-json-authority-ingestion-profile.v1.json",
+                    "sourceDigest": "sha256:70c9328b32201a6ac86ec14422892057af130f31550757e9d1a465c11efed223"
+                  },
+                  {
+                    "bindingId": "membership-policy",
+                    "sourceRef": "../policies/sidefx-semantic-corpus-membership-policy.v1.json",
+                    "sourceDigest": "sha256:0b3ff298fd68707b37c6827b4d527bafc05528fa9704a043eadb85ab76316b33"
+                  },
+                  {
+                    "bindingId": "canonicalization-policy",
+                    "sourceRef": "../policies/sidefx-semantic-canonicalization-policy.v1.json",
+                    "sourceDigest": "sha256:3372aa03fd1f644d626045d469ed228904c97e2a566dd94904942ec7084870c6"
+                  },
+                  {
+                    "bindingId": "request-contract",
+                    "sourceRef": "../capabilities/ingest-sidefx-json-authority/contracts/sidefx-json-authority-ingestion-request.schema.json",
+                    "sourceDigest": "sha256:bfaeb6b53f9cae6ff74c700e2ecce2b6de61433bb3e53a6e495c155af2ade947"
+                  },
+                  {
+                    "bindingId": "receipt-contract",
+                    "sourceRef": "../contracts/sidefx-json-authority-ingestion-receipt.schema.json",
+                    "sourceDigest": "sha256:83a28ed29c7735e786493c0e40301b95ecc0171bbc4e31d6d716d4a1a1d95950"
+                  },
+                  {
+                    "bindingId": "fixture-manifest",
+                    "sourceRef": "../capabilities/ingest-sidefx-json-authority/fixtures/fixture-manifest.authority.json",
+                    "sourceDigest": "sha256:4d604f6cc7cdbed670a8af3215557a8335e80f5af744e500b5243037a3a3bf54"
+                  },
+                  {
+                    "bindingId": "fixture-manifest-schema",
+                    "sourceRef": "../capabilities/ingest-sidefx-json-authority/fixtures/fixture-manifest.authority.schema.json",
+                    "sourceDigest": "sha256:5ab5cde17736cc08f07b8885aee030f6fcc608a981a4a7a212276c9ac5ab5798"
+                  },
+                  {
+                    "bindingId": "schema-catalog",
+                    "sourceRef": "../capabilities/ingest-sidefx-json-authority/authorities/declared-schema-catalog.v1.json",
+                    "sourceDigest": "sha256:07f778ea7a72ef7083583bb00ee34a405f72538dd887756ae2aa36f761342b2b"
+                  },
+                  {
+                    "bindingId": "reference-scope",
+                    "sourceRef": "../capabilities/ingest-sidefx-json-authority/authorities/content-reference-scope.v1.json",
+                    "sourceDigest": "sha256:3612cf2cfafa0c1a58b4d941d962350009404720d82211ab8cc34fed74675ec4"
+                  },
+                  {
+                    "bindingId": "version-policy",
+                    "sourceRef": "../capabilities/ingest-sidefx-json-authority/authorities/version-policy.v1.json",
+                    "sourceDigest": "sha256:5b49ce679fe59c5f98b6a12ffeff7c06235cba053497fa670e8cc8bcf15340f0"
+                  }
+                ],
+                "conformanceDisposition": "SDA_JSON_AUTHORITY_INGESTION_PROVIDER_CONFORMANT",
+                "conformanceReceiptDigest": "sha256:95fe7e8ddc70cad84a307a6670b455a65e35a2f3d5b3d365d685e6de77bb5502",
+                "conformanceReceiptRef": "../../../../scenario-driven-architecture/capabilities/sda-platform/verify-json-authority-ingestion-conformance/conformance/json-authority-ingestion-provider-conformance.v1.json",
+                "eligibilityDisposition": "NOT_OBSERVABLE",
+                "lifecycle": "ADMITTED",
+                "platformCapabilityId": "sda-json-authority-ingestion-port.v1",
+                "providerAuthorityDigest": "sha256:f39fb91732ee448ac56db23b8728add4b1477df2cf27a81740b6058e4c231546",
+                "providerAuthorityId": "profile-governed-json-authority-ingestor.v1",
+                "providerAuthorityRef": "../../../../scenario-driven-architecture/capabilities/sda-platform/bind-profile-governed-json-authority-ingestion/profile-governed-json-authority-ingestor.authority.json",
+                "providerBindingDigest": "sha256:4cadcff2bf76f5e7d0cb1b7fec511bf6317a37c5a161f9a33e3c197f0c18af22",
+                "providerBindingRef": "authority/sidefx-semantic-brain/platform/json-authority-ingestion-provider.binding.json",
+                "reasonCode": "TARGET_NOT_DECLARED_BY_BINDING"
+              }
+            ],
+            "requestedPlatformCapabilityId": "sda-json-authority-ingestion-port.v1",
+            "requestedTarget": "csharp",
+            "resolutionType": "sidefx-semantic-provider-resolution.v1",
+            "snapshotDigest": "sha256:b1d87d6f3b5969df31c5f2683e606ef8bca64df463abcf2b74f050039d373ff4",
+            "resolutionDigest": "sha256:ef376456908c123346ed9f0d8c77cfc38a02051ebd7c38142ccbf4a0ddc16d3e"
+          }
+        },
+        {
+          "fixtureId": "refuse-unadmitted-and-unconformed-providers",
+          "provenance": "SELECTED_FIXTURE_AUTHORITY",
+          "command": "sfx 'capability' 'invoke' 'resolve-sidefx-eligible-providers' '--namespace' 'sidefx:capabilities' '--input' '@C:\\lab\\repos\\sfx-embody\\evidence\\hugging-face-pilots\\2026-09-10T00-23-20.815Z\\resolve-sidefx-eligible-providers\\refuse-unadmitted-and-unconformed-providers.input.json' '--json'",
+          "cwd": "C:\\lab\\repos\\sfx-embody",
+          "exitCode": 0,
+          "signal": null,
+          "milliseconds": 6606,
+          "inputFile": "refuse-unadmitted-and-unconformed-providers.input.json",
+          "stdoutFile": "refuse-unadmitted-and-unconformed-providers.stdout.json",
+          "stderrFile": "refuse-unadmitted-and-unconformed-providers.stderr.txt",
+          "inputFileDigest": "sha256:afec6d1ee8d7a74f3a36ba7ae9133e8d4f4ce45d63ee0981b409cbcd75fcca96",
+          "stdoutDigest": "sha256:229e7cebbc7d162f0a2b02c4e626d460aaa18feadaa2f43c28aaa9543aa3fb87",
+          "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "expected": {
+            "disposition": "terminated",
+            "scenarioSequence": [
+              "resolve-sidefx-eligible-providers"
+            ],
+            "terminalScenarioId": "resolve-sidefx-eligible-providers",
+            "outcomeAssertions": [
+              {
+                "conditionId": "unadmitted-provider-is-ineligible",
+                "path": "providers.0.eligibilityDisposition",
+                "operator": "equals",
+                "value": "INELIGIBLE"
+              },
+              {
+                "conditionId": "unadmitted-reason-is-named",
+                "path": "providers.0.reasonCode",
+                "operator": "equals",
+                "value": "PROVIDER_NOT_ADMITTED"
+              },
+              {
+                "conditionId": "absent-conformance-is-not-observable",
+                "path": "providers.1.eligibilityDisposition",
+                "operator": "equals",
+                "value": "NOT_OBSERVABLE"
+              },
+              {
+                "conditionId": "absent-conformance-reason-is-named",
+                "path": "providers.1.reasonCode",
+                "operator": "equals",
+                "value": "CONFORMANCE_EVIDENCE_ABSENT"
+              },
+              {
+                "conditionId": "nothing-was-admitted",
+                "path": "eligibleCount",
+                "operator": "equals",
+                "value": 0
+              },
+              {
+                "conditionId": "resolution-digest-derived",
+                "path": "resolutionDigest",
+                "operator": "equals",
+                "value": "sha256:3c46378f9b6837bfa78ae5e15d66077ad9e5a97b093e591bbdfed33f331f7ca1"
+              }
+            ]
+          },
+          "assertionCount": 6,
+          "status": "PASSED",
+          "problems": [],
+          "kernelDisposition": "terminated",
+          "domainDisposition": "NOT_OBSERVABLE",
+          "outcome": {
+            "consideredCount": 2,
+            "disposition": "NOT_OBSERVABLE",
+            "eligibleCount": 0,
+            "findings": [],
+            "providers": [
+              {
+                "authorityBindings": [
+                  {
+                    "bindingId": "profile",
+                    "sourceRef": "../profiles/sidefx-json-authority-ingestion-profile.v1.json",
+                    "sourceDigest": "sha256:70c9328b32201a6ac86ec14422892057af130f31550757e9d1a465c11efed223"
+                  },
+                  {
+                    "bindingId": "membership-policy",
+                    "sourceRef": "../policies/sidefx-semantic-corpus-membership-policy.v1.json",
+                    "sourceDigest": "sha256:0b3ff298fd68707b37c6827b4d527bafc05528fa9704a043eadb85ab76316b33"
+                  },
+                  {
+                    "bindingId": "canonicalization-policy",
+                    "sourceRef": "../policies/sidefx-semantic-canonicalization-policy.v1.json",
+                    "sourceDigest": "sha256:3372aa03fd1f644d626045d469ed228904c97e2a566dd94904942ec7084870c6"
+                  },
+                  {
+                    "bindingId": "request-contract",
+                    "sourceRef": "../capabilities/ingest-sidefx-json-authority/contracts/sidefx-json-authority-ingestion-request.schema.json",
+                    "sourceDigest": "sha256:bfaeb6b53f9cae6ff74c700e2ecce2b6de61433bb3e53a6e495c155af2ade947"
+                  },
+                  {
+                    "bindingId": "receipt-contract",
+                    "sourceRef": "../contracts/sidefx-json-authority-ingestion-receipt.schema.json",
+                    "sourceDigest": "sha256:83a28ed29c7735e786493c0e40301b95ecc0171bbc4e31d6d716d4a1a1d95950"
+                  },
+                  {
+                    "bindingId": "fixture-manifest",
+                    "sourceRef": "../capabilities/ingest-sidefx-json-authority/fixtures/fixture-manifest.authority.json",
+                    "sourceDigest": "sha256:4d604f6cc7cdbed670a8af3215557a8335e80f5af744e500b5243037a3a3bf54"
+                  },
+                  {
+                    "bindingId": "fixture-manifest-schema",
+                    "sourceRef": "../capabilities/ingest-sidefx-json-authority/fixtures/fixture-manifest.authority.schema.json",
+                    "sourceDigest": "sha256:5ab5cde17736cc08f07b8885aee030f6fcc608a981a4a7a212276c9ac5ab5798"
+                  },
+                  {
+                    "bindingId": "schema-catalog",
+                    "sourceRef": "../capabilities/ingest-sidefx-json-authority/authorities/declared-schema-catalog.v1.json",
+                    "sourceDigest": "sha256:07f778ea7a72ef7083583bb00ee34a405f72538dd887756ae2aa36f761342b2b"
+                  },
+                  {
+                    "bindingId": "reference-scope",
+                    "sourceRef": "../capabilities/ingest-sidefx-json-authority/authorities/content-reference-scope.v1.json",
+                    "sourceDigest": "sha256:3612cf2cfafa0c1a58b4d941d962350009404720d82211ab8cc34fed74675ec4"
+                  },
+                  {
+                    "bindingId": "version-policy",
+                    "sourceRef": "../capabilities/ingest-sidefx-json-authority/authorities/version-policy.v1.json",
+                    "sourceDigest": "sha256:5b49ce679fe59c5f98b6a12ffeff7c06235cba053497fa670e8cc8bcf15340f0"
+                  }
+                ],
+                "conformanceDisposition": "SDA_JSON_AUTHORITY_INGESTION_PROVIDER_CONFORMANT",
+                "conformanceReceiptDigest": "sha256:95fe7e8ddc70cad84a307a6670b455a65e35a2f3d5b3d365d685e6de77bb5502",
+                "conformanceReceiptRef": "../../../../scenario-driven-architecture/capabilities/sda-platform/verify-json-authority-ingestion-conformance/conformance/json-authority-ingestion-provider-conformance.v1.json",
+                "eligibilityDisposition": "INELIGIBLE",
+                "lifecycle": "PROPOSED",
+                "platformCapabilityId": "sda-json-authority-ingestion-port.v1",
+                "providerAuthorityDigest": "sha256:f39fb91732ee448ac56db23b8728add4b1477df2cf27a81740b6058e4c231546",
+                "providerAuthorityId": "proposed-provider.v1",
+                "providerAuthorityRef": "../../../../scenario-driven-architecture/capabilities/sda-platform/bind-profile-governed-json-authority-ingestion/profile-governed-json-authority-ingestor.authority.json",
+                "providerBindingDigest": "sha256:4cadcff2bf76f5e7d0cb1b7fec511bf6317a37c5a161f9a33e3c197f0c18af22",
+                "providerBindingRef": "authority/sidefx-semantic-brain/platform/json-authority-ingestion-provider.binding.json",
+                "reasonCode": "PROVIDER_NOT_ADMITTED"
+              },
+              {
+                "authorityBindings": [
+                  {
+                    "bindingId": "profile",
+                    "sourceRef": "../profiles/sidefx-json-authority-ingestion-profile.v1.json",
+                    "sourceDigest": "sha256:70c9328b32201a6ac86ec14422892057af130f31550757e9d1a465c11efed223"
+                  },
+                  {
+                    "bindingId": "membership-policy",
+                    "sourceRef": "../policies/sidefx-semantic-corpus-membership-policy.v1.json",
+                    "sourceDigest": "sha256:0b3ff298fd68707b37c6827b4d527bafc05528fa9704a043eadb85ab76316b33"
+                  },
+                  {
+                    "bindingId": "canonicalization-policy",
+                    "sourceRef": "../policies/sidefx-semantic-canonicalization-policy.v1.json",
+                    "sourceDigest": "sha256:3372aa03fd1f644d626045d469ed228904c97e2a566dd94904942ec7084870c6"
+                  },
+                  {
+                    "bindingId": "request-contract",
+                    "sourceRef": "../capabilities/ingest-sidefx-json-authority/contracts/sidefx-json-authority-ingestion-request.schema.json",
+                    "sourceDigest": "sha256:bfaeb6b53f9cae6ff74c700e2ecce2b6de61433bb3e53a6e495c155af2ade947"
+                  },
+                  {
+                    "bindingId": "receipt-contract",
+                    "sourceRef": "../contracts/sidefx-json-authority-ingestion-receipt.schema.json",
+                    "sourceDigest": "sha256:83a28ed29c7735e786493c0e40301b95ecc0171bbc4e31d6d716d4a1a1d95950"
+                  },
+                  {
+                    "bindingId": "fixture-manifest",
+                    "sourceRef": "../capabilities/ingest-sidefx-json-authority/fixtures/fixture-manifest.authority.json",
+                    "sourceDigest": "sha256:4d604f6cc7cdbed670a8af3215557a8335e80f5af744e500b5243037a3a3bf54"
+                  },
+                  {
+                    "bindingId": "fixture-manifest-schema",
+                    "sourceRef": "../capabilities/ingest-sidefx-json-authority/fixtures/fixture-manifest.authority.schema.json",
+                    "sourceDigest": "sha256:5ab5cde17736cc08f07b8885aee030f6fcc608a981a4a7a212276c9ac5ab5798"
+                  },
+                  {
+                    "bindingId": "schema-catalog",
+                    "sourceRef": "../capabilities/ingest-sidefx-json-authority/authorities/declared-schema-catalog.v1.json",
+                    "sourceDigest": "sha256:07f778ea7a72ef7083583bb00ee34a405f72538dd887756ae2aa36f761342b2b"
+                  },
+                  {
+                    "bindingId": "reference-scope",
+                    "sourceRef": "../capabilities/ingest-sidefx-json-authority/authorities/content-reference-scope.v1.json",
+                    "sourceDigest": "sha256:3612cf2cfafa0c1a58b4d941d962350009404720d82211ab8cc34fed74675ec4"
+                  },
+                  {
+                    "bindingId": "version-policy",
+                    "sourceRef": "../capabilities/ingest-sidefx-json-authority/authorities/version-policy.v1.json",
+                    "sourceDigest": "sha256:5b49ce679fe59c5f98b6a12ffeff7c06235cba053497fa670e8cc8bcf15340f0"
+                  }
+                ],
+                "conformanceDisposition": "",
+                "conformanceReceiptDigest": "",
+                "conformanceReceiptRef": "",
+                "eligibilityDisposition": "NOT_OBSERVABLE",
+                "lifecycle": "ADMITTED",
+                "platformCapabilityId": "sda-json-authority-ingestion-port.v1",
+                "providerAuthorityDigest": "sha256:f39fb91732ee448ac56db23b8728add4b1477df2cf27a81740b6058e4c231546",
+                "providerAuthorityId": "unconformed-provider.v1",
+                "providerAuthorityRef": "../../../../scenario-driven-architecture/capabilities/sda-platform/bind-profile-governed-json-authority-ingestion/profile-governed-json-authority-ingestor.authority.json",
+                "providerBindingDigest": "sha256:4cadcff2bf76f5e7d0cb1b7fec511bf6317a37c5a161f9a33e3c197f0c18af22",
+                "providerBindingRef": "authority/sidefx-semantic-brain/platform/json-authority-ingestion-provider.binding.json",
+                "reasonCode": "CONFORMANCE_EVIDENCE_ABSENT"
+              }
+            ],
+            "requestedPlatformCapabilityId": "sda-json-authority-ingestion-port.v1",
+            "requestedTarget": "node",
+            "resolutionType": "sidefx-semantic-provider-resolution.v1",
+            "snapshotDigest": "sha256:b1d87d6f3b5969df31c5f2683e606ef8bca64df463abcf2b74f050039d373ff4",
+            "resolutionDigest": "sha256:3c46378f9b6837bfa78ae5e15d66077ad9e5a97b093e591bbdfed33f331f7ca1"
+          }
+        },
+        {
+          "fixtureId": "reject-null-request",
+          "provenance": "LOCAL_INPUT_PROBE",
+          "command": "sfx 'capability' 'invoke' 'resolve-sidefx-eligible-providers' '--namespace' 'sidefx:capabilities' '--input' '@C:\\lab\\repos\\sfx-embody\\evidence\\hugging-face-pilots\\2026-09-10T00-23-20.815Z\\resolve-sidefx-eligible-providers\\reject-null-request.input.json' '--json'",
+          "cwd": "C:\\lab\\repos\\sfx-embody",
+          "exitCode": 0,
+          "signal": null,
+          "milliseconds": 6513,
+          "inputFile": "reject-null-request.input.json",
+          "stdoutFile": "reject-null-request.stdout.json",
+          "stderrFile": "reject-null-request.stderr.txt",
+          "inputFileDigest": "sha256:38e0b9de817f645c4bec37c0d4a3e58baecccb040f5718dc069a72c7385a0bed",
+          "stdoutDigest": "sha256:3807251c81730a03cff7ce5ab172cde291a5fb21505c2a312a41cd41b73423e0",
+          "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "expected": {
+            "disposition": "rejected"
+          },
+          "assertionCount": 0,
+          "status": "PASSED",
+          "problems": [],
+          "kernelDisposition": "rejected",
+          "domainDisposition": null,
+          "outcome": null
+        }
+      ]
+    }
+  ],
+  "container": {
+    "directory": "C:\\lab\\repos\\sfx-embody\\evidence\\hugging-face-pilots\\2026-09-10T00-23-20.815Z\\container-2026-09-10T00-31-57.689Z",
+    "image": "sha256:cda31cc6d260de4050319816ec0786f5c52f49fa6ca8d4ac261cabe2a634c0a9",
+    "status": "PASSED",
+    "exitCode": 0,
+    "node": "v24.20.0",
+    "platform": "linux",
+    "architecture": "x64",
+    "passed": 16,
+    "integrityRefusals": 3,
+    "scope": "Packaged native-body execution parity with retained CLI results, executions and observations (excluding observation timestamps). Not the database selection/planning service or production isolation qualification.",
+    "user": "node",
+    "networkMode": "none",
+    "readOnlyRoot": true,
+    "capDrop": [
+      "ALL"
+    ],
+    "securityOpt": [
+      "no-new-privileges"
+    ],
+    "memoryBytes": 268435456,
+    "nanoCpus": 1000000000,
+    "pidsLimit": 64,
+    "mounts": [],
+    "stdoutDigest": "sha256:e45a102be26970cae8cd1738240046738b367dac85fda4c39048d9acdbf27fda",
+    "stderrDigest": "sha256:c43f7a8e822af2d6f07b930e268ea776bac852545d6ca49a1164e990d34b3ba6",
+    "packageManifestDigest": "sha256:d7ff267b2252dc75a8ba837ed81cbbd4f691d48e9840460acb30b4ebc6149626",
+    "pilots": [
+      {
+        "capabilityId": "say-hello-world",
+        "authorityIdentity": {
+          "scenarioDefinitionDigest": "sha256:123b5017f236eae5d2cfcd3b0f7a27a1f85b01119bf2e1fe440dd65f7c539e8c",
+          "pinnedPlatformCommit": "716811046f52dd2a67f9ff308a50d755571cbbad",
+          "platformDigest": "sha256:4a9ce9d7b96c39aeadba21c7e65e7a2a3a7b4a545b8fe6dbf041c18f7b7cd9de",
+          "resolverVersion": "sha256:bf39e0a6ad0058b05ff479ae59d892d29a248a48a3ca67ae58f8b9e39eb19ffe",
+          "artifactDigest": "sha256:e50a0e7e3a982c3bfc25e68bf79a0045529181641936813f41ce0ebe1b953645"
+        },
+        "snapshotId": "sha256:1a770ac0795d10665a88166f8d8c968dc5b2d030fdfab2b837aa6071d135f9e9",
+        "projectionDigest": "sha256:4b8fca785f5f6f121d6274fc480187219e5662778459ca2ce2a1d098e337fa3f",
+        "planFile": "plans/say-hello-world.json",
+        "planDigest": "sha256:c496042e6387383214e31078b2f42f03b4d418c3200ab3bcd75924ac43f9e54d",
+        "bodyFiles": 21,
+        "cases": 3,
+        "modules": 12
+      },
+      {
+        "capabilityId": "greet-by-name",
+        "authorityIdentity": {
+          "scenarioDefinitionDigest": "sha256:07f4cbb2048538eb88e3a73b6d60d1fa15e08bc49293a00f6e6da055a9b08b54",
+          "pinnedPlatformCommit": "716811046f52dd2a67f9ff308a50d755571cbbad",
+          "platformDigest": "sha256:4a9ce9d7b96c39aeadba21c7e65e7a2a3a7b4a545b8fe6dbf041c18f7b7cd9de",
+          "resolverVersion": "sha256:bf39e0a6ad0058b05ff479ae59d892d29a248a48a3ca67ae58f8b9e39eb19ffe",
+          "artifactDigest": "sha256:71f77a3826aefd69e59a0e683376256e30eb30898825ffe5f784383e4398bc30"
+        },
+        "snapshotId": "sha256:1a770ac0795d10665a88166f8d8c968dc5b2d030fdfab2b837aa6071d135f9e9",
+        "projectionDigest": "sha256:4b8fca785f5f6f121d6274fc480187219e5662778459ca2ce2a1d098e337fa3f",
+        "planFile": "plans/greet-by-name.json",
+        "planDigest": "sha256:9de31171d83b09d2d085deecb2434f8600318b8a9067671d8a03d24a788eff3c",
+        "bodyFiles": 22,
+        "cases": 8,
+        "modules": 14
+      },
+      {
+        "capabilityId": "resolve-sidefx-eligible-providers",
+        "authorityIdentity": {
+          "scenarioDefinitionDigest": "sha256:a18c0e606e1a70c22c5efd173e130016747bbaaf14f3f875bcc6428d9cc6a93f",
+          "pinnedPlatformCommit": "716811046f52dd2a67f9ff308a50d755571cbbad",
+          "platformDigest": "sha256:4a9ce9d7b96c39aeadba21c7e65e7a2a3a7b4a545b8fe6dbf041c18f7b7cd9de",
+          "resolverVersion": "sha256:bf39e0a6ad0058b05ff479ae59d892d29a248a48a3ca67ae58f8b9e39eb19ffe",
+          "artifactDigest": "sha256:a7335b6046a87c87cb70ed19a7857b0a95823dccadfb3420c1c3883db1570de8"
+        },
+        "snapshotId": "sha256:1a770ac0795d10665a88166f8d8c968dc5b2d030fdfab2b837aa6071d135f9e9",
+        "projectionDigest": "sha256:4b8fca785f5f6f121d6274fc480187219e5662778459ca2ce2a1d098e337fa3f",
+        "planFile": "plans/resolve-sidefx-eligible-providers.json",
+        "planDigest": "sha256:815dcdbbfe9c62e373846dde84e5697ad3e7ef43a271f02d8fb294d4cd55fab4",
+        "bodyFiles": 26,
+        "cases": 5,
+        "modules": 14
+      }
+    ]
+  }
+}

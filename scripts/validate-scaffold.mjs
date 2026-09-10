@@ -89,6 +89,7 @@ const bodyFiles = plan.files.filter(f => f.relativePath.includes('/body/')).leng
 console.log('planned       :', plan.files.length, 'files (' + bodyFiles + ' body)');
 
 const { satisfies, valueAt } = await import(pathToFileURL(path.join(config.sdaRoot, 'artifacts/tools/dist/consumer-projection/proof/assertion-evaluator.js')));
+const { createGovernedEffectContext } = await import(pathToFileURL(path.join(config.sdaRoot, 'languages/typescript/runtimes/node/native-mechanic-primitives.mjs')));
 const fixtures = json(plan.files.find(f => f.relativePath.endsWith('/evidence/fixture-authority.json')).content).fixtures;
 if (!fixtures.length) { console.error('\nSCAFFOLD_DECLARES_NO_FIXTURES: nothing exercises this capability'); process.exit(1); }
 
@@ -96,7 +97,14 @@ const runtime = await loadMemoryScenario(plan);
 let asserted = 0, failed = 0;
 for (const fixture of fixtures) {
   const observations = [], executions = [];
-  const scenario = await runtime.createScenario({ observer: { observe: v => observations.push(v) }, clock: { now: () => new Date().toISOString() } });
+  // A fixture that stubs the governed effects keeps the declared composition
+  // deterministic without a network exchange. The provider itself is unchanged;
+  // only its supplied effect context is a fixture.
+  const effectContext = fixture.effectStub ? createGovernedEffectContext({
+    credentialReader: () => fixture.effectStub.credential,
+    fetch: async () => new Response(fixture.effectStub.response.body, { status: fixture.effectStub.response.status, headers: fixture.effectStub.response.headers })
+  }) : undefined;
+  const scenario = await runtime.createScenario({ observer: { observe: v => observations.push(v) }, clock: { now: () => new Date().toISOString() }, effectContext });
   const input = structuredClone(fixture.input);
   const result = await scenario.execute(input, { executionId: fixture.fixtureId, rootExecutionId: fixture.fixtureId,
     rootInput: structuredClone(input), ancestry: [plan.selectedScenarioId], collect: v => executions.push(v) });

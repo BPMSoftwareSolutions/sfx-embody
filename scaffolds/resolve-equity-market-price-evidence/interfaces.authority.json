@@ -16,11 +16,62 @@
   ],
   "portBindings": [
     {
-      "portId": "resolve-equity-market-price-evidence-port",
+      "portId": "build-equity-price-binding-request",
       "platformCapabilityId": "sda-authority-transformation-port.v1",
       "configuration": {
         "transformationAuthorityRef": "semantic-transformation.authority.json",
-        "transformationId": "transform-resolve-equity-market-price-evidence"
+        "transformationId": "build-equity-price-binding-request"
+      }
+    },
+    {
+      "portId": "bind-equity-price-provider-credential",
+      "platformCapabilityId": "sda-external-credential-reference-binding-port.v1",
+      "configuration": {
+        "credentialAuthorities": [
+          {
+            "referenceName": "RAPID_API_KEY",
+            "source": "environment",
+            "requestingCapabilityIds": ["resolve-equity-market-price-evidence"],
+            "endpointAuthorityDigests": ["sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b"],
+            "effectScopes": ["ONE_BOUNDED_HTTPS_EXCHANGE_NO_REDIRECT_NO_RETRY"],
+            "injectionRule": { "id": "rapidapi-x-rapidapi-key.v1", "headerName": "X-RapidAPI-Key" },
+            "lifetimeMilliseconds": 15000
+          }
+        ]
+      }
+    },
+    {
+      "portId": "build-equity-price-exchange-request",
+      "platformCapabilityId": "sda-authority-transformation-port.v1",
+      "configuration": {
+        "transformationAuthorityRef": "semantic-transformation.authority.json",
+        "transformationId": "build-equity-price-exchange-request"
+      }
+    },
+    {
+      "portId": "observe-equity-price-exchange",
+      "platformCapabilityId": "sda-governed-http-exchange-port.v1",
+      "configuration": {
+        "endpointAuthorities": [
+          {
+            "endpointAuthorityDigest": "sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b",
+            "urlPrefixes": ["https://yahoo-finance166.p.rapidapi.com/api/stock/get-price?"],
+            "methods": ["GET"],
+            "allowedRequestHeaders": ["x-rapidapi-host"],
+            "allowedResponseHeaders": ["content-type", "retry-after"]
+          }
+        ],
+        "credentialInjectionRules": [
+          { "id": "rapidapi-x-rapidapi-key.v1", "headerName": "X-RapidAPI-Key" }
+        ]
+      }
+    },
+    {
+      "portId": "normalize-equity-price-evidence",
+      "platformCapabilityId": "sda-authority-transformation-port.v1",
+      "configuration": {
+        "transformationAuthorityRef": "semantic-transformation.authority.json",
+        "transformationId": "normalize-equity-price-evidence"
       }
     }
   ],

@@ -1,0 +1,67 @@
+{
+  "subject": "resolve-equity-market-price-evidence",
+  "namespace": "sidefx:capabilities",
+  "label": "Live stock price",
+  "description": "Retrieve an actual quote from the configured RapidAPI provider, then run the database-selected capability to produce canonical price evidence. Enter an uppercase symbol such as AAPL. One request; no automatic retry.",
+  "inputContract": "live-equity-price-request.v1",
+  "inputSchemaDigest": "sha256:97b2f584d847b242202f4c06d90d9051492a47f83293d6f74f0e6be54929d539",
+  "providerInputBindingDigest": "sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b",
+  "interaction": "form",
+  "inputs": [
+    {
+      "pointer": "/contractId",
+      "ownership": "fixed",
+      "value": "live-equity-price-request.v1"
+    },
+    {
+      "pointer": "/payload",
+      "ownership": "derived",
+      "construction": "object-from-declared-children"
+    },
+    {
+      "pointer": "/payload/symbol",
+      "ownership": "editable",
+      "control": "text",
+      "label": "Stock symbol",
+      "required": true,
+      "minLength": 1,
+      "maxLength": 24,
+      "pattern": "^[A-Z0-9.^=-]{1,24}$",
+      "trim": false,
+      "unicodeNormalization": "none"
+    },
+    {
+      "pointer": "/payload/region",
+      "ownership": "editable",
+      "control": "select",
+      "label": "Region",
+      "required": true,
+      "minLength": 2,
+      "maxLength": 2,
+      "enum": [
+        "US"
+      ],
+      "trim": false,
+      "unicodeNormalization": "none"
+    }
+  ],
+  "outcome": {
+    "contract": "equity-market-price-evidence.v1",
+    "schemaDigest": "sha256:7491b5daf9ab87fb56b86a61fe661ad86dc03b305cca97517d3819183d49ca24",
+    "view": "structured-result",
+    "summaryPointers": [
+      "/disposition",
+      "/payload/symbol",
+      "/payload/region",
+      "/payload/observedPrice",
+      "/payload/currency",
+      "/payload/observedMarketTime",
+      "/payload/marketState",
+      "/payload/exchange",
+      "/payload/sourceAttribution"
+    ],
+    "collectionPointers": [],
+    "tracePointers": [],
+    "externalProviderInvoked": true
+  }
+}
