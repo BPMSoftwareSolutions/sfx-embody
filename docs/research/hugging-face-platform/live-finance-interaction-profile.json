@@ -5,7 +5,6 @@
   "description": "Retrieve an actual quote from the configured RapidAPI provider, then run the database-selected capability to produce canonical price evidence. Enter an uppercase symbol such as AAPL. One request; no automatic retry.",
   "inputContract": "live-equity-price-request.v1",
   "inputSchemaDigest": "sha256:97b2f584d847b242202f4c06d90d9051492a47f83293d6f74f0e6be54929d539",
-  "providerInputBindingDigest": "sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b",
   "interaction": "form",
   "inputs": [
     {
@@ -47,7 +46,7 @@
   ],
   "outcome": {
     "contract": "equity-market-price-evidence.v1",
-    "schemaDigest": "sha256:7491b5daf9ab87fb56b86a61fe661ad86dc03b305cca97517d3819183d49ca24",
+    "schemaDigest": "sha256:075cb1dd62d074a2000d8682572b05e54638a281d74163ae1b88abe5deff316b",
     "view": "structured-result",
     "summaryPointers": [
       "/disposition",
@@ -62,6 +61,7 @@
     ],
     "collectionPointers": [],
     "tracePointers": [],
+    "resolvedDisposition": "EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED",
     "externalProviderInvoked": true
   }
 }
