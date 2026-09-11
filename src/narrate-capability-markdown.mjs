@@ -14,6 +14,9 @@
 //
 // The invocation tree is drawn from the scenario invocations the model declares
 // as relationships, never from an ordering guessed out of closure depth.
+import { circuitDiagram, scenarioDiagram, executionOrderDiagrams } from './diagram-capability-circuit.mjs';
+import { observeCapabilityIntegrity, observationKinds } from './observe-capability-integrity.mjs';
+
 const ABSENT = '_(not declared)_';
 const PLAIN = '(not declared)';
 const has = text => typeof text === 'string' && text.trim().length > 0;
@@ -66,7 +69,7 @@ function operationSketch(definition, portsById, inClosure, unresolved) {
     const target = operation.portId ?? operation.scenarioId ?? null;
     const missing = operation.kind === 'invoke-scenario' && operation.scenarioId && !inClosure.has(operation.scenarioId);
     if (missing && !unresolved.includes(operation.scenarioId)) unresolved.push(operation.scenarioId);
-    lines.push(`${last ? '`--' : '|--'} ${plain(operation.kind)}${target ? ` --> ${target}` : ''}${missing ? '   (not in the declared closure)' : ''}`);
+    lines.push(`${last ? '`--' : '|--'} ${index + 1}. ${plain(operation.kind)}${target ? ` --> ${target}` : ''}${missing ? '   (not in the declared closure)' : ''}`);
     const stem = last ? '    ' : '|   ';
     const port = operation.portId ? portsById.get(operation.portId) : undefined;
     if (operation.portId && !port) lines.push(`${stem}\`-- port definition: ${PLAIN}`);
@@ -144,6 +147,49 @@ export function narrateCapabilityMarkdown(meaning) {
   ]));
   lines.push('');
 
+  // What a reviewer must see first: where the declared circuit does not join
+  // up, where two declarations disagree, and where meaning is not declared.
+  const observations = observeCapabilityIntegrity(meaning);
+  lines.push(`## Review summary (${observations.length} ${observations.length === 1 ? 'observation' : 'observations'})`, '');
+  if (!observations.length) {
+    lines.push('Every declared id in this circuit resolves, no two retained definitions disagree,',
+      'and meaning is declared at every point this report inspects.', '');
+  } else {
+    lines.push('Each line states what the selected model declares. None is a judgement about',
+      "whether the estate is correct - that is the reviewer's to make.", '');
+    for (const [kind, title] of [[observationKinds.STRUCTURE, 'Structure — the declared circuit does not join up here'],
+      [observationKinds.DIVERGENCE, 'Divergence — one declared id, definitions that disagree'],
+      [observationKinds.MEANING, 'Meaning — the authority declares none here']]) {
+      const group = observations.filter(observation => observation.kind === kind);
+      if (!group.length) continue;
+      lines.push(`**${title} (${group.length})**`, '');
+      lines.push(...table(['Subject', 'Observation', 'Code'],
+        group.map(observation => [`\`${observation.subject}\``, observation.statement, `\`${observation.code}\``])), '');
+    }
+  }
+
+  lines.push('## Capability circuit', '');
+  lines.push('Every node and edge is a relationship the model declares. Edge captions carry the',
+    'declared execution order. A red node or dashed edge is a point the paragraphs above name.', '');
+  lines.push(...fence(circuitDiagram(meaning), 'mermaid'), '');
+
+  const traces = executionOrderDiagrams(meaning);
+  if (traces.length) {
+    lines.push('## Execution order', '');
+    lines.push(`The declared operation sequence for \`${capability.selectedScenarioId}\`, in the order the`,
+      'execution authority declares it.', '');
+    if (traces.length > 1) {
+      lines.push(`Its definitions declare **${traces.length} different sequences**. Each is drawn as declared;`,
+        "no single one of them is the capability's order.", '');
+    }
+    for (const trace of traces) {
+      if (traces.length > 1 || trace.definitionCount > 1) {
+        lines.push(`**\`${trace.authorityId}\` — ${trace.digests.length} of ${trace.definitionCount} definitions** (${trace.digests.map(digest => `\`${short(digest)}\``).join(', ')})`, '');
+      }
+      lines.push(...fence(trace.lines, 'mermaid'), '');
+    }
+  }
+
   lines.push('## User story', '');
   if (capability.userStory) {
     lines.push(...table(['Field', 'Declared'], [
@@ -179,7 +225,7 @@ export function narrateCapabilityMarkdown(meaning) {
   lines.push(`## Scenario closure (${scenarios.length})`, '');
   const tree = invocationTree(capability.selectedScenarioId, scenarios, invocations);
   lines.push(`Drawn from the ${invocations.length} scenario ${invocations.length === 1 ? 'invocation' : 'invocations'} the model declares as relationships.`, '');
-  lines.push(...fence(tree.lines), '');
+  lines.push(...fence(scenarioDiagram(meaning), 'mermaid'), '');
   if (tree.unreached.length) {
     lines.push(`${tree.unreached.length === 1 ? 'This scenario is' : 'These scenarios are'} in the declared closure, but no declared invocation edge reaches ${tree.unreached.length === 1 ? 'it' : 'them'} from the scenario read:`, '');
     for (const id of tree.unreached) lines.push(`- \`${id}\``);

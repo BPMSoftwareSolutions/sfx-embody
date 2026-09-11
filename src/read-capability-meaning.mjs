@@ -147,7 +147,24 @@ WHERE cs.capability_version_pk=@capability_version_pk
   AND tgt.scenario_id IN (SELECT scenario_id FROM @closure)
 ORDER BY src.scenario_id,tgt.scenario_id;
 
--- 7: providers declaring an implementation of those ports' platform capabilities,
+-- 7: how the whole estate configures each platform capability these ports
+--    declare. A port carrying no transformation is only notable against how the
+--    same platform capability is configured elsewhere; this supplies that
+--    comparison as data instead of assuming which ports ought to have one.
+SELECT pc.platform_capability_id AS platformCapabilityId,COUNT(*) AS portCount,
+       SUM(CASE WHEN pc.transformation_id IS NULL THEN 0 ELSE 1 END) AS withTransformation
+FROM (
+    SELECT DISTINCT d.declared_id AS port_id,
+           JSON_VALUE(d.definition_json,'$.semantics.platformCapabilityId') COLLATE Latin1_General_100_BIN2 AS platform_capability_id,
+           JSON_VALUE(d.definition_json,'$.semantics.configuration.transformationId') COLLATE Latin1_General_100_BIN2 AS transformation_id
+    FROM analysis.v_selected_semantic_definition d
+    WHERE d.estate_model_pk=@estate_model_pk AND d.object_kind='PORT'
+) pc
+WHERE pc.platform_capability_id IN (SELECT platform_capability_id FROM @port_definitions WHERE platform_capability_id IS NOT NULL)
+GROUP BY pc.platform_capability_id
+ORDER BY pc.platform_capability_id;
+
+-- 8: providers declaring an implementation of those ports' platform capabilities,
 --    and the mechanics those providers declare.
 SELECT DISTINCT pdf.platform_capability_id AS platformCapabilityId,p.provider_id AS providerId,
        m.mechanic_id AS mechanicId,mv.definition_profile AS definitionProfile
@@ -194,7 +211,7 @@ export async function readCapabilityMeaning(databaseRoot, selection, { timings }
   const read = await query(MEANING_SQL, { input: selection, rowLimit: 100000, retainObjects: false });
   if (timings) timings['capability-meaning.sql'] = performance.now() - start;
   if (read.truncated) throw new Error('DATABASE_AUTHORITY_NOT_COHERENT');
-  const [capabilities, scenarios, authorities, ports, transformations, conditions, invocations, mechanics] = read.recordsets;
+  const [capabilities, scenarios, authorities, ports, transformations, conditions, invocations, usage, mechanics] = read.recordsets;
   if (!capabilities?.length) throw new Error('CAPABILITY_MEANING_UNAVAILABLE');
 
   const declared = parse(capabilities[0].definitionJson)?.semantics?.authority ?? null;
@@ -261,6 +278,20 @@ export async function readCapabilityMeaning(databaseRoot, selection, { timings }
     })),
     observableConditions: conditions.map(row => ({ conditionId: row.conditionId })),
     invocations: invocations.map(row => ({ fromScenarioId: row.fromScenarioId, toScenarioId: row.toScenarioId })),
+    platformCapabilityUsage: usage.map(row => ({
+      platformCapabilityId: row.platformCapabilityId,
+      portCount: Number(row.portCount ?? 0),
+      withTransformation: Number(row.withTransformation ?? 0),
+    })),
+    // Every declared provider implementation, including one that declares no
+    // mechanic. Dropping those would hide a provider standing in the circuit
+    // with no mechanic behind it, which is exactly what a reviewer must see.
+    implementations: mechanics.map(row => ({
+      platformCapabilityId: row.platformCapabilityId,
+      providerId: row.providerId,
+      mechanicId: row.mechanicId,
+      definitionProfile: row.definitionProfile,
+    })),
     mechanics: mechanics.filter(row => row.mechanicId !== null).map(row => ({
       platformCapabilityId: row.platformCapabilityId,
       providerId: row.providerId,
