@@ -6,11 +6,12 @@ import { readAuthority } from './read-authority.mjs';
 import { readCircuitMedia } from './read-circuit-media.mjs';
 import { readCapabilityMeaning } from './read-capability-meaning.mjs';
 import { narrateCapabilityMeaning } from './narrate-capability-meaning.mjs';
+import { narrateCapabilityMarkdown } from './narrate-capability-markdown.mjs';
 import { listCapabilities } from './list-capabilities.mjs';
 
 const digest = value => 'sha256:' + createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
-const requestFields = ['object', 'verb', 'subject', 'namespace', 'input', 'query', 'as', 'scenario'];
+const requestFields = ['object', 'verb', 'subject', 'namespace', 'input', 'query', 'as', 'scenario', 'format'];
 
 // Each operation declares the shape it accepts. Adding an operation is a row
 // here and a row in the command mapping; it is never a new dispatch rule spread
@@ -20,7 +21,7 @@ const operations = {
   observe: { object: 'capability', subject: true, input: 'required' },
   prepare: { object: 'capability', subject: true, input: 'rejected' },
   circuit: { object: 'capability', subject: true, input: 'optional', scenario: true },
-  reveal: { object: 'capability', subject: true, input: 'optional', scenario: true, views: ['circuit', 'meaning'] },
+  reveal: { object: 'capability', subject: true, input: 'optional', scenario: true, views: ['circuit', 'meaning'], formats: ['text', 'markdown'] },
   catalogue: { object: 'capability', subject: false, input: 'rejected' },
   list: { object: 'capability', subject: false, input: 'rejected' },
   find: { object: 'capability', subject: false, input: 'rejected', query: true },
@@ -28,6 +29,8 @@ const operations = {
 };
 // Reveal without an explicit view returns the capability's canonical story.
 const DEFAULT_VIEW = 'meaning';
+// Plain text remains the default; Markdown is asked for explicitly.
+const DEFAULT_FORMAT = 'text';
 
 export function validateDatabaseCommand(envelope) {
   if (!object(envelope) || envelope.deliveryType !== 'sfx-command-delivery.v1'
@@ -41,8 +44,13 @@ export function validateDatabaseCommand(envelope) {
     || (spec.query ? !present(request.query) : request.query !== undefined)
     || (request.namespace !== undefined && !present(request.namespace))
     || (request.scenario !== undefined && (!spec.scenario || !present(request.scenario)))
-    || (request.as !== undefined && (!spec.views || !present(request.as)))) throw new Error('DATABASE_COMMAND_REJECTED');
+    || (request.as !== undefined && (!spec.views || !present(request.as)))
+    || (request.format !== undefined && (!spec.formats || !present(request.format)))) throw new Error('DATABASE_COMMAND_REJECTED');
   if (spec.views && request.as !== undefined && !spec.views.includes(request.as)) throw new Error('CAPABILITY_VIEW_NOT_OFFERED');
+  if (spec.formats && request.format !== undefined && !spec.formats.includes(request.format)) throw new Error('CAPABILITY_FORMAT_NOT_OFFERED');
+  // Only the narrated view is formatted. A retained circuit is delivered as the
+  // publication retains it, so a format there is refused rather than ignored.
+  if (spec.formats && request.format !== undefined && (request.as ?? DEFAULT_VIEW) !== 'meaning') throw new Error('CAPABILITY_FORMAT_NOT_OFFERED');
   if (spec.input === 'required' && !Object.hasOwn(request, 'input')) throw new Error('CAPABILITY_INPUT_REQUIRED');
   if (spec.input === 'rejected' && Object.hasOwn(request, 'input')) throw new Error(envelope.operation === 'prepare' ? 'PREPARATION_INPUT_NOT_OFFERED' : 'OPERATION_INPUT_NOT_OFFERED');
   return request;
@@ -91,7 +99,11 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, 
   // is composed only of values the estate retains; nothing is inferred or filled in.
   if (request.verb === 'reveal' && (request.as ?? DEFAULT_VIEW) === 'meaning') {
     const meaning = await measure('readCapabilityMeaning', () => readCapabilityMeaning(databaseRoot, selection, { timings: timings.queries }));
-    return { disposition: 'terminated', view: 'meaning', narrative: narrateCapabilityMeaning(meaning), meaning,
+    // Format selects how the same retained meaning is presented. It adds no
+    // facts: both narrators read this one result and neither queries again.
+    const format = request.format ?? DEFAULT_FORMAT;
+    return { disposition: 'terminated', view: 'meaning', format,
+      narrative: (format === 'markdown' ? narrateCapabilityMarkdown : narrateCapabilityMeaning)(meaning), meaning,
       evidence: { timings, authoritySource: 'DATABASE', bodyStorage: 'NOT_REQUESTED',
         snapshotId: meaning.snapshotId, projectionDigest: meaning.projectionDigest,
         viewDefinitionDigest: meaning.viewDefinitionDigest } };

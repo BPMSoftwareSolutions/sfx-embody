@@ -59,12 +59,13 @@
         "identity": "capability",
         "input": true,
         "view": true,
+        "format": true,
         "namespace": true,
         "wraps": {
           "surface": "database-invocation",
           "operation": "reveal"
         },
-        "description": "Reveal a declared capability. --as meaning (default) tells its canonical story from retained authority; --as circuit reads its retained blueprint."
+        "description": "Reveal a declared capability. --as meaning (default) tells its canonical story from retained authority, --format markdown for review-ready documentation with declared-relationship diagrams; --as circuit reads its retained blueprint."
       },
       "prepare": {
         "min": 1,

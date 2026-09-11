@@ -66,3 +66,19 @@ test('observation carries invocation unchanged and stays a distinct declared ope
   assert.throws(() => validateDatabaseCommand(command('invoke', observe)), /DATABASE_OPERATION_NOT_OFFERED/);
   assert.throws(() => validateDatabaseCommand(command('observe', { ...observe, verb: 'invoke' })), /DATABASE_OPERATION_NOT_OFFERED/);
 });
+
+test('reveal formats the narrated view only, and only as the estate offers', () => {
+  const reveal = extra => command('reveal', { object: 'capability', verb: 'reveal', subject: 'example', ...extra });
+  // An unqualified reveal picks its own default; the caller never spells it.
+  assert.equal(validateDatabaseCommand(reveal({})).format, undefined);
+  for (const format of ['text', 'markdown']) assert.equal(validateDatabaseCommand(reveal({ format })).format, format);
+  assert.throws(() => validateDatabaseCommand(reveal({ format: 'pdf' })), /CAPABILITY_FORMAT_NOT_OFFERED/);
+  assert.throws(() => validateDatabaseCommand(reveal({ format: '' })), /DATABASE_COMMAND_REJECTED/);
+  // A retained circuit is delivered as the publication retains it. Asking to
+  // format it is refused rather than accepted and quietly ignored.
+  assert.throws(() => validateDatabaseCommand(reveal({ as: 'circuit', format: 'markdown' })), /CAPABILITY_FORMAT_NOT_OFFERED/);
+  assert.equal(validateDatabaseCommand(reveal({ as: 'meaning', format: 'markdown' })).format, 'markdown');
+  // Only an operation declaring a presentation accepts one.
+  assert.throws(() => validateDatabaseCommand(command('list', { object: 'capability', verb: 'list', format: 'markdown' })), /DATABASE_COMMAND_REJECTED/);
+  assert.throws(() => validateDatabaseCommand(command('invoke', { object: 'capability', verb: 'invoke', subject: 'example', input: null, format: 'markdown' })), /DATABASE_COMMAND_REJECTED/);
+});

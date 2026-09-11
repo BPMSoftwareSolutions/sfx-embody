@@ -72,7 +72,7 @@ GROUP BY s.scenario_id OPTION(MAXRECURSION 32767);
 
 -- 1: each scenario in the declared closure, with its authored specification.
 SELECT c.scenario_id AS scenarioId,c.minimum_depth AS minimumDepth,c.cycle_detected AS cycleDetected,
-       d.definition_json AS definitionJson
+       'sha256:'+LOWER(CONVERT(varchar(64),d.definition_digest,2)) AS definitionDigest,d.definition_json AS definitionJson
 FROM @closure c
 LEFT JOIN analysis.v_selected_semantic_definition d
   ON d.estate_model_pk=@estate_model_pk AND d.object_kind='SCENARIO'
@@ -81,17 +81,18 @@ ORDER BY c.minimum_depth,c.scenario_id;
 
 DECLARE @authorities TABLE(authority_id nvarchar(400) COLLATE Latin1_General_100_BIN2,
                            owning_scenario_id nvarchar(400) COLLATE Latin1_General_100_BIN2,
-                           definition_json nvarchar(max));
-INSERT @authorities(authority_id,owning_scenario_id,definition_json)
-SELECT d.declared_id,JSON_VALUE(d.definition_json,'$.semantics.authority.owningScenarioId'),d.definition_json
+                           definition_digest varchar(71),definition_json nvarchar(max));
+INSERT @authorities(authority_id,owning_scenario_id,definition_digest,definition_json)
+SELECT d.declared_id,JSON_VALUE(d.definition_json,'$.semantics.authority.owningScenarioId'),'sha256:'+LOWER(CONVERT(varchar(64),d.definition_digest,2)),d.definition_json
 FROM analysis.v_selected_semantic_definition d
 WHERE d.estate_model_pk=@estate_model_pk AND d.object_kind='EXECUTION_AUTHORITY'
   AND JSON_VALUE(d.definition_json,'$.semantics.authority.owningScenarioId') COLLATE Latin1_General_100_BIN2
       IN (SELECT scenario_id FROM @closure);
 
 -- 2: the execution authority each scenario declares, with its operations.
-SELECT authority_id AS authorityId,owning_scenario_id AS owningScenarioId,definition_json AS definitionJson
-FROM @authorities ORDER BY owning_scenario_id,authority_id;
+SELECT authority_id AS authorityId,owning_scenario_id AS owningScenarioId,
+       definition_digest AS definitionDigest,definition_json AS definitionJson
+FROM @authorities ORDER BY owning_scenario_id,authority_id,definition_digest;
 
 DECLARE @ports TABLE(port_id nvarchar(400) COLLATE Latin1_General_100_BIN2 PRIMARY KEY);
 INSERT @ports(port_id)
@@ -102,25 +103,25 @@ WHERE JSON_VALUE(op.value,'$.portId') IS NOT NULL;
 DECLARE @port_definitions TABLE(port_id nvarchar(400) COLLATE Latin1_General_100_BIN2,
                                 platform_capability_id nvarchar(400) COLLATE Latin1_General_100_BIN2,
                                 transformation_id nvarchar(400) COLLATE Latin1_General_100_BIN2,
-                                definition_json nvarchar(max));
-INSERT @port_definitions(port_id,platform_capability_id,transformation_id,definition_json)
+                                definition_digest varchar(71),definition_json nvarchar(max));
+INSERT @port_definitions(port_id,platform_capability_id,transformation_id,definition_digest,definition_json)
 SELECT d.declared_id,JSON_VALUE(d.definition_json,'$.semantics.platformCapabilityId'),
-       JSON_VALUE(d.definition_json,'$.semantics.configuration.transformationId'),d.definition_json
+       JSON_VALUE(d.definition_json,'$.semantics.configuration.transformationId'),'sha256:'+LOWER(CONVERT(varchar(64),d.definition_digest,2)),d.definition_json
 FROM analysis.v_selected_semantic_definition d
 WHERE d.estate_model_pk=@estate_model_pk AND d.object_kind='PORT'
   AND d.declared_id IN (SELECT port_id FROM @ports);
 
 -- 3: the ports those operations invoke.
 SELECT port_id AS portId,platform_capability_id AS platformCapabilityId,
-       transformation_id AS transformationId,definition_json AS definitionJson
-FROM @port_definitions ORDER BY port_id;
+       transformation_id AS transformationId,definition_digest AS definitionDigest,definition_json AS definitionJson
+FROM @port_definitions ORDER BY port_id,definition_digest;
 
 -- 4: the transformation each port is configured with.
-SELECT d.declared_id AS transformationId,d.definition_json AS definitionJson
+SELECT d.declared_id AS transformationId,'sha256:'+LOWER(CONVERT(varchar(64),d.definition_digest,2)) AS definitionDigest,d.definition_json AS definitionJson
 FROM analysis.v_selected_semantic_definition d
 WHERE d.estate_model_pk=@estate_model_pk AND d.object_kind='TRANSFORMATION'
   AND d.declared_id IN (SELECT transformation_id FROM @port_definitions WHERE transformation_id IS NOT NULL)
-ORDER BY d.declared_id;
+ORDER BY d.declared_id,definitionDigest;
 
 -- 5: the observable conditions declared against this capability definition.
 SELECT d.declared_id AS conditionId,d.definition_json AS definitionJson
@@ -129,7 +130,24 @@ WHERE d.estate_model_pk=@estate_model_pk AND d.object_kind='OBSERVABLE_CONDITION
   AND JSON_VALUE(d.definition_json,'$.semantics.owner_definition_digest')=@capability_digest
 ORDER BY d.declared_id;
 
--- 6: providers declaring an implementation of those ports' platform capabilities,
+-- 6: the declared scenario invocations between scenarios in this closure. These
+--    are real edges (an event's execution operation naming a target scenario),
+--    not an ordering inferred from depth.
+SELECT DISTINCT src.scenario_id AS fromScenarioId,tgt.scenario_id AS toScenarioId
+FROM model.capability_scenario cs
+JOIN model.scenario_version svs ON svs.scenario_version_pk=cs.scenario_version_pk
+JOIN model.scenario src ON src.scenario_pk=svs.scenario_pk
+JOIN model.scenario_event e ON e.scenario_version_pk=svs.scenario_version_pk
+JOIN model.execution_operation op ON op.execution_authority_version_pk=e.execution_authority_version_pk
+JOIN model.operation_scenario_invocation i ON i.execution_operation_pk=op.execution_operation_pk
+JOIN model.scenario_version svt ON svt.scenario_version_pk=i.target_scenario_version_pk
+JOIN model.scenario tgt ON tgt.scenario_pk=svt.scenario_pk
+WHERE cs.capability_version_pk=@capability_version_pk
+  AND src.scenario_id IN (SELECT scenario_id FROM @closure)
+  AND tgt.scenario_id IN (SELECT scenario_id FROM @closure)
+ORDER BY src.scenario_id,tgt.scenario_id;
+
+-- 7: providers declaring an implementation of those ports' platform capabilities,
 --    and the mechanics those providers declare.
 SELECT DISTINCT pdf.platform_capability_id AS platformCapabilityId,p.provider_id AS providerId,
        m.mechanic_id AS mechanicId,mv.definition_profile AS definitionProfile
@@ -155,13 +173,28 @@ const parse = value => {
 // than rendered as an empty sentence.
 const text = value => (typeof value === 'string' && value.trim().length ? value : null);
 
+// The selected model can retain more than one definition for a single declared
+// id: 275 of its 8,524 declared ids do, one of them 13 times. Those definitions
+// can disagree. Collapsing them would hide that, so every retained definition is
+// carried, with its digest, grouped under the id that declares it.
+function group(rows, key, build) {
+  const entries = new Map();
+  for (const row of rows) {
+    if (!entries.has(row[key])) entries.set(row[key], { [key]: row[key], definitions: [] });
+    const entry = entries.get(row[key]);
+    const definition = build(row, entry);
+    if (definition !== null) entry.definitions.push(definition);
+  }
+  return [...entries.values()];
+}
+
 export async function readCapabilityMeaning(databaseRoot, selection, { timings } = {}) {
   const { query } = await import(pathToFileURL(path.join(databaseRoot, 'src/query/run.mjs')));
   const start = performance.now();
   const read = await query(MEANING_SQL, { input: selection, rowLimit: 100000, retainObjects: false });
   if (timings) timings['capability-meaning.sql'] = performance.now() - start;
   if (read.truncated) throw new Error('DATABASE_AUTHORITY_NOT_COHERENT');
-  const [capabilities, scenarios, authorities, ports, transformations, conditions, mechanics] = read.recordsets;
+  const [capabilities, scenarios, authorities, ports, transformations, conditions, invocations, mechanics] = read.recordsets;
   if (!capabilities?.length) throw new Error('CAPABILITY_MEANING_UNAVAILABLE');
 
   const declared = parse(capabilities[0].definitionJson)?.semantics?.authority ?? null;
@@ -181,37 +214,53 @@ export async function readCapabilityMeaning(databaseRoot, selection, { timings }
       userStory: declared?.userStory ?? null,
       experience: declared?.experience ?? null,
     },
-    scenarios: scenarios.map(row => {
-      const scenario = parse(row.definitionJson)?.semantics?.scenario ?? null;
+    scenarios: group(scenarios, 'scenarioId', (row, entry) => {
+      entry.minimumDepth = row.minimumDepth;
+      entry.cycleDetected = Boolean(row.cycleDetected);
+      if (row.definitionDigest === null || row.definitionDigest === undefined) return null;
+      const parsed = parse(row.definitionJson);
+      const semantics = parsed?.semantics ?? null;
+      const scenario = semantics?.scenario ?? null;
       return {
-        scenarioId: row.scenarioId,
-        minimumDepth: row.minimumDepth,
-        cycleDetected: Boolean(row.cycleDetected),
-        declared: scenario !== null,
-        keyword: text(scenario?.keyword),
-        name: text(scenario?.name),
-        description: text(scenario?.description),
-        steps: Array.isArray(scenario?.steps) ? scenario.steps : [],
-        tags: Array.isArray(scenario?.tags) ? scenario.tags.map(tag => tag?.name).filter(Boolean) : [],
-        examples: Array.isArray(scenario?.examples) ? scenario.examples : [],
+        definitionDigest: row.definitionDigest,
+        format: parsed?.format ?? null,
+        specification: scenario === null ? null : {
+          keyword: text(scenario.keyword),
+          name: text(scenario.name),
+          description: text(scenario.description),
+          steps: Array.isArray(scenario.steps) ? scenario.steps : [],
+          tags: Array.isArray(scenario.tags) ? scenario.tags.map(tag => tag?.name).filter(Boolean) : [],
+          examples: Array.isArray(scenario.examples) ? scenario.examples : [],
+        },
+        // Some retained scenario definitions declare the scenario's face rather
+        // than an authored specification. That is a different declaration, not
+        // an absent one, and is reported as what it is.
+        face: scenario !== null || semantics === null ? null : {
+          capabilityId: text(semantics.capabilityId),
+          event: text(semantics.event),
+          input: text(semantics.input),
+          outcome: text(semantics.outcome),
+        },
       };
     }),
-    executionAuthorities: authorities.map(row => ({
-      authorityId: row.authorityId,
+    executionAuthorities: group(authorities, 'authorityId', row => ({
+      definitionDigest: row.definitionDigest,
       owningScenarioId: row.owningScenarioId,
       operations: parse(row.definitionJson)?.semantics?.authority?.operations ?? [],
     })),
-    ports: ports.map(row => ({
-      portId: row.portId,
+    ports: group(ports, 'portId', row => ({
+      definitionDigest: row.definitionDigest,
       platformCapabilityId: row.platformCapabilityId,
       transformationId: row.transformationId,
       configuration: parse(row.definitionJson)?.semantics?.configuration ?? null,
     })),
-    transformations: transformations.map(row => ({
-      transformationId: row.transformationId,
-      expression: parse(row.definitionJson)?.semantics?.expression ?? null,
+    transformations: group(transformations, 'transformationId', row => ({
+      definitionDigest: row.definitionDigest,
+      expressionKeys: (value => value && typeof value === 'object' && !Array.isArray(value)
+        ? Object.keys(value).sort() : null)(parse(row.definitionJson)?.semantics?.expression),
     })),
     observableConditions: conditions.map(row => ({ conditionId: row.conditionId })),
+    invocations: invocations.map(row => ({ fromScenarioId: row.fromScenarioId, toScenarioId: row.toScenarioId })),
     mechanics: mechanics.filter(row => row.mechanicId !== null).map(row => ({
       platformCapabilityId: row.platformCapabilityId,
       providerId: row.providerId,

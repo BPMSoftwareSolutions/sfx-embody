@@ -4,9 +4,13 @@
 // value read from the estate model by read-capability-meaning.mjs. Where the
 // authority declares nothing, it says so — it never fills a gap with a default,
 // an example, a paraphrase or an inferred sentence.
+//
+// The selected model can retain several definitions for one declared id. That is
+// reported wherever it happens rather than collapsed to the first one.
 const ABSENT = '(not declared)';
 const value = text => (typeof text === 'string' && text.trim().length ? text : ABSENT);
 const indent = (lines, pad = '  ') => lines.map(line => (line.length ? pad + line : line));
+const short = digest => (typeof digest === 'string' ? digest.replace(/^sha256:/, '').slice(0, 12) : ABSENT);
 
 function field(label, text, width) {
   return `${label.padEnd(width)}  ${value(text)}`;
@@ -16,24 +20,56 @@ function heading(title) {
   return ['', title, '-'.repeat(title.length)];
 }
 
+// The distinct declared values of one field across a declared id's definitions.
+function distinct(definitions, field) {
+  return [...new Set(definitions.map(definition => definition[field]).filter(value => value !== null && value !== undefined))].sort();
+}
+
+function retained(count) {
+  return count === 1 ? '' : `  [${count} retained definitions; digests differ]`;
+}
+
 // Steps carry their own keyword ("Given ", "When ", "Then ") and authored text.
 // They are already prose in the authority and are printed verbatim.
+function definitionLines(definition, labelled) {
+  const body = [];
+  if (definition.specification) {
+    const specification = definition.specification;
+    if (specification.description) body.push(specification.description);
+    if (specification.steps.length) {
+      for (const step of specification.steps) body.push(`  ${(step.keyword ?? '').trim()} ${step.text ?? ''}`.trimEnd());
+    } else {
+      body.push(`  steps: ${ABSENT}`);
+    }
+    if (specification.tags.length) body.push(`  tags: ${specification.tags.join(', ')}`);
+    if (specification.examples.length) body.push(`  examples declared: ${specification.examples.length}`);
+  } else if (definition.face) {
+    // This definition declares the scenario's face rather than an authored
+    // specification. It is reported as that, not as a missing scenario.
+    body.push("This definition declares the scenario's face, not an authored specification.");
+    body.push(`  event    ${value(definition.face.event)}`);
+    body.push(`  input    ${value(definition.face.input)}`);
+    body.push(`  outcome  ${value(definition.face.outcome)}`);
+  } else {
+    body.push(`This definition declares neither an authored specification nor a face. ${ABSENT}`);
+  }
+  return labelled ? [`definition ${short(definition.definitionDigest)}`, ...indent(body)] : body;
+}
+
 function scenarioLines(scenario) {
   const lines = [];
-  const title = [scenario.keyword ?? 'Scenario', scenario.name ?? scenario.scenarioId].join(': ');
-  lines.push(`${title}${scenario.minimumDepth === 0 ? '  [root]' : `  [depth ${scenario.minimumDepth}]`}${scenario.cycleDetected ? '  [cycle declared]' : ''}`);
+  const specified = scenario.definitions.find(definition => definition.specification) ?? null;
+  const name = specified?.specification.name ?? scenario.scenarioId;
+  const keyword = specified?.specification.keyword ?? 'Scenario';
+  lines.push(`${keyword}: ${name}${scenario.minimumDepth === 0 ? '  [the scenario read]' : `  [depth ${scenario.minimumDepth}]`}${scenario.cycleDetected ? '  [cycle declared]' : ''}`);
   lines.push(`id: ${scenario.scenarioId}`);
-  if (!scenario.declared) {
-    lines.push('This scenario is named by the declared closure; the estate retains no scenario definition for it.');
+  if (!scenario.definitions.length) {
+    lines.push('This scenario is named by the declared closure; the estate retains no definition for it.');
     return lines;
   }
-  if (scenario.description) lines.push(scenario.description);
-  if (scenario.steps.length) {
-    for (const step of scenario.steps) lines.push(`  ${(step.keyword ?? '').trim()} ${step.text ?? ''}`.trimEnd());
-  } else {
-    lines.push(`  steps: ${ABSENT}`);
-  }
-  if (scenario.examples?.length) lines.push(`  examples declared: ${scenario.examples.length}`);
+  lines.push(`retained definitions: ${scenario.definitions.length}${scenario.definitions.length === 1 ? '' : ' (digests differ; each is shown)'}`);
+  const labelled = scenario.definitions.length > 1;
+  for (const definition of scenario.definitions) lines.push(...definitionLines(definition, labelled));
   return lines;
 }
 
@@ -87,36 +123,64 @@ export function narrateCapabilityMeaning(meaning) {
     lines.push(...indent(scenarioLines(scenario)));
   }
 
-  lines.push(...heading(`Execution plan (${executionAuthorities.length} execution ${executionAuthorities.length === 1 ? 'authority' : 'authorities'})`));
+  lines.push(...heading(`Execution plan (${executionAuthorities.length} declared execution ${executionAuthorities.length === 1 ? 'authority' : 'authorities'})`));
   if (!executionAuthorities.length) {
     lines.push(`No execution authority is declared for the scenarios in this closure. ${ABSENT}`);
   }
   const portsById = new Map(ports.map(port => [port.portId, port]));
-  for (const authority of executionAuthorities) {
-    lines.push('');
-    lines.push(`  ${authority.owningScenarioId}`);
-    lines.push(`    execution authority  ${authority.authorityId}`);
-    if (!authority.operations.length) lines.push(`    operations           ${ABSENT}`);
-    for (const operation of authority.operations) {
+  const inClosure = new Set(scenarios.map(scenario => scenario.scenarioId));
+  const unresolved = [];
+  const operationLines = definition => {
+    const out = [];
+    if (!definition.operations.length) out.push(`operations: ${ABSENT}`);
+    for (const operation of definition.operations) {
+      const target = operation.portId ?? operation.scenarioId ?? null;
+      // A declared invocation of a scenario the closure does not contain is a
+      // real disagreement between two declarations. It is reported, not hidden.
+      const missing = operation.kind === 'invoke-scenario' && operation.scenarioId && !inClosure.has(operation.scenarioId);
+      if (missing && !unresolved.includes(operation.scenarioId)) unresolved.push(operation.scenarioId);
+      out.push(`${value(operation.kind)}${target ? ` -> ${target}` : ''}${missing ? '   (not in the declared closure)' : ''}`);
       const port = operation.portId ? portsById.get(operation.portId) : undefined;
-      lines.push(`    operation            ${value(operation.kind)}${operation.portId ? ` -> ${operation.portId}` : ''}`);
-      if (operation.portId && !port) lines.push(`      port definition    ${ABSENT}`);
+      if (operation.portId && !port) out.push(`  port definition: ${ABSENT}`);
       if (port) {
-        lines.push(`      platform capability  ${value(port.platformCapabilityId)}`);
-        lines.push(`      transformation       ${value(port.transformationId)}`);
+        out.push(`  platform capability  ${distinct(port.definitions, 'platformCapabilityId').join(', ') || ABSENT}`);
+        out.push(`  transformation       ${distinct(port.definitions, 'transformationId').join(', ') || ABSENT}`);
       }
     }
+    return out;
+  };
+  for (const authority of executionAuthorities) {
+    // Definitions are never merged. Where they disagree, each is shown as it is.
+    const shapes = new Set(authority.definitions.map(definition => JSON.stringify(definition.operations)));
+    lines.push('');
+    lines.push(`  ${authority.authorityId}${authority.definitions.length === 1 ? ''
+      : `  [${authority.definitions.length} retained definitions; they declare ${shapes.size === 1 ? 'the same operations' : `${shapes.size} different operation sets`}]`}`);
+    lines.push(`    owning scenario  ${distinct(authority.definitions, 'owningScenarioId').join(', ') || ABSENT}`);
+    if (authority.definitions.length === 1) {
+      lines.push(...indent(operationLines(authority.definitions[0]), '    '));
+      continue;
+    }
+    for (const definition of authority.definitions) {
+      lines.push('');
+      lines.push(`    definition ${short(definition.definitionDigest)}`);
+      lines.push(...indent(operationLines(definition), '      '));
+    }
+  }
+  if (unresolved.length) {
+    lines.push(...heading(`Declared scenario invocations not in the closure (${unresolved.length})`));
+    lines.push('An execution authority declares an invocation of these scenarios, but the');
+    lines.push("selected estate model does not resolve them into this capability's closure:");
+    for (const id of unresolved.sort()) lines.push(`  ${id}`);
   }
 
   lines.push(...heading(`Transformations (${transformations.length})`));
   if (!transformations.length) lines.push(`No transformation is configured by these ports. ${ABSENT}`);
   for (const transformation of transformations) {
     // The expression tree is the mechanics of the transformation. Its declared
-    // root operation is reported; the full tree stays in the structured result.
-    const root = transformation.expression && typeof transformation.expression === 'object'
-      ? Object.keys(transformation.expression).sort().join(', ') : null;
-    lines.push(`  ${transformation.transformationId}`);
-    lines.push(`    declared expression keys  ${value(root)}`);
+    // root keys are reported; the full tree stays in the structured result.
+    lines.push(`  ${transformation.transformationId}${retained(transformation.definitions.length)}`);
+    const keys = [...new Set(transformation.definitions.flatMap(definition => definition.expressionKeys ?? []))].sort();
+    lines.push(`    declared expression keys  ${keys.length ? keys.join(', ') : ABSENT}`);
   }
 
   lines.push(...heading(`Mechanics (${mechanics.length} declared provider/mechanic ${mechanics.length === 1 ? 'pair' : 'pairs'})`));

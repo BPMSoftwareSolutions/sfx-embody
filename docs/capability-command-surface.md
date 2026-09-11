@@ -9,6 +9,7 @@ disk involvement and no second source of truth:
 | `sfx capability list` | `model.estate_capability` and the selected `CAPABILITY` definitions | every declared capability with the user story it retains |
 | `sfx capability find <query>` | the same, matched in SQL | matching capabilities, each reporting which fields matched |
 | `sfx capability reveal <id> --as meaning` | the capability's declared semantic closure | its canonical story in human language |
+| `sfx capability reveal <id> --as meaning --format markdown` | the same read | the same story as review-ready Markdown with declared-relationship diagrams |
 | `sfx capability reveal <id> --as circuit` | the retained snapshot media publication | its retained blueprint catalogue or view |
 | `sfx capability invoke <id> --input …` | authority, planned and executed in memory | the kernel result and its evidence |
 | `sfx capability observe <id> --input …` | exactly what `invoke` reads | the same result, plus live execution telemetry |
@@ -86,6 +87,55 @@ carries no input, provider body or secret, and it cannot change the outcome —
 With `--json`, each line is `{"observation":{…}}` on stderr while the result
 stays machine-readable on stdout.
 
+## Markdown documentation
+
+`--format markdown` presents the same single read as a document a team can
+review: heading structure, tables, Gherkin in fenced blocks, and ASCII sketches
+of declared relationships. `--format` is declared by the mapping (`"format": true`)
+and offered by the delivery (`text`, `markdown`), so it is refused where it does
+not apply rather than accepted and ignored — including on `--as circuit`, which
+is delivered exactly as the publication retains it.
+
+The diagrams draw only declared relationships. The scenario closure tree is built
+from the scenario invocations the model declares as relationships
+(`model.operation_scenario_invocation`), never from an ordering guessed out of
+closure depth, and any closure scenario no declared edge reaches is listed
+separately instead of being attached to the root.
+
+## What the documentation exposed
+
+Rendering real authority immediately surfaced conditions worth a reviewer's
+attention. None of these are rendering artifacts; all are retained estate state.
+
+**One declared id can have several retained definitions, and they can disagree.**
+The selected model retains 9,155 definitions across 8,524 distinct declared ids.
+275 of those ids carry more than one definition, one of them 13. The renderer
+never merges them into a union — each is shown with its digest, and where they
+differ the count of distinct operation sets is stated.
+
+`resolve-equity-market-price-evidence.v1` is the clearest case. Six retained
+definitions declare three different operation sets:
+
+| Definitions | Declared operations |
+| --- | --- |
+| 3 | the port, plus three `invoke-scenario` operations |
+| 2 | the port alone |
+| 1 | five entirely different ports |
+
+**An execution authority can declare an invocation the model does not resolve.**
+Those three `invoke-scenario` operations name scenarios that are not in the
+declared closure, because the closure view admits only targets whose definitions
+are in the selected estate model. Both statements are retained authority and they
+disagree, so the document reports the disagreement under *Declared scenario
+invocations not in the closure* rather than silently dropping either side.
+
+**A scenario definition is not always an authored specification.**
+`resolve-equity-market-price-evidence` retains a definition that declares the
+scenario's face — event, input, outcome — with no Gherkin. An earlier draft of
+this renderer reported that as "the estate retains no scenario definition", which
+was wrong: a definition is retained, of a different declared profile. It is now
+reported as what it is.
+
 ## What was exercised
 
 Against snapshot
@@ -108,9 +158,15 @@ binding:
 | `sfx capability reveal generate-executable-capability-scaffold --scenario replay-scaffold-generation` | exit 0; distinct `Root` and `Selected` |
 | `sfx capability observe resolve-sidefx-eligible-providers --input '@examples/provider-resolution.request.json'` | exit 0; live telemetry on stderr, result on stdout |
 | `sfx capability invoke …` (same input) | exit 0; 0 bytes on stderr |
+| `sfx capability reveal resolve-equity-market-price-evidence --as meaning --format markdown` | exit 0; 173-line document |
+| `sfx capability reveal generate-executable-capability-scaffold --format markdown` | exit 0; 633 lines, 16-scenario tree from 15 declared invocations |
+| `sfx capability reveal … --format markdown --as circuit` | exit 4; `CAPABILITY_FORMAT_NOT_OFFERED` |
+| `sfx capability reveal … --format pdf` | exit 4; `CAPABILITY_FORMAT_NOT_OFFERED` |
+| `sfx capability list --format markdown` | exit 2; `OPTION_NOT_APPLICABLE` |
+| `sfx capability invoke … --format markdown` | exit 2; `OPTION_NOT_APPLICABLE` |
 
 Telemetry was confirmed to stream rather than buffer: `readAuthority started`
 arrived 3.2 seconds before `readAuthority completed` in wall-clock terms.
 
-`npm test` passes 11/11 here and 17/17 in `sidefx-cli`, including that
+`npm test` passes 12/12 here and 17/17 in `sidefx-cli`, including that
 repository's entity-neutrality suite.

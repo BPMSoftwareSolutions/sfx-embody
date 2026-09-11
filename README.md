@@ -36,6 +36,8 @@ The same database surface now also lists, finds, reveals and observes
 capabilities. [The database capability command surface](docs/capability-command-surface.md)
 records every offered command, the declared chain `sfx capability reveal --as meaning`
 walks to tell a capability's canonical story, and what was actually exercised.
+`sfx capability reveal <id> --as meaning --format markdown` renders that story as
+review-ready documentation with declared-relationship diagrams.
 `sfx capability observe` runs exactly what `invoke` runs and streams the
 delivery's execution telemetry to stderr as it arrives.
 
