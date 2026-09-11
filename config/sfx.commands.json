@@ -3,33 +3,143 @@
   "surfaces": {
     "database-invocation": {
       "delivery": "database-memory",
-      "operations": ["invoke", "prepare", "circuit", "catalogue"]
+      "operations": [
+        "invoke",
+        "observe",
+        "prepare",
+        "reveal",
+        "circuit",
+        "catalogue",
+        "list",
+        "find",
+        "artifact"
+      ]
     }
   },
   "identities": {
-    "capability": { "pattern": "^[a-z][a-z0-9-]*$", "message": "Supply a capability identity." }
+    "capability": {
+      "pattern": "^[a-z][a-z0-9-]*$",
+      "message": "Supply a capability identity."
+    },
+    "media": {
+      "pattern": "^[a-f0-9]{64}$",
+      "message": "Supply a retained media digest."
+    }
   },
   "commands": {
     "capability": {
+      "list": {
+        "min": 0,
+        "max": 0,
+        "identity": "capability",
+        "input": false,
+        "namespace": true,
+        "wraps": {
+          "surface": "database-invocation",
+          "operation": "list"
+        },
+        "description": "List the capabilities the selected database estate declares, with the user story each one retains."
+      },
+      "find": {
+        "min": 1,
+        "max": null,
+        "query": true,
+        "identity": "capability",
+        "input": false,
+        "namespace": true,
+        "wraps": {
+          "surface": "database-invocation",
+          "operation": "find"
+        },
+        "description": "Find declared capabilities whose identity or retained meaning matches the query; each result reports the fields that matched."
+      },
+      "reveal": {
+        "min": 1,
+        "max": 1,
+        "identity": "capability",
+        "input": true,
+        "view": true,
+        "namespace": true,
+        "wraps": {
+          "surface": "database-invocation",
+          "operation": "reveal"
+        },
+        "description": "Reveal a declared capability. --as meaning (default) tells its canonical story from retained authority; --as circuit reads its retained blueprint."
+      },
       "prepare": {
-        "min": 1, "max": 1, "identity": "capability", "input": false, "namespace": true,
-        "wraps": { "surface": "database-invocation", "operation": "prepare" },
+        "min": 1,
+        "max": 1,
+        "identity": "capability",
+        "input": false,
+        "namespace": true,
+        "wraps": {
+          "surface": "database-invocation",
+          "operation": "prepare"
+        },
         "description": "Resolve and prove the selected database capability; retain its preparation in SQL. Optional: invocation never consumes it."
       },
       "invoke": {
-        "min": 1, "max": 1, "identity": "capability", "input": true, "namespace": true,
-        "wraps": { "surface": "database-invocation", "operation": "invoke" },
+        "min": 1,
+        "max": 1,
+        "identity": "capability",
+        "input": true,
+        "namespace": true,
+        "wraps": {
+          "surface": "database-invocation",
+          "operation": "invoke"
+        },
         "description": "Execute the database capability's declared root through the candidate memory provider; authority is read and planned per invocation."
       },
+      "observe": {
+        "min": 1,
+        "max": 1,
+        "identity": "capability",
+        "input": true,
+        "namespace": true,
+        "observation": true,
+        "wraps": {
+          "surface": "database-invocation",
+          "operation": "observe"
+        },
+        "description": "Execute the database capability exactly as invoke does, streaming its execution telemetry live as the delivery observes it."
+      },
       "circuit": {
-        "min": 1, "max": 1, "identity": "capability", "input": true, "namespace": true,
-        "wraps": { "surface": "database-invocation", "operation": "circuit" },
-        "description": "Derive the capability's circuits from the selected database authority; every declared scenario in its closure becomes a view."
+        "min": 1,
+        "max": 1,
+        "identity": "capability",
+        "input": true,
+        "namespace": true,
+        "wraps": {
+          "surface": "database-invocation",
+          "operation": "circuit"
+        },
+        "description": "Read a retained circuit catalogue or view from the selected snapshot media publication."
       },
       "catalogue": {
-        "min": 0, "max": 0, "identity": "capability", "input": false, "namespace": false,
-        "wraps": { "surface": "database-invocation", "operation": "catalogue" },
-        "description": "List the capabilities selected by the current database estate."
+        "min": 0,
+        "max": 0,
+        "identity": "capability",
+        "input": false,
+        "namespace": false,
+        "wraps": {
+          "surface": "database-invocation",
+          "operation": "catalogue"
+        },
+        "description": "List the capabilities selected by the current database estate, with retained circuit availability."
+      }
+    },
+    "media": {
+      "artifact": {
+        "min": 1,
+        "max": 1,
+        "identity": "media",
+        "input": false,
+        "namespace": false,
+        "wraps": {
+          "surface": "database-invocation",
+          "operation": "artifact"
+        },
+        "description": "Read the original bytes of an artifact in the selected snapshot media publication."
       }
     }
   }

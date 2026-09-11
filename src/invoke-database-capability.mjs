@@ -1,27 +1,50 @@
 import { createHash, randomUUID } from 'node:crypto';
-import path from 'node:path';
-import { pathToFileURL } from 'node:url';
 import { prepareDatabaseCapability } from './prepare-database-capability.mjs';
 import { planNode } from './materialize-node.mjs';
 import { loadMemoryScenario } from './load-memory-scenario.mjs';
 import { readAuthority } from './read-authority.mjs';
-import { deriveCapability } from './derive-circuit.mjs';
+import { readCircuitMedia } from './read-circuit-media.mjs';
+import { readCapabilityMeaning } from './read-capability-meaning.mjs';
+import { narrateCapabilityMeaning } from './narrate-capability-meaning.mjs';
+import { listCapabilities } from './list-capabilities.mjs';
 
 const digest = value => 'sha256:' + createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
-const requestFields = ['object', 'verb', 'subject', 'namespace', 'input'];
+const requestFields = ['object', 'verb', 'subject', 'namespace', 'input', 'query', 'as', 'scenario'];
+
+// Each operation declares the shape it accepts. Adding an operation is a row
+// here and a row in the command mapping; it is never a new dispatch rule spread
+// through the delivery.
+const operations = {
+  invoke: { object: 'capability', subject: true, input: 'required' },
+  observe: { object: 'capability', subject: true, input: 'required' },
+  prepare: { object: 'capability', subject: true, input: 'rejected' },
+  circuit: { object: 'capability', subject: true, input: 'optional', scenario: true },
+  reveal: { object: 'capability', subject: true, input: 'optional', scenario: true, views: ['circuit', 'meaning'] },
+  catalogue: { object: 'capability', subject: false, input: 'rejected' },
+  list: { object: 'capability', subject: false, input: 'rejected' },
+  find: { object: 'capability', subject: false, input: 'rejected', query: true },
+  artifact: { object: 'media', subject: true, input: 'rejected' },
+};
+// Reveal without an explicit view returns the capability's canonical story.
+const DEFAULT_VIEW = 'meaning';
 
 export function validateDatabaseCommand(envelope) {
   if (!object(envelope) || envelope.deliveryType !== 'sfx-command-delivery.v1'
     || !Object.keys(envelope).every(key => ['deliveryType', 'operation', 'request'].includes(key))) throw new Error('DELIVERY_PROTOCOL_REJECTED');
   const request = envelope.request;
-  if (!['invoke', 'prepare', 'circuit', 'catalogue'].includes(envelope.operation) || !object(request) || request.object !== 'capability' || request.verb !== envelope.operation) throw new Error('DATABASE_OPERATION_NOT_OFFERED');
+  const spec = Object.hasOwn(operations, envelope.operation) ? operations[envelope.operation] : undefined;
+  if (!spec || !object(request) || request.object !== spec.object || request.verb !== envelope.operation) throw new Error('DATABASE_OPERATION_NOT_OFFERED');
+  const present = value => typeof value === 'string' && value.length > 0;
   if (!Object.keys(request).every(key => requestFields.includes(key))
-    || (request.verb !== 'catalogue' && (typeof request.subject !== 'string' || !request.subject.length))
-    || (request.subject !== undefined && (typeof request.subject !== 'string' || !request.subject.length))
-    || (request.namespace !== undefined && (typeof request.namespace !== 'string' || !request.namespace.length))) throw new Error('DATABASE_COMMAND_REJECTED');
-  if (request.verb === 'invoke' && !Object.hasOwn(request, 'input')) throw new Error('CAPABILITY_INPUT_REQUIRED');
-  if (request.verb === 'prepare' && Object.hasOwn(request, 'input')) throw new Error('PREPARATION_INPUT_NOT_OFFERED');
+    || (spec.subject ? !present(request.subject) : request.subject !== undefined)
+    || (spec.query ? !present(request.query) : request.query !== undefined)
+    || (request.namespace !== undefined && !present(request.namespace))
+    || (request.scenario !== undefined && (!spec.scenario || !present(request.scenario)))
+    || (request.as !== undefined && (!spec.views || !present(request.as)))) throw new Error('DATABASE_COMMAND_REJECTED');
+  if (spec.views && request.as !== undefined && !spec.views.includes(request.as)) throw new Error('CAPABILITY_VIEW_NOT_OFFERED');
+  if (spec.input === 'required' && !Object.hasOwn(request, 'input')) throw new Error('CAPABILITY_INPUT_REQUIRED');
+  if (spec.input === 'rejected' && Object.hasOwn(request, 'input')) throw new Error(envelope.operation === 'prepare' ? 'PREPARATION_INPUT_NOT_OFFERED' : 'OPERATION_INPUT_NOT_OFFERED');
   return request;
 }
 
@@ -43,37 +66,51 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, 
     finally { timings[name] = performance.now() - start; }
   };
   const request = structuredClone(validateDatabaseCommand(envelope));
-  const selection = { capabilityId: request.subject, target: 'node', ...(request.namespace === undefined ? {} : { namespaceId: request.namespace }),
-    ...(request.verb === 'circuit' && typeof request.input?.scenarioId === 'string' ? { scenarioId: request.input.scenarioId } : {}) };
+  // A scenario may be selected positionally for a view, or carried in the
+  // circuit operation's existing input. Neither is inferred from an identity.
+  const selectedScenarioId = request.scenario
+    ?? (typeof request.input?.scenarioId === 'string' ? request.input.scenarioId : undefined);
+  const selection = { capabilityId: request.subject, target: 'node',
+    ...(request.namespace === undefined ? {} : { namespaceId: request.namespace }),
+    ...(['circuit', 'reveal'].includes(request.verb) && selectedScenarioId !== undefined ? { scenarioId: selectedScenarioId } : {}) };
   const config = { databaseRoot, sdaRoot };
   if (request.verb === 'prepare') return prepareDatabaseCapability(selection, config, measure, timings);
-  // The catalogue lists capabilities from the model; it derives no scene.
-  if (request.verb === 'catalogue') {
-    const { query } = await import(pathToFileURL(path.join(databaseRoot, 'src/query/run.mjs')));
-    const listing = await measure('readCatalogue', () => query(
-      `SELECT c.capability_id AS capabilityId, n.namespace_id AS namespaceId
-         FROM model.estate_capability ec
-         JOIN model.capability c ON c.capability_pk = ec.capability_pk
-         JOIN model.identity_namespace n ON n.namespace_pk = c.namespace_pk
-        WHERE ec.estate_model_pk = @estate_model_pk
-        ORDER BY c.capability_id`, { retainObjects: false, rowLimit: 100000 }));
-    return { disposition: 'terminated', catalogue: { snapshotId: listing.snapshotId, projectionDigest: listing.projectionDigest,
-      capabilities: listing.recordsets[0] },
-      evidence: { authoritySource: 'DATABASE', snapshotId: listing.snapshotId, projectionDigest: listing.projectionDigest } };
+
+  // Listing and finding read the estate model. They derive no scene and plan no body.
+  if (['list', 'find'].includes(request.verb)) {
+    const listing = await measure('readCapabilityListing', () => listCapabilities(databaseRoot, {
+      ...(request.namespace === undefined ? {} : { namespaceId: request.namespace }),
+      ...(request.query === undefined ? {} : { query: request.query }),
+    }, { timings: timings.queries }));
+    return { disposition: 'terminated', ...listing,
+      evidence: { timings, authoritySource: 'DATABASE', bodyStorage: 'NOT_REQUESTED',
+        snapshotId: listing.snapshotId, projectionDigest: listing.projectionDigest } };
   }
-  // A circuit is a view of the same authority invocation reads. It is derived
-  // here, from the selected capability and its declared closure, rather than
-  // from any separately compiled product, so the database is the only source.
-  if (request.verb === 'circuit') {
-    const bundle = await measure('readAuthority', () => readAuthority(databaseRoot, selection, { retainObjects: false, timings: timings.queries }));
-    const circuit = deriveCapability({ bundle, capabilityId: request.subject });
-    return { disposition: 'terminated', circuit, evidence: { authoritySource: 'DATABASE',
-      bodyStorage: 'NOT_REQUESTED', snapshotId: bundle.authority.snapshotId, projectionDigest: bundle.authority.projectionDigest,
-      queries: [bundle.authority, bundle.closure].filter(Boolean).map(({ recordsets, ...identity }) => identity) } };
+
+  // Revealing a capability's meaning reads its declared semantics. The narrative
+  // is composed only of values the estate retains; nothing is inferred or filled in.
+  if (request.verb === 'reveal' && (request.as ?? DEFAULT_VIEW) === 'meaning') {
+    const meaning = await measure('readCapabilityMeaning', () => readCapabilityMeaning(databaseRoot, selection, { timings: timings.queries }));
+    return { disposition: 'terminated', view: 'meaning', narrative: narrateCapabilityMeaning(meaning), meaning,
+      evidence: { timings, authoritySource: 'DATABASE', bodyStorage: 'NOT_REQUESTED',
+        snapshotId: meaning.snapshotId, projectionDigest: meaning.projectionDigest,
+        viewDefinitionDigest: meaning.viewDefinitionDigest } };
+  }
+
+  if (['catalogue', 'circuit', 'artifact', 'reveal'].includes(request.verb)) {
+    const media = request.verb === 'reveal' ? 'circuit' : request.verb;
+    const retained = await measure('readRetainedCircuit', () => readCircuitMedia(databaseRoot, {
+      operation: media, capabilityId: request.subject, viewId: request.input?.viewId,
+      artifactDigest: media === 'artifact' ? request.subject : undefined,
+    }));
+    return { disposition: 'terminated', ...(request.verb === 'reveal' ? { view: 'circuit' } : {}),
+      [media === 'catalogue' ? 'catalogue' : media === 'artifact' ? 'media' : 'circuit']: retained,
+      evidence: { authoritySource: 'DATABASE_MEDIA', snapshotId: retained.snapshotId, publicationDigest: retained.publicationDigest } };
   }
   // Invocation is direct: it resolves the selected authority, plans the native
-  // body and executes it in memory on every call. Preparation is an optional,
-  // separately invoked retained proof and is never consumed here.
+  // body and executes it in memory on every call. Observation runs the same
+  // execution and additionally streams its telemetry; it is not a second path.
+  // Preparation is an optional, separately invoked retained proof and is never consumed here.
   const bundle = await measure('readAuthority', () => readAuthority(databaseRoot, selection, { retainObjects: false, timings: timings.queries }));
   const plan = await measure('planNativeBody', () => planNode({ bundle, sdaRoot }));
   const runtime = await measure('loadMemoryModules', () => loadMemoryScenario(plan));
@@ -89,6 +126,7 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, 
     ...(result.disposition === 'failed' ? { errorCode: 'CAPABILITY_EXECUTION_FAILED' } : {}),
     outcome: { capabilityId: plan.capabilityId, scenarioId: plan.selectedScenarioId, result, executions, observations,
       evidence: { timings, authoritySource: 'DATABASE', bodyStorage: 'MEMORY_ONLY', managedAdmission: 'NOT_REQUESTED',
+        executionOperation: request.verb,
         providerStatus: 'CANDIDATE_PHYSICAL_PROVIDER', inputDigest: digest(request.input), resultDigest: digest(result),
         snapshotId: bundle.authority.snapshotId, projectionDigest: bundle.authority.projectionDigest,
         authorityIdentity: Object.fromEntries(['scenarioDefinitionDigest', 'pinnedPlatformCommit', 'platformDigest', 'resolverVersion', 'artifactDigest'].map(key => [key, entry.receipt[key]])),

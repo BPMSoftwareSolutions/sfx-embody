@@ -32,6 +32,13 @@ Invoke from this directory using the project's explicit database process binding
 sfx capability invoke resolve-sidefx-eligible-providers --input '@examples/provider-resolution.request.json' --json
 ```
 
+The same database surface now also lists, finds, reveals and observes
+capabilities. [The database capability command surface](docs/capability-command-surface.md)
+records every offered command, the declared chain `sfx capability reveal --as meaning`
+walks to tell a capability's canonical story, and what was actually exercised.
+`sfx capability observe` runs exactly what `invoke` runs and streams the
+delivery's execution telemetry to stderr as it arrives.
+
 The exercised command returned exit 0 and `PROVIDERS_RESOLVED`. It reads the
 capability and declared root Scenario from SQL, plans the selected native body,
 executes it in memory, and returns the kernel result and authority/storage
