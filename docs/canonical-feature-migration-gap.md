@@ -6,10 +6,11 @@ changed by this review.
 
 ## 1. Required outcome
 
-**Every capability in the database must have a canonical feature. This applies
-equally to managed and provisional capabilities.** The feature must describe the
-exact capability revision that is invoked, and its full declaration must be
-available through the database's semantic model.
+**Every managed or provisional capability in the database must have a canonical
+feature.** The feature must describe the exact capability revision that is
+invoked, and its full declaration must be available through the database's
+semantic model. Non-managed platform dependency rows are out of scope and are
+removed from inventory rather than migrated (§2.1).
 
 The canonical feature is a required part of a Capability definition. Retaining
 some `.feature` bytes at a matching path is insufficient. The database needs an
@@ -23,9 +24,12 @@ feature completeness or require a provisional capability to undergo managed
 admission merely to have a canonical feature.
 
 A feature file with no corresponding database capability is an inventory item,
-not an instruction to register a new capability. Conversely, an existing database
-capability cannot be excluded from this migration because its writeup is missing,
-untagged, provisional, or outside the Harness `features/` directory.
+not an instruction to register a new capability. Conversely, an existing managed
+or provisional capability cannot be excluded from this migration because its
+writeup is missing, untagged, or outside the Harness `features/` directory. This
+scope covers the `sidefx:capabilities` namespace. The non-managed
+`sidefx:platform-capabilities` catalog rows described in §2.1 are not
+capabilities and are excluded rather than dispositioned as drafts.
 
 ## 2. Verified baseline
 
@@ -45,8 +49,10 @@ feature lineage, and implementation hashes.
 
 | Measure | Verified value |
 | --- | ---: |
-| Capability identities retained in `model.capability` | **290** |
-| Capability versions retained in `model.capability_version` | **313** |
+| Capability identities retained in `model.capability` | **290** (220 managed + 70 non-managed platform) |
+| Capability versions retained in `model.capability_version` | **313** (228 managed + 85 non-managed platform) |
+| Managed capability identities in `sidefx:capabilities` | **220** |
+| Managed capability versions in `sidefx:capabilities` | **228** |
 | Currently selected capabilities / owned scenarios | 220 / 825 |
 | Canonical files / files with matching retained bytes | 235 / 235 |
 | Files with a capability tag / distinct capability IDs | 234 / **233** |
@@ -57,17 +63,59 @@ feature lineage, and implementation hashes.
 | Distinct retained `.feature` source paths in this snapshot | 390 |
 
 The original report covered 220 selected capabilities. **The migration inventory
-must cover all 290 identities and reconcile all 313 retained versions.** The
-report's `unselectedIdentities` names the other 70 identities; their canonical
-feature coverage and registration history still need version-by-version review.
-They are not excluded as drafts. Historical definitions remain immutable, but
-history must be accounted for and every invocation-addressable version needs an
-exact canonical feature binding.
+must cover all 220 managed identities and reconcile all 228 retained managed
+versions.** The report's `unselectedIdentities` names 70 identities, but all 70
+are the non-managed `sidefx:platform-capabilities` catalog (§2.1), not unselected
+managed capabilities. There are no unselected `sidefx:capabilities` identities.
+The platform rows are excluded rather than dispositioned as drafts. Historical
+managed definitions remain immutable, but history must be accounted for and
+every invocation-addressable managed version needs an exact canonical feature
+binding.
 
 A snapshot ID alone does not identify a model: registrations and mapping changes
 can produce different generations over the same snapshot. Freeze the selected
 model, mapping manifest and exact retained-source inventory for each migration
 run. These counts are the reviewed baseline, not evergreen target constants.
+
+### 2.1 Non-managed platform-catalog rows (excluded)
+
+A rogue automated change materialized the pinned platform authority's provider
+catalog as `model.capability` rows. The source
+`sda-platform-capabilities.semantic-authority.json` declares `capabilities[]`
+entries whose `capabilityId` values describe provider ports, runtimes, stores and
+transforms (for example `sda-node-consumer-runtime.v1`,
+`sda-json-authority-ingestion-port.v1`). `src/migration/platform.mjs` defines
+each entry as a CAPABILITY in the `sidefx:platform-capabilities` namespace, so
+these dependency declarations are counted alongside genuine managed capabilities.
+
+They are not capabilities. The platform contract itself states the catalog IDs
+"are dependencies with exact definitions, not additional managed capability
+memberships or invented Scenarios" (`config/platform-normalization.json`). The
+identifiers also bake the definition revision into the identity (`.v1`, `.v2`),
+whereas the architecture separates identity from version and otherwise preserves
+a declared version label verbatim (`data-architecture-strategy.md`;
+`physical-data-model-review.md` N-04). None carries an owned Scenario and none has
+a canonical `.feature` lineage. This is a mis-modeling correction, not a draft
+exemption: the excluded rows were never managed or provisional capabilities.
+
+Fresh read-only evidence from selected model 34:
+
+| Measure | Verified value |
+| --- | ---: |
+| `sidefx:platform-capabilities` identities | 70 |
+| `sidefx:platform-capabilities` versions | 85 |
+| Identities / versions ending `.v1` | 68 / 83 |
+| Identities / versions ending `.v2` | 2 / 2 |
+| Owned scenarios | 0 |
+| Identities with canonical `.feature` lineage | 0 |
+| Defining source | `sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/sda-platform-capabilities.semantic-authority.json` |
+
+Disposition: exclude the entire `sidefx:platform-capabilities` namespace from the
+canonical-feature inventory and completeness gate. Remove or reclassify these
+rows through the platform mapping so provider/port/mechanic dependencies are not
+stored as managed capability identities; do not demand canonical features for
+them, and do not count them toward migration coverage. The gate is scoped to
+`sidefx:capabilities`, so these rows can neither satisfy nor fail it.
 
 ### Corrections to the original gap accounting
 
@@ -100,7 +148,8 @@ ten group-D scenarios did not reconcile the actual identity grain.
 ```
 
 These equations explain the selected-model comparison. They are not a target of
-1,031 scenarios and do not establish coverage of all 290 database identities.
+1,031 scenarios and do not establish coverage of all managed database identities
+(220 in `sidefx:capabilities`).
 Group A means absent from the current selection, not necessarily absent from
 all database history.
 
@@ -273,10 +322,13 @@ mapping rule; old definitions remain intact.
 
 ## 6. Database enforcement
 
-Use the existing Capability/Scenario identity and version model. Add an explicit
-version-owned canonical-feature binding and validation through the active schema
-migration path. Physical table/column names and DDL are the next implementation
-artifact; the required contract is:
+Use the existing Capability/Scenario identity and version model. Scope the
+completeness gate to managed and provisional capability identities in
+`sidefx:capabilities`; the non-managed `sidefx:platform-capabilities` dependency
+rows of §2.1 must not be admitted as capabilities or counted by the gate. Add an
+explicit version-owned canonical-feature binding and validation through the
+active schema migration path. Physical table/column names and DDL are the next
+implementation artifact; the required contract is:
 
 - The binding selects one canonical semantic feature for a Capability version,
   resolves its complete parsed fragment and exact retained source lineage, and
@@ -313,7 +365,7 @@ managed admission on a provisional capability.
 
 | Stage | Work | Exit evidence |
 | --- | --- | --- |
-| 1. Inventory every Capability | Reconcile all 290 identities / 313 retained versions; identify every invocation-addressable revision and exact feature/support source set | No identity omitted; each discrepancy has a concrete resolution path |
+| 1. Inventory every Capability | Reconcile all 220 managed identities / 228 managed versions (the 70 non-managed platform-catalog rows of §2.1 are excluded); identify every invocation-addressable revision and exact feature/support source set | No managed identity omitted; each discrepancy has a concrete resolution path; platform dependency rows stay out of the capability inventory |
 | 2. Prove shared projection | Implement canonical-feature binding and common parser/mapping; exercise managed and provisional controls | Same semantic source set produces the same definitions through both ingestion paths |
 | 3. Reconcile and backfill | Repair missing writeups/IDs and source conflicts; derive complete replacement definitions into an unpublished generation | All required canonical features are complete and coherent; no unexplained scenario additions/removals |
 | 4. Verify full coverage | Apply relational, lineage, semantic-fidelity and affected execution checks | Every invocable Capability version satisfies the contract; all historical versions are dispositioned |
@@ -391,10 +443,12 @@ also restores its known feature gaps and reopens migration completion.
 
 The migration is complete when:
 
-- Every database Capability identity is accounted for, and every invocation-
-  addressable version has exactly one fully projected canonical feature, for
-  managed and provisional estates alike. Historical-version dispositions are
-  complete; selected-only counts cannot conceal missing identities.
+- Every managed or provisional Capability identity in `sidefx:capabilities` is
+  accounted for, and every invocation-addressable version has exactly one fully
+  projected canonical feature, for managed and provisional estates alike. The 70
+  non-managed platform-catalog rows are excluded as non-capabilities (§2.1).
+  Historical-version dispositions are complete; selected-only counts cannot
+  conceal missing identities.
 - For each migrated version, its declared and modeled scenario sets are equal,
   its root agrees, and full prose/tags/context survive. The 235 corpus files and
   other declaring sources retain digest-bound dispositions without treating
@@ -435,4 +489,5 @@ bytes after the query. It does not recapture, ingest, register, publish or invok
 A future run measures the then-selected generation and local corpus; compare
 pins before comparing counts. The audit establishes the selected-model
 reconciliation and full identity/version counts. It does not yet establish
-canonical-feature coverage for all 313 versions or resolve source conflicts.
+canonical-feature coverage for all 228 managed versions or resolve source
+conflicts. The 85 non-managed platform-catalog versions are out of scope (§2.1).
