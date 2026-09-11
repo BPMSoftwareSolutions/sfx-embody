@@ -1,35 +1,43 @@
-# Canonical feature writeups: reconciliation and migration strategy
+# Canonical feature normalization: target model and migration
 
-Reviewed on 2026-09-11. This document specifies the migration strategy and records
-fresh read-only evidence. No database, schema, Harness authority or capsule was
-changed by this review.
+Reviewed on 2026-09-11. The evidence below is read-only; no database was changed
+by this review. The schema is under active development, generated from
+`catalog.mjs`, `schema.mjs` and `views.mjs`. The current `model.capability` and
+`model.scenario` shape is a starting point, not a constraint. This document
+defines the target model for canonical features and the expand/contract migration
+that reaches it.
 
 ## 1. Required outcome
 
-**Every managed or provisional capability in the database must have a canonical
-feature.** The feature must describe the exact capability revision that is
-invoked, and its full declaration must be available through the database's
-semantic model. Non-managed platform dependency rows are out of scope and are
-removed from inventory rather than migrated (§2.1).
+**Every invocation-addressable capability version binds to exactly one canonical
+feature version, and the feature is the authority for that capability's declared
+scenarios and authored behavior.** Non-managed platform dependency rows are out
+of scope and are removed from inventory rather than migrated (§2.1).
 
-The canonical feature is a required part of a Capability definition. Retaining
-some `.feature` bytes at a matching path is insufficient. The database needs an
-explicit relationship from the Capability version to its canonical feature,
-complete normalized scenarios and tags, and provenance back to the exact bytes.
+The feature is a **first-class normalized object** in the model. It is not an
+opaque digest in a capability envelope, and it is not a separately maintained
+face list on a registration specification. Retaining `.feature` bytes at a
+matching path does not satisfy this outcome on its own.
 
-This migration will backfill existing capabilities and enforce the requirement
-on every subsequent registration and revision. There is no separate authored
-candidate catalog in this strategy. Managed/provisional status does not relax
-feature completeness or require a provisional capability to undergo managed
-admission merely to have a canonical feature.
+The model must hold all of the following:
 
-A feature file with no corresponding database capability is an inventory item,
-not an instruction to register a new capability. Conversely, an existing managed
-or provisional capability cannot be excluded from this migration because its
-writeup is missing, untagged, or outside the Harness `features/` directory. This
-scope covers the `sidefx:capabilities` namespace. The non-managed
-`sidefx:platform-capabilities` catalog rows described in §2.1 are not
-capabilities and are excluded rather than dispositioned as drafts.
+- the normalized feature declaration (title, narrative, tags, language);
+- the exact scenario versions the feature declares, with their authored Gherkin;
+- an explicit, version-owned binding from the capability version to its one
+  canonical feature version;
+- provenance from the feature declaration back to the exact retained bytes.
+
+This applies equally to managed and provisional capabilities. There is no
+separate authored candidate catalog in this strategy, and provisional status
+does not relax feature completeness.
+
+A feature with no corresponding capability is an inventory item, not an
+instruction to register a new capability. Conversely, an existing managed or
+provisional capability cannot be excluded because its writeup is missing,
+untagged, or outside the Harness `features/` directory. This scope covers the
+`sidefx:capabilities` namespace. The non-managed `sidefx:platform-capabilities`
+catalog rows described in §2.1 are not capabilities and are excluded rather than
+dispositioned as drafts.
 
 ## 2. Verified baseline
 
@@ -121,8 +129,10 @@ them, and do not count them toward migration coverage. The gate is scoped to
 
 ### 2.2 Corrections to the original gap accounting
 
-Scenario identity is Capability-owned. Three repeated scenario ID strings occur
-under different Capability owners and are valid distinct identities. Ten more
+In the **current** model, Scenario identity is Capability-owned; the target model
+re-parents it to the feature (§4). The repeated scenario ID strings below are
+still valid distinct identities because they belong to different owners. Three
+repeated scenario ID strings occur under different Capability owners. Ten more
 occur in both HTTP feature revisions under the same owner. The HTTP candidate
 also declares three additional scenarios. Neither file may win by iteration order.
 
@@ -151,9 +161,8 @@ ten group-D scenarios did not reconcile the actual identity grain.
 
 These equations explain the selected-model comparison. They are not a target of
 1,031 scenarios and do not establish coverage of all managed database identities
-(220 in `sidefx:capabilities`).
-Group A means absent from the current selection, not necessarily absent from
-all database history.
+(220 in `sidefx:capabilities`). Group A means absent from the current selection,
+not necessarily absent from all database history.
 
 | Shared capability | Corpus-only IDs | Model-only IDs |
 | --- | ---: | ---: |
@@ -167,29 +176,37 @@ all database history.
 The report's `missingCapabilities`, `modelOnlyCapabilities`, and
 `sharedDifferences` retain complete IDs without truncation.
 
-## 3. Root causes established by implementation review
+## 3. Root cause
 
-There is already a feature projector. Its coverage and the separate registration
-implementation explain why retained features and normalized definitions diverge.
+**The schema had no canonical feature entity.** That is the defect, and it
+produced every downstream symptom.
 
-| Boundary | Current behavior | Migration implication |
+The feature existed in three disconnected forms, none of which was an authority:
+
+| Where the feature lived | Form | Consequence |
 | --- | --- | --- |
-| [Normalization v1](C:/lab/sidefx-database/config/normalization-v1.json) and [v2](C:/lab/sidefx-database/config/normalization-v2.json) | Managed capsule membership is explicit; v2 preserves it | A retained repository file alone does not establish selected membership; this historical rule is not the new feature-completeness boundary |
-| [Managed normalizer](C:/lab/sidefx-database/src/migration/normalize.mjs) | Parses capsule features; retains scenario AST and tags; projects faces and references | Reuse this responsibility, with corrected reconciliation and completeness checks |
-| [Provisioned registration](C:/lab/sidefx-database/src/register/capability.mjs) | Takes `spec.scenarios` and constructs face-only scenario semantics independently of the retained feature | Replace the independent scenario list with the same full feature projection used by managed ingestion |
-| Feature source selection | Normalizer checks a `features/` entry and a `.feature` source path, including semantic-brain sources with capsule aliases | Both lineages can use one parser with explicit source selectors |
-| [Publication](C:/lab/sidefx-database/src/migration/schema.mjs) | Published definitions and membership are immutable; a BUILDING generation is validated and selected atomically | Backfill through versioned definitions and a new generation, not in-place edits |
+| Managed ingestion (`normalize.mjs`) | Opaque digest in capability `contributions`, plus a partial `scenario_members` fragment | No readable feature declaration; the writeup is not addressable |
+| Managed scenario projection | `semantics.scenario` on `model.scenario_version` | Authored behavior survives, but nothing declares which feature owns the scenario set |
+| Provisional registration (`register/capability.mjs`) | A face list (`spec.scenarios`); the packed `.feature` was never parsed | The writeup was silently dropped |
 
-The membership rule was therefore documented. It does not justify leaving any
-managed or provisional database capability without a canonical feature.
+Three further effects follow directly:
 
-Feature narrative is also partly retained today: the managed normalizer hashes
-the cleaned feature AST into Capability contributions. The actual description
-is recoverable from the retained source, but is not exposed as a first-class
-Capability narrative. Structured `userStory` and `experience` come from authority
-JSON; general prose must not be converted into those fields by inference.
+- **Two projectors, two behaviors.** Managed ingestion parsed features; provisional
+  registration did not. Nothing forced them to agree because there was no shared
+  declaration to agree on.
+- **No binding.** Nothing related a capability version to one exact feature
+  version, so no gate could require one.
+- **A re-registration collision.** Because scenario content lived in the
+  capability envelope only on the managed lane, a changed provisioned feature
+  reused the same capability version and collided on
+  `model.capability_scenario` (`(capability_version_pk, scenario_pk)`).
 
-### The equity example needs revision reconciliation
+The evidence is decisive about the size of the data defect: **219 of 220 selected
+capabilities already carry an authored scenario specification. Exactly one does
+not.** The problem is not missing bytes in 220 features; it is a missing entity
+in the schema.
+
+### 3.1 The equity example
 
 The [Harness feature](C:/lab/repos/agentic-harness/features/resolve-equity-market-price-evidence.feature)
 has four scenarios and root input `equity-market-price-evidence-request`. The
@@ -206,61 +223,114 @@ invocations belong to only some of those definitions. This is evidence of
 revision disagreement, not proof that the selected implementation simply needs
 three additional scenario rows.
 
-First bind the feature, contracts and execution authorities belonging to the
-same invocable revision. Fully normalizing the registered one-scenario feature
-repairs specification loss for that revision. Making the four-scenario Harness
-feature canonical for the current capability is a semantic revision: its support
-authorities and applicable proof must agree. The migration must record the
-choice explicitly, and cannot produce a hybrid from both.
+The migration must bind the feature, contracts and execution authorities
+belonging to the same invocable revision. Fully normalizing the registered
+one-scenario feature repairs specification loss for that revision. Making the
+four-scenario Harness feature canonical for the current capability is a semantic
+revision: its support authorities and applicable proof must agree. The migration
+records the choice explicitly and never produces a hybrid from both.
 
-## 4. Canonical feature contract
+## 4. Target model: the feature is the authority
 
-Every Capability version exposed for invocation must satisfy these invariants:
+The feature is a versioned, content-addressed semantic object, exactly like
+Capability, Scenario and Contract. Scenario identity is re-parented to the
+feature. A capability reaches a scenario **only** through the feature version it
+binds.
 
-1. **One canonical feature definition.** It has an exact semantic digest and an
-   explicit binding to retained raw feature bytes. Multiple identical or
-   semantically equivalent appearances can contribute lineage; differing semantic
-   revisions cannot jointly be the canonical feature for one Capability version.
-2. **Complete owned scenario set.** Every declared scenario appears exactly once
-   in `model.capability_scenario` for that version, and every modeled scenario
-   belongs to the canonical feature. The root is declared, unique, belongs to the
-   same Capability, and agrees with supporting Capability authority.
-3. **Full authored meaning.** Feature narrative, scenario specifications, tags and
-   Gherkin context survive projection. Face-only definitions do not satisfy this
-   contract.
+```
+FEATURE                                             stable identity
+  feature_pk PK, namespace_pk FK, feature_id ID
+  capability_pk FK?                                 declared owner (@capability)
+  semantic_object_pk FK
+  UK(namespace_pk, feature_id)
+        | 1:n
+FEATURE_VERSION                                     content-addressed definition
+  feature_version_pk PK, feature_pk FK
+  semantic_object_definition_pk FK
+  capability_pk FK?                                 carried owner (see §6)
+  definition_digest D
+  semantics = { content_digest, source_class, source_path }   retained-source manifest;
+                                                  the narrative is read from the bound bytes
+  AK(feature_pk, definition_digest)
+        | 1:n  the feature DECLARES its scenario set
+FEATURE_SCENARIO
+  feature_version_pk FK, scenario_pk FK
+  scenario_version_pk FK, ordinal N
+  PK(feature_version_pk, scenario_pk)
+        |
+        +--> SCENARIO                               identity now FEATURE-owned
+        |      scenario_pk PK, feature_pk FK, scenario_id
+        |      UK(feature_pk, scenario_id)
+        |          | 1:n
+        |      SCENARIO_VERSION                     content-addressed definition
+        |          scenario_version_pk PK, scenario_pk FK
+        |          semantic_object_definition_pk FK
+        |          semantics = { keyword, name, description, steps, tags, examples }
+        |
+CAPABILITY                                          stable identity
+  capability_pk PK, namespace_pk FK, capability_id, semantic_object_pk FK
+        | 1:n
+CAPABILITY_VERSION                                  content-addressed definition
+  capability_version_pk PK, capability_pk FK
+  semantic_object_definition_pk FK
+  semantics = { authority, canonical_feature: { featureId, featureVersionDigest } }
+  AK(capability_pk, definition_digest)
+        |
+        | exactly one CANONICAL binding
+        v
+CAPABILITY_FEATURE                                  version-owned, append-only
+  capability_version_pk FK, feature_version_pk FK, capability_pk FK
+  binding_role CODE                                 'CANONICAL' | 'ALTERNATE'
+  UK(capability_version_pk) WHERE binding_role = 'CANONICAL'
+```
+
+Authority chain: **capability version -> feature version -> feature scenario ->
+scenario version -> authored AST.** One path, no second owner.
+
+`capability_root_scenario` remains the only capability-side scenario selection.
+During the expand/contract migration `model.capability_scenario` stays a base
+table, constrained so its owner agrees with the feature's (§6.1). At the contract
+stage it is replaced by a derived view over the binding (`CAPABILITY_FEATURE`
+joined to `FEATURE_SCENARIO`), never an independent claim. The capability
+envelope no longer embeds scenario content; it carries only the canonical feature
+version digest as a reference.
+
+### 4.1 Canonical feature contract
+
+1. **One canonical binding.** Every invocation-addressable capability version
+   has exactly one `CANONICAL` `CAPABILITY_FEATURE` row, and the envelope's
+   `canonical_feature.featureVersionDigest` equals the bound
+   `FEATURE_VERSION.definition_digest`.
+2. **Feature-declared scenario set.** The capability's scenarios are the bound
+   feature version's `FEATURE_SCENARIO` set. The root is declared, belongs to
+   that set, and is unique.
+3. **Full authored meaning.** The feature narrative and every scenario
+   specification, tag and Gherkin context survive projection. Face-only
+   definitions do not satisfy the contract.
 4. **Coherent references.** Inputs, events, outcomes, contracts and execution
-   references resolve against the same revision and explicitly pinned shared
-   dependencies. An unresolved reference remains a typed finding; feature
-   presence alone does not prove execution readiness.
-5. **Traceable revision.** Source observations and mapping rules identify exactly
-   what supplied each declaration. A digest match at a path is not authority
-   selection.
+   references resolve against the same revision and pinned shared dependencies.
+5. **Traceable revision.** `FEATURE_VERSION` traces through `source_lineage` to
+   the exact `.feature` appearance with a matching `content_digest`. A digest at
+   a path is not authority selection.
 
-The feature governs the declared semantic promise and scenario set. Contracts,
-execution authorities, bindings and proofs remain their own declarations, and
-must agree with that promise. A discrepancy is reconciled at the source revision;
-it is not settled by whichever representation has more rows.
+### 4.2 Source selection and authority
 
-### Source selection and authority
-
-Produce a frozen reconciliation manifest for every database Capability identity
-and version. It includes namespace/owner, current definition digest, applicable
+Produce a frozen reconciliation manifest for every capability identity and
+version. It includes namespace/owner, current definition digest, applicable
 managed/provisional lineage, exact feature digest and appearances, supporting
 authority digests, root/scenario set, discrepancies, and resolution evidence.
 
 Use the revision's applicable registration, capsule, placement or admission
 records to establish its source set. Both managed and provisional sources can
-supply a canonical feature. Neither class automatically overrides the other.
-A newer timestamp, larger file, path spelling, or scenario count never selects
+supply a canonical feature. Neither class automatically overrides the other. A
+newer timestamp, larger file, path spelling, or scenario count never selects
 authority. Unverifiable placement evidence leaves a reconciliation item open.
-
-Use these dispositions during migration:
 
 | Finding | Required resolution |
 | --- | --- |
 | Exact feature already matches the revision | Bind it and verify full normalized fidelity |
 | Matching feature retained, mapping incomplete | Re-project the full feature and affected dependencies |
-| Multiple conflicting feature revisions | Select the exact coherent revision with source evidence; retain alternatives as history |
+| Multiple conflicting feature revisions | Select the exact coherent revision with source evidence; retain alternatives as `ALTERNATE` bindings |
 | Feature absent or missing canonical IDs | Recover the correct source or author/reconcile it through the capability's applicable change path; do not derive authority from an incomplete model |
 | Model has scenarios absent from a compared file | Locate the feature that actually supplied that version, or reconcile the writeup; never delete scenarios solely to match a shorter file |
 
@@ -270,36 +340,35 @@ to relabel an invocable provisional capability as a draft.
 
 ## 5. One projection core for managed and provisional capabilities
 
-`sidefx-database` should own one deterministic feature-to-semantic projection
-core. Managed ingestion, provisional registration and revision operations use
-that same core. Their source-selection and lifecycle evidence may differ; their
-canonical feature completeness contract does not. `sfx-embody` consumes and
-verifies the resulting definitions.
+`sidefx-database` owns one deterministic feature-to-semantic projection core.
+Managed ingestion, provisional registration and revision operations all use it.
+Their source-selection and lifecycle evidence may differ; their canonical feature
+contract does not. `sfx-embody` consumes and verifies the resulting definitions.
 
-Retain both source layouts. Resolve packaging aliases explicitly rather than
-moving files or maintaining separate semantic projectors. Registration must
-parse the exact retained feature bytes; `spec.scenarios` must cease being an
-independently maintained source of semantic truth. During transition it can only
-be a derived value or an equality assertion against the parsed feature.
+Registration must parse the exact retained feature bytes. `spec.scenarios` must
+cease being an independently maintained source of semantic truth; during the
+transition it may only be a derived value or an equality assertion against the
+parsed feature.
 
-| Declaration | Normalized destination / rule |
+| Declaration | Normalized destination |
 | --- | --- |
-| `@capability` | Capability identity in its explicit namespace; agree with its declared owner |
-| `@root-scenario` | `model.capability_root_scenario`; agree with `rootScenarioId` and the selected scenario set |
-| Feature title, description and complete AST | Explicit feature fragment in the Capability semantic envelope, with exact retained-source binding |
-| `@scenario`, name and full specification | `model.scenario`, `model.scenario_version`, `model.capability_scenario`; retain `semantics.scenario.steps` for current consumers |
+| `@capability` | Capability identity in its explicit namespace, and the feature's declared owner |
+| Feature narrative and tags | Bound retained `.feature` bytes; `model.feature_version` records a manifest (`content_digest`, `source_class`, `source_path`), and `model.feature_scenario` pins the authored scenario versions |
+| `@scenario`, name and full specification | `model.scenario` / `model.scenario_version` (feature-owned), pinned by `model.feature_scenario` |
+| `@root-scenario` | `model.capability_root_scenario`; must belong to the bound feature version's scenario set |
 | `@input` / `@input-contract` | `model.scenario_input` and exact contract-version reference/state |
 | `@event` / `@event-authority` | `model.scenario_event` and exact execution-authority reference/state |
 | `@outcome` / `@outcome-contract` | `model.scenario_outcome` and `model.scenario_outcome_contract` |
 | `@outcome-terminal` / `@terminal-disposition` | Explicit terminality and disposition; no disposition inferred from prose |
 | Other tags | Preserve verbatim and classify unsupported semantic mappings; never silently discard them |
 
-Identity remains `(namespace, capability ID)` and `(Capability, scenario ID)`.
-Do not introduce filename-derived IDs or global Scenario identity. Duplicate
-singleton tags, conflicting roots, and duplicate scenario declarations within
-one selected revision fail canonical-feature validation. Repeated source copies
-add lineage, not scenario rows. Untagged blocks remain visible findings until
-authored canonical IDs resolve them.
+Identity is `(namespace, feature ID)` for the feature and `(feature, scenario
+ID)` for the scenario. A capability reaches a scenario only through its bound
+feature version. Do not introduce filename-derived IDs or a global Scenario
+identity. Duplicate singleton tags, conflicting roots, and duplicate scenario
+declarations within one selected revision fail canonical-feature validation.
+Repeated source copies add lineage, not scenario rows. Untagged blocks remain
+visible findings until authored canonical IDs resolve them.
 
 Use the existing Gherkin parser. The mapping must preserve Rule and Background
 context, Scenario Outlines, Examples, tables, doc strings, inherited tags and
@@ -310,69 +379,174 @@ structures produce findings instead of being silently flattened.
 
 Missing references preserve exact declared text and `ABSENT` versus `UNRESOLVED`.
 Do not fabricate Contract, execution authority, Product or Blueprint entities.
-In particular, outcome-contract misses need an explicit observation: the current
-normalizer only inserts that relationship when it resolves. General Feature
-prose remains narrative; structured user stories, experiences and observable
-conditions retain their own authority.
+General Feature prose remains narrative; structured user stories, experiences and
+observable conditions retain their own authority.
 
 Semantic digests cover normalized semantic fragments and exact semantic
 references. Raw-byte/capsule digests, paths, timestamps and parser locations are
 provenance. Keep raw bytes for reconstruction. Packaging changes alone must not
-change semantic identity. Converging registration's current provisioning-manifest
-hashing with this contract will create new definition versions under a new
-mapping rule; old definitions remain intact.
+change semantic identity.
 
-## 6. Database enforcement
+## 6. Schema migration: expand, backfill, prove, contract
 
-Use the existing Capability/Scenario identity and version model. Scope the
-completeness gate to managed and provisional capability identities in
-`sidefx:capabilities`; the non-managed `sidefx:platform-capabilities` dependency
-rows of §2.1 must not be admitted as capabilities or counted by the gate. Add an
-explicit version-owned canonical-feature binding and validation through the
-active schema migration path. Physical table/column names and DDL are the next
-implementation artifact; the required contract is:
+The schema is generated code. Reaching the target model is a versioned schema
+migration plus a backfill generation, not an in-place edit. Use expand/contract
+so readers never break and the new parent is DB-enforced before the redundant
+column is removed.
 
-- The binding selects one canonical semantic feature for a Capability version,
-  resolves its complete parsed fragment and exact retained source lineage, and
-  is immutable with that version. Provenance may include multiple appearances.
-- The Capability envelope includes the feature semantics and complete owned
-  scenario membership, using the reviewed finite contribution manifest to avoid
-  recursive definition hashing. Scenario/member pointers resolve to those exact
-  declarations.
-- A database-enforced completeness gate compares the projected scenario set,
-  root, tags and feature binding. Direct SQL cannot bypass it by inserting
-  face-only rows or selecting an incompletely projected generation.
-- Registration, revision and publication use that gate for managed and
-  provisional capabilities alike. Invocation resolves the feature belonging to
-  its selected exact Capability version and reports a precise integrity error
-  if the binding is missing or contradictory.
-- A migration receipt records predecessor/candidate models, mapping and source
-  digests, replacements, open findings, validation and cutover. Receipt status
-  cannot turn an unresolved source conflict into a canonical feature.
+### 6.1 Expand
 
-Published historical definitions cannot be rewritten in place. Where the
-migration merely establishes an evidenced feature association for an old version,
-use an append-only, validated provenance association compatible with immutability.
-Where authored semantics or scenario membership change, create a new version and
-record supersession. Never attach changed semantics to an unchanged definition
-digest. Every historical version gets a documented disposition; any version
-available through invocation must meet the full contract.
+Add the new tables and the new parents. Nothing is removed yet.
 
-New schema work must be additive and versioned. Do not edit the installed
-migration-001 digest, disable guards, revive retired importers, or rebuild by
-dropping retained history. Database `PUBLISHED` state does not confer Harness
-managed admission on a provisional capability.
+- `model.feature`, `model.feature_version`, `model.feature_scenario`,
+  `model.capability_feature`.
+- `model.scenario.feature_pk` (nullable at first) and `model.scenario.capability_pk`
+  (retained).
+- `model.feature_version.capability_pk` and `model.feature.capability_pk`, carried
+  so the owner can be enforced by composite foreign keys.
+
+The retained `scenario.capability_pk` is a **provably redundant copy** of the
+feature's owner. Make disagreement impossible with composite keys:
+
+```sql
+-- the feature's owner is the anchor
+CREATE UNIQUE INDEX ux_feature_pk_capability
+  ON model.feature(feature_pk, capability_pk);
+ALTER TABLE model.scenario ADD CONSTRAINT fk_scenario_feature_owner
+  FOREIGN KEY (feature_pk, capability_pk)
+  REFERENCES model.feature(feature_pk, capability_pk);
+
+-- a capability version can only bind a feature version of its own capability
+ALTER TABLE model.capability_version
+  ADD CONSTRAINT ux_cv_pk_capability UNIQUE (capability_version_pk, capability_pk);
+ALTER TABLE model.feature_version
+  ADD CONSTRAINT ux_fv_pk_capability UNIQUE (feature_version_pk, capability_pk);
+ALTER TABLE model.capability_feature ADD CONSTRAINT fk_cf_cv
+  FOREIGN KEY (capability_version_pk, capability_pk)
+  REFERENCES model.capability_version(capability_version_pk, capability_pk);
+ALTER TABLE model.capability_feature ADD CONSTRAINT fk_cf_fv
+  FOREIGN KEY (feature_version_pk, capability_pk)
+  REFERENCES model.feature_version(feature_version_pk, capability_pk);
+```
+
+Follow the same pattern between `feature_scenario` and `scenario`, and between
+the retained `capability_scenario` and `scenario`, so every path pins the same
+owner. Every path then resolves to the same `capability_pk`:
+
+```text
+capability_version ──(capability_pk)──► capability_feature ──(capability_pk)──► feature_version
+                                                                                     |
+                                                                          feature_scenario
+                                                                                     |
+                                                                                     v
+capability_scenario ──(capability_pk)───────────────────────────────► scenario(feature_pk, capability_pk)
+```
+
+### 6.2 Backfill
+
+The applied SQL is one file,
+[`sidefx-database/sql/migrations/007-canonical-feature.sql`](C:/lab/sidefx-database/sql/migrations/007-canonical-feature.sql):
+
+- **schema** — the additive expand DDL above;
+- **load** — set-based; resolves one retained feature appearance per selected
+  capability (scenario lineage first, then the `features/<capability_id>.feature`
+  path convention), writes `feature`, `feature_version`, `feature_scenario`, and
+  the `CANONICAL` binding;
+- **verification** — counts, gaps, gate violations, and a binding sample.
+
+The whole file runs in **one transaction** and ends in `ROLLBACK TRANSACTION;`
+with `COMMIT TRANSACTION;` commented out. Apply it by switching those two lines
+only after the verification selects are clean. It keeps the narrative in the
+bound bytes and does not re-parse Gherkin. An optional `#override` table lets the
+operator pin the canonical appearance for a capability whose revision is
+contested (for example the equity feature).
+
+The authored scenario content already lives in `model.scenario_version`; the load
+pins those exact versions through `feature_scenario`. Where a capability's
+feature declares a scenario the model has not normalized, the load reports a gap
+rather than fabricating a version. Because existing rows are immutable, adding a
+`scenario.feature_pk` column and backfilling it is not part of this migration;
+the owner is enforced through `feature_scenario` and its composite keys instead
+(§6.1). The actual re-parent happens at contract.
+
+### 6.3 Prove
+
+The composite keys in §6.1 make cross-owner rows impossible. The adversarial
+cases use the same `reject(...)` idiom as `prove.mjs`:
+
+```js
+reject('a feature version cannot belong to another capability',
+  row('feature_version', { feature_pk: fA, capability_pk: capB }), /547/);
+reject('a capability version cannot bind another capability\'s feature version',
+  row('capability_feature',
+    { capability_version_pk: cvA, feature_version_pk: fvB, capability_pk: capA }), /547/);
+reject('a feature version cannot declare another capability\'s scenario',
+  row('feature_scenario', { capability_pk: capA, scenario_pk: scB }), /547/);
+```
+
+Green on those proves the new parent is enforced at the database, not by convention.
+
+### 6.4 Gate
+
+`007` installs `source.validate_canonical_features`, scoped to
+`sidefx:capabilities`, with:
+
+- `G_CAPABILITY_CANONICAL_FEATURE` — every selected managed capability version
+  has exactly one `CANONICAL` binding.
+- `G_FEATURE_SCENARIO_OWNER` — every `feature_scenario` row's scenario belongs to
+  the same capability as the feature version.
+- `G_FEATURE_VERSION_OWNER` — every bound feature version belongs to the same
+  capability as the binding.
+
+`008` reports the remaining gaps (selected capabilities with no resolved feature)
+without failing the load. These gates require the parser and are therefore
+pending until the projection is projected through one core:
+
+- `G_FEATURE_VERSION_PIN` — the capability envelope's canonical feature digest.
+- `G_ROOT_IN_FEATURE` — the root belongs to the bound feature version's set.
+- `G_FEATURE_BYTES_BOUND` — the feature version traces to matching bytes.
+- `G_FEATURE_TAG_OWNER` — exactly one `@capability`, resolving to the capability.
+- `G_SCENARIO_AUTHORED` — the selected scenario version carries authored steps.
+
+`007` also adds `sidefx.v_capability_feature` and
+`sidefx.v_capability_feature_scenarios` so readers resolve the feature without
+scanning history.
+
+### 6.5 Contract
+
+The target puts `feature_pk` on the scenario identity and drops
+`scenario.capability_pk`. That is a new-generation operation: existing `scenario`
+rows are immutable and cannot be updated, so the re-parent happens when the
+scenarios are re-minted. Until then the owner is enforced through
+`feature_scenario` and `capability_feature` (§6.1), and `capability_scenario`
+stays a base table. This migration does not perform the contract step.
+
+### 6.6 Consequences
+
+- Binding or revising a feature is an append to `capability_feature` /
+  `feature_scenario`. It does not rebuild 220 capability memberships. Once the
+  capability envelope carries the canonical feature digest (§6.4), a feature
+  change also mints a new `capability_version`.
+- Published historical definitions are never rewritten. Where the migration only
+  establishes an evidenced feature association for an old version, use the
+  append-only binding. Where authored semantics change, mint a new version and
+  record supersession.
+- New schema work is additive and versioned. Do not edit the installed
+  migration-001 digest, disable guards, or rebuild by dropping retained history.
+- Database `PUBLISHED` state does not confer Harness managed admission on a
+  provisional capability.
 
 ## 7. Migration sequence
 
 | Stage | Work | Exit evidence |
 | --- | --- | --- |
-| 1. Inventory every Capability | Reconcile all 220 managed identities / 228 managed versions (the 70 non-managed platform-catalog rows of §2.1 are excluded); identify every invocation-addressable revision and exact feature/support source set | No managed identity omitted; each discrepancy has a concrete resolution path; platform dependency rows stay out of the capability inventory |
-| 2. Prove shared projection | Implement canonical-feature binding and common parser/mapping; exercise managed and provisional controls | Same semantic source set produces the same definitions through both ingestion paths |
-| 3. Reconcile and backfill | Repair missing writeups/IDs and source conflicts; derive complete replacement definitions into an unpublished generation | All required canonical features are complete and coherent; no unexplained scenario additions/removals |
-| 4. Verify full coverage | Apply relational, lineage, semantic-fidelity and affected execution checks | Every invocable Capability version satisfies the contract; all historical versions are dispositioned |
-| 5. Cut over atomically | Recheck frozen inputs and expected predecessor; validate and select under the writer lock | Exact old/new generation receipt; concurrent stale publisher rejected |
-| 6. Enforce continuously | Run the same projection/completeness gates on every registration and revision | Feature/model drift cannot be introduced by a separate provisional path |
+| 1. Expand | Add `feature`, `feature_version`, `feature_scenario`, `capability_feature`, and the nullable parent columns | New tables exist; existing readers unaffected |
+| 2. Inventory | Reconcile all 220 managed identities / 228 managed versions (the 70 non-managed platform rows of §2.1 are excluded) | No managed identity omitted; each discrepancy has a resolution path |
+| 3. Project | Run one projection core over the retained features into the new tables | Feature narrative and authored scenario specifications are complete and addressable |
+| 4. Backfill and prove | Set `scenario.feature_pk`, verify owners, add the composite keys and gates, run the adversarial proof cases | Every path pins one owner; redundant column proven safe |
+| 5. Cut over atomically | Build the backfill generation, validate and select under the writer lock | Old/new generation receipt; stale publisher rejected |
+| 6. Enforce continuously | Require the canonical binding on every registration and revision | Feature/model drift cannot be introduced by a separate path |
+| 7. Contract | Drop `scenario.capability_pk` and its composite keys | Redundancy removed; feature is the only authority |
 
 Run pilots before the full backfill, using:
 
@@ -386,28 +560,26 @@ Run pilots before the full backfill, using:
    missing-canonical-ID case.
 
 Pilots prove the mechanism. They are not completion of the migration. Keep the
-existing selected model in service while the complete replacement is built;
-missing-feature enforcement on the existing estate and final cutover arrive with
-the backfill. Do not drop capabilities or intentionally break invocation to make
-a coverage percentage pass. Unresolved canonical-feature defects keep the
-migration incomplete.
+existing selected model in service while the complete replacement is built; do
+not drop capabilities or intentionally break invocation to make a coverage
+percentage pass. Unresolved canonical-feature defects keep the migration
+incomplete.
 
 Derive the complete candidate before loading. Follow foreign-key dependencies:
-source/observations, reusable definitions, Capability/Scenario versions and
-membership, execution authorities and operations, faces/bindings, lineage and
-coverage, then publication. Plan exact references before inserting immutable
-rows; never insert an unresolved face with a plan to mutate it after publication.
+source/observations, reusable definitions, feature/version and scenario
+membership, capability versions and binding, execution authorities and
+operations, faces/bindings, lineage and coverage, then publication. Plan exact
+references before inserting immutable rows.
 
 Recompute the affected dependency closure, including invocations, contracts,
 fixtures, observable conditions, blueprint pins and preparation identities.
 Carry unaffected definitions and evidence. Changed definitions do not inherit
-old proof or assessments as though they had been revalidated. Canonical feature
-projection alone does not supply a missing Blueprint or execution authority.
+old proof or assessments as though they had been revalidated.
 
 Selected meaning and execution queries must follow exact version FKs and owner
-scope. Historical comparison may display alternatives explicitly. Joining on
-scenario ID text alone or unioning all retained execution-authority versions
-cannot define the canonical circuit of the selected Capability revision.
+scope. Joining on scenario ID text alone or unioning all retained
+execution-authority versions cannot define the canonical circuit of the selected
+capability revision.
 
 ## 8. Idempotency, cutover and rollback
 
@@ -418,62 +590,56 @@ contents. Different sources, mappings or predecessor create a different plan.
 Counts alone are insufficient retry evidence.
 
 Failed loads leave the selected model untouched. Earlier table commits may remain
-for diagnosis and resume; final validation failure does not undo them. Checkpoints
-must belong to the exact plan. Do not reuse the existing fixed-generation loader's
-checkpoints for an unrelated backfill.
+for diagnosis and resume; final validation failure does not undo them.
+Checkpoints must belong to the exact plan.
 
 The existing `source.publish_model` takes a writer lock and validates before
 selection, but has no expected-predecessor argument. Add a database-enforced
 compare-and-select check in the same transaction so a candidate built against an
-old generation cannot replace a newer registration. Verify frozen inputs and
-compatible reader definitions at that boundary as well.
+old generation cannot replace a newer registration.
 
-Prove an owner-executed rollback operation before cutover. It must reselect the
-previous published generation under the writer lock, check the expected current
-generation, validate compatibility and retain a selection receipt. This is a
-required extension, not an existing command: `source.publish_model` expects a
-BUILDING generation and is not a general rollback selector.
+Prove an owner-executed rollback operation before cutover. It reselects the
+previous published generation under the writer lock, checks the expected current
+generation, validates compatibility and retains a selection receipt. This is a
+required extension: `source.publish_model` expects a BUILDING generation and is
+not a general rollback selector.
 
 Retain the previous generation and compatible reader/schema behavior throughout
-the rollback window. Exercise forward selection and rollback in an isolated
-database first. Rollback restores database selection, preserves source/history,
-and causes subsequent invocations to resolve the restored exact revision; it
-does not undo effects already executed. A rollback to the pre-migration baseline
-also restores its known feature gaps and reopens migration completion.
+the rollback window. Rollback restores database selection, preserves
+source/history, and causes subsequent invocations to resolve the restored exact
+revision; it does not undo effects already executed.
 
 ## 9. Acceptance evidence
 
 The migration is complete when:
 
-- Every managed or provisional Capability identity in `sidefx:capabilities` is
-  accounted for, and every invocation-addressable version has exactly one fully
-  projected canonical feature, for managed and provisional estates alike. The 70
-  non-managed platform-catalog rows are excluded as non-capabilities (§2.1).
-  Historical-version dispositions are complete; selected-only counts cannot
-  conceal missing identities.
-- For each migrated version, its declared and modeled scenario sets are equal,
-  its root agrees, and full prose/tags/context survive. The 235 corpus files and
-  other declaring sources retain digest-bound dispositions without treating
-  every source file as a new Capability.
-- Duplicate copies preserve identity and add lineage; same scenario text IDs
-  under different owners stay distinct; conflicting revisions cannot merge.
-  Missing IDs and missing references produce explicit failures/findings.
+- Every managed or provisional capability identity in `sidefx:capabilities` is
+  accounted for, and every invocation-addressable version has exactly one
+  canonical feature binding. The 70 non-managed platform-catalog rows are
+  excluded as non-capabilities (§2.1).
+- Every `FEATURE_VERSION` declares its scenario set, and each capability's
+  scenario set is exactly the bound feature version's set. The root belongs to
+  that set. Full prose, tags and Gherkin context survive projection.
+- Feature and scenario identity are feature-scoped and stable; repeated scenario
+  ID strings under different features stay distinct; conflicting revisions are
+  retained as `ALTERNATE` bindings and never merged. The redundant
+  `scenario.capability_pk` is proven consistent and then removed.
 - Both registration and ingestion use the shared core. Repeat runs create no
   duplicate semantic rows; semantic changes mint new versions; published
   definitions remain immutable.
 - SQL key, ownership, lineage, canonical-feature and constraint-trust gates pass.
   Relevant meaning, resolver, invocation and retained-fixture checks pass for
   changed definitions and their affected dependencies.
-- Adversarial checks reject registration/publication without a canonical feature,
-  extra or missing scenarios, contradictory roots, stale source/predecessor,
-  and direct-SQL bypass. Interrupted load/resume and competing publishers are
-  exercised. Readers observe one coherent generation during cutover/rollback.
+- Adversarial checks reject publication without a canonical feature, extra or
+  missing scenarios, contradictory roots, cross-owner bindings, stale
+  source/predecessor, and direct-SQL bypass. Readers observe one coherent
+  generation during cutover and rollback.
 
-The next implementation deliverable is the version-by-version reconciliation
-manifest plus the additive binding/gate specification and shared projection
-contract. Source repairs follow the applicable managed or provisional change
-path; no additional policy decision about whether provisional capabilities
-qualify for canonical features remains open.
+The next implementation deliverable is the generator changes
+(`catalog.mjs` / `schema.mjs` / `views.mjs`) for the expand stage, followed by
+the version-by-version reconciliation manifest. Source repairs follow the
+applicable managed or provisional change path; no policy decision about whether
+provisional capabilities qualify for canonical features remains open.
 
 ## 10. Reproduce this review
 

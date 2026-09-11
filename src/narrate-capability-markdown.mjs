@@ -233,6 +233,25 @@ export function narrateCapabilityMarkdown(meaning) {
     }
   }
 
+  const features = meaning.features ?? [];
+  lines.push(`## Canonical feature (${features.length})`, '');
+  if (!features.length) {
+    lines.push(`The estate binds no canonical feature to this capability. ${ABSENT}`, '');
+  } else {
+    lines.push(...table(['Profile', 'Binding', 'Retained source', 'Source bytes', 'Pinned scenarios'],
+      features.map(feature => [`\`${feature.sourceProfile}\``,
+        [feature.bindingRole, feature.generationBound ? 'generation-scoped' : null].filter(Boolean).join(' + ') || 'not bound',
+        `\`${feature.sourcePath}\``, `\`${feature.contentDigest}\``, String(feature.pinnedScenarios)])), '');
+    for (const feature of features) {
+      if (!feature.name && !feature.description) continue;
+      if (feature.name) lines.push(`### ${feature.name}`, '');
+      if (feature.description) {
+        // The Feature narrative as the writeup states it.
+        lines.push(...feature.description.split('\n').map(item => item.trim()).filter(Boolean), '');
+      }
+    }
+  }
+
   lines.push('## User story', '');
   if (capability.userStory) {
     lines.push(...table(['Field', 'Declared'], [

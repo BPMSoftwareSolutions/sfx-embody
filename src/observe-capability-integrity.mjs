@@ -18,7 +18,7 @@ const plural = (count, one, many) => `${count} ${count === 1 ? one : many}`;
 
 export function observeCapabilityIntegrity(meaning) {
   const { capability, scenarios, executionAuthorities, ports, transformations,
-    observableConditions, invocations, implementations, platformCapabilityUsage = [] } = meaning;
+    observableConditions, invocations, implementations, platformCapabilityUsage = [], features = [] } = meaning;
   const observations = [];
   const see = (kind, code, subject, statement) => observations.push({ kind, code, subject, statement });
 
@@ -148,6 +148,28 @@ export function observeCapabilityIntegrity(meaning) {
         shapes.size > 1
           ? `${plural(item.definitions.length, 'retained definition', 'retained definitions')} declaring ${plural(shapes.size, `different ${noun}`, `different ${noun}s`)}. The circuit draws their union; no single definition declares all of it.`
           : `${plural(item.definitions.length, 'retained definition', 'retained definitions')} with differing digests that declare the same thing.`);
+    }
+  }
+
+  // The canonical feature binding, as migrations 007/008 retain it.
+  if (!features.length) {
+    see(STRUCTURE, 'CANONICAL_FEATURE_UNBOUND', capability.capabilityId,
+      'The estate binds no canonical feature to this capability.');
+  } else {
+    const canonical = features.filter(feature => feature.bindingRole === 'CANONICAL');
+    if (!canonical.length) {
+      see(STRUCTURE, 'CANONICAL_FEATURE_UNBOUND', capability.capabilityId,
+        `A feature is retained for this capability, but no profile is bound CANONICAL in this generation (${features.map(f => f.sourceProfile).join(', ')}).`);
+    }
+    for (const feature of canonical) {
+      if (feature.name || feature.description) continue;
+      // The binding the generation selects carries no parsed declaration, while
+      // another retained profile may. That is a fact about the binding.
+      const carrier = features.find(other => other.name || other.description);
+      see(MEANING, 'CANONICAL_FEATURE_DECLARATION_ABSENT', feature.featureId,
+        carrier
+          ? `The CANONICAL binding is \`${feature.sourceProfile}\`, which declares no feature name or narrative; the parsed declaration is retained on \`${carrier.sourceProfile}\`, which this generation does not bind canonically.`
+          : 'The CANONICAL binding declares no feature name or narrative.');
     }
   }
 

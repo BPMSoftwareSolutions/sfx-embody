@@ -14,10 +14,16 @@
 | Snapshot | `sha256:1a770ac0795d10665a88166f8d8c968dc5b2d030fdfab2b837aa6071d135f9e9` |
 | Projection | `sha256:8aae1f306ced5952333da0fb936d2f846081f8ed31b6f627a2099ad49cbbfdb0` |
 
-## Review summary (0 observations)
+## Review summary (1 observation)
 
-Every declared id in this circuit resolves, no two retained definitions disagree,
-and meaning is declared at every point this report inspects.
+Each line states what the selected model declares. None is a judgement about
+whether the estate is correct - that is the reviewer's to make.
+
+**Meaning — the authority declares none here (1)**
+
+| Subject | Observation | Code |
+| --- | --- | --- |
+| `materialize-authorized-file-batch` | The CANONICAL binding is `retained-feature-binding.v1`, which declares no feature name or narrative; the parsed declaration is retained on `parsed-feature-declaration.v1`, which this generation does not bind canonically. | `CANONICAL_FEATURE_DECLARATION_ABSENT` |
 
 ## Capability circuit today
 
@@ -134,6 +140,33 @@ sequenceDiagram
   n0->>n2: invoke-scenario
   n0->>n3: invoke-scenario
 ```
+
+## Canonical feature (2)
+
+| Profile | Binding | Retained source | Source bytes | Pinned scenarios |
+| --- | --- | --- | --- | --- |
+| `parsed-feature-declaration.v1` | generation-scoped | `features/materialize-authorized-file-batch.feature` | `sha256:8cf7141cb96bf97f94a8401951402175582a9b408935acf2792045a7bfef2081` | 4 |
+| `retained-feature-binding.v1` | CANONICAL | `features/materialize-authorized-file-batch.feature` | `sha256:8cf7141cb96bf97f94a8401951402175582a9b408935acf2792045a7bfef2081` | 4 |
+
+### Materialize one authorized batch of exact file bytes
+
+A caller supplies one disposable external-root authority and a non-empty ordered
+batch of content-addressed file mappings. The capability derives one canonical
+authorized plan, delegates exactly that plan to an admitted generic filesystem
+mechanic, and returns bounded post-effect testimony for every mapping.
+The capability is domain-neutral. It knows nothing about capsules, expansion,
+Reveal, repositories, projectors, or any consumer-specific layout. It neither
+discovers a destination nor grants authority to one. The caller supplies the
+target root, relative target paths, exact base64 bytes, expected SHA-256 digests,
+and per-target existence policy.
+Absolute paths, traversal, symbolic-link crossings, malformed or divergent byte
+testimony, duplicate or colliding targets, incompatible existing targets, and
+post-effect digest divergence fail closed. The complete batch is validated before
+the target root is created or any file is written. Repeating an exact authorized
+request is idempotent only where allow-exact-match is explicitly declared.
+Success reports file paths, byte lengths, content hashes, per-mapping results,
+and effect lineage without returning encoded content bytes. REQUEST_REJECTED and
+EFFECT_FAILED remain distinct from EFFECT_OBSERVED and never claim completion.
 
 ## User story
 

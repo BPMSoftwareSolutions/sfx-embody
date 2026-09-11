@@ -90,6 +90,25 @@ export function narrateCapabilityMeaning(meaning) {
   lines.push(`Definition  ${capability.definitionDigest}`);
   lines.push(`Snapshot    ${meaning.snapshotId}`);
 
+  lines.push(...heading(`Canonical feature (${(meaning.features ?? []).length})`));
+  if (!(meaning.features ?? []).length) {
+    lines.push(`The estate binds no canonical feature to this capability. ${ABSENT}`);
+  }
+  for (const feature of meaning.features ?? []) {
+    lines.push('');
+    lines.push(`  ${feature.featureId}  [${feature.sourceProfile}]`);
+    lines.push(`    binding            ${[feature.bindingRole, feature.generationBound ? 'generation-scoped' : null]
+      .filter(Boolean).join(' + ') || 'not bound'}`);
+    lines.push(`    retained source    ${value(feature.sourcePath)}`);
+    lines.push(`    source bytes       ${value(feature.contentDigest)}`);
+    lines.push(`    pinned scenarios   ${feature.pinnedScenarios}`);
+    lines.push(`    declared name      ${value(feature.name)}`);
+    if (feature.description) {
+      lines.push('');
+      for (const line of feature.description.split('\n').map(item => item.trim()).filter(Boolean)) lines.push(`    ${line}`);
+    }
+  }
+
   lines.push(...heading('User story'));
   if (capability.userStory) {
     lines.push(field('Actor', capability.userStory.actor, 8));

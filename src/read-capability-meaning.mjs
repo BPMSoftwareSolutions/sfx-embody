@@ -195,6 +195,31 @@ LEFT JOIN model.provider_mechanic_implementation pmi ON pmi.provider_definition_
 LEFT JOIN model.mechanic_version mv ON mv.mechanic_version_pk=pmi.mechanic_version_pk
 LEFT JOIN model.mechanic m ON m.mechanic_pk=mv.mechanic_pk
 ORDER BY pdf.platform_capability_id,p.provider_id,m.mechanic_id;
+
+-- 10: the canonical feature bound to this capability. Migrations 007 and 008
+--     retain two profiles: 007 binds the retained bytes by digest and path, 008
+--     adds the parsed declaration. Both are reported, each with the binding that
+--     names it, so a narrative held on a profile the generation does not bind
+--     canonically is visible rather than silently promoted.
+SELECT f.feature_id AS featureId,fv.source_profile AS sourceProfile,
+       cf.binding_role AS bindingRole,
+       CASE WHEN ecf.feature_version_pk IS NULL THEN 0 ELSE 1 END AS generationBound,
+       'sha256:'+LOWER(CONVERT(varchar(64),fv.definition_digest,2)) AS definitionDigest,
+       JSON_VALUE(CONVERT(varchar(max),co.content_bytes),'$.semantics.name') AS name,
+       JSON_VALUE(CONVERT(varchar(max),co.content_bytes),'$.semantics.description') AS description,
+       JSON_VALUE(CONVERT(varchar(max),co.content_bytes),'$.semantics.source_path') AS sourcePath,
+       JSON_VALUE(CONVERT(varchar(max),co.content_bytes),'$.semantics.content_digest') AS contentDigest,
+       (SELECT COUNT(*) FROM model.feature_scenario fs WHERE fs.feature_version_pk=fv.feature_version_pk) AS pinnedScenarios
+FROM model.feature f
+JOIN model.feature_version fv ON fv.feature_pk=f.feature_pk
+JOIN model.semantic_object_definition d ON d.semantic_object_definition_pk=fv.semantic_object_definition_pk
+JOIN source.content_object co ON co.content_object_pk=d.canonical_content_pk
+LEFT JOIN model.capability_feature cf ON cf.feature_version_pk=fv.feature_version_pk
+     AND cf.capability_version_pk=@capability_version_pk
+LEFT JOIN model.estate_capability_feature ecf ON ecf.feature_version_pk=fv.feature_version_pk
+     AND ecf.capability_pk=f.capability_pk
+WHERE f.capability_pk=(SELECT capability_pk FROM model.capability_version WHERE capability_version_pk=@capability_version_pk)
+ORDER BY fv.source_profile;
 `;
 
 const parse = value => {
@@ -226,7 +251,7 @@ export async function readCapabilityMeaning(databaseRoot, selection, { timings }
   const read = await query(MEANING_SQL, { input: selection, rowLimit: 100000, retainObjects: false });
   if (timings) timings['capability-meaning.sql'] = performance.now() - start;
   if (read.truncated) throw new Error('DATABASE_AUTHORITY_NOT_COHERENT');
-  const [capabilities, scenarios, authorities, ports, transformations, conditions, invocations, usage, blueprints, mechanics] = read.recordsets;
+  const [capabilities, scenarios, authorities, ports, transformations, conditions, invocations, usage, blueprints, mechanics, features] = read.recordsets;
   if (!capabilities?.length) throw new Error('CAPABILITY_MEANING_UNAVAILABLE');
 
   const declared = parse(capabilities[0].definitionJson)?.semantics?.authority ?? null;
@@ -298,6 +323,20 @@ export async function readCapabilityMeaning(databaseRoot, selection, { timings }
     invocations: invocations.map(row => ({ fromScenarioId: row.fromScenarioId, toScenarioId: row.toScenarioId })),
     // The blueprint candidate as retained: its declared nodes and edges, carried
     // whole so the circuit it proposed can be drawn beside the circuit today.
+    // The canonical feature the estate binds to this capability, as migrations
+    // 007 and 008 retain it.
+    features: (features ?? []).map(row => ({
+      featureId: row.featureId,
+      sourceProfile: row.sourceProfile,
+      bindingRole: row.bindingRole,
+      generationBound: Boolean(row.generationBound),
+      definitionDigest: row.definitionDigest,
+      name: text(row.name),
+      description: text(row.description),
+      sourcePath: row.sourcePath,
+      contentDigest: row.contentDigest === null ? null : 'sha256:' + row.contentDigest,
+      pinnedScenarios: Number(row.pinnedScenarios ?? 0),
+    })),
     blueprints: blueprints.map(row => {
       const declared = parse(row.definitionJson)?.semantics ?? null;
       return {

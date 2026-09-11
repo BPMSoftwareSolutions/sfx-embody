@@ -12,7 +12,7 @@
 | Snapshot | `sha256:1a770ac0795d10665a88166f8d8c968dc5b2d030fdfab2b837aa6071d135f9e9` |
 | Projection | `sha256:8aae1f306ced5952333da0fb936d2f846081f8ed31b6f627a2099ad49cbbfdb0` |
 
-## Review summary (10 observations)
+## Review summary (11 observations)
 
 Each line states what the selected model declares. None is a judgement about
 whether the estate is correct - that is the reviewer's to make.
@@ -33,10 +33,11 @@ whether the estate is correct - that is the reviewer's to make.
 | `resolve-equity-market-price-evidence-port` | 5 retained definitions with differing digests that declare the same thing. | `PORT_DEFINITIONS_REPEATED` |
 | `transform-resolve-equity-market-price-evidence` | 5 retained definitions with differing digests that declare the same thing. | `TRANSFORMATION_DEFINITIONS_REPEATED` |
 
-**Meaning — the authority declares none here (4)**
+**Meaning — the authority declares none here (5)**
 
 | Subject | Observation | Code |
 | --- | --- | --- |
+| `resolve-equity-market-price-evidence` | The CANONICAL binding is `retained-feature-binding.v1`, which declares no feature name or narrative; the parsed declaration is retained on `parsed-feature-declaration.v1`, which this generation does not bind canonically. | `CANONICAL_FEATURE_DECLARATION_ABSENT` |
 | `resolve-equity-market-price-evidence` | The capability declares no experience, so it states no promise. | `EXPERIENCE_ABSENT` |
 | `resolve-equity-market-price-evidence` | No observable condition is declared against this capability definition, so nothing states how its promise is observed. | `OBSERVABLE_CONDITIONS_ABSENT` |
 | `resolve-equity-market-price-evidence` | Every retained definition declares the scenario's face only. No definition declares an authored specification, so the scenario states no behaviour in language. | `SCENARIO_SPECIFICATION_ABSENT` |
@@ -144,6 +145,22 @@ sequenceDiagram
   n0->>n5: invoke-port
   Note right of n5: sda-authority-transformation-port.v1 / normalize-equity-price-evidence
 ```
+
+## Canonical feature (2)
+
+| Profile | Binding | Retained source | Source bytes | Pinned scenarios |
+| --- | --- | --- | --- | --- |
+| `parsed-feature-declaration.v1` | generation-scoped | `features/resolve-equity-market-price-evidence.feature` | `sha256:2cef921f310859afce813f5f35a8dc5362c738ec7a819ed50540a3c4dea150c8` | 1 |
+| `retained-feature-binding.v1` | CANONICAL | `features/resolve-equity-market-price-evidence.feature` | `sha256:2cef921f310859afce813f5f35a8dc5362c738ec7a819ed50540a3c4dea150c8` | 1 |
+
+### Resolve provider-neutral equity market-price evidence
+
+A consumer asks for observed market-price evidence using one canonical input
+and receives one canonical outcome independent of the selected supplier. The
+provider binding, native request, native response, credential realization,
+and supplier testimony remain outside the capability's semantic identity.
+An observed price is attributable provider testimony, not an assertion of
+intrinsic value, investment suitability, or cross-provider equivalence.
 
 ## User story
 
