@@ -3,7 +3,7 @@
   "surfaces": {
     "database-invocation": {
       "delivery": "database-memory",
-      "operations": ["invoke", "prepare"]
+      "operations": ["invoke", "prepare", "circuit"]
     }
   },
   "identities": {
@@ -20,6 +20,11 @@
         "min": 1, "max": 1, "identity": "capability", "input": true, "namespace": true,
         "wraps": { "surface": "database-invocation", "operation": "invoke" },
         "description": "Execute the database capability's declared root through the candidate memory provider; authority is read and planned per invocation."
+      },
+      "circuit": {
+        "min": 1, "max": 1, "identity": "capability", "input": true, "namespace": true,
+        "wraps": { "surface": "database-invocation", "operation": "circuit" },
+        "description": "Derive the capability's circuit from the selected database authority. Optional input {\"scenarioId\": \"...\"} selects a scenario."
       }
     }
   }

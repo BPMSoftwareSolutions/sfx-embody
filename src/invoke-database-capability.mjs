@@ -3,6 +3,7 @@ import { prepareDatabaseCapability } from './prepare-database-capability.mjs';
 import { planNode } from './materialize-node.mjs';
 import { loadMemoryScenario } from './load-memory-scenario.mjs';
 import { readAuthority } from './read-authority.mjs';
+import { deriveCircuit } from './derive-circuit.mjs';
 
 const digest = value => 'sha256:' + createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -12,7 +13,7 @@ export function validateDatabaseCommand(envelope) {
   if (!object(envelope) || envelope.deliveryType !== 'sfx-command-delivery.v1'
     || !Object.keys(envelope).every(key => ['deliveryType', 'operation', 'request'].includes(key))) throw new Error('DELIVERY_PROTOCOL_REJECTED');
   const request = envelope.request;
-  if (!['invoke', 'prepare'].includes(envelope.operation) || !object(request) || request.object !== 'capability' || request.verb !== envelope.operation) throw new Error('DATABASE_OPERATION_NOT_OFFERED');
+  if (!['invoke', 'prepare', 'circuit'].includes(envelope.operation) || !object(request) || request.object !== 'capability' || request.verb !== envelope.operation) throw new Error('DATABASE_OPERATION_NOT_OFFERED');
   if (!Object.keys(request).every(key => requestFields.includes(key))
     || typeof request.subject !== 'string' || !request.subject.length
     || (request.namespace !== undefined && (typeof request.namespace !== 'string' || !request.namespace.length))) throw new Error('DATABASE_COMMAND_REJECTED');
@@ -39,9 +40,20 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, 
     finally { timings[name] = performance.now() - start; }
   };
   const request = structuredClone(validateDatabaseCommand(envelope));
-  const selection = { capabilityId: request.subject, target: 'node', ...(request.namespace === undefined ? {} : { namespaceId: request.namespace }) };
+  const selection = { capabilityId: request.subject, target: 'node', ...(request.namespace === undefined ? {} : { namespaceId: request.namespace }),
+    ...(request.verb === 'circuit' && typeof request.input?.scenarioId === 'string' ? { scenarioId: request.input.scenarioId } : {}) };
   const config = { databaseRoot, sdaRoot };
   if (request.verb === 'prepare') return prepareDatabaseCapability(selection, config, measure, timings);
+  // A circuit is a view of the same authority invocation reads. It is derived
+  // here, from the selected capability and scenario, rather than from any
+  // separately compiled product, so the database is the only source.
+  if (request.verb === 'circuit') {
+    const bundle = await measure('readAuthority', () => readAuthority(databaseRoot, selection, { retainObjects: false, timings: timings.queries }));
+    const circuit = deriveCircuit({ bundle, capabilityId: request.subject });
+    return { disposition: 'terminated', circuit, evidence: { authoritySource: 'DATABASE',
+      bodyStorage: 'NOT_REQUESTED', snapshotId: bundle.authority.snapshotId, projectionDigest: bundle.authority.projectionDigest,
+      queries: [bundle.authority, bundle.closure].filter(Boolean).map(({ recordsets, ...identity }) => identity) } };
+  }
   // Invocation is direct: it resolves the selected authority, plans the native
   // body and executes it in memory on every call. Preparation is an optional,
   // separately invoked retained proof and is never consumed here.
