@@ -37,7 +37,9 @@ The [read-only audit](research/canonical-feature-migration/audit.mjs) uses the
 existing database Gherkin parser and restricted SQL reader. The
 [retained report](research/canonical-feature-migration/review-20260911.json)
 contains file hashes, declared IDs, differences, selected scenario versions,
-feature lineage, and implementation hashes.
+feature lineage, and implementation hashes. Every figure cited below is
+reproduced by standalone SQL in the
+[SQL appendix](research/canonical-feature-migration/appendix.md).
 
 | Pin | Value |
 | --- | --- |
@@ -117,7 +119,7 @@ stored as managed capability identities; do not demand canonical features for
 them, and do not count them toward migration coverage. The gate is scoped to
 `sidefx:capabilities`, so these rows can neither satisfy nor fail it.
 
-### Corrections to the original gap accounting
+### 2.2 Corrections to the original gap accounting
 
 Scenario identity is Capability-owned. Three repeated scenario ID strings occur
 under different Capability owners and are valid distinct identities. Ten more
