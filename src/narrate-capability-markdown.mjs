@@ -14,8 +14,9 @@
 //
 // The invocation tree is drawn from the scenario invocations the model declares
 // as relationships, never from an ordering guessed out of closure depth.
-import { circuitDiagram, scenarioDiagram, executionOrderDiagrams } from './diagram-capability-circuit.mjs';
+import { executionOrderDiagrams } from './diagram-capability-circuit.mjs';
 import { observeCapabilityIntegrity, observationKinds } from './observe-capability-integrity.mjs';
+import { blueprintDiagram, circuitFromAuthority, compareBlueprintToCircuit } from './diagram-blueprint-circuit.mjs';
 
 const ABSENT = '_(not declared)_';
 const PLAIN = '(not declared)';
@@ -168,10 +169,52 @@ export function narrateCapabilityMarkdown(meaning) {
     }
   }
 
-  lines.push('## Capability circuit', '');
-  lines.push('Every node and edge is a relationship the model declares. Edge captions carry the',
-    'declared execution order. A red node or dashed edge is a point the paragraphs above name.', '');
-  lines.push(...fence(circuitDiagram(meaning), 'mermaid'), '');
+  lines.push('## Capability circuit today', '');
+  lines.push('The circuit the estate declares now, drawn in the same shape a blueprint is drawn in,',
+    'so the two can be read against each other. Node shape is the declared kind, the label lines',
+    'are the declared face, and each edge caption is the declared operation kind and its step in',
+    'the declared order. A node in red is a point the review summary names.', '');
+  lines.push(...fence(blueprintDiagram(circuitFromAuthority(meaning)), 'mermaid'), '');
+
+  // What the circuit is today, beside what its blueprint candidate proposed.
+  const blueprints = meaning.blueprints ?? [];
+  lines.push(`## Blueprint candidate (${blueprints.length})`, '');
+  if (!blueprints.length) {
+    lines.push('The estate retains no circuit blueprint candidate bound to this capability,',
+      "so there is nothing to compare today's circuit against.", '');
+  }
+  for (const blueprint of blueprints) {
+    lines.push(`### \`${blueprint.blueprintId}\``, '');
+    lines.push(...table(['Field', 'Value'], [
+      ['Carrier', blueprint.carrierVersion],
+      ['Blueprint version', blueprint.capability?.version],
+      ['Root experience', blueprint.capability?.rootExperience],
+      ['Definition digest', `\`${blueprint.definitionDigest}\``],
+      ['Declared nodes', String(blueprint.nodes.length)],
+      ['Declared edges', String(blueprint.edges.length)],
+    ]), '');
+    lines.push('Generated from the retained blueprint authority on every read, not from a',
+      'pre-rendered artifact. Node shape is the declared kind; every edge caption is the',
+      'declared selecting variant, topology, semantic progress and bounded return.', '');
+    lines.push(...fence(blueprintDiagram(blueprint), 'mermaid'), '');
+
+    const comparison = compareBlueprintToCircuit(blueprint, meaning);
+    lines.push('#### Proposed against today', '');
+    for (const [title, side, proposedLabel, todayLabel] of [
+      ['Cells and scenarios', comparison.cells, "Proposed as a cell, no scenario of that name in today's closure", "In today's closure, not proposed as a cell"],
+      ['Ports', comparison.ports, 'Proposed as a provider slot, not a port today', 'A port today, not proposed as a provider slot']]) {
+      lines.push(`**${title}**`, '');
+      // An empty side is none, not undeclared. The distinction matters here.
+      const listed = items => (items.length ? items.map(item => `\`${item}\``).join(', ') : 'none');
+      lines.push(...table(['Standing', 'Count', 'Declared'], [
+        ['Proposed and present today', String(side.both.length), listed(side.both)],
+        [proposedLabel, String(side.proposedOnly.length), listed(side.proposedOnly)],
+        [todayLabel, String(side.todayOnly.length), listed(side.todayOnly)],
+      ]), '');
+    }
+    lines.push('A name on one side only is reported as exactly that. Which side is right is the',
+      "reviewer's to decide.", '');
+  }
 
   const traces = executionOrderDiagrams(meaning);
   if (traces.length) {
@@ -224,8 +267,7 @@ export function narrateCapabilityMarkdown(meaning) {
 
   lines.push(`## Scenario closure (${scenarios.length})`, '');
   const tree = invocationTree(capability.selectedScenarioId, scenarios, invocations);
-  lines.push(`Drawn from the ${invocations.length} scenario ${invocations.length === 1 ? 'invocation' : 'invocations'} the model declares as relationships.`, '');
-  lines.push(...fence(scenarioDiagram(meaning), 'mermaid'), '');
+  lines.push(`The model declares ${invocations.length} scenario ${invocations.length === 1 ? 'invocation' : 'invocations'} as relationships between these scenarios.`, '');
   if (tree.unreached.length) {
     lines.push(`${tree.unreached.length === 1 ? 'This scenario is' : 'These scenarios are'} in the declared closure, but no declared invocation edge reaches ${tree.unreached.length === 1 ? 'it' : 'them'} from the scenario read:`, '');
     for (const id of tree.unreached) lines.push(`- \`${id}\``);

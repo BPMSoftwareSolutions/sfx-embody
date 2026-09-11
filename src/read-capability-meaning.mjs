@@ -61,9 +61,9 @@ FROM analysis.v_selected_semantic_definition d
 WHERE d.estate_model_pk=@estate_model_pk AND d.semantic_object_definition_pk=@capability_definition_pk;
 
 DECLARE @closure TABLE(scenario_id nvarchar(400) COLLATE Latin1_General_100_BIN2 PRIMARY KEY,
-                       minimum_depth int,cycle_detected bit);
-INSERT @closure(scenario_id,minimum_depth,cycle_detected)
-SELECT s.scenario_id,MIN(cl.minimum_depth),MAX(CONVERT(tinyint,cl.cycle_detected))
+                       scenario_version_pk bigint,minimum_depth int,cycle_detected bit);
+INSERT @closure(scenario_id,scenario_version_pk,minimum_depth,cycle_detected)
+SELECT s.scenario_id,MIN(sv.scenario_version_pk),MIN(cl.minimum_depth),MAX(CONVERT(tinyint,cl.cycle_detected))
 FROM analysis.v_scenario_invocation_closure cl
 JOIN model.scenario_version sv ON sv.scenario_version_pk=cl.downstream_scenario_version_pk
 JOIN model.scenario s ON s.scenario_pk=sv.scenario_pk
@@ -72,6 +72,10 @@ GROUP BY s.scenario_id OPTION(MAXRECURSION 32767);
 
 -- 1: each scenario in the declared closure, with its authored specification.
 SELECT c.scenario_id AS scenarioId,c.minimum_depth AS minimumDepth,c.cycle_detected AS cycleDetected,
+       (SELECT MIN(i.input_id) FROM model.scenario_input i WHERE i.scenario_version_pk=c.scenario_version_pk) AS inputId,
+       (SELECT MIN(e.event_id) FROM model.scenario_event e WHERE e.scenario_version_pk=c.scenario_version_pk) AS eventId,
+       (SELECT MIN(e.responsibility) FROM model.scenario_event e WHERE e.scenario_version_pk=c.scenario_version_pk) AS responsibility,
+       (SELECT MIN(o.outcome_id) FROM model.scenario_outcome o WHERE o.scenario_version_pk=c.scenario_version_pk) AS outcomeId,
        'sha256:'+LOWER(CONVERT(varchar(64),d.definition_digest,2)) AS definitionDigest,d.definition_json AS definitionJson
 FROM @closure c
 LEFT JOIN analysis.v_selected_semantic_definition d
@@ -164,7 +168,18 @@ WHERE pc.platform_capability_id IN (SELECT platform_capability_id FROM @port_def
 GROUP BY pc.platform_capability_id
 ORDER BY pc.platform_capability_id;
 
--- 8: providers declaring an implementation of those ports' platform capabilities,
+-- 8: the circuit blueprint candidate declared for this capability, if the estate
+--    retains one. The blueprint binds itself to the capability it proposes, so
+--    the binding is read, never assembled out of the blueprint's own name.
+SELECT d.declared_id AS blueprintId,
+       'sha256:'+LOWER(CONVERT(varchar(64),d.definition_digest,2)) AS definitionDigest,
+       d.definition_json AS definitionJson
+FROM analysis.v_selected_semantic_definition d
+WHERE d.estate_model_pk=@estate_model_pk AND d.object_kind='BLUEPRINT'
+  AND JSON_VALUE(d.definition_json,'$.semantics.capability.capabilityId')=@capability_id
+ORDER BY d.declared_id;
+
+-- 9: providers declaring an implementation of those ports' platform capabilities,
 --    and the mechanics those providers declare.
 SELECT DISTINCT pdf.platform_capability_id AS platformCapabilityId,p.provider_id AS providerId,
        m.mechanic_id AS mechanicId,mv.definition_profile AS definitionProfile
@@ -211,7 +226,7 @@ export async function readCapabilityMeaning(databaseRoot, selection, { timings }
   const read = await query(MEANING_SQL, { input: selection, rowLimit: 100000, retainObjects: false });
   if (timings) timings['capability-meaning.sql'] = performance.now() - start;
   if (read.truncated) throw new Error('DATABASE_AUTHORITY_NOT_COHERENT');
-  const [capabilities, scenarios, authorities, ports, transformations, conditions, invocations, usage, mechanics] = read.recordsets;
+  const [capabilities, scenarios, authorities, ports, transformations, conditions, invocations, usage, blueprints, mechanics] = read.recordsets;
   if (!capabilities?.length) throw new Error('CAPABILITY_MEANING_UNAVAILABLE');
 
   const declared = parse(capabilities[0].definitionJson)?.semantics?.authority ?? null;
@@ -234,6 +249,9 @@ export async function readCapabilityMeaning(databaseRoot, selection, { timings }
     scenarios: group(scenarios, 'scenarioId', (row, entry) => {
       entry.minimumDepth = row.minimumDepth;
       entry.cycleDetected = Boolean(row.cycleDetected);
+      // The scenario's declared face, as the model states it on the scenario
+      // version: what it admits, what energizes it, what it produces.
+      entry.face = { inputId: row.inputId, eventId: row.eventId, outcomeId: row.outcomeId, responsibility: row.responsibility };
       if (row.definitionDigest === null || row.definitionDigest === undefined) return null;
       const parsed = parse(row.definitionJson);
       const semantics = parsed?.semantics ?? null;
@@ -278,6 +296,19 @@ export async function readCapabilityMeaning(databaseRoot, selection, { timings }
     })),
     observableConditions: conditions.map(row => ({ conditionId: row.conditionId })),
     invocations: invocations.map(row => ({ fromScenarioId: row.fromScenarioId, toScenarioId: row.toScenarioId })),
+    // The blueprint candidate as retained: its declared nodes and edges, carried
+    // whole so the circuit it proposed can be drawn beside the circuit today.
+    blueprints: blueprints.map(row => {
+      const declared = parse(row.definitionJson)?.semantics ?? null;
+      return {
+        blueprintId: row.blueprintId,
+        definitionDigest: row.definitionDigest,
+        carrierVersion: declared?.carrierVersion ?? null,
+        capability: declared?.capability ?? null,
+        nodes: Array.isArray(declared?.nodes) ? declared.nodes : [],
+        edges: Array.isArray(declared?.edges) ? declared.edges : [],
+      };
+    }),
     platformCapabilityUsage: usage.map(row => ({
       platformCapabilityId: row.platformCapabilityId,
       portCount: Number(row.portCount ?? 0),
