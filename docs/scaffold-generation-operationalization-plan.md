@@ -14,6 +14,10 @@ This revision responds to the [plan review](scaffold-generation-operationalizati
 
 The review's further directions are integrated as explicit sections: the intended flywheel and its distinction from generator reuse (section 2), the governed read of what already exists (section 3.1), SQL as the default authoring and review surface (section 5), reconciliation as the operating discipline (section 6), the caller-facing invocation interface (section 7), and the mutable-workshop boundary for database experimentation (section 1.1).
 
+A second review round accepted four corrections now carried throughout: the immutability and candidate-successor rule is scoped to **sealed capsule artifacts only**, not the database working representation (section 1.1, section 5); the workshop has an executable deliverable (Increment 1) proving that an edited, uncapsulized definition runs through the CLI before capsulization; the compact score display (section 2.3) is derived from the single assessment per decision (section 11); and burden evidence `1` is claimed only with a named inspected source or supported estimate, with unsupported cells marked `unassessed`.
+
+The first workshop handoffs, [sql-cli-work-order-001.md](sql-cli-work-order-001.md) and [sql-cli-work-order-002.md](sql-cli-work-order-002.md), are attached to Increment 1 and selected by the least-work-complete-loop rule in section 2.4, which treats review and maintenance effort as part of the architectural cost. Their evidence is currently untested; completion requires observed CLI results.
+
 Generation remains a pure derivation. The existing capability execution path runs the resulting realization. This preserves the generator's declared responsibility while making its output useful sooner: first a truthful executable result, then a verified outcome with real providers wherever required.
 
 ## 1. Review scope and authority
@@ -95,6 +99,19 @@ Two distinctions the record must preserve:
 
 - **An incomplete assessment is not the same as evidence score 0.** This register currently classifies the benefit claims above as `0` (untested hypothesis); where an assessment is genuinely incomplete it is recorded once as `unassessed` in section 11 and inherited here unchanged.
 - **Benefit and burden need separate evidence scores when their support differs.** First-delivery time, repetition savings, continuing burden, reversibility and distribution remain separate measures. They are never collapsed into an invented aggregate score.
+
+### 2.4 Selection rule: the least-work complete loop
+
+When more than one path can advance the named flywheel step, choose **the least-work option that proves the complete intended loop**. Component-only or partial proof does not close the loop; necessary supporting work counts as partial progress until the loop works end to end. **Review effort is itself part of the architectural cost**, so a path that is cheaper to implement but harder to inspect, review or maintain is not automatically the lower-work option. Working data stays mutable and capsule promotion owns managed governance, so proving the loop never requires managed-promotion prerequisites.
+
+This rule selects among candidate work orders for the first workshop deliverable (section 8, Increment 1). The current candidates are:
+
+| Work order | Loop it proves | Checks |
+| --- | --- | --- |
+| [sql-cli-work-order-001.md](sql-cli-work-order-001.md) | SQL generates a Hello World scaffold → CLI invokes it → SQL changes the message → repeat with an unchanged CLI/runtime. | Read back the scaffold; actual stdout; SQL-only message change and restore; a second identity from the same operation. |
+| [sql-cli-work-order-002.md](sql-cli-work-order-002.md) | Read existing working data → edit a definition through SQL → invoke through CLI → vary inputs → reconcile → roll back. | Actual read; edited-definition execution; input variation (two symbols and one invalid input); rollback confirmed by a fresh read. |
+
+The two are not additive requirements. The least-work path that closes the complete loop is selected first; the other remains partial progress until its own loop closes. Both keep working data mutable, require observed CLI results before claiming completion, and treat review and maintenance effort as part of the cost. The scorecards in each work order are provisional and reconcile against section 11.
 
 ## 3. Inspected baseline, governed read and concrete gaps
 
@@ -207,7 +224,7 @@ The names below describe proposed information groups, not newly admitted schema 
 - The intended outcome or flywheel step it supports.
 - Contribution score (0–3) and its reason, citing which interpretation of the anchor supports the score.
 - Positive and negative effects separately, each with its own evidence score (0–2), its sources and its rationale. Benefit and burden are scored separately whenever their support differs.
-- First-delivery impact, repetition impact, continuing burden and reversibility.
+- First-delivery impact, repetition impact, continuing burden and reversibility. Review and maintenance effort count as continuing burden and first-delivery cost, not as work outside the decision.
 - Who benefits, who performs additional work and who bears failures.
 - Necessity, disposition, revisit trigger and subsequent observations.
 
@@ -386,12 +403,13 @@ Release independently eligible changes as soon as their own proof and lifecycle 
 
 The workshop assessment in Increment 0 has no implementation consequence unless an edited, uncapsulized definition can actually run. This bounded deliverable closes that gap and is the first executable proof of the mutable-workshop boundary. It does not wait for capsulization or managed admission.
 
+- Apply the least-work-complete-loop selection rule (section 2.4) to the candidate handoffs [sql-cli-work-order-001.md](sql-cli-work-order-001.md) and [sql-cli-work-order-002.md](sql-cli-work-order-002.md). Select the one whose complete loop is cheaper to prove including review and maintenance effort; the other is partial progress, not a prerequisite.
 - Make the relevant working data mutable through ordinary SQL (`INSERT`/`UPDATE`/`DELETE`) without triggering append-only guards, publication-dependent write restrictions or mandatory successor creation. Where an existing guard blocks this, narrow it to sealed artifacts or bypass the playground path; do not weaken seal protection.
 - Let the runtime read and execute the **current working state** of a definition, not only a sealed or published candidate. Identify the minimal read-path change in `read-authority.mjs`, `materialize-node.mjs` and `invoke-database-capability.mjs` needed to consume working rows, and preserve the existing published-candidate path unchanged.
 - Keep the distinction explicit in evidence: a working-state execution is reported as working/mutable, never as admitted, published or sealed. Incomplete and failed definitions are reported honestly.
-- Prove the concrete first workshop exercise: **read actual working data → edit a definition through SQL → invoke that edited definition through CLI → reconcile the observed result → roll back.** Because the runtime is a separate connection (section 5), the edit must be visible to it: either commit the working edit and apply a compensating revert after reconciliation, or use the supported transaction-sharing path. Either way the working data is restored, and the change is never promoted. It must succeed before any capsulization or managed admission; promotion into a sealed capsule is a separate subsequent proof.
+- Prove the selected loop end to end through the CLI. For work order 002 that is **read actual working data → edit a definition through SQL → invoke that edited definition through CLI → vary inputs → reconcile the observed result → roll back**; for work order 001 it is **SQL scaffold → CLI execution → observed stdout → SQL change → repeat**. Because the runtime is a separate connection (section 5), the edit must be visible to it: either commit the working edit and apply a compensating revert after reconciliation, or use the supported transaction-sharing path. Either way the working data is restored, and the change is never promoted. It must succeed before any capsulization or managed admission; promotion into a sealed capsule is a separate subsequent proof.
 
-**Exit:** an edited, uncapsulized working definition executes through the CLI and its observed result reconciles against the declared expectation, with working-versus-sealed status visible and the change rolled back. Sealed artifacts and the published-candidate path remain unaffected. Capsulization and managed admission are explicitly out of this increment's scope.
+**Exit:** the selected work order completes its whole loop with observed CLI results, working-versus-sealed status visible, the change rolled back (work order 002) or restored (work order 001), and no external source edits. Sealed artifacts and the published-candidate path remain unaffected. Capsulization and managed admission are explicitly out of this increment's scope. Supporting work that does not close the loop is reported as partial progress.
 
 ### Increment 2 — revise the declarative generator contract
 
@@ -500,13 +518,15 @@ Choose the second pilot during increment 0 as the next actual team need with a c
 
 Exercise the pilot through the SQL authoring/review surface and the caller-facing invocation interface, so that the review-time hypothesis and the input-variation acceptance criterion are measurable on the same candidate.
 
-The first concrete measurement is the workshop sequence from Increment 1: read actual working data → edit a definition through SQL → invoke that edited definition through CLI → reconcile the observed result → roll back. It must pass before capsulization or managed admission; the simulated and provider-backed pilot milestones then run against the same reconciled candidate.
+The first concrete measurement is the selected work order from Increment 1 (section 2.4): either the Hello World scaffold loop or the read → edit → invoke → vary → reconcile → rollback loop. It must pass before capsulization or managed admission; the simulated and provider-backed pilot milestones then run against the same reconciled candidate.
+
+Review and maintenance effort count as architectural cost, not overhead outside the accounting: a change that runs but is expensive to inspect, review or maintain is not cheap. Record that effort with the delivery effort and carry it into the decision record's continuing burden.
 
 | Measure | Collection rule |
 | --- | --- |
 | Time to first simulated execution | Elapsed time and engineering effort from scoped start; include source reconciliation, review and validation overhead. |
 | Time to first verified outcome | Separate timestamp/effort for the real outcome; identify provider-backed or provider-free proof and any external waiting time. |
-| Review effort per bounded change | Time and human steps to read the `.sql` change, its verification result sets and its scored flywheel assessment; recorded per change so the SQL-surface hypothesis is measured directly. |
+| Review effort per bounded change | Time and human steps to read the `.sql` change, its verification result sets and its scored flywheel assessment; recorded per change so the SQL-surface hypothesis is measured directly. This is cost, not a footnote. |
 | Mechanics reused | Exact distinct admitted mechanic identities/versions and bindings; also show obligations covered. Do not inflate the count with repeated calls or fixtures. |
 | New work and maintenance | New/revised semantic identities, profiles, adapters, contracts and recurring engineering/operational burden, with owners. |
 | Execution quality | Authorized successes/attempts by real versus simulated mode; failure reasons and distinct actual users. |
@@ -523,7 +543,7 @@ Scope anchor: one useful executable scaffold followed by its verified outcome, p
 
 | ID | Decision and source | Flywheel step (section 2.1) | Contribution (reason) | Benefit evidence | Burden evidence | Disposition / revisit |
 | --- | --- | --- | --- | --- | --- | --- |
-| D1 | Extend the existing pure generator (sections 3–4) | 2 — resolve existing mechanics, author only what is missing | **3** — necessary to produce the declared executable realization | **1** — inspected shell/slot machinery; measured improvement not yet scored | **1** — carrier/proof work; inspected generator shell, slot and evidence-obligation scenarios | Needed now; preserve purity. |
+| D1 | Extend the existing pure generator (sections 3–4) | 2 — resolve existing mechanics, author only what is missing | **3** — necessary to produce the declared executable realization | **1** — inspected shell/slot machinery; measured improvement not yet observed | **1** — carrier/proof work; inspected generator shell, slot and evidence-obligation scenarios | Needed now; preserve purity. |
 | D2 | Permit exact admitted semantic reuse (increment 2) | 2 and 3 — retain and reuse qualified assets | **2** — directly supports mechanic selection for the current scaffold | **0** — reduced delivery effort remains an untested hypothesis | **1** — provenance/compatibility work; inspected `preserve-semantic-transformation-as-unresolved` rule and reuse ordering | Needed now; unresolved/new meaning still uses its authoring path. |
 | D3 | Keep realization and outcome evidence separate (4.3–4.4) | 1 and 5 — truthful delivery of useful outcomes | **2** — directly supports the named truthful-reporting step | **1** — prevents fixture success claiming an external outcome; inspected | **1** — display/attribution work; inspected `narrate-capability-meaning.mjs` and `capability-command-surface.md` | Needed now; measure whether evidence remains understandable. |
 | D4 | Resolve reuse before new identity (4.2) | 2 and 4 — author only gaps, reuse assets next time | **2** — directly supports the current mechanic-selection step | **0** — lower repetition cost is an untested hypothesis | **1** — qualification/retrieval work; inspected `read-authority.mjs` resolver | Needed now; measure decision overhead and actual reuse. |
@@ -584,7 +604,9 @@ The team can review a concrete proposal without first resolving every optional m
 | Invocation interface | Schema-derived CLI arguments and JSON input through the shared invocation capability, with explicit precedence and effective-input inspection | Pending team review. |
 | Mutable workshop boundary | Working data is edited by ordinary SQL without a governed successor; execution of the current working state is proven in Increment 1 before capsulization; managed conformance/closure/admission binds only at promotion; sealed capsule artifacts are immutable | Pending team review. |
 | Immutability scope | Candidate-successor and supported-source-path requirements apply to sealed capsule artifacts only, not the database working representation | Pending team review. |
-| Working-data execution | Edited, uncapsulized definitions execute through the runtime and CLI, imported as working/mutable rather than admitted/published/sealed | Pending team review. |
+| Working-data execution | Edited, uncapsulized definitions execute through the runtime and CLI, reported as working/mutable rather than admitted/published/sealed | Pending team review. |
+| Work-order selection | Choose the least-work option that proves the complete intended loop, counting review and maintenance effort as cost; supporting work is partial progress until the loop works | Pending team review. |
+| Candidate work orders | [sql-cli-work-order-001.md](sql-cli-work-order-001.md) and [sql-cli-work-order-002.md](sql-cli-work-order-002.md) are the first workshop candidates; their scorecards remain provisional and untested until observed | Pending team review. |
 | Pilot | Equity evidence after exact source/feature reconciliation; name a real second use during increment 0 | Pending team review. |
 | Ownership and schedule | Assign generator, semantic review, database, runtime and provider owners; estimate after the baseline is reproduced | Unassigned. |
 
