@@ -31,17 +31,23 @@ function readCliConfiguration(bundle) {
 
 const INPUT_TYPES = new Set(['json', 'text', 'number', 'boolean']);
 
+function setInputPath(target, path, value) {
+  const segments = path.split('.');
+  let current = target;
+  for (const segment of segments.slice(0, -1)) { if (!object(current[segment])) current[segment] = {}; current = current[segment]; }
+  current[segments[segments.length - 1]] = value;
+  return target;
+}
+
 // Build the canonical input the contract expects from a typed scalar and the
-// capability's declared mapping. The declaration names the contract and the path.
+// capability's declared mapping: the contract, the path for the scalar, and any
+// declared field defaults the capability states for its CLI surface.
 function buildCanonicalInput(declared, type, raw) {
   if (!declared || typeof declared.contract !== 'string' || typeof declared.path !== 'string') throw new Error('CAPABILITY_INPUT_NOT_DECLARED');
   if (!INPUT_TYPES.has(type) || type === 'json') throw new Error('CAPABILITY_INPUT_TYPE_NOT_OFFERED');
   const value = type === 'number' ? Number(raw) : type === 'boolean' ? raw === true || raw === 'true' : String(raw);
-  const input = { contractId: declared.contract };
-  const segments = declared.path.split('.');
-  let target = input;
-  for (const segment of segments.slice(0, -1)) { if (!object(target[segment])) target[segment] = {}; target = target[segment]; }
-  target[segments[segments.length - 1]] = value;
+  const input = setInputPath({ contractId: declared.contract }, declared.path, value);
+  for (const [path, defaultValue] of Object.entries(declared.fields ?? {})) setInputPath(input, path, defaultValue);
   return input;
 }
 
