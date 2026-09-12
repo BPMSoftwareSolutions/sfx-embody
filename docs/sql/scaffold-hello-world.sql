@@ -64,6 +64,7 @@ SET @capText = N'{
   "experience": { "experienceId": "' + STRING_ESCAPE(@CapabilityId, 'json') + N'.v1", "actor": "caller",
     "promise": "the configured message is delivered through the sda-json-cli.v1 standard-output interface",
     "observableConditions": [ { "conditionId": "message-delivered-to-standard-output" } ] },
+  "semantics": { "cli": { "display": { "select": "outcome.payload.message", "as": "text" }, "input": { "type": "text", "contract": "' + STRING_ESCAPE(@InputContract, 'json') + N'", "path": "payload.name" } } },
   "rootScenarioId": "' + STRING_ESCAPE(@CapabilityId, 'json') + N'"
 }';
 SET @featureText =
