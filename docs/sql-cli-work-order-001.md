@@ -2,6 +2,8 @@
 
 2026-09-12 · Work order · End-to-end execution not yet demonstrated
 
+**Observed status:** The [SQL scaffold file](sql/scaffold-hello-world.sql) now generates an inspectable session-local candidate and rolls back. Two parameterized SQL trials passed; actual CLI invocation returned `CAPABILITY_NOT_FOUND`. A stdout event binding and a working-data execution connection remain missing. **0/4 CLI checks complete.** See the [execution record](research/sql-cli-work-order-001/README.md) and [actual results](research/sql-cli-work-order-001/verification.json). The file does not yet install an executable capability.
+
 **Goal:** Generate a Hello World capability through SQL and invoke it through the existing CLI. Capability meaning and changes come entirely from the database.
 
 ```mermaid

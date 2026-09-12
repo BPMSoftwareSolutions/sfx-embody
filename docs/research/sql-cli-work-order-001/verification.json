@@ -1,0 +1,815 @@
+{
+  "observedAt": "2026-09-12T08:47:29.136Z",
+  "sqlFile": "docs/sql/scaffold-hello-world.sql",
+  "sqlDigest": "sha256:87d78b7533a55a6a1e9fdd0c858a1b14f78a835a721050492a57795a05402bbe",
+  "proofs": [
+    {
+      "capabilityId": "hello-world-sql",
+      "message": "Hello World",
+      "scope": "SQL_SESSION_LOCAL_CANDIDATE_ONLY",
+      "rollbackObserved": true,
+      "resultsets": [
+        [
+          {
+            "result_set": "1_SCAFFOLD",
+            "inspected_model_id": "34",
+            "inspected_projection_digest": "sha256:8aae1f306ced5952333da0fb936d2f846081f8ed31b6f627a2099ad49cbbfdb0",
+            "capability_id": "hello-world-sql",
+            "scenario_id": "hello-world-sql",
+            "feature_text": "@capability:hello-world-sql\n@root-scenario:hello-world-sql\nFeature: Write the configured text to standard output\n\n  @scenario:hello-world-sql\n  @input:empty-request\n  @input-contract:hello-world-sql-request.v1\n  @event:write-configured-text\n  @event-authority:hello-world-sql.v1\n  @outcome:standard-output-written\n  @outcome-contract:hello-world-sql-write-receipt.v1\n  @outcome-terminal\n  Scenario: Write the database-defined message\n    Given an empty request and the message configured in the database\n    When the standard-output mechanic executes with that message\n    Then the caller observes the exact message on stdout\n    And execution evidence identifies the actual standard-output call\n",
+            "input_contract_id": "hello-world-sql-request.v1",
+            "input_schema": "{\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"type\":\"object\",\"additionalProperties\":false}",
+            "event_authority_id": "hello-world-sql.v1",
+            "event_responsibility": "Write the database-defined message through a standard-output mechanic",
+            "output_contract_id": "hello-world-sql-write-receipt.v1",
+            "output_schema": "{\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"type\":\"object\",\"required\":[\"text\",\"bytesWritten\"],\"additionalProperties\":false,\"properties\":{\"text\":{\"type\":\"string\"},\"bytesWritten\":{\"type\":\"integer\",\"minimum\":0}}}",
+            "message": "Hello World",
+            "operations": "[{\"scenario_id\":\"hello-world-sql\",\"ordinal\":1,\"operation_kind\":\"invoke-port\",\"port_id\":\"hello-world-sql-stdout-port\",\"required_mechanic\":\"Write supplied text to standard output; report completion or failure of the actual write\",\"request_json\":\"{\\\"text\\\":\\\"Hello World\\\"}\",\"bound_platform_capability_id\":null,\"provider_module\":null,\"provider_export\":null}]",
+            "scaffold_status": "SESSION_LOCAL_CANDIDATE_WITH_OPEN_SLOTS"
+          }
+        ],
+        [
+          {
+            "result_set": "2_CHANGE",
+            "candidate_id": "hello-world-sql",
+            "candidate_message": "Hello World",
+            "proposed_change": "CREATE_SESSION_LOCAL_SCAFFOLD",
+            "existing_selected_identity_count": 0,
+            "transaction_action": "ROLLBACK",
+            "persistent_capability_rows_written": 0
+          }
+        ],
+        [
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-authority-transformation-port.v1",
+            "provider_module": "semantic-transformation-evaluator.mjs",
+            "provider_export": "evaluateExpression",
+            "invocation": "transformation",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-bounded-base64-byte-digest-port.v1",
+            "provider_module": "bounded-base64-byte-digest-provider.mjs",
+            "provider_export": "resolveBoundedBase64ByteDigests",
+            "invocation": "configuration",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-canonical-capability-feature-resolution-port.v1",
+            "provider_module": "canonical-capability-feature-resolution-provider.mjs",
+            "provider_export": "resolveCanonicalCapabilityFeature",
+            "invocation": "url-context",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-declarative-value-port.v1",
+            "provider_module": null,
+            "provider_export": null,
+            "invocation": "configuration",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-external-credential-reference-binding-port.v1",
+            "provider_module": "external-credential-reference-binding-provider.mjs",
+            "provider_export": "bindExternalCredentialReference",
+            "invocation": "effects",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-external-observation-port.v1",
+            "provider_module": "external-observation-provider.mjs",
+            "provider_export": "observeExternalRepresentation",
+            "invocation": "configuration",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-filesystem-artifact-store.v1",
+            "provider_module": "filesystem-artifact-store-provider.mjs",
+            "provider_export": "storeArtifact",
+            "invocation": "configuration",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-generic-llm-connector-port.v1",
+            "provider_module": "generic-llm-connector-provider.mjs",
+            "provider_export": "invokeGenericLlmConnector",
+            "invocation": "llm",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-governed-disposable-root-lifecycle-port.v1",
+            "provider_module": "governed-disposable-root-lifecycle-provider.mjs",
+            "provider_export": "invokeGovernedDisposableRootLifecycle",
+            "invocation": "effects",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-governed-external-root-batch-materialization-port.v1",
+            "provider_module": "governed-external-root-batch-materialization-provider.mjs",
+            "provider_export": "invokeGovernedExternalRootBatchMaterialization",
+            "invocation": "configuration",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-governed-external-root-consumer-projection-port.v1",
+            "provider_module": "governed-external-root-consumer-projection-provider.mjs",
+            "provider_export": "invokeGovernedExternalRootConsumerProjection",
+            "invocation": "configuration",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-governed-external-root-observation-port.v1",
+            "provider_module": "governed-external-root-observation-provider.mjs",
+            "provider_export": "observeGovernedExternalRoot",
+            "invocation": "configuration",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-governed-external-root-projected-application-execution-port.v1",
+            "provider_module": null,
+            "provider_export": null,
+            "invocation": "configuration",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-governed-file-system-shaping-port.v2",
+            "provider_module": "governed-file-system-shaping-provider.mjs",
+            "provider_export": "invokeGovernedFileSystemShaping",
+            "invocation": "configuration",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-governed-http-exchange-port.v1",
+            "provider_module": "governed-http-exchange-provider.mjs",
+            "provider_export": "observeGovernedHttpExchange",
+            "invocation": "effects",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-governed-repository-observation-port.v1",
+            "provider_module": "governed-repository-observation-provider.mjs",
+            "provider_export": "observeGovernedRepository",
+            "invocation": "configuration",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-governed-serial-execution-port.v1",
+            "provider_module": "governed-serial-execution-provider.mjs",
+            "provider_export": "invokeGovernedSerialExecution",
+            "invocation": "serial",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-governed-target-execution-observation-port.v1",
+            "provider_module": "governed-target-execution-observation-provider.mjs",
+            "provider_export": "observeGovernedTargetExecution",
+            "invocation": "configuration",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-governed-tooling-binding-transaction-port.v1",
+            "provider_module": "governed-tooling-binding-transaction-provider.mjs",
+            "provider_export": "transactGovernedToolingBinding",
+            "invocation": "configuration",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-governed-tooling-migration-operation-port.v1",
+            "provider_module": "governed-tooling-migration-operation-provider.mjs",
+            "provider_export": "invokeGovernedToolingMigrationOperation",
+            "invocation": "configuration",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-json-authority-ingestion-port.v1",
+            "provider_module": "json-authority-ingestion-provider.mjs",
+            "provider_export": "invokeJsonAuthorityIngestion",
+            "invocation": "url-context",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-managed-language-module-invocation-port.v1",
+            "provider_module": "managed-language-module-provider.mjs",
+            "provider_export": "invokeManagedLanguageModule",
+            "invocation": "url-context",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-os-environment-credential-port.v1",
+            "provider_module": "os-environment-credential-provider.mjs",
+            "provider_export": "bindOsEnvironmentCredential",
+            "invocation": "configuration",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-projected-capability-invocation-port.v1",
+            "provider_module": null,
+            "provider_export": null,
+            "invocation": "configuration",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-projected-capability-invocation-port.v2",
+            "provider_module": null,
+            "provider_export": null,
+            "invocation": "configuration",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-proof-binding-evaluation-port.v1",
+            "provider_module": "proof-binding-evaluation-provider.mjs",
+            "provider_export": "invokeProofBindingEvaluation",
+            "invocation": "url-context",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-scenario-semantic-carrier-evaluation-port.v1",
+            "provider_module": "semantic-carrier-evaluator-provider.mjs",
+            "provider_export": "invokeScenarioSemanticCarrierCompilationEvaluation",
+            "invocation": "url-context",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-scenario-semantic-carrier-extraction-port.v1",
+            "provider_module": "semantic-carrier-extractor-provider.mjs",
+            "provider_export": "invokeScenarioSemanticCarrierExtraction",
+            "invocation": "url-context",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-scenario-semantic-carrier-validation-port.v1",
+            "provider_module": "semantic-carrier-validator/index.mjs",
+            "provider_export": "invokeScenarioSemanticCarrierValidation",
+            "invocation": "url-context",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-semantic-execution-graph-compilation-port.v1",
+            "provider_module": "semantic-execution-graph-compilation-provider.mjs",
+            "provider_export": "compileSemanticExecutionGraph",
+            "invocation": "configuration",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-semantic-vector-index.v1",
+            "provider_module": "semantic-vector-index-provider.mjs",
+            "provider_export": "invokeSemanticVectorIndex",
+            "invocation": "configuration",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          }
+        ],
+        [
+          {
+            "result_set": "4_VERIFICATION",
+            "code": "STDOUT_PROVIDER_BINDING_NOT_FOUND",
+            "expected": "A callable generic stdout event provider with matching request/receipt contracts",
+            "observed": "No stdout-named event binding in the selected registry; the complete event-port inventory follows.",
+            "evidence_source": "Selected snapshot Node registry; #Operation binding fields remain NULL",
+            "disposition": "EXECUTION_NOT_PROVEN"
+          },
+          {
+            "result_set": "4_VERIFICATION",
+            "code": "WORKING_CANDIDATE_NOT_CONNECTED_TO_CLI",
+            "expected": "CLI executes this exact SQL working definition",
+            "observed": "This script creates session-local working rows. Current read-authority.mjs resolves source.current_model and retained capsule sources.",
+            "evidence_source": "C:/lab/repos/sfx-embody/src/read-authority.mjs; sql/diagnostics/capability-embodiment.sql (source inspected 2026-09-12)",
+            "disposition": "EXECUTION_NOT_PROVEN"
+          }
+        ],
+        [
+          {
+            "result_set": "5_RUBRIC_AND_FLYWHEEL",
+            "decision_id": "SQL-CLI-001",
+            "flywheel": "SQL scaffold -> CLI execution -> observed output -> SQL change -> repeat",
+            "contribution_score": 3,
+            "contribution_reason": "Required to demonstrate the requested loop",
+            "end_to_end_evidence_score": 0,
+            "evidence_reason": "No stdout mechanic execution demonstrated",
+            "assessment_basis": "PLANNING_ASSESSMENT",
+            "assessment_date": "2026-09-12",
+            "observed_cli_checkpoints": 0,
+            "required_cli_checkpoints": 4,
+            "external_source_edits": 0,
+            "managed_promotion_prerequisites": 0,
+            "first_scaffold_minutes": null,
+            "first_scaffold_human_steps": null,
+            "repeat_minutes": null,
+            "benefit_and_burden": "UNMEASURED: expected easier repetition; provider binding and working-data delivery still missing",
+            "disposition": "HELD_AT_EXECUTION"
+          }
+        ],
+        [
+          {
+            "open_transactions": 0,
+            "scaffold_temp_object": null
+          }
+        ]
+      ]
+    },
+    {
+      "capabilityId": "hello-world-sql-repeat",
+      "message": "Hello SQL's 世界",
+      "scope": "SQL_SESSION_LOCAL_CANDIDATE_ONLY",
+      "rollbackObserved": true,
+      "resultsets": [
+        [
+          {
+            "result_set": "1_SCAFFOLD",
+            "inspected_model_id": "34",
+            "inspected_projection_digest": "sha256:8aae1f306ced5952333da0fb936d2f846081f8ed31b6f627a2099ad49cbbfdb0",
+            "capability_id": "hello-world-sql-repeat",
+            "scenario_id": "hello-world-sql-repeat",
+            "feature_text": "@capability:hello-world-sql-repeat\n@root-scenario:hello-world-sql-repeat\nFeature: Write the configured text to standard output\n\n  @scenario:hello-world-sql-repeat\n  @input:empty-request\n  @input-contract:hello-world-sql-repeat-request.v1\n  @event:write-configured-text\n  @event-authority:hello-world-sql-repeat.v1\n  @outcome:standard-output-written\n  @outcome-contract:hello-world-sql-repeat-write-receipt.v1\n  @outcome-terminal\n  Scenario: Write the database-defined message\n    Given an empty request and the message configured in the database\n    When the standard-output mechanic executes with that message\n    Then the caller observes the exact message on stdout\n    And execution evidence identifies the actual standard-output call\n",
+            "input_contract_id": "hello-world-sql-repeat-request.v1",
+            "input_schema": "{\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"type\":\"object\",\"additionalProperties\":false}",
+            "event_authority_id": "hello-world-sql-repeat.v1",
+            "event_responsibility": "Write the database-defined message through a standard-output mechanic",
+            "output_contract_id": "hello-world-sql-repeat-write-receipt.v1",
+            "output_schema": "{\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"type\":\"object\",\"required\":[\"text\",\"bytesWritten\"],\"additionalProperties\":false,\"properties\":{\"text\":{\"type\":\"string\"},\"bytesWritten\":{\"type\":\"integer\",\"minimum\":0}}}",
+            "message": "Hello SQL's 世界",
+            "operations": "[{\"scenario_id\":\"hello-world-sql-repeat\",\"ordinal\":1,\"operation_kind\":\"invoke-port\",\"port_id\":\"hello-world-sql-repeat-stdout-port\",\"required_mechanic\":\"Write supplied text to standard output; report completion or failure of the actual write\",\"request_json\":\"{\\\"text\\\":\\\"Hello SQL's 世界\\\"}\",\"bound_platform_capability_id\":null,\"provider_module\":null,\"provider_export\":null}]",
+            "scaffold_status": "SESSION_LOCAL_CANDIDATE_WITH_OPEN_SLOTS"
+          }
+        ],
+        [
+          {
+            "result_set": "2_CHANGE",
+            "candidate_id": "hello-world-sql-repeat",
+            "candidate_message": "Hello SQL's 世界",
+            "proposed_change": "CREATE_SESSION_LOCAL_SCAFFOLD",
+            "existing_selected_identity_count": 0,
+            "transaction_action": "ROLLBACK",
+            "persistent_capability_rows_written": 0
+          }
+        ],
+        [
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-authority-transformation-port.v1",
+            "provider_module": "semantic-transformation-evaluator.mjs",
+            "provider_export": "evaluateExpression",
+            "invocation": "transformation",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-bounded-base64-byte-digest-port.v1",
+            "provider_module": "bounded-base64-byte-digest-provider.mjs",
+            "provider_export": "resolveBoundedBase64ByteDigests",
+            "invocation": "configuration",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-canonical-capability-feature-resolution-port.v1",
+            "provider_module": "canonical-capability-feature-resolution-provider.mjs",
+            "provider_export": "resolveCanonicalCapabilityFeature",
+            "invocation": "url-context",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-declarative-value-port.v1",
+            "provider_module": null,
+            "provider_export": null,
+            "invocation": "configuration",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-external-credential-reference-binding-port.v1",
+            "provider_module": "external-credential-reference-binding-provider.mjs",
+            "provider_export": "bindExternalCredentialReference",
+            "invocation": "effects",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-external-observation-port.v1",
+            "provider_module": "external-observation-provider.mjs",
+            "provider_export": "observeExternalRepresentation",
+            "invocation": "configuration",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-filesystem-artifact-store.v1",
+            "provider_module": "filesystem-artifact-store-provider.mjs",
+            "provider_export": "storeArtifact",
+            "invocation": "configuration",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-generic-llm-connector-port.v1",
+            "provider_module": "generic-llm-connector-provider.mjs",
+            "provider_export": "invokeGenericLlmConnector",
+            "invocation": "llm",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-governed-disposable-root-lifecycle-port.v1",
+            "provider_module": "governed-disposable-root-lifecycle-provider.mjs",
+            "provider_export": "invokeGovernedDisposableRootLifecycle",
+            "invocation": "effects",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-governed-external-root-batch-materialization-port.v1",
+            "provider_module": "governed-external-root-batch-materialization-provider.mjs",
+            "provider_export": "invokeGovernedExternalRootBatchMaterialization",
+            "invocation": "configuration",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-governed-external-root-consumer-projection-port.v1",
+            "provider_module": "governed-external-root-consumer-projection-provider.mjs",
+            "provider_export": "invokeGovernedExternalRootConsumerProjection",
+            "invocation": "configuration",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-governed-external-root-observation-port.v1",
+            "provider_module": "governed-external-root-observation-provider.mjs",
+            "provider_export": "observeGovernedExternalRoot",
+            "invocation": "configuration",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-governed-external-root-projected-application-execution-port.v1",
+            "provider_module": null,
+            "provider_export": null,
+            "invocation": "configuration",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-governed-file-system-shaping-port.v2",
+            "provider_module": "governed-file-system-shaping-provider.mjs",
+            "provider_export": "invokeGovernedFileSystemShaping",
+            "invocation": "configuration",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-governed-http-exchange-port.v1",
+            "provider_module": "governed-http-exchange-provider.mjs",
+            "provider_export": "observeGovernedHttpExchange",
+            "invocation": "effects",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-governed-repository-observation-port.v1",
+            "provider_module": "governed-repository-observation-provider.mjs",
+            "provider_export": "observeGovernedRepository",
+            "invocation": "configuration",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-governed-serial-execution-port.v1",
+            "provider_module": "governed-serial-execution-provider.mjs",
+            "provider_export": "invokeGovernedSerialExecution",
+            "invocation": "serial",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-governed-target-execution-observation-port.v1",
+            "provider_module": "governed-target-execution-observation-provider.mjs",
+            "provider_export": "observeGovernedTargetExecution",
+            "invocation": "configuration",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-governed-tooling-binding-transaction-port.v1",
+            "provider_module": "governed-tooling-binding-transaction-provider.mjs",
+            "provider_export": "transactGovernedToolingBinding",
+            "invocation": "configuration",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-governed-tooling-migration-operation-port.v1",
+            "provider_module": "governed-tooling-migration-operation-provider.mjs",
+            "provider_export": "invokeGovernedToolingMigrationOperation",
+            "invocation": "configuration",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-json-authority-ingestion-port.v1",
+            "provider_module": "json-authority-ingestion-provider.mjs",
+            "provider_export": "invokeJsonAuthorityIngestion",
+            "invocation": "url-context",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-managed-language-module-invocation-port.v1",
+            "provider_module": "managed-language-module-provider.mjs",
+            "provider_export": "invokeManagedLanguageModule",
+            "invocation": "url-context",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-os-environment-credential-port.v1",
+            "provider_module": "os-environment-credential-provider.mjs",
+            "provider_export": "bindOsEnvironmentCredential",
+            "invocation": "configuration",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-projected-capability-invocation-port.v1",
+            "provider_module": null,
+            "provider_export": null,
+            "invocation": "configuration",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-projected-capability-invocation-port.v2",
+            "provider_module": null,
+            "provider_export": null,
+            "invocation": "configuration",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-proof-binding-evaluation-port.v1",
+            "provider_module": "proof-binding-evaluation-provider.mjs",
+            "provider_export": "invokeProofBindingEvaluation",
+            "invocation": "url-context",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-scenario-semantic-carrier-evaluation-port.v1",
+            "provider_module": "semantic-carrier-evaluator-provider.mjs",
+            "provider_export": "invokeScenarioSemanticCarrierCompilationEvaluation",
+            "invocation": "url-context",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-scenario-semantic-carrier-extraction-port.v1",
+            "provider_module": "semantic-carrier-extractor-provider.mjs",
+            "provider_export": "invokeScenarioSemanticCarrierExtraction",
+            "invocation": "url-context",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-scenario-semantic-carrier-validation-port.v1",
+            "provider_module": "semantic-carrier-validator/index.mjs",
+            "provider_export": "invokeScenarioSemanticCarrierValidation",
+            "invocation": "url-context",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-semantic-execution-graph-compilation-port.v1",
+            "provider_module": "semantic-execution-graph-compilation-provider.mjs",
+            "provider_export": "compileSemanticExecutionGraph",
+            "invocation": "configuration",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          },
+          {
+            "result_set": "3_REUSE",
+            "platform_capability_id": "sda-semantic-vector-index.v1",
+            "provider_module": "semantic-vector-index-provider.mjs",
+            "provider_export": "invokeSemanticVectorIndex",
+            "invocation": "configuration",
+            "source_path": "sda-bootstrap@952de6bfa690fe85d85ca36261f22a1cb63c85eb/platform/kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json",
+            "registry_digest": "sha256:85b30a8fafd8be63e1e1ff050d28ea581e9f1f8b1f2393e2589fc6663833decd",
+            "assessment": "AVAILABLE_REGISTRY_DECLARATION_NOT_A_STDOUT_COMPATIBILITY_CLAIM"
+          }
+        ],
+        [
+          {
+            "result_set": "4_VERIFICATION",
+            "code": "STDOUT_PROVIDER_BINDING_NOT_FOUND",
+            "expected": "A callable generic stdout event provider with matching request/receipt contracts",
+            "observed": "No stdout-named event binding in the selected registry; the complete event-port inventory follows.",
+            "evidence_source": "Selected snapshot Node registry; #Operation binding fields remain NULL",
+            "disposition": "EXECUTION_NOT_PROVEN"
+          },
+          {
+            "result_set": "4_VERIFICATION",
+            "code": "WORKING_CANDIDATE_NOT_CONNECTED_TO_CLI",
+            "expected": "CLI executes this exact SQL working definition",
+            "observed": "This script creates session-local working rows. Current read-authority.mjs resolves source.current_model and retained capsule sources.",
+            "evidence_source": "C:/lab/repos/sfx-embody/src/read-authority.mjs; sql/diagnostics/capability-embodiment.sql (source inspected 2026-09-12)",
+            "disposition": "EXECUTION_NOT_PROVEN"
+          }
+        ],
+        [
+          {
+            "result_set": "5_RUBRIC_AND_FLYWHEEL",
+            "decision_id": "SQL-CLI-001",
+            "flywheel": "SQL scaffold -> CLI execution -> observed output -> SQL change -> repeat",
+            "contribution_score": 3,
+            "contribution_reason": "Required to demonstrate the requested loop",
+            "end_to_end_evidence_score": 0,
+            "evidence_reason": "No stdout mechanic execution demonstrated",
+            "assessment_basis": "PLANNING_ASSESSMENT",
+            "assessment_date": "2026-09-12",
+            "observed_cli_checkpoints": 0,
+            "required_cli_checkpoints": 4,
+            "external_source_edits": 0,
+            "managed_promotion_prerequisites": 0,
+            "first_scaffold_minutes": null,
+            "first_scaffold_human_steps": null,
+            "repeat_minutes": null,
+            "benefit_and_burden": "UNMEASURED: expected easier repetition; provider binding and working-data delivery still missing",
+            "disposition": "HELD_AT_EXECUTION"
+          }
+        ],
+        [
+          {
+            "open_transactions": 0,
+            "scaffold_temp_object": null
+          }
+        ]
+      ]
+    }
+  ],
+  "cli": {
+    "command": "sfx capability invoke hello-world-sql --input '{}' --json",
+    "cwd": "C:\\lab\\repos\\sfx-embody",
+    "exitCode": 4,
+    "stdout": "",
+    "stderr": "{\"error\":{\"code\":\"CAPABILITY_NOT_FOUND\",\"message\":\"CAPABILITY_NOT_FOUND\",\"details\":{\"operation\":\"invoke\",\"result\":{\"disposition\":\"failed\",\"errorCode\":\"CAPABILITY_NOT_FOUND\",\"error\":{\"code\":\"CAPABILITY_NOT_FOUND\",\"message\":\"CAPABILITY_NOT_FOUND\"}}}}}\n"
+  },
+  "workOrder": {
+    "observedCliChecks": 0,
+    "requiredCliChecks": 4,
+    "endToEndEvidenceScore": 0,
+    "contributionScore": 3,
+    "status": "BLOCKED_BY_MISSING_STDOUT_BINDING_AND_WORKING_DATA_DELIVERY",
+    "externalSourceEdits": 0,
+    "managedPromotionPrerequisites": 0
+  }
+}
