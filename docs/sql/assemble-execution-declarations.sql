@@ -118,10 +118,10 @@ SELECT cap.estate_model_pk, cap.capability_id,
    + N'"interfaces":"interfaces.authority.json","fixtures":"fixtures.authority.json"}]}') COLLATE Latin1_General_100_BIN2
 FROM cap
 UNION ALL
--- features/<id>.feature (feature text resolved by the declaration's content_digest)
+-- capabilities/<id>/capability.feature (feature text resolved by the declaration's content_digest)
 SELECT cap.estate_model_pk, cap.capability_id,
-  (N'features/' + cap.capability_id + N'.feature') COLLATE Latin1_General_100_BIN2,
-  N'features/{id}.feature' COLLATE Latin1_General_100_BIN2,
+  (N'capabilities/' + cap.capability_id + N'/capability.feature') COLLATE Latin1_General_100_BIN2,
+  N'capability.feature' COLLATE Latin1_General_100_BIN2,
   (CONVERT(nvarchar(max), CONVERT(varchar(max), fco.content_bytes) COLLATE Latin1_General_100_BIN2_UTF8)) COLLATE Latin1_General_100_BIN2
 FROM cap
 JOIN model.feature f ON f.feature_id = cap.capability_id
@@ -168,9 +168,13 @@ DECLARE @capSod bigint = (SELECT semantic_object_definition_pk FROM model.estate
 DECLARE @capSo bigint = (SELECT semantic_object_pk FROM model.capability WHERE capability_pk=@capPk);
 DECLARE @capDigestHex varchar(64) = LOWER(CONVERT(varchar(64), (SELECT definition_digest FROM model.semantic_object_definition WHERE semantic_object_definition_pk=@capSod), 2));
 DECLARE @namespace nvarchar(400) = N'sidefx:capability:' + @cap;
-
--- (4) FIXTURE declaration.
 DECLARE @fixtureId nvarchar(400) = N'greets-the-supplied-name';
+
+-- Seed the fixture and the capability CLI declaration only once. A re-run
+-- refreshes the assembly view above and otherwise leaves the model unchanged.
+IF NOT EXISTS (SELECT 1 FROM model.fixture WHERE owner_definition_pk=@capSod AND fixture_id=@fixtureId)
+BEGIN
+-- (4) FIXTURE declaration.
 DECLARE @fixtureJson nvarchar(max) = N'{"fixtureId":"greets-the-supplied-name","input":{"contractId":"hello-world-request.v1","payload":{"name":"Sidney"}},"expected":{"disposition":"terminated","terminalScenarioId":"hello-world-sql","scenarioSequence":["hello-world-sql"],"outcomeAssertions":[{"conditionId":"exact-message","path":"payload.message","operator":"equals","value":"Hello Sidney!"}]}}';
 DECLARE @fixEnv nvarchar(max) = N'{"address":{"id":"' + @fixtureId + N'","kind":"FIXTURE","namespace":"' + @namespace + N'"},"format":"sidefx-semantic-definition.v1","semantics":{"owner_definition_digest":"' + @capDigestHex + N'","fixture":' + @fixtureJson + N'}}';
 DECLARE @fixBytes varbinary(max) = CONVERT(varbinary(max), CONVERT(varchar(max), (@fixEnv) COLLATE Latin1_General_100_BIN2_UTF8));
@@ -211,6 +215,7 @@ INSERT source.source_lineage (semantic_object_definition_pk, member_kind, canoni
 GRANT UPDATE ON OBJECT::model.capability TO sidefx_importer;
 UPDATE model.estate_capability SET capability_version_pk=@newVer, semantic_object_definition_pk=@newSod WHERE estate_model_pk=@model AND capability_pk=@capPk;
 UPDATE model.fixture SET owner_definition_pk=@newSod WHERE fixture_id=@fixtureId AND semantic_object_pk=@fixSo;
+END
 GO
 -- ============================== VERIFICATION ==============================
 SELECT '3_fixtures_document' AS result_set, document
