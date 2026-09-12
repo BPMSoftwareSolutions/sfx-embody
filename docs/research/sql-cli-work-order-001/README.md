@@ -27,8 +27,11 @@ The existing `say-hello-world` capability is not a substitute: its selected auth
 
 ## Exact missing work
 
-1. **Stdout event binding:** identify or supply a generic implementation of “write supplied text to standard output,” its request/receipt contract and runtime binding. The message must remain database data. A registry name match alone is insufficient evidence of compatibility.
-2. **Working-data delivery:** connect a mutable SQL capability definition to the existing execution path. Currently `read-authority.mjs` resolves the selected estate model and retained capsule sources; it cannot consume this candidate. A separate CLI connection also cannot read session-local tables. Choose and implement a persistent working-data source or an exact candidate handoff; changing the script's rollback to commit does not provide either.
+The follow-up [gap resolution](gap-resolution.md) confirms these with live evidence and specifies the smallest change that closes each.
+
+1. **Stdout event binding:** no admitted `invocation: "effects"` port writes text to standard output. The registry is pinned platform authority (`716811046f52dd2a67f9ff308a50d755571cbbad`, clean worktree), so a provider must be added to `languages/typescript/runtimes/node/` and admitted through a managed platform update. A registry name match alone is insufficient evidence of compatibility.
+2. **Working-data delivery:** the intended working tables are guarded. An in-place `UPDATE source.content_object` is rejected with SQL error `51003 IMMUTABLE_INSPECTION_DATA` (`guard_content_object`), so the working representation cannot be edited as-is. Add a mutable `workshop` store the runtime can read, rather than mutating sealed tables or weakening their guards; a separate CLI connection also cannot read session-local tables.
+3. **Stdout surface:** `sidefx-cli` consumes the delivery's stdout as one canonical JSON object, so the message is only visible inside the result JSON, not as raw text. This is a separate CLI/delivery presentation change.
 
 These are implementation gaps. No managed promotion prerequisite was imposed and no publication guard was disabled. Existing capabilities, sealed capsules and selected model were unchanged. The SQL file reports these gaps instead of fabricating a provider or a successful execution receipt.
 
