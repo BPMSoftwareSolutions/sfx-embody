@@ -84,6 +84,7 @@
         "max": 1,
         "identity": "capability",
         "input": true,
+        "inputType": true,
         "display": true,
         "namespace": true,
         "wraps": {
@@ -100,6 +101,7 @@
         "namespace": true,
         "observation": true,
         "display": true,
+        "inputType": true,
         "wraps": {
           "surface": "database-invocation",
           "operation": "observe"
