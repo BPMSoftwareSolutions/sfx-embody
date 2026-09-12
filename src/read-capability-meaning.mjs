@@ -217,8 +217,8 @@ JOIN source.content_object co ON co.content_object_pk=d.canonical_content_pk
 LEFT JOIN model.capability_feature cf ON cf.feature_version_pk=fv.feature_version_pk
      AND cf.capability_version_pk=@capability_version_pk
 LEFT JOIN model.estate_capability_feature ecf ON ecf.feature_version_pk=fv.feature_version_pk
-     AND ecf.capability_pk=f.capability_pk
-WHERE f.capability_pk=(SELECT capability_pk FROM model.capability_version WHERE capability_version_pk=@capability_version_pk)
+     AND ecf.capability_pk=(SELECT capability_pk FROM model.capability_version WHERE capability_version_pk=@capability_version_pk)
+WHERE f.feature_pk=(SELECT feature_pk FROM model.capability WHERE capability_pk=(SELECT capability_pk FROM model.capability_version WHERE capability_version_pk=@capability_version_pk))
 ORDER BY fv.source_profile;
 `;
 
