@@ -135,8 +135,7 @@ SELECT cap.estate_model_pk, cap.capability_id,
    + ISNULL((SELECT STRING_AGG(JSON_QUERY(def.envelope, '$.semantics'), N',')
              FROM def JOIN model.port p ON p.semantic_object_pk = def.semantic_object_pk
              JOIN model.identity_namespace n ON n.namespace_pk = p.namespace_pk
-             WHERE n.namespace_id = (N'sidefx:capability:' + cap.capability_id) COLLATE Latin1_General_100_BIN2
-               AND p.port_id IN (SELECT r.port_id FROM reachable r WHERE r.capability_id = cap.capability_id)), N'') + N'],"projectionBindings":[]}') COLLATE Latin1_General_100_BIN2
+             WHERE n.namespace_id = (N'sidefx:capability:' + cap.capability_id) COLLATE Latin1_General_100_BIN2), N'') + N'],"projectionBindings":[]}') COLLATE Latin1_General_100_BIN2
 FROM cap JOIN cli ON cli.capability_id = cap.capability_id
 UNION ALL
 -- consumer-workspace.authority.json (assembled from the capability's members)
