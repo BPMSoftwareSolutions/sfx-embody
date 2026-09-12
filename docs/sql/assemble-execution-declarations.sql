@@ -51,15 +51,33 @@ cli AS (
   FROM cap JOIN capdef ON capdef.capability_id = cap.capability_id
 ),
 capcontract AS (
-  SELECT DISTINCT cap.capability_id, ct.contract_id, so.content_object_pk AS schema_content_pk
+  SELECT x.capability_id, x.contract_id, x.schema_content_pk
+  FROM (
+    SELECT cap.capability_id, ct.contract_id, so.content_object_pk AS schema_content_pk,
+           ROW_NUMBER() OVER (PARTITION BY cap.capability_id, ct.contract_id ORDER BY sv.scenario_version_pk DESC, cv.contract_version_pk DESC) AS rn
+    FROM cap
+    JOIN model.capability_scenario cs ON cs.capability_version_pk = cap.capability_version_pk
+    JOIN analysis.v_scenario_invocation_closure c ON c.selected_scenario_version_pk = cs.scenario_version_pk
+    JOIN model.scenario_version sv ON sv.scenario_version_pk = c.downstream_scenario_version_pk
+    LEFT JOIN model.scenario_input si ON si.scenario_version_pk = sv.scenario_version_pk
+    LEFT JOIN model.scenario_outcome_contract soc ON soc.scenario_version_pk = sv.scenario_version_pk
+    JOIN model.contract_version cv ON cv.contract_version_pk IN (si.input_contract_version_pk, soc.contract_version_pk)
+    JOIN model.contract ct ON ct.contract_pk = cv.contract_pk
+    JOIN model.schema_object so ON so.schema_object_pk = cv.schema_object_pk
+  ) x WHERE x.rn = 1
+),
+reachable AS (
+  SELECT DISTINCT cap.capability_id,
+    CONVERT(nvarchar(400), JSON_VALUE(op.value, '$.portId')) COLLATE Latin1_General_100_BIN2 AS port_id
   FROM cap
   JOIN model.capability_scenario cs ON cs.capability_version_pk = cap.capability_version_pk
-  JOIN model.scenario_version sv ON sv.scenario_version_pk = cs.scenario_version_pk
-  LEFT JOIN model.scenario_input si ON si.scenario_version_pk = sv.scenario_version_pk
-  LEFT JOIN model.scenario_outcome_contract soc ON soc.scenario_version_pk = sv.scenario_version_pk
-  JOIN model.contract_version cv ON cv.contract_version_pk IN (si.input_contract_version_pk, soc.contract_version_pk)
-  JOIN model.contract ct ON ct.contract_pk = cv.contract_pk
-  JOIN model.schema_object so ON so.schema_object_pk = cv.schema_object_pk
+  JOIN analysis.v_scenario_invocation_closure c ON c.selected_scenario_version_pk = cs.scenario_version_pk
+  JOIN model.scenario_event se ON se.scenario_version_pk = c.downstream_scenario_version_pk
+  JOIN model.execution_authority_version eav ON eav.execution_authority_version_pk = se.execution_authority_version_pk
+  JOIN model.semantic_object_definition d ON d.semantic_object_definition_pk = eav.semantic_object_definition_pk
+  JOIN source.content_object co ON co.content_object_pk = d.canonical_content_pk
+  CROSS APPLY OPENJSON(CONVERT(nvarchar(max), CONVERT(varchar(max), co.content_bytes) COLLATE Latin1_General_100_BIN2_UTF8), '$.semantics.authority.operations') op
+  WHERE JSON_VALUE(op.value, '$.portId') IS NOT NULL
 )
 -- capability.authority.json
 SELECT cap.estate_model_pk, cap.capability_id,
@@ -73,10 +91,18 @@ SELECT cap.estate_model_pk, cap.capability_id,
   (N'capabilities/' + cap.capability_id + N'/execution-authorities.authority.json') COLLATE Latin1_General_100_BIN2,
   N'execution-authorities.authority.json' COLLATE Latin1_General_100_BIN2,
   (N'{"authorityType":"execution-authorities.v1","executionAuthorities":['
-   + ISNULL((SELECT STRING_AGG(JSON_QUERY(def.envelope, '$.semantics.authority'), N',')
-             FROM def JOIN model.execution_authority ea ON ea.semantic_object_pk = def.semantic_object_pk
-             JOIN model.identity_namespace n ON n.namespace_pk = ea.namespace_pk
-             WHERE n.namespace_id = (N'sidefx:capability:' + cap.capability_id) COLLATE Latin1_General_100_BIN2), N'') + N']}') COLLATE Latin1_General_100_BIN2
+   + ISNULL((SELECT STRING_AGG(JSON_QUERY(x.env, '$.semantics.authority'), N',')
+             FROM (
+               SELECT DISTINCT eav.execution_authority_version_pk,
+                 CONVERT(nvarchar(max), CONVERT(varchar(max), co.content_bytes) COLLATE Latin1_General_100_BIN2_UTF8) AS env
+               FROM model.capability_scenario cs
+               JOIN analysis.v_scenario_invocation_closure c ON c.selected_scenario_version_pk = cs.scenario_version_pk
+               JOIN model.scenario_event se ON se.scenario_version_pk = c.downstream_scenario_version_pk
+               JOIN model.execution_authority_version eav ON eav.execution_authority_version_pk = se.execution_authority_version_pk
+               JOIN model.semantic_object_definition d ON d.semantic_object_definition_pk = eav.semantic_object_definition_pk
+               JOIN source.content_object co ON co.content_object_pk = d.canonical_content_pk
+               WHERE cs.capability_version_pk = cap.capability_version_pk
+             ) x), N'') + N']}') COLLATE Latin1_General_100_BIN2
 FROM cap
 UNION ALL
 -- semantic-transformation.authority.json
@@ -109,7 +135,8 @@ SELECT cap.estate_model_pk, cap.capability_id,
    + ISNULL((SELECT STRING_AGG(JSON_QUERY(def.envelope, '$.semantics'), N',')
              FROM def JOIN model.port p ON p.semantic_object_pk = def.semantic_object_pk
              JOIN model.identity_namespace n ON n.namespace_pk = p.namespace_pk
-             WHERE n.namespace_id = (N'sidefx:capability:' + cap.capability_id) COLLATE Latin1_General_100_BIN2), N'') + N'],"projectionBindings":[]}') COLLATE Latin1_General_100_BIN2
+             WHERE n.namespace_id = (N'sidefx:capability:' + cap.capability_id) COLLATE Latin1_General_100_BIN2
+               AND p.port_id IN (SELECT r.port_id FROM reachable r WHERE r.capability_id = cap.capability_id)), N'') + N'],"projectionBindings":[]}') COLLATE Latin1_General_100_BIN2
 FROM cap JOIN cli ON cli.capability_id = cap.capability_id
 UNION ALL
 -- consumer-workspace.authority.json (assembled from the capability's members)
@@ -122,17 +149,26 @@ SELECT cap.estate_model_pk, cap.capability_id,
    + N'"interfaces":"interfaces.authority.json","fixtures":"fixtures.authority.json"}]}') COLLATE Latin1_General_100_BIN2
 FROM cap
 UNION ALL
--- capabilities/<id>/capability.feature (feature text resolved by the declaration's content_digest)
+-- capabilities/<id>/capability.feature (one text per capability: the declared
+-- feature's current version, preferring the parsed declaration over the retained
+-- text carrier; text resolved by the declaration's content_digest)
 SELECT cap.estate_model_pk, cap.capability_id,
   (N'capabilities/' + cap.capability_id + N'/capability.feature') COLLATE Latin1_General_100_BIN2,
   N'capability.feature' COLLATE Latin1_General_100_BIN2,
-  (CONVERT(nvarchar(max), CONVERT(varchar(max), fco.content_bytes) COLLATE Latin1_General_100_BIN2_UTF8)) COLLATE Latin1_General_100_BIN2
+  x.text COLLATE Latin1_General_100_BIN2
 FROM cap
-JOIN model.feature f ON f.feature_id = cap.capability_id
-JOIN model.feature_version fv ON fv.feature_pk = f.feature_pk AND fv.source_profile = N'retained-feature-binding.v1'
-JOIN model.semantic_object_definition d ON d.semantic_object_definition_pk = fv.semantic_object_definition_pk
-JOIN source.content_object env ON env.content_object_pk = d.canonical_content_pk
-JOIN source.content_object fco ON fco.content_digest = CONVERT(binary(32), N'0x' + JSON_VALUE(CONVERT(nvarchar(max), CONVERT(varchar(max), env.content_bytes) COLLATE Latin1_General_100_BIN2_UTF8), '$.semantics.content_digest'), 1)
+OUTER APPLY (
+  SELECT TOP 1 CONVERT(nvarchar(max), CONVERT(varchar(max), fco.content_bytes) COLLATE Latin1_General_100_BIN2_UTF8) AS text
+  FROM model.capability c2
+  JOIN model.feature_version fv ON fv.feature_pk = c2.feature_pk
+  JOIN model.semantic_object_definition d ON d.semantic_object_definition_pk = fv.semantic_object_definition_pk
+  JOIN source.content_object env ON env.content_object_pk = d.canonical_content_pk
+  JOIN source.content_object fco ON fco.content_digest = CONVERT(binary(32), N'0x' + JSON_VALUE(CONVERT(nvarchar(max), CONVERT(varchar(max), env.content_bytes) COLLATE Latin1_General_100_BIN2_UTF8), '$.semantics.content_digest'), 1)
+  WHERE c2.capability_pk = cap.capability_pk
+  ORDER BY CASE fv.source_profile WHEN N'parsed-feature-declaration.v1' THEN 0 WHEN N'retained-feature-binding.v1' THEN 1 ELSE 2 END,
+           fv.feature_version_pk DESC
+) x
+WHERE x.text IS NOT NULL
 UNION ALL
 -- contracts/contract-catalog.json
 SELECT cap.estate_model_pk, cap.capability_id,

@@ -25,11 +25,10 @@ IF COL_LENGTH(N'model.capability', N'feature_pk') IS NULL
   ALTER TABLE model.capability ADD feature_pk bigint NULL;
 GO
 
--- 2. Backfill from the inverted key. One feature per capability today, so the
---    mapping is unambiguous.
-UPDATE c SET c.feature_pk = f.feature_pk
-FROM model.capability c JOIN model.feature f ON f.capability_pk = c.capability_pk
-WHERE c.feature_pk IS NULL;
+-- 2. Backfill from the inverted key, while it still exists. One feature per
+--    capability today, so the mapping is unambiguous.
+IF COL_LENGTH(N'model.feature', N'capability_pk') IS NOT NULL
+  EXEC(N'UPDATE c SET c.feature_pk = f.feature_pk FROM model.capability c JOIN model.feature f ON f.capability_pk = c.capability_pk WHERE c.feature_pk IS NULL;');
 
 -- 3. Remove the inverted constraints/index before removing their columns.
 IF OBJECT_ID(N'model.FK_model_feature_version_feature', N'F') IS NOT NULL
@@ -50,11 +49,18 @@ IF NOT EXISTS (SELECT 1 FROM sys.foreign_keys WHERE name = N'FK_model_feature_ve
 IF COL_LENGTH(N'model.feature', N'capability_pk') IS NOT NULL
   ALTER TABLE model.feature DROP COLUMN capability_pk;
 
--- 4. Add the forward foreign key and a lookup index.
-IF NOT EXISTS (SELECT 1 FROM sys.foreign_keys WHERE name = N'FK_model_capability_feature')
-  ALTER TABLE model.capability WITH CHECK ADD CONSTRAINT FK_model_capability_feature FOREIGN KEY (feature_pk) REFERENCES model.feature (feature_pk);
-IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = N'IX_model_capability_feature_pk' AND object_id = OBJECT_ID(N'model.capability'))
-  CREATE NONCLUSTERED INDEX IX_model_capability_feature_pk ON model.capability (feature_pk);
+-- 4. The forward key is mandatory: every capability references a feature. Refuse
+--    (rather than silently leaving it nullable) when one is missing, then enforce
+--    NOT NULL. The FK and lookup index must be absent to change nullability.
+IF EXISTS (SELECT 1 FROM model.capability WHERE feature_pk IS NULL) THROW 51001, 'CAPABILITY_FEATURE_REQUIRED', 1;
+IF EXISTS (SELECT 1 FROM sys.foreign_keys WHERE name = N'FK_model_capability_feature')
+  ALTER TABLE model.capability DROP CONSTRAINT FK_model_capability_feature;
+IF EXISTS (SELECT 1 FROM sys.indexes WHERE name = N'IX_model_capability_feature_pk' AND object_id = OBJECT_ID(N'model.capability'))
+  DROP INDEX IX_model_capability_feature_pk ON model.capability;
+IF EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID(N'model.capability') AND name = N'feature_pk' AND is_nullable = 1)
+  ALTER TABLE model.capability ALTER COLUMN feature_pk bigint NOT NULL;
+ALTER TABLE model.capability WITH CHECK ADD CONSTRAINT FK_model_capability_feature FOREIGN KEY (feature_pk) REFERENCES model.feature (feature_pk);
+CREATE NONCLUSTERED INDEX IX_model_capability_feature_pk ON model.capability (feature_pk);
 
 -- 5. Verification.
 SELECT '1_capability_columns' AS result_set, c.name AS column_name, ty.name AS type_name, c.is_nullable

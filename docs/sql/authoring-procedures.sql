@@ -652,7 +652,8 @@ CREATE OR ALTER PROCEDURE model.configure_interface
   @input_path      nvarchar(400) = NULL,
   @display_select  nvarchar(400) = NULL,
   @display_as      nvarchar(40)  = NULL,
-  @defaults_json   nvarchar(max) = NULL
+  @defaults_json   nvarchar(max) = NULL,
+  @cli_json        nvarchar(max) = NULL
 WITH EXECUTE AS OWNER
 AS
 BEGIN
@@ -661,6 +662,7 @@ BEGIN
   DECLARE @model bigint = (SELECT estate_model_pk FROM source.current_model WHERE singleton_id = 1);
   IF @model IS NULL THROW 51000, 'CURRENT_MODEL_NOT_FOUND', 1;
   IF @defaults_json IS NOT NULL AND ISJSON(@defaults_json) <> 1 THROW 51001, 'DEFAULTS_JSON_INVALID', 1;
+  IF @cli_json IS NOT NULL AND ISJSON(@cli_json) <> 1 THROW 51001, 'CLI_JSON_INVALID', 1;
 
   DECLARE @capPk bigint, @capSo bigint, @capSod bigint;
   SELECT @capPk = c.capability_pk, @capSo = c.semantic_object_pk, @capSod = ec.semantic_object_definition_pk
@@ -676,7 +678,7 @@ BEGIN
   WHERE d.semantic_object_definition_pk = @capSod;
   DECLARE @before nvarchar(max) = JSON_QUERY(@curEnv, '$.semantics.cli');
 
-  DECLARE @cli nvarchar(max) = ISNULL(JSON_QUERY(@curEnv, '$.semantics.cli'), N'{}');
+  DECLARE @cli nvarchar(max) = CASE WHEN @cli_json IS NOT NULL THEN @cli_json ELSE ISNULL(JSON_QUERY(@curEnv, '$.semantics.cli'), N'{}') END;
   IF @input_type     IS NOT NULL SET @cli = JSON_MODIFY(@cli, '$.input.type', @input_type);
   IF @input_contract IS NOT NULL SET @cli = JSON_MODIFY(@cli, '$.input.contract', @input_contract);
   IF @input_path     IS NOT NULL SET @cli = JSON_MODIFY(@cli, '$.input.path', @input_path);
@@ -1233,11 +1235,18 @@ BEGIN
   DELETE so FROM model.semantic_object_definition so JOIN #delSod x ON x.sod=so.semantic_object_definition_pk
     WHERE NOT EXISTS (SELECT 1 FROM source.source_lineage sl WHERE sl.semantic_object_definition_pk=so.semantic_object_definition_pk);
 
-  DECLARE @fields nvarchar(max);
-  SELECT @fields = N'{' + STRING_AGG(N'"' + STRING_ESCAPE(j.[key],'json') + N'":' + j.value, N',') + N'}'
-  FROM OPENJSON(@expr, '$.fields') j WHERE j.[key] <> @output_field;
-  SET @fields = ISNULL(@fields, N'{}');
-  DECLARE @newExpr nvarchar(max) = JSON_MODIFY(@expr, '$.fields', JSON_QUERY(@fields));
+  DECLARE @parentPath nvarchar(4000), @leaf nvarchar(400);
+  DECLARE @dot int = CHARINDEX('.', REVERSE(@output_field));
+  IF @dot = 0 BEGIN SET @parentPath = N''; SET @leaf = @output_field; END
+  ELSE BEGIN SET @leaf = RIGHT(@output_field, @dot-1); SET @parentPath = LEFT(@output_field, LEN(@output_field)-@dot); END
+  DECLARE @parentExpr nvarchar(max), @parentFieldsPath nvarchar(4000);
+  IF @parentPath = N'' BEGIN SET @parentExpr = @expr; SET @parentFieldsPath = N'$.fields'; END
+  ELSE BEGIN SET @parentExpr = JSON_QUERY(@expr, N'$.fields.' + @parentPath); SET @parentFieldsPath = N'$.fields.' + @parentPath + N'.fields'; END
+  DECLARE @newFields nvarchar(max);
+  SELECT @newFields = N'{' + STRING_AGG(N'"' + STRING_ESCAPE(j.[key],'json') + N'":' + j.value, N',') + N'}'
+  FROM OPENJSON(@parentExpr, '$.fields') j WHERE j.[key] <> @leaf;
+  SET @newFields = ISNULL(@newFields, N'{}');
+  DECLARE @newExpr nvarchar(max) = JSON_MODIFY(@expr, @parentFieldsPath, JSON_QUERY(@newFields));
   DECLARE @newEnv nvarchar(max) = JSON_MODIFY(@env, '$.semantics.expression', JSON_QUERY(@newExpr));
 
   DECLARE @nb varbinary(max) = CONVERT(varbinary(max), CONVERT(varchar(max), (@newEnv) COLLATE Latin1_General_100_BIN2_UTF8));
@@ -1264,5 +1273,128 @@ BEGIN
   SELECT N'dependents' AS result_set, j.[key] AS dependent_field
   FROM OPENJSON(@expr, '$.fields') j
   WHERE j.[key] <> @output_field AND j.value LIKE N'%' + @output_field + N'%';
+END;
+GO
+
+-- =====================================================================
+-- model.configure_contract
+-- Add or remove payload properties on a capability's INPUT or OUTCOME contract
+-- so a composed mechanic output can flow through the result. Re-mints the
+-- schema_object and the contract definition, and rebinds the scenario face.
+-- =====================================================================
+CREATE OR ALTER PROCEDURE model.configure_contract
+  @capability_id        nvarchar(120),
+  @face                 nvarchar(20) = N'OUTCOME',
+  @add_properties_json  nvarchar(max) = NULL,
+  @remove_properties_json nvarchar(max) = NULL,
+  @required             bit = 1
+WITH EXECUTE AS OWNER
+AS
+BEGIN
+  SET NOCOUNT ON;
+  SET @face = UPPER(@face);
+  IF @face NOT IN (N'INPUT', N'OUTCOME') THROW 51001, 'FACE_INVALID', 1;
+  IF @add_properties_json    IS NOT NULL AND ISJSON(@add_properties_json)<>1    THROW 51001, 'ADD_PROPERTIES_JSON_INVALID', 1;
+  IF @remove_properties_json IS NOT NULL AND ISJSON(@remove_properties_json)<>1 THROW 51001, 'REMOVE_PROPERTIES_JSON_INVALID', 1;
+  IF @add_properties_json IS NULL AND @remove_properties_json IS NULL THROW 51001, 'NO_CHANGE_REQUESTED', 1;
+
+  DECLARE @model bigint = (SELECT estate_model_pk FROM source.current_model WHERE singleton_id = 1);
+  IF @model IS NULL THROW 51000, 'CURRENT_MODEL_NOT_FOUND', 1;
+
+  DECLARE @capVer bigint;
+  SELECT @capVer = ec.capability_version_pk
+  FROM model.estate_capability ec
+  JOIN model.capability c ON c.capability_pk=ec.capability_pk
+  JOIN model.identity_namespace n ON n.namespace_pk=c.namespace_pk
+  WHERE ec.estate_model_pk=@model AND c.capability_id=@capability_id AND n.namespace_id=N'sidefx:capabilities';
+  IF @capVer IS NULL THROW 51001, 'CAPABILITY_NOT_FOUND', 1;
+  DECLARE @scnVer bigint = (SELECT MAX(cs.scenario_version_pk) FROM model.capability_scenario cs WHERE cs.capability_version_pk=@capVer);
+
+  DECLARE @oldCv bigint;
+  IF @face=N'OUTCOME' SELECT @oldCv = MAX(contract_version_pk) FROM model.scenario_outcome_contract WHERE scenario_version_pk=@scnVer;
+  ELSE                SELECT @oldCv = MAX(input_contract_version_pk) FROM model.scenario_input WHERE scenario_version_pk=@scnVer;
+  IF @oldCv IS NULL THROW 51001, 'CONTRACT_FACE_NOT_FOUND', 1;
+
+  DECLARE @contractPk bigint, @contractSo bigint, @schemaPk bigint, @oldSod bigint;
+  SELECT @contractPk=cv.contract_pk, @contractSo=cv.semantic_object_pk, @schemaPk=cv.schema_object_pk, @oldSod=cv.semantic_object_definition_pk
+  FROM model.contract_version cv WHERE cv.contract_version_pk=@oldCv;
+
+  DECLARE @schema nvarchar(max) = (SELECT CONVERT(nvarchar(max), CONVERT(varchar(max), co.content_bytes) COLLATE Latin1_General_100_BIN2_UTF8)
+    FROM model.schema_object so JOIN source.content_object co ON co.content_object_pk=so.content_object_pk WHERE so.schema_object_pk=@schemaPk);
+  DECLARE @env nvarchar(max) = (SELECT CONVERT(nvarchar(max), CONVERT(varchar(max), co.content_bytes) COLLATE Latin1_General_100_BIN2_UTF8)
+    FROM model.semantic_object_definition d JOIN source.content_object co ON co.content_object_pk=d.canonical_content_pk WHERE d.semantic_object_definition_pk=@oldSod);
+  DECLARE @before nvarchar(max) = JSON_QUERY(@schema, '$.properties.payload.properties');
+
+  IF @remove_properties_json IS NOT NULL
+  BEGIN
+    DECLARE @keep nvarchar(max);
+    SELECT @keep = N'{' + STRING_AGG(N'"' + STRING_ESCAPE(j.[key],'json') + N'":' + j.value, N',') + N'}'
+    FROM OPENJSON(@schema, '$.properties.payload.properties') j
+    WHERE j.[key] NOT IN (SELECT value FROM OPENJSON(@remove_properties_json));
+    SET @schema = JSON_MODIFY(@schema, '$.properties.payload.properties', JSON_QUERY(ISNULL(@keep, N'{}')));
+    DECLARE @req nvarchar(max);
+    SELECT @req = N'[' + STRING_AGG(N'"' + STRING_ESCAPE(r.value,'json') + N'"', N',') + N']'
+    FROM OPENJSON(@schema, '$.properties.payload.required') r
+    WHERE r.value NOT IN (SELECT value FROM OPENJSON(@remove_properties_json));
+    SET @schema = JSON_MODIFY(@schema, '$.properties.payload.required', JSON_QUERY(ISNULL(@req, N'[]')));
+  END
+
+  IF @add_properties_json IS NOT NULL
+  BEGIN
+    DECLARE @name nvarchar(400), @propSchema nvarchar(max);
+    DECLARE @props TABLE (prop_name nvarchar(400), prop_schema nvarchar(max));
+    INSERT @props SELECT [key], value FROM OPENJSON(@add_properties_json);
+    DECLARE addCur CURSOR LOCAL FAST_FORWARD FOR SELECT prop_name, prop_schema FROM @props;
+    OPEN addCur; FETCH NEXT FROM addCur INTO @name, @propSchema;
+    WHILE @@FETCH_STATUS=0
+    BEGIN
+      SET @schema = JSON_MODIFY(@schema, '$.properties.payload.properties.' + @name, JSON_QUERY(@propSchema));
+      IF @required = 1 AND NOT EXISTS (SELECT 1 FROM OPENJSON(@schema, '$.properties.payload.required') r WHERE r.value=@name)
+        SET @schema = JSON_MODIFY(@schema, 'append $.properties.payload.required', @name);
+      FETCH NEXT FROM addCur INTO @name, @propSchema;
+    END
+    CLOSE addCur; DEALLOCATE addCur;
+  END
+
+  DECLARE @sb varbinary(max) = CONVERT(varbinary(max), CONVERT(varchar(max), (@schema) COLLATE Latin1_General_100_BIN2_UTF8));
+  DECLARE @sd binary(32) = HASHBYTES('SHA2_256', @sb);
+  IF NOT EXISTS (SELECT 1 FROM source.content_object WHERE content_digest=@sd) INSERT source.content_object (content_digest, content_bytes, byte_length) VALUES (@sd, @sb, DATALENGTH(@sb));
+  DECLARE @newSchemaPk bigint = (SELECT schema_object_pk FROM model.schema_object WHERE content_digest=@sd);
+  IF @newSchemaPk IS NULL
+  BEGIN
+    INSERT model.schema_object (content_digest, dialect, content_object_pk)
+      VALUES (@sd, N'https://json-schema.org/draft/2020-12/schema', (SELECT content_object_pk FROM source.content_object WHERE content_digest=@sd));
+    SET @newSchemaPk = SCOPE_IDENTITY();
+  END
+
+  DECLARE @newEnv nvarchar(max) = JSON_MODIFY(@env, '$.semantics.schema_digest', LOWER(CONVERT(varchar(64), @sd, 2)));
+  DECLARE @eb varbinary(max) = CONVERT(varbinary(max), CONVERT(varchar(max), (@newEnv) COLLATE Latin1_General_100_BIN2_UTF8));
+  DECLARE @ed binary(32) = HASHBYTES('SHA2_256', @eb);
+  IF NOT EXISTS (SELECT 1 FROM source.content_object WHERE content_digest=@ed) INSERT source.content_object (content_digest, content_bytes, byte_length) VALUES (@ed, @eb, DATALENGTH(@eb));
+  DECLARE @newSod bigint = (SELECT semantic_object_definition_pk FROM model.semantic_object_definition WHERE semantic_object_pk=@contractSo AND definition_digest=@ed);
+  IF @newSod IS NULL
+  BEGIN
+    INSERT model.semantic_object_definition (semantic_object_pk, object_kind, definition_digest, canonical_content_pk)
+      VALUES (@contractSo, 'CONTRACT', @ed, (SELECT content_object_pk FROM source.content_object WHERE content_digest=@ed));
+    SET @newSod = SCOPE_IDENTITY();
+    IF NOT EXISTS (SELECT 1 FROM model.estate_definition WHERE estate_model_pk=@model AND semantic_object_definition_pk=@newSod)
+      INSERT model.estate_definition (estate_model_pk, semantic_object_definition_pk) VALUES (@model, @newSod);
+  END
+  DECLARE @newCv bigint = (SELECT TOP 1 contract_version_pk FROM model.contract_version WHERE contract_pk=@contractPk AND semantic_object_definition_pk=@newSod ORDER BY contract_version_pk DESC);
+  IF @newCv IS NULL
+  BEGIN
+    INSERT model.contract_version (contract_pk, semantic_object_pk, semantic_object_definition_pk, definition_digest, name, contract_kind, schema_object_pk, object_kind, _owner_definition_pk, _canonical_pointer, schema_reference_state)
+      VALUES (@contractPk, @contractSo, @newSod, @ed, NULL, NULL, @newSchemaPk, 'CONTRACT', @newSod, N'', 'RESOLVED');
+    SET @newCv = SCOPE_IDENTITY();
+  END
+
+  IF @face=N'OUTCOME'
+    UPDATE model.scenario_outcome_contract SET contract_version_pk=@newCv WHERE scenario_version_pk=@scnVer AND contract_version_pk=@oldCv;
+  ELSE
+    UPDATE model.scenario_input SET input_contract_version_pk=@newCv WHERE scenario_version_pk=@scnVer AND input_contract_version_pk=@oldCv;
+
+  SELECT N'CONFIGURE_CONTRACT' AS action, @capability_id AS capability_id, @face AS face,
+         @oldCv AS contract_version_before, @newCv AS contract_version_after,
+         @before AS payload_properties_before, JSON_QUERY(@schema, '$.properties.payload.properties') AS payload_properties_after;
 END;
 GO
