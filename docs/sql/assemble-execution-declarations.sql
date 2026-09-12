@@ -32,11 +32,15 @@ WITH cap AS (
   JOIN model.capability c ON c.capability_pk = ec.capability_pk
 ),
 def AS (
-  SELECT d.semantic_object_definition_pk AS sod, d.object_kind, s.declared_id, s.namespace_pk, s.semantic_object_pk,
-         CONVERT(nvarchar(max), CONVERT(varchar(max), co.content_bytes) COLLATE Latin1_General_100_BIN2_UTF8) AS envelope
-  FROM model.semantic_object_definition d
-  JOIN model.semantic_object s ON s.semantic_object_pk = d.semantic_object_pk
-  JOIN source.content_object co ON co.content_object_pk = d.canonical_content_pk
+  SELECT sod, object_kind, declared_id, namespace_pk, semantic_object_pk, envelope
+  FROM (
+    SELECT d.semantic_object_definition_pk AS sod, d.object_kind, s.declared_id, s.namespace_pk, s.semantic_object_pk,
+           CONVERT(nvarchar(max), CONVERT(varchar(max), co.content_bytes) COLLATE Latin1_General_100_BIN2_UTF8) AS envelope,
+           ROW_NUMBER() OVER (PARTITION BY d.semantic_object_pk ORDER BY d.semantic_object_definition_pk DESC) AS rn
+    FROM model.semantic_object_definition d
+    JOIN model.semantic_object s ON s.semantic_object_pk = d.semantic_object_pk
+    JOIN source.content_object co ON co.content_object_pk = d.canonical_content_pk
+  ) x WHERE rn = 1
 ),
 capdef AS (
   SELECT cap.capability_id, def.envelope
