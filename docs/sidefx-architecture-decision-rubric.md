@@ -1,16 +1,22 @@
 # SideFX Architecture Decision Rubric
 
-Draft working aid · 2026-09-11
+Team review baseline · revised 2026-09-11
 
 Purpose: account for architectural decisions by their authority, present necessity, and positive and negative effects on the builder's intended flywheel.
 
-This document proposes a review method. The minimal-scaffold constraint below records the builder's explicit clarification in this conversation; the scoring scales, examples, and procedural recommendations remain proposals, not admitted platform policy. Saving, citing, or reusing this document does not expand their authority. No repository was inspected. Existing implementation coverage is user-reported and must be checked before drawing implementation conclusions.
+This document establishes the review baseline proposed for the scaffold-generation operationalization and subsequent architecture decisions. The minimal-scaffold constraint records the builder's explicit direction. The scoring scales and implementation details remain review proposals, not admitted platform policy. Saving, citing, or reusing this document does not expand their authority.
+
+The [implementation plan](scaffold-generation-operationalization-plan.md) records the local source inspection performed on 2026-09-11 and the concrete capability changes proposed from it. Its observations replace the original draft's assumption that implementation coverage was entirely user-reported; they do not establish current managed admission or live database behavior. This rubric owns the review method; the plan owns the proposed implementation sequence. Review adoption and any subsequent capability admission are recorded separately.
 
 ## Starting constraint: the smallest complete path to the outcome
 
 **Builder-directed baseline:** For a feature, begin with the least functionality necessary to carry its intended Input → Event → Outcome experience through to an observable result, within applicable existing constraints. Include zero, one, or multiple providers according to what that outcome requires.
 
 The outcome determines the scaffold's scope. A provider connection is an implementation step when needed; its presence or successful response alone does not establish the intended outcome. Reuse the applicable definitions, declared mechanics, execution authority, and available implementation. Minimality does not authorize dropping required steps, inventing a different execution topology, or presenting a partial interaction as a completed result.
+
+The first executable demonstration may use a declared fixture at an unresolved boundary. It must say which work was simulated and which outcome obligations remain unproven. **Executing the declared Input → Event → Outcome path with validated input and output proves that tested contract path; it does not by itself establish the promised behavior or external effect.** Geometry and output shape alone do not prove execution. For a provider-free transformation, real execution and behavioral assertions may establish the intended outcome. For an external booking, a simulated confirmation establishes neither the booking nor provider conformance.
+
+Preserve the target circuit and all required mechanic references while choosing the first realization. A deferred mechanic stays visible with its reason and revisit condition. Execute an available, compatible, authorized mechanic when it can supply the work; use simulation only at an explicitly identified boundary. When a test deliberately isolates an available provider, record that purpose. Do not use an empty or preserving transformation as evidence that unresolved domain behavior has been supplied.
 
 This scaffold choice is the first architectural decision accounted for by the rubric. Record its authority, its relationship to the feature's flywheel, the smallest sufficient path, and its expected effects. A bounded scaffold should shorten the path to credible use and reduce speculative commitments; its trade-offs may include limited coverage and later adaptation work. Check those predictions against actual delivery and subsequent use.
 
@@ -29,7 +35,7 @@ The resulting architecture is the accumulation of justified commitments at this 
 
 ## 1. Put the intended experience first
 
-The builder's stated experience is the scope anchor:
+For each application, state its own Input → Event → Outcome experience and intended user. The diagram interaction below is the original builder-directed example, and remains the scope anchor when implementing that experience. It does not impose a diagram UI on every capability or make UI development a prerequisite for the scaffold-generator pilot.
 
 - **Input:** A user selects a declared diagram component. Its input form expands from the component using the applicable existing input definition. The user supplies the required data.
 - **Event:** The user submits. The form returns into the component, and the request executes through the applicable established execution path. The interaction communicates the real execution state.
@@ -45,9 +51,9 @@ Keep the interaction loop and this hypothesis distinct. One successful demonstra
 
 Record three observations using the existing work process:
 
-1. Time from starting the scoped change to the first credible end-to-end demonstration, including review overhead.
+1. Time from starting the scoped change to the first executable simulated result and, separately, the first behaviorally verified outcome, including review overhead. Record provider-backed execution when a provider is required. If a milestone has not occurred, keep it unobserved.
 2. Successful authorized executions out of attempts, with the number of distinct users and the principal failure reasons. Repeated test clicks are not evidence of adoption.
-3. Effort to deliver the next comparable useful example, noting which reuse or learning caused a change. If no next example exists, the flywheel remains unverified.
+3. Effort to deliver the next comparable useful example, noting exact mechanics reused, new maintenance introduced, and which reuse or learning caused a change. If no next example exists, the flywheel remains unverified.
 
 Do not invent numerical targets before establishing a baseline or obtaining a builder target.
 
@@ -132,7 +138,8 @@ These assessments are provisional. They identify what to inspect; they do not as
 | Preserve established input admission, execution binding, and actual result/failure reporting | Makes the demonstration credible. Wiring may slow the first visible result. | Preserve applicable requirements and implement the smallest correct connection. Never imply execution succeeded because the animation finished. |
 | Require a new generic form framework before showing one component | Could reduce work across sufficiently similar later cases; adds upfront delay and ongoing obligations. | Defer if the current fields can be expressed through existing or small local mechanics. Revisit when required cases expose a measured recurring gap. |
 | Introduce a second authoritative input model for the UI | Could simplify a local renderer; adds drift, translation, and competing authority. | Prefer a derived view of the existing definition. A new independent authority requires a concrete need and authorization at the appropriate scope. |
-| Add a decision service, registry, or policy engine to enforce this rubric | Could eventually support repeated review; adds a new system before testing the review itself. | Use a section in the existing design document first. Reconsider tooling only when repeated review produces a demonstrated burden. |
+| Operationalize the rubric inside the existing scaffold generator | Makes the minimum path, reuse basis and open obligations inspectable; adds contract and evidence maintenance. | Proposed in the [implementation plan](scaffold-generation-operationalization-plan.md). Derive concrete decisions from supplied authority and retain human judgments as attributed inputs. |
+| Add a separate decision service, registry, or policy engine | Could eventually support repeated review; adds another system and authority boundary. | Defer. The design document and existing scaffold capability can carry the current decision record; revisit only on demonstrated unmet needs. |
 | Reuse an old document's "all components require X" prerequisite | May reflect a valid invariant, or may preserve an unaccepted generalization. | Locate the source and scope. Preserve verified applicable requirements; do not promote repetition into authority. |
 
 ## 7. Copy into the next design document
@@ -150,6 +157,10 @@ Current experience and proposed flywheel:
 Scope anchor / existing delegation:
 Smallest feasible delivery slice:
 Intended outcome and minimal execution path, including providers only as required:
+Target mechanic/topology references and first-realization coverage:
+What executes, what is simulated, and what remains unresolved:
+Contract evidence versus behavioral/external-outcome evidence:
+Reuse choice and compatibility basis; profile/binding/identity change if needed:
 Baseline and next observable result:
 
 Decision and exact source location:
@@ -169,4 +180,55 @@ Observed result after implementation:
 
 The reviewer summarizes: what is needed now, what helps now, what is deferred and why, and any concrete decision outside delegation. Preserve the initial prediction beside later observations. Merge redundant entries, avoid speculative precision, and evaluate whether this review itself materially delayed the intended demonstration.
 
-Review effort should scale with consequence. The first implementation of this method is a document section and a conversation grounded in the builder's intent.
+Review effort should scale with consequence. The initial record lives in the design document. The proposed generator extension derives the reproducible parts of that record; it does not replace scope judgment, manufacture estimates, or turn optional scores into admission gates.
+
+## 8. Apply the rubric operationally to scaffolding
+
+The scaffold decision answers: **What is the least executable realization of this declared outcome, which admitted mechanics already provide it, and what evidence is still missing?** Use the same decision record for the initial slice and material later additions.
+
+### Minimum responsibilities
+
+| Position | Required accounting |
+| --- | --- |
+| Input | Exact input contract; how supplied data is validated; the failure path for invalid input. |
+| Event | Declared responsibility, topology and mechanics; explicit transformation or fixture-backed simulation; admitted reuse and execution constraints. |
+| Outcome | Exact output contract; validation result; behavioral assertions and evidence required to claim the intended result. |
+| Execution evidence | Exact definitions and bindings used; what actually ran; simulated boundaries and fixture identities; failures, unresolved work and the scope of every success claim. |
+
+Generation, execution and admission have separate meanings. A successful generator invocation means the generator returned its declared result, which may still be held. A generated shell is not an executed capability. A fixture pass is not evidence of an external effect. A database registration is not managed admission. Preserve each applicable status instead of reducing them to one green indicator.
+
+The generator derives from the reviewed feature and conditioning blueprint. It must not choose a cheaper circuit by deleting declared branches, changing precedence, absorbing delegated responsibilities, or inventing a provider seam. If the minimal realization needs a topology change, return that concrete change to the existing design authority. A missing design, contract or simulation boundary is a bounded obligation, not an invitation to infer meaning.
+
+### Reuse and semantic identity
+
+Resolve applicability before comparing local implementation effort. Follow the Semantic Brain's recorded preference: `REUSE_EXISTING`, `COMPOSE_EXISTING`, `AUTHOR_PROFILE`, then `AUTHOR_NEW`; incomplete or ambiguous authority yields `HELD`. Resolve exact current authorities when implementing this preference. A text match or catalog entry alone does not prove compatibility.
+
+| Requested change | Treatment | Evidence to preserve |
+| --- | --- | --- |
+| Different values within an existing contract | Reuse with parameters | Parameter validity and applicable constraints. |
+| Specialization permitted by an admitted pattern | Use or author a profile through the applicable path | Pattern, allowed variation and profile compatibility. |
+| Different implementation of the same promise | Bind a conforming implementation or provider | Input/output compatibility, effects, failure behavior and relevant conformance evidence. |
+| Different promised behavior, effects or guarantees | Revise meaning or introduce semantic identity through the applicable path | Explicit semantic delta, affected consumers and why existing meaning cannot satisfy it. |
+
+Do not make a new identity solely because implementation differs, or claim semantic equivalence solely because schemas match. Compose only where admitted composition and binding rules support the declared circuit. Generality and sharing permission are independent: a generic mechanic may have a proprietary implementation; a domain-specific mechanic may be reusable throughout an enterprise.
+
+The semantic authority and its referenced definitions must collectively retain the promise, input/result contracts, failure semantics, effects and constraints. Profiles, provider bindings, conformance evidence and reuse permissions remain attached to their proper authorities. SQL retrieval must preserve those links and exact versions; being retrievable does not confer execution permission or compatibility.
+
+### Provider seams and truthful simulation
+
+Capability contracts and provider contracts may differ. Record both provider request/response contracts, the capability-to-provider and provider-to-capability mappings, configuration/credential references, and declared failure handling. A fixture substitutes at that same declared seam. Replacing it with a conforming provider changes realization and evidence without changing the capability's promise.
+
+| Observation | Supported conclusion | Still required |
+| --- | --- | --- |
+| Output validates against its schema | Structural contract compatibility | Behavioral evidence and any promised external effect. |
+| Fixture traverses the declared seam and passes assertions | The tested path handles that declared fixture | Actual provider conformance and outcome evidence. |
+| Real provider returns a successful transport response | That exchange completed as observed | Validation, semantic interpretation and the feature's outcome conditions. |
+| Required behavior and outcome conditions are evidenced | The scoped intended result is established | Any untested scenarios or later changes remain separately accounted for. |
+
+Determinism applies to resolution rules and generation from frozen inputs. It does not make a live observation, filesystem state, clock or model response deterministic. Replay fixture results against pinned inputs; assess live runs using the declared invariants and retain their actual testimony.
+
+### Review closure and continued use
+
+The team reviews the initial scope, authority basis, target/realization mapping, reuse choices, simulation boundaries, acceptance evidence and distribution of costs together. Record acceptance or requested changes, reviewer, date and scope in the existing decision record. The present status is **proposed for team review**; no adoption or implementation result is implied by this file.
+
+After the first slice, append observations beside predictions: time to simulated execution, time to verified outcome, exact reuse, new maintenance, who saved work and who inherited work. Compare the next useful example with the first. Adjust the rubric when evidence exposes recurring ambiguity; version any machine-readable rule changes through the capability's existing contract and authority process. A review-method change does not silently revise previously admitted capability meaning.
