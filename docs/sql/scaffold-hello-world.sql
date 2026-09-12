@@ -90,7 +90,7 @@ SET @workspaceText = N'{ "workspaceType": "consumer-workspace-authority.v1", "co
 SET @execText = N'{ "authorityType": "execution-authorities.v1", "executionAuthorities": [ { "id": "' + STRING_ESCAPE(@EventAuthorityId, 'json') + N'", "owningScenarioId": "' + STRING_ESCAPE(@CapabilityId, 'json') + N'",
   "operations": [ { "kind": "invoke-port", "portId": "' + STRING_ESCAPE(@PortId, 'json') + N'" } ] } ] }';
 SET @interfacesText = N'{ "interfaceAuthorityType": "consumer-interface-authority.v1", "contractValidatorCapabilityId": "sda-schema-contract-admission.v1", "contractCatalog": "contracts/contract-catalog.json",
-  "interfaces": [ { "interfaceId": "' + STRING_ESCAPE(@CapabilityId, 'json') + N'-cli", "kind": "cli", "rootScenarioId": "' + STRING_ESCAPE(@CapabilityId, 'json') + N'", "platformCapabilityId": "sda-json-cli.v1", "projectionTargets": [ "node" ] } ],
+  "interfaces": [ { "interfaceId": "' + STRING_ESCAPE(@CapabilityId, 'json') + N'-cli", "kind": "cli", "rootScenarioId": "' + STRING_ESCAPE(@CapabilityId, 'json') + N'", "platformCapabilityId": "sda-json-cli.v1", "configuration": { "display": { "select": "outcome.payload.message", "as": "text" } }, "projectionTargets": [ "node" ] } ],
   "portBindings": [ { "portId": "' + STRING_ESCAPE(@PortId, 'json') + N'", "platformCapabilityId": "sda-authority-transformation-port.v1",
     "configuration": { "transformationAuthorityRef": "semantic-transformation.authority.json", "transformationId": "' + STRING_ESCAPE(@TransformationId, 'json') + N'" } } ], "projectionBindings": [] }';
 SET @transText = N'{ "authorityType": "semantic-transformation-authority.v1", "transformations": [ { "id": "' + STRING_ESCAPE(@TransformationId, 'json') + N'",
@@ -221,6 +221,10 @@ BEGIN
   INSERT #priorSod (sod, so) SELECT oc.semantic_object_definition_pk, oc.semantic_object_pk FROM model.observable_condition oc WHERE oc.owner_definition_pk=@priorCapSod;
   INSERT #priorSod (sod, so) SELECT fv.semantic_object_definition_pk, fv.semantic_object_pk FROM model.feature_version fv JOIN model.feature f ON f.feature_pk=fv.feature_pk WHERE f.feature_id=@CapabilityId;
 
+  DELETE soc FROM model.scenario_outcome_contract soc WHERE soc.scenario_version_pk=@priorScnVer;
+  DELETE si FROM model.scenario_input si WHERE si.scenario_version_pk=@priorScnVer;
+  DELETE se FROM model.scenario_event se WHERE se.scenario_version_pk=@priorScnVer;
+  DELETE so FROM model.scenario_outcome so WHERE so.scenario_version_pk=@priorScnVer;
   DELETE ipi FROM model.operation_port_invocation ipi WHERE ipi._owner_definition_pk IN (SELECT sod FROM #priorSod);
   DELETE osi FROM model.operation_scenario_invocation osi WHERE osi._owner_definition_pk IN (SELECT sod FROM #priorSod);
   DELETE eo FROM model.execution_operation eo WHERE eo._owner_definition_pk IN (SELECT sod FROM #priorSod);
@@ -233,13 +237,10 @@ BEGIN
   DELETE t FROM model.transformation t WHERE t.semantic_object_pk IN (SELECT so FROM #priorSod WHERE so IS NOT NULL);
   DELETE pv FROM model.port_version pv WHERE pv.semantic_object_definition_pk IN (SELECT sod FROM #priorSod);
   DELETE p FROM model.port p WHERE p.semantic_object_pk IN (SELECT so FROM #priorSod WHERE so IS NOT NULL);
-  DELETE soc FROM model.scenario_outcome_contract soc WHERE soc.scenario_version_pk=@priorScnVer;
-  DELETE si FROM model.scenario_input si WHERE si.scenario_version_pk=@priorScnVer;
-  DELETE se FROM model.scenario_event se WHERE se.scenario_version_pk=@priorScnVer;
-  DELETE so FROM model.scenario_outcome so WHERE so.scenario_version_pk=@priorScnVer;
   DELETE crs FROM model.capability_root_scenario crs WHERE crs.capability_version_pk=@priorCapVer;
   DELETE cs FROM model.capability_scenario cs WHERE cs.capability_version_pk=@priorCapVer;
   DELETE oc FROM model.observable_condition oc WHERE oc.owner_definition_pk=@priorCapSod;
+  UPDATE model.capability SET feature_pk=NULL WHERE capability_pk=@priorCapPk;
   DELETE fs FROM model.feature_scenario fs WHERE fs.feature_version_pk IN (SELECT fv.feature_version_pk FROM model.feature_version fv JOIN model.feature f ON f.feature_pk=fv.feature_pk WHERE f.feature_id=@CapabilityId);
   DELETE ecf FROM model.estate_capability_feature ecf WHERE ecf.capability_pk=@priorCapPk;
   DELETE fv FROM model.feature_version fv WHERE fv.feature_pk IN (SELECT feature_pk FROM model.feature WHERE feature_id=@CapabilityId);
@@ -247,7 +248,6 @@ BEGIN
   DELETE sv FROM model.scenario_version sv WHERE sv.scenario_version_pk=@priorScnVer;
   DELETE s FROM model.scenario s WHERE s.capability_pk=@priorCapPk;
   DELETE ec FROM model.estate_capability ec WHERE ec.capability_pk=@priorCapPk;
-  UPDATE model.capability SET feature_pk=NULL WHERE capability_pk=@priorCapPk;
   DELETE cvv FROM model.capability_version cvv WHERE cvv.capability_pk=@priorCapPk;
   DELETE cc FROM model.capability cc WHERE cc.capability_pk=@priorCapPk;
   DELETE no FROM model.namespace_owner no WHERE no.owner_semantic_object_pk IN (SELECT so FROM #priorSod WHERE so IS NOT NULL);

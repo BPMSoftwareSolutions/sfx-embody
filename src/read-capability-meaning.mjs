@@ -230,10 +230,12 @@ const parse = value => {
 // than rendered as an empty sentence.
 const text = value => (typeof value === 'string' && value.trim().length ? value : null);
 
-// The selected model can retain more than one definition for a single declared
-// id: 275 of its 8,524 declared ids do, one of them 13 times. Those definitions
-// can disagree. Collapsing them would hide that, so every retained definition is
-// carried, with its digest, grouped under the id that declares it.
+// The selected view returns one definition per declared id: the current
+// (highest semantic_object_definition_pk) definition for each semantic object.
+// Superseded definitions remain in the model but are not read here. Grouping
+// still carries every definition the view returns, with its digest, under the id
+// that declares it, so a model that does present more than one is shown, not
+// collapsed.
 function group(rows, key, build) {
   const entries = new Map();
   for (const row of rows) {

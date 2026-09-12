@@ -166,15 +166,32 @@ alone and the capsule become an optional promotion.
 
 ## Open items
 
-- `hello-world-request.v1` / `hello-world-greeting.v1` each hold 2 `CONTRACT`
-  definitions in the same `sidefx:contracts` namespace (ours + `say-hello-world`'s).
-  That one is a real same-namespace duplication and must be reconciled before the
-  port resolves contracts by identity.
+- **Closed — same-namespace duplication.** `hello-world-request.v1` /
+  `hello-world-greeting.v1`, and every other declared id, are now presented once.
+  See "Closure" below.
 - Confirm whether work itself already expects `WORKSPACE`/`SEMANTIC_GRAPH` kinds
   in `sidefx-database` before minting new ones.
+
+## Closure — one definition per declared id
+
+The read boundary now presents one definition per declared id:
+`analysis.v_selected_semantic_definition` selects the highest
+`semantic_object_definition_pk` for each semantic object in the selected model
+(`docs/sql/select-one-definition-per-declared-id.sql`). Superseded definitions are
+**not removed**; they remain in the model and simply stop being the definition read.
+
+Before the change the view returned every definition, so consumers read the union of
+superseded and current declarations. That one cause produced the same-namespace
+`CONTRACT` duplication and the equity `EXECUTION_AUTHORITY` / `PORT` /
+`TRANSFORMATION` multiplicities. After the change, 0 selected ids carry more than one
+definition; 38 ids still carry multiple definitions in the model. This closes the
+same-namespace open item at the read boundary, not by deleting rows.
 
 ## Status
 
 - Diagnosis: **recorded and verified**.
-- Bounded remediation: **scoped above, not implemented**.
+- Bounded remediation: **scoped above, not implemented** (the model-backed port;
+  the selection rule is a separate, delivered change).
 - Self-hosting the 46: **not started**; deliberately deferred.
+- Remaining live gap: the runtime still resolves exactly one retained-source row
+  per capability, so capsule source remains mandatory at declaration time.

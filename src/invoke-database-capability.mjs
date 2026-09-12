@@ -11,14 +11,29 @@ import { listCapabilities } from './list-capabilities.mjs';
 
 const digest = value => 'sha256:' + createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
-const requestFields = ['object', 'verb', 'subject', 'namespace', 'input', 'query', 'as', 'scenario', 'format'];
+const requestFields = ['object', 'verb', 'subject', 'namespace', 'input', 'query', 'as', 'scenario', 'format', 'display'];
+
+// The capability's CLI display projection, read from its own interface declaration.
+// A capability that declares none returns the full canonical outcome unchanged.
+function readDeclaredDisplay(bundle) {
+  const records = [...(bundle?.authority?.recordsets?.[1] ?? []), ...(bundle?.authority?.recordsets?.[2] ?? [])];
+  for (const record of records) {
+    if (typeof record.source_path !== 'string' || !record.source_path.endsWith('interfaces.authority.json')) continue;
+    try {
+      const document = JSON.parse(Buffer.from(record.content_bytes.base64, 'base64').toString('utf8'));
+      const cli = Array.isArray(document.interfaces) ? document.interfaces.find(entry => entry.kind === 'cli') : null;
+      if (cli?.configuration?.display) return cli.configuration.display;
+    } catch { /* A malformed interface document is not display authority. */ }
+  }
+  return null;
+}
 
 // Each operation declares the shape it accepts. Adding an operation is a row
 // here and a row in the command mapping; it is never a new dispatch rule spread
 // through the delivery.
 const operations = {
-  invoke: { object: 'capability', subject: true, input: 'required' },
-  observe: { object: 'capability', subject: true, input: 'required' },
+  invoke: { object: 'capability', subject: true, input: 'required', display: true },
+  observe: { object: 'capability', subject: true, input: 'required', display: true },
   prepare: { object: 'capability', subject: true, input: 'rejected' },
   circuit: { object: 'capability', subject: true, input: 'optional', scenario: true },
   reveal: { object: 'capability', subject: true, input: 'optional', scenario: true, views: ['circuit', 'meaning'], formats: ['text', 'markdown'] },
@@ -45,6 +60,7 @@ export function validateDatabaseCommand(envelope) {
     || (request.namespace !== undefined && !present(request.namespace))
     || (request.scenario !== undefined && (!spec.scenario || !present(request.scenario)))
     || (request.as !== undefined && (!spec.views || !present(request.as)))
+    || (request.display !== undefined && spec.display !== true)
     || (request.format !== undefined && (!spec.formats || !present(request.format)))) throw new Error('DATABASE_COMMAND_REJECTED');
   if (spec.views && request.as !== undefined && !spec.views.includes(request.as)) throw new Error('CAPABILITY_VIEW_NOT_OFFERED');
   if (spec.formats && request.format !== undefined && !spec.formats.includes(request.format)) throw new Error('CAPABILITY_FORMAT_NOT_OFFERED');
@@ -124,6 +140,7 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, 
   // execution and additionally streams its telemetry; it is not a second path.
   // Preparation is an optional, separately invoked retained proof and is never consumed here.
   const bundle = await measure('readAuthority', () => readAuthority(databaseRoot, selection, { retainObjects: false, timings: timings.queries }));
+  const display = readDeclaredDisplay(bundle);
   const plan = await measure('planNativeBody', () => planNode({ bundle, sdaRoot }));
   const runtime = await measure('loadMemoryModules', () => loadMemoryScenario(plan));
   const executions = [], observations = [];
@@ -137,6 +154,7 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, 
   return { disposition: result.disposition === 'failed' ? 'failed' : 'terminated',
     ...(result.disposition === 'failed' ? { errorCode: 'CAPABILITY_EXECUTION_FAILED' } : {}),
     outcome: { capabilityId: plan.capabilityId, scenarioId: plan.selectedScenarioId, result, executions, observations,
+      ...(display ? { display } : {}),
       evidence: { timings, authoritySource: 'DATABASE', bodyStorage: 'MEMORY_ONLY', managedAdmission: 'NOT_REQUESTED',
         executionOperation: request.verb,
         providerStatus: 'CANDIDATE_PHYSICAL_PROVIDER', inputDigest: digest(request.input), resultDigest: digest(result),
