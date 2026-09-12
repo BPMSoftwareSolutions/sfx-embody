@@ -232,3 +232,72 @@ Determinism applies to resolution rules and generation from frozen inputs. It do
 The team reviews the initial scope, authority basis, target/realization mapping, reuse choices, simulation boundaries, acceptance evidence and distribution of costs together. Record acceptance or requested changes, reviewer, date and scope in the existing decision record. The present status is **proposed for team review**; no adoption or implementation result is implied by this file.
 
 After the first slice, append observations beside predictions: time to simulated execution, time to verified outcome, exact reuse, new maintenance, who saved work and who inherited work. Compare the next useful example with the first. Adjust the rubric when evidence exposes recurring ambiguity; version any machine-readable rule changes through the capability's existing contract and authority process. A review-method change does not silently revise previously admitted capability meaning.
+
+## 9. Work-order rubric: does this dependency serve the SQL → CLI flywheel?
+
+This section applies the rubric to one bounded work order — [SQL → CLI: scaffold Hello World](sql-cli-work-order-001.md) — and to the artifact `docs/sql/scaffold-hello-world.sql`. Its purpose is to decide which records, bindings, generations and lifecycle steps are **necessary to close that loop**, and which are promotion machinery the loop does not require.
+
+### 9.1 The loop, stated as observable events
+
+1. Sidney runs a `.sql` file.
+2. The unchanged CLI invokes the capability it created.
+3. Observed output contains the database-defined message.
+4. Sidney changes the message in SQL and re-runs.
+5. The unchanged CLI observes the changed output.
+6. The same SQL scaffolds another identity.
+
+The loop closes when the observed CLI output changes as the SQL data changes, with **no capability-specific source file participating**. A step that does not change any of those six events is not part of the loop.
+
+### 9.2 Selection rule: least work that closes the loop
+
+Choose the least-work option that completes all six events. Review and maintenance effort count in the cost. Supporting work — schema plumbing, validation, extraction — is partial progress until the loop closes, not an alternative to closing it. This mirrors section 2.4 of the [implementation plan](scaffold-generation-operationalization-plan.md).
+
+### 9.3 Necessity test for each dependency
+
+For each record, binding, generation or lifecycle step, ask: **if this is omitted, which of the six events fails, and where?** Classify the answer:
+
+| Class | Meaning | Treatment |
+| --- | --- | --- |
+| **Execution necessity** | The runtime read/execute path cannot resolve or run the capability without it. | Keep; it is the loop. |
+| **Delivery necessity** | The caller cannot observe the outcome without it (the CLI/interface binding). | Keep; event 3 depends on it. |
+| **Validation/promotion necessity** | Required only because a new generation is published (validation gates, carried membership, lineage completeness). | Keep while publishing; reconsider if a non-publishing path exists. |
+| **Not necessary** | Removing it changes none of the six events. | Remove; it buries the meaning and adds review cost. |
+
+A dependency is never justified by "the schema requires it" alone. State the failing event and the exact read/gate that fails.
+
+### 9.4 Worked application: `scaffold-hello-world.sql`
+
+| Dependency | Class | Evidence | Disposition |
+| --- | --- | --- | --- |
+| Retained capsule-source entries (`source_appearance`/`content_object` for the capability's capsule digest) | Execution necessity | `sql/diagnostics/capability-embodiment.sql` resolves the capability and returns the retained source; `src/materialize-node.mjs` builds the body from those bytes. | Keep. |
+| One lineage row: capability definition → observation → capsule appearance | Execution necessity | `capability-embodiment.sql` resolves the capsule digest only through `source.source_lineage`. | Keep exactly one. |
+| Additional lineage rows (scenario, faces, port, transformation, execution authority, expression tree) | Validation/promotion necessity | Only `source.validate_model` gate `G_LINEAGE_MEMBER` reads them; the invocation read path does not. | Needed only because publication validates. |
+| New `source.estate_model` BUILDING + membership carry + `source.publish_model` | Execution necessity **for a new capability** | The read path pins `source.current_model`; `model.guard_estate_capability` throws `PUBLISHED_MEMBERSHIP_IMMUTABLE` on inserts into a PUBLISHED model. | Required by the current read path (see 9.5). |
+| Interface binding to `sda-json-cli.v1` | Delivery necessity | Platform provider `ScenarioKernel.NodePlatform.Interface.JsonCli`, operation `deliverArtifact(outcome, destination = process.stdout)`. | Keep; event 3 depends on it. |
+| Port binding to `sda-authority-transformation-port.v1` | Execution necessity (value-producing path) | The execution authority is read from the capsule; the transformation produces the outcome the delivery writes. | Keep for a value-producing capability. |
+| Parameterized `@CapabilityId` / `@Message` | Loop quality (events 4–6) | The message lives in the transformation and the outcome schema; identity lives in every id-bearing file. | Keep; it is the change-and-repeat mechanism. |
+
+### 9.5 Is publication necessary?
+
+Two states, distinguished by the guards, not by the loop.
+
+**Old state (guards present).** A capability newly added through the current runtime must be published: the read path pins `source.current_model`, and `model.guard_estate_capability` refuses inserts into a PUBLISHED model (`PUBLISHED_MEMBERSHIP_IMMUTABLE`, error 51003 — observed). While those guards exist, a new generation plus `validate_model`/`publish_model` is the only SQL path that makes the capability selectable. The extra lineage and validation records are then **publication overhead**, not invocation requirements.
+
+**Proposed state (`remove-execution-dependence-overhead.sql`).** The guards are the restriction, not the capability. Dropping the ones whose definition contains a blocking condition — and scoping importer update rights to the two objects the scaffold updates — removes the need for a generation, validation and publication. The read path still pins `source.current_model`, so `scaffold-hello-world.sql` inserts its selection rows directly into that model. Publication is then **not** part of this loop.
+
+Publication is therefore necessary only while the immutability and membership guards are in place. It was never intrinsically necessary to the flywheel; it was the cost of the guards. The two work-order files are the decision: remove the restriction, and the lifecycle step disappears with it.
+
+A separate, still-open question is whether the runtime should read a mutable working definition without any retained capsule source at all. That is a runtime read-path change and is not required to close this loop.
+
+### 9.6 Decision record for the work order
+
+| Question | Finding |
+| --- | --- |
+| What closes the loop? | SQL-authored retained source + CLI invocation + observed message; message and identity are parameters. |
+| What is execution-necessary? | Capsule source entries for the selected digest; one lineage resolution; the CLI interface binding; a port/authority that yields the payload. |
+| What is publication-necessary? | The new generation, membership carry, remaining lineage, and `validate_model`/`publish_model`. |
+| What is not necessary? | Any record that neither the read path nor a validation gate consults. |
+| What remains open? | Whether the runtime should read a mutable working definition without retained capsule source. The stdout call is not open: it is the existing `sda-json-cli.v1` (`Interface.JsonCli` → `deliverArtifact → process.stdout`) declared through the capability interface, and is reused with no platform change. |
+| Evidence status | The `.sql` has not been executed by the agent; publication necessity rests on the observed `PUBLISHED_MEMBERSHIP_IMMUTABLE` guard and the pinned read path. |
+
+The team should review this record with the `.sql` and the six observable events in front of them. A dependency that cannot name its failing event is either publication overhead to be minimized or work that belongs to a different decision.
