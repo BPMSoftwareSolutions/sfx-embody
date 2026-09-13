@@ -76,6 +76,8 @@ BEGIN
   DECLARE @b_inSchema varbinary(max), @d_inSchema binary(32);
   DECLARE @b_outSchema varbinary(max), @d_outSchema binary(32);
   DECLARE @manifest nvarchar(max), @manifestHex varchar(64);
+  DECLARE @refs TABLE (execution_operation_pk bigint PRIMARY KEY, scenario_id nvarchar(400) COLLATE Latin1_General_100_BIN2, capability_id nvarchar(400) COLLATE Latin1_General_100_BIN2);
+  DECLARE @invFk nvarchar(400), @invFkSql nvarchar(600);
 
   -- 1. Declared text. @CapabilityId and @GreetingTemplate are the only required inputs.
   SET @capText = N'{
@@ -175,6 +177,20 @@ BEGIN
     INSERT #priorSod (sod, so) SELECT tv.semantic_object_definition_pk, tv.semantic_object_pk FROM model.transformation_version tv JOIN model.transformation t ON t.transformation_pk=tv.transformation_pk JOIN model.identity_namespace n ON n.namespace_pk=t.namespace_pk WHERE n.namespace_id=N'sidefx:capability:'+@CapabilityId;
     INSERT #priorSod (sod, so) SELECT oc.semantic_object_definition_pk, oc.semantic_object_pk FROM model.observable_condition oc WHERE oc.owner_definition_pk=@priorCapSod;
     INSERT #priorSod (sod, so) SELECT fv.semantic_object_definition_pk, fv.semantic_object_pk FROM model.feature_version fv JOIN model.feature f ON f.feature_pk=fv.feature_pk WHERE f.feature_id=@CapabilityId;
+
+    -- Other capabilities compose this one's Scenarios and pin their versions by
+    -- foreign key. Detach those invocations before the versions are removed, and
+    -- re-point them at the fresh version once it is created, so re-authoring a
+    -- target is safe. Only this capability's own invocations are deleted below.
+    INSERT @refs (execution_operation_pk, scenario_id, capability_id)
+    SELECT DISTINCT osi.execution_operation_pk, ts.scenario_id, c.capability_id
+    FROM model.operation_scenario_invocation osi
+    JOIN model.scenario_version tsv ON tsv.scenario_version_pk=osi.target_scenario_version_pk
+    JOIN model.scenario ts ON ts.scenario_pk=tsv.scenario_pk
+    JOIN model.capability c ON c.capability_pk=ts.capability_pk
+    WHERE ts.capability_pk=@priorCapPk AND osi._owner_definition_pk NOT IN (SELECT sod FROM #priorSod);
+    SELECT @invFk=name FROM sys.foreign_keys WHERE parent_object_id=OBJECT_ID('model.operation_scenario_invocation') AND referenced_object_id=OBJECT_ID('model.scenario_version');
+    IF @invFk IS NOT NULL BEGIN SET @invFkSql=N'ALTER TABLE model.operation_scenario_invocation DROP CONSTRAINT '+QUOTENAME(@invFk); EXEC(@invFkSql); END
 
     DELETE soc FROM model.scenario_outcome_contract soc WHERE soc.scenario_version_pk IN (SELECT scenario_version_pk FROM model.scenario_version WHERE scenario_pk=@priorScnPk);
     DELETE si FROM model.scenario_input si WHERE si.scenario_version_pk IN (SELECT scenario_version_pk FROM model.scenario_version WHERE scenario_pk=@priorScnPk);
@@ -344,6 +360,17 @@ BEGIN
   INSERT model.capability_scenario (capability_pk, capability_version_pk, scenario_pk, scenario_version_pk, _owner_definition_pk, _canonical_pointer)
     VALUES (@capPk, @capVer, @scnPk, @scnVer, @capSod, N'/semantics/scenario_members/' + @capId);
   INSERT model.capability_root_scenario (capability_version_pk, scenario_pk, _owner_definition_pk, _canonical_pointer) VALUES (@capVer, @scnPk, @capSod, N'');
+
+  -- Re-point the detached composed invocations at this capability's fresh
+  -- Scenario version, then restore the pairing constraint.
+  IF @invFk IS NOT NULL
+  BEGIN
+    UPDATE osi SET osi.target_scenario_version_pk=@scnVer
+    FROM model.operation_scenario_invocation osi JOIN @refs r ON r.execution_operation_pk=osi.execution_operation_pk
+    WHERE r.scenario_id=@capId;
+    SET @invFkSql=N'ALTER TABLE model.operation_scenario_invocation WITH CHECK ADD CONSTRAINT '+QUOTENAME(@invFk)+N' FOREIGN KEY (target_scenario_version_pk) REFERENCES model.scenario_version (scenario_version_pk)';
+    EXEC(@invFkSql);
+  END
 
   -- Contracts and schemas: shared estate identities; mint what is missing.
   IF NOT EXISTS (SELECT 1 FROM model.schema_object WHERE content_digest=@d_inSchema)
@@ -1718,6 +1745,10 @@ BEGIN
   UPDATE model.capability_version SET semantic_object_definition_pk=@sod, definition_digest=@d WHERE capability_version_pk=@capVer;
   UPDATE model.estate_capability SET semantic_object_definition_pk=@sod WHERE estate_model_pk=@model AND capability_pk=@capPk;
   IF @fk IS NOT NULL BEGIN SET @fkSql=N'ALTER TABLE model.estate_capability WITH CHECK ADD CONSTRAINT '+QUOTENAME(@fk)+N' FOREIGN KEY (capability_version_pk, semantic_object_definition_pk) REFERENCES model.capability_version (capability_version_pk, semantic_object_definition_pk)'; EXEC(@fkSql); END
+  -- Keep the capability's owned rows attached to its current declaration.
+  UPDATE oc SET oc.owner_definition_pk=@sod
+  FROM model.observable_condition oc JOIN model.identity_namespace n ON n.namespace_pk=oc.namespace_pk
+  WHERE n.namespace_id=(SELECT TOP 1 n2.namespace_id FROM model.scenario s JOIN model.identity_namespace n2 ON n2.namespace_pk=s.namespace_pk WHERE s.capability_pk=@capPk);
 
   -- Retire every scaffolded feature profile but the canonical parsed declaration.
   DECLARE @keep bigint=(SELECT MAX(feature_version_pk) FROM model.feature_version WHERE feature_pk=@featPk);
