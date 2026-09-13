@@ -1,64 +1,5 @@
 {
   "contracts": {
-    "equity-market-price-evidence-request.v1": {
-      "schemaRef": "capabilities/resolve-equity-market-price-evidence/contracts/equity-market-price-evidence-request.v1.schema.json",
-      "schemaId": "https://schemas.agentic-harness.local/contracts/equity-market-price-evidence-request.v1.schema.json",
-      "schemaDigest": "e1b742bedc62bb2c1bdb2e362996ae7432c3d189c34b91fc39e2ecbda45e0679",
-      "schema": {
-        "$schema": "https://json-schema.org/draft/2020-12/schema",
-        "$id": "https://schemas.agentic-harness.local/contracts/equity-market-price-evidence-request.v1.schema.json",
-        "title": "Equity market price evidence request",
-        "description": "One canonical request for provider-neutral equity market price evidence. The native provider testimony, provider binding and credential realization remain outside the capability's semantic identity.",
-        "type": "object",
-        "required": [
-          "contractId",
-          "payload"
-        ],
-        "additionalProperties": false,
-        "properties": {
-          "contractId": {
-            "const": "equity-market-price-evidence-request.v1"
-          },
-          "payload": {
-            "type": "object",
-            "required": [
-              "nativeTestimony",
-              "region",
-              "providerBinding"
-            ],
-            "additionalProperties": false,
-            "properties": {
-              "nativeTestimony": {
-                "type": "object",
-                "description": "The raw supplier payload. Its shape is selected by presence, never by provider identity."
-              },
-              "region": {
-                "type": "string",
-                "minLength": 1
-              },
-              "providerBinding": {
-                "type": "object",
-                "required": [
-                  "bindingId",
-                  "providerId"
-                ],
-                "additionalProperties": false,
-                "properties": {
-                  "bindingId": {
-                    "type": "string",
-                    "minLength": 1
-                  },
-                  "providerId": {
-                    "type": "string",
-                    "minLength": 1
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "equity-market-price-evidence.v1": {
       "schemaRef": "capabilities/resolve-equity-market-price-evidence/contracts/equity-market-price-evidence.v1.schema.json",
       "schemaId": "https://schemas.agentic-harness.local/contracts/equity-market-price-evidence.v1.schema.json",
@@ -226,33 +167,6 @@
         ]
       }
     },
-    "equity-market-price-provider-unavailable.v1": {
-      "schemaRef": "capabilities/resolve-equity-market-price-evidence/contracts/equity-market-price-provider-unavailable.v1.schema.json",
-      "schemaId": "https://schemas.agentic-harness.local/contracts/equity-market-price-provider-unavailable.v1.schema.json",
-      "schemaDigest": "a6a07c6669fd7207f01e85fcaaab6618d27bf2acb88997021cea4fac9252a9eb",
-      "schema": {
-        "$schema": "https://json-schema.org/draft/2020-12/schema",
-        "$id": "https://schemas.agentic-harness.local/contracts/equity-market-price-provider-unavailable.v1.schema.json",
-        "title": "Equity market price provider unavailable",
-        "description": "Resolution is held with attributable provider attempt evidence and no price evidence is invented.",
-        "type": "object",
-        "required": [
-          "contractId",
-          "disposition"
-        ],
-        "properties": {
-          "contractId": {
-            "const": "equity-market-price-provider-unavailable.v1"
-          },
-          "disposition": {
-            "const": "EQUITY_MARKET_PRICE_PROVIDER_UNAVAILABLE"
-          },
-          "providerAttemptEvidence": {
-            "type": "object"
-          }
-        }
-      }
-    },
     "live-equity-price-request.v1": {
       "schemaRef": "capabilities/resolve-equity-market-price-evidence/contracts/live-equity-price-request.v1.schema.json",
       "schemaId": "https://schemas.sidefx.local/contracts/live-equity-price-request.v1.schema.json",
@@ -296,53 +210,6 @@
             }
           }
         }
-      }
-    },
-    "native-equity-market-price-testimony-rejection.v1": {
-      "schemaRef": "capabilities/resolve-equity-market-price-evidence/contracts/native-equity-market-price-testimony-rejection.v1.schema.json",
-      "schemaId": "https://schemas.agentic-harness.local/contracts/native-equity-market-price-testimony-rejection.v1.schema.json",
-      "schemaDigest": "43bc2474611a8cfc34a7c07be82d11455b59ff8814d0b057f842a8fa478c3fbd",
-      "schema": {
-        "$schema": "https://json-schema.org/draft/2020-12/schema",
-        "$id": "https://schemas.agentic-harness.local/contracts/native-equity-market-price-testimony-rejection.v1.schema.json",
-        "title": "Native equity market price testimony rejection",
-        "description": "The native testimony is rejected without widening the mapping or emitting canonical price evidence.",
-        "type": "object",
-        "required": [
-          "contractId",
-          "disposition",
-          "reasonCode"
-        ],
-        "properties": {
-          "contractId": {
-            "const": "native-equity-market-price-testimony-rejection.v1"
-          },
-          "disposition": {
-            "const": "NATIVE_MARKET_PRICE_TESTIMONY_REJECTED"
-          },
-          "reasonCode": {
-            "const": "REQUIRED_NATIVE_FIELDS_ABSENT"
-          },
-          "absentFieldCount": {
-            "type": "integer",
-            "minimum": 0
-          },
-          "providerTestimony": {
-            "type": "object"
-          }
-        }
-      }
-    },
-    "native-equity-market-price-testimony.v1": {
-      "schemaRef": "capabilities/resolve-equity-market-price-evidence/contracts/native-equity-market-price-testimony.v1.schema.json",
-      "schemaId": "https://schemas.agentic-harness.local/contracts/native-equity-market-price-testimony.v1.schema.json",
-      "schemaDigest": "1705422752bbd4f352d9c085608268553395e1e42abbd80b1894e9baa8847379",
-      "schema": {
-        "$schema": "https://json-schema.org/draft/2020-12/schema",
-        "$id": "https://schemas.agentic-harness.local/contracts/native-equity-market-price-testimony.v1.schema.json",
-        "title": "Native equity market price testimony",
-        "description": "The raw supplier payload admitted at the native testimony boundary. Its shape is selected by presence, never by provider identity; the canonical mapping reads either declared native shape.",
-        "type": "object"
       }
     }
   }

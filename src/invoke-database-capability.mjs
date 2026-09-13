@@ -12,6 +12,9 @@ import { listCapabilities } from './list-capabilities.mjs';
 const digest = value => 'sha256:' + createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 const requestFields = ['object', 'verb', 'subject', 'namespace', 'input', 'inputType', 'query', 'as', 'scenario', 'format', 'display'];
+// The estate runtime root: a Port binding configuration may name an estate
+// provider module relative to this root.
+const ESTATE_RUNTIME_ROOT = new URL('../', import.meta.url);
 
 // The capability's CLI interface configuration (input mapping, display projection),
 // read from its own interface declaration. A capability that declares none keeps the
@@ -27,6 +30,26 @@ function readCliConfiguration(bundle) {
     } catch { /* A malformed interface document is not CLI authority. */ }
   }
   return {};
+}
+
+// A capability whose Port binding declares an estate provider is delivered by the
+// estate runtime rather than by a generated body. The module and export are
+// declaration data, so the delivery resolves them from the capability's own Port
+// binding instead of dispatching on capability identity.
+function readEstateProvider(bundle) {
+  const records = [...(bundle?.authority?.recordsets?.[1] ?? []), ...(bundle?.authority?.recordsets?.[2] ?? [])];
+  for (const record of records) {
+    if (typeof record.source_path !== 'string' || !record.source_path.endsWith('interfaces.authority.json')) continue;
+    try {
+      const document = JSON.parse(Buffer.from(record.content_bytes.base64, 'base64').toString('utf8'));
+      for (const binding of Array.isArray(document.portBindings) ? document.portBindings : []) {
+        const estate = binding?.configuration?.estateProvider;
+        if (estate && typeof estate.module === 'string' && typeof estate.export === 'string')
+          return { module: estate.module, export: estate.export, configuration: binding.configuration };
+      }
+    } catch { /* A malformed interface document is not estate authority. */ }
+  }
+  return null;
 }
 
 const INPUT_TYPES = new Set(['json', 'text', 'number', 'boolean']);
@@ -166,6 +189,27 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, 
   const bundle = await measure('readAuthority', () => readAuthority(databaseRoot, selection, { retainObjects: false, timings: timings.queries }));
   const cli = readCliConfiguration(bundle);
   const display = cli.display ?? null;
+  // An estate-provider capability is delivered by its declared provider: read the
+  // authority, plan no body, and return the provider's outcome. Materialization is
+  // a separate governed effect; this does not write.
+  const estateProvider = readEstateProvider(bundle);
+  if (estateProvider) {
+    let estateInput;
+    if (typeof request.input !== 'string') estateInput = structuredClone(request.input);
+    else {
+      const inputType = request.inputType ?? cli.input?.type ?? 'json';
+      if (inputType === 'json') { try { estateInput = JSON.parse(request.input); } catch { throw new Error('CAPABILITY_INPUT_JSON_REJECTED'); } }
+      else estateInput = buildCanonicalInput(cli.input, inputType, request.input);
+    }
+    const provider = await import(new URL(estateProvider.module, ESTATE_RUNTIME_ROOT).href);
+    if (typeof provider[estateProvider.export] !== 'function') throw new Error('ESTATE_PROVIDER_EXPORT_NOT_FOUND:' + estateProvider.export);
+    const outcome = await measure('executeEstateProvider', () => provider[estateProvider.export](estateProvider.configuration ?? {}, estateInput, config));
+    return { disposition: 'terminated',
+      outcome: { capabilityId: selection.capabilityId, scenarioId: bundle.authority.recordsets[0][0].scenario_id, result: { outcome }, executions: [], observations: [],
+        evidence: { timings, authoritySource: 'DATABASE', bodyStorage: 'NOT_REQUESTED', managedAdmission: 'NOT_REQUESTED',
+          snapshotId: bundle.authority.snapshotId, projectionDigest: bundle.authority.projectionDigest,
+          queries: [bundle.authority, bundle.closure, bundle.resolutions, bundle.mechanics].filter(Boolean).map(({ recordsets, ...identity }) => identity) } } };
+  }
   const plan = await measure('planNativeBody', () => planNode({ bundle, sdaRoot }));
   const runtime = await measure('loadMemoryModules', () => loadMemoryScenario(plan));
   const executions = [], observations = [];

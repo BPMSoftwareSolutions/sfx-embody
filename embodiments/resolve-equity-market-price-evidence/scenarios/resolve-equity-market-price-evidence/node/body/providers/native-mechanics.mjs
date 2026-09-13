@@ -35,4 +35,28 @@ function sfxLength(value) {
         sfxNotAdmitted("OPERAND_NOT_MEASURABLE");
     return value.length;
 }
-export { sfxEquals, sfxLength, sfxTruthy, sfxValueAt };
+function sfxFormat(template, values) {
+    const coerced = Object.entries(values).map(([key, value]) => {
+        if (value === null || value === undefined)
+            return [key, "null"];
+        if (typeof value === "boolean")
+            return [key, value ? "true" : "false"];
+        if (typeof value === "number")
+            return [key, String(value)];
+        if (typeof value === "string")
+            return [key, value];
+        sfxNotAdmitted("OPERAND_NOT_PRIMITIVE");
+    });
+    return coerced.reduce((text, [key, value]) => text.replaceAll(`{${key}}`, value), template);
+}
+function sfxTryParseJson(value) {
+    if (value === null || value === undefined)
+        return { disposition: "NOT_PARSED", value: null };
+    try {
+        return { disposition: "PARSED", value: JSON.parse(value) };
+    }
+    catch {
+        return { disposition: "NOT_PARSED", value: null };
+    }
+}
+export { sfxEquals, sfxFormat, sfxLength, sfxTruthy, sfxTryParseJson, sfxValueAt };

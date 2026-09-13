@@ -26,18 +26,18 @@ const declaration = {
     ["gherkin"]: {
         ["given"]: {
             ["semanticRef"]: "resolve-equity-market-price-evidence.given",
-            ["text"]: "a canonical symbol and region, an admitted provider route, an exact native mapping, and bounded exchange authority"
+            ["text"]: "a canonical symbol and region and one admitted provider endpoint authority"
         },
         ["when"]: {
             ["semanticRef"]: "resolve-equity-market-price-evidence.when",
-            ["text"]: "equity market-price evidence is resolved"
+            ["text"]: "the credential reference is bound, one bounded exchange is observed, and the native testimony is normalized"
         },
         ["then"]: {
             ["semanticRef"]: "resolve-equity-market-price-evidence.then",
             ["text"]: "the canonical evidence retains symbol, region, currency, price, market time, market state, exchange, source attribution, and provider testimony identity"
         }
     },
-    ["name"]: "Resolve an equity price observation through an admitted provider binding"
+    ["name"]: "Resolve an equity price observation through a declared provider binding"
 };
 export class ResolveEquityMarketPriceEvidenceScenario {
     static capabilityId = "resolve-equity-market-price-evidence";
@@ -51,21 +51,33 @@ export class ResolveEquityMarketPriceEvidenceScenario {
     }
     async perform(input, context) {
         const root = input;
-        const resolveEquityMarketPriceEvidencePortResult = await this.dependencies["resolve-equity-market-price-evidence-port"].execute(input, root);
-        const equityMarketPriceEvidenceResult = await this.dependencies["retain-provider-realization-outside-market-price-semantics"].invoke(resolveEquityMarketPriceEvidencePortResult, context, 1);
-        const equityMarketPriceProviderUnavailableResult = await this.dependencies["hold-unavailable-equity-market-price-provider"].invoke(equityMarketPriceEvidenceResult, context, 2);
-        const nativeEquityMarketPriceTestimonyRejectedResult = await this.dependencies["reject-nonconforming-native-market-price-testimony"].invoke(equityMarketPriceProviderUnavailableResult, context, 3);
-        return nativeEquityMarketPriceTestimonyRejectedResult;
+        const buildEquityPriceBindingRequestResult = await this.dependencies["build-equity-price-binding-request"].execute(input, root);
+        const bindEquityPriceProviderCredentialResult = await this.dependencies["bind-equity-price-provider-credential"].execute(buildEquityPriceBindingRequestResult, root, context, this.effectContext);
+        const buildEquityPriceExchangeRequestResult = await this.dependencies["build-equity-price-exchange-request"].execute(bindEquityPriceProviderCredentialResult, root);
+        const observeEquityPriceExchangeResult = await this.dependencies["observe-equity-price-exchange"].execute(buildEquityPriceExchangeRequestResult, root, context, this.effectContext);
+        const normalizeEquityPriceEvidenceResult = await this.dependencies["normalize-equity-price-evidence"].execute(observeEquityPriceExchangeResult, root);
+        return normalizeEquityPriceEvidenceResult;
     }
     async execute(input, context) {
+        const stop = { execution: null };
+        const scoped = { ...context, input, __compositionStop: stop };
         const kernel = new ScenarioKernel(this.contracts, {
             async resolve(event) {
                 if (event.executionAuthorityId !== declaration.event.executionAuthorityId)
                     throw new Error('EXECUTION_AUTHORITY_DIVERGENCE');
                 return { executionAuthorityId: event.executionAuthorityId, handler: declaration.event };
             }
-        }, { execute: async (_authority, value) => this.perform(value, context) }, new DispositionResolver(), this.observer, this.clock);
-        const execution = await kernel.execute(declaration, { ...context, input });
+        }, { execute: async (_authority, value) => this.perform(value, scoped) }, new DispositionResolver(), this.observer, this.clock);
+        const execution = await kernel.execute(declaration, scoped);
+        // A composed child that reached a governed stop owns the disposition. The
+        // kernel maps its executor's throw to 'failed', so the child's execution is
+        // returned instead: composition stops at the first non-success and the
+        // composed disposition/outcome is surfaced, not collapsed to a failure.
+        if (stop.execution) {
+            if (context.__compositionStop)
+                context.__compositionStop.execution = stop.execution;
+            return stop.execution;
+        }
         context.collect?.(execution);
         return execution;
     }
@@ -77,8 +89,13 @@ export class ResolveEquityMarketPriceEvidenceScenario {
             executionId: parent.executionId + '/' + ordinal + '/' + declaration.scenarioId,
             rootInput: structuredClone(input), parentExecutionId: parent.executionId, ancestry: [...ancestry, declaration.scenarioId]
         });
-        if (execution.disposition === 'failed' || execution.disposition === 'rejected')
-            throw new Error('CHILD_SCENARIO_' + execution.disposition.toUpperCase());
+        if (execution.disposition === 'failed' || execution.disposition === 'rejected') {
+            if (parent.__compositionStop)
+                parent.__compositionStop.execution = execution;
+            const stopped = new Error('COMPOSITION_STOP:' + execution.scenarioId + ':' + execution.disposition);
+            stopped.__compositionStop = true;
+            throw stopped;
+        }
         return execution.outcome;
     }
 }

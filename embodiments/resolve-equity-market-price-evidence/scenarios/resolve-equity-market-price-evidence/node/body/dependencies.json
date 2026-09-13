@@ -1,26 +1,32 @@
 [
   {
-    "id": "resolve-equity-market-price-evidence-port",
-    "module": "./providers/resolve-equity-market-price-evidence-port.mjs",
-    "className": "ResolveEquityMarketPriceEvidencePort",
+    "id": "build-equity-price-binding-request",
+    "module": "./providers/build-equity-price-binding-request.mjs",
+    "className": "BuildEquityPriceBindingRequest",
     "kind": "invoke-port"
   },
   {
-    "id": "retain-provider-realization-outside-market-price-semantics",
-    "module": "../../../retain-provider-realization-outside-market-price-semantics/node/body/scenario.mjs",
-    "className": "RetainProviderRealizationOutsideMarketPriceSemanticsScenario",
-    "kind": "invoke-scenario"
+    "id": "bind-equity-price-provider-credential",
+    "module": "./providers/bind-equity-price-provider-credential.mjs",
+    "className": "BindEquityPriceProviderCredential",
+    "kind": "invoke-effect"
   },
   {
-    "id": "hold-unavailable-equity-market-price-provider",
-    "module": "../../../hold-unavailable-equity-market-price-provider/node/body/scenario.mjs",
-    "className": "HoldUnavailableEquityMarketPriceProviderScenario",
-    "kind": "invoke-scenario"
+    "id": "build-equity-price-exchange-request",
+    "module": "./providers/build-equity-price-exchange-request.mjs",
+    "className": "BuildEquityPriceExchangeRequest",
+    "kind": "invoke-port"
   },
   {
-    "id": "reject-nonconforming-native-market-price-testimony",
-    "module": "../../../reject-nonconforming-native-market-price-testimony/node/body/scenario.mjs",
-    "className": "RejectNonconformingNativeMarketPriceTestimonyScenario",
-    "kind": "invoke-scenario"
+    "id": "observe-equity-price-exchange",
+    "module": "./providers/observe-equity-price-exchange.mjs",
+    "className": "ObserveEquityPriceExchange",
+    "kind": "invoke-effect"
+  },
+  {
+    "id": "normalize-equity-price-evidence",
+    "module": "./providers/normalize-equity-price-evidence.mjs",
+    "className": "NormalizeEquityPriceEvidence",
+    "kind": "invoke-port"
   }
 ]
