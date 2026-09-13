@@ -20,8 +20,8 @@ Feature: Project the admitted consumer execution embodiment plan
   silently absent input.
 
   @scenario:project-consumer-execution-embodiment-plan
-  @input:capability-embodiment-authority
-  @input-contract:capability-embodiment-authority.v1
+  @input:capability-authority-declaration
+  @input-contract:capability-authority-declaration.v1
   @event:project-consumer-execution-embodiment-plan
   @event-authority:project-consumer-execution-embodiment-plan.v1
   @outcome:consumer-execution-embodiment-projection-context
@@ -34,8 +34,8 @@ Feature: Project the admitted consumer execution embodiment plan
     Then one admitted projection context is returned or a held finding names the missing plan authority
 
   @scenario:derive-target-neutral-execution-plan
-  @input:capability-embodiment-authority
-  @input-contract:capability-embodiment-authority.v1
+  @input:capability-authority-declaration
+  @input-contract:capability-authority-declaration.v1
   @event:derive-target-neutral-execution-plan
   @event-authority:derive-target-neutral-execution-plan.v1
   @outcome:consumer-execution-embodiment-plan
@@ -47,8 +47,8 @@ Feature: Project the admitted consumer execution embodiment plan
     And an authority that declares no execution operations returns EXECUTION_PLAN_UNDECLARED
 
   @scenario:register-projection-authorities
-  @input:capability-embodiment-authority
-  @input-contract:capability-embodiment-authority.v1
+  @input:capability-authority-declaration
+  @input-contract:capability-authority-declaration.v1
   @event:register-projection-authorities
   @event-authority:register-projection-authorities.v1
   @outcome:registered-projection-authority-set

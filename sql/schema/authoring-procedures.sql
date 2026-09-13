@@ -1086,7 +1086,7 @@ BEGIN
       INSERT #work (frag, pointer, parentPk, memberKind, memberName, ordinal)
       SELECT CASE j.[type] WHEN 1 THEN N'"' + STRING_ESCAPE(j.value,'json') + N'"' WHEN 0 THEN N'null' ELSE j.value END,
              @pointer + N'/' + j.[key], @nodePk,
-             CASE WHEN @ch='{' THEN 'OBJECT_MEMBER' ELSE 'ARRAY_ELEMENT' END, j.[key],
+             CASE WHEN @ch='{' THEN 'OBJECT_MEMBER' ELSE 'ARRAY_MEMBER' END, CASE WHEN @ch='{' THEN j.[key] ELSE NULL END,
              CASE WHEN @ch='[' THEN TRY_CONVERT(int, j.[key]) ELSE NULL END
       FROM OPENJSON(@trim) j;
     END

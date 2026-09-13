@@ -19,7 +19,6 @@ export async function planNode({ bundle, sdaRoot }) {
   const { selection, authority, resolutions } = bundle;
   const selected = one(authority.recordsets[0], 'CAPABILITY_SCENARIO_SELECTION');
   const capabilityId = selected.capability_id;
-  const target = selection.target ?? 'node';
   if (capabilityId !== selection.capabilityId || selected.scenario_id !== selection.scenarioId) throw new Error('SELECTION_DIVERGENCE');
   // Reads actually taken must agree on snapshot and projection. The resolver map
   // is optional, so it is checked only when it was read.
@@ -38,6 +37,9 @@ export async function planNode({ bundle, sdaRoot }) {
   });
   const documents = records.filter(r => r.source_path.endsWith('.json')).map(r => ({ ...r, value: json(r.text) }));
   const workspace = one(documents.filter(r => r.value.workspaceType === 'consumer-workspace-authority.v1'), 'WORKSPACE_AUTHORITY');
+  // Retained generations may omit the selection target and declare exactly one
+  // in their workspace authority. Read that declaration without a language default.
+  const target = selection.target ?? one(workspace.value.projectionTargets, 'TARGET_SELECTION_UNRESOLVED');
   const sourceAt = (from, reference) => one(records.filter(r => r.source_path === path.posix.normalize(path.posix.join(path.posix.dirname(from.source_path), reference))), 'SOURCE_REFERENCE:' + reference);
   const documentAt = (from, reference) => { const record = sourceAt(from, reference); return { ...record, value: json(record.text) }; };
   const capEntry = one(workspace.value.capabilities.filter(c => documentAt(workspace, c.capability).value.capabilityId === capabilityId), 'WORKSPACE_CAPABILITY');
@@ -99,11 +101,11 @@ export async function planNode({ bundle, sdaRoot }) {
   // A declared cross-capability invocation carries the referenced capability's
   // feature text in the same bundle. Build every declared Scenario, tagged with
   // its owning capability, so the closure can resolve a target outside this one.
-  // A feature is self-describing: the capability id is the path segment of
-  // capabilities/<capabilityId>/capability.feature.
-  const featureRecords = records.filter(r => r.source_path.endsWith('/capability.feature'));
+  // Retained generations also place their declared feature under features/.
+  // Ownership is its capability annotation, independent of the file name.
+  const featureRecords = records.filter(r => r.source_path.startsWith('capabilities/') && r.source_path.endsWith('.feature'));
   const parsedScenarios = featureRecords.flatMap(record => {
-    const owner = record.source_path.split('/')[1];
+    const owner = one([...record.text.matchAll(/^\s*@capability:([^\s]+)\s*$/gm)].map(match => match[1]), 'FEATURE_CAPABILITY_AUTHORITY');
     return gherkin.build(record.text).map(scenario => ({ owner, scenario }));
   });
   const allScenarios = parsedScenarios.map(entry => entry.scenario);
@@ -135,16 +137,16 @@ export async function planNode({ bundle, sdaRoot }) {
     executionAuthorities: execution.value.executionAuthorities, interfaceAuthority, semanticTransformations,
     sourceRefs: [capability.source_path, ...featureRecords.map(r => r.source_path), execution.source_path, graphAuthority.source_path, interfaces.source_path, ...new Set(Object.values(provenance.ports).map(p => p.sourceRef))] };
   const compiledGraph = new SemanticExecutionGraphCompiler().compile(graphInput);
-  // The native mechanic provider is declared by the pinned mechanic registry
-  // already carried in this bundle, so it is read from there rather than
-  // re-derived from the resolver map. one() still refuses a registry that
-  // declares zero or several transformation ports.
-  // The native mechanic provider is the registry's pure semantic-value profile.
-  // Every language registry declares it (node, python, csharp); only node also
-  // repeats it as an eventPort, which is the shape the older node path read.
-  const transformationProfile = one(registry.value.graphProviderProfiles.filter(p => p.effectClassification === 'pure'), 'NATIVE_MECHANIC_PROVIDER_' + target);
-  const native = { implementation_id: path.posix.join(registry.value.providerModuleRoot, transformationProfile.providerModule),
-    implementation_export: transformationProfile.providerExport };
+  // Current reads carry normalized profile rows. Retained generations created
+  // before that result set existed carry their selection in the pinned registry.
+  // An empty current result set is unresolved; it never uses the older form.
+  const profileRows = authority.recordsets[3];
+  const transformationProfile = profileRows === undefined
+    ? one(registry.value.graphProviderProfiles.filter(p => p.effectClassification === 'pure'), 'NATIVE_MECHANIC_PROVIDER_' + target)
+    : one(profileRows.filter(p => p.target_id === target && p.effect_classification === 'pure'), 'PROFILE_PROVIDER_ABSENT_OR_AMBIGUOUS:' + target);
+  const native = profileRows === undefined
+    ? { implementation_id: path.posix.join(registry.value.providerModuleRoot, transformationProfile.providerModule), implementation_export: transformationProfile.providerExport }
+    : { implementation_id: path.posix.join(transformationProfile.provider_module_root, transformationProfile.provider_module), implementation_export: transformationProfile.provider_export };
   // Sourcing the pair from the registry would make the old comparison against the
   // database's own resolution a tautology. Where the requirement matrix was read
   // -- prepare, verify:estate, the probe -- the original derivation is still

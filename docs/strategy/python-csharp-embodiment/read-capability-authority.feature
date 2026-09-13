@@ -13,9 +13,14 @@ Feature: Read one capability authority for a selected profile
   requested profile is held with the exact unresolved requirement rather than
   reported as an empty declaration.
 
+  The input is construct-embodiment-plan-request.v1, the same request the
+  composing capability receives. The requested target selects its declared
+  profile. The returned capability-authority-declaration.v1 carries that target,
+  profile and requirements into provider binding resolution.
+
   @scenario:read-capability-authority
-  @input:capability-authority-read-request
-  @input-contract:capability-authority-read-request.v1
+  @input:construct-embodiment-plan-request
+  @input-contract:construct-embodiment-plan-request.v1
   @event:read-capability-authority
   @event-authority:read-capability-authority.v1
   @outcome:capability-authority-declaration
@@ -23,13 +28,13 @@ Feature: Read one capability authority for a selected profile
   @outcome-variants:CAPABILITY_AUTHORITY_READ|CAPABILITY_AUTHORITY_UNRESOLVED
   @outcome-terminal
   Scenario: Read one capability authority for one profile
-    Given one capability identity, one optional scenario, and one requested profile
+    Given one capability identity, one optional scenario, and one requested target
     When the authority is read from the selected generation
     Then the retained authority, invocation closure, mechanic declarations and profile requirements are returned or the unresolved requirement is held
 
   @scenario:resolve-select-profile-requirements
-  @input:capability-authority-read-request
-  @input-contract:capability-authority-read-request.v1
+  @input:construct-embodiment-plan-request
+  @input-contract:construct-embodiment-plan-request.v1
   @event:resolve-selected-profile-requirements
   @event-authority:resolve-selected-profile-requirements.v1
   @outcome:profile-requirement-declaration

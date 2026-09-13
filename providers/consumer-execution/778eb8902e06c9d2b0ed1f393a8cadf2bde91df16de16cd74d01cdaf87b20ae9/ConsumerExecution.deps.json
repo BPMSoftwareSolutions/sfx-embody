@@ -1,0 +1,72 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "ConsumerExecution/1.0.0": {
+        "dependencies": {
+          "ScenarioKernel.Adapters": "1.0.0"
+        },
+        "runtime": {
+          "ConsumerExecution.dll": {}
+        }
+      },
+      "ScenarioKernel.Adapters/1.0.0": {
+        "dependencies": {
+          "ScenarioKernel.Contracts": "1.0.0",
+          "ScenarioKernel.Execution": "1.0.0"
+        },
+        "runtime": {
+          "ScenarioKernel.Adapters.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "ScenarioKernel.Contracts/1.0.0": {
+        "runtime": {
+          "ScenarioKernel.Contracts.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "ScenarioKernel.Execution/1.0.0": {
+        "dependencies": {
+          "ScenarioKernel.Contracts": "1.0.0"
+        },
+        "runtime": {
+          "ScenarioKernel.Execution.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ConsumerExecution/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ScenarioKernel.Adapters/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ScenarioKernel.Contracts/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ScenarioKernel.Execution/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

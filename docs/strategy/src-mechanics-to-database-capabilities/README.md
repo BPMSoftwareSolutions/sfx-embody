@@ -8,9 +8,9 @@ or changes. Format follows the estate convention (see `agentic-harness/features`
 | --- | --- | --- | --- |
 | `read-estate-query.feature` | NEW | Phase 1 | The database read has no declared operation. `declared-query-evaluation` evaluates an admitted JSON document, not SQL; this capability owns the SQL read. |
 | `deliver-governed-capability-invocation.feature` | NEW | Phase 2 | The two deliveries differ only by a policy literal; this declares the carrier and the policy. |
-| `project-capability-revelation.feature` | UPDATE | Phase 4 | Narration becomes declared projections and formats, not separate hand-authored formatters. |
+| `project-capability-revelation.feature` | UPDATE | Phase 4 | Preserves the existing view set and receipt binding; narration becomes declared projections and formats, not separate hand-authored formatters. |
 | `project-capability-circuit.feature` | NEW | Phase 4 | The two circuit diagram builders become one projection of the declared graph. |
-| `resolve-capability-proof-obligations.feature` | UPDATE | Phase 5 | The native-mutation and validator/compiler checks must resolve to declared obligations before the code checks retire. |
+| `resolve-capability-proof-obligations.feature` | UPDATE | Phase 5 | Preserves every existing obligation; adds native-mutation and validator/compiler obligations that must resolve before the code checks retire. |
 | `execute-declared-capability.feature` | NEW | Phase 6 | The declaration is the body; execute the declared operations with bound providers and retire the generate-and-run triple. |
 
 ## Notes for review

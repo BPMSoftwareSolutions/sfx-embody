@@ -1,0 +1,85 @@
+{
+  "bindingType": "projected-consumer-application-binding.v3",
+  "executionPlan": "execution-plan.json",
+  "fixtures": "../evidence/fixture-authority.json",
+  "mechanicalSterility": "../evidence/projection-conformance.json",
+  "executionPlanDigest": "sha256:7436d0cf6ff1753164a9d87b48a7630fde487452ccfe53a6c8cc965f0258d872",
+  "executionAuthority": {
+    "target": "csharp",
+    "pinnedPlatformCommit": "716811046f52dd2a67f9ff308a50d755571cbbad",
+    "effectContext": {
+      "module": "languages/typescript/runtimes/node/native-mechanic-primitives.mjs",
+      "export": "createGovernedEffectContext",
+      "digest": "sha256:1cc204869f0ce7b60ad03187d364db4a432b0b632ce4469a7cf37747d6a379d5"
+    },
+    "runtime": {
+      "command": "dotnet",
+      "args": [
+        "{estateRoot}/providers/consumer-execution/778eb8902e06c9d2b0ed1f393a8cadf2bde91df16de16cd74d01cdaf87b20ae9/ConsumerExecution.dll"
+      ],
+      "source": "using System.Text.Json;\nusing System.Text.Json.Nodes;\nusing ScenarioKernel.Adapters.Consumer;\nusing ScenarioKernel.Adapters.Graph;\n\nvar request = JsonNode.Parse(Console.ReadLine()!)!.AsObject();\nvar plan = request[\"plan\"]!.AsObject();\nvar root = request[\"input\"];\nvar physical = request[\"physicalCellIds\"]!.AsArray().Select(x => x!.GetValue<string>()).ToHashSet(StringComparer.Ordinal);\nvar collections = new Dictionary<string, int>(StringComparer.Ordinal);\nvar engine = new SemanticTransformationEngine();\nvar cells = plan[\"canonicalGraph\"]![\"cells\"]!.AsArray().Select(x => x!.AsObject()).ToDictionary(x => x[\"cellId\"]!.GetValue<string>(), StringComparer.Ordinal);\nasync ValueTask<GraphProviderOutcome> Provider(JsonNode? input, GraphExecutionContext context, CancellationToken token)\n{\n    token.ThrowIfCancellationRequested();\n    if (physical.Contains(context.CellId))\n    {\n        Console.WriteLine(new JsonObject {\n            [\"type\"] = \"invoke-provider\", [\"cellId\"] = context.CellId,\n            [\"cellExecutionId\"] = context.CellExecutionId, [\"rootExecutionId\"] = context.RootExecutionId,\n            [\"input\"] = input?.DeepClone()\n        }.ToJsonString());\n        var reply = JsonNode.Parse((await Console.In.ReadLineAsync(token))!)!.AsObject();\n        if (reply[\"error\"] is JsonValue error) throw new InvalidOperationException(error.GetValue<string>());\n        return new GraphProviderOutcome(reply[\"outcome\"]?.DeepClone());\n    }\n    var expression = context.Configuration?[\"binding\"]?[\"configuration\"]?[\"expression\"] as JsonObject ?? context.Configuration;\n    if (expression?[\"op\"] is not JsonValue operation)\n    {\n        if (cells[context.CellId][\"execution\"]?[\"authorityId\"]?.GetValue<string>() == \"mechanic:identity.v1\") return new GraphProviderOutcome(input?.DeepClone(), \"VALUE\");\n        throw new InvalidOperationException(\"UNDECLARED_EXECUTION_MECHANIC:\" + context.CellId);\n    }\n    try\n    {\n        var entering = context.DecompositionInput ?? input;\n        var outcome = engine.Transform(expression, entering, root);\n        if (outcome is null) throw new InvalidOperationException(\"LEXICAL_BINDING_NOT_AVAILABLE_AT_CELL_ALTITUDE\");\n        if (new[] { \"map\", \"flat-map\", \"filter\", \"find\", \"some\", \"every\" }.Contains(operation.GetValue<string>(), StringComparer.Ordinal))\n        {\n            var occurrence = collections.GetValueOrDefault(context.CellId);\n            collections[context.CellId] = occurrence + 1;\n            var source = expression[\"from\"] is JsonObject from ? engine.Transform(from, entering, root) as JsonArray : null;\n            return new GraphProviderOutcome(outcome, occurrence < (source?.Count ?? 0) ? \"CONTINUE\" : \"STOP\");\n        }\n        return new GraphProviderOutcome(outcome);\n    }\n    catch (InvalidOperationException)\n    {\n        return new GraphProviderOutcome(input?.DeepClone(), \"VALUE\");\n    }\n}\nvar authorities = plan[\"bindingAuthorities\"]!.AsArray().Select(x => x!.AsObject()).ToDictionary(x => x[\"id\"]!.GetValue<string>(), StringComparer.Ordinal);\nValueTask<JsonNode?> ProjectBinding(string identity, JsonNode? value, CancellationToken token)\n{\n    token.ThrowIfCancellationRequested();\n    return ValueTask.FromResult(engine.Transform(authorities[identity][\"binding\"]![\"configuration\"]![\"expression\"]!.AsObject(), value, root));\n}\nvar providers = plan[\"realizationOverlay\"]![\"providerBindings\"]!.AsArray()\n    .Select(x => x![\"providerProfileId\"]!.GetValue<string>()).Distinct(StringComparer.Ordinal)\n    .ToDictionary(identity => identity, _ => (GraphProvider)Provider, StringComparer.Ordinal);\nvar result = await new SemanticExecutionGraphScheduler(plan, providers, ProjectBinding).ExecuteAsync(root, request[\"rootExecutionId\"]!.GetValue<string>());\nConsole.WriteLine(new JsonObject { [\"type\"] = \"result\", [\"result\"] = result }.ToJsonString());\n",
+      "sourceDigest": "sha256:778eb8902e06c9d2b0ed1f393a8cadf2bde91df16de16cd74d01cdaf87b20ae9",
+      "dependencies": [
+        {
+          "root": "estateRoot",
+          "path": "providers/consumer-execution/778eb8902e06c9d2b0ed1f393a8cadf2bde91df16de16cd74d01cdaf87b20ae9/ConsumerExecution.deps.json",
+          "digest": "sha256:ecf470605df840980934099a537ced554cda569ce2c7cdc84dd5e4432dc6c6a3"
+        },
+        {
+          "root": "estateRoot",
+          "path": "providers/consumer-execution/778eb8902e06c9d2b0ed1f393a8cadf2bde91df16de16cd74d01cdaf87b20ae9/ConsumerExecution.dll",
+          "digest": "sha256:fd72f16e14cd51249e39562ba3f6abfdb11ae5ecb4da75167332771f2d85640d"
+        },
+        {
+          "root": "estateRoot",
+          "path": "providers/consumer-execution/778eb8902e06c9d2b0ed1f393a8cadf2bde91df16de16cd74d01cdaf87b20ae9/ConsumerExecution.runtimeconfig.json",
+          "digest": "sha256:256dda2706e1151bb95987b6b5be610bf68d64e058285b19e7e958222fc90414"
+        },
+        {
+          "root": "estateRoot",
+          "path": "providers/consumer-execution/778eb8902e06c9d2b0ed1f393a8cadf2bde91df16de16cd74d01cdaf87b20ae9/ScenarioKernel.Adapters.dll",
+          "digest": "sha256:5958b088f53e19370ab9e08cf764789f0cd4be45fc158a144a5d33296ade0ef4"
+        },
+        {
+          "root": "estateRoot",
+          "path": "providers/consumer-execution/778eb8902e06c9d2b0ed1f393a8cadf2bde91df16de16cd74d01cdaf87b20ae9/ScenarioKernel.Contracts.dll",
+          "digest": "sha256:2ee3332365aab74bd6e15413e08519d2dc81b22397a39f3cdb4b2ececb2b6ddf"
+        },
+        {
+          "root": "estateRoot",
+          "path": "providers/consumer-execution/778eb8902e06c9d2b0ed1f393a8cadf2bde91df16de16cd74d01cdaf87b20ae9/ScenarioKernel.Execution.dll",
+          "digest": "sha256:356e3a55eed08760f25eaa74a77e0b764900659d3a62c5bf5cbcd7e8717b62ec"
+        },
+        {
+          "root": "sdaRoot",
+          "path": "languages/csharp/src/ScenarioKernel.Adapters/Graph/SemanticExecutionGraphScheduler.cs",
+          "digest": "sha256:e1ae899393c78b6e179d9a5300f94d7617cf043b0e0c6f85ee4b84f24ab3f8ca"
+        },
+        {
+          "root": "sdaRoot",
+          "path": "languages/csharp/src/ScenarioKernel.Adapters/Consumer/SemanticTransformationEngine.cs",
+          "digest": "sha256:fd67dd950b66ce60933f3027f5f4001e52883622d94549231121aafcbf4c0e93"
+        }
+      ],
+      "timeoutMilliseconds": 60000,
+      "maximumOutputBytes": 16777216,
+      "environment": {}
+    }
+  },
+  "providerBindings": [
+    {
+      "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.2",
+      "providerId": "ScenarioKernel.Adapters.Consumer.AdmittedConsumerPlatform",
+      "implementationRef": "languages/typescript/runtimes/node/external-credential-reference-binding-provider.mjs",
+      "implementationDigest": "sha256:415806ff8d181e9cf4d87814b3c2f40fb39d598e236877c66d88e521726371df",
+      "providerExport": "bindExternalCredentialReference"
+    },
+    {
+      "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.4",
+      "providerId": "ScenarioKernel.Adapters.Consumer.AdmittedConsumerPlatform",
+      "implementationRef": "languages/typescript/runtimes/node/governed-http-exchange-provider.mjs",
+      "implementationDigest": "sha256:67a28e738ade419a256b85c9bc139d1aad0f256d196b28250465d763845a2e5f",
+      "providerExport": "observeGovernedHttpExchange"
+    }
+  ]
+}

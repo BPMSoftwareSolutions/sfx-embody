@@ -2,6 +2,10 @@
 
 2026-09-13 · Team review · How the estate reaches Python and C# by rows, not by a renderer.
 
+Current installation and remaining work are recorded in
+[implementation.md](python-csharp-embodiment/implementation.md). The inventory and
+NEW/UPDATE labels below describe the state before these migrations.
+
 This document supersedes the reading in
 [cross-target-hold-report.md](../cross-target-hold-report.md) and narrows
 [cross-target-embodiment.md](../cross-target-embodiment.md) to the work that is left.
@@ -96,22 +100,23 @@ target*. That selection currently lives in `src/` — in `materialize-node.mjs` 
 **2. Per-target implementation coverage for some mechanics.** The 38
 `provider_capability_implementation` rows are **all Node**
 (`ScenarioKernel.NodePlatform*`), and provider coverage per mechanic is uneven.
-Measured node/python/csharp/cpp provider counts:
+Measured node/python/csharp/java/cpp provider counts (`scenario_kernel*` is Python;
+`scenario.kernel*` is Java):
 
-| Mechanic | node | python | csharp | cpp |
-| --- | ---: | ---: | ---: | ---: |
-| `cli-delivery` | 1 | 1 | 1 | 0 |
-| `declared-query-evaluation` | 1 | **0** | 1 | 0 |
-| `consumer-projection-publication` | 1 | **0** | **0** | 0 |
-| `event-port-invocation` | 31 | 2 | 3 | 0 |
-| `json-reading` | 2 | 1 | 2 | 0 |
-| `runtime-projection` | 1 | 3 | 2 | 1 |
-| `scenario-orchestration` | 1 | 3 | 1 | 1 |
-| `schema-admission` | 2 | 3 | 3 | 1 |
-| `semantic-execution` | 1 | 3 | 2 | 1 |
-| `state-projection` | 2 | 2 | 2 | 0 |
-| `authority-resolution` | 1 | 3 | 2 | 1 |
-| `contract-document-reading` | 1 | 3 | 2 | 1 |
+| Mechanic | node | python | csharp | java | cpp |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| `cli-delivery` | 1 | 1 | 1 | 0 | 0 |
+| `declared-query-evaluation` | 1 | **0** | 1 | 0 | 0 |
+| `consumer-projection-publication` | 1 | **0** | **0** | 0 | 0 |
+| `event-port-invocation` | 31 | 2 | 3 | 0 | 0 |
+| `json-reading` | 2 | 1 | 2 | 0 | 0 |
+| `runtime-projection` | 1 | 2 | 2 | 1 | 1 |
+| `scenario-orchestration` | 1 | 2 | 1 | 1 | 1 |
+| `schema-admission` | 2 | 2 | 3 | 1 | 1 |
+| `semantic-execution` | 1 | 2 | 2 | 1 | 1 |
+| `state-projection` | 2 | 2 | 2 | 0 | 0 |
+| `authority-resolution` | 1 | 2 | 2 | 1 | 1 |
+| `contract-document-reading` | 1 | 2 | 2 | 1 | 1 |
 
 So target neutrality is not "teach the renderer Python." It is (a) author the
 binding rows, and (b) where a target has no provider for a required mechanic,
@@ -157,7 +162,8 @@ context carries the projected **plan** as an input presupposition; this capabili
 consumes it. Measured: **no scenario in the selected model declares
 `consumer-execution-embodiment-projection-context` as an outcome**, so the model
 names the composition's starting point but no producer for it. Naming and declaring
-that producer is a prerequisite before treating the plan path as ready. The
+that producer is a prerequisite before treating the plan path as ready (step M4 in
+§5). The
 canonical drafts are
 [`python-csharp-embodiment/project-consumer-execution-embodiment-plan.feature`](python-csharp-embodiment/project-consumer-execution-embodiment-plan.feature)
 (NEW — the producer) and
@@ -196,6 +202,10 @@ host. No `'node'` literal remains in the selection path.
   [`plan-capability-embodiment.feature`](python-csharp-embodiment/plan-capability-embodiment.feature),
   [`construct-embodiment-plan.feature`](python-csharp-embodiment/construct-embodiment-plan.feature).
 
+M1 establishes profile selection. M2 installs the binding resolver and changes the
+composer and planner contracts together; the composition begins invoking the new
+resolver only when that migration supplies it.
+
 ### M2 — Populate provider bindings (the drive)
 
 For every `provider_slot`, select the declared `provider_definition` that satisfies
@@ -204,12 +214,25 @@ the slot's requirements under the selected profile, and write
 choice was made; `binding_role` records which requirement it satisfies.
 
 - Rows: `provider_binding_scope` (slot → context, policy, role) and
-  `provider_binding` (slot → provider definition, ordinal).
+  `provider_binding` (slot → provider definition, ordinal); declare
+  `resolve-provider-slot-bindings` and update the composition and planner contracts
+  in the same migration.
 - Source of truth: the DB's `provider_capability_implementation` and
   `provider_mechanic_implementation` rows, not the runtime registries.
 - Verify: a diagnostic returns the resolved provider per slot per target, and the
-  carrier reads it.
-- Declared behavior: [`resolve-provider-slot-bindings.feature`](python-csharp-embodiment/resolve-provider-slot-bindings.feature).
+  carrier reads it. Preflight `construct-embodiment-plan` through the complete
+  read → binding resolution → plan composition.
+- Declared behavior: [`resolve-provider-slot-bindings.feature`](python-csharp-embodiment/resolve-provider-slot-bindings.feature),
+  [`plan-capability-embodiment.feature`](python-csharp-embodiment/plan-capability-embodiment.feature),
+  [`construct-embodiment-plan.feature`](python-csharp-embodiment/construct-embodiment-plan.feature).
+
+The declared contract chain is
+`construct-embodiment-plan-request.v1` → `read-capability-authority` →
+`capability-authority-declaration.v1` → `resolve-provider-slot-bindings` →
+`provider-slot-binding-set.v1` → `plan-capability-embodiment` →
+`capability-embodiment-plan.v1`. The binding set carries the unchanged authority
+declaration with the selected providers; each child receives the preceding
+outcome without a request conversion.
 
 ### M3 — One source for effects and contract admission
 
@@ -228,9 +251,31 @@ chain is not yet in rows — then reconcile coverage on the database.
 - Verify: the per-target requirement diagnostic resolves from rows and reports the
   remaining unimplemented requirements **explicitly**, rather than assuming zero.
 - Declared behavior: [`resolve-provider-slot-bindings.feature`](python-csharp-embodiment/resolve-provider-slot-bindings.feature)
-  (`PROVIDER_SLOT_UNBOUND` / `PROVIDER_IMPLEMENTATION_ABSENT`).
+  (`PROVIDER_SLOT_UNBOUND` / `PROVIDER_IMPLEMENTATION_ABSENT`) and
+  [`read-capability-authority.feature`](python-csharp-embodiment/read-capability-authority.feature).
 
-### M4 — Bind the consumer application provider (render)
+### M4 — Declare the execution embodiment plan producer
+
+The platform pipeline `project-consumer-execution-embodiment-v2` consumes a
+projection context that carries the projected plan. Measured, no scenario in the
+selected model declares that context as an outcome, so the pipeline begins from an
+input nothing produces. Declare the producer so the plan path starts from a
+declared capability instead of an assumption. This step precedes render because
+render consumes the plan the producer emits.
+
+- Rows: the capability, its feature, its input (`capability-authority-declaration.v1`,
+  the declaration `read-capability-authority` already produces) and outcome
+  (`consumer-execution-embodiment-projection-context.v1`) contracts, its
+  target-neutral execution-plan scenario, its projection-authority registration
+  scenario, and its provider binding.
+- Verify: the projection context is produced by a declared invocation, and a missing
+  plan authority is a held finding rather than an absent input.
+- Declared behavior: [`project-consumer-execution-embodiment-plan.feature`](python-csharp-embodiment/project-consumer-execution-embodiment-plan.feature)
+  (NEW `project-consumer-execution-embodiment-plan`) and
+  [`project-consumer-execution-embodiment-v2.feature`](python-csharp-embodiment/project-consumer-execution-embodiment-v2.feature)
+  (UPDATE — consumes the produced context).
+
+### M5 — Bind the consumer application provider (render)
 
 Bind the declared per-target consumer application provider
 (`scenario_kernel.platform.consumer`, `ScenarioKernel.Adapters.Consumer.AdmittedConsumerPlatform`)
@@ -244,7 +289,7 @@ estate's job is the plan.
 - Declared behavior: [`write-capability-embodiment.feature`](python-csharp-embodiment/write-capability-embodiment.feature),
   [`materialize-capability-embodiment.feature`](python-csharp-embodiment/materialize-capability-embodiment.feature).
 
-### M5 — Bind the runtime execution provider (execute the plan)
+### M6 — Bind the runtime execution provider (execute the plan)
 
 Bind the per-target execution provider (the target kernel's graph scheduler) to the
 execution slots, replacing the estate's node-only `loadMemoryScenario` assumption
@@ -253,13 +298,16 @@ with a declared execution boundary.
 - Rows: slot → provider binding for `scenario-orchestration` / `semantic-execution`.
 - Verify: `invoke` for a Python/C# capability executes the projected plan and
   returns a declared disposition.
-- Declared behavior: [`materialize-capability-embodiment.feature`](python-csharp-embodiment/materialize-capability-embodiment.feature)
-  (`hold-materialization-without-bound-provider`).
+- Declared behavior: [`project-consumer-execution-embodiment-v2.feature`](python-csharp-embodiment/project-consumer-execution-embodiment-v2.feature)
+  (the target-neutral pipeline renders and observes the plan across targets). The
+  estate-side execution of a declaration is
+  [`execute-declared-capability.feature`](src-mechanics-to-database-capabilities/execute-declared-capability.feature)
+  (strategy 2, Phase 6).
 
-### M6 — Converge node onto the plan form
+### M7 — Converge node onto the plan form
 
 Bring the node path onto the same projected plan so there is one embodiment
-contract, not two. This is the point of the whole path: after M6, the only
+contract, not two. This is the point of the whole path: after M7, the only
 difference between targets is a profile and a set of bindings.
 
 - Rows: node's render/execution slots bind to its plan-form providers.
@@ -283,11 +331,11 @@ declared meaning must change).
 | [`resolve-provider-slot-bindings.feature`](python-csharp-embodiment/resolve-provider-slot-bindings.feature) | NEW | M2, M3 | `resolve-provider-slot-bindings` |
 | [`read-capability-authority.feature`](python-csharp-embodiment/read-capability-authority.feature) | UPDATE | M1, M3 | `read-capability-authority` |
 | [`plan-capability-embodiment.feature`](python-csharp-embodiment/plan-capability-embodiment.feature) | UPDATE | M1, M2 | `plan-capability-embodiment` |
-| [`construct-embodiment-plan.feature`](python-csharp-embodiment/construct-embodiment-plan.feature) | UPDATE | M1 | `construct-embodiment-plan` |
-| [`write-capability-embodiment.feature`](python-csharp-embodiment/write-capability-embodiment.feature) | UPDATE | M4 | `write-capability-embodiment` |
-| [`materialize-capability-embodiment.feature`](python-csharp-embodiment/materialize-capability-embodiment.feature) | UPDATE | M4, M5, M6 | `materialize-capability-embodiment` |
-| [`project-consumer-execution-embodiment-plan.feature`](python-csharp-embodiment/project-consumer-execution-embodiment-plan.feature) | NEW | §4 | `project-consumer-execution-embodiment-plan` |
-| [`project-consumer-execution-embodiment-v2.feature`](python-csharp-embodiment/project-consumer-execution-embodiment-v2.feature) | UPDATE | §4 | `project-consumer-execution-embodiment-v2` |
+| [`construct-embodiment-plan.feature`](python-csharp-embodiment/construct-embodiment-plan.feature) | UPDATE | M1, M2 | `construct-embodiment-plan` |
+| [`write-capability-embodiment.feature`](python-csharp-embodiment/write-capability-embodiment.feature) | UPDATE | M5, M7 | `write-capability-embodiment` |
+| [`materialize-capability-embodiment.feature`](python-csharp-embodiment/materialize-capability-embodiment.feature) | UPDATE | M5, M7 | `materialize-capability-embodiment` |
+| [`project-consumer-execution-embodiment-plan.feature`](python-csharp-embodiment/project-consumer-execution-embodiment-plan.feature) | NEW | M4 | `project-consumer-execution-embodiment-plan` |
+| [`project-consumer-execution-embodiment-v2.feature`](python-csharp-embodiment/project-consumer-execution-embodiment-v2.feature) | UPDATE | M4, M6 | `project-consumer-execution-embodiment-v2` |
 
 The drafts state proposed contract identities that are not yet declared rows; they
 become real when the migration is authored. Every `Scenario` in a draft is behavior
@@ -306,7 +354,7 @@ Each step compounds; none is one-off.
    314 across 74 providers. Every new provider self-registers its mechanics, so the
    next target's requirements resolve against the catalog instead of a fresh
    audit.
-3. **Plan flywheel.** Once node is on the plan form (M6), every target executes the
+3. **Plan flywheel.** Once node is on the plan form (M7), every target executes the
    same declared plan. A capability authored once is executable on every profile
    that binds the plan's mechanics. This is the cross-target equivalent of the
    SQL→CLI flywheel: author once, observe everywhere.
@@ -321,7 +369,7 @@ Each step compounds; none is one-off.
   declared disposition from `invoke`, with `observe` streaming telemetry.
 - Node `planDigest`/`artifactDigest` byte-identical across M1–M3 (selection and
   binding must not move node's body).
-- Through M6, node **behavior** is unchanged (dispositions, 17 fixtures); the
+- Through M7, node **behavior** is unchanged (dispositions, 17 fixtures); the
   digests change by construction and the new values are verified.
 - The per-target readiness diagnostic resolves from rows and reports remaining
   unimplemented requirements explicitly (not a bare zero).
@@ -329,7 +377,7 @@ Each step compounds; none is one-off.
 
 ## 8. Open decisions for the team
 
-1. **M6 or not.** Do we converge node onto the projected plan, or keep the node
+1. **M7 or not.** Do we converge node onto the projected plan, or keep the node
    per-port body as a declared profile-optimized path? Convergence is cleaner but
    touches the node embodiment; the alternative keeps two artifacts but one
    selection mechanism.
@@ -361,11 +409,15 @@ UNION ALL SELECT 'provider_binding', COUNT_BIG(*) FROM model.provider_binding;
 -- 0, 0
 
 -- Per-language provider coverage is uneven (this corrects the first draft's claim
--- that every mechanic has node, python and csharp providers).
+-- that every mechanic has node, python and csharp providers, and its later error
+-- of folding Java providers into python_n). scenario_kernel* is Python;
+-- scenario.kernel* is Java (e.g. scenario.kernel.platform.AdmittedConsumerPlatform
+-- declares projectionTarget java).
 SELECT m.mechanic_id,
        SUM(CASE WHEN p.provider_id LIKE 'ScenarioKernel.NodePlatform%' THEN 1 ELSE 0 END) node_n,
-       SUM(CASE WHEN p.provider_id LIKE 'scenario[_]kernel%' OR p.provider_id LIKE 'scenario.kernel%' THEN 1 ELSE 0 END) python_n,
+       SUM(CASE WHEN p.provider_id LIKE 'scenario[_]kernel%' THEN 1 ELSE 0 END) python_n,
        SUM(CASE WHEN p.provider_id LIKE 'ScenarioKernel.Adapters%' THEN 1 ELSE 0 END) csharp_n,
+       SUM(CASE WHEN p.provider_id LIKE 'scenario.kernel%' THEN 1 ELSE 0 END) java_n,
        SUM(CASE WHEN p.provider_id LIKE 'sda::%' THEN 1 ELSE 0 END) cpp_n
 FROM model.provider_mechanic_implementation i
 JOIN model.provider_definition pd ON pd.provider_definition_pk = i.provider_definition_pk
@@ -375,9 +427,10 @@ JOIN model.mechanic m ON m.mechanic_pk = mv.mechanic_pk
 WHERE m.mechanic_id IN ('cli-delivery','declared-query-evaluation','scenario-orchestration',
   'runtime-projection','schema-admission','consumer-projection-publication')
 GROUP BY m.mechanic_id ORDER BY m.mechanic_id;
--- cli-delivery 1/1/1/0; declared-query-evaluation 1/0/1/0;
--- consumer-projection-publication 1/0/0/0; schema-admission 2/3/3/1;
--- runtime-projection 1/3/2/1; scenario-orchestration 1/3/1/1
+-- cli-delivery 1/1/1/0/0; declared-query-evaluation 1/0/1/0/0;
+-- consumer-projection-publication 1/0/0/0/0; schema-admission 2/2/3/1/1;
+-- runtime-projection 1/2/2/1/1; scenario-orchestration 1/2/1/1/1
+-- (node/python/csharp/java/cpp)
 
 -- Capability implementations are Node-only.
 SELECT p.provider_id, COUNT_BIG(*) n
@@ -423,7 +476,7 @@ source; five claims were corrected in place and are recorded here:
 4. **Fixture totals do not prove verification equivalence** — see the companion
    strategy §5 Phase 5.
 5. **A plan-form node body changes the digests**, by construction
-   (`materialize-node.mjs:301`); M6 verifies behavior, then verifies new digests.
+   (`materialize-node.mjs:301`); M7 verifies behavior, then verifies new digests.
 
 ## 10. Artifacts
 

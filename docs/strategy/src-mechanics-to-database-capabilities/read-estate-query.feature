@@ -2,10 +2,11 @@
 @root-scenario:read-estate-query
 Feature: Read one declared query from the selected capability estate
 
-  The estate's readers — read-authority, the list/find surface, and the embodiment
-  read — each run SQL against the selected generation. That read is not
-  declared-query-evaluation: declared-query-evaluation orients an already-admitted
-  JSON document and never touches SQL. This capability owns the database read.
+  The estate's readers — read-authority, the list/find surface, meaning, circuit
+  media, and the embodiment read — each run SQL against the selected generation.
+  That read is not declared-query-evaluation: declared-query-evaluation orients an
+  already-admitted JSON document and never touches SQL. This capability owns the
+  database read.
 
   The query is declared, addressed by identity, and executed under the reader
   boundary against the selected generation. The capability returns the result set
@@ -14,8 +15,9 @@ Feature: Read one declared query from the selected capability estate
   without an ORDER BY carries no meaning.
 
   The read never coerces input, never substitutes a default estate, and never
-  reports a truncated result as complete. An unknown or malformed query is
-  rejected; a result that reached the row limit is returned as truncated.
+  reports a truncated result as complete. Truncation is reported only when the
+  produced result exceeds the row limit: exactly N rows at limit N is complete, and
+  N+1 rows is truncated. An unknown or malformed query is rejected.
 
   @scenario:read-estate-query
   @input:estate-query-request
@@ -41,7 +43,21 @@ Feature: Read one declared query from the selected capability estate
   Scenario: Execute the declared query under the reader boundary
     Given one declared query and one admitted input document
     When the query is executed
-    Then every result set is returned with its row count and the row limit that was applied
+    Then every result set is returned with its row count and the row limit that was applied, and truncation is reported only when the produced row count exceeds the limit
+
+  @scenario:report-truncation-only-above-limit
+  @input:estate-query-result
+  @input-contract:estate-query-result.v1
+  @event:report-estate-query-truncation
+  @event-authority:report-estate-query-truncation.v1
+  @outcome:estate-query-result
+  @outcome-contract:estate-query-result.v1
+  @outcome-variants:READ_QUERY_COMPLETE|READ_QUERY_TRUNCATED
+  @outcome-terminal
+  Scenario: Keep a result exactly at the row limit complete
+    Given a query whose produced result has exactly N rows and an applied row limit of N
+    When the truncation state is resolved
+    Then the result is READ_QUERY_COMPLETE, and only a produced result of N+1 rows is READ_QUERY_TRUNCATED
 
   @scenario:carry-query-provenance
   @input:estate-query-result

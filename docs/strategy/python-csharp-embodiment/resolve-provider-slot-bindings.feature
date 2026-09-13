@@ -8,10 +8,11 @@ Feature: Resolve the provider that fills each declared slot for one profile
   holds is the selection: for one selected profile and target, which provider
   fills which slot.
 
-  This capability resolves that selection. It reads the slot requirements, the
-  admitted implementations and the declared profiles, and returns one binding per
-  slot or an explicit finding for a slot it cannot bind. It invokes no provider,
-  renders nothing, and writes nothing.
+  This capability resolves that selection from capability-authority-declaration.v1,
+  the outcome of read-capability-authority. It preserves the declaration's selected
+  generation, target and profile while reading the slot requirements and admitted
+  implementations, and returns one binding per slot or an explicit finding for a
+  slot it cannot bind. It invokes no provider, renders nothing, and writes nothing.
 
   Coverage is measured, never assumed. A slot with no matching implementation is
   held as unbound rather than silently left to a fallback. A slot with more than
@@ -19,9 +20,14 @@ Feature: Resolve the provider that fills each declared slot for one profile
   resolved by preference. The selection is derived from rows, so adding a target
   or changing a provider is a rebinding, never a new branch.
 
+  The returned set is the planning context: it carries the capability authority
+  declaration it was resolved against alongside the selected provider for every
+  slot, so a planner consumes one declared input rather than re-reading the
+  authority and re-selecting providers.
+
   @scenario:resolve-provider-slot-bindings
-  @input:provider-slot-binding-request
-  @input-contract:provider-slot-binding-request.v1
+  @input:capability-authority-declaration
+  @input-contract:capability-authority-declaration.v1
   @event:resolve-provider-slot-bindings
   @event-authority:resolve-provider-slot-bindings.v1
   @outcome:provider-slot-binding-set
@@ -29,19 +35,19 @@ Feature: Resolve the provider that fills each declared slot for one profile
   @outcome-variants:PROVIDER_SLOTS_BOUND|PROVIDER_SLOT_UNBOUND|PROVIDER_SLOT_AMBIGUOUS
   @outcome-terminal
   Scenario: Resolve one exact provider binding per declared slot
-    Given one selected capability, one profile, and the declared slot requirements
+    Given one capability authority declaration carrying the selected target, profile and slot requirements
     When provider bindings are resolved from the admitted implementations
     Then return one provider definition per slot or an explicit finding naming the unbound or ambiguous slot
 
   @scenario:read-slot-requirements
-  @input:provider-slot-binding-request
-  @input-contract:provider-slot-binding-request.v1
+  @input:capability-authority-declaration
+  @input-contract:capability-authority-declaration.v1
   @event:read-provider-slot-requirements
   @event-authority:read-provider-slot-requirements.v1
   @outcome:provider-slot-requirements
   @outcome-contract:provider-slot-requirements.v1
   Scenario: Read every declared requirement of every slot
-    Given the selected profile and the slots declared by the capability blueprint
+    Given the authority declaration's selected profile and the slots declared by its capability blueprint
     When the requirements of each slot are read
     Then every port, mechanic and profile requirement of every slot is returned
     And a slot that declares no requirement returns PROVIDER_SLOT_REQUIREMENT_ABSENT
@@ -60,15 +66,15 @@ Feature: Resolve the provider that fills each declared slot for one profile
     Then exactly one provider is selected, or the slot is held as absent or ambiguous evidence
 
   @scenario:replay-provider-slot-binding
-  @input:provider-slot-binding-request
-  @input-contract:provider-slot-binding-request.v1
+  @input:capability-authority-declaration
+  @input-contract:capability-authority-declaration.v1
   @event:replay-provider-slot-binding
   @event-authority:replay-provider-slot-binding.v1
   @outcome:provider-slot-binding-set
   @outcome-contract:provider-slot-binding-set.v1
   @outcome-terminal
   Scenario: Reproduce byte-identical bindings for one frozen model
-    Given one frozen model, profile and target
+    Given one authority declaration bound to a frozen model, profile and target
     When the bindings are resolved twice
     Then both binding sets are byte-identical
     And a divergent replay returns PROVIDER_SLOT_BINDING_REPLAY_DIVERGED rather than the later set

@@ -59,7 +59,7 @@ function ownerOfScenario(bundle, scenarioId) {
   return bundle.closure.recordsets[0].find(r => r.downstream_scenario_id === scenarioId)?.owning_capability_id ?? null;
 }
 
-async function isEstateDelivery(bundle, context) {
+export async function isEstateDelivery(bundle, context) {
   try {
     const selected = bundle.authority.recordsets[0][0].scenario_id;
     const authority = readRootAuthority(bundle, selected);
@@ -70,7 +70,7 @@ async function isEstateDelivery(bundle, context) {
       } else if (operation.kind === 'invoke-scenario') {
         const capabilityId = ownerOfScenario(bundle, operation.scenarioId);
         if (!capabilityId) continue;
-        const child = await readAuthority(context.databaseRoot, { capabilityId, target: 'node', scenarioId: operation.scenarioId }, { retainObjects: false });
+        const child = await (context.readAuthority ?? readAuthority)(context.databaseRoot, { capabilityId, target: 'node', scenarioId: operation.scenarioId }, { retainObjects: false });
         if (await isEstateDelivery(child, context)) return true;
       }
     }
@@ -82,8 +82,8 @@ async function isEstateDelivery(bundle, context) {
 // operations: an estate-provider Port transforms the running state, and a
 // composed Scenario runs its own declared operations with that state. State is
 // threaded exactly as the declared authority orders it.
-async function executeEstateCapability({ capabilityId, scenarioId }, state, context, ancestry = []) {
-  const bundle = await readAuthority(context.databaseRoot,
+export async function executeEstateCapability({ capabilityId, scenarioId }, state, context, ancestry = []) {
+  const bundle = await (context.readAuthority ?? readAuthority)(context.databaseRoot,
     { capabilityId, target: 'node', ...(scenarioId === undefined ? {} : { scenarioId }) }, { retainObjects: false });
   const selected = bundle.authority.recordsets[0][0].scenario_id;
   const authority = readRootAuthority(bundle, selected);

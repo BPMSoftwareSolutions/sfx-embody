@@ -4,16 +4,19 @@ Canonical `.feature` writeups for every capability the
 [Python/C# embodiment strategy](../python-csharp-embodiment.md) creates or changes.
 Format follows the estate convention (see `agentic-harness/features`).
 
+[Implementation status](implementation.md) records the installed subset and
+remaining obligations. NEW/UPDATE below describes the pre-migration state.
+
 | Feature | Status | Strategy step | Why it changes |
 | --- | --- | --- | --- |
-| `resolve-provider-slot-bindings.feature` | NEW | M2 | The declared drive is absent: `provider_binding_scope`/`provider_binding` are empty and `src/` hardcodes the selection. This capability resolves one provider per slot from rows. |
+| `resolve-provider-slot-bindings.feature` | NEW | M2, M3 | The declared drive is absent: `provider_binding_scope`/`provider_binding` are empty and `src/` hardcodes the selection. This capability consumes the authority declaration and resolves one provider per slot from rows. |
 | `read-capability-authority.feature` | UPDATE | M1, M3 | Make the authority read target-neutral; return the requested profile's requirements and hold `PROFILE_PROVIDER_ABSENT` instead of assuming Node. |
-| `plan-capability-embodiment.feature` | UPDATE | M1, M2 | Plan against the resolved provider bindings for the selected profile; no target-specific path. |
-| `construct-embodiment-plan.feature` | UPDATE | M1 | Compose read → bindings → plan for any target. |
-| `write-capability-embodiment.feature` | UPDATE | M4 | Target-neutral governed write; establish and verify the digests the plan produced. |
-| `materialize-capability-embodiment.feature` | UPDATE | M4, M5, M6 | Materialize for any declared target; a plan-form body changes the digests by construction. |
-| `project-consumer-execution-embodiment-plan.feature` | NEW | §4 | The producer of `consumer-execution-embodiment-projection-context` is absent from the model; this supplies it. |
-| `project-consumer-execution-embodiment-v2.feature` | UPDATE | §4 | The admitted projection context is now a produced input, not an assumed one; contracts confirmed. |
+| `plan-capability-embodiment.feature` | UPDATE | M1, M2 | Plan against the resolved provider-slot binding set for the selected profile; no target-specific path. |
+| `construct-embodiment-plan.feature` | UPDATE | M1, M2 | Compose read → binding resolution → plan for any target; M2 installs the resolver and updates the contracts together. |
+| `write-capability-embodiment.feature` | UPDATE | M5, M7 | Target-neutral governed write; establish and verify the digests the plan produced. |
+| `materialize-capability-embodiment.feature` | UPDATE | M5, M7 | Materialize for any declared target; a plan-form body changes the digests by construction. |
+| `project-consumer-execution-embodiment-plan.feature` | NEW | M4 | The producer of `consumer-execution-embodiment-projection-context` is absent from the model; this supplies it from the authority declaration. |
+| `project-consumer-execution-embodiment-v2.feature` | UPDATE | M4, M6 | The admitted projection context is now a produced input, not an assumed one; contracts confirmed. |
 
 ## Notes for review
 

@@ -1,0 +1,261 @@
+-- Authoring helpers. They participate in the caller's transaction.
+CREATE OR ALTER PROCEDURE model.put_semantic_definition
+ @kind varchar(64),@namespace nvarchar(400),@id nvarchar(400),@semantics nvarchar(max),
+ @object bigint OUTPUT,@definition bigint OUTPUT,@digest binary(32) OUTPUT
+WITH EXECUTE AS OWNER
+AS
+BEGIN
+ SET NOCOUNT ON;
+ IF ISJSON(@semantics)<>1 THROW 51000,'SEMANTIC_DEFINITION_INVALID',1;
+ DECLARE @namespace_pk bigint=(SELECT namespace_pk FROM model.identity_namespace WHERE namespace_kind=@kind AND namespace_id=@namespace);
+ IF @namespace_pk IS NULL BEGIN
+  INSERT model.identity_namespace(namespace_kind,namespace_id) VALUES(@kind,@namespace);
+  SET @namespace_pk=SCOPE_IDENTITY();
+ END;
+ SET @object=(SELECT semantic_object_pk FROM model.semantic_object WHERE namespace_pk=@namespace_pk AND object_kind=@kind AND declared_id=@id);
+ IF @object IS NULL BEGIN
+  INSERT model.semantic_object(object_kind,namespace_pk,declared_id) VALUES(@kind,@namespace_pk,@id);
+  SET @object=SCOPE_IDENTITY();
+ END;
+ DECLARE @text nvarchar(max)=(SELECT @id AS [address.id],@kind AS [address.kind],@namespace AS [address.namespace],
+  N'sidefx-semantic-definition.v1' AS format,JSON_QUERY(@semantics) AS semantics FOR JSON PATH,WITHOUT_ARRAY_WRAPPER);
+ DECLARE @bytes varbinary(max)=CONVERT(varbinary(max),CONVERT(varchar(max),@text COLLATE Latin1_General_100_BIN2_UTF8));
+ SET @digest=HASHBYTES('SHA2_256',@bytes);
+ IF NOT EXISTS (SELECT 1 FROM source.content_object WHERE content_digest=@digest)
+  INSERT source.content_object(content_digest,content_bytes,byte_length) VALUES(@digest,@bytes,DATALENGTH(@bytes));
+ SET @definition=(SELECT semantic_object_definition_pk FROM model.semantic_object_definition WHERE semantic_object_pk=@object AND definition_digest=@digest);
+ IF @definition IS NULL BEGIN
+  INSERT model.semantic_object_definition(semantic_object_pk,object_kind,definition_digest,canonical_content_pk)
+   VALUES(@object,@kind,@digest,(SELECT content_object_pk FROM source.content_object WHERE content_digest=@digest));
+  SET @definition=SCOPE_IDENTITY();
+ END;
+ DECLARE @estate bigint=(SELECT estate_model_pk FROM source.current_model WHERE singleton_id=1);
+ IF NOT EXISTS (SELECT 1 FROM model.estate_definition WHERE estate_model_pk=@estate AND semantic_object_definition_pk=@definition)
+  INSERT model.estate_definition(estate_model_pk,semantic_object_definition_pk) VALUES(@estate,@definition);
+END;
+GO
+CREATE OR ALTER PROCEDURE model.declare_contract
+ @id nvarchar(400),@schema nvarchar(max)
+WITH EXECUTE AS OWNER
+AS
+BEGIN
+ SET NOCOUNT ON;
+ IF ISJSON(@schema)<>1 THROW 51000,'CONTRACT_SCHEMA_INVALID',1;
+ DECLARE @bytes varbinary(max)=CONVERT(varbinary(max),CONVERT(varchar(max),@schema COLLATE Latin1_General_100_BIN2_UTF8));
+ DECLARE @schema_digest binary(32)=HASHBYTES('SHA2_256',@bytes),@object bigint,@definition bigint,@digest binary(32);
+ IF NOT EXISTS (SELECT 1 FROM source.content_object WHERE content_digest=@schema_digest)
+  INSERT source.content_object(content_digest,content_bytes,byte_length) VALUES(@schema_digest,@bytes,DATALENGTH(@bytes));
+ DECLARE @schema_pk bigint=(SELECT schema_object_pk FROM model.schema_object WHERE content_digest=@schema_digest);
+ IF @schema_pk IS NULL BEGIN
+  INSERT model.schema_object(content_digest,dialect,content_object_pk)
+   VALUES(@schema_digest,JSON_VALUE(@schema,'$."$schema"'),(SELECT content_object_pk FROM source.content_object WHERE content_digest=@schema_digest));
+  SET @schema_pk=SCOPE_IDENTITY();
+ END;
+ DECLARE @semantics nvarchar(max)=(SELECT LOWER(CONVERT(varchar(64),@schema_digest,2)) AS schema_digest FOR JSON PATH,WITHOUT_ARRAY_WRAPPER);
+ EXEC model.put_semantic_definition 'CONTRACT',N'sidefx:contracts',@id,@semantics,@object OUTPUT,@definition OUTPUT,@digest OUTPUT;
+ DECLARE @contract bigint=(SELECT contract_pk FROM model.contract WHERE semantic_object_pk=@object);
+ IF @contract IS NULL BEGIN
+  INSERT model.contract(namespace_pk,contract_id,semantic_object_pk,object_kind)
+   SELECT namespace_pk,@id,@object,'CONTRACT' FROM model.semantic_object WHERE semantic_object_pk=@object;
+  SET @contract=SCOPE_IDENTITY();
+ END;
+ IF NOT EXISTS (SELECT 1 FROM model.contract_version WHERE semantic_object_definition_pk=@definition)
+  INSERT model.contract_version(contract_pk,semantic_object_pk,semantic_object_definition_pk,definition_digest,schema_object_pk,object_kind,_owner_definition_pk,_canonical_pointer,schema_reference_state)
+   VALUES(@contract,@object,@definition,@digest,@schema_pk,'CONTRACT',@definition,N'','RESOLVED');
+END;
+GO
+CREATE OR ALTER PROCEDURE model.declare_scenario
+ @capability_id nvarchar(400),@scenario nvarchar(max),@operations nvarchar(max),@port_bindings nvarchar(max)
+WITH EXECUTE AS OWNER
+AS
+BEGIN
+ SET NOCOUNT ON;
+ DECLARE @estate bigint=(SELECT estate_model_pk FROM source.current_model WHERE singleton_id=1);
+ DECLARE @capability bigint,@capability_version bigint,@capability_definition bigint;
+ SELECT @capability=c.capability_pk,@capability_version=ec.capability_version_pk,@capability_definition=ec.semantic_object_definition_pk
+ FROM model.capability c JOIN model.identity_namespace n ON n.namespace_pk=c.namespace_pk AND n.namespace_id=N'sidefx:capabilities'
+ JOIN model.estate_capability ec ON ec.capability_pk=c.capability_pk AND ec.estate_model_pk=@estate WHERE c.capability_id=@capability_id;
+ IF @capability IS NULL THROW 51000,'CAPABILITY_NOT_FOUND',1;
+ DECLARE @id nvarchar(400)=JSON_VALUE(@scenario,'$.scenarioId'),@name nvarchar(max)=JSON_VALUE(@scenario,'$.name');
+ DECLARE @input nvarchar(400)=JSON_VALUE(@scenario,'$.inputId'),@input_contract nvarchar(400)=JSON_VALUE(@scenario,'$.inputContract');
+ DECLARE @event nvarchar(400)=JSON_VALUE(@scenario,'$.eventId'),@authority nvarchar(400)=JSON_VALUE(@scenario,'$.eventAuthority');
+ DECLARE @outcome nvarchar(400)=JSON_VALUE(@scenario,'$.outcomeId'),@outcome_contract nvarchar(400)=JSON_VALUE(@scenario,'$.outcomeContract');
+ DECLARE @terminal bit=CASE WHEN JSON_VALUE(@scenario,'$.terminal')='true' THEN 1 ELSE 0 END;
+ DECLARE @root bit=CASE WHEN JSON_VALUE(@scenario,'$.root')='true' THEN 1 ELSE 0 END;
+ DECLARE @given nvarchar(max)=JSON_VALUE(@scenario,'$.given'),@when nvarchar(max)=JSON_VALUE(@scenario,'$.when'),@then nvarchar(max)=JSON_VALUE(@scenario,'$.then');
+ IF @id IS NULL OR @event IS NULL OR @authority IS NULL OR @given IS NULL OR @when IS NULL OR @then IS NULL
+  THROW 51000,'SCENARIO_FACES_REQUIRED',1;
+ DECLARE @in_version bigint,@out_version bigint;
+ SELECT @in_version=cv.contract_version_pk FROM model.contract c
+ JOIN model.identity_namespace n ON n.namespace_pk=c.namespace_pk AND n.namespace_id=N'sidefx:contracts'
+ JOIN model.contract_version cv ON cv.contract_pk=c.contract_pk
+ JOIN analysis.v_selected_semantic_definition d ON d.semantic_object_definition_pk=cv.semantic_object_definition_pk AND d.estate_model_pk=@estate WHERE c.contract_id=@input_contract;
+ SELECT @out_version=cv.contract_version_pk FROM model.contract c
+ JOIN model.identity_namespace n ON n.namespace_pk=c.namespace_pk AND n.namespace_id=N'sidefx:contracts'
+ JOIN model.contract_version cv ON cv.contract_pk=c.contract_pk
+ JOIN analysis.v_selected_semantic_definition d ON d.semantic_object_definition_pk=cv.semantic_object_definition_pk AND d.estate_model_pk=@estate WHERE c.contract_id=@outcome_contract;
+ IF @in_version IS NULL OR @out_version IS NULL THROW 51000,'SCENARIO_CONTRACT_NOT_DECLARED',1;
+ DECLARE @namespace nvarchar(400)=N'sidefx:capability:'+@capability_id;
+ DECLARE @object bigint,@definition bigint,@digest binary(32),@semantics nvarchar(max);
+ DECLARE @binding nvarchar(max),@port_id nvarchar(400),@port bigint,@port_version bigint;
+ DECLARE @ports TABLE(port_id nvarchar(400),port_version bigint);
+ DECLARE @bindings CURSOR;
+ SET @bindings=CURSOR LOCAL FAST_FORWARD FOR SELECT value FROM OPENJSON(@port_bindings);
+ OPEN @bindings;
+ FETCH NEXT FROM @bindings INTO @binding;
+ WHILE @@FETCH_STATUS=0 BEGIN
+  SET @port_id=JSON_VALUE(@binding,'$.portId');
+  EXEC model.put_semantic_definition 'PORT',@namespace,@port_id,@binding,@object OUTPUT,@definition OUTPUT,@digest OUTPUT;
+  SET @port=(SELECT port_pk FROM model.port WHERE semantic_object_pk=@object);
+  IF @port IS NULL BEGIN
+   INSERT model.port(namespace_pk,port_id,semantic_object_pk,object_kind)
+    SELECT namespace_pk,@port_id,@object,'PORT' FROM model.semantic_object WHERE semantic_object_pk=@object;
+   SET @port=SCOPE_IDENTITY();
+  END;
+  SET @port_version=(SELECT port_version_pk FROM model.port_version WHERE semantic_object_definition_pk=@definition);
+  IF @port_version IS NULL BEGIN
+   INSERT model.port_version(port_pk,semantic_object_pk,semantic_object_definition_pk,definition_digest,port_profile,object_kind,_owner_definition_pk,_canonical_pointer)
+    VALUES(@port,@object,@definition,@digest,'consumer-interface-authority.v1','PORT',@definition,N'');
+   SET @port_version=SCOPE_IDENTITY();
+  END;
+  INSERT @ports VALUES(@port_id,@port_version);
+  FETCH NEXT FROM @bindings INTO @binding;
+ END;
+ CLOSE @bindings;
+ DEALLOCATE @bindings;
+ SET @semantics=(SELECT @authority AS [authority.id],@id AS [authority.owningScenarioId],JSON_QUERY(@operations) AS [authority.operations] FOR JSON PATH,WITHOUT_ARRAY_WRAPPER);
+ EXEC model.put_semantic_definition 'EXECUTION_AUTHORITY',@namespace,@authority,@semantics,@object OUTPUT,@definition OUTPUT,@digest OUTPUT;
+ DECLARE @authority_pk bigint=(SELECT execution_authority_pk FROM model.execution_authority WHERE semantic_object_pk=@object);
+ IF @authority_pk IS NULL BEGIN
+  INSERT model.execution_authority(namespace_pk,execution_authority_id,semantic_object_pk,object_kind)
+   SELECT namespace_pk,@authority,@object,'EXECUTION_AUTHORITY' FROM model.semantic_object WHERE semantic_object_pk=@object;
+  SET @authority_pk=SCOPE_IDENTITY();
+ END;
+ DECLARE @authority_version bigint=(SELECT execution_authority_version_pk FROM model.execution_authority_version WHERE semantic_object_definition_pk=@definition);
+ IF @authority_version IS NULL BEGIN
+  INSERT model.execution_authority_version(execution_authority_pk,semantic_object_pk,semantic_object_definition_pk,definition_digest,authority_profile,object_kind,_owner_definition_pk,_canonical_pointer)
+   VALUES(@authority_pk,@object,@definition,@digest,'execution-authorities.v1','EXECUTION_AUTHORITY',@definition,N'');
+  SET @authority_version=SCOPE_IDENTITY();
+  INSERT model.execution_operation(execution_authority_version_pk,operation_id,ordinal,operation_kind,_owner_definition_pk,_canonical_pointer)
+   SELECT @authority_version,JSON_VALUE(value,'$.operationId'),CONVERT(int,[key]),JSON_VALUE(value,'$.kind'),@definition,N'/authority/operations/'+[key] FROM OPENJSON(@operations);
+  INSERT model.operation_port_invocation(execution_operation_pk,port_version_pk,operation_kind,_owner_definition_pk,_canonical_pointer)
+   SELECT op.execution_operation_pk,p.port_version,'invoke-port',@definition,op._canonical_pointer
+   FROM model.execution_operation op JOIN OPENJSON(@operations) j ON CONVERT(int,j.[key])=op.ordinal
+   JOIN @ports p ON p.port_id=JSON_VALUE(j.value,'$.portId') WHERE op.execution_authority_version_pk=@authority_version AND op.operation_kind='invoke-port';
+  IF EXISTS (SELECT 1 FROM model.execution_operation op WHERE op.execution_authority_version_pk=@authority_version
+   AND (op.operation_kind<>'invoke-port' OR NOT EXISTS (SELECT 1 FROM model.operation_port_invocation i WHERE i.execution_operation_pk=op.execution_operation_pk)))
+   THROW 51000,'SCENARIO_OPERATION_BINDING_NOT_DECLARED',1;
+ END;
+ UPDATE invocation SET port_version_pk=p.port_version
+ FROM model.operation_port_invocation invocation
+ JOIN model.execution_operation op ON op.execution_operation_pk=invocation.execution_operation_pk
+ JOIN OPENJSON(@operations) j ON CONVERT(int,j.[key])=op.ordinal
+ JOIN @ports p ON p.port_id=JSON_VALUE(j.value,'$.portId')
+ WHERE op.execution_authority_version_pk=@authority_version;
+ DECLARE @tag_rows TABLE(tag nvarchar(100),value nvarchar(400));
+ INSERT @tag_rows VALUES('capability',@capability_id),('scenario',@id),('input',@input),('input-contract',@input_contract),
+  ('event',@event),('event-authority',@authority),('outcome',@outcome),('outcome-contract',@outcome_contract);
+ IF @root=1 INSERT @tag_rows VALUES('root-scenario',@id);
+ DECLARE @tags nvarchar(max)=N'{'+(SELECT STRING_AGG(CONVERT(nvarchar(max),N'"'+STRING_ESCAPE(tag,'json')+N'":["'+STRING_ESCAPE(value,'json')+N'"]'),N',') WITHIN GROUP(ORDER BY tag) FROM @tag_rows)+N'}';
+ IF @terminal=1 SET @tags=JSON_MODIFY(@tags,'$."outcome-terminal"',JSON_QUERY(N'[true]'));
+ DECLARE @parsed_tags nvarchar(max)=(SELECT N'@'+tag+N':'+value AS name FROM @tag_rows ORDER BY tag FOR JSON PATH);
+ IF @terminal=1 SET @parsed_tags=JSON_MODIFY(@parsed_tags,'append $',JSON_QUERY(N'{"name":"@outcome-terminal"}'));
+ DECLARE @steps nvarchar(max)=(SELECT keyword,keywordType,text FROM (VALUES
+  (0,N'Given ',N'Context',@given),(1,N'When ',N'Action',@when),(2,N'Then ',N'Outcome',@then)) s(ordinal,keyword,keywordType,text) ORDER BY ordinal FOR JSON PATH);
+ DECLARE @parsed_scenario nvarchar(max)=(SELECT N'Scenario' AS keyword,@name AS name,N'' AS description,
+  JSON_QUERY(N'[]') AS examples,JSON_QUERY(@steps) AS steps,JSON_QUERY(@parsed_tags) AS tags FOR JSON PATH,WITHOUT_ARRAY_WRAPPER);
+ SET @semantics=(SELECT JSON_QUERY(@parsed_scenario) AS scenario,JSON_QUERY(@tags) AS tags FOR JSON PATH,WITHOUT_ARRAY_WRAPPER);
+ DECLARE @scenario_pk bigint,@old_version bigint,@scenario_namespace nvarchar(400);
+ SELECT @scenario_pk=s.scenario_pk,@scenario_namespace=n.namespace_id FROM model.scenario s
+ JOIN model.identity_namespace n ON n.namespace_pk=s.namespace_pk WHERE s.capability_pk=@capability AND s.scenario_id=@id;
+ SET @scenario_namespace=COALESCE(@scenario_namespace,@namespace);
+ EXEC model.put_semantic_definition 'SCENARIO',@scenario_namespace,@id,@semantics,@object OUTPUT,@definition OUTPUT,@digest OUTPUT;
+ IF @scenario_pk IS NULL BEGIN
+  INSERT model.scenario(namespace_pk,scenario_id,semantic_object_pk,object_kind,capability_pk)
+   SELECT namespace_pk,@id,@object,'SCENARIO',@capability FROM model.semantic_object WHERE semantic_object_pk=@object;
+  SET @scenario_pk=SCOPE_IDENTITY();
+ END;
+ DECLARE @scenario_definition bigint=@definition,@scenario_digest binary(32)=@digest;
+ DECLARE @version bigint=(SELECT scenario_version_pk FROM model.scenario_version WHERE semantic_object_definition_pk=@definition);
+ IF @version IS NULL BEGIN
+  INSERT model.scenario_version(scenario_pk,semantic_object_pk,semantic_object_definition_pk,definition_digest,name,source_profile,object_kind,_owner_definition_pk,_canonical_pointer)
+   VALUES(@scenario_pk,@object,@definition,@digest,@name,'managed-feature-tags.v1','SCENARIO',@definition,N'');
+  SET @version=SCOPE_IDENTITY();
+  DECLARE @face_namespace nvarchar(400)=N'owner:sha256:'+LOWER(CONVERT(varchar(64),@scenario_digest,2));
+  DECLARE @faces TABLE(kind varchar(64),id nvarchar(400),reference nvarchar(400),text nvarchar(max),role varchar(20));
+  INSERT @faces VALUES('SCENARIO_INPUT',@input,@input_contract,@given,'input'),('SCENARIO_EVENT',@event,@authority,@when,'event'),('SCENARIO_OUTCOME',@outcome,@outcome_contract,@then,'outcome');
+  DECLARE @kind varchar(64),@face nvarchar(400),@reference nvarchar(400),@text nvarchar(max),@role varchar(20),@faces_cursor CURSOR;
+  SET @faces_cursor=CURSOR LOCAL FAST_FORWARD FOR SELECT kind,id,reference,text,role FROM @faces;
+  OPEN @faces_cursor;
+  FETCH NEXT FROM @faces_cursor INTO @kind,@face,@reference,@text,@role;
+  WHILE @@FETCH_STATUS=0 BEGIN
+   SET @semantics=(SELECT @face AS id,@reference AS declared_reference,@text AS text,@role AS role,
+    LOWER(CONVERT(varchar(64),@scenario_digest,2)) AS owner_definition_digest FOR JSON PATH,WITHOUT_ARRAY_WRAPPER);
+   EXEC model.put_semantic_definition @kind,@face_namespace,@face,@semantics,@object OUTPUT,@definition OUTPUT,@digest OUTPUT;
+   IF @kind='SCENARIO_INPUT'
+    INSERT model.scenario_input(scenario_version_pk,input_id,name,input_contract_version_pk,semantic_object_pk,semantic_object_definition_pk,namespace_pk,definition_digest,object_kind,_owner_definition_pk,_canonical_pointer,contract_reference_state)
+     SELECT @version,@face,@text,@in_version,@object,@definition,namespace_pk,@digest,@kind,@scenario_definition,N'/input','RESOLVED' FROM model.semantic_object WHERE semantic_object_pk=@object;
+   IF @kind='SCENARIO_EVENT'
+    INSERT model.scenario_event(scenario_version_pk,event_id,name,responsibility,execution_authority_version_pk,semantic_object_pk,semantic_object_definition_pk,namespace_pk,definition_digest,object_kind,_owner_definition_pk,_canonical_pointer,authority_reference_state)
+     SELECT @version,@face,@text,@text,@authority_version,@object,@definition,namespace_pk,@digest,@kind,@scenario_definition,N'/event','RESOLVED' FROM model.semantic_object WHERE semantic_object_pk=@object;
+   IF @kind='SCENARIO_OUTCOME'
+    INSERT model.scenario_outcome(scenario_version_pk,outcome_id,name,experience,terminal,semantic_object_pk,semantic_object_definition_pk,namespace_pk,definition_digest,object_kind,_owner_definition_pk,_canonical_pointer)
+     SELECT @version,@face,@text,@text,@terminal,@object,@definition,namespace_pk,@digest,@kind,@scenario_definition,N'/outcome' FROM model.semantic_object WHERE semantic_object_pk=@object;
+   FETCH NEXT FROM @faces_cursor INTO @kind,@face,@reference,@text,@role;
+  END;
+  CLOSE @faces_cursor;
+  DEALLOCATE @faces_cursor;
+  INSERT model.scenario_outcome_contract VALUES(@version,@out_version,@scenario_definition,N'/outcome/contract');
+  INSERT model.outcome_variant(scenario_version_pk,variant_id,terminal,_owner_definition_pk,_canonical_pointer)
+   SELECT @version,value,@terminal,@scenario_definition,N'/variants/'+[key] FROM OPENJSON(@scenario,'$.variants');
+ END;
+ UPDATE model.scenario_input SET input_contract_version_pk=@in_version WHERE scenario_version_pk=@version;
+ UPDATE model.scenario_event SET execution_authority_version_pk=@authority_version WHERE scenario_version_pk=@version;
+ UPDATE model.scenario_outcome_contract SET contract_version_pk=@out_version WHERE scenario_version_pk=@version;
+ SELECT @old_version=scenario_version_pk FROM model.capability_scenario WHERE capability_version_pk=@capability_version AND scenario_pk=@scenario_pk;
+ IF @old_version IS NULL INSERT model.capability_scenario(capability_pk,capability_version_pk,scenario_pk,scenario_version_pk,_owner_definition_pk,_canonical_pointer)
+  VALUES(@capability,@capability_version,@scenario_pk,@version,@capability_definition,N'/scenarios/'+@id);
+ ELSE BEGIN
+  UPDATE model.capability_scenario SET scenario_version_pk=@version WHERE capability_version_pk=@capability_version AND scenario_pk=@scenario_pk;
+  UPDATE model.operation_scenario_invocation SET target_scenario_version_pk=@version WHERE target_scenario_version_pk=@old_version;
+ END;
+ IF @root=1 AND NOT EXISTS (SELECT 1 FROM model.capability_root_scenario WHERE capability_version_pk=@capability_version)
+  INSERT model.capability_root_scenario VALUES(@capability_version,@scenario_pk,@capability_definition,N'/rootScenarioId');
+ SELECT @id AS declared_scenario,@version AS scenario_version_pk;
+END;
+GO
+CREATE OR ALTER PROCEDURE model.declare_capability_feature
+ @capability_id nvarchar(400),@feature_text nvarchar(max)
+WITH EXECUTE AS OWNER
+AS
+BEGIN
+ SET NOCOUNT ON;
+ DECLARE @estate bigint=(SELECT estate_model_pk FROM source.current_model WHERE singleton_id=1);
+ DECLARE @capability bigint,@capability_version bigint,@feature bigint;
+ SELECT @capability=c.capability_pk,@capability_version=ec.capability_version_pk,@feature=c.feature_pk
+ FROM model.capability c JOIN model.identity_namespace n ON n.namespace_pk=c.namespace_pk AND n.namespace_id=N'sidefx:capabilities'
+ JOIN model.estate_capability ec ON ec.capability_pk=c.capability_pk AND ec.estate_model_pk=@estate WHERE c.capability_id=@capability_id;
+ IF @capability IS NULL THROW 51000,'CAPABILITY_NOT_FOUND',1;
+ DECLARE @bytes varbinary(max)=CONVERT(varbinary(max),CONVERT(varchar(max),@feature_text COLLATE Latin1_General_100_BIN2_UTF8));
+ DECLARE @feature_digest binary(32)=HASHBYTES('SHA2_256',@bytes);
+ IF NOT EXISTS (SELECT 1 FROM source.content_object WHERE content_digest=@feature_digest)
+  INSERT source.content_object(content_digest,content_bytes,byte_length) VALUES(@feature_digest,@bytes,DATALENGTH(@bytes));
+ DECLARE @scenarios nvarchar(max)=(SELECT s.scenario_id AS scenarioId,cs.scenario_version_pk AS scenarioVersionPk
+  FROM model.capability_scenario cs JOIN model.scenario s ON s.scenario_pk=cs.scenario_pk
+  WHERE cs.capability_version_pk=@capability_version ORDER BY s.scenario_id FOR JSON PATH);
+ DECLARE @semantics nvarchar(max)=(SELECT @capability_id AS name,LOWER(CONVERT(varchar(64),@feature_digest,2)) AS content_digest,
+  N'features/'+@capability_id+N'.feature' AS source_path,JSON_QUERY(@scenarios) AS scenarios FOR JSON PATH,WITHOUT_ARRAY_WRAPPER);
+ DECLARE @object bigint,@definition bigint,@digest binary(32);
+ EXEC model.put_semantic_definition 'FEATURE',N'sidefx:features',@capability_id,@semantics,@object OUTPUT,@definition OUTPUT,@digest OUTPUT;
+ DECLARE @version bigint=(SELECT feature_version_pk FROM model.feature_version WHERE semantic_object_definition_pk=@definition);
+ IF @version IS NULL BEGIN
+  INSERT model.feature_version(feature_pk,capability_pk,semantic_object_pk,semantic_object_definition_pk,definition_digest,name,source_profile,object_kind,_owner_definition_pk,_canonical_pointer)
+   VALUES(@feature,@capability,@object,@definition,@digest,@capability_id,'parsed-feature-declaration.v1','FEATURE',@definition,N'');
+  SET @version=SCOPE_IDENTITY();
+  INSERT model.feature_scenario(feature_version_pk,scenario_pk,scenario_version_pk,capability_pk,ordinal)
+   SELECT @version,cs.scenario_pk,cs.scenario_version_pk,@capability,ROW_NUMBER() OVER(ORDER BY s.scenario_id)-1
+   FROM model.capability_scenario cs JOIN model.scenario s ON s.scenario_pk=cs.scenario_pk WHERE cs.capability_version_pk=@capability_version;
+ END;
+ UPDATE model.estate_capability_feature SET feature_version_pk=@version WHERE estate_model_pk=@estate AND capability_version_pk=@capability_version;
+END;
+GO

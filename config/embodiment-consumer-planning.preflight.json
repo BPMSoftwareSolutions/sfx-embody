@@ -1,0 +1,68 @@
+[
+  {
+    "name": "Node plan remains unchanged before convergence",
+    "capabilityId": "construct-embodiment-plan",
+    "input": {
+      "capabilityId": "resolve-equity-market-price-evidence",
+      "target": "node"
+    },
+    "expected": {
+      "planDigest": "sha256:d05d9677650b0ef9a54aa42f857d1c28b88b5cb67b64fab651ff2a74dfb3e64f",
+      "artifactDigest": "sha256:a130a8901380ccb457dc13efb886a4f30fa2bcfc818ad62d8c336159816ea1f0"
+    }
+  },
+  {
+    "name": "python plans from bound providers",
+    "capabilityId": "construct-embodiment-plan",
+    "input": {
+      "capabilityId": "resolve-equity-market-price-evidence",
+      "target": "python"
+    },
+    "expected": {
+      "contractId": "capability-embodiment-plan.v1",
+      "target": "python",
+      "fileCount": 5
+    }
+  },
+  {
+    "name": "csharp plans from bound providers",
+    "capabilityId": "construct-embodiment-plan",
+    "input": {
+      "capabilityId": "resolve-equity-market-price-evidence",
+      "target": "csharp"
+    },
+    "expected": {
+      "contractId": "capability-embodiment-plan.v1",
+      "target": "csharp",
+      "fileCount": 5
+    }
+  },
+  {
+    "name": "python materialization verifies every written digest",
+    "capabilityId": "materialize-capability-embodiment",
+    "input": {
+      "capabilityId": "resolve-equity-market-price-evidence",
+      "target": "python"
+    },
+    "expected": {
+      "contractId": "capability-embodiment-materialization.v1",
+      "target": "python",
+      "fileCount": 5
+    },
+    "verifyWrittenFiles": true
+  },
+  {
+    "name": "csharp materialization verifies every written digest",
+    "capabilityId": "materialize-capability-embodiment",
+    "input": {
+      "capabilityId": "resolve-equity-market-price-evidence",
+      "target": "csharp"
+    },
+    "expected": {
+      "contractId": "capability-embodiment-materialization.v1",
+      "target": "csharp",
+      "fileCount": 5
+    },
+    "verifyWrittenFiles": true
+  }
+]

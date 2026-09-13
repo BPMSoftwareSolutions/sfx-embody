@@ -8,6 +8,10 @@ that the database already declares the runtime they implement, and orders the
 migrations that move the work from code to rows. It is the operational companion
 to [python-csharp-embodiment.md](python-csharp-embodiment.md).
 
+The inventory records the pre-migration baseline. Subsequent reader changes and
+installed work are recorded in the
+[Python/C# implementation status](python-csharp-embodiment/implementation.md).
+
 ## 1. The rule
 
 The database is the authority. The CLI is a fixed carrier of arguments and
@@ -115,8 +119,8 @@ cover the gaps, and delete the shadow.**
 
 | `src/` group | Declared mechanics | Declared providers (example) | Replaced by |
 | --- | --- | --- | --- |
-| Reads — database SQL (`read-authority`, `list-capabilities`) | *none declared* | — | a new declared SQL-execution operation + provider (Phase 1) |
-| Reads — admitted content (`read-capability-meaning`, `read-circuit-media`, `read-workspace-config`) | `json-reading`, `contract-document-reading`, `query-cli-delivery`, `query-command-dispatch` | `ScenarioKernel.NodePlatform.Interface.JsonCli` | declared reads over admitted documents |
+| Reads — database SQL (`read-authority`, `list-capabilities`, `read-capability-meaning`, `read-circuit-media`) | *none declared* | — | a new declared SQL-execution operation + provider (Phase 1) |
+| Reads — admitted content (`read-workspace-config`) | `json-reading`, `contract-document-reading`, `query-cli-delivery`, `query-command-dispatch` | `ScenarioKernel.NodePlatform.Interface.JsonCli` | declared reads over admitted documents |
 | Delivery / carrier | `cli-delivery` | `ScenarioKernel.NodePlatform.Interface.JsonCli`, `scenario_kernel.platform.consumer` | one carrier + a declared delivery policy |
 | Delivery policy (fs-write / memory-only) | `authorized-file-system-plan-execution`, `bounded-declared-resource-observation`, `post-effect-absence-proof` | per profile | `processEvidence` as a policy row |
 | Preparation | `schema-admission`, `authority-resolution`, `contract-validation`, `governed-feature-reference-resolution` | `…Schema.JsonSchemaContractAdmission`, `ScenarioKernel.Adapters.Schema.JsonSchemaContractValidator` | binding rows + declared admission |
@@ -157,14 +161,17 @@ this. No code and no rows change.
 There are two distinct reads, not one:
 
 - **Database reads** (`read-authority.mjs`, `list-capabilities.mjs` — including the
-  inline `LIST_SQL`). These execute SQL against the selected estate. This is **not**
+  inline `LIST_SQL` — plus `read-capability-meaning.mjs` (runs `MEANING_SQL` through
+  the database query runner) and `read-circuit-media.mjs` (delegates to
+  `readWorkbench`, which queries SQL for publication selection and catalogue data).
+  These execute SQL against the selected estate. This is **not**
   `declared-query-evaluation`: that provider (`query-cli.mjs:22`, `runQuery`)
   evaluates a declared expression against an already-admitted JSON document and
   never touches SQL. The SQL-execution operation must itself be declared — a
   mechanic and a provider — before the readers can retire.
-- **Admitted-content reads** (`read-capability-meaning.mjs`,
-  `read-circuit-media.mjs`, `read-workspace-config.mjs`). These read
-  already-retained JSON and map to `json-reading` / `contract-document-reading`.
+- **Admitted-content reads** (`read-workspace-config.mjs`). This reads the
+  regression-cases JSON and no SQL, and maps to `json-reading` /
+  `contract-document-reading`.
 
 - Rows: declare the database read operation + provider; declare the admitted-content
   reads against existing mechanics; move `LIST_SQL` beside
@@ -212,7 +219,8 @@ become one projection over two graphs.
 - Rows: projection per output format/graph.
 - Verify: rendered output matches Phase 0 for each format.
 - Declared behavior: [`project-capability-revelation.feature`](src-mechanics-to-database-capabilities/project-capability-revelation.feature)
-  (UPDATE `project-capability-revelation`) and
+  (UPDATE `project-capability-revelation`: preserves the existing view set and receipt
+  binding, and adds `project-declared-format` and `hold-view-without-declared-meaning`) and
   [`project-capability-circuit.feature`](src-mechanics-to-database-capabilities/project-capability-circuit.feature)
   (NEW `project-capability-circuit`).
 
@@ -240,8 +248,10 @@ fixtures) **before** retiring any assertion code.
 - Verify: every existing check has a declared counterpart, and `verify:estate` /
   `verify:memory` pass from rows.
 - Declared behavior: [`resolve-capability-proof-obligations.feature`](src-mechanics-to-database-capabilities/resolve-capability-proof-obligations.feature)
-  (UPDATE `resolve-capability-proof-obligations`, adding `derive-native-mutation-obligations`
-  and `derive-validator-witness-obligations`).
+  (UPDATE `resolve-capability-proof-obligations`: preserves all existing obligations —
+  positive, missing-input, invalid-input, terminal-variant, effect-failure,
+  observable-condition, fixture-candidate binding, coverage closure, replay — and
+  adds `derive-native-mutation-obligations` and `derive-validator-witness-obligations`).
 
 ### Phase 6 — Retire the body generator
 
@@ -256,7 +266,7 @@ evaluator.
   bindings (see [python-csharp-embodiment.md](python-csharp-embodiment.md) §4 for
   the real contracts).
 - Verify: node **behavior** unchanged (dispositions, every fixture); the
-  plan/artifact digests change by construction (see §5 M6 of the cross-target
+  plan/artifact digests change by construction (see §5 M7 of the cross-target
   strategy) and the new values are verified. `src/` reduced to the carrier, the
   generic reader, and the host runtime.
 - Declared behavior: [`execute-declared-capability.feature`](src-mechanics-to-database-capabilities/execute-declared-capability.feature)

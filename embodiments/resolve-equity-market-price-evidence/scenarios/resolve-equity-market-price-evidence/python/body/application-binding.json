@@ -1,0 +1,69 @@
+{
+  "bindingType": "projected-consumer-application-binding.v3",
+  "executionPlan": "execution-plan.json",
+  "fixtures": "../evidence/fixture-authority.json",
+  "mechanicalSterility": "../evidence/projection-conformance.json",
+  "executionPlanDigest": "sha256:e5a38f9feb163433be11ca3427226e3100294bb3be41add7de479536d1319c7f",
+  "executionAuthority": {
+    "target": "python",
+    "pinnedPlatformCommit": "716811046f52dd2a67f9ff308a50d755571cbbad",
+    "effectContext": {
+      "module": "languages/typescript/runtimes/node/native-mechanic-primitives.mjs",
+      "export": "createGovernedEffectContext",
+      "digest": "sha256:1cc204869f0ce7b60ad03187d364db4a432b0b632ce4469a7cf37747d6a379d5"
+    },
+    "runtime": {
+      "command": "python",
+      "args": [
+        "-c",
+        "{source}"
+      ],
+      "source": "import copy\nimport json\nimport sys\nfrom scenario_kernel.platform.consumer import _graph_providers\nfrom scenario_kernel.platform.execution_graph import SemanticExecutionGraphScheduler\nfrom scenario_kernel.adapters import SemanticTransformationEngine\nfrom scenario_kernel.adapters.semantic_transformation_evaluator import evaluate, _Refusal\n\nrequest = json.loads(sys.stdin.readline())\nplan, root = request['plan'], request['input']\nphysical = set(request['physicalCellIds'])\npure = _graph_providers(plan, root, None, {}, None)\ncells = {cell['cellId']: cell for cell in plan['canonicalGraph']['cells']}\ncollections = {}\n\ndef provider(value, context):\n    if context.cell_id not in physical:\n        expression = context.configuration\n        if isinstance(expression, dict) and expression.get('kind') == 'invoke-port':\n            return pure[context.provider_profile_id](value, context)\n        if not isinstance(expression, dict) or 'op' not in expression:\n            if cells[context.cell_id]['execution']['authorityId'] == 'mechanic:identity.v1':\n                return {'outcomeValue': value, 'outcomeVariant': 'VALUE'}\n            raise RuntimeError('UNDECLARED_EXECUTION_MECHANIC:' + context.cell_id)\n        try:\n            entering = context.decomposition_input if context.decomposition_input is not None else value\n            scope = {'input': entering, 'root': root}\n            outcome = evaluate(expression, scope)\n            if outcome is None:\n                raise ValueError('LEXICAL_BINDING_NOT_AVAILABLE_AT_CELL_ALTITUDE')\n            if expression['op'] in {'map', 'flat-map', 'filter', 'find', 'some', 'every'}:\n                occurrence = collections.get(context.cell_id, 0)\n                collections[context.cell_id] = occurrence + 1\n                source = evaluate(expression.get('from', {}), scope)\n                return {'outcomeValue': outcome, 'outcomeVariant': 'CONTINUE' if occurrence < (len(source) if isinstance(source, list) else 0) else 'STOP'}\n            return {'outcomeValue': outcome}\n        except (KeyError, TypeError, ValueError, _Refusal):\n            return {'outcomeValue': value, 'outcomeVariant': 'VALUE'}\n    print(json.dumps({'type': 'invoke-provider', 'cellId': context.cell_id,\n        'cellExecutionId': context.cell_execution_id, 'rootExecutionId': context.root_execution_id,\n        'input': value}, ensure_ascii=False), flush=True)\n    reply = json.loads(sys.stdin.readline())\n    if 'error' in reply:\n        raise RuntimeError(reply['error'])\n    return {'outcomeValue': reply['outcome']}\n\nauthorities = {entry['id']: entry for entry in plan.get('bindingAuthorities', [])}\ndef project_binding(identity, value):\n    authority = authorities[identity]\n    return SemanticTransformationEngine().transform(authority['binding']['configuration']['expression'], value, root)\n\nproviders = {entry['providerProfileId']: provider for entry in plan['realizationOverlay']['providerBindings']}\nresult = SemanticExecutionGraphScheduler(plan, providers, project_binding).execute(copy.deepcopy(root), request['rootExecutionId'])\nprint(json.dumps({'type': 'result', 'result': result}, ensure_ascii=False), flush=True)\n",
+      "sourceDigest": "sha256:b667774410ea9a975ea0e62e854d63e94365ca8824f1433601bf5de6e710949f",
+      "dependencies": [
+        {
+          "root": "sdaRoot",
+          "path": "languages/python/src/scenario_kernel/platform/execution_graph.py",
+          "digest": "sha256:457b87297b17950ebfb5e7ef3ba2596bcfbe8853a6008ea73148a7ac81fbd779"
+        },
+        {
+          "root": "sdaRoot",
+          "path": "languages/python/src/scenario_kernel/platform/consumer.py",
+          "digest": "sha256:eed4ea8d53672a2180aed9764fa979bb1c903772dccaa9db6aadc806686b0824"
+        },
+        {
+          "root": "sdaRoot",
+          "path": "languages/python/src/scenario_kernel/adapters/core.py",
+          "digest": "sha256:cf9a61531dcdef4a642fbb205c1f3fe328b62bca77b08112b03f91f6ad41c3e6"
+        },
+        {
+          "root": "sdaRoot",
+          "path": "languages/python/src/scenario_kernel/adapters/semantic_transformation_evaluator.py",
+          "digest": "sha256:5c89354ed924539b76de877b78a452daffb3e445df7da7ec89ab23d5e2deb672"
+        }
+      ],
+      "timeoutMilliseconds": 60000,
+      "maximumOutputBytes": 16777216,
+      "environment": {
+        "PYTHONPATH": "{platformRoot}/languages/python/src",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      }
+    }
+  },
+  "providerBindings": [
+    {
+      "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.2",
+      "providerId": "scenario_kernel.platform.consumer",
+      "implementationRef": "languages/typescript/runtimes/node/external-credential-reference-binding-provider.mjs",
+      "implementationDigest": "sha256:415806ff8d181e9cf4d87814b3c2f40fb39d598e236877c66d88e521726371df",
+      "providerExport": "bindExternalCredentialReference"
+    },
+    {
+      "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.4",
+      "providerId": "scenario_kernel.platform.consumer",
+      "implementationRef": "languages/typescript/runtimes/node/governed-http-exchange-provider.mjs",
+      "implementationDigest": "sha256:67a28e738ade419a256b85c9bc139d1aad0f256d196b28250465d763845a2e5f",
+      "providerExport": "observeGovernedHttpExchange"
+    }
+  ]
+}
