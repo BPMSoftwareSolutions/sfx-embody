@@ -19,6 +19,7 @@ export async function planNode({ bundle, sdaRoot }) {
   const { selection, authority, resolutions } = bundle;
   const selected = one(authority.recordsets[0], 'CAPABILITY_SCENARIO_SELECTION');
   const capabilityId = selected.capability_id;
+  const target = selection.target ?? 'node';
   if (capabilityId !== selection.capabilityId || selected.scenario_id !== selection.scenarioId) throw new Error('SELECTION_DIVERGENCE');
   // Reads actually taken must agree on snapshot and projection. The resolver map
   // is optional, so it is checked only when it was read.
@@ -47,7 +48,7 @@ export async function planNode({ bundle, sdaRoot }) {
   const interfaces = documentAt(workspace, capEntry.interfaces);
   const fixtures = documentAt(workspace, capEntry.fixtures);
   const platform = one(documents.filter(r => r.value.sdaPlatform?.commit), 'PINNED_PLATFORM_PACKAGE');
-  const registry = one(documents.filter(r => r.value.registryType && r.value.language === 'node'), 'NODE_REGISTRY');
+  const registry = one(documents.filter(r => r.value.registryType && r.value.language === target), 'REGISTRY_FOR_TARGET:' + target);
   const commit = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: sdaRoot, encoding: 'utf8' }).trim();
   if (commit !== platform.value.sdaPlatform.commit) throw new Error('PHYSICAL_PLATFORM_COMMIT_MISMATCH');
   const trackedPaths = ['tools/src', 'languages/typescript', 'package.json'];
@@ -138,16 +139,19 @@ export async function planNode({ bundle, sdaRoot }) {
   // already carried in this bundle, so it is read from there rather than
   // re-derived from the resolver map. one() still refuses a registry that
   // declares zero or several transformation ports.
-  const transformationPort = one(registry.value.eventPorts.filter(p => p.invocation === 'transformation'), 'NATIVE_MECHANIC_PROVIDER');
-  const native = { implementation_id: path.posix.join(registry.value.providerModuleRoot, transformationPort.providerModule),
-    implementation_export: transformationPort.providerExport };
+  // The native mechanic provider is the registry's pure semantic-value profile.
+  // Every language registry declares it (node, python, csharp); only node also
+  // repeats it as an eventPort, which is the shape the older node path read.
+  const transformationProfile = one(registry.value.graphProviderProfiles.filter(p => p.effectClassification === 'pure'), 'NATIVE_MECHANIC_PROVIDER_' + target);
+  const native = { implementation_id: path.posix.join(registry.value.providerModuleRoot, transformationProfile.providerModule),
+    implementation_export: transformationProfile.providerExport };
   // Sourcing the pair from the registry would make the old comparison against the
   // database's own resolution a tautology. Where the requirement matrix was read
   // -- prepare, verify:estate, the probe -- the original derivation is still
   // performed and the two must agree. The invoke path does not read the matrix,
   // so it cannot make this comparison; that is the cost this change accepts.
   if (resolutions) {
-    const declared = one([...new Map(resolutions.recordsets[0].filter(r => r.target_language === 'node' && r.requirement_kind === 'MECHANIC')
+    const declared = one([...new Map(resolutions.recordsets[0].filter(r => r.target_language === target && r.requirement_kind === 'MECHANIC')
       .map(r => [r.implementation_id + ':' + r.implementation_export, r])).values()], 'NATIVE_MECHANIC_PROVIDER');
     if (declared.implementation_id !== native.implementation_id || declared.implementation_export !== native.implementation_export)
       throw new Error('NATIVE_MECHANIC_PROVIDER_DIVERGENCE:' + declared.implementation_id + '#' + declared.implementation_export);
@@ -164,7 +168,7 @@ export async function planNode({ bundle, sdaRoot }) {
     mechanicExport: native.implementation_export,
     mechanicDeclarations: bundle.mechanics.recordsets[0].map(r => json(r.definition_json)), provenance,
     effectPorts,
-    resolvedTransformationPorts: registry.value.eventPorts.filter(p => p.invocation === 'transformation' && p.providerExport === native.implementation_export && path.posix.join(registry.value.providerModuleRoot, p.providerModule) === native.implementation_id).map(p => p.platformCapabilityId) });
+    resolvedTransformationPorts: interfaceAuthority.portBindings.filter(b => b.configuration?.transformationAuthorityRef).map(b => b.platformCapabilityId) });
   const files = provider.render({ repositoryRoot: sdaRoot, workspaceRoot: path.posix.dirname(workspace.source_path), capabilityId,
     interfaceAuthority, query: { authorityGraph: { scenarios, executionAuthorities } } });
   const contractCatalog = documentAt(interfaces, interfaces.value.contractCatalog);
@@ -181,7 +185,7 @@ export async function planNode({ bundle, sdaRoot }) {
     contracts[id] = { schemaRef: source.source_path, schemaId: source.value.$id, schemaDigest: hash(JSON.stringify(source.value)).slice(7), schema: source.value };
     contractSources.push({ id, source });
   }
-  const admission = one(registry.value.contractAdmissions.filter(a => a.platformCapabilityId === interfaces.value.contractValidatorCapabilityId && a.kind === 'direct'), 'REAL_CONTRACT_ADMISSION');
+  const admission = one(registry.value.contractAdmissions.filter(a => a.platformCapabilityId === interfaces.value.contractValidatorCapabilityId && a.kind === 'direct'), 'REAL_CONTRACT_ADMISSION_' + target);
   const admissionModule = path.posix.join(registry.value.providerModuleRoot, admission.providerModule);
   const { JsonSchemaTypeGraphBuilder } = await load('artifacts/tools/dist/projection/ir/json-schema-type-graph-builder.js');
   const { TargetProjectionGraphBuilder } = await load('artifacts/tools/dist/projection/ir/target-projection-graph-builder.js');

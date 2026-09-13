@@ -1,4 +1,4 @@
--- read-capability-authority.sql
+﻿-- read-capability-authority.sql
 --
 -- Declares `read-capability-authority`: the read step of the long-form
 -- embodiment composition. Its outcome is the transportable authority
@@ -12,7 +12,7 @@ SET @trgCur = CURSOR FOR SELECT QUOTENAME(s.name)+'.'+QUOTENAME(t.name) FROM sys
 OPEN @trgCur; FETCH NEXT FROM @trgCur INTO @trg; WHILE @@FETCH_STATUS=0 BEGIN EXEC(N'DROP TRIGGER '+@trg); FETCH NEXT FROM @trgCur INTO @trg; END CLOSE @trgCur; DEALLOCATE @trgCur;
 BEGIN TRANSACTION;
 GO
-DECLARE @request nvarchar(max)=N'{"$schema":"https://json-schema.org/draft/2020-12/schema","$id":"https://schemas.agentic-harness.local/contracts/construct-embodiment-plan-request.v1.schema.json","title":"Construct Embodiment Plan Request","type":"object","additionalProperties":false,"required":["capabilityId"],"properties":{"capabilityId":{"type":"string","minLength":1},"scenarioId":{"type":"string","minLength":1},"target":{"type":"string","enum":["node"]}}}';
+DECLARE @request nvarchar(max)=N'{"$schema":"https://json-schema.org/draft/2020-12/schema","$id":"https://schemas.agentic-harness.local/contracts/construct-embodiment-plan-request.v1.schema.json","title":"Construct Embodiment Plan Request","type":"object","additionalProperties":false,"required":["capabilityId"],"properties":{"capabilityId":{"type":"string","minLength":1},"scenarioId":{"type":"string","minLength":1},"target":{"type":"string","enum":["node","python","csharp"]}}}';
 DECLARE @declaration nvarchar(max)=N'{"$schema":"https://json-schema.org/draft/2020-12/schema","$id":"https://schemas.agentic-harness.local/contracts/capability-authority-declaration.v1.schema.json","title":"Capability Authority Declaration","type":"object","additionalProperties":false,"required":["contractId","capabilityId","scenarioId","target","snapshotId","projectionDigest"],"properties":{"contractId":{"const":"capability-authority-declaration.v1"},"capabilityId":{"type":"string","minLength":1},"scenarioId":{"type":"string","minLength":1},"target":{"type":"string","minLength":1},"snapshotId":{"type":"string","minLength":1},"projectionDigest":{"type":"string","minLength":1},"viewDefinitionDigest":{"type":"string"},"authority":{"type":"object"},"closure":{"type":"object"},"mechanics":{"type":"object"}}}';
 EXEC model.scaffold_estate_provider_capability
   @capability_id=N'read-capability-authority',
@@ -23,3 +23,4 @@ EXEC model.scaffold_estate_provider_capability
   @description=N'Read a capability''s retained authority as a declaration';
 ROLLBACK TRANSACTION;
 -- To install, replace the ROLLBACK above with COMMIT and re-run.
+
