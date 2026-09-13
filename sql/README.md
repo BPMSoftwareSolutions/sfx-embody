@@ -81,3 +81,16 @@ against the current model produced three migrations
 `restore-equity-normalize-expression.sql`). The last was preflighted
 uncommitted — `DISPOSITION terminated` — then installed and confirmed through
 `sfx capability invoke`.
+
+## Composing capabilities
+
+A capability composes another capability by declaring an `invoke-scenario`
+operation whose target is a Scenario in another capability. The closure, the
+declaration view and the planner carry the target's feature, Ports and
+Transformations; this is data only. `compose-resolve-equity-market-price-evidence.sql`
+is the working proof. `docs/research/capability-composition/README.md` records the
+boundary: **drop-in** composition works (the invoking state equals the target's
+input contract and the target's outcome equals what follows), while
+**adapter** composition (slicing a caller carrier around a child invocation) is not
+yet expressible, and a child's `rejected` disposition currently fails the parent.
+

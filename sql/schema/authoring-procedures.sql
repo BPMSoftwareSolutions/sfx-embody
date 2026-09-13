@@ -195,16 +195,15 @@ BEGIN
     DELETE crs FROM model.capability_root_scenario crs WHERE crs.capability_version_pk IN (SELECT capability_version_pk FROM model.capability_version WHERE capability_pk=@priorCapPk);
     DELETE cs FROM model.capability_scenario cs WHERE cs.capability_pk=@priorCapPk;
     DELETE oc FROM model.observable_condition oc WHERE oc.owner_definition_pk=@priorCapSod;
-    UPDATE model.capability SET feature_pk=NULL WHERE capability_pk=@priorCapPk;
     DELETE fs FROM model.feature_scenario fs WHERE fs.feature_version_pk IN (SELECT fv.feature_version_pk FROM model.feature_version fv JOIN model.feature f ON f.feature_pk=fv.feature_pk WHERE f.feature_id=@CapabilityId);
     DELETE ecf FROM model.estate_capability_feature ecf WHERE ecf.capability_pk=@priorCapPk;
     DELETE fv FROM model.feature_version fv WHERE fv.feature_pk IN (SELECT feature_pk FROM model.feature WHERE feature_id=@CapabilityId);
-    DELETE f FROM model.feature f WHERE f.feature_id=@CapabilityId;
     DELETE sv FROM model.scenario_version sv WHERE sv.scenario_pk=@priorScnPk;
     DELETE s FROM model.scenario s WHERE s.capability_pk=@priorCapPk;
     DELETE ec FROM model.estate_capability ec WHERE ec.capability_pk=@priorCapPk;
     DELETE cvv FROM model.capability_version cvv WHERE cvv.capability_pk=@priorCapPk;
     DELETE cc FROM model.capability cc WHERE cc.capability_pk=@priorCapPk;
+    DELETE f FROM model.feature f WHERE f.feature_id=@CapabilityId;
     -- Superseded definitions and any pre-existing source rows are left in place:
     -- the read path selects the latest definition per semantic object, and this
     -- authoring surface writes no source rows. Deleting them would require
@@ -326,7 +325,15 @@ BEGIN
   SELECT @capNs=namespace_pk FROM model.identity_namespace WHERE namespace_kind='CAPABILITY' AND namespace_id=N'sidefx:capabilities';
   SELECT @scenarioNs=namespace_pk FROM model.identity_namespace WHERE namespace_kind='SCENARIO' AND namespace_id=@ownedCapNs;
 
-  INSERT model.capability (namespace_pk, capability_id, semantic_object_pk, object_kind) VALUES (@capNs, @capId, @capSo, 'CAPABILITY'); SET @capPk = SCOPE_IDENTITY();
+  -- The canonical feature object exists before the capability: model.capability.feature_pk
+  -- is NOT NULL and references it, and feature_version references the capability.
+  DECLARE @featureNs bigint = (SELECT namespace_pk FROM model.identity_namespace WHERE namespace_kind='FEATURE' AND namespace_id=N'sidefx:features');
+  IF @featureNs IS NULL BEGIN INSERT model.identity_namespace (namespace_kind, namespace_id) VALUES ('FEATURE', N'sidefx:features'); SET @featureNs=SCOPE_IDENTITY(); END
+  SELECT @featSo = semantic_object_pk FROM model.semantic_object WHERE object_kind='FEATURE' AND namespace_pk=@featureNs AND declared_id=@capId;
+  IF @featSo IS NULL BEGIN INSERT model.semantic_object (object_kind, namespace_pk, declared_id) VALUES ('FEATURE', @featureNs, @capId); SET @featSo=SCOPE_IDENTITY(); END
+  INSERT model.feature (namespace_pk, feature_id, semantic_object_pk, object_kind) VALUES (@featureNs, @capId, @featSo, 'FEATURE'); SET @featPk=SCOPE_IDENTITY();
+
+  INSERT model.capability (namespace_pk, capability_id, semantic_object_pk, object_kind, feature_pk) VALUES (@capNs, @capId, @capSo, 'CAPABILITY', @featPk); SET @capPk = SCOPE_IDENTITY();
   INSERT model.capability_version (capability_pk, semantic_object_pk, semantic_object_definition_pk, definition_digest, name, object_kind, _owner_definition_pk, _canonical_pointer)
     VALUES (@capPk, @capSo, @capSod, @d_capDef, @capId, 'CAPABILITY', @capSod, N''); SET @capVer = SCOPE_IDENTITY();
   INSERT model.estate_capability (estate_model_pk, capability_pk, capability_version_pk, semantic_object_definition_pk) VALUES (@model, @capPk, @capVer, @capSod);
@@ -428,10 +435,6 @@ BEGIN
     WHERE n.namespace_id=@ownedCapNs AND s.declared_id=N'message-delivered-to-standard-output' AND d.definition_digest=@d_cond;
 
   -- Canonical feature (retained binding + parsed declaration) and generation membership.
-  DECLARE @featureNs bigint = (SELECT namespace_pk FROM model.identity_namespace WHERE namespace_kind='FEATURE' AND namespace_id=N'sidefx:features');
-  IF @featureNs IS NULL BEGIN INSERT model.identity_namespace (namespace_kind, namespace_id) VALUES ('FEATURE', N'sidefx:features'); SET @featureNs=SCOPE_IDENTITY(); END
-  SELECT @featSo = semantic_object_pk FROM model.semantic_object WHERE object_kind='FEATURE' AND namespace_pk=@featureNs AND declared_id=@capId;
-  IF @featSo IS NULL BEGIN INSERT model.semantic_object (object_kind, namespace_pk, declared_id) VALUES ('FEATURE', @featureNs, @capId); SET @featSo=SCOPE_IDENTITY(); END
   SET @env = N'{"address":{"id":"' + @capId + N'","kind":"FEATURE","namespace":"sidefx:features"},"format":"sidefx-semantic-definition.v1","semantics":{"content_digest":"' + LOWER(CONVERT(varchar(64), @d_feat, 2)) + N'","source_class":"WORKSHOP","source_path":"features/' + @capId + N'.feature"}}';
   SET @envBytes = CONVERT(varbinary(max), CONVERT(varchar(max), (@env) COLLATE Latin1_General_100_BIN2_UTF8)); SET @d_featRet = HASHBYTES('SHA2_256', @envBytes);
   IF NOT EXISTS (SELECT 1 FROM source.content_object WHERE content_digest=@d_featRet) INSERT source.content_object (content_digest, content_bytes, byte_length) VALUES (@d_featRet, @envBytes, DATALENGTH(@envBytes));
@@ -450,7 +453,6 @@ BEGIN
   END
   IF NOT EXISTS (SELECT 1 FROM model.estate_definition WHERE estate_model_pk=@model AND semantic_object_definition_pk=@featSodP)
     INSERT model.estate_definition (estate_model_pk, semantic_object_definition_pk) VALUES (@model, @featSodP);
-  INSERT model.feature (namespace_pk, feature_id, semantic_object_pk, object_kind) VALUES (@featureNs, @capId, @featSo, 'FEATURE'); SET @featPk=SCOPE_IDENTITY();
   INSERT model.feature_version (feature_pk, capability_pk, semantic_object_pk, semantic_object_definition_pk, definition_digest, name, source_profile, object_kind, _owner_definition_pk, _canonical_pointer)
     VALUES (@featPk, @capPk, @featSo, @featSodR, @d_featRet, @capId, 'retained-feature-binding.v1', 'FEATURE', @featSodR, N''); SET @featVerR=SCOPE_IDENTITY();
   INSERT model.feature_version (feature_pk, capability_pk, semantic_object_pk, semantic_object_definition_pk, definition_digest, name, source_profile, object_kind, _owner_definition_pk, _canonical_pointer)
