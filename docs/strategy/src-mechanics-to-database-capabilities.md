@@ -91,24 +91,32 @@ The 191 declared mechanics include the exact operations `src/` performs by hand:
 
 The 74 providers declare which mechanics they implement
 (`provider_mechanic_implementation` = 314), and the 6 profiles group them per
-language. The 55 slots declare what each capability needs
-(`slot_port_requirement` = 41, plus `slot_mechanic_requirement` and
-`slot_profile_requirement`). The 1,157 fixtures and 597 observable conditions are
-the expectations the verification code re-expresses.
+language. The 55 slots declare 41 port requirements (`slot_port_requirement`);
+`slot_mechanic_requirement` currently has 0 rows and `provider_port_implementation`
+is 0, so the port → mechanic → provider chain is not yet complete in rows. The
+1,157 fixtures and 597 observable conditions are committed expectations.
 
-What is missing is the drive: `provider_binding_scope` and `provider_binding` are
-empty. The model knows every mechanic, every implementation, every slot
-requirement and every expectation. It does not know **which provider fills which
-slot** — and that selection is exactly what `src/` hardcodes, keyed on `'node'`.
+Two things are missing:
+
+1. **The drive.** `provider_binding_scope` and `provider_binding` are empty. The
+   model does not know *which provider fills which slot* — and that selection is
+   exactly what `src/` hardcodes, keyed on `'node'`.
+2. **Per-target coverage for some mechanics.** All 38
+   `provider_capability_implementation` rows are Node, and provider coverage per
+   mechanic is uneven (e.g. `consumer-projection-publication` is Node-only;
+   `declared-query-evaluation` has no Python provider). Where a target has no
+   implementation, a provider-implementation row is also required.
 
 **The migration is therefore not "reimplement the runtime as data." The model is
-already the runtime. It is to populate the drive and delete the shadow.**
+already the runtime for the mechanics it covers. It is to populate the drive,
+cover the gaps, and delete the shadow.**
 
 ## 4. Disposition: `src/` → declared mechanic → declared provider
 
 | `src/` group | Declared mechanics | Declared providers (example) | Replaced by |
 | --- | --- | --- | --- |
-| Reads | `declared-query-evaluation`, `json-reading`, `contract-document-reading`, `query-cli-delivery`, `query-command-dispatch` | `ScenarioKernel.NodePlatform.Interface.JsonQueryCli`, `…Interface.JsonCli` | declared query rows + the carrier's query runner |
+| Reads — database SQL (`read-authority`, `list-capabilities`) | *none declared* | — | a new declared SQL-execution operation + provider (Phase 1) |
+| Reads — admitted content (`read-capability-meaning`, `read-circuit-media`, `read-workspace-config`) | `json-reading`, `contract-document-reading`, `query-cli-delivery`, `query-command-dispatch` | `ScenarioKernel.NodePlatform.Interface.JsonCli` | declared reads over admitted documents |
 | Delivery / carrier | `cli-delivery` | `ScenarioKernel.NodePlatform.Interface.JsonCli`, `scenario_kernel.platform.consumer` | one carrier + a declared delivery policy |
 | Delivery policy (fs-write / memory-only) | `authorized-file-system-plan-execution`, `bounded-declared-resource-observation`, `post-effect-absence-proof` | per profile | `processEvidence` as a policy row |
 | Preparation | `schema-admission`, `authority-resolution`, `contract-validation`, `governed-feature-reference-resolution` | `…Schema.JsonSchemaContractAdmission`, `ScenarioKernel.Adapters.Schema.JsonSchemaContractValidator` | binding rows + declared admission |
@@ -121,11 +129,22 @@ already the runtime. It is to populate the drive and delete the shadow.**
 
 None of these requires a kernel change. Each is a row set.
 
+Note on `declared-query-evaluation`: it is **not** the database read. Its provider
+(`query-cli.mjs:22`, `runQuery`) evaluates a declared query against an
+already-admitted JSON document — see Phase 1.
+
 ## 5. The migration path
 
 Ordered so each phase is independently reviewable and each is a
 `ROLLBACK`-defaulted migration under `sql/migrations/`. Lifecycle:
 [AGENTS.md](../../AGENTS.md), [sql/README.md](../../sql/README.md).
+
+Each phase names the canonical `.feature` draft that declares the behavior it
+implements. All drafts are in
+[`src-mechanics-to-database-capabilities/`](src-mechanics-to-database-capabilities/)
+with status and rationale in its
+[`README.md`](src-mechanics-to-database-capabilities/README.md), and they are
+summarized at the end of this section.
 
 ### Phase 0 — Baseline (evidence, no change)
 
@@ -135,12 +154,24 @@ this. No code and no rows change.
 
 ### Phase 1 — Reads
 
-Declare the queries the readers run (starting with the inline `LIST_SQL`) beside
-`capability-embodiment.sql`, and let the carrier execute *any* declared query
-generically. The five read files collapse to one generic runner plus rows.
+There are two distinct reads, not one:
 
-- Rows: a query per read, addressed by id, executed by `declared-query-evaluation`.
+- **Database reads** (`read-authority.mjs`, `list-capabilities.mjs` — including the
+  inline `LIST_SQL`). These execute SQL against the selected estate. This is **not**
+  `declared-query-evaluation`: that provider (`query-cli.mjs:22`, `runQuery`)
+  evaluates a declared expression against an already-admitted JSON document and
+  never touches SQL. The SQL-execution operation must itself be declared — a
+  mechanic and a provider — before the readers can retire.
+- **Admitted-content reads** (`read-capability-meaning.mjs`,
+  `read-circuit-media.mjs`, `read-workspace-config.mjs`). These read
+  already-retained JSON and map to `json-reading` / `contract-document-reading`.
+
+- Rows: declare the database read operation + provider; declare the admitted-content
+  reads against existing mechanics; move `LIST_SQL` beside
+  `capability-embodiment.sql`.
 - Verify: `sfx capability reveal` and list/find outputs byte-identical to Phase 0.
+- Declared behavior: [`read-estate-query.feature`](src-mechanics-to-database-capabilities/read-estate-query.feature)
+  (NEW capability `read-estate-query`; the read is not `declared-query-evaluation`).
 
 ### Phase 2 — Carrier and delivery policy
 
@@ -152,6 +183,8 @@ with two literals.
 - Rows: delivery policy per governed boundary.
 - Verify: the memory-only proof and the write delivery both hold; no behavioral
   diff.
+- Declared behavior: [`deliver-governed-capability-invocation.feature`](src-mechanics-to-database-capabilities/deliver-governed-capability-invocation.feature)
+  (NEW capability `deliver-governed-capability-invocation`).
 
 ### Phase 3 — Provider bindings (the drive)
 
@@ -165,6 +198,8 @@ is the phase that lets the carrier resolve a provider from a row rather than fro
   `provider_binding(scope, slot, provider_definition, ordinal)`.
 - Verify: a diagnostic returns the resolved provider per slot; node execution and
   all 17 memory fixtures unchanged.
+- Declared behavior: [`python-csharp-embodiment/resolve-provider-slot-bindings.feature`](python-csharp-embodiment/resolve-provider-slot-bindings.feature)
+  (NEW capability `resolve-provider-slot-bindings`; shared with the cross-target path).
 
 ### Phase 4 — Projections
 
@@ -176,17 +211,37 @@ become one projection over two graphs.
 
 - Rows: projection per output format/graph.
 - Verify: rendered output matches Phase 0 for each format.
+- Declared behavior: [`project-capability-revelation.feature`](src-mechanics-to-database-capabilities/project-capability-revelation.feature)
+  (UPDATE `project-capability-revelation`) and
+  [`project-capability-circuit.feature`](src-mechanics-to-database-capabilities/project-capability-circuit.feature)
+  (NEW `project-capability-circuit`).
 
 ### Phase 5 — Verification and expectations
 
-The 1,157 fixtures and 597 observable conditions are already committed. Point the
-verification runs at them through `bounded-projected-fixture-execution` and retire
-the per-file assertion code. Integrity observation (`observable-view-state`,
-`ordered-findings`, `deterministic-finding-order`) becomes declared evaluation.
+The 1,157 fixtures and 597 observable conditions are committed, but the current
+verification is **not** equivalent to them, and the correspondence is not yet
+established:
 
-- Rows: fixture/obligation references (no new expectations need authoring for the
-  current estate; they exist).
-- Verify: `verify:estate` / `verify:memory` unchanged.
+- `verify-native-projection.mjs` applies a 9-entry textual **mutation set** to each
+  emitted body (`sfxEquals(`→`sfxGreaterThan(`, `sfxTruthy(`→`Boolean(`, …) plus a
+  200-vector differential corpus and reference / prototype / `-0` / `undefined`
+  observation. It checks that the lowering agrees with the selected provider — a
+  code witness, not a fixture row.
+- `verify-contract-fidelity.mjs` independently validates projected contracts with
+  Ajv and a TypeScript compiler witness; the file itself records that the vector
+  corpus is "test evidence, never contract authority."
+
+Neither has a demonstrated mapping onto `model.fixture` /
+`model.observable_condition`. Establish that mapping (or author the missing
+fixtures) **before** retiring any assertion code.
+
+- Rows: fixture references for the checks that correspond; new fixtures for the
+  native-mutation and validator/compiler witnesses.
+- Verify: every existing check has a declared counterpart, and `verify:estate` /
+  `verify:memory` pass from rows.
+- Declared behavior: [`resolve-capability-proof-obligations.feature`](src-mechanics-to-database-capabilities/resolve-capability-proof-obligations.feature)
+  (UPDATE `resolve-capability-proof-obligations`, adding `derive-native-mutation-obligations`
+  and `derive-validator-witness-obligations`).
 
 ### Phase 6 — Retire the body generator
 
@@ -196,25 +251,54 @@ generate-and-run triple — `materialize-node`, `consumer-object-provider`,
 with bound providers. `native-expression-projection` is subsumed by the declared
 evaluator.
 
-- Rows: the embodiment plan (already declared via
-  `project-consumer-execution-embodiment-v2`) plus the render/execution bindings.
-- Verify: node `planDigest`/`artifactDigest` and every fixture unchanged; `src/`
-  reduced to the carrier, the generic reader, and the host runtime.
+- Rows: the projected plan carried by
+  `consumer-execution-embodiment-projection-context`, plus the render/execution
+  bindings (see [python-csharp-embodiment.md](python-csharp-embodiment.md) §4 for
+  the real contracts).
+- Verify: node **behavior** unchanged (dispositions, every fixture); the
+  plan/artifact digests change by construction (see §5 M6 of the cross-target
+  strategy) and the new values are verified. `src/` reduced to the carrier, the
+  generic reader, and the host runtime.
+- Declared behavior: [`execute-declared-capability.feature`](src-mechanics-to-database-capabilities/execute-declared-capability.feature)
+  (NEW `execute-declared-capability`).
+
+### Canonical feature drafts
+
+Every capability this path creates or changes has a canonical draft under
+[`src-mechanics-to-database-capabilities/`](src-mechanics-to-database-capabilities/).
+Status is **NEW** (the capability does not exist in the selected model) or
+**UPDATE** (it exists and its declared meaning must change).
+
+| Draft | Status | Phase | Capability |
+| --- | --- | --- | --- |
+| [`read-estate-query.feature`](src-mechanics-to-database-capabilities/read-estate-query.feature) | NEW | 1 | `read-estate-query` |
+| [`deliver-governed-capability-invocation.feature`](src-mechanics-to-database-capabilities/deliver-governed-capability-invocation.feature) | NEW | 2 | `deliver-governed-capability-invocation` |
+| [`resolve-provider-slot-bindings.feature`](python-csharp-embodiment/resolve-provider-slot-bindings.feature) | NEW | 3 | `resolve-provider-slot-bindings` (shared with the cross-target path) |
+| [`project-capability-revelation.feature`](src-mechanics-to-database-capabilities/project-capability-revelation.feature) | UPDATE | 4 | `project-capability-revelation` |
+| [`project-capability-circuit.feature`](src-mechanics-to-database-capabilities/project-capability-circuit.feature) | NEW | 4 | `project-capability-circuit` |
+| [`resolve-capability-proof-obligations.feature`](src-mechanics-to-database-capabilities/resolve-capability-proof-obligations.feature) | UPDATE | 5 | `resolve-capability-proof-obligations` |
+| [`execute-declared-capability.feature`](src-mechanics-to-database-capabilities/execute-declared-capability.feature) | NEW | 6 | `execute-declared-capability` |
+
+The drafts state proposed contract identities that are not yet declared rows; they
+become real when the migration is authored. Every `Scenario` in a draft is behavior
+the corresponding phase must satisfy and verify.
 
 ## 6. Flywheel opportunities
 
-1. **Declare once, reuse everywhere.** A mechanic declared once (e.g.
-   `declared-query-evaluation`) serves every capability that reads. Today each read
-   instance is code; after Phase 1 each is a row referencing a shared mechanic.
+1. **Declare once, reuse everywhere.** A mechanic declared once (e.g. the database
+   read operation Phase 1 must declare) serves every capability that reads. Today
+   each read instance is code; after Phase 1 each is a row referencing a shared
+   mechanic.
 2. **Provider catalog compounding.** 74 providers already declare 314 mechanic
    implementations. Every new provider resolves the next capability's requirements
    against the catalog instead of a fresh audit.
 3. **Selection as data.** After Phase 3, changing which provider serves a slot, or
    adding a target, is a binding row. The same change serves every capability that
    uses that slot — the reuse is structural, not copied.
-4. **Expectations already paid for.** 1,157 fixtures and 597 conditions mean the
-   verification flywheel does not begin from zero; it begins by pointing at rows
-   that already exist.
+4. **Expectations partly paid for.** 1,157 fixtures and 597 conditions exist, but
+   the native-mutation and validator/compiler witnesses have no declared
+   counterpart yet. Phase 5 begins by establishing that correspondence, then by
+   authoring the few missing rows.
 5. **The cross-project flywheel.** The SDA language runtimes repeat the same
    mechanics per language. Once the mechanic/binding model is the single source,
    those repetitions become instances of one declared catalog rather than parallel
@@ -287,7 +371,7 @@ JOIN model.blueprint_node bn ON bn.blueprint_node_pk = ps.owner_node_pk
 GROUP BY bn.node_kind;
 -- provider-slot 55
 
--- Per-language providers implement the mechanics.
+-- Per-language provider coverage for a mechanic (cli-delivery has all three; many do not).
 SELECT p.provider_id, m.mechanic_id
 FROM model.provider_mechanic_implementation i
 JOIN model.provider_definition pd ON pd.provider_definition_pk = i.provider_definition_pk
@@ -298,6 +382,9 @@ WHERE m.mechanic_id = 'cli-delivery';
 -- ScenarioKernel.NodePlatform.Interface.JsonCli (node),
 -- ScenarioKernel.Adapters.Consumer.AdmittedConsumerPlatform (csharp),
 -- scenario_kernel.platform.consumer (python)
+-- By contrast consumer-projection-publication returns node only, and
+-- declared-query-evaluation has no python provider. Establish per-target
+-- requirements before binding.
 ```
 
 Binding shape:
@@ -312,11 +399,38 @@ model.provider_binding(provider_binding_scope_pk, provider_slot_pk, provider_def
                        selection_policy, ordinal)
 ```
 
+### Corrections from review (2026-09-13)
+
+Five claims in the first draft were checked and corrected; they are recorded so the
+team can see the evidence boundary:
+
+1. **Per-target coverage is not established by provider counts.** All 38
+   `provider_capability_implementation` rows are Node; per-mechanic coverage is
+   uneven (`consumer-projection-publication` node-only; `declared-query-evaluation`
+   no Python). Phase 3 must establish requirements per target and may need to
+   author missing implementations.
+2. **The embodiment capability's contracts were misidentified.**
+   `project-consumer-execution-embodiment-v2` takes
+   `consumer-execution-embodiment-projection-context` and returns
+   `projected-consumer-execution-embodiment-candidate`; it does **not** return
+   `consumer-execution-embodiment-plan.v2`. The plan is an admitted input, and no
+   scenario in the model emits that context — its producer is absent.
+3. **`declared-query-evaluation` is not the SQL reader.** `runQuery`
+   (`query-cli.mjs:22`) evaluates a declared expression against an admitted JSON
+   document. Phase 1 declares the database read operation instead of reusing it.
+4. **Fixture totals do not prove verification equivalence.** The native-mutation set
+   and the Ajv/TS-compiler checks have no demonstrated correspondence to
+   `model.fixture` / `model.observable_condition`; Phase 5 establishes it first.
+5. **A plan-form node body changes the digests.** `materialize-node.mjs:301` hashes
+   `{capabilityId, scenarioId, target, resolverDigest, files: body}` and
+   `hash(pretty(body))`; Phase 6 verifies behavior, then verifies new digests.
+
 ## 10. Artifacts
 
 | Purpose | Path |
 | --- | --- |
 | This strategy | `docs/strategy/src-mechanics-to-database-capabilities.md` |
+| Canonical feature drafts | `docs/strategy/src-mechanics-to-database-capabilities/` (6 `.feature` + `README.md`) |
 | Cross-target strategy | `docs/strategy/python-csharp-embodiment.md` |
 | Flywheel precedent | `docs/database-mutation-flywheels.md` |
 | Embodiment capability model | `docs/embodiment-as-capability.md` |
