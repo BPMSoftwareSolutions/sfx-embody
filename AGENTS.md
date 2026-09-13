@@ -1,0 +1,54 @@
+# AGENTS.md
+
+`sfx-embody` materializes executable Capability and Scenario bodies from
+database authority. The database selects the capability, scenario, downstream
+scenarios, transformations, mechanics and provider bindings; the Node
+projection boundary materializes their native bodies.
+
+## The prime rule: meaning is authored in the database
+
+Capabilities are changed by rows, in `.sql`, under `sql/`. Do not change a
+capability's meaning, wiring, contracts, authorities or transformations by
+editing `src/` or `sidefx-database/sql/diagnostics/`. Those are readers.
+
+## The change lifecycle (read `sql/README.md`)
+
+1. **Evidence first.** Establish the working generation for the capability: a
+   readable bundle under `evidence/<capability>/` or an extracted
+   `edited-bundle.json`. A regression is a diff against the generation that
+   worked.
+2. **Author one migration** in `sql/migrations/`: idempotent, drops the
+   `model`/`source` guard triggers inside the script, opens its own
+   `BEGIN TRANSACTION`, ends in `ROLLBACK`, prints result sets.
+3. **Dry-run:** `node scripts/run-migration.mjs sql/migrations/<file>.sql`.
+4. **Preflight the invocation from the uncommitted state:**
+   `node --experimental-vm-modules scripts/invoke-from-transaction.mjs sql/migrations/<file>.sql <capabilityId> <input.json>`.
+   If the disposition is wrong, edit the migration and repeat from 3. Never
+   commit before this passes.
+5. **Install:** flip the final `ROLLBACK TRANSACTION;` to `COMMIT TRANSACTION;`
+   and run `node scripts/run-migration.mjs <committed file>`.
+6. **Verify the installation:** `sfx capability invoke <identity> --input ... --json`.
+7. **Commit** only after 6, one migration per commit.
+
+## Non-negotiables
+
+- Never use `sidefx-database/sql/migrations/run-file.mjs` to install: it wraps
+  its own transaction and silently discards the script's `COMMIT`.
+- Capture `--json` through `cmd /c`; PowerShell 5.1 corrupts native stderr.
+- On the database surface it is *all rows*. No "capsule", "artifact",
+  "retained source" or "projection" vocabulary in migrations.
+- Do not invent provider or kernel behavior to make an invocation pass. If a
+  capability is blocked by a domain concern that only the Node runtime
+  implements, that is a finding, not a reason to edit the kernel.
+
+## Commands
+
+| Command | Purpose |
+| --- | --- |
+| `node scripts/run-migration.mjs <file.sql>` | Run a migration as authored (no outer transaction). |
+| `node --experimental-vm-modules scripts/invoke-from-transaction.mjs <file.sql> <capabilityId> [input.json]` | Preflight: apply uncommitted, invoke, roll back. |
+| `npm run verify:estate` | Regression cases. |
+| `npm run verify:memory` | Retained-fixture parity. |
+| `sfx capability invoke <identity> --input '@file.json' --json` | Real-surface invocation. |
+| `sfx capability observe <identity> --input '@file.json'` | Same execution, streamed telemetry. |
+| `sfx capability reveal <identity> --as meaning --format markdown` | Render retained meaning. |

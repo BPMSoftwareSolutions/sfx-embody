@@ -14,6 +14,7 @@ sfx-embody materializes executable Capability and Scenario bodies from database 
 | --- | --- |
 | src/ | Database reader, materializer, language resolvers, native Reveal and verification |
 | scripts/ | Regression, audit, reporting and baseline commands |
+| sql/ | The database-change authority: installed views and procedures (`sql/schema/`), one-off data migrations (`sql/migrations/`), and the change lifecycle (`sql/README.md`) |
 | tests/ | Resolver regression tests |
 | config/ | Workspace paths and Capability/Scenario selections |
 | embodiments/ | Capability → scenarios → Scenario → language → body and evidence |
@@ -23,6 +24,19 @@ sfx-embody materializes executable Capability and Scenario bodies from database 
 | baselines/ | Frozen original source, bodies and evidence with byte manifests |
 
 Every directory named evidence and every embodiment.receipt.json file is ignored by Git, including those inside Scenarios and frozen baselines. Generated bodies remain version controlled. Verification and audit commands recreate current evidence and receipts locally; historical baseline verification requires its saved local evidence and receipts.
+
+## Database-only change lifecycle
+
+Capability meaning is authored in the database, so every change is a `.sql` migration under `sql/migrations/`, installed and verified without editing the runtime. The process is evidence-first and preflight-verified:
+
+1. capture the working generation (`evidence/<capability>/`),
+2. author one idempotent migration that opens its own transaction and ends in `ROLLBACK`,
+3. dry-run it: `node scripts/run-migration.mjs sql/migrations/<file>.sql`,
+4. preflight the invocation from the uncommitted transaction:
+   `node --experimental-vm-modules scripts/invoke-from-transaction.mjs sql/migrations/<file>.sql <capabilityId> <input.json>`,
+5. install the committed copy, verify with `sfx capability invoke`, then commit.
+
+Read [sql/README.md](sql/README.md) for the rules and why they exist. Agents: the same lifecycle is in [AGENTS.md](AGENTS.md) and the `sidefx-database-change` skill.
 
 [Database invocation investigation](docs/database-direct-invocation.md) follows expanded execution through to live SQL-to-memory invocation. `planNode` produces the same native bytes in memory; `writeNodePlan` is an optional persistence step. The candidate memory loader runs those unchanged bytes and resolves contracts from the in-memory resource map. A restricted-process live proof passed for the provider resolver, and `npm run verify:memory` checks retained-fixture parity across the three configured capabilities. This is a bounded execution proof, not a completed database-native change or capsulization surface.
 

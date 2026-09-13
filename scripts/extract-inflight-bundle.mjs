@@ -1,4 +1,4 @@
-// Extract the exact authority bundle the read path uses from an uncommitted
+﻿// Extract the exact authority bundle the read path uses from an uncommitted
 // rollback experiment, and write it to disk. Nothing is committed.
 //
 //   node --experimental-vm-modules scripts/extract-inflight-bundle.mjs <experiment.sql> <bundle.json> [capabilityId]
@@ -13,7 +13,7 @@ import { pathToFileURL } from 'node:url';
 
 const DATABASE_ROOT = 'C:/lab/sidefx-database';
 const db = (...p) => path.join(DATABASE_ROOT, ...p);
-const experimentFile = process.argv[2] ?? 'docs/sql/scaffold-hello-world.sql';
+const experimentFile = process.argv[2] ?? 'sql/migrations/scaffold-hello-world.sql';
 const bundleFile = process.argv[3] ?? 'evidence/hello-world-sql/inflight-bundle.json';
 const capabilityId = process.argv[4] ?? 'hello-world-sql';
 
@@ -67,3 +67,4 @@ try {
   try { await tx.rollback(); } catch {}
   try { await pool.close(); } catch {}
 }
+

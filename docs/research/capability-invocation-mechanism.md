@@ -1,8 +1,8 @@
-# Capability invocation as the composition mechanism
+﻿# Capability invocation as the composition mechanism
 
 Fork resolved in favor of option 2: a capability must be able to declare that it
 composes another capability, so `observe-governed-http-exchange` (and every other
-domain concern) is used as a capability — not re-bound as a platform port.
+domain concern) is used as a capability â€” not re-bound as a platform port.
 
 ## Why the current model cannot express it
 
@@ -12,7 +12,7 @@ domain concern) is used as a capability — not re-bound as a platform port.
 - The existing cross-capability vehicle, `sda-projected-capability-invocation-port.v2`,
   is a platform port whose registry entry has:
   - `invocation: configuration` (planner executes only `transformation`/`effects`), and
-  - **no provider module** — nothing to invoke even if reclassified.
+  - **no provider module** â€” nothing to invoke even if reclassified.
 
 So the composition concern was absorbed by the Node runtime instead of being a
 declared, language-portable mechanism.
@@ -33,13 +33,13 @@ capability (no new platform port).
 
 ### Planner (runtime)
 
-1. `src/materialize-node.mjs` — when planning a capability, if a declared operation
+1. `src/materialize-node.mjs` â€” when planning a capability, if a declared operation
    targets another capability, plan that target capability too and carry its body
    modules into the current body.
-2. `src/resolvers/node/consumer-object-provider.mjs` — for a cross-capability
+2. `src/resolvers/node/consumer-object-provider.mjs` â€” for a cross-capability
    `invoke-scenario`, emit a dependency that invokes the target capability's
    scenario class, mapping the declared contracts.
-3. `sql/diagnostics/scenario-closure.sql` (or a sibling view) — expose the
+3. `sql/diagnostics/scenario-closure.sql` (or a sibling view) â€” expose the
    cross-capability target so the planner sees it as a declared edge.
 
 ### Honesty constraint
@@ -58,7 +58,8 @@ target capability's provider.
 
 ## Status
 
-A (union-root schema → object schema) is delivered as durable SQL
-(`docs/sql/ensure-contract-object-root-schema.sql`, commit `6054168`), and
+A (union-root schema â†’ object schema) is delivered as durable SQL
+(`sql/migrations/ensure-contract-object-root-schema.sql`, commit `6054168`), and
 `observe-governed-http-exchange` invokes through the normal pipeline. B (this
 mechanism) is a platform-runtime change and is the open work item.
+

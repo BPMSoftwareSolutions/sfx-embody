@@ -1,6 +1,6 @@
-{
+﻿{
   "observedAt": "2026-09-12T08:47:29.136Z",
-  "sqlFile": "docs/sql/scaffold-hello-world.sql",
+  "sqlFile": "sql/migrations/scaffold-hello-world.sql",
   "sqlDigest": "sha256:87d78b7533a55a6a1e9fdd0c858a1b14f78a835a721050492a57795a05402bbe",
   "proofs": [
     {
@@ -401,7 +401,7 @@
     },
     {
       "capabilityId": "hello-world-sql-repeat",
-      "message": "Hello SQL's 世界",
+      "message": "Hello SQL's ä¸–ç•Œ",
       "scope": "SQL_SESSION_LOCAL_CANDIDATE_ONLY",
       "rollbackObserved": true,
       "resultsets": [
@@ -419,8 +419,8 @@
             "event_responsibility": "Write the database-defined message through a standard-output mechanic",
             "output_contract_id": "hello-world-sql-repeat-write-receipt.v1",
             "output_schema": "{\"$schema\":\"https://json-schema.org/draft/2020-12/schema\",\"type\":\"object\",\"required\":[\"text\",\"bytesWritten\"],\"additionalProperties\":false,\"properties\":{\"text\":{\"type\":\"string\"},\"bytesWritten\":{\"type\":\"integer\",\"minimum\":0}}}",
-            "message": "Hello SQL's 世界",
-            "operations": "[{\"scenario_id\":\"hello-world-sql-repeat\",\"ordinal\":1,\"operation_kind\":\"invoke-port\",\"port_id\":\"hello-world-sql-repeat-stdout-port\",\"required_mechanic\":\"Write supplied text to standard output; report completion or failure of the actual write\",\"request_json\":\"{\\\"text\\\":\\\"Hello SQL's 世界\\\"}\",\"bound_platform_capability_id\":null,\"provider_module\":null,\"provider_export\":null}]",
+            "message": "Hello SQL's ä¸–ç•Œ",
+            "operations": "[{\"scenario_id\":\"hello-world-sql-repeat\",\"ordinal\":1,\"operation_kind\":\"invoke-port\",\"port_id\":\"hello-world-sql-repeat-stdout-port\",\"required_mechanic\":\"Write supplied text to standard output; report completion or failure of the actual write\",\"request_json\":\"{\\\"text\\\":\\\"Hello SQL's ä¸–ç•Œ\\\"}\",\"bound_platform_capability_id\":null,\"provider_module\":null,\"provider_export\":null}]",
             "scaffold_status": "SESSION_LOCAL_CANDIDATE_WITH_OPEN_SLOTS"
           }
         ],
@@ -428,7 +428,7 @@
           {
             "result_set": "2_CHANGE",
             "candidate_id": "hello-world-sql-repeat",
-            "candidate_message": "Hello SQL's 世界",
+            "candidate_message": "Hello SQL's ä¸–ç•Œ",
             "proposed_change": "CREATE_SESSION_LOCAL_SCAFFOLD",
             "existing_selected_identity_count": 0,
             "transaction_action": "ROLLBACK",
@@ -813,3 +813,4 @@
     "managedPromotionPrerequisites": 0
   }
 }
+

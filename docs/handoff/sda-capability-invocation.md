@@ -1,4 +1,4 @@
-# Handoff to the SDA team — Capability invocation as the composition mechanism
+﻿# Handoff to the SDA team â€” Capability invocation as the composition mechanism
 
 Status: **work item, not yet implemented.** This document is the authoritative
 brief for the platform-runtime change. It supersedes the earlier research note
@@ -6,9 +6,9 @@ brief for the platform-runtime change. It supersedes the earlier research note
 
 ## 1. The ask, in one sentence
 
-Teach the runtime that a capability may **compose another capability** — resolve a
+Teach the runtime that a capability may **compose another capability** â€” resolve a
 declared target capability, load its already language-resolved body, and execute
-it — so that `observe-governed-http-exchange` (and every other domain concern) is
+it â€” so that `observe-governed-http-exchange` (and every other domain concern) is
 used **as a capability**, not re-bound as a Node-only platform port.
 
 ## 2. Why this is the right change (and the evidence)
@@ -28,7 +28,7 @@ else comes from data.** Today that is not true.
   `transformation` and `effects`.
 - Composition currently rides on `sda-projected-capability-invocation-port.v2`, a
   platform port whose registry entry is `invocation: configuration` and declares
-  **no provider module** — so nothing executes it.
+  **no provider module** â€” so nothing executes it.
 
 Consequence: capabilities that delegate to another capability are silently
 Node-only while claiming portability. The composition concern belongs in the
@@ -39,7 +39,7 @@ behavior remaining data + provider.
 
 - `observe-governed-http-exchange` is a real capability (10 scenarios); it reveals
   and now invokes through the normal pipeline. Commit `6054168` fixes its input
-  contract schema (`docs/sql/ensure-contract-object-root-schema.sql`) — the root
+  contract schema (`sql/migrations/ensure-contract-object-root-schema.sql`) â€” the root
   was a union with no `type: object`.
 - The three capabilities that bind `sda-governed-http-exchange-port.v1` directly
   are `observe-governed-http-exchange`, `resolve-equity-market-price-evidence`,
@@ -92,7 +92,7 @@ provider.
 1. Declare `resolve-equity-market-price-evidence` (and `speech-provider`) as
    composing `observe-governed-http-exchange`, mapping
    `observe-governed-http-exchange-input.v1` / `governed-http-exchange-evidence.v1`.
-2. `sfx capability invoke resolve-equity-market-price-evidence --input …` executes
+2. `sfx capability invoke resolve-equity-market-price-evidence --input â€¦` executes
    the exchange **through the `observe-governed-http-exchange` capability**.
 3. `sfx capability reveal` on both shows the declared composition edge.
 4. The Node runtime carries no HTTP logic; the composition resolves identically
@@ -101,19 +101,19 @@ provider.
 
 ## 6. How to verify today
 
-- `sfx capability reveal observe-governed-http-exchange` — story/promise/contracts.
-- `sfx capability invoke observe-governed-http-exchange --input @file.json` —
+- `sfx capability reveal observe-governed-http-exchange` â€” story/promise/contracts.
+- `sfx capability invoke observe-governed-http-exchange --input @file.json` â€”
   executes to a domain disposition (e.g. `rejected` for an unauthorized endpoint),
   proving the pipeline runs the capability.
 
 ## 7. Rubric basis
 
-- §3 authority: builder intent — kernels resolve language only.
-- §4 necessary now: composition is required to run these capabilities honestly.
-- §8 semantic identity: capability invocation is a declared relationship, not a
+- Â§3 authority: builder intent â€” kernels resolve language only.
+- Â§4 necessary now: composition is required to run these capabilities honestly.
+- Â§8 semantic identity: capability invocation is a declared relationship, not a
   platform port.
-- §5/§9: contribution 3, evidence 2 (observed Node-only). Under the current state
-  the SQL→CLI flywheel only works on Node.
+- Â§5/Â§9: contribution 3, evidence 2 (observed Node-only). Under the current state
+  the SQLâ†’CLI flywheel only works on Node.
 
 ## 8. Notes / risks
 
@@ -125,3 +125,4 @@ provider.
   kinds are the ones the Node loader special-cases and the planner omits. After
   capability invocation lands, review those 29 ports (inventory in
   `docs/research/platform-mechanic-honesty.md`) for migration to capabilities.
+

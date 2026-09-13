@@ -1,6 +1,6 @@
-# SQL → CLI Hello World: gap resolution
+﻿# SQL â†’ CLI Hello World: gap resolution
 
-2026-09-12 · Findings and minimal change set. The end-to-end loop does not run yet;
+2026-09-12 Â· Findings and minimal change set. The end-to-end loop does not run yet;
 this records exactly what blocks it, with observed evidence, and the smallest
 change that closes each gap.
 
@@ -8,7 +8,7 @@ change that closes each gap.
 
 Run from `C:/lab/repos/sfx-embody` against the live `sidefx` database
 (`bpmsoftwaresolutions`). The existing greeting capability was invoked through the
-unchanged CLI to prove the read → plan → execute path is live:
+unchanged CLI to prove the read â†’ plan â†’ execute path is live:
 
 ```powershell
 sfx capability invoke say-hello-world --input '{"contractId":"hello-world-request.v1","payload":{}}'
@@ -18,7 +18,7 @@ It returned `disposition: terminated` with outcome
 `{"contractId":"hello-world-greeting.v1","payload":{"message":"Hello, World!"}}`
 on stdout. So the CLI and runtime are available; the blockers are specific.
 
-## Blocker A — the database working representation is not editable
+## Blocker A â€” the database working representation is not editable
 
 The candidate SQL scaffold wrote session-local temp tables. A separate CLI
 connection cannot see those, and the intended working data lives in tables that
@@ -54,24 +54,24 @@ bypass the playground path; do not weaken seal protection"): add a **mutable
 working store** that the runtime reads, separate from the sealed `source`/`model`
 tables.
 
-1. `docs/sql/workshop-hello-world.sql` — idempotently creates:
+1. `sql/migrations/workshop-hello-world.sql` â€” idempotently creates:
    - `workshop.capability_definition(capability_id PK, root_scenario_id, operation_kind, message, updated_at)`
    - grants `SELECT` to `sidefx_reader`
    - `MERGE` the `hello-world-sql` row with `@Message`, then `COMMIT`.
-2. `src/read-workshop-authority.mjs` — reads the committed working row for the
+2. `src/read-workshop-authority.mjs` â€” reads the committed working row for the
    selected capability and returns a working-definition bundle.
-3. `src/invoke-database-capability.mjs` — in the `invoke`/`observe` path, fall
+3. `src/invoke-database-capability.mjs` â€” in the `invoke`/`observe` path, fall
    back to the workshop reader when `readAuthority` reports `CAPABILITY_NOT_FOUND`.
    Return `authoritySource: 'WORKSHOP'`, `workingRepresentation: 'MUTABLE'`,
    `managedAdmission: 'NOT_REQUESTED'`. The sealed estate path is unchanged.
 4. `src/read-authority.mjs` is untouched, so sealed-capsule resolution and its
    guards stay exactly as they are.
 
-The alternative — relaxing `guard_content_object` for non-`deleted` updates — is
+The alternative â€” relaxing `guard_content_object` for non-`deleted` updates â€” is
 smaller but edits guarded tables in place and is not recommended while the
 mutable store costs no more.
 
-## Blocker B — no standard-output mechanic exists
+## Blocker B â€” no standard-output mechanic exists
 
 The pinned Node mechanic registry declares no provider that writes supplied text
 to standard output.
@@ -111,7 +111,7 @@ because the registry names bytes that the pin check verifies.
    pinned platform authority through the platform load/migration path (a managed
    change), or run the loop against a deliberately unpinned workshop platform.
 
-## Blocker C — the CLI only surfaces canonical JSON
+## Blocker C â€” the CLI only surfaces canonical JSON
 
 Even with B resolved, the child's standard output is the transport for one JSON
 result, so raw text written inside the capability is not shown on the terminal.
@@ -141,8 +141,8 @@ implementation evidence the work order asked for.
 ## Least-work path that closes the loop
 
 Apply the selection rule from the plan (section 2.4). The complete intended loop
-is *SQL authors the working definition → CLI executes it → the message is
-observed → SQL changes it → repeat*. All three blockers above are on that loop;
+is *SQL authors the working definition â†’ CLI executes it â†’ the message is
+observed â†’ SQL changes it â†’ repeat*. All three blockers above are on that loop;
 none is skippable by choosing 001 vs 002.
 
 - A is required for either work order and is self-contained in `sfx-embody` plus
@@ -151,7 +151,7 @@ none is skippable by choosing 001 vs 002.
   only A (its outcome is already observable).
 
 Recommended order: close A first (bounded, testable, no managed migration), prove
-the working-data edit → invoke → change → rollback loop on an existing
+the working-data edit â†’ invoke â†’ change â†’ rollback loop on an existing
 capability, then close B+C as a managed platform/CLI change for the Hello World
 stdout proof.
 
@@ -164,4 +164,5 @@ stdout proof.
 | Edited working definition executes | Blocked by A (`IMMUTABLE_INSPECTION_DATA`). |
 | Standard-output mechanic executes | Blocked by B (no admitted provider). |
 | Message visible as raw stdout | Blocked by C (JSON-only delivery result). |
-| Second capability identity | Not reached; depends on A–C. |
+| Second capability identity | Not reached; depends on Aâ€“C. |
+

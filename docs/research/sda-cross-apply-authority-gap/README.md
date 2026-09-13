@@ -1,13 +1,13 @@
-# SDA cross-apply vs. path-addressed authority: where the capsule actually comes from
+﻿# SDA cross-apply vs. path-addressed authority: where the capsule actually comes from
 
-2026-09-12 · Research finding · Diagnosis verified; bounded remediation scoped, not yet implemented.
+2026-09-12 Â· Research finding Â· Diagnosis verified; bounded remediation scoped, not yet implemented.
 
 ## Thesis
 
 `sfx-embody`'s `materialize-node.mjs` is a Node-only reimplementation of a
 cross-apply projection pipeline that Scenario Driven Architecture (SDA) already
 provides. The deeper cause is not the materializer: SDA's *authority format* is
-**path-addressed** — capability members are referenced by relative file path and
+**path-addressed** â€” capability members are referenced by relative file path and
 the compiler is rooted at a `workspaceRoot` directory. That single choice forces
 the whole chain we have been untangling:
 
@@ -31,10 +31,10 @@ Each load-bearing claim was re-checked against the two working trees.
 SDA ships the seam:
 
 - `scenario-driven-architecture/tools/src/projection/providers/structural-provider-registry.ts`
-  — a provider per target (`csharp`, `go`, `java`, `node`, `python`) plus a
+  â€” a provider per target (`csharp`, `go`, `java`, `node`, `python`) plus a
   `process-json-v1` transport for out-of-process resolvers.
-- `ConsumerCapabilityCompiler.compile(root, { projectionTargets })` →
-  `Record<Target, …>` and `ConsumerProjectionPlanBuilder` (multi-target).
+- `ConsumerCapabilityCompiler.compile(root, { projectionTargets })` â†’
+  `Record<Target, â€¦>` and `ConsumerProjectionPlanBuilder` (multi-target).
 
 `sfx-embody/src/materialize-node.mjs`:
 
@@ -101,7 +101,7 @@ All 46 are classified by declarability in
 [declarability-of-the-46.md](declarability-of-the-46.md): none performs direct
 I/O, 41 are pure, 19 are pure and path-free, and 9 are declarable with no
 upstream addressing change. That document also narrows the bootstrap objection
-recorded below — `admit-consumer-source-facts` is already pure, so the bounded
+recorded below â€” `admit-consumer-source-facts` is already pure, so the bounded
 seam does not require touching it.
 
 ## Two different programs
@@ -109,11 +109,11 @@ seam does not require touching it.
 The diagnosis is correct; the cure must be split, because they are not the same
 amount of work.
 
-1. **Make SQL declaration cheap now** — back the existing
+1. **Make SQL declaration cheap now** â€” back the existing
    `ConsumerWorkspaceRepository` port with a model-backed adapter and stop
    `materialize-node` consuming the path-addressed source. Bounded; delivers the
    flywheel value.
-2. **Make SDA self-host** — declare the 46 as managed capabilities so
+2. **Make SDA self-host** â€” declare the 46 as managed capabilities so
    `admit-consumer-source-facts` reads the model. A multi-month platform
    migration, and it does not bootstrap cleanly: the pipeline you would use to
    declare the 46 is itself part of the 46.
@@ -136,15 +136,15 @@ What `planNode` reads, and where it can come from:
 
 | Document the planner reads (`materialize-node.mjs`) | Model today |
 | --- | --- |
-| `capability.authority.json` | yes — `CAPABILITY` envelope `semantics.authority` |
-| `execution-authorities.authority.json` | yes — `EXECUTION_AUTHORITY` envelope |
-| `semantic-transformation.authority.json` | yes — `TRANSFORMATION` envelope |
-| feature `.feature` text | derivable — `FEATURE` binding resolves the bytes via `content_digest` |
-| contract catalog + schemas | derivable — `CONTRACT` `schema_digest` resolves `source.content_object` |
-| `interfaces.authority.json` | **partial** — `PORT` covers port bindings; the interface list (`sda-json-cli.v1`, `contractValidatorCapabilityId`) has no kind |
-| `fixtures.authority.json` | **missing** — `FIXTURE` kind exists but 0 for this capability |
-| `semantic-graph.authority.json` | **missing** — no model kind |
-| `consumer-workspace.authority.json` | **missing** — no model kind |
+| `capability.authority.json` | yes â€” `CAPABILITY` envelope `semantics.authority` |
+| `execution-authorities.authority.json` | yes â€” `EXECUTION_AUTHORITY` envelope |
+| `semantic-transformation.authority.json` | yes â€” `TRANSFORMATION` envelope |
+| feature `.feature` text | derivable â€” `FEATURE` binding resolves the bytes via `content_digest` |
+| contract catalog + schemas | derivable â€” `CONTRACT` `schema_digest` resolves `source.content_object` |
+| `interfaces.authority.json` | **partial** â€” `PORT` covers port bindings; the interface list (`sda-json-cli.v1`, `contractValidatorCapabilityId`) has no kind |
+| `fixtures.authority.json` | **missing** â€” `FIXTURE` kind exists but 0 for this capability |
+| `semantic-graph.authority.json` | **missing** â€” no model kind |
+| `consumer-workspace.authority.json` | **missing** â€” no model kind |
 | pinned platform package + node registry | source-layer by design (`recordsets[2]`); leave as is |
 
 So "wire the port" is: (a) introduce the repository seam and resolve capability
@@ -166,18 +166,18 @@ alone and the capsule become an optional promotion.
 
 ## Open items
 
-- **Closed — same-namespace duplication.** `hello-world-request.v1` /
+- **Closed â€” same-namespace duplication.** `hello-world-request.v1` /
   `hello-world-greeting.v1`, and every other declared id, are now presented once.
   See "Closure" below.
 - Confirm whether work itself already expects `WORKSPACE`/`SEMANTIC_GRAPH` kinds
   in `sidefx-database` before minting new ones.
 
-## Closure — one definition per declared id
+## Closure â€” one definition per declared id
 
 The read boundary now presents one definition per declared id:
 `analysis.v_selected_semantic_definition` selects the highest
 `semantic_object_definition_pk` for each semantic object in the selected model
-(`docs/sql/select-one-definition-per-declared-id.sql`). Superseded definitions are
+(`sql/schema/select-one-definition-per-declared-id.sql`). Superseded definitions are
 **not removed**; they remain in the model and simply stop being the definition read.
 
 Before the change the view returned every definition, so consumers read the union of
@@ -195,3 +195,4 @@ same-namespace open item at the read boundary, not by deleting rows.
 - Self-hosting the 46: **not started**; deliberately deferred.
 - Remaining live gap: the runtime still resolves exactly one retained-source row
   per capability, so capsule source remains mandatory at declaration time.
+

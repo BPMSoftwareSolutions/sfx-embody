@@ -1,6 +1,6 @@
-# SideFX Architecture Decision Rubric
+﻿# SideFX Architecture Decision Rubric
 
-Team review baseline · revised 2026-09-11
+Team review baseline Â· revised 2026-09-11
 
 Purpose: account for architectural decisions by their authority, present necessity, and positive and negative effects on the builder's intended flywheel.
 
@@ -10,11 +10,11 @@ The [implementation plan](scaffold-generation-operationalization-plan.md) record
 
 ## Starting constraint: the smallest complete path to the outcome
 
-**Builder-directed baseline:** For a feature, begin with the least functionality necessary to carry its intended Input → Event → Outcome experience through to an observable result, within applicable existing constraints. Include zero, one, or multiple providers according to what that outcome requires.
+**Builder-directed baseline:** For a feature, begin with the least functionality necessary to carry its intended Input â†’ Event â†’ Outcome experience through to an observable result, within applicable existing constraints. Include zero, one, or multiple providers according to what that outcome requires.
 
 The outcome determines the scaffold's scope. A provider connection is an implementation step when needed; its presence or successful response alone does not establish the intended outcome. Reuse the applicable definitions, declared mechanics, execution authority, and available implementation. Minimality does not authorize dropping required steps, inventing a different execution topology, or presenting a partial interaction as a completed result.
 
-The first executable demonstration may use a declared fixture at an unresolved boundary. It must say which work was simulated and which outcome obligations remain unproven. **Executing the declared Input → Event → Outcome path with validated input and output proves that tested contract path; it does not by itself establish the promised behavior or external effect.** Geometry and output shape alone do not prove execution. For a provider-free transformation, real execution and behavioral assertions may establish the intended outcome. For an external booking, a simulated confirmation establishes neither the booking nor provider conformance.
+The first executable demonstration may use a declared fixture at an unresolved boundary. It must say which work was simulated and which outcome obligations remain unproven. **Executing the declared Input â†’ Event â†’ Outcome path with validated input and output proves that tested contract path; it does not by itself establish the promised behavior or external effect.** Geometry and output shape alone do not prove execution. For a provider-free transformation, real execution and behavioral assertions may establish the intended outcome. For an external booking, a simulated confirmation establishes neither the booking nor provider conformance.
 
 Preserve the target circuit and all required mechanic references while choosing the first realization. A deferred mechanic stays visible with its reason and revisit condition. Execute an available, compatible, authorized mechanic when it can supply the work; use simulation only at an explicitly identified boundary. When a test deliberately isolates an available provider, record that purpose. Do not use an empty or preserving transformation as evidence that unresolved domain behavior has been supplied.
 
@@ -35,7 +35,7 @@ The resulting architecture is the accumulation of justified commitments at this 
 
 ## 1. Put the intended experience first
 
-For each application, state its own Input → Event → Outcome experience and intended user. The diagram interaction below is the original builder-directed example, and remains the scope anchor when implementing that experience. It does not impose a diagram UI on every capability or make UI development a prerequisite for the scaffold-generator pilot.
+For each application, state its own Input â†’ Event â†’ Outcome experience and intended user. The diagram interaction below is the original builder-directed example, and remains the scope anchor when implementing that experience. It does not impose a diagram UI on every capability or make UI development a prerequisite for the scaffold-generator pilot.
 
 - **Input:** A user selects a declared diagram component. Its input form expands from the component using the applicable existing input definition. The user supplies the required data.
 - **Event:** The user submits. The form returns into the component, and the request executes through the applicable established execution path. The interaction communicates the real execution state.
@@ -108,8 +108,8 @@ Use quantities where available and explicitly labeled judgments elsewhere. Unkno
 
 | Measure | What to record |
 | --- | --- |
-| Contribution, 0–3 | **0:** no identified connection to this slice or its feedback. **1:** plausible indirect or future contribution. **2:** directly supports a named current interaction step. **3:** necessary to a named current step, or observed to improve a subsequent useful cycle. Cite which interpretation supports the score. |
-| Evidence, 0–2 | **0:** untested hypothesis. **1:** inspected implementation, measurements from a relevant case, or a supported estimate. **2:** observed in the target slice or a comparable subsequent cycle. Score benefit and burden separately when their evidence differs. A user's explicit scope instruction is authority, not an empirical benefit measurement. |
+| Contribution, 0â€“3 | **0:** no identified connection to this slice or its feedback. **1:** plausible indirect or future contribution. **2:** directly supports a named current interaction step. **3:** necessary to a named current step, or observed to improve a subsequent useful cycle. Cite which interpretation supports the score. |
+| Evidence, 0â€“2 | **0:** untested hypothesis. **1:** inspected implementation, measurements from a relevant case, or a supported estimate. **2:** observed in the target slice or a comparable subsequent cycle. Score benefit and burden separately when their evidence differs. A user's explicit scope instruction is authority, not an empirical benefit measurement. |
 | First-delivery effect | Range of hours or days added to or removed from the critical path. Separate actual measurements from forecasts. Total effort and elapsed delay are different quantities. |
 | Repetition effect | Expected or measured hours saved or added per subsequent comparable example, with the workload and reuse assumption stated. |
 | Continuing burden | Recurring engineering hours, operational costs in their own currency, additional user steps, and independent definitions or dependencies introduced. Record only relevant quantities. |
@@ -120,7 +120,7 @@ These form a measurement profile. Do not add the ordinal scores to hours, money,
 
 For an optional investment whose effects can reasonably be expressed in engineering hours, use a transparent break-even calculation:
 
-**Net engineering hours saved over n further examples = n × (hours saved per example − added maintenance hours per example) − extra upfront hours.**
+**Net engineering hours saved over n further examples = n Ã— (hours saved per example âˆ’ added maintenance hours per example) âˆ’ extra upfront hours.**
 
 Count design, implementation, validation, migration, and rubric overhead in the appropriate terms. Keep first-delivery delay visible separately, even when later savings look favorable. Use only credible near-term examples for n; do not assume unlimited future use. When net savings per example are positive, divide extra upfront hours by net savings per example and round up to estimate break-even. Uncertain inputs produce an uncertain break-even range.
 
@@ -169,8 +169,8 @@ New or expanded vocabulary / obligation, if any:
 What fails now if omitted; smallest sufficient remedy:
 Positive effects / beneficiaries:
 Adverse effects / who bears them:
-Contribution 0–3 and reason:
-Evidence 0–2, sources, and unknowns:
+Contribution 0â€“3 and reason:
+Evidence 0â€“2, sources, and unknowns:
 First-delivery effect; repetition effect; continuing burden:
 Reversibility and affected commitments:
 Disposition and rationale:
@@ -233,9 +233,9 @@ The team reviews the initial scope, authority basis, target/realization mapping,
 
 After the first slice, append observations beside predictions: time to simulated execution, time to verified outcome, exact reuse, new maintenance, who saved work and who inherited work. Compare the next useful example with the first. Adjust the rubric when evidence exposes recurring ambiguity; version any machine-readable rule changes through the capability's existing contract and authority process. A review-method change does not silently revise previously admitted capability meaning.
 
-## 9. Work-order rubric: does this dependency serve the SQL → CLI flywheel?
+## 9. Work-order rubric: does this dependency serve the SQL â†’ CLI flywheel?
 
-This section applies the rubric to one bounded work order — [SQL → CLI: scaffold Hello World](sql-cli-work-order-001.md) — and to the artifact `docs/sql/scaffold-hello-world.sql`. Its purpose is to decide which records, bindings, generations and lifecycle steps are **necessary to close that loop**, and which are promotion machinery the loop does not require.
+This section applies the rubric to one bounded work order â€” [SQL â†’ CLI: scaffold Hello World](sql-cli-work-order-001.md) â€” and to the artifact `sql/migrations/scaffold-hello-world.sql`. Its purpose is to decide which records, bindings, generations and lifecycle steps are **necessary to close that loop**, and which are promotion machinery the loop does not require.
 
 ### 9.1 The loop, stated as observable events
 
@@ -250,7 +250,7 @@ The loop closes when the observed CLI output changes as the SQL data changes, wi
 
 ### 9.2 Selection rule: least work that closes the loop
 
-Choose the least-work option that completes all six events. Review and maintenance effort count in the cost. Supporting work — schema plumbing, validation, extraction — is partial progress until the loop closes, not an alternative to closing it. This mirrors section 2.4 of the [implementation plan](scaffold-generation-operationalization-plan.md).
+Choose the least-work option that completes all six events. Review and maintenance effort count in the cost. Supporting work â€” schema plumbing, validation, extraction â€” is partial progress until the loop closes, not an alternative to closing it. This mirrors section 2.4 of the [implementation plan](scaffold-generation-operationalization-plan.md).
 
 ### 9.3 Necessity test for each dependency
 
@@ -270,20 +270,20 @@ A dependency is never justified by "the schema requires it" alone. State the fai
 | Dependency | Class | Evidence | Disposition |
 | --- | --- | --- | --- |
 | Retained capsule-source entries (`source_appearance`/`content_object` for the capability's capsule digest) | Execution necessity | `sql/diagnostics/capability-embodiment.sql` resolves the capability and returns the retained source; `src/materialize-node.mjs` builds the body from those bytes. | Keep. |
-| One lineage row: capability definition → observation → capsule appearance | Execution necessity | `capability-embodiment.sql` resolves the capsule digest only through `source.source_lineage`. | Keep exactly one. |
+| One lineage row: capability definition â†’ observation â†’ capsule appearance | Execution necessity | `capability-embodiment.sql` resolves the capsule digest only through `source.source_lineage`. | Keep exactly one. |
 | Additional lineage rows (scenario, faces, port, transformation, execution authority, expression tree) | Validation/promotion necessity | Only `source.validate_model` gate `G_LINEAGE_MEMBER` reads them; the invocation read path does not. | Needed only because publication validates. |
 | New `source.estate_model` BUILDING + membership carry + `source.publish_model` | Execution necessity **for a new capability** | The read path pins `source.current_model`; `model.guard_estate_capability` throws `PUBLISHED_MEMBERSHIP_IMMUTABLE` on inserts into a PUBLISHED model. | Required by the current read path (see 9.5). |
 | Interface binding to `sda-json-cli.v1` | Delivery necessity | Platform provider `ScenarioKernel.NodePlatform.Interface.JsonCli`, operation `deliverArtifact(outcome, destination = process.stdout)`. | Keep; event 3 depends on it. |
 | Port binding to `sda-authority-transformation-port.v1` | Execution necessity (value-producing path) | The execution authority is read from the capsule; the transformation produces the outcome the delivery writes. | Keep for a value-producing capability. |
-| Parameterized `@CapabilityId` / `@Message` | Loop quality (events 4–6) | The message lives in the transformation and the outcome schema; identity lives in every id-bearing file. | Keep; it is the change-and-repeat mechanism. |
+| Parameterized `@CapabilityId` / `@Message` | Loop quality (events 4â€“6) | The message lives in the transformation and the outcome schema; identity lives in every id-bearing file. | Keep; it is the change-and-repeat mechanism. |
 
 ### 9.5 Is publication necessary?
 
 Two states, distinguished by the guards, not by the loop.
 
-**Old state (guards present).** A capability newly added through the current runtime must be published: the read path pins `source.current_model`, and `model.guard_estate_capability` refuses inserts into a PUBLISHED model (`PUBLISHED_MEMBERSHIP_IMMUTABLE`, error 51003 — observed). While those guards exist, a new generation plus `validate_model`/`publish_model` is the only SQL path that makes the capability selectable. The extra lineage and validation records are then **publication overhead**, not invocation requirements.
+**Old state (guards present).** A capability newly added through the current runtime must be published: the read path pins `source.current_model`, and `model.guard_estate_capability` refuses inserts into a PUBLISHED model (`PUBLISHED_MEMBERSHIP_IMMUTABLE`, error 51003 â€” observed). While those guards exist, a new generation plus `validate_model`/`publish_model` is the only SQL path that makes the capability selectable. The extra lineage and validation records are then **publication overhead**, not invocation requirements.
 
-**Proposed state (`remove-execution-dependence-overhead.sql`).** The guards are the restriction, not the capability. Dropping the ones whose definition contains a blocking condition — and scoping importer update rights to the two objects the scaffold updates — removes the need for a generation, validation and publication. The read path still pins `source.current_model`, so `scaffold-hello-world.sql` inserts its selection rows directly into that model. Publication is then **not** part of this loop.
+**Proposed state (`remove-execution-dependence-overhead.sql`).** The guards are the restriction, not the capability. Dropping the ones whose definition contains a blocking condition â€” and scoping importer update rights to the two objects the scaffold updates â€” removes the need for a generation, validation and publication. The read path still pins `source.current_model`, so `scaffold-hello-world.sql` inserts its selection rows directly into that model. Publication is then **not** part of this loop.
 
 Publication is therefore necessary only while the immutability and membership guards are in place. It was never intrinsically necessary to the flywheel; it was the cost of the guards. The two work-order files are the decision: remove the restriction, and the lifecycle step disappears with it.
 
@@ -297,7 +297,8 @@ A separate, still-open question is whether the runtime should read a mutable wor
 | What is execution-necessary? | Capsule source entries for the selected digest; one lineage resolution; the CLI interface binding; a port/authority that yields the payload. |
 | What is publication-necessary? | The new generation, membership carry, remaining lineage, and `validate_model`/`publish_model`. |
 | What is not necessary? | Any record that neither the read path nor a validation gate consults. |
-| What remains open? | Whether the runtime should read a mutable working definition without retained capsule source. The stdout call is not open: it is the existing `sda-json-cli.v1` (`Interface.JsonCli` → `deliverArtifact → process.stdout`) declared through the capability interface, and is reused with no platform change. |
-| Evidence status | Executed and observed. The loop ran end to end against the live `sidefx` database: the unchanged CLI invokes `hello-world-sql` (`Hello Sidney!` on stdout), the message and identity are database data, re-running scaffolds a second identity, and `reveal` walks the declared chain with `Mechanics` resolved. `resolve-equity-market-price-evidence` additionally executed live provider conformance (`EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED`, observed price). The runtime still resolves exactly one retained-source row per capability (`capability-embodiment.sql`), so capsule source remains mandatory at declaration time — §9.6's open question. |
+| What remains open? | Whether the runtime should read a mutable working definition without retained capsule source. The stdout call is not open: it is the existing `sda-json-cli.v1` (`Interface.JsonCli` â†’ `deliverArtifact â†’ process.stdout`) declared through the capability interface, and is reused with no platform change. |
+| Evidence status | Executed and observed. The loop ran end to end against the live `sidefx` database: the unchanged CLI invokes `hello-world-sql` (`Hello Sidney!` on stdout), the message and identity are database data, re-running scaffolds a second identity, and `reveal` walks the declared chain with `Mechanics` resolved. `resolve-equity-market-price-evidence` additionally executed live provider conformance (`EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED`, observed price). The runtime still resolves exactly one retained-source row per capability (`capability-embodiment.sql`), so capsule source remains mandatory at declaration time â€” Â§9.6's open question. |
 
 The team should review this record with the `.sql` and the six observable events in front of them. A dependency that cannot name its failing event is either publication overhead to be minimized or work that belongs to a different decision.
+

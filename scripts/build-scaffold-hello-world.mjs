@@ -1,4 +1,4 @@
-// Emit docs/sql/scaffold-hello-world.sql. Read-only against the database.
+﻿// Emit sql/migrations/scaffold-hello-world.sql. Read-only against the database.
 //
 // Minimal workshop scaffold:
 //   - retained capsule source (read path resolves authority from it)
@@ -306,6 +306,7 @@ ROLLBACK TRANSACTION;
 `);
 
 const out = s.join('\n').replaceAll('DOUBLE=;\n', '');
-const file = path.resolve('docs/sql/scaffold-hello-world.sql');
+const file = path.resolve('sql/migrations/scaffold-hello-world.sql');
 await fs.writeFile(file, out + '\n');
 console.log(JSON.stringify({ file, bytes: Buffer.byteLength(out) }, null, 2));
+

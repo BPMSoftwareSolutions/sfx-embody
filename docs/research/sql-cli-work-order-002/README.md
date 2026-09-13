@@ -1,18 +1,18 @@
-# Work order 002 result: proving the working loop
+﻿# Work order 002 result: proving the working loop
 
-2026-09-12 · Result · Complete loop observed; database change rolled back.
+2026-09-12 Â· Result Â· Complete loop observed; database change rolled back.
 
 ## What was run
 
-The loop: read the working definition → make one SQL edit → invoke the edited
-definition → vary inputs → roll back. The edit is uncommitted, so the read path
+The loop: read the working definition â†’ make one SQL edit â†’ invoke the edited
+definition â†’ vary inputs â†’ roll back. The edit is uncommitted, so the read path
 must see it on the same connection. The invocation is therefore done from the
 extracted in-flight bundle, not from a separate CLI connection.
 
 ```powershell
 # 1-2. Apply the edit (uncommitted) and extract the edited bundle
 node --experimental-vm-modules scripts/extract-inflight-bundle.mjs `
-  docs/sql/work-order-002-edit-equity.sql `
+  sql/migrations/work-order-002-edit-equity.sql `
   evidence/resolve-equity-market-price-evidence/edited-bundle.json `
   resolve-equity-market-price-evidence
 
@@ -25,13 +25,13 @@ node --experimental-vm-modules scripts/invoke-from-bundle.mjs `
   evidence/resolve-equity-market-price-evidence/edited-bundle.json --symbol AAPL --region XX
 ```
 
-The one edit (`docs/sql/work-order-002-edit-equity.sql`): append `-EDITED` to the
+The one edit (`sql/migrations/work-order-002-edit-equity.sql`): append `-EDITED` to the
 normalize transformation's `bindingId` literal
-(`rapidapi-davethebeast-yahoo-finance166-stock-price.v1` →
-`…-stock-price.v1-EDITED`). It is a single `REPLACE` over the retained
+(`rapidapi-davethebeast-yahoo-finance166-stock-price.v1` â†’
+`â€¦-stock-price.v1-EDITED`). It is a single `REPLACE` over the retained
 transformation, with a new content object and a repointed appearance.
 
-## Step 1 — Read (actual working definition)
+## Step 1 â€” Read (actual working definition)
 
 ```
 capability_id  resolve-equity-market-price-evidence
@@ -46,33 +46,33 @@ outcome_id     equity-market-price-evidence
 
 Bundle read path: `authorityRows [1,13,7]`, `closureRows [1]`, `mechanicRows [191]`.
 
-## Step 2/3 — Edit and invoke, varied (actual outputs)
+## Step 2/3 â€” Edit and invoke, varied (actual outputs)
 
 | Symbol | Region | Disposition | Outcome |
 | --- | --- | --- | --- |
-| AAPL | US | `terminated` | `EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED`, `observedPrice 332.27`, `marketState CLOSED`, `sourceAttribution "Delayed Quote"`, `providerTestimony.bindingId "…-stock-price.v1-EDITED"` |
-| MSFT | US | `terminated` | `EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED`, `observedPrice 495.63`, `marketState CLOSED`, `sourceAttribution "Delayed Quote"`, `providerTestimony.bindingId "…-stock-price.v1-EDITED"` |
-| AAPL | XX | `rejected` | `null` — invalid `region` rejected at input admission |
+| AAPL | US | `terminated` | `EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED`, `observedPrice 332.27`, `marketState CLOSED`, `sourceAttribution "Delayed Quote"`, `providerTestimony.bindingId "â€¦-stock-price.v1-EDITED"` |
+| MSFT | US | `terminated` | `EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED`, `observedPrice 495.63`, `marketState CLOSED`, `sourceAttribution "Delayed Quote"`, `providerTestimony.bindingId "â€¦-stock-price.v1-EDITED"` |
+| AAPL | XX | `rejected` | `null` â€” invalid `region` rejected at input admission |
 
 The edited value is visible in the outcome (`bindingId` carries `-EDITED`), and
 the two symbols produced different observed prices from the live provider.
 
-## Step 4 — Roll back (fresh read)
+## Step 4 â€” Roll back (fresh read)
 
 ```
 current-snapshot transformation digest   sha256:dd31ccde72c84fc8e39055485fb4c51071f2578229cc494735332fbb83966872
 original definition present              yes (1 appearance)
-edited digest cb42a76b… present          no  (0 content rows, 0 appearances)
-edited-…-EDITED text present             no  (0 rows)
+edited digest cb42a76bâ€¦ present          no  (0 content rows, 0 appearances)
+edited-â€¦-EDITED text present             no  (0 rows)
 ```
 
 ## Scorecard
 
 | Measure | Before | After |
 | --- | --- | --- |
-| Flywheel contribution, 0–3 | **3** (proposed) | **3** — necessary to prove the loop; assess ongoing benefit after use |
-| End-to-end evidence, 0–2 | **0** — untested | **2** — complete loop observed through invocation |
-| CLI checkpoints | **Not run** | **4/4** — read, edit+invoke, vary+check, rollback |
+| Flywheel contribution, 0â€“3 | **3** (proposed) | **3** â€” necessary to prove the loop; assess ongoing benefit after use |
+| End-to-end evidence, 0â€“2 | **0** â€” untested | **2** â€” complete loop observed through invocation |
+| CLI checkpoints | **Not run** | **4/4** â€” read, edit+invoke, vary+check, rollback |
 | Effort and burden | Unknown | One ~40-line SQL edit + 5 commands; each equity invocation a few seconds. No new runtime maintenance. Not time-instrumented. |
 
 ## Honest scope notes
@@ -88,3 +88,4 @@ edited-…-EDITED text present             no  (0 rows)
 - The install of the hello-world capability previously dropped the guards on the
   tables this edit touches (`source.content_object`, `source.source_appearance`);
   that is why the in-place edit is possible without further cleanup.
+
