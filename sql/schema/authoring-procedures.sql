@@ -1,11 +1,11 @@
--- authoring-procedures.sql
+﻿-- authoring-procedures.sql
 --
 -- Reusable model-authoring procedures. Each procedure makes one declared change,
 -- returns the affected identities and before/after values, and participates in the
 -- caller's transaction. None of them begin, commit or roll back a transaction.
 --
--- Rubric: docs/sidefx-architecture-decision-rubric.md §9.
--- Decisions applied here (see §9.3 necessity test and §9.5):
+-- Rubric: docs/sidefx-architecture-decision-rubric.md Â§9.
+-- Decisions applied here (see Â§9.3 necessity test and Â§9.5):
 --   * Write model.* declarations plus the content-addressed bytes the model and the
 --     read path actually consume: semantic-definition envelopes, contract schema
 --     bytes, and the feature text. These are execution/delivery necessity.
@@ -13,11 +13,11 @@
 --     source_declaration_observation / source_lineage and no raw capsule-file
 --     content_object rows. The read path (analysis.v_capability_execution_declaration
 --     via capability-embodiment.sql) does not consult them, so omitting them changes
---     none of §9.1's six events. Not necessary.
+--     none of Â§9.1's six events. Not necessary.
 --   * Never call source.validate_model / source.publish_model and never create a new
---     estate_model generation. That is publication machinery (§9.5), not the loop.
+--     estate_model generation. That is publication machinery (Â§9.5), not the loop.
 --   * Procedures live in the existing model schema; no new schema or authority
---     boundary is introduced for a loop that does not require one (§2, §6).
+--     boundary is introduced for a loop that does not require one (Â§2, Â§6).
 --
 -- Installation only. The caller supplies the transaction.
 
@@ -1416,7 +1416,7 @@ CREATE OR ALTER PROCEDURE model.scaffold_estate_provider_capability
   @input_schema     nvarchar(max),
   @outcome_contract nvarchar(400),
   @outcome_schema   nvarchar(max),
-  @description      nvarchar(max) = NULL,
+  @description      nvarchar(max) = N'',
   @on_exists        nvarchar(20)  = N'REPLACE'
 WITH EXECUTE AS OWNER
 AS
@@ -1524,6 +1524,8 @@ Feature: '+ISNULL(@description,N'')+N'
   ELSE
     INSERT model.estate_capability_feature (estate_model_pk,capability_pk,capability_version_pk,feature_version_pk,binding_role) VALUES (@model,@capPk,@capVer,@featVer,'CANONICAL');
 
+  EXEC model.author_capability_meaning @capability_id=@capId, @intent=@description, @outcome=N'the declared outcome is returned';
+
   SELECT N'ESTATE_CAPABILITY' AS action, @capId AS capability_id, @capVer AS capability_version_pk, @scnVer AS scenario_version_pk,
          @input_contract AS input_contract, @outcome_contract AS outcome_contract, @provider_module AS provider_module, @provider_export AS provider_export;
 END;
@@ -1543,7 +1545,7 @@ CREATE OR ALTER PROCEDURE model.scaffold_composed_capability
   @outcome_contract nvarchar(400),
   @outcome_schema   nvarchar(max),
   @targets          nvarchar(max),   -- JSON array of capability ids, invoked in order
-  @description      nvarchar(max) = NULL,
+  @description      nvarchar(max) = N'',
   @on_exists        nvarchar(20)  = N'REPLACE'
 WITH EXECUTE AS OWNER
 AS
@@ -1662,6 +1664,68 @@ Feature: '+ISNULL(@description,N'')+N'
   ELSE
     INSERT model.estate_capability_feature (estate_model_pk,capability_pk,capability_version_pk,feature_version_pk,binding_role) VALUES (@model,@capPk,@capVer,@featVer,'CANONICAL');
 
+  EXEC model.author_capability_meaning @capability_id=@capId, @intent=@description, @outcome=N'the declared outcome is returned';
+
   SELECT N'COMPOSED_CAPABILITY' AS action, @capId AS capability_id, @capVer AS capability_version_pk, @scnVer AS scenario_version_pk, @newEaVer AS execution_authority_version_pk, @targets AS targets;
 END;
 GO
+
+-- =====================================================================
+-- model.author_capability_meaning
+-- Author a capability's canonical meaning in its own declaration: the user
+-- story, the experience promise and condition, and the single canonical feature.
+-- It also clears the scaffolded CLI mapping and the scaffolded greeting scenario
+-- members, and retires every scaffolded feature profile except the canonical
+-- parsed declaration. A capability authored for structure is not yet a capability
+-- with meaning; this is the row that supplies it.
+-- =====================================================================
+CREATE OR ALTER PROCEDURE model.author_capability_meaning
+  @capability_id nvarchar(400),
+  @intent        nvarchar(max),
+  @outcome       nvarchar(max)
+WITH EXECUTE AS OWNER
+AS
+BEGIN
+  SET NOCOUNT ON;
+  DECLARE @model bigint=(SELECT estate_model_pk FROM source.current_model WHERE singleton_id=1);
+  DECLARE @capPk bigint, @capSo bigint, @capVer bigint, @capSod bigint, @featPk bigint;
+  SELECT @capPk=c.capability_pk, @capSo=c.semantic_object_pk, @featPk=c.feature_pk
+  FROM model.capability c JOIN model.identity_namespace n ON n.namespace_pk=c.namespace_pk
+  WHERE n.namespace_id=N'sidefx:capabilities' AND c.capability_id=@capability_id;
+  IF @capPk IS NULL THROW 51000,'CAPABILITY_NOT_FOUND',1;
+  SELECT @capVer=capability_version_pk, @capSod=semantic_object_definition_pk FROM model.estate_capability WHERE estate_model_pk=@model AND capability_pk=@capPk;
+
+  DECLARE @env nvarchar(max)=(SELECT CONVERT(nvarchar(max),CONVERT(varchar(max),co.content_bytes) COLLATE Latin1_General_100_BIN2_UTF8)
+    FROM model.semantic_object_definition d JOIN source.content_object co ON co.content_object_pk=d.canonical_content_pk WHERE d.semantic_object_definition_pk=@capSod);
+  SET @env = JSON_MODIFY(@env,'$.semantics.authority.name',@capability_id);
+  SET @env = JSON_MODIFY(@env,'$.semantics.authority.userStory',JSON_QUERY(N'{"actor":"caller","intent":"'+STRING_ESCAPE(@intent,'json')+'","outcome":"'+STRING_ESCAPE(@outcome,'json')+'"}'));
+  SET @env = JSON_MODIFY(@env,'$.semantics.authority.experience',JSON_QUERY(N'{"experienceId":"'+@capability_id+N'.v1","actor":"caller","promise":"'+STRING_ESCAPE(@intent,'json')+'","observableConditions":[{"conditionId":"'+@capability_id+N'"}]}'));
+  SET @env = JSON_MODIFY(@env,'$.semantics.cli',NULL);
+  SET @env = JSON_MODIFY(@env,'$.semantics.scenario_members',NULL);
+
+  DECLARE @b varbinary(max)=CONVERT(varbinary(max),CONVERT(varchar(max),(@env) COLLATE Latin1_General_100_BIN2_UTF8));
+  DECLARE @d binary(32)=HASHBYTES('SHA2_256',@b);
+  IF NOT EXISTS (SELECT 1 FROM source.content_object WHERE content_digest=@d) INSERT source.content_object (content_digest,content_bytes,byte_length) VALUES (@d,@b,DATALENGTH(@b));
+  DECLARE @sod bigint=(SELECT semantic_object_definition_pk FROM model.semantic_object_definition WHERE semantic_object_pk=@capSo AND definition_digest=@d);
+  IF @sod IS NULL BEGIN INSERT model.semantic_object_definition (semantic_object_pk,object_kind,definition_digest,canonical_content_pk) VALUES (@capSo,'CAPABILITY',@d,(SELECT content_object_pk FROM source.content_object WHERE content_digest=@d)); SET @sod=SCOPE_IDENTITY(); END
+  IF NOT EXISTS (SELECT 1 FROM model.estate_definition WHERE estate_model_pk=@model AND semantic_object_definition_pk=@sod) INSERT model.estate_definition (estate_model_pk,semantic_object_definition_pk) VALUES (@model,@sod);
+  -- The capability's declaration version is a composite (capability_version_pk,
+  -- semantic_object_definition_pk) key. Move both sides together by dropping the
+  -- pairing constraint for the update; the surrounding transaction restores it.
+  DECLARE @fk nvarchar(400)=(SELECT TOP 1 name FROM sys.foreign_keys WHERE parent_object_id=OBJECT_ID('model.estate_capability') AND referenced_object_id=OBJECT_ID('model.capability_version'));
+  DECLARE @fkSql nvarchar(600);
+  IF @fk IS NOT NULL BEGIN SET @fkSql=N'ALTER TABLE model.estate_capability DROP CONSTRAINT '+QUOTENAME(@fk); EXEC(@fkSql); END
+  UPDATE model.capability_version SET semantic_object_definition_pk=@sod, definition_digest=@d WHERE capability_version_pk=@capVer;
+  UPDATE model.estate_capability SET semantic_object_definition_pk=@sod WHERE estate_model_pk=@model AND capability_pk=@capPk;
+  IF @fk IS NOT NULL BEGIN SET @fkSql=N'ALTER TABLE model.estate_capability WITH CHECK ADD CONSTRAINT '+QUOTENAME(@fk)+N' FOREIGN KEY (capability_version_pk, semantic_object_definition_pk) REFERENCES model.capability_version (capability_version_pk, semantic_object_definition_pk)'; EXEC(@fkSql); END
+
+  -- Retire every scaffolded feature profile but the canonical parsed declaration.
+  DECLARE @keep bigint=(SELECT MAX(feature_version_pk) FROM model.feature_version WHERE feature_pk=@featPk);
+  DELETE fs FROM model.feature_scenario fs JOIN model.feature_version fv ON fv.feature_version_pk=fs.feature_version_pk
+    WHERE fv.feature_pk=@featPk AND fv.feature_version_pk<@keep;
+  DELETE fv FROM model.feature_version fv WHERE fv.feature_pk=@featPk AND fv.feature_version_pk<@keep;
+
+  SELECT N'AUTHOR_CAPABILITY_MEANING' AS action, @capability_id AS capability_id, @sod AS capability_definition_pk, @keep AS canonical_feature_version_pk;
+END;
+GO
+
