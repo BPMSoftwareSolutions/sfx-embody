@@ -32,24 +32,82 @@ function readCliConfiguration(bundle) {
   return {};
 }
 
-// A capability whose Port binding declares an estate provider is delivered by the
-// estate runtime rather than by a generated body. The module and export are
-// declaration data, so the delivery resolves them from the capability's own Port
-// binding instead of dispatching on capability identity.
-function readEstateProvider(bundle) {
-  const records = [...(bundle?.authority?.recordsets?.[1] ?? []), ...(bundle?.authority?.recordsets?.[2] ?? [])];
-  for (const record of records) {
-    if (typeof record.source_path !== 'string' || !record.source_path.endsWith('interfaces.authority.json')) continue;
-    try {
-      const document = JSON.parse(Buffer.from(record.content_bytes.base64, 'base64').toString('utf8'));
-      for (const binding of Array.isArray(document.portBindings) ? document.portBindings : []) {
-        const estate = binding?.configuration?.estateProvider;
-        if (estate && typeof estate.module === 'string' && typeof estate.export === 'string')
-          return { module: estate.module, export: estate.export, configuration: binding.configuration };
-      }
-    } catch { /* A malformed interface document is not estate authority. */ }
+// A capability is delivered by the estate runtime when its declared execution
+// authority composes estate-provider Ports, directly or through composed
+// Scenarios. The provider module and export are declaration data; nothing here
+// dispatches on capability identity.
+function readRecords(bundle) {
+  return [...(bundle?.authority?.recordsets?.[1] ?? []), ...(bundle?.authority?.recordsets?.[2] ?? [])];
+}
+function readJsonDocument(bundle, suffix) {
+  for (const record of readRecords(bundle)) {
+    if (typeof record.source_path !== 'string' || !record.source_path.endsWith(suffix)) continue;
+    try { return JSON.parse(Buffer.from(record.content_bytes.base64, 'base64').toString('utf8')); } catch { /* not authority */ }
   }
   return null;
+}
+function readRootAuthority(bundle, scenarioId) {
+  const authorities = readJsonDocument(bundle, '/execution-authorities.authority.json');
+  return authorities?.executionAuthorities?.find(a => a.owningScenarioId === scenarioId) ?? null;
+}
+function readEstatePortBinding(bundle, portId) {
+  const interfaces = readJsonDocument(bundle, '/interfaces.authority.json');
+  return interfaces?.portBindings?.find(b => b.portId === portId) ?? null;
+}
+function ownerOfScenario(bundle, scenarioId) {
+  return bundle.closure.recordsets[0].find(r => r.downstream_scenario_id === scenarioId)?.owning_capability_id ?? null;
+}
+
+async function isEstateDelivery(bundle, context) {
+  try {
+    const selected = bundle.authority.recordsets[0][0].scenario_id;
+    const authority = readRootAuthority(bundle, selected);
+    if (!authority) return false;
+    for (const operation of authority.operations ?? []) {
+      if (operation.kind === 'invoke-port') {
+        if (readEstatePortBinding(bundle, operation.portId)?.configuration?.estateProvider) return true;
+      } else if (operation.kind === 'invoke-scenario') {
+        const capabilityId = ownerOfScenario(bundle, operation.scenarioId);
+        if (!capabilityId) continue;
+        const child = await readAuthority(context.databaseRoot, { capabilityId, target: 'node', scenarioId: operation.scenarioId }, { retainObjects: false });
+        if (await isEstateDelivery(child, context)) return true;
+      }
+    }
+    return false;
+  } catch { return false; }
+}
+
+// Execute a capability's declared execution authority as a sequence of estate
+// operations: an estate-provider Port transforms the running state, and a
+// composed Scenario runs its own declared operations with that state. State is
+// threaded exactly as the declared authority orders it.
+async function executeEstateCapability({ capabilityId, scenarioId }, state, context, ancestry = []) {
+  const bundle = await readAuthority(context.databaseRoot,
+    { capabilityId, target: 'node', ...(scenarioId === undefined ? {} : { scenarioId }) }, { retainObjects: false });
+  const selected = bundle.authority.recordsets[0][0].scenario_id;
+  const authority = readRootAuthority(bundle, selected);
+  if (!authority) throw new Error('ESTATE_AUTHORITY_NOT_RESOLVED:' + capabilityId);
+  let current = state;
+  for (const operation of authority.operations ?? []) {
+    if (operation.kind === 'invoke-port') {
+      const binding = readEstatePortBinding(bundle, operation.portId);
+      const estate = binding?.configuration?.estateProvider;
+      if (!estate || typeof estate.module !== 'string' || typeof estate.export !== 'string')
+        throw new Error('ESTATE_PROVIDER_NOT_DECLARED:' + capabilityId + ':' + operation.portId);
+      const provider = await import(new URL(estate.module, ESTATE_RUNTIME_ROOT).href);
+      if (typeof provider[estate.export] !== 'function') throw new Error('ESTATE_PROVIDER_EXPORT_NOT_FOUND:' + estate.export);
+      current = await provider[estate.export](binding.configuration, current, context);
+    } else if (operation.kind === 'invoke-scenario') {
+      const owner = ownerOfScenario(bundle, operation.scenarioId);
+      if (!owner) throw new Error('ESTATE_TARGET_CAPABILITY_NOT_RESOLVED:' + operation.scenarioId);
+      const key = owner + ':' + operation.scenarioId;
+      if (ancestry.includes(key)) throw new Error('ESTATE_COMPOSITION_CYCLE:' + key);
+      current = await executeEstateCapability({ capabilityId: owner, scenarioId: operation.scenarioId }, current, context, [...ancestry, key]);
+    } else {
+      throw new Error('ESTATE_OPERATION_NOT_SUPPORTED:' + operation.kind);
+    }
+  }
+  return current;
 }
 
 const INPUT_TYPES = new Set(['json', 'text', 'number', 'boolean']);
@@ -189,11 +247,10 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, 
   const bundle = await measure('readAuthority', () => readAuthority(databaseRoot, selection, { retainObjects: false, timings: timings.queries }));
   const cli = readCliConfiguration(bundle);
   const display = cli.display ?? null;
-  // An estate-provider capability is delivered by its declared provider: read the
-  // authority, plan no body, and return the provider's outcome. Materialization is
-  // a separate governed effect; this does not write.
-  const estateProvider = readEstateProvider(bundle);
-  if (estateProvider) {
+  // An estate-delivery capability is executed by the estate runtime over its
+  // declared operations: estate-provider Ports and composed Scenarios. It plans
+  // no native body and writes nothing; materialization is a separate effect.
+  if (await measure('detectEstateDelivery', () => isEstateDelivery(bundle, config))) {
     let estateInput;
     if (typeof request.input !== 'string') estateInput = structuredClone(request.input);
     else {
@@ -201,9 +258,7 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, 
       if (inputType === 'json') { try { estateInput = JSON.parse(request.input); } catch { throw new Error('CAPABILITY_INPUT_JSON_REJECTED'); } }
       else estateInput = buildCanonicalInput(cli.input, inputType, request.input);
     }
-    const provider = await import(new URL(estateProvider.module, ESTATE_RUNTIME_ROOT).href);
-    if (typeof provider[estateProvider.export] !== 'function') throw new Error('ESTATE_PROVIDER_EXPORT_NOT_FOUND:' + estateProvider.export);
-    const outcome = await measure('executeEstateProvider', () => provider[estateProvider.export](estateProvider.configuration ?? {}, estateInput, config));
+    const outcome = await measure('executeEstateDelivery', () => executeEstateCapability({ capabilityId: selection.capabilityId, scenarioId: selection.scenarioId }, estateInput, config));
     return { disposition: 'terminated',
       outcome: { capabilityId: selection.capabilityId, scenarioId: bundle.authority.recordsets[0][0].scenario_id, result: { outcome }, executions: [], observations: [],
         evidence: { timings, authoritySource: 'DATABASE', bodyStorage: 'NOT_REQUESTED', managedAdmission: 'NOT_REQUESTED',

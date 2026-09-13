@@ -1,25 +1,23 @@
-// Estate provider: construct the content-addressed embodiment plan for a
-// capability identity.
+// Estate provider: construct the content-addressed embodiment plan from a
+// capability's retained authority declaration.
 //
-// This is the runtime half of the `construct-embodiment-plan` capability. The
-// capability's Port binding configuration names this module and export, so the
-// delivery resolves the provider from the declaration rather than from a
-// hard-coded capability identity. It reads the selected capability's retained
-// authority, plans the native body through the same materializer the direct
-// invocation path uses, and returns the reviewable, digest-bound plan. It does
-// not write any file: materialization is a separate governed effect.
-import { readAuthority } from '../../read-authority.mjs';
+// This is the plan step of the long-form embodiment composition. It consumes the
+// declaration the read step produced and plans the native body through the same
+// materializer the direct invocation path uses. It writes nothing:
+// materialization is a separate governed effect.
 import { planNode } from '../../materialize-node.mjs';
 
 export async function planCapabilityEmbodiment(configuration, input, context) {
-  const { databaseRoot, sdaRoot } = context;
-  if (!input || typeof input.capabilityId !== 'string' || input.capabilityId.length === 0)
-    throw new Error('EMBODIMENT_CAPABILITY_ID_REQUIRED');
-  const target = input.target ?? 'node';
-  if (target !== 'node') throw new Error('EMBODIMENT_TARGET_NOT_OFFERED:' + target);
-  const selection = { capabilityId: input.capabilityId, target,
-    ...(typeof input.scenarioId === 'string' && input.scenarioId.length > 0 ? { scenarioId: input.scenarioId } : {}) };
-  const bundle = await readAuthority(databaseRoot, selection, { retainObjects: false });
+  const { sdaRoot } = context;
+  if (!input || !input.authority || !input.closure || !input.mechanics)
+    throw new Error('EMBODIMENT_AUTHORITY_REQUIRED');
+  const bundle = {
+    selection: { capabilityId: input.capabilityId, target: input.target ?? 'node', scenarioId: input.scenarioId },
+    authority: input.authority,
+    closure: input.closure,
+    resolutions: null,
+    mechanics: input.mechanics
+  };
   const plan = await planNode({ bundle, sdaRoot });
   const entry = plan.receipts.find(receipt => receipt.plan.scenarioId === plan.selectedScenarioId);
   if (!entry) throw new Error('EMBODIMENT_SELECTED_SCENARIO_NOT_PLANNED:' + plan.selectedScenarioId);
@@ -27,7 +25,7 @@ export async function planCapabilityEmbodiment(configuration, input, context) {
     contractId: 'capability-embodiment-plan.v1',
     capabilityId: plan.capabilityId,
     scenarioId: plan.selectedScenarioId,
-    target,
+    target: input.target ?? 'node',
     planDigest: entry.receipt.embodimentPlanDigest,
     artifactDigest: entry.receipt.artifactDigest,
     scenarioDefinitionDigest: entry.receipt.scenarioDefinitionDigest,
