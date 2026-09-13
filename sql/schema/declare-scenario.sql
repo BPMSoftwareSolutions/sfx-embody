@@ -51,7 +51,8 @@ BEGIN
    VALUES(@schema_digest,JSON_VALUE(@schema,'$."$schema"'),(SELECT content_object_pk FROM source.content_object WHERE content_digest=@schema_digest));
   SET @schema_pk=SCOPE_IDENTITY();
  END;
- DECLARE @semantics nvarchar(max)=(SELECT LOWER(CONVERT(varchar(64),@schema_digest,2)) AS schema_digest FOR JSON PATH,WITHOUT_ARRAY_WRAPPER);
+ DECLARE @semantics nvarchar(max)=(SELECT LOWER(CONVERT(varchar(64),@schema_digest,2)) AS schema_digest,
+  JSON_VALUE(@schema,'$."$id"') AS schema_id FOR JSON PATH,WITHOUT_ARRAY_WRAPPER);
  EXEC model.put_semantic_definition 'CONTRACT',N'sidefx:contracts',@id,@semantics,@object OUTPUT,@definition OUTPUT,@digest OUTPUT;
  DECLARE @contract bigint=(SELECT contract_pk FROM model.contract WHERE semantic_object_pk=@object);
  IF @contract IS NULL BEGIN

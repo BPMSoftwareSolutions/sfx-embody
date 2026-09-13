@@ -11,6 +11,7 @@
         "--experimental-permission",
         "--allow-child-process",
         "--allow-fs-read=./src",
+        "--allow-fs-read=./providers",
         "--allow-fs-read=./config",
         "--allow-fs-read=./node_modules",
         "--allow-fs-read=./package.json",

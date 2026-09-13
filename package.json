@@ -12,7 +12,7 @@
   },
   "scripts": {
     "test": "node --test tests",
-    "verify:estate": "node scripts/verify-estate.mjs config/regression.cases.json",
+    "verify:estate": "node --experimental-vm-modules scripts/verify-estate.mjs config/regression.cases.json",
     "verify:memory": "node --experimental-vm-modules scripts/verify-memory-parity.mjs config/regression.cases.json",
     "qualify:pilots": "node scripts/qualify-pilots.mjs",
     "package:pilots": "node scripts/package-qualified-pilots.mjs",

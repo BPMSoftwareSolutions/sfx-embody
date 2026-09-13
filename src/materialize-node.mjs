@@ -103,7 +103,9 @@ export async function planNode({ bundle, sdaRoot }) {
   // its owning capability, so the closure can resolve a target outside this one.
   // Retained generations also place their declared feature under features/.
   // Ownership is its capability annotation, independent of the file name.
-  const featureRecords = records.filter(r => r.source_path.startsWith('capabilities/') && r.source_path.endsWith('.feature'));
+  const featureRecords = [feature, ...records.filter(r => r.source_path !== feature.source_path
+    && r.source_path.startsWith('capabilities/') && r.source_path.endsWith('.feature')
+    && ![...r.text.matchAll(/^\s*@capability:([^\s]+)\s*$/gm)].some(match => match[1] === capabilityId))];
   const parsedScenarios = featureRecords.flatMap(record => {
     const owner = one([...record.text.matchAll(/^\s*@capability:([^\s]+)\s*$/gm)].map(match => match[1]), 'FEATURE_CAPABILITY_AUTHORITY');
     return gherkin.build(record.text).map(scenario => ({ owner, scenario }));

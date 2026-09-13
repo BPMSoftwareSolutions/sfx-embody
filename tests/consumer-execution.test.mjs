@@ -5,6 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { executeConsumerPlan } from '../src/resolvers/node/consumer-execution-provider.mjs';
+import { registerConsumerAuthority, recordConsumerInputAdmission, requireAdmittedConsumerAuthority } from '../src/resolvers/node/consumer-authority-context.mjs';
 
 const hash = value => 'sha256:' + crypto.createHash('sha256').update(value).digest('hex');
 async function fixture(t, source) {
@@ -32,9 +33,22 @@ console.log(JSON.stringify({type:'result',result:reply.outcome}));lines.close();
 
 test('a native invocation reaches only its bound provider with the original input', async t => {
   const { input, context } = await fixture(t, worker('declared'));
+  const observations = [];
+  context.onObservation = value => observations.push(value);
+  context.collectProviderExecution = value => {
+    value.input.text = 'changed by evidence collector';
+    value.outcome.received.text = 'changed by evidence collector';
+  };
   const result = await executeConsumerPlan({}, input, context);
   assert.deepEqual(result.result, { received: input.scenarioInput });
   assert.equal(result.process.exitCode, 0);
+  assert.deepEqual(observations.map(({ phase, status }) => [phase, status]), [
+    ['executeConsumerPlan', 'started'], ['invokeProvider', 'started'],
+    ['invokeProvider', 'completed'], ['executeConsumerPlan', 'completed']
+  ]);
+  assert.equal(JSON.stringify(observations).includes(input.scenarioInput.text), false);
+  context.onObservation = () => { throw new Error('observer unavailable'); };
+  assert.deepEqual((await executeConsumerPlan({}, input, context)).result, result.result);
 });
 
 test('an undeclared cell cannot invoke a physical provider', async t => {
@@ -55,4 +69,22 @@ test('native execution observes its declared time and output bounds', async t =>
   const output = await fixture(t, 'console.log("x".repeat(500));setInterval(()=>{},1000)');
   output.input.executionAuthority.runtime.maximumOutputBytes = 100;
   await assert.rejects(executeConsumerPlan({}, output.input, output.context), /DECLARED_EXECUTION_OUTPUT_LIMIT/);
+});
+
+test('request fields cannot assert database authority or input admission', async () => {
+  const input = { inputAdmitted: true, scenario: { input: { contractId: 'request.v1' } }, scenarioInput: {} };
+  await assert.rejects(executeConsumerPlan({ authoritySource: 'DATABASE' }, input, {}), /DECLARED_EXECUTION_AUTHORITY_NOT_ADMITTED/);
+});
+
+test('admission is bound to both the database plan and the admitted input', () => {
+  const context = {}, input = { plan: { target: 'python' }, executionAuthority: { runtime: { command: 'python' } },
+    providerBindings: [], authorityIdentity: { planDigest: 'one' }, scenario: { input: { contractId: 'request.v1' } },
+    scenarioInput: { value: 1 } };
+  registerConsumerAuthority(context, input);
+  assert.throws(() => requireAdmittedConsumerAuthority(context, input), /NOT_ADMITTED/);
+  recordConsumerInputAdmission(context, input, 'request.v1');
+  assert.doesNotThrow(() => requireAdmittedConsumerAuthority(context, structuredClone(input)));
+  assert.throws(() => requireAdmittedConsumerAuthority(context, { ...input, scenarioInput: { value: 2 } }), /NOT_ADMITTED/);
+  assert.throws(() => requireAdmittedConsumerAuthority(context, { ...input, executionAuthority: { runtime: { command: 'different' } } }), /NOT_ADMITTED/);
+  assert.throws(() => requireAdmittedConsumerAuthority({}, input), /NOT_ADMITTED/);
 });

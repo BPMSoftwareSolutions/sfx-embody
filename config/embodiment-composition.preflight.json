@@ -1,0 +1,143 @@
+[
+  {
+    "name": "node invokes the declared capability composition",
+    "capabilityId": "execute-declared-capability",
+    "input": {
+      "capabilityId": "compose-resolve-equity-market-price-evidence",
+      "target": "node",
+      "scenarioInput": {
+        "contractId": "live-equity-price-request.v1",
+        "payload": {
+          "symbol": "MSFT",
+          "region": "US"
+        }
+      }
+    },
+    "expected": {
+      "disposition": "EXECUTION_COMPLETED",
+      "execution.result.disposition": "completed",
+      "execution.result.outcome.disposition": "EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED"
+    }
+  },
+  {
+    "name": "node plans the composed capability",
+    "capabilityId": "construct-embodiment-plan",
+    "input": {
+      "capabilityId": "compose-resolve-equity-market-price-evidence",
+      "target": "node"
+    },
+    "expected": {
+      "contractId": "capability-embodiment-plan.v1",
+      "target": "node",
+      "fileCount": 5
+    }
+  },
+  {
+    "name": "python invokes the declared capability composition",
+    "capabilityId": "execute-declared-capability",
+    "input": {
+      "capabilityId": "compose-resolve-equity-market-price-evidence",
+      "target": "python",
+      "scenarioInput": {
+        "contractId": "live-equity-price-request.v1",
+        "payload": {
+          "symbol": "MSFT",
+          "region": "US"
+        }
+      }
+    },
+    "expected": {
+      "disposition": "EXECUTION_COMPLETED",
+      "execution.result.disposition": "completed",
+      "execution.result.outcome.disposition": "EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED"
+    }
+  },
+  {
+    "name": "python plans the composed capability",
+    "capabilityId": "construct-embodiment-plan",
+    "input": {
+      "capabilityId": "compose-resolve-equity-market-price-evidence",
+      "target": "python"
+    },
+    "expected": {
+      "contractId": "capability-embodiment-plan.v1",
+      "target": "python",
+      "fileCount": 5
+    }
+  },
+  {
+    "name": "csharp invokes the declared capability composition",
+    "capabilityId": "execute-declared-capability",
+    "input": {
+      "capabilityId": "compose-resolve-equity-market-price-evidence",
+      "target": "csharp",
+      "scenarioInput": {
+        "contractId": "live-equity-price-request.v1",
+        "payload": {
+          "symbol": "MSFT",
+          "region": "US"
+        }
+      }
+    },
+    "expected": {
+      "disposition": "EXECUTION_COMPLETED",
+      "execution.result.disposition": "completed",
+      "execution.result.outcome.disposition": "EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED"
+    }
+  },
+  {
+    "name": "csharp plans the composed capability",
+    "capabilityId": "construct-embodiment-plan",
+    "input": {
+      "capabilityId": "compose-resolve-equity-market-price-evidence",
+      "target": "csharp"
+    },
+    "expected": {
+      "contractId": "capability-embodiment-plan.v1",
+      "target": "csharp",
+      "fileCount": 5
+    }
+  },
+  {
+    "name": "node writes the composed consumer plan",
+    "capabilityId": "materialize-capability-embodiment",
+    "input": {
+      "capabilityId": "compose-resolve-equity-market-price-evidence",
+      "target": "node"
+    },
+    "outputRoot": "evidence/python-csharp-embodiment/composition-preflight",
+    "expected": {
+      "contractId": "capability-embodiment-materialization.v1",
+      "target": "node"
+    },
+    "verifyWrittenFiles": true
+  },
+  {
+    "name": "python writes the composed consumer plan",
+    "capabilityId": "materialize-capability-embodiment",
+    "input": {
+      "capabilityId": "compose-resolve-equity-market-price-evidence",
+      "target": "python"
+    },
+    "outputRoot": "evidence/python-csharp-embodiment/composition-preflight",
+    "expected": {
+      "contractId": "capability-embodiment-materialization.v1",
+      "target": "python"
+    },
+    "verifyWrittenFiles": true
+  },
+  {
+    "name": "csharp writes the composed consumer plan",
+    "capabilityId": "materialize-capability-embodiment",
+    "input": {
+      "capabilityId": "compose-resolve-equity-market-price-evidence",
+      "target": "csharp"
+    },
+    "outputRoot": "evidence/python-csharp-embodiment/composition-preflight",
+    "expected": {
+      "contractId": "capability-embodiment-materialization.v1",
+      "target": "csharp"
+    },
+    "verifyWrittenFiles": true
+  }
+]

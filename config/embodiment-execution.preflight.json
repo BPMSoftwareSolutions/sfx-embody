@@ -1,0 +1,72 @@
+[
+  {
+    "name": "python completed with admitted outcome",
+    "capabilityId": "execute-declared-capability",
+    "input": {
+      "capabilityId": "resolve-equity-market-price-evidence",
+      "target": "python",
+      "scenarioInput": {
+        "contractId": "live-equity-price-request.v1",
+        "payload": {
+          "symbol": "MSFT",
+          "region": "US"
+        }
+      }
+    },
+    "expected": {
+      "disposition": "EXECUTION_COMPLETED",
+      "execution.result.disposition": "completed",
+      "execution.result.outcome.disposition": "EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED"
+    }
+  },
+  {
+    "name": "python invalid input reaches no execution",
+    "capabilityId": "execute-declared-capability",
+    "input": {
+      "capabilityId": "resolve-equity-market-price-evidence",
+      "target": "python",
+      "scenarioInput": {}
+    },
+    "expected": {
+      "disposition": "INPUT_REJECTED"
+    },
+    "absent": [
+      "execution"
+    ]
+  },
+  {
+    "name": "csharp completed with admitted outcome",
+    "capabilityId": "execute-declared-capability",
+    "input": {
+      "capabilityId": "resolve-equity-market-price-evidence",
+      "target": "csharp",
+      "scenarioInput": {
+        "contractId": "live-equity-price-request.v1",
+        "payload": {
+          "symbol": "MSFT",
+          "region": "US"
+        }
+      }
+    },
+    "expected": {
+      "disposition": "EXECUTION_COMPLETED",
+      "execution.result.disposition": "completed",
+      "execution.result.outcome.disposition": "EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED"
+    }
+  },
+  {
+    "name": "csharp invalid input reaches no execution",
+    "capabilityId": "execute-declared-capability",
+    "input": {
+      "capabilityId": "resolve-equity-market-price-evidence",
+      "target": "csharp",
+      "scenarioInput": {}
+    },
+    "expected": {
+      "disposition": "INPUT_REJECTED"
+    },
+    "absent": [
+      "execution"
+    ]
+  }
+]

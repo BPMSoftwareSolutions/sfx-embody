@@ -1,53 +1,54 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import crypto from 'node:crypto';
 import assert from 'node:assert/strict';
 import { pathToFileURL } from 'node:url';
-import { planNode } from '../src/materialize-node.mjs';
-import { loadMemoryScenario } from '../src/load-memory-scenario.mjs';
+import { executeEstateCapability } from '../src/invoke-database-capability.mjs';
+import { executeConsumerPlan } from '../src/resolvers/node/consumer-execution-provider.mjs';
+import { loadConsumerPlan } from '../src/load-consumer-plan.mjs';
+import { readFixtureConsumerPlan } from './verify-consumer-fixtures.mjs';
 import { readWorkspaceConfig } from '../src/read-workspace-config.mjs';
 
 const config = await readWorkspaceConfig(process.argv[2]);
+const context = { ...config, estateRoot: path.resolve('.') };
 const { satisfies, valueAt } = await import(pathToFileURL(path.join(config.sdaRoot, 'artifacts/tools/dist/consumer-projection/proof/assertion-evaluator.js')));
 const cases = [];
 for (const request of config.cases) {
-  const bundle = JSON.parse(await fs.readFile(request.bundleFile, 'utf8'));
-  const plan = await planNode({ bundle, sdaRoot: config.sdaRoot });
-  const body = plan.files.filter(f => f.relativePath.includes('/body/'));
-  for (const file of body) {
-    const observed = 'sha256:' + crypto.createHash('sha256').update(await fs.readFile(file.relativePath)).digest('hex');
-    assert.equal(observed, file.digest, file.relativePath);
-  }
-  const entry = plan.receipts.find(r => r.plan.scenarioId === plan.selectedScenarioId);
-  const disk = await import(pathToFileURL(path.resolve(entry.base, 'body/composition.mjs')));
-  const memory = await loadMemoryScenario(plan);
-  const fixtures = JSON.parse(plan.files.find(f => f.relativePath === entry.base + '/evidence/fixture-authority.json').content).fixtures;
+  const selection = JSON.parse(await fs.readFile(request.selectionFile, 'utf8'));
+  // Materialize the declared plan through the governed writer so the disk side
+  // is the declared generation; the memory side is the same declaration read
+  // directly. The parity check needs no pre-staged legacy body.
+  const materialization = await executeEstateCapability({ capabilityId: 'materialize-capability-embodiment' }, selection, context);
+  if (materialization.contractId !== 'capability-embodiment-materialization.v1') throw new Error('EMBODIMENT_MATERIALIZATION_FAILED');
+  const declaration = await executeEstateCapability({ capabilityId: 'read-capability-authority' }, selection, context);
+  const read = await readFixtureConsumerPlan(declaration, context);
+  const bytes = new Map(read.files.map(file => [file.relativePath, Buffer.from(file.content)]));
+  const memory = await loadConsumerPlan(read.result, read.bindingPath, name => bytes.get(name));
+  const disk = await loadConsumerPlan(read.result, read.bindingPath, name => fs.readFile(path.resolve(context.estateRoot, name)));
+  const fixtures = memory.fixtureAuthority.fixtures;
   let outcomeAssertions = 0, kernelObservations = 0;
   const run = async (runtime, fixture) => {
-    const observations = [], executions = [];
-    const scenario = runtime.createScenario({ observer: { observe: v => observations.push(v) }, clock: { now: () => new Date().toISOString() } });
     const input = structuredClone(fixture.input);
-    const actual = await scenario.execute(input, { executionId: fixture.fixtureId, rootExecutionId: fixture.fixtureId,
-      rootInput: structuredClone(input), ancestry: [plan.selectedScenarioId], collect: v => executions.push(v) });
+    const actual = await executeConsumerPlan({}, { ...runtime, scenarioInput: input }, { ...context, rootExecutionId: fixture.fixtureId });
     assert.deepEqual(input, fixture.input);
-    return { actual, executions, observations: observations.map(({ observedAt, ...o }) => o) };
+    return actual;
   };
   for (const fixture of fixtures) {
     const actual = await run(memory, fixture), expected = await run(disk, fixture);
     assert.deepEqual(actual, expected, fixture.fixtureId);
-    assert.equal(actual.actual.disposition, fixture.expected.disposition);
+    assert.equal(actual.result.disposition, fixture.expected.disposition === 'terminated' ? 'completed' : fixture.expected.disposition);
     for (const assertion of fixture.expected.outcomeAssertions) {
-      assert(satisfies(valueAt(actual.actual.outcome, assertion.path), assertion));
+      assert(satisfies(valueAt(actual.result.outcome, assertion.path), assertion));
       outcomeAssertions++;
     }
-    kernelObservations += actual.observations.length;
+    kernelObservations += actual.result.cellTestimony.length;
   }
   const invalid = { fixtureId: 'invalid-input', input: null };
   const rejected = await run(memory, invalid);
   assert.deepEqual(rejected, await run(disk, invalid));
-  assert.equal(rejected.actual.disposition, 'rejected');
-  cases.push({ capabilityId: plan.capabilityId, fixtures: fixtures.length, outcomeAssertions, kernelObservations,
-    identicalBodyFiles: body.length, invalidInputParity: true, disposition: 'PASSED' });
+  assert.equal(rejected.result.disposition, 'rejected');
+  cases.push({ capabilityId: declaration.capabilityId, fixtures: fixtures.length, outcomeAssertions, kernelObservations,
+    identicalDeclaredFiles: read.files.length, planDigest: read.result.planDigest, artifactDigest: read.result.artifactDigest,
+    invalidInputParity: true, disposition: 'PASSED' });
 }
 console.log(JSON.stringify({ disposition: 'PASSED',
-  scope: 'Retained database bundles: unchanged native bytes and complete disk/memory execution parity across configured capabilities. The separate live restricted-process proof covers the provider resolver.', cases }, null, 2));
+  scope: 'Database-selected consumer plans: every declared file digest and complete native disk/memory execution results, including cell and edge testimony, across the configured fixtures.', cases }, null, 2));

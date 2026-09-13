@@ -1,8 +1,0 @@
-[
-  {
-    "id": "resolve-sidefx-eligible-providers-port",
-    "module": "./providers/resolve-sidefx-eligible-providers-port.mjs",
-    "className": "ResolveSidefxEligibleProvidersPort",
-    "kind": "invoke-port"
-  }
-]

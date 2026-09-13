@@ -1,0 +1,56 @@
+[
+  {
+    "name": "The declared writer retires only unchanged files of the previous body",
+    "capabilityId": "materialize-capability-embodiment",
+    "input": {
+      "capabilityId": "resolve-equity-market-price-evidence",
+      "target": "node"
+    },
+    "expected": {
+      "contractId": "capability-embodiment-materialization.v1",
+      "fileCount": 5
+    },
+    "verifyWrittenFiles": true,
+    "absentFiles": [
+      "embodiments/resolve-equity-market-price-evidence/scenarios/resolve-equity-market-price-evidence/node/body/providers/build-equity-price-binding-request.mjs",
+      "embodiments/resolve-equity-market-price-evidence/scenarios/resolve-equity-market-price-evidence/node/body/providers/bind-equity-price-provider-credential.mjs",
+      "embodiments/resolve-equity-market-price-evidence/scenarios/resolve-equity-market-price-evidence/node/body/providers/build-equity-price-exchange-request.mjs",
+      "embodiments/resolve-equity-market-price-evidence/scenarios/resolve-equity-market-price-evidence/node/body/providers/observe-equity-price-exchange.mjs",
+      "embodiments/resolve-equity-market-price-evidence/scenarios/resolve-equity-market-price-evidence/node/body/providers/normalize-equity-price-evidence.mjs",
+      "embodiments/resolve-equity-market-price-evidence/scenarios/resolve-equity-market-price-evidence/node/body/providers/native-mechanics.mjs",
+      "embodiments/resolve-equity-market-price-evidence/scenarios/resolve-equity-market-price-evidence/node/body/scenario.mjs",
+      "embodiments/resolve-equity-market-price-evidence/scenarios/resolve-equity-market-price-evidence/node/body/dependencies.json",
+      "embodiments/resolve-equity-market-price-evidence/scenarios/resolve-equity-market-price-evidence/node/body/contracts/equity-market-price-evidence-v1-provider-testimony.ts",
+      "embodiments/resolve-equity-market-price-evidence/scenarios/resolve-equity-market-price-evidence/node/body/contracts/equity-market-price-evidence-v1-payload.ts",
+      "embodiments/resolve-equity-market-price-evidence/scenarios/resolve-equity-market-price-evidence/node/body/contracts/equity-market-price-evidence-v1.ts",
+      "embodiments/resolve-equity-market-price-evidence/scenarios/resolve-equity-market-price-evidence/node/body/contracts/live-equity-price-request-v1-payload.ts",
+      "embodiments/resolve-equity-market-price-evidence/scenarios/resolve-equity-market-price-evidence/node/body/contracts/live-equity-price-request-v1.ts",
+      "embodiments/resolve-equity-market-price-evidence/scenarios/resolve-equity-market-price-evidence/node/body/contracts/index.ts",
+      "embodiments/resolve-equity-market-price-evidence/scenarios/resolve-equity-market-price-evidence/node/body/contracts/authority.json",
+      "embodiments/resolve-equity-market-price-evidence/scenarios/resolve-equity-market-price-evidence/node/body/providers/native-mechanic-primitives.mjs",
+      "embodiments/resolve-equity-market-price-evidence/scenarios/resolve-equity-market-price-evidence/node/body/providers/sda/languages/typescript/dist/src/kernel/scenario-kernel.js",
+      "embodiments/resolve-equity-market-price-evidence/scenarios/resolve-equity-market-price-evidence/node/body/providers/sda/languages/typescript/dist/src/execution/index.js",
+      "embodiments/resolve-equity-market-price-evidence/scenarios/resolve-equity-market-price-evidence/node/body/providers/sda/languages/typescript/dist/src/execution/contract-validator.js",
+      "embodiments/resolve-equity-market-price-evidence/scenarios/resolve-equity-market-price-evidence/node/body/providers/sda/languages/typescript/dist/src/execution/execution-authority-resolver.js",
+      "embodiments/resolve-equity-market-price-evidence/scenarios/resolve-equity-market-price-evidence/node/body/providers/sda/languages/typescript/dist/src/execution/semantic-executor.js",
+      "embodiments/resolve-equity-market-price-evidence/scenarios/resolve-equity-market-price-evidence/node/body/providers/sda/languages/typescript/dist/src/execution/disposition-resolver.js",
+      "embodiments/resolve-equity-market-price-evidence/scenarios/resolve-equity-market-price-evidence/node/body/providers/sda/languages/typescript/dist/src/execution/execution-observer.js",
+      "embodiments/resolve-equity-market-price-evidence/scenarios/resolve-equity-market-price-evidence/node/body/providers/sda/languages/typescript/dist/src/kernel/disposition-resolver.js",
+      "embodiments/resolve-equity-market-price-evidence/scenarios/resolve-equity-market-price-evidence/node/body/providers/sda/languages/typescript/runtimes/node/schema-contract-admission-provider.mjs",
+      "embodiments/resolve-equity-market-price-evidence/scenarios/resolve-equity-market-price-evidence/node/body/providers/sda/languages/typescript/runtimes/node/external-credential-reference-binding-provider.mjs",
+      "embodiments/resolve-equity-market-price-evidence/scenarios/resolve-equity-market-price-evidence/node/body/providers/sda/languages/typescript/runtimes/node/native-mechanic-primitives.mjs",
+      "embodiments/resolve-equity-market-price-evidence/scenarios/resolve-equity-market-price-evidence/node/body/providers/sda/languages/typescript/runtimes/node/governed-http-exchange-provider.mjs",
+      "embodiments/resolve-equity-market-price-evidence/scenarios/resolve-equity-market-price-evidence/node/body/package.json",
+      "embodiments/resolve-equity-market-price-evidence/scenarios/resolve-equity-market-price-evidence/node/body/composition.mjs",
+      "embodiments/resolve-equity-market-price-evidence/scenarios/resolve-equity-market-price-evidence/node/evidence/embodiment-plan.json",
+      "embodiments/resolve-equity-market-price-evidence/scenarios/resolve-equity-market-price-evidence/node/embodiment.receipt.json"
+    ],
+    "retainedFiles": [
+      {
+        "relativePath": "embodiments/resolve-equity-market-price-evidence/scenarios/resolve-equity-market-price-evidence/node/body/retained-user-file.txt",
+        "content": "Unlisted content must be preserved.\n"
+      }
+    ],
+    "outputRoot": "evidence/python-csharp-embodiment/retirement-preflight"
+  }
+]

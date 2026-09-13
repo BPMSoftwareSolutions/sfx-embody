@@ -3,6 +3,8 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { pathToFileURL } from 'node:url';
 import { readExecutionGraph } from '../../read-execution-graph.mjs';
+import Ajv from 'ajv';
+import { registerConsumerAuthority } from './consumer-authority-context.mjs';
 
 const hash = value => 'sha256:' + crypto.createHash('sha256').update(value).digest('hex');
 const pretty = value => JSON.stringify(value, null, 2) + '\n';
@@ -38,7 +40,8 @@ export async function readConsumerEmbodimentPlan(configuration, bindingSet, cont
     const port = cell.execution.configuration?.binding;
     if (!port) {
       const mechanic = one(mechanics.filter(mechanic => mechanic.mechanic_id === slot.mechanicId), 'PROVIDER_IMPLEMENTATION_ABSENT:' + slot.mechanicId);
-      pureMechanics.set(slot.mechanicId, mechanic.implementation_ref);
+      pureMechanics.set(slot.mechanicId, { implementationRef: mechanic.implementation_ref,
+        profile: mechanic.effect_classification === 'effect' ? effect : pure });
       continue;
     }
     const binding = one(bindings.filter(candidate => candidate.port_id === port.portId), 'DECLARED_OPERATION_PROVIDER_UNBOUND:' + slot.slotId);
@@ -56,12 +59,12 @@ export async function readConsumerEmbodimentPlan(configuration, bindingSet, cont
       implementationRef: binding.host_implementation_ref, implementationDigest: binding.host_implementation_digest,
       providerExport: binding.host_provider_export });
   }
-  for (const [mechanicId, implementationRef] of pureMechanics) selections.push({ targetId: declaration.target,
-    profileId: pure.provider_profile_id, profileDigest: pure.profile_definition_digest, implementationRef, mechanicIds: [mechanicId] });
+  for (const [mechanicId, { implementationRef, profile }] of pureMechanics) selections.push({ targetId: declaration.target,
+    profileId: profile.provider_profile_id, profileDigest: profile.profile_definition_digest, implementationRef, mechanicIds: [mechanicId] });
   const moduleRoot = path.join(context.sdaRoot, 'languages/typescript/runtimes/node/semantic-execution-graph');
   const { resolveRealizationOverlay } = await import(pathToFileURL(path.join(moduleRoot, 'overlay-resolver.js')).href);
   const { createPlanV3 } = await import(pathToFileURL(path.join(moduleRoot, 'plan-v3.js')).href);
-  const bindingAuthorities = (read.graphInput.interfaceAuthority.projectionBindings ?? []).map(binding => ({ id: binding.bindingId, binding }));
+  const bindingAuthorities = (read.graphInput.interfaceAuthority.projectionBindings ?? []).map(binding => ({ id: binding.projectionId, binding }));
   const plan = createPlanV3(graph, resolveRealizationOverlay(graph, declaration.target, selections), read.compiled.sourceMap, read.contractCatalog, bindingAuthorities);
   const base = [configuration.relativeRoot, segment(declaration.capabilityId), 'scenarios', segment(declaration.scenarioId), segment(declaration.target)].join('/');
   const fromBinding = file => path.posix.relative(path.posix.dirname(configuration.files.binding), file);
@@ -87,4 +90,16 @@ export async function readConsumerEmbodimentPlan(configuration, bindingSet, cont
 
 export async function planConsumerEmbodiment(configuration, input, context) {
   return (await readConsumerEmbodimentPlan(configuration, input, context)).result;
+}
+
+export async function readConsumerExecutionPlan(configuration, input, context) {
+  const { evaluateExpression } = await import(pathToFileURL(path.join(context.sdaRoot,
+    'languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs')).href);
+  if (configuration.inputAdmission && !new Ajv({ strict: false }).validate(configuration.inputAdmission, input))
+    return evaluateExpression(configuration.admissionFailureExpression, { input, root: input });
+  const read = await readConsumerEmbodimentPlan(configuration.planner, input, context);
+  const scenario = read.plan.canonicalGraph.cells.find(cell => cell.cellId === read.plan.canonicalGraph.rootCellId);
+  const result = evaluateExpression(configuration.expression, { input: { carrier: input, ...read, scenario }, root: input });
+  registerConsumerAuthority(context, result);
+  return result;
 }

@@ -1,0 +1,157 @@
+[
+  {
+    "name": "Direct invocation consumes the selected declaration",
+    "capabilityId": "read-capability-authority",
+    "input": {
+      "capabilityId": "resolve-equity-market-price-evidence"
+    },
+    "expected": {
+      "target": "node"
+    },
+    "verifyDatabaseCommand": {
+      "request": {
+        "object": "capability",
+        "verb": "invoke",
+        "subject": "resolve-equity-market-price-evidence",
+        "namespace": "sidefx:capabilities",
+        "input": {
+          "contractId": "live-equity-price-request.v1",
+          "payload": {
+            "symbol": "MSFT",
+            "region": "US"
+          }
+        }
+      },
+      "expected": {
+        "disposition": "terminated",
+        "outcome.result.disposition": "terminated",
+        "outcome.result.outcome.disposition": "EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED"
+      }
+    }
+  },
+  {
+    "name": "Direct invocation preserves input rejection",
+    "capabilityId": "read-capability-authority",
+    "input": {
+      "capabilityId": "resolve-equity-market-price-evidence"
+    },
+    "expected": {
+      "target": "node"
+    },
+    "verifyDatabaseCommand": {
+      "request": {
+        "object": "capability",
+        "verb": "invoke",
+        "subject": "resolve-equity-market-price-evidence",
+        "namespace": "sidefx:capabilities",
+        "input": {}
+      },
+      "expected": {
+        "disposition": "terminated",
+        "outcome.result.disposition": "rejected",
+        "outcome.result.executionDisposition": "INPUT_REJECTED"
+      }
+    }
+  },
+  {
+    "name": "Observation executes the same declared plan and streams native provider telemetry",
+    "capabilityId": "read-capability-authority",
+    "input": {
+      "capabilityId": "resolve-equity-market-price-evidence"
+    },
+    "expected": {
+      "target": "node"
+    },
+    "verifyDatabaseCommand": {
+      "request": {
+        "object": "capability",
+        "verb": "observe",
+        "subject": "resolve-equity-market-price-evidence",
+        "namespace": "sidefx:capabilities",
+        "input": {
+          "contractId": "live-equity-price-request.v1",
+          "payload": {
+            "symbol": "MSFT",
+            "region": "US"
+          }
+        }
+      },
+      "expected": {
+        "disposition": "terminated",
+        "outcome.result.disposition": "terminated",
+        "outcome.result.outcome.disposition": "EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED"
+      },
+      "requireProviderObservation": true
+    }
+  },
+  {
+    "name": "python invocation uses its declared consumer",
+    "capabilityId": "read-capability-authority",
+    "input": {
+      "capabilityId": "resolve-equity-market-price-evidence",
+      "target": "python"
+    },
+    "expected": {
+      "target": "python"
+    },
+    "verifyDatabaseCommand": {
+      "request": {
+        "object": "capability",
+        "verb": "invoke",
+        "subject": "execute-declared-capability",
+        "input": {
+          "capabilityId": "resolve-equity-market-price-evidence",
+          "target": "python",
+          "scenarioInput": {
+            "contractId": "live-equity-price-request.v1",
+            "payload": {
+              "symbol": "MSFT",
+              "region": "US"
+            }
+          }
+        }
+      },
+      "expected": {
+        "disposition": "terminated",
+        "outcome.result.outcome.disposition": "EXECUTION_COMPLETED",
+        "outcome.result.outcome.execution.result.outcome.disposition": "EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED",
+        "outcome.result.outcome.authorityIdentity.target": "python"
+      }
+    }
+  },
+  {
+    "name": "csharp invocation uses its declared consumer",
+    "capabilityId": "read-capability-authority",
+    "input": {
+      "capabilityId": "resolve-equity-market-price-evidence",
+      "target": "csharp"
+    },
+    "expected": {
+      "target": "csharp"
+    },
+    "verifyDatabaseCommand": {
+      "request": {
+        "object": "capability",
+        "verb": "invoke",
+        "subject": "execute-declared-capability",
+        "input": {
+          "capabilityId": "resolve-equity-market-price-evidence",
+          "target": "csharp",
+          "scenarioInput": {
+            "contractId": "live-equity-price-request.v1",
+            "payload": {
+              "symbol": "MSFT",
+              "region": "US"
+            }
+          }
+        }
+      },
+      "expected": {
+        "disposition": "terminated",
+        "outcome.result.outcome.disposition": "EXECUTION_COMPLETED",
+        "outcome.result.outcome.execution.result.outcome.disposition": "EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED",
+        "outcome.result.outcome.authorityIdentity.target": "csharp"
+      }
+    }
+  }
+]

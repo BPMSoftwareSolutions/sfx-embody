@@ -26,6 +26,7 @@ try {
   const { connectionEnvironmentVariable } = await readDatabaseConfig();
   process.env[connectionEnvironmentVariable] = connectionString(connectionEnvironmentVariable);
   const processEvidence = restrictMemoryProcess(config);
+  config.spawnDeclared = processEvidence.spawnDeclared;
   if (process.env.SIDEFX_OBSERVE === '1') {
     config.onObservation = observation => {
       // Only telemetry leaves this channel. Inputs, provider bodies and secrets

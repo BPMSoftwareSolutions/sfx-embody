@@ -5,6 +5,8 @@
 // the declared invocation closure and the mechanic declarations, bound to the
 // snapshot and projection that produced them. It writes nothing.
 import { readAuthority } from '../../read-authority.mjs';
+import { pathToFileURL } from 'node:url';
+import path from 'node:path';
 
 export async function readCapabilityAuthority(configuration, input, context) {
   const { databaseRoot } = context;
@@ -12,6 +14,7 @@ export async function readCapabilityAuthority(configuration, input, context) {
     throw new Error('READ_CAPABILITY_ID_REQUIRED');
   const target = input.target ?? configuration.defaultTarget;
   const selection = { capabilityId: input.capabilityId, target,
+    ...(typeof input.namespaceId === 'string' && input.namespaceId.length > 0 ? { namespaceId: input.namespaceId } : {}),
     ...(typeof input.scenarioId === 'string' && input.scenarioId.length > 0 ? { scenarioId: input.scenarioId } : {}) };
   const bundle = await (context.readAuthority ?? readAuthority)(databaseRoot, selection, { retainObjects: false });
   const profiles = bundle.authority.recordsets[3];
@@ -19,7 +22,7 @@ export async function readCapabilityAuthority(configuration, input, context) {
     const count = profiles?.filter(profile => profile.target_id === target && profile.effect_classification === role).length ?? 0;
     if (count !== 1) throw new Error((count === 0 ? configuration.profileAbsent : configuration.profileAmbiguous) + ':' + target + ':' + role + ':' + count);
   }
-  return {
+  const result = {
     contractId: 'capability-authority-declaration.v1',
     capabilityId: input.capabilityId,
     scenarioId: bundle.authority.recordsets[0][0].scenario_id,
@@ -31,4 +34,8 @@ export async function readCapabilityAuthority(configuration, input, context) {
     closure: bundle.closure,
     mechanics: bundle.mechanics
   };
+  if (!configuration.expression) return result;
+  const { evaluateExpression } = await import(pathToFileURL(path.join(context.sdaRoot,
+    'languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs')).href);
+  return evaluateExpression(configuration.expression, { input: { request: input, result }, root: input });
 }

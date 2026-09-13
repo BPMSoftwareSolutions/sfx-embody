@@ -7,3 +7,5 @@ embodiment.receipt.json
 .env.*
 !.env.example
 .tmp*/
+# Compiled implementations are verified against their database declarations.
+providers/consumer-execution/

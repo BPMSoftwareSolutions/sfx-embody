@@ -1463,7 +1463,20 @@ BEGIN
   DECLARE @portId nvarchar(400)=@capId+N'-port';
   DECLARE @portSo bigint, @portPk bigint, @psod bigint, @pver bigint;
   SELECT @portSo=p.semantic_object_pk, @portPk=p.port_pk FROM model.port p JOIN model.identity_namespace n ON n.namespace_pk=p.namespace_pk WHERE n.namespace_id=N'sidefx:capability:'+@capId AND p.port_id=@portId;
-  DECLARE @portEnv nvarchar(max)=N'{"address":{"id":"'+@portId+N'","kind":"PORT","namespace":"sidefx:capability:'+@capId+N'"},"format":"sidefx-semantic-definition.v1","semantics":{"configuration":{"estateProvider":{"module":"'+@provider_module+N'","export":"'+@provider_export+N'"}},"platformCapabilityId":"sda-embodiment-plan-port.v1","portId":"'+@portId+N'"}}';
+  -- Declare the estate provider implementation as a provider; the Port names it by id.
+  DECLARE @providerId nvarchar(400)=REPLACE(REPLACE(@provider_module,'src/resolvers/node/',''),'.mjs','')+N'.'+@provider_export;
+  DECLARE @provObject bigint, @provDefinition bigint, @provDigest binary(32), @provNamespace bigint, @provPk bigint;
+  SET @provNamespace=(SELECT namespace_pk FROM model.identity_namespace WHERE namespace_kind='PROVIDER' AND namespace_id=N'sidefx:providers');
+  IF @provNamespace IS NULL BEGIN INSERT model.identity_namespace(namespace_kind,namespace_id) VALUES('PROVIDER',N'sidefx:providers'); SET @provNamespace=SCOPE_IDENTITY(); END
+  EXEC model.put_semantic_definition 'PROVIDER',N'sidefx:providers',@providerId,
+   N'{"module":"'+@provider_module+N'","export":"'+@provider_export+N'","declarationProfile":"sda-estate-provider-implementation.v1"}',
+   @provObject OUTPUT,@provDefinition OUTPUT,@provDigest OUTPUT;
+  SET @provPk=(SELECT provider_pk FROM model.provider WHERE namespace_pk=@provNamespace AND provider_id=@providerId);
+  IF @provPk IS NULL BEGIN INSERT model.provider(namespace_pk,provider_id,semantic_object_pk,object_kind) VALUES(@provNamespace,@providerId,@provObject,'PROVIDER'); SET @provPk=SCOPE_IDENTITY(); END
+  IF NOT EXISTS (SELECT 1 FROM model.provider_definition WHERE provider_pk=@provPk AND semantic_object_definition_pk=@provDefinition)
+   INSERT model.provider_definition(provider_pk,semantic_object_pk,semantic_object_definition_pk,definition_digest,name,declaration_profile,object_kind,_owner_definition_pk,_canonical_pointer)
+   VALUES(@provPk,@provObject,@provDefinition,@provDigest,@providerId,'sda-estate-provider-implementation.v1','PROVIDER',@provDefinition,N'');
+  DECLARE @portEnv nvarchar(max)=N'{"address":{"id":"'+@portId+N'","kind":"PORT","namespace":"sidefx:capability:'+@capId+N'"},"format":"sidefx-semantic-definition.v1","semantics":{"configuration":{"providerId":"'+@providerId+N'"},"platformCapabilityId":"sda-embodiment-plan-port.v1","portId":"'+@portId+N'"}}';
   DECLARE @pb varbinary(max)=CONVERT(varbinary(max),CONVERT(varchar(max),(@portEnv) COLLATE Latin1_General_100_BIN2_UTF8));
   DECLARE @pd binary(32)=HASHBYTES('SHA2_256',@pb);
   IF NOT EXISTS (SELECT 1 FROM source.content_object WHERE content_digest=@pd) INSERT source.content_object (content_digest,content_bytes,byte_length) VALUES (@pd,@pb,DATALENGTH(@pb));

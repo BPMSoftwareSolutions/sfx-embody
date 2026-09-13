@@ -1,9 +1,8 @@
 import { createHash, randomUUID } from 'node:crypto';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { prepareDatabaseCapability } from './prepare-database-capability.mjs';
-import { planNode } from './materialize-node.mjs';
-import { loadMemoryScenario } from './load-memory-scenario.mjs';
 import { readAuthority } from './read-authority.mjs';
+import { readExecutionDelivery } from './read-execution-delivery.mjs';
 import { readCircuitMedia } from './read-circuit-media.mjs';
 import { readCapabilityMeaning } from './read-capability-meaning.mjs';
 import { narrateCapabilityMeaning } from './narrate-capability-meaning.mjs';
@@ -62,16 +61,20 @@ function ownerOfScenario(bundle, scenarioId) {
 export async function isEstateDelivery(bundle, context) {
   try {
     const selected = bundle.authority.recordsets[0][0].scenario_id;
-    const authority = readRootAuthority(bundle, selected);
-    if (!authority) return false;
-    for (const operation of authority.operations ?? []) {
-      if (operation.kind === 'invoke-port') {
-        if (readEstatePortBinding(bundle, operation.portId)?.configuration?.estateProvider) return true;
-      } else if (operation.kind === 'invoke-scenario') {
-        const capabilityId = ownerOfScenario(bundle, operation.scenarioId);
-        if (!capabilityId) continue;
-        const child = await (context.readAuthority ?? readAuthority)(context.databaseRoot, { capabilityId, target: 'node', scenarioId: operation.scenarioId }, { retainObjects: false });
-        if (await isEstateDelivery(child, context)) return true;
+    const pending = [selected], visited = new Set();
+    // The declaration already includes the complete invocation closure and its
+    // port bindings. Read it once, including cycles, without querying children
+    // again or executing any operation during delivery selection.
+    while (pending.length) {
+      const id = pending.pop();
+      if (visited.has(id)) continue;
+      visited.add(id);
+      const authority = readRootAuthority(bundle, id);
+      if (!authority) continue;
+      for (const operation of authority.operations ?? []) {
+        if (operation.kind === 'invoke-port') {
+          if (readEstatePortBinding(bundle, operation.portId)?.configuration?.estateProvider) return true;
+        } else if (operation.kind === 'invoke-scenario') pending.push(operation.scenarioId);
       }
     }
     return false;
@@ -82,9 +85,11 @@ export async function isEstateDelivery(bundle, context) {
 // operations: an estate-provider Port transforms the running state, and a
 // composed Scenario runs its own declared operations with that state. State is
 // threaded exactly as the declared authority orders it.
-export async function executeEstateCapability({ capabilityId, scenarioId }, state, context, ancestry = []) {
+export async function executeEstateCapability({ capabilityId, scenarioId, namespaceId }, state, context, ancestry = []) {
   const bundle = await (context.readAuthority ?? readAuthority)(context.databaseRoot,
-    { capabilityId, target: 'node', ...(scenarioId === undefined ? {} : { scenarioId }) }, { retainObjects: false });
+    { capabilityId, ...(context.deliveryTarget === undefined ? {} : { target: context.deliveryTarget }),
+      ...(namespaceId === undefined ? {} : { namespaceId }),
+      ...(scenarioId === undefined ? {} : { scenarioId }) }, { retainObjects: false });
   const selected = bundle.authority.recordsets[0][0].scenario_id;
   const authority = readRootAuthority(bundle, selected);
   if (!authority) throw new Error('ESTATE_AUTHORITY_NOT_RESOLVED:' + capabilityId);
@@ -109,6 +114,19 @@ export async function executeEstateCapability({ capabilityId, scenarioId }, stat
     }
   }
   return current;
+}
+
+// The CLI configuration supplies both carrier mappings. This boundary invokes
+// the declared execution capability and returns its declared delivery form.
+export async function executeSelectedDeclaration(delivery, selection, selected, scenarioInput, context) {
+  const { evaluateExpression } = await import(new URL('languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs',
+    pathToFileURL(context.sdaRoot.replace(/\\/g, '/') + '/')).href);
+  const rootExecutionId = context.rootExecutionId ?? randomUUID();
+  const carrier = { selection, selected, scenarioInput, rootExecutionId };
+  const input = evaluateExpression(delivery.requestExpression, { input: carrier, root: scenarioInput });
+  const executionResult = await executeEstateCapability({ capabilityId: delivery.capabilityId }, input,
+    { ...context, rootExecutionId, deliveryTarget: delivery.defaultTarget });
+  return evaluateExpression(delivery.resultExpression, { input: { ...carrier, executionResult }, root: scenarioInput });
 }
 
 const INPUT_TYPES = new Set(['json', 'text', 'number', 'boolean']);
@@ -179,9 +197,25 @@ export function validateDatabaseCommand(envelope) {
   return request;
 }
 
-export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, onObservation }) {
+export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, onObservation, spawnDeclared,
+  readAuthority: suppliedAuthorityReader, readQuery, rootExecutionId, signal }) {
   const timings = { unit: 'milliseconds', queries: {} };
-  const observe = value => { try { onObservation?.(value); } catch { /* Observation is not execution authority. */ } };
+  const observations = [];
+  const observe = value => { observations.push(value); try { onObservation?.(value); } catch { /* Observation is not execution authority. */ } };
+  // Reuse declarations only within this invocation. No retained body or
+  // declaration cache is consulted, and callers receive independent values.
+  const declarations = new Map();
+  const declarationKey = (root, selection) => JSON.stringify([root,
+    Object.entries(selection).filter(([, value]) => value !== undefined).sort(([a], [b]) => a.localeCompare(b))]);
+  const readSelectedAuthority = async (root, selection, options) => {
+    const key = declarationKey(root, selection);
+    if (declarations.has(key)) return structuredClone(declarations.get(key));
+    const bundle = await (suppliedAuthorityReader ?? readAuthority)(root, selection, options);
+    declarations.set(key, bundle);
+    declarations.set(declarationKey(root, bundle.selection), bundle);
+    declarations.set(declarationKey(root, { ...selection, scenarioId: bundle.authority.recordsets[0][0].scenario_id }), bundle);
+    return structuredClone(bundle);
+  };
   const measure = async (name, work) => {
     const start = performance.now();
     observe({ observationType: 'delivery-phase', phase: name, status: 'started', observedAt: new Date().toISOString() });
@@ -201,10 +235,17 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, 
   // circuit operation's existing input. Neither is inferred from an identity.
   const selectedScenarioId = request.scenario
     ?? (typeof request.input?.scenarioId === 'string' ? request.input.scenarioId : undefined);
-  const selection = { capabilityId: request.subject, target: 'node',
+  const selection = { capabilityId: request.subject,
     ...(request.namespace === undefined ? {} : { namespaceId: request.namespace }),
     ...(['circuit', 'reveal'].includes(request.verb) && selectedScenarioId !== undefined ? { scenarioId: selectedScenarioId } : {}) };
-  const config = { databaseRoot, sdaRoot, estateRoot: fileURLToPath(ESTATE_RUNTIME_ROOT) };
+  const config = { databaseRoot, sdaRoot, estateRoot: fileURLToPath(ESTATE_RUNTIME_ROOT), spawnDeclared,
+    onObservation: observe, readAuthority: readSelectedAuthority, readQuery, rootExecutionId, signal };
+  let delivery;
+  if (['invoke', 'observe', 'materialize', 'prepare'].includes(request.verb)) {
+    delivery = await measure('readExecutionDelivery', () => readExecutionDelivery(config));
+    selection.target = delivery.defaultTarget;
+    config.deliveryTarget = delivery.defaultTarget;
+  }
   if (request.verb === 'prepare') return prepareDatabaseCapability(selection, config, measure, timings);
 
   // Listing and finding read the estate model. They derive no scene and plan no body.
@@ -242,11 +283,10 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, 
       [media === 'catalogue' ? 'catalogue' : media === 'artifact' ? 'media' : 'circuit']: retained,
       evidence: { authoritySource: 'DATABASE_MEDIA', snapshotId: retained.snapshotId, publicationDigest: retained.publicationDigest } };
   }
-  // Invocation is direct: it resolves the selected authority, plans the native
-  // body and executes it in memory on every call. Observation runs the same
-  // execution and additionally streams its telemetry; it is not a second path.
+  // Invocation resolves the selected declaration and its execution delivery.
+  // Observation runs the same execution and streams the same telemetry.
   // Preparation is an optional, separately invoked retained proof and is never consumed here.
-  const bundle = await measure('readAuthority', () => readAuthority(databaseRoot, selection, { retainObjects: false, timings: timings.queries }));
+  const bundle = await measure('readAuthority', () => readSelectedAuthority(databaseRoot, selection, { retainObjects: false, timings: timings.queries }));
   const cli = readCliConfiguration(bundle);
   const display = cli.display ?? null;
   // An estate-delivery capability is executed by the estate runtime over its
@@ -260,19 +300,13 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, 
       if (inputType === 'json') { try { estateInput = JSON.parse(request.input); } catch { throw new Error('CAPABILITY_INPUT_JSON_REJECTED'); } }
       else estateInput = buildCanonicalInput(cli.input, inputType, request.input);
     }
-    const outcome = await measure('executeEstateDelivery', () => executeEstateCapability({ capabilityId: selection.capabilityId, scenarioId: selection.scenarioId }, estateInput, config));
+    const outcome = await measure('executeEstateDelivery', () => executeEstateCapability(selection, estateInput, config));
     return { disposition: 'terminated',
       outcome: { capabilityId: selection.capabilityId, scenarioId: bundle.authority.recordsets[0][0].scenario_id, result: { outcome }, executions: [], observations: [],
         evidence: { timings, authoritySource: 'DATABASE', bodyStorage: 'NOT_REQUESTED', managedAdmission: 'NOT_REQUESTED',
           snapshotId: bundle.authority.snapshotId, projectionDigest: bundle.authority.projectionDigest,
           queries: [bundle.authority, bundle.closure, bundle.resolutions, bundle.mechanics].filter(Boolean).map(({ recordsets, ...identity }) => identity) } } };
   }
-  const plan = await measure('planNativeBody', () => planNode({ bundle, sdaRoot }));
-  const runtime = await measure('loadMemoryModules', () => loadMemoryScenario(plan));
-  const executions = [], observations = [];
-  const scenario = await measure('createScenario', () => runtime.createScenario({ observer: { observe: value => { observations.push(value); observe(value); } },
-    clock: { now: () => new Date().toISOString() } }));
-  const executionId = randomUUID();
   let input;
   if (typeof request.input !== 'string') input = structuredClone(request.input);
   else {
@@ -282,18 +316,18 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, 
       catch { throw new Error('CAPABILITY_INPUT_JSON_REJECTED'); }
     } else input = buildCanonicalInput(cli.input, inputType, request.input);
   }
-  const result = await measure('executeScenario', () => scenario.execute(input, { executionId, rootExecutionId: executionId,
-    rootInput: structuredClone(input), ancestry: [plan.selectedScenarioId], collect: value => executions.push(value) }));
-  const entry = plan.receipts.find(r => r.plan.scenarioId === plan.selectedScenarioId);
-  return { disposition: result.disposition === 'failed' ? 'failed' : 'terminated',
-    ...(result.disposition === 'failed' ? { errorCode: 'CAPABILITY_EXECUTION_FAILED' } : {}),
-    outcome: { capabilityId: plan.capabilityId, scenarioId: plan.selectedScenarioId, result, executions, observations,
+  const selected = bundle.authority.recordsets[0][0];
+  const executed = await measure('executeDeclaredCapability', () => executeSelectedDeclaration(delivery, selection, selected, input, config));
+  const { result } = executed;
+  return { disposition: executed.disposition,
+    ...(executed.disposition === 'failed' ? { errorCode: 'CAPABILITY_EXECUTION_FAILED' } : {}),
+    outcome: { capabilityId: selection.capabilityId, scenarioId: selected.scenario_id, result,
+      executions: [result], observations, ...(executed.execution ? { execution: executed.execution } : {}),
       ...(display ? { display } : {}),
       evidence: { timings, authoritySource: 'DATABASE', bodyStorage: 'MEMORY_ONLY', managedAdmission: 'NOT_REQUESTED',
         executionOperation: request.verb,
         providerStatus: 'CANDIDATE_PHYSICAL_PROVIDER', inputDigest: digest(input), resultDigest: digest(result),
         snapshotId: bundle.authority.snapshotId, projectionDigest: bundle.authority.projectionDigest,
-        authorityIdentity: Object.fromEntries(['scenarioDefinitionDigest', 'pinnedPlatformCommit', 'platformDigest', 'resolverVersion', 'artifactDigest'].map(key => [key, entry.receipt[key]])),
-        queries: [bundle.authority, bundle.closure, bundle.resolutions, bundle.mechanics].filter(Boolean).map(({ recordsets, ...identity }) => identity),
-        modules: runtime.modules, resources: runtime.accesses, externalDependencies: runtime.externalDependencies } } };
+        authorityIdentity: executed.authorityIdentity,
+        queries: [bundle.authority, bundle.closure, bundle.resolutions, bundle.mechanics].filter(Boolean).map(({ recordsets, ...identity }) => identity) } } };
 }
