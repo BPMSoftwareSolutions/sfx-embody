@@ -94,10 +94,26 @@ export async function planNode({ bundle, sdaRoot }) {
   const { GherkinScenarioGraphBuilder } = await load('artifacts/tools/dist/consumer-projection/authority/gherkin-scenario-graph-builder.js');
   const { SemanticTransitionGraphBuilder } = await load('artifacts/tools/dist/consumer-projection/authority/semantic-transition-graph-builder.js');
   const { SemanticExecutionGraphCompiler } = await load('languages/typescript/runtimes/node/semantic-execution-graph/index.js');
-  const allScenarios = new GherkinScenarioGraphBuilder(new AnnotatedGherkinParser()).build(feature.text);
+  const gherkin = new GherkinScenarioGraphBuilder(new AnnotatedGherkinParser());
+  // A declared cross-capability invocation carries the referenced capability's
+  // feature text in the same bundle. Build every declared Scenario, tagged with
+  // its owning capability, so the closure can resolve a target outside this one.
+  // A feature is self-describing: the capability id is the path segment of
+  // capabilities/<capabilityId>/capability.feature.
+  const featureRecords = records.filter(r => r.source_path.endsWith('/capability.feature'));
+  const parsedScenarios = featureRecords.flatMap(record => {
+    const owner = record.source_path.split('/')[1];
+    return gherkin.build(record.text).map(scenario => ({ owner, scenario }));
+  });
+  const allScenarios = parsedScenarios.map(entry => entry.scenario);
+  const scenarioByOwner = new Map(parsedScenarios.map(entry => [entry.owner + '\u0000' + entry.scenario.scenarioId, entry.scenario]));
   const closure = bundle.closure.recordsets[0];
   if (closure.some(r => r.cycle_detected)) throw new Error('SCENARIO_INVOCATION_CYCLE');
-  const scenarios = closure.map(r => one(allScenarios.filter(s => s.scenarioId === r.downstream_scenario_id), 'SCENARIO_SOURCE_RESOLUTION'));
+  const scenarios = closure.map(r => {
+    const scenario = scenarioByOwner.get((r.owning_capability_id ?? capabilityId) + '\u0000' + r.downstream_scenario_id);
+    if (!scenario) throw new Error('SCENARIO_SOURCE_RESOLUTION:' + r.downstream_scenario_id);
+    return scenario;
+  });
   const executionAuthorities = scenarios.map(s => one(execution.value.executionAuthorities.filter(a => a.id === s.event.executionAuthorityId && a.owningScenarioId === s.scenarioId), 'EVENT_AUTHORITY_RESOLUTION'));
   const transitions = new SemanticTransitionGraphBuilder().build(graphAuthority.value, Object.fromEntries(allScenarios.map(s => [s.scenarioId, s])));
   // This provider currently lowers ordered invocations. Other topology remains held.
@@ -116,7 +132,7 @@ export async function planNode({ bundle, sdaRoot }) {
   }
   const graphInput = { capability: capability.value, scenarios: allScenarios, transitions,
     executionAuthorities: execution.value.executionAuthorities, interfaceAuthority, semanticTransformations,
-    sourceRefs: [capability.source_path, feature.source_path, execution.source_path, graphAuthority.source_path, interfaces.source_path, ...new Set(Object.values(provenance.ports).map(p => p.sourceRef))] };
+    sourceRefs: [capability.source_path, ...featureRecords.map(r => r.source_path), execution.source_path, graphAuthority.source_path, interfaces.source_path, ...new Set(Object.values(provenance.ports).map(p => p.sourceRef))] };
   const compiledGraph = new SemanticExecutionGraphCompiler().compile(graphInput);
   // The native mechanic provider is declared by the pinned mechanic registry
   // already carried in this bundle, so it is read from there rather than

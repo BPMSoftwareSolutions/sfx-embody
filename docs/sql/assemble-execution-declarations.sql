@@ -66,6 +66,20 @@ capcontract AS (
     JOIN model.schema_object so ON so.schema_object_pk = cv.schema_object_pk
   ) x WHERE x.rn = 1
 ),
+-- Every capability whose Scenarios appear in this capability's declared invocation
+-- closure, including the capability itself. A referenced capability's Ports and
+-- Transformations become part of the consuming capability's declaration so the
+-- planner can render a composed Scenario without a second declaration read.
+reach AS (
+  SELECT DISTINCT cap.capability_id,
+    (N'sidefx:capability:' + dc.capability_id) COLLATE Latin1_General_100_BIN2 AS namespace_id
+  FROM cap
+  JOIN model.capability_scenario cs ON cs.capability_version_pk = cap.capability_version_pk
+  JOIN analysis.v_scenario_invocation_closure c ON c.capability_version_pk = cap.capability_version_pk AND c.selected_scenario_version_pk = cs.scenario_version_pk
+  JOIN model.scenario_version dsv ON dsv.scenario_version_pk = c.downstream_scenario_version_pk
+  JOIN model.scenario ds ON ds.scenario_pk = dsv.scenario_pk
+  JOIN model.capability dc ON dc.capability_pk = ds.capability_pk
+),
 reachable AS (
   SELECT DISTINCT cap.capability_id,
     CONVERT(nvarchar(400), JSON_VALUE(op.value, '$.portId')) COLLATE Latin1_General_100_BIN2 AS port_id
@@ -113,7 +127,7 @@ SELECT cap.estate_model_pk, cap.capability_id,
    + ISNULL((SELECT STRING_AGG(JSON_QUERY(def.envelope, '$.semantics'), N',')
              FROM def JOIN model.transformation t ON t.semantic_object_pk = def.semantic_object_pk
              JOIN model.identity_namespace n ON n.namespace_pk = t.namespace_pk
-             WHERE n.namespace_id = (N'sidefx:capability:' + cap.capability_id) COLLATE Latin1_General_100_BIN2), N'') + N']}') COLLATE Latin1_General_100_BIN2
+             WHERE n.namespace_id COLLATE Latin1_General_100_BIN2 IN (SELECT r.namespace_id FROM reach r WHERE r.capability_id = cap.capability_id)), N'') + N']}') COLLATE Latin1_General_100_BIN2
 FROM cap
 UNION ALL
 -- semantic-graph.authority.json (assembled; no separate declaration)
@@ -135,7 +149,7 @@ SELECT cap.estate_model_pk, cap.capability_id,
    + ISNULL((SELECT STRING_AGG(JSON_QUERY(def.envelope, '$.semantics'), N',')
              FROM def JOIN model.port p ON p.semantic_object_pk = def.semantic_object_pk
              JOIN model.identity_namespace n ON n.namespace_pk = p.namespace_pk
-             WHERE n.namespace_id = (N'sidefx:capability:' + cap.capability_id) COLLATE Latin1_General_100_BIN2), N'') + N'],"projectionBindings":[]}') COLLATE Latin1_General_100_BIN2
+             WHERE n.namespace_id COLLATE Latin1_General_100_BIN2 IN (SELECT r.namespace_id FROM reach r WHERE r.capability_id = cap.capability_id)), N'') + N'],"projectionBindings":[]}') COLLATE Latin1_General_100_BIN2
 FROM cap JOIN cli ON cli.capability_id = cap.capability_id
 UNION ALL
 -- consumer-workspace.authority.json (assembled from the capability's members)
