@@ -1,4 +1,5 @@
 import { createHash, randomUUID } from 'node:crypto';
+import { fileURLToPath } from 'node:url';
 import { prepareDatabaseCapability } from './prepare-database-capability.mjs';
 import { planNode } from './materialize-node.mjs';
 import { loadMemoryScenario } from './load-memory-scenario.mjs';
@@ -138,6 +139,7 @@ function buildCanonicalInput(declared, type, raw) {
 const operations = {
   invoke: { object: 'capability', subject: true, input: 'required', inputType: true, display: true },
   observe: { object: 'capability', subject: true, input: 'required', inputType: true, display: true },
+  materialize: { object: 'capability', subject: true, input: 'required', inputType: true, display: true },
   prepare: { object: 'capability', subject: true, input: 'rejected' },
   circuit: { object: 'capability', subject: true, input: 'optional', scenario: true },
   reveal: { object: 'capability', subject: true, input: 'optional', scenario: true, views: ['circuit', 'meaning'], formats: ['text', 'markdown'] },
@@ -202,7 +204,7 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, 
   const selection = { capabilityId: request.subject, target: 'node',
     ...(request.namespace === undefined ? {} : { namespaceId: request.namespace }),
     ...(['circuit', 'reveal'].includes(request.verb) && selectedScenarioId !== undefined ? { scenarioId: selectedScenarioId } : {}) };
-  const config = { databaseRoot, sdaRoot };
+  const config = { databaseRoot, sdaRoot, estateRoot: fileURLToPath(ESTATE_RUNTIME_ROOT) };
   if (request.verb === 'prepare') return prepareDatabaseCapability(selection, config, measure, timings);
 
   // Listing and finding read the estate model. They derive no scene and plan no body.

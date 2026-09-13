@@ -70,10 +70,51 @@ the digests from disk reproduces those values, and every file digest matches. Th
 stale four-Scenario artifact is replaced by the current one-Scenario generation
 (`embodiments/resolve-equity-market-price-evidence/`).
 
+## The write (governed effect)
+
+`materialize-capability-embodiment` composes the whole loop:
+
+```
+identity --construct-embodiment-plan (read -> plan)--> embodiment plan
+         --write-capability-embodiment--> materialization record
+```
+
+- **`write-capability-embodiment`** — input `capability-embodiment-plan.v1`; outcome
+  `capability-embodiment-materialization.v1` (`outputRoot`, `planDigest`,
+  `artifactDigest`, `fileCount`, `written[]`). The plan authorizes the crossing;
+  the writer re-plans from the same authority, writes beneath the authorized
+  root, and refuses (`EMBODIMENT_WRITE_DIVERGED`, `EMBODIMENT_WRITE_DIGEST_MISMATCH`)
+  if the written artifact does not reproduce the plan.
+
+The write is delivered by a **distinct governed delivery**, `embodiment-materialization`
+(`sfx.config.json`): the same transport as `database-memory`, but authorized to
+write `./embodiments` and not subject to the memory-only storage proof control —
+which exists to prove that *invocation* reads no retained cache and writes
+nothing. `src/embodiment-delivery.mjs` is the write-boundary entry.
+
+```
+sfx capability materialize materialize-capability-embodiment \
+  --input '{"capabilityId":"resolve-equity-market-price-evidence","target":"node"}' --json
+```
+
+returns the materialization record and writes the body beneath the embodiment
+root.
+
+## Proof
+
+- The read-only `database-memory` delivery still proves memory-only invocation:
+  `construct-embodiment-plan` returns `planDigest sha256:d21dbcbb…` with no write.
+- The write delivery returns `artifactDigest sha256:b785cb9a…`, `fileCount 30`,
+  `written` 30 entries; the on-disk artifact matches every file digest.
+- The stale four-Scenario artifact is replaced by the current one-Scenario
+  generation (`embodiments/resolve-equity-market-price-evidence/`).
+
 ## What remains
 
-The write is a separate governed effect: the plan capability says what should be
-written, and the crossing (staging, ordering, target-root authorization) belongs
-to `materialize-authorized-file-batch`, or to a `materialize-capability-embodiment`
-capability composed with it. The regeneration used the materializer's own writer;
-making that write a declared effect is the next piece.
+The `materialize` subject is the composer capability (`materialize-capability-embodiment`),
+with the target capability carried in the input. A friendlier surface would let the
+target be the subject, with the composer named by the delivery — a small CLI/transport
+change rather than a capability change. The read delivery and the write delivery are
+now separate, declared effect boundaries; completing the estate's declared
+`materialize-authorized-file-batch` as the concrete writer (rather than the
+materializer's own writer) is the longer form still
