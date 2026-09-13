@@ -1,0 +1,8 @@
+[
+  {
+    "id": "reject-nonconforming-native-market-price-testimony-port",
+    "module": "./providers/reject-nonconforming-native-market-price-testimony-port.mjs",
+    "className": "RejectNonconformingNativeMarketPriceTestimonyPort",
+    "kind": "invoke-port"
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "resolve-equity-market-price-evidence-port",
+    "module": "./providers/resolve-equity-market-price-evidence-port.mjs",
+    "className": "ResolveEquityMarketPriceEvidencePort",
+    "kind": "invoke-port"
+  },
+  {
+    "id": "retain-provider-realization-outside-market-price-semantics",
+    "module": "../../../retain-provider-realization-outside-market-price-semantics/node/body/scenario.mjs",
+    "className": "RetainProviderRealizationOutsideMarketPriceSemanticsScenario",
+    "kind": "invoke-scenario"
+  },
+  {
+    "id": "hold-unavailable-equity-market-price-provider",
+    "module": "../../../hold-unavailable-equity-market-price-provider/node/body/scenario.mjs",
+    "className": "HoldUnavailableEquityMarketPriceProviderScenario",
+    "kind": "invoke-scenario"
+  },
+  {
+    "id": "reject-nonconforming-native-market-price-testimony",
+    "module": "../../../reject-nonconforming-native-market-price-testimony/node/body/scenario.mjs",
+    "className": "RejectNonconformingNativeMarketPriceTestimonyScenario",
+    "kind": "invoke-scenario"
+  }
+]

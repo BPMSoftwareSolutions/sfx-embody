@@ -1,0 +1,8 @@
+[
+  {
+    "id": "hold-unavailable-equity-market-price-provider-port",
+    "module": "./providers/hold-unavailable-equity-market-price-provider-port.mjs",
+    "className": "HoldUnavailableEquityMarketPriceProviderPort",
+    "kind": "invoke-port"
+  }
+]

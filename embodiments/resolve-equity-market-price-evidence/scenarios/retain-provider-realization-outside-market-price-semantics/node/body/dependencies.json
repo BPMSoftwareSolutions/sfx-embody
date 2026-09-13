@@ -1,0 +1,8 @@
+[
+  {
+    "id": "retain-provider-realization-outside-market-price-semantics-port",
+    "module": "./providers/retain-provider-realization-outside-market-price-semantics-port.mjs",
+    "className": "RetainProviderRealizationOutsideMarketPriceSemanticsPort",
+    "kind": "invoke-port"
+  }
+]
