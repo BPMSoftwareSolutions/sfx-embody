@@ -14,7 +14,8 @@ port and no kernel change.
   the same declaration bundle; the assembled declaration view already aggregates
   the referenced capability's Ports and Transformations over the closure.
 - `materialize-node` parses every declared feature in the bundle and maps the
-  closure by owning capability; the body renderer is unchanged.
+  closure by owning capability; the body renderer surfaces a composed child's
+  governed stop (see Decisions).
 
 ## What works
 
@@ -37,17 +38,17 @@ consumes. The experiment
 `compose-equity-observe-exchange.experiment.sql` declares exactly that substitution.
 
 Preflighted uncommitted, it plans 11 closure Scenarios (the target's whole
-closure) and **executes observe's kernel** — confirming the mechanism. It does not
-terminate as a domain success:
+closure) and **executes observe's kernel** — confirming the mechanism. observe's
+root rejects the equity endpoint authority (a legitimate domain verdict for
+observe), and the composer now surfaces that governed stop:
 
-1. observe's root rejects the equity endpoint authority (`rejected`), which is a
-   legitimate domain verdict for observe; and
-2. the generated parent `invoke` throws `CHILD_SCENARIO_REJECTED` on a child
-   `rejected` disposition, so the composing capability fails instead of
-   inheriting the child's verdict.
+- the preflight `DISPOSITION` is `rejected`, and the returned execution is
+  observe's (`executionId …/3/observe-governed-http-exchange`, `disposition:
+  rejected`), not a failure.
 
-So observe is not a viable composition *child* for equity's endpoint, and a
-capability whose normal path can reject cannot currently be composed at all.
+So observe is a valid *governed-stop* child of equity; it is not a *successful*
+child for equity's endpoint. A capability whose normal path can reject is now
+composable without collapsing its verdict into a failure.
 
 ## Adapter composition (speech)
 
@@ -68,10 +69,15 @@ that addresses a sub-state around a child invocation.
 ## Findings
 
 1. **Drop-in composition works** and is the supported form.
-2. **A child rejection is a hard failure.** The generated `invoke` treats
-   `rejected` like `failed`, so any capability that can reject cannot be composed
-   as a successful child. The semantics of a composed child's non-success need a
-   decision (propagate the verdict vs. fail the parent).
+2. **A child's governed stop is surfaced (implemented).** The declared
+   composition authority separates governed stops from failure
+   (`execute-declared-scenario-composition.authority.json`:
+   *execution-stops-at-the-first-non-success*, *composition-does-not-claim-acceptance*;
+   governedStops include `OUTCOME_REJECTED`/`EVENT_FAILED`). The generated
+   `invoke`/`execute` (`consumer-object-provider.mjs`) now stop at the first
+   non-success and return the child's execution, so the composer's disposition is
+   the child's (`rejected`/`failed`) instead of a generic failure. Observed:
+   equity composing observe preflights to `DISPOSITION rejected`.
 3. **Context-preserving (adapter) composition is not expressible** with
    `invoke-scenario` alone. It needs either an adapter capability whose root
    is a drop-in for the caller's ordinal, or an operation-level mapping that
@@ -84,10 +90,26 @@ that addresses a sub-state around a child invocation.
    the feature first; never null the column; delete the feature after the
    capability). A capability-creating migration is then re-runnable.
 
-## Next steps
+## Decisions (rubric-grounded)
 
-- Decide finding 2: should a child's `rejected` surface as the parent's
-  disposition (the kernel already has dispositions) rather than throw?
-- For speech, express the adapter as a declared capability (its own input/output
-  contracts) so the caller invokes a drop-in, or extend the operation model with a
-  declared carrier mapping around an invocation.
+**A — child non-success semantics: implemented.** Authority is the admitted
+composition policy and its governed stops (§3); omission blocked composing any
+capability whose path can reject (§4, observed with observe). Smallest form: the
+body renderer stops at the first non-success and surfaces the child's
+disposition/outcome; no model or public-contract change; reversible. Note the
+kernel maps an executor throw to `failed` and does not itself express a governed
+stop; the renderer carries it in the composition context and returns the child's
+execution. If a future language kernel is to compose, that stop must be declared
+data, not re-derived per language.
+
+**B — adapter composition: deferred, with a trigger.** It is not required by the
+current loop (`bounded-execution-closure.md`; §4/§9 — none of the six observable
+events change), and the composition proof is drop-in. An adapter *capability* does
+not solve it either: the linear state replaces the whole state at an invocation,
+so caller context cannot be preserved. Only a declared input/merge mapping on the
+invocation operation can; that is a durable model commitment (§5, medium
+reversibility), so per §8 (`REUSE_EXISTING → COMPOSE_EXISTING → AUTHOR_PROFILE →
+AUTHOR_NEW`) the smallest move now is to try redesigning the caller so the
+invocation point is drop-in. **Revisit trigger:** a concrete second case that
+cannot be redesigned to drop-in, or a measured repetition saving that beats the
+model burden.
