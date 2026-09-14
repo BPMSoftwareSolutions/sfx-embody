@@ -1,0 +1,5 @@
+<Project>
+  <ItemGroup Condition="Exists('$(MSBuildThisFileDirectory)..\execution-plans')">
+    <Content Include="$(MSBuildThisFileDirectory)..\execution-plans\*.json" Link="authority\execution-plans\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

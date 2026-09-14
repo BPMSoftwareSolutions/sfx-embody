@@ -1,0 +1,38 @@
+{
+  "scenarioId": "resolve-sidefx-eligible-providers",
+  "input": {
+    "inputId": "sidefx-provider-resolution-request",
+    "contract": {
+      "contractId": "sidefx-provider-resolution-request.v1"
+    }
+  },
+  "event": {
+    "eventId": "sidefx-provider-resolution-requested",
+    "executionAuthorityId": "resolve-sidefx-eligible-providers.v1"
+  },
+  "outcome": {
+    "outcomeId": "sidefx-semantic-provider-resolution",
+    "contract": {
+      "contractId": "sidefx-semantic-provider-resolution.v1"
+    },
+    "experience": {
+      "statement": "eligible providers cite exact binding, profile, policy, authority, and conformance evidence and every other provider is NOT_OBSERVABLE, INELIGIBLE, or NOT_APPLICABLE with its reason"
+    },
+    "terminal": true
+  },
+  "gherkin": {
+    "given": {
+      "semanticRef": "resolve-sidefx-eligible-providers.given",
+      "text": "declared provider bindings, a requested platform capability, a requested target, and the admitted conformant dispositions"
+    },
+    "when": {
+      "semanticRef": "resolve-sidefx-eligible-providers.when",
+      "text": "each binding is checked for capability match, admission, conformance evidence, and declared target"
+    },
+    "then": {
+      "semanticRef": "resolve-sidefx-eligible-providers.then",
+      "text": "eligible providers cite exact binding, profile, policy, authority, and conformance evidence and every other provider is NOT_OBSERVABLE, INELIGIBLE, or NOT_APPLICABLE with its reason"
+    }
+  },
+  "name": "Admit only providers whose binding, conformance, and target are declared"
+}
