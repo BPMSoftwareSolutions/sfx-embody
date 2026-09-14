@@ -226,26 +226,6 @@ try {
         await assert.rejects(fs.stat(path.resolve(caseContext.outputRoot ?? caseContext.estateRoot, file)), { code: 'ENOENT' }, test.name + ': ' + file);
       for (const file of test.retainedFiles ?? [])
         assert.equal(await fs.readFile(path.resolve(caseContext.outputRoot ?? caseContext.estateRoot, file.relativePath), 'utf8'), file.content, test.name + ': ' + file.relativePath);
-      if (test.verifyNativeProviders) {
-        const { verifyConsumerExecutionProviders } = await import('./verify-consumer-execution-providers.mjs');
-        const verification = await verifyConsumerExecutionProviders(result, test.verifyNativeProviders, caseContext);
-        console.log('NATIVE PROVIDERS VERIFIED', JSON.stringify(verification));
-      }
-      if (test.verifyConsumerFixtures) {
-        const { verifyConsumerFixtures } = await import('./verify-consumer-fixtures.mjs');
-        const verification = await verifyConsumerFixtures(result, test.verifyConsumerFixtures, caseContext);
-        console.log('CONSUMER FIXTURES VERIFIED', JSON.stringify(verification));
-      }
-      if (test.verifyDeclaredFixtures) {
-        const { verifyDeclaredFixtures } = await import('./verify-declared-fixtures.mjs');
-        const verification = await verifyDeclaredFixtures(result, test.verifyDeclaredFixtures, caseContext);
-        console.log('DECLARED FIXTURES VERIFIED', JSON.stringify(verification));
-      }
-      if (test.verifyConsumerFirstFailure) {
-        const { verifyConsumerFirstFailure } = await import('./verify-consumer-first-failure.mjs');
-        const verification = await verifyConsumerFirstFailure(result, test.verifyConsumerFirstFailure, caseContext);
-        console.log('FIRST FAILURE VERIFIED', JSON.stringify(verification));
-      }
       outcome.verification.push({ name: test.name, disposition: 'PASSED' });
       delete outcome.currentCase;
       console.log('VERIFIED', test.name);

@@ -1,10 +1,9 @@
 # SQL: the database-only change lifecycle
 
 Every change to the estate's meaning is a database change. The runtime
-(`src/`, and `sidefx-database/sql/diagnostics/`) is a reader of that meaning;
-it is not where a capability, scenario, authority, contract, port or
-transformation is authored. This directory holds the `.sql` deliverables and
-the process that installs and verifies them.
+(`src/`) is a reader of that meaning; it is not where a capability, scenario,
+authority, contract, port or transformation is authored. This directory holds
+the `.sql` deliverables and the process that installs and verifies them.
 
 ## Layout
 
@@ -16,10 +15,12 @@ the process that installs and verifies them.
 | `scripts/run-migration.mjs` | Runs a migration as authored, without wrapping it in a transaction. |
 | `scripts/invoke-from-transaction.mjs` | Applies a migration **uncommitted**, reads/plans/executes a capability, then rolls back. |
 
-The runtime reader queries live in `C:/lab/sidefx-database/sql/diagnostics/`
-(`capability-embodiment.sql`, `scenario-closure.sql`, ...). A migration here may
-depend on those; a reader change is itself a database change and follows the
-same lifecycle.
+The runtime reads only the estate's own declared views
+(`analysis.v_capability_graph_source` /
+`analysis.v_capability_execution_declaration`), built by the migrations here.
+Nothing reads `sidefx-database/sql/` — not diagnostics, not migrations;
+`sidefx-database` supplies the connection and query runner only. A read change
+is itself a database change and follows the same lifecycle.
 
 ## The lifecycle
 

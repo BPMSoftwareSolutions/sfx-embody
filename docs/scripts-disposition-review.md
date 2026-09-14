@@ -140,3 +140,15 @@ next thing to check.
 declarable. The remaining thirteen should be retired on disk without declaring
 them, because they are materialization, native-body or provenance concerns that
 the kernel supersedes.
+
+**Executed 2026-09-14 (working tree, not yet git-committed).** Twelve of the
+eliminated scripts were deleted on disk — `audit-semantic-expression`,
+`audit-lowering-evidence`, `materialize-consumer-provider-dependencies`,
+`preserve-baseline`, `qualify-pilots`, `verify-consumer-execution-providers`,
+`verify-consumer-first-failure`, `verify-consumer-fixtures`,
+`verify-declared-fixtures`, `verify-sfx-invocation.ps1`,
+`verify-sfx-preparation.ps1`, `extract-bundle` — and the `package.json`
+lifecycle entries `qualify:pilots`/`audit:source`/`audit:lowering` were removed.
+`build-scaffold-hello-world.mjs` and
+`read-scenario-round-trip-authority.mjs` remain, along with the three keepers.
+`npm test` passes 8/8.
