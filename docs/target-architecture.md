@@ -8,10 +8,12 @@ and [research/platform-mechanic-honesty.md](research/platform-mechanic-honesty.m
 
 ## The rule
 
-- **All meaning is database rows.** Capability, feature, contracts,
-  scenarios/execution authorities, operations, ports, transformations,
-  mechanics, provider bindings, targets — authored in `.sql`, versioned as
-  semantic definitions. A capability changes by changing rows.
+- **All meaning is declared authority/data** — not handwritten application
+  behavior. Capability, feature, contracts, scenarios/execution authorities,
+  operations, ports, transformations, mechanics, provider bindings, targets —
+  authored as rows today (`.sql`), and next JSON, versioned as semantic
+  definitions. *Authority-as-data is the principle; authority-as-SQL-rows is a
+  realization.* A capability changes by changing its declaration.
 - **The language kernel resolves language, and only language.** Each target
   language (node, python, csharp; java/go pending) reads the declared execution
   graph and *interprets* it. The kernel holds no domain logic. The rubric line:
