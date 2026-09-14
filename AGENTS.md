@@ -8,7 +8,9 @@ every concern are specified in `docs/target-architecture.md` - design and
 retention questions are answered there, not re-litigated per module. Parallel
 execution of the remaining work is planned in `docs/implementation-strategy.md`.
 The binding requirement that every executable mechanic be embodied in the
-embodiment (per target) is specified in `docs/embodiment-completeness.md`.
+embodiment (per target) is specified in `docs/embodiment-completeness.md`. The
+invocation cost model and its optimization plan are in
+`docs/performance-optimization.md`.
 
 ## The prime rule: meaning is authored in the database
 
