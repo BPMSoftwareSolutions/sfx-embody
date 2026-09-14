@@ -42,30 +42,71 @@ next unit, land it, prove it, move on.
 | **C — overlay/provider completeness** | Generalize `run-declared-graph`'s overlay rule + provider set to every mechanic a graph can use (pure set, effect ports, declared reads) | `sql/migrations/declare-run-declared-graph-capability.sql` + a registry-derived rule | parallel with B; single writer on the file |
 | **D — tooling deletion** | Remove architecture-1 scripts and their package.json entries; replace lifecycle scripts whose fallback was architecture 1 | `scripts/**`, `package.json` | parallel; one writer per file |
 | **E — reader/presentation capabilities** | Declare `reveal`/`list`/`find`/`circuit`/`catalogue`/`artifact`/`narrate`/`diagram` as capabilities (SQL read + transformation; templates) | one file per unit under `sql/migrations/` | parallel; depends on A for the API |
-| **F — kernel (SDA)** | Cross-language primitives; java/go where a mechanic is still Node-only | SDA repo only | parallel |
+| **F — kernel (SDA)** | Cross-language primitives. Units 17/18 landed natively in SDA `7fd4ff3` (python governed effect ports + contract admission; c# `SemanticExecutionGraphEffectProvider` + contract-catalog enforcement). Remaining: java/go where a mechanic is still Node-only | SDA repo only | parallel |
 
 ## Backlog (seed queue)
 
-| # | Lane | Unit | Proof |
-|---|---|---|---|
-| 1 | A | Loader reads selection/CLI from `analysis.v_capability_graph_source`; drop `capability-embodiment.sql`/`scenario-closure.sql` reads (removes the last `sidefx-database/sql` reach) | equity + greet invokes green; timings show no `*.sql` diagnostic queries |
-| 2 | B | Re-declare the 4 ports binding `authority-read-provider.readCapabilityAuthority` (`read-declared-authority`, `read-capability-authority`, `execute-declared-capability`, `authority-read-provider`) to declared reads | each capability invokes through the kernel |
-| 3 | B | Sweep every `PORT` whose `definition_json` names `src/resolvers/` or `materialize-node`; re-declare | `sql/inspect` report shows zero residual references |
-| 4 | C | Complete `overlayBindings` for the full pure-mechanic set + effect ports; key by `mechanicId` from the registry | equity, greet, a domain capability all compile+execute |
-| 5 | C | Declared-read provider dispatch by `mechanicId` for domain slots | domain capability executes with no local provider |
-| 6 | D | Delete architecture-1 scripts (`verify-estate`, `verify-memory-parity`, `verify-consumer-*`, `package-qualified-pilots`, `pilot-container/run`, `invoke-from-bundle`, `probe-database-invocation`, `report-native-repair`, `validate-scaffold`) and their `package.json` entries | `npm test` / lifecycle scripts green; no dangling imports |
-| 7 | D | Remove `materialize-node` from the delivery graph so `consumer-object-provider`/`native-expression-projection` delete | all 12 resolvers absent; kernel path green |
-| 8 | E | Declare `list-capabilities` (SQL read + shaping) as a capability | `sfx capability list` routed through the frontdoor |
-| 9 | E | Declare `reveal`(meaning)/`catalogue`/`circuit`/`artifact` from the DB-side reads | each operation returns from declared data |
-| 10 | E | Declare `narrate-*`/`diagram-*` as templates/transformations (or request a presentation mechanic if not expressible) | reveal renders from data |
-| 11 | F | java/go for any mechanic still Node-only in the target's path | cross-target parity |
-| 12 | D | Update/remove tests importing deleted modules (`circuit-diagram`, `consumer-execution`, `consumer-plan`, `consumer-write`, `embodiment-binding`, `node-resolver`, `preparation`) — architecture 1 | `npm test` green |
-| 13 | B | Re-declare `execute-declared-capability` root authority to reach its sub-scenarios (or drop orphan cells) — clears `UNREACHABLE_CELL` | it invokes through the kernel |
-| 14 | D | Remove `sql/diagnostics` reads from `scripts/invoke-from-transaction.mjs` and `scripts/extract-inflight-bundle.mjs` | no `sql/diagnostics` outside docs/baselines |
-| 15 | C | Compiled effect cells must carry the port `configuration` (`credentialAuthorities`/`endpointAuthorities`) into the cell binding so `createPlatformEffectProvider` receives it. Equity currently returns `PROVIDER_EXCHANGE_NOT_COMPLETED` though the credential env and port authorities are present; the compiled credential cell's `configuration` appears empty. If the compiler drops it, this is the kernel change request (preserve declared effect-port configuration into the compiled cell binding) | `sfx capability invoke resolve-equity-market-price-evidence --input AVGO` → `EQUITY_MARKET_PRICE_PROVIDER_COMPLETED` |
-| 16 | E | Expose `contractAuthorities` (resolved from `contracts/contract-catalog.json` + `contracts/*.schema.json`) and the fixtures reference in `analysis.v_capability_graph_source` (`assemble-capability-graph-source.sql`), so regenerated plans carry a non-empty `contractCatalog` (the compiler sets it from `authorityGraph.contractAuthorities`, which the view omits) | a regenerated node plan has non-empty `contractCatalog`; node `bind` resolves |
-| 17 | F (python) | Wire the platform-effect dispatch seam + input contract admission into the python consumer host (`languages/python/src/scenario_kernel/platform/consumer.py#_graph_providers`), mirroring node's `createPlatformEffectProvider` | python embodiment `disposition: terminated`, `EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED` |
-| 18 | F (csharp) | Wire `SemanticExecutionGraphEffectProvider` into `AdmittedConsumerPlatform`'s `Provider` (dispatch `mechanicId` → declared effect provider) and enforce `plan.contractCatalog` | c# embodiment `disposition: terminated`, `EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED` |
+| # | Lane | Unit | Proof | Status |
+|---|---|---|---|---|
+| 1 | A | Loader reads selection/CLI from `analysis.v_capability_graph_source`; drop `capability-embodiment.sql`/`scenario-closure.sql` reads (removes the last `sidefx-database/sql` reach) | equity + greet invokes green; timings show no `*.sql` diagnostic queries | in progress |
+| 2 | B | Re-declare the 4 ports binding `authority-read-provider.readCapabilityAuthority` (`read-declared-authority`, `read-capability-authority`, `execute-declared-capability`, `authority-read-provider`) to declared reads | each capability invokes through the kernel | partial |
+| 3 | B | Sweep every `PORT` whose `definition_json` names `src/resolvers/` or `materialize-node`; re-declare | `sql/inspect` report shows zero residual references | partial |
+| 4 | C | Complete `overlayBindings` for the full pure-mechanic set + effect ports; key by `mechanicId` from the registry | equity, greet, a domain capability all compile+execute | pending |
+| 5 | C | Declared-read provider dispatch by `mechanicId` for domain slots | domain capability executes with no local provider | pending |
+| 6 | D | Delete architecture-1 scripts (`verify-estate`, `verify-memory-parity`, `verify-consumer-*`, `package-qualified-pilots`, `pilot-container/run`, `invoke-from-bundle`, `probe-database-invocation`, `report-native-repair`, `validate-scaffold`) and their `package.json` entries | `npm test` / lifecycle scripts green; no dangling imports | done (working tree) |
+| 7 | D | Remove `materialize-node` from the delivery graph so `consumer-object-provider`/`native-expression-projection` delete | all 12 resolvers absent; kernel path green | pending |
+| 8 | E | Declare `list-capabilities` (SQL read + shaping) as a capability | `sfx capability list` routed through the frontdoor | pending |
+| 9 | E | Declare `reveal`(meaning)/`catalogue`/`circuit`/`artifact` from the DB-side reads | each operation returns from declared data | pending |
+| 10 | E | Declare `narrate-*`/`diagram-*` as templates/transformations (or request a presentation mechanic if not expressible) | reveal renders from data | pending |
+| 11 | F | java/go for any mechanic still Node-only in the target's path | cross-target parity | pending |
+| 12 | D | Update/remove tests importing deleted modules (`circuit-diagram`, `consumer-execution`, `consumer-plan`, `consumer-write`, `embodiment-binding`, `node-resolver`, `preparation`) — architecture 1 | `npm test` green | done (working tree) |
+| 13 | B | Re-declare `execute-declared-capability` root authority to reach its sub-scenarios (or drop orphan cells) — clears `UNREACHABLE_CELL` | it invokes through the kernel | pending |
+| 14 | D | Remove `sql/diagnostics` reads from `scripts/invoke-from-transaction.mjs` and `scripts/extract-inflight-bundle.mjs` | no `sql/diagnostics` outside docs/baselines | pending |
+| 15 | C | Compiled effect cells must carry the port `configuration` (`credentialAuthorities`/`endpointAuthorities`) into the cell binding so `createPlatformEffectProvider` receives it. Equity currently returns `PROVIDER_EXCHANGE_NOT_COMPLETED` though the credential env and port authorities are present; the compiled credential cell's `configuration` appears empty. If the compiler drops it, this is the kernel change request (preserve declared effect-port configuration into the compiled cell binding) | `sfx capability invoke resolve-equity-market-price-evidence --input AVGO` → `EQUITY_MARKET_PRICE_PROVIDER_COMPLETED` | pending |
+| 16 | E | Expose `contractAuthorities` (resolved from `contracts/contract-catalog.json` + `contracts/*.schema.json`) and the fixtures reference in `analysis.v_capability_graph_source` (`assemble-capability-graph-source.sql`), so regenerated plans carry a non-empty `contractCatalog` (the compiler sets it from `authorityGraph.contractAuthorities`, which the view omits) | a regenerated node plan has non-empty `contractCatalog`; node `bind` resolves | done (`ec6c6a7`) |
+| 17 | F (python) | Wire the platform-effect dispatch seam + input contract admission into the python consumer host (`languages/python/src/scenario_kernel/platform/consumer.py#_graph_providers`), mirroring node's `createPlatformEffectProvider` | python embodiment `disposition: terminated`, `EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED` | done (SDA `7fd4ff3`) |
+| 18 | F (csharp) | Wire `SemanticExecutionGraphEffectProvider` into `AdmittedConsumerPlatform`'s `Provider` (dispatch `mechanicId` → declared effect provider) and enforce `plan.contractCatalog` | c# embodiment `disposition: terminated`, `EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED` | done (SDA `7fd4ff3`) |
+
+## Status (2026-09-14)
+
+Completed units, as reported and with proof where stated:
+
+- **Lane D — units 6 and 12, and the `scripts-disposition-review.md` Net
+  (working tree, not yet git-committed).** The 12 eliminated scripts were deleted
+  (`audit-semantic-expression`, `audit-lowering-evidence`,
+  `materialize-consumer-provider-dependencies`, `preserve-baseline`,
+  `qualify-pilots`, `verify-consumer-execution-providers`,
+  `verify-consumer-first-failure`, `verify-consumer-fixtures`,
+  `verify-declared-fixtures`, `verify-sfx-invocation.ps1`,
+  `verify-sfx-preparation.ps1`, `extract-bundle`). The `package.json` lifecycle
+  entries `qualify:pilots`/`audit:source`/`audit:lowering` were removed; the dead
+  verifier blocks were removed from `scripts/invoke-from-transaction.mjs`; the
+  `sql/README.md` diagnostics claim was corrected. Proof: `npm test` passes 8/8.
+- **Lane B — units 2 and 3 (partial).** Installed migrations
+  `free-declared-read-ports.sql`, `free-contract-admission-ports.sql`,
+  `redeclare-execution-graph-read-ports.sql` (free the database-query-provider,
+  contract-admission-provider and execution-graph-read-provider Ports from
+  `configuration.providerId`) and `delete-orphaned-estate-read-providers.sql`
+  (deletes the orphaned `authority-read-provider.readCapabilityAuthority` and
+  `read-authority.readAuthority` provider rows).
+  `sql/inspect/hand-authored-module-references.sql` is down from 21 to 16 rows;
+  7 estate-module PROVIDER rows remain (consumer-authority-context,
+  consumer-execution-provider, consumer-plan-provider, embodiment-plan-provider,
+  embodiment-write-provider, invoke-database-capability, load-memory-scenario)
+  pending Port re-declaration. Proof: `say-hello-world`, `run-declared-query`,
+  `read-declared-execution-graph`, `contract-admission-provider` and
+  `resolve-equity-market-price-evidence` all invoke green through the kernel.
+- **Performance #6 — done.** `add-invocation-supporting-indexes.sql` adds
+  `IX_model_capability_capability_id` and `IX_model_sod_version_desc`; the other
+  requested indexes already existed.
+- **Lane F — units 17 and 18 — done.** Implemented natively in SDA commit
+  `7fd4ff3` (`governed_effect_ports.py` / `consumer.py` for python;
+  `GovernedEffectPorts.cs` / `AdmittedConsumerPlatform.cs`
+  `SemanticExecutionGraphEffectProvider` for c#: real non-facade ports, contract
+  catalog enforced). Unit 16 (Lane E) is done via
+  `expose-contract-authorities-in-graph-source.sql`, committed `ec6c6a7`.
+- **Lane A / performance #1, #2, #4 and #5 — in progress** by a concurrent
+  agent; not claimed done here.
 
 ## Unit template (use verbatim in the commit)
 

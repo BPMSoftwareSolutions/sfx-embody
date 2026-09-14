@@ -25,19 +25,24 @@ concatenations can overflow 8000 bytes (it throws after ~99 s unfiltered) — wi
 
 ## Ranked plan
 
-| # | issue | fix | expected impact | classification |
-|---|---|---|---|---|
-| 1 | graph source assembles the estate before filtering | parameterize to one capability **before** JSON aggregation — inline TVF `analysis.capability_graph_source(@capability_id)` (or `CROSS APPLY` with `cap` filtered first); loader calls it | removes the **35 s+** dominant term | **DB** (`sfx-embody/sql`) + loader call site |
-| 2 | execution-declaration recomputes estate-wide CTEs; per-row closure TVF; dead `reachable` | scope `cap` to the selected capability first; compute the contract-closure set once (set-based recursive CTE, not a per-row multi-statement function); delete dead `reachable`; widen `STRING_AGG` | **11–20 s → ~1–2 s** | **DB** |
-| 3 | declaration document recordset read on every invoke | make it conditional (as `resolution` already is) — off for invoke | removes **8–20 s/invoke** | **boot/loader** |
-| 4 | `graph_source` read twice | return it in the authority read; drop the second | ~3 s + a round trip | **boot/loader** |
-| 5 | closure and mechanics are separate round trips | fold into one statement/batch | ~1–2 s | **boot/loader** |
-| 6 | missing supporting indexes | seek indexes on `capability(capability_id)`; `semantic_object_definition(semantic_object_pk, definition_pk DESC) INCLUDE (canonical_content_pk)`; `contract_version(schema_object_pk)`; `scenario_input/outcome_contract(scenario_version_pk)` | ms-level; helps #1/#2 | **DB**; a persisted column on `source.content_object` is SDA-owned → **request** |
-| 7 | every read re-assembles documents | one **read session**: single pool + `pinModel` + `EXECUTE AS`, N statements, one close; boot slices recordsets and keeps the existing coherence checks | removes ~7 connect + 7 pin + 7 tx-begin **≈ 7 s** | **boot** (query runner) |
-| 8 | 8 sequential one-shot reads | **one declared read returning all recordsets** (delivery, authority, closure, mechanics, graph source, `run-declared-graph` authority) in a single batch | combines #3–#7 | **DB + boot** |
-| 9 | documents re-assembled every invocation | materialize assembled documents keyed by `(estate_model_pk, capability_id, entry_id)` **plus a row-generation key**; serve by seek | O(1) reads | **DB**, but see the invariant below — a digest-only key is unsafe |
-| 10 | heavy module import per invoke; spawn per invoke | keep `typescript`/`ajv` off the path (already are); long-lived delivery (daemon/IPC) with pool + module reuse | ~0.7–0.9 s | **SDA/lib change request** (CLI transport) |
-| 11 | SDA-owned `v_selected_semantic_definition` full-scan/decodes | MAX-per-object selection + `object_kind`-leading index; relocate the definition into `sfx-embody/sql/schema` per the target | 1.4–1.7 s → sub-second | **SDA change request** (sidefx-database) unless relocated |
+| # | issue | fix | expected impact | classification | status |
+|---|---|---|---|---|---|---|
+| 1 | graph source assembles the estate before filtering | parameterize to one capability **before** JSON aggregation — inline TVF `analysis.capability_graph_source(@capability_id)` (or `CROSS APPLY` with `cap` filtered first); loader calls it | removes the **35 s+** dominant term | **DB** (`sfx-embody/sql`) + loader call site | in progress |
+| 2 | execution-declaration recomputes estate-wide CTEs; per-row closure TVF; dead `reachable` | scope `cap` to the selected capability first; compute the contract-closure set once (set-based recursive CTE, not a per-row multi-statement function); delete dead `reachable`; widen `STRING_AGG` | **11–20 s → ~1–2 s** | **DB** | in progress |
+| 3 | declaration document recordset read on every invoke | make it conditional (as `resolution` already is) — off for invoke | removes **8–20 s/invoke** | **boot/loader** | pending |
+| 4 | `graph_source` read twice | return it in the authority read; drop the second | ~3 s + a round trip | **boot/loader** | in progress |
+| 5 | closure and mechanics are separate round trips | fold into one statement/batch | ~1–2 s | **boot/loader** | in progress |
+| 6 | missing supporting indexes | seek indexes on `capability(capability_id)`; `semantic_object_definition(semantic_object_pk, definition_pk DESC) INCLUDE (canonical_content_pk)`; `contract_version(schema_object_pk)`; `scenario_input/outcome_contract(scenario_version_pk)` | ms-level; helps #1/#2 | **DB**; a persisted column on `source.content_object` is SDA-owned → **request** | done |
+| 7 | every read re-assembles documents | one **read session**: single pool + `pinModel` + `EXECUTE AS`, N statements, one close; boot slices recordsets and keeps the existing coherence checks | removes ~7 connect + 7 pin + 7 tx-begin **≈ 7 s** | **boot** (query runner) | pending |
+| 8 | 8 sequential one-shot reads | **one declared read returning all recordsets** (delivery, authority, closure, mechanics, graph source, `run-declared-graph` authority) in a single batch | combines #3–#7 | **DB + boot** | pending |
+| 9 | documents re-assembled every invocation | materialize assembled documents keyed by `(estate_model_pk, capability_id, entry_id)` **plus a row-generation key**; serve by seek | O(1) reads | **DB**, but see the invariant below — a digest-only key is unsafe | pending |
+| 10 | heavy module import per invoke; spawn per invoke | keep `typescript`/`ajv` off the path (already are); long-lived delivery (daemon/IPC) with pool + module reuse | ~0.7–0.9 s | **SDA/lib change request** (CLI transport) | pending |
+| 11 | SDA-owned `v_selected_semantic_definition` full-scan/decodes | MAX-per-object selection + `object_kind`-leading index; relocate the definition into `sfx-embody/sql/schema` per the target | 1.4–1.7 s → sub-second | **SDA change request** (sidefx-database) unless relocated | pending |
+
+Status 2026-09-14: #6 is done (`add-invocation-supporting-indexes.sql` adds
+`IX_model_capability_capability_id` and `IX_model_sod_version_desc`; the other
+requested indexes already existed). #1, #2, #4 and #5 are in progress by a
+concurrent agent. All other rows are pending.
 
 ## Invariants that must survive every optimization
 

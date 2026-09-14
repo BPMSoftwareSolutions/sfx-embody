@@ -17,6 +17,15 @@ digest checks. Those dependencies are declared; these results do not establish
 independent Python/C# implementations of HTTP, credential binding, or schema
 admission. No platform kernel source has been changed.
 
+> **2026-09-14 correction.** The paragraph above — that Python and C# delegate
+> credential binding, HTTP exchange and schema admission to the Node providers —
+> is superseded. SDA commit `7fd4ff3` implements the governed effect ports
+> natively in each kernel (`languages/python/src/scenario_kernel/platform/governed_effect_ports.py`
+> and `consumer.py`; `GovernedEffectPorts.cs` and `AdmittedConsumerPlatform.cs`'s
+> `SemanticExecutionGraphEffectProvider`): real, non-facade ports with the
+> contract catalog enforced. Lane F units 17 and 18 are done; the delegation
+> statement above no longer holds.
+
 | Step | Verified state |
 | --- | --- |
 | M0 | Original Node plan and Python/C# failure evidence retained under `evidence/python-csharp-embodiment/baseline/`. |
@@ -26,7 +35,7 @@ admission. No platform kernel source has been changed.
 | M4 | The plan producer and its three scenarios are installed. Its context still needs complete integration with the consuming projection pipeline. |
 | M5 | Python/C# plan construction and materialization are installed and verified through the real CLI. The files contain the execution plan, binding, fixture authority, source map and candidate evidence. Candidate evidence does not claim conveyor acceptance. |
 | M6 | Declared execution and consumer contract admission are installed and verified through the real CLI. The consuming pipeline's eight-part fixture obligations and complete normalized execution-slot bindings remain to be completed. |
-| M7 | Node planning, execution, writing and direct CLI invocation use the consumer plan. All 17 original regression fixture outcomes passed in-flight. Real CLI execution and observation resolve live equity evidence on all three targets; Node materialization reproduces the tested new digests. Retirement of the old generated bodies and estate/memory verification remain in progress. |
+| M7 | Node planning, execution, writing and direct CLI invocation use the consumer plan. All 17 original regression fixture outcomes passed in-flight. Real CLI execution and observation resolve live equity evidence on all three targets; Node materialization reproduces the tested new digests. Retirement of the old generated bodies and estate/memory verification remain in progress. Superseded 2026-09-14: Python/C# now implement the governed effect ports and contract admission natively (SDA commit `7fd4ff3`) — see the correction above. |
 
 Installed migrations, in order:
 
