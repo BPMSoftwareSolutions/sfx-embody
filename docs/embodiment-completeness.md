@@ -1,14 +1,81 @@
 # Embodiment completeness
 
 **The requirement, in one sentence:** an embodiment is complete only when *every
-executable mechanic* a capability's execution uses is declared and bound **in the
-embodiment itself**, for each target — with nothing left to a host default, a
-passthrough, or an assumption that "the kernel handles it".
+executable mechanic* a capability's execution uses is embodied **in code, per
+target language**, and bound in the embodiment itself — with nothing left to a host
+default, a passthrough, or an assumption that "the kernel handles it".
 
-This is the unambiguous ask. Everything below defines it, how to prove it, and how
-to fulfil it. It is binding, alongside
+This is the unambiguous ask. It is binding, alongside
 [target-architecture.md](target-architecture.md) and
 [implementation-strategy.md](implementation-strategy.md).
+
+## Where mechanics are embodied: code files, per language — never facades
+
+Executable mechanics live in **code**, in each target language's runtime, as real
+implementations that perform the work. A language that returns its input unchanged
+(or otherwise does nothing) is a **facade**, not an embodiment — the python and
+csharp effect ports were exactly that before unit 17/18. Every mechanic below must
+have a real implementation in **all three** languages, with parity (same
+disposition and digest).
+
+| mechanic kind | node (code file) | python (code file) | csharp (code file) |
+|---|---|---|---|
+| pure semantic-value | `languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs` | python mechanic provider (`platform/…`) | `Graph/SemanticExecutionGraphMechanicProvider.cs` |
+| transformation / language | `semantic-transformation-evaluator.mjs` | python evaluator | `ScenarioKernel.Adapters/.../SemanticTransformationEngine` |
+| collection / recurrence | scheduler + mechanic provider | `platform/execution_graph.py` + provider | `Graph/SemanticExecutionGraphScheduler.cs` + provider |
+| platform effect ports | `external-credential-reference-binding-provider.mjs`, `governed-http-exchange-provider.mjs`, `semantic-execution-graph-effect-provider.mjs` | `platform/governed_effect_ports.py` | `Graph/GovernedEffectPorts.cs` |
+| schema / contract admission | `schema-contract-admission-provider.mjs` | python schema admission | `Schema/SemanticContractCatalogAdmission.cs`, `JsonSchemaContractValidator.cs` |
+| declared data read | kernel declared-read code | python declared-read | csharp declared-read |
+| scheduling | `semantic-execution-graph/scheduler.js` | `platform/execution_graph.py` | `Graph/SemanticExecutionGraphScheduler.cs` |
+
+(Paths are the current node/python/csharp SDA implementations; the point is the
+*location and nature* — a code file in each language, executing the mechanic, not
+a JSON stand-in and not a passthrough.)
+
+## What stays data (JSON / rows)
+
+Only **selection and configuration** is data — never a mechanic's behavior:
+
+- the declared meaning: capability, scenario, operations, ports, transformations,
+  provider bindings, contracts, topology, targets, provider profiles;
+- per-node configuration: statements, credential/endpoint authorities, expressions,
+  contract schemas;
+- the binding: `overlayBindings` (`mechanicId → providerProfileId`) and `providers`
+  (`providerProfileId → code module/export[/factory]`).
+
+A JSON declaration says *which* code mechanic runs and *with what configuration*.
+The code says *how it runs*. Neither may substitute for the other: no behavior in a
+JSON default, no requirement hidden in code.
+
+## How the consumer application decides code vs data (and keeps pattern flexibility)
+
+The split is derived from the graph and the target registry — not hardcoded:
+
+1. The compiled graph names each cell's mechanic as data
+   (`mechanicId` / `platformCapabilityId`).
+2. Each id resolves, in that target's registry, to a **provider profile** naming a
+   **code file + export**. A declared read (`{ statement, resultColumn }`) resolves
+   to the language's declared-read code, with the statement as data. Contract
+   admission resolves to the language's schema-admission code.
+3. Therefore: a cell that names a platform mechanic is executed by **language code**;
+   a cell that carries a statement is executed by the declared-read **code** with
+   the statement as **data**; nothing executable remains as bare JSON.
+
+Because the binding is `mechanicId → profile → code module/export` (data), the
+consumer application is free to choose the **projected code pattern** per target —
+it can
+
+- emit a native code body that imports the per-language mechanic code and threads
+  the JSON configuration, or
+- emit a plan/overlay and let the language host bind the same code mechanics at run
+  time, or
+- any other pattern,
+
+so long as every required mechanic is bound to per-language code and executes for
+real. **Data decides which mechanics and their configuration; the language code
+decides how they execute; the consumer decides the pattern.** That is the
+flexibility the consumer application has, and it does not change the requirement:
+the mechanics are embodied in code, per language, with no facades.
 
 ## What counts as an executable mechanic
 
@@ -92,74 +159,6 @@ Four places must each carry every mechanic; a gap in any one is the defect:
    `providers`) must cover the full pure-mechanic set, the collection mechanics,
    the effect ports, and declared reads, so no invoked capability hits
    `OVERLAY_BINDING_MISSING`.
-
-## Where mechanics are embodied: code files, per language — never facades
-
-Executable mechanics live in **code**, in each target language's runtime, as real
-implementations that perform the work. A language that returns its input unchanged
-(or otherwise does nothing) is a **facade**, not an embodiment — the python and
-csharp effect ports were exactly that before unit 17/18. Every mechanic below must
-have a real implementation in **all three** languages, with parity (same
-disposition and digest).
-
-| mechanic kind | node (code file) | python (code file) | csharp (code file) |
-|---|---|---|---|
-| pure semantic-value | `languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs` | python mechanic provider (`platform/…`) | `Graph/SemanticExecutionGraphMechanicProvider.cs` |
-| transformation / language | `semantic-transformation-evaluator.mjs` | python evaluator | `ScenarioKernel.Adapters/.../SemanticTransformationEngine` |
-| collection / recurrence | scheduler + mechanic provider | `platform/execution_graph.py` + provider | `Graph/SemanticExecutionGraphScheduler.cs` + provider |
-| platform effect ports | `external-credential-reference-binding-provider.mjs`, `governed-http-exchange-provider.mjs`, `semantic-execution-graph-effect-provider.mjs` | `platform/governed_effect_ports.py` | `Graph/GovernedEffectPorts.cs` |
-| schema / contract admission | `schema-contract-admission-provider.mjs` | python schema admission | `Schema/SemanticContractCatalogAdmission.cs`, `JsonSchemaContractValidator.cs` |
-| declared data read | kernel declared-read code | python declared-read | csharp declared-read |
-| scheduling | `semantic-execution-graph/scheduler.js` | `platform/execution_graph.py` | `Graph/SemanticExecutionGraphScheduler.cs` |
-
-(Paths are the current node/python/csharp SDA implementations; the point is the
-*location and nature* — a code file in each language, executing the mechanic, not
-a JSON stand-in and not a passthrough.)
-
-## What stays data (JSON / rows)
-
-Only **selection and configuration** is data — never a mechanic's behavior:
-
-- the declared meaning: capability, scenario, operations, ports, transformations,
-  provider bindings, contracts, topology, targets, provider profiles;
-- per-node configuration: statements, credential/endpoint authorities, expressions,
-  contract schemas;
-- the binding: `overlayBindings` (`mechanicId → providerProfileId`) and `providers`
-  (`providerProfileId → code module/export[/factory]`).
-
-A JSON declaration says *which* code mechanic runs and *with what configuration*.
-The code says *how it runs*. Neither may substitute for the other: no behavior in a
-JSON default, no requirement hidden in code.
-
-## How the consumer application decides code vs data (and keeps pattern flexibility)
-
-The split is derived from the graph and the target registry — not hardcoded:
-
-1. The compiled graph names each cell's mechanic as data
-   (`mechanicId` / `platformCapabilityId`).
-2. Each id resolves, in that target's registry, to a **provider profile** naming a
-   **code file + export**. A declared read (`{ statement, resultColumn }`) resolves
-   to the language's declared-read code, with the statement as data. Contract
-   admission resolves to the language's schema-admission code.
-3. Therefore: a cell that names a platform mechanic is executed by **language code**;
-   a cell that carries a statement is executed by the declared-read **code** with
-   the statement as **data**; nothing executable remains as bare JSON.
-
-Because the binding is `mechanicId → profile → code module/export` (data), the
-consumer application is free to choose the **projected code pattern** per target —
-it can
-
-- emit a native code body that imports the per-language mechanic code and threads
-  the JSON configuration, or
-- emit a plan/overlay and let the language host bind the same code mechanics at run
-  time, or
-- any other pattern,
-
-so long as every required mechanic is bound to per-language code and executes for
-real. **Data decides which mechanics and their configuration; the language code
-decides how they execute; the consumer decides the pattern.** That is the
-flexibility the consumer application has, and it does not change the requirement:
-the mechanics are embodied in code, per language, with no facades.
 
 ## Definition of done
 
