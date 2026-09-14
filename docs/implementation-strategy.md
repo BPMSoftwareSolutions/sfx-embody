@@ -5,7 +5,10 @@ defines the target, the standards, and the execution protocol. This document is
 the *execution plan* — how a pool of agents drives the remaining work to the
 target in parallel without stopping.
 
-Read both first. The target decides *what*; this decides *who and how*.
+Read both first. The target decides *what*; this decides *who and how*. The
+binding requirement that every executable mechanic be embodied per target is
+specified in [embodiment-completeness.md](embodiment-completeness.md) — a unit is
+not done until that rule holds for the capability it touches.
 
 ## Rules every agent follows
 
