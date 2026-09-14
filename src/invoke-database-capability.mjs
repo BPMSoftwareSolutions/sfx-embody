@@ -282,7 +282,7 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, 
     ?? cli.display ?? null;
   const outcome = await measure('executeDeclaredGraph', () => executeEstateCapability({ capabilityId: 'run-declared-graph' }, graphSource, config));
   return { disposition: 'terminated',
-    outcome: { capabilityId: selection.capabilityId, scenarioId: selected.scenario_id, result: { outcome }, executions: [], observations: [],
+    outcome: { capabilityId: selection.capabilityId, scenarioId: selected.scenario_id, result: outcome, executions: [], observations: [],
       ...(display ? { display } : {}),
       evidence: { timings, authoritySource: 'DATABASE', bodyStorage: 'NOT_REQUESTED', managedAdmission: 'NOT_REQUESTED',
         snapshotId: bundle.authority.snapshotId, projectionDigest: bundle.authority.projectionDigest } } };
