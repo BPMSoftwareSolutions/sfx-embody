@@ -3,22 +3,74 @@
 //   node --experimental-vm-modules scripts/invoke-from-transaction.mjs <experiment.sql> [capabilityId] [input.json] [estate-cases.json]
 //
 // The experiment runs on one connection inside one transaction. The same
-// connection then runs the read-path queries, so the uncommitted rows are
-// visible. The native body is planned and executed in-process and the outcome is
-// printed. The transaction is rolled back at the end -- nothing is committed.
+// connection then runs the estate's declared reads, so the uncommitted rows are
+// visible. The capability's declared graph is handed to the kernel, which
+// interprets it in process, and the outcome is printed. The transaction is
+// rolled back at the end -- nothing is committed.
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { createHash } from 'node:crypto';
 import assert from 'node:assert/strict';
-import { planNode } from '../src/materialize-node.mjs';
-import { loadMemoryScenario } from '../src/load-memory-scenario.mjs';
-import { isEstateDelivery, executeEstateCapability, executeSelectedDeclaration, executeDatabaseCommand } from '../src/invoke-database-capability.mjs';
+import { executeEstateCapability, executeSelectedDeclaration, executeDatabaseCommand } from '../src/invoke-database-capability.mjs';
 import { readExecutionDelivery } from '../src/read-execution-delivery.mjs';
 
 const DATABASE_ROOT = 'C:/lab/sidefx-database';
 const SDA_ROOT = 'C:/lab/repos/scenario-driven-architecture';
 const db = (...p) => path.join(DATABASE_ROOT, ...p);
+
+// The transaction-bound declaration read. It mirrors the loader's own read in
+// src/read-authority.mjs -- the estate's declared views, never the legacy
+// sidefx-database diagnostics -- but runs on the experiment's transaction so
+// uncommitted rows are the authority.
+const AUTHORITY_READ = `
+SELECT TOP 1 g.capability_id,
+       g.root_scenario_id AS scenario_id,
+       n.namespace_id
+FROM analysis.v_capability_graph_source g
+LEFT JOIN model.capability c ON c.capability_id = g.capability_id
+LEFT JOIN model.identity_namespace n ON n.namespace_pk = c.namespace_pk
+WHERE g.capability_id = CONVERT(nvarchar(400), JSON_VALUE(@input, '$.capabilityId'))
+  AND (JSON_VALUE(@input, '$.namespaceId') IS NULL OR n.namespace_id = JSON_VALUE(@input, '$.namespaceId'))
+ORDER BY n.namespace_id;
+
+SELECT d.source_path, d.entry_id,
+       CONVERT(varbinary(max), CONVERT(varchar(max), d.document) COLLATE Latin1_General_100_BIN2_UTF8) AS content_bytes
+FROM analysis.v_capability_execution_declaration d
+WHERE d.capability_id = CONVERT(nvarchar(400), JSON_VALUE(@input, '$.capabilityId'))
+ORDER BY d.source_path, d.entry_id;`;
+
+const CLOSURE_READ = `
+DECLARE @capability_id nvarchar(4000)=JSON_VALUE(@input,'$.capabilityId'),
+        @scenario_id nvarchar(4000)=JSON_VALUE(@input,'$.scenarioId'),
+        @namespace_id nvarchar(4000)=JSON_VALUE(@input,'$.namespaceId');
+DECLARE @matches bigint,@capability_version_pk bigint,@scenario_version_pk bigint;
+SELECT @matches=COUNT_BIG(*),@capability_version_pk=MAX(ec.capability_version_pk)
+FROM model.estate_capability ec
+JOIN model.capability c ON c.capability_pk=ec.capability_pk
+JOIN model.identity_namespace n ON n.namespace_pk=c.namespace_pk
+WHERE ec.estate_model_pk=@estate_model_pk AND c.capability_id=@capability_id
+  AND (@namespace_id IS NULL OR n.namespace_id=@namespace_id);
+IF @matches=0 THROW 51000,'CAPABILITY_NOT_FOUND',1;
+IF @matches<>1 THROW 51000,'CAPABILITY_NAMESPACE_AMBIGUOUS',1;
+SELECT @matches=COUNT_BIG(*),@scenario_version_pk=MAX(cs.scenario_version_pk)
+FROM model.capability_scenario cs JOIN model.scenario s ON s.scenario_pk=cs.scenario_pk
+WHERE cs.capability_version_pk=@capability_version_pk AND s.scenario_id=@scenario_id;
+IF @matches=0 THROW 51000,'SCENARIO_NOT_IN_CAPABILITY',1;
+IF @matches<>1 THROW 51000,'SCENARIO_NAMESPACE_AMBIGUOUS',1;
+SELECT DISTINCT s.scenario_id AS downstream_scenario_id,cl.minimum_depth,cl.cycle_detected,
+       sc.capability_id AS owning_capability_id,
+       i.input_id,e.event_id,e.responsibility,o.outcome_id,sv.definition_digest AS scenario_definition_digest
+FROM analysis.v_scenario_invocation_closure cl
+JOIN model.scenario_version sv ON sv.scenario_version_pk=cl.downstream_scenario_version_pk
+JOIN model.scenario s ON s.scenario_pk=sv.scenario_pk
+JOIN model.capability sc ON sc.capability_pk=s.capability_pk
+LEFT JOIN model.scenario_input i ON i.scenario_version_pk=sv.scenario_version_pk
+LEFT JOIN model.scenario_event e ON e.scenario_version_pk=sv.scenario_version_pk
+LEFT JOIN model.scenario_outcome o ON o.scenario_version_pk=sv.scenario_version_pk
+WHERE cl.capability_version_pk=@capability_version_pk AND cl.selected_scenario_version_pk=@scenario_version_pk
+ORDER BY cl.minimum_depth,s.scenario_id
+OPTION(MAXRECURSION 32767);`;
 
 const experimentFile = process.argv[2] ?? db('sql/experiments/remove-overhead-and-scaffold-hello-world.sql');
 const capabilityId = process.argv[3] ?? 'hello-world-sql';
@@ -45,17 +97,16 @@ try {
 
   const pinned = await pinModel(tx);
   const identity = { snapshotId: pinned.snapshot_id, projectionDigest: pinned.projection_id, viewDefinitionDigest: pinned.viewDefinitionDigest, truncated: false };
-  const readStatement = async (statement, { input: selection }) => {
+  const readStatement = async (statement, { input: selection } = {}) => {
     const request = new sql.Request(tx)
       .input('estate_model_pk', sql.BigInt, pinned.estate_model_pk)
       .input('snapshot_id', sql.VarChar(71), pinned.snapshot_id)
       .input('projection_id', sql.VarChar(71), pinned.projection_id)
       .input('view_definition_digest', sql.VarChar(71), pinned.viewDefinitionDigest)
-      .input('input', sql.NVarChar(sql.MAX), JSON.stringify(selection));
+      .input('input', sql.NVarChar(sql.MAX), JSON.stringify(selection ?? null));
     const result = await request.query(statement);
     return { ...identity, recordsets: result.recordsets.map(rs => rs.map(normalizeSql)), rowCounts: result.recordsets.map(rs => rs.length) };
   };
-  const readQuery = async (file, selection) => readStatement(await fs.readFile(db('sql/diagnostics', file), 'utf8'), { input: selection });
 
   const mechanicsRaw = await new sql.Request(tx).query(`SELECT definition_json FROM analysis.v_selected_semantic_definition WHERE estate_model_pk=${Number(pinned.estate_model_pk)} AND object_kind='MECHANIC'`);
   const mechanics = { ...identity, recordsets: [mechanicsRaw.recordset.map(normalizeSql)], rowCounts: [mechanicsRaw.recordset.length] };
@@ -66,11 +117,13 @@ try {
   const readTransactionAuthority = async (_databaseRoot, selection) => {
     const key = selectionKey(selection);
     if (authorityReads.has(key)) return structuredClone(authorityReads.get(key));
-    const authority = await readQuery('capability-embodiment.sql', selection);
-    const selected = authority.recordsets[0][0];
-    if (!selected) throw new Error('CAPABILITY_NOT_FOUND_ON_THIS_TRANSACTION:' + selection.capabilityId);
-    const closure = await readQuery('scenario-closure.sql', { ...selection, scenarioId: selected.scenario_id });
-    const bundle = { selection: { ...selection, scenarioId: selected.scenario_id }, authority, closure, resolutions: null, mechanics };
+    const authority = await readStatement(AUTHORITY_READ, { input: selection });
+    const root = authority.recordsets[0]?.[0];
+    if (!root) throw new Error('CAPABILITY_NOT_FOUND_ON_THIS_TRANSACTION:' + selection.capabilityId);
+    const resolved = { ...selection, scenarioId: selection.scenarioId ?? root.scenario_id,
+      ...(root.namespace_id === undefined ? {} : { namespaceId: root.namespace_id }) };
+    const closure = await readStatement(CLOSURE_READ, { input: resolved });
+    const bundle = { selection: resolved, authority, closure, resolutions: null, mechanics };
     authorityReads.set(key, bundle);
     authorityReads.set(selectionKey(bundle.selection), bundle);
     return structuredClone(bundle);
@@ -109,23 +162,23 @@ try {
       }
     };
   }
-  if (await isEstateDelivery(bundle, context)) {
-    const result = await executeEstateCapability({ capabilityId }, input, context);
-    outcome.result = result;
-    console.log('DISPOSITION', result.disposition ?? result.contractId);
-    console.log('OUTCOME', JSON.stringify(result));
-  } else {
-    const plan = await planNode({ bundle, sdaRoot: SDA_ROOT });
-    console.log('PLANNED', plan.files.length, 'files; scenario', plan.selectedScenarioId);
-    const runtime = await loadMemoryScenario(plan);
-    const executions = [];
-    const scenario = await runtime.createScenario({ observer: { observe() {} }, clock: { now: () => new Date().toISOString() } });
-    const result = await scenario.execute(input, { executionId: 'invoke-from-transaction', rootExecutionId: 'invoke-from-transaction',
-      rootInput: structuredClone(input), ancestry: [plan.selectedScenarioId], collect: v => executions.push(v) });
-    outcome.result = result;
-    console.log('DISPOSITION', result.disposition);
-    console.log('OUTCOME', JSON.stringify(result.outcome));
-  }
+  // Invocation reads the capability's declared graph from the estate view and
+  // hands it to the kernel through the same run-declared-graph capability the
+  // loader uses. Every read stays on this transaction, so the uncommitted rows
+  // are the authority. Delivery selection names the target the applied rows
+  // declare; a capability with no declared target is unchanged.
+  const delivery = await readExecutionDelivery(context);
+  context.deliveryTarget = delivery.defaultTarget;
+  const graphRead = await readStatement(
+    "SELECT graph_source FROM analysis.v_capability_graph_source WHERE capability_id = CONVERT(nvarchar(400), JSON_VALUE(@input,'$.capabilityId'))",
+    { input: { capabilityId } });
+  if (!graphRead.recordsets[0]?.length) throw new Error('DECLARED_GRAPH_SOURCE_MISSING:' + capabilityId);
+  const graphSource = JSON.parse(graphRead.recordsets[0][0].graph_source);
+  graphSource.input = input;
+  const result = await executeEstateCapability({ capabilityId: 'run-declared-graph' }, graphSource, context);
+  outcome.result = result;
+  console.log('DISPOSITION', result.disposition ?? result.contractId);
+  console.log('OUTCOME', JSON.stringify(result));
   // Optional estate cases share this transaction and therefore cannot pass by
   // accidentally reading an installed generation on another connection.
   if (process.argv[5]) {

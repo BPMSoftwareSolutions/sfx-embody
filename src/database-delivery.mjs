@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { executeDatabaseCommand, validateDatabaseCommand } from './invoke-database-capability.mjs';
+import { readAuthority } from './read-authority.mjs';
 import { restrictMemoryProcess } from './restrict-memory-process.mjs';
 
 try {
@@ -25,6 +26,12 @@ try {
   const { connectionString } = await import(pathToFileURL(path.join(config.databaseRoot, 'src/ingest/database.mjs')));
   const { connectionEnvironmentVariable } = await readDatabaseConfig();
   process.env[connectionEnvironmentVariable] = connectionString(connectionEnvironmentVariable);
+  // The frontdoor owns the connection. Inject the query runner and the
+  // declaration read for the loader; the loader must not reach into
+  // sidefx-database itself.
+  const { query: readQuery } = await import(pathToFileURL(path.join(config.databaseRoot, 'src/query/run.mjs')));
+  config.readQuery = readQuery;
+  config.readAuthority = readAuthority;
   const processEvidence = restrictMemoryProcess(config);
   config.spawnDeclared = processEvidence.spawnDeclared;
   if (process.env.SIDEFX_OBSERVE === '1') {

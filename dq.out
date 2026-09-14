@@ -1,0 +1,947 @@
+{
+  "capabilityId": "database-query-provider",
+  "scenarioId": "database-query-provider",
+  "result": {
+    "outcome": [
+      {
+        "capabilityId": "adapt-job-market-intelligence-evidence"
+      },
+      {
+        "capabilityId": "admit-canonical-circuit-blueprint"
+      },
+      {
+        "capabilityId": "admit-capability-authority"
+      },
+      {
+        "capabilityId": "admit-capsule-execution-closure"
+      },
+      {
+        "capabilityId": "admit-consumer-source-facts"
+      },
+      {
+        "capabilityId": "admit-declared-contract"
+      },
+      {
+        "capabilityId": "admit-execution-vector"
+      },
+      {
+        "capabilityId": "admit-external-market-representation"
+      },
+      {
+        "capabilityId": "admit-kernel-specification"
+      },
+      {
+        "capabilityId": "admit-language-declaration"
+      },
+      {
+        "capabilityId": "admit-registry-asset"
+      },
+      {
+        "capabilityId": "admit-schema-family"
+      },
+      {
+        "capabilityId": "advance-sidefx-current-corpus-pointer"
+      },
+      {
+        "capabilityId": "analyze-sidefx-semantic-gaps"
+      },
+      {
+        "capabilityId": "analyze-sidefx-semantic-impact"
+      },
+      {
+        "capabilityId": "assemble-sidefx-capability-authoring-context"
+      },
+      {
+        "capabilityId": "assure-presentation-provider-closure"
+      },
+      {
+        "capabilityId": "audit-controlled-tooling-migration-batch"
+      },
+      {
+        "capabilityId": "author-canonical-circuit-blueprint-candidate"
+      },
+      {
+        "capabilityId": "author-canonical-feature"
+      },
+      {
+        "capabilityId": "author-capability-candidate-from-feature-reference"
+      },
+      {
+        "capabilityId": "author-capability-scenario-conveyor"
+      },
+      {
+        "capabilityId": "author-one-scenario-candidate"
+      },
+      {
+        "capabilityId": "author-one-scenario-solution"
+      },
+      {
+        "capabilityId": "author-tooling-capability-candidate"
+      },
+      {
+        "capabilityId": "bind-canonical-blueprint-review"
+      },
+      {
+        "capabilityId": "bind-external-credential-reference"
+      },
+      {
+        "capabilityId": "bind-model-testimony-evidence"
+      },
+      {
+        "capabilityId": "bind-sidefx-semantic-query-receipt"
+      },
+      {
+        "capabilityId": "carry-consumer-authority-context"
+      },
+      {
+        "capabilityId": "classify-sidefx-semantic-corpus-sources"
+      },
+      {
+        "capabilityId": "compare-projected-tooling-migration-oracle"
+      },
+      {
+        "capabilityId": "compare-sidefx-store-equivalence"
+      },
+      {
+        "capabilityId": "compose-canonical-scenario-graph"
+      },
+      {
+        "capabilityId": "compose-resolve-equity-market-price-evidence"
+      },
+      {
+        "capabilityId": "construct-capability-author-delegate-request"
+      },
+      {
+        "capabilityId": "construct-consumer-projection-plan"
+      },
+      {
+        "capabilityId": "construct-deterministic-realization-plan"
+      },
+      {
+        "capabilityId": "construct-embodiment-plan"
+      },
+      {
+        "capabilityId": "construct-model-connection-runtime-closure"
+      },
+      {
+        "capabilityId": "construct-model-role-conveyor-plan"
+      },
+      {
+        "capabilityId": "construct-projectable-capability-publication-shape"
+      },
+      {
+        "capabilityId": "construct-sidefx-evaluation-corpus-snapshot"
+      },
+      {
+        "capabilityId": "construct-sidefx-evaluation-object-catalog"
+      },
+      {
+        "capabilityId": "construct-sidefx-evaluation-relationship-graph"
+      },
+      {
+        "capabilityId": "construct-sidefx-semantic-query-plan"
+      },
+      {
+        "capabilityId": "construct-tooling-migration-execution-plan"
+      },
+      {
+        "capabilityId": "database-query-provider"
+      },
+      {
+        "capabilityId": "decide-implementation-admission"
+      },
+      {
+        "capabilityId": "decode-physical-capability-capsule"
+      },
+      {
+        "capabilityId": "deliver-capability-change-api"
+      },
+      {
+        "capabilityId": "deliver-capability-change-cli"
+      },
+      {
+        "capabilityId": "deliver-capability-change-mcp"
+      },
+      {
+        "capabilityId": "deliver-capsule-estate-cli"
+      },
+      {
+        "capabilityId": "deliver-capsule-estate-mcp"
+      },
+      {
+        "capabilityId": "deliver-realization-api"
+      },
+      {
+        "capabilityId": "derive-api-operation-graph"
+      },
+      {
+        "capabilityId": "derive-canonical-execution-graph"
+      },
+      {
+        "capabilityId": "derive-canonical-type-graph"
+      },
+      {
+        "capabilityId": "derive-cross-language-equivalence"
+      },
+      {
+        "capabilityId": "derive-target-execution-graph"
+      },
+      {
+        "capabilityId": "derive-target-projection-graph"
+      },
+      {
+        "capabilityId": "detect-established-strategic-market-patterns"
+      },
+      {
+        "capabilityId": "detect-hand-authored-code"
+      },
+      {
+        "capabilityId": "determine-authority-conformance"
+      },
+      {
+        "capabilityId": "determine-behavioral-conformance"
+      },
+      {
+        "capabilityId": "determine-candidate-origin"
+      },
+      {
+        "capabilityId": "determine-execution-closure"
+      },
+      {
+        "capabilityId": "determine-execution-conformance"
+      },
+      {
+        "capabilityId": "determine-model-role-provider-switch"
+      },
+      {
+        "capabilityId": "determine-platform-mechanic-conformance"
+      },
+      {
+        "capabilityId": "determine-projected-shape-equivalence"
+      },
+      {
+        "capabilityId": "determine-shape-conformance"
+      },
+      {
+        "capabilityId": "determine-sidefx-capability-authoring-disposition"
+      },
+      {
+        "capabilityId": "determine-sidefx-evaluation-corpus-closure"
+      },
+      {
+        "capabilityId": "discover-language-bindings"
+      },
+      {
+        "capabilityId": "establish-capsule-first-repository-closure"
+      },
+      {
+        "capabilityId": "establish-human-capability-ownership-review-receipt"
+      },
+      {
+        "capabilityId": "evaluate-scenario-solution-candidate"
+      },
+      {
+        "capabilityId": "evaluate-semantic-carrier-compilation-evidence"
+      },
+      {
+        "capabilityId": "evaluate-sidefx-proof-binding"
+      },
+      {
+        "capabilityId": "evaluate-sidefx-verification-coverage"
+      },
+      {
+        "capabilityId": "execute-admitted-capability"
+      },
+      {
+        "capabilityId": "execute-capsule-direct"
+      },
+      {
+        "capabilityId": "execute-capsule-runtime"
+      },
+      {
+        "capabilityId": "execute-consumer-plan"
+      },
+      {
+        "capabilityId": "execute-declared-capability"
+      },
+      {
+        "capabilityId": "execute-governed-model-invocation"
+      },
+      {
+        "capabilityId": "execute-governed-model-role-conveyor"
+      },
+      {
+        "capabilityId": "execute-governed-serial-tooling-migration"
+      },
+      {
+        "capabilityId": "execute-projected-model-provider-attempt"
+      },
+      {
+        "capabilityId": "extract-semantic-carrier-graph"
+      },
+      {
+        "capabilityId": "generate-executable-capability-scaffold"
+      },
+      {
+        "capabilityId": "generate-governed-narration"
+      },
+      {
+        "capabilityId": "govern-authoring-convergence"
+      },
+      {
+        "capabilityId": "govern-model-provider-binding"
+      },
+      {
+        "capabilityId": "govern-strategic-decision"
+      },
+      {
+        "capabilityId": "govern-strategic-decision-v2"
+      },
+      {
+        "capabilityId": "greet-by-name"
+      },
+      {
+        "capabilityId": "ground-sidefx-semantic-query-results"
+      },
+      {
+        "capabilityId": "hello-world"
+      },
+      {
+        "capabilityId": "hello-world-2"
+      },
+      {
+        "capabilityId": "hello-world-sql"
+      },
+      {
+        "capabilityId": "ingest-sidefx-json-authority"
+      },
+      {
+        "capabilityId": "inspect-canonical-circuit-blueprint-candidate"
+      },
+      {
+        "capabilityId": "inspect-delegated-capability-candidate"
+      },
+      {
+        "capabilityId": "interlock-agent-operation"
+      },
+      {
+        "capabilityId": "invoke-database-capability"
+      },
+      {
+        "capabilityId": "load-memory-scenario"
+      },
+      {
+        "capabilityId": "manage-capability-capsule"
+      },
+      {
+        "capabilityId": "manage-capsule-estate"
+      },
+      {
+        "capabilityId": "materialize-authorized-file-batch"
+      },
+      {
+        "capabilityId": "materialize-capability-embodiment"
+      },
+      {
+        "capabilityId": "materialize-converged-candidate"
+      },
+      {
+        "capabilityId": "materialize-projectable-capability-candidate"
+      },
+      {
+        "capabilityId": "observe-capability-change"
+      },
+      {
+        "capabilityId": "observe-governed-http-exchange"
+      },
+      {
+        "capabilityId": "observe-governed-repository"
+      },
+      {
+        "capabilityId": "observe-language-behavior"
+      },
+      {
+        "capabilityId": "observe-live-model-connection"
+      },
+      {
+        "capabilityId": "observe-native-presentation"
+      },
+      {
+        "capabilityId": "observe-projected-target-execution"
+      },
+      {
+        "capabilityId": "obtain-governed-model-response"
+      },
+      {
+        "capabilityId": "obtain-governed-speech-media"
+      },
+      {
+        "capabilityId": "open-capability-change"
+      },
+      {
+        "capabilityId": "operate-capsule-estate"
+      },
+      {
+        "capabilityId": "operate-tooling-migration-conveyor"
+      },
+      {
+        "capabilityId": "operate-tooling-migration-inventory"
+      },
+      {
+        "capabilityId": "operate-tooling-migration-promote"
+      },
+      {
+        "capabilityId": "operate-tooling-migration-run"
+      },
+      {
+        "capabilityId": "operate-tooling-migration-verify"
+      },
+      {
+        "capabilityId": "plan-capability-embodiment"
+      },
+      {
+        "capabilityId": "plan-consumer-execution"
+      },
+      {
+        "capabilityId": "preserve-admitted-projection-on-incomplete-regeneration"
+      },
+      {
+        "capabilityId": "project-accessibility-binding"
+      },
+      {
+        "capabilityId": "project-activation-binding"
+      },
+      {
+        "capabilityId": "project-adaptation-binding"
+      },
+      {
+        "capabilityId": "project-and-prove-semantic-carrier-graph"
+      },
+      {
+        "capabilityId": "project-availability-presentation"
+      },
+      {
+        "capabilityId": "project-canonical-circuit-blueprint"
+      },
+      {
+        "capabilityId": "project-capability-revelation"
+      },
+      {
+        "capabilityId": "project-collection-presentation"
+      },
+      {
+        "capabilityId": "project-consumer-execution-embodiment-plan"
+      },
+      {
+        "capabilityId": "project-consumer-execution-embodiment-v2"
+      },
+      {
+        "capabilityId": "project-document-presentation"
+      },
+      {
+        "capabilityId": "project-feedback-presentation"
+      },
+      {
+        "capabilityId": "project-flow-composition"
+      },
+      {
+        "capabilityId": "project-focus-navigation"
+      },
+      {
+        "capabilityId": "project-governed-http-request-body"
+      },
+      {
+        "capabilityId": "project-input-binding"
+      },
+      {
+        "capabilityId": "project-model-provider-protocol"
+      },
+      {
+        "capabilityId": "project-native-expressions"
+      },
+      {
+        "capabilityId": "project-openapi-description"
+      },
+      {
+        "capabilityId": "project-operation-binding"
+      },
+      {
+        "capabilityId": "project-portfolio-alignment-view"
+      },
+      {
+        "capabilityId": "project-presentation-hosting"
+      },
+      {
+        "capabilityId": "project-presentation-lifecycle"
+      },
+      {
+        "capabilityId": "project-presentation-state-binding"
+      },
+      {
+        "capabilityId": "project-presentation-token-binding"
+      },
+      {
+        "capabilityId": "project-semantic-element-realization"
+      },
+      {
+        "capabilityId": "project-semantic-presentation-layer"
+      },
+      {
+        "capabilityId": "project-sidefx-semantic-identity-index"
+      },
+      {
+        "capabilityId": "project-sidefx-semantic-lexical-index"
+      },
+      {
+        "capabilityId": "project-source-selection-presentation"
+      },
+      {
+        "capabilityId": "project-strategic-evidence-review"
+      },
+      {
+        "capabilityId": "project-structured-data-presentation"
+      },
+      {
+        "capabilityId": "project-validation-presentation"
+      },
+      {
+        "capabilityId": "promote-proven-implementation"
+      },
+      {
+        "capabilityId": "proof-flow"
+      },
+      {
+        "capabilityId": "prove-canonical-blueprint-geometry"
+      },
+      {
+        "capabilityId": "prove-cross-apply-ui-parity"
+      },
+      {
+        "capabilityId": "prove-cross-target-projection-equivalence"
+      },
+      {
+        "capabilityId": "prove-domain-isolation"
+      },
+      {
+        "capabilityId": "prove-experience-closure"
+      },
+      {
+        "capabilityId": "prove-mechanical-sterility"
+      },
+      {
+        "capabilityId": "prove-monotonic-execution-circuit"
+      },
+      {
+        "capabilityId": "prove-projected-execution-behavior"
+      },
+      {
+        "capabilityId": "prove-projected-sterility-before-publication"
+      },
+      {
+        "capabilityId": "prove-query-closure"
+      },
+      {
+        "capabilityId": "provision-capability-artifacts"
+      },
+      {
+        "capabilityId": "publish-bounded-tooling-migration-evidence"
+      },
+      {
+        "capabilityId": "publish-capability-change"
+      },
+      {
+        "capabilityId": "publish-implementation-evidence"
+      },
+      {
+        "capabilityId": "publish-projected-capability"
+      },
+      {
+        "capabilityId": "publish-sidefx-evidence-receipt"
+      },
+      {
+        "capabilityId": "qualify-provider-candidate-completeness"
+      },
+      {
+        "capabilityId": "read-authority"
+      },
+      {
+        "capabilityId": "read-authorized-file"
+      },
+      {
+        "capabilityId": "read-authorized-file-through-capability"
+      },
+      {
+        "capabilityId": "read-capability-authority"
+      },
+      {
+        "capabilityId": "read-declared-authority"
+      },
+      {
+        "capabilityId": "read-declared-execution-graph"
+      },
+      {
+        "capabilityId": "realize-admitted-capability"
+      },
+      {
+        "capabilityId": "realize-node-execute-bounded-process"
+      },
+      {
+        "capabilityId": "reconstruct-capability-workspace"
+      },
+      {
+        "capabilityId": "render-consumer-object"
+      },
+      {
+        "capabilityId": "reproduce-target-execution-vector"
+      },
+      {
+        "capabilityId": "reproduce-target-structural-model"
+      },
+      {
+        "capabilityId": "resolve-admitted-market-facts"
+      },
+      {
+        "capabilityId": "resolve-bounded-market-interpretation"
+      },
+      {
+        "capabilityId": "resolve-capability-proof-obligations"
+      },
+      {
+        "capabilityId": "resolve-capability-reinforcing-fit"
+      },
+      {
+        "capabilityId": "resolve-equity-market-price-evidence"
+      },
+      {
+        "capabilityId": "resolve-estate-dependency-closure"
+      },
+      {
+        "capabilityId": "resolve-governed-model-invocation-profile"
+      },
+      {
+        "capabilityId": "resolve-governed-scenario-route"
+      },
+      {
+        "capabilityId": "resolve-governed-task"
+      },
+      {
+        "capabilityId": "resolve-platform-responsibilities"
+      },
+      {
+        "capabilityId": "resolve-product-promise-fit"
+      },
+      {
+        "capabilityId": "resolve-provider-slot-bindings"
+      },
+      {
+        "capabilityId": "resolve-registered-realization-plan"
+      },
+      {
+        "capabilityId": "resolve-scenario-reinforcing-fit"
+      },
+      {
+        "capabilityId": "resolve-scenario-solution-authoring-profile"
+      },
+      {
+        "capabilityId": "resolve-sidefx-capability-precedents"
+      },
+      {
+        "capabilityId": "resolve-sidefx-current-corpus-pointer"
+      },
+      {
+        "capabilityId": "resolve-sidefx-eligible-providers"
+      },
+      {
+        "capabilityId": "resolve-sidefx-semantic-knowledge-request"
+      },
+      {
+        "capabilityId": "resolve-sidefx-semantic-pattern-candidates"
+      },
+      {
+        "capabilityId": "resolve-strategic-interpretation"
+      },
+      {
+        "capabilityId": "resolve-strategic-market-fit"
+      },
+      {
+        "capabilityId": "resolve-strategic-market-signals"
+      },
+      {
+        "capabilityId": "retrieve-sidefx-semantic-candidates"
+      },
+      {
+        "capabilityId": "reveal-and-refine-capability-meaning"
+      },
+      {
+        "capabilityId": "route-aware-consumer-execution-surface"
+      },
+      {
+        "capabilityId": "run-declared-query"
+      },
+      {
+        "capabilityId": "say-hello-world"
+      },
+      {
+        "capabilityId": "sda-authority-state-projection.v1"
+      },
+      {
+        "capabilityId": "sda-authority-transformation-port.v1"
+      },
+      {
+        "capabilityId": "sda-bounded-base64-byte-digest-port.v1"
+      },
+      {
+        "capabilityId": "sda-canonical-capability-feature-resolution-port.v1"
+      },
+      {
+        "capabilityId": "sda-declarative-state-projection.v1"
+      },
+      {
+        "capabilityId": "sda-declarative-value-port.v1"
+      },
+      {
+        "capabilityId": "sda-external-credential-reference-binding-port.v1"
+      },
+      {
+        "capabilityId": "sda-external-observation-port.v1"
+      },
+      {
+        "capabilityId": "sda-filesystem-artifact-store.v1"
+      },
+      {
+        "capabilityId": "sda-fixture-contract-validator.v1"
+      },
+      {
+        "capabilityId": "sda-generic-llm-connector-port.v1"
+      },
+      {
+        "capabilityId": "sda-governed-disposable-root-lifecycle-port.v1"
+      },
+      {
+        "capabilityId": "sda-governed-external-root-batch-materialization-port.v1"
+      },
+      {
+        "capabilityId": "sda-governed-external-root-consumer-projection-port.v1"
+      },
+      {
+        "capabilityId": "sda-governed-external-root-observation-port.v1"
+      },
+      {
+        "capabilityId": "sda-governed-external-root-projected-application-execution-port.v1"
+      },
+      {
+        "capabilityId": "sda-governed-file-system-shaping-port.v2"
+      },
+      {
+        "capabilityId": "sda-governed-http-exchange-port.v1"
+      },
+      {
+        "capabilityId": "sda-governed-repository-observation-port.v1"
+      },
+      {
+        "capabilityId": "sda-governed-serial-execution-port.v1"
+      },
+      {
+        "capabilityId": "sda-governed-target-execution-observation-port.v1"
+      },
+      {
+        "capabilityId": "sda-governed-tooling-binding-transaction-port.v1"
+      },
+      {
+        "capabilityId": "sda-governed-tooling-migration-operation-port.v1"
+      },
+      {
+        "capabilityId": "sda-json-authority-ingestion-port.v1"
+      },
+      {
+        "capabilityId": "sda-json-cli.v1"
+      },
+      {
+        "capabilityId": "sda-json-query-cli.v1"
+      },
+      {
+        "capabilityId": "sda-managed-language-module-invocation-port.v1"
+      },
+      {
+        "capabilityId": "sda-node-consumer-runtime.v1"
+      },
+      {
+        "capabilityId": "sda-os-environment-credential-port.v1"
+      },
+      {
+        "capabilityId": "sda-projected-capability-invocation-port.v1"
+      },
+      {
+        "capabilityId": "sda-projected-capability-invocation-port.v2"
+      },
+      {
+        "capabilityId": "sda-proof-binding-evaluation-port.v1"
+      },
+      {
+        "capabilityId": "sda-scenario-semantic-carrier-evaluation-port.v1"
+      },
+      {
+        "capabilityId": "sda-scenario-semantic-carrier-extraction-port.v1"
+      },
+      {
+        "capabilityId": "sda-scenario-semantic-carrier-validation-port.v1"
+      },
+      {
+        "capabilityId": "sda-schema-contract-admission.v1"
+      },
+      {
+        "capabilityId": "sda-semantic-execution-graph-compilation-port.v1"
+      },
+      {
+        "capabilityId": "sda-semantic-vector-index.v1"
+      },
+      {
+        "capabilityId": "seal-capability-change"
+      },
+      {
+        "capabilityId": "shape-governed-file-system-batch"
+      },
+      {
+        "capabilityId": "speech-provider"
+      },
+      {
+        "capabilityId": "stage-projected-candidate"
+      },
+      {
+        "capabilityId": "trace-sidefx-scenario-lineage"
+      },
+      {
+        "capabilityId": "transact-governed-tooling-responsibility-binding"
+      },
+      {
+        "capabilityId": "validate-semantic-carrier"
+      },
+      {
+        "capabilityId": "verify-admitted-capability-lifecycle"
+      },
+      {
+        "capabilityId": "verify-capability-authoring-lineage"
+      },
+      {
+        "capabilityId": "verify-capability-scenario-outcomes"
+      },
+      {
+        "capabilityId": "verify-governed-model-invocation-parity"
+      },
+      {
+        "capabilityId": "verify-governed-placement"
+      },
+      {
+        "capabilityId": "verify-model-connection-conformance"
+      },
+      {
+        "capabilityId": "verify-model-role-conveyor-closure"
+      },
+      {
+        "capabilityId": "verify-realization-lifecycle-contracts"
+      },
+      {
+        "capabilityId": "verify-reinforcing-fit-language"
+      },
+      {
+        "capabilityId": "verify-sidefx-durable-store-admission"
+      },
+      {
+        "capabilityId": "verify-sidefx-evidence-ledger-integrity"
+      },
+      {
+        "capabilityId": "write-binary-artifact"
+      },
+      {
+        "capabilityId": "write-capability-embodiment"
+      },
+      {
+        "capabilityId": "write-consumer-embodiment"
+      }
+    ]
+  },
+  "executions": [],
+  "observations": [],
+  "evidence": {
+    "timings": {
+      "unit": "milliseconds",
+      "queries": {
+        "capability-embodiment.sql": 1800.6700999999998,
+        "scenario-closure.sql": 991.5904999999998,
+        "mechanic-definitions.sql": 1103.4567000000006
+      },
+      "readExecutionDelivery": 1197.3353000000002,
+      "readAuthority": 3905.2842999999993,
+      "detectEstateDelivery": 0.30130000000008295,
+      "executeEstateDelivery": 1111.8608000000004,
+      "processSetup": 788.9277,
+      "processTotal": 7004.7372
+    },
+    "authoritySource": "DATABASE",
+    "bodyStorage": "NOT_REQUESTED",
+    "managedAdmission": "NOT_REQUESTED",
+    "snapshotId": "sha256:1a770ac0795d10665a88166f8d8c968dc5b2d030fdfab2b837aa6071d135f9e9",
+    "projectionDigest": "sha256:8aae1f306ced5952333da0fb936d2f846081f8ed31b6f627a2099ad49cbbfdb0",
+    "queries": [
+      {
+        "snapshotId": "sha256:1a770ac0795d10665a88166f8d8c968dc5b2d030fdfab2b837aa6071d135f9e9",
+        "projectionDigest": "sha256:8aae1f306ced5952333da0fb936d2f846081f8ed31b6f627a2099ad49cbbfdb0",
+        "viewDefinitionDigest": "sha256:db80b95111665fc68c834bc8d280278181afdf14f1ebee681802ef5be2040948",
+        "queryDigest": "sha256:a30b8b665cc9fb6cf76c36fb360de32e2c4ad5e08671591db1779ead06a78b76",
+        "resultDigest": "sha256:5ac67c46c8676a82bc7f372dfcff4b6a68b8034f511bfd556ede6d2decaaeed4",
+        "resultObjectDigest": "sha256:3587b849b73dee87f2a33e8b79d31d3018ab0286fc4618a360e251112be588e2",
+        "resultCanonicalization": "sorted-multiset-per-recordset.v1",
+        "rowLimit": 100000,
+        "truncated": false,
+        "rowCounts": [
+          1,
+          11,
+          7,
+          6
+        ],
+        "disposition": "READ_QUERY_COMPLETE",
+        "objectRetention": "MEMORY_ONLY",
+        "inputDigest": "sha256:54aa8fbe493368c368498bfd92dfa39fbc543fa9790636c4f8e208c2a42ac236"
+      },
+      {
+        "snapshotId": "sha256:1a770ac0795d10665a88166f8d8c968dc5b2d030fdfab2b837aa6071d135f9e9",
+        "projectionDigest": "sha256:8aae1f306ced5952333da0fb936d2f846081f8ed31b6f627a2099ad49cbbfdb0",
+        "viewDefinitionDigest": "sha256:db80b95111665fc68c834bc8d280278181afdf14f1ebee681802ef5be2040948",
+        "queryDigest": "sha256:f161bfef91ead5c67b44fb1acce36b61698a06c673aca172095b910b7fe85287",
+        "resultDigest": "sha256:3c3f429dd37de3e0024ab474c377f463c5d48cfaa26878ce576d8e709f6f8c43",
+        "resultObjectDigest": "sha256:df70f6ffe8b3ef9289bf0d675879f8a82593b37ecdbc7ba1041cb97b3aea02d9",
+        "resultCanonicalization": "sorted-multiset-per-recordset.v1",
+        "rowLimit": 100000,
+        "truncated": false,
+        "rowCounts": [
+          1
+        ],
+        "disposition": "READ_QUERY_COMPLETE",
+        "objectRetention": "MEMORY_ONLY",
+        "inputDigest": "sha256:84418aef51dac971a9f71f20bef674013ad2beb8fb2de7c5b0bc0a87d726e076"
+      },
+      {
+        "snapshotId": "sha256:1a770ac0795d10665a88166f8d8c968dc5b2d030fdfab2b837aa6071d135f9e9",
+        "projectionDigest": "sha256:8aae1f306ced5952333da0fb936d2f846081f8ed31b6f627a2099ad49cbbfdb0",
+        "viewDefinitionDigest": "sha256:db80b95111665fc68c834bc8d280278181afdf14f1ebee681802ef5be2040948",
+        "queryDigest": "sha256:0d29368220f18746b2ba2c94ab707cdcbe0c3149c5ea6b32322efa7d197f5841",
+        "resultDigest": "sha256:f8ce3736bdaddf59bd946fa9505e003e829c208044727777bb16e30bac587b4d",
+        "resultObjectDigest": "sha256:3e50d0ee8a7c9f3965c574dcbd638d0168fa8c36b5b818b18bbbfe2c7f916681",
+        "resultCanonicalization": "sorted-multiset-per-recordset.v1",
+        "rowLimit": 100000,
+        "truncated": false,
+        "rowCounts": [
+          193
+        ],
+        "disposition": "READ_QUERY_COMPLETE",
+        "objectRetention": "MEMORY_ONLY"
+      }
+    ],
+    "process": {
+      "fsWriteAllowed": false,
+      "expandedBodyReadAllowed": false,
+      "databaseCacheReadAllowed": false,
+      "childCalls": []
+    }
+  }
+}

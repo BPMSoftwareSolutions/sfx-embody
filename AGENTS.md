@@ -1,9 +1,12 @@
 # AGENTS.md
 
-`sfx-embody` materializes executable Capability and Scenario bodies from
-database authority. The database selects the capability, scenario, downstream
-scenarios, transformations, mechanics and provider bindings; the Node
-projection boundary materializes their native bodies.
+`sfx-embody` reads database authority and drives the CLI; the SDA kernel
+interprets each declared capability's execution graph in process. Meaning lives
+in rows, the kernel resolves language, providers are declared, and nothing is
+materialized. The target end state, the irreducible code, and the disposition of
+every concern are specified in `docs/target-architecture.md` - design and
+retention questions are answered there, not re-litigated per module. Parallel
+execution of the remaining work is planned in `docs/implementation-strategy.md`.
 
 ## The prime rule: meaning is authored in the database
 

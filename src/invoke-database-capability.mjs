@@ -1,13 +1,6 @@
 import { createHash, randomUUID } from 'node:crypto';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { prepareDatabaseCapability } from './prepare-database-capability.mjs';
-import { readAuthority } from './read-authority.mjs';
 import { readExecutionDelivery } from './read-execution-delivery.mjs';
-import { readCircuitMedia } from './read-circuit-media.mjs';
-import { readCapabilityMeaning } from './read-capability-meaning.mjs';
-import { narrateCapabilityMeaning } from './narrate-capability-meaning.mjs';
-import { narrateCapabilityMarkdown } from './narrate-capability-markdown.mjs';
-import { listCapabilities } from './list-capabilities.mjs';
 
 const digest = value => 'sha256:' + createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -86,7 +79,7 @@ export async function isEstateDelivery(bundle, context) {
 // composed Scenario runs its own declared operations with that state. State is
 // threaded exactly as the declared authority orders it.
 export async function executeEstateCapability({ capabilityId, scenarioId, namespaceId }, state, context, ancestry = []) {
-  const bundle = await (context.readAuthority ?? readAuthority)(context.databaseRoot,
+  const bundle = await context.readAuthority(context.databaseRoot,
     { capabilityId, ...(context.deliveryTarget === undefined ? {} : { target: context.deliveryTarget }),
       ...(namespaceId === undefined ? {} : { namespaceId }),
       ...(scenarioId === undefined ? {} : { scenarioId }) }, { retainObjects: false });
@@ -210,7 +203,7 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, 
   const readSelectedAuthority = async (root, selection, options) => {
     const key = declarationKey(root, selection);
     if (declarations.has(key)) return structuredClone(declarations.get(key));
-    const bundle = await (suppliedAuthorityReader ?? readAuthority)(root, selection, options);
+    const bundle = await suppliedAuthorityReader(root, selection, options);
     declarations.set(key, bundle);
     declarations.set(declarationKey(root, bundle.selection), bundle);
     declarations.set(declarationKey(root, { ...selection, scenarioId: bundle.authority.recordsets[0][0].scenario_id }), bundle);
@@ -241,72 +234,22 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, 
   const config = { databaseRoot, sdaRoot, estateRoot: fileURLToPath(ESTATE_RUNTIME_ROOT), spawnDeclared,
     onObservation: observe, readAuthority: readSelectedAuthority, readQuery, rootExecutionId, signal };
   let delivery;
-  if (['invoke', 'observe', 'materialize', 'prepare'].includes(request.verb)) {
+  if (['invoke', 'observe'].includes(request.verb)) {
     delivery = await measure('readExecutionDelivery', () => readExecutionDelivery(config));
     selection.target = delivery.defaultTarget;
     config.deliveryTarget = delivery.defaultTarget;
   }
-  if (request.verb === 'prepare') return prepareDatabaseCapability(selection, config, measure, timings);
-
-  // Listing and finding read the estate model. They derive no scene and plan no body.
-  if (['list', 'find'].includes(request.verb)) {
-    const listing = await measure('readCapabilityListing', () => listCapabilities(databaseRoot, {
-      ...(request.namespace === undefined ? {} : { namespaceId: request.namespace }),
-      ...(request.query === undefined ? {} : { query: request.query }),
-    }, { timings: timings.queries }));
-    return { disposition: 'terminated', ...listing,
-      evidence: { timings, authoritySource: 'DATABASE', bodyStorage: 'NOT_REQUESTED',
-        snapshotId: listing.snapshotId, projectionDigest: listing.projectionDigest } };
-  }
-
-  // Revealing a capability's meaning reads its declared semantics. The narrative
-  // is composed only of values the estate retains; nothing is inferred or filled in.
-  if (request.verb === 'reveal' && (request.as ?? DEFAULT_VIEW) === 'meaning') {
-    const meaning = await measure('readCapabilityMeaning', () => readCapabilityMeaning(databaseRoot, selection, { timings: timings.queries }));
-    // Format selects how the same retained meaning is presented. It adds no
-    // facts: both narrators read this one result and neither queries again.
-    const format = request.format ?? DEFAULT_FORMAT;
-    return { disposition: 'terminated', view: 'meaning', format,
-      narrative: (format === 'markdown' ? narrateCapabilityMarkdown : narrateCapabilityMeaning)(meaning), meaning,
-      evidence: { timings, authoritySource: 'DATABASE', bodyStorage: 'NOT_REQUESTED',
-        snapshotId: meaning.snapshotId, projectionDigest: meaning.projectionDigest,
-        viewDefinitionDigest: meaning.viewDefinitionDigest } };
-  }
-
-  if (['catalogue', 'circuit', 'artifact', 'reveal'].includes(request.verb)) {
-    const media = request.verb === 'reveal' ? 'circuit' : request.verb;
-    const retained = await measure('readRetainedCircuit', () => readCircuitMedia(databaseRoot, {
-      operation: media, capabilityId: request.subject, viewId: request.input?.viewId,
-      artifactDigest: media === 'artifact' ? request.subject : undefined,
-    }));
-    return { disposition: 'terminated', ...(request.verb === 'reveal' ? { view: 'circuit' } : {}),
-      [media === 'catalogue' ? 'catalogue' : media === 'artifact' ? 'media' : 'circuit']: retained,
-      evidence: { authoritySource: 'DATABASE_MEDIA', snapshotId: retained.snapshotId, publicationDigest: retained.publicationDigest } };
-  }
+  // The reader operations (prepare/list/find/reveal/catalogue/circuit/artifact)
+  // are declared capabilities reached through the frontdoor; this loader only
+  // reads the selected declaration and hands it to the kernel.
   // Invocation resolves the selected declaration and its execution delivery.
   // Observation runs the same execution and streams the same telemetry.
   // Preparation is an optional, separately invoked retained proof and is never consumed here.
   const bundle = await measure('readAuthority', () => readSelectedAuthority(databaseRoot, selection, { retainObjects: false, timings: timings.queries }));
   const cli = readCliConfiguration(bundle);
-  const display = cli.display ?? null;
-  // An estate-delivery capability is executed by the estate runtime over its
-  // declared operations: estate-provider Ports and composed Scenarios. It plans
-  // no native body and writes nothing; materialization is a separate effect.
-  if (await measure('detectEstateDelivery', () => isEstateDelivery(bundle, config))) {
-    let estateInput;
-    if (typeof request.input !== 'string') estateInput = structuredClone(request.input);
-    else {
-      const inputType = request.inputType ?? cli.input?.type ?? 'json';
-      if (inputType === 'json') { try { estateInput = JSON.parse(request.input); } catch { throw new Error('CAPABILITY_INPUT_JSON_REJECTED'); } }
-      else estateInput = buildCanonicalInput(cli.input, inputType, request.input);
-    }
-    const outcome = await measure('executeEstateDelivery', () => executeEstateCapability(selection, estateInput, config));
-    return { disposition: 'terminated',
-      outcome: { capabilityId: selection.capabilityId, scenarioId: bundle.authority.recordsets[0][0].scenario_id, result: { outcome }, executions: [], observations: [],
-        evidence: { timings, authoritySource: 'DATABASE', bodyStorage: 'NOT_REQUESTED', managedAdmission: 'NOT_REQUESTED',
-          snapshotId: bundle.authority.snapshotId, projectionDigest: bundle.authority.projectionDigest,
-          queries: [bundle.authority, bundle.closure, bundle.resolutions, bundle.mechanics].filter(Boolean).map(({ recordsets, ...identity }) => identity) } } };
-  }
+  // Invocation reads the capability's declared authority from the estate view and
+  // hands it to the kernel. No per-port estate providers; no materialization.
+  const selected = bundle.authority.recordsets[0][0];
   let input;
   if (typeof request.input !== 'string') input = structuredClone(request.input);
   else {
@@ -316,18 +259,31 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, 
       catch { throw new Error('CAPABILITY_INPUT_JSON_REJECTED'); }
     } else input = buildCanonicalInput(cli.input, inputType, request.input);
   }
-  const selected = bundle.authority.recordsets[0][0];
-  const executed = await measure('executeDeclaredCapability', () => executeSelectedDeclaration(delivery, selection, selected, input, config));
-  const { result } = executed;
-  return { disposition: executed.disposition,
-    ...(executed.disposition === 'failed' ? { errorCode: 'CAPABILITY_EXECUTION_FAILED' } : {}),
-    outcome: { capabilityId: selection.capabilityId, scenarioId: selected.scenario_id, result,
-      executions: [result], observations, ...(executed.execution ? { execution: executed.execution } : {}),
+  // A graph source supplied as the invocation input is the authority handed to
+  // the kernel; otherwise the selected capability's declared graph is read from
+  // the estate view and the invocation input is threaded through it. The
+  // assembled carrier is identical either way.
+  const suppliedGraph = object(input) && typeof input.capabilityId === 'string'
+    && Array.isArray(input.scenarios) && Array.isArray(input.executionAuthorities);
+  let graphSource;
+  if (suppliedGraph) graphSource = structuredClone(input);
+  else {
+    const graphRead = await measure('readGraphSource', () => readQuery(
+      "SELECT graph_source FROM analysis.v_capability_graph_source WHERE capability_id = CONVERT(nvarchar(400), JSON_VALUE(@input,'$.capabilityId'))",
+      { input: { capabilityId: selection.capabilityId }, rowLimit: 1, retainObjects: false }));
+    if (!graphRead.recordsets[0] || graphRead.recordsets[0].length === 0) throw new Error('DECLARED_GRAPH_SOURCE_MISSING:' + selection.capabilityId);
+    graphSource = JSON.parse(graphRead.recordsets[0][0].graph_source);
+    graphSource.input = input;
+  }
+  // The display projection is declared on the capability's CLI interface, which
+  // travels with the graph source's interface authority. The bundle may not carry
+  // it now that the boot read uses the estate views.
+  const display = graphSource?.interfaceAuthority?.interfaces?.find(entry => entry.kind === 'cli')?.configuration?.display
+    ?? cli.display ?? null;
+  const outcome = await measure('executeDeclaredGraph', () => executeEstateCapability({ capabilityId: 'run-declared-graph' }, graphSource, config));
+  return { disposition: 'terminated',
+    outcome: { capabilityId: selection.capabilityId, scenarioId: selected.scenario_id, result: { outcome }, executions: [], observations: [],
       ...(display ? { display } : {}),
-      evidence: { timings, authoritySource: 'DATABASE', bodyStorage: 'MEMORY_ONLY', managedAdmission: 'NOT_REQUESTED',
-        executionOperation: request.verb,
-        providerStatus: 'CANDIDATE_PHYSICAL_PROVIDER', inputDigest: digest(input), resultDigest: digest(result),
-        snapshotId: bundle.authority.snapshotId, projectionDigest: bundle.authority.projectionDigest,
-        authorityIdentity: executed.authorityIdentity,
-        queries: [bundle.authority, bundle.closure, bundle.resolutions, bundle.mechanics].filter(Boolean).map(({ recordsets, ...identity }) => identity) } } };
+      evidence: { timings, authoritySource: 'DATABASE', bodyStorage: 'NOT_REQUESTED', managedAdmission: 'NOT_REQUESTED',
+        snapshotId: bundle.authority.snapshotId, projectionDigest: bundle.authority.projectionDigest } } };
 }

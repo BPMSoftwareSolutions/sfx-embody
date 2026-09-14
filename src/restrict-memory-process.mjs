@@ -5,7 +5,7 @@ import { createHash } from 'node:crypto';
 
 // Storage proof controls for this candidate provider, not a hostile-code sandbox.
 // Credential lookup finishes before this boundary. Thereafter only the planner's
-// read-only platform pin checks and checked, declared consumer providers may
+// read-only platform revision read and checked, declared consumer providers may
 // leave the Node process. General child-process calls remain unavailable.
 export function restrictMemoryProcess({ databaseRoot, sdaRoot }) {
   if (!process.permission || process.permission.has('fs.write')) throw new Error('FILESYSTEM_WRITES_MUST_BE_DISABLED');
@@ -15,9 +15,7 @@ export function restrictMemoryProcess({ databaseRoot, sdaRoot }) {
   const execFileSync = childProcess.execFileSync;
   const spawn = childProcess.spawn;
   const patterns = [
-    ['rev-parse', 'HEAD'],
-    ['diff', '--name-only', null, '--', 'tools/src', 'languages/typescript', 'package.json'],
-    ['ls-files', '--others', '--exclude-standard', '--', 'tools/src', 'languages/typescript', 'package.json']
+    ['rev-parse', 'HEAD']
   ];
   childProcess.execFileSync = (file, args, options) => {
     if (file !== 'git' || path.resolve(options?.cwd ?? '.') !== path.resolve(sdaRoot)
