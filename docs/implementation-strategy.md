@@ -108,6 +108,38 @@ Completed units, as reported and with proof where stated:
 - **Lane A / performance #1, #2, #4 and #5 — in progress** by a concurrent
   agent; not claimed done here.
 
+## Wave 1 (2026-09-14) — six lanes dispatched against the target experience
+
+The backlog above covers lanes A–F (the subtraction of architecture 1). This wave
+additionally opens the three primary-experience items in
+[target-experience.md](target-experience.md) that have **no estate surface at all**
+today, so they are design-first: they read the estate and SDA, produce a committed
+markdown design under `docs/`, and author migrations that they install only if the
+preflight genuinely passes.
+
+| Lane | Mandate | Target-experience item | Owns |
+|---|---|---|---|
+| **P — invocation performance** | Ranked plan #1, #2, #4, #5, #3. `say-hello-world` measured at **57 s** (readGraphSource 30.7 s, readAuthority 12.7 s, executeDeclaredGraph 11.4 s) before this wave | the flywheel's cost | `sql/schema/*`, `src/*` (boot), `sql/migrations/optimize-*` |
+| **B — re-declaration** | Units 3, 13: the 7 residual estate-module PROVIDER rows; `UNREACHABLE_CELL` on `execute-declared-capability` | #2 one invocation path | `sql/migrations/free-*`, `redeclare-*`, `reach-*` |
+| **D — subtraction** | Units 7, 14 + remove the stale `materialize`/`embodiment-materialization` surface | #2, the subtraction phase | `sfx.config.json`, `config/*`, `scripts/*`, `sql/migrations/remove-materialize-*` |
+| **U — presentation authority** | The first login-flow capability: capability rows + declared UI authority rows, no framework in the rows | #3 presentation capabilities | `docs/ui-presentation-authority.md`, `sql/migrations/declare-login-*` |
+| **T — EPD** | Altitude-selectable streaming, planned-vs-observed overlay, surface `observedPathDigest`; per-cell timing is an SDA change request | #4 execution telemetry | `docs/execution-performance-drilldown.md`, `sql/migrations/declare-observation-*` |
+| **J — JSON authoring** | A JSON authoring surface emitting the same normalized rows, preserving idempotency, content-addressed digests, current-definition selection and the rollback preflight | #1 SQL *or* JSON | `docs/json-authoring-surface.md`, `sql/migrations/declare-json-authoring-*` |
+
+**Serialization.** File ownership is the conflict rule, as above — but the *database*
+is also a serialization point this wave: a migration drops and recreates the
+`model`/`source` guard triggers inside its own transaction, which takes schema
+locks. Concurrent migrations therefore block or deadlock each other. A lock timeout
+or deadlock is **not** a data defect; the unit retries. Invocation timings are not
+comparable across the wave while lane P is landing — judge a unit on its
+disposition, not its duration.
+
+**Design-first lanes state their own honesty.** U, T and J must report
+authored / preflighted / installed as three distinct states, and must never install
+a migration whose preflight did not pass. An accurate "blocked on X" is the
+deliverable when the estate cannot yet carry the unit; a green that required
+inventing provider or kernel behavior is a finding, not a fix.
+
 ## Unit template (use verbatim in the commit)
 
 ```
