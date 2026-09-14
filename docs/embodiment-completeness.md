@@ -9,6 +9,33 @@ This is the unambiguous ask. It is binding, alongside
 [target-architecture.md](target-architecture.md) and
 [implementation-strategy.md](implementation-strategy.md).
 
+## Agents must not change the SDA repo — kernel changes are requests, not edits
+
+Agents working in this repo MUST NOT modify the SDA repo/kernel
+(`C:\lab\repos\scenario-driven-architecture`). Doing so is a **violation**. The SDA
+repo is the platform; this repo is the database authority plus the reader/boot.
+
+- A **kernel change** is a language-resolver change that requires every language to
+  conform (node, python, csharp; java/go where applicable). Kernel changes are
+  *identified* here, never *performed* here.
+- When the work requires one, submit an **SDA change request** to the user driving
+  the session. The user inspects and validates the request, and — if valid — has the
+  SDA team make the change. Agents never make it.
+- Request format:
+  - **primitive** — the exact change (e.g. "GraphTokenScheduler composite re-entry
+    must scope its expression to its own incoming sequence input").
+  - **why kernel** — why it must be interpreted in every language rather than
+    selected as data.
+  - **affected languages** — which of node / python / csharp (and java / go) must
+    conform.
+  - **data that binds it** — the rows/config that will bind the primitive once it
+    exists.
+  - **evidence** — the failing invocation/graph, and any local probe that isolates
+    it (a probe is read-only; it is not a change).
+
+If an agent believes an SDA change is needed, it **stops** and submits the request.
+It does not edit SDA, does not wire a facade, and does not fake a green.
+
 ## Where mechanics are embodied: code files, per language — never facades
 
 Executable mechanics live in **code**, in each target language's runtime, as real
