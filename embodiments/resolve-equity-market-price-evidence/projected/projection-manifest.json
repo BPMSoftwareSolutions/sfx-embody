@@ -1,0 +1,234 @@
+{
+  "projectionManifestType": "consumer-capability-projection-manifest.v1",
+  "generator": "scenario-driven-architecture/tools/src/consumer-projection",
+  "authorityRefs": [
+    "capability.feature",
+    "capability.authority.json",
+    "semantic-graph.authority.json",
+    "execution-authorities.authority.json",
+    "projection-authorities.authority.json",
+    "interfaces.authority.json",
+    "fixtures.authority.json",
+    "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+    "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json"
+  ],
+  "admittedPlatformCapabilities": [
+    "sda-authority-state-projection.v1",
+    "sda-authority-transformation-port.v1",
+    "sda-bounded-base64-byte-digest-port.v1",
+    "sda-canonical-capability-feature-resolution-port.v1",
+    "sda-csharp-admitted-consumer-platform.v1",
+    "sda-csharp-consumer-runtime.v1",
+    "sda-csharp-declarative-consumer-mechanics.v1",
+    "sda-csharp-filesystem-artifact-store.v1",
+    "sda-csharp-in-memory-authority-resolver.v1",
+    "sda-csharp-in-memory-execution-observer.v1",
+    "sda-csharp-in-memory-semantic-executor.v1",
+    "sda-csharp-json-representation.v1",
+    "sda-csharp-json-schema-contract-validator.v1",
+    "sda-csharp-sdk.v1",
+    "sda-csharp-semantic-transformation.v1",
+    "sda-declarative-state-projection.v1",
+    "sda-declarative-value-port.v1",
+    "sda-external-credential-reference-binding-port.v1",
+    "sda-external-observation-port.v1",
+    "sda-filesystem-artifact-store.v1",
+    "sda-fixture-contract-validator.v1",
+    "sda-generic-llm-connector-port.v1",
+    "sda-governed-disposable-root-lifecycle-port.v1",
+    "sda-governed-external-root-batch-materialization-port.v1",
+    "sda-governed-external-root-consumer-projection-port.v1",
+    "sda-governed-external-root-observation-port.v1",
+    "sda-governed-external-root-projected-application-execution-port.v1",
+    "sda-governed-file-system-shaping-port.v2",
+    "sda-governed-http-exchange-port.v1",
+    "sda-governed-repository-observation-port.v1",
+    "sda-governed-serial-execution-port.v1",
+    "sda-governed-target-execution-observation-port.v1",
+    "sda-governed-tooling-binding-transaction-port.v1",
+    "sda-governed-tooling-migration-operation-port.v1",
+    "sda-json-authority-ingestion-port.v1",
+    "sda-json-cli.v1",
+    "sda-json-query-cli.v1",
+    "sda-node-consumer-runtime.v1",
+    "sda-os-environment-credential-port.v1",
+    "sda-projected-capability-invocation-port.v1",
+    "sda-projected-capability-invocation-port.v2",
+    "sda-proof-binding-evaluation-port.v1",
+    "sda-python-admitted-consumer-platform.v1",
+    "sda-python-consumer-runtime.v1",
+    "sda-python-declarative-consumer-mechanics.v1",
+    "sda-python-filesystem-artifact-store.v1",
+    "sda-python-in-memory-authority-resolver.v1",
+    "sda-python-in-memory-execution-observer.v1",
+    "sda-python-in-memory-semantic-executor.v1",
+    "sda-python-json-document-mechanics.v1",
+    "sda-python-json-schema-contract-validator.v1",
+    "sda-python-predicate-contract-validator.v1",
+    "sda-python-semantic-transformation.v1",
+    "sda-scenario-semantic-carrier-evaluation-port.v1",
+    "sda-scenario-semantic-carrier-extraction-port.v1",
+    "sda-scenario-semantic-carrier-validation-port.v1",
+    "sda-schema-contract-admission.v1",
+    "sda-semantic-execution-graph-compilation-port.v1",
+    "sda-semantic-vector-index.v1",
+    "sda-wpf-ui.v1"
+  ],
+  "files": [
+    {
+      "path": "application-binding.csharp.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "0912005439d64c46dd3457dd5e73518bd7fba1794dc182940544e556daabf0da"
+    },
+    {
+      "path": "application-binding.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "3fd2906580e2bca790bf2575221f6727640a3745e56990316d959571bf3d2323"
+    },
+    {
+      "path": "application-binding.node.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "3fd2906580e2bca790bf2575221f6727640a3745e56990316d959571bf3d2323"
+    },
+    {
+      "path": "application-binding.python.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "1d5eaa220363a369f660bd0035611762fae53b0a2dff1aacd87acf5e79310313"
+    },
+    {
+      "path": "capability.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "c508a0bf78711fe3041443b7ef915789c50b319c7e0e4e23fc0d15e6c111b1b3"
+    },
+    {
+      "path": "csharp/Directory.Build.props",
+      "executableOrigin": "PROJECTED",
+      "sha256": "2e4fcb10514fe9fb8a6d30c787ba5f6158a56822c0ca21c12d2e02d780eb9ea9"
+    },
+    {
+      "path": "csharp/Directory.Build.targets",
+      "executableOrigin": "PROJECTED",
+      "sha256": "dc595a9ef97246c196b1052d0388ea5f1842991ba3415ed51e3e953293110e2a"
+    },
+    {
+      "path": "csharp/Program.generated.cs",
+      "executableOrigin": "PROJECTED",
+      "sha256": "f90f5c3813eee6ac4d18e0303e54196cd36c6ea5fa72e9d8701a50ff91f7db88"
+    },
+    {
+      "path": "csharp/ProjectedConsumerCli.generated.csproj",
+      "executableOrigin": "PROJECTED",
+      "sha256": "8c66b48bae470fb3ed4e596dedf9af7686442501695900e6d26b88ec6bdd1fbb"
+    },
+    {
+      "path": "csharp/ProjectedConsumerClient.generated.cs",
+      "executableOrigin": "PROJECTED",
+      "sha256": "9176a9261d3b3b008fd26edf4cfa27eb680904588be4ba6c9cf251d8ee0b18e6"
+    },
+    {
+      "path": "csharp/ProjectedConsumerSdk.generated.csproj",
+      "executableOrigin": "PROJECTED",
+      "sha256": "2e35e6c816ee96d242121f3a5754a060d9372818f3de8c5c5d16cf6b24d2ed2c"
+    },
+    {
+      "path": "execution-plans/consumer-execution-plan.csharp.v3.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "dc80ca5511e97c8191f4912cc243505dcef86899cb07d0da191e4026f9a7fa40"
+    },
+    {
+      "path": "execution-plans/consumer-execution-plan.node.v3.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "0ab6291b792099d74efafdedd023aa2db4871b15c6bc42c717b9e7b417d5adec"
+    },
+    {
+      "path": "execution-plans/consumer-execution-plan.python.v3.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "89c358b6ea814ce76f961808b34caa894c5aebf335ff015819909bc2d7d8ef8b"
+    },
+    {
+      "path": "fixtures/fixtures.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "44340309142c819a691e3294d10a1eceafaa35c97c29ed79a60c617d73f73f92"
+    },
+    {
+      "path": "node/capability-runtime.generated.mjs",
+      "executableOrigin": "PROJECTED",
+      "sha256": "bdf3e549fd2cfede58376b012bc2cfddd4dc8f625f557cc335904dab15b14a6d"
+    },
+    {
+      "path": "node/capability.projected.test.mjs",
+      "executableOrigin": "PROJECTED",
+      "sha256": "60a1afcca4861c20f62d9d9533616f9df0a3a31c6ba78e298d4a5619866238de"
+    },
+    {
+      "path": "node/conformance-query.generated.mjs",
+      "executableOrigin": "PROJECTED",
+      "sha256": "59bb6f31ffd93bb4e6c9a4afe7fe6b6cd91d9bb9bbaa66a28a295408140ab7fa"
+    },
+    {
+      "path": "node/resolve-equity-market-price-evidence-cli.generated.mjs",
+      "executableOrigin": "PROJECTED",
+      "sha256": "4fd439daeadca99fdd3dce2f822b362d111cdb3744e003b888c50cad9442fd64"
+    },
+    {
+      "path": "projection-conformance.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "eff29d9d763919b405a021fc126f66b5b0c552c3cbe74d8ddb85f9781e4b2eed"
+    },
+    {
+      "path": "python/consumer.generated.py",
+      "executableOrigin": "PROJECTED",
+      "sha256": "fa923fa52e33db166fe7293894dc7e3bfe3002fa405943661b3c68e452d9a4ea"
+    },
+    {
+      "path": "query/conformance-query.csharp.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "c42b718676d1e4c35ce6e403018254e0712e2b2a759062029432c91144d9005d"
+    },
+    {
+      "path": "query/conformance-query.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "6b0912587249eab701d10f9f77a9e9c3a71d7e4076e930d81e12389a331d3126"
+    },
+    {
+      "path": "query/conformance-query.node.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "6b0912587249eab701d10f9f77a9e9c3a71d7e4076e930d81e12389a331d3126"
+    },
+    {
+      "path": "query/conformance-query.python.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "fb9fd46046220750452d675a56ae3757b31955dd259f15d69e8a6d55678515fc"
+    },
+    {
+      "path": "query/platform-mechanic-resolution.csharp.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "3c63725894cad91aada717c2f1eb69547b690882a16b8e3667b92a872e213aae"
+    },
+    {
+      "path": "query/platform-mechanic-resolution.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "dfa0499c1b198adbea5f342d13e23d6caebbd4003e627799c89017c68510ab6a"
+    },
+    {
+      "path": "query/platform-mechanic-resolution.node.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "dfa0499c1b198adbea5f342d13e23d6caebbd4003e627799c89017c68510ab6a"
+    },
+    {
+      "path": "query/platform-mechanic-resolution.python.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "e5d2760f995af27e3a137b4e1268c8062deefbab290bee51d965a96b539dc7e9"
+    },
+    {
+      "path": "scenarios/resolve-equity-market-price-evidence.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "ceff21ce9c26f9908d581e8fb767f8a1a7f04f64ff36267293f1044d8dcbb1a8"
+    },
+    {
+      "path": "telemetry/expected-trace.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "b7100dcfa919969f8fbe7665881f6462d05003d8e4bff32548b206efcecedb7f"
+    }
+  ]
+}

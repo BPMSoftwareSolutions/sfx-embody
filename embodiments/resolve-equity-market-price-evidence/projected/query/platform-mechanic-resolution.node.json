@@ -1,0 +1,425 @@
+{
+  "resolutionType": "consumer-platform-mechanic-resolution.v1",
+  "projectionTarget": "node",
+  "requirements": [
+    {
+      "mechanicId": "contract-document-reading",
+      "capabilityKind": "consumer-runtime",
+      "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1"
+    },
+    {
+      "mechanicId": "canonicalization",
+      "capabilityKind": "consumer-runtime",
+      "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1"
+    },
+    {
+      "mechanicId": "schema-admission",
+      "capabilityKind": "consumer-runtime",
+      "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1"
+    },
+    {
+      "mechanicId": "authority-resolution",
+      "capabilityKind": "consumer-runtime",
+      "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1"
+    },
+    {
+      "mechanicId": "semantic-execution",
+      "capabilityKind": "consumer-runtime",
+      "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1"
+    },
+    {
+      "mechanicId": "telemetry-observation",
+      "capabilityKind": "consumer-runtime",
+      "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1"
+    },
+    {
+      "mechanicId": "scenario-invocation",
+      "capabilityKind": "consumer-runtime",
+      "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1"
+    },
+    {
+      "mechanicId": "transition-binding-projection",
+      "capabilityKind": "consumer-runtime",
+      "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1"
+    },
+    {
+      "mechanicId": "interface-delivery",
+      "capabilityKind": "consumer-runtime",
+      "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1"
+    },
+    {
+      "mechanicId": "runtime-projection",
+      "capabilityKind": "consumer-runtime",
+      "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1"
+    },
+    {
+      "mechanicId": "artifact-result-delivery",
+      "capabilityKind": "consumer-runtime",
+      "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1"
+    },
+    {
+      "mechanicId": "authority-driven-transformation",
+      "capabilityKind": "consumer-runtime",
+      "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1"
+    },
+    {
+      "mechanicId": "durable-artifact-materialization",
+      "capabilityKind": "consumer-runtime",
+      "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1"
+    },
+    {
+      "mechanicId": "contract-validation",
+      "capabilityKind": "contract-validator",
+      "requiredBy": "scenario-contract-admission",
+      "requestedCapabilityId": "sda-schema-contract-admission.v1"
+    },
+    {
+      "mechanicId": "cli-delivery",
+      "capabilityKind": "interface-delivery",
+      "requiredBy": "interface:resolve-equity-market-price-evidence-cli",
+      "requestedCapabilityId": "sda-json-cli.v1"
+    },
+    {
+      "mechanicId": "json-reading",
+      "capabilityKind": "interface-delivery",
+      "requiredBy": "interface:resolve-equity-market-price-evidence-cli",
+      "requestedCapabilityId": "sda-json-cli.v1"
+    },
+    {
+      "mechanicId": "json-serialization",
+      "capabilityKind": "interface-delivery",
+      "requiredBy": "interface:resolve-equity-market-price-evidence-cli",
+      "requestedCapabilityId": "sda-json-cli.v1"
+    },
+    {
+      "mechanicId": "event-port-invocation",
+      "capabilityKind": "event-port",
+      "requiredBy": "port:resolve-equity-market-price-evidence-port",
+      "requestedCapabilityId": "sda-authority-transformation-port.v1"
+    },
+    {
+      "mechanicId": "event-port-invocation",
+      "capabilityKind": "event-port",
+      "requiredBy": "port:retain-provider-realization-outside-market-price-semantics-port",
+      "requestedCapabilityId": "sda-authority-transformation-port.v1"
+    },
+    {
+      "mechanicId": "event-port-invocation",
+      "capabilityKind": "event-port",
+      "requiredBy": "port:hold-unavailable-equity-market-price-provider-port",
+      "requestedCapabilityId": "sda-authority-transformation-port.v1"
+    },
+    {
+      "mechanicId": "event-port-invocation",
+      "capabilityKind": "event-port",
+      "requiredBy": "port:reject-nonconforming-native-market-price-testimony-port",
+      "requestedCapabilityId": "sda-authority-transformation-port.v1"
+    },
+    {
+      "mechanicId": "event-port-invocation",
+      "capabilityKind": "event-port",
+      "requiredBy": "port:build-equity-price-binding-request",
+      "requestedCapabilityId": "sda-authority-transformation-port.v1"
+    },
+    {
+      "mechanicId": "event-port-invocation",
+      "capabilityKind": "event-port",
+      "requiredBy": "port:bind-equity-price-provider-credential",
+      "requestedCapabilityId": "sda-external-credential-reference-binding-port.v1"
+    },
+    {
+      "mechanicId": "event-port-invocation",
+      "capabilityKind": "event-port",
+      "requiredBy": "port:build-equity-price-exchange-request",
+      "requestedCapabilityId": "sda-authority-transformation-port.v1"
+    },
+    {
+      "mechanicId": "event-port-invocation",
+      "capabilityKind": "event-port",
+      "requiredBy": "port:observe-equity-price-exchange",
+      "requestedCapabilityId": "sda-governed-http-exchange-port.v1"
+    },
+    {
+      "mechanicId": "event-port-invocation",
+      "capabilityKind": "event-port",
+      "requiredBy": "port:normalize-equity-price-evidence",
+      "requestedCapabilityId": "sda-authority-transformation-port.v1"
+    }
+  ],
+  "resolutions": [
+    {
+      "mechanicId": "contract-document-reading",
+      "capabilityKind": "consumer-runtime",
+      "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
+      "status": "AVAILABLE",
+      "capabilityId": "sda-node-consumer-runtime.v1",
+      "provider": "ScenarioKernel.NodePlatform",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+    },
+    {
+      "mechanicId": "canonicalization",
+      "capabilityKind": "consumer-runtime",
+      "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
+      "status": "AVAILABLE",
+      "capabilityId": "sda-node-consumer-runtime.v1",
+      "provider": "ScenarioKernel.NodePlatform",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+    },
+    {
+      "mechanicId": "schema-admission",
+      "capabilityKind": "consumer-runtime",
+      "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
+      "status": "AVAILABLE",
+      "capabilityId": "sda-node-consumer-runtime.v1",
+      "provider": "ScenarioKernel.NodePlatform",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+    },
+    {
+      "mechanicId": "authority-resolution",
+      "capabilityKind": "consumer-runtime",
+      "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
+      "status": "AVAILABLE",
+      "capabilityId": "sda-node-consumer-runtime.v1",
+      "provider": "ScenarioKernel.NodePlatform",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+    },
+    {
+      "mechanicId": "semantic-execution",
+      "capabilityKind": "consumer-runtime",
+      "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
+      "status": "AVAILABLE",
+      "capabilityId": "sda-node-consumer-runtime.v1",
+      "provider": "ScenarioKernel.NodePlatform",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+    },
+    {
+      "mechanicId": "telemetry-observation",
+      "capabilityKind": "consumer-runtime",
+      "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
+      "status": "AVAILABLE",
+      "capabilityId": "sda-node-consumer-runtime.v1",
+      "provider": "ScenarioKernel.NodePlatform",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+    },
+    {
+      "mechanicId": "scenario-invocation",
+      "capabilityKind": "consumer-runtime",
+      "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
+      "status": "AVAILABLE",
+      "capabilityId": "sda-node-consumer-runtime.v1",
+      "provider": "ScenarioKernel.NodePlatform",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+    },
+    {
+      "mechanicId": "transition-binding-projection",
+      "capabilityKind": "consumer-runtime",
+      "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
+      "status": "AVAILABLE",
+      "capabilityId": "sda-node-consumer-runtime.v1",
+      "provider": "ScenarioKernel.NodePlatform",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+    },
+    {
+      "mechanicId": "interface-delivery",
+      "capabilityKind": "consumer-runtime",
+      "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
+      "status": "AVAILABLE",
+      "capabilityId": "sda-node-consumer-runtime.v1",
+      "provider": "ScenarioKernel.NodePlatform",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+    },
+    {
+      "mechanicId": "runtime-projection",
+      "capabilityKind": "consumer-runtime",
+      "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
+      "status": "AVAILABLE",
+      "capabilityId": "sda-node-consumer-runtime.v1",
+      "provider": "ScenarioKernel.NodePlatform",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+    },
+    {
+      "mechanicId": "artifact-result-delivery",
+      "capabilityKind": "consumer-runtime",
+      "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
+      "status": "AVAILABLE",
+      "capabilityId": "sda-node-consumer-runtime.v1",
+      "provider": "ScenarioKernel.NodePlatform",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+    },
+    {
+      "mechanicId": "authority-driven-transformation",
+      "capabilityKind": "consumer-runtime",
+      "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
+      "status": "AVAILABLE",
+      "capabilityId": "sda-node-consumer-runtime.v1",
+      "provider": "ScenarioKernel.NodePlatform",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+    },
+    {
+      "mechanicId": "durable-artifact-materialization",
+      "capabilityKind": "consumer-runtime",
+      "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
+      "status": "AVAILABLE",
+      "capabilityId": "sda-node-consumer-runtime.v1",
+      "provider": "ScenarioKernel.NodePlatform",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+    },
+    {
+      "mechanicId": "contract-validation",
+      "capabilityKind": "contract-validator",
+      "requiredBy": "scenario-contract-admission",
+      "requestedCapabilityId": "sda-schema-contract-admission.v1",
+      "status": "AVAILABLE",
+      "capabilityId": "sda-schema-contract-admission.v1",
+      "provider": "ScenarioKernel.NodePlatform.Schema.JsonSchemaContractAdmission",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+    },
+    {
+      "mechanicId": "cli-delivery",
+      "capabilityKind": "interface-delivery",
+      "requiredBy": "interface:resolve-equity-market-price-evidence-cli",
+      "requestedCapabilityId": "sda-json-cli.v1",
+      "status": "AVAILABLE",
+      "capabilityId": "sda-json-cli.v1",
+      "provider": "ScenarioKernel.NodePlatform.Interface.JsonCli",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+    },
+    {
+      "mechanicId": "json-reading",
+      "capabilityKind": "interface-delivery",
+      "requiredBy": "interface:resolve-equity-market-price-evidence-cli",
+      "requestedCapabilityId": "sda-json-cli.v1",
+      "status": "AVAILABLE",
+      "capabilityId": "sda-json-cli.v1",
+      "provider": "ScenarioKernel.NodePlatform.Interface.JsonCli",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+    },
+    {
+      "mechanicId": "json-serialization",
+      "capabilityKind": "interface-delivery",
+      "requiredBy": "interface:resolve-equity-market-price-evidence-cli",
+      "requestedCapabilityId": "sda-json-cli.v1",
+      "status": "AVAILABLE",
+      "capabilityId": "sda-json-cli.v1",
+      "provider": "ScenarioKernel.NodePlatform.Interface.JsonCli",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+    },
+    {
+      "mechanicId": "event-port-invocation",
+      "capabilityKind": "event-port",
+      "requiredBy": "port:resolve-equity-market-price-evidence-port",
+      "requestedCapabilityId": "sda-authority-transformation-port.v1",
+      "status": "AVAILABLE",
+      "capabilityId": "sda-authority-transformation-port.v1",
+      "provider": "ScenarioKernel.NodePlatform.Execution.AuthorityTransformation",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+    },
+    {
+      "mechanicId": "event-port-invocation",
+      "capabilityKind": "event-port",
+      "requiredBy": "port:retain-provider-realization-outside-market-price-semantics-port",
+      "requestedCapabilityId": "sda-authority-transformation-port.v1",
+      "status": "AVAILABLE",
+      "capabilityId": "sda-authority-transformation-port.v1",
+      "provider": "ScenarioKernel.NodePlatform.Execution.AuthorityTransformation",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+    },
+    {
+      "mechanicId": "event-port-invocation",
+      "capabilityKind": "event-port",
+      "requiredBy": "port:hold-unavailable-equity-market-price-provider-port",
+      "requestedCapabilityId": "sda-authority-transformation-port.v1",
+      "status": "AVAILABLE",
+      "capabilityId": "sda-authority-transformation-port.v1",
+      "provider": "ScenarioKernel.NodePlatform.Execution.AuthorityTransformation",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+    },
+    {
+      "mechanicId": "event-port-invocation",
+      "capabilityKind": "event-port",
+      "requiredBy": "port:reject-nonconforming-native-market-price-testimony-port",
+      "requestedCapabilityId": "sda-authority-transformation-port.v1",
+      "status": "AVAILABLE",
+      "capabilityId": "sda-authority-transformation-port.v1",
+      "provider": "ScenarioKernel.NodePlatform.Execution.AuthorityTransformation",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+    },
+    {
+      "mechanicId": "event-port-invocation",
+      "capabilityKind": "event-port",
+      "requiredBy": "port:build-equity-price-binding-request",
+      "requestedCapabilityId": "sda-authority-transformation-port.v1",
+      "status": "AVAILABLE",
+      "capabilityId": "sda-authority-transformation-port.v1",
+      "provider": "ScenarioKernel.NodePlatform.Execution.AuthorityTransformation",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+    },
+    {
+      "mechanicId": "event-port-invocation",
+      "capabilityKind": "event-port",
+      "requiredBy": "port:bind-equity-price-provider-credential",
+      "requestedCapabilityId": "sda-external-credential-reference-binding-port.v1",
+      "status": "AVAILABLE",
+      "capabilityId": "sda-external-credential-reference-binding-port.v1",
+      "provider": "ScenarioKernel.NodePlatform.Effects.ExternalCredentialReferenceBinding",
+      "implementationRef": "languages/typescript/runtimes/node/external-credential-reference-binding-provider.mjs",
+      "conformanceRef": "languages/typescript/runtimes/node/governed-http-effect-ports.conformance.test.mjs"
+    },
+    {
+      "mechanicId": "event-port-invocation",
+      "capabilityKind": "event-port",
+      "requiredBy": "port:build-equity-price-exchange-request",
+      "requestedCapabilityId": "sda-authority-transformation-port.v1",
+      "status": "AVAILABLE",
+      "capabilityId": "sda-authority-transformation-port.v1",
+      "provider": "ScenarioKernel.NodePlatform.Execution.AuthorityTransformation",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+    },
+    {
+      "mechanicId": "event-port-invocation",
+      "capabilityKind": "event-port",
+      "requiredBy": "port:observe-equity-price-exchange",
+      "requestedCapabilityId": "sda-governed-http-exchange-port.v1",
+      "status": "AVAILABLE",
+      "capabilityId": "sda-governed-http-exchange-port.v1",
+      "provider": "ScenarioKernel.NodePlatform.Effects.GovernedHttpExchange",
+      "implementationRef": "languages/typescript/runtimes/node/governed-http-exchange-provider.mjs",
+      "conformanceRef": "languages/typescript/runtimes/node/governed-http-effect-ports.conformance.test.mjs"
+    },
+    {
+      "mechanicId": "event-port-invocation",
+      "capabilityKind": "event-port",
+      "requiredBy": "port:normalize-equity-price-evidence",
+      "requestedCapabilityId": "sda-authority-transformation-port.v1",
+      "status": "AVAILABLE",
+      "capabilityId": "sda-authority-transformation-port.v1",
+      "provider": "ScenarioKernel.NodePlatform.Execution.AuthorityTransformation",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+    }
+  ],
+  "disposition": "RESOLVED"
+}

@@ -1,0 +1,1 @@
+{"fixtureType":"consumer-capability-fixtures.v1","fixtures":[{"fixtureId":"equity-qqq-evidence-resolves","input":{"contractId":"live-equity-price-request.v1","payload":{"symbol":"QQQ","region":"US"}},"expected":{"disposition":"terminated","terminalScenarioId":"resolve-equity-market-price-evidence","scenarioSequence":["resolve-equity-market-price-evidence"]}}]}

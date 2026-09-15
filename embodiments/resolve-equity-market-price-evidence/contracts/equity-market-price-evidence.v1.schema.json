@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.agentic-harness.local/contracts/equity-market-price-evidence.v1.schema.json",
+  "title": "Equity market price evidence",
+  "description": "One canonical outcome for provider-neutral equity market price evidence: the resolved evidence, an explicit native-testimony rejection, or an explicit provider-unavailable hold. An observed price is attributable provider testimony, not an assertion of intrinsic value or cross-provider equivalence.",
+  "type": "object",
+  "required": ["contractId", "disposition", "providerTestimony"],
+  "additionalProperties": false,
+  "properties": {
+    "contractId": { "const": "equity-market-price-evidence.v1" },
+    "disposition": {
+      "enum": [
+        "EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED",
+        "NATIVE_MARKET_PRICE_TESTIMONY_REJECTED",
+        "EQUITY_MARKET_PRICE_PROVIDER_UNAVAILABLE"
+      ]
+    },
+    "payload": {
+      "type": "object",
+      "required": ["symbol", "region", "currency", "observedPrice", "observedMarketTime", "marketState", "exchange", "sourceAttribution"],
+      "additionalProperties": false,
+      "properties": {
+        "symbol": { "type": "string", "minLength": 1 },
+        "region": { "type": "string", "minLength": 1 },
+        "currency": { "type": "string", "minLength": 1 },
+        "observedPrice": { "type": "number" },
+        "observedMarketTime": { "type": "integer", "minimum": 0 },
+        "marketState": { "type": "string", "minLength": 1 },
+        "exchange": { "type": "string", "minLength": 1 },
+        "sourceAttribution": { "type": "string", "minLength": 1 }
+      }
+    },
+    "reasonCode": {
+      "enum": ["REQUIRED_NATIVE_FIELDS_ABSENT", "PROVIDER_EXCHANGE_NOT_COMPLETED"]
+    },
+    "absentFieldCount": { "type": "integer", "minimum": 0 },
+    "providerTestimony": {
+      "type": "object",
+      "required": ["bindingId", "providerId"],
+      "additionalProperties": false,
+      "properties": {
+        "bindingId": { "type": "string", "minLength": 1 },
+        "providerId": { "type": "string", "minLength": 1 },
+        "nativeShape": { "enum": ["quoteSummary.result.0.price", "quoteResponse.result.0"] }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "disposition": { "const": "EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED" } } },
+      "then": { "required": ["payload"], "properties": { "reasonCode": false, "absentFieldCount": false } }
+    },
+    {
+      "if": { "properties": { "disposition": { "const": "NATIVE_MARKET_PRICE_TESTIMONY_REJECTED" } } },
+      "then": { "required": ["reasonCode", "absentFieldCount"], "properties": { "payload": false } }
+    },
+    {
+      "if": { "properties": { "disposition": { "const": "EQUITY_MARKET_PRICE_PROVIDER_UNAVAILABLE" } } },
+      "then": { "required": ["reasonCode"], "properties": { "payload": false, "absentFieldCount": false } }
+    }
+  ]
+}

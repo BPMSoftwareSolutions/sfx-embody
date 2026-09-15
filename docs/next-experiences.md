@@ -25,7 +25,9 @@ Node / Python / C#.
   `project:consumer-capability`) → per-target providers emit generated seams
   (`.mjs`/`.py`/`.cs`), bindings, plans, a `projection-manifest.json` — **disk only**
   (`SDA:tools/src/adapters/consumer-projection/node-consumer-projection-artifact-store.ts`
-  writes `<workspaceRoot>/projected`).
+  writes `<workspaceRoot>/projected`). The terminal reaches it as
+  `sfx capability project <id> --workspace <dir>` through the estate's
+  `database-projection` surface ([capability-command-surface.md](capability-command-surface.md)).
 - **No DB copy.** `source.content_object` / `semantic_object_definition` retain
   *declared authority* only; invocation is derived (`bodyStorage: NOT_REQUESTED`).
   `sfx-embody/embodiments/` is legacy **materialize** output — materialize was retired
@@ -47,8 +49,12 @@ Node / Python / C#.
   **row-generation key bumped per authoring migration is mandatory** — coherence
   digests do not change on in-place row writes. Keep these rows **off the hot path**
   (never read by `capability_graph_source`, the loader, or `readExecutionDelivery`).
-- **Boot/estate code:** a harvest/mirror script that writes the repo copy +
-  per-file-digest manifest (the `baselines/*/baseline.manifest.json` shape).
+- **Boot/estate code (done):** `sfx capability project <id> --workspace <dir>`
+  (`src/projection-delivery.mjs`) assembles the declared documents in one pinned
+  read, stages the workspace and writes the repo copy under `<dir>/projected`;
+  the projector's `projection-manifest.json` carries the per-file
+  `{path, executableOrigin, sha256}` rows. `--full-mechanics` gates publication
+  on every canonical provider slot being bound.
 - **Boot/estate code:** a cross-language harness — project one canonical capability
   to node+python+csharp, run the same fixture corpus N times on one machine, report
   median/p95 whole-invocation and per-cell time (separate process startup).
@@ -185,7 +191,7 @@ citing it as a dependency.)
 |---|---|---|
 | 1 | body rows (`content_object` + generation-keyed mapping), off the hot path | **data** |
 | 1 | `sfx-embody/embodiments/` (legacy materialize output; materialize retired `2fafd6c`, gone from `src/`) | **delete** — proof debt, read by no code; if kept, only as an immutable frozen baseline (never on the invocation path) |
-| 1 | repo mirror + digest manifest; cross-language timing harness | **boot/estate code** |
+| 1 | repo mirror + digest manifest (`sfx capability project`); cross-language timing harness | **boot/estate code** |
 | 1 | `sourcePointers` in the published manifest; projector DB target; uniform timing | **SDA request** |
 | 2 | per-OS packaging + signing/notarization build | **boot/estate code** |
 | 2 | binary digest/attestation + delivery binding rows | **data** |

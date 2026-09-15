@@ -23,6 +23,14 @@
         "--allow-fs-read=../../sidefx-database/package.json",
         "src/database-delivery.mjs", "config/database-runtime.json"
       ]
+    },
+    "database-projection": {
+      "type": "process",
+      "command": "node",
+      "cwd": ".",
+      "args": [
+        "src/projection-delivery.mjs", "config/database-runtime.json"
+      ]
     }
   }
 }

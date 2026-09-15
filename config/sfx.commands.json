@@ -13,6 +13,12 @@
         "find",
         "artifact"
       ]
+    },
+    "database-projection": {
+      "delivery": "database-projection",
+      "operations": [
+        "project"
+      ]
     }
   },
   "identities": {
@@ -119,6 +125,19 @@
           "operation": "catalogue"
         },
         "description": "List the capabilities selected by the current database estate, with retained circuit availability."
+      },
+      "project": {
+        "min": 1,
+        "max": 1,
+        "identity": "capability",
+        "workspace": true,
+        "targets": true,
+        "fullMechanics": true,
+        "wraps": {
+          "surface": "database-projection",
+          "operation": "project"
+        },
+        "description": "Project the capability's declared authority into executable mechanical bodies: stage its declared documents into --workspace, run the admitted consumer projector per target, and write the generated seams, plans, queries and conformance evidence under <workspace>/projected. --targets selects targets (the workspace's declared targets are the default); --full-mechanics requires every canonical cell's platform mechanic to be bound for every target. Projection is review/publish output, never the invocation path."
       }
     },
     "media": {

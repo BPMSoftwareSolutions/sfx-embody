@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.sidefx.local/contracts/live-equity-price-request.v1.schema.json",
+  "title": "Live equity price request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contractId",
+    "payload"
+  ],
+  "properties": {
+    "contractId": {
+      "const": "live-equity-price-request.v1"
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "symbol",
+        "region"
+      ],
+      "properties": {
+        "symbol": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 24,
+          "pattern": "^[A-Z0-9.^=-]{1,24}$"
+        },
+        "region": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 2,
+          "enum": [
+            "US"
+          ]
+        }
+      }
+    }
+  }
+}

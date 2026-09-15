@@ -109,6 +109,21 @@ Completed units, as reported and with proof where stated:
   installed; see the proof below and [performance-optimization.md](performance-optimization.md).
   Full closure/mechanics batching and shared reference-catalog optimization remain
   deferred, not completed.
+- **Projection is a native CLI command (2026-09-15).** `sfx capability project
+  <id> --workspace <dir> [--targets …] [--full-mechanics]` is the
+  `database-projection` surface: `src/projection-delivery.mjs` assembles the
+  declared documents in one pinned read, stages them into the workspace, runs the
+  admitted SDA consumer projector and reports each target's digests and bound
+  mechanics. `--workspace`/`--targets`/`--full-mechanics` are declared options in
+  the terminal vocabulary (sidefx-cli `commands.mjs`/`cli.mjs`), not a side
+  script. Proof: the command projected `resolve-equity-market-price-evidence`
+  into `embodiments/resolve-equity-market-price-evidence/projected` with 12
+  staged documents, 32 files, all targets sharing canonical digest
+  `sha256:6d8e145c…`, 137/137 bindings, `PURE_PROJECTION_CONFORMS`, and the
+  `--full-mechanics` gate is a no-op on this capability (every canonical provider
+  slot bound). CLI tests 28/28; estate tests 47/50 (three database-gated skips).
+  Finding: generated seam specifiers are relative to the generation workspace, so
+  a mirrored body resolves only at its generation depth — an SDA request.
 - **Cross-language projection conformance — installed (2026-09-15).**
   `expose-sda-conforming-declaration-documents.sql` makes the declared documents
   SDA-conforming: port bindings project to `{portId, platformCapabilityId,

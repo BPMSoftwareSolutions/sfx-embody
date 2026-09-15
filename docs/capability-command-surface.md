@@ -14,15 +14,19 @@ disk involvement and no second source of truth:
 | `sfx capability reveal <id> --as circuit` | the retained snapshot media publication | its retained blueprint catalogue or view |
 | `sfx capability invoke <id> --input …` | authority, planned and executed in memory | the kernel result and its evidence |
 | `sfx capability observe <id> --input …` | exactly what `invoke` reads | the same result, plus live execution telemetry |
+| `sfx capability project <id> --workspace <dir>` | the capability's declared documents, assembled in one pinned read | the per-target mechanical bodies, execution plans and conformance evidence under `<dir>/projected` |
 
 `prepare` was subtracted with its materialization mechanism: it is not offered,
 so `sfx capability prepare` is refused as an unknown operation rather than
 reaching a path nothing declares. The reader operations above are declared reads
 and are verified live.
 
-Every operation is a row in [config/sfx.commands.json](../config/sfx.commands.json)
-and a row in the `operations` table of
-[src/invoke-database-capability.mjs](../src/invoke-database-capability.mjs).
+Every operation is a row in [config/sfx.commands.json](../config/sfx.commands.json).
+The database-invocation operations are rows in the `operations` table of
+[src/invoke-database-capability.mjs](../src/invoke-database-capability.mjs);
+`project` is the separate `database-projection` surface served by
+[src/projection-delivery.mjs](../src/projection-delivery.mjs), a
+publication/harness boundary that no invocation, reader or graph source consults.
 Neither the CLI nor the delivery gained a capability-specific dispatch branch, so
 the [Entity Neutrality Law](../../sidefx-cli/docs/command-model.md) still holds:
 `sfx <object> <operation> [identity]`.
@@ -195,6 +199,42 @@ The presentation contract, the authority-side story projections and the demo
 approach are fixed in
 [execution-story-projection.md](execution-story-projection.md).
 
+## Projection
+
+`sfx capability project` is the publication surface for the mechanical bodies.
+One pinned read assembles the capability's declared documents; the delivery
+stages them into `--workspace`; the admitted consumer projector runs over the
+workspace and writes the generated seams, execution plans, conformance queries,
+fixtures and evidence under `<workspace>/projected`. The projection targets
+default to the workspace's declared targets and can be narrowed with
+`--targets node,python,csharp`. `--full-mechanics` requires every canonical cell
+that carries a platform provider slot to resolve to a projected binding for every
+selected target; an unbound slot fails the delivery with
+`PROJECTION_MECHANICS_INCOMPLETE:<targets>` rather than publishing a partial body.
+
+The report names the out-directory, each target's `canonicalGraphDigest` and
+`realizedGraphDigest`, the bound/required mechanics, the file count and the
+projection conformance disposition. The staged documents and the generated bodies
+are ordinary workspace files: they are version-controlled for review and
+comparison, and nothing in the invocation path reads them — the retained body is
+an artifact, never the invocation mechanism.
+
+```
+$ sfx capability project resolve-equity-market-price-evidence \
+    --workspace embodiments/resolve-equity-market-price-evidence --full-mechanics
+Projected resolve-equity-market-price-evidence -> …\embodiments\resolve-equity-market-price-evidence\projected
+  csharp   canonical sha256:6d8e145c…  bindings 137/137
+  node     canonical sha256:6d8e145c…  bindings 137/137
+  python   canonical sha256:6d8e145c…  bindings 137/137
+PURE_PROJECTION_CONFORMS; 12 declared document(s), 32 file(s); full mechanics required
+```
+
+One SDA-side finding: the generated seam modules import the SDA runtime through a
+relative path computed from the generation workspace, so a body copied to another
+depth resolves only from where it was generated. Portable specifiers (or a
+manifest that carries them) are an SDA change request; the repo copy is for
+review and comparison, and the running projection remains the command's output at
+its own workspace.
 
 ## Markdown documentation
 
