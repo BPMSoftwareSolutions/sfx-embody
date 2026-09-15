@@ -31,11 +31,15 @@ declared nor inside an admitted resolver boundary, it is a defect.
 ## 1. The rule
 
 The transistor classifies **authority for executable behavior**, not physical
-artifacts. Every executable behavior has exactly one origin:
+artifacts. Every executable behavior is governed from exactly one of two places:
 
-> **Every executable behavior has exactly one origin: declared authority (1),
-> interpreted through resolver mechanics (0). Projected executables are embodiments
-> of declared authority and never constitute a third source of executable meaning.**
+> **declared authority (1), which specifies executable meaning and configuration;
+> or an admitted resolver boundary (0), which embodies irreducible native
+> mechanics.**
+
+Declared behavior executes through resolver mechanics. Projected executables are
+reproducible embodiments of declared authority and are never a third source of
+executable meaning.
 
 | | state | what it is | cardinality | who owns it |
 |---|---|---|---|---|
