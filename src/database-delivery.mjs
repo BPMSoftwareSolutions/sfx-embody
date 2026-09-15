@@ -5,6 +5,7 @@ import { executeDatabaseCommand, validateDatabaseCommand } from './invoke-databa
 import { readAuthority } from './read-authority.mjs';
 import { withDatabaseReadSession } from './database-read-session.mjs';
 import { restrictMemoryProcess } from './restrict-memory-process.mjs';
+import { safeObservation } from './observation-filter.mjs';
 
 try {
   const chunks = [];
@@ -38,11 +39,7 @@ try {
     config.onObservation = observation => {
       // Only telemetry leaves this channel. Inputs, provider bodies and secrets
       // remain in their existing execution/evidence boundaries.
-      const safe = Object.fromEntries(['observationType', 'phase', 'status', 'observedAt',
-        'executionId', 'rootExecutionId', 'parentExecutionId', 'scenarioId', 'stepId', 'sequence']
-        .filter(key => ['string', 'number'].includes(typeof observation[key]) || observation[key] === null)
-        .map(key => [key, observation[key]]));
-      process.stderr.write('SFX_OBSERVATION ' + JSON.stringify(safe) + '\n');
+      process.stderr.write('SFX_OBSERVATION ' + JSON.stringify(safeObservation(observation)) + '\n');
     };
   }
   const setupTime = performance.now();

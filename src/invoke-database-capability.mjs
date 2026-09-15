@@ -1,10 +1,11 @@
 import { createHash, randomUUID } from 'node:crypto';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { readExecutionDelivery } from './read-execution-delivery.mjs';
+import { createExecutionDrilldown, isObservationAltitudeSelection } from './execution-drilldown.mjs';
 
 const digest = value => 'sha256:' + createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
-const requestFields = ['object', 'verb', 'subject', 'namespace', 'input', 'inputType', 'query', 'as', 'scenario', 'format', 'display'];
+const requestFields = ['object', 'verb', 'subject', 'namespace', 'input', 'inputType', 'query', 'as', 'scenario', 'format', 'display', 'observationAltitudes'];
 // The estate runtime root: a Port binding configuration may name an estate
 // provider module relative to this root.
 const ESTATE_RUNTIME_ROOT = new URL('../', import.meta.url);
@@ -100,6 +101,7 @@ export async function executeEstateCapability({ capabilityId, scenarioId, namesp
       const provider = await import(new URL(estate.module, ESTATE_RUNTIME_ROOT).href);
       if (typeof provider[estate.export] !== 'function') throw new Error('ESTATE_PROVIDER_EXPORT_NOT_FOUND:' + estate.export);
       current = await provider[estate.export](binding.configuration, current, context);
+      if (typeof context?.onState === 'function') { try { context.onState(current, operation); } catch { /* State observation is not execution authority. */ } }
     } else if (operation.kind === 'invoke-scenario') {
       const owner = ownerOfScenario(bundle, operation.scenarioId);
       if (!owner) throw new Error('ESTATE_TARGET_CAPABILITY_NOT_RESOLVED:' + operation.scenarioId);
@@ -153,7 +155,7 @@ function buildCanonicalInput(declared, type, raw) {
 // through the delivery.
 const operations = {
   invoke: { object: 'capability', subject: true, input: 'required', inputType: true, display: true },
-  observe: { object: 'capability', subject: true, input: 'required', inputType: true, display: true },
+  observe: { object: 'capability', subject: true, input: 'required', inputType: true, display: true, observationAltitudes: true },
   materialize: { object: 'capability', subject: true, input: 'required', inputType: true, display: true },
   prepare: { object: 'capability', subject: true, input: 'rejected' },
   circuit: { object: 'capability', subject: true, input: 'optional', scenario: true },
@@ -183,7 +185,10 @@ export function validateDatabaseCommand(envelope) {
     || (request.as !== undefined && (!spec.views || !present(request.as)))
     || (request.display !== undefined && spec.display !== true)
     || (request.inputType !== undefined && spec.inputType !== true)
+    || (request.observationAltitudes !== undefined && spec.observationAltitudes !== true)
     || (request.format !== undefined && (!spec.formats || !present(request.format)))) throw new Error('DATABASE_COMMAND_REJECTED');
+  if (spec.observationAltitudes === true && request.observationAltitudes !== undefined
+    && !isObservationAltitudeSelection(request.observationAltitudes)) throw new Error('CAPABILITY_OBSERVATION_ALTITUDE_NOT_OFFERED');
   if (spec.views && request.as !== undefined && !spec.views.includes(request.as)) throw new Error('CAPABILITY_VIEW_NOT_OFFERED');
   if (spec.formats && request.format !== undefined && !spec.formats.includes(request.format)) throw new Error('CAPABILITY_FORMAT_NOT_OFFERED');
   // Only the narrated view is formatted. A retained circuit is delivered as the
@@ -289,11 +294,25 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, 
   // it now that the boot read uses the estate views.
   const display = graphSource?.interfaceAuthority?.interfaces?.find(entry => entry.kind === 'cli')?.configuration?.display
     ?? cli.display ?? null;
+  // Observation carries the drilldown. The kernel streams testimony through the
+  // sink; the compiled plan is captured from the running carrier so the overlay
+  // joins planned topology against what executed. Invocation takes none of this.
+  let drilldown;
+  if (request.verb === 'observe') {
+    drilldown = createExecutionDrilldown({ observationAltitudes: request.observationAltitudes, scenarioId: selected.scenario_id, observe });
+    config.onTestimony = drilldown.sink;
+    config.onState = state => drilldown.setPlan(state);
+  }
   const outcome = await measure('executeDeclaredGraph', () => executeEstateCapability({ capabilityId: 'run-declared-graph' }, graphSource, config));
+  if (drilldown) drilldown.absorb(outcome);
+  const observedPathDigest = drilldown && typeof outcome?.observedPathDigest === 'string' ? outcome.observedPathDigest : undefined;
   return { disposition: 'terminated',
     outcome: { capabilityId: selection.capabilityId, scenarioId: selected.scenario_id, result: outcome, executions: [], observations: [],
       ...(display ? { display } : {}),
+      ...(drilldown ? { overlay: drilldown.buildOverlay(outcome) } : {}),
+      ...(observedPathDigest !== undefined ? { observedPathDigest } : {}),
       evidence: { timings, authoritySource: 'DATABASE', bodyStorage: 'NOT_REQUESTED', managedAdmission: 'NOT_REQUESTED',
         snapshotId: bundle.authority.snapshotId, projectionDigest: bundle.authority.projectionDigest,
-        viewDefinitionDigest: bundle.authority.viewDefinitionDigest } } };
+        viewDefinitionDigest: bundle.authority.viewDefinitionDigest,
+        ...(observedPathDigest !== undefined ? { observedPathDigest } : {}) } } };
 }

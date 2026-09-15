@@ -87,6 +87,36 @@ carries no input, provider body or secret, and it cannot change the outcome —
 With `--json`, each line is `{"observation":{…}}` on stderr while the result
 stays machine-readable on stdout.
 
+### Execution performance drilldown
+
+`observe` also streams the kernel's execution testimony and returns the planned
+topology against what executed. The kernel emits one testimony per cell and per
+edge it interprets; the estate forwards its `onTestimony` sink, and each titled
+`cell-execution-testimony.v1` / `edge-execution-testimony.v1` observation carries
+`cellId` / `edgeId`, `cellAltitude` and the timing fields (`durationMilliseconds`,
+`startedAt`, `completedAt`). Nothing about the execution changes: the same graph,
+outcome and `observedPathDigest` are produced.
+
+The selection is the declared request field `observationAltitudes`, surfaced as
+the repeatable CLI option `--observation-altitude NAME` over the four semantic
+cell altitudes (`scenario`, `mechanic`, `provider`, `physical`). Cells at a
+selected altitude stream; every edge is streamed when all four altitudes are
+selected, otherwise an edge streams when it enters a cell at a selected altitude.
+When the option is omitted the whole range streams. The operation is a row in
+[config/sfx.commands.json](../config/sfx.commands.json) (`"observationAltitudes": true`)
+and a row in the `operations` table, exactly like the other options.
+
+The observe result gains two fields that invoke never carries: `observedPathDigest`
+(also in `evidence.observedPathDigest`) and `overlay`. The overlay joins each
+planned `canonicalGraph` cell and edge with the observed testimony — disposition,
+`outcomeVariant`, `selectedEdgeIds`, per-execution timings — and counts planned
+against observed topology. `invoke` output is unchanged.
+
+The kernel's per-cell timing and live testimony sink are an SDA change request.
+Until that lands, the estate still absorbs `cellTestimony` / `edgeTestimony` from
+the returned graph result, so the overlay and digest are populated either way.
+
+
 ## Markdown documentation
 
 `--format markdown` presents the same single read as a document a product owner

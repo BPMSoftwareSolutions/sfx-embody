@@ -102,11 +102,12 @@
         "observation": true,
         "display": true,
         "inputType": true,
+        "observationAltitudes": true,
         "wraps": {
           "surface": "database-invocation",
           "operation": "observe"
         },
-        "description": "Execute the database capability exactly as invoke does, streaming its execution telemetry live as the delivery observes it."
+        "description": "Execute the database capability exactly as invoke does, streaming its execution telemetry live as the delivery observes it. --observation-altitude NAME (repeatable: scenario, mechanic, provider, physical) selects which semantic cell altitudes stream; every selected altitude also streams the edges entering it, and the result carries the planned-vs-observed overlay and the observed-path digest."
       },
       "circuit": {
         "min": 1,
