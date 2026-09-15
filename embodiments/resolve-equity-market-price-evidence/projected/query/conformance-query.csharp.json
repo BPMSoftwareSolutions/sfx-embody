@@ -3376,26 +3376,7 @@
   },
   "executableOrigin": {
     "originType": "consumer-executable-origin.v1",
-    "disposition": "REJECTED",
-    "unauthorizedFiles": [
-      ".projected.sda-backup-94011420-5088-4772-b480-f41c7b21639a/csharp/Program.generated.cs",
-      ".projected.sda-backup-94011420-5088-4772-b480-f41c7b21639a/csharp/ProjectedConsumerClient.generated.cs",
-      ".projected.sda-backup-94011420-5088-4772-b480-f41c7b21639a/node/capability-execution.generated.mjs",
-      ".projected.sda-backup-94011420-5088-4772-b480-f41c7b21639a/node/capability-runtime.generated.mjs",
-      ".projected.sda-backup-94011420-5088-4772-b480-f41c7b21639a/node/capability.projected.test.mjs",
-      ".projected.sda-backup-94011420-5088-4772-b480-f41c7b21639a/node/conformance-query.generated.mjs",
-      ".projected.sda-backup-94011420-5088-4772-b480-f41c7b21639a/node/resolve-equity-market-price-evidence-cli.generated.mjs",
-      ".projected.sda-backup-94011420-5088-4772-b480-f41c7b21639a/python/consumer-execution.generated.py",
-      ".projected.sda-backup-94011420-5088-4772-b480-f41c7b21639a/python/consumer.generated.py",
-      ".projected.sda-stage-94011420-5088-4772-b480-f41c7b21639a/csharp/Program.generated.cs",
-      ".projected.sda-stage-94011420-5088-4772-b480-f41c7b21639a/csharp/ProjectedConsumerClient.generated.cs",
-      ".projected.sda-stage-94011420-5088-4772-b480-f41c7b21639a/node/capability-execution.generated.mjs",
-      ".projected.sda-stage-94011420-5088-4772-b480-f41c7b21639a/node/capability-runtime.generated.mjs",
-      ".projected.sda-stage-94011420-5088-4772-b480-f41c7b21639a/node/capability.projected.test.mjs",
-      ".projected.sda-stage-94011420-5088-4772-b480-f41c7b21639a/node/conformance-query.generated.mjs",
-      ".projected.sda-stage-94011420-5088-4772-b480-f41c7b21639a/node/resolve-equity-market-price-evidence-cli.generated.mjs",
-      ".projected.sda-stage-94011420-5088-4772-b480-f41c7b21639a/python/consumer-execution.generated.py",
-      ".projected.sda-stage-94011420-5088-4772-b480-f41c7b21639a/python/consumer.generated.py"
-    ]
+    "disposition": "PROJECTED_ONLY",
+    "unauthorizedFiles": []
   }
 }

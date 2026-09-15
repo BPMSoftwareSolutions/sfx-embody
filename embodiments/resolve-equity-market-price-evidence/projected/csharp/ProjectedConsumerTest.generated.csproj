@@ -9,7 +9,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Program.generated.cs" />
+    <Compile Include="CapabilityOperations.generated.cs" />
     <Compile Include="Capability.projected.test.generated.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="capability-carrier.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="capability-contracts.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="capability-bindings.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="execution-patterns.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="execution-operations.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="capability-fixtures.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\..\scenario-driven-architecture\languages\csharp\src\ScenarioKernel.Adapters\ScenarioKernel.Adapters.csproj" />

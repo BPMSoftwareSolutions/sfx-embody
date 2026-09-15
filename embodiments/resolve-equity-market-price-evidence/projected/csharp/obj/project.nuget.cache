@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "tBt1rXLSt5k=",
+  "success": true,
+  "projectFilePath": "C:\\lab\\repos\\sfx-embody\\embodiments\\resolve-equity-market-price-evidence\\projected\\csharp\\ProjectedConsumerCli.generated.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Sidney Jones\\.nuget\\packages\\microsoft.codeanalysis.analyzers\\3.3.4\\microsoft.codeanalysis.analyzers.3.3.4.nupkg.sha512",
+    "C:\\Users\\Sidney Jones\\.nuget\\packages\\microsoft.codeanalysis.common\\4.12.0\\microsoft.codeanalysis.common.4.12.0.nupkg.sha512",
+    "C:\\Users\\Sidney Jones\\.nuget\\packages\\microsoft.codeanalysis.csharp\\4.12.0\\microsoft.codeanalysis.csharp.4.12.0.nupkg.sha512"
+  ],
+  "logs": []
+}

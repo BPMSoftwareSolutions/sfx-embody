@@ -1,6 +1,6 @@
 {
   "resolutionType": "consumer-platform-mechanic-resolution.v1",
-  "projectionTarget": "python",
+  "projectionTarget": "node",
   "requirements": [
     {
       "mechanicId": "contract-document-reading",
@@ -152,130 +152,130 @@
       "capabilityKind": "consumer-runtime",
       "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
       "status": "AVAILABLE",
-      "capabilityId": "sda-python-admitted-consumer-platform.v1",
-      "provider": "scenario_kernel.platform.consumer",
-      "implementationRef": "languages/python/src/scenario_kernel/platform/consumer.py",
-      "conformanceRef": "tools/tests/consumer-projection/python-consumer-projection.test.js"
+      "capabilityId": "sda-node-consumer-runtime.v1",
+      "provider": "ScenarioKernel.NodePlatform",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
     },
     {
       "mechanicId": "canonicalization",
       "capabilityKind": "consumer-runtime",
       "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
       "status": "AVAILABLE",
-      "capabilityId": "sda-python-admitted-consumer-platform.v1",
-      "provider": "scenario_kernel.platform.consumer",
-      "implementationRef": "languages/python/src/scenario_kernel/platform/consumer.py",
-      "conformanceRef": "tools/tests/consumer-projection/python-consumer-projection.test.js"
+      "capabilityId": "sda-node-consumer-runtime.v1",
+      "provider": "ScenarioKernel.NodePlatform",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
     },
     {
       "mechanicId": "schema-admission",
       "capabilityKind": "consumer-runtime",
       "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
       "status": "AVAILABLE",
-      "capabilityId": "sda-python-admitted-consumer-platform.v1",
-      "provider": "scenario_kernel.platform.consumer",
-      "implementationRef": "languages/python/src/scenario_kernel/platform/consumer.py",
-      "conformanceRef": "tools/tests/consumer-projection/python-consumer-projection.test.js"
+      "capabilityId": "sda-node-consumer-runtime.v1",
+      "provider": "ScenarioKernel.NodePlatform",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
     },
     {
       "mechanicId": "authority-resolution",
       "capabilityKind": "consumer-runtime",
       "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
       "status": "AVAILABLE",
-      "capabilityId": "sda-python-admitted-consumer-platform.v1",
-      "provider": "scenario_kernel.platform.consumer",
-      "implementationRef": "languages/python/src/scenario_kernel/platform/consumer.py",
-      "conformanceRef": "tools/tests/consumer-projection/python-consumer-projection.test.js"
+      "capabilityId": "sda-node-consumer-runtime.v1",
+      "provider": "ScenarioKernel.NodePlatform",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
     },
     {
       "mechanicId": "semantic-execution",
       "capabilityKind": "consumer-runtime",
       "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
       "status": "AVAILABLE",
-      "capabilityId": "sda-python-admitted-consumer-platform.v1",
-      "provider": "scenario_kernel.platform.consumer",
-      "implementationRef": "languages/python/src/scenario_kernel/platform/consumer.py",
-      "conformanceRef": "tools/tests/consumer-projection/python-consumer-projection.test.js"
+      "capabilityId": "sda-node-consumer-runtime.v1",
+      "provider": "ScenarioKernel.NodePlatform",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
     },
     {
       "mechanicId": "telemetry-observation",
       "capabilityKind": "consumer-runtime",
       "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
       "status": "AVAILABLE",
-      "capabilityId": "sda-python-admitted-consumer-platform.v1",
-      "provider": "scenario_kernel.platform.consumer",
-      "implementationRef": "languages/python/src/scenario_kernel/platform/consumer.py",
-      "conformanceRef": "tools/tests/consumer-projection/python-consumer-projection.test.js"
+      "capabilityId": "sda-node-consumer-runtime.v1",
+      "provider": "ScenarioKernel.NodePlatform",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
     },
     {
       "mechanicId": "scenario-invocation",
       "capabilityKind": "consumer-runtime",
       "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
       "status": "AVAILABLE",
-      "capabilityId": "sda-python-admitted-consumer-platform.v1",
-      "provider": "scenario_kernel.platform.consumer",
-      "implementationRef": "languages/python/src/scenario_kernel/platform/consumer.py",
-      "conformanceRef": "tools/tests/consumer-projection/python-consumer-projection.test.js"
+      "capabilityId": "sda-node-consumer-runtime.v1",
+      "provider": "ScenarioKernel.NodePlatform",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
     },
     {
       "mechanicId": "transition-binding-projection",
       "capabilityKind": "consumer-runtime",
       "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
       "status": "AVAILABLE",
-      "capabilityId": "sda-python-admitted-consumer-platform.v1",
-      "provider": "scenario_kernel.platform.consumer",
-      "implementationRef": "languages/python/src/scenario_kernel/platform/consumer.py",
-      "conformanceRef": "tools/tests/consumer-projection/python-consumer-projection.test.js"
+      "capabilityId": "sda-node-consumer-runtime.v1",
+      "provider": "ScenarioKernel.NodePlatform",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
     },
     {
       "mechanicId": "interface-delivery",
       "capabilityKind": "consumer-runtime",
       "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
       "status": "AVAILABLE",
-      "capabilityId": "sda-python-admitted-consumer-platform.v1",
-      "provider": "scenario_kernel.platform.consumer",
-      "implementationRef": "languages/python/src/scenario_kernel/platform/consumer.py",
-      "conformanceRef": "tools/tests/consumer-projection/python-consumer-projection.test.js"
+      "capabilityId": "sda-node-consumer-runtime.v1",
+      "provider": "ScenarioKernel.NodePlatform",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
     },
     {
       "mechanicId": "runtime-projection",
       "capabilityKind": "consumer-runtime",
       "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
       "status": "AVAILABLE",
-      "capabilityId": "sda-python-admitted-consumer-platform.v1",
-      "provider": "scenario_kernel.platform.consumer",
-      "implementationRef": "languages/python/src/scenario_kernel/platform/consumer.py",
-      "conformanceRef": "tools/tests/consumer-projection/python-consumer-projection.test.js"
+      "capabilityId": "sda-node-consumer-runtime.v1",
+      "provider": "ScenarioKernel.NodePlatform",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
     },
     {
       "mechanicId": "artifact-result-delivery",
       "capabilityKind": "consumer-runtime",
       "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
       "status": "AVAILABLE",
-      "capabilityId": "sda-python-admitted-consumer-platform.v1",
-      "provider": "scenario_kernel.platform.consumer",
-      "implementationRef": "languages/python/src/scenario_kernel/platform/consumer.py",
-      "conformanceRef": "tools/tests/consumer-projection/python-consumer-projection.test.js"
+      "capabilityId": "sda-node-consumer-runtime.v1",
+      "provider": "ScenarioKernel.NodePlatform",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
     },
     {
       "mechanicId": "authority-driven-transformation",
       "capabilityKind": "consumer-runtime",
       "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
       "status": "AVAILABLE",
-      "capabilityId": "sda-python-admitted-consumer-platform.v1",
-      "provider": "scenario_kernel.platform.consumer",
-      "implementationRef": "languages/python/src/scenario_kernel/platform/consumer.py",
-      "conformanceRef": "tools/tests/consumer-projection/python-consumer-projection.test.js"
+      "capabilityId": "sda-node-consumer-runtime.v1",
+      "provider": "ScenarioKernel.NodePlatform",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
     },
     {
       "mechanicId": "durable-artifact-materialization",
       "capabilityKind": "consumer-runtime",
       "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
       "status": "AVAILABLE",
-      "capabilityId": "sda-python-admitted-consumer-platform.v1",
-      "provider": "scenario_kernel.platform.consumer",
-      "implementationRef": "languages/python/src/scenario_kernel/platform/consumer.py",
-      "conformanceRef": "tools/tests/consumer-projection/python-consumer-projection.test.js"
+      "capabilityId": "sda-node-consumer-runtime.v1",
+      "provider": "ScenarioKernel.NodePlatform",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
     },
     {
       "mechanicId": "contract-validation",
@@ -284,9 +284,9 @@
       "requestedCapabilityId": "sda-schema-contract-admission.v1",
       "status": "AVAILABLE",
       "capabilityId": "sda-schema-contract-admission.v1",
-      "provider": "scenario_kernel.adapters.JsonSchemaContractValidator",
-      "implementationRef": "languages/python/src/scenario_kernel/adapters/core.py",
-      "conformanceRef": "tools/tests/consumer-projection/python-consumer-projection.test.js"
+      "provider": "ScenarioKernel.NodePlatform.Schema.JsonSchemaContractAdmission",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
     },
     {
       "mechanicId": "cli-delivery",
@@ -295,9 +295,9 @@
       "requestedCapabilityId": "sda-json-cli.v1",
       "status": "AVAILABLE",
       "capabilityId": "sda-json-cli.v1",
-      "provider": "scenario_kernel.platform.consumer",
-      "implementationRef": "languages/python/src/scenario_kernel/platform/consumer.py",
-      "conformanceRef": "tools/tests/consumer-projection/python-consumer-projection.test.js"
+      "provider": "ScenarioKernel.NodePlatform.Interface.JsonCli",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
     },
     {
       "mechanicId": "json-reading",
@@ -306,9 +306,9 @@
       "requestedCapabilityId": "sda-json-cli.v1",
       "status": "AVAILABLE",
       "capabilityId": "sda-json-cli.v1",
-      "provider": "scenario_kernel.platform.consumer",
-      "implementationRef": "languages/python/src/scenario_kernel/platform/consumer.py",
-      "conformanceRef": "tools/tests/consumer-projection/python-consumer-projection.test.js"
+      "provider": "ScenarioKernel.NodePlatform.Interface.JsonCli",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
     },
     {
       "mechanicId": "json-serialization",
@@ -317,9 +317,9 @@
       "requestedCapabilityId": "sda-json-cli.v1",
       "status": "AVAILABLE",
       "capabilityId": "sda-json-cli.v1",
-      "provider": "scenario_kernel.platform.consumer",
-      "implementationRef": "languages/python/src/scenario_kernel/platform/consumer.py",
-      "conformanceRef": "tools/tests/consumer-projection/python-consumer-projection.test.js"
+      "provider": "ScenarioKernel.NodePlatform.Interface.JsonCli",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
     },
     {
       "mechanicId": "event-port-invocation",
@@ -328,9 +328,9 @@
       "requestedCapabilityId": "sda-authority-transformation-port.v1",
       "status": "AVAILABLE",
       "capabilityId": "sda-authority-transformation-port.v1",
-      "provider": "scenario_kernel.adapters.SemanticTransformationEngine",
-      "implementationRef": "languages/python/src/scenario_kernel/adapters/core.py",
-      "conformanceRef": "tools/tests/consumer-projection/python-consumer-projection.test.js"
+      "provider": "ScenarioKernel.NodePlatform.Execution.AuthorityTransformation",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
     },
     {
       "mechanicId": "event-port-invocation",
@@ -339,9 +339,9 @@
       "requestedCapabilityId": "sda-authority-transformation-port.v1",
       "status": "AVAILABLE",
       "capabilityId": "sda-authority-transformation-port.v1",
-      "provider": "scenario_kernel.adapters.SemanticTransformationEngine",
-      "implementationRef": "languages/python/src/scenario_kernel/adapters/core.py",
-      "conformanceRef": "tools/tests/consumer-projection/python-consumer-projection.test.js"
+      "provider": "ScenarioKernel.NodePlatform.Execution.AuthorityTransformation",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
     },
     {
       "mechanicId": "event-port-invocation",
@@ -350,9 +350,9 @@
       "requestedCapabilityId": "sda-authority-transformation-port.v1",
       "status": "AVAILABLE",
       "capabilityId": "sda-authority-transformation-port.v1",
-      "provider": "scenario_kernel.adapters.SemanticTransformationEngine",
-      "implementationRef": "languages/python/src/scenario_kernel/adapters/core.py",
-      "conformanceRef": "tools/tests/consumer-projection/python-consumer-projection.test.js"
+      "provider": "ScenarioKernel.NodePlatform.Execution.AuthorityTransformation",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
     },
     {
       "mechanicId": "event-port-invocation",
@@ -361,9 +361,9 @@
       "requestedCapabilityId": "sda-authority-transformation-port.v1",
       "status": "AVAILABLE",
       "capabilityId": "sda-authority-transformation-port.v1",
-      "provider": "scenario_kernel.adapters.SemanticTransformationEngine",
-      "implementationRef": "languages/python/src/scenario_kernel/adapters/core.py",
-      "conformanceRef": "tools/tests/consumer-projection/python-consumer-projection.test.js"
+      "provider": "ScenarioKernel.NodePlatform.Execution.AuthorityTransformation",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
     },
     {
       "mechanicId": "event-port-invocation",
@@ -372,9 +372,9 @@
       "requestedCapabilityId": "sda-authority-transformation-port.v1",
       "status": "AVAILABLE",
       "capabilityId": "sda-authority-transformation-port.v1",
-      "provider": "scenario_kernel.adapters.SemanticTransformationEngine",
-      "implementationRef": "languages/python/src/scenario_kernel/adapters/core.py",
-      "conformanceRef": "tools/tests/consumer-projection/python-consumer-projection.test.js"
+      "provider": "ScenarioKernel.NodePlatform.Execution.AuthorityTransformation",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
     },
     {
       "mechanicId": "event-port-invocation",
@@ -383,9 +383,9 @@
       "requestedCapabilityId": "sda-external-credential-reference-binding-port.v1",
       "status": "AVAILABLE",
       "capabilityId": "sda-external-credential-reference-binding-port.v1",
-      "provider": "scenario_kernel.platform.governed_effect_ports",
-      "implementationRef": "languages/python/src/scenario_kernel/platform/governed_effect_ports.py",
-      "conformanceRef": "languages/python/tests/conformance/test_governed_effect_ports.py"
+      "provider": "ScenarioKernel.NodePlatform.Effects.ExternalCredentialReferenceBinding",
+      "implementationRef": "languages/typescript/runtimes/node/external-credential-reference-binding-provider.mjs",
+      "conformanceRef": "languages/typescript/runtimes/node/governed-http-effect-ports.conformance.test.mjs"
     },
     {
       "mechanicId": "event-port-invocation",
@@ -394,9 +394,9 @@
       "requestedCapabilityId": "sda-authority-transformation-port.v1",
       "status": "AVAILABLE",
       "capabilityId": "sda-authority-transformation-port.v1",
-      "provider": "scenario_kernel.adapters.SemanticTransformationEngine",
-      "implementationRef": "languages/python/src/scenario_kernel/adapters/core.py",
-      "conformanceRef": "tools/tests/consumer-projection/python-consumer-projection.test.js"
+      "provider": "ScenarioKernel.NodePlatform.Execution.AuthorityTransformation",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
     },
     {
       "mechanicId": "event-port-invocation",
@@ -405,9 +405,9 @@
       "requestedCapabilityId": "sda-governed-http-exchange-port.v1",
       "status": "AVAILABLE",
       "capabilityId": "sda-governed-http-exchange-port.v1",
-      "provider": "scenario_kernel.platform.governed_effect_ports",
-      "implementationRef": "languages/python/src/scenario_kernel/platform/governed_effect_ports.py",
-      "conformanceRef": "languages/python/tests/conformance/test_governed_effect_ports.py"
+      "provider": "ScenarioKernel.NodePlatform.Effects.GovernedHttpExchange",
+      "implementationRef": "languages/typescript/runtimes/node/governed-http-exchange-provider.mjs",
+      "conformanceRef": "languages/typescript/runtimes/node/governed-http-effect-ports.conformance.test.mjs"
     },
     {
       "mechanicId": "event-port-invocation",
@@ -416,9 +416,9 @@
       "requestedCapabilityId": "sda-authority-transformation-port.v1",
       "status": "AVAILABLE",
       "capabilityId": "sda-authority-transformation-port.v1",
-      "provider": "scenario_kernel.adapters.SemanticTransformationEngine",
-      "implementationRef": "languages/python/src/scenario_kernel/adapters/core.py",
-      "conformanceRef": "tools/tests/consumer-projection/python-consumer-projection.test.js"
+      "provider": "ScenarioKernel.NodePlatform.Execution.AuthorityTransformation",
+      "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+      "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
     }
   ],
   "disposition": "RESOLVED"
