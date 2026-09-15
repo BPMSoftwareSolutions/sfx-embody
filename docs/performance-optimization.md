@@ -77,12 +77,19 @@ namespaces were verified through the CLI. Five captured graph documents retain
 byte equality; full declaration parity covers six capabilities. The original
 views remain available to existing SQL consumers and were not rewritten.
 
-**Known, unchanged failures:** `resolve-sidefx-eligible-providers` still lacks the
-`map` overlay binding. Its pre-change graph and executor reproduce
-`SEMANTIC_EXECUTION_GRAPH_OVERLAY_BINDING_MISSING: 'map'`; both preflight and the
-installed CLI retain that failure. This is separate binding-row work, not a
-reason to modify the kernel for a performance green. Composed equity also retains
-its pre-existing `GRAPH_COMPILER_MISSING_INVOKED_SCENARIO` compilation failure.
+**Binding completion (installed 2026-09-15):**
+`sql/migrations/complete-run-declared-graph-pure-mechanic-bindings.sql` derived the
+missing overlay entries from the estate's own MECHANIC registry and merged them
+into `run-declared-graph-execute` (16 → 37 bindings; `required_pure_unbound: 0`).
+Preflight and the installed CLI now return `PROVIDERS_RESOLVED`, `eligibleCount: 1`
+and the retained `resolutionDigest`
+`sha256:02d4e6e01b2fe6c49f76d97c8af407dc03b2dbc12cad245b8aaff95b7b810ca5`; greeting
+graph/outcome digests are unchanged. The four declared mechanics with no
+observing embodiment (`bind-path`, `canonical-json-byte-validation`,
+`retained-lineage-authorization`, `canonical-artifact-byte-planning`) are
+deliberately not bound; a capability that needs one is an SDA embodiment request.
+Composed equity retains its pre-existing
+`GRAPH_COMPILER_MISSING_INVOKED_SCENARIO` compilation failure.
 
 **Remaining cost:** roughly one second for connection/pin setup, several hundred
 milliseconds for delivery process setup, and additional CLI transport/startup.

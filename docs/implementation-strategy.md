@@ -51,7 +51,7 @@ next unit, land it, prove it, move on.
 | 1 | A | Loader reads selection/CLI from `analysis.v_capability_graph_source`; drop `capability-embodiment.sql`/`scenario-closure.sql` reads (removes the last `sidefx-database/sql` reach) | equity + greet invokes green; timings show no `*.sql` diagnostic queries | in progress |
 | 2 | B | Re-declare the 4 ports binding `authority-read-provider.readCapabilityAuthority` (`read-declared-authority`, `read-capability-authority`, `execute-declared-capability`, `authority-read-provider`) to declared reads | each capability invokes through the kernel | partial |
 | 3 | B | Sweep every `PORT` whose `definition_json` names `src/resolvers/` or `materialize-node`; re-declare | `sql/inspect` report shows zero residual references | partial |
-| 4 | C | Complete `overlayBindings` for the full pure-mechanic set + effect ports; key by `mechanicId` from the registry | equity, greet, a domain capability all compile+execute | pending |
+| 4 | C | Complete `overlayBindings` for the full pure-mechanic set + effect ports; key by `mechanicId` from the registry | equity, greet, a domain capability all compile+execute | done: `complete-run-declared-graph-pure-mechanic-bindings.sql` merges the registry pure set (16→37 bindings); `resolve-sidefx-eligible-providers` returns `PROVIDERS_RESOLVED` with the retained `resolutionDigest`; greetings unchanged |
 | 5 | C | Declared-read provider dispatch by `mechanicId` for domain slots | domain capability executes with no local provider | pending |
 | 6 | D | Delete architecture-1 scripts (`verify-estate`, `verify-memory-parity`, `verify-consumer-*`, `package-qualified-pilots`, `pilot-container/run`, `invoke-from-bundle`, `probe-database-invocation`, `report-native-repair`, `validate-scaffold`) and their `package.json` entries | `npm test` / lifecycle scripts green; no dangling imports | done (working tree) |
 | 7 | D | Remove `materialize-node` from the delivery graph so `consumer-object-provider`/`native-expression-projection` delete | all 12 resolvers absent; kernel path green | pending |
@@ -161,9 +161,14 @@ reader permissions and lock lifetime are covered by 32 unit tests and three
 opt-in integration checks. Full receipts and repeat commands are in
 [performance-optimization.md](performance-optimization.md).
 
-Lane C remains open: `resolve-sidefx-eligible-providers` fails for a missing `map`
-overlay binding with both its captured pre-change graph and the installed read.
-That failure was preserved and recorded, not hidden by a reader or kernel change.
+Lane C unit 4 is installed: `complete-run-declared-graph-pure-mechanic-bindings.sql`
+merged every declared pure mechanic the semantic-value provider embodies into the
+`run-declared-graph-execute` overlay. The previously blocked
+`resolve-sidefx-eligible-providers` now returns `PROVIDERS_RESOLVED` through the
+real CLI, and the greeting digests are unchanged. The four declared mechanics with
+no observing embodiment remain deliberately unbound (SDA
+`conformance/execution-graph/mechanics/README.md`); a capability that requires one
+is an SDA embodiment request, recorded here as a finding rather than faked green.
 
 ## Unit template (use verbatim in the commit)
 

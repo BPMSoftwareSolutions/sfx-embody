@@ -49,9 +49,11 @@ target; agents must not edit SDA), [implementation-strategy.md](implementation-s
    (compile → execute). No per-capability dispatch; resolution is data. The first
    [invocation optimization](performance-optimization.md) is installed: greeting
    delivery is about 2 seconds rather than 57 seconds, without changing its graph
-   or outcome digest. Remaining: API/UI do not share the loader; residual
-   `estateProvider`/`src/resolvers/*` bindings and missing overlay entries are data
-   defects. Stale delivery removal is separate subtraction work.
+   or outcome digest. The shared executor overlay now covers the declared
+   pure-mechanic set, so provider resolution invokes through the same path.
+   Remaining: API/UI do not share the loader; residual
+   `estateProvider`/`src/resolvers/*` bindings are data defects. Stale delivery
+   removal is separate subtraction work.
 3. **Presentation-layer capabilities (WPF, JavaFX, vanilla HTML, React) that project
    to multiple presentations.** SDA owns the presentation seam: a versioned
    `sda-ui-presentation-ir` protocol, `resolve-declared-ui-presentation` →
