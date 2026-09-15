@@ -185,6 +185,25 @@ work (§2) does not remove the need for an unseal input; the two are orthogonal.
 "sealed binary" unit is not documented in the corpus; confirm with its owner before
 citing it as a dependency.)
 
+## 5. Migrating boot-resident declared logic to declared capabilities
+
+**Target:** move the portable logic that currently sits in the boot into declared
+capabilities (a read/transformation over testimony), per `docs/transistor-model.md:170-191`:
+`src/execution-drilldown.mjs` (altitude selection, testimony join, planned-vs-observed
+overlay), `src/observation-filter.mjs` (telemetry field allowlist), and
+`src/semantic-address.mjs` (semantic addressing). Terminal rendering stays in
+`sidefx-cli`.
+
+**Why not extend it.** These files carry no host imports — they are declared authority
+(1) misplaced in code, the defect §3.2 names. Adding transport fields to the allowlist
+or the drilldown to serve the provider-altitude demo grows the defect instead of
+migrating it.
+
+**Depends on.** SDA request 7 (`docs/transistor-model.md:481`) for the provider/physical
+cells and testimony the migrated capabilities read. Until the kernel emits them, the
+honest line for a provider lane remains `PROVIDER_UNAVAILABLE` /
+`PROVIDER_EXCHANGE_NOT_COMPLETED`.
+
 ## Classification summary
 
 | # | deliverable | class |
@@ -202,6 +221,9 @@ citing it as a dependency.)
 | 4 | vault provider per language | **SDA request** |
 | 4 | vault declaration, reference names, rules, binding | **data** |
 | 4 | remove env exposure (DB string + effect credential); boot unseal step | **boot** |
+| 5 | migrate `execution-drilldown.mjs` / `observation-filter.mjs` / `semantic-address.mjs` into declared capabilities (read/transformation over testimony) | **data** |
+| 5 | provider/physical altitude cells + bounded redacted testimony | **SDA request** |
+| 5 | terminal rendering of drilldown observations | **boot** (stays in sidefx-cli) |
 
 Every item preserves the invariants: one coherence pin per invocation, the isolation
 boundary, no materialization on the invocation path, and no SDA edits from this repo

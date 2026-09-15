@@ -478,6 +478,21 @@ Format per [embodiment-completeness.md](embodiment-completeness.md):12-37
    - *evidence:* `docs/capability-command-surface.md:242-247`;
      `docs/next-experiences.md:61-63`.
 
+7. **Materialize provider and physical altitude cells and their testimony.**
+   - *primitive:* the compiler materializes `provider`/`physical` cells with their
+     Input → Execution → Outcome geometry, and each runtime emits the provider's
+     bounded, redacted execution evidence as that cell's testimony.
+   - *why kernel:* semantic altitudes are kernel law (the `execution-cell` schema
+     enum); the compiler and runtimes are resolvers (0). There is no estate half —
+     extending the boot's observation filter/drilldown would grow the §3.2 defect.
+   - *languages:* node, python, csharp.
+   - *data that binds it:* the equity port bindings `bind-equity-price-provider-credential`
+     and `observe-equity-price-exchange`; fixture `equity-qqq-evidence-resolves`.
+   - *evidence:* `--observation-altitude provider|physical` yields six delivery-phase
+     lines and zero cells; `SDA:languages/typescript/runtimes/node/semantic-execution-graph/compiler.js:70,143`;
+     `SDA:kernel/schemas/execution-cell.schema.json:12`.
+   - *request:* `SDA:docs/sda-change-request-provider-physical-altitudes.md`.
+
 ---
 
 ## 11. The one-paragraph statement
