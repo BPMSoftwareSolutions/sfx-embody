@@ -1,3 +1,4 @@
+import fs from 'node:fs/promises';
 import { createHash, randomUUID } from 'node:crypto';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { readExecutionDelivery } from './read-execution-delivery.mjs';
@@ -9,6 +10,31 @@ const requestFields = ['object', 'verb', 'subject', 'namespace', 'input', 'input
 // The estate runtime root: a Port binding configuration may name an estate
 // provider module relative to this root.
 const ESTATE_RUNTIME_ROOT = new URL('../', import.meta.url);
+// The target language's admitted mechanic registry is declared authority. A Port
+// that names a platform mechanic by `platformCapabilityId` carries no module
+// path; the boot resolves the per-language implementation from the registry.
+const PLATFORM_REGISTRY_REF = 'kernel/semantic-authority/consumer/node-mechanic-registry.authority.v1.json';
+const platformRegistries = new Map();
+const sdaBaseUrl = sdaRoot => pathToFileURL(String(sdaRoot).replace(/\\/g, '/').replace(/\/?$/, '/'));
+async function readPlatformRegistry(sdaRoot) {
+  const url = new URL(PLATFORM_REGISTRY_REF, sdaBaseUrl(sdaRoot));
+  if (!platformRegistries.has(url.href)) platformRegistries.set(url.href, fs.readFile(url, 'utf8').then(text => JSON.parse(text)));
+  return platformRegistries.get(url.href);
+}
+async function resolvePlatformMechanic(binding, context) {
+  const platformCapabilityId = binding?.platformCapabilityId;
+  if (typeof platformCapabilityId !== 'string' || platformCapabilityId.length === 0
+    || typeof context?.sdaRoot !== 'string' || context.sdaRoot.length === 0) return null;
+  const registry = await readPlatformRegistry(context.sdaRoot);
+  const entries = [...(registry.contractAdmissions ?? []), ...(registry.eventPorts ?? []), ...(registry.stateProjections ?? [])];
+  const entry = entries.find(candidate => candidate.platformCapabilityId === platformCapabilityId
+    && candidate.kind === 'direct' && candidate.invocation === 'configuration'
+    && typeof candidate.providerModule === 'string' && typeof candidate.providerExport === 'string');
+  if (!entry) return null;
+  const moduleRoot = typeof registry.providerModuleRoot === 'string' ? registry.providerModuleRoot : '';
+  const providerModule = await import(new URL(moduleRoot + '/' + entry.providerModule, sdaBaseUrl(context.sdaRoot)).href);
+  return typeof providerModule[entry.providerExport] === 'function' ? providerModule[entry.providerExport] : null;
+}
 
 // The capability's CLI interface configuration (input mapping, display projection),
 // read from its own interface declaration. A capability that declares none keeps the
@@ -96,11 +122,16 @@ export async function executeEstateCapability({ capabilityId, scenarioId, namesp
     if (operation.kind === 'invoke-port') {
       const binding = readEstatePortBinding(bundle, operation.portId);
       const estate = binding?.configuration?.estateProvider;
-      if (!estate || typeof estate.module !== 'string' || typeof estate.export !== 'string')
-        throw new Error('ESTATE_PROVIDER_NOT_DECLARED:' + capabilityId + ':' + operation.portId);
-      const provider = await import(new URL(estate.module, ESTATE_RUNTIME_ROOT).href);
-      if (typeof provider[estate.export] !== 'function') throw new Error('ESTATE_PROVIDER_EXPORT_NOT_FOUND:' + estate.export);
-      current = await provider[estate.export](binding.configuration, current, context);
+      let invokePort;
+      if (estate && typeof estate.module === 'string' && typeof estate.export === 'string') {
+        const provider = await import(new URL(estate.module, ESTATE_RUNTIME_ROOT).href);
+        invokePort = provider[estate.export];
+        if (typeof invokePort !== 'function') throw new Error('ESTATE_PROVIDER_EXPORT_NOT_FOUND:' + estate.export);
+      } else {
+        invokePort = await resolvePlatformMechanic(binding, context);
+        if (typeof invokePort !== 'function') throw new Error('PLATFORM_MECHANIC_NOT_DECLARED:' + capabilityId + ':' + operation.portId);
+      }
+      current = await invokePort(binding.configuration, current, context);
       if (typeof context?.onState === 'function') { try { context.onState(current, operation); } catch { /* State observation is not execution authority. */ } }
     } else if (operation.kind === 'invoke-scenario') {
       const owner = ownerOfScenario(bundle, operation.scenarioId);
