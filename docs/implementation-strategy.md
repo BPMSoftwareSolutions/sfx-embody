@@ -109,6 +109,24 @@ Completed units, as reported and with proof where stated:
   installed; see the proof below and [performance-optimization.md](performance-optimization.md).
   Full closure/mechanics batching and shared reference-catalog optimization remain
   deferred, not completed.
+- **Cross-language projection conformance — installed (2026-09-15).**
+  `expose-sda-conforming-declaration-documents.sql` makes the declared documents
+  SDA-conforming: port bindings project to `{portId, platformCapabilityId,
+  configuration}`, transformations to `{id, expression}`, the workspace document
+  carries `kernel`, `governance`, `conformanceQuery`, `telemetryAuthority`,
+  `platformCapabilityCatalog` and the capability's `projectionAuthorities`, the
+  `projection-authorities.authority.json` entry is emitted, and the equity fixture
+  is authored. Proof: the SDA projector run from the live rows over all three
+  targets emits `node+python+csharp`, all plans share canonical digest
+  `sha256:6d8e145c…` with 137 provider bindings, `PURE_PROJECTION_CONFORMS`, and
+  platform mechanic resolution reports `RESOLVED`/`AVAILABLE` with zero
+  `MISSING`/`CAPABILITY_NOT_FOUND` on every target; both effect ports bind the
+  language implementations (python `governed_effect_ports.py`, c# 
+  `GovernedEffectPorts.cs`). SDA `895a63d` admitted the python/csharp catalog
+  entries. The database invocation digest moves (`…8ad3907` → `…10d4386c`) because
+  estate provenance left the canonical authority; disposition and outcome are
+  unchanged (`EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED`), `npm test` is 47/50 with
+  three database-gated skips, and `scripts/verify-demo.mjs` is green.
 - **Wave J — JSON authoring surface installed.** `declare-json-authoring-surface.sql`
   (fixed and installed) declares `model.declare_capability_document` plus two
   JSON-authored capabilities (`count-declared-capabilities`,
