@@ -81,6 +81,15 @@ const listingModule = 'data:text/javascript,' + encodeURIComponent(`export const
 const listing = { capabilityId: 'list-capabilities',
   executionAuthorities: [{ owningScenarioId: 'list-capabilities', operations: [{ kind: 'invoke-port', portId: 'list-port' }] }],
   interfaceAuthority: { portBindings: [{ portId: 'list-port', configuration: { estateProvider: { module: listingModule, export: 'read' } } }] } };
+// The retained-publication carrier is supplied by the executor fixture: circuit
+// reads the catalogue, artifact reads one retained artifact's bytes.
+const publicationExecutor = 'data:text/javascript,' + encodeURIComponent(`
+export const invoke = async (_, graph) => ({ disposition: "completed", outcome:
+  graph.input.operation === "artifact" ? { artifact: { url: "x", base64: "AAAA" } }
+  : { capabilityId: graph.input.capabilityId ?? null, views: [] } });`);
+const publication = { capabilityId: 'read-retained-publication',
+  executionAuthorities: [{ owningScenarioId: 'read-retained-publication', operations: [{ kind: 'invoke-port', portId: 'publication-port' }] }],
+  interfaceAuthority: { portBindings: [{ portId: 'publication-port', configuration: { estateProvider: { module: fixtureModule, export: 'invoke' } } }] } };
 
 function context({ mismatch, executorModule = fixtureModule } = {}) {
   const reads = [], queries = [], observations = [];
@@ -98,9 +107,12 @@ function context({ mismatch, executorModule = fixtureModule } = {}) {
       const isExecutor = selection.capabilityId === 'run-declared-graph';
       const isReader = selection.capabilityId === 'read-capability-meaning';
       const isListing = selection.capabilityId === 'list-capabilities';
+      const isPublication = selection.capabilityId === 'read-retained-publication';
       return { selection, authority: { ...identity, ...(mismatch === reads.length ? { viewDefinitionDigest: 'other' } : {}),
-        recordsets: [[{ scenario_id: isExecutor ? 'executor' : isReader ? 'read-capability-meaning' : isListing ? 'list-capabilities' : 'root' }]] },
-        closure: { recordsets: [[]] }, graphSource: structuredClone(isExecutor ? executor : isReader ? reader : isListing ? listing : graph) };
+        recordsets: [[{ scenario_id: isExecutor ? 'executor' : isReader ? 'read-capability-meaning'
+          : isListing ? 'list-capabilities' : isPublication ? 'read-retained-publication' : 'root' }]] },
+        closure: { recordsets: [[]] }, graphSource: structuredClone(isExecutor ? executor : isReader ? reader
+          : isListing ? listing : isPublication ? publication : graph) };
     }
   };
 }
@@ -140,6 +152,27 @@ test('list and find read through the declared listing capability', async () => {
     request: { object: 'capability', verb: 'find', query: 'example' } }, findConfig);
   assert.equal(found.outcome.query, 'example');
   assert.deepEqual(found.outcome.capabilities[0].matchedFields, ['capabilityId']);
+});
+
+test('circuit, artifact and reveal --as circuit read through the declared publication capability', async () => {
+  const circuitConfig = context({ executorModule: publicationExecutor });
+  const circuit = await executeDatabaseCommand({ deliveryType: 'sfx-command-delivery.v1', operation: 'circuit',
+    request: { object: 'capability', verb: 'circuit', subject: 'example' } }, circuitConfig);
+  assert.deepEqual(circuit.outcome.circuit, { capabilityId: 'example', views: [] });
+  assert.equal(circuit.outcome.view, undefined);
+  assert.deepEqual(circuitConfig.reads.map(read => read.selection.capabilityId),
+    ['read-retained-publication', 'run-declared-graph']);
+
+  const revealConfig = context({ executorModule: publicationExecutor });
+  const revealed = await executeDatabaseCommand({ deliveryType: 'sfx-command-delivery.v1', operation: 'reveal',
+    request: { object: 'capability', verb: 'reveal', subject: 'example', as: 'circuit' } }, revealConfig);
+  assert.equal(revealed.outcome.view, 'circuit');
+  assert.equal(revealed.outcome.circuit.capabilityId, 'example');
+
+  const artifactConfig = context({ executorModule: publicationExecutor });
+  const artifact = await executeDatabaseCommand({ deliveryType: 'sfx-command-delivery.v1', operation: 'artifact',
+    request: { object: 'media', verb: 'artifact', subject: 'a'.repeat(64) } }, artifactConfig);
+  assert.equal(artifact.outcome.media.artifact.base64, 'AAAA');
 });
 
 test('reveal reads through the declared reader capability with the subject as input', async () => {

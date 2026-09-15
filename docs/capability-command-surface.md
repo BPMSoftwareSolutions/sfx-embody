@@ -14,7 +14,8 @@ disk involvement and no second source of truth:
 | `sfx capability invoke <id> --input …` | authority, planned and executed in memory | the kernel result and its evidence |
 | `sfx capability observe <id> --input …` | exactly what `invoke` reads | the same result, plus live execution telemetry |
 
-`prepare`, `circuit`, `catalogue` and `media artifact` are unchanged.
+`prepare` remains on the old path pending its subtraction; the reader
+operations above are declared reads and are verified live.
 
 Every operation is a row in [config/sfx.commands.json](../config/sfx.commands.json)
 and a row in the `operations` table of
@@ -30,6 +31,17 @@ read ([sql/migrations/declare-list-capabilities.sql](../sql/migrations/declare-l
 one port whose declared read returns the selected estate's capabilities as JSON
 rows under the reader boundary. The read owns the matching and the reported
 `matchedFields`; the terminal renders the rows.
+
+`circuit`, `reveal --as circuit` and `media artifact` are served by the declared
+`read-retained-publication` read
+([sql/migrations/declare-read-retained-publication.sql](../sql/migrations/declare-read-retained-publication.sql)):
+the current model's latest explicit media publication is read under the reader
+boundary and the retained catalogue, one retained view, or one retained
+artifact's original bytes is returned. The read never crosses a model boundary,
+and a model with no retained publication reports `CIRCUIT_PUBLICATION_UNAVAILABLE`
+rather than a substitute. `catalogue` remains the declared listing read; its
+circuit-availability field is not declared yet. `prepare` is not re-declared:
+its materialization mechanism was eliminated.
 
 Every value these commands print is read from the selected estate model. Where
 the authority declares nothing, the output says so — it never substitutes a

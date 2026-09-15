@@ -158,15 +158,16 @@ const operations = {
   observe: { object: 'capability', subject: true, input: 'required', inputType: true, display: true, observationAltitudes: true },
   materialize: { object: 'capability', subject: true, input: 'required', inputType: true, display: true },
   prepare: { object: 'capability', subject: true, input: 'rejected' },
-  circuit: { object: 'capability', subject: true, input: 'optional', scenario: true },
+  circuit: { object: 'capability', subject: true, input: 'optional', scenario: true, reader: 'read-retained-publication' },
   // A reader operation is a declared capability reached through the frontdoor;
-  // the subject is its input, never an execution it triggers.
+  // the subject is its input, never an execution it triggers. Reveal's reader
+  // follows the declared view.
   reveal: { object: 'capability', subject: true, input: 'optional', scenario: true, views: ['circuit', 'meaning'], formats: ['text', 'markdown'],
-    reader: 'read-capability-meaning' },
+    readers: { meaning: 'read-capability-meaning', circuit: 'read-retained-publication' } },
   catalogue: { object: 'capability', subject: false, input: 'rejected', reader: 'list-capabilities' },
   list: { object: 'capability', subject: false, input: 'rejected', reader: 'list-capabilities' },
   find: { object: 'capability', subject: false, input: 'rejected', query: true, reader: 'list-capabilities' },
-  artifact: { object: 'media', subject: true, input: 'rejected' },
+  artifact: { object: 'media', subject: true, input: 'rejected', reader: 'read-retained-publication' },
 };
 // Reveal without an explicit view returns the capability's canonical story.
 const DEFAULT_VIEW = 'meaning';
@@ -261,33 +262,47 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, 
   }
   // A declared reader operation resolves through its own declared capability,
   // with the subject as the read input. It never executes the subject.
-  const readerCapability = operations[request.verb]?.reader;
+  const view = request.as ?? DEFAULT_VIEW;
+  const readerCapability = operations[request.verb]?.readers?.[view] ?? operations[request.verb]?.reader;
   if (readerCapability) {
-    if (request.verb === 'reveal' && (request.as ?? DEFAULT_VIEW) !== 'meaning')
-      throw new Error('CAPABILITY_VIEW_NOT_DECLARED:' + request.as);
     const reader = await measure('readAuthority', () => readSelectedAuthority(databaseRoot,
       { capabilityId: readerCapability }, { retainObjects: false, documents: false, timings: timings.queries }));
     if (!reader.graphSource) throw new Error('DECLARED_GRAPH_SOURCE_MISSING:' + readerCapability);
     const readerSource = structuredClone(reader.graphSource);
     // The reader input is the declared selection: a subject for reveal, a query
-    // for find, a namespace for any listing. The read consumes what it declares.
+    // for find, a namespace for a listing, a carrier for the retained media.
+    const retained = request.verb === 'circuit' || (request.verb === 'reveal' && view === 'circuit');
     readerSource.input = {
       ...(request.subject === undefined ? {} : { capabilityId: request.subject }),
       ...(request.query === undefined ? {} : { query: request.query }),
       ...(selection.namespaceId === undefined ? {} : { namespaceId: selection.namespaceId }),
-      ...(selectedScenarioId === undefined ? {} : { scenarioId: selectedScenarioId }) };
+      ...(selectedScenarioId === undefined ? {} : { scenarioId: selectedScenarioId }),
+      ...(retained ? { operation: 'circuit' } : {}),
+      ...(request.verb === 'artifact' ? { operation: 'artifact', artifactDigest: request.subject } : {}),
+      ...(typeof request.input?.viewId === 'string' ? { viewId: request.input.viewId } : {}) };
     const read = await measure('executeDeclaredGraph', () => executeEstateCapability({ capabilityId: 'run-declared-graph' }, readerSource, config));
+    // A reader never executes meaning; a failed read is the domain failure the
+    // declared read raised, not an outcome a caller should inspect.
+    if (read?.disposition === 'failed' || read?.code === 'CELL_EXECUTION_FAILED') {
+      const serialized = JSON.stringify(read);
+      const message = read.error?.message ?? read.message ?? read.errorCode ?? read.error?.code
+        ?? /"message":"([^"]+)"/.exec(serialized)?.[1] ?? 'DECLARED_READ_FAILED';
+      throw new Error(String(message));
+    }
     const readerOutcome = read?.outcome ?? read;
-    // A listing read returns rows; a meaning read returns the one document.
+    // The read's shape follows the operation: rows for a listing, the one meaning
+    // document for reveal, or the retained catalogue, view or artifact.
     return { disposition: 'terminated',
       outcome: { ...(request.subject === undefined ? {} : { capabilityId: request.subject }),
         ...(selection.namespaceId === undefined ? {} : { namespaceId: selection.namespaceId }),
         ...(selectedScenarioId === undefined ? {} : { scenarioId: selectedScenarioId }),
         ...(request.query === undefined ? {} : { query: request.query }),
-        view: request.as ?? DEFAULT_VIEW,
+        ...(request.verb === 'reveal' ? { view } : {}),
         ...(Array.isArray(readerOutcome)
           ? { count: readerOutcome.length, capabilities: readerOutcome }
-          : { meaning: readerOutcome }),
+          : request.verb === 'artifact' ? { media: readerOutcome }
+            : retained ? { circuit: readerOutcome }
+              : { meaning: readerOutcome }),
         evidence: { timings, authoritySource: 'DATABASE', snapshotId: reader.authority.snapshotId,
           projectionDigest: reader.authority.projectionDigest, viewDefinitionDigest: reader.authority.viewDefinitionDigest } } };
   }

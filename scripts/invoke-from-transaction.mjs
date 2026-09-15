@@ -106,8 +106,30 @@ await withDatabaseReadSession({ connect, sql, pinModel, normalizeSql, stable, ha
       outcome.currentCase = { name: test.name, result };
       if (test.verifyDatabaseCommand) {
         const command = test.verifyDatabaseCommand;
-        const actual = await executeDatabaseCommand({ deliveryType: 'sfx-command-delivery.v1',
-          operation: command.request.verb, request: command.request }, caseContext);
+        let actual;
+        try {
+          actual = await executeDatabaseCommand({ deliveryType: 'sfx-command-delivery.v1',
+            operation: command.request.verb, request: command.request }, caseContext);
+        } catch (error) {
+          // A case may declare the exact failure the estate state must produce.
+          if (command.expectedError === undefined || !String(error.message).includes(command.expectedError)) throw error;
+          console.log('DATABASE COMMAND VERIFIED (expected error)', JSON.stringify({ error: command.expectedError }));
+          outcome.verification.push({ name: test.name, disposition: 'PASSED' });
+          delete outcome.currentCase;
+          continue;
+        }
+        if (command.expectedError !== undefined) {
+          // A kernel-interpreted failure returns as a failed disposition inside
+          // the reader outcome, so the declared failure is matched where it lands.
+          const serialized = JSON.stringify(actual);
+          const failed = serialized.includes('"disposition":"failed"') || serialized.includes('"code":"CELL_EXECUTION_FAILED"');
+          assert.ok(failed && serialized.includes(command.expectedError),
+            test.name + ': expected ' + command.expectedError + ' in ' + serialized.slice(0, 1500));
+          console.log('DATABASE COMMAND VERIFIED (expected error)', JSON.stringify({ error: command.expectedError }));
+          outcome.verification.push({ name: test.name, disposition: 'PASSED' });
+          delete outcome.currentCase;
+          continue;
+        }
         outcome.currentCase.delivery = actual;
         for (const [field, expected] of Object.entries(command.expected))
           assert.deepEqual(field.split('.').reduce((value, key) => value?.[key], actual), expected, test.name + ': ' + field);
