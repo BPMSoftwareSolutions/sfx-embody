@@ -57,6 +57,11 @@ test('coherence and truncation guards remain on every authority read', async () 
 const fixtureModule = 'data:text/javascript,' + encodeURIComponent('export const invoke = async (_, graph) => ({ disposition: "completed", outcome: graph.input });');
 const executor = { capabilityId: 'run-declared-graph', executionAuthorities: [{ owningScenarioId: 'executor', operations: [{ kind: 'invoke-port', portId: 'port' }] }],
   interfaceAuthority: { portBindings: [{ portId: 'port', configuration: { estateProvider: { module: fixtureModule, export: 'invoke' } } }] } };
+// The declared reader capability the loader dispatches reveal to. The read is a
+// declared port in the real estate; this fixture supplies its execution.
+const reader = { capabilityId: 'read-capability-meaning',
+  executionAuthorities: [{ owningScenarioId: 'read-capability-meaning', operations: [{ kind: 'invoke-port', portId: 'read-port' }] }],
+  interfaceAuthority: { portBindings: [{ portId: 'read-port', configuration: { estateProvider: { module: fixtureModule, export: 'invoke' } } }] } };
 
 function context({ mismatch } = {}) {
   const reads = [], queries = [], observations = [];
@@ -71,9 +76,10 @@ function context({ mismatch } = {}) {
     readAuthority: async (_, selection, options) => {
       reads.push({ selection, options });
       const isExecutor = selection.capabilityId === 'run-declared-graph';
+      const isReader = selection.capabilityId === 'read-capability-meaning';
       return { selection, authority: { ...identity, ...(mismatch === reads.length ? { viewDefinitionDigest: 'other' } : {}),
-        recordsets: [[{ scenario_id: isExecutor ? 'executor' : 'root' }]] },
-        closure: { recordsets: [[]] }, graphSource: structuredClone(isExecutor ? executor : graph) };
+        recordsets: [[{ scenario_id: isExecutor ? 'executor' : isReader ? 'read-capability-meaning' : 'root' }]] },
+        closure: { recordsets: [[]] }, graphSource: structuredClone(isExecutor ? executor : isReader ? reader : graph) };
     }
   };
 }
@@ -96,6 +102,17 @@ test('invoke and observe use the same bounded graph and preserve declared scalar
 
 test('delivery and executor reads cannot cross authority identities', async () => {
   for (const mismatch of [1, 2]) await assert.rejects(executeDatabaseCommand(command(null), context({ mismatch })), /DATABASE_AUTHORITY_NOT_COHERENT/);
+});
+
+test('reveal reads through the declared reader capability with the subject as input', async () => {
+  const config = context();
+  const result = await executeDatabaseCommand({ deliveryType: 'sfx-command-delivery.v1', operation: 'reveal',
+    request: { object: 'capability', verb: 'reveal', subject: 'example', namespace: 'sidefx:capabilities' } }, config);
+  assert.equal(result.outcome.view, 'meaning');
+  assert.equal(result.outcome.capabilityId, 'example');
+  assert.deepEqual(result.outcome.meaning, { capabilityId: 'example', namespaceId: 'sidefx:capabilities' });
+  assert.deepEqual(config.reads.map(read => read.selection.capabilityId), ['read-capability-meaning', 'run-declared-graph']);
+  assert.equal(result.outcome.evidence.snapshotId, 'snapshot');
 });
 
 test('supplied graph input remains unchanged and observation failures do not affect execution', async () => {

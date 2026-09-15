@@ -99,7 +99,10 @@ await withDatabaseReadSession({ connect, sql, pinModel, normalizeSql, stable, ha
     outcome.verification = [];
     for (const test of cases) {
       const caseContext = test.outputRoot ? { ...context, outputRoot: path.resolve(test.outputRoot) } : context;
-      const result = await executeEstateCapability({ capabilityId: test.capabilityId, scenarioId: test.scenarioId }, test.input, caseContext);
+      // A case may declare executeSubject:false when the point is a command on
+      // another operation (a reader capability), not the subject's own carrier.
+      const result = test.executeSubject === false ? null
+        : await executeEstateCapability({ capabilityId: test.capabilityId, scenarioId: test.scenarioId }, test.input, caseContext);
       outcome.currentCase = { name: test.name, result };
       if (test.verifyDatabaseCommand) {
         const command = test.verifyDatabaseCommand;
@@ -111,7 +114,9 @@ await withDatabaseReadSession({ connect, sql, pinModel, normalizeSql, stable, ha
         if (command.requireProviderObservation)
           assert.ok(actual.outcome.observations.some(value => value.phase === 'invokeProvider' && value.status === 'completed'), test.name + ': native provider observation');
         console.log('DATABASE COMMAND VERIFIED', JSON.stringify({ disposition: actual.disposition,
-          capabilityId: actual.outcome.capabilityId, resultDisposition: actual.outcome.result.disposition }));
+          capabilityId: actual.outcome.capabilityId,
+          ...(actual.outcome.result === undefined ? { view: actual.outcome.view }
+            : { resultDisposition: actual.outcome.result.disposition }) }));
       }
       if (test.verifyExecutionDelivery) {
         const delivery = await readExecutionDelivery(caseContext);

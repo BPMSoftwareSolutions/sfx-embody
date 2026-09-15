@@ -38,29 +38,31 @@ User story
 The estate declares no user story for this capability. (not declared)
 ```
 
-The narrator in [src/narrate-capability-meaning.mjs](../src/narrate-capability-meaning.mjs)
-contributes section labels and ordering only. The prose itself is authority: the
-Given/When/Then steps are the retained scenario steps, and the intent, outcome
-and promise are the retained `userStory` and `experience` values.
+`reveal --as meaning` is itself a declared reader operation:
+[`read-capability-meaning`](../sql/migrations/declare-read-capability-meaning.sql)
+is a capability whose one port is a declared read of the subject's assembled
+declaration set. The terminal contributes section labels and ordering only. The
+prose itself is authority: the Given/When/Then steps are the retained feature,
+and the intent, outcome and promise are the retained `userStory` and `experience`
+values.
 
-## The declared chain `reveal --as meaning` walks
+## What `reveal --as meaning` reads
 
-Each hop is an explicit relationship in the model, not a naming convention:
+Every value is a declared relationship, never a naming convention:
 
-```
-capability -> root scenario -> declared closure -> execution authority
-  -> port -> platform capability -> provider -> mechanic
-```
+- the capability document carries the name, `userStory` and `experience`
+  (observable conditions included);
+- the feature document carries the authored Gherkin;
+- the graph source carries the scenarios with their input / event / outcome
+  faces, the execution authorities and their ordered operations, the port
+  bindings with their platform capabilities, and the contract authorities.
 
-Observable conditions attach to the capability by `owner_definition_digest`.
-Ports resolve to mechanics through `provider_capability_implementation` and
-`provider_mechanic_implementation`; a port's `platformCapabilityId` is *not* a
-mechanic id, and no such equivalence is assumed. The whole read is one query, so
-every recordset shares one snapshot and projection identity.
-
-The declared root scenario and the scenario actually read are reported as
-distinct facts. `reveal <id> --scenario <other>` prints both `Root` and
-`Selected` rather than relabelling the selection as the root.
+The declared read returns them together under the reader boundary, so the story
+and the snapshot identity travel in one read. Reading a non-root scenario, the
+retained circuit publication and the remaining reader operations
+(`list`, `find`, `circuit`, `catalogue`, `artifact`) are declared next; until
+then `--as circuit` fails as `CAPABILITY_VIEW_NOT_DECLARED` rather than
+pretending to read.
 
 ## Observation
 
@@ -152,8 +154,12 @@ THEN
   ✓ equity-market-price-evidence  (equity-market-price-evidence.v1)
 ```
 
-The `--json` result carries `story` and each overlay row carries
-`semanticAddress`; `observedPathDigest` is unchanged.
+`--trace` streams the complete testimony in those declared terms: each mechanic
+line carries the declared expression path it computed (`literal requestUrl.symbol`)
+and each edge its admission disposition, and the observed tree — the same overlay
+nested by planned parent — renders after the story. The `--json` result carries
+`story` and each overlay row carries `semanticAddress`; `observedPathDigest` is
+unchanged.
 
 One kernel identity note: the scheduler reuses the operation cell's
 `cellExecutionId` for the scenario cell it wraps. The estate keys observed cells

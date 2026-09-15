@@ -159,7 +159,10 @@ const operations = {
   materialize: { object: 'capability', subject: true, input: 'required', inputType: true, display: true },
   prepare: { object: 'capability', subject: true, input: 'rejected' },
   circuit: { object: 'capability', subject: true, input: 'optional', scenario: true },
-  reveal: { object: 'capability', subject: true, input: 'optional', scenario: true, views: ['circuit', 'meaning'], formats: ['text', 'markdown'] },
+  // A reader operation is a declared capability reached through the frontdoor;
+  // the subject is its input, never an execution it triggers.
+  reveal: { object: 'capability', subject: true, input: 'optional', scenario: true, views: ['circuit', 'meaning'], formats: ['text', 'markdown'],
+    reader: 'read-capability-meaning' },
   catalogue: { object: 'capability', subject: false, input: 'rejected' },
   list: { object: 'capability', subject: false, input: 'rejected' },
   find: { object: 'capability', subject: false, input: 'rejected', query: true },
@@ -255,6 +258,28 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, 
     authorityIdentity = delivery;
     selection.target = delivery.defaultTarget;
     config.deliveryTarget = delivery.defaultTarget;
+  }
+  // A declared reader operation resolves through its own declared capability,
+  // with the subject as the read input. It never executes the subject.
+  const readerCapability = operations[request.verb]?.reader;
+  if (readerCapability) {
+    if (request.verb === 'reveal' && (request.as ?? DEFAULT_VIEW) !== 'meaning')
+      throw new Error('CAPABILITY_VIEW_NOT_DECLARED:' + request.as);
+    const reader = await measure('readAuthority', () => readSelectedAuthority(databaseRoot,
+      { capabilityId: readerCapability }, { retainObjects: false, documents: false, timings: timings.queries }));
+    if (!reader.graphSource) throw new Error('DECLARED_GRAPH_SOURCE_MISSING:' + readerCapability);
+    const readerSource = structuredClone(reader.graphSource);
+    readerSource.input = { capabilityId: request.subject,
+      ...(selection.namespaceId === undefined ? {} : { namespaceId: selection.namespaceId }),
+      ...(selectedScenarioId === undefined ? {} : { scenarioId: selectedScenarioId }) };
+    const read = await measure('executeDeclaredGraph', () => executeEstateCapability({ capabilityId: 'run-declared-graph' }, readerSource, config));
+    return { disposition: 'terminated',
+      outcome: { capabilityId: request.subject,
+        ...(selection.namespaceId === undefined ? {} : { namespaceId: selection.namespaceId }),
+        ...(selectedScenarioId === undefined ? {} : { scenarioId: selectedScenarioId }),
+        view: request.as ?? DEFAULT_VIEW, meaning: read?.outcome ?? read,
+        evidence: { timings, authoritySource: 'DATABASE', snapshotId: reader.authority.snapshotId,
+          projectionDigest: reader.authority.projectionDigest, viewDefinitionDigest: reader.authority.viewDefinitionDigest } } };
   }
   // The reader operations (prepare/list/find/reveal/catalogue/circuit/artifact)
   // are declared capabilities reached through the frontdoor; this loader only
