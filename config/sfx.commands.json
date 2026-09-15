@@ -133,11 +133,12 @@
         "workspace": true,
         "targets": true,
         "fullMechanics": true,
+        "codegenPatterns": true,
         "wraps": {
           "surface": "database-projection",
           "operation": "project"
         },
-        "description": "Project the capability's declared authority into executable mechanical bodies: stage its declared documents into --workspace, run the admitted consumer projector per target, and write the carriers, generated bodies, plans, queries and conformance evidence under <workspace>/projected. --targets selects targets (the workspace's declared targets are the default); --full-mechanics selects the per-language capability execution emitters, so each target's plan is realized as target-native code. Projection is review/publish output, never the invocation path."
+        "description": "Project the capability's declared authority into executable mechanical bodies: stage its declared documents into --workspace, run the admitted consumer projector per target, and write the carriers, generated bodies, plans, queries and conformance evidence under <workspace>/projected. --targets selects targets (the workspace's declared targets are the default); --full-mechanics selects the per-language capability execution emitters, so each target's plan is realized as target-native code; --codegen-pattern TYPE (repeatable: sequence, selection, broadcast, join, recurrence, return, failure, cancellation, decomposition, for-each) renders the patterns of that type by splicing the registered codegen resolver's emitted code into the generated body instead of calling the runtime resolver, and refuses the projection for a type the target has no codegen registration for. Projection is review/publish output, never the invocation path."
       }
     },
     "media": {

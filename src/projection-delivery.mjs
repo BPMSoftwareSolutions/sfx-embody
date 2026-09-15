@@ -13,7 +13,9 @@ import { withDatabaseReadSession } from './database-read-session.mjs';
 
 const OPERATION = 'project';
 const ADMITTED_TARGETS = Object.freeze(['node', 'python', 'csharp']);
-const requestFields = ['object', 'verb', 'subject', 'workspace', 'targets', 'fullMechanics'];
+const ADMITTED_CODEGEN_PATTERNS = Object.freeze(['sequence', 'selection', 'broadcast', 'join', 'recurrence',
+  'return', 'failure', 'cancellation', 'decomposition', 'for-each']);
+const requestFields = ['object', 'verb', 'subject', 'workspace', 'targets', 'fullMechanics', 'codegenPatterns'];
 
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 const present = value => typeof value === 'string' && value.length > 0;
@@ -29,6 +31,10 @@ function validate(envelope) {
   if (request.targets !== undefined && (!Array.isArray(request.targets) || request.targets.length === 0
     || !request.targets.every(target => ADMITTED_TARGETS.includes(target)))) throw new Error('PROJECTION_TARGETS_REJECTED');
   if (request.fullMechanics !== undefined && request.fullMechanics !== true) throw new Error('PROJECTION_FULL_MECHANICS_REJECTED');
+  if (request.codegenPatterns !== undefined && (!Array.isArray(request.codegenPatterns) || request.codegenPatterns.length === 0
+    || !request.codegenPatterns.every(pattern => present(pattern) && ADMITTED_CODEGEN_PATTERNS.includes(pattern)))) {
+    throw new Error('PROJECTION_CODEGEN_PATTERNS_REJECTED');
+  }
   return request;
 }
 
@@ -96,6 +102,7 @@ async function project(request, config, readQuery) {
   await projectConsumerCapability(workspace, {
     ...(request.targets === undefined ? {} : { projectionTargets: request.targets }),
     ...(request.fullMechanics === true ? { fullMechanics: true } : {}),
+    ...(request.codegenPatterns === undefined ? {} : { codegenPatterns: request.codegenPatterns }),
     repositoryRoot: config.sdaRoot });
   const planDir = path.join(outDir, 'execution-plans');
   const planFiles = (await fs.readdir(planDir)).filter(file => file.endsWith('.v3.json')).sort();
@@ -106,7 +113,8 @@ async function project(request, config, readQuery) {
   const written = await countFiles(outDir);
   return { capabilityId: request.subject, workspace, outDir, targets: plans.map(plan => plan.target),
     documents: staged.length, files: written.files, bytes: written.bytes,
-    fullMechanics: request.fullMechanics === true, plans, conformance: conformance.disposition,
+    fullMechanics: request.fullMechanics === true, codegenPatterns: request.codegenPatterns ?? [],
+    plans, conformance: conformance.disposition,
     evidence: { snapshotId, projectionDigest } };
 }
 
