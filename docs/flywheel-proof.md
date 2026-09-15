@@ -1,7 +1,8 @@
 # The flywheel proof
 
-**Status.** Authored and executed 2026-09-15 in one operator session. No git
-commits were made (constraint). All files are working-tree artifacts.
+**Status.** Authored and executed 2026-09-15 in one operator session. The
+capability, its examples and this record landed in the estate commits of the same
+day.
 
 **Scope.** `target-experience.md` §"Where database pressure is actually
 valuable: the authoring flywheel" and §"The flywheel proof";

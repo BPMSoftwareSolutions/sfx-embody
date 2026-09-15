@@ -57,27 +57,39 @@ is a deliverable.
 | Authoring | SQL plus the JSON surface (`model.declare_capability_document`; two JSON-authored capabilities installed); the mutation→invoke flywheel is not yet proven (no second-capability effort comparison) |
 | Projection | `sfx capability project` is the native command; `--full-mechanics` selects the per-language execution emitters; `--codegen-pattern` is a declared repeatable option; the manifest carries per-file `digest` + `sourcePointers`; 137/137 slots bound, `PURE_PROJECTION_CONFORMS` |
 | DB copy of bodies | installed as a generation-keyed artifact set (51 bodies: 15 node, 12 python, 16 csharp, 8 shared) with `source_class='PROJECTED_BODY'` rows and content-addressed bytes; proven off the hot path; the installed migration is 8.5 MB (see F5) |
-| Perf comparison | `scripts/projected-performance.mjs` reports whole-invocation median/p95 and cross-target parity for node/python/csharp; per-cell time is blocked on generated-testimony timing (F1) |
+| Perf comparison | `scripts/projected-performance.mjs` reports whole-invocation median/p95 and cross-target parity for node/python/csharp; per-cell time is blocked on generated-testimony timing (F1), and `scripts/verify-projected-testimony.mjs` is the closure probe |
+| Resolver seams | closed (G7): `sql/inspect/hand-authored-module-references.sql` reports zero rows; the boot resolves a port with no `estateProvider` from the declared per-language mechanic registry |
 | Presentation | no estate UI-authority store or pipeline; the login-flow capability is the first expected (target-experience §3) |
 | Bootstrap | Node-only; the projector emits node/python/csharp, so three bootstraps are owed (transistor-model §6, §9.1); a language is a supported runtime only once admitted |
 
 ## 3. Priority queue
 
-### Now — close the versioned-bodies experience and the current register
+### Now — status of the three items opened 2026-09-15
 
-1. **Per-cell timing and testimony parity in generated bodies (F1, F2).** SDA
-   emitters only. Without it, the cross-language comparison can time whole
-   invocations but cannot explain them per cell, and the three targets' testimony
-   is not parity (python `observedPathDigest: null`; csharp omits the field and
-   `resolverTestimony`; granularity 8/112/5 cells). This is the only item blocking
-   the §1 experience's last leg.
-2. **Residual resolver seams (G7).** `sql/inspect/hand-authored-module-references.sql`
-   must reach zero rows by re-declaring ports to platform mechanics or declared
-   reads — never by restoring deleted code. This is estate data, not an SDA change.
-3. **The flywheel proof.** Author capability B on the back of A and record whether
-   B was materially easier (target-experience §"The flywheel proof"). Until that is
-   observed, the program's definition of done — "the next capability is cheaper" —
-   is unverified.
+1. **Per-cell timing and testimony parity in generated bodies (F1, F2) — filed.**
+   SDA emitters only. The request is
+   [sda-change-request-projected-testimony.md](sda-change-request-projected-testimony.md):
+   node `capability-execution-emitter.ts` (`recordPatternTestimony`,
+   `recordCellTestimony`, `recordEdgeTestimony`), python `_record_cell`/
+   `_record_edge`, csharp `RecordEdge`/`RecordCell`, stamping the kernel
+   schedulers' existing `startedAt`/`completedAt`/`durationMilliseconds`. The
+   closure probe `scripts/verify-projected-testimony.mjs` reports `TESTIMONY OPEN`
+   today: timing absent on every record in all three targets; python
+   `observedPathDigest` null; csharp omits it and `resolverTestimony`; cell-id
+   sets differ (node 8 / python 111 / csharp 5, with 70 python ids semantic-id
+   normalized forms). This is the only item blocking the §1 experience's last leg.
+2. **Residual resolver seams (G7) — closed.** `sql/inspect/hand-authored-module-references.sql`
+   reports zero rows: 22 ports freed, 8 module carriers and 7 estate-module
+   PROVIDER rows deleted (target disposition: elimination; deleted resolvers were
+   not restored), and the boot resolves a port with no `estateProvider` from the
+   declared per-language mechanic registry. All 15 touched capabilities compared
+   pre/post with identical dispositions and `observedPathDigest`s; tests 47/50.
+3. **The flywheel proof — observed.** `read-declared-capability-document` (B) was
+   JSON-authored on the back of A in 95 seconds from T0 to a verified CLI
+   invocation with zero failed attempts; [flywheel-proof.md](flywheel-proof.md)
+   records the three rubric observations, the reuse/new-maintenance inventory, and
+   the scope limit: proven for the declared-read JSON shape, not for pure-mechanics
+   or provider-backed capabilities, and the install lifecycle cost did not drop.
 
 ### Next — the experiences behind the current one
 
@@ -113,8 +125,8 @@ languages / data that binds it / evidence.
 | 4 | Publish the mechanic taxonomy authority; end the duplicated twelve names (G4) | open |
 | 5 | Per-language mechanic-registry loader + bootstrap surface (G6) | open |
 | 6 | `sourcePointers` in the published manifest + portable seam specifier | `sourcePointers` landed in `projection-manifest.json`; portable seam open |
-| 7 | Generated testimony must carry `durationMilliseconds`/`startedAt`/`completedAt` (F1) | open — blocks per-cell comparison |
-| 8 | Testimony parity across projected targets: `observedPathDigest`, `resolverTestimony`, granularity (F2) | open |
+| 7 | Generated testimony must carry `durationMilliseconds`/`startedAt`/`completedAt` (F1) | request filed: `docs/sda-change-request-projected-testimony.md`; probe reports OPEN |
+| 8 | Testimony parity across projected targets: `observedPathDigest`, `resolverTestimony`, granularity (F2) | request filed with item 7; probe reports OPEN |
 | 9 | Projector DB artifact target and uniform timing emission (next-experiences §1) | open |
 | 10 | Stale C++ inventory correction (G8, G10) | open (doc-level) |
 
@@ -122,12 +134,14 @@ languages / data that binds it / evidence.
 
 | # | Finding | Class | Evidence |
 |---|---|---|---|
-| F1 | Projected bodies record cell/edge/resolver testimony with digests and logical order but **no timing fields** in node, python or csharp | SDA emitter request | `docs/projection-performance.md`; a fixture run shows `durationMilliseconds`/`startedAt`/`completedAt` count = 0 |
-| F2 | Projected testimony is not cross-language parity: python `observedPathDigest: null`, csharp omits `observedPathDigest` and `resolverTestimony`, cell counts 8 (node) / 112 (python) / 5 (csharp) | SDA emitter request | perf harness report; generated bodies |
+| F1 | Projected bodies record cell/edge/resolver testimony with digests and logical order but **no timing fields** in node, python or csharp | SDA emitter request — filed | `docs/sda-change-request-projected-testimony.md`; `scripts/verify-projected-testimony.mjs` OPEN report (timing absent on every record) |
+| F2 | Projected testimony is not cross-language parity: python `observedPathDigest: null`, csharp omits it and `resolverTestimony`, cell-id sets differ (node 8 / python 111 / csharp 5; 70 python ids semantic-id normalized) | SDA emitter request — filed | probe report; generated bodies |
 | F3 | Codegen-mode patterns are rendered locally by the tools emitters (sync renderers cannot invoke Python/C# at projection time); node output is byte-identical to the registered resolver `emit`, python/C# are semantically verified only | Pin before any digest-bound release | `docs/capability-command-surface.md` §Projection |
 | F4 | Generated bodies import the SDA runtime through generation-depth-relative paths; a moved body resolves only at its generation depth | SDA request (portable specifiers) | node body imports; manifest carries `sourcePointers`, not portability |
 | F5 | The database copy is installed as an 8.5 MB migration, so the bodies live in git twice (files + rows) | Revisit trigger: a persistence path replaces the generated migration | `sql/migrations/publish-projected-bodies-*.sql`; `scripts/publish-projected-bodies.mjs` |
 | F6 | The declared RapidAPI credential is rate-limited to zero (429, ~20.8-day reset), so the live equity acceptance cannot be reproduced until reset; invocation behavior is otherwise unchanged (identical pre/post disposition, digests) | Environment | preflight/invoke receipts; quota headers |
+| F7 | Three execution-graph capabilities (`compile-declared-authority`, `execute-semantic-execution-graph`, `execute-semantic-value-graph`) still fail the CLI path with `SEMANTIC_EXECUTION_GRAPH_OVERLAY_BINDING_MISSING` for their own mechanic id; pre-existing and independent of G7 (the kernel binds cells by `platformCapabilityId`, never by `providerId`) | Estate overlay-completeness unit | G7 receipts; `execute-declared-capability` shows the same failure before and after the module rows left |
+| F8 | JSON authoring friction FF1–FF6: `cmd /c` input quoting, a migration is required to install a document, file/SQL-literal byte duplication with no keeper, scaffold residue rendered by `reveal`, no declared absence convention, concurrent-writer conditions | Authoring-surface units | `docs/flywheel-proof.md` |
 
 ## 6. How a unit lands (unchanged, for quick reference)
 
