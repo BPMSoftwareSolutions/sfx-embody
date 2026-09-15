@@ -156,7 +156,6 @@ function buildCanonicalInput(declared, type, raw) {
 const operations = {
   invoke: { object: 'capability', subject: true, input: 'required', inputType: true, display: true },
   observe: { object: 'capability', subject: true, input: 'required', inputType: true, display: true, observationAltitudes: true },
-  materialize: { object: 'capability', subject: true, input: 'required', inputType: true, display: true },
   circuit: { object: 'capability', subject: true, input: 'optional', scenario: true, reader: 'read-retained-publication' },
   // A reader operation is a declared capability reached through the frontdoor;
   // the subject is its input, never an execution it triggers. Reveal's reader
