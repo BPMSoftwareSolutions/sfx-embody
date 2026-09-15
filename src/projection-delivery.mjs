@@ -101,10 +101,10 @@ async function project(request, config, readQuery) {
   const plans = [];
   for (const file of planFiles) plans.push(inspectPlan(file.replace(/^consumer-execution-plan\.|\.v3\.json$/g, ''),
     JSON.parse(await fs.readFile(path.join(planDir, file), 'utf8'))));
-  const incomplete = plans.filter(plan => !plan.mechanicsComplete);
-  if (request.fullMechanics === true && incomplete.length) {
-    throw new Error('PROJECTION_MECHANICS_INCOMPLETE:' + incomplete.map(plan => plan.target).join(','));
-  }
+  // The projected bodies are seams onto the plan interpreter, not the declared
+  // mechanics realized as target-native code. Full mechanics refuses rather than
+  // publish a facade; it becomes the switch for the honest path when it exists.
+  if (request.fullMechanics === true) throw new Error('FULL_MECHANICS_REQUIRES_PER_LANGUAGE_PROJECTION');
   const conformance = JSON.parse(await fs.readFile(path.join(outDir, 'projection-conformance.json'), 'utf8'));
   const written = await countFiles(outDir);
   return { capabilityId: request.subject, workspace, outDir, targets: plans.map(plan => plan.target),
