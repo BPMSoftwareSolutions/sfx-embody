@@ -7,6 +7,12 @@ the current state, the target, what it takes, and the classification (**data** /
 [embodiment-completeness.md](embodiment-completeness.md) (agents must not edit SDA),
 [performance-optimization.md](performance-optimization.md).
 
+**Citation roots.** Unprefixed paths are this repo (`sfx-embody`). `SDA:` resolves
+against the scenario-driven-architecture repo (`../scenario-driven-architecture`) —
+agents must not edit it. `DB:` resolves against the sidefx-database repo
+(`../../sidefx-database`), a third, separate repo. Bare identifiers after `SDA:`
+(e.g. `SDA:project:consumer-capability`) name SDA-owned surfaces, not file paths.
+
 ## 1. Version-controlled mechanical bodies + cross-language performance comparison
 
 **Target:** version-control the fully projected mechanical bodies of a declared
@@ -15,20 +21,24 @@ capability, with (a) a copy in the database *and* in the repo, (b) review as cod
 Node / Python / C#.
 
 **Current state.**
-- The projection surface is **SDA**: `project:consumer-capability`
-  (`tools/src/interfaces/consumer-projection/project.ts`) → per-target providers
-  emit generated seams (`.mjs`/`.py`/`.cs`), bindings, plans, a
-  `projection-manifest.json` — **disk only** (`NodeConsumerProjectionArtifactStore`
+- The projection surface is **SDA** (`SDA:tools/src/interfaces/consumer-projection/project.ts`,
+  `project:consumer-capability`) → per-target providers emit generated seams
+  (`.mjs`/`.py`/`.cs`), bindings, plans, a `projection-manifest.json` — **disk only**
+  (`SDA:tools/src/adapters/consumer-projection/node-consumer-projection-artifact-store.ts`
   writes `<workspaceRoot>/projected`).
 - **No DB copy.** `source.content_object` / `semantic_object_definition` retain
   *declared authority* only; invocation is derived (`bodyStorage: NOT_REQUESTED`).
-  `sfx-embody/embodiments/` is legacy `materialize-node` output — **proof debt**.
+  `sfx-embody/embodiments/` is legacy **materialize** output — materialize was retired
+  in `2fafd6c` and no longer exists under `src/` (see the disposition row below).
 - **Carries exist but are dropped on publish.** Per-file `sourcePointers` and the v3
   cell `sourceMap` exist, but the published manifest keeps only
   `{path, executableOrigin, sha256}`.
 - **Per-cell timing already exists** in all three kernels (`durationMilliseconds`,
-  `startedAt`/`completedAt`; node `scheduler.js`, python `execution_graph.py`, csharp
-  `SemanticExecutionGraphScheduler.cs`). No kernel change needed for timing itself.
+  `startedAt`/`completedAt`): node
+  `SDA:languages/typescript/runtimes/node/semantic-execution-graph/scheduler.js`,
+  python `SDA:languages/python/src/scenario_kernel/platform/execution_graph.py`,
+  csharp `SDA:languages/csharp/src/ScenarioKernel.Adapters/Graph/SemanticExecutionGraphScheduler.cs`.
+  No kernel change needed for timing itself.
 
 **What it takes.**
 - **Data:** content-address every body in `source.content_object`; map rows keyed by
@@ -58,9 +68,10 @@ distributed without exposing its implementation.
 **Current state.** The bootstrap is a spawned Node process (`src/database-delivery.mjs`)
 behind a stdin envelope / stdout result / stderr `SFX_OBSERVATION` protocol, guarded
 by `--experimental-permission` + `restrictMemoryProcess`. It **dynamically imports
-the DB runner (`sidefx-database/src/...`), the SDA kernel, and estate providers from
-unprotected disk** — the current read allowlist includes `../scenario-driven-architecture`
-and `./providers`. The CLI only spawns; it does not verify a digest.
+the DB runner (`sidefx-database/src/...`, a separate repo), the SDA kernel
+(`SDA:languages/...`), and estate providers from unprotected disk** — the current read
+allowlist includes `../scenario-driven-architecture` (SDA) and `./providers`. The CLI
+only spawns; it does not verify a digest.
 
 **What it takes.**
 - **Boot/estate code:** a per-OS packaging build. **Node SEA** (`--experimental-sea-config`
@@ -90,14 +101,16 @@ signed component), and the frontdoor still owns the connection.
 script-creation pattern is noticed, generate + project a managed capability so the
 agent reuses it instead of writing scripts.
 
-**Current state.** The temp dir holds ~936 files (~242 `.mjs`), and **~131 `.mjs`
-import the DB runner directly** (`sidefx-database/src/query/run.mjs` /
-`ingest/database.mjs`) — a direct reach around the frontdoor/loader, exactly the
-layering violation the target names. It exists because one question is one `import`
-away and the managed path costs a declared closure + migration. Detectors exist:
-`detect-hand-authored-code` (observe/classify only) and
-`sql/inspect/hand-authored-module-references.sql` (module refs inside declarations).
-**Recurrence aggregation does not exist.**
+**Current state (as of 2026-09-15).** The temp dir holds ~958 files (~249 `.mjs`),
+and **~134 `.mjs` import the DB runner directly** (`DB:src/query/run.mjs`
+/ `DB:src/ingest/database.mjs`) — a direct reach around the frontdoor/loader, exactly the
+layering violation the target names. Reproduce with:
+`Get-ChildItem $env:TEMP\opencode -Recurse -File -Filter *.mjs | Select-String 'src/query/run.mjs|src/ingest/database.mjs' -List`
+(counts are volatile evidence — re-stamp the date and command when re-measured). It
+exists because one question is one `import` away and the managed path costs a declared
+closure + migration. Detectors exist: `detect-hand-authored-code` (observe/classify
+only) and `sql/inspect/hand-authored-module-references.sql` (module refs inside
+declarations). **Recurrence aggregation does not exist.**
 
 **What it takes.**
 - **(A) Data:** author the script's behavior as rows via `model.scaffold_capability`
@@ -108,11 +121,15 @@ away and the managed path costs a declared closure + migration. Detectors exist:
 - **(B) Data:** a declared recurrence read over detection evidence (a `sql/inspect/*`
   view); generate mechanical artifacts via `generate-executable-capability-scaffold`
   (pure, consumes a reviewed blueprint).
-- **(B) SDA change request:** on-disk projection is SDA (`publish-projected-capability`,
-  `project:consumer-capability`, `no-hand-authored-code.policy.v1.json` →
-  `generated/` with do-not-edit markers/receipts). Steer reuse with the existing
-  declared reads (`sfx capability list`/`find`, `reveal --as meaning`) plus in-repo
-  projected artifacts the agent encounters instead of copying a template.
+- **(B) SDA change request:** on-disk projection is SDA
+  (`SDA:publish-projected-capability`, `SDA:project:consumer-capability`, and the
+  workspace's **declared governance reference** `no-hand-authored-code.policy.v1.json`
+  — referenced from `consumer-workspace.authority.json` as `../../governance/no-hand-authored-code.policy.v1.json`;
+  the file is **not present on disk**, so it is a declared, currently-unresolved
+  governance reference, not an artifact you can open — which fixes
+  `projectedArtifactRoot: "generated"` with do-not-edit markers/receipts). Steer reuse
+  with the existing declared reads (`sfx capability list`/`find`, `reveal --as meaning`)
+  plus in-repo projected artifacts the agent encounters instead of copying a template.
 
 **No new estate file writes on the invocation path**; the *decision* (what capability
 a script becomes) is data. Any script parser is boot/harness or SDA (the admitted
@@ -129,9 +146,11 @@ secrets.
 - **DB connection string**: `src/database-delivery.mjs:30` writes it into the delivery
   process env (`process.env[connectionEnvironmentVariable] = connectionString(...)`).
 - **Effect credential** (e.g. `RAPID_API_KEY`): `credentialReader` defaults to
-  `referenceName => process.env[referenceName]` (node `native-mechanic-primitives.mjs:22`;
-  python `governed_effect_ports.py`; csharp `GovernedEffectPorts.cs`), and the raw
-  value is held in the in-process `credentialBindings` map; the OS provider even
+  `referenceName => process.env[referenceName]` (node
+  `SDA:languages/typescript/runtimes/node/native-mechanic-primitives.mjs:22`; python
+  `SDA:languages/python/src/scenario_kernel/platform/governed_effect_ports.py`; csharp
+  `SDA:languages/csharp/src/ScenarioKernel.Adapters/Graph/GovernedEffectPorts.cs`), and
+  the raw value is held in the in-process `credentialBindings` map; the OS provider even
   re-broadcasts it into `process.env`.
 - **The safety property already present:** the one-use **opaque binding** — evidence
   exposes only `opaqueBindingId`/`referenceName`/`nonDisclosureVerified`, never the
@@ -165,6 +184,7 @@ citing it as a dependency.)
 | # | deliverable | class |
 |---|---|---|
 | 1 | body rows (`content_object` + generation-keyed mapping), off the hot path | **data** |
+| 1 | `sfx-embody/embodiments/` (legacy materialize output; materialize retired `2fafd6c`, gone from `src/`) | **delete** — proof debt, read by no code; if kept, only as an immutable frozen baseline (never on the invocation path) |
 | 1 | repo mirror + digest manifest; cross-language timing harness | **boot/estate code** |
 | 1 | `sourcePointers` in the published manifest; projector DB target; uniform timing | **SDA request** |
 | 2 | per-OS packaging + signing/notarization build | **boot/estate code** |
