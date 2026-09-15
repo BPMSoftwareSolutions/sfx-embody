@@ -55,7 +55,7 @@ next unit, land it, prove it, move on.
 | 5 | C | Declared-read provider dispatch by `mechanicId` for domain slots | domain capability executes with no local provider | pending |
 | 6 | D | Delete architecture-1 scripts (`verify-estate`, `verify-memory-parity`, `verify-consumer-*`, `package-qualified-pilots`, `pilot-container/run`, `invoke-from-bundle`, `probe-database-invocation`, `report-native-repair`, `validate-scaffold`) and their `package.json` entries | `npm test` / lifecycle scripts green; no dangling imports | done (working tree) |
 | 7 | D | Remove `materialize-node` from the delivery graph so `consumer-object-provider`/`native-expression-projection` delete | all 12 resolvers absent; kernel path green | pending |
-| 8 | E | Declare `list-capabilities` (SQL read + shaping) as a capability | `sfx capability list` routed through the frontdoor | pending |
+| 8 | E | Declare `list-capabilities` (SQL read + shaping) as a capability | `sfx capability list` routed through the frontdoor | done: `declare-list-capabilities.sql`; `list`, `find` and `catalogue` dispatch through the declared read and render live |
 | 9 | E | Declare `reveal`(meaning)/`catalogue`/`circuit`/`artifact` from the DB-side reads | each operation returns from declared data | partial: `reveal --as meaning` is declared (`declare-read-capability-meaning.sql`; loader dispatch + terminal story, verified live); `list`, `find`, `circuit`, `catalogue`, `artifact` and non-root scenario selection pending |
 | 10 | E | Declare `narrate-*`/`diagram-*` as templates/transformations (or request a presentation mechanic if not expressible) | reveal renders from data | pending |
 | 11 | F | java/go for any mechanic still Node-only in the target's path | cross-target parity | pending |

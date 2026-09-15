@@ -25,6 +25,12 @@ the [Entity Neutrality Law](../../sidefx-cli/docs/command-model.md) still holds:
 
 ## Nothing is synthesized
 
+`list`, `find` and `catalogue` are served by the declared `list-capabilities`
+read ([sql/migrations/declare-list-capabilities.sql](../sql/migrations/declare-list-capabilities.sql)):
+one port whose declared read returns the selected estate's capabilities as JSON
+rows under the reader boundary. The read owns the matching and the reported
+`matchedFields`; the terminal renders the rows.
+
 Every value these commands print is read from the selected estate model. Where
 the authority declares nothing, the output says so — it never substitutes a
 default, an example, a paraphrase or an inferred sentence. That is visible in the

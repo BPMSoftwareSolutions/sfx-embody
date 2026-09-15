@@ -55,16 +55,36 @@ test('coherence and truncation guards remain on every authority read', async () 
 
 // A fixture provider tests the loader's carrier only, not kernel interpretation.
 const fixtureModule = 'data:text/javascript,' + encodeURIComponent('export const invoke = async (_, graph) => ({ disposition: "completed", outcome: graph.input });');
-const executor = { capabilityId: 'run-declared-graph', executionAuthorities: [{ owningScenarioId: 'executor', operations: [{ kind: 'invoke-port', portId: 'port' }] }],
-  interfaceAuthority: { portBindings: [{ portId: 'port', configuration: { estateProvider: { module: fixtureModule, export: 'invoke' } } }] } };
+const executorFor = module => ({ capabilityId: 'run-declared-graph',
+  executionAuthorities: [{ owningScenarioId: 'executor', operations: [{ kind: 'invoke-port', portId: 'port' }] }],
+  interfaceAuthority: { portBindings: [{ portId: 'port', configuration: { estateProvider: { module, export: 'invoke' } } }] } });
+// A listing read outcome, carried through the executor fixture so the loader's
+// listing shape is exercised without interpreting the graph in the unit test.
+const listingExecutor = 'data:text/javascript,' + encodeURIComponent(`
+export const invoke = async (_, graph) => ({ disposition: "completed", outcome:
+  graph.input.query === undefined
+    ? [{ capabilityId: "example", namespaceId: graph.input.namespaceId, scenarioCount: 1, userStory: { intent: "story" } }, { capabilityId: "other" }]
+    : [{ capabilityId: "other", matchedFields: ["capabilityId"] }] });`);
+const executor = executorFor(fixtureModule);
 // The declared reader capability the loader dispatches reveal to. The read is a
 // declared port in the real estate; this fixture supplies its execution.
 const reader = { capabilityId: 'read-capability-meaning',
   executionAuthorities: [{ owningScenarioId: 'read-capability-meaning', operations: [{ kind: 'invoke-port', portId: 'read-port' }] }],
   interfaceAuthority: { portBindings: [{ portId: 'read-port', configuration: { estateProvider: { module: fixtureModule, export: 'invoke' } } }] } };
+const listingModule = 'data:text/javascript,' + encodeURIComponent(`export const read = (configuration, input) => ({
+  disposition: "completed",
+  outcome: [
+    { capabilityId: "example", namespaceId: input.namespaceId ?? null, scenarioCount: 1, userStory: { intent: "story" } },
+    input.query === undefined ? { capabilityId: "other" } : { capabilityId: "other", matchedFields: ["capabilityId"] }
+  ]
+});`);
+const listing = { capabilityId: 'list-capabilities',
+  executionAuthorities: [{ owningScenarioId: 'list-capabilities', operations: [{ kind: 'invoke-port', portId: 'list-port' }] }],
+  interfaceAuthority: { portBindings: [{ portId: 'list-port', configuration: { estateProvider: { module: listingModule, export: 'read' } } }] } };
 
-function context({ mismatch } = {}) {
+function context({ mismatch, executorModule = fixtureModule } = {}) {
   const reads = [], queries = [], observations = [];
+  const executor = executorFor(executorModule);
   return { databaseRoot: 'unused', reads, queries, observations,
     onObservation: observation => { observations.push(observation); },
     readQuery: async statement => {
@@ -77,9 +97,10 @@ function context({ mismatch } = {}) {
       reads.push({ selection, options });
       const isExecutor = selection.capabilityId === 'run-declared-graph';
       const isReader = selection.capabilityId === 'read-capability-meaning';
+      const isListing = selection.capabilityId === 'list-capabilities';
       return { selection, authority: { ...identity, ...(mismatch === reads.length ? { viewDefinitionDigest: 'other' } : {}),
-        recordsets: [[{ scenario_id: isExecutor ? 'executor' : isReader ? 'read-capability-meaning' : 'root' }]] },
-        closure: { recordsets: [[]] }, graphSource: structuredClone(isExecutor ? executor : isReader ? reader : graph) };
+        recordsets: [[{ scenario_id: isExecutor ? 'executor' : isReader ? 'read-capability-meaning' : isListing ? 'list-capabilities' : 'root' }]] },
+        closure: { recordsets: [[]] }, graphSource: structuredClone(isExecutor ? executor : isReader ? reader : isListing ? listing : graph) };
     }
   };
 }
@@ -102,6 +123,23 @@ test('invoke and observe use the same bounded graph and preserve declared scalar
 
 test('delivery and executor reads cannot cross authority identities', async () => {
   for (const mismatch of [1, 2]) await assert.rejects(executeDatabaseCommand(command(null), context({ mismatch })), /DATABASE_AUTHORITY_NOT_COHERENT/);
+});
+
+test('list and find read through the declared listing capability', async () => {
+  const listConfig = context({ executorModule: listingExecutor });
+  const listed = await executeDatabaseCommand({ deliveryType: 'sfx-command-delivery.v1', operation: 'list',
+    request: { object: 'capability', verb: 'list', namespace: 'sidefx:capabilities' } }, listConfig);
+  assert.equal(listed.outcome.count, 2);
+  assert.equal(listed.outcome.capabilities[0].capabilityId, 'example');
+  assert.equal(listed.outcome.capabilities[0].namespaceId, 'sidefx:capabilities');
+  assert.equal(listed.outcome.meaning, undefined);
+  assert.deepEqual(listConfig.reads.map(read => read.selection.capabilityId), ['list-capabilities', 'run-declared-graph']);
+
+  const findConfig = context({ executorModule: listingExecutor });
+  const found = await executeDatabaseCommand({ deliveryType: 'sfx-command-delivery.v1', operation: 'find',
+    request: { object: 'capability', verb: 'find', query: 'example' } }, findConfig);
+  assert.equal(found.outcome.query, 'example');
+  assert.deepEqual(found.outcome.capabilities[0].matchedFields, ['capabilityId']);
 });
 
 test('reveal reads through the declared reader capability with the subject as input', async () => {

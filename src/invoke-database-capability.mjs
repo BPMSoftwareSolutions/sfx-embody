@@ -163,9 +163,9 @@ const operations = {
   // the subject is its input, never an execution it triggers.
   reveal: { object: 'capability', subject: true, input: 'optional', scenario: true, views: ['circuit', 'meaning'], formats: ['text', 'markdown'],
     reader: 'read-capability-meaning' },
-  catalogue: { object: 'capability', subject: false, input: 'rejected' },
-  list: { object: 'capability', subject: false, input: 'rejected' },
-  find: { object: 'capability', subject: false, input: 'rejected', query: true },
+  catalogue: { object: 'capability', subject: false, input: 'rejected', reader: 'list-capabilities' },
+  list: { object: 'capability', subject: false, input: 'rejected', reader: 'list-capabilities' },
+  find: { object: 'capability', subject: false, input: 'rejected', query: true, reader: 'list-capabilities' },
   artifact: { object: 'media', subject: true, input: 'rejected' },
 };
 // Reveal without an explicit view returns the capability's canonical story.
@@ -269,15 +269,25 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, 
       { capabilityId: readerCapability }, { retainObjects: false, documents: false, timings: timings.queries }));
     if (!reader.graphSource) throw new Error('DECLARED_GRAPH_SOURCE_MISSING:' + readerCapability);
     const readerSource = structuredClone(reader.graphSource);
-    readerSource.input = { capabilityId: request.subject,
+    // The reader input is the declared selection: a subject for reveal, a query
+    // for find, a namespace for any listing. The read consumes what it declares.
+    readerSource.input = {
+      ...(request.subject === undefined ? {} : { capabilityId: request.subject }),
+      ...(request.query === undefined ? {} : { query: request.query }),
       ...(selection.namespaceId === undefined ? {} : { namespaceId: selection.namespaceId }),
       ...(selectedScenarioId === undefined ? {} : { scenarioId: selectedScenarioId }) };
     const read = await measure('executeDeclaredGraph', () => executeEstateCapability({ capabilityId: 'run-declared-graph' }, readerSource, config));
+    const readerOutcome = read?.outcome ?? read;
+    // A listing read returns rows; a meaning read returns the one document.
     return { disposition: 'terminated',
-      outcome: { capabilityId: request.subject,
+      outcome: { ...(request.subject === undefined ? {} : { capabilityId: request.subject }),
         ...(selection.namespaceId === undefined ? {} : { namespaceId: selection.namespaceId }),
         ...(selectedScenarioId === undefined ? {} : { scenarioId: selectedScenarioId }),
-        view: request.as ?? DEFAULT_VIEW, meaning: read?.outcome ?? read,
+        ...(request.query === undefined ? {} : { query: request.query }),
+        view: request.as ?? DEFAULT_VIEW,
+        ...(Array.isArray(readerOutcome)
+          ? { count: readerOutcome.length, capabilities: readerOutcome }
+          : { meaning: readerOutcome }),
         evidence: { timings, authoritySource: 'DATABASE', snapshotId: reader.authority.snapshotId,
           projectionDigest: reader.authority.projectionDigest, viewDefinitionDigest: reader.authority.viewDefinitionDigest } } };
   }
