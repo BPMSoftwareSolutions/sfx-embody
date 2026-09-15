@@ -12,7 +12,10 @@ embodiment (per target) is specified in `docs/embodiment-completeness.md`. The
 invocation cost model and its optimization plan are in
 `docs/performance-optimization.md`. The architecture we are gearing up for, the
 primary experience, and which past decisions were premature ("wrong timing, not
-wrong") are in `docs/target-experience.md`.
+wrong") are in `docs/target-experience.md`. The next target experiences we are
+bringing clarity to (versioned projected bodies + cross-language perf, sealed
+bootstrap binary, backdoor-script migration, vault manager) are in
+`docs/next-experiences.md`.
 
 ## The prime rule: meaning is authored in the database
 

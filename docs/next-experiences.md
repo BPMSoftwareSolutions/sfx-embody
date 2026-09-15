@@ -1,0 +1,182 @@
+# Next target experiences — what it would take
+
+Research findings for the experiences we are bringing clarity to. Each item states
+the current state, the target, what it takes, and the classification (**data** /
+**boot/estate code** / **SDA change request**). Authority:
+[target-architecture.md](target-architecture.md), [target-experience.md](target-experience.md),
+[embodiment-completeness.md](embodiment-completeness.md) (agents must not edit SDA),
+[performance-optimization.md](performance-optimization.md).
+
+## 1. Version-controlled mechanical bodies + cross-language performance comparison
+
+**Target:** version-control the fully projected mechanical bodies of a declared
+capability, with (a) a copy in the database *and* in the repo, (b) review as code
+(implementation + semantic carries), (c) live execution-performance comparison across
+Node / Python / C#.
+
+**Current state.**
+- The projection surface is **SDA**: `project:consumer-capability`
+  (`tools/src/interfaces/consumer-projection/project.ts`) → per-target providers
+  emit generated seams (`.mjs`/`.py`/`.cs`), bindings, plans, a
+  `projection-manifest.json` — **disk only** (`NodeConsumerProjectionArtifactStore`
+  writes `<workspaceRoot>/projected`).
+- **No DB copy.** `source.content_object` / `semantic_object_definition` retain
+  *declared authority* only; invocation is derived (`bodyStorage: NOT_REQUESTED`).
+  `sfx-embody/embodiments/` is legacy `materialize-node` output — **proof debt**.
+- **Carries exist but are dropped on publish.** Per-file `sourcePointers` and the v3
+  cell `sourceMap` exist, but the published manifest keeps only
+  `{path, executableOrigin, sha256}`.
+- **Per-cell timing already exists** in all three kernels (`durationMilliseconds`,
+  `startedAt`/`completedAt`; node `scheduler.js`, python `execution_graph.py`, csharp
+  `SemanticExecutionGraphScheduler.cs`). No kernel change needed for timing itself.
+
+**What it takes.**
+- **Data:** content-address every body in `source.content_object`; map rows keyed by
+  `capability + generation + target + relative path` (`source_appearance` with a new
+  `source_class='PROJECTED_BODY'`, or a `PROJECTED_BODY` model object). A
+  **row-generation key bumped per authoring migration is mandatory** — coherence
+  digests do not change on in-place row writes. Keep these rows **off the hot path**
+  (never read by `capability_graph_source`, the loader, or `readExecutionDelivery`).
+- **Boot/estate code:** a harvest/mirror script that writes the repo copy +
+  per-file-digest manifest (the `baselines/*/baseline.manifest.json` shape).
+- **Boot/estate code:** a cross-language harness — project one canonical capability
+  to node+python+csharp, run the same fixture corpus N times on one machine, report
+  median/p95 whole-invocation and per-cell time (separate process startup).
+- **SDA change request:** include `sourcePointers` in the published manifest and/or a
+  per-target `source-map.json`; a projector DB artifact target; uniform timing
+  emission if the CLI proof shape is extended.
+
+**The retained body is an artifact for review/versioning/perf, never the invocation
+mechanism.**
+
+## 2. Sealed bootstrap binary with attested digest
+
+**Target:** ship the consumer bootstrap as a compiled binary (`.exe`/`.dll`/`.dmg`)
+per OS, with an integrity/authorization attestation, so the platform can be
+distributed without exposing its implementation.
+
+**Current state.** The bootstrap is a spawned Node process (`src/database-delivery.mjs`)
+behind a stdin envelope / stdout result / stderr `SFX_OBSERVATION` protocol, guarded
+by `--experimental-permission` + `restrictMemoryProcess`. It **dynamically imports
+the DB runner (`sidefx-database/src/...`), the SDA kernel, and estate providers from
+unprotected disk** — the current read allowlist includes `../scenario-driven-architecture`
+and `./providers`. The CLI only spawns; it does not verify a digest.
+
+**What it takes.**
+- **Boot/estate code:** a per-OS packaging build. **Node SEA** (`--experimental-sea-config`
+  + `postject`) is the closest fit because it preserves Node's permission flags and the
+  guard; a native build per OS/arch is required. (pkg/Bun/Deno are marked *tooling —
+  validate*; ESM dynamic `import()` of absolute paths and native addons are the risks.)
+- **Data:** declare the binary identity/digest (and signature/key reference) exactly
+  as provider `implementationRef`/`digest` are declared today; the delivery binding in
+  `sfx.config.json` points at the signed binary.
+- **SDA/platform change request:** the CLI must verify the pinned digest **before
+  spawn** (a binary cannot attest itself; the OS loader or caller must); bundle the SDA
+  kernel + per-language providers into a signed platform binary (today they are plain
+  readable files — sealing the bootstrap alone leaks them); cross-language sealed
+  bootstraps.
+- **Terminology:** the right construct is a **signed (attested) digest**, not an
+  "encrypted digest" — encryption gives confidentiality, not authenticity.
+
+**Trust boundary:** sealed *implementation* (frontdoor + loader + DB runner + kernel +
+providers); open *authority rows and config* (meaning is the product and lives in
+rows). The irreducible DB connection/query runner stays code (bundled or a second
+signed component), and the frontdoor still owns the connection.
+
+## 3. Migrating backdoor scripts to declared capabilities
+
+**Target:** (A) when a user notices backdoor scripts (e.g. under
+`%TEMP%\opencode`), migrate them as declared capabilities; (B) when a recurring AI
+script-creation pattern is noticed, generate + project a managed capability so the
+agent reuses it instead of writing scripts.
+
+**Current state.** The temp dir holds ~936 files (~242 `.mjs`), and **~131 `.mjs`
+import the DB runner directly** (`sidefx-database/src/query/run.mjs` /
+`ingest/database.mjs`) — a direct reach around the frontdoor/loader, exactly the
+layering violation the target names. It exists because one question is one `import`
+away and the managed path costs a declared closure + migration. Detectors exist:
+`detect-hand-authored-code` (observe/classify only) and
+`sql/inspect/hand-authored-module-references.sql` (module refs inside declarations).
+**Recurrence aggregation does not exist.**
+
+**What it takes.**
+- **(A) Data:** author the script's behavior as rows via `model.scaffold_capability`
+  (or a bespoke migration). Classify the script with `detect-hand-authored-code` to
+  get attributable evidence, then author the *meaning* (never inferred). A thin
+  `model.migrate_script_intent_to_capability(@intent_json)` on the existing `@defs`
+  chain is the natural deliverable; the script-walking/scraping stays boot/harness.
+- **(B) Data:** a declared recurrence read over detection evidence (a `sql/inspect/*`
+  view); generate mechanical artifacts via `generate-executable-capability-scaffold`
+  (pure, consumes a reviewed blueprint).
+- **(B) SDA change request:** on-disk projection is SDA (`publish-projected-capability`,
+  `project:consumer-capability`, `no-hand-authored-code.policy.v1.json` →
+  `generated/` with do-not-edit markers/receipts). Steer reuse with the existing
+  declared reads (`sfx capability list`/`find`, `reveal --as meaning`) plus in-repo
+  projected artifacts the agent encounters instead of copying a template.
+
+**No new estate file writes on the invocation path**; the *decision* (what capability
+a script becomes) is data. Any script parser is boot/harness or SDA (the admitted
+transformation vocabulary cannot pattern-match).
+
+## 4. Vault manager capability (credentials off the front door)
+
+**Target:** stop storing credentials in environment variables; a declared vault-manager
+capability resolves credentials from an encrypted vault provider, so (a) credentials
+are nowhere near the front door of execution, and (b) the agent has no access to
+secrets.
+
+**Current state — where secrets surface.**
+- **DB connection string**: `src/database-delivery.mjs:30` writes it into the delivery
+  process env (`process.env[connectionEnvironmentVariable] = connectionString(...)`).
+- **Effect credential** (e.g. `RAPID_API_KEY`): `credentialReader` defaults to
+  `referenceName => process.env[referenceName]` (node `native-mechanic-primitives.mjs:22`;
+  python `governed_effect_ports.py`; csharp `GovernedEffectPorts.cs`), and the raw
+  value is held in the in-process `credentialBindings` map; the OS provider even
+  re-broadcasts it into `process.env`.
+- **The safety property already present:** the one-use **opaque binding** — evidence
+  exposes only `opaqueBindingId`/`referenceName`/`nonDisclosureVerified`, never the
+  value; the CLI/agent never receives the value through the invocation channel.
+
+**What it takes.**
+- **SDA change request:** a per-language **vault provider** (node/python/csharp)
+  resolving from an encrypted vault (OS keychain/Credential Manager/DPAPI, HashiCorp
+  Vault, Azure Key Vault, 1Password, age/sops) that feeds the **existing**
+  credential-reference port, preserving the opaque-binding evidence contract. Only
+  node has an OS-credential resolver today; python/csharp have none.
+- **Data:** the vault provider declaration (kind, locator, auth-method, scope),
+  credential **reference names**, injection rules, and authority rules
+  (`requestingCapabilityIds`/`endpointAuthorityDigests`/`effectScopes`/`lifetime`),
+  plus the binding in `overlayBindings`/`providers`. **Rows never carry values.**
+- **Boot defect to remove:** the delivery process must not copy the DB connection
+  string into its env — resolve at the connect boundary, hand in a live handle, drop
+  the value; and the effect credential's plaintext must exist only inside the vault
+  provider's resolve call and the exchange header injection (not in a generic
+  `credentialBindings` map, not in env, not in cells/evidence/logs).
+
+**Sealed/unseal boundary:** the vault is sealed at rest until a runtime unseal; the
+unseal key cannot come from the vault, and a declared capability cannot resolve it —
+the unseal step belongs to the **boot** (irreducible frontdoor). The sealed-binary
+work (§2) does not remove the need for an unseal input; the two are orthogonal. (The
+"sealed binary" unit is not documented in the corpus; confirm with its owner before
+citing it as a dependency.)
+
+## Classification summary
+
+| # | deliverable | class |
+|---|---|---|
+| 1 | body rows (`content_object` + generation-keyed mapping), off the hot path | **data** |
+| 1 | repo mirror + digest manifest; cross-language timing harness | **boot/estate code** |
+| 1 | `sourcePointers` in the published manifest; projector DB target; uniform timing | **SDA request** |
+| 2 | per-OS packaging + signing/notarization build | **boot/estate code** |
+| 2 | binary digest/attestation + delivery binding rows | **data** |
+| 2 | CLI pre-spawn verification + transport; sealing the kernel/providers platform | **SDA/platform request** |
+| 3 | script→capability rows; recurrence read; generate via scaffold | **data** |
+| 3 | script walking/observation; detection reuse | **boot/harness** (detector is data) |
+| 3 | on-disk capability projection/reuse steering | **SDA request** |
+| 4 | vault provider per language | **SDA request** |
+| 4 | vault declaration, reference names, rules, binding | **data** |
+| 4 | remove env exposure (DB string + effect credential); boot unseal step | **boot** |
+
+Every item preserves the invariants: one coherence pin per invocation, the isolation
+boundary, no materialization on the invocation path, and no SDA edits from this repo
+(cross-language → an SDA change request).
