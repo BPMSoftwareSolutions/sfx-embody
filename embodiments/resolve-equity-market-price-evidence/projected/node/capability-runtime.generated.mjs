@@ -1,3 +1,18 @@
-// GENERATED PURE PROJECTION SEAM. Do not hand-edit.
-import bind from "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/admitted-consumer-platform.mjs";
-export const executeCapability = bind(import.meta.url, "../application-binding.node.json");
+// GENERATED CAPABILITY RUNTIME. Do not hand-edit.
+export {
+  bindingAuthorities,
+  capabilityId,
+  canonicalGraph,
+  canonicalGraphDigest,
+  cli,
+  conformance,
+  executeCapability,
+  fixtureIds,
+  fixtures,
+  realizedGraphDigest,
+  realizationOverlay,
+  runFixture,
+  valueAt
+} from "./capability-execution.generated.mjs";
+import { cli, conformance, executeCapability } from "./capability-execution.generated.mjs";
+export default Object.freeze({ executeCapability, conformance, cli });

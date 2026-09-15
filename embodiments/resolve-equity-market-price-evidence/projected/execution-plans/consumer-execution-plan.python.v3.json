@@ -10988,1104 +10988,1104 @@
         "slotId": "slot:cell:mechanic:resolve-equity-market-price-evidence.operation.1",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.1",
         "mechanicId": "sda-authority-transformation-port.v1",
-        "providerProfileId": "python:sda-authority-transformation-port.v1",
-        "providerProfileDigest": "sha256:0072fb762a47efbdd9364a5d8bc0e65a244bc4f41ea2d1d7092ae7a9ada14209",
-        "implementationRef": "languages/python/src/scenario_kernel/adapters/core.py"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:cell:mechanic:resolve-equity-market-price-evidence.operation.2",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.2",
         "mechanicId": "sda-external-credential-reference-binding-port.v1",
-        "providerProfileId": "python:sda-external-credential-reference-binding-port.v1",
-        "providerProfileDigest": "sha256:951aaef6f53648a1c561a8c5019643d749026c3340a82d8dcb50ed71bccc1090",
-        "implementationRef": "languages/python/src/scenario_kernel/platform/governed_effect_ports.py"
+        "providerProfileId": "sda-platform-effect-graph-provider.v1",
+        "providerProfileDigest": "sha256:3c2030fe6b50a4f2ea26f743c76cfa8cf83f62a19d867745f3bf756418ec04ef",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_effect_provider.py#create_platform_effect_provider"
       },
       {
         "slotId": "slot:cell:mechanic:resolve-equity-market-price-evidence.operation.3",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.3",
         "mechanicId": "sda-authority-transformation-port.v1",
-        "providerProfileId": "python:sda-authority-transformation-port.v1",
-        "providerProfileDigest": "sha256:0072fb762a47efbdd9364a5d8bc0e65a244bc4f41ea2d1d7092ae7a9ada14209",
-        "implementationRef": "languages/python/src/scenario_kernel/adapters/core.py"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:cell:mechanic:resolve-equity-market-price-evidence.operation.4",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.4",
         "mechanicId": "sda-governed-http-exchange-port.v1",
-        "providerProfileId": "python:sda-governed-http-exchange-port.v1",
-        "providerProfileDigest": "sha256:ed5ed9d6f266248a622cfbf007ee5752c26e40d2daa19a1e25a67953d4642734",
-        "implementationRef": "languages/python/src/scenario_kernel/platform/governed_effect_ports.py"
+        "providerProfileId": "sda-platform-effect-graph-provider.v1",
+        "providerProfileDigest": "sha256:3c2030fe6b50a4f2ea26f743c76cfa8cf83f62a19d867745f3bf756418ec04ef",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_effect_provider.py#create_platform_effect_provider"
       },
       {
         "slotId": "slot:cell:mechanic:resolve-equity-market-price-evidence.operation.5",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5",
         "mechanicId": "sda-authority-transformation-port.v1",
-        "providerProfileId": "python:sda-authority-transformation-port.v1",
-        "providerProfileDigest": "sha256:0072fb762a47efbdd9364a5d8bc0e65a244bc4f41ea2d1d7092ae7a9ada14209",
-        "implementationRef": "languages/python/src/scenario_kernel/adapters/core.py"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.1:expression",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.1:expression",
         "mechanicId": "object",
-        "providerProfileId": "python:provider:object",
-        "providerProfileDigest": "sha256:a6a3fc4708da02924477aa6e47cf8ca9fc3641fe92d251e02e2b307939cdb9cd",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.1:expression.fields.credentialReference",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.1:expression.fields.credentialReference",
         "mechanicId": "literal",
-        "providerProfileId": "python:provider:literal",
-        "providerProfileDigest": "sha256:53e55c6568c9e2d03b11f03f043c505ed2ba2588cba95d7de0bd595ba2e63843",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.1:expression.fields.effectLineage",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.1:expression.fields.effectLineage",
         "mechanicId": "array",
-        "providerProfileId": "python:provider:array",
-        "providerProfileDigest": "sha256:9047e017fcbe5ca64b29bf2b8e05a7960623360621cfd1ae30b2b7fabd2f86c2",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.1:expression.fields.effectScope",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.1:expression.fields.effectScope",
         "mechanicId": "literal",
-        "providerProfileId": "python:provider:literal",
-        "providerProfileDigest": "sha256:53e55c6568c9e2d03b11f03f043c505ed2ba2588cba95d7de0bd595ba2e63843",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.1:expression.fields.endpointAuthorityDigest",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.1:expression.fields.endpointAuthorityDigest",
         "mechanicId": "literal",
-        "providerProfileId": "python:provider:literal",
-        "providerProfileDigest": "sha256:53e55c6568c9e2d03b11f03f043c505ed2ba2588cba95d7de0bd595ba2e63843",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.1:expression.fields.invocationIdentity",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.1:expression.fields.invocationIdentity",
         "mechanicId": "literal",
-        "providerProfileId": "python:provider:literal",
-        "providerProfileDigest": "sha256:53e55c6568c9e2d03b11f03f043c505ed2ba2588cba95d7de0bd595ba2e63843",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.1:expression.fields.requestingCapabilityId",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.1:expression.fields.requestingCapabilityId",
         "mechanicId": "literal",
-        "providerProfileId": "python:provider:literal",
-        "providerProfileDigest": "sha256:53e55c6568c9e2d03b11f03f043c505ed2ba2588cba95d7de0bd595ba2e63843",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.3:expression",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression",
         "mechanicId": "object",
-        "providerProfileId": "python:provider:object",
-        "providerProfileDigest": "sha256:a6a3fc4708da02924477aa6e47cf8ca9fc3641fe92d251e02e2b307939cdb9cd",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.allowedResponseHeaders",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.allowedResponseHeaders",
         "mechanicId": "array",
-        "providerProfileId": "python:provider:array",
-        "providerProfileDigest": "sha256:9047e017fcbe5ca64b29bf2b8e05a7960623360621cfd1ae30b2b7fabd2f86c2",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.allowedResponseHeaders.items.0",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.allowedResponseHeaders.items.0",
         "mechanicId": "literal",
-        "providerProfileId": "python:provider:literal",
-        "providerProfileDigest": "sha256:53e55c6568c9e2d03b11f03f043c505ed2ba2588cba95d7de0bd595ba2e63843",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.allowedResponseHeaders.items.1",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.allowedResponseHeaders.items.1",
         "mechanicId": "literal",
-        "providerProfileId": "python:provider:literal",
-        "providerProfileDigest": "sha256:53e55c6568c9e2d03b11f03f043c505ed2ba2588cba95d7de0bd595ba2e63843",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.cancellationScopeReference",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.cancellationScopeReference",
         "mechanicId": "literal",
-        "providerProfileId": "python:provider:literal",
-        "providerProfileDigest": "sha256:53e55c6568c9e2d03b11f03f043c505ed2ba2588cba95d7de0bd595ba2e63843",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.credentialInjectionRuleId",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.credentialInjectionRuleId",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.endpointAuthorityDigest",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.endpointAuthorityDigest",
         "mechanicId": "literal",
-        "providerProfileId": "python:provider:literal",
-        "providerProfileDigest": "sha256:53e55c6568c9e2d03b11f03f043c505ed2ba2588cba95d7de0bd595ba2e63843",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.exchangeKind",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.exchangeKind",
         "mechanicId": "literal",
-        "providerProfileId": "python:provider:literal",
-        "providerProfileDigest": "sha256:53e55c6568c9e2d03b11f03f043c505ed2ba2588cba95d7de0bd595ba2e63843",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.invocationIdentity",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.invocationIdentity",
         "mechanicId": "literal",
-        "providerProfileId": "python:provider:literal",
-        "providerProfileDigest": "sha256:53e55c6568c9e2d03b11f03f043c505ed2ba2588cba95d7de0bd595ba2e63843",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.lineageId",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.lineageId",
         "mechanicId": "literal",
-        "providerProfileId": "python:provider:literal",
-        "providerProfileDigest": "sha256:53e55c6568c9e2d03b11f03f043c505ed2ba2588cba95d7de0bd595ba2e63843",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.maxResponseBytes",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.maxResponseBytes",
         "mechanicId": "literal",
-        "providerProfileId": "python:provider:literal",
-        "providerProfileDigest": "sha256:53e55c6568c9e2d03b11f03f043c505ed2ba2588cba95d7de0bd595ba2e63843",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.method",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.method",
         "mechanicId": "literal",
-        "providerProfileId": "python:provider:literal",
-        "providerProfileDigest": "sha256:53e55c6568c9e2d03b11f03f043c505ed2ba2588cba95d7de0bd595ba2e63843",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.opaqueCredentialBinding",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.opaqueCredentialBinding",
         "mechanicId": "object",
-        "providerProfileId": "python:provider:object",
-        "providerProfileDigest": "sha256:a6a3fc4708da02924477aa6e47cf8ca9fc3641fe92d251e02e2b307939cdb9cd",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.opaqueCredentialBinding.fields.bindingId",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.opaqueCredentialBinding.fields.bindingId",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.opaqueCredentialBinding.fields.credentialInjectionRuleId",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.opaqueCredentialBinding.fields.credentialInjectionRuleId",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.redirectPolicy",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.redirectPolicy",
         "mechanicId": "literal",
-        "providerProfileId": "python:provider:literal",
-        "providerProfileDigest": "sha256:53e55c6568c9e2d03b11f03f043c505ed2ba2588cba95d7de0bd595ba2e63843",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.requestBodyText",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.requestBodyText",
         "mechanicId": "literal",
-        "providerProfileId": "python:provider:literal",
-        "providerProfileDigest": "sha256:53e55c6568c9e2d03b11f03f043c505ed2ba2588cba95d7de0bd595ba2e63843",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.requestUrl",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.requestUrl",
         "mechanicId": "format",
-        "providerProfileId": "python:provider:format",
-        "providerProfileDigest": "sha256:b91520cbb217493c55bad9a51a1ccc357bc1c7001231a7c51c0611f150afaa97",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.requestUrl.values.region",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.requestUrl.values.region",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.requestUrl.values.symbol",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.requestUrl.values.symbol",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.safeHeaders",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.safeHeaders",
         "mechanicId": "object",
-        "providerProfileId": "python:provider:object",
-        "providerProfileDigest": "sha256:a6a3fc4708da02924477aa6e47cf8ca9fc3641fe92d251e02e2b307939cdb9cd",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.safeHeaders.fields.X-RapidAPI-Host",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.safeHeaders.fields.X-RapidAPI-Host",
         "mechanicId": "literal",
-        "providerProfileId": "python:provider:literal",
-        "providerProfileDigest": "sha256:53e55c6568c9e2d03b11f03f043c505ed2ba2588cba95d7de0bd595ba2e63843",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.timeoutMilliseconds",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.timeoutMilliseconds",
         "mechanicId": "literal",
-        "providerProfileId": "python:provider:literal",
-        "providerProfileDigest": "sha256:53e55c6568c9e2d03b11f03f043c505ed2ba2588cba95d7de0bd595ba2e63843",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression",
         "mechanicId": "let",
-        "providerProfileId": "python:provider:let",
-        "providerProfileDigest": "sha256:aaf99a6ccce99456fb20e9bfdd1d55ef3a2ab384e639ae2b93e748403757be4d",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.bindingId",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.bindingId",
         "mechanicId": "literal",
-        "providerProfileId": "python:provider:literal",
-        "providerProfileDigest": "sha256:53e55c6568c9e2d03b11f03f043c505ed2ba2588cba95d7de0bd595ba2e63843",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.bodyText:result",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.bodyText",
         "mechanicId": "identity",
-        "providerProfileId": "python:provider:identity",
-        "providerProfileDigest": "sha256:75764d7ffb42846c1da51c0e95727dbed4459edf5fcdb4ab2f4d0edc3e3b4f48",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.bodyText.else",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.bodyText.else",
         "mechanicId": "literal",
-        "providerProfileId": "python:provider:literal",
-        "providerProfileDigest": "sha256:53e55c6568c9e2d03b11f03f043c505ed2ba2588cba95d7de0bd595ba2e63843",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.bodyText.then",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.bodyText.then",
         "mechanicId": "base64-decode-utf8",
-        "providerProfileId": "python:provider:base64-decode-utf8",
-        "providerProfileDigest": "sha256:f2fd0ad0d1454138e35d77656148822672aa81a53a776ff3f9f4f796ba0a89d1",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.bodyText.then.value",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.bodyText.then.value",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.bodyText.when",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.bodyText.when",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.completed",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.completed",
         "mechanicId": "equals",
-        "providerProfileId": "python:provider:equals",
-        "providerProfileDigest": "sha256:822a34fcc53b9623583d6951d77cad3cfe575972455c81f06adb6f1f6c194fcc",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.completed.left",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.completed.left",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.completed.right",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.completed.right",
         "mechanicId": "literal",
-        "providerProfileId": "python:provider:literal",
-        "providerProfileDigest": "sha256:53e55c6568c9e2d03b11f03f043c505ed2ba2588cba95d7de0bd595ba2e63843",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.conforming",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.conforming",
         "mechanicId": "equals",
-        "providerProfileId": "python:provider:equals",
-        "providerProfileDigest": "sha256:822a34fcc53b9623583d6951d77cad3cfe575972455c81f06adb6f1f6c194fcc",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.conforming.left",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.conforming.left",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.conforming.right",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.conforming.right",
         "mechanicId": "literal",
-        "providerProfileId": "python:provider:literal",
-        "providerProfileDigest": "sha256:53e55c6568c9e2d03b11f03f043c505ed2ba2588cba95d7de0bd595ba2e63843",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.currency:result",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.currency",
         "mechanicId": "identity",
-        "providerProfileId": "python:provider:identity",
-        "providerProfileDigest": "sha256:75764d7ffb42846c1da51c0e95727dbed4459edf5fcdb4ab2f4d0edc3e3b4f48",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.currency.else",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.currency.else",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.currency.then",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.currency.then",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.currency.when",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.currency.when",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.exchange:result",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.exchange",
         "mechanicId": "identity",
-        "providerProfileId": "python:provider:identity",
-        "providerProfileDigest": "sha256:75764d7ffb42846c1da51c0e95727dbed4459edf5fcdb4ab2f4d0edc3e3b4f48",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.exchange.else",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.exchange.else",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.exchange.then",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.exchange.then",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.exchange.when",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.exchange.when",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.marketState:result",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.marketState",
         "mechanicId": "identity",
-        "providerProfileId": "python:provider:identity",
-        "providerProfileDigest": "sha256:75764d7ffb42846c1da51c0e95727dbed4459edf5fcdb4ab2f4d0edc3e3b4f48",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.marketState.else",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.marketState.else",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.marketState.then",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.marketState.then",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.marketState.when",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.marketState.when",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.missing",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.missing",
         "mechanicId": "filter",
-        "providerProfileId": "python:provider:filter",
-        "providerProfileDigest": "sha256:48e3ac56482c21e3e316b0ed335786240082b7469537d0bc7bb011b33970c0d8",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.missing.from",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.missing.from",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.missing.where",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.missing.where",
         "mechanicId": "equals",
-        "providerProfileId": "python:provider:equals",
-        "providerProfileDigest": "sha256:822a34fcc53b9623583d6951d77cad3cfe575972455c81f06adb6f1f6c194fcc",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.missing.where.left",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.missing.where.left",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.missing.where.right",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.missing.where.right",
         "mechanicId": "literal",
-        "providerProfileId": "python:provider:literal",
-        "providerProfileDigest": "sha256:53e55c6568c9e2d03b11f03f043c505ed2ba2588cba95d7de0bd595ba2e63843",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.missingCount",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.missingCount",
         "mechanicId": "length",
-        "providerProfileId": "python:provider:length",
-        "providerProfileDigest": "sha256:2af8fa12f4249aaf08d12dd6840b1b3f496eefb296259aad08c6d1a82b87da0b",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.missingCount.value",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.missingCount.value",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.native",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.native",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.nativeShape:result",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.nativeShape",
         "mechanicId": "identity",
-        "providerProfileId": "python:provider:identity",
-        "providerProfileDigest": "sha256:75764d7ffb42846c1da51c0e95727dbed4459edf5fcdb4ab2f4d0edc3e3b4f48",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.nativeShape.else",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.nativeShape.else",
         "mechanicId": "literal",
-        "providerProfileId": "python:provider:literal",
-        "providerProfileDigest": "sha256:53e55c6568c9e2d03b11f03f043c505ed2ba2588cba95d7de0bd595ba2e63843",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.nativeShape.then",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.nativeShape.then",
         "mechanicId": "literal",
-        "providerProfileId": "python:provider:literal",
-        "providerProfileDigest": "sha256:53e55c6568c9e2d03b11f03f043c505ed2ba2588cba95d7de0bd595ba2e63843",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.nativeShape.when",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.nativeShape.when",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.observedMarketTime:result",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.observedMarketTime",
         "mechanicId": "identity",
-        "providerProfileId": "python:provider:identity",
-        "providerProfileDigest": "sha256:75764d7ffb42846c1da51c0e95727dbed4459edf5fcdb4ab2f4d0edc3e3b4f48",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.observedMarketTime.else",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.observedMarketTime.else",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.observedMarketTime.then",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.observedMarketTime.then",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.observedMarketTime.when",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.observedMarketTime.when",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.observedPrice:result",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.observedPrice",
         "mechanicId": "identity",
-        "providerProfileId": "python:provider:identity",
-        "providerProfileDigest": "sha256:75764d7ffb42846c1da51c0e95727dbed4459edf5fcdb4ab2f4d0edc3e3b4f48",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.observedPrice.else",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.observedPrice.else",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.observedPrice.then",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.observedPrice.then",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.observedPrice.when",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.observedPrice.when",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.parsed",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.parsed",
         "mechanicId": "try-parse-json",
-        "providerProfileId": "python:provider:try-parse-json",
-        "providerProfileDigest": "sha256:4a54d6ff9bdd693689c2b209fe2f5a96e93a06e9dc91dd3f50d6dc2a76e838d9",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.parsed.value",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.parsed.value",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.providerId",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.providerId",
         "mechanicId": "literal",
-        "providerProfileId": "python:provider:literal",
-        "providerProfileDigest": "sha256:53e55c6568c9e2d03b11f03f043c505ed2ba2588cba95d7de0bd595ba2e63843",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.requiredValues",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.requiredValues",
         "mechanicId": "array",
-        "providerProfileId": "python:provider:array",
-        "providerProfileDigest": "sha256:9047e017fcbe5ca64b29bf2b8e05a7960623360621cfd1ae30b2b7fabd2f86c2",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.requiredValues.items.0",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.requiredValues.items.0",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.requiredValues.items.1",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.requiredValues.items.1",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.requiredValues.items.2",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.requiredValues.items.2",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.requiredValues.items.3",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.requiredValues.items.3",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.requiredValues.items.4",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.requiredValues.items.4",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.requiredValues.items.5",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.requiredValues.items.5",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.requiredValues.items.6",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.requiredValues.items.6",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.responseQuote",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.responseQuote",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.sourceAttribution:result",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.sourceAttribution",
         "mechanicId": "identity",
-        "providerProfileId": "python:provider:identity",
-        "providerProfileDigest": "sha256:75764d7ffb42846c1da51c0e95727dbed4459edf5fcdb4ab2f4d0edc3e3b4f48",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.sourceAttribution.else",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.sourceAttribution.else",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.sourceAttribution.then",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.sourceAttribution.then",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.sourceAttribution.when",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.sourceAttribution.when",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.summaryQuote",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.summaryQuote",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.symbol:result",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.symbol",
         "mechanicId": "identity",
-        "providerProfileId": "python:provider:identity",
-        "providerProfileDigest": "sha256:75764d7ffb42846c1da51c0e95727dbed4459edf5fcdb4ab2f4d0edc3e3b4f48",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.symbol.else",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.symbol.else",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.symbol.then",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.symbol.then",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.symbol.when",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.symbol.when",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value:result",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value",
         "mechanicId": "identity",
-        "providerProfileId": "python:provider:identity",
-        "providerProfileDigest": "sha256:75764d7ffb42846c1da51c0e95727dbed4459edf5fcdb4ab2f4d0edc3e3b4f48",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.else",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.else",
         "mechanicId": "object",
-        "providerProfileId": "python:provider:object",
-        "providerProfileDigest": "sha256:a6a3fc4708da02924477aa6e47cf8ca9fc3641fe92d251e02e2b307939cdb9cd",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.else.fields.contractId",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.else.fields.contractId",
         "mechanicId": "literal",
-        "providerProfileId": "python:provider:literal",
-        "providerProfileDigest": "sha256:53e55c6568c9e2d03b11f03f043c505ed2ba2588cba95d7de0bd595ba2e63843",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.else.fields.disposition",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.else.fields.disposition",
         "mechanicId": "literal",
-        "providerProfileId": "python:provider:literal",
-        "providerProfileDigest": "sha256:53e55c6568c9e2d03b11f03f043c505ed2ba2588cba95d7de0bd595ba2e63843",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.else.fields.providerTestimony",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.else.fields.providerTestimony",
         "mechanicId": "object",
-        "providerProfileId": "python:provider:object",
-        "providerProfileDigest": "sha256:a6a3fc4708da02924477aa6e47cf8ca9fc3641fe92d251e02e2b307939cdb9cd",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.else.fields.providerTestimony.fields.bindingId",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.else.fields.providerTestimony.fields.bindingId",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.else.fields.providerTestimony.fields.providerId",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.else.fields.providerTestimony.fields.providerId",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.else.fields.reasonCode",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.else.fields.reasonCode",
         "mechanicId": "literal",
-        "providerProfileId": "python:provider:literal",
-        "providerProfileDigest": "sha256:53e55c6568c9e2d03b11f03f043c505ed2ba2588cba95d7de0bd595ba2e63843",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then:result",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then",
         "mechanicId": "identity",
-        "providerProfileId": "python:provider:identity",
-        "providerProfileDigest": "sha256:75764d7ffb42846c1da51c0e95727dbed4459edf5fcdb4ab2f4d0edc3e3b4f48",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.else",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.else",
         "mechanicId": "object",
-        "providerProfileId": "python:provider:object",
-        "providerProfileDigest": "sha256:a6a3fc4708da02924477aa6e47cf8ca9fc3641fe92d251e02e2b307939cdb9cd",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.else.fields.absentFieldCount",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.else.fields.absentFieldCount",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.else.fields.contractId",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.else.fields.contractId",
         "mechanicId": "literal",
-        "providerProfileId": "python:provider:literal",
-        "providerProfileDigest": "sha256:53e55c6568c9e2d03b11f03f043c505ed2ba2588cba95d7de0bd595ba2e63843",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.else.fields.disposition",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.else.fields.disposition",
         "mechanicId": "literal",
-        "providerProfileId": "python:provider:literal",
-        "providerProfileDigest": "sha256:53e55c6568c9e2d03b11f03f043c505ed2ba2588cba95d7de0bd595ba2e63843",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.else.fields.providerTestimony",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.else.fields.providerTestimony",
         "mechanicId": "object",
-        "providerProfileId": "python:provider:object",
-        "providerProfileDigest": "sha256:a6a3fc4708da02924477aa6e47cf8ca9fc3641fe92d251e02e2b307939cdb9cd",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.else.fields.providerTestimony.fields.bindingId",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.else.fields.providerTestimony.fields.bindingId",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.else.fields.providerTestimony.fields.nativeShape",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.else.fields.providerTestimony.fields.nativeShape",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.else.fields.providerTestimony.fields.providerId",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.else.fields.providerTestimony.fields.providerId",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.else.fields.reasonCode",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.else.fields.reasonCode",
         "mechanicId": "literal",
-        "providerProfileId": "python:provider:literal",
-        "providerProfileDigest": "sha256:53e55c6568c9e2d03b11f03f043c505ed2ba2588cba95d7de0bd595ba2e63843",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then",
         "mechanicId": "object",
-        "providerProfileId": "python:provider:object",
-        "providerProfileDigest": "sha256:a6a3fc4708da02924477aa6e47cf8ca9fc3641fe92d251e02e2b307939cdb9cd",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.contractId",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.contractId",
         "mechanicId": "literal",
-        "providerProfileId": "python:provider:literal",
-        "providerProfileDigest": "sha256:53e55c6568c9e2d03b11f03f043c505ed2ba2588cba95d7de0bd595ba2e63843",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.disposition",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.disposition",
         "mechanicId": "literal",
-        "providerProfileId": "python:provider:literal",
-        "providerProfileDigest": "sha256:53e55c6568c9e2d03b11f03f043c505ed2ba2588cba95d7de0bd595ba2e63843",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.payload",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.payload",
         "mechanicId": "object",
-        "providerProfileId": "python:provider:object",
-        "providerProfileDigest": "sha256:a6a3fc4708da02924477aa6e47cf8ca9fc3641fe92d251e02e2b307939cdb9cd",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.payload.fields.currency",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.payload.fields.currency",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.payload.fields.exchange",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.payload.fields.exchange",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.payload.fields.marketState",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.payload.fields.marketState",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.payload.fields.observedMarketTime",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.payload.fields.observedMarketTime",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.payload.fields.observedPrice",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.payload.fields.observedPrice",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.payload.fields.region",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.payload.fields.region",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.payload.fields.sourceAttribution",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.payload.fields.sourceAttribution",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.payload.fields.symbol",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.payload.fields.symbol",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.providerTestimony",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.providerTestimony",
         "mechanicId": "object",
-        "providerProfileId": "python:provider:object",
-        "providerProfileDigest": "sha256:a6a3fc4708da02924477aa6e47cf8ca9fc3641fe92d251e02e2b307939cdb9cd",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.providerTestimony.fields.bindingId",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.providerTestimony.fields.bindingId",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.providerTestimony.fields.nativeShape",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.providerTestimony.fields.nativeShape",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.providerTestimony.fields.providerId",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.providerTestimony.fields.providerId",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.when",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.when",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.when",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.when",
         "mechanicId": "path",
-        "providerProfileId": "python:provider:path",
-        "providerProfileDigest": "sha256:2a974edcae2dcc5ff634d1a208171dc075ac34e92facf7af51e558b1534816aa",
-        "implementationRef": "graph-v1-compatibility-provider"
+        "providerProfileId": "sda-semantic-value-graph-provider.v1",
+        "providerProfileDigest": "sha256:0fc9ed8eaa36fc68c551c8d1d338a1efa22d48023944dd8b5ae9d62f084847de",
+        "implementationRef": "languages/python/src/scenario_kernel/adapters/semantic_execution_graph_mechanic_provider.py#create_mechanic_provider"
       }
     ],
     "physicalCells": [],
     "physicalEdges": [],
-    "overlayDigest": "sha256:c90df96e084019c38bdb0a4efc7d4ad9040c99fe4f205edf7865b02cbb0be86c"
+    "overlayDigest": "sha256:785274a1d1aa30c6a47e75d2d9f7ff1b5f42f024fb41fc466961a08be11f5a4b"
   },
-  "realizedGraphDigest": "sha256:224d41fcaff2010eaa2e8e17a1adf0267ec386daca046e47b81edcac9b9eec83",
+  "realizedGraphDigest": "sha256:c118fa66c8ef25d59a7d24c565d3d97614236ec481e9d99fe5b237603c3a5959",
   "sourceMap": {
     "cell:scenario:resolve-equity-market-price-evidence": [
       "scenarios#/0"
