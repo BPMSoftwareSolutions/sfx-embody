@@ -15,7 +15,10 @@ primary experience, and which past decisions were premature ("wrong timing, not
 wrong") are in `docs/target-experience.md`. The next target experiences we are
 bringing clarity to (versioned projected bodies + cross-language perf, sealed
 bootstrap binary, backdoor-script migration, vault manager) are in
-`docs/next-experiences.md`.
+`docs/next-experiences.md`. The smallest primitive of the whole architecture - the
+resolver (0, per-language code) versus declared authority (1, language-neutral
+data), and why a multi-language runtime entails a multi-language bootstrap - is in
+`docs/transistor-model.md`.
 
 ## The prime rule: meaning is authored in the database
 
