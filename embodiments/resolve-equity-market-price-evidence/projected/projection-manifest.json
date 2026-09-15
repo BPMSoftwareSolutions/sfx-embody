@@ -80,15 +80,13 @@
       "executableOrigin": "PROJECTED",
       "sha256": "0e01b1d22a5a4b8260a45b3f2542e3eb42940497198786c53edddaf5f1744c03",
       "digest": "sha256:0e01b1d22a5a4b8260a45b3f2542e3eb42940497198786c53edddaf5f1744c03",
-      "sourcePointers": [
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/interfaces.authority.json"
-      ]
+      "sourcePointers": []
     },
     {
       "path": "application-binding.json",
       "executableOrigin": "PROJECTED",
-      "sha256": "637bf7265d48fd49d7799bee450a9d0e0a576e4e4aec42240013c2d9b68f14ac",
-      "digest": "sha256:637bf7265d48fd49d7799bee450a9d0e0a576e4e4aec42240013c2d9b68f14ac",
+      "sha256": "85a227c81fd0a4e069e204e2eb598949b3f273be015aee55aef30c3833c900d6",
+      "digest": "sha256:85a227c81fd0a4e069e204e2eb598949b3f273be015aee55aef30c3833c900d6",
       "sourcePointers": [
         "../sfx-embody/embodiments/resolve-equity-market-price-evidence/interfaces.authority.json"
       ]
@@ -98,9 +96,7 @@
       "executableOrigin": "PROJECTED",
       "sha256": "637bf7265d48fd49d7799bee450a9d0e0a576e4e4aec42240013c2d9b68f14ac",
       "digest": "sha256:637bf7265d48fd49d7799bee450a9d0e0a576e4e4aec42240013c2d9b68f14ac",
-      "sourcePointers": [
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/interfaces.authority.json"
-      ]
+      "sourcePointers": []
     },
     {
       "path": "application-binding.python.json",
@@ -127,145 +123,49 @@
       "executableOrigin": "PROJECTED",
       "sha256": "d24a272385d34c551599beb73e5a840614ff8cf98c1fd9fc3efca68b87f37d2c",
       "digest": "sha256:d24a272385d34c551599beb73e5a840614ff8cf98c1fd9fc3efca68b87f37d2c",
-      "sourcePointers": [
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/capability.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/capability.feature",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/execution-authorities.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/fixtures.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/interfaces.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/projection-authorities.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/semantic-graph.authority.json",
-        "capability.authority.json",
-        "execution-authorities.authority.json",
-        "interfaces.authority.json",
-        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
-        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
-        "semantic-graph.authority.json"
-      ]
+      "sourcePointers": []
     },
     {
       "path": "csharp/Program.generated.cs",
       "executableOrigin": "PROJECTED",
       "sha256": "2406ccbb9266ceac50c4610d7677c1e9f8895ef46013643bf9fb60566cf260a8",
       "digest": "sha256:2406ccbb9266ceac50c4610d7677c1e9f8895ef46013643bf9fb60566cf260a8",
-      "sourcePointers": [
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/capability.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/capability.feature",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/execution-authorities.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/fixtures.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/interfaces.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/projection-authorities.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/semantic-graph.authority.json",
-        "capability.authority.json",
-        "execution-authorities.authority.json",
-        "executionAuthorities/resolve-equity-market-price-evidence/operations/0",
-        "executionAuthorities/resolve-equity-market-price-evidence/operations/1",
-        "executionAuthorities/resolve-equity-market-price-evidence/operations/2",
-        "executionAuthorities/resolve-equity-market-price-evidence/operations/3",
-        "executionAuthorities/resolve-equity-market-price-evidence/operations/4",
-        "interfaces.authority.json",
-        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
-        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
-        "scenarios#/0",
-        "semantic-graph.authority.json"
-      ]
+      "sourcePointers": []
     },
     {
       "path": "csharp/ProjectedConsumerCli.generated.cs",
       "executableOrigin": "PROJECTED",
       "sha256": "d404c548bc38d069a8809295af23162143a7bd8845bb2b02827d3588557aecd3",
       "digest": "sha256:d404c548bc38d069a8809295af23162143a7bd8845bb2b02827d3588557aecd3",
-      "sourcePointers": [
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/capability.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/capability.feature",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/execution-authorities.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/fixtures.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/interfaces.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/projection-authorities.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/semantic-graph.authority.json",
-        "capability.authority.json",
-        "execution-authorities.authority.json",
-        "interfaces.authority.json",
-        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
-        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
-        "semantic-graph.authority.json"
-      ]
+      "sourcePointers": []
     },
     {
       "path": "csharp/ProjectedConsumerCli.generated.csproj",
       "executableOrigin": "PROJECTED",
       "sha256": "ccb3cb8644b63d81d73047f643b3d34e2655bec5dd60937c8dbc4a9a13580876",
       "digest": "sha256:ccb3cb8644b63d81d73047f643b3d34e2655bec5dd60937c8dbc4a9a13580876",
-      "sourcePointers": [
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/capability.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/capability.feature",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/execution-authorities.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/fixtures.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/interfaces.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/projection-authorities.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/semantic-graph.authority.json",
-        "capability.authority.json",
-        "execution-authorities.authority.json",
-        "interfaces.authority.json",
-        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
-        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
-        "semantic-graph.authority.json"
-      ]
+      "sourcePointers": []
     },
     {
       "path": "csharp/ProjectedConsumerTest.generated.csproj",
       "executableOrigin": "PROJECTED",
       "sha256": "07a58187c3d1029f8e5c4309655964b29eecc3b792a6e05bff4499b7eb7daa79",
       "digest": "sha256:07a58187c3d1029f8e5c4309655964b29eecc3b792a6e05bff4499b7eb7daa79",
-      "sourcePointers": [
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/capability.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/capability.feature",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/execution-authorities.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/fixtures.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/interfaces.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/projection-authorities.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/semantic-graph.authority.json",
-        "capability.authority.json",
-        "execution-authorities.authority.json",
-        "interfaces.authority.json",
-        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
-        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
-        "semantic-graph.authority.json"
-      ]
+      "sourcePointers": []
     },
     {
       "path": "execution-plans/consumer-execution-plan.csharp.v3.json",
       "executableOrigin": "PROJECTED",
       "sha256": "6f92c1585494fc5b1c08ade5269037e54ec008cb9c2a01a8bf95543285670d4a",
       "digest": "sha256:6f92c1585494fc5b1c08ade5269037e54ec008cb9c2a01a8bf95543285670d4a",
-      "sourcePointers": [
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/capability.feature",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/capability.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/semantic-graph.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/execution-authorities.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/projection-authorities.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/interfaces.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/fixtures.authority.json",
-        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
-        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json"
-      ]
+      "sourcePointers": []
     },
     {
       "path": "execution-plans/consumer-execution-plan.node.v3.json",
       "executableOrigin": "PROJECTED",
       "sha256": "7aef50916c0025f135fd34e85336076b6c868c2ad65f9795ec5f6ae5b988e8a1",
       "digest": "sha256:7aef50916c0025f135fd34e85336076b6c868c2ad65f9795ec5f6ae5b988e8a1",
-      "sourcePointers": [
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/capability.feature",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/capability.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/semantic-graph.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/execution-authorities.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/projection-authorities.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/interfaces.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/fixtures.authority.json",
-        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
-        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json"
-      ]
+      "sourcePointers": []
     },
     {
       "path": "execution-plans/consumer-execution-plan.python.v3.json",
@@ -298,111 +198,35 @@
       "executableOrigin": "PROJECTED",
       "sha256": "d2dabb0c9235166717da79ea4fd8efc38befa8aafe529ddd2936355d71efb60f",
       "digest": "sha256:d2dabb0c9235166717da79ea4fd8efc38befa8aafe529ddd2936355d71efb60f",
-      "sourcePointers": [
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/capability.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/capability.feature",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/execution-authorities.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/fixtures.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/interfaces.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/projection-authorities.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/semantic-graph.authority.json",
-        "capability.authority.json",
-        "execution-authorities.authority.json",
-        "executionAuthorities/resolve-equity-market-price-evidence/operations/0",
-        "executionAuthorities/resolve-equity-market-price-evidence/operations/1",
-        "executionAuthorities/resolve-equity-market-price-evidence/operations/2",
-        "executionAuthorities/resolve-equity-market-price-evidence/operations/3",
-        "executionAuthorities/resolve-equity-market-price-evidence/operations/4",
-        "interfaces.authority.json",
-        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
-        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
-        "scenarios#/0",
-        "semantic-graph.authority.json"
-      ]
+      "sourcePointers": []
     },
     {
       "path": "node/capability-runtime.generated.mjs",
       "executableOrigin": "PROJECTED",
       "sha256": "65552a9d50b4aed4bd972c8fa0bac2e06cf5ea4a9138a4c2ef59367c0d6d7de6",
       "digest": "sha256:65552a9d50b4aed4bd972c8fa0bac2e06cf5ea4a9138a4c2ef59367c0d6d7de6",
-      "sourcePointers": [
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/capability.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/capability.feature",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/execution-authorities.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/fixtures.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/interfaces.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/projection-authorities.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/semantic-graph.authority.json",
-        "capability.authority.json",
-        "execution-authorities.authority.json",
-        "interfaces.authority.json",
-        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
-        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
-        "semantic-graph.authority.json"
-      ]
+      "sourcePointers": []
     },
     {
       "path": "node/capability.projected.test.mjs",
       "executableOrigin": "PROJECTED",
       "sha256": "8852d9eda37a2b685453e7964f48215e209fe7bd4008c552a289ea7baf8b9994",
       "digest": "sha256:8852d9eda37a2b685453e7964f48215e209fe7bd4008c552a289ea7baf8b9994",
-      "sourcePointers": [
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/capability.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/capability.feature",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/execution-authorities.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/fixtures.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/interfaces.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/projection-authorities.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/semantic-graph.authority.json",
-        "capability.authority.json",
-        "execution-authorities.authority.json",
-        "interfaces.authority.json",
-        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
-        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
-        "semantic-graph.authority.json"
-      ]
+      "sourcePointers": []
     },
     {
       "path": "node/conformance-query.generated.mjs",
       "executableOrigin": "PROJECTED",
       "sha256": "16405f28a0de363c77bc7f8abcfd91668e499376fcd68f4d8db7d95067769c57",
       "digest": "sha256:16405f28a0de363c77bc7f8abcfd91668e499376fcd68f4d8db7d95067769c57",
-      "sourcePointers": [
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/capability.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/capability.feature",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/execution-authorities.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/fixtures.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/interfaces.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/projection-authorities.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/semantic-graph.authority.json",
-        "capability.authority.json",
-        "execution-authorities.authority.json",
-        "interfaces.authority.json",
-        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
-        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
-        "semantic-graph.authority.json"
-      ]
+      "sourcePointers": []
     },
     {
       "path": "node/resolve-equity-market-price-evidence-cli.generated.mjs",
       "executableOrigin": "PROJECTED",
       "sha256": "0a2ac29cf8755510f009a315ee39a183ea37e53fd92d0d193525e71c31513f29",
       "digest": "sha256:0a2ac29cf8755510f009a315ee39a183ea37e53fd92d0d193525e71c31513f29",
-      "sourcePointers": [
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/capability.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/capability.feature",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/execution-authorities.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/fixtures.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/interfaces.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/projection-authorities.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/semantic-graph.authority.json",
-        "capability.authority.json",
-        "execution-authorities.authority.json",
-        "interfaces.authority.json",
-        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
-        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
-        "semantic-graph.authority.json"
-      ]
+      "sourcePointers": []
     },
     {
       "path": "projection-conformance.json",
@@ -466,23 +290,13 @@
       "executableOrigin": "PROJECTED",
       "sha256": "503cb18bd2c46a5a8c9a74cb165b9fb58049acae83350c605e40bbab7006a3a5",
       "digest": "sha256:503cb18bd2c46a5a8c9a74cb165b9fb58049acae83350c605e40bbab7006a3a5",
-      "sourcePointers": [
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/capability.feature",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/capability.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/semantic-graph.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/execution-authorities.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/projection-authorities.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/interfaces.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/fixtures.authority.json",
-        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
-        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json"
-      ]
+      "sourcePointers": []
     },
     {
       "path": "query/conformance-query.json",
       "executableOrigin": "PROJECTED",
-      "sha256": "b2d1a244ff4423241966b53b8146965f6ac0bd03a8c05b20b923ea9dbe5db4b5",
-      "digest": "sha256:b2d1a244ff4423241966b53b8146965f6ac0bd03a8c05b20b923ea9dbe5db4b5",
+      "sha256": "d081f1555ef5a732b3adef3dc6ca0f76c715ae06912f8d4a6f557908dfcf2722",
+      "digest": "sha256:d081f1555ef5a732b3adef3dc6ca0f76c715ae06912f8d4a6f557908dfcf2722",
       "sourcePointers": [
         "../sfx-embody/embodiments/resolve-equity-market-price-evidence/capability.feature",
         "../sfx-embody/embodiments/resolve-equity-market-price-evidence/capability.authority.json",
@@ -498,25 +312,15 @@
     {
       "path": "query/conformance-query.node.json",
       "executableOrigin": "PROJECTED",
-      "sha256": "b2d1a244ff4423241966b53b8146965f6ac0bd03a8c05b20b923ea9dbe5db4b5",
-      "digest": "sha256:b2d1a244ff4423241966b53b8146965f6ac0bd03a8c05b20b923ea9dbe5db4b5",
-      "sourcePointers": [
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/capability.feature",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/capability.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/semantic-graph.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/execution-authorities.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/projection-authorities.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/interfaces.authority.json",
-        "../sfx-embody/embodiments/resolve-equity-market-price-evidence/fixtures.authority.json",
-        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
-        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json"
-      ]
+      "sha256": "07d6a2eb41448c4950281509a40a65016c7c4baf351c1d4a1c00c4d131889baa",
+      "digest": "sha256:07d6a2eb41448c4950281509a40a65016c7c4baf351c1d4a1c00c4d131889baa",
+      "sourcePointers": []
     },
     {
       "path": "query/conformance-query.python.json",
       "executableOrigin": "PROJECTED",
-      "sha256": "d85a942fc6957c001a599243ce5ab20d7830832242859dbcb1d5773712db6720",
-      "digest": "sha256:d85a942fc6957c001a599243ce5ab20d7830832242859dbcb1d5773712db6720",
+      "sha256": "d081f1555ef5a732b3adef3dc6ca0f76c715ae06912f8d4a6f557908dfcf2722",
+      "digest": "sha256:d081f1555ef5a732b3adef3dc6ca0f76c715ae06912f8d4a6f557908dfcf2722",
       "sourcePointers": [
         "../sfx-embody/embodiments/resolve-equity-market-price-evidence/capability.feature",
         "../sfx-embody/embodiments/resolve-equity-market-price-evidence/capability.authority.json",
@@ -534,15 +338,13 @@
       "executableOrigin": "PROJECTED",
       "sha256": "3c63725894cad91aada717c2f1eb69547b690882a16b8e3667b92a872e213aae",
       "digest": "sha256:3c63725894cad91aada717c2f1eb69547b690882a16b8e3667b92a872e213aae",
-      "sourcePointers": [
-        "kernel/semantic-authority/consumer/sda-platform-capabilities.semantic-authority.json"
-      ]
+      "sourcePointers": []
     },
     {
       "path": "query/platform-mechanic-resolution.json",
       "executableOrigin": "PROJECTED",
-      "sha256": "dfa0499c1b198adbea5f342d13e23d6caebbd4003e627799c89017c68510ab6a",
-      "digest": "sha256:dfa0499c1b198adbea5f342d13e23d6caebbd4003e627799c89017c68510ab6a",
+      "sha256": "e5d2760f995af27e3a137b4e1268c8062deefbab290bee51d965a96b539dc7e9",
+      "digest": "sha256:e5d2760f995af27e3a137b4e1268c8062deefbab290bee51d965a96b539dc7e9",
       "sourcePointers": [
         "kernel/semantic-authority/consumer/sda-platform-capabilities.semantic-authority.json"
       ]
@@ -552,9 +354,7 @@
       "executableOrigin": "PROJECTED",
       "sha256": "dfa0499c1b198adbea5f342d13e23d6caebbd4003e627799c89017c68510ab6a",
       "digest": "sha256:dfa0499c1b198adbea5f342d13e23d6caebbd4003e627799c89017c68510ab6a",
-      "sourcePointers": [
-        "kernel/semantic-authority/consumer/sda-platform-capabilities.semantic-authority.json"
-      ]
+      "sourcePointers": []
     },
     {
       "path": "query/platform-mechanic-resolution.python.json",
