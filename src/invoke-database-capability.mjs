@@ -13,7 +13,9 @@ const ESTATE_RUNTIME_ROOT = new URL('../', import.meta.url);
 // read from its own interface declaration. A capability that declares none keeps the
 // canonical input and returns the full outcome unchanged.
 function readCliConfiguration(bundle) {
-  const records = [...(bundle?.authority?.recordsets?.[1] ?? []), ...(bundle?.authority?.recordsets?.[2] ?? [])];
+  const declared = bundle.graphSource?.interfaceAuthority?.interfaces?.find(entry => entry.kind === 'cli');
+  if (declared?.configuration) return declared.configuration;
+  const records = readRecords(bundle);
   for (const record of records) {
     if (typeof record.source_path !== 'string' || !record.source_path.endsWith('interfaces.authority.json')) continue;
     try {
@@ -40,10 +42,12 @@ function readJsonDocument(bundle, suffix) {
   return null;
 }
 function readRootAuthority(bundle, scenarioId) {
+  if (bundle.graphSource) return bundle.graphSource.executionAuthorities?.find(a => a.owningScenarioId === scenarioId) ?? null;
   const authorities = readJsonDocument(bundle, '/execution-authorities.authority.json');
   return authorities?.executionAuthorities?.find(a => a.owningScenarioId === scenarioId) ?? null;
 }
 function readEstatePortBinding(bundle, portId) {
+  if (bundle.graphSource) return bundle.graphSource.interfaceAuthority?.portBindings?.find(b => b.portId === portId) ?? null;
   const interfaces = readJsonDocument(bundle, '/interfaces.authority.json');
   return interfaces?.portBindings?.find(b => b.portId === portId) ?? null;
 }
@@ -82,7 +86,7 @@ export async function executeEstateCapability({ capabilityId, scenarioId, namesp
   const bundle = await context.readAuthority(context.databaseRoot,
     { capabilityId, ...(context.deliveryTarget === undefined ? {} : { target: context.deliveryTarget }),
       ...(namespaceId === undefined ? {} : { namespaceId }),
-      ...(scenarioId === undefined ? {} : { scenarioId }) }, { retainObjects: false });
+      ...(scenarioId === undefined ? {} : { scenarioId }) }, { retainObjects: false, documents: false });
   const selected = bundle.authority.recordsets[0][0].scenario_id;
   const authority = readRootAuthority(bundle, selected);
   if (!authority) throw new Error('ESTATE_AUTHORITY_NOT_RESOLVED:' + capabilityId);
@@ -191,22 +195,28 @@ export function validateDatabaseCommand(envelope) {
 }
 
 export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, onObservation, spawnDeclared,
-  readAuthority: suppliedAuthorityReader, readQuery, rootExecutionId, signal }) {
+  readAuthority: suppliedAuthorityReader, readQuery, rootExecutionId, signal, collectProviderExecution, effectContextOverrides }) {
   const timings = { unit: 'milliseconds', queries: {} };
   const observations = [];
   const observe = value => { observations.push(value); try { onObservation?.(value); } catch { /* Observation is not execution authority. */ } };
   // Reuse declarations only within this invocation. No retained body or
   // declaration cache is consulted, and callers receive independent values.
   const declarations = new Map();
-  const declarationKey = (root, selection) => JSON.stringify([root,
+  let authorityIdentity, mechanics;
+  const declarationKey = (root, selection, options = {}) => JSON.stringify([root,
+    options.documents ?? true, options.resolution ?? 'closure', options.retainObjects ?? true,
     Object.entries(selection).filter(([, value]) => value !== undefined).sort(([a], [b]) => a.localeCompare(b))]);
   const readSelectedAuthority = async (root, selection, options) => {
-    const key = declarationKey(root, selection);
+    const key = declarationKey(root, selection, options);
     if (declarations.has(key)) return structuredClone(declarations.get(key));
-    const bundle = await suppliedAuthorityReader(root, selection, options);
+    const bundle = await suppliedAuthorityReader(root, selection, { ...options, mechanics });
+    authorityIdentity ??= bundle.authority;
+    if (bundle.authority.truncated || ['snapshotId', 'projectionDigest', 'viewDefinitionDigest'].some(
+      field => bundle.authority[field] !== authorityIdentity[field])) throw new Error('DATABASE_AUTHORITY_NOT_COHERENT');
+    mechanics ??= bundle.mechanics;
     declarations.set(key, bundle);
-    declarations.set(declarationKey(root, bundle.selection), bundle);
-    declarations.set(declarationKey(root, { ...selection, scenarioId: bundle.authority.recordsets[0][0].scenario_id }), bundle);
+    declarations.set(declarationKey(root, bundle.selection, options), bundle);
+    declarations.set(declarationKey(root, { ...selection, scenarioId: bundle.authority.recordsets[0][0].scenario_id }, options), bundle);
     return structuredClone(bundle);
   };
   const measure = async (name, work) => {
@@ -232,10 +242,12 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, 
     ...(request.namespace === undefined ? {} : { namespaceId: request.namespace }),
     ...(['circuit', 'reveal'].includes(request.verb) && selectedScenarioId !== undefined ? { scenarioId: selectedScenarioId } : {}) };
   const config = { databaseRoot, sdaRoot, estateRoot: fileURLToPath(ESTATE_RUNTIME_ROOT), spawnDeclared,
-    onObservation: observe, readAuthority: readSelectedAuthority, readQuery, rootExecutionId, signal };
+    onObservation: observe, readAuthority: readSelectedAuthority, readQuery, rootExecutionId, signal,
+    collectProviderExecution, effectContextOverrides };
   let delivery;
   if (['invoke', 'observe'].includes(request.verb)) {
     delivery = await measure('readExecutionDelivery', () => readExecutionDelivery(config));
+    authorityIdentity = delivery;
     selection.target = delivery.defaultTarget;
     config.deliveryTarget = delivery.defaultTarget;
   }
@@ -245,7 +257,7 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, 
   // Invocation resolves the selected declaration and its execution delivery.
   // Observation runs the same execution and streams the same telemetry.
   // Preparation is an optional, separately invoked retained proof and is never consumed here.
-  const bundle = await measure('readAuthority', () => readSelectedAuthority(databaseRoot, selection, { retainObjects: false, timings: timings.queries }));
+  const bundle = await measure('readAuthority', () => readSelectedAuthority(databaseRoot, selection, { retainObjects: false, documents: false, timings: timings.queries }));
   const cli = readCliConfiguration(bundle);
   // Invocation reads the capability's declared authority from the estate view and
   // hands it to the kernel. No per-port estate providers; no materialization.
@@ -268,11 +280,8 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, 
   let graphSource;
   if (suppliedGraph) graphSource = structuredClone(input);
   else {
-    const graphRead = await measure('readGraphSource', () => readQuery(
-      "SELECT graph_source FROM analysis.v_capability_graph_source WHERE capability_id = CONVERT(nvarchar(400), JSON_VALUE(@input,'$.capabilityId'))",
-      { input: { capabilityId: selection.capabilityId }, rowLimit: 1, retainObjects: false }));
-    if (!graphRead.recordsets[0] || graphRead.recordsets[0].length === 0) throw new Error('DECLARED_GRAPH_SOURCE_MISSING:' + selection.capabilityId);
-    graphSource = JSON.parse(graphRead.recordsets[0][0].graph_source);
+    if (!bundle.graphSource) throw new Error('DECLARED_GRAPH_SOURCE_MISSING:' + selection.capabilityId);
+    graphSource = structuredClone(bundle.graphSource);
     graphSource.input = input;
   }
   // The display projection is declared on the capability's CLI interface, which
@@ -285,5 +294,6 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, 
     outcome: { capabilityId: selection.capabilityId, scenarioId: selected.scenario_id, result: outcome, executions: [], observations: [],
       ...(display ? { display } : {}),
       evidence: { timings, authoritySource: 'DATABASE', bodyStorage: 'NOT_REQUESTED', managedAdmission: 'NOT_REQUESTED',
-        snapshotId: bundle.authority.snapshotId, projectionDigest: bundle.authority.projectionDigest } } };
+        snapshotId: bundle.authority.snapshotId, projectionDigest: bundle.authority.projectionDigest,
+        viewDefinitionDigest: bundle.authority.viewDefinitionDigest } } };
 }

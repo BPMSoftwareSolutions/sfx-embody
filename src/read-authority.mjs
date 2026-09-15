@@ -16,22 +16,20 @@ import { pathToFileURL } from 'node:url';
 //       ~30 s because analysis.v_scenario_language_resolution expands every
 //       capability/scenario pair before filtering. Diagnostics and proof paths
 //       ask for it deliberately; invocation does not.
+// `documents: false` keeps only graph-required assembly. Explicit extraction
+// retains the full document set as JSON in the primary row's `documents` column.
+// The frontdoor supplies `query` and invocation-local mechanics; direct extraction
+// can still use the standalone query primitive.
 const AUTHORITY_READ = `
-SELECT TOP 1 g.capability_id,
+SELECT g.capability_id,
        g.root_scenario_id AS scenario_id,
-       n.namespace_id
-FROM analysis.v_capability_graph_source g
-LEFT JOIN model.capability c ON c.capability_id = g.capability_id
-LEFT JOIN model.identity_namespace n ON n.namespace_pk = c.namespace_pk
-WHERE g.capability_id = CONVERT(nvarchar(400), JSON_VALUE(@input, '$.capabilityId'))
-  AND (JSON_VALUE(@input, '$.namespaceId') IS NULL OR n.namespace_id = JSON_VALUE(@input, '$.namespaceId'))
-ORDER BY n.namespace_id;
-
-SELECT d.source_path, d.entry_id,
-       CONVERT(varbinary(max), CONVERT(varchar(max), d.document) COLLATE Latin1_General_100_BIN2_UTF8) AS content_bytes
-FROM analysis.v_capability_execution_declaration d
-WHERE d.capability_id = CONVERT(nvarchar(400), JSON_VALUE(@input, '$.capabilityId'))
-ORDER BY d.source_path, d.entry_id;`;
+       g.namespace_id, g.graph_source, g.cli_configuration, g.documents
+FROM analysis.capability_graph_source(
+  CONVERT(nvarchar(400), JSON_VALUE(@input, '$.capabilityId')),
+  CONVERT(bit, JSON_VALUE(@input, '$.includeDocuments')),
+  CONVERT(nvarchar(400), JSON_VALUE(@input, '$.namespaceId'))) g
+WHERE g.estate_model_pk = @estate_model_pk
+  AND (JSON_VALUE(@input, '$.namespaceId') IS NULL OR g.namespace_id = JSON_VALUE(@input, '$.namespaceId'));`;
 
 const CLOSURE_READ = `
 DECLARE @capability_id nvarchar(4000)=JSON_VALUE(@input,'$.capabilityId'),
@@ -129,15 +127,16 @@ OPTION(MAXRECURSION 32767);`;
 const MECHANIC_READ = `SELECT definition_json FROM analysis.v_selected_semantic_definition
 WHERE estate_model_pk=@estate_model_pk AND object_kind='MECHANIC'`;
 
-export async function readAuthority(databaseRoot, selection, { retainObjects = true, timings, resolution = 'closure' } = {}) {
-  const { query } = await import(pathToFileURL(path.join(databaseRoot, 'src/query/run.mjs')));
+export async function readAuthority(databaseRoot, selection, { retainObjects = true, timings, resolution = 'closure', documents = true,
+  query: suppliedQuery, mechanics: suppliedMechanics } = {}) {
+  const query = suppliedQuery ?? (await import(pathToFileURL(path.join(databaseRoot, 'src/query/run.mjs')))).query;
   const measure = async (name, work) => {
     const start = performance.now();
     try { return await work(); }
     finally { if (timings) timings[name] = performance.now() - start; }
   };
   const read = (name, statement, input) => measure(name, () => query(statement, { input, rowLimit: 100000, retainObjects }));
-  const authority = await read('capability-authority', AUTHORITY_READ, selection);
+  const authority = await read('capability-authority', AUTHORITY_READ, { ...selection, includeDocuments: documents ? 1 : 0 });
   const root = authority.recordsets[0]?.[0];
   if (!root) throw new Error('CAPABILITY_NOT_FOUND');
   if (selection.scenarioId === undefined && (authority.truncated || authority.recordsets[0].length !== 1)) throw new Error('CAPABILITY_ROOT_SCENARIO_UNRESOLVED');
@@ -146,7 +145,7 @@ export async function readAuthority(databaseRoot, selection, { retainObjects = t
   selection = { ...selection, scenarioId, ...(root.namespace_id === undefined ? {} : { namespaceId: root.namespace_id }) };
   const closure = await read('capability-closure', CLOSURE_READ, selection);
   const resolutions = resolution === 'requirements' ? await read('scenario-resolver-map', RESOLUTION_READ, selection) : null;
-  const mechanics = await read('mechanic-definitions', MECHANIC_READ, selection);
+  const mechanics = suppliedMechanics ?? await read('mechanic-definitions', MECHANIC_READ, selection);
   // Every retained read must describe the same snapshot, projection and view
   // definitions. A skipped resolver read is simply not among them.
   for (const result of [authority, closure, resolutions, mechanics].filter(Boolean)) {
@@ -154,7 +153,8 @@ export async function readAuthority(databaseRoot, selection, { retainObjects = t
       || result.viewDefinitionDigest !== authority.viewDefinitionDigest)
       throw new Error('DATABASE_AUTHORITY_NOT_COHERENT');
   }
-  return { selection, authority, closure, resolutions, mechanics };
+  const graphSource = JSON.parse(root.graph_source);
+  return { selection, authority, closure, resolutions, mechanics, graphSource };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {

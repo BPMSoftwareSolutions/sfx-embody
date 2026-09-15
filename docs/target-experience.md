@@ -44,11 +44,14 @@ target; agents must not edit SDA), [implementation-strategy.md](implementation-s
    current-definition selection, and the rollback preflight.
 2. **One single deterministic invocation path for all capabilities (CLI, API, UI).**
    Today: the CLI path is genuinely single — `invoke` and `observe` run the *same*
-   code (`observe` only sets `SIDEFX_OBSERVE=1`), through the loader reading the
-   estate views, into the declared `run-declared-graph` (compile → execute). No
-   per-capability dispatch; resolution is data. Remaining: API/UI do not share the
-   loader; `materialize`/`embodiment-materialization` is a stale surface that should
-   be removed; residual `estateProvider`/`src/resolvers/*` bindings are data defects.
+   code (`observe` only sets `SIDEFX_OBSERVE=1`), through bounded capability reads
+   on one pinned reader session, into the declared `run-declared-graph`
+   (compile → execute). No per-capability dispatch; resolution is data. The first
+   [invocation optimization](performance-optimization.md) is installed: greeting
+   delivery is about 2 seconds rather than 57 seconds, without changing its graph
+   or outcome digest. Remaining: API/UI do not share the loader; residual
+   `estateProvider`/`src/resolvers/*` bindings and missing overlay entries are data
+   defects. Stale delivery removal is separate subtraction work.
 3. **Presentation-layer capabilities (WPF, JavaFX, vanilla HTML, React) that project
    to multiple presentations.** SDA owns the presentation seam: a versioned
    `sda-ui-presentation-ir` protocol, `resolve-declared-ui-presentation` →
@@ -68,8 +71,9 @@ target; agents must not edit SDA), [implementation-strategy.md](implementation-s
    in the rows.
 4. **Invoke live and see execution telemetry, choosing semantic altitudes to observe
    — "execution performance drilldown" (EPD).** Today: `observe` streams only
-   `delivery-phase` timings (readExecutionDelivery, readAuthority, readGraphSource,
-   executeDeclaredGraph) plus process setup/total. The kernel returns *testimony*,
+   `delivery-phase` timings (readExecutionDelivery, readAuthority,
+   executeDeclaredGraph) plus process and read-session timings in evidence. The
+   graph read is now part of readAuthority, not a second query. The kernel returns *testimony*,
    not a stream: `cellTestimony` / `edgeTestimony` / `observedPathDigest`, not passed
    to an observer. Semantic **cell altitudes** are `scenario`, `mechanic`, `provider`,
    `physical` (operations are the estate's execution-authority operation list, not an
@@ -128,8 +132,12 @@ ontology.
 
 The next architecture phase is **subtraction**, not another subsystem:
 
+The diagram records the research baseline. Its invocation-read subtraction is now
+installed; measured results and remaining costs are in
+[performance-optimization.md](performance-optimization.md).
+
 ```
-        CURRENT                              TARGET
+        RESEARCH BASELINE                    TARGET
 SQL authority                       SQL / JSON authority
   → views                             → bounded capability read
   → bundles                           → one coherence session

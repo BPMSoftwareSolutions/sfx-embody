@@ -3,6 +3,7 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { executeDatabaseCommand, validateDatabaseCommand } from './invoke-database-capability.mjs';
 import { readAuthority } from './read-authority.mjs';
+import { withDatabaseReadSession } from './database-read-session.mjs';
 import { restrictMemoryProcess } from './restrict-memory-process.mjs';
 
 try {
@@ -22,16 +23,15 @@ try {
   for (const key of ['databaseRoot', 'sdaRoot']) config[key] = path.resolve(path.dirname(configFile), config[key]);
   // Preserve the database reader's existing credential reference. Never retain it
   // in command envelopes or execution evidence. Windows lookup is read-only.
-  const { config: readDatabaseConfig } = await import(pathToFileURL(path.join(config.databaseRoot, 'src/core.mjs')));
-  const { connectionString } = await import(pathToFileURL(path.join(config.databaseRoot, 'src/ingest/database.mjs')));
-  const { connectionEnvironmentVariable } = await readDatabaseConfig();
+  const { config: readDatabaseConfig, stable, hash, digest } = await import(pathToFileURL(path.join(config.databaseRoot, 'src/core.mjs')));
+  const { connectionString, connect, sql } = await import(pathToFileURL(path.join(config.databaseRoot, 'src/ingest/database.mjs')));
+  const { connectionEnvironmentVariable, queryRowLimit } = await readDatabaseConfig();
   process.env[connectionEnvironmentVariable] = connectionString(connectionEnvironmentVariable);
   // The frontdoor owns the connection. Inject the query runner and the
   // declaration read for the loader; the loader must not reach into
   // sidefx-database itself.
-  const { query: readQuery } = await import(pathToFileURL(path.join(config.databaseRoot, 'src/query/run.mjs')));
-  config.readQuery = readQuery;
-  config.readAuthority = readAuthority;
+  const { normalizeSql } = await import(pathToFileURL(path.join(config.databaseRoot, 'src/query/run.mjs')));
+  const { pinModel } = await import(pathToFileURL(path.join(config.databaseRoot, 'src/query/model-pin.mjs')));
   const processEvidence = restrictMemoryProcess(config);
   config.spawnDeclared = processEvidence.spawnDeclared;
   if (process.env.SIDEFX_OBSERVE === '1') {
@@ -46,7 +46,14 @@ try {
     };
   }
   const setupTime = performance.now();
-  const result = await executeDatabaseCommand(envelope, config);
+  const result = await withDatabaseReadSession({ connect, sql, pinModel, normalizeSql, stable, hash, digest, queryRowLimit },
+    async (readQuery, sessionEvidence) => {
+      config.readQuery = readQuery;
+      config.readAuthority = (root, selection, options) => readAuthority(root, selection, { ...options, query: readQuery });
+      const result = await executeDatabaseCommand(envelope, config);
+      if (result.outcome?.evidence) result.outcome.evidence.readSession = sessionEvidence;
+      return result;
+    });
   if (result.outcome?.evidence) {
     result.outcome.evidence.timings.processSetup = setupTime;
     result.outcome.evidence.timings.processTotal = performance.now();

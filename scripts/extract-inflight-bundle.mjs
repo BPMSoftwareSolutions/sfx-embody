@@ -16,9 +16,11 @@ const DATABASE_ROOT = 'C:/lab/sidefx-database';
 const db = (...p) => path.join(DATABASE_ROOT, ...p);
 
 // The transaction-bound declaration read. It mirrors the loader's own read in
-// src/read-authority.mjs -- the estate's declared views, never the legacy
-// sidefx-database diagnostics -- but runs on the experiment's transaction so
-// uncommitted rows are the authority.
+// src/read-authority.mjs -- the estate's own declared views under sql/ -- but
+// runs on the experiment's transaction so uncommitted rows are the authority.
+// sidefx-database supplies the connection and query runner only; nothing here
+// reads SQL out of it (docs/target-architecture.md, "Location of migrations and
+// reads").
 const AUTHORITY_READ = `
 SELECT TOP 1 g.capability_id,
        g.root_scenario_id AS scenario_id,

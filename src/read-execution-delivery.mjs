@@ -1,10 +1,7 @@
-import path from 'node:path';
-import { pathToFileURL } from 'node:url';
-
 // The CLI provider declares the execution capability and its carrier mappings.
 // The authority reader declares the default target. Neither is chosen here.
 export async function readExecutionDelivery(context) {
-  const query = context.readQuery ?? (await import(pathToFileURL(path.join(context.databaseRoot, 'src/query/run.mjs')).href)).query;
+  const query = context.readQuery;
   const result = await query(`SELECT declared_id AS provider_id,
     JSON_QUERY(definition_json,'$.semantics.executionDelivery') AS configuration
     FROM analysis.v_selected_semantic_definition

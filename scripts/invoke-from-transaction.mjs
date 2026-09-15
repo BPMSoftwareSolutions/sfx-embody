@@ -14,71 +14,26 @@ import { createHash } from 'node:crypto';
 import assert from 'node:assert/strict';
 import { executeEstateCapability, executeSelectedDeclaration, executeDatabaseCommand } from '../src/invoke-database-capability.mjs';
 import { readExecutionDelivery } from '../src/read-execution-delivery.mjs';
+import { readAuthority } from '../src/read-authority.mjs';
+import { withDatabaseReadSession } from '../src/database-read-session.mjs';
 
 const DATABASE_ROOT = 'C:/lab/sidefx-database';
 const SDA_ROOT = 'C:/lab/repos/scenario-driven-architecture';
 const db = (...p) => path.join(DATABASE_ROOT, ...p);
 
-// The transaction-bound declaration read. It mirrors the loader's own read in
-// src/read-authority.mjs -- the estate's declared views, never the legacy
-// sidefx-database diagnostics -- but runs on the experiment's transaction so
-// uncommitted rows are the authority.
-const AUTHORITY_READ = `
-SELECT TOP 1 g.capability_id,
-       g.root_scenario_id AS scenario_id,
-       n.namespace_id
-FROM analysis.v_capability_graph_source g
-LEFT JOIN model.capability c ON c.capability_id = g.capability_id
-LEFT JOIN model.identity_namespace n ON n.namespace_pk = c.namespace_pk
-WHERE g.capability_id = CONVERT(nvarchar(400), JSON_VALUE(@input, '$.capabilityId'))
-  AND (JSON_VALUE(@input, '$.namespaceId') IS NULL OR n.namespace_id = JSON_VALUE(@input, '$.namespaceId'))
-ORDER BY n.namespace_id;
-
-SELECT d.source_path, d.entry_id,
-       CONVERT(varbinary(max), CONVERT(varchar(max), d.document) COLLATE Latin1_General_100_BIN2_UTF8) AS content_bytes
-FROM analysis.v_capability_execution_declaration d
-WHERE d.capability_id = CONVERT(nvarchar(400), JSON_VALUE(@input, '$.capabilityId'))
-ORDER BY d.source_path, d.entry_id;`;
-
-const CLOSURE_READ = `
-DECLARE @capability_id nvarchar(4000)=JSON_VALUE(@input,'$.capabilityId'),
-        @scenario_id nvarchar(4000)=JSON_VALUE(@input,'$.scenarioId'),
-        @namespace_id nvarchar(4000)=JSON_VALUE(@input,'$.namespaceId');
-DECLARE @matches bigint,@capability_version_pk bigint,@scenario_version_pk bigint;
-SELECT @matches=COUNT_BIG(*),@capability_version_pk=MAX(ec.capability_version_pk)
-FROM model.estate_capability ec
-JOIN model.capability c ON c.capability_pk=ec.capability_pk
-JOIN model.identity_namespace n ON n.namespace_pk=c.namespace_pk
-WHERE ec.estate_model_pk=@estate_model_pk AND c.capability_id=@capability_id
-  AND (@namespace_id IS NULL OR n.namespace_id=@namespace_id);
-IF @matches=0 THROW 51000,'CAPABILITY_NOT_FOUND',1;
-IF @matches<>1 THROW 51000,'CAPABILITY_NAMESPACE_AMBIGUOUS',1;
-SELECT @matches=COUNT_BIG(*),@scenario_version_pk=MAX(cs.scenario_version_pk)
-FROM model.capability_scenario cs JOIN model.scenario s ON s.scenario_pk=cs.scenario_pk
-WHERE cs.capability_version_pk=@capability_version_pk AND s.scenario_id=@scenario_id;
-IF @matches=0 THROW 51000,'SCENARIO_NOT_IN_CAPABILITY',1;
-IF @matches<>1 THROW 51000,'SCENARIO_NAMESPACE_AMBIGUOUS',1;
-SELECT DISTINCT s.scenario_id AS downstream_scenario_id,cl.minimum_depth,cl.cycle_detected,
-       sc.capability_id AS owning_capability_id,
-       i.input_id,e.event_id,e.responsibility,o.outcome_id,sv.definition_digest AS scenario_definition_digest
-FROM analysis.v_scenario_invocation_closure cl
-JOIN model.scenario_version sv ON sv.scenario_version_pk=cl.downstream_scenario_version_pk
-JOIN model.scenario s ON s.scenario_pk=sv.scenario_pk
-JOIN model.capability sc ON sc.capability_pk=s.capability_pk
-LEFT JOIN model.scenario_input i ON i.scenario_version_pk=sv.scenario_version_pk
-LEFT JOIN model.scenario_event e ON e.scenario_version_pk=sv.scenario_version_pk
-LEFT JOIN model.scenario_outcome o ON o.scenario_version_pk=sv.scenario_version_pk
-WHERE cl.capability_version_pk=@capability_version_pk AND cl.selected_scenario_version_pk=@scenario_version_pk
-ORDER BY cl.minimum_depth,s.scenario_id
-OPTION(MAXRECURSION 32767);`;
-
-const experimentFile = process.argv[2] ?? db('sql/experiments/remove-overhead-and-scaffold-hello-world.sql');
+const experimentFile = process.argv[2];
+if (!experimentFile) {
+  console.error('usage: node --experimental-vm-modules scripts/invoke-from-transaction.mjs <migration.sql> [capabilityId] [input.json] [estate-cases.json]');
+  process.exit(2);
+}
 const capabilityId = process.argv[3] ?? 'hello-world-sql';
 const input = JSON.parse(await fs.readFile(process.argv[4] ?? path.resolve('examples/hello-world-sql.request.json'), 'utf8'));
 
 const { connect, sql } = await import(pathToFileURL(db('src/ingest/database.mjs')).href);
 const { pinModel } = await import(pathToFileURL(db('src/query/model-pin.mjs')).href);
 const { normalizeSql } = await import(pathToFileURL(db('src/query/run.mjs')).href);
+const { config, stable, hash, digest } = await import(pathToFileURL(db('src/core.mjs')).href);
+const { queryRowLimit } = await config();
 
 let text = await fs.readFile(experimentFile, 'utf8');
 const marker = 'ROLLBACK TRANSACTION;';
@@ -87,54 +42,21 @@ if (at < 0) throw new Error('NO_ROLLBACK_IN_EXPERIMENT');
 text = text.slice(0, at);
 const batches = text.split(/^\s*GO\s*$/mi).map(s => s.trim()).filter(Boolean);
 
-const pool = await connect();
-const tx = new sql.Transaction(pool);
 const outcome = { experimentFile, capabilityId, input, readPath: null, result: null };
-try {
-  await tx.begin();
-  for (const batch of batches) await new sql.Request(tx).batch(batch);
-  console.log('EXPERIMENT APPLIED (uncommitted)');
-
-  const pinned = await pinModel(tx);
-  const identity = { snapshotId: pinned.snapshot_id, projectionDigest: pinned.projection_id, viewDefinitionDigest: pinned.viewDefinitionDigest, truncated: false };
-  const readStatement = async (statement, { input: selection } = {}) => {
-    const request = new sql.Request(tx)
-      .input('estate_model_pk', sql.BigInt, pinned.estate_model_pk)
-      .input('snapshot_id', sql.VarChar(71), pinned.snapshot_id)
-      .input('projection_id', sql.VarChar(71), pinned.projection_id)
-      .input('view_definition_digest', sql.VarChar(71), pinned.viewDefinitionDigest)
-      .input('input', sql.NVarChar(sql.MAX), JSON.stringify(selection ?? null));
-    const result = await request.query(statement);
-    return { ...identity, recordsets: result.recordsets.map(rs => rs.map(normalizeSql)), rowCounts: result.recordsets.map(rs => rs.length) };
-  };
-
-  const mechanicsRaw = await new sql.Request(tx).query(`SELECT definition_json FROM analysis.v_selected_semantic_definition WHERE estate_model_pk=${Number(pinned.estate_model_pk)} AND object_kind='MECHANIC'`);
-  const mechanics = { ...identity, recordsets: [mechanicsRaw.recordset.map(normalizeSql)], rowCounts: [mechanicsRaw.recordset.length] };
-  // Every nested read stays on the same transaction, including reads performed
-  // by estate providers. Using a second connection would test installed rows.
-  const authorityReads = new Map();
-  const selectionKey = selection => JSON.stringify(Object.entries(selection).filter(([, value]) => value !== undefined).sort(([a], [b]) => a.localeCompare(b)));
-  const readTransactionAuthority = async (_databaseRoot, selection) => {
-    const key = selectionKey(selection);
-    if (authorityReads.has(key)) return structuredClone(authorityReads.get(key));
-    const authority = await readStatement(AUTHORITY_READ, { input: selection });
-    const root = authority.recordsets[0]?.[0];
-    if (!root) throw new Error('CAPABILITY_NOT_FOUND_ON_THIS_TRANSACTION:' + selection.capabilityId);
-    const resolved = { ...selection, scenarioId: selection.scenarioId ?? root.scenario_id,
-      ...(root.namespace_id === undefined ? {} : { namespaceId: root.namespace_id }) };
-    const closure = await readStatement(CLOSURE_READ, { input: resolved });
-    const bundle = { selection: resolved, authority, closure, resolutions: null, mechanics };
-    authorityReads.set(key, bundle);
-    authorityReads.set(selectionKey(bundle.selection), bundle);
-    return structuredClone(bundle);
-  };
-  const bundle = await readTransactionAuthority(DATABASE_ROOT, { capabilityId, target: 'node' });
-  const { authority, closure } = bundle;
+await withDatabaseReadSession({ connect, sql, pinModel, normalizeSql, stable, hash, digest, queryRowLimit }, async (readStatement, sessionEvidence) => {
+  // Use the production declaration reader with the uncommitted transaction.
+  // No second connection or separately maintained read SQL can bypass this proof.
+  const readTransactionAuthority = (root, selection, options) => readAuthority(root, selection,
+    { ...options, query: readStatement });
+  const bundle = await readTransactionAuthority(DATABASE_ROOT, { capabilityId, target: 'node' }, { retainObjects: false });
+  const { authority, closure, mechanics } = bundle;
   if (process.argv[6]) await fs.writeFile(process.argv[6], JSON.stringify(bundle, null, 2) + '\n');
   const selected = authority.recordsets[0][0];
-  outcome.readPath = { selected, authorityRows: authority.rowCounts, closureRows: closure.rowCounts, mechanicRows: mechanics.rowCounts };
+  outcome.readPath = { selected: { capability_id: selected.capability_id, scenario_id: selected.scenario_id, namespace_id: selected.namespace_id },
+    authorityRows: authority.rowCounts, closureRows: closure.rowCounts, mechanicRows: mechanics.rowCounts };
 
   const context = { databaseRoot: DATABASE_ROOT, sdaRoot: SDA_ROOT, estateRoot: path.resolve('.'), readAuthority: readTransactionAuthority, readQuery: readStatement };
+  context.deliveryTarget = (await readExecutionDelivery(context)).defaultTarget;
   if (process.env.SFX_PREFLIGHT_PHYSICAL_TRACE === '1') {
     context.collectProviderExecution = ({ cellId, input, outcome }) => {
       const payload = input?.payload ?? input;
@@ -162,20 +84,11 @@ try {
       }
     };
   }
-  // Invocation reads the capability's declared graph from the estate view and
-  // hands it to the kernel through the same run-declared-graph capability the
-  // loader uses. Every read stays on this transaction, so the uncommitted rows
-  // are the authority. Delivery selection names the target the applied rows
-  // declare; a capability with no declared target is unchanged.
-  const delivery = await readExecutionDelivery(context);
-  context.deliveryTarget = delivery.defaultTarget;
-  const graphRead = await readStatement(
-    "SELECT graph_source FROM analysis.v_capability_graph_source WHERE capability_id = CONVERT(nvarchar(400), JSON_VALUE(@input,'$.capabilityId'))",
-    { input: { capabilityId } });
-  if (!graphRead.recordsets[0]?.length) throw new Error('DECLARED_GRAPH_SOURCE_MISSING:' + capabilityId);
-  const graphSource = JSON.parse(graphRead.recordsets[0][0].graph_source);
-  graphSource.input = input;
-  const result = await executeEstateCapability({ capabilityId: 'run-declared-graph' }, graphSource, context);
+  const execution = await executeDatabaseCommand({ deliveryType: 'sfx-command-delivery.v1', operation: 'invoke',
+    request: { object: 'capability', verb: 'invoke', subject: capabilityId, input } }, context);
+  const result = execution.outcome.result;
+  outcome.evidence = execution.outcome.evidence;
+  outcome.evidence.readSession = sessionEvidence;
   outcome.result = result;
   console.log('DISPOSITION', result.disposition ?? result.contractId);
   console.log('OUTCOME', JSON.stringify(result));
@@ -231,12 +144,12 @@ try {
       console.log('VERIFIED', test.name);
     }
   }
-} catch (error) {
+}, { beforePin: async tx => {
+  for (const batch of batches) await new sql.Request(tx).batch(batch);
+  console.log('EXPERIMENT APPLIED (uncommitted)');
+} }).catch(error => {
   outcome.error = { message: error.message, stack: error.stack };
   console.error('INVOKE FAILED:', error.message);
   process.exitCode = 1;
-} finally {
-  try { await tx.rollback(); } catch {}
-  try { await pool.close(); } catch {}
-}
+});
 console.log('RESULT', JSON.stringify(outcome));

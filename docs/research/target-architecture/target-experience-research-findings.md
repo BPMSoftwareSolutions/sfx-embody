@@ -1,5 +1,9 @@
 # Timing review: which architecture decisions were premature
 
+The invocation-cost and read-path findings below record the research baseline.
+The first bounded-read and single-session optimization is now installed; current
+measurements and proof are in [performance-optimization.md](../../performance-optimization.md).
+
 ## 1. The rubric's method (extracted)
 
 **Starting constraint (minimality).** Begin with the least functionality that carries the intended Input → Event → Outcome to an observable result; zero/one/many providers only as the outcome requires; preserve required mechanic references; a fixture at an unresolved boundary must be labelled. Minimality does **not** authorize dropping required steps or changing topology (`sidefx-architecture-decision-rubric.md:11-21`). The initial decision need not design the eventual architecture; further structure is warranted only when actual needs/evidence/obligations support it (`:23`, `:34`).

@@ -14,12 +14,6 @@
         "find",
         "artifact"
       ]
-    },
-    "embodiment-materialization": {
-      "delivery": "embodiment-materialization",
-      "operations": [
-        "materialize"
-      ]
     }
   },
   "identities": {
@@ -113,20 +107,6 @@
           "operation": "observe"
         },
         "description": "Execute the database capability exactly as invoke does, streaming its execution telemetry live as the delivery observes it."
-      },
-      "materialize": {
-        "min": 1,
-        "max": 1,
-        "identity": "capability",
-        "input": true,
-        "inputType": true,
-        "display": true,
-        "namespace": true,
-        "wraps": {
-          "surface": "embodiment-materialization",
-          "operation": "materialize"
-        },
-        "description": "Materialize a capability identity's embodiment through the authorized write boundary: read, plan and write its native body beneath the embodiment root."
       },
       "circuit": {
         "min": 1,

@@ -105,8 +105,10 @@ Completed units, as reported and with proof where stated:
   `SemanticExecutionGraphEffectProvider` for c#: real non-facade ports, contract
   catalog enforced). Unit 16 (Lane E) is done via
   `expose-contract-authorities-in-graph-source.sql`, committed `ec6c6a7`.
-- **Lane A / performance #1, #2, #4 and #5 — in progress** by a concurrent
-  agent; not claimed done here.
+- **Lane P / invocation reads:** the bounded-read and single-session slice is now
+  installed; see the proof below and [performance-optimization.md](performance-optimization.md).
+  Full closure/mechanics batching and shared reference-catalog optimization remain
+  deferred, not completed.
 
 ## Wave 1 (2026-09-14) — six lanes dispatched against the target experience
 
@@ -139,6 +141,29 @@ authored / preflighted / installed as three distinct states, and must never inst
 a migration whose preflight did not pass. An accurate "blocked on X" is the
 deliverable when the estate cannot yet carry the unit; a green that required
 inventing provider or kernel behavior is a finding, not a fix.
+
+## Invocation read slice installed (2026-09-14)
+
+Lane P installed `sql/migrations/bound-capability-invocation-reads.sql` after
+rollback dry-run and production-reader preflight. The loader reads each bounded
+graph once, skips graph-unused documents, and shares one connection, transaction,
+coherence pin, reader identity and mechanic-definition read for the invocation.
+Preflight now uses that same session runner. No SDA changes or capability meaning
+changes were made; the work has not been git-committed.
+
+Proof: `say-hello-world` and `greet-by-name` retain their graph and outcome digests
+at 2.02 s / 2.12 s median delivery time, versus approximately 57 s before.
+Full CLI medians are 3.14 s / 3.13 s. Unicode and `observe` pass, and
+`sfx capability invoke run-declared-query --input {} --json` executes a real
+declared provider query on the same session (seven statements, one pin).
+The six-statement greeting path, refusal behavior, cleanup, SQL normalization,
+reader permissions and lock lifetime are covered by 32 unit tests and three
+opt-in integration checks. Full receipts and repeat commands are in
+[performance-optimization.md](performance-optimization.md).
+
+Lane C remains open: `resolve-sidefx-eligible-providers` fails for a missing `map`
+overlay binding with both its captured pre-change graph and the installed read.
+That failure was preserved and recorded, not hidden by a reader or kernel change.
 
 ## Unit template (use verbatim in the commit)
 
