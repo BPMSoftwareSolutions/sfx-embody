@@ -6,7 +6,6 @@
       "operations": [
         "invoke",
         "observe",
-        "prepare",
         "reveal",
         "circuit",
         "catalogue",
@@ -66,18 +65,6 @@
           "operation": "reveal"
         },
         "description": "Reveal a declared capability. --as meaning (default) tells its canonical story from retained authority, --format markdown for review-ready documentation with declared-relationship diagrams; --as circuit reads its retained blueprint."
-      },
-      "prepare": {
-        "min": 1,
-        "max": 1,
-        "identity": "capability",
-        "input": false,
-        "namespace": true,
-        "wraps": {
-          "surface": "database-invocation",
-          "operation": "prepare"
-        },
-        "description": "Resolve and prove the selected database capability; retain its preparation in SQL. Optional: invocation never consumes it."
       },
       "invoke": {
         "min": 1,

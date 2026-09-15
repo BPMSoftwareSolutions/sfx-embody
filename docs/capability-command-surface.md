@@ -9,13 +9,16 @@ disk involvement and no second source of truth:
 | `sfx capability list` | `model.estate_capability` and the selected `CAPABILITY` definitions | every declared capability with the user story it retains |
 | `sfx capability find <query>` | the same, matched in SQL | matching capabilities, each reporting which fields matched |
 | `sfx capability reveal <id> --as meaning` | the capability's declared semantic closure | its canonical story in human language |
+| `sfx capability reveal <id> --as meaning --scenario <scenario>` | the same read, with the selected scenario validated against the capability's members and invocation closure | the same story, reporting Root and Selected distinctly, with the selected scenario's declared faces |
 | `sfx capability reveal <id> --as meaning --format markdown` | the same read | the same story as review-ready Markdown with declared-relationship diagrams |
 | `sfx capability reveal <id> --as circuit` | the retained snapshot media publication | its retained blueprint catalogue or view |
 | `sfx capability invoke <id> --input …` | authority, planned and executed in memory | the kernel result and its evidence |
 | `sfx capability observe <id> --input …` | exactly what `invoke` reads | the same result, plus live execution telemetry |
 
-`prepare` remains on the old path pending its subtraction; the reader
-operations above are declared reads and are verified live.
+`prepare` was subtracted with its materialization mechanism: it is not offered,
+so `sfx capability prepare` is refused as an unknown operation rather than
+reaching a path nothing declares. The reader operations above are declared reads
+and are verified live.
 
 Every operation is a row in [config/sfx.commands.json](../config/sfx.commands.json)
 and a row in the `operations` table of
@@ -39,9 +42,11 @@ the current model's latest explicit media publication is read under the reader
 boundary and the retained catalogue, one retained view, or one retained
 artifact's original bytes is returned. The read never crosses a model boundary,
 and a model with no retained publication reports `CIRCUIT_PUBLICATION_UNAVAILABLE`
-rather than a substitute. `catalogue` remains the declared listing read; its
-circuit-availability field is not declared yet. `prepare` is not re-declared:
-its materialization mechanism was eliminated.
+rather than a substitute. `catalogue` is the declared listing read and its rows
+now carry `circuitAvailable`, true only when the current model's retained
+publication lists the capability's catalogue (`add-catalogue-circuit-availability.sql`).
+`prepare` is not re-declared and is not offered: its materialization mechanism
+was eliminated, so the command is refused as an unknown operation.
 
 Every value these commands print is read from the selected estate model. Where
 the authority declares nothing, the output says so — it never substitutes a
@@ -76,11 +81,13 @@ Every value is a declared relationship, never a naming convention:
   bindings with their platform capabilities, and the contract authorities.
 
 The declared read returns them together under the reader boundary, so the story
-and the snapshot identity travel in one read. Reading a non-root scenario, the
-retained circuit publication and the remaining reader operations
-(`list`, `find`, `circuit`, `catalogue`, `artifact`) are declared next; until
-then `--as circuit` fails as `CAPABILITY_VIEW_NOT_DECLARED` rather than
-pretending to read.
+and the snapshot identity travel in one read. A caller-selected scenario is
+honored by the same read: `selectedScenarioId` and `selectedScenario` (the
+scenario's owning capability and its declared input/event/outcome faces with
+their contracts) are returned beside the declared root, and a scenario that is
+neither a declared member of the capability nor in its declared invocation
+closure is refused with `SCENARIO_NOT_IN_CAPABILITY` rather than silently read as
+the root.
 
 ## Observation
 

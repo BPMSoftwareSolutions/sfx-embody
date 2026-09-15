@@ -186,6 +186,23 @@ test('reveal reads through the declared reader capability with the subject as in
   assert.equal(result.outcome.evidence.snapshotId, 'snapshot');
 });
 
+test('reveal carries the selected scenario into the reader input and returns the read untouched', async () => {
+  const config = context();
+  const result = await executeDatabaseCommand({ deliveryType: 'sfx-command-delivery.v1', operation: 'reveal',
+    request: { object: 'capability', verb: 'reveal', subject: 'example', namespace: 'sidefx:capabilities',
+      scenario: 'replay-scaffold-generation' } }, config);
+  assert.equal(result.outcome.view, 'meaning');
+  assert.equal(result.outcome.capabilityId, 'example');
+  assert.equal(result.outcome.scenarioId, 'replay-scaffold-generation');
+  // The fixture reader echoes the input it was handed, so the reader input and
+  // the delivered meaning are the same object: the loader adds the selected
+  // scenario to the read and reshapes none of the read's own outcome.
+  assert.deepEqual(result.outcome.meaning, { capabilityId: 'example', namespaceId: 'sidefx:capabilities',
+    scenarioId: 'replay-scaffold-generation' });
+  assert.deepEqual(config.reads.map(read => read.selection.capabilityId), ['read-capability-meaning', 'run-declared-graph']);
+  assert.equal(result.outcome.evidence.snapshotId, 'snapshot');
+});
+
 test('supplied graph input remains unchanged and observation failures do not affect execution', async () => {
   const input = { capabilityId: 'supplied', scenarios: [], executionAuthorities: [], input: { value: 7 } };
   const result = await executeDatabaseCommand(command(input), { ...context(), onObservation() { throw new Error('observer'); } });
