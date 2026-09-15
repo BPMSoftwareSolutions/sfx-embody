@@ -207,12 +207,12 @@ stages them into `--workspace`; the admitted consumer projector runs over the
 workspace and writes the generated seams, execution plans, conformance queries,
 fixtures and evidence under `<workspace>/projected`. The projection targets
 default to the workspace's declared targets and can be narrowed with
-`--targets node,python,csharp`. `--full-mechanics` demands the declared mechanics
-realized as target-native code. The current projector emits per-target seams onto
-the plan interpreter, so the flag refuses with
-`FULL_MECHANICS_REQUIRES_PER_LANGUAGE_PROJECTION` rather than publish a facade,
-until capability-scope execution projection lands. Without the flag the
-projection still writes the seams and plans as review output.
+`--targets node,python,csharp`. `--full-mechanics` selects the per-language
+capability execution emitters: each target's compiled plan is realized as
+target-native code (every cell bound to a real module or compiled operation, no
+compatibility provider, no runtime expression interpretation), with per-file
+`digest` + `sourcePointers` in the manifest. Without the flag the projection
+writes the seam bodies and plans as review output.
 
 The report names the out-directory, each target's `canonicalGraphDigest` and
 `realizedGraphDigest`, the bound/required mechanics, the file count and the
@@ -232,7 +232,11 @@ PURE_PROJECTION_CONFORMS; 12 declared document(s), 32 file(s)
 
 $ sfx capability project resolve-equity-market-price-evidence \
     --workspace embodiments/resolve-equity-market-price-evidence --full-mechanics
-FULL_MECHANICS_REQUIRES_PER_LANGUAGE_PROJECTION
+Projected resolve-equity-market-price-evidence -> …\embodiments\resolve-equity-market-price-evidence\projected
+  csharp   canonical sha256:6d8e145c…  bindings 137/137  emitted
+  node     canonical sha256:6d8e145c…  bindings 137/137  emitted
+  python   canonical sha256:6d8e145c…  bindings 137/137  emitted
+EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED; every slot a real module or compiled operation
 ```
 
 One SDA-side finding: the generated seam modules import the SDA runtime through a

@@ -95,16 +95,13 @@ async function project(request, config, readQuery) {
   const { projectConsumerCapability } = await import(pathToFileURL(projectorFile).href);
   await projectConsumerCapability(workspace, {
     ...(request.targets === undefined ? {} : { projectionTargets: request.targets }),
+    ...(request.fullMechanics === true ? { fullMechanics: true } : {}),
     repositoryRoot: config.sdaRoot });
   const planDir = path.join(outDir, 'execution-plans');
   const planFiles = (await fs.readdir(planDir)).filter(file => file.endsWith('.v3.json')).sort();
   const plans = [];
   for (const file of planFiles) plans.push(inspectPlan(file.replace(/^consumer-execution-plan\.|\.v3\.json$/g, ''),
     JSON.parse(await fs.readFile(path.join(planDir, file), 'utf8'))));
-  // The projected bodies are seams onto the plan interpreter, not the declared
-  // mechanics realized as target-native code. Full mechanics refuses rather than
-  // publish a facade; it becomes the switch for the honest path when it exists.
-  if (request.fullMechanics === true) throw new Error('FULL_MECHANICS_REQUIRES_PER_LANGUAGE_PROJECTION');
   const conformance = JSON.parse(await fs.readFile(path.join(outDir, 'projection-conformance.json'), 'utf8'));
   const written = await countFiles(outDir);
   return { capabilityId: request.subject, workspace, outDir, targets: plans.map(plan => plan.target),
