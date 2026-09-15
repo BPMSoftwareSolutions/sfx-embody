@@ -51,10 +51,10 @@ Production notes:
 
 - Run `chcp 65001` (UTF-8) in the recording terminal, otherwise the `✓`, `·` and
   `↳` line symbols render as mojibake. The CLI writes UTF-8 bytes either way.
-- The invocation beat is dependably ~2 s. `list` and `find` assemble the whole
-  declared estate read and can take considerably longer on a loaded estate; time
-  them on the recording machine and cut the command rather than the beat if they
-  are slow.
+- The invocation beat is dependably ~2 s, and `list`/`find` now read the whole
+  declared estate in about the same time (the declared listing read was
+  optimized from ~10 s of SQL to ~0.3 s; see
+  `sql/migrations/optimize-list-capabilities-read.sql`).
 - `sfx capability list --namespace sidefx:capabilities` prints the count the
   estate currently declares (264 at the time of the last recorded receipts). It is
   estate state, never a constant in the script or this document.
