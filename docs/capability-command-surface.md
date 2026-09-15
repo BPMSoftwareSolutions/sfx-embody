@@ -102,9 +102,11 @@ the repeatable CLI option `--observation-altitude NAME` over the four semantic
 cell altitudes (`scenario`, `mechanic`, `provider`, `physical`). Cells at a
 selected altitude stream; every edge is streamed when all four altitudes are
 selected, otherwise an edge streams when it enters a cell at a selected altitude.
-When the option is omitted the whole range streams. The operation is a row in
-[config/sfx.commands.json](../config/sfx.commands.json) (`"observationAltitudes": true`)
-and a row in the `operations` table, exactly like the other options.
+Observe is story-first: when no altitude is named the terminal requests the
+scenario altitude, and `--trace` requests the whole range. The operation is a row
+in [config/sfx.commands.json](../config/sfx.commands.json)
+(`"observationAltitudes": true`) and a row in the `operations` table, exactly
+like the other options.
 
 The observe result gains two fields that invoke never carries: `observedPathDigest`
 (also in `evidence.observedPathDigest`) and `overlay`. The overlay joins each
@@ -112,9 +114,55 @@ planned `canonicalGraph` cell and edge with the observed testimony — dispositi
 `outcomeVariant`, `selectedEdgeIds`, per-execution timings — and counts planned
 against observed topology. `invoke` output is unchanged.
 
-The kernel's per-cell timing and live testimony sink are an SDA change request.
-Until that lands, the estate still absorbs `cellTestimony` / `edgeTestimony` from
-the returned graph result, so the overlay and digest are populated either way.
+The kernel's per-cell timing and live testimony sink landed in SDA; `observe`
+streams from the sink when the kernel provides it and absorbs the returned
+`cellTestimony` / `edgeTestimony` when it does not, so the overlay, timing and
+digest are populated either way.
+
+### Semantic projection
+
+Testimony is mechanical by itself; `observe` also carries the declared semantic
+address of each executed cell. The estate joins testimony to the selected
+capability's own declaration: the scenario cell addresses to `SCENARIO_OUTCOME`
+with the declared `inputId` / `eventId` / `outcomeId`; each operation cell to its
+declared responsibility (`responsibilityId` — the declared Port or child
+Scenario — in `responsibilityOrdinal` order); each expression cell to its
+`mechanicId`. The address is data from rows; no prose enters the runtime.
+
+The terminal renders the address on the live stream (a responsibility as `✓`, an
+edge as `↳`, a mechanic as `·`), then renders the observed story for the result:
+declared faces as GIVEN / WHEN / THEN, responsibilities in declared order with
+their testimony timing and disposition, composed child scenarios under the
+parent, and the capability's declared `--display` projection when asked for.
+`invoke` carries none of it.
+
+```
+  ↳ 01:30:51.287 scenario resolve-equity-market-price-evidence 0.012 ms
+  ✓ 01:30:51.287 scenario resolve-equity-market-price-evidence 0.05 ms
+
+Scenario resolve-equity-market-price-evidence
+GIVEN live-equity-price-request  (live-equity-price-request.v1)
+WHEN
+  ✓ build-equity-price-binding-request  0.057 ms
+  ✓ bind-equity-price-provider-credential  0.465 ms
+  ✓ build-equity-price-exchange-request  0.073 ms
+  ✓ observe-equity-price-exchange  321.157 ms
+  ✓ normalize-equity-price-evidence  0.153 ms
+THEN
+  ✓ equity-market-price-evidence  (equity-market-price-evidence.v1)
+```
+
+The `--json` result carries `story` and each overlay row carries
+`semanticAddress`; `observedPathDigest` is unchanged.
+
+One kernel identity note: the scheduler reuses the operation cell's
+`cellExecutionId` for the scenario cell it wraps. The estate keys observed cells
+by declared `cellId` plus execution id, so both summaries survive; a unique
+scenario-cell execution id is an SDA change request.
+
+The presentation contract, the authority-side story projections and the demo
+approach are fixed in
+[execution-story-projection.md](execution-story-projection.md).
 
 
 ## Markdown documentation

@@ -72,17 +72,19 @@ target; agents must not edit SDA), [implementation-strategy.md](implementation-s
    interaction / presentation profile), projected per target — no framework decision
    in the rows.
 4. **Invoke live and see execution telemetry, choosing semantic altitudes to observe
-   — "execution performance drilldown" (EPD).** Today: `observe` streams only
-   `delivery-phase` timings (readExecutionDelivery, readAuthority,
-   executeDeclaredGraph) plus process and read-session timings in evidence. The
-   graph read is now part of readAuthority, not a second query. The kernel returns *testimony*,
-   not a stream: `cellTestimony` / `edgeTestimony` / `observedPathDigest`, not passed
-   to an observer. Semantic **cell altitudes** are `scenario`, `mechanic`, `provider`,
-   `physical` (operations are the estate's execution-authority operation list, not an
-   altitude). Telemetry authority and observation bindings exist. Gap: per-cell
-   timing requires the kernel to put timing in testimony (**SDA change request**);
-   altitude-selectable streaming, planned-vs-observed overlay, and surfacing
-   `observedPathDigest` are the EPD work.
+   — "execution performance drilldown" (EPD).** Installed: `observe` streams cell
+   and edge testimony at selectable semantic **cell altitudes** (`scenario`,
+   `mechanic`, `provider`, `physical`) with per-cell timing, returns the
+   planned-vs-observed overlay and `observedPathDigest`, and joins each cell to
+   its declared semantic address — scenario face, responsibility, mechanic. The
+   terminal renders the observed story: declared GIVEN / WHEN / THEN,
+   responsibilities in declared order with testimony timing, composed child
+   scenarios under the parent. `invoke` carries none of it. Remaining: render at
+   further altitudes and from the declared feature prose; the execution and
+   evidence story itself is live. Operations remain the estate's
+   execution-authority operation list, not a cell altitude. The presentation
+   contract, the story-projection model and the demo approach are fixed in
+   [execution-story-projection.md](execution-story-projection.md).
 
 ## Decision timing — what was premature (rubric §9)
 

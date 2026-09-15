@@ -299,7 +299,8 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, 
   // joins planned topology against what executed. Invocation takes none of this.
   let drilldown;
   if (request.verb === 'observe') {
-    drilldown = createExecutionDrilldown({ observationAltitudes: request.observationAltitudes, scenarioId: selected.scenario_id, observe });
+    drilldown = createExecutionDrilldown({ observationAltitudes: request.observationAltitudes, scenarioId: selected.scenario_id,
+      observe, authority: graphSource });
     config.onTestimony = drilldown.sink;
     config.onState = state => drilldown.setPlan(state);
   }
@@ -309,7 +310,7 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, 
   return { disposition: 'terminated',
     outcome: { capabilityId: selection.capabilityId, scenarioId: selected.scenario_id, result: outcome, executions: [], observations: [],
       ...(display ? { display } : {}),
-      ...(drilldown ? { overlay: drilldown.buildOverlay(outcome) } : {}),
+      ...(drilldown ? { overlay: drilldown.buildOverlay(outcome), story: drilldown.buildStory(outcome) } : {}),
       ...(observedPathDigest !== undefined ? { observedPathDigest } : {}),
       evidence: { timings, authoritySource: 'DATABASE', bodyStorage: 'NOT_REQUESTED', managedAdmission: 'NOT_REQUESTED',
         snapshotId: bundle.authority.snapshotId, projectionDigest: bundle.authority.projectionDigest,

@@ -107,7 +107,7 @@
           "surface": "database-invocation",
           "operation": "observe"
         },
-        "description": "Execute the database capability exactly as invoke does, streaming its execution telemetry live as the delivery observes it. --observation-altitude NAME (repeatable: scenario, mechanic, provider, physical) selects which semantic cell altitudes stream; every selected altitude also streams the edges entering it, and the result carries the planned-vs-observed overlay and the observed-path digest."
+        "description": "Execute the database capability exactly as invoke does and tell its story: the declared faces, responsibilities in declared order with testimony timing, composed scenarios, and (with --display) the declared products; the result carries the planned-vs-observed overlay and the observed-path digest. The stream is story-first -- the scenario altitude -- and --trace streams the complete mechanical testimony; --observation-altitude NAME (repeatable: scenario, mechanic, provider, physical) selects which semantic cell altitudes stream, and every selected altitude also streams the edges entering it."
       },
       "circuit": {
         "min": 1,

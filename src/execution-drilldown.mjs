@@ -1,7 +1,11 @@
 // The execution performance drilldown. The kernel returns testimony for every
 // cell and edge it executes; when it offers a live testimony sink this module
 // receives each item, streams the ones the caller selected as observations, and
-// joins the complete observed path back onto the plan's canonical graph.
+// joins the complete observed path back onto the plan's canonical graph. Each
+// streamed item and overlay row also carries its declared semantic address, so
+// the observer can tell the scenario story from testimony and authority alone.
+import { buildObservedStory, createSemanticAuthority, semanticAddress } from './semantic-address.mjs';
+
 const ALTITUDES = ['scenario', 'mechanic', 'provider', 'physical'];
 const CELL_TESTIMONY = 'cell-execution-testimony.v1';
 const EDGE_TESTIMONY = 'edge-execution-testimony.v1';
@@ -15,10 +19,23 @@ export function isObservationAltitudeSelection(value) {
     && new Set(value).size === value.length;
 }
 
-const cellKey = testimony => testimony.cellExecutionId ?? `${testimony.cellId}:${testimony.logicalOrder}`;
+// A cell identity is its declared cell id plus its occurrence. The kernel may
+// reuse one execution id for a scenario cell and the operation cell it wraps, so
+// the execution id alone would drop one of them.
+const cellKey = testimony => `${testimony.cellId}\u0000${testimony.cellExecutionId ?? testimony.logicalOrder}`;
 const edgeKey = testimony => `${testimony.edgeId}:${testimony.logicalOrder}`;
 
-const cellObservation = (testimony, scenarioId) => ({
+// A declared mechanic identity: `mechanic:literal.v1` and `junction:selection.v1`
+// both name one mechanic.
+const mechanicId = value => typeof value === 'string' && value.length
+  ? value.replace(/^(mechanic|junction):/, '').replace(/\.v\d+$/, '') : null;
+
+// Address fields are string-or-number identity; null/absent members are omitted so
+// the observation channel stays a scalar allowlist.
+const addressFields = address => Object.fromEntries(Object.entries(address ?? {})
+  .filter(([, value]) => typeof value === 'string' || typeof value === 'number'));
+
+const cellObservation = (testimony, scenarioId, address) => ({
   observationType: CELL_TESTIMONY,
   phase: 'executeDeclaredGraph',
   status: 'observed',
@@ -26,28 +43,30 @@ const cellObservation = (testimony, scenarioId) => ({
   executionId: testimony.cellExecutionId,
   rootExecutionId: testimony.rootExecutionId,
   parentExecutionId: testimony.parentCellExecutionId ?? null,
-  scenarioId,
+  scenarioId: address?.scenarioId ?? scenarioId,
   sequence: testimony.logicalOrder,
   cellId: testimony.cellId,
   cellAltitude: testimony.cellAltitude,
   startedAt: testimony.startedAt,
   completedAt: testimony.completedAt,
-  durationMilliseconds: testimony.durationMilliseconds
+  durationMilliseconds: testimony.durationMilliseconds,
+  ...addressFields(address)
 });
 
-const edgeObservation = (testimony, scenarioId) => ({
+const edgeObservation = (testimony, scenarioId, address) => ({
   observationType: EDGE_TESTIMONY,
   phase: 'executeDeclaredGraph',
   status: 'observed',
   observedAt: new Date().toISOString(),
   executionId: testimony.sourceCellExecutionId,
   rootExecutionId: testimony.rootExecutionId,
-  scenarioId,
+  scenarioId: address?.scenarioId ?? scenarioId,
   sequence: testimony.logicalOrder,
   edgeId: testimony.edgeId,
   startedAt: testimony.startedAt,
   completedAt: testimony.completedAt,
-  durationMilliseconds: testimony.durationMilliseconds
+  durationMilliseconds: testimony.durationMilliseconds,
+  ...addressFields(address)
 });
 
 const cellSummary = testimony => ({
@@ -75,12 +94,16 @@ const edgeSummary = testimony => ({
 const planCells = plan => [...(plan?.canonicalGraph?.cells ?? []), ...(plan?.realizationOverlay?.physicalCells ?? [])];
 const planEdges = plan => [...(plan?.canonicalGraph?.edges ?? []), ...(plan?.realizationOverlay?.physicalEdges ?? [])];
 
-export function createExecutionDrilldown({ observationAltitudes, scenarioId, observe }) {
+export function createExecutionDrilldown({ observationAltitudes, scenarioId, observe, authority }) {
   const selected = new Set(observationAltitudes ?? ALTITUDES);
   const cells = new Map();
   const edges = new Map();
+  const semantic = createSemanticAuthority(authority);
   let plan = null;
   let altitudeByCellId = null;
+  let cellByCellId = null;
+  const addressFor = cellId => semanticAddress(semantic, cellId,
+    mechanicId(cellByCellId?.get(cellId)?.execution?.authorityId));
 
   const remember = testimony => {
     if (!object(testimony)) return;
@@ -100,10 +123,11 @@ export function createExecutionDrilldown({ observationAltitudes, scenarioId, obs
     try {
       remember(testimony);
       if (testimony.testimonyType === CELL_TESTIMONY) {
-        if (selected.has(testimony.cellAltitude)) observe(cellObservation(testimony, scenarioId));
+        if (selected.has(testimony.cellAltitude)) observe(cellObservation(testimony, scenarioId, addressFor(testimony.cellId)));
       } else if (testimony.testimonyType === EDGE_TESTIMONY) {
         const altitude = altitudeByCellId?.get(testimony.destinationCellId);
-        if (selected.size === ALTITUDES.length || selected.has(altitude)) observe(edgeObservation(testimony, scenarioId));
+        if (selected.size === ALTITUDES.length || selected.has(altitude))
+          observe(edgeObservation(testimony, scenarioId, addressFor(testimony.destinationCellId)));
       }
     } catch { /* Testimony is not execution authority. */ }
   };
@@ -121,6 +145,7 @@ export function createExecutionDrilldown({ observationAltitudes, scenarioId, obs
     if (plan === null && object(value) && object(value.canonicalGraph)) {
       plan = value;
       altitudeByCellId = new Map(planCells(plan).map(cell => [cell.cellId, cell.altitude]));
+      cellByCellId = new Map(planCells(plan).map(cell => [cell.cellId, cell]));
     }
   };
 
@@ -141,24 +166,28 @@ export function createExecutionDrilldown({ observationAltitudes, scenarioId, obs
     }
     const cellIds = new Set(plannedCells.map(cell => cell.cellId));
     const edgeIds = new Set(plannedEdges.map(edge => edge.edgeId));
+    const destinationOf = edge => typeof edge.to === 'string' ? edge.to : edge.to?.cellId;
     const cellRows = plannedCells.map(cell => ({
       cellId: cell.cellId,
       altitude: cell.altitude,
       parentCellId: cell.parentCellId ?? null,
+      semanticAddress: addressFor(cell.cellId),
       planned: { inputContractId: cell.input?.contractId, outcomeContractId: cell.outcome?.contractId,
         executionAuthorityId: cell.execution?.authorityId, authorityDigest: cell.execution?.authorityDigest },
       observed: observedCells.get(cell.cellId) ?? []
     }));
     for (const [cellId, observed] of observedCells) if (!cellIds.has(cellId))
-      cellRows.push({ cellId, altitude: observed[0]?.cellAltitude ?? null, parentCellId: null, planned: null, observed });
+      cellRows.push({ cellId, altitude: observed[0]?.cellAltitude ?? null, parentCellId: null,
+        semanticAddress: addressFor(cellId), planned: null, observed });
     const edgeRows = plannedEdges.map(edge => ({
       edgeId: edge.edgeId,
       kind: edge.kind,
+      semanticAddress: addressFor(destinationOf(edge)),
       planned: { from: edge.from ?? null, to: edge.to ?? null, selectsVariant: edge.selectsVariant ?? null },
       observed: observedEdges.get(edge.edgeId) ?? []
     }));
     for (const [edgeId, observed] of observedEdges) if (!edgeIds.has(edgeId))
-      edgeRows.push({ edgeId, kind: null, planned: null, observed });
+      edgeRows.push({ edgeId, kind: null, semanticAddress: addressFor(observed[0]?.destinationCellId), planned: null, observed });
     return {
       graphId: canonical?.graphId ?? result?.graphId ?? null,
       canonicalGraphDigest: plan?.canonicalGraphDigest ?? result?.canonicalGraphDigest ?? null,
@@ -170,5 +199,25 @@ export function createExecutionDrilldown({ observationAltitudes, scenarioId, obs
     };
   };
 
-  return { sink, absorb, setPlan, buildOverlay };
+  // The observed story in declared terms: scenario faces, responsibilities in
+  // declared order with testimony timing, and composed child scenarios. The
+  // presentation layer supplies the language; this module supplies structure.
+  const buildStory = result => {
+    const responsibilities = new Map();
+    for (const testimony of cells.values()) {
+      const address = addressFor(testimony.cellId);
+      if (address?.semanticRole !== 'EXECUTION_RESPONSIBILITY') continue;
+      const key = `${address.scenarioId}\u0000${address.responsibilityOrdinal}`;
+      if (responsibilities.has(key)) continue;
+      responsibilities.set(key, { ...address,
+        disposition: testimony.disposition ?? null,
+        outcomeVariant: testimony.outcomeVariant ?? null,
+        outcomeContractId: testimony.outcomeContractId ?? null,
+        durationMilliseconds: testimony.durationMilliseconds ?? null });
+    }
+    return buildObservedStory({ authority: semantic, scenarioId,
+      responsibilities: [...responsibilities.values()], observedPathDigest: result?.observedPathDigest });
+  };
+
+  return { sink, absorb, setPlan, buildOverlay, buildStory };
 }
