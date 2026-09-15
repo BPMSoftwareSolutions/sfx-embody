@@ -1,0 +1,50 @@
+{
+  "document": "sidefx-capability-authority.v1",
+  "capabilityId": "read-declared-capability-document",
+  "meaning": {
+    "intent": "read back the authority document the current model installed for one capability",
+    "outcome": "the caller observes the installed sidefx-capability-authority.v1 document and its content address, or that no document is installed for the id"
+  },
+  "cli": { "display": { "select": "outcome.payload", "as": "json" } },
+  "contracts": [
+    { "id": "read-declared-capability-document-result.v1",
+      "schema": { "type": "object",
+        "properties": {
+          "capabilityId": { "type": "string" },
+          "documentInstalled": { "type": "boolean" },
+          "documentDigest": { "type": "string" },
+          "document": { "type": "object" }
+        },
+        "required": ["capabilityId", "documentInstalled"],
+        "additionalProperties": true } }
+  ],
+  "scenarios": [
+    {
+      "scenarioId": "read-declared-capability-document",
+      "name": "Read the authority document installed for one capability",
+      "inputId": "read-declared-capability-document-request",
+      "inputContract": "read-capability-meaning-request.v1",
+      "eventId": "declared-capability-document-requested",
+      "eventAuthority": "read-declared-capability-document.v1",
+      "outcomeId": "declared-capability-document",
+      "outcomeContract": "read-declared-capability-document-result.v1",
+      "terminal": true,
+      "root": true,
+      "given": "one capability identity and the current model",
+      "when": "the installed capability document ledger is read under the reader boundary",
+      "then": "the installed authority document and its content address are returned, or the caller is told no document is installed for the id",
+      "operations": [
+        { "operationId": "read-declared-capability-document.0", "kind": "invoke-port",
+          "portId": "read-declared-capability-document-port" }
+      ],
+      "portBindings": [
+        { "portId": "read-declared-capability-document-port",
+          "platformCapabilityId": "sda-embodiment-plan-port.v1",
+          "configuration": {
+            "statement": "DECLARE @capability_id nvarchar(400)=NULLIF(LTRIM(RTRIM(JSON_VALUE(@input,'$.capabilityId'))),N'');\nDECLARE @document_digest varchar(64)=NULL;\nIF @capability_id IS NOT NULL\n SELECT TOP 1 @document_digest=LOWER(JSON_VALUE(d.definition_json,'$.semantics.document_digest'))\n FROM analysis.v_selected_semantic_definition d\n WHERE d.estate_model_pk=@estate_model_pk AND d.object_kind='CAPABILITY_DOCUMENT'\n  AND d.namespace_id=N'sidefx:capability-documents' AND d.declared_id=@capability_id COLLATE Latin1_General_100_BIN2;\nDECLARE @document nvarchar(max)=NULL;\nIF @document_digest IS NOT NULL\n SELECT @document=CONVERT(nvarchar(max),CONVERT(varchar(max),co.content_bytes) COLLATE Latin1_General_100_BIN2_UTF8)\n FROM source.content_object co WHERE co.content_digest=CONVERT(binary(32),@document_digest,2);\nSELECT (SELECT @capability_id AS capabilityId,\n CONVERT(bit,CASE WHEN @document_digest IS NULL THEN 0 ELSE 1 END) AS documentInstalled,\n CASE WHEN @document_digest IS NULL THEN NULL ELSE N'sha256:'+@document_digest END AS documentDigest,\n JSON_QUERY(@document) AS document\n FOR JSON PATH,WITHOUT_ARRAY_WRAPPER) AS value",
+            "resultColumn": "value"
+          } }
+      ]
+    }
+  ]
+}
