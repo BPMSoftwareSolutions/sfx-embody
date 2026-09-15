@@ -343,8 +343,9 @@ ORDER BY d.declared_id;
 -- The rows a JSON-authored capability produces, beside a SQL-authored one of the
 -- same shape. Same kinds, same profiles, same port standard: no providerId.
 SELECT '2_json_vs_sql_rows' AS result_set, c.capability_id,
-       CASE WHEN c.capability_id IN (N'count-declared-capabilities',N'count-declared-contracts')
-            COLLATE Latin1_General_100_BIN2 THEN N'json' ELSE N'sql' END AS authored_by,
+       CASE WHEN c.capability_id COLLATE Latin1_General_100_BIN2
+                 IN (N'count-declared-capabilities',N'count-declared-contracts')
+            THEN N'json' ELSE N'sql' END AS authored_by,
        s.scenario_id, sv.source_profile AS scenario_profile,
        pv.port_profile, eav.authority_profile,
        JSON_VALUE(pd.definition_json,'$.semantics.platformCapabilityId') AS platform_capability_id,
@@ -387,5 +388,4 @@ JOIN model.capability_version cv ON cv.capability_pk=c.capability_pk
 WHERE c.capability_id IN (N'count-declared-capabilities',N'count-declared-contracts')
 GROUP BY c.capability_id
 ORDER BY c.capability_id;
-ROLLBACK TRANSACTION;
--- To install, replace the ROLLBACK above with COMMIT and re-run.
+COMMIT TRANSACTION;

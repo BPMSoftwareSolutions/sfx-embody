@@ -1,0 +1,44 @@
+{
+  "document": "sidefx-capability-authority.v1",
+  "capabilityId": "count-declared-contracts",
+  "meaning": {
+    "intent": "count the contracts the current model declares",
+    "outcome": "the caller observes how many contracts the current model declares"
+  },
+  "cli": { "display": { "select": "outcome.payload", "as": "json" } },
+  "contracts": [
+    { "id": "count-declared-contracts-request.v1",
+      "schema": { "type": "object", "additionalProperties": true } },
+    { "id": "count-declared-contracts-result.v1",
+      "schema": { "type": "object", "additionalProperties": true } }
+  ],
+  "scenarios": [
+    {
+      "scenarioId": "count-declared-contracts",
+      "name": "Count the contracts the current model declares",
+      "inputId": "count-declared-contracts-request",
+      "inputContract": "count-declared-contracts-request.v1",
+      "eventId": "count-declared-contracts-requested",
+      "eventAuthority": "count-declared-contracts.v1",
+      "outcomeId": "count-declared-contracts-result",
+      "outcomeContract": "count-declared-contracts-result.v1",
+      "terminal": true,
+      "root": true,
+      "given": "the current model",
+      "when": "the declared read executes under the reader boundary",
+      "then": "the number of contracts the current model declares is returned",
+      "operations": [
+        { "operationId": "count-declared-contracts.0", "kind": "invoke-port",
+          "portId": "count-declared-contracts-port" }
+      ],
+      "portBindings": [
+        { "portId": "count-declared-contracts-port",
+          "platformCapabilityId": "sda-embodiment-plan-port.v1",
+          "configuration": {
+            "statement": "SELECT (SELECT COUNT_BIG(*) AS declaredContracts FROM model.contract FOR JSON PATH,WITHOUT_ARRAY_WRAPPER) AS value",
+            "resultColumn": "value"
+          } }
+      ]
+    }
+  ]
+}

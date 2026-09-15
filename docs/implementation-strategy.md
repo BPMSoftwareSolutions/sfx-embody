@@ -109,6 +109,16 @@ Completed units, as reported and with proof where stated:
   installed; see the proof below and [performance-optimization.md](performance-optimization.md).
   Full closure/mechanics batching and shared reference-catalog optimization remain
   deferred, not completed.
+- **Wave J — JSON authoring surface installed.** `declare-json-authoring-surface.sql`
+  (fixed and installed) declares `model.declare_capability_document` plus two
+  JSON-authored capabilities (`count-declared-capabilities`,
+  `count-declared-contracts`) from the documents under `examples/json-authoring/`.
+  Proven: the replay reports `UNCHANGED` and mints no further version; the rows
+  carry the same profiles and the same port standard as the SQL-authored
+  `run-declared-query`; live invokes return 304/761 and `reveal` renders the
+  authored intent. The shape, the four preserved properties and the remaining gap
+  (no CLI `declare` command, no inverted projection) are in
+  [json-authoring-surface.md](json-authoring-surface.md).
 
 ## Wave 1 (2026-09-14) — six lanes dispatched against the target experience
 

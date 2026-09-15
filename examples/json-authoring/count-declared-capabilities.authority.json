@@ -1,0 +1,44 @@
+{
+  "document": "sidefx-capability-authority.v1",
+  "capabilityId": "count-declared-capabilities",
+  "meaning": {
+    "intent": "count the capabilities the current model declares",
+    "outcome": "the caller observes how many capabilities the current model declares"
+  },
+  "cli": { "display": { "select": "outcome.payload", "as": "json" } },
+  "contracts": [
+    { "id": "count-declared-capabilities-request.v1",
+      "schema": { "type": "object", "additionalProperties": true } },
+    { "id": "count-declared-capabilities-result.v1",
+      "schema": { "type": "object", "additionalProperties": true } }
+  ],
+  "scenarios": [
+    {
+      "scenarioId": "count-declared-capabilities",
+      "name": "Count the capabilities the current model declares",
+      "inputId": "count-declared-capabilities-request",
+      "inputContract": "count-declared-capabilities-request.v1",
+      "eventId": "count-declared-capabilities-requested",
+      "eventAuthority": "count-declared-capabilities.v1",
+      "outcomeId": "count-declared-capabilities-result",
+      "outcomeContract": "count-declared-capabilities-result.v1",
+      "terminal": true,
+      "root": true,
+      "given": "the current model",
+      "when": "the declared read executes under the reader boundary",
+      "then": "the number of capabilities the current model declares is returned",
+      "operations": [
+        { "operationId": "count-declared-capabilities.0", "kind": "invoke-port",
+          "portId": "count-declared-capabilities-port" }
+      ],
+      "portBindings": [
+        { "portId": "count-declared-capabilities-port",
+          "platformCapabilityId": "sda-embodiment-plan-port.v1",
+          "configuration": {
+            "statement": "SELECT (SELECT COUNT_BIG(*) AS declaredCapabilities FROM model.estate_capability ec JOIN source.current_model cm ON cm.estate_model_pk=ec.estate_model_pk FOR JSON PATH,WITHOUT_ARRAY_WRAPPER) AS value",
+            "resultColumn": "value"
+          } }
+      ]
+    }
+  ]
+}
