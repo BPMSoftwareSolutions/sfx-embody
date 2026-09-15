@@ -105,6 +105,15 @@ to embody) are enumerated in
 **SDA:kernel/schemas/projected-artifact-mechanical-sterility.schema.json:14** and
 counted by **SDA:tools/src/consumer-projection/proof/mechanical-sterility-evaluator.ts:7-20**.
 
+**One law, many faces.** The estate's other rules — no handwritten consumer meaning,
+projection provenance, cross-language parity, native mechanics, authority separation,
+bootstrap constraints, the sterility rules — are not independent laws. Each is a
+consequence of the binary. Before the transistor they could be stood between, and
+someone could ask *"where should this one little piece go?"*; now that question has no
+standing. It is `0` or `1`, and anything that is neither is a defect. The test is the
+whole enforcement mindset: not *"please remember the rule"*, but *"executable
+mechanics detected outside an admitted resolver boundary → reject."*
+
 ---
 
 ## 2. Why the bootstrap has to be multi-language
@@ -188,7 +197,7 @@ import at :121-122). Every one of these is 0 or 1; none is "neutral".
 The minimal surface a language must provide to boot and execute the *same* declared
 capability, as it exists today in SDA:
 
-| # | resolver body | node | python | csharp | java | go | cpp |
+| # | required element | node | python | csharp | java | go | cpp |
 |---|---|---|---|---|---|---|---|
 | 1 | token scheduler | `runtimes/node/semantic-execution-graph/scheduler.js` | `platform/execution_graph.py` | `Graph/SemanticExecutionGraphScheduler.cs` | `platform/SemanticExecutionGraphScheduler.java` | `platform/execution_graph.go` | `graph/execution_graph_scheduler.cpp` |
 | 2 | mechanic provider | `semantic-execution-graph-mechanic-provider.mjs` | `adapters/semantic_execution_graph_mechanic_provider.py` | `Graph/SemanticExecutionGraphMechanicProvider.cs` | `platform/SemanticExecutionGraphMechanicProvider.java` | `platform/graph_mechanic_provider.go` | `graph/execution_graph_mechanic_provider.cpp` |
@@ -198,14 +207,36 @@ capability, as it exists today in SDA:
 | 6 | execution-pattern resolvers | `execution-pattern-resolvers.mjs` | `platform/execution_pattern_resolvers.py` | `Graph/ExecutionPatternResolvers.cs` | **not found** | **not found** | **not found** |
 | 7 | schema / contract admission | `schema-contract-admission-provider.mjs` | `platform/consumer.py` | `Schema/SemanticContractCatalogAdmission.cs` | `platform/SemanticExecutionGraphConsumerHost.java` | `platform/graph_consumer_host.go` | `graph/contract_catalog_admission.cpp` |
 | 8 | effect ports | external-credential / http / … | `platform/governed_effect_ports.py` | `Graph/GovernedEffectPorts.cs` | `platform/GovernedEffectPorts.java` | `platform/…effect ports` | `graph/governed_effect_ports.cpp` |
-| 9 | kernel state machine + disposition | `src/kernel/scenario-kernel.ts` | `kernel/scenario_kernel.py` | `src/ScenarioKernel/ScenarioKernel.cs` | `kernel/ScenarioKernel.java` | `kernel/scenario_kernel.go` | **generated** (`generated/execution/…`) |
+| 9 | kernel state machine + disposition | `src/kernel/scenario-kernel.ts` | `kernel/scenario_kernel.py` | `src/ScenarioKernel/ScenarioKernel.cs` | `kernel/ScenarioKernel.java` | `kernel/scenario_kernel.go` | **DEFECT — `generated/execution/…` is projected (1), not resolver (0)** |
 | 10 | consumer platform entry | `runtimes/node/admitted-consumer-platform.mjs` | `platform/consumer.py` | `Consumer/AdmittedConsumerPlatform.cs` | `platform/AdmittedConsumerPlatform.java` | `platform/platform.go` | `platform/consumer_platform.cpp` |
 | 11 | mechanic-registry loader | `node-mechanic-registry-loader.mjs` | **not found** | **not found** | **not found** | **not found** | **not found** |
 | 12 | frontdoor / loader / DB runner / sandbox | this repo `src/` | **not found** | **not found** | **not found** | **not found** | **not found** |
 
-Rows 1–10 are SDA resolver bodies. **Row 11 and row 12 are the gap this document is
-about**: only Node has a registry loader, and only Node has a bootstrap. The
-per-language registries exist as declared authority
+Rows 1–8 and 10 are resolver bodies (0): native code each language must provide.
+Row 9 (the linear kernel state machine) is a resolver body (0) for
+node/python/csharp/java/go, but for C++ it is `generated`.
+
+**Finding: C++ row 9 is a classification defect, and the law closes it.** *Generated*
+means projection of declared authority — a `1` embodiment. It cannot simultaneously be
+a hand-authored native resolver — a `0`. There are exactly two findings, with no third:
+
+- **(A) C++ is missing the required native resolver.** The required resolver body is
+  absent, so C++'s per-language resolver floor is incomplete (its graph-scheduler
+  conformance in §5 does not cover this element).
+- **(B) The behavior was misclassified as resolver work** and belongs to projected
+  declared authority (1). Then the element is an embodiment of `1`, and C++'s resolver
+  floor is its native scheduler, providers and effect ports — not the kernel state
+  machine.
+
+Evidence decides: if the admitted bootstrap compiler produced `generated/execution`
+with the reproducible self-hosting evidence ADR-0014 requires, the element is `1` and
+the finding is **B**; absent that evidence, it is **A**. Either way, listing it under
+the resolver floor is the defect — the same reason C++'s resolver boundary is
+undeclared (G10).
+
+**Row 11 and row 12 are the separate gap this document is about**: only Node has a
+registry loader, and only Node has a bootstrap. The per-language registries exist as
+declared authority
 (**SDA:kernel/semantic-authority/consumer/<language>-mechanic-registry.authority.v1.json**,
 six files) but for python/csharp/java/go/cpp they are not consumed by a runtime loader.
 
@@ -263,9 +294,9 @@ manifest declares `languageResolver.target: "node"`
 | **(c) thin shim to one canonical host** | each language shells to the canonical host | one kernel implementation | **rejected**: the `nativeFloor:true` effects would execute in the canonical host, not natively — a facade, which [embodiment-completeness.md](embodiment-completeness.md):41-46 forbids ("A language that returns its input unchanged … is a facade, not an embodiment") |
 
 Option (b) does not remove the need for option (a): a sealed Node binary is a
-single-language bootstrap. The multi-language *runtime* still needs a per-language
-boot **or** a documented decision to narrow the target set. That decision is the
-team's (see §9).
+single-language bootstrap. A supported runtime still needs its own native path; a
+language cannot be made supported by shipping another language's binary. Which
+languages are supported is set by admission, not by narrowing on paper (§9).
 
 ### 6.3 Irreducible per language, regardless of option
 
@@ -309,7 +340,7 @@ confidentiality, not authenticity.
 | G3 | **No language-level missing-resolver gate.** Parity is scoped to 13 consumer mechanics for `IMPLEMENTING` bindings; a language missing a resolver body fails no admission. | SDA:sda-platform-mechanic-parity.semantic-authority.json | SDA change |
 | G4 | **No taxonomy authority.** The twelve mechanic names live twice (kernel schema + TS evaluator) and can drift; no `projected-execution-mechanic-taxonomy.v1`. | SDA:docs/sda-common-execution-mechanics-and-deterministic-tooling-capabilities-analysis.md:284-301 | SDA change |
 | G5 | **Sterility evaluator misses `.go`.** Its extension regex omits `.go` (covers `.js|.mjs|.cjs|.ts|.tsx|.cs|.py|.java|.swift|.kt|.cpp`). | SDA:…/mechanical-sterility-evaluator.ts:38 | SDA change |
-| G6 | **Only Node has a mechanic-registry loader and a bootstrap.** Python/C#/Java/Go/C++ registries are declared but not consumed at runtime. | SDA:docs/handoff/semantic-execution-graph-cross-target-host-gaps.md:130-139; `sda-bootstrap` manifest `languageResolver.target: node` | SDA change (loader) + estate decision (bootstrap) |
+| G6 | **Only Node has a mechanic-registry loader and a bootstrap.** Python/C#/Java/Go/C++ registries are declared but not consumed at runtime. | SDA:docs/handoff/semantic-execution-graph-cross-target-host-gaps.md:130-139; `sda-bootstrap` manifest `languageResolver.target: node` | SDA change (loader + per-language bootstrap) |
 | G7 | **Residual estate resolver seam.** The loader still dynamically imports `configuration.estateProvider.module` (a type-0 estate module) and 7 estate-module PROVIDER rows remain. | src/invoke-database-capability.mjs:99-103; sql/inspect/hand-authored-module-references.sql; implementation-strategy.md:92-95 | **data defect** — re-declare (estate) |
 | G8 | **Stale inventory.** `languages-resolver-boundary-and-projection-inventory.md:209-218` says C++ has no kernel; C++ is graph-ADMITTED with a full `graph/` provider set. | SDA:conformance/execution-graph/language-graph-v1-conformance.json:38-41 | SDA doc fix |
 | G9 | **No cross-language schema-admission corpus.** | SDA:docs/handoff/semantic-execution-graph-cross-target-host-gaps.md:200-201 | SDA change |
@@ -342,27 +373,45 @@ need new estate code.
 
 ---
 
-## 9. Decisions the team must make
+## 9. What the law determines (and what is merely implementation)
 
-These are builder decisions (per
-[sidefx-architecture-decision-rubric.md](sidefx-architecture-decision-rubric.md):101),
-not resolvable by a lane:
+The law leaves no architectural choice here. Each of the four former "decisions" is
+determined by the law; where a real choice remains it is implementation *beneath* the
+law, not an open architecture question.
 
-1. **Target set.** Is the multi-language runtime `node + python + csharp` (the estate
-   projection's admitted targets today), or all six SDA graph-ADMITTED languages
-   (`node, python, csharp, java, go, cpp`)? The answer fixes how many bootstraps are
-   owed.
-2. **Bootstrap realization.** Per-language re-authored bootstrap (§6.2a) versus a
-   sealed binary per OS (§6.2b). They are orthogonal but quantify the work:
-   (a) requires the irreducible three per language; (b) requires a packaging/signing
-   build and pre-spawn digest verification, and still lands on one language unless
-   combined with (a).
-3. **Sealed artifact scope.** Whether sealing covers only the frontdoor/loader or the
-   whole platform (kernel + providers), given that sealing the frontdoor alone leaks
-   the kernel.
-4. **Enforcement home.** Whether the resolver-boundary scan belongs to SDA admission
-   (G1–G5) only, or whether the estate also runs a declaration-side check in its
-   preflight.
+1. **Target set — determined by admission, not chosen.** A language is a *supported
+   runtime* once it declares a binding and a target registration
+   (`language-target-registration.json`) and passes admission; the law then owes it an
+   admitted native path. A language that has not been admitted owes no bootstrap. The
+   estate's projector emits `node | python | csharp`, so three bootstraps are owed;
+   `java, go, cpp` are graph-ADMITTED in SDA but have no consumer host or
+   registry loader, so they are **not yet supported runtimes** — they owe the
+   bootstrap the day they are admitted, not before. Adding a language adds resolvers;
+   it never changes the declaration.
+2. **Bootstrap realization — constrained by the law, not free.** The law requires, per
+   supported runtime, an admitted native path from physical entry to canonical
+   authority to its resolver floor, **without delegating executable semantics to
+   another runtime**. That excludes the thin shim (§6.2c) outright. It does not choose
+   between interpreted and compiled/sealed packaging: Node SEA, per-OS signing and the
+   like are implementation beneath the law, and must preserve the isolation boundary
+   and the no-materialization rule. What is not free: a language cannot be called
+   supported by shipping another language's binary.
+3. **Sealed scope — fixed by the trust boundary.** §6.4 already fixes it: seal the
+   implementation (frontdoor + loader + DB runner + kernel + providers); keep
+   authority rows and config open. "Seal the frontdoor alone" is therefore not an
+   option — it contradicts the stated boundary by leaking the kernel. Either the whole
+   implementation is sealed, or sealing is not claimed.
+4. **Enforcement home — both surfaces, each for its own violation class.** The law
+   says behavior that is neither declared nor inside an admitted resolver boundary is
+   a violation. Violations occur on two surfaces, so both are enforced: the platform
+   (SDA executable files → the repo-wide sterility gate) and the estate (declaration
+   rows naming a module → `hand-authored-module-references.sql`). The estate detector
+   already exists; the platform gate is owed (request 2). It is not a choice between
+   them.
+
+If a genuine implementation decision remains, it sits beneath the law: it must
+satisfy the two required properties (native, non-delegating) and preserve isolation
+and no-materialization. Nothing above that is open.
 
 ---
 
