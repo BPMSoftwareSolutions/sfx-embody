@@ -2,10 +2,10 @@
 //
 // One pinned database read assembles the capability's declared documents; they
 // are staged into the requested workspace; the admitted consumer projector runs
-// over the workspace and writes the per-target seams, execution plans, queries,
-// fixtures and conformance evidence under <workspace>/projected. A projection is
-// review/publish output: nothing here is on the invocation path, and no reader,
-// loader or graph source consults it.
+// over the workspace and writes the per-target carriers, generated bodies,
+// execution plans, queries, fixtures and conformance evidence under
+// <workspace>/projected. A projection is review/publish output: nothing here is
+// on the invocation path, and no reader, loader or graph source consults it.
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';

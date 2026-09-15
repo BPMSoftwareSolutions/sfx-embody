@@ -9,3 +9,8 @@ embodiment.receipt.json
 .tmp*/
 # Compiled implementations are verified against their database declarations.
 providers/consumer-execution/
+# Projected bodies run their toolchains locally; compiled output and interpreter
+# caches are acceptance by-products, never projected artifacts.
+embodiments/**/projected/**/bin/
+embodiments/**/projected/**/obj/
+embodiments/**/projected/**/__pycache__/

@@ -239,12 +239,16 @@ Projected resolve-equity-market-price-evidence -> …\embodiments\resolve-equity
 EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED; every slot a real module or compiled operation
 ```
 
-One SDA-side finding: the generated seam modules import the SDA runtime through a
-relative path computed from the generation workspace, so a body copied to another
-depth resolves only from where it was generated. Portable specifiers (or a
-manifest that carries them) are an SDA change request; the repo copy is for
-review and comparison, and the running projection remains the command's output at
-its own workspace.
+Two SDA-side watch items. The generated bodies import the SDA runtime through
+paths relative to the generation workspace depth, so a body moved to another
+depth resolves only from where it was generated; the manifest binds each file to
+declared authority with `sourcePointers`, not to a portable specifier. And
+codegen-mode patterns are rendered locally by the tools emitters (sync renderers
+cannot invoke Python/C# at projection time): node output is byte-identical to the
+registered resolver's `emit`, while python/C# are semantically verified, not
+byte-compared. The manifest digests bind the emitted bytes as rendered, so before
+any projected body becomes a digest-bound release artifact, the registered
+resolver emission must be byte-compared or the renderer provenance pinned.
 
 ## Markdown documentation
 
