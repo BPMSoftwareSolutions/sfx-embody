@@ -107,13 +107,56 @@ THEN
 `observedPathDigest` and the kernel outcome are identical to a plain `invoke`;
 the story is a projection, not a second execution.
 
+### The trace reading
+
+Testimony at full resolution must still make sense. A mechanic cell prints the
+mechanic and the declared expression path it computed; an edge prints the
+admission into its destination; a responsibility and a scenario print their
+declared identity. Nothing repeats without a declared position.
+
+```text
+  · 02:19:07.180 literal credentialReference 0.683 ms
+  ↳ 02:19:07.180 array effectLineage admitted 0.031 ms
+  ✓ 02:19:07.182 build-equity-price-binding-request 0.173 ms
+  ✓ 02:19:07.182 bind-equity-price-provider-credential 0.547 ms
+  ✓ 02:19:07.486 observe-equity-price-exchange 300.066 ms
+  ✓ 02:19:07.494 normalize-equity-price-evidence 0.133 ms
+```
+
+With `--trace`, the result also renders the observed tree: the same overlay the
+story joins, nested by planned parent and ordered by testimony time. This is the
+mechanical depth the story collapses.
+
+```text
+TRACE
+✓ scenario resolve-equity-market-price-evidence  0.038 ms
+  ✓ build-equity-price-binding-request  0.173 ms
+    ✓ literal credentialReference  0.683 ms
+    ✓ array effectLineage  0.08 ms
+    ✓ object  0.12 ms
+  ✓ bind-equity-price-provider-credential  0.547 ms
+  ✓ build-equity-price-exchange-request  0.086 ms
+    ✓ path requestUrl.symbol  0.022 ms
+    ✓ format requestUrl  0.232 ms
+    ✓ object  0.114 ms
+  ✓ observe-equity-price-exchange  300.066 ms
+  ✓ normalize-equity-price-evidence  0.133 ms
+    ✓ try-parse-json parsed  0.053 ms
+    ✓ boolean-selection bodyText:selection  0.097 ms
+    …
+```
+
+`observedPathDigest` is identical for invoke and observe in the same generation
+(verified live: `sha256:365445c7f45acc507d5b3b7f634f60156f19dd19d11e96a0d1db27176785d012`
+for both), so the trace is a reading, not a second execution.
+
 ## The presentation contract (installed)
 
 | invocation | reading |
 |---|---|
 | `sfx capability observe <id> [--input …]` | the semantic story: declared faces, responsibilities in declared order, the terminal `THEN`. Mechanical testimony is **not** streamed by default; only the scenario altitude and the edges entering it stream live. |
 | `… --display` | the story plus the capability's declared display projection (products) under THEN. |
-| `… --trace` | additionally streams the complete testimony live (`scenario`, `mechanic`, `provider`, `physical`). `--observation-altitude NAME` scopes which cell altitudes stream and takes precedence; the story is unchanged. |
+| `… --trace` | additionally streams the complete testimony live (`scenario`, `mechanic`, `provider`, `physical`). Every mechanic line carries the declared expression path it computed, every edge its admission disposition; after the story the terminal renders the hierarchical `TRACE` tree. `--observation-altitude NAME` scopes which cell altitudes stream and takes precedence. |
 | `… --json` | canonical result: `story`, `overlay`, `semanticAddress` per row, `observedPathDigest`; observation lines are JSON on stderr. |
 | `sfx capability invoke <id>` | unchanged, and carries none of the above. |
 

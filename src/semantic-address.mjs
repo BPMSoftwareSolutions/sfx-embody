@@ -32,6 +32,24 @@ export function createSemanticAuthority(graphSource) {
 const declaredOperation = (authority, scenarioId, ordinal) =>
   authority.operations.get(scenarioId)?.find(operation => operation.ordinal === ordinal);
 
+// The declared expression path a mechanic cell computes, read from its cell
+// address: `expression.fields.requestUrl.values.symbol` -> `requestUrl.symbol`.
+// Structural keywords address the expression tree; array positions attach to the
+// member they index. The path is identity, not language.
+const PATH_KEYWORDS = new Set(['expression', 'fields', 'values', 'bindings', 'items']);
+function declaredPath(suffix) {
+  const rendered = [];
+  for (const segment of String(suffix ?? '').split('.')) {
+    if (!segment || PATH_KEYWORDS.has(segment)) continue;
+    if (/^\d+$/.test(segment) && rendered.length) {
+      rendered[rendered.length - 1] += `[${segment}]`;
+      continue;
+    }
+    rendered.push(segment);
+  }
+  return rendered.join('.');
+}
+
 // A cell's semantic address. Scenario cells carry the declared faces; operation
 // cells and their mechanic sub-cells carry the declared responsibility. Nothing is
 // inferred beyond the declared structure, and an unknown cell addresses to null.
@@ -69,7 +87,7 @@ export function semanticAddress(authority, cellId, mechanicId) {
   };
   if (operation[3] === undefined) return responsibility;
   return { ...responsibility, semanticRole: 'MECHANIC', mechanicId: mechanicId ?? null,
-    responsibilityId: responsibility.responsibilityId };
+    mechanicPath: declaredPath(operation[3]) || null, responsibilityId: responsibility.responsibilityId };
 }
 
 // The observed story: the scenario's declared faces, its responsibilities in

@@ -35,13 +35,45 @@ test('a cell addresses to its declared scenario, responsibility and mechanic', (
   assert.deepEqual(semanticAddress(authority, 'cell:mechanic:example.operation.3:expression.fields.value', 'object'), {
     scenarioId: 'example', parentScenarioId: null, semanticRole: 'MECHANIC',
     responsibilityId: 'third-port', responsibilityKind: 'invoke-port', responsibilityOrdinal: 3,
-    inputId: null, eventId: null, outcomeId: null, outcomeContractId: null, mechanicId: 'object' });
+    inputId: null, eventId: null, outcomeId: null, outcomeContractId: null, mechanicId: 'object',
+    mechanicPath: 'value' });
   // A composed child names its own scenario and its declared parent.
   assert.equal(semanticAddress(authority, 'cell:mechanic:child.operation.1', null).parentScenarioId, 'example');
   assert.equal(semanticAddress(authority, 'cell:scenario:child', null).parentScenarioId, 'example');
   // Nothing is invented for a cell the declaration does not name.
   assert.equal(semanticAddress(authority, 'cell:provider:unknown', null), null);
   assert.equal(semanticAddress(authority, 'cell:mechanic:absent.operation.1', null).responsibilityId, null);
+});
+
+test('a mechanic address carries the declared expression path it computed', () => {
+  const authority = createSemanticAuthority(graph);
+  const address = semanticAddress(authority, 'cell:mechanic:example.operation.3:expression.fields.requestUrl.values.symbol', 'format');
+  assert.deepEqual([address.mechanicId, address.mechanicPath, address.responsibilityId],
+    ['format', 'requestUrl.symbol', 'third-port']);
+  const indexed = semanticAddress(createSemanticAuthority({ executionAuthorities: [{ owningScenarioId: 'example', operations: [
+    { kind: 'invoke-port', portId: 'port' }] }], scenarios: [] }),
+  'cell:mechanic:example.operation.1:expression.bindings.requiredValues.items.2', 'array');
+  assert.equal(indexed.mechanicPath, 'requiredValues[2]');
+});
+
+test('an edge observation names its source, destination and admission', () => {
+  const observed = [];
+  const drilldown = createExecutionDrilldown({ scenarioId: 'example', observe: value => observed.push(value),
+    authority: graph, observationAltitudes: ['mechanic'] });
+  drilldown.setPlan({ canonicalGraph: { graphId: 'example-graph', cells: [
+    { cellId: 'cell:mechanic:example.operation.1', altitude: 'mechanic', parentCellId: 'cell:scenario:example' },
+    { cellId: 'cell:mechanic:example.operation.1:expression.fields.value', altitude: 'mechanic',
+      parentCellId: 'cell:mechanic:example.operation.1' }], edges: [
+    { edgeId: 'edge:one', kind: 'sequence', from: { cellId: 'cell:mechanic:example.operation.1' },
+      to: { cellId: 'cell:mechanic:example.operation.1:expression.fields.value' } }] } });
+  drilldown.sink({ testimonyType: 'edge-execution-testimony.v1', edgeId: 'edge:one',
+    destinationCellId: 'cell:mechanic:example.operation.1:expression.fields.value', sourceCellExecutionId: 'exec:1',
+    admissionDisposition: 'admitted', logicalOrder: 0, durationMilliseconds: 2 });
+  assert.deepEqual(observed.map(({ sourceCellId, destinationCellId, admissionDisposition, mechanicId, mechanicPath }) =>
+    ({ sourceCellId, destinationCellId, admissionDisposition, mechanicId, mechanicPath })), [{
+    sourceCellId: 'cell:mechanic:example.operation.1',
+    destinationCellId: 'cell:mechanic:example.operation.1:expression.fields.value',
+    admissionDisposition: 'admitted', mechanicId: undefined, mechanicPath: 'value' }]);
 });
 
 test('a scenario cell sharing an execution id with its operation keeps its own observed summary', () => {

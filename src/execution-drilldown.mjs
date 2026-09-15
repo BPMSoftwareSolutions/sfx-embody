@@ -53,7 +53,9 @@ const cellObservation = (testimony, scenarioId, address) => ({
   ...addressFields(address)
 });
 
-const edgeObservation = (testimony, scenarioId, address) => ({
+const cellIdOf = value => typeof value === 'string' ? value : value?.cellId;
+
+const edgeObservation = (testimony, scenarioId, address, edge) => ({
   observationType: EDGE_TESTIMONY,
   phase: 'executeDeclaredGraph',
   status: 'observed',
@@ -63,6 +65,9 @@ const edgeObservation = (testimony, scenarioId, address) => ({
   scenarioId: address?.scenarioId ?? scenarioId,
   sequence: testimony.logicalOrder,
   edgeId: testimony.edgeId,
+  sourceCellId: cellIdOf(edge?.from),
+  destinationCellId: testimony.destinationCellId ?? cellIdOf(edge?.to) ?? null,
+  admissionDisposition: testimony.admissionDisposition ?? null,
   startedAt: testimony.startedAt,
   completedAt: testimony.completedAt,
   durationMilliseconds: testimony.durationMilliseconds,
@@ -102,6 +107,7 @@ export function createExecutionDrilldown({ observationAltitudes, scenarioId, obs
   let plan = null;
   let altitudeByCellId = null;
   let cellByCellId = null;
+  let edgeByEdgeId = null;
   const addressFor = cellId => semanticAddress(semantic, cellId,
     mechanicId(cellByCellId?.get(cellId)?.execution?.authorityId));
 
@@ -127,7 +133,8 @@ export function createExecutionDrilldown({ observationAltitudes, scenarioId, obs
       } else if (testimony.testimonyType === EDGE_TESTIMONY) {
         const altitude = altitudeByCellId?.get(testimony.destinationCellId);
         if (selected.size === ALTITUDES.length || selected.has(altitude))
-          observe(edgeObservation(testimony, scenarioId, addressFor(testimony.destinationCellId)));
+          observe(edgeObservation(testimony, scenarioId, addressFor(testimony.destinationCellId),
+            edgeByEdgeId?.get(testimony.edgeId)));
       }
     } catch { /* Testimony is not execution authority. */ }
   };
@@ -146,6 +153,7 @@ export function createExecutionDrilldown({ observationAltitudes, scenarioId, obs
       plan = value;
       altitudeByCellId = new Map(planCells(plan).map(cell => [cell.cellId, cell.altitude]));
       cellByCellId = new Map(planCells(plan).map(cell => [cell.cellId, cell]));
+      edgeByEdgeId = new Map(planEdges(plan).map(edge => [edge.edgeId, edge]));
     }
   };
 

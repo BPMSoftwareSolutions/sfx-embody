@@ -6,7 +6,8 @@ export const OBSERVATION_FIELDS = ['observationType', 'phase', 'status', 'observ
   // The declared semantic address of the executed cell. The observer joins it to
   // authority to tell the scenario story; no input, body or secret is among them.
   'semanticRole', 'responsibilityId', 'responsibilityKind', 'responsibilityOrdinal',
-  'mechanicId', 'childScenarioId', 'parentScenarioId', 'inputId', 'eventId', 'outcomeId', 'outcomeContractId'];
+  'mechanicId', 'mechanicPath', 'childScenarioId', 'parentScenarioId', 'inputId', 'eventId',
+  'outcomeId', 'outcomeContractId', 'sourceCellId', 'destinationCellId', 'admissionDisposition'];
 
 export function safeObservation(observation) {
   return Object.fromEntries(OBSERVATION_FIELDS
