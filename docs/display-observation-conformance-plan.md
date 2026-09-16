@@ -104,7 +104,11 @@ Recorded as request 8 in `transistor-model.md` §10.
 
 1. CLI deletions (D1, D2, D6 legacy fallback, D11) — no data dependency; removes the
    fabrications.
-2. SDA kernel requests 1-3 (testimony parity, envelope, durations).
+2. SDA kernel requests 1-3 (testimony parity, envelope, durations), plus request 4
+   (physical-altitude effect execution and mechanic outcome aggregation —
+   `docs/sda-change-request-effect-altitude-execution.md`; the equity run shows
+   `BOUND` at provider altitude overridden by `CREDENTIAL_NOT_AVAILABLE` at
+   physical altitude, with `exchangeCount: 0`).
 3. Declared observation-presentation + telemetry rows (D4, D5, D10); remove the
    corresponding estate logic; keep only emission seams.
 4. `configure_interface` fix; then D7/D9 migration as capacity allows.
@@ -114,5 +118,8 @@ Recorded as request 8 in `transistor-model.md` §10.
 - `docs/display-projection-decision-record.md:35,42,168-193` (D1/D6/D3 decisions, U-series).
 - `docs/display-projection-migration.md:141-142` (vocabulary limits).
 - `docs/sda-change-request-projected-testimony.md:208-249` (projected-body parity, adjacent).
+- `docs/sda-change-request-effect-altitude-execution.md` (physical-altitude effect
+  execution and mechanic outcome aggregation; the credential/exchange failure is
+  pre-network — `exchangeCount: 0` — not the rate-limited provider).
 - `docs/transistor-model.md:170-191` (§3.2 boot classification), `:418-483` (§10 requests).
 - `docs/next-experiences.md` §5 (observation-logic migration unit).
