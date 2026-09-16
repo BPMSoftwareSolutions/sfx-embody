@@ -9,6 +9,18 @@ The checking behavior is **declared authority**: when the fallback work proceeds
 it is authored as a declared capability (deterministic guard and no-binding
 fixtures), not as boot code.
 
+**Status 2026-09-16 (later): the fallback is declared and installed.** The user
+directed the route be **one estate `.sql` migration** rather than a harness
+dependency: `sql/migrations/add-equity-price-fallback-route.sql` (estate
+`9230b83`) declares the real-time1 route behind the primary, and
+`sql/migrations/redeclare-equity-provider-slot-requirements.sql`
+(estate `eb32ada`) re-declares the blueprint for ten operations. F10 landed (SDA
+`1dd253d`); live proof: primary 166 `retained-non-success` with
+`exchangeCount: 1` (429 quota), fallback credential `BOUND`, fallback exchange
+`completed`, outcome `EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED` attributed to
+`rapidapi/yahoo-finance-real-time1`. The endpoint authority digest is minted in
+the migration as the content address of the declared endpoint record.
+
 ## Verdict
 
 **Validated — the skill is accurate, safe, and its decision gate is correct.**
@@ -70,57 +82,41 @@ estate failure (`exchangeCount: 0`) is confirmed as the F10 artifact.
    from "route failed" (a declared skipped/`not-attempted` surface), or the
    audience reads a failure that never happened.
 
-## 4. The proposed fallback + rate-limit cycling
+## 4. The fallback + rate-limit cycling
 
 Adding `yahoo-finance15` and `yahoo-finance-real-time1` as fallback price
 providers and cycling them on 30-day rate-limit evidence.
 
-**What the skill already covers.** The route shape (ports, operations,
+**What the skill covers and what happened.** The route shape (ports, operations,
 selection carrying provider identity, classified variants, slot-inventory
-re-declaration) and the three-case preflight. Two extra routes at +2 operations
-each (+4 total; the request builders can be reused or added per route) — the
-`<>5` assertion must be re-declared in the same change, exactly as the skill's
-traps say.
+re-declaration) and the three-case preflight. Only **one** fallback route was
+declared, because only real-time1 is canonical-mappable: `markets/quote` on
+finance15 returns a formatted price string (`"$332.72"`), null currency, a human
+timestamp and a copywrite URL — not mappable to the canonical payload without
+fabrication or a new transformation vocabulary — while `market/get-quotes` on
+real-time1 returns `quoteResponse.result.0` with
+`symbol/currency/regularMarketPrice/regularMarketTime/marketState/exchange/quoteSourceName`.
+The `<>5` assertion was re-declared in the same change, exactly as the skill's
+traps say (now ten operations).
 
-**What blocks it today (in order):**
+**Resolved in the install:**
 
-1. **F10 — the exchange never runs on the estate path.** `exchangeCount: 0`; a
-   fallback would fail identically until
-   `docs/sda-change-request-effect-altitude-execution.md` lands. Owner: SDA.
-2. **Quote operations supplied; entitlement and endpoint authorities unproven —
-   updated 2026-09-16.** The price-capable operations are
-   `GET /api/v1/markets/quote?ticker=…&type=STOCKS` on
-   `yahoo-finance15.p.rapidapi.com` and
-   `GET /market/get-quotes?region=…&symbols=…` on
-   `yahoo-finance-real-time1.p.rapidapi.com` — same RapidAPI account, so the same
-   `RAPID_API_KEY` authority, each route with its own endpoint digest. Neither is
-   declared in the harness provider operations yet, and neither has ever been
-   observed: the earlier replacement candidate `rapidapi/apidojo/yh-finance`
-   reached `yh-finance.p.rapidapi.com` and returned **403
-   `NOT_SUBSCRIBED_TO_API`**
-   (`agentic-harness/provisioning/rapidapi-finance-provider-swap-live-exchanges.evidence.receipt.json`),
-   and the two hosts' only declared operations so far are `market-news` and
-   `stock-options` with `admission: NOT_CLAIMED`. Before any route is authored,
-   the harness must declare the two quote operations, compile their operation
-   descriptors for the endpoint authorities and digests, and observe each
-   exchange (entitlement, normalized response class, price-field mapping). The
-   estate does not compute a digest and will not fabricate one. The harness
-   already declares the machinery these routes plug into:
-   `authority/provider-connections/rapidapi-finance.provider-connections.candidate.json`
-   (binding records with host, path, `queryProjection`, credential reference,
-   effect profile), `semantic-authority/equity-market-price-native-canonical-mappings.candidate.json`
-   (native-to-canonical field maps; the 166 binding is mapped from a live AAPL
-   response, the apidojo candidate is held on the 403), and
-   `governance/equity-market-price-provider-route.policy.candidate.json`
-   (`orderedBindings`, `maximumExchangeAttempts: 2`, `fallbackEligibleOutcomes`
-   including `PROVIDER_RATE_LIMITED`). The two quote operations are added there
-   and observed to mint their bindings, mappings and the endpoint/binding
-   digests the estate port configuration carries. Owner: harness (you) for
-   declaration and observation; estate follows with the routes per the skill.
-3. **The rate-limit signal is not surfaced.** `httpStatus: 429` is real in the
+1. **F10 — landed (SDA `1dd253d`).** The exchange runs on the estate path; the
+   live primary exchange is `retained-non-success` with `exchangeCount: 1`.
+2. **Quote operations observed live.** Both endpoints returned 200 with the
+   estate's `RAPID_API_KEY` in direct probes on 2026-09-16. The harness-authority
+   path described in the earlier revision of this document was rejected by the
+   user as unnecessary complexity; the estate mints the endpoint authority
+   digest as the content address of the declared endpoint record. (Historical:
+   the earlier replacement candidate `rapidapi/apidojo/yh-finance` returned 403
+   `NOT_SUBSCRIBED_TO_API`.)
+
+**Still open (in order):**
+
+1. **The rate-limit signal is not surfaced.** `httpStatus: 429` is real in the
    evidence but not streamed; the bounded allowlist omits it. Owner: estate
    (one bounded scalar; pairs with nit 2).
-4. **No durable run-evidence store.** The invocation path is read-only
+2. **No durable run-evidence store.** The invocation path is read-only
    (`bodyStorage: NOT_REQUESTED`; `evidence/` is disk). "Evidence runs in the
    database" is a **declared capability**: a probe capability per provider,
    invocable through the unchanged CLI, its outcome classified and retained by the
@@ -128,6 +124,25 @@ traps say.
    boot-side, and it is a scheduled invocation, not new executable logic. The
    invocation path must not gain a write. Owner: estate, authored as rows when
    the fallback work proceeds.
+
+**Template findings (fix candidates in the skill).** Three frictions were hit
+while authoring the installed migration:
+
+1. The template's transformation section throws
+   `FALLBACK_TRANSFORMATION_NOT_REGISTERED` when a transformation semantic
+   object exists but has no `model.transformation` row; the working form inserts
+   the registration:
+   `INSERT model.transformation(namespace_pk, transformation_id, semantic_object_pk, object_kind) SELECT namespace_pk, @id, @object, 'TRANSFORMATION' FROM model.semantic_object WHERE semantic_object_pk=@object`.
+2. A transformation semantics envelope must carry `"id"` beside the expression
+   (`{"id":…,"expression":…}`), or graph compilation fails with
+   `GRAPH_COMPILER_INVALID_TRANSFORMATION_ID`.
+3. Chunked nvarchar literals: over 4000 chars truncate on `+`, so the first
+   piece must be `CONVERT(nvarchar(max), N'…')`. When interpolating a variable
+   inside a chunked literal the join is a single `+`:
+   `N'…["' + @digest + N'"]…'`. The doubled form
+   (`' + ' + @digest + ' + N'`) stores the literal text ` + @digest + `
+   instead of the value; the symptom is `IDENTITY_MISMATCH` at credential
+   binding.
 
 **Expressible once unblocked.** Each route is rows (skill §2); a skipped route
 performs no transport (verified); the selection chooses the answering route's
@@ -137,12 +152,10 @@ result (`…_RATE_LIMITED` as failure, "all routes exhausted" distinct from
 evidence store, choosing the preferred route order per invocation — data, not
 code — provided items 3–4 exist.
 
-**Suggested sequence.** (1) F10 lands (SDA). (2) Decide the evidence store and
-add `httpStatus` to bounded provider evidence (estate). (3) Declare price
-endpoint authorities for the two hosts (harness/user). (4) Author the two routes
-per the skill with the three-case preflight. (5) Add the evidence run recorder
-and the 30-day selection read; verify a real cycle: primary 429 → fallback
-answers → the rate-limited provider is deprioritized for thirty days.
+**Suggested sequence (remaining).** (1) Decide the evidence store and add
+`httpStatus` to bounded provider evidence (estate). (2) Add the evidence run
+recorder and the 30-day selection read; verify a real cycle: primary 429 →
+fallback answers → the rate-limited provider is deprioritized for thirty days.
 
 ## 5. Evidence
 
@@ -150,7 +163,17 @@ answers → the rate-limited provider is deprioritized for thirty days.
   / `exchangeCount: 0`; no live binding → `rejected-credential` /
   `exchangeCount: 0`; live route → `response-complete` / `exchangeCount: 1` /
   `httpStatus: 429`. Instrumentation only; not committed as a script.
-- Estate receipt for the current failure: `sfx capability observe
-  resolve-equity-market-price-evidence --input AVGO --json` (`exchangeCount: 0`).
+- Direct quote probes, 2026-09-16: `GET /api/v1/markets/quote?ticker=AAPL&type=STOCKS`
+  (finance15) → 200, not canonical-mappable; `GET /market/get-quotes?region=US&symbols=GOOG`
+  (real-time1) → 200, canonical-mappable.
+- Installed fallback: preflight and live invoke on 2026-09-16 —
+  `sfx capability invoke resolve-equity-market-price-evidence --input @examples/equity-market-price-evidence.request.json --json`
+  → `EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED`, payload MSFT 488.88 USD REGULAR NMS,
+  `providerTestimony.providerId: rapidapi/yahoo-finance-real-time1`, primary
+  exchange `retained-non-success` `exchangeCount: 1`, fallback exchange
+  `completed` `exchangeCount: 1`. Estate suite 48/51 (3 DB-gated skips).
+- Blueprint re-declaration: ten slots in operation order;
+  `analysis.v_provider_slot_resolution` is `PROVIDER_SLOTS_BOUND` × 10 for node,
+  python and csharp; a second run prints `already_declared` and writes nothing.
 - Provider catalog: `agentic-harness/authority/cli/provider-catalog.json` and
   `authority/provider-connections/http-provider.operations.json`.

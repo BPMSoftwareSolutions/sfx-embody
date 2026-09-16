@@ -4,6 +4,16 @@ Format per [embodiment-completeness.md](embodiment-completeness.md): primitive /
 why kernel / affected languages / data that binds it / evidence. Filed from the
 estate; agents do not edit SDA.
 
+**Status: landed — SDA `1dd253d`, verified live 2026-09-16.** The physical cell
+for a platform effect port is now observational: the credential responsibility
+reports `BOUND` at provider, physical and mechanic altitude, and the exchange
+reports its real transport (`retained-non-success`, `reachedStage:
+response-complete`, `exchangeCount: 1`, `transportDisposition: completed`) on the
+rate-limited primary. The fallback route installed on top of it resolves through
+the secondary provider (`add-equity-price-fallback-route.sql`, estate `9230b83`);
+full verification receipts are in
+[declare-provider-fallback-validation.md](declare-provider-fallback-validation.md) §5.
+
 ## Summary
 
 The provider/physical descent materialized by SDA `6aa2434`/`171d96f` executes a

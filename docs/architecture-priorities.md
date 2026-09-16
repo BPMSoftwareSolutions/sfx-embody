@@ -96,9 +96,11 @@ is a deliverable.
    with byte parity and the rows-only loop proof recorded in
    [display-projection-decision-record.md](display-projection-decision-record.md)
    §5. D5 closed: the kernel materialized provider/physical descent (SDA
-   `6aa2434`/`171d96f`); the `providerEvidence` passthrough is U4. Next: U2
-   (equity display) and U4 (streamed status + declared reading selection); the
-   map is [display-projection-migration.md](display-projection-migration.md).
+   `6aa2434`/`171d96f`). U2 (equity display, estate `099e48a`) and U4 (declared
+   readings + streamed `display.entry` + bounded `providerEvidence`, estate
+   `4a6049e`/`7f5cfa2`, CLI `783723b`) landed 2026-09-16. Next: U3 (reader
+   documents) and U5 (boot/CLI reduction); the map is
+   [display-projection-migration.md](display-projection-migration.md).
 
 ### Next — the experiences behind the current one
 
@@ -148,11 +150,11 @@ languages / data that binds it / evidence.
 | F3 | Codegen-mode patterns are rendered locally by the tools emitters (sync renderers cannot invoke Python/C# at projection time); node output is byte-identical to the registered resolver `emit`, python/C# are semantically verified only | Pin before any digest-bound release | `docs/capability-command-surface.md` §Projection |
 | F4 | Generated bodies import the SDA runtime through generation-depth-relative paths; a moved body resolves only at its generation depth | SDA request (portable specifiers) | node body imports; manifest carries `sourcePointers`, not portability |
 | F5 | The database copy is installed as an 8.5 MB migration, so the bodies live in git twice (files + rows) | Revisit trigger: a persistence path replaces the generated migration | `sql/migrations/publish-projected-bodies-*.sql`; `scripts/publish-projected-bodies.mjs` |
-| F6 | The declared RapidAPI credential is rate-limited to zero (429, ~20.8-day reset), so the live equity acceptance cannot be reproduced until reset; invocation behavior is otherwise unchanged (identical pre/post disposition, digests) | Environment | preflight/invoke receipts; quota headers |
+| F6 | The declared RapidAPI credential is rate-limited to zero (429, ~20.8-day reset), so the live equity acceptance cannot be reproduced until reset; invocation behavior is otherwise unchanged (identical pre/post disposition, digests) | Environment — **routed around**: the fallback route (estate `9230b83`) resolves through `yahoo-finance-real-time1` while 166 is rate-limited; the quota remains the primary's condition and the demo's fallback trigger | preflight/invoke receipts; quota headers; `docs/declare-provider-fallback-validation.md` |
 | F7 | Three execution-graph capabilities (`compile-declared-authority`, `execute-semantic-execution-graph`, `execute-semantic-value-graph`) still fail the CLI path with `SEMANTIC_EXECUTION_GRAPH_OVERLAY_BINDING_MISSING` for their own mechanic id; pre-existing and independent of G7 (the kernel binds cells by `platformCapabilityId`, never by `providerId`) | Estate overlay-completeness unit | G7 receipts; `execute-declared-capability` shows the same failure before and after the module rows left |
 | F8 | JSON authoring friction FF1–FF6: `cmd /c` input quoting, a migration is required to install a document, file/SQL-literal byte duplication with no keeper, scaffold residue rendered by `reveal`, no declared absence convention, concurrent-writer conditions | Authoring-surface units | `docs/flywheel-proof.md` |
 | F9 | The observation display executes as code outside the kernel: status derivation, lanes, ordering and semantics in `src/execution-drilldown.mjs`, `src/semantic-address.mjs`, `src/observation-filter.mjs`, `src/invoke-database-capability.mjs` and `sidefx-cli/src/render.mjs` | Declared-authority migration (decision: the display is 1) — U1 landed 2026-09-15 (contract + hello-world transformation + boot seam + byte parity + rows-only loop proof) | `docs/display-projection-migration.md`; `docs/display-projection-decision-record.md` |
-| F10 | Physical-altitude cells re-invoke platform effect ports with the provider cell's outcome, and the mechanic cell surfaces that artifact: the equity run shows `BOUND` at provider altitude overridden by `CREDENTIAL_NOT_AVAILABLE` at physical altitude, with `exchangeCount: 0` — no HTTP attempt, so the quota is not the cause | SDA change request (filed) | `docs/sda-change-request-effect-altitude-execution.md` |
+| F10 | Physical-altitude cells re-invoke platform effect ports with the provider cell's outcome, and the mechanic cell surfaces that artifact: the equity run shows `BOUND` at provider altitude overridden by `CREDENTIAL_NOT_AVAILABLE` at physical altitude, with `exchangeCount: 0` — no HTTP attempt, so the quota is not the cause | **Landed** — SDA `1dd253d`; live verification 2026-09-16 (`BOUND` at all altitudes; primary exchange `retained-non-success` with `exchangeCount: 1`); the fallback route installed on it resolves through real-time1 (estate `9230b83`) | `docs/sda-change-request-effect-altitude-execution.md`; `docs/declare-provider-fallback-validation.md` §4–5 |
 
 ## 6. How a unit lands (unchanged, for quick reference)
 
