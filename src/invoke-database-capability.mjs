@@ -146,11 +146,20 @@ export async function executeEstateCapability({ capabilityId, scenarioId, namesp
   return current;
 }
 
+// The kernel's declared-expression evaluator: the one mechanism that evaluates a
+// declared expression on this target. The execution delivery's result expression
+// and the declared display projection both go through it; the boot never
+// interprets an expression itself.
+async function loadExpressionEvaluator(sdaRoot) {
+  const { evaluateExpression } = await import(new URL('languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs',
+    pathToFileURL(String(sdaRoot).replace(/\\/g, '/') + '/')).href);
+  return evaluateExpression;
+}
+
 // The CLI configuration supplies both carrier mappings. This boundary invokes
 // the declared execution capability and returns its declared delivery form.
 export async function executeSelectedDeclaration(delivery, selection, selected, scenarioInput, context) {
-  const { evaluateExpression } = await import(new URL('languages/typescript/runtimes/node/semantic-transformation-evaluator.mjs',
-    pathToFileURL(context.sdaRoot.replace(/\\/g, '/') + '/')).href);
+  const evaluateExpression = await loadExpressionEvaluator(context.sdaRoot);
   const rootExecutionId = context.rootExecutionId ?? randomUUID();
   const carrier = { selection, selected, scenarioInput, rootExecutionId };
   const input = evaluateExpression(delivery.requestExpression, { input: carrier, root: scenarioInput });
@@ -373,22 +382,46 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, 
   // it now that the boot read uses the estate views.
   const display = graphSource?.interfaceAuthority?.interfaces?.find(entry => entry.kind === 'cli')?.configuration?.display
     ?? cli.display ?? null;
-  // Observation carries the drilldown. The kernel streams testimony through the
-  // sink; the compiled plan is captured from the running carrier so the overlay
-  // joins planned topology against what executed. Invocation takes none of this.
+  // Observation carries the drilldown; every invocation captures the compiled
+  // plan from the running carrier so the declared display projection can join
+  // planned topology against testimony. The plan is read from the same onState
+  // seam the drilldown uses; nothing is re-compiled or guessed. Invocation keeps
+  // no other drilldown behavior.
+  let plan = null;
+  const capturePlan = value => { if (plan === null && object(value) && object(value.canonicalGraph)) plan = value; };
   let drilldown;
   if (request.verb === 'observe') {
     drilldown = createExecutionDrilldown({ observationAltitudes: request.observationAltitudes, scenarioId: selected.scenario_id,
       observe, authority: graphSource });
     config.onTestimony = drilldown.sink;
-    config.onState = state => drilldown.setPlan(state);
+    config.onState = value => { capturePlan(value); drilldown.setPlan(value); };
+  } else {
+    config.onState = capturePlan;
   }
   const outcome = await measure('executeDeclaredGraph', () => executeEstateCapability({ capabilityId: 'run-declared-graph' }, graphSource, config));
   if (drilldown) drilldown.absorb(outcome);
+  // The declared display projection. The interface names the transformation and
+  // the declared expression builds the display document from the carrier,
+  // declared authority and testimony. Observation asks for the display;
+  // invocation asks with --display. The reading is a scope field the boot
+  // derives from the declared request vocabulary: the reading selection itself
+  // is not declarable on the operation yet (see the migration's gap note).
+  let displayProjection = null;
+  if (display?.transformationId && (request.verb === 'observe' || request.display === true)) {
+    const transformation = (graphSource.semanticTransformations ?? []).find(entry => entry?.id === display.transformationId);
+    if (transformation) {
+      const evaluateExpression = await loadExpressionEvaluator(sdaRoot);
+      const reading = request.verb === 'observe' && Array.isArray(request.observationAltitudes)
+        && request.observationAltitudes.some(altitude => altitude !== 'scenario') ? 'trace' : 'default';
+      displayProjection = { document: evaluateExpression(transformation.expression, {
+        selection, selected, scenarioInput: input, rootExecutionId, authority: graphSource,
+        plan, execution: outcome, reading }), as: display.as ?? 'json' };
+    }
+  }
   const observedPathDigest = drilldown && typeof outcome?.observedPathDigest === 'string' ? outcome.observedPathDigest : undefined;
   return { disposition: 'terminated',
     outcome: { capabilityId: selection.capabilityId, scenarioId: selected.scenario_id, result: outcome, executions: [], observations: [],
-      ...(display ? { display } : {}),
+      ...(displayProjection ? { display: displayProjection } : display ? { display } : {}),
       ...(drilldown ? { overlay: drilldown.buildOverlay(outcome), story: drilldown.buildStory(outcome) } : {}),
       ...(observedPathDigest !== undefined ? { observedPathDigest } : {}),
       evidence: { timings, authoritySource: 'DATABASE', bodyStorage: 'NOT_REQUESTED', managedAdmission: 'NOT_REQUESTED',
