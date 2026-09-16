@@ -87,21 +87,26 @@ traps say.
 1. **F10 — the exchange never runs on the estate path.** `exchangeCount: 0`; a
    fallback would fail identically until
    `docs/sda-change-request-effect-altitude-execution.md` lands. Owner: SDA.
-2. **Neither host is price-capable — settled 2026-09-16.** The supplied
-   operations are `GET /api/v1/markets/news?ticker=…` on
-   `yahoo-finance15.p.rapidapi.com` and `GET /stock/get-options?symbol=…` on
-   `yahoo-finance-real-time1.p.rapidapi.com`; the harness catalog confirms only
-   `market-news` and `stock-options`, and the declared inventory shows
-   `rapidapi/yahoo-finance166` as the **only** stock-price provider
-   (`/api/stock/get-price`). A fallback must serve the same promise, so neither
-   host can fall back for *price*: news or options evidence would fabricate the
-   promise. Spreading the price quota therefore requires 2+ price-capable
-   subscriptions — supply the operation and the endpoint authority that grants
-   it (never fabricate the digest). These two hosts remain valid as *separate*
-   capabilities (market-news evidence, options-chain evidence) with their own
-   contracts and scenarios, sharing the same `RAPID_API_KEY` authority with
-   their own endpoint digests. Owner: you (supply/subscribe) + harness
-   declaration.
+2. **Quote operations supplied; entitlement and endpoint authorities unproven —
+   updated 2026-09-16.** The price-capable operations are
+   `GET /api/v1/markets/quote?ticker=…&type=STOCKS` on
+   `yahoo-finance15.p.rapidapi.com` and
+   `GET /market/get-quotes?region=…&symbols=…` on
+   `yahoo-finance-real-time1.p.rapidapi.com` — same RapidAPI account, so the same
+   `RAPID_API_KEY` authority, each route with its own endpoint digest. Neither is
+   declared in the harness provider operations yet, and neither has ever been
+   observed: the earlier replacement candidate `rapidapi/apidojo/yh-finance`
+   reached `yh-finance.p.rapidapi.com` and returned **403
+   `NOT_SUBSCRIBED_TO_API`**
+   (`agentic-harness/provisioning/rapidapi-finance-provider-swap-live-exchanges.evidence.receipt.json`),
+   and the two hosts' only declared operations so far are `market-news` and
+   `stock-options` with `admission: NOT_CLAIMED`. Before any route is authored,
+   the harness must declare the two quote operations, compile their operation
+   descriptors for the endpoint authorities and digests, and observe each
+   exchange (entitlement, normalized response class, price-field mapping). The
+   estate does not compute a digest and will not fabricate one. Owner: harness
+   (you) for declaration and observation; estate follows with the routes per the
+   skill.
 3. **The rate-limit signal is not surfaced.** `httpStatus: 429` is real in the
    evidence but not streamed; the bounded allowlist omits it. Owner: estate
    (one bounded scalar; pairs with nit 2).
