@@ -143,6 +143,13 @@ transformation vocabulary cannot pattern-match).
 
 ## 4. Vault manager capability (credentials off the front door)
 
+**Deep dive:** [vault-manager-capabilities.md](vault-manager-capabilities.md) —
+the mechanism research, the two declared capabilities (`store-credential`,
+`resolve-credential`), key management, and the V1–V5 strategy. Precedent:
+`bind-external-credential-reference` and the candidate-authoring conveyor
+already declare the provider connection and stage credential binds for Gemini /
+OpenAI; the vault changes the credential *source* under an installed pattern.
+
 **Target:** stop storing credentials in environment variables; a declared vault-manager
 capability resolves credentials from an encrypted vault provider, so (a) credentials
 are nowhere near the front door of execution, and (b) the agent has no access to
