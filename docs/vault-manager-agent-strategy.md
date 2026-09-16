@@ -1,6 +1,6 @@
 # Vault manager — multi-agent execution strategy
 
-Status: READY FOR EXECUTION
+Status: WAVES 1-2 PARTIALLY EXECUTED — W0, W2, W3 landed; W1, W4, W5, W6 next (see Execution log)
 Frame: `transistor-model.md` §1 — declared authority (1) or an admitted resolver (0) in the
 SDA kernel; no third place. Target model: `vault-manager-capabilities.md` (contract §3, key
 custody §4, units V1–V5 §6).
@@ -149,3 +149,35 @@ runtime edits.
    store negative.
 5. Capability declarations are byte-identical across OS realizations; rotation and further
    realizations (Keychain, Secret Service/TPM, KMS) remain pure additions.
+
+## Execution log
+
+- **W0 — DONE** (SDA `e7b3864`). Contract `sda-credential-vault-port.v1`, ops `store`/`apply`,
+  `realization` evidence; `windows-credential-store-provider.mjs` owns key custody (native DPAPI
+  module first, bounded PowerShell fallback, fail-closed `VAULT_SEALED`); stub realization swap
+  proves the registry entry is stable; OS-credential receipt digests re-derived. Vault 15/15,
+  graph 53/53, effect ports 8/8, OS-credential 5/5.
+- **W2 — DONE, ROLLBACK** (estate `4dd191f`). The four contracts and both capabilities declared
+  in one ROLLBACK-by-default migration; dry-run completes with 11 result sets and
+  `names_secret_material=0` on all 16 result-contract members. Install pending preflight.
+- **W3 — DONE** (estate `0fb8660`). Realization resolved through `overlayBindings`/`providers`
+  and threaded via `effectContextOverrides`; connect string resolved at the connect boundary,
+  env copy removed. Estate suite 61 pass / 0 fail / 3 skipped.
+- **Next sequence (W2b, then W4):**
+  1. **W2b — overlay bindings (data)**: add the vault mechanic to the execute overlay
+     (`{mechanicId: "sda-credential-vault-port.v1", providerProfileId:
+     "sda-platform-effect-graph-provider.v1", providerProfileDigest: "sha256:945a4ff5…",
+     implementationRef: "sda-platform-effect-graph-provider.v1"}`) and the host realization
+     (`overlayBindings: [{mechanicId: "sda-credential-store-realization.v1", providerProfileId}]`,
+     `providers: [{providerProfileId, module:
+     "languages/typescript/runtimes/node/windows-credential-store-provider.mjs",
+     export: "createWindowsCredentialStoreRealization", factory: true}]`) on the two Port
+     bindings. Then run the in-transaction preflight and install the migration.
+  2. **W4 — source switch**: only after a host realization can actually release a key.
+     **Gate**: no native DPAPI module is installed and the PowerShell fallback is blocked by
+     `restrict-memory-process` on this host, so live invocations currently return `VAULT_SEALED`.
+     Decision needed: install a native DPAPI module, allow the bounded PowerShell path, or bind
+     the in-memory stub for preflight only.
+  3. **W1 — python/C# port** and **W5 — non-disclosure receipts** follow the gates in §4.
+  4. **Follow-up defect**: `src/projection-delivery.mjs:139` carries the same env-copy pattern
+     removed at `database-delivery.mjs`; classify and fix as its own unit.
