@@ -1374,6 +1374,202 @@
       }
     },
     {
+      "operationId": "slot:cell:physical:resolve-equity-market-price-evidence.operation.2",
+      "cellId": "cell:physical:resolve-equity-market-price-evidence.operation.2",
+      "altitude": "physical",
+      "mechanicId": "sda-external-credential-reference-binding-port.v1",
+      "providerProfileId": "sda-platform-effect-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/external-credential-reference-binding-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/external-credential-reference-binding-provider.mjs",
+      "providerExport": "bindExternalCredentialReference",
+      "invocation": "effects",
+      "factory": false,
+      "sourceUnit": "event-port",
+      "semanticAddress": "resolve-equity-market-price-evidence/scenario/resolve-equity-market-price-evidence/operation/resolve-equity-market-price-evidence.operation.2/physical",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "portId": "bind-equity-price-provider-credential",
+        "platformCapabilityId": "sda-external-credential-reference-binding-port.v1",
+        "configuration": {
+          "credentialAuthorities": [
+            {
+              "effectScopes": [
+                "ONE_BOUNDED_HTTPS_EXCHANGE_NO_REDIRECT_NO_RETRY"
+              ],
+              "endpointAuthorityDigests": [
+                "sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b"
+              ],
+              "injectionRule": {
+                "headerName": "X-RapidAPI-Key",
+                "id": "rapidapi-x-rapidapi-key.v1"
+              },
+              "lifetimeMilliseconds": 15000,
+              "referenceName": "RAPID_API_KEY",
+              "requestingCapabilityIds": [
+                "resolve-equity-market-price-evidence"
+              ],
+              "source": "environment"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "operationId": "slot:cell:physical:resolve-equity-market-price-evidence.operation.4",
+      "cellId": "cell:physical:resolve-equity-market-price-evidence.operation.4",
+      "altitude": "physical",
+      "mechanicId": "sda-governed-http-exchange-port.v1",
+      "providerProfileId": "sda-platform-effect-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/governed-http-exchange-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/governed-http-exchange-provider.mjs",
+      "providerExport": "observeGovernedHttpExchange",
+      "invocation": "effects",
+      "factory": false,
+      "sourceUnit": "event-port",
+      "semanticAddress": "resolve-equity-market-price-evidence/scenario/resolve-equity-market-price-evidence/operation/resolve-equity-market-price-evidence.operation.4/physical",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "portId": "observe-equity-price-exchange",
+        "platformCapabilityId": "sda-governed-http-exchange-port.v1",
+        "configuration": {
+          "credentialInjectionRules": [
+            {
+              "headerName": "X-RapidAPI-Key",
+              "id": "rapidapi-x-rapidapi-key.v1"
+            }
+          ],
+          "endpointAuthorities": [
+            {
+              "allowedRequestHeaders": [
+                "x-rapidapi-host"
+              ],
+              "allowedResponseHeaders": [
+                "content-type",
+                "retry-after"
+              ],
+              "endpointAuthorityDigest": "sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b",
+              "methods": [
+                "GET"
+              ],
+              "urlPrefixes": [
+                "https://yahoo-finance166.p.rapidapi.com/api/stock/get-price?"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "operationId": "slot:cell:provider:resolve-equity-market-price-evidence.operation.2",
+      "cellId": "cell:provider:resolve-equity-market-price-evidence.operation.2",
+      "altitude": "provider",
+      "mechanicId": "sda-external-credential-reference-binding-port.v1",
+      "providerProfileId": "sda-platform-effect-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/external-credential-reference-binding-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/external-credential-reference-binding-provider.mjs",
+      "providerExport": "bindExternalCredentialReference",
+      "invocation": "effects",
+      "factory": false,
+      "sourceUnit": "event-port",
+      "semanticAddress": "resolve-equity-market-price-evidence/scenario/resolve-equity-market-price-evidence/operation/resolve-equity-market-price-evidence.operation.2/provider",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-port",
+        "portId": "bind-equity-price-provider-credential",
+        "binding": {
+          "portId": "bind-equity-price-provider-credential",
+          "platformCapabilityId": "sda-external-credential-reference-binding-port.v1",
+          "configuration": {
+            "credentialAuthorities": [
+              {
+                "effectScopes": [
+                  "ONE_BOUNDED_HTTPS_EXCHANGE_NO_REDIRECT_NO_RETRY"
+                ],
+                "endpointAuthorityDigests": [
+                  "sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b"
+                ],
+                "injectionRule": {
+                  "headerName": "X-RapidAPI-Key",
+                  "id": "rapidapi-x-rapidapi-key.v1"
+                },
+                "lifetimeMilliseconds": 15000,
+                "referenceName": "RAPID_API_KEY",
+                "requestingCapabilityIds": [
+                  "resolve-equity-market-price-evidence"
+                ],
+                "source": "environment"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "operationId": "slot:cell:provider:resolve-equity-market-price-evidence.operation.4",
+      "cellId": "cell:provider:resolve-equity-market-price-evidence.operation.4",
+      "altitude": "provider",
+      "mechanicId": "sda-governed-http-exchange-port.v1",
+      "providerProfileId": "sda-platform-effect-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/governed-http-exchange-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/governed-http-exchange-provider.mjs",
+      "providerExport": "observeGovernedHttpExchange",
+      "invocation": "effects",
+      "factory": false,
+      "sourceUnit": "event-port",
+      "semanticAddress": "resolve-equity-market-price-evidence/scenario/resolve-equity-market-price-evidence/operation/resolve-equity-market-price-evidence.operation.4/provider",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-port",
+        "portId": "observe-equity-price-exchange",
+        "binding": {
+          "portId": "observe-equity-price-exchange",
+          "platformCapabilityId": "sda-governed-http-exchange-port.v1",
+          "configuration": {
+            "credentialInjectionRules": [
+              {
+                "headerName": "X-RapidAPI-Key",
+                "id": "rapidapi-x-rapidapi-key.v1"
+              }
+            ],
+            "endpointAuthorities": [
+              {
+                "allowedRequestHeaders": [
+                  "x-rapidapi-host"
+                ],
+                "allowedResponseHeaders": [
+                  "content-type",
+                  "retry-after"
+                ],
+                "endpointAuthorityDigest": "sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b",
+                "methods": [
+                  "GET"
+                ],
+                "urlPrefixes": [
+                  "https://yahoo-finance166.p.rapidapi.com/api/stock/get-price?"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
       "operationId": "slot:mechanic:resolve-equity-market-price-evidence.operation.1:expression",
       "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.1:expression",
       "altitude": "mechanic",
@@ -7176,6 +7372,22 @@
       "outcomeContractId": "semantic-value.v1"
     },
     "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.when": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:physical:resolve-equity-market-price-evidence.operation.2": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:physical:resolve-equity-market-price-evidence.operation.4": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:provider:resolve-equity-market-price-evidence.operation.2": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:provider:resolve-equity-market-price-evidence.operation.4": {
       "inputContractId": "semantic-value.v1",
       "outcomeContractId": "semantic-value.v1"
     },

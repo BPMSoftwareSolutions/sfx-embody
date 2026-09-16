@@ -83,6 +83,18 @@ function valueDigest(value) {
   return "sha256:" + crypto.createHash("sha256").update(encoded).digest("hex");
 }
 
+const PROVIDER_EVIDENCE_TOKEN = /^[A-Za-z0-9][A-Za-z0-9._:-]*$/;
+
+function boundedProviderEvidence(value) {
+  if (value === null || typeof value !== "object" || Array.isArray(value)) return undefined;
+  const evidence = {};
+  if (typeof value.reachedStage === "string" && PROVIDER_EVIDENCE_TOKEN.test(value.reachedStage)) evidence.reachedStage = value.reachedStage;
+  if (Number.isInteger(value.exchangeCount) && value.exchangeCount >= 0) evidence.exchangeCount = value.exchangeCount;
+  if (typeof value.transportDisposition === "string" && PROVIDER_EVIDENCE_TOKEN.test(value.transportDisposition)) evidence.transportDisposition = value.transportDisposition;
+  if (typeof value.redactionVerified === "boolean") evidence.redactionVerified = value.redactionVerified;
+  return Object.keys(evidence).length > 0 ? Object.freeze(evidence) : undefined;
+}
+
 function patternOutcome(value, variant, disposition = "completed", routes = []) {
   return Object.freeze({
     value,
@@ -200,6 +212,15 @@ function groupedPatternAt(cellId) {
   return groupedPatternByAnchor.get(semanticId(cellId));
 }
 
+const semanticOperationCellIdByRef = Object.freeze(Object.fromEntries(
+  Object.keys(operationDescriptorByCellId).map((cellId) => [semanticId(cellId), cellId])
+));
+
+function descentCellId(declaredCellId) {
+  if (operationDescriptorByCellId[declaredCellId] !== undefined) return declaredCellId;
+  return semanticOperationCellIdByRef[declaredCellId] ?? declaredCellId;
+}
+
 const carrierCellIds = new Set();
 const carrierRouteKeys = new Set();
 for (const projection of carrier.eventExecutionProjections ?? []) {
@@ -269,11 +290,15 @@ function recordCellTestimony(cellId, outcome, runtime) {
   const descriptor = operationDescriptorByCellId[cellId];
   const occurrence = runtime.occurrences.get(cellId) ?? 0;
   runtime.occurrences.set(cellId, occurrence + 1);
+  const altitude = descriptor && typeof descriptor.altitude === "string" ? descriptor.altitude : "mechanic";
+  const evidence = altitude === "provider" || altitude === "physical" ? boundedProviderEvidence(outcome.value) : undefined;
   runtime.testimony.cells.push(Object.freeze({
     testimonyType: "cell-execution-testimony.v1",
     cellId,
+    cellAltitude: altitude,
     cellExecutionId: runtime.rootExecutionId + ":" + cellId + ":" + occurrence,
     providerProfileId: descriptor && typeof descriptor.providerProfileId === "string" ? descriptor.providerProfileId : null,
+    ...(evidence !== undefined ? { providerEvidence: evidence } : {}),
     outcomeVariant: outcome.variant ?? null,
     disposition: outcome.disposition,
     outcomeDigest: valueDigest(outcome.value),
@@ -370,6 +395,21 @@ function patternContext(runtime) {
   return context;
 }
 
+async function runCellDescent(pattern, input, runtime) {
+  const entryCellIds = pattern.decomposition && Array.isArray(pattern.decomposition.entryCellIds) ? pattern.decomposition.entryCellIds : [];
+  const exitCellIds = pattern.decomposition && Array.isArray(pattern.decomposition.exitCellIds) ? pattern.decomposition.exitCellIds : [];
+  let outcome = patternOutcome(input);
+  for (const entryCellId of entryCellIds) {
+    outcome = await runAdmittedCell(descentCellId(entryCellId), outcome.value, runtime);
+    if (outcome.disposition !== "completed") return outcome;
+  }
+  for (const exitCellId of exitCellIds) {
+    outcome = await runAdmittedCell(descentCellId(exitCellId), outcome.value, runtime);
+    if (outcome.disposition !== "completed") return outcome;
+  }
+  return outcome;
+}
+
 async function stepCell(cellId, input, runtime, options = {}) {
   if (!admitContract(cellId, input, "inputContractId")) {
     const rejected = patternOutcome(input, "INPUT_REJECTED", "rejected");
@@ -393,6 +433,15 @@ async function stepCell(cellId, input, runtime, options = {}) {
   }
   const pattern = groupedPatternAt(cellId);
   const structural = options.structural === true;
+  if (pattern !== undefined && pattern.patternType === "decomposition" &&
+      pattern.decomposition && pattern.decomposition.descent === true) {
+    let outcome = await runCellDescent(pattern, input, runtime);
+    if (outcome.disposition === "completed" && !admitContract(cellId, outcome.value, "outcomeContractId")) {
+      outcome = patternOutcome(outcome.value, "OUTCOME_REJECTED", "rejected");
+    }
+    recordCellTestimony(cellId, outcome, runtime);
+    return outcome;
+  }
   if (pattern !== undefined && !(structural && STRUCTURAL_PATTERN_TYPES.has(pattern.patternType))) {
     const resolver = patternResolverByType.get(pattern.patternType);
     if (resolver === undefined) throw new Error("EXECUTION_PATTERN_RESOLVER_MISSING: '" + pattern.patternType + "'.");

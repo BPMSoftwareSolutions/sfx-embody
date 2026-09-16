@@ -6753,6 +6753,256 @@
         ]
       },
       {
+        "cellId": "cell:physical:resolve-equity-market-price-evidence.operation.2",
+        "semanticAddress": "resolve-equity-market-price-evidence/scenario/resolve-equity-market-price-evidence/operation/resolve-equity-market-price-evidence.operation.2/physical",
+        "altitude": "physical",
+        "parentCellId": "cell:provider:resolve-equity-market-price-evidence.operation.2",
+        "input": {
+          "portId": "cell:physical:resolve-equity-market-price-evidence.operation.2:input",
+          "contractId": "semantic-value.v1"
+        },
+        "execution": {
+          "kind": "physical",
+          "authorityId": "physical:sda-external-credential-reference-binding-port.v1",
+          "authorityDigest": "sha256:2bbb1f47e07475365a4de12e5ee89c71ec9b819005e475acf2a7d562ecb4cfe4",
+          "protocolRef": "cell-execution-protocol.v1",
+          "primitiveProfileId": "sda-external-credential-reference-binding-port.v1",
+          "providerSlotId": "slot:cell:physical:resolve-equity-market-price-evidence.operation.2",
+          "configuration": {
+            "portId": "bind-equity-price-provider-credential",
+            "platformCapabilityId": "sda-external-credential-reference-binding-port.v1",
+            "configuration": {
+              "credentialAuthorities": [
+                {
+                  "effectScopes": [
+                    "ONE_BOUNDED_HTTPS_EXCHANGE_NO_REDIRECT_NO_RETRY"
+                  ],
+                  "endpointAuthorityDigests": [
+                    "sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b"
+                  ],
+                  "injectionRule": {
+                    "headerName": "X-RapidAPI-Key",
+                    "id": "rapidapi-x-rapidapi-key.v1"
+                  },
+                  "lifetimeMilliseconds": 15000,
+                  "referenceName": "RAPID_API_KEY",
+                  "requestingCapabilityIds": [
+                    "resolve-equity-market-price-evidence"
+                  ],
+                  "source": "environment"
+                }
+              ]
+            }
+          }
+        },
+        "outcome": {
+          "portId": "cell:physical:resolve-equity-market-price-evidence.operation.2:outcome",
+          "contractId": "semantic-value.v1",
+          "variants": [
+            "CANCELLED",
+            "FAILURE",
+            "SUCCESS"
+          ]
+        },
+        "sourcePointers": [
+          "executionAuthorities/resolve-equity-market-price-evidence/operations/1"
+        ],
+        "sourceAuthorityDigests": [
+          "sha256:e286b8966e80b30aafb3aee29a17a39f0baed49382d440ec4c3290a0e0caa70a"
+        ]
+      },
+      {
+        "cellId": "cell:physical:resolve-equity-market-price-evidence.operation.4",
+        "semanticAddress": "resolve-equity-market-price-evidence/scenario/resolve-equity-market-price-evidence/operation/resolve-equity-market-price-evidence.operation.4/physical",
+        "altitude": "physical",
+        "parentCellId": "cell:provider:resolve-equity-market-price-evidence.operation.4",
+        "input": {
+          "portId": "cell:physical:resolve-equity-market-price-evidence.operation.4:input",
+          "contractId": "semantic-value.v1"
+        },
+        "execution": {
+          "kind": "physical",
+          "authorityId": "physical:sda-governed-http-exchange-port.v1",
+          "authorityDigest": "sha256:6e3a52ad0e6709db1b40077c5388b0248772c2e30a2fa9590244bcf56aa32e3e",
+          "protocolRef": "cell-execution-protocol.v1",
+          "primitiveProfileId": "sda-governed-http-exchange-port.v1",
+          "providerSlotId": "slot:cell:physical:resolve-equity-market-price-evidence.operation.4",
+          "configuration": {
+            "portId": "observe-equity-price-exchange",
+            "platformCapabilityId": "sda-governed-http-exchange-port.v1",
+            "configuration": {
+              "credentialInjectionRules": [
+                {
+                  "headerName": "X-RapidAPI-Key",
+                  "id": "rapidapi-x-rapidapi-key.v1"
+                }
+              ],
+              "endpointAuthorities": [
+                {
+                  "allowedRequestHeaders": [
+                    "x-rapidapi-host"
+                  ],
+                  "allowedResponseHeaders": [
+                    "content-type",
+                    "retry-after"
+                  ],
+                  "endpointAuthorityDigest": "sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b",
+                  "methods": [
+                    "GET"
+                  ],
+                  "urlPrefixes": [
+                    "https://yahoo-finance166.p.rapidapi.com/api/stock/get-price?"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "outcome": {
+          "portId": "cell:physical:resolve-equity-market-price-evidence.operation.4:outcome",
+          "contractId": "semantic-value.v1",
+          "variants": [
+            "CANCELLED",
+            "FAILURE",
+            "SUCCESS"
+          ]
+        },
+        "sourcePointers": [
+          "executionAuthorities/resolve-equity-market-price-evidence/operations/3"
+        ],
+        "sourceAuthorityDigests": [
+          "sha256:e286b8966e80b30aafb3aee29a17a39f0baed49382d440ec4c3290a0e0caa70a"
+        ]
+      },
+      {
+        "cellId": "cell:provider:resolve-equity-market-price-evidence.operation.2",
+        "semanticAddress": "resolve-equity-market-price-evidence/scenario/resolve-equity-market-price-evidence/operation/resolve-equity-market-price-evidence.operation.2/provider",
+        "altitude": "provider",
+        "parentCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.2",
+        "input": {
+          "portId": "cell:provider:resolve-equity-market-price-evidence.operation.2:input",
+          "contractId": "semantic-value.v1"
+        },
+        "execution": {
+          "kind": "provider",
+          "authorityId": "provider:sda-external-credential-reference-binding-port.v1",
+          "authorityDigest": "sha256:562dc28566fc95d2b86d97d1353d42e93a0d8039ed40daf7e69b46bbe5ac68c0",
+          "protocolRef": "cell-execution-protocol.v1",
+          "providerSlotId": "slot:cell:provider:resolve-equity-market-price-evidence.operation.2",
+          "configuration": {
+            "kind": "invoke-port",
+            "portId": "bind-equity-price-provider-credential",
+            "binding": {
+              "portId": "bind-equity-price-provider-credential",
+              "platformCapabilityId": "sda-external-credential-reference-binding-port.v1",
+              "configuration": {
+                "credentialAuthorities": [
+                  {
+                    "effectScopes": [
+                      "ONE_BOUNDED_HTTPS_EXCHANGE_NO_REDIRECT_NO_RETRY"
+                    ],
+                    "endpointAuthorityDigests": [
+                      "sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b"
+                    ],
+                    "injectionRule": {
+                      "headerName": "X-RapidAPI-Key",
+                      "id": "rapidapi-x-rapidapi-key.v1"
+                    },
+                    "lifetimeMilliseconds": 15000,
+                    "referenceName": "RAPID_API_KEY",
+                    "requestingCapabilityIds": [
+                      "resolve-equity-market-price-evidence"
+                    ],
+                    "source": "environment"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "outcome": {
+          "portId": "cell:provider:resolve-equity-market-price-evidence.operation.2:outcome",
+          "contractId": "semantic-value.v1",
+          "variants": [
+            "CANCELLED",
+            "FAILURE",
+            "SUCCESS"
+          ]
+        },
+        "sourcePointers": [
+          "executionAuthorities/resolve-equity-market-price-evidence/operations/1"
+        ],
+        "sourceAuthorityDigests": [
+          "sha256:e286b8966e80b30aafb3aee29a17a39f0baed49382d440ec4c3290a0e0caa70a"
+        ]
+      },
+      {
+        "cellId": "cell:provider:resolve-equity-market-price-evidence.operation.4",
+        "semanticAddress": "resolve-equity-market-price-evidence/scenario/resolve-equity-market-price-evidence/operation/resolve-equity-market-price-evidence.operation.4/provider",
+        "altitude": "provider",
+        "parentCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.4",
+        "input": {
+          "portId": "cell:provider:resolve-equity-market-price-evidence.operation.4:input",
+          "contractId": "semantic-value.v1"
+        },
+        "execution": {
+          "kind": "provider",
+          "authorityId": "provider:sda-governed-http-exchange-port.v1",
+          "authorityDigest": "sha256:4548a8f7e92d26306546bbdb7bae7fb6a940812e15f3514a8ce066da63a5d35e",
+          "protocolRef": "cell-execution-protocol.v1",
+          "providerSlotId": "slot:cell:provider:resolve-equity-market-price-evidence.operation.4",
+          "configuration": {
+            "kind": "invoke-port",
+            "portId": "observe-equity-price-exchange",
+            "binding": {
+              "portId": "observe-equity-price-exchange",
+              "platformCapabilityId": "sda-governed-http-exchange-port.v1",
+              "configuration": {
+                "credentialInjectionRules": [
+                  {
+                    "headerName": "X-RapidAPI-Key",
+                    "id": "rapidapi-x-rapidapi-key.v1"
+                  }
+                ],
+                "endpointAuthorities": [
+                  {
+                    "allowedRequestHeaders": [
+                      "x-rapidapi-host"
+                    ],
+                    "allowedResponseHeaders": [
+                      "content-type",
+                      "retry-after"
+                    ],
+                    "endpointAuthorityDigest": "sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b",
+                    "methods": [
+                      "GET"
+                    ],
+                    "urlPrefixes": [
+                      "https://yahoo-finance166.p.rapidapi.com/api/stock/get-price?"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "outcome": {
+          "portId": "cell:provider:resolve-equity-market-price-evidence.operation.4:outcome",
+          "contractId": "semantic-value.v1",
+          "variants": [
+            "CANCELLED",
+            "FAILURE",
+            "SUCCESS"
+          ]
+        },
+        "sourcePointers": [
+          "executionAuthorities/resolve-equity-market-price-evidence/operations/3"
+        ],
+        "sourceAuthorityDigests": [
+          "sha256:e286b8966e80b30aafb3aee29a17a39f0baed49382d440ec4c3290a0e0caa70a"
+        ]
+      },
+      {
         "cellId": "cell:scenario:resolve-equity-market-price-evidence",
         "semanticAddress": "resolve-equity-market-price-evidence/scenario/resolve-equity-market-price-evidence",
         "altitude": "scenario",
@@ -9416,6 +9666,74 @@
         ]
       },
       {
+        "edgeId": "edge:descent-return:resolve-equity-market-price-evidence.operation.2",
+        "kind": "return",
+        "from": {
+          "cellId": "cell:physical:resolve-equity-market-price-evidence.operation.2",
+          "portId": "cell:physical:resolve-equity-market-price-evidence.operation.2:outcome"
+        },
+        "to": {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.2",
+          "portId": "cell:mechanic:resolve-equity-market-price-evidence.operation.2:outcome"
+        },
+        "edgeContractId": "semantic-value.v1",
+        "authorityDigest": "sha256:ed0de06d3d1fe4d389d1533df1e97f0219be95df28f7656923e264e250a4ded6",
+        "sourcePointers": [
+          "executionAuthorities/resolve-equity-market-price-evidence/operations/1"
+        ]
+      },
+      {
+        "edgeId": "edge:descent-return:resolve-equity-market-price-evidence.operation.4",
+        "kind": "return",
+        "from": {
+          "cellId": "cell:physical:resolve-equity-market-price-evidence.operation.4",
+          "portId": "cell:physical:resolve-equity-market-price-evidence.operation.4:outcome"
+        },
+        "to": {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.4",
+          "portId": "cell:mechanic:resolve-equity-market-price-evidence.operation.4:outcome"
+        },
+        "edgeContractId": "semantic-value.v1",
+        "authorityDigest": "sha256:2dcd17237133f0c0b418a357a4c46fdb54593764f32c076eccb9a9e5b93570c4",
+        "sourcePointers": [
+          "executionAuthorities/resolve-equity-market-price-evidence/operations/3"
+        ]
+      },
+      {
+        "edgeId": "edge:descent:resolve-equity-market-price-evidence.operation.2",
+        "kind": "sequence",
+        "from": {
+          "cellId": "cell:provider:resolve-equity-market-price-evidence.operation.2",
+          "portId": "cell:provider:resolve-equity-market-price-evidence.operation.2:outcome"
+        },
+        "to": {
+          "cellId": "cell:physical:resolve-equity-market-price-evidence.operation.2",
+          "portId": "cell:physical:resolve-equity-market-price-evidence.operation.2:input"
+        },
+        "edgeContractId": "semantic-value.v1",
+        "authorityDigest": "sha256:ed0de06d3d1fe4d389d1533df1e97f0219be95df28f7656923e264e250a4ded6",
+        "sourcePointers": [
+          "executionAuthorities/resolve-equity-market-price-evidence/operations/1"
+        ]
+      },
+      {
+        "edgeId": "edge:descent:resolve-equity-market-price-evidence.operation.4",
+        "kind": "sequence",
+        "from": {
+          "cellId": "cell:provider:resolve-equity-market-price-evidence.operation.4",
+          "portId": "cell:provider:resolve-equity-market-price-evidence.operation.4:outcome"
+        },
+        "to": {
+          "cellId": "cell:physical:resolve-equity-market-price-evidence.operation.4",
+          "portId": "cell:physical:resolve-equity-market-price-evidence.operation.4:input"
+        },
+        "edgeContractId": "semantic-value.v1",
+        "authorityDigest": "sha256:2dcd17237133f0c0b418a357a4c46fdb54593764f32c076eccb9a9e5b93570c4",
+        "sourcePointers": [
+          "executionAuthorities/resolve-equity-market-price-evidence/operations/3"
+        ]
+      },
+      {
         "edgeId": "edge:return:cell:mechanic:resolve-equity-market-price-evidence.operation.1:expression:cell:mechanic:resolve-equity-market-price-evidence.operation.1:0",
         "kind": "return",
         "from": {
@@ -9564,6 +9882,16 @@
         "returnBindingAuthorityId": "binding:return:cell:mechanic:resolve-equity-market-price-evidence.operation.1"
       },
       {
+        "parentCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.2",
+        "entryCellIds": [
+          "cell:provider:resolve-equity-market-price-evidence.operation.2"
+        ],
+        "exitCellIds": [
+          "cell:physical:resolve-equity-market-price-evidence.operation.2"
+        ],
+        "returnBindingAuthorityId": "binding:return:cell:mechanic:resolve-equity-market-price-evidence.operation.2"
+      },
+      {
         "parentCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.3",
         "entryCellIds": [
           "cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.allowedResponseHeaders.items.0"
@@ -9572,6 +9900,16 @@
           "cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression"
         ],
         "returnBindingAuthorityId": "binding:return:cell:mechanic:resolve-equity-market-price-evidence.operation.3"
+      },
+      {
+        "parentCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.4",
+        "entryCellIds": [
+          "cell:provider:resolve-equity-market-price-evidence.operation.4"
+        ],
+        "exitCellIds": [
+          "cell:physical:resolve-equity-market-price-evidence.operation.4"
+        ],
+        "returnBindingAuthorityId": "binding:return:cell:mechanic:resolve-equity-market-price-evidence.operation.4"
       },
       {
         "parentCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5",
@@ -9783,6 +10121,38 @@
         "slotId": "slot:cell:mechanic:resolve-equity-market-price-evidence.operation.5",
         "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5",
         "mechanicId": "sda-authority-transformation-port.v1",
+        "profileConstraints": [
+          "profile-bound"
+        ]
+      },
+      {
+        "slotId": "slot:cell:physical:resolve-equity-market-price-evidence.operation.2",
+        "cellId": "cell:physical:resolve-equity-market-price-evidence.operation.2",
+        "mechanicId": "sda-external-credential-reference-binding-port.v1",
+        "profileConstraints": [
+          "profile-bound"
+        ]
+      },
+      {
+        "slotId": "slot:cell:physical:resolve-equity-market-price-evidence.operation.4",
+        "cellId": "cell:physical:resolve-equity-market-price-evidence.operation.4",
+        "mechanicId": "sda-governed-http-exchange-port.v1",
+        "profileConstraints": [
+          "profile-bound"
+        ]
+      },
+      {
+        "slotId": "slot:cell:provider:resolve-equity-market-price-evidence.operation.2",
+        "cellId": "cell:provider:resolve-equity-market-price-evidence.operation.2",
+        "mechanicId": "sda-external-credential-reference-binding-port.v1",
+        "profileConstraints": [
+          "profile-bound"
+        ]
+      },
+      {
+        "slotId": "slot:cell:provider:resolve-equity-market-price-evidence.operation.4",
+        "cellId": "cell:provider:resolve-equity-market-price-evidence.operation.4",
+        "mechanicId": "sda-governed-http-exchange-port.v1",
         "profileConstraints": [
           "profile-bound"
         ]
@@ -10976,12 +11346,12 @@
       }
     ]
   },
-  "canonicalGraphDigest": "sha256:6d8e145c32ebc8629dab66e0be7fe88e135968b4bdcd888ee3e266d712b41dbf",
+  "canonicalGraphDigest": "sha256:97b39b5058357a925d7ea068f4dde79afdad74732cd0cc264a37b642d89e2357",
   "realizationOverlay": {
     "overlayType": "execution-graph-realization-overlay.v1",
     "overlayId": "overlay:graph:resolve-equity-market-price-evidence:node",
     "graphId": "graph:resolve-equity-market-price-evidence",
-    "canonicalGraphDigest": "sha256:6d8e145c32ebc8629dab66e0be7fe88e135968b4bdcd888ee3e266d712b41dbf",
+    "canonicalGraphDigest": "sha256:97b39b5058357a925d7ea068f4dde79afdad74732cd0cc264a37b642d89e2357",
     "targetId": "node",
     "providerBindings": [
       {
@@ -11023,6 +11393,38 @@
         "providerProfileId": "sda-semantic-value-graph-provider.v1",
         "providerProfileDigest": "sha256:a36a000fee2b6803599df25c33063913794fa3231b7be311310f6ec6f1b43e7f",
         "implementationRef": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs#createMechanicProvider"
+      },
+      {
+        "slotId": "slot:cell:physical:resolve-equity-market-price-evidence.operation.2",
+        "cellId": "cell:physical:resolve-equity-market-price-evidence.operation.2",
+        "mechanicId": "sda-external-credential-reference-binding-port.v1",
+        "providerProfileId": "sda-platform-effect-graph-provider.v1",
+        "providerProfileDigest": "sha256:aacfad4fae904ac2ed2d1fdf67f3249b6376142462c9972d97e8da8b965827bf",
+        "implementationRef": "languages/typescript/runtimes/node/semantic-execution-graph-effect-provider.mjs#createPlatformEffectProvider"
+      },
+      {
+        "slotId": "slot:cell:physical:resolve-equity-market-price-evidence.operation.4",
+        "cellId": "cell:physical:resolve-equity-market-price-evidence.operation.4",
+        "mechanicId": "sda-governed-http-exchange-port.v1",
+        "providerProfileId": "sda-platform-effect-graph-provider.v1",
+        "providerProfileDigest": "sha256:aacfad4fae904ac2ed2d1fdf67f3249b6376142462c9972d97e8da8b965827bf",
+        "implementationRef": "languages/typescript/runtimes/node/semantic-execution-graph-effect-provider.mjs#createPlatformEffectProvider"
+      },
+      {
+        "slotId": "slot:cell:provider:resolve-equity-market-price-evidence.operation.2",
+        "cellId": "cell:provider:resolve-equity-market-price-evidence.operation.2",
+        "mechanicId": "sda-external-credential-reference-binding-port.v1",
+        "providerProfileId": "sda-platform-effect-graph-provider.v1",
+        "providerProfileDigest": "sha256:aacfad4fae904ac2ed2d1fdf67f3249b6376142462c9972d97e8da8b965827bf",
+        "implementationRef": "languages/typescript/runtimes/node/semantic-execution-graph-effect-provider.mjs#createPlatformEffectProvider"
+      },
+      {
+        "slotId": "slot:cell:provider:resolve-equity-market-price-evidence.operation.4",
+        "cellId": "cell:provider:resolve-equity-market-price-evidence.operation.4",
+        "mechanicId": "sda-governed-http-exchange-port.v1",
+        "providerProfileId": "sda-platform-effect-graph-provider.v1",
+        "providerProfileDigest": "sha256:aacfad4fae904ac2ed2d1fdf67f3249b6376142462c9972d97e8da8b965827bf",
+        "implementationRef": "languages/typescript/runtimes/node/semantic-execution-graph-effect-provider.mjs#createPlatformEffectProvider"
       },
       {
         "slotId": "slot:mechanic:resolve-equity-market-price-evidence.operation.1:expression",
@@ -12083,9 +12485,9 @@
     ],
     "physicalCells": [],
     "physicalEdges": [],
-    "overlayDigest": "sha256:d49d02048ec8931e43ab8b994466181ed58024c52f6836cf9a70be003c39a148"
+    "overlayDigest": "sha256:a7d4159c85911fe1358de3d5cdc8c36ed9dfe4a181e1daced70acf927a3bc709"
   },
-  "realizedGraphDigest": "sha256:e3c186812562e127fb95a192f9af8cd774dce8604a0c5e15514b49ada355ab60",
+  "realizedGraphDigest": "sha256:ad7b9b78d88967049b0f35d8a457b8669eeab6e02e459d70693fcdf98d80377b",
   "sourceMap": {
     "cell:scenario:resolve-equity-market-price-evidence": [
       "scenarios#/0"
@@ -12096,10 +12498,22 @@
     "cell:mechanic:resolve-equity-market-price-evidence.operation.2": [
       "executionAuthorities/resolve-equity-market-price-evidence/operations/1"
     ],
+    "cell:provider:resolve-equity-market-price-evidence.operation.2": [
+      "executionAuthorities/resolve-equity-market-price-evidence/operations/1"
+    ],
+    "cell:physical:resolve-equity-market-price-evidence.operation.2": [
+      "executionAuthorities/resolve-equity-market-price-evidence/operations/1"
+    ],
     "cell:mechanic:resolve-equity-market-price-evidence.operation.3": [
       "executionAuthorities/resolve-equity-market-price-evidence/operations/2"
     ],
     "cell:mechanic:resolve-equity-market-price-evidence.operation.4": [
+      "executionAuthorities/resolve-equity-market-price-evidence/operations/3"
+    ],
+    "cell:provider:resolve-equity-market-price-evidence.operation.4": [
+      "executionAuthorities/resolve-equity-market-price-evidence/operations/3"
+    ],
+    "cell:physical:resolve-equity-market-price-evidence.operation.4": [
       "executionAuthorities/resolve-equity-market-price-evidence/operations/3"
     ],
     "cell:mechanic:resolve-equity-market-price-evidence.operation.5": [
@@ -12483,6 +12897,10 @@
       "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then:selection",
       "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.when",
       "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value:selection",
+      "cell:physical:resolve-equity-market-price-evidence.operation.2",
+      "cell:physical:resolve-equity-market-price-evidence.operation.4",
+      "cell:provider:resolve-equity-market-price-evidence.operation.2",
+      "cell:provider:resolve-equity-market-price-evidence.operation.4",
       "cell:scenario:resolve-equity-market-price-evidence"
     ],
     "edgeIds": [
@@ -12638,6 +13056,10 @@
       "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression:dependency:8",
       "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression:dependency:9",
       "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression:dependency:result",
+      "edge:descent-return:resolve-equity-market-price-evidence.operation.2",
+      "edge:descent-return:resolve-equity-market-price-evidence.operation.4",
+      "edge:descent:resolve-equity-market-price-evidence.operation.2",
+      "edge:descent:resolve-equity-market-price-evidence.operation.4",
       "edge:return:cell:mechanic:resolve-equity-market-price-evidence.operation.1:expression:cell:mechanic:resolve-equity-market-price-evidence.operation.1:0",
       "edge:return:cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression:cell:mechanic:resolve-equity-market-price-evidence.operation.3:0",
       "edge:return:cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression:cell:mechanic:resolve-equity-market-price-evidence.operation.5:0",

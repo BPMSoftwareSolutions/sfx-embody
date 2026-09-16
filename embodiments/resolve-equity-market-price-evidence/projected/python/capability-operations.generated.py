@@ -1,6 +1,6 @@
 # GENERATED CAPABILITY OPERATIONS. Do not hand-edit.
-# canonicalGraphDigest: sha256:6d8e145c32ebc8629dab66e0be7fe88e135968b4bdcd888ee3e266d712b41dbf
-# realizedGraphDigest: sha256:c118fa66c8ef25d59a7d24c565d3d97614236ec481e9d99fe5b237603c3a5959
+# canonicalGraphDigest: sha256:97b39b5058357a925d7ea068f4dde79afdad74732cd0cc264a37b642d89e2357
+# realizedGraphDigest: sha256:07e043eeda0b2f2a193d8a00a7ed3ea643d84e270c869bd483820b3085c3d3ad
 from __future__ import annotations
 
 import base64
@@ -451,370 +451,370 @@ def op_2(scope):
 def op_4(scope):
     return (sfx_let(scope, [("completed", lambda scope: sfx_equals(sfx_value_at(scope.get("input"), "disposition"), "completed")), ("bodyText", lambda scope: (sfx_base64_decode_utf8(sfx_value_at(scope.get("input"), "responseBodyBytes")) if sfx_truthy(sfx_value_at(scope.get("completed"), "")) else "")), ("parsed", lambda scope: sfx_try_parse_json(sfx_value_at(scope.get("bodyText"), ""))), ("native", lambda scope: sfx_value_at(scope.get("parsed"), "value")), ("summaryQuote", lambda scope: sfx_value_at(scope.get("native"), "quoteSummary.result.0.price")), ("responseQuote", lambda scope: sfx_value_at(scope.get("native"), "quoteResponse.result.0")), ("symbol", lambda scope: (sfx_value_at(scope.get("summaryQuote"), "symbol") if sfx_truthy(sfx_value_at(scope.get("summaryQuote"), "")) else sfx_value_at(scope.get("responseQuote"), "symbol"))), ("currency", lambda scope: (sfx_value_at(scope.get("summaryQuote"), "currency") if sfx_truthy(sfx_value_at(scope.get("summaryQuote"), "")) else sfx_value_at(scope.get("responseQuote"), "currency"))), ("observedPrice", lambda scope: (sfx_value_at(scope.get("summaryQuote"), "regularMarketPrice.raw") if sfx_truthy(sfx_value_at(scope.get("summaryQuote"), "")) else sfx_value_at(scope.get("responseQuote"), "regularMarketPrice"))), ("observedMarketTime", lambda scope: (sfx_value_at(scope.get("summaryQuote"), "regularMarketTime") if sfx_truthy(sfx_value_at(scope.get("summaryQuote"), "")) else sfx_value_at(scope.get("responseQuote"), "regularMarketTime"))), ("marketState", lambda scope: (sfx_value_at(scope.get("summaryQuote"), "marketState") if sfx_truthy(sfx_value_at(scope.get("summaryQuote"), "")) else sfx_value_at(scope.get("responseQuote"), "marketState"))), ("exchange", lambda scope: (sfx_value_at(scope.get("summaryQuote"), "exchange") if sfx_truthy(sfx_value_at(scope.get("summaryQuote"), "")) else sfx_value_at(scope.get("responseQuote"), "exchange"))), ("sourceAttribution", lambda scope: (sfx_value_at(scope.get("summaryQuote"), "quoteSourceName") if sfx_truthy(sfx_value_at(scope.get("summaryQuote"), "")) else sfx_value_at(scope.get("responseQuote"), "quoteSourceName"))), ("requiredValues", lambda scope: [(sfx_value_at(scope.get("symbol"), "")), (sfx_value_at(scope.get("currency"), "")), (sfx_value_at(scope.get("observedPrice"), "")), (sfx_value_at(scope.get("observedMarketTime"), "")), (sfx_value_at(scope.get("marketState"), "")), (sfx_value_at(scope.get("exchange"), "")), (sfx_value_at(scope.get("sourceAttribution"), ""))]), ("missing", lambda scope: sfx_collection("filter", sfx_value_at(scope.get("requiredValues"), ""), scope, "v", lambda scope: sfx_equals(sfx_value_at(scope.get("v"), ""), None))), ("missingCount", lambda scope: sfx_length(sfx_value_at(scope.get("missing"), ""))), ("conforming", lambda scope: sfx_equals(sfx_value_at(scope.get("missingCount"), ""), 0)), ("nativeShape", lambda scope: ("quoteSummary.result.0.price" if sfx_truthy(sfx_value_at(scope.get("summaryQuote"), "")) else "quoteResponse.result.0")), ("bindingId", lambda scope: "rapidapi-davethebeast-yahoo-finance166-stock-price.v1-EDITED"), ("providerId", lambda scope: "rapidapi/davethebeast/yahoo-finance166")], lambda scope: (({"contractId": ("equity-market-price-evidence.v1"), "disposition": ("EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED"), "payload": ({"symbol": (sfx_value_at(scope.get("symbol"), "")), "region": (sfx_value_at(scope.get("root"), "payload.region")), "currency": (sfx_value_at(scope.get("currency"), "")), "observedPrice": (sfx_value_at(scope.get("observedPrice"), "")), "observedMarketTime": (sfx_value_at(scope.get("observedMarketTime"), "")), "marketState": (sfx_value_at(scope.get("marketState"), "")), "exchange": (sfx_value_at(scope.get("exchange"), "")), "sourceAttribution": (sfx_value_at(scope.get("sourceAttribution"), ""))}), "providerTestimony": ({"bindingId": (sfx_value_at(scope.get("bindingId"), "")), "providerId": (sfx_value_at(scope.get("providerId"), "")), "nativeShape": (sfx_value_at(scope.get("nativeShape"), ""))})} if sfx_truthy(sfx_value_at(scope.get("conforming"), "")) else {"contractId": ("equity-market-price-evidence.v1"), "disposition": ("NATIVE_MARKET_PRICE_TESTIMONY_REJECTED"), "reasonCode": ("REQUIRED_NATIVE_FIELDS_ABSENT"), "absentFieldCount": (sfx_value_at(scope.get("missingCount"), "")), "providerTestimony": ({"bindingId": (sfx_value_at(scope.get("bindingId"), "")), "providerId": (sfx_value_at(scope.get("providerId"), "")), "nativeShape": (sfx_value_at(scope.get("nativeShape"), ""))})}) if sfx_truthy(sfx_value_at(scope.get("completed"), "")) else {"contractId": ("equity-market-price-evidence.v1"), "disposition": ("EQUITY_MARKET_PRICE_PROVIDER_UNAVAILABLE"), "reasonCode": ("PROVIDER_EXCHANGE_NOT_COMPLETED"), "providerTestimony": ({"bindingId": (sfx_value_at(scope.get("bindingId"), "")), "providerId": (sfx_value_at(scope.get("providerId"), ""))})})))
 
-def op_5(scope):
+def op_9(scope):
     return ({"credentialReference": ("RAPID_API_KEY"), "effectLineage": ([]), "effectScope": ("ONE_BOUNDED_HTTPS_EXCHANGE_NO_REDIRECT_NO_RETRY"), "endpointAuthorityDigest": ("sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b"), "invocationIdentity": ("equity-market-price-evidence.v1"), "requestingCapabilityId": ("resolve-equity-market-price-evidence")})
 
-def op_6(scope):
+def op_10(scope):
     return ("RAPID_API_KEY")
 
-def op_7(scope):
+def op_11(scope):
     return ([])
 
-def op_8(scope):
+def op_12(scope):
     return ("ONE_BOUNDED_HTTPS_EXCHANGE_NO_REDIRECT_NO_RETRY")
 
-def op_9(scope):
-    return ("sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b")
-
-def op_10(scope):
-    return ("equity-market-price-evidence.v1")
-
-def op_11(scope):
-    return ("resolve-equity-market-price-evidence")
-
-def op_12(scope):
-    return ({"allowedResponseHeaders": ([("content-type"), ("retry-after")]), "cancellationScopeReference": ("equity-market-price-evidence.v1"), "credentialInjectionRuleId": (sfx_value_at(scope.get("input"), "credentialInjectionRuleId")), "endpointAuthorityDigest": ("sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b"), "exchangeKind": ("live-provider-input"), "invocationIdentity": ("equity-market-price-evidence.v1"), "lineageId": ("equity-market-price-evidence.v1"), "maxResponseBytes": (262144), "method": ("GET"), "opaqueCredentialBinding": ({"bindingId": (sfx_value_at(scope.get("input"), "opaqueBindingId")), "credentialInjectionRuleId": (sfx_value_at(scope.get("input"), "credentialInjectionRuleId"))}), "redirectPolicy": ("manual"), "requestBodyText": (""), "requestUrl": (sfx_format("https://yahoo-finance166.p.rapidapi.com/api/stock/get-price?symbol={symbol}&region={region}", {"region": (sfx_value_at(scope.get("root"), "payload.region")), "symbol": (sfx_value_at(scope.get("root"), "payload.symbol"))})), "safeHeaders": ({"X-RapidAPI-Host": ("yahoo-finance166.p.rapidapi.com")}), "timeoutMilliseconds": (12000)})
-
 def op_13(scope):
-    return ([("content-type"), ("retry-after")])
+    return ("sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b")
 
 def op_14(scope):
-    return ("content-type")
-
-def op_15(scope):
-    return ("retry-after")
-
-def op_16(scope):
     return ("equity-market-price-evidence.v1")
 
+def op_15(scope):
+    return ("resolve-equity-market-price-evidence")
+
+def op_16(scope):
+    return ({"allowedResponseHeaders": ([("content-type"), ("retry-after")]), "cancellationScopeReference": ("equity-market-price-evidence.v1"), "credentialInjectionRuleId": (sfx_value_at(scope.get("input"), "credentialInjectionRuleId")), "endpointAuthorityDigest": ("sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b"), "exchangeKind": ("live-provider-input"), "invocationIdentity": ("equity-market-price-evidence.v1"), "lineageId": ("equity-market-price-evidence.v1"), "maxResponseBytes": (262144), "method": ("GET"), "opaqueCredentialBinding": ({"bindingId": (sfx_value_at(scope.get("input"), "opaqueBindingId")), "credentialInjectionRuleId": (sfx_value_at(scope.get("input"), "credentialInjectionRuleId"))}), "redirectPolicy": ("manual"), "requestBodyText": (""), "requestUrl": (sfx_format("https://yahoo-finance166.p.rapidapi.com/api/stock/get-price?symbol={symbol}&region={region}", {"region": (sfx_value_at(scope.get("root"), "payload.region")), "symbol": (sfx_value_at(scope.get("root"), "payload.symbol"))})), "safeHeaders": ({"X-RapidAPI-Host": ("yahoo-finance166.p.rapidapi.com")}), "timeoutMilliseconds": (12000)})
+
 def op_17(scope):
-    return (sfx_value_at(scope.get("input"), "credentialInjectionRuleId"))
+    return ([("content-type"), ("retry-after")])
 
 def op_18(scope):
-    return ("sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b")
+    return ("content-type")
 
 def op_19(scope):
-    return ("live-provider-input")
+    return ("retry-after")
 
 def op_20(scope):
     return ("equity-market-price-evidence.v1")
 
 def op_21(scope):
-    return ("equity-market-price-evidence.v1")
-
-def op_22(scope):
-    return (262144)
-
-def op_23(scope):
-    return ("GET")
-
-def op_24(scope):
-    return ({"bindingId": (sfx_value_at(scope.get("input"), "opaqueBindingId")), "credentialInjectionRuleId": (sfx_value_at(scope.get("input"), "credentialInjectionRuleId"))})
-
-def op_25(scope):
-    return (sfx_value_at(scope.get("input"), "opaqueBindingId"))
-
-def op_26(scope):
     return (sfx_value_at(scope.get("input"), "credentialInjectionRuleId"))
 
+def op_22(scope):
+    return ("sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b")
+
+def op_23(scope):
+    return ("live-provider-input")
+
+def op_24(scope):
+    return ("equity-market-price-evidence.v1")
+
+def op_25(scope):
+    return ("equity-market-price-evidence.v1")
+
+def op_26(scope):
+    return (262144)
+
 def op_27(scope):
-    return ("manual")
+    return ("GET")
 
 def op_28(scope):
-    return ("")
+    return ({"bindingId": (sfx_value_at(scope.get("input"), "opaqueBindingId")), "credentialInjectionRuleId": (sfx_value_at(scope.get("input"), "credentialInjectionRuleId"))})
 
 def op_29(scope):
-    return (sfx_format("https://yahoo-finance166.p.rapidapi.com/api/stock/get-price?symbol={symbol}&region={region}", {"region": (sfx_value_at(scope.get("root"), "payload.region")), "symbol": (sfx_value_at(scope.get("root"), "payload.symbol"))}))
+    return (sfx_value_at(scope.get("input"), "opaqueBindingId"))
 
 def op_30(scope):
-    return (sfx_value_at(scope.get("root"), "payload.region"))
+    return (sfx_value_at(scope.get("input"), "credentialInjectionRuleId"))
 
 def op_31(scope):
-    return (sfx_value_at(scope.get("root"), "payload.symbol"))
+    return ("manual")
 
 def op_32(scope):
-    return ({"X-RapidAPI-Host": ("yahoo-finance166.p.rapidapi.com")})
-
-def op_33(scope):
-    return ("yahoo-finance166.p.rapidapi.com")
-
-def op_34(scope):
-    return (12000)
-
-def op_35(scope):
-    return (sfx_let(scope, [("completed", lambda scope: sfx_equals(sfx_value_at(scope.get("input"), "disposition"), "completed")), ("bodyText", lambda scope: (sfx_base64_decode_utf8(sfx_value_at(scope.get("input"), "responseBodyBytes")) if sfx_truthy(sfx_value_at(scope.get("completed"), "")) else "")), ("parsed", lambda scope: sfx_try_parse_json(sfx_value_at(scope.get("bodyText"), ""))), ("native", lambda scope: sfx_value_at(scope.get("parsed"), "value")), ("summaryQuote", lambda scope: sfx_value_at(scope.get("native"), "quoteSummary.result.0.price")), ("responseQuote", lambda scope: sfx_value_at(scope.get("native"), "quoteResponse.result.0")), ("symbol", lambda scope: (sfx_value_at(scope.get("summaryQuote"), "symbol") if sfx_truthy(sfx_value_at(scope.get("summaryQuote"), "")) else sfx_value_at(scope.get("responseQuote"), "symbol"))), ("currency", lambda scope: (sfx_value_at(scope.get("summaryQuote"), "currency") if sfx_truthy(sfx_value_at(scope.get("summaryQuote"), "")) else sfx_value_at(scope.get("responseQuote"), "currency"))), ("observedPrice", lambda scope: (sfx_value_at(scope.get("summaryQuote"), "regularMarketPrice.raw") if sfx_truthy(sfx_value_at(scope.get("summaryQuote"), "")) else sfx_value_at(scope.get("responseQuote"), "regularMarketPrice"))), ("observedMarketTime", lambda scope: (sfx_value_at(scope.get("summaryQuote"), "regularMarketTime") if sfx_truthy(sfx_value_at(scope.get("summaryQuote"), "")) else sfx_value_at(scope.get("responseQuote"), "regularMarketTime"))), ("marketState", lambda scope: (sfx_value_at(scope.get("summaryQuote"), "marketState") if sfx_truthy(sfx_value_at(scope.get("summaryQuote"), "")) else sfx_value_at(scope.get("responseQuote"), "marketState"))), ("exchange", lambda scope: (sfx_value_at(scope.get("summaryQuote"), "exchange") if sfx_truthy(sfx_value_at(scope.get("summaryQuote"), "")) else sfx_value_at(scope.get("responseQuote"), "exchange"))), ("sourceAttribution", lambda scope: (sfx_value_at(scope.get("summaryQuote"), "quoteSourceName") if sfx_truthy(sfx_value_at(scope.get("summaryQuote"), "")) else sfx_value_at(scope.get("responseQuote"), "quoteSourceName"))), ("requiredValues", lambda scope: [(sfx_value_at(scope.get("symbol"), "")), (sfx_value_at(scope.get("currency"), "")), (sfx_value_at(scope.get("observedPrice"), "")), (sfx_value_at(scope.get("observedMarketTime"), "")), (sfx_value_at(scope.get("marketState"), "")), (sfx_value_at(scope.get("exchange"), "")), (sfx_value_at(scope.get("sourceAttribution"), ""))]), ("missing", lambda scope: sfx_collection("filter", sfx_value_at(scope.get("requiredValues"), ""), scope, "v", lambda scope: sfx_equals(sfx_value_at(scope.get("v"), ""), None))), ("missingCount", lambda scope: sfx_length(sfx_value_at(scope.get("missing"), ""))), ("conforming", lambda scope: sfx_equals(sfx_value_at(scope.get("missingCount"), ""), 0)), ("nativeShape", lambda scope: ("quoteSummary.result.0.price" if sfx_truthy(sfx_value_at(scope.get("summaryQuote"), "")) else "quoteResponse.result.0")), ("bindingId", lambda scope: "rapidapi-davethebeast-yahoo-finance166-stock-price.v1-EDITED"), ("providerId", lambda scope: "rapidapi/davethebeast/yahoo-finance166")], lambda scope: (({"contractId": ("equity-market-price-evidence.v1"), "disposition": ("EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED"), "payload": ({"symbol": (sfx_value_at(scope.get("symbol"), "")), "region": (sfx_value_at(scope.get("root"), "payload.region")), "currency": (sfx_value_at(scope.get("currency"), "")), "observedPrice": (sfx_value_at(scope.get("observedPrice"), "")), "observedMarketTime": (sfx_value_at(scope.get("observedMarketTime"), "")), "marketState": (sfx_value_at(scope.get("marketState"), "")), "exchange": (sfx_value_at(scope.get("exchange"), "")), "sourceAttribution": (sfx_value_at(scope.get("sourceAttribution"), ""))}), "providerTestimony": ({"bindingId": (sfx_value_at(scope.get("bindingId"), "")), "providerId": (sfx_value_at(scope.get("providerId"), "")), "nativeShape": (sfx_value_at(scope.get("nativeShape"), ""))})} if sfx_truthy(sfx_value_at(scope.get("conforming"), "")) else {"contractId": ("equity-market-price-evidence.v1"), "disposition": ("NATIVE_MARKET_PRICE_TESTIMONY_REJECTED"), "reasonCode": ("REQUIRED_NATIVE_FIELDS_ABSENT"), "absentFieldCount": (sfx_value_at(scope.get("missingCount"), "")), "providerTestimony": ({"bindingId": (sfx_value_at(scope.get("bindingId"), "")), "providerId": (sfx_value_at(scope.get("providerId"), "")), "nativeShape": (sfx_value_at(scope.get("nativeShape"), ""))})}) if sfx_truthy(sfx_value_at(scope.get("completed"), "")) else {"contractId": ("equity-market-price-evidence.v1"), "disposition": ("EQUITY_MARKET_PRICE_PROVIDER_UNAVAILABLE"), "reasonCode": ("PROVIDER_EXCHANGE_NOT_COMPLETED"), "providerTestimony": ({"bindingId": (sfx_value_at(scope.get("bindingId"), "")), "providerId": (sfx_value_at(scope.get("providerId"), ""))})})))
-
-def op_36(scope):
-    return ("rapidapi-davethebeast-yahoo-finance166-stock-price.v1-EDITED")
-
-def op_37(scope):
     return ("")
 
+def op_33(scope):
+    return (sfx_format("https://yahoo-finance166.p.rapidapi.com/api/stock/get-price?symbol={symbol}&region={region}", {"region": (sfx_value_at(scope.get("root"), "payload.region")), "symbol": (sfx_value_at(scope.get("root"), "payload.symbol"))}))
+
+def op_34(scope):
+    return (sfx_value_at(scope.get("root"), "payload.region"))
+
+def op_35(scope):
+    return (sfx_value_at(scope.get("root"), "payload.symbol"))
+
+def op_36(scope):
+    return ({"X-RapidAPI-Host": ("yahoo-finance166.p.rapidapi.com")})
+
+def op_37(scope):
+    return ("yahoo-finance166.p.rapidapi.com")
+
 def op_38(scope):
-    return (sfx_base64_decode_utf8(sfx_value_at(scope.get("input"), "responseBodyBytes")))
+    return (12000)
 
 def op_39(scope):
-    return (sfx_value_at(scope.get("input"), "responseBodyBytes"))
+    return (sfx_let(scope, [("completed", lambda scope: sfx_equals(sfx_value_at(scope.get("input"), "disposition"), "completed")), ("bodyText", lambda scope: (sfx_base64_decode_utf8(sfx_value_at(scope.get("input"), "responseBodyBytes")) if sfx_truthy(sfx_value_at(scope.get("completed"), "")) else "")), ("parsed", lambda scope: sfx_try_parse_json(sfx_value_at(scope.get("bodyText"), ""))), ("native", lambda scope: sfx_value_at(scope.get("parsed"), "value")), ("summaryQuote", lambda scope: sfx_value_at(scope.get("native"), "quoteSummary.result.0.price")), ("responseQuote", lambda scope: sfx_value_at(scope.get("native"), "quoteResponse.result.0")), ("symbol", lambda scope: (sfx_value_at(scope.get("summaryQuote"), "symbol") if sfx_truthy(sfx_value_at(scope.get("summaryQuote"), "")) else sfx_value_at(scope.get("responseQuote"), "symbol"))), ("currency", lambda scope: (sfx_value_at(scope.get("summaryQuote"), "currency") if sfx_truthy(sfx_value_at(scope.get("summaryQuote"), "")) else sfx_value_at(scope.get("responseQuote"), "currency"))), ("observedPrice", lambda scope: (sfx_value_at(scope.get("summaryQuote"), "regularMarketPrice.raw") if sfx_truthy(sfx_value_at(scope.get("summaryQuote"), "")) else sfx_value_at(scope.get("responseQuote"), "regularMarketPrice"))), ("observedMarketTime", lambda scope: (sfx_value_at(scope.get("summaryQuote"), "regularMarketTime") if sfx_truthy(sfx_value_at(scope.get("summaryQuote"), "")) else sfx_value_at(scope.get("responseQuote"), "regularMarketTime"))), ("marketState", lambda scope: (sfx_value_at(scope.get("summaryQuote"), "marketState") if sfx_truthy(sfx_value_at(scope.get("summaryQuote"), "")) else sfx_value_at(scope.get("responseQuote"), "marketState"))), ("exchange", lambda scope: (sfx_value_at(scope.get("summaryQuote"), "exchange") if sfx_truthy(sfx_value_at(scope.get("summaryQuote"), "")) else sfx_value_at(scope.get("responseQuote"), "exchange"))), ("sourceAttribution", lambda scope: (sfx_value_at(scope.get("summaryQuote"), "quoteSourceName") if sfx_truthy(sfx_value_at(scope.get("summaryQuote"), "")) else sfx_value_at(scope.get("responseQuote"), "quoteSourceName"))), ("requiredValues", lambda scope: [(sfx_value_at(scope.get("symbol"), "")), (sfx_value_at(scope.get("currency"), "")), (sfx_value_at(scope.get("observedPrice"), "")), (sfx_value_at(scope.get("observedMarketTime"), "")), (sfx_value_at(scope.get("marketState"), "")), (sfx_value_at(scope.get("exchange"), "")), (sfx_value_at(scope.get("sourceAttribution"), ""))]), ("missing", lambda scope: sfx_collection("filter", sfx_value_at(scope.get("requiredValues"), ""), scope, "v", lambda scope: sfx_equals(sfx_value_at(scope.get("v"), ""), None))), ("missingCount", lambda scope: sfx_length(sfx_value_at(scope.get("missing"), ""))), ("conforming", lambda scope: sfx_equals(sfx_value_at(scope.get("missingCount"), ""), 0)), ("nativeShape", lambda scope: ("quoteSummary.result.0.price" if sfx_truthy(sfx_value_at(scope.get("summaryQuote"), "")) else "quoteResponse.result.0")), ("bindingId", lambda scope: "rapidapi-davethebeast-yahoo-finance166-stock-price.v1-EDITED"), ("providerId", lambda scope: "rapidapi/davethebeast/yahoo-finance166")], lambda scope: (({"contractId": ("equity-market-price-evidence.v1"), "disposition": ("EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED"), "payload": ({"symbol": (sfx_value_at(scope.get("symbol"), "")), "region": (sfx_value_at(scope.get("root"), "payload.region")), "currency": (sfx_value_at(scope.get("currency"), "")), "observedPrice": (sfx_value_at(scope.get("observedPrice"), "")), "observedMarketTime": (sfx_value_at(scope.get("observedMarketTime"), "")), "marketState": (sfx_value_at(scope.get("marketState"), "")), "exchange": (sfx_value_at(scope.get("exchange"), "")), "sourceAttribution": (sfx_value_at(scope.get("sourceAttribution"), ""))}), "providerTestimony": ({"bindingId": (sfx_value_at(scope.get("bindingId"), "")), "providerId": (sfx_value_at(scope.get("providerId"), "")), "nativeShape": (sfx_value_at(scope.get("nativeShape"), ""))})} if sfx_truthy(sfx_value_at(scope.get("conforming"), "")) else {"contractId": ("equity-market-price-evidence.v1"), "disposition": ("NATIVE_MARKET_PRICE_TESTIMONY_REJECTED"), "reasonCode": ("REQUIRED_NATIVE_FIELDS_ABSENT"), "absentFieldCount": (sfx_value_at(scope.get("missingCount"), "")), "providerTestimony": ({"bindingId": (sfx_value_at(scope.get("bindingId"), "")), "providerId": (sfx_value_at(scope.get("providerId"), "")), "nativeShape": (sfx_value_at(scope.get("nativeShape"), ""))})}) if sfx_truthy(sfx_value_at(scope.get("completed"), "")) else {"contractId": ("equity-market-price-evidence.v1"), "disposition": ("EQUITY_MARKET_PRICE_PROVIDER_UNAVAILABLE"), "reasonCode": ("PROVIDER_EXCHANGE_NOT_COMPLETED"), "providerTestimony": ({"bindingId": (sfx_value_at(scope.get("bindingId"), "")), "providerId": (sfx_value_at(scope.get("providerId"), ""))})})))
 
 def op_40(scope):
-    return (sfx_value_at(scope.get("completed"), ""))
+    return ("rapidapi-davethebeast-yahoo-finance166-stock-price.v1-EDITED")
+
+def op_41(scope):
+    return ("")
 
 def op_42(scope):
-    return (sfx_equals(sfx_value_at(scope.get("input"), "disposition"), "completed"))
+    return (sfx_base64_decode_utf8(sfx_value_at(scope.get("input"), "responseBodyBytes")))
 
 def op_43(scope):
-    return (sfx_value_at(scope.get("input"), "disposition"))
+    return (sfx_value_at(scope.get("input"), "responseBodyBytes"))
 
 def op_44(scope):
-    return ("completed")
-
-def op_45(scope):
-    return (sfx_equals(sfx_value_at(scope.get("missingCount"), ""), 0))
+    return (sfx_value_at(scope.get("completed"), ""))
 
 def op_46(scope):
-    return (sfx_value_at(scope.get("missingCount"), ""))
+    return (sfx_equals(sfx_value_at(scope.get("input"), "disposition"), "completed"))
 
 def op_47(scope):
-    return (0)
+    return (sfx_value_at(scope.get("input"), "disposition"))
 
 def op_48(scope):
-    return (sfx_value_at(scope.get("responseQuote"), "currency"))
+    return ("completed")
 
 def op_49(scope):
-    return (sfx_value_at(scope.get("summaryQuote"), "currency"))
+    return (sfx_equals(sfx_value_at(scope.get("missingCount"), ""), 0))
 
 def op_50(scope):
-    return (sfx_value_at(scope.get("summaryQuote"), ""))
+    return (sfx_value_at(scope.get("missingCount"), ""))
+
+def op_51(scope):
+    return (0)
 
 def op_52(scope):
-    return (sfx_value_at(scope.get("responseQuote"), "exchange"))
+    return (sfx_value_at(scope.get("responseQuote"), "currency"))
 
 def op_53(scope):
-    return (sfx_value_at(scope.get("summaryQuote"), "exchange"))
+    return (sfx_value_at(scope.get("summaryQuote"), "currency"))
 
 def op_54(scope):
     return (sfx_value_at(scope.get("summaryQuote"), ""))
 
 def op_56(scope):
-    return (sfx_value_at(scope.get("responseQuote"), "marketState"))
+    return (sfx_value_at(scope.get("responseQuote"), "exchange"))
 
 def op_57(scope):
-    return (sfx_value_at(scope.get("summaryQuote"), "marketState"))
+    return (sfx_value_at(scope.get("summaryQuote"), "exchange"))
 
 def op_58(scope):
     return (sfx_value_at(scope.get("summaryQuote"), ""))
 
 def op_60(scope):
-    return (sfx_collection("filter", sfx_value_at(scope.get("requiredValues"), ""), scope, "v", lambda scope: sfx_equals(sfx_value_at(scope.get("v"), ""), None)))
-
-def op_60_source(scope):
-    return (sfx_value_at(scope.get("requiredValues"), ""))
+    return (sfx_value_at(scope.get("responseQuote"), "marketState"))
 
 def op_61(scope):
-    return (sfx_value_at(scope.get("requiredValues"), ""))
+    return (sfx_value_at(scope.get("summaryQuote"), "marketState"))
 
 def op_62(scope):
-    return (sfx_equals(sfx_value_at(scope.get("v"), ""), None))
-
-def op_63(scope):
-    return (sfx_value_at(scope.get("v"), ""))
-
-def op_64(scope):
-    return (None)
-
-def op_65(scope):
-    return (sfx_length(sfx_value_at(scope.get("missing"), "")))
-
-def op_66(scope):
-    return (sfx_value_at(scope.get("missing"), ""))
-
-def op_67(scope):
-    return (sfx_value_at(scope.get("parsed"), "value"))
-
-def op_68(scope):
-    return ("quoteResponse.result.0")
-
-def op_69(scope):
-    return ("quoteSummary.result.0.price")
-
-def op_70(scope):
     return (sfx_value_at(scope.get("summaryQuote"), ""))
 
+def op_64(scope):
+    return (sfx_collection("filter", sfx_value_at(scope.get("requiredValues"), ""), scope, "v", lambda scope: sfx_equals(sfx_value_at(scope.get("v"), ""), None)))
+
+def op_64_source(scope):
+    return (sfx_value_at(scope.get("requiredValues"), ""))
+
+def op_65(scope):
+    return (sfx_value_at(scope.get("requiredValues"), ""))
+
+def op_66(scope):
+    return (sfx_equals(sfx_value_at(scope.get("v"), ""), None))
+
+def op_67(scope):
+    return (sfx_value_at(scope.get("v"), ""))
+
+def op_68(scope):
+    return (None)
+
+def op_69(scope):
+    return (sfx_length(sfx_value_at(scope.get("missing"), "")))
+
+def op_70(scope):
+    return (sfx_value_at(scope.get("missing"), ""))
+
+def op_71(scope):
+    return (sfx_value_at(scope.get("parsed"), "value"))
+
 def op_72(scope):
-    return (sfx_value_at(scope.get("responseQuote"), "regularMarketTime"))
+    return ("quoteResponse.result.0")
 
 def op_73(scope):
-    return (sfx_value_at(scope.get("summaryQuote"), "regularMarketTime"))
+    return ("quoteSummary.result.0.price")
 
 def op_74(scope):
     return (sfx_value_at(scope.get("summaryQuote"), ""))
 
 def op_76(scope):
-    return (sfx_value_at(scope.get("responseQuote"), "regularMarketPrice"))
+    return (sfx_value_at(scope.get("responseQuote"), "regularMarketTime"))
 
 def op_77(scope):
-    return (sfx_value_at(scope.get("summaryQuote"), "regularMarketPrice.raw"))
+    return (sfx_value_at(scope.get("summaryQuote"), "regularMarketTime"))
 
 def op_78(scope):
     return (sfx_value_at(scope.get("summaryQuote"), ""))
 
 def op_80(scope):
-    return (sfx_try_parse_json(sfx_value_at(scope.get("bodyText"), "")))
+    return (sfx_value_at(scope.get("responseQuote"), "regularMarketPrice"))
 
 def op_81(scope):
-    return (sfx_value_at(scope.get("bodyText"), ""))
+    return (sfx_value_at(scope.get("summaryQuote"), "regularMarketPrice.raw"))
 
 def op_82(scope):
-    return ("rapidapi/davethebeast/yahoo-finance166")
-
-def op_83(scope):
-    return ([(sfx_value_at(scope.get("symbol"), "")), (sfx_value_at(scope.get("currency"), "")), (sfx_value_at(scope.get("observedPrice"), "")), (sfx_value_at(scope.get("observedMarketTime"), "")), (sfx_value_at(scope.get("marketState"), "")), (sfx_value_at(scope.get("exchange"), "")), (sfx_value_at(scope.get("sourceAttribution"), ""))])
+    return (sfx_value_at(scope.get("summaryQuote"), ""))
 
 def op_84(scope):
-    return (sfx_value_at(scope.get("symbol"), ""))
+    return (sfx_try_parse_json(sfx_value_at(scope.get("bodyText"), "")))
 
 def op_85(scope):
-    return (sfx_value_at(scope.get("currency"), ""))
+    return (sfx_value_at(scope.get("bodyText"), ""))
 
 def op_86(scope):
-    return (sfx_value_at(scope.get("observedPrice"), ""))
+    return ("rapidapi/davethebeast/yahoo-finance166")
 
 def op_87(scope):
-    return (sfx_value_at(scope.get("observedMarketTime"), ""))
+    return ([(sfx_value_at(scope.get("symbol"), "")), (sfx_value_at(scope.get("currency"), "")), (sfx_value_at(scope.get("observedPrice"), "")), (sfx_value_at(scope.get("observedMarketTime"), "")), (sfx_value_at(scope.get("marketState"), "")), (sfx_value_at(scope.get("exchange"), "")), (sfx_value_at(scope.get("sourceAttribution"), ""))])
 
 def op_88(scope):
-    return (sfx_value_at(scope.get("marketState"), ""))
-
-def op_89(scope):
-    return (sfx_value_at(scope.get("exchange"), ""))
-
-def op_90(scope):
-    return (sfx_value_at(scope.get("sourceAttribution"), ""))
-
-def op_91(scope):
-    return (sfx_value_at(scope.get("native"), "quoteResponse.result.0"))
-
-def op_92(scope):
-    return (sfx_value_at(scope.get("responseQuote"), "quoteSourceName"))
-
-def op_93(scope):
-    return (sfx_value_at(scope.get("summaryQuote"), "quoteSourceName"))
-
-def op_94(scope):
-    return (sfx_value_at(scope.get("summaryQuote"), ""))
-
-def op_96(scope):
-    return (sfx_value_at(scope.get("native"), "quoteSummary.result.0.price"))
-
-def op_97(scope):
-    return (sfx_value_at(scope.get("responseQuote"), "symbol"))
-
-def op_98(scope):
-    return (sfx_value_at(scope.get("summaryQuote"), "symbol"))
-
-def op_99(scope):
-    return (sfx_value_at(scope.get("summaryQuote"), ""))
-
-def op_101(scope):
-    return ({"contractId": ("equity-market-price-evidence.v1"), "disposition": ("EQUITY_MARKET_PRICE_PROVIDER_UNAVAILABLE"), "reasonCode": ("PROVIDER_EXCHANGE_NOT_COMPLETED"), "providerTestimony": ({"bindingId": (sfx_value_at(scope.get("bindingId"), "")), "providerId": (sfx_value_at(scope.get("providerId"), ""))})})
-
-def op_102(scope):
-    return ("equity-market-price-evidence.v1")
-
-def op_103(scope):
-    return ("EQUITY_MARKET_PRICE_PROVIDER_UNAVAILABLE")
-
-def op_104(scope):
-    return ({"bindingId": (sfx_value_at(scope.get("bindingId"), "")), "providerId": (sfx_value_at(scope.get("providerId"), ""))})
-
-def op_105(scope):
-    return (sfx_value_at(scope.get("bindingId"), ""))
-
-def op_106(scope):
-    return (sfx_value_at(scope.get("providerId"), ""))
-
-def op_107(scope):
-    return ("PROVIDER_EXCHANGE_NOT_COMPLETED")
-
-def op_108(scope):
-    return ({"contractId": ("equity-market-price-evidence.v1"), "disposition": ("NATIVE_MARKET_PRICE_TESTIMONY_REJECTED"), "reasonCode": ("REQUIRED_NATIVE_FIELDS_ABSENT"), "absentFieldCount": (sfx_value_at(scope.get("missingCount"), "")), "providerTestimony": ({"bindingId": (sfx_value_at(scope.get("bindingId"), "")), "providerId": (sfx_value_at(scope.get("providerId"), "")), "nativeShape": (sfx_value_at(scope.get("nativeShape"), ""))})})
-
-def op_109(scope):
-    return (sfx_value_at(scope.get("missingCount"), ""))
-
-def op_110(scope):
-    return ("equity-market-price-evidence.v1")
-
-def op_111(scope):
-    return ("NATIVE_MARKET_PRICE_TESTIMONY_REJECTED")
-
-def op_112(scope):
-    return ({"bindingId": (sfx_value_at(scope.get("bindingId"), "")), "providerId": (sfx_value_at(scope.get("providerId"), "")), "nativeShape": (sfx_value_at(scope.get("nativeShape"), ""))})
-
-def op_113(scope):
-    return (sfx_value_at(scope.get("bindingId"), ""))
-
-def op_114(scope):
-    return (sfx_value_at(scope.get("nativeShape"), ""))
-
-def op_115(scope):
-    return (sfx_value_at(scope.get("providerId"), ""))
-
-def op_116(scope):
-    return ("REQUIRED_NATIVE_FIELDS_ABSENT")
-
-def op_117(scope):
-    return ({"contractId": ("equity-market-price-evidence.v1"), "disposition": ("EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED"), "payload": ({"symbol": (sfx_value_at(scope.get("symbol"), "")), "region": (sfx_value_at(scope.get("root"), "payload.region")), "currency": (sfx_value_at(scope.get("currency"), "")), "observedPrice": (sfx_value_at(scope.get("observedPrice"), "")), "observedMarketTime": (sfx_value_at(scope.get("observedMarketTime"), "")), "marketState": (sfx_value_at(scope.get("marketState"), "")), "exchange": (sfx_value_at(scope.get("exchange"), "")), "sourceAttribution": (sfx_value_at(scope.get("sourceAttribution"), ""))}), "providerTestimony": ({"bindingId": (sfx_value_at(scope.get("bindingId"), "")), "providerId": (sfx_value_at(scope.get("providerId"), "")), "nativeShape": (sfx_value_at(scope.get("nativeShape"), ""))})})
-
-def op_118(scope):
-    return ("equity-market-price-evidence.v1")
-
-def op_119(scope):
-    return ("EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED")
-
-def op_120(scope):
-    return ({"symbol": (sfx_value_at(scope.get("symbol"), "")), "region": (sfx_value_at(scope.get("root"), "payload.region")), "currency": (sfx_value_at(scope.get("currency"), "")), "observedPrice": (sfx_value_at(scope.get("observedPrice"), "")), "observedMarketTime": (sfx_value_at(scope.get("observedMarketTime"), "")), "marketState": (sfx_value_at(scope.get("marketState"), "")), "exchange": (sfx_value_at(scope.get("exchange"), "")), "sourceAttribution": (sfx_value_at(scope.get("sourceAttribution"), ""))})
-
-def op_121(scope):
-    return (sfx_value_at(scope.get("currency"), ""))
-
-def op_122(scope):
-    return (sfx_value_at(scope.get("exchange"), ""))
-
-def op_123(scope):
-    return (sfx_value_at(scope.get("marketState"), ""))
-
-def op_124(scope):
-    return (sfx_value_at(scope.get("observedMarketTime"), ""))
-
-def op_125(scope):
-    return (sfx_value_at(scope.get("observedPrice"), ""))
-
-def op_126(scope):
-    return (sfx_value_at(scope.get("root"), "payload.region"))
-
-def op_127(scope):
-    return (sfx_value_at(scope.get("sourceAttribution"), ""))
-
-def op_128(scope):
     return (sfx_value_at(scope.get("symbol"), ""))
 
-def op_129(scope):
-    return ({"bindingId": (sfx_value_at(scope.get("bindingId"), "")), "providerId": (sfx_value_at(scope.get("providerId"), "")), "nativeShape": (sfx_value_at(scope.get("nativeShape"), ""))})
+def op_89(scope):
+    return (sfx_value_at(scope.get("currency"), ""))
 
-def op_130(scope):
+def op_90(scope):
+    return (sfx_value_at(scope.get("observedPrice"), ""))
+
+def op_91(scope):
+    return (sfx_value_at(scope.get("observedMarketTime"), ""))
+
+def op_92(scope):
+    return (sfx_value_at(scope.get("marketState"), ""))
+
+def op_93(scope):
+    return (sfx_value_at(scope.get("exchange"), ""))
+
+def op_94(scope):
+    return (sfx_value_at(scope.get("sourceAttribution"), ""))
+
+def op_95(scope):
+    return (sfx_value_at(scope.get("native"), "quoteResponse.result.0"))
+
+def op_96(scope):
+    return (sfx_value_at(scope.get("responseQuote"), "quoteSourceName"))
+
+def op_97(scope):
+    return (sfx_value_at(scope.get("summaryQuote"), "quoteSourceName"))
+
+def op_98(scope):
+    return (sfx_value_at(scope.get("summaryQuote"), ""))
+
+def op_100(scope):
+    return (sfx_value_at(scope.get("native"), "quoteSummary.result.0.price"))
+
+def op_101(scope):
+    return (sfx_value_at(scope.get("responseQuote"), "symbol"))
+
+def op_102(scope):
+    return (sfx_value_at(scope.get("summaryQuote"), "symbol"))
+
+def op_103(scope):
+    return (sfx_value_at(scope.get("summaryQuote"), ""))
+
+def op_105(scope):
+    return ({"contractId": ("equity-market-price-evidence.v1"), "disposition": ("EQUITY_MARKET_PRICE_PROVIDER_UNAVAILABLE"), "reasonCode": ("PROVIDER_EXCHANGE_NOT_COMPLETED"), "providerTestimony": ({"bindingId": (sfx_value_at(scope.get("bindingId"), "")), "providerId": (sfx_value_at(scope.get("providerId"), ""))})})
+
+def op_106(scope):
+    return ("equity-market-price-evidence.v1")
+
+def op_107(scope):
+    return ("EQUITY_MARKET_PRICE_PROVIDER_UNAVAILABLE")
+
+def op_108(scope):
+    return ({"bindingId": (sfx_value_at(scope.get("bindingId"), "")), "providerId": (sfx_value_at(scope.get("providerId"), ""))})
+
+def op_109(scope):
     return (sfx_value_at(scope.get("bindingId"), ""))
 
-def op_131(scope):
-    return (sfx_value_at(scope.get("nativeShape"), ""))
-
-def op_132(scope):
+def op_110(scope):
     return (sfx_value_at(scope.get("providerId"), ""))
 
+def op_111(scope):
+    return ("PROVIDER_EXCHANGE_NOT_COMPLETED")
+
+def op_112(scope):
+    return ({"contractId": ("equity-market-price-evidence.v1"), "disposition": ("NATIVE_MARKET_PRICE_TESTIMONY_REJECTED"), "reasonCode": ("REQUIRED_NATIVE_FIELDS_ABSENT"), "absentFieldCount": (sfx_value_at(scope.get("missingCount"), "")), "providerTestimony": ({"bindingId": (sfx_value_at(scope.get("bindingId"), "")), "providerId": (sfx_value_at(scope.get("providerId"), "")), "nativeShape": (sfx_value_at(scope.get("nativeShape"), ""))})})
+
+def op_113(scope):
+    return (sfx_value_at(scope.get("missingCount"), ""))
+
+def op_114(scope):
+    return ("equity-market-price-evidence.v1")
+
+def op_115(scope):
+    return ("NATIVE_MARKET_PRICE_TESTIMONY_REJECTED")
+
+def op_116(scope):
+    return ({"bindingId": (sfx_value_at(scope.get("bindingId"), "")), "providerId": (sfx_value_at(scope.get("providerId"), "")), "nativeShape": (sfx_value_at(scope.get("nativeShape"), ""))})
+
+def op_117(scope):
+    return (sfx_value_at(scope.get("bindingId"), ""))
+
+def op_118(scope):
+    return (sfx_value_at(scope.get("nativeShape"), ""))
+
+def op_119(scope):
+    return (sfx_value_at(scope.get("providerId"), ""))
+
+def op_120(scope):
+    return ("REQUIRED_NATIVE_FIELDS_ABSENT")
+
+def op_121(scope):
+    return ({"contractId": ("equity-market-price-evidence.v1"), "disposition": ("EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED"), "payload": ({"symbol": (sfx_value_at(scope.get("symbol"), "")), "region": (sfx_value_at(scope.get("root"), "payload.region")), "currency": (sfx_value_at(scope.get("currency"), "")), "observedPrice": (sfx_value_at(scope.get("observedPrice"), "")), "observedMarketTime": (sfx_value_at(scope.get("observedMarketTime"), "")), "marketState": (sfx_value_at(scope.get("marketState"), "")), "exchange": (sfx_value_at(scope.get("exchange"), "")), "sourceAttribution": (sfx_value_at(scope.get("sourceAttribution"), ""))}), "providerTestimony": ({"bindingId": (sfx_value_at(scope.get("bindingId"), "")), "providerId": (sfx_value_at(scope.get("providerId"), "")), "nativeShape": (sfx_value_at(scope.get("nativeShape"), ""))})})
+
+def op_122(scope):
+    return ("equity-market-price-evidence.v1")
+
+def op_123(scope):
+    return ("EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED")
+
+def op_124(scope):
+    return ({"symbol": (sfx_value_at(scope.get("symbol"), "")), "region": (sfx_value_at(scope.get("root"), "payload.region")), "currency": (sfx_value_at(scope.get("currency"), "")), "observedPrice": (sfx_value_at(scope.get("observedPrice"), "")), "observedMarketTime": (sfx_value_at(scope.get("observedMarketTime"), "")), "marketState": (sfx_value_at(scope.get("marketState"), "")), "exchange": (sfx_value_at(scope.get("exchange"), "")), "sourceAttribution": (sfx_value_at(scope.get("sourceAttribution"), ""))})
+
+def op_125(scope):
+    return (sfx_value_at(scope.get("currency"), ""))
+
+def op_126(scope):
+    return (sfx_value_at(scope.get("exchange"), ""))
+
+def op_127(scope):
+    return (sfx_value_at(scope.get("marketState"), ""))
+
+def op_128(scope):
+    return (sfx_value_at(scope.get("observedMarketTime"), ""))
+
+def op_129(scope):
+    return (sfx_value_at(scope.get("observedPrice"), ""))
+
+def op_130(scope):
+    return (sfx_value_at(scope.get("root"), "payload.region"))
+
+def op_131(scope):
+    return (sfx_value_at(scope.get("sourceAttribution"), ""))
+
+def op_132(scope):
+    return (sfx_value_at(scope.get("symbol"), ""))
+
 def op_133(scope):
-    return (sfx_value_at(scope.get("conforming"), ""))
+    return ({"bindingId": (sfx_value_at(scope.get("bindingId"), "")), "providerId": (sfx_value_at(scope.get("providerId"), "")), "nativeShape": (sfx_value_at(scope.get("nativeShape"), ""))})
+
+def op_134(scope):
+    return (sfx_value_at(scope.get("bindingId"), ""))
 
 def op_135(scope):
+    return (sfx_value_at(scope.get("nativeShape"), ""))
+
+def op_136(scope):
+    return (sfx_value_at(scope.get("providerId"), ""))
+
+def op_137(scope):
+    return (sfx_value_at(scope.get("conforming"), ""))
+
+def op_139(scope):
     return (sfx_value_at(scope.get("completed"), ""))
 
 BINDING_FUNCTIONS = {

@@ -41,6 +41,13 @@ Declared behavior executes through resolver mechanics. Projected executables are
 reproducible embodiments of declared authority and are never a third source of
 executable meaning.
 
+**The resolver mechanics live in the SDA Kernel (scenario-driven-architecture), 
+requiring a bare minimum three-language conformance (Node, Python, and CSharp).
+There is no grey area. Either it's resolver(0) code living in the SDA Kernel or 
+it's declared(1) in the database, period. Hence, when we run into a bug in code 
+that exist outside of the SDA Kernel, then that is decide whether it should be 
+moved into data or the resolver. The code cannot remain in its found location**
+
 | | state | what it is | cardinality | who owns it |
 |---|---|---|---|---|
 | **0** | **resolver** | hand-authored executable code that *interprets* declared authority | **one admitted resolver surface per language/runtime profile** | the platform (SDA), per language |

@@ -25,6 +25,30 @@
       }
     },
     {
+      "patternId": "decomposition:cell:mechanic:resolve-equity-market-price-evidence.operation.2",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:physical:resolve-equity-market-price-evidence.operation.2"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:cell:mechanic:resolve-equity-market-price-evidence.operation.2"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:provider:resolve-equity-market-price-evidence.operation.2"
+        ],
+        "exitCellIds": [
+          "cell:physical:resolve-equity-market-price-evidence.operation.2"
+        ],
+        "returnBindingAuthorityId": "binding:return:cell:mechanic:resolve-equity-market-price-evidence.operation.2",
+        "descent": true
+      }
+    },
+    {
       "patternId": "decomposition:cell:mechanic:resolve-equity-market-price-evidence.operation.3",
       "patternType": "decomposition",
       "participantCellIds": [
@@ -45,6 +69,30 @@
           "cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression"
         ],
         "returnBindingAuthorityId": "binding:return:cell:mechanic:resolve-equity-market-price-evidence.operation.3"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:resolve-equity-market-price-evidence.operation.4",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:physical:resolve-equity-market-price-evidence.operation.4"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:cell:mechanic:resolve-equity-market-price-evidence.operation.4"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:provider:resolve-equity-market-price-evidence.operation.4"
+        ],
+        "exitCellIds": [
+          "cell:physical:resolve-equity-market-price-evidence.operation.4"
+        ],
+        "returnBindingAuthorityId": "binding:return:cell:mechanic:resolve-equity-market-price-evidence.operation.4",
+        "descent": true
       }
     },
     {

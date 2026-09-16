@@ -3303,6 +3303,13 @@
           "product": "semantic-value.v1",
           "semanticProgress": "narrowing",
           "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:physical:resolve-equity-market-price-evidence.operation.2",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.2",
+          "product": "semantic-value.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return"
         }
       ]
     },
@@ -3338,6 +3345,151 @@
         {
           "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.4",
           "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:physical:resolve-equity-market-price-evidence.operation.4",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.4",
+          "product": "semantic-value.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return"
+        }
+      ]
+    },
+    {
+      "providerCircuitType": "provider-circuit.v1",
+      "projectionId": "circuit:provider:cell:physical:resolve-equity-market-price-evidence.operation.2",
+      "parentExecutionCellId": "cell:provider:resolve-equity-market-price-evidence.operation.2",
+      "rootCellId": "cell:physical:resolve-equity-market-price-evidence.operation.2",
+      "cells": [
+        {
+          "cellId": "cell:physical:resolve-equity-market-price-evidence.operation.2",
+          "physicalInput": {
+            "dataType": "semantic-value.v1"
+          },
+          "nativeOperation": {
+            "operationId": "physical:sda-external-credential-reference-binding-port.v1",
+            "boundary": "bind-equity-price-provider-credential",
+            "effect": "sda-external-credential-reference-binding-port.v1"
+          },
+          "physicalResult": {
+            "dataType": "semantic-value.v1"
+          }
+        }
+      ],
+      "routes": [
+        {
+          "fromCellId": "cell:physical:resolve-equity-market-price-evidence.operation.2",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.2",
+          "product": "semantic-value.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return"
+        },
+        {
+          "fromCellId": "cell:provider:resolve-equity-market-price-evidence.operation.2",
+          "toCellId": "cell:physical:resolve-equity-market-price-evidence.operation.2",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        }
+      ]
+    },
+    {
+      "providerCircuitType": "provider-circuit.v1",
+      "projectionId": "circuit:provider:cell:physical:resolve-equity-market-price-evidence.operation.4",
+      "parentExecutionCellId": "cell:provider:resolve-equity-market-price-evidence.operation.4",
+      "rootCellId": "cell:physical:resolve-equity-market-price-evidence.operation.4",
+      "cells": [
+        {
+          "cellId": "cell:physical:resolve-equity-market-price-evidence.operation.4",
+          "physicalInput": {
+            "dataType": "semantic-value.v1"
+          },
+          "nativeOperation": {
+            "operationId": "physical:sda-governed-http-exchange-port.v1",
+            "boundary": "observe-equity-price-exchange",
+            "effect": "sda-governed-http-exchange-port.v1"
+          },
+          "physicalResult": {
+            "dataType": "semantic-value.v1"
+          }
+        }
+      ],
+      "routes": [
+        {
+          "fromCellId": "cell:physical:resolve-equity-market-price-evidence.operation.4",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.4",
+          "product": "semantic-value.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return"
+        },
+        {
+          "fromCellId": "cell:provider:resolve-equity-market-price-evidence.operation.4",
+          "toCellId": "cell:physical:resolve-equity-market-price-evidence.operation.4",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        }
+      ]
+    },
+    {
+      "providerCircuitType": "provider-circuit.v1",
+      "projectionId": "circuit:provider:cell:provider:resolve-equity-market-price-evidence.operation.2",
+      "parentExecutionCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.2",
+      "rootCellId": "cell:provider:resolve-equity-market-price-evidence.operation.2",
+      "cells": [
+        {
+          "cellId": "cell:provider:resolve-equity-market-price-evidence.operation.2",
+          "physicalInput": {
+            "dataType": "semantic-value.v1"
+          },
+          "nativeOperation": {
+            "operationId": "provider:sda-external-credential-reference-binding-port.v1",
+            "boundary": "bind-equity-price-provider-credential",
+            "effect": "sda-external-credential-reference-binding-port.v1"
+          },
+          "physicalResult": {
+            "dataType": "semantic-value.v1"
+          }
+        }
+      ],
+      "routes": [
+        {
+          "fromCellId": "cell:provider:resolve-equity-market-price-evidence.operation.2",
+          "toCellId": "cell:physical:resolve-equity-market-price-evidence.operation.2",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        }
+      ]
+    },
+    {
+      "providerCircuitType": "provider-circuit.v1",
+      "projectionId": "circuit:provider:cell:provider:resolve-equity-market-price-evidence.operation.4",
+      "parentExecutionCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.4",
+      "rootCellId": "cell:provider:resolve-equity-market-price-evidence.operation.4",
+      "cells": [
+        {
+          "cellId": "cell:provider:resolve-equity-market-price-evidence.operation.4",
+          "physicalInput": {
+            "dataType": "semantic-value.v1"
+          },
+          "nativeOperation": {
+            "operationId": "provider:sda-governed-http-exchange-port.v1",
+            "boundary": "observe-equity-price-exchange",
+            "effect": "sda-governed-http-exchange-port.v1"
+          },
+          "physicalResult": {
+            "dataType": "semantic-value.v1"
+          }
+        }
+      ],
+      "routes": [
+        {
+          "fromCellId": "cell:provider:resolve-equity-market-price-evidence.operation.4",
+          "toCellId": "cell:physical:resolve-equity-market-price-evidence.operation.4",
           "product": "semantic-value.v1",
           "semanticProgress": "narrowing",
           "edgeKind": "sequence"

@@ -1,6 +1,6 @@
 # GENERATED CAPABILITY EXECUTION BODY. Do not hand-edit.
-# canonicalGraphDigest: sha256:6d8e145c32ebc8629dab66e0be7fe88e135968b4bdcd888ee3e266d712b41dbf
-# realizedGraphDigest: sha256:c118fa66c8ef25d59a7d24c565d3d97614236ec481e9d99fe5b237603c3a5959
+# canonicalGraphDigest: sha256:97b39b5058357a925d7ea068f4dde79afdad74732cd0cc264a37b642d89e2357
+# realizedGraphDigest: sha256:07e043eeda0b2f2a193d8a00a7ed3ea643d84e270c869bd483820b3085c3d3ad
 from __future__ import annotations
 
 import copy
@@ -66,6 +66,14 @@ for _pattern in PATTERN_CATALOG.get("patterns") or []:
         for _cell_id in _participants:
             _DECOMPOSITION_BY_PARTICIPANT.setdefault(_cell_id, _pattern)
 
+_DESCENT_BY_PARENT = {}
+for _pattern in PATTERN_CATALOG.get("patterns") or []:
+    _decomposition = _pattern.get("decomposition") if isinstance(_pattern.get("decomposition"), dict) else None
+    _pattern_id = str(_pattern.get("patternId") or "")
+    if (str(_pattern.get("patternType") or "") == "decomposition" and _decomposition is not None
+            and _decomposition.get("descent") is True and _pattern_id.startswith("decomposition:")):
+        _DESCENT_BY_PARENT[_pattern_id[len("decomposition:"):]] = _pattern
+
 _TERMINAL_CELLS = {}
 for _projection in CARRIER.get("eventExecutionProjections") or []:
     _projection_cells = {str(cell.get("cellId")) for cell in _projection.get("cells") or []}
@@ -117,17 +125,39 @@ def _digest(value):
     return "sha256:" + hashlib.sha256(encoded).hexdigest()
 
 
+def _provider_evidence(outcome):
+    value = outcome.get("value")
+    if not isinstance(value, dict):
+        return {}
+    evidence = {}
+    for key in ("reachedStage", "transportDisposition"):
+        token = value.get(key)
+        if isinstance(token, str) and re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._:-]*", token):
+            evidence[key] = token
+    count = value.get("exchangeCount")
+    if isinstance(count, int) and not isinstance(count, bool) and count >= 0:
+        evidence["exchangeCount"] = count
+    redaction = value.get("redactionVerified")
+    if isinstance(redaction, bool):
+        evidence["redactionVerified"] = redaction
+    return evidence
+
+
 def _record_cell(cell_id, descriptor, outcome):
     occurrence = _TESTIMONY_OCCURRENCES.get(cell_id, 0)
     _TESTIMONY_OCCURRENCES[cell_id] = occurrence + 1
     declared = descriptor if isinstance(descriptor, dict) else {}
+    altitude = declared.get("altitude")
+    evidence = _provider_evidence(outcome) if altitude in ("provider", "physical") else {}
     order = _TESTIMONY_ORDER[0]
     _TESTIMONY_ORDER[0] = order + 1
     _CELL_TESTIMONY.append({
         "testimonyType": "cell-execution-testimony.v1",
         "cellId": cell_id,
+        "cellAltitude": altitude or "mechanic",
         "cellExecutionId": str(_OPTIONS.get("rootExecutionId")) + ":" + cell_id + ":" + str(occurrence),
         "providerProfileId": declared.get("providerProfileId"),
+        **({"providerEvidence": evidence} if evidence else {}),
         "outcomeVariant": outcome.get("variant"),
         "disposition": outcome.get("disposition"),
         "outcomeDigest": _digest(outcome.get("value")),
@@ -410,6 +440,8 @@ def _anchor_pattern(cell_id, scope_cell_ids):
 
 def _execute_descriptor(cell_id, descriptor, value, scope_input):
     kind = descriptor.get("kind")
+    if descriptor.get("physicalBoundary"):
+        return _outcome(value, _variant(value, descriptor))
     if kind == "expression":
         expression_input = scope_input if scope_input is not None else value
         scope = {"input": expression_input, "root": _OPTIONS.get("rootInput")}
@@ -453,6 +485,20 @@ def _execute_descriptor(cell_id, descriptor, value, scope_input):
     return _outcome(value, _variant(value, descriptor))
 
 
+def _run_descent(pattern, value, step):
+    decomposition = pattern.get("decomposition") or {}
+    outcome = _outcome(value)
+    for cell_id in decomposition.get("entryCellIds") or []:
+        outcome = step(str(cell_id), outcome.get("value"))
+        if outcome.get("disposition") != "completed":
+            return outcome
+    for cell_id in decomposition.get("exitCellIds") or []:
+        outcome = step(str(cell_id), outcome.get("value"))
+        if outcome.get("disposition") != "completed":
+            return outcome
+    return outcome
+
+
 def _make_step(scope_input):
     def step(cell_id, value, options=None):
         descriptor = _DESCRIPTORS.get(cell_id)
@@ -467,8 +513,11 @@ def _make_step(scope_input):
                 if fixture is not None:
                     outcome = fixture
                 else:
+                    descent = _DESCENT_BY_PARENT.get(cell_id)
                     circuit = _MECHANIC_CIRCUITS.get(cell_id)
-                    if circuit is not None:
+                    if descent is not None:
+                        outcome = _run_descent(descent, value, step)
+                    elif circuit is not None:
                         result = _run_scope(
                             {str(cell.get("cellId")): cell for cell in circuit.get("cells") or []},
                             circuit.get("routes") or [],

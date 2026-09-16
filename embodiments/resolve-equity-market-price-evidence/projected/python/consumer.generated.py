@@ -1,6 +1,6 @@
 # GENERATED CAPABILITY CONSUMER SEAM. Do not hand-edit.
-# canonicalGraphDigest: sha256:6d8e145c32ebc8629dab66e0be7fe88e135968b4bdcd888ee3e266d712b41dbf
-# realizedGraphDigest: sha256:c118fa66c8ef25d59a7d24c565d3d97614236ec481e9d99fe5b237603c3a5959
+# canonicalGraphDigest: sha256:97b39b5058357a925d7ea068f4dde79afdad74732cd0cc264a37b642d89e2357
+# realizedGraphDigest: sha256:07e043eeda0b2f2a193d8a00a7ed3ea643d84e270c869bd483820b3085c3d3ad
 import importlib.util
 import pathlib
 import sys
