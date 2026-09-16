@@ -87,13 +87,20 @@ traps say.
 1. **F10 — the exchange never runs on the estate path.** `exchangeCount: 0`; a
    fallback would fail identically until
    `docs/sda-change-request-effect-altitude-execution.md` lands. Owner: SDA.
-2. **No price endpoint authority for either host.** The harness catalog declares
-   `rapidapi/yahoo-finance15` with `market-news` only and
-   `rapidapi/yahoo-finance-real-time1` with `stock-options` only; neither has a
-   declared stock-price operation, URL prefix, or `endpointAuthorityDigest`.
-   Per the skill's own rule, the change is blocked until the endpoint authority
-   that grants a price route is declared and its digest obtained — never
-   fabricated. Owner: whoever owns the provider authority (you) + harness
+2. **Neither host is price-capable — settled 2026-09-16.** The supplied
+   operations are `GET /api/v1/markets/news?ticker=…` on
+   `yahoo-finance15.p.rapidapi.com` and `GET /stock/get-options?symbol=…` on
+   `yahoo-finance-real-time1.p.rapidapi.com`; the harness catalog confirms only
+   `market-news` and `stock-options`, and the declared inventory shows
+   `rapidapi/yahoo-finance166` as the **only** stock-price provider
+   (`/api/stock/get-price`). A fallback must serve the same promise, so neither
+   host can fall back for *price*: news or options evidence would fabricate the
+   promise. Spreading the price quota therefore requires 2+ price-capable
+   subscriptions — supply the operation and the endpoint authority that grants
+   it (never fabricate the digest). These two hosts remain valid as *separate*
+   capabilities (market-news evidence, options-chain evidence) with their own
+   contracts and scenarios, sharing the same `RAPID_API_KEY` authority with
+   their own endpoint digests. Owner: you (supply/subscribe) + harness
    declaration.
 3. **The rate-limit signal is not surfaced.** `httpStatus: 429` is real in the
    evidence but not streamed; the bounded allowlist omits it. Owner: estate
