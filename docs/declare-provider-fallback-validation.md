@@ -104,9 +104,19 @@ traps say.
    the harness must declare the two quote operations, compile their operation
    descriptors for the endpoint authorities and digests, and observe each
    exchange (entitlement, normalized response class, price-field mapping). The
-   estate does not compute a digest and will not fabricate one. Owner: harness
-   (you) for declaration and observation; estate follows with the routes per the
-   skill.
+   estate does not compute a digest and will not fabricate one. The harness
+   already declares the machinery these routes plug into:
+   `authority/provider-connections/rapidapi-finance.provider-connections.candidate.json`
+   (binding records with host, path, `queryProjection`, credential reference,
+   effect profile), `semantic-authority/equity-market-price-native-canonical-mappings.candidate.json`
+   (native-to-canonical field maps; the 166 binding is mapped from a live AAPL
+   response, the apidojo candidate is held on the 403), and
+   `governance/equity-market-price-provider-route.policy.candidate.json`
+   (`orderedBindings`, `maximumExchangeAttempts: 2`, `fallbackEligibleOutcomes`
+   including `PROVIDER_RATE_LIMITED`). The two quote operations are added there
+   and observed to mint their bindings, mappings and the endpoint/binding
+   digests the estate port configuration carries. Owner: harness (you) for
+   declaration and observation; estate follows with the routes per the skill.
 3. **The rate-limit signal is not surfaced.** `httpStatus: 429` is real in the
    evidence but not streamed; the bounded allowlist omits it. Owner: estate
    (one bounded scalar; pairs with nit 2).
