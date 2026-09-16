@@ -2,9 +2,12 @@
 
 **Scope.** `.claude/skills/declare-provider-fallback/SKILL.md` and its template,
 validated against the live model and the SDA runtime on 2026-09-16 (estate
-`4e0c154`). Method: reference audit, code inspection, and a direct provider probe
-(`scripts/probe-provider-fallback-gate.mjs`) that exercises the skill's central
-mechanism without the kernel.
+`4e0c154`). Method: reference audit, code inspection, and one-off direct provider
+calls that exercised the skill's central mechanism without the kernel. Those calls
+were validation instrumentation only — no probe script is retained in the repo.
+The checking behavior is **declared authority**: when the fallback work proceeds
+it is authored as a declared capability (deterministic guard and no-binding
+fixtures), not as boot code.
 
 ## Verdict
 
@@ -26,9 +29,12 @@ blocker are recorded below; none invalidates the skill.
 | The declared vocabulary in §5 (`routeOrder`, `fallbackEligibleFailureClasses`, `attemptBudget`, `bindings[]`, `preferredBindingId`, `failureClass`, `attemptsUsed`) | the scaffolded `select-equity-market-price-provider` authority; the skill correctly says re-derive from the declaration rather than restate |
 | The F10 pointer (§1) | `docs/sda-change-request-effect-altitude-execution.md` exists; its signature matches the estate run exactly |
 
-## 2. Mechanism verification (probe receipts)
+## 2. Mechanism verification (one-off call receipts)
 
-Direct provider calls with the real equity configuration, no kernel in the path:
+Direct provider calls with the real equity configuration, no kernel in the path.
+Method disposition: the same checks are declarable — a capability whose operations
+invoke the credential and exchange ports with declared inputs and fixtures — and
+that is where they belong; no executable probe is added to this repo.
 
 | Case | Result |
 |---|---|
@@ -94,11 +100,12 @@ traps say.
    (one bounded scalar; pairs with nit 2).
 4. **No durable run-evidence store.** The invocation path is read-only
    (`bodyStorage: NOT_REQUESTED`; `evidence/` is disk). "Evidence runs in the
-   database" needs a decision: (a) a probe harness that records each provider's
-   observed outcome through a supported publication/registration path, or (b) a
-   declared evidence store with a harness writer, or (c) accept disk evidence and
-   drive selection from a harness-computed preference. The invocation path must
-   not gain a write. Owner: estate design decision.
+   database" is a **declared capability**: a probe capability per provider,
+   invocable through the unchanged CLI, its outcome classified and retained by the
+   estate's evidence/publication path. Only the cadence of those runs is
+   boot-side, and it is a scheduled invocation, not new executable logic. The
+   invocation path must not gain a write. Owner: estate, authored as rows when
+   the fallback work proceeds.
 
 **Expressible once unblocked.** Each route is rows (skill §2); a skipped route
 performs no transport (verified); the selection chooses the answering route's
@@ -117,8 +124,10 @@ answers → the rate-limited provider is deprioritized for thirty days.
 
 ## 5. Evidence
 
-- Probe: `scripts/probe-provider-fallback-gate.mjs` (three cases; one network
-  attempt).
+- One-off provider-call receipts, 2026-09-16: guarded request → `rejected-endpoint`
+  / `exchangeCount: 0`; no live binding → `rejected-credential` /
+  `exchangeCount: 0`; live route → `response-complete` / `exchangeCount: 1` /
+  `httpStatus: 429`. Instrumentation only; not committed as a script.
 - Estate receipt for the current failure: `sfx capability observe
   resolve-equity-market-price-evidence --input AVGO --json` (`exchangeCount: 0`).
 - Provider catalog: `agentic-harness/authority/cli/provider-catalog.json` and
