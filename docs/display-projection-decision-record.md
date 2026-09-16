@@ -137,3 +137,57 @@ predictions once U1 lands (rubric §1: compare predictions with actual delivery)
 - Existing declared seam for D1: `sql/migrations/bind-declared-execution-delivery.sql:26`.
 - Vocabulary validation: the two compiled/evaluated sketches in
   `docs/display-projection-migration.md` §4.
+
+## 7. Observed result after implementation (U2/U4, 2026-09-16)
+
+- **U2 declared and installed:** `sql/migrations/declare-equity-observe-display.sql`.
+  Transformation `resolve-equity-market-price-evidence-observe-display.v1` over
+  the U1 scope (`{authority, plan, execution, reading}`): heading, GIVEN, WHEN
+  (plan `execution.configuration.portId` join, testimony `cellId` join), THEN, a
+  STATUS field, the product display block when `execution.outcome.payload`
+  exists, and the trace tree. The interface `display` switched from
+  `{select: outcome.payload, as: json}` to `{transformationId, as: json}`.
+  Live on the unavailable branch (`--input AVGO`): WHEN shows
+  `observe-equity-price-exchange` failed, THEN failed, and
+  `STATUS EQUITY_MARKET_PRICE_PROVIDER_UNAVAILABLE (PROVIDER_EXCHANGE_NOT_COMPLETED)`.
+- **U4 declared and installed:** `sql/migrations/declare-observation-readings.sql`
+  declares the reading altitude sets on both display-bearing CLI interfaces
+  (`default ["scenario"]`, `trace` all four); `src/invoke-database-capability.mjs`
+  selects the first declared reading that admits the requested altitudes and
+  drops the old `any-non-scenario → trace` rule. Preflighted from the
+  uncommitted transaction for both capabilities: trace selects the tree block,
+  default omits it.
+- **D7 streamed entries:** every streamed cell/edge observation now carries
+  `display.entry` in the declared Entry vocabulary, and the bounded
+  `providerEvidence` fields pass through `src/observation-filter.mjs`. Live
+  `--input AVGO --trace`: the operation.4 provider cell prints `×` with
+  `{reachedStage: credential-binding, exchangeCount: 0, transportDisposition:
+  denied, redactionVerified: true}` and its physical cell prints `×` with
+  `{reachedStage: endpoint-admission, …}`; `say-hello-world --trace` is
+  unchanged (`✓` on every completed entry), 47/50 estate tests (3 skipped).
+- **Declaration gap (reported, not silent):** the entry *derivation* is estate
+  logic in `src/execution-drilldown.mjs`, not declared authority. Mechanical
+  `disposition` plus the bounded provider transport evidence decides the status;
+  a scenario or responsibility cell completes mechanically while its domain
+  outcome carries a non-success `outcomeVariant` (e.g.
+  `EQUITY_MARKET_PRICE_PROVIDER_UNAVAILABLE`, `rejected-endpoint`), and the
+  kernel's `outcomeVariant` is an open token with no declared success/failure
+  classification, so those streamed entries still print `completed` while the
+  declared document states the failure. The precise declaration needed: an
+  observation presentation authority per capability — e.g. a declared
+  `TRANSFORMATION` (`<capability>-observe-entry.v1`) named by the CLI
+  configuration (`"observation": {"transformationId": …}`) and evaluated by the
+  drilldown per testimony event over `{testimony, address, authority}` to map
+  `disposition`/`outcomeVariant` to the declared status token — or a
+  kernel-attached status classification on cell testimony. Likewise the
+  telemetry allowlist itself is code: the declared telemetry authority the
+  consumer workspace already names (`scenario-execution.telemetry-authority.json`)
+  is not read by the estate filter.
+- **Finding, not fixed here (outside the unit's file scope):**
+  `model.configure_interface` pairs `MAX(scenario_pk)` with
+  `MAX(scenario_version_pk)` across the capability's whole history, which is not
+  a declared pair once the history holds more than one scenario version (equity
+  declares four); U2/U4 therefore write the capability envelope directly and
+  copy the current version's scenario wiring. The procedure should select the
+  pair from the current `model.capability_scenario` row (or take an explicit
+  scenario) before it is used again.

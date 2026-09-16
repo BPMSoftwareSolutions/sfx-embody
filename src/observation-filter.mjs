@@ -9,8 +9,31 @@ export const OBSERVATION_FIELDS = ['observationType', 'phase', 'status', 'observ
   'mechanicId', 'mechanicPath', 'childScenarioId', 'parentScenarioId', 'inputId', 'eventId',
   'outcomeId', 'outcomeContractId', 'sourceCellId', 'destinationCellId', 'admissionDisposition'];
 
+// Structured telemetry the estate derives: the streamed display entry (the
+// sfx-display-document.v1 Entry vocabulary) and the kernel's bounded provider
+// evidence. Only these members may carry an object, and only their declared
+// scalars survive; the bounded provider evidence adds a boolean, and no other
+// nested member can ride in.
+export const OBSERVATION_OBJECT_FIELDS = Object.freeze({
+  providerEvidence: ['reachedStage', 'exchangeCount', 'transportDisposition', 'redactionVerified'],
+  display: ['entry']
+});
+const ENTRY_FIELDS = ['status', 'text', 'note', 'admission', 'timing'];
+
+const scalar = value => typeof value === 'string' || typeof value === 'number' || value === null;
+const nestedScalar = value => scalar(value) || typeof value === 'boolean';
+function pickObject(value, fields) {
+  if (value === null || typeof value !== 'object' || Array.isArray(value)) return null;
+  const picked = Object.fromEntries(fields.filter(key => nestedScalar(value[key])).map(key => [key, value[key]]));
+  return Object.keys(picked).length ? picked : null;
+}
+
 export function safeObservation(observation) {
-  return Object.fromEntries(OBSERVATION_FIELDS
-    .filter(key => ['string', 'number'].includes(typeof observation?.[key]) || observation?.[key] === null)
-    .map(key => [key, observation[key]]));
+  const safe = {};
+  for (const key of OBSERVATION_FIELDS) if (scalar(observation?.[key])) safe[key] = observation[key];
+  const entry = pickObject(observation?.display?.entry, ENTRY_FIELDS);
+  if (entry) safe.display = { entry };
+  const providerEvidence = pickObject(observation?.providerEvidence, OBSERVATION_OBJECT_FIELDS.providerEvidence);
+  if (providerEvidence) safe.providerEvidence = providerEvidence;
+  return safe;
 }

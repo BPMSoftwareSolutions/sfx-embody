@@ -35,27 +35,72 @@ const mechanicId = value => typeof value === 'string' && value.length
 const addressFields = address => Object.fromEntries(Object.entries(address ?? {})
   .filter(([, value]) => typeof value === 'string' || typeof value === 'number'));
 
-const cellObservation = (testimony, scenarioId, address) => ({
-  observationType: CELL_TESTIMONY,
-  phase: 'executeDeclaredGraph',
-  status: 'observed',
-  observedAt: new Date().toISOString(),
-  executionId: testimony.cellExecutionId,
-  rootExecutionId: testimony.rootExecutionId,
-  parentExecutionId: testimony.parentCellExecutionId ?? null,
-  scenarioId: address?.scenarioId ?? scenarioId,
-  sequence: testimony.logicalOrder,
-  cellId: testimony.cellId,
-  cellAltitude: testimony.cellAltitude,
-  startedAt: testimony.startedAt,
-  completedAt: testimony.completedAt,
-  durationMilliseconds: testimony.durationMilliseconds,
-  ...addressFields(address)
-});
+// The streamed display entry. It is the same Entry vocabulary the declared
+// display document uses (sfx-display-document.v1), derived from the testimony:
+// the mechanical disposition decides the declared status token, a completed
+// cell whose bounded provider evidence names a transport that did not complete
+// is failed, and the text is the declared address join. The derivation is
+// estate logic reading declared identity and testimony, not declared authority:
+// the kernel's outcomeVariant is an open token, so no declared success/failure
+// vocabulary is available to a scenario or responsibility cell whose cell
+// completed while its domain outcome did not (see the declaration gap in
+// docs/display-projection-decision-record.md).
+const timingText = value => typeof value === 'number'
+  ? (value >= 1000 ? `${(value / 1000).toFixed(2)} s` : `${value} ms`) : null;
+const boundedEvidence = value => {
+  if (value === null || typeof value !== 'object' || Array.isArray(value)) return null;
+  const evidence = {};
+  for (const key of ['reachedStage', 'exchangeCount', 'transportDisposition', 'redactionVerified'])
+    if (['string', 'number', 'boolean'].includes(typeof value[key])) evidence[key] = value[key];
+  return Object.keys(evidence).length ? evidence : null;
+};
+const testimonyStatus = (testimony, evidence) => {
+  if (typeof testimony.disposition !== 'string' || testimony.disposition.length === 0) return 'unobserved';
+  if (testimony.disposition !== 'completed') return 'failed';
+  if (typeof evidence?.transportDisposition === 'string' && evidence.transportDisposition !== 'completed') return 'failed';
+  return 'completed';
+};
+const admissionStatus = admission => admission === 'admitted' ? 'completed'
+  : admission === 'rejected' || admission === 'cancelled' ? 'failed' : 'unobserved';
+const entryText = (address, planCell, fallback) => {
+  if (address?.semanticRole === 'SCENARIO_OUTCOME') return `scenario ${address.scenarioId}`;
+  if (address?.semanticRole === 'MECHANIC') return [address.mechanicId, address.mechanicPath].filter(Boolean).join(' ') || fallback;
+  if (address?.responsibilityKind === 'invoke-scenario') return `scenario ${address.childScenarioId ?? address.responsibilityId}`;
+  return address?.responsibilityId ?? planCell?.semanticAddress ?? fallback;
+};
+const entryOf = (status, text, extra = {}) => {
+  const entry = { status, text };
+  for (const [key, value] of Object.entries(extra)) if (value !== null && value !== undefined) entry[key] = value;
+  return entry;
+};
+
+const cellObservation = (testimony, scenarioId, address, planCell) => {
+  const evidence = boundedEvidence(testimony.providerEvidence);
+  return {
+    observationType: CELL_TESTIMONY,
+    phase: 'executeDeclaredGraph',
+    status: 'observed',
+    observedAt: new Date().toISOString(),
+    executionId: testimony.cellExecutionId,
+    rootExecutionId: testimony.rootExecutionId,
+    parentExecutionId: testimony.parentCellExecutionId ?? null,
+    scenarioId: address?.scenarioId ?? scenarioId,
+    sequence: testimony.logicalOrder,
+    cellId: testimony.cellId,
+    cellAltitude: testimony.cellAltitude,
+    startedAt: testimony.startedAt,
+    completedAt: testimony.completedAt,
+    durationMilliseconds: testimony.durationMilliseconds,
+    ...addressFields(address),
+    display: { entry: entryOf(testimonyStatus(testimony, evidence), entryText(address, planCell, testimony.cellId),
+      { timing: timingText(testimony.durationMilliseconds) }) },
+    ...(evidence ? { providerEvidence: evidence } : {})
+  };
+};
 
 const cellIdOf = value => typeof value === 'string' ? value : value?.cellId;
 
-const edgeObservation = (testimony, scenarioId, address, edge) => ({
+const edgeObservation = (testimony, scenarioId, address, edge, planCell) => ({
   observationType: EDGE_TESTIMONY,
   phase: 'executeDeclaredGraph',
   status: 'observed',
@@ -71,7 +116,10 @@ const edgeObservation = (testimony, scenarioId, address, edge) => ({
   startedAt: testimony.startedAt,
   completedAt: testimony.completedAt,
   durationMilliseconds: testimony.durationMilliseconds,
-  ...addressFields(address)
+  ...addressFields(address),
+  display: { entry: entryOf(admissionStatus(testimony.admissionDisposition),
+    entryText(address, planCell, testimony.destinationCellId ?? cellIdOf(edge?.to) ?? testimony.edgeId),
+    { admission: testimony.admissionDisposition ?? null, timing: timingText(testimony.durationMilliseconds) }) }
 });
 
 const cellSummary = testimony => ({
@@ -129,12 +177,13 @@ export function createExecutionDrilldown({ observationAltitudes, scenarioId, obs
     try {
       remember(testimony);
       if (testimony.testimonyType === CELL_TESTIMONY) {
-        if (selected.has(testimony.cellAltitude)) observe(cellObservation(testimony, scenarioId, addressFor(testimony.cellId)));
+        if (selected.has(testimony.cellAltitude)) observe(cellObservation(testimony, scenarioId,
+          addressFor(testimony.cellId), cellByCellId?.get(testimony.cellId)));
       } else if (testimony.testimonyType === EDGE_TESTIMONY) {
         const altitude = altitudeByCellId?.get(testimony.destinationCellId);
         if (selected.size === ALTITUDES.length || selected.has(altitude))
           observe(edgeObservation(testimony, scenarioId, addressFor(testimony.destinationCellId),
-            edgeByEdgeId?.get(testimony.edgeId)));
+            edgeByEdgeId?.get(testimony.edgeId), cellByCellId?.get(testimony.destinationCellId)));
       }
     } catch { /* Testimony is not execution authority. */ }
   };
