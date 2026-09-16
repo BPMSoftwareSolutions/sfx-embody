@@ -1,69 +1,31 @@
--- Authoring helpers. They participate in the caller's transaction.
-CREATE OR ALTER PROCEDURE model.put_semantic_definition
- @kind varchar(64),@namespace nvarchar(400),@id nvarchar(400),@semantics nvarchar(max),
- @object bigint OUTPUT,@definition bigint OUTPUT,@digest binary(32) OUTPUT
-WITH EXECUTE AS OWNER
-AS
-BEGIN
- SET NOCOUNT ON;
- IF ISJSON(@semantics)<>1 THROW 51000,'SEMANTIC_DEFINITION_INVALID',1;
- DECLARE @namespace_pk bigint=(SELECT namespace_pk FROM model.identity_namespace WHERE namespace_kind=@kind AND namespace_id=@namespace);
- IF @namespace_pk IS NULL BEGIN
-  INSERT model.identity_namespace(namespace_kind,namespace_id) VALUES(@kind,@namespace);
-  SET @namespace_pk=SCOPE_IDENTITY();
- END;
- SET @object=(SELECT semantic_object_pk FROM model.semantic_object WHERE namespace_pk=@namespace_pk AND object_kind=@kind AND declared_id=@id);
- IF @object IS NULL BEGIN
-  INSERT model.semantic_object(object_kind,namespace_pk,declared_id) VALUES(@kind,@namespace_pk,@id);
-  SET @object=SCOPE_IDENTITY();
- END;
- DECLARE @text nvarchar(max)=(SELECT @id AS [address.id],@kind AS [address.kind],@namespace AS [address.namespace],
-  N'sidefx-semantic-definition.v1' AS format,JSON_QUERY(@semantics) AS semantics FOR JSON PATH,WITHOUT_ARRAY_WRAPPER);
- DECLARE @bytes varbinary(max)=CONVERT(varbinary(max),CONVERT(varchar(max),@text COLLATE Latin1_General_100_BIN2_UTF8));
- SET @digest=HASHBYTES('SHA2_256',@bytes);
- IF NOT EXISTS (SELECT 1 FROM source.content_object WHERE content_digest=@digest)
-  INSERT source.content_object(content_digest,content_bytes,byte_length) VALUES(@digest,@bytes,DATALENGTH(@bytes));
- SET @definition=(SELECT semantic_object_definition_pk FROM model.semantic_object_definition WHERE semantic_object_pk=@object AND definition_digest=@digest);
- IF @definition IS NULL BEGIN
-  INSERT model.semantic_object_definition(semantic_object_pk,object_kind,definition_digest,canonical_content_pk)
-   VALUES(@object,@kind,@digest,(SELECT content_object_pk FROM source.content_object WHERE content_digest=@digest));
-  SET @definition=SCOPE_IDENTITY();
- END;
- DECLARE @estate bigint=(SELECT estate_model_pk FROM source.current_model WHERE singleton_id=1);
- IF NOT EXISTS (SELECT 1 FROM model.estate_definition WHERE estate_model_pk=@estate AND semantic_object_definition_pk=@definition)
-  INSERT model.estate_definition(estate_model_pk,semantic_object_definition_pk) VALUES(@estate,@definition);
-END;
-GO
-CREATE OR ALTER PROCEDURE model.declare_contract
- @id nvarchar(400),@schema nvarchar(max)
-WITH EXECUTE AS OWNER
-AS
-BEGIN
- SET NOCOUNT ON;
- IF ISJSON(@schema)<>1 THROW 51000,'CONTRACT_SCHEMA_INVALID',1;
- DECLARE @bytes varbinary(max)=CONVERT(varbinary(max),CONVERT(varchar(max),@schema COLLATE Latin1_General_100_BIN2_UTF8));
- DECLARE @schema_digest binary(32)=HASHBYTES('SHA2_256',@bytes),@object bigint,@definition bigint,@digest binary(32);
- IF NOT EXISTS (SELECT 1 FROM source.content_object WHERE content_digest=@schema_digest)
-  INSERT source.content_object(content_digest,content_bytes,byte_length) VALUES(@schema_digest,@bytes,DATALENGTH(@bytes));
- DECLARE @schema_pk bigint=(SELECT schema_object_pk FROM model.schema_object WHERE content_digest=@schema_digest);
- IF @schema_pk IS NULL BEGIN
-  INSERT model.schema_object(content_digest,dialect,content_object_pk)
-   VALUES(@schema_digest,JSON_VALUE(@schema,'$."$schema"'),(SELECT content_object_pk FROM source.content_object WHERE content_digest=@schema_digest));
-  SET @schema_pk=SCOPE_IDENTITY();
- END;
- DECLARE @semantics nvarchar(max)=(SELECT LOWER(CONVERT(varchar(64),@schema_digest,2)) AS schema_digest,
-  JSON_VALUE(@schema,'$."$id"') AS schema_id FOR JSON PATH,WITHOUT_ARRAY_WRAPPER);
- EXEC model.put_semantic_definition 'CONTRACT',N'sidefx:contracts',@id,@semantics,@object OUTPUT,@definition OUTPUT,@digest OUTPUT;
- DECLARE @contract bigint=(SELECT contract_pk FROM model.contract WHERE semantic_object_pk=@object);
- IF @contract IS NULL BEGIN
-  INSERT model.contract(namespace_pk,contract_id,semantic_object_pk,object_kind)
-   SELECT namespace_pk,@id,@object,'CONTRACT' FROM model.semantic_object WHERE semantic_object_pk=@object;
-  SET @contract=SCOPE_IDENTITY();
- END;
- IF NOT EXISTS (SELECT 1 FROM model.contract_version WHERE semantic_object_definition_pk=@definition)
-  INSERT model.contract_version(contract_pk,semantic_object_pk,semantic_object_definition_pk,definition_digest,schema_object_pk,object_kind,_owner_definition_pk,_canonical_pointer,schema_reference_state)
-   VALUES(@contract,@object,@definition,@digest,@schema_pk,'CONTRACT',@definition,N'','RESOLVED');
-END;
+-- declare-scenario-variant-classification.sql
+--
+-- Extends model.declare_scenario so declared scenario variants accept the
+-- kernel's object form ({"variantId":"BOUND","classification":"success"}) as
+-- well as the string form ("SUCCESS"). The classification is validated to
+-- success|failure and stored on model.outcome_variant; it is optional, and a
+-- variant without one stays unclassified (the kernel omits outcomeClassification
+-- for it). Variants are upserted on every declaration because they are not part
+-- of the scenario semantics digest, so a classification change is effective on
+-- re-declaration. Before this, equity's classification needed a bespoke
+-- migration (classify-equity-outcome-variants.sql).
+--
+-- The self-test below declares a scratch scenario on say-hello-world with both
+-- forms and a changed classification, asserts the stored rows, then rolls back
+-- to its savepoint so the declarations never persist (the procedure DDL does).
+--
+-- Default: ROLLBACK. Replace the final ROLLBACK TRANSACTION; with COMMIT
+-- TRANSACTION; to install (after the from-transaction preflight passes).
+SET NOCOUNT ON;
+SET XACT_ABORT ON;
+BEGIN TRANSACTION;
+-- Idempotent column guard: normally added by classify-equity-outcome-variants.sql,
+-- repeated here so a fresh build can run this migration independently.
+IF COL_LENGTH('model.outcome_variant','classification') IS NULL
+ ALTER TABLE model.outcome_variant ADD classification varchar(16) NULL;
+IF NOT EXISTS (SELECT 1 FROM sys.check_constraints WHERE name=N'CK_model_outcome_variant_classification')
+ ALTER TABLE model.outcome_variant WITH CHECK ADD CONSTRAINT CK_model_outcome_variant_classification
+  CHECK (classification IS NULL OR classification IN ('success','failure'));
 GO
 CREATE OR ALTER PROCEDURE model.declare_scenario
  @capability_id nvarchar(400),@scenario nvarchar(max),@operations nvarchar(max),@port_bindings nvarchar(max)
@@ -208,33 +170,33 @@ BEGIN
   DEALLOCATE @faces_cursor;
   INSERT model.scenario_outcome_contract VALUES(@version,@out_version,@scenario_definition,N'/outcome/contract');
  END;
- -- Declared scenario variants accept the string form ("SUCCESS") and the object
- -- form ({"variantId":"BOUND","classification":"success"}). The classification
- -- is optional and constrained to success|failure. Variants are upserted on
- -- every declaration so a classification change is effective even when the
- -- scenario definition digest is unchanged (variants are not part of the
- -- scenario semantics digest).
- DECLARE @variant_rows TABLE (variant_id nvarchar(400) COLLATE Latin1_General_100_BIN2, classification varchar(16), json_type int, ordinal int);
- INSERT @variant_rows
-  SELECT CASE v.[type] WHEN 1 THEN v.[value] WHEN 5 THEN JSON_VALUE(v.[value], '$.variantId') END,
-   CASE v.[type] WHEN 5 THEN JSON_VALUE(v.[value], '$.classification') END,
-   v.[type], CONVERT(int, v.[key])
-  FROM OPENJSON(@scenario, '$.variants') v;
- IF EXISTS (SELECT 1 FROM @variant_rows WHERE json_type NOT IN (1, 5))
-  THROW 51000, 'SCENARIO_VARIANT_FORM_NOT_DECLARED', 1;
- IF EXISTS (SELECT 1 FROM @variant_rows WHERE variant_id IS NULL OR LEN(LTRIM(RTRIM(variant_id))) = 0)
-  THROW 51000, 'SCENARIO_VARIANT_ID_REQUIRED', 1;
- IF EXISTS (SELECT 1 FROM @variant_rows WHERE classification IS NOT NULL AND classification NOT IN ('success', 'failure'))
-  THROW 51000, 'SCENARIO_VARIANT_CLASSIFICATION_INVALID', 1;
- UPDATE existing SET classification = declared.classification, terminal = @terminal
- FROM model.outcome_variant existing
- JOIN @variant_rows declared ON declared.variant_id = existing.variant_id
- WHERE existing.scenario_version_pk = @version;
- INSERT model.outcome_variant(scenario_version_pk, variant_id, classification, terminal, _owner_definition_pk, _canonical_pointer)
-  SELECT @version, declared.variant_id, declared.classification, @terminal, @scenario_definition, N'/variants/' + CONVERT(nvarchar(10), declared.ordinal)
-  FROM @variant_rows declared
-  WHERE NOT EXISTS (SELECT 1 FROM model.outcome_variant existing
-    WHERE existing.scenario_version_pk = @version AND existing.variant_id = declared.variant_id);
+  -- Declared scenario variants accept the string form ("SUCCESS") and the object
+  -- form ({"variantId":"BOUND","classification":"success"}). The classification
+  -- is optional and constrained to success|failure. Variants are upserted on
+  -- every declaration so a classification change is effective even when the
+  -- scenario definition digest is unchanged (variants are not part of the
+  -- scenario semantics digest).
+  DECLARE @variant_rows TABLE (variant_id nvarchar(400) COLLATE Latin1_General_100_BIN2, classification varchar(16), json_type int, ordinal int);
+  INSERT @variant_rows
+   SELECT CASE v.[type] WHEN 1 THEN v.[value] WHEN 5 THEN JSON_VALUE(v.[value], '$.variantId') END,
+    CASE v.[type] WHEN 5 THEN JSON_VALUE(v.[value], '$.classification') END,
+    v.[type], CONVERT(int, v.[key])
+   FROM OPENJSON(@scenario, '$.variants') v;
+  IF EXISTS (SELECT 1 FROM @variant_rows WHERE json_type NOT IN (1, 5))
+   THROW 51000, 'SCENARIO_VARIANT_FORM_NOT_DECLARED', 1;
+  IF EXISTS (SELECT 1 FROM @variant_rows WHERE variant_id IS NULL OR LEN(LTRIM(RTRIM(variant_id))) = 0)
+   THROW 51000, 'SCENARIO_VARIANT_ID_REQUIRED', 1;
+  IF EXISTS (SELECT 1 FROM @variant_rows WHERE classification IS NOT NULL AND classification NOT IN ('success', 'failure'))
+   THROW 51000, 'SCENARIO_VARIANT_CLASSIFICATION_INVALID', 1;
+  UPDATE existing SET classification = declared.classification, terminal = @terminal
+  FROM model.outcome_variant existing
+  JOIN @variant_rows declared ON declared.variant_id = existing.variant_id
+  WHERE existing.scenario_version_pk = @version;
+  INSERT model.outcome_variant(scenario_version_pk, variant_id, classification, terminal, _owner_definition_pk, _canonical_pointer)
+   SELECT @version, declared.variant_id, declared.classification, @terminal, @scenario_definition, N'/variants/' + CONVERT(nvarchar(10), declared.ordinal)
+   FROM @variant_rows declared
+   WHERE NOT EXISTS (SELECT 1 FROM model.outcome_variant existing
+     WHERE existing.scenario_version_pk = @version AND existing.variant_id = declared.variant_id);
  UPDATE model.scenario_input SET input_contract_version_pk=@in_version WHERE scenario_version_pk=@version;
  UPDATE model.scenario_event SET execution_authority_version_pk=@authority_version WHERE scenario_version_pk=@version;
  UPDATE model.scenario_outcome_contract SET contract_version_pk=@out_version WHERE scenario_version_pk=@version;
@@ -250,38 +212,21 @@ BEGIN
  SELECT @id AS declared_scenario,@version AS scenario_version_pk;
 END;
 GO
-CREATE OR ALTER PROCEDURE model.declare_capability_feature
- @capability_id nvarchar(400),@feature_text nvarchar(max)
-WITH EXECUTE AS OWNER
-AS
-BEGIN
- SET NOCOUNT ON;
- DECLARE @estate bigint=(SELECT estate_model_pk FROM source.current_model WHERE singleton_id=1);
- DECLARE @capability bigint,@capability_version bigint,@feature bigint;
- SELECT @capability=c.capability_pk,@capability_version=ec.capability_version_pk,@feature=c.feature_pk
- FROM model.capability c JOIN model.identity_namespace n ON n.namespace_pk=c.namespace_pk AND n.namespace_id=N'sidefx:capabilities'
- JOIN model.estate_capability ec ON ec.capability_pk=c.capability_pk AND ec.estate_model_pk=@estate WHERE c.capability_id=@capability_id;
- IF @capability IS NULL THROW 51000,'CAPABILITY_NOT_FOUND',1;
- DECLARE @bytes varbinary(max)=CONVERT(varbinary(max),CONVERT(varchar(max),@feature_text COLLATE Latin1_General_100_BIN2_UTF8));
- DECLARE @feature_digest binary(32)=HASHBYTES('SHA2_256',@bytes);
- IF NOT EXISTS (SELECT 1 FROM source.content_object WHERE content_digest=@feature_digest)
-  INSERT source.content_object(content_digest,content_bytes,byte_length) VALUES(@feature_digest,@bytes,DATALENGTH(@bytes));
- DECLARE @scenarios nvarchar(max)=(SELECT s.scenario_id AS scenarioId,cs.scenario_version_pk AS scenarioVersionPk
-  FROM model.capability_scenario cs JOIN model.scenario s ON s.scenario_pk=cs.scenario_pk
-  WHERE cs.capability_version_pk=@capability_version ORDER BY s.scenario_id FOR JSON PATH);
- DECLARE @semantics nvarchar(max)=(SELECT @capability_id AS name,LOWER(CONVERT(varchar(64),@feature_digest,2)) AS content_digest,
-  N'features/'+@capability_id+N'.feature' AS source_path,JSON_QUERY(@scenarios) AS scenarios FOR JSON PATH,WITHOUT_ARRAY_WRAPPER);
- DECLARE @object bigint,@definition bigint,@digest binary(32);
- EXEC model.put_semantic_definition 'FEATURE',N'sidefx:features',@capability_id,@semantics,@object OUTPUT,@definition OUTPUT,@digest OUTPUT;
- DECLARE @version bigint=(SELECT feature_version_pk FROM model.feature_version WHERE semantic_object_definition_pk=@definition);
- IF @version IS NULL BEGIN
-  INSERT model.feature_version(feature_pk,capability_pk,semantic_object_pk,semantic_object_definition_pk,definition_digest,name,source_profile,object_kind,_owner_definition_pk,_canonical_pointer)
-   VALUES(@feature,@capability,@object,@definition,@digest,@capability_id,'parsed-feature-declaration.v1','FEATURE',@definition,N'');
-  SET @version=SCOPE_IDENTITY();
-  INSERT model.feature_scenario(feature_version_pk,scenario_pk,scenario_version_pk,capability_pk,ordinal)
-   SELECT @version,cs.scenario_pk,cs.scenario_version_pk,@capability,ROW_NUMBER() OVER(ORDER BY s.scenario_id)-1
-   FROM model.capability_scenario cs JOIN model.scenario s ON s.scenario_pk=cs.scenario_pk WHERE cs.capability_version_pk=@capability_version;
- END;
- UPDATE model.estate_capability_feature SET feature_version_pk=@version WHERE estate_model_pk=@estate AND capability_version_pk=@capability_version;
-END;
-GO
+
+SAVE TRANSACTION scenario_variant_selftest;
+DECLARE @selftest_scenario nvarchar(max) = N'{"scenarioId":"variant-form-selftest","name":"Variant form self test","inputId":"hello-world-request","inputContract":"hello-world-request.v1","eventId":"variant-form-selftest-requested","eventAuthority":"variant-form-selftest.v1","outcomeId":"variant-form-selftest-result","outcomeContract":"hello-world-greeting.v1","terminal":true,"root":false,"given":"a variant form self test","when":"the scenario is declared with string and object variants","then":"their classifications are stored","variants":["TERMINAL",{"variantId":"FAILED","classification":"failure"},{"variantId":"OOPS","classification":"success"}]}';
+EXEC model.declare_scenario @capability_id=N'say-hello-world', @scenario=@selftest_scenario, @operations=N'[]', @port_bindings=N'[]';
+DECLARE @selftest_version bigint = (
+  SELECT sv.scenario_version_pk FROM model.scenario_version sv
+  JOIN model.scenario s ON s.semantic_object_pk = sv.semantic_object_pk
+  WHERE s.scenario_id = N'variant-form-selftest');
+SELECT 'scenario_variant_forms' AS result_set, variant_id, classification, terminal
+FROM model.outcome_variant WHERE scenario_version_pk = @selftest_version ORDER BY variant_id;
+SET @selftest_scenario = JSON_MODIFY(@selftest_scenario, '$.variants[1].classification', 'success');
+EXEC model.declare_scenario @capability_id=N'say-hello-world', @scenario=@selftest_scenario, @operations=N'[]', @port_bindings=N'[]';
+SELECT 'scenario_variant_upsert' AS result_set, variant_id, classification
+FROM model.outcome_variant WHERE scenario_version_pk = @selftest_version ORDER BY variant_id;
+ROLLBACK TRANSACTION scenario_variant_selftest;
+SELECT 'selftest_rolled_back' AS result_set,
+  (SELECT COUNT(*) FROM model.scenario s WHERE s.scenario_id = N'variant-form-selftest') AS remaining_scenarios;
+COMMIT TRANSACTION;
