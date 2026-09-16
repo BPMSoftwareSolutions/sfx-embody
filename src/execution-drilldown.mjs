@@ -37,14 +37,10 @@ const addressFields = address => Object.fromEntries(Object.entries(address ?? {}
 
 // The streamed display entry. It is the same Entry vocabulary the declared
 // display document uses (sfx-display-document.v1), derived from the testimony:
-// the mechanical disposition decides the declared status token, a completed
-// cell whose bounded provider evidence names a transport that did not complete
-// is failed, and the text is the declared address join. The derivation is
-// estate logic reading declared identity and testimony, not declared authority:
-// the kernel's outcomeVariant is an open token, so no declared success/failure
-// vocabulary is available to a scenario or responsibility cell whose cell
-// completed while its domain outcome did not (see the declaration gap in
-// docs/display-projection-decision-record.md).
+// the kernel attaches the declared outcome classification to the testimony
+// (success -> completed, failure -> failed), and only an undeclared variant
+// falls back to stating the mechanical disposition. The text is the declared
+// address join. The estate derives no status of its own.
 const timingText = value => typeof value === 'number'
   ? (value >= 1000 ? `${(value / 1000).toFixed(2)} s` : `${value} ms`) : null;
 const boundedEvidence = value => {
@@ -54,11 +50,11 @@ const boundedEvidence = value => {
     if (['string', 'number', 'boolean'].includes(typeof value[key])) evidence[key] = value[key];
   return Object.keys(evidence).length ? evidence : null;
 };
-const testimonyStatus = (testimony, evidence) => {
+const testimonyStatus = testimony => {
+  if (testimony.outcomeClassification === 'success') return 'completed';
+  if (testimony.outcomeClassification === 'failure') return 'failed';
   if (typeof testimony.disposition !== 'string' || testimony.disposition.length === 0) return 'unobserved';
-  if (testimony.disposition !== 'completed') return 'failed';
-  if (typeof evidence?.transportDisposition === 'string' && evidence.transportDisposition !== 'completed') return 'failed';
-  return 'completed';
+  return testimony.disposition === 'completed' ? 'completed' : 'failed';
 };
 const admissionStatus = admission => admission === 'admitted' ? 'completed'
   : admission === 'rejected' || admission === 'cancelled' ? 'failed' : 'unobserved';
@@ -92,7 +88,7 @@ const cellObservation = (testimony, scenarioId, address, planCell) => {
     completedAt: testimony.completedAt,
     durationMilliseconds: testimony.durationMilliseconds,
     ...addressFields(address),
-    display: { entry: entryOf(testimonyStatus(testimony, evidence), entryText(address, planCell, testimony.cellId),
+    display: { entry: entryOf(testimonyStatus(testimony), entryText(address, planCell, testimony.cellId),
       { timing: timingText(testimony.durationMilliseconds) }) },
     ...(evidence ? { providerEvidence: evidence } : {})
   };

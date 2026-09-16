@@ -48,7 +48,8 @@ const canonicalGraph = {
 };
 const cellScenario = { testimonyType: 'cell-execution-testimony.v1', cellId: 'cell:scenario', cellAltitude: 'scenario',
   cellExecutionId: 'exec:1', rootExecutionId: 'root:1', parentCellExecutionId: null, outcomeContractId: 'out.v1',
-  outcomeVariant: 'ok', disposition: 'completed', selectedEdgeIds: ['edge:one'], logicalOrder: 0,
+  outcomeVariant: 'ok', disposition: 'completed', providerEvidence: { transportDisposition: 'denied' },
+  selectedEdgeIds: ['edge:one'], logicalOrder: 0,
   startedAt: '2026-01-01T00:00:00.000Z', completedAt: '2026-01-01T00:00:00.005Z', durationMilliseconds: 5 };
 const cellProvider = { ...cellScenario, cellId: 'cell:provider', cellAltitude: 'provider', cellExecutionId: 'exec:2',
   parentCellExecutionId: 'exec:1', outcomeVariant: 'done', selectedEdgeIds: [], logicalOrder: 2, durationMilliseconds: 7 };
@@ -59,22 +60,23 @@ const edgeOne = { testimonyType: 'edge-execution-testimony.v1', edgeId: 'edge:on
 const moduleUrl = source => 'data:text/javascript,' + encodeURIComponent(source);
 const compileModule = moduleUrl(`export const compile = async (_, input) => ({ canonicalGraph: ${JSON.stringify(canonicalGraph)},
   canonicalGraphDigest: 'sha256:plan', realizationOverlay: { physicalCells: [], physicalEdges: [] }, input: input.input });`);
-const executeModule = stream => moduleUrl(`export const execute = async (_, plan, context) => {
-  const cells = ${JSON.stringify([cellScenario, cellProvider])};
+const executeModule = (stream, classification) => moduleUrl(`export const execute = async (_, plan, context) => {
+  const cells = ${JSON.stringify([cellScenario, cellProvider])}.map(cell => cell.cellId === 'cell:scenario' && ${JSON.stringify(classification)}
+    ? { ...cell, outcomeClassification: ${JSON.stringify(classification)} } : cell);
   const edges = ${JSON.stringify([edgeOne])};
   if (${stream} && typeof context.onTestimony === 'function') { for (const cell of cells) context.onTestimony(cell); for (const edge of edges) context.onTestimony(edge); }
   return { disposition: 'completed', outcome: plan.input, outcomeVariant: 'done',
     cellTestimony: cells, edgeTestimony: edges, observedPathDigest: 'sha256:observed' };
 };`);
 
-const executor = stream => ({ capabilityId: 'run-declared-graph',
+const executor = (stream, classification) => ({ capabilityId: 'run-declared-graph',
   executionAuthorities: [{ owningScenarioId: 'executor', operations: [
     { kind: 'invoke-port', portId: 'compile' }, { kind: 'invoke-port', portId: 'execute' }] }],
   interfaceAuthority: { portBindings: [
     { portId: 'compile', configuration: { estateProvider: { module: compileModule, export: 'compile' } } },
-    { portId: 'execute', configuration: { estateProvider: { module: executeModule(stream), export: 'execute' } } }] } });
+    { portId: 'execute', configuration: { estateProvider: { module: executeModule(stream, classification), export: 'execute' } } }] } });
 
-function context({ stream = true } = {}) {
+function context({ stream = true, classification = null } = {}) {
   const reads = [], observations = [];
   return { databaseRoot: 'unused', reads, observations,
     onObservation: observation => observations.push(observation),
@@ -85,7 +87,7 @@ function context({ stream = true } = {}) {
       reads.push(selection);
       const isExecutor = selection.capabilityId === 'run-declared-graph';
       return { selection, authority: { ...identity, recordsets: [[{ scenario_id: isExecutor ? 'executor' : 'root' }]] },
-        closure: { recordsets: [[]] }, graphSource: structuredClone(isExecutor ? executor(stream) : graph) };
+        closure: { recordsets: [[]] }, graphSource: structuredClone(isExecutor ? executor(stream, classification) : graph) };
     } };
 }
 
@@ -110,6 +112,20 @@ test('observe streams only the selected altitudes and joins the plan against the
   assert.equal(overlay.edges[0].observed[0].durationMilliseconds, 2);
   assert.equal(result.outcome.observedPathDigest, 'sha256:observed');
   assert.equal(result.outcome.evidence.observedPathDigest, 'sha256:observed');
+});
+
+test('the streamed entry status is the kernel-attached outcome classification', async () => {
+  const statuses = observations => observations.filter(o => o.display?.entry).map(o => o.display.entry.status);
+  for (const [classification, expected] of [['failure', 'failed'], ['success', 'completed']]) {
+    const config = context({ classification });
+    await executeDatabaseCommand(command({ value: 7 }, 'observe', { observationAltitudes: ['scenario'] }), config);
+    assert.deepEqual(statuses(config.observations), [expected]);
+  }
+  // An undeclared variant states only the mechanical disposition: the bounded
+  // provider evidence no longer decides the streamed status.
+  const undeclared = context();
+  await executeDatabaseCommand(command({ value: 7 }, 'observe', { observationAltitudes: ['scenario'] }), undeclared);
+  assert.deepEqual(statuses(undeclared.observations), ['completed']);
 });
 
 test('the whole altitude range streams every cell and edge and absorbs silent kernel testimony', async () => {

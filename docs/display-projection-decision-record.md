@@ -165,24 +165,27 @@ predictions once U1 lands (rubric §1: compare predictions with actual delivery)
   denied, redactionVerified: true}` and its physical cell prints `×` with
   `{reachedStage: endpoint-admission, …}`; `say-hello-world --trace` is
   unchanged (`✓` on every completed entry), 47/50 estate tests (3 skipped).
-- **Declaration gap (reported, not silent):** the entry *derivation* is estate
-  logic in `src/execution-drilldown.mjs`, not declared authority. Mechanical
-  `disposition` plus the bounded provider transport evidence decides the status;
-  a scenario or responsibility cell completes mechanically while its domain
-  outcome carries a non-success `outcomeVariant` (e.g.
-  `EQUITY_MARKET_PRICE_PROVIDER_UNAVAILABLE`, `rejected-endpoint`), and the
-  kernel's `outcomeVariant` is an open token with no declared success/failure
-  classification, so those streamed entries still print `completed` while the
-  declared document states the failure. The precise declaration needed: an
-  observation presentation authority per capability — e.g. a declared
-  `TRANSFORMATION` (`<capability>-observe-entry.v1`) named by the CLI
-  configuration (`"observation": {"transformationId": …}`) and evaluated by the
-  drilldown per testimony event over `{testimony, address, authority}` to map
-  `disposition`/`outcomeVariant` to the declared status token — or a
-  kernel-attached status classification on cell testimony. Likewise the
-  telemetry allowlist itself is code: the declared telemetry authority the
-  consumer workspace already names (`scenario-execution.telemetry-authority.json`)
-  is not read by the estate filter.
+- **Declaration gap (closed by declaration, 2026-09-16):**
+  `sql/migrations/classify-equity-outcome-variants.sql` declares the
+  classification of the equity outcome variants in rows: the scenario variants
+  (`model.outcome_variant.classification`) and the exchange, credential and
+  normalize operation variants on the execution authority. The assembly
+  re-emits them as `scenarioOutcomes` / `operation.outcomeVariants` in the graph
+  source, the kernel derives `outcomeClassification` on cell testimony from the
+  declared classification (absent when undeclared), and the streamed entry
+  status now reads it (`success` -> `completed`, `failure` -> `failed`); only an
+  undeclared variant falls back to the mechanical disposition, and the bounded
+  provider evidence is emitted as telemetry only. The observation-presentation
+  transformation (`<capability>-observe-entry.v1`) is therefore not needed. The
+  migration is authored ROLLBACK-by-default; the dry run printed the
+  classification rows and the preflight from the uncommitted transaction showed
+  the scenario cell and the credential/exchange/normalize operation cells
+  carrying `outcomeClassification` while their mechanical disposition stayed
+  `completed` (`say-hello-world`, which declares no variants, carries none).
+  What remains code: the telemetry allowlist itself — the declared telemetry
+  authority the consumer workspace names
+  (`scenario-execution.telemetry-authority.json`) is still not read by the
+  estate filter (D5).
 - **Finding, not fixed here (outside the unit's file scope):**
   `model.configure_interface` pairs `MAX(scenario_pk)` with
   `MAX(scenario_version_pk)` across the capability's whole history, which is not
