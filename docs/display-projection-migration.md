@@ -188,6 +188,11 @@ values exactly. Fixtures live in the CLI repo so its tests are estate-free.
 
 ## 7. Open decisions (team)
 
+Dispositioned under the decision rubric in
+[display-projection-decision-record.md](display-projection-decision-record.md)
+(needed now / useful now / defer with triggers; builder decisions listed there).
+The recommendations below remain the technical input to that record.
+
 | # | Decision | Recommendation |
 |---|---|---|
 | D1 | Evaluation seam: reuse the delivery `resultExpression` (already declared, bound but unused) vs a separate display transformation id | use the declared display transformation referenced by the interface; if the delivery seam fits, prefer it and avoid a second mechanism |
