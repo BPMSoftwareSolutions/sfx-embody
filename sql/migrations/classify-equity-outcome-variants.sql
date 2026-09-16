@@ -588,5 +588,5 @@ SELECT '6_semantic_graph_document' AS result_set,
 FROM OPENJSON((SELECT documents FROM analysis.capability_graph_source(N'resolve-equity-market-price-evidence',1,NULL)))
  WITH (entry_id nvarchar(500) '$.entry_id', document nvarchar(max) '$.document') d
 WHERE d.entry_id=N'semantic-graph.authority.json';
-ROLLBACK TRANSACTION;
--- To install, replace the ROLLBACK above with COMMIT and re-run.
+COMMIT TRANSACTION;
+-- Installed copy: the declared classifications persist and the graph source re-emits them.

@@ -35,7 +35,7 @@ fabrications plus fallbacks — and one genuine kernel gap: non-node testimony s
 |---|---|---|---|---|
 | D1 | THEN tick hardcoded `completed` | `sidefx-cli/src/render.mjs:89` | DEFECT (fabricates meaning) | delete — the declared document supplies status; renderer keeps `emitDocument` only |
 | D2 | responsibility marks read only `disposition`, ignore `outcomeVariant` | `render.mjs:75-77`, `:202` | DEFECT | delete; declared document |
-| D3 | streamed entry status: mechanically-completed cell prints `completed` regardless of variant | `src/execution-drilldown.mjs:57-64` | DEFECT (declaration gap) | declared observation-presentation transformation (`<capability>-observe-entry.v1`) named by `configuration.observation` |
+| D3 | streamed entry status: mechanically-completed cell prints `completed` regardless of variant | `src/execution-drilldown.mjs:57-64` | **CLOSED** by kernel-attached classification (SDA `6ba5c42`, estate `2d61e1e`): testimony carries declared `outcomeClassification` at every altitude and the estate reads it (`success`→`completed`, `failure`→`failed`); only undeclared variants fall back to the mechanical disposition | no transformation needed; the observation-presentation work that remains is entry text/address (D4) |
 | D4 | entry text/shape, address join, overlay rows, story extraction | `execution-drilldown.mjs:35-75,150-277`; `semantic-address.mjs:6-127` | 1 mislocated | same declared transformations; kernel emits `semanticAddress` and faces with testimony |
 | D5 | observation field allowlist + object fields | `src/observation-filter.mjs:3-21` | 1 mislocated | declared telemetry authority (`scenario-execution.telemetry-authority.json`, currently unread); keep the scalar picker as emission seam (`:23-38`) |
 | D6 | silent display downgrade: unresolved `transformationId` attaches raw config, terminal falls back to the story path | `invoke-database-capability.mjs:425-437`; `render.mjs:249` | DEFECT | hard refusal `CAPABILITY_DISPLAY_NOT_RESOLVED`, or a declared disposition; delete the legacy `{select,as}` fallback (`render.mjs:254-257`) |
@@ -74,9 +74,10 @@ Recorded as request 8 in `transistor-model.md` §10.
 
 ## Estate rows to add
 
-- Observation-presentation transformation(s): status from `disposition` + `outcomeVariant`,
-  altitude lanes, entry vocabulary (D3) — the same declare pattern as
-  `declare-observation-display-projection.sql`.
+- Observation-presentation transformation(s): altitude lanes and entry text/address
+  (D4) — the same declare pattern as `declare-observation-display-projection.sql`.
+  The status token is settled by the kernel-attached `outcomeClassification` (D3,
+  SDA `6ba5c42`): no status mapping belongs in rows or code.
 - Telemetry authority wiring so the allowlist is read, not code (D5); readings consumed
   from `semantics.cli.readings` (D10).
 - Delete the silent downgrade and the legacy `{select,as}` path (D6).
@@ -104,7 +105,7 @@ Recorded as request 8 in `transistor-model.md` §10.
 1. CLI deletions (D1, D2, D6 legacy fallback, D11) — no data dependency; removes the
    fabrications.
 2. SDA kernel requests 1-3 (testimony parity, envelope, durations).
-3. Declared observation-presentation + telemetry rows (D3, D4, D5, D10); remove the
+3. Declared observation-presentation + telemetry rows (D4, D5, D10); remove the
    corresponding estate logic; keep only emission seams.
 4. `configure_interface` fix; then D7/D9 migration as capacity allows.
 
