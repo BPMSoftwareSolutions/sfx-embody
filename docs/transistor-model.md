@@ -495,10 +495,17 @@ Format per [embodiment-completeness.md](embodiment-completeness.md):12-37
    - *languages:* node, python, csharp.
    - *data that binds it:* the equity port bindings `bind-equity-price-provider-credential`
      and `observe-equity-price-exchange`; fixture `equity-qqq-evidence-resolves`.
-   - *evidence:* `--observation-altitude provider|physical` yields six delivery-phase
-     lines and zero cells; `SDA:languages/typescript/runtimes/node/semantic-execution-graph/compiler.js:70,143`;
+   - *evidence:* before SDA `6aa2434`/`171d96f`, `--observation-altitude provider`
+     and `--observation-altitude physical` yielded six delivery-phase lines and
+     zero cells; `SDA:languages/typescript/runtimes/node/semantic-execution-graph/compiler.js:70,143`;
      `SDA:kernel/schemas/execution-cell.schema.json:12`.
    - *request:* `SDA:docs/sda-change-request-provider-physical-altitudes.md`.
+   - *status:* **landed** (SDA `6aa2434`, `171d96f`, re-verified 2026-09-15):
+     live compile and observe emit provider and physical cells (equity: 2 + 2)
+     and stream them at those altitudes. Remaining: the bounded
+     `providerEvidence` fields are not yet passed through the observation
+     allowlist/drilldown — the U4 unit in
+     [display-projection-decision-record.md](display-projection-decision-record.md).
 
 ---
 

@@ -199,10 +199,12 @@ overlay), `src/observation-filter.mjs` (telemetry field allowlist), and
 or the drilldown to serve the provider-altitude demo grows the defect instead of
 migrating it.
 
-**Depends on.** SDA request 7 (`docs/transistor-model.md:481`) for the provider/physical
-cells and testimony the migrated capabilities read. Until the kernel emits them, the
-honest line for a provider lane remains `PROVIDER_UNAVAILABLE` /
-`PROVIDER_EXCHANGE_NOT_COMPLETED`.
+**Depends on.** SDA request 7 (`docs/transistor-model.md:488`) is **satisfied for cell
+materialization** (SDA `6aa2434`, `171d96f`): the compiler emits provider and physical
+cells (equity: 2 + 2) and the runtimes stream them at those altitudes. Remaining: the
+bounded `providerEvidence` fields are not yet in the observation allowlist/drilldown;
+that passthrough belongs to the declared telemetry/display units (U4), not a kernel
+request.
 
 ## Classification summary
 

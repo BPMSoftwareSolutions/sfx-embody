@@ -113,13 +113,14 @@ maps.
   come from a runtime field rather than declared iteration; the plan's cells are
   lexically sorted, which is wrong for ≥10 operations (`.operation.10` before
   `.operation.2`).
-- **Provider/physical evidence (separate thread, not this migration's critical
-  path).** The compiler and scheduler demonstrably support provider/physical
-  cells and bounded `providerEvidence` for effect ports
-  (`compiler.js:209-265`, `scheduler.js:8-20,358-384`), but production observe
-  yields zero cells at those altitudes and the allowlist admits no transport
-  fields. Open item O5: determine whether the equity plan/overlay drops them
-  (declared data) or the pipeline does — a read-only plan probe settles it.
+- **Provider/physical evidence (resolved, 2026-09-15).** The compiler and
+  scheduler support provider/physical cells and bounded `providerEvidence` for
+  effect ports (`compiler.js:209-265`, `scheduler.js:8-20,358-384`); SDA
+  `6aa2434`/`171d96f` materialized the descent after the earlier capture, and live
+  observe now emits 2 provider + 2 physical cells for equity and streams them at
+  those altitudes. Remaining: the bounded `providerEvidence` fields are not yet
+  passed through the observation allowlist/drilldown (U4), and the display
+  projection may surface them once they are.
 
 ## 4. Vocabulary feasibility — the matrix in brief
 
@@ -199,7 +200,7 @@ The recommendations below remain the technical input to that record.
 | D2 | Carrier loop (`executeEstateCapability` port/composition dispatch): boot loader or kernel? | keep as the loader's minimal execution shell; move `invoke-scenario` composition to the kernel (already requested as R1 in `sidefx-public-demo-readiness.md`) |
 | D3 | Semantic address source: kernel emits it with testimony vs plan-based join | plan-based for the document (validated); kernel-attached address for the live stream is a separate request |
 | D4 | Aggregate elapsed definition | per-cell timings first; file `sum` only if the display must show a total |
-| D5 | Provider/physical localization (empty altitudes) | read-only plan/overlay probe, then declared data vs pipeline |
+| D5 | Provider/physical localization | closed: kernel materialization landed (SDA `6aa2434`/`171d96f`); `providerEvidence` passthrough is U4 |
 | D6 | `--json` shape | additive `display.document`; `story`/`overlay` stay for compatibility, deprecate later |
 | D7 | Streamed status fields | declare them in the telemetry authority and emit the display entry per event |
 
