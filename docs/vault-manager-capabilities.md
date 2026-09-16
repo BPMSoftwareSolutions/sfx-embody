@@ -413,11 +413,19 @@ sentinel absent from every evidence field; sealed store reports `VAULT_SEALED`;
 wrong scope/digest/reference rejected; a second realization stub proves the
 capability rows are unchanged when the realization swaps.
 
+**Status: done** (SDA `e7b3864`, `bf5feb1`; estate boot W3 `0fb8660`). The
+pinned native DPAPI module is loaded with the delivery's `--allow-addons`; with
+no realization the port refuses with `VAULT_SEALED` and never falls back.
+
 ### V2 — Declared capabilities
 Author `store-credential` and `resolve-credential` documents + migration
 (§2). Accept: `sfx capability invoke store-credential --input -` stores; the
 result contains no plaintext or digest of it; `resolve-credential` returns the
 application outcome only (no reveal); `observe` streams no plaintext.
+
+**Status: done and installed** (estate `4dd191f`; preflight store/apply green;
+live `resolve-credential` returns `CREDENTIAL_BOUND` with realization
+`windows-credential-store-provider` and no plaintext member).
 
 ### V3 — The live source switch
 The installed credential authorities switched from environment to vault:
@@ -429,16 +437,42 @@ bind still stages the same literals and the exchange injects the same headers
 (`x-goog-api-key`), now from vault entries; none of the three names is present
 in `process.env`.
 
+**Status: done for every authority that can execute; one exchange blocked by
+the frozen SDA.** All five installed authorities (equity primary and fallback,
+Gemini, OpenAI reference and speech) are `source: "vault"` with the declared
+locator; the transition unit stored each reference and proved `CREDENTIAL_BOUND`,
+and the live equity invocation with the names absent from the environment
+returned `EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED`. The live conveyor exchange
+cannot execute on SDA `bf5feb1`: the graph path fails
+`SEMANTIC_EXECUTION_GRAPH_OVERLAY_BINDING_MISSING: 'invoke-scenario'` (and, once
+`invoke-scenario` is supplied diagnostically, `sda-projected-capability-
+invocation-port.v2` / the `invocation: "llm"` connector dispatch). That is the
+recorded SDA request R1/R2, not an estate data gap; the Gemini credential
+requirement itself resolves from the vault (`CREDENTIAL_BOUND`, scope
+`governed-model-invocation`).
+
 ### V4 — Non-disclosure proof
 Sweep artifacts for the sentinel: invoke `--json`, `observe --trace` output,
 `evidence/` bundles, the observation stream, and the database rows. Accept: a
 recorded receipt that names every channel and shows the sentinel absent; a
 negative receipt for a tampered store (GCM auth failure).
 
+**Status: done** (W5 receipts). A random sentinel was stored under
+`RAPID_API_KEY` and the executable vault paths driven through the CLI with the
+names absent; every channel reports the sentinel absent (invoke `--json`,
+`observe --trace` stdout and streamed observation lines, the `store-credential`
+input channel, an equity provider exchange attempted with the sentinel,
+7,105 `evidence/` files, 19 local delivery receipts, and the durable content
+objects). The tampered vault copy returned `CREDENTIAL_NOT_AVAILABLE` (AES-GCM
+authentication failure) with `nonDisclosureVerified: true`; the real value was
+then restored and re-proved.
+
 ### V5 — Rotation, other realizations, consent
 Rotation; macOS Keychain, Linux Secret Service/TPM and cloud KMS realizations;
 python/csharp port implementations; a stronger unwrap consent boundary (§4.3)
 if required. The capability rows do not change for any of these.
+
+**Status: deferred** (unchanged scope).
 
 **Dependencies.** V1 blocks V2; V3 needs V1's seam; V4 needs V3. The sealed
 binary and per-language bootstraps carry the realization code — orthogonal but
@@ -453,24 +487,45 @@ shared.
    vault as a new effect port vs the credential port's `source: "vault"`
    (recommend: override seam first, then extend the installed capability's
    source — the conveyor's declarations then need one locator, not a rewrite).
+   **Resolved:** both. A new `resolve-credential`/`store-credential` capability
+   pair is declared (V2), the boot's override seam threads the realization
+   (`effectContextOverrides.credentialStoreRealization`, W3), and the installed
+   authorities' `source` was switched to `"vault"` with one locator each (W4).
 2. **Windows realization:** native DPAPI/CNG module vs bounded PowerShell
    subprocess vs Credential Manager (recommend: native module, key held in
    DPAPI/CNG custody, never a sibling blob beside the store). Resolved for this
    host by §8: native module is needed now; the PowerShell path is deferred to a
    builder decision on the child-process confinement boundary.
+   **Resolved and observed:** the pinned native module (`@primno/dpapi`) is used;
+   the invocation delivery requires `--allow-addons` for it, and the key record
+   is released into memory only. The PowerShell fallback remains deferred.
 3. **Threat boundary:** is same-user process protection (agent can unwrap)
    acceptable for now, or is a consent gate required before the demo?
+   **Resolved:** §4.3 is accepted; no consent gate (builder decision 4).
 4. **Store location:** `%LOCALAPPDATA%\sfx\vault\` (recommend) vs a configured
    path; never the repo, never `%TEMP%`.
+   **Resolved:** `%LOCALAPPDATA%\sfx\vault` is the declared locator; the boot
+   resolves the environment reference before the kernel sees the configuration,
+   so the ciphertext lands under the OS user profile, never the repo.
 5. **Composition:** does `resolve-credential` need the invoke-scenario
    composition (R1) for the first version, or is resolve-and-use-in-one-scenario
    enough (recommend: enough).
+   **Resolved:** enough for the credential work (equity is one scenario with
+   port operations only; `resolve-credential` is a single port). The conveyor's
+   own composition stays an SDA request (V3 status), not a vault dependency.
 6. **Store input UX:** stdin (`--input -`) suffices for machines; is a masked
    prompt required for humans in the first version?
+   **Resolved for this program:** the transition unit stores in-process and the
+   CLI's stdin carrier already avoids argv; a masked interactive prompt remains
+   optional CLI work.
 7. **Ciphertext home:** local store file first (recommend) vs encrypted content
    rows in the SideFX database — the latter is allowed by the two-roof split
    (§4.1) but needs a semantic kind; the key stays in the OS keystore either
    way.
+   **Resolved for this program:** the local store file lands first
+   (`%LOCALAPPDATA%\sfx\vault\vault.json`, AES-256-GCM, AAD-bound to reference,
+   key version and vault id); the database-resident variant stays a pure
+   addition.
 
 ## 8. Decision record — host key release for the live source switch
 
@@ -502,5 +557,19 @@ the dependency; no capability declaration changes on any OS.
 decision rejects the dependency), or a host/language has no native keystore module — then B
 returns as a builder decision on the confinement boundary, not as an implementation fallback.
 
-**Observed result after implementation.** Unfilled; complete after a live store→apply→invoke
-reports `CREDENTIAL_BOUND` with the sentinel absent and the authorized provider call completed.
+**Observed result after implementation.** Live, 2026-09-16. The transition unit
+(`scripts/transition-credential-authorities-to-vault.mjs`) stored each of the
+three references from the environment and applied it: `CREDENTIAL_BOUND` with
+realization `windows-credential-store-provider` for `RAPID_API_KEY`,
+`LOC_GEMINI_API_KEY` and `LOC_OPENAI_API_KEY`; the source-switch migration then
+installed with 0 environment authorities and 5 vault authorities remaining. The
+equity invocation with the names absent from the environment returned
+`EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED` (QQQ 704.72 USD, Nasdaq Real Time
+Price) — the authorized provider call completed with the vault-released key. The
+non-disclosure sweep found the sentinel absent from every named channel
+(`invoke --json`, `observe --trace` plus the observation stream,
+`evidence/` and local delivery receipts, and the durable rows) and the tampered
+store failed GCM authentication. Receipts: `evidence/vault-20260916/transition/`,
+`evidence/vault-20260916/non-disclosure/`, `evidence/vault-20260916/live-*.out`.
+The conveyor's own exchange remains blocked by the frozen SDA graph-path
+composition (V3 status).

@@ -1,6 +1,7 @@
 # Vault manager — multi-agent execution strategy
 
-Status: WAVES 1-2 PARTIALLY EXECUTED — W0, W2, W3 landed; W1, W4, W5, W6 next (see Execution log)
+Status: W2b, W4, W5, W6 EXECUTED on the estate; W1 deferred; the Gemini conveyor's exchange is
+blocked by the frozen SDA graph path (see Execution log)
 Frame: `transistor-model.md` §1 — declared authority (1) or an admitted resolver (0) in the
 SDA kernel; no third place. Target model: `vault-manager-capabilities.md` (contract §3, key
 custody §4, units V1–V5 §6).
@@ -182,3 +183,72 @@ runtime edits.
   3. **W1 — python/C# port** and **W5 — non-disclosure receipts** follow the gates in §4.
   4. **Follow-up defect**: `src/projection-delivery.mjs:139` carries the same env-copy pattern
      removed at `database-delivery.mjs`; classify and fix as its own unit.
+
+- **W2b — DONE and installed** (estate; preflight green). `bind-credential-vault-mechanic-and-
+  realization.sql` adds, on the host `run-declared-graph-execute` Port: the vault effect mechanic
+  binding; the realization binding (`sda-credential-store-realization.v1` →
+  `windows-credential-store-provider`); and the realization provider
+  (`languages/typescript/runtimes/node/windows-credential-store-provider.mjs`,
+  `createWindowsCredentialStoreRealization`, `factory: true`). The vault capability Ports stay
+  OS-neutral (capability rows carry no keystore). The provider merge preserves the `factory`
+  boolean (a JSON string `"true"` would make the loader call the factory as the provider); the
+  recorded effect-profile digest is asserted against the W2 header. Preflight (uncommitted):
+  `store-credential` → `CREDENTIAL_STORED`; `resolve-credential` → `CREDENTIAL_BOUND` with
+  realization `windows-credential-store-provider`.
+- **W2 — INSTALLED** (committed form). Combined W2+W2b preflight then install; dry-run 11 result
+  sets, `names_secret_material=0` on all result-contract members; read-back shows both
+  capabilities and the three credential bindings on the execute Port.
+- **W4 — DONE and installed** (`switch-credential-authorities-to-vault.sql`). All five installed
+  authorities for the three names (equity primary and fallback `RAPID_API_KEY`, Gemini and
+  OpenAI reference binding, speech `LOC_OPENAI_API_KEY`) are `source: "vault"` with locator
+  `%LOCALAPPDATA%\sfx\vault`; 0 environment authorities remain.
+- **Transition unit — DONE** (`scripts/transition-credential-authorities-to-vault.mjs`,
+  idempotent, separately receipted). Stored each of the three environment values once through
+  `store-credential`, proved `CREDENTIAL_BOUND` through `resolve-credential`, preflighted the
+  switch from the uncommitted transaction with the names absent from the child environment
+  (equity resolved; Gemini/OpenAI resolve bound), then installed the switch. Re-run with the
+  names absent: `SKIPPED_ENVIRONMENT_ABSENT` + `CREDENTIAL_BOUND`, `ALREADY_SWITCHED`, no new
+  version. Receipts: `evidence/vault-20260916/transition/transition.report.json`,
+  `…/transition-idempotent/transition.report.json`.
+- **Boot locator resolution and delivery grants** (companion to W2b/W4). The declared
+  `%LOCALAPPDATA%` store locator is expanded in the boot before the kernel sees it
+  (`src/credential-vault-realization.mjs` + `src/invoke-database-capability.mjs`); the
+  `database-memory` delivery grants read of `C:\Users\*\AppData\Local\sfx` and
+  `--allow-addons` for the pinned native DPAPI module, and still forbids filesystem writes (the
+  store runs only in the transition unit).
+- **Live proofs — credential proof, not price proof.** With the three names removed from the
+  invocation environment: equity `resolve-equity-market-price-evidence` →
+  `EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED` with observed QQQ 704.72 USD (Nasdaq Real Time Price);
+  `resolve-credential` for the Gemini policy → `CREDENTIAL_BOUND` (scope
+  `governed-model-invocation`, realization `windows-credential-store-provider`); final equity
+  re-proof after the sweep resolved again. Receipts: `evidence/vault-20260916/live-*.out`.
+- **Gemini conveyor — BLOCKED by the frozen SDA graph path** (SDA `bf5feb1`; request R1/R2).
+  `obtain-governed-model-response` and `bind-external-credential-reference` fail
+  `SEMANTIC_EXECUTION_GRAPH_OVERLAY_BINDING_MISSING: 'invoke-scenario'`; with a diagnostic
+  `invoke-scenario` binding the next missing piece is `sda-projected-capability-invocation-port.v2`
+  (composed port) and the `invocation: "llm"` connector dispatch. No workaround was installed;
+  the credential half of the conveyor is proven from the vault and the exchange stays blocked.
+  Receipt: `evidence/vault-20260916/live-gemini-conveyor.err`, transition report `preflightConveyor`.
+- **W5 — DONE** (`scripts/verify-credential-non-disclosure.mjs`). A random sentinel stored under
+  `RAPID_API_KEY` and driven through the CLI with the names absent; the sentinel is absent from
+  `invoke --json`, `observe --trace` (stdout and streamed observation lines), the
+  `store-credential` input channel, an equity provider exchange attempted with the sentinel,
+  7,105 `evidence/` files, 19 local delivery receipts, and the durable content objects; the
+  tampered vault copy returned `CREDENTIAL_NOT_AVAILABLE` (GCM failure); the real value was
+  restored and re-proved. Receipts: `evidence/vault-20260916/non-disclosure/`.
+- **Env-copy unit — DONE.** `src/projection-delivery.mjs` now uses
+  `createDatabaseConnectBoundary`; the connection string lives only in the boundary closure.
+  Test `tests/projection-delivery-connect-boundary.test.mjs`; live projection smoke
+  `resolve-sidefx-eligible-providers` → `PURE_PROJECTION_CONFORMS` (13 documents, 17 files).
+  Receipt: `evidence/vault-20260916/projection-smoke.out`.
+- **W6 — DONE.** `docs/vault-manager-capabilities.md` marks V1–V4 landed (V5 deferred), resolves
+  open questions 1–7 where the program decided them, and fills the §8 observed result; this log
+  records the final states.
+- **Verification.** `npm test`: 69 tests, 66 pass, 0 fail, 3 skipped; focused
+  `credential-vault-realization` + `database-connect-boundary` +
+  `projection-delivery-connect-boundary`: 17/17 pass. Migrations installed and observed by
+  read queries (`evidence/vault-20260916/installed-state.out`).
+- **Blocked item (reported, not worked around).** The Gemini conveyor exchange cannot execute on
+  the frozen SDA; any estate-side binding added to force it would claim a provider mapping no
+  embodiment observes. Unblock on SDA request R1 (graph-path `invoke-scenario` composition and
+  composed-port handling) plus R2 (connector dispatch).
