@@ -10,6 +10,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { withDatabaseReadSession } from './database-read-session.mjs';
+import { createDatabaseConnectBoundary } from './database-connect-boundary.mjs';
 
 const OPERATION = 'project';
 const ADMITTED_TARGETS = Object.freeze(['node', 'python', 'csharp']);
@@ -134,9 +135,15 @@ async function main() {
     || typeof config.databaseRoot !== 'string' || typeof config.sdaRoot !== 'string') throw new Error('RUNTIME_CONFIGURATION_REJECTED');
   for (const key of ['databaseRoot', 'sdaRoot']) config[key] = path.resolve(path.dirname(configFile), config[key]);
   const { config: readDatabaseConfig, stable, hash, digest } = await import(pathToFileURL(path.join(config.databaseRoot, 'src/core.mjs')));
-  const { connectionString, connect, sql } = await import(pathToFileURL(path.join(config.databaseRoot, 'src/ingest/database.mjs')));
-  const { connectionEnvironmentVariable, queryRowLimit } = await readDatabaseConfig();
-  process.env[connectionEnvironmentVariable] = connectionString(connectionEnvironmentVariable);
+  const { connectionString, sql } = await import(pathToFileURL(path.join(config.databaseRoot, 'src/ingest/database.mjs')));
+  const { connectionEnvironmentVariable, queryRowLimit, requestTimeoutMs } = await readDatabaseConfig();
+  // The connection string is resolved before any memory-process restriction
+  // applies and lives only in the connect boundary closure; it is never copied
+  // into process.env, so a projected child, an observation or retained evidence
+  // cannot carry it. Same boundary as the invocation delivery.
+  const connect = createDatabaseConnectBoundary({ sql,
+    connectionString: connectionString(connectionEnvironmentVariable),
+    connectionName: connectionEnvironmentVariable, requestTimeoutMs });
   const { normalizeSql } = await import(pathToFileURL(path.join(config.databaseRoot, 'src/query/run.mjs')));
   const { pinModel } = await import(pathToFileURL(path.join(config.databaseRoot, 'src/query/model-pin.mjs')));
   const outcome = await withDatabaseReadSession({ connect, sql, pinModel, normalizeSql, stable, hash, digest, queryRowLimit },
