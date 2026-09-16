@@ -500,6 +500,23 @@ Format per [embodiment-completeness.md](embodiment-completeness.md):12-37
      zero cells; `SDA:languages/typescript/runtimes/node/semantic-execution-graph/compiler.js:70,143`;
      `SDA:kernel/schemas/execution-cell.schema.json:12`.
    - *request:* `SDA:docs/sda-change-request-provider-physical-altitudes.md`.
+
+8. **Conform testimony shape, result envelope and timing across node/python/csharp.**
+   - *primitive:* python and csharp schedulers and all three projected emitters emit the
+     full `cell-execution-testimony.v1`/`edge-execution-testimony.v1` fields (node is the
+     only conformant shape today); schema-bind the result envelope
+     (`disposition/outcome/outcomeVariant/cellTestimony/edgeTestimony/observedPathDigest`);
+     normalize duration rounding (node rounds, python/csharp emit raw floats).
+   - *why kernel:* a language-neutral display/observation projection needs one stable
+     testimony contract, and testimony is kernel output.
+   - *languages:* python, csharp (node is the reference).
+   - *data that binds it:* the equity graph, the shared graph fixtures, the declared
+     display transformation.
+   - *evidence:* `SDA:languages/python/src/scenario_kernel/platform/execution_graph.py:221-239,270-280`;
+     `SDA:languages/csharp/src/ScenarioKernel.Adapters/Graph/SemanticExecutionGraphScheduler.cs:223-237,280-289`;
+     `SDA:kernel/schemas/cell-execution-testimony.schema.json:7`;
+     node `SDA:languages/typescript/runtimes/node/semantic-execution-graph/scheduler.js:372-388`.
+   - *plan:* `docs/display-observation-conformance-plan.md`.
    - *status:* **landed** (SDA `6aa2434`, `171d96f`, re-verified 2026-09-15):
      live compile and observe emit provider and physical cells (equity: 2 + 2)
      and stream them at those altitudes. Remaining: the bounded
