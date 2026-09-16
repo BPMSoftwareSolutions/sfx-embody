@@ -1,7 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { executeDatabaseCommand, executeEstateCapability } from '../src/invoke-database-capability.mjs';
-import { CREDENTIAL_STORE_REALIZATION_MECHANIC_ID } from '../src/credential-vault-realization.mjs';
+import { CREDENTIAL_STORE_REALIZATION_MECHANIC_ID, resolveCredentialVaultLocators,
+  resolveCredentialVaultLocatorsInGraphSource, resolveDeclaredEnvironmentReference } from '../src/credential-vault-realization.mjs';
 
 const KEY_BYTES = Array.from(Buffer.from('0123456789abcdef0123456789abcdef', 'utf8'));
 const KEY_SENTINELS = [Buffer.from(KEY_BYTES).toString('base64'), Buffer.from(KEY_BYTES).toString('hex'), '0123456789abcdef'];
@@ -146,6 +147,49 @@ test('an explicit boot-supplied realization takes precedence over the declared p
     estateContext(bindingConfiguration(), { effectContextOverrides: { credentialStoreRealization: bootRealization } }));
   assert.equal(result.outcome.realizationId, 'boot-supplied-store');
   assert.equal(result.outcome.sealed, true);
+});
+
+test('declared vault locators resolve from the host environment before the provider sees them', () => {
+  process.env.SFX_TEST_CREDENTIAL_VAULT_ROOT = 'C:\\vault-root';
+  try {
+    const configuration = {
+      operation: 'store',
+      storeLocator: '%SFX_TEST_CREDENTIAL_VAULT_ROOT%\\sfx\\vault',
+      unrelated: '%SFX_TEST_CREDENTIAL_VAULT_ROOT%',
+      credentialAuthorities: [
+        { referenceName: 'RAPID_API_KEY', source: 'vault', storeLocator: '%SFX_TEST_CREDENTIAL_VAULT_ROOT%\\sfx\\vault' },
+        { referenceName: 'LOC_OPENAI_API_KEY', source: 'environment' }
+      ]
+    };
+    const resolved = resolveCredentialVaultLocators(configuration);
+    assert.equal(resolved.storeLocator, 'C:\\vault-root\\sfx\\vault');
+    assert.equal(resolved.unrelated, '%SFX_TEST_CREDENTIAL_VAULT_ROOT%');
+    assert.equal(resolved.credentialAuthorities[0].storeLocator, 'C:\\vault-root\\sfx\\vault');
+    assert.equal(resolved.credentialAuthorities[1], configuration.credentialAuthorities[1]);
+    assert.equal(configuration.storeLocator, '%SFX_TEST_CREDENTIAL_VAULT_ROOT%\\sfx\\vault', 'the declaration is not mutated');
+  } finally { delete process.env.SFX_TEST_CREDENTIAL_VAULT_ROOT; }
+});
+
+test('an unresolved environment reference is left verbatim; the provider fails closed', () => {
+  delete process.env.SFX_TEST_MISSING_VAULT_ROOT;
+  assert.equal(resolveDeclaredEnvironmentReference('%SFX_TEST_MISSING_VAULT_ROOT%\\sfx'), '%SFX_TEST_MISSING_VAULT_ROOT%\\sfx');
+  assert.equal(resolveDeclaredEnvironmentReference('C:\\fixed\\sfx'), 'C:\\fixed\\sfx');
+});
+
+test('the graph source hand-off expands vault locators on its Port bindings only', () => {
+  process.env.SFX_TEST_CREDENTIAL_VAULT_ROOT = 'D:\\host-vault';
+  try {
+    const graphSource = { capabilityId: 'fixture',
+      interfaceAuthority: { portBindings: [
+        { portId: 'vault-port', configuration: { operation: 'apply', storeLocator: '%SFX_TEST_CREDENTIAL_VAULT_ROOT%\\sfx\\vault' } },
+        { portId: 'other-port', configuration: { location: '%SFX_TEST_CREDENTIAL_VAULT_ROOT%\\other' } }
+      ] } };
+    const resolved = resolveCredentialVaultLocatorsInGraphSource(graphSource);
+    assert.equal(resolved.interfaceAuthority.portBindings[0].configuration.storeLocator, 'D:\\host-vault\\sfx\\vault');
+    assert.equal(resolved.interfaceAuthority.portBindings[1].configuration.location, '%SFX_TEST_CREDENTIAL_VAULT_ROOT%\\other');
+    assert.equal(graphSource.interfaceAuthority.portBindings[0].configuration.storeLocator, '%SFX_TEST_CREDENTIAL_VAULT_ROOT%\\sfx\\vault');
+    assert.equal(resolveCredentialVaultLocatorsInGraphSource({ capabilityId: 'no-authority' }).interfaceAuthority, undefined);
+  } finally { delete process.env.SFX_TEST_CREDENTIAL_VAULT_ROOT; }
 });
 
 test('no key bytes reach results or the observation stream', async () => {

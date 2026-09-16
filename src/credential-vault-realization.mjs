@@ -29,6 +29,56 @@ function normalizedRealization(candidate, realizationId) {
     ? candidate : { ...candidate, realizationId };
 }
 
+// A declared vault configuration may reference a host environment root: the
+// vault store locator is declared as `%LOCALAPPDATA%\sfx\vault` (the OS default
+// home for the ciphertext). The boot resolves those references against the host
+// environment before the kernel or a provider sees the configuration, so the
+// provider never expands a path and no key material or plaintext is involved.
+// An unknown reference is left verbatim; the provider then fails closed on the
+// unresolvable locator rather than guessing a location.
+const ENVIRONMENT_REFERENCE = /%([A-Za-z_][A-Za-z0-9_]*)%/g;
+export function resolveDeclaredEnvironmentReference(value) {
+  return String(value).replace(ENVIRONMENT_REFERENCE, (match, name) =>
+    typeof process.env[name] === 'string' && process.env[name].length > 0 ? process.env[name] : match);
+}
+function expandLocator(entry) {
+  return isObject(entry) && typeof entry.storeLocator === 'string' && entry.storeLocator.includes('%')
+    ? { ...entry, storeLocator: resolveDeclaredEnvironmentReference(entry.storeLocator) }
+    : entry;
+}
+// The vault keys that may carry a declared locator: the vault port's own
+// `storeLocator` and each credential authority's `storeLocator` (W4's source
+// switch declares one per switched authority). Everything else is untouched.
+export function resolveCredentialVaultLocators(configuration) {
+  if (!isObject(configuration)) return configuration;
+  let resolved = configuration;
+  if (typeof configuration.storeLocator === 'string' && configuration.storeLocator.includes('%')) {
+    resolved = { ...resolved, storeLocator: resolveDeclaredEnvironmentReference(configuration.storeLocator) };
+  }
+  if (Array.isArray(configuration.credentialAuthorities)) {
+    const authorities = configuration.credentialAuthorities.map(expandLocator);
+    if (authorities.some((entry, index) => entry !== configuration.credentialAuthorities[index])) {
+      resolved = { ...resolved, credentialAuthorities: authorities };
+    }
+  }
+  return resolved;
+}
+// The declared graph source carries its Port bindings; the boot resolves the
+// vault locators once, before the graph is handed to the kernel and compiled.
+export function resolveCredentialVaultLocatorsInGraphSource(graphSource) {
+  const bindings = graphSource?.interfaceAuthority?.portBindings;
+  if (!Array.isArray(bindings)) return graphSource;
+  let changed = false;
+  const portBindings = bindings.map(binding => {
+    if (!isObject(binding) || !isObject(binding.configuration)) return binding;
+    const configuration = resolveCredentialVaultLocators(binding.configuration);
+    if (configuration === binding.configuration) return binding;
+    changed = true;
+    return { ...binding, configuration };
+  });
+  return changed ? { ...graphSource, interfaceAuthority: { ...graphSource.interfaceAuthority, portBindings } } : graphSource;
+}
+
 // Resolve the realization through the ordinary provider-resolution path: the
 // binding names a profile, the profile names a module and export under the SDA
 // root, and the export creates the realization that owns key custody. Any

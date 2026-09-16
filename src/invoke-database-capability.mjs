@@ -3,7 +3,8 @@ import { createHash, randomUUID } from 'node:crypto';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { readExecutionDelivery } from './read-execution-delivery.mjs';
 import { createExecutionDrilldown, isObservationAltitudeSelection } from './execution-drilldown.mjs';
-import { resolveCredentialStoreRealization } from './credential-vault-realization.mjs';
+import { resolveCredentialStoreRealization, resolveCredentialVaultLocatorsInGraphSource,
+  resolveCredentialVaultLocators } from './credential-vault-realization.mjs';
 
 const digest = value => 'sha256:' + createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -167,7 +168,7 @@ export async function executeEstateCapability({ capabilityId, scenarioId, namesp
         if (typeof invokePort !== 'function') throw new Error('PLATFORM_MECHANIC_NOT_DECLARED:' + capabilityId + ':' + operation.portId);
       }
       const portContext = await credentialVaultPortContext(binding, context);
-      current = await invokePort(binding.configuration, current, portContext);
+      current = await invokePort(resolveCredentialVaultLocators(binding.configuration), current, portContext);
       if (typeof context?.onState === 'function') { try { context.onState(current, operation); } catch { /* State observation is not execution authority. */ } }
     } else if (operation.kind === 'invoke-scenario') {
       const owner = ownerOfScenario(bundle, operation.scenarioId);
@@ -413,6 +414,10 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, 
     graphSource = structuredClone(bundle.graphSource);
     graphSource.input = input;
   }
+  // Declared vault locators (`%LOCALAPPDATA%\sfx\vault`) resolve to host paths
+  // here, once, before the graph is compiled and before any provider sees the
+  // configuration. No plaintext or key material is involved in the path.
+  graphSource = resolveCredentialVaultLocatorsInGraphSource(graphSource);
   // The display projection is declared on the capability's CLI interface, which
   // travels with the graph source's interface authority. The bundle may not carry
   // it now that the boot read uses the estate views.

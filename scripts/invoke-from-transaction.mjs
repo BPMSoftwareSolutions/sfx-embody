@@ -26,6 +26,18 @@ if (!experimentFile) {
   console.error('usage: node --experimental-vm-modules scripts/invoke-from-transaction.mjs <migration.sql> [capabilityId] [input.json] [estate-cases.json]');
   process.exit(2);
 }
+
+// The preflight prints its carrier for diagnosis. A plaintext member named
+// `secret` (the credential store request's only plaintext field) must never
+// reach stdout, a log or a retained capture: redact it in every printed view.
+const redactSecrets = value => {
+  if (Array.isArray(value)) return value.map(redactSecrets);
+  if (value !== null && typeof value === 'object') {
+    return Object.fromEntries(Object.entries(value).map(([key, member]) =>
+      [key, key === 'secret' ? '[REDACTED]' : redactSecrets(member)]));
+  }
+  return value;
+};
 const capabilityId = process.argv[3] ?? 'hello-world-sql';
 const input = JSON.parse(await fs.readFile(process.argv[4] ?? path.resolve('examples/hello-world-sql.request.json'), 'utf8'));
 
@@ -179,4 +191,4 @@ await withDatabaseReadSession({ connect, sql, pinModel, normalizeSql, stable, ha
   console.error('INVOKE FAILED:', error.message);
   process.exitCode = 1;
 });
-console.log('RESULT', JSON.stringify(outcome));
+console.log('RESULT', JSON.stringify(redactSecrets(outcome)));
