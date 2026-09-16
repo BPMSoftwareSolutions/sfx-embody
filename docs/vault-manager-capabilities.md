@@ -455,7 +455,9 @@ shared.
    source — the conveyor's declarations then need one locator, not a rewrite).
 2. **Windows realization:** native DPAPI/CNG module vs bounded PowerShell
    subprocess vs Credential Manager (recommend: native module, key held in
-   DPAPI/CNG custody, never a sibling blob beside the store).
+   DPAPI/CNG custody, never a sibling blob beside the store). Resolved for this
+   host by §8: native module is needed now; the PowerShell path is deferred to a
+   builder decision on the child-process confinement boundary.
 3. **Threat boundary:** is same-user process protection (agent can unwrap)
    acceptable for now, or is a consent gate required before the demo?
 4. **Store location:** `%LOCALAPPDATA%\sfx\vault\` (recommend) vs a configured
@@ -469,3 +471,36 @@ shared.
    rows in the SideFX database — the latter is allowed by the two-roof split
    (§4.1) but needs a semantic kind; the key stays in the OS keystore either
    way.
+
+## 8. Decision record — host key release for the live source switch
+
+Recorded under `sidefx-architecture-decision-rubric.md` §7. Resolves open question 2 for
+this host.
+
+| Decision and source location | Applicable authority and scope | Necessary now? | Expected benefit / burden | Disposition and revisit trigger |
+| --- | --- | --- | --- | --- |
+| How the Windows realization obtains the DPAPI key so `apply` can bind a credential; §4.2 and §6/V3–V4 | Builder intent + delegated realization discretion; §4.2: "the realization owns the choice"; the boot's `restrict-memory-process.mjs:14-39` child-process confinement is an existing admitted constraint | Without a key release on the host, `apply` returns `VAULT_SEALED`, the V3 source switch cannot be installed (both live invocations break) and V4 has no live invocation to sweep | (A) native module: +1 dependency per OS/language realization, hours to remove; (C) stub: cheap, contract path only; (B) permitting a PowerShell subprocess widens a confinement boundary | A for W4; C for the W2 preflight only; B deferred — revisit if A is unavailable/rejected |
+
+**What executes, what is simulated, what remains unresolved.** With (A), the store→apply path
+executes live: the realization releases the key from DPAPI custody in memory, the port binds
+the credential to the invocation, and the provider call proceeds. With (C) in the W2
+in-transaction preflight, execution is simulated only at the keystore boundary (rubric §8): the
+result establishes the contract path, not the external outcome. Unresolved until the live run:
+actual DPAPI release, sentinel absence across live channels (V4), and the source switch itself.
+
+**Measurements.** Contribution: A 3 (necessary to the named live outcome), C 2 (directly
+supports the W2 preflight step), B 1 (blocked hypothesis). Evidence: A 1 (implementation
+inspected; no live DPAPI run yet), C 2 (observed at preflight), B 0. First-delivery effect:
+A ~1–2 h (install/pin, wire, live store→apply→invoke); C ~1 h. Repetition effect: none per
+comparable example; future OS realizations reuse the same seam. Continuing burden: A one native
+module per OS and language realization; B a subprocess per unwrap plus a widened allowlist;
+C none, and it must be removed after preflight. Reversibility: A hours (fallback path remains),
+B cheap to re-block, C immediate. Distribution: the boot and future per-language hosts carry
+the dependency; no capability declaration changes on any OS.
+
+**Revisit trigger.** A conforming native DPAPI/CNG module cannot be installed (or a supply-chain
+decision rejects the dependency), or a host/language has no native keystore module — then B
+returns as a builder decision on the confinement boundary, not as an implementation fallback.
+
+**Observed result after implementation.** Unfilled; complete after a live store→apply→invoke
+reports `CREDENTIAL_BOUND` with the sentinel absent and the authorized provider call completed.

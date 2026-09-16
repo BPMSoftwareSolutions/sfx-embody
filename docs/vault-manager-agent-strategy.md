@@ -174,10 +174,11 @@ runtime edits.
      export: "createWindowsCredentialStoreRealization", factory: true}]`) on the two Port
      bindings. Then run the in-transaction preflight and install the migration.
   2. **W4 — source switch**: only after a host realization can actually release a key.
-     **Gate**: no native DPAPI module is installed and the PowerShell fallback is blocked by
-     `restrict-memory-process` on this host, so live invocations currently return `VAULT_SEALED`.
-     Decision needed: install a native DPAPI module, allow the bounded PowerShell path, or bind
-     the in-memory stub for preflight only.
+     **Decision (vault doc §8, rubric §7)**: the native DPAPI/CNG module is needed now for W4;
+     the in-memory stub is useful now for the W2 in-transaction preflight only and must be
+     labeled as simulation at the declared seam; the bounded PowerShell path is deferred to a
+     builder decision on the `restrict-memory-process` child-process confinement. Revisit if no
+     conforming native module can be installed.
   3. **W1 — python/C# port** and **W5 — non-disclosure receipts** follow the gates in §4.
   4. **Follow-up defect**: `src/projection-delivery.mjs:139` carries the same env-copy pattern
      removed at `database-delivery.mjs`; classify and fix as its own unit.
