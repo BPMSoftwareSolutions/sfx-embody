@@ -145,10 +145,14 @@ transformation vocabulary cannot pattern-match).
 
 **Deep dive:** [vault-manager-capabilities.md](vault-manager-capabilities.md) —
 the mechanism research, the two declared capabilities (`store-credential`,
-`resolve-credential`), key management, and the V1–V5 strategy. Precedent:
+`resolve-credential`), the two-roof key split (ciphertext in the store, unwrap
+key in the OS keystore), OS keystores as provider realizations behind one
+semantic contract, and the V1–V5 strategy. Precedent:
 `bind-external-credential-reference` and the candidate-authoring conveyor
 already declare the provider connection and stage credential binds for Gemini /
-OpenAI; the vault changes the credential *source* under an installed pattern.
+OpenAI; the vault changes the credential *source* under an installed pattern,
+and the outcome is credential applied to an authorized provider invocation —
+never a revealed secret.
 
 **Target:** stop storing credentials in environment variables; a declared vault-manager
 capability resolves credentials from an encrypted vault provider, so (a) credentials

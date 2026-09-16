@@ -17,12 +17,38 @@ existing model. Capabilities declare they need a credential and providers
 satisfy that. The model doesn't ever see the secret. The CLI doesn't print it
 and testimony never records it."
 
-**Invariants.** (1) Rows never carry values. (2) The invocation channel never
+**The refinement (user's words, second pass).** "A public key doesn't unlock a
+private key. … The database can store encrypted key material, but it shouldn't
+also store everything needed to decrypt it. Otherwise someone stealing that
+database gets both halves. Instead, have the database hold only the encrypted
+secret, while the decryption key is protected by something outside the
+database. Ideally the OS's secure key store. That way your specific resolve
+credential capability can unwrap the secret just in time, pass it to the
+provider in memory, and then forget it. In SideFX terms, the outcome isn't
+reveal secret. It's credential applied to authorized provider invocation. So
+yes, split the key material, but don't put decryption entirely under the same
+roof as the ciphertext. The good news is, the pattern works across operating
+systems, but the physical keystore integration changes. So I think about it
+through the provider lens. On Windows You'd resolve to something like DPAPI or
+CNG, on Mac Keychain, on Linux, whatever Secret Service or TPM option you
+standardize on. The key is, don't bake any of that into the capability. Keep
+the vault — or rather the credential capability — semantic and let each OS be
+just another provider behind it. Same contract, different provider realization.
+That way the same SideFX capability works on Mac, Windows, Linux, and tomorrow
+maybe a cloud secret manager without changing the capability itself. That's
+very on brand for the provider architecture we just walked through."
+
+**Invariants.** (1) Rows never carry plaintext. (2) The invocation channel never
 carries plaintext to the caller: no CLI output, no testimony, no evidence body,
-no logs. (3) The plaintext exists only inside the vault provider's call and the
-exchange-header injection, in one process, for one use. (4) The master key is
-never in the vault file. (5) No SDA edits from this repo (cross-language ⇒ SDA
-change request).
+no logs. (3) The plaintext exists only inside the credential provider's call
+and the exchange-header injection, in one process, for one use. (4) The store
+holds ciphertext and the unwrap key is held by the OS keystore — never both
+halves under one roof. (5) There is no reveal outcome: the result of resolving a
+credential is *credential applied to an authorized provider invocation*.
+(6) The capability is semantic; the OS keystore is a provider realization
+behind one contract, so the capability rows are identical on Windows, macOS,
+Linux and a future cloud secret manager. (7) No SDA edits from this repo
+(cross-language ⇒ SDA change request).
 
 ---
 
@@ -175,7 +201,7 @@ return a non-disclosing receipt.
 | | |
 |---|---|
 | Input contract | `store-credential-request.v1`: `{referenceName, secret, scope?}` (additionalProperties false; `secret` is the only plaintext field) |
-| Operations | one `invoke-port` → `sda-secret-vault-store-port.v1` (configuration: vault locator, allowed reference names, max secret bytes) |
+| Operations | one `invoke-port` → `sda-credential-vault-port.v1` `store` (configuration: store locator, allowed reference names, max secret bytes) |
 | Outcome contract | `store-credential-result.v1`: `{referenceName, entryId, storedAt, formatVersion, nonDisclosureVerified}` — no secret, no digest of the secret |
 | Variants | `CREDENTIAL_STORED` (success), `CREDENTIAL_STORE_REJECTED` (failure: sealed vault, unknown reference, policy) |
 | CLI display | outcome as json; the input mapping must never echo `secret` |
@@ -187,16 +213,17 @@ The store port returns a reference only.
 
 ### 2.2 `resolve-credential`
 
-**Intent.** Given a credential requirement, bind an ephemeral one-use secret
-that the same invocation's effect provider can consume; disclose only that a
-binding exists.
+**Intent.** Given a credential requirement, place an ephemeral one-use secret
+into the authorized invocation's effect context so the provider consumes it in
+memory and the invocation forgets it. **The outcome is not "secret revealed";
+it is "credential applied to an authorized provider invocation."**
 
 | | |
 |---|---|
 | Input contract | `resolve-credential-request.v1`: `{credentialReference, invocationIdentity, requestingCapabilityId, endpointAuthorityDigest, effectScope}` — the exact shape the credential port already requires |
-| Operations | one `invoke-port` → `sda-secret-vault-resolve-port.v1` (same binding semantics as the existing credential port; source = vault) |
-| Outcome contract | `resolve-credential-result.v1`: `{disposition, opaqueBindingId, referenceName, effectScope, expiresAt, nonDisclosureVerified}` |
-| Variants | `CREDENTIAL_BOUND` (success), `CREDENTIAL_NOT_AVAILABLE`, `UNAUTHORIZED_REFERENCE`, `IDENTITY_MISMATCH`, `VAULT_SEALED` (failure) |
+| Operations | one `invoke-port` → `sda-credential-vault-port.v1` `apply` (same binding semantics as the existing credential port; source = vault realization) |
+| Outcome contract | `resolve-credential-result.v1`: `{disposition, opaqueBindingId, referenceName, effectScope, invocationIdentity, endpointAuthorityDigest, expiresAt, nonDisclosureVerified}` — the result names the application (which authorized invocation the binding was placed for); the secret itself is not in the vocabulary |
+| Variants | `CREDENTIAL_APPLIED` (success; classified from the port's `BOUND` evidence), `CREDENTIAL_NOT_AVAILABLE`, `UNAUTHORIZED_REFERENCE`, `IDENTITY_MISMATCH`, `VAULT_SEALED` (failure) |
 
 **Precedent for this exact shape.** `bind-external-credential-reference`
 (§1.2) is already the declared resolve capability with an environment source:
@@ -219,9 +246,10 @@ faithful hand-offs exist:
    invoke-scenario composition.
 
 The honest statement for the demo: **a standalone `resolve-credential`
-invocation returns proof-of-binding, never the secret.** "Returns an ephemeral
-secret" is true kernel-internally (the binding holds it) and false at the CLI
-boundary — by design, per the user's own rule.
+invocation returns proof-of-application, never the secret.** "Returns an
+ephemeral secret" is true kernel-internally (the binding holds it for the
+authorized invocation) and false at the CLI boundary — there is no reveal
+outcome to invoke, by design.
 
 ### 2.3 What "declares it needs a credential" means today
 
@@ -234,90 +262,121 @@ new contract vocabulary.
 
 ---
 
-## 3. The vault provider (SDA)
+## 3. The credential provider contract and its OS realizations
 
-One new platform port with two operations (or two ports):
+One new platform **contract**; the capability never names an OS and each OS is
+just another provider realization behind it.
 
-- `sda-secret-vault-port.v1` — `store` and `resolve`, dispatched like the
-  effect ports; `resolve` must run under the same shared effect context as the
-  credential port (it is a credential source), `store` is a plain effect.
-- Configuration: `{vaultLocator, allowedReferenceNames[], maximumSecretBytes,
-  referencePolicy}`.
-- Evidence: `{disposition, referenceName, entryId|opaqueBindingId, scope,
-  nonDisclosureVerified: true, detail}` — the existing evidence vocabulary,
-  mirrored.
-- The unsealed master key arrives as a **boot-provided handle**, not from
-  configuration files the declaration can read (see §4).
+**The contract.** `sda-credential-vault-port.v1`, two operations:
 
-**Dispatch decision to make with SDA:** either (a) extend the credential port
-with `source: "vault"` and let it call the vault provider for the value, or
-(b) consume `host.effectContextOverrides` in `createPlatformEffectProvider` so
-the boot injects a vault-backed `credentialReader` and the credential port is
-untouched. (b) is smaller and preserves the credential port's proven semantics;
-(a) makes the vault visible in declared configuration. Recommend (b) first,
-then (a) when cross-language providers exist.
+- `store` — write `{referenceName, secret}` under the configured policy and
+  return `{entryId, storedAt, formatVersion}` only.
+- `apply` — resolve the reference into a one-use binding in the shared effect
+  context of the authorized invocation and record
+  `{disposition, opaqueBindingId, referenceName, effectScope,
+  nonDisclosureVerified, realization}`. There is **no `reveal` operation**: the
+  outcome is a credential applied to an authorized provider invocation, never a
+  secret returned to a caller.
 
-**Cross-language.** Only node can land first (the registry's effect ports are
-node implementations). python/csharp/java/go/c++ mirror through their own
-runtimes; that is the same per-language pattern as the credential port today
-and follows the per-language bootstrap work.
+Configuration: `{storeLocator, allowedReferenceNames[], maximumSecretBytes,
+referencePolicy}`. Evidence mirrors the existing credential port; nothing in
+the contract mentions DPAPI, Keychain, TPM or a cloud KMS.
+
+**The realizations.** Behind the same contract, one realization per keystore
+family:
+
+| Realization | Keystore | What it owns |
+|---|---|---|
+| `windows-credential-store-provider` | DPAPI / CNG / Credential Manager (TPM when present) | key custody, wrap/unwrap |
+| `macos-keychain-credential-store-provider` | Keychain | key custody, wrap/unwrap |
+| `linux-secret-service-credential-store-provider` | Secret Service / TPM | key custody, wrap/unwrap |
+| `cloud-secret-manager-credential-store-provider` (future) | KMS / Secret Manager | remote unwrap |
+
+The kernel already resolves provider realizations per target and host: the
+mechanic registry maps a `platformCapabilityId` to the provider module, and a
+plan's `realizationOverlay.providerBindings` resolves a profile through
+`context.resolveProvider`
+(`semantic-execution-graph-execution-provider.mjs:74-79`), with provider
+profiles declared per estate — the same machinery the conveyor's provider
+bindings use. The capability's rows are **identical on every OS**; only the
+realization binding differs.
+
+**Dispatch seam.** Two integration choices remain (open question 1): extend the
+installed `bind-external-credential-reference` credential authority with
+`source: "vault"` so it calls the realization, or consume
+`host.effectContextOverrides` in `createPlatformEffectProvider` so the boot
+injects a vault-backed `credentialReader` and the credential port is untouched.
+Recommendation: the override seam first (smallest; preserves the proven
+credential port), then the declared source once the realizations exist.
+
+**Cross-language.** Node first (the registry's effect ports are node
+implementations); python/csharp/java/go/c++ mirror the port in their runtimes.
+Realizations are per language *and* per OS; capability declarations never
+change.
 
 ---
 
-## 4. The unseal boundary and key management
+## 4. Key custody and management
 
-### 4.1 Design
+### 4.1 The split — ciphertext and key under different roofs
+
+The rule: **whatever holds the encrypted secret must not also hold everything
+needed to decrypt it.** A thief who takes the store gets ciphertext only.
 
 ```
-vaultDir/                       (e.g. %LOCALAPPDATA%\sfx\vault\)
-  master.key.dpapi              OS-protected master key (DPAPI CurrentUser, blob)
-  vault.json                    entries: {name, keyVersion, nonce, ciphertext, tag, createdAt}
+ciphertext home (either):               key home (always):
+  the store file                          the OS keystore, via the realization
+    %LOCALAPPDATA%\sfx\vault\vault.json     DPAPI/CNG         (Windows)
+  or the SideFX database as                 Keychain          (macOS)
+    encrypted content rows                  Secret Service/TPM (Linux)
+                                            cloud KMS         (future)
 ```
 
-- Master key: 32 random bytes (`crypto.randomBytes(32)`).
-- Protection: DPAPI `CryptProtectData` (user scope, UI off) — the wrapped blob
-  is a **separate file**; the vault file never contains the key (user's rule).
-- Entries: AES-256-GCM, fresh 12-byte nonce per write, AAD binding
+- A public key does not unlock a private key, and a wrapped blob beside the
+  ciphertext is not a separate roof: the default is that the OS keystore
+  **releases the key** (in memory, to the realization) rather than a sibling
+  `.dpapi` file existing next to the store. A wrapped key file is acceptable
+  only in the database-resident-ciphertext variant, where the two halves then
+  genuinely sit under different roofs.
+- Ciphertext: AES-256-GCM entries `{referenceName, keyVersion, nonce,
+  ciphertext, tag, createdAt}`, fresh 12-byte nonce per write, AAD binding
   `{referenceName, keyVersion, vaultId}` so ciphertext cannot be moved between
-  names.
-- Rotation: each entry carries `keyVersion`; rotate re-encrypts under a new
-  master key; the wrapped key file is replaced atomically after all entries.
+  names. The database may hold the ciphertext (the model still never sees
+  plaintext); it needs a semantic kind and is deferred (open question 7). The
+  local store file lands first.
+- Rotation: entries carry `keyVersion`; rotate re-wraps under a new master key
+  released by the keystore.
 - Writes: read-modify-write with tmp + rename (the artifact-store pattern);
   single-writer assumption, documented.
 
-### 4.2 Where the unseal happens
+### 4.2 Where the unwrap happens
 
-The unseal step belongs to the **boot**, not a declared capability
-([next-experiences.md](next-experiences.md) §4; transistor model: the unseal
-resolver is irreducible 0 per language). Concretely for node:
+Inside the **provider realization**, not in the capability and not in declared
+configuration: the realization talks to its OS keystore (DPAPI/CNG, Keychain,
+Secret Service, KMS) and holds the in-memory handle the vault operations use,
+dropping it with the process. This is irreducible 0 code per language and OS —
+the same code the sealed-binary and per-language-bootstrap work will carry —
+while the *selection* of the realization for the host is the ordinary provider
+resolution path (§3).
 
-- Boot (frontdoor process) unseals DPAPI → master key (Buffer) at the connect
-  boundary, builds the vault handle, hands it to the kernel host, drops the
-  value when the process ends.
-- The handle reaches the provider through the effect-context seam (§1.3):
-  either `createPlatformEffectProvider` learns to read
-  `host.effectContextOverrides` (one SDA change), or the loader wraps the
-  execution provider. Prefer the SDA change.
-- Node has no built-in DPAPI. Options, in preference order: (1) a small native
-  module (`win-dpapi`-class) loaded by the boot; (2) PowerShell
-  `[System.Security.Cryptography.ProtectedData]` via bounded subprocess (slow,
-  but zero-dependency); (3) Windows Credential Manager via `wincred`-class
-  module. macOS Keychain (`security`) and Linux libsecret (`secret-tool`) are
-  the later cross-platform forms. This is boot code per language — the same
-  code the sealed-binary and per-language-bootstrap work will carry.
+For node on Windows the realization owns the choice: a native DPAPI/CNG module
+first; bounded PowerShell `[System.Security.Cryptography.ProtectedData]` as the
+zero-dependency fallback; Credential Manager via a `wincred`-class module as
+the user-facing variant; TPM-bound keys when available. None of this is visible
+to the capability, its contracts, or its declarations.
 
 ### 4.3 Honest threat boundary
 
-DPAPI CurrentUser protects the master key against **other OS users and offline
-theft** (file copied elsewhere). It does **not** protect against a process
-running as the same user — which includes the agent. So "the agent has no
-access to secrets" holds on the *invocation channel* (the value is never
-returned, printed, streamed, or retained) but not against an agent that
-deliberately calls the unseal API and reads the vault file. Stronger boundaries
-(Windows Hello / Credential Manager consent prompt / a vault daemon gating
-unseal) are a separate decision; the doc records this limit rather than hiding
-it. This is exactly why plaintext must never reach the invocation boundary: the
-boundary is the guarantee's scope.
+The OS keystore (DPAPI CurrentUser on Windows) protects the key against
+**other OS users and offline theft** (the store copied elsewhere yields
+ciphertext only). It does **not** protect against a process running as the same
+user — which includes the agent. So "the agent has no access to secrets" holds
+on the *invocation channel* (the value is never returned, printed, streamed, or
+retained) but not against an agent that deliberately calls the keystore API and
+reads the store. Stronger boundaries (Windows Hello / Credential Manager
+consent prompt / a vault daemon gating unwrap) are a separate decision; the doc
+records this limit rather than hiding it. This is exactly why plaintext must
+never reach the invocation boundary: the boundary is the guarantee's scope.
 
 ---
 
@@ -325,12 +384,13 @@ boundary is the guarantee's scope.
 
 | Change | Class | Where |
 |---|---|---|
-| Vault provider (store + resolve), evidence contract, registry entries | **SDA request** | node first; `PLATFORM_EFFECT_PORTS` or `invokePlatformEffectMechanic` + `node-mechanic-registry` |
+| Credential vault **contract** (`store`/`apply`), evidence contract | **SDA request** | `PLATFORM_EFFECT_PORTS` or `invokePlatformEffectMechanic` + `node-mechanic-registry` |
+| **Provider realizations** per OS (Windows DPAPI/CNG first, then Keychain, Secret Service/TPM, cloud KMS) | **provider realization (0 code per language+OS)** | one module per realization; selected through the registry / provider-profile bindings |
 | Effect-context override consumed by the effect factory (`host.effectContextOverrides`) | **SDA request** (one seam) | `semantic-execution-graph-effect-provider.mjs:17` |
-| `source: "vault"` on the credential authority (or equivalent vault reader) | **SDA request** | `external-credential-reference-binding-provider.mjs:44` |
+| `source: "vault"` on the credential authority (or equivalent realization reader) | **SDA request** | `external-credential-reference-binding-provider.mjs:44` |
 | Remove the env re-broadcast | **SDA request** (with the vault landing) | `os-environment-credential-provider.mjs:75` |
-| OS key unseal (DPAPI/Credential Manager per language) | **boot code** | `src/database-delivery.mjs` frontdoor; cross-platform later |
-| Unseal handle → kernel injection | **SDA seam + boot wiring** | estate loader already threads `effectContextOverrides` (`invoke-database-capability.mjs:259,307`) |
+| Realization selection for the host (which keystore provider binds) | **data** (provider profiles/bindings) | estate authority rows; capability rows never change per OS |
+| Handle flow: keystore → realization → vault operations | **inside the realization** (boot only selects the realization) | estate loader threads `effectContextOverrides` (`invoke-database-capability.mjs:259,307`) |
 | Contracts `store-credential-*`, `resolve-credential-*`; two capability documents; vault declaration (locator, names, scopes); variants; CLI display | **data** | JSON documents + one migration via `model.declare_capability_document` |
 | Switch the installed credential authorities to the vault source (equity's `RAPID_API_KEY`; the conveyor's `LOC_GEMINI_API_KEY` / `LOC_OPENAI_API_KEY`) | **data** | `sql/migrations/` — one `source`/locator change per authority, nothing else moves |
 | Remove the DB connection-string env copy; resolve at the connect boundary | **boot code** | `src/database-delivery.mjs:30` |
@@ -343,40 +403,45 @@ boundary is the guarantee's scope.
 ### V0 — this record (done)
 Decision and mechanism research; no runtime changes.
 
-### V1 — SDA vault provider, node
-Primitive: vault store/resolve port with AES-GCM, DPAPI-agnostic (the key is
-injected), evidence mirroring the credential port, registry entries, and the
-`effectContextOverrides` seam. Accept: conformance tests for store→resolve→
-exchange with a sentinel secret; the sentinel absent from every evidence field;
-sealed vault reports `VAULT_SEALED`; wrong scope/digest/reference rejected.
+### V1 — the contract and the first realization (node, Windows)
+Primitive: `sda-credential-vault-port.v1` (`store`/`apply`) with AES-GCM,
+keystore-agnostic (the realization supplies the key), evidence mirroring the
+credential port, registry entries, the `effectContextOverrides` seam, and one
+realization: `windows-credential-store-provider` (DPAPI/CNG key custody).
+Accept: conformance tests for store→apply→exchange with a sentinel secret; the
+sentinel absent from every evidence field; sealed store reports `VAULT_SEALED`;
+wrong scope/digest/reference rejected; a second realization stub proves the
+capability rows are unchanged when the realization swaps.
 
 ### V2 — Declared capabilities
 Author `store-credential` and `resolve-credential` documents + migration
 (§2). Accept: `sfx capability invoke store-credential --input -` stores; the
-result contains no plaintext or digest of it; `resolve-credential` returns
-proof-of-binding only; `observe` streams no plaintext.
+result contains no plaintext or digest of it; `resolve-credential` returns the
+application outcome only (no reveal); `observe` streams no plaintext.
 
-### V3 — Unseal and the live source switch
-Boot unseal (DPAPI), handle injection, and the installed credential authorities
-switched from environment to vault: equity's `RAPID_API_KEY` and the conveyor's
-`LOC_GEMINI_API_KEY` / `LOC_OPENAI_API_KEY`. Accept: the equity invocation
-resolves via the vault and the fallback route still resolves through real-time1;
-the conveyor's credential bind still stages the same literals and the exchange
-injects the same headers (`x-goog-api-key`), now from vault entries; none of the
-three names is present in `process.env`.
+### V3 — The live source switch
+The installed credential authorities switched from environment to vault:
+equity's `RAPID_API_KEY` and the conveyor's `LOC_GEMINI_API_KEY` /
+`LOC_OPENAI_API_KEY`, with the Windows realization releasing the key from the
+OS keystore. Accept: the equity invocation resolves via the vault and the
+fallback route still resolves through real-time1; the conveyor's credential
+bind still stages the same literals and the exchange injects the same headers
+(`x-goog-api-key`), now from vault entries; none of the three names is present
+in `process.env`.
 
 ### V4 — Non-disclosure proof
 Sweep artifacts for the sentinel: invoke `--json`, `observe --trace` output,
 `evidence/` bundles, the observation stream, and the database rows. Accept: a
 recorded receipt that names every channel and shows the sentinel absent; a
-negative receipt for a tampered vault (auth failure).
+negative receipt for a tampered store (GCM auth failure).
 
-### V5 — Rotation, cross-platform, consent
-Rotation; python/csharp providers; a stronger unseal consent boundary
-(§4.3) if required.
+### V5 — Rotation, other realizations, consent
+Rotation; macOS Keychain, Linux Secret Service/TPM and cloud KMS realizations;
+python/csharp port implementations; a stronger unwrap consent boundary (§4.3)
+if required. The capability rows do not change for any of these.
 
 **Dependencies.** V1 blocks V2; V3 needs V1's seam; V4 needs V3. The sealed
-binary and per-language bootstraps carry V3's unseal code — orthogonal but
+binary and per-language bootstraps carry the realization code — orthogonal but
 shared.
 
 ---
@@ -388,14 +453,19 @@ shared.
    vault as a new effect port vs the credential port's `source: "vault"`
    (recommend: override seam first, then extend the installed capability's
    source — the conveyor's declarations then need one locator, not a rewrite).
-2. **Unseal implementation:** native DPAPI module vs bounded PowerShell
-   subprocess vs Credential Manager (recommend: native module in the boot).
-3. **Threat boundary:** is same-user process protection (agent can unseal)
+2. **Windows realization:** native DPAPI/CNG module vs bounded PowerShell
+   subprocess vs Credential Manager (recommend: native module, key held in
+   DPAPI/CNG custody, never a sibling blob beside the store).
+3. **Threat boundary:** is same-user process protection (agent can unwrap)
    acceptable for now, or is a consent gate required before the demo?
-4. **Vault location:** `%LOCALAPPDATA%\sfx\vault\` (recommend) vs a configured
+4. **Store location:** `%LOCALAPPDATA%\sfx\vault\` (recommend) vs a configured
    path; never the repo, never `%TEMP%`.
 5. **Composition:** does `resolve-credential` need the invoke-scenario
    composition (R1) for the first version, or is resolve-and-use-in-one-scenario
    enough (recommend: enough).
 6. **Store input UX:** stdin (`--input -`) suffices for machines; is a masked
    prompt required for humans in the first version?
+7. **Ciphertext home:** local store file first (recommend) vs encrypted content
+   rows in the SideFX database — the latter is allowed by the two-roof split
+   (§4.1) but needs a semantic kind; the key stays in the OS keystore either
+   way.
