@@ -12,10 +12,10 @@ export const OBSERVATION_FIELDS = ['observationType', 'phase', 'status', 'observ
 // Structured telemetry the estate derives: the streamed display entry (the
 // sfx-display-document.v1 Entry vocabulary) and the kernel's bounded provider
 // evidence. Only these members may carry an object, and only their declared
-// scalars survive; the bounded provider evidence adds a boolean, and no other
-// nested member can ride in.
+// scalars survive; the bounded provider evidence adds the transport status
+// (the rate-limit signal), and no other nested member can ride in.
 export const OBSERVATION_OBJECT_FIELDS = Object.freeze({
-  providerEvidence: ['reachedStage', 'exchangeCount', 'transportDisposition', 'redactionVerified'],
+  providerEvidence: ['reachedStage', 'exchangeCount', 'transportDisposition', 'redactionVerified', 'httpStatus'],
   display: ['entry']
 });
 const ENTRY_FIELDS = ['status', 'text', 'note', 'admission', 'timing'];

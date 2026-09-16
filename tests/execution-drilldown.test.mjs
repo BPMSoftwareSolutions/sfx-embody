@@ -20,6 +20,14 @@ test('observation altitudes are validated only where the operation offers them',
   assert.throws(() => validateDatabaseCommand(command(null, 'invoke', { observationAltitudes: ['scenario'] })), /DATABASE_COMMAND_REJECTED/);
 });
 
+test('the observation filter carries the bounded httpStatus and keeps other provider evidence out', () => {
+  const safe = safeObservation({ observationType: 'cell-execution-testimony.v1',
+    providerEvidence: { reachedStage: 'response-complete', exchangeCount: 1, transportDisposition: 'completed',
+      redactionVerified: true, httpStatus: 429, responseBodyBytes: 'c2VjcmV0', secret: 'x' } });
+  assert.deepEqual(safe.providerEvidence, { reachedStage: 'response-complete', exchangeCount: 1,
+    transportDisposition: 'completed', redactionVerified: true, httpStatus: 429 });
+});
+
 test('the observation filter carries testimony fields and keeps inputs and bodies out', () => {
   const safe = safeObservation({ observationType: 'cell-execution-testimony.v1', phase: 'executeDeclaredGraph',
     status: 'observed', observedAt: '2026-01-01T00:00:00.000Z', executionId: 'exec:1', rootExecutionId: 'root:1',
@@ -48,7 +56,8 @@ const canonicalGraph = {
 };
 const cellScenario = { testimonyType: 'cell-execution-testimony.v1', cellId: 'cell:scenario', cellAltitude: 'scenario',
   cellExecutionId: 'exec:1', rootExecutionId: 'root:1', parentCellExecutionId: null, outcomeContractId: 'out.v1',
-  outcomeVariant: 'ok', disposition: 'completed', providerEvidence: { transportDisposition: 'denied' },
+  outcomeVariant: 'ok', disposition: 'completed',
+  providerEvidence: { transportDisposition: 'denied', httpStatus: 429 },
   selectedEdgeIds: ['edge:one'], logicalOrder: 0,
   startedAt: '2026-01-01T00:00:00.000Z', completedAt: '2026-01-01T00:00:00.005Z', durationMilliseconds: 5 };
 const cellProvider = { ...cellScenario, cellId: 'cell:provider', cellAltitude: 'provider', cellExecutionId: 'exec:2',
@@ -140,6 +149,9 @@ test('the whole altitude range streams every cell and edge and absorbs silent ke
       const testimony = config.observations.filter(o => o.observationType.endsWith('-execution-testimony.v1'));
       assert.equal(testimony.filter(o => o.observationType === 'cell-execution-testimony.v1').length, 2);
       assert.equal(testimony.filter(o => o.observationType === 'edge-execution-testimony.v1').length, 1);
+      const evidenced = config.observations.filter(o => o.providerEvidence);
+      assert.equal(evidenced.length, 2);
+      assert.equal(evidenced[0].providerEvidence.httpStatus, 429);
     }
   }
 });

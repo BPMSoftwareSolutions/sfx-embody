@@ -108,12 +108,20 @@ IF @fallback_request_expression LIKE N'<<%>>' THROW 51000,'FALLBACK_REQUEST_EXPR
 
 DECLARE @namespace nvarchar(400)=N'sidefx:capability:'+@capability_id;
 DECLARE @object bigint,@definition bigint,@digest binary(32);
-DECLARE @semantics nvarchar(max)=(SELECT JSON_QUERY(@fallback_request_expression) AS expression
-  FOR JSON PATH,WITHOUT_ARRAY_WRAPPER);
+-- The semantics envelope carries the transformation id beside the expression.
+-- Without "id" graph compilation fails GRAPH_COMPILER_INVALID_TRANSFORMATION_ID.
+DECLARE @semantics nvarchar(max)=N'{"id":"' + STRING_ESCAPE(@fallback_request_port,'json') +
+  N'","expression":' + @fallback_request_expression + N'}';
 EXEC model.put_semantic_definition 'TRANSFORMATION',@namespace,@fallback_request_port,@semantics,
   @object OUTPUT,@definition OUTPUT,@digest OUTPUT;
+-- A new transformation id has no model.transformation row yet; register it in
+-- the semantic object's namespace. (put_semantic_definition only defines.)
 DECLARE @transformation bigint=(SELECT transformation_pk FROM model.transformation WHERE semantic_object_pk=@object);
-IF @transformation IS NULL THROW 51000,'FALLBACK_TRANSFORMATION_NOT_REGISTERED',1;
+IF @transformation IS NULL BEGIN
+ INSERT model.transformation(namespace_pk,transformation_id,semantic_object_pk,object_kind)
+ SELECT namespace_pk,@fallback_request_port,@object,'TRANSFORMATION' FROM model.semantic_object WHERE semantic_object_pk=@object;
+ SET @transformation=SCOPE_IDENTITY();
+END;
 DECLARE @version bigint=(SELECT transformation_version_pk FROM model.transformation_version WHERE semantic_object_definition_pk=@definition);
 IF @version IS NULL BEGIN
  INSERT model.transformation_version(transformation_pk,semantic_object_pk,semantic_object_definition_pk,definition_digest,
@@ -132,10 +140,16 @@ DECLARE @selection_transformation nvarchar(400) = N'<<SELECTION_TRANSFORMATION_I
 DECLARE @selection_expression nvarchar(max) = N'<<SELECTION_EXPRESSION_JSON>>';
 IF @selection_transformation LIKE N'<<%>>' OR @selection_expression LIKE N'<<%>>'
  THROW 51000,'FALLBACK_SELECTION_NOT_DECLARED',1;
-SET @semantics=(SELECT JSON_QUERY(@selection_expression) AS expression FOR JSON PATH,WITHOUT_ARRAY_WRAPPER);
+SET @semantics=N'{"id":"' + STRING_ESCAPE(@selection_transformation,'json') +
+  N'","expression":' + @selection_expression + N'}';
 EXEC model.put_semantic_definition 'TRANSFORMATION',@namespace,@selection_transformation,@semantics,
   @object OUTPUT,@definition OUTPUT,@digest OUTPUT;
 SET @transformation=(SELECT transformation_pk FROM model.transformation WHERE semantic_object_pk=@object);
+IF @transformation IS NULL BEGIN
+ INSERT model.transformation(namespace_pk,transformation_id,semantic_object_pk,object_kind)
+ SELECT namespace_pk,@selection_transformation,@object,'TRANSFORMATION' FROM model.semantic_object WHERE semantic_object_pk=@object;
+ SET @transformation=SCOPE_IDENTITY();
+END;
 SET @version=(SELECT transformation_version_pk FROM model.transformation_version WHERE semantic_object_definition_pk=@definition);
 IF @version IS NULL BEGIN
  INSERT model.transformation_version(transformation_pk,semantic_object_pk,semantic_object_definition_pk,definition_digest,
@@ -154,7 +168,14 @@ END;
 --
 -- Carry the whole port inventory, not just the new rows: the call declares the
 -- scenario's ports as given. Preserve the primary route's bindings verbatim.
-DECLARE @port_bindings nvarchar(max) = N'[' +
+-- NOTE on long literals: a single string literal is capped near 4000 characters
+-- and truncates silently. When <<EXISTING_PORT_BINDINGS_JSON>> (or
+-- <<EXISTING_OPERATIONS_JSON>>) exceeds that, paste it as several N'...' chunks
+-- each under 4000, and begin the concatenation with CONVERT(nvarchar(max), N'...')
+-- so the accumulated value stays max-length. Interpolate a variable inside a
+-- chunk as N'..."' + @var + N'"...' (a single +); the doubled form
+-- (' + ' + @var + ' + N') stores the literal text instead of the value.
+DECLARE @port_bindings nvarchar(max) = CONVERT(nvarchar(max), N'[') +
   -- ... every existing port binding of this scenario, unchanged ...
   N'<<EXISTING_PORT_BINDINGS_JSON>>' + N',' +
   -- the fallback request builder
@@ -194,7 +215,7 @@ IF ISJSON(@port_bindings)<>1 THROW 51000,'FALLBACK_PORT_BINDINGS_INVALID',1;
 -- fallback's request builder is the only place the route can vary, and what the
 -- exchange port then does with a guarded request is port behavior to verify in
 -- the preflight - not to assume here.
-DECLARE @operations nvarchar(max) = N'[' +
+DECLARE @operations nvarchar(max) = CONVERT(nvarchar(max), N'[') +
   N'<<EXISTING_OPERATIONS_JSON>>' + N',' +
   N'{"kind":"invoke-port","portId":"' + STRING_ESCAPE(@fallback_request_port,'json') + N'"},' +
   N'{"kind":"invoke-port","portId":"' + STRING_ESCAPE(@fallback_credential_port,'json') + N'"},' +

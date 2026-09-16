@@ -125,8 +125,10 @@ traps say (now ten operations).
    invocation path must not gain a write. Owner: estate, authored as rows when
    the fallback work proceeds.
 
-**Template findings (fix candidates in the skill).** Three frictions were hit
-while authoring the installed migration:
+**Template findings — fixed in the skill 2026-09-16.** Three frictions were hit
+while authoring the installed migration; the template and the traps now carry
+the working forms (the fixes mirror the installed migration, which is verified
+live):
 
 1. The template's transformation section throws
    `FALLBACK_TRANSFORMATION_NOT_REGISTERED` when a transformation semantic
@@ -152,9 +154,12 @@ result (`…_RATE_LIMITED` as failure, "all routes exhausted" distinct from
 evidence store, choosing the preferred route order per invocation — data, not
 code — provided items 3–4 exist.
 
-**Suggested sequence (remaining).** (1) Decide the evidence store and add
-`httpStatus` to bounded provider evidence (estate). (2) Add the evidence run
-recorder and the 30-day selection read; verify a real cycle: primary 429 →
+**Suggested sequence (remaining).** (1) The evidence store decision is recorded
+in [rate-limit-evidence-store.md](rate-limit-evidence-store.md); `httpStatus`
+now passes the estate allowlists and the kernel bound is filed as an SDA request
+([bounded provider evidence](sda-change-request-bounded-provider-evidence-http-status.md)).
+(2) The probe capability, the 30-day order selection and the equity wiring are
+staged as units U1–U4 in that record; verify a real cycle: primary 429 →
 fallback answers → the rate-limited provider is deprioritized for thirty days.
 
 ## 5. Evidence

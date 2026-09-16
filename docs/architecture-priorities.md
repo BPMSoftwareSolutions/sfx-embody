@@ -140,6 +140,7 @@ languages / data that binds it / evidence.
 | 8 | Testimony parity across projected targets: `observedPathDigest`, `resolverTestimony`, granularity (F2) | request filed with item 7; probe reports OPEN |
 | 9 | Projector DB artifact target and uniform timing emission (next-experiences §1) | open |
 | 10 | Stale C++ inventory correction (G8, G10) | open (doc-level) |
+| 11 | Bounded provider evidence must carry the transport status (`httpStatus`), the rate-limit signal | request filed: `docs/sda-change-request-bounded-provider-evidence-http-status.md`; estate allowlists ready |
 
 ## 5. Findings register
 

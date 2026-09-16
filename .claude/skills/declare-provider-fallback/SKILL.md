@@ -200,6 +200,21 @@ commit.
   `EQUITY_WORKING_EXECUTION_DIVERGED` at
   [declare-equity-provider-slot-requirements.sql:49](sql/migrations/declare-equity-provider-slot-requirements.sql#L49).
   New operations mean the slot requirements are re-declared in the same change.
+- **A new transformation id must be registered, and its envelope must carry
+  `"id"`.** `model.put_semantic_definition 'TRANSFORMATION'` only defines the
+  semantic object; the graph compiler also needs the registry row
+  (`INSERT model.transformation(namespace_pk, transformation_id,
+  semantic_object_pk, object_kind) SELECT namespace_pk, @id, @object,
+  'TRANSFORMATION' FROM model.semantic_object WHERE semantic_object_pk=@object`),
+  and the semantics envelope must be `{"id":…,"expression":…}` - without it
+  compilation fails `GRAPH_COMPILER_INVALID_TRANSFORMATION_ID`. The template
+  does both.
+- **Long string literals truncate silently near 4000 characters.** Paste live
+  port bindings and operations as several `N'…'` chunks under 4000 each, begin
+  the concatenation with `CONVERT(nvarchar(max), N'…')`, and interpolate a
+  variable inside a chunk as `N'…"' + @var + N'"…'` (a single `+`). The doubled
+  form stores the literal text instead of the value and surfaces later as
+  `IDENTITY_MISMATCH` at credential binding.
 - **Variant classification is upserted; the scenario digest is not.** Variants
   are not part of the scenario semantics digest, so a classification change takes
   effect on re-declaration even when nothing else moved. Object form

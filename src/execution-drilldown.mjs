@@ -46,7 +46,7 @@ const timingText = value => typeof value === 'number'
 const boundedEvidence = value => {
   if (value === null || typeof value !== 'object' || Array.isArray(value)) return null;
   const evidence = {};
-  for (const key of ['reachedStage', 'exchangeCount', 'transportDisposition', 'redactionVerified'])
+  for (const key of ['reachedStage', 'exchangeCount', 'transportDisposition', 'redactionVerified', 'httpStatus'])
     if (['string', 'number', 'boolean'].includes(typeof value[key])) evidence[key] = value[key];
   return Object.keys(evidence).length ? evidence : null;
 };
