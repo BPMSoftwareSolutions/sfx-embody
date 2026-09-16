@@ -90,6 +90,13 @@ is a deliverable.
    records the three rubric observations, the reuse/new-maintenance inventory, and
    the scope limit: proven for the declared-read JSON shape, not for pure-mechanics
    or provider-backed capabilities, and the install lifecycle cost did not drop.
+4. **Display projection migration — mapped, awaiting ratification.**
+   [display-projection-migration.md](display-projection-migration.md) classifies
+   the portable logic in the four boot files and the terminal, confirms the
+   declared transformation vocabulary expresses the display shape (two validated
+   sketches), and sequences the migration: rows for the projection, seams only in
+   the boot, bytes only in the CLI. One conditional kernel request (`sum`,
+   aggregate elapsed); seven team decisions listed there.
 
 ### Next — the experiences behind the current one
 
@@ -142,6 +149,7 @@ languages / data that binds it / evidence.
 | F6 | The declared RapidAPI credential is rate-limited to zero (429, ~20.8-day reset), so the live equity acceptance cannot be reproduced until reset; invocation behavior is otherwise unchanged (identical pre/post disposition, digests) | Environment | preflight/invoke receipts; quota headers |
 | F7 | Three execution-graph capabilities (`compile-declared-authority`, `execute-semantic-execution-graph`, `execute-semantic-value-graph`) still fail the CLI path with `SEMANTIC_EXECUTION_GRAPH_OVERLAY_BINDING_MISSING` for their own mechanic id; pre-existing and independent of G7 (the kernel binds cells by `platformCapabilityId`, never by `providerId`) | Estate overlay-completeness unit | G7 receipts; `execute-declared-capability` shows the same failure before and after the module rows left |
 | F8 | JSON authoring friction FF1–FF6: `cmd /c` input quoting, a migration is required to install a document, file/SQL-literal byte duplication with no keeper, scaffold residue rendered by `reveal`, no declared absence convention, concurrent-writer conditions | Authoring-surface units | `docs/flywheel-proof.md` |
+| F9 | The observation display executes as code outside the kernel: status derivation, lanes, ordering and semantics in `src/execution-drilldown.mjs`, `src/semantic-address.mjs`, `src/observation-filter.mjs`, `src/invoke-database-capability.mjs` and `sidefx-cli/src/render.mjs` | Declared-authority migration (decision: the display is 1) | `docs/display-projection-migration.md` — full classification, validated vocabulary feasibility, migration sequence, seven decisions |
 
 ## 6. How a unit lands (unchanged, for quick reference)
 
