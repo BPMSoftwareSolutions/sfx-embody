@@ -499,6 +499,4 @@ SELECT '11_policy_coverage' AS result_set, ia.reference_name,
 FROM installed_authority ia
 WHERE ia.reference_name IS NOT NULL
 ORDER BY ia.reference_name;
-ROLLBACK TRANSACTION;
--- To install, replace the rollback above with a commit and run:
---   node scripts/run-migration.mjs sql/migrations/declare-credential-capabilities.sql
+COMMIT TRANSACTION;
