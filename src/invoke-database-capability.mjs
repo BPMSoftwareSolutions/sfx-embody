@@ -3,6 +3,7 @@ import { createHash, randomUUID } from 'node:crypto';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { readExecutionDelivery } from './read-execution-delivery.mjs';
 import { createExecutionDrilldown, isObservationAltitudeSelection } from './execution-drilldown.mjs';
+import { resolveCredentialStoreRealization } from './credential-vault-realization.mjs';
 
 const digest = value => 'sha256:' + createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -123,6 +124,26 @@ export async function isEstateDelivery(bundle, context) {
 // operations: an estate-provider Port transforms the running state, and a
 // composed Scenario runs its own declared operations with that state. State is
 // threaded exactly as the declared authority orders it.
+// A Port binding may declare the host's credential-store realization through the
+// ordinary provider-profile path (`overlayBindings` mechanicId -> profileId,
+// `providers` profileId -> module/export). The resolved realization is placed on
+// the effect-context override the kernel host consumes; it owns key custody, so
+// no key material is copied onto the context, state, results or evidence. One
+// resolution serves the whole invocation.
+const credentialStoreRealizations = new WeakMap();
+async function credentialVaultPortContext(binding, context) {
+  if (!object(context)) return context;
+  const configuration = binding?.configuration;
+  let resolutions = credentialStoreRealizations.get(context);
+  if (resolutions === undefined) { resolutions = new Map(); credentialStoreRealizations.set(context, resolutions); }
+  const key = JSON.stringify([configuration?.overlayBindings ?? null, configuration?.providers ?? null]);
+  if (!resolutions.has(key)) resolutions.set(key, resolveCredentialStoreRealization(configuration, context));
+  const realization = await resolutions.get(key);
+  if (realization === null) return context;
+  return { ...context, effectContextOverrides: { credentialStoreRealization: realization,
+    ...(object(context.effectContextOverrides) ? context.effectContextOverrides : {}) } };
+}
+
 export async function executeEstateCapability({ capabilityId, scenarioId, namespaceId }, state, context, ancestry = []) {
   const bundle = await context.readAuthority(context.databaseRoot,
     { capabilityId, ...(context.deliveryTarget === undefined ? {} : { target: context.deliveryTarget }),
@@ -145,7 +166,8 @@ export async function executeEstateCapability({ capabilityId, scenarioId, namesp
         invokePort = await resolvePlatformMechanic(binding, context);
         if (typeof invokePort !== 'function') throw new Error('PLATFORM_MECHANIC_NOT_DECLARED:' + capabilityId + ':' + operation.portId);
       }
-      current = await invokePort(binding.configuration, current, context);
+      const portContext = await credentialVaultPortContext(binding, context);
+      current = await invokePort(binding.configuration, current, portContext);
       if (typeof context?.onState === 'function') { try { context.onState(current, operation); } catch { /* State observation is not execution authority. */ } }
     } else if (operation.kind === 'invoke-scenario') {
       const owner = ownerOfScenario(bundle, operation.scenarioId);

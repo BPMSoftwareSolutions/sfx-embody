@@ -4,6 +4,7 @@ import { pathToFileURL } from 'node:url';
 import { executeDatabaseCommand, validateDatabaseCommand } from './invoke-database-capability.mjs';
 import { readAuthority } from './read-authority.mjs';
 import { withDatabaseReadSession } from './database-read-session.mjs';
+import { createDatabaseConnectBoundary } from './database-connect-boundary.mjs';
 import { restrictMemoryProcess } from './restrict-memory-process.mjs';
 import { safeObservation } from './observation-filter.mjs';
 
@@ -25,9 +26,15 @@ try {
   // Preserve the database reader's existing credential reference. Never retain it
   // in command envelopes or execution evidence. Windows lookup is read-only.
   const { config: readDatabaseConfig, stable, hash, digest } = await import(pathToFileURL(path.join(config.databaseRoot, 'src/core.mjs')));
-  const { connectionString, connect, sql } = await import(pathToFileURL(path.join(config.databaseRoot, 'src/ingest/database.mjs')));
-  const { connectionEnvironmentVariable, queryRowLimit } = await readDatabaseConfig();
-  process.env[connectionEnvironmentVariable] = connectionString(connectionEnvironmentVariable);
+  const { connectionString, sql } = await import(pathToFileURL(path.join(config.databaseRoot, 'src/ingest/database.mjs')));
+  const { connectionEnvironmentVariable, queryRowLimit, requestTimeoutMs } = await readDatabaseConfig();
+  // The connection string is resolved before the memory-process restriction can
+  // forbid the read-only OS-environment lookup, and lives only in the connect
+  // boundary closure. It is never copied into process.env, so the observation
+  // stream, declared children and retained evidence cannot carry it.
+  const connect = createDatabaseConnectBoundary({ sql,
+    connectionString: connectionString(connectionEnvironmentVariable),
+    connectionName: connectionEnvironmentVariable, requestTimeoutMs });
   // The frontdoor owns the connection. Inject the query runner and the
   // declaration read for the loader; the loader must not reach into
   // sidefx-database itself.
