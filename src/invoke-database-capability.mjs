@@ -54,6 +54,20 @@ function readCliConfiguration(bundle) {
   return {};
 }
 
+// The declared reading selection. The capability's CLI configuration declares
+// each reading's altitude set in order; the first reading whose declared
+// altitudes admit every requested altitude is the reading the display
+// transformation consumes. A capability that declares no readings reads the
+// default. The boot selects; it does not carry the altitude vocabulary.
+function deriveReading(readings, observationAltitudes) {
+  const selected = Array.isArray(observationAltitudes) ? observationAltitudes : [];
+  for (const entry of Array.isArray(readings) ? readings : []) {
+    if (typeof entry?.reading !== 'string' || !Array.isArray(entry.altitudes)) continue;
+    if (selected.every(altitude => entry.altitudes.includes(altitude))) return entry.reading;
+  }
+  return 'default';
+}
+
 // A capability is delivered by the estate runtime when its declared execution
 // authority composes estate-provider Ports, directly or through composed
 // Scenarios. The provider module and export are declaration data; nothing here
@@ -403,16 +417,15 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, 
   // The declared display projection. The interface names the transformation and
   // the declared expression builds the display document from the carrier,
   // declared authority and testimony. Observation asks for the display;
-  // invocation asks with --display. The reading is a scope field the boot
-  // derives from the declared request vocabulary: the reading selection itself
-  // is not declarable on the operation yet (see the migration's gap note).
+  // invocation asks with --display. The reading is the scope field the declared
+  // CLI configuration selects from the requested altitudes; the terminal only
+  // forwards them.
   let displayProjection = null;
   if (display?.transformationId && (request.verb === 'observe' || request.display === true)) {
     const transformation = (graphSource.semanticTransformations ?? []).find(entry => entry?.id === display.transformationId);
     if (transformation) {
       const evaluateExpression = await loadExpressionEvaluator(sdaRoot);
-      const reading = request.verb === 'observe' && Array.isArray(request.observationAltitudes)
-        && request.observationAltitudes.some(altitude => altitude !== 'scenario') ? 'trace' : 'default';
+      const reading = deriveReading(cli.readings, request.observationAltitudes);
       displayProjection = { document: evaluateExpression(transformation.expression, {
         selection, selected, scenarioInput: input, rootExecutionId, authority: graphSource,
         plan, execution: outcome, reading }), as: display.as ?? 'json' };
