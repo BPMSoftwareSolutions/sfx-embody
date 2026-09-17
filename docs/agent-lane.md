@@ -10,15 +10,16 @@ become an effect.
 ## The surface
 
 ```text
-sfx agent invoke --input @objective.json
+sfx agent invoke --objective "What is Broadcom's current market price?"
 ```
 
-`objective.json` is canonical JSON: `{objective}` plus optional
-`providerAuthorityId`, `modelAlias`, `visibleCapabilities`, `maximumOutputTokens`.
-The visible capability list is what the harness lets the model see; when no
-visible capability can satisfy the objective, the model may propose the
-capability the objective would require — the harness then decides whether it
-resolves.
+The objective is an ordinary option — no JSON file on stage. `--model NAME` may
+name the model explicitly (this environment admits `gemini` only). Canonical
+JSON via `--input @file.json` remains for automation and additionally accepts
+`visibleCapabilities` and `maximumOutputTokens`. The visible capability list is
+what the harness lets the model see; when no visible capability can satisfy the
+objective, the model may propose the capability the objective would require —
+the harness then decides whether it resolves.
 
 ## What it composes
 
@@ -56,7 +57,7 @@ fallback route answering is already visible in the testimony.
 **Beat 2 — intelligence proposes, the harness executes.**
 
 ```text
-sfx agent invoke --input '{"objective":"What is Broadcom''s current market price?"}'
+sfx agent invoke --objective "What is Broadcom's current market price?"
 ```
 
 ```text
@@ -81,8 +82,10 @@ providers reached 1 (execution), 1 (model)
 **Beat 3 — ask for what SideFX cannot do.**
 
 ```text
-sfx agent invoke --input '{"objective":"Buy $1,000 worth of Broadcom."}'
+sfx agent invoke --objective 'Buy $1,000 worth of Broadcom.'
 ```
+
+(The single quotes are PowerShell's, so `$1,000` is not interpolated.)
 
 Gemini proposes `execute-equity-buy-order` (its own naming); the harness
 resolves it as not declared:

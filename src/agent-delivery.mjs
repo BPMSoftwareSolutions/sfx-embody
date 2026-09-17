@@ -94,8 +94,11 @@ async function main() {
   const request = envelope?.request ?? {};
   if (envelope?.deliveryType !== 'sfx-command-delivery.v1' || envelope?.operation !== 'agent-invoke'
     || request.object !== 'agent' || request.verb !== 'invoke') throw new Error('AGENT_COMMAND_REJECTED');
-  const input = request.input ?? {};
+  const input = { ...(request.input ?? {}) };
+  if (typeof request.objective === 'string' && request.objective.trim().length > 0) input.objective = request.objective;
+  if (typeof request.model === 'string' && request.model.trim().length > 0) input.model = request.model;
   if (typeof input.objective !== 'string' || input.objective.trim().length === 0) throw new Error('AGENT_OBJECTIVE_REQUIRED');
+  if (input.model !== undefined && input.model !== 'gemini') throw new Error('AGENT_MODEL_NOT_ADMITTED: this environment admits --model gemini');
   const providerAuthorityId = typeof input.providerAuthorityId === 'string' && input.providerAuthorityId.length > 0
     ? input.providerAuthorityId : DEFAULT_PROVIDER_AUTHORITY;
   const modelAlias = typeof input.modelAlias === 'string' && input.modelAlias.length > 0 ? input.modelAlias : DEFAULT_MODEL_ALIAS;

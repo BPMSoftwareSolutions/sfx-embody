@@ -1,0 +1,32 @@
+{
+  "carrierType": "governed-model-invocation-request.v1",
+  "requestId": "governed-model-1",
+  "requestHash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+  "modelRequest": {
+    "$schema": "../../generic-llm-connector/authority/model-request.schema.v1.json",
+    "requestId": "governed-model-1",
+    "providerAuthorityId": "primary-cognitive-provider",
+    "modelAlias": "instruction-capable-model",
+    "interaction": {
+      "mode": "text-generation",
+      "messages": [
+        { "role": "user", "content": "Reply with the single word: ready" }
+      ]
+    },
+    "responsePolicy": { "format": "text", "maximumOutputTokens": 256, "temperature": 0 },
+    "executionPolicy": {
+      "timeoutMilliseconds": 120000,
+      "attemptAuthority": { "maximumAuthorizedAttempts": 1 },
+      "providerSubstitution": { "allowed": false }
+    },
+    "evidencePolicy": {
+      "captureRequestHash": true,
+      "captureResponseHash": true,
+      "captureResolvedProvider": true,
+      "captureResolvedModel": true,
+      "captureTokenUsage": true,
+      "captureTiming": true
+    }
+  },
+  "requestLineage": ["model-response-obtained", "obtain-governed-model-response"]
+}

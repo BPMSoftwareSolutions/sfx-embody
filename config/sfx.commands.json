@@ -152,11 +152,13 @@
         "min": 0,
         "max": 0,
         "input": true,
+        "objective": true,
+        "model": true,
         "wraps": {
           "surface": "agent-invocation",
           "operation": "agent-invoke"
         },
-        "description": "Invoke one objective through the agent lane: the governed model invocation capability supplies a proposal (untrusted testimony), the harness resolves the proposed capability, and either executes it through the same governed delivery or refuses by absence. Input: canonical JSON with objective, and optional providerAuthorityId, modelAlias, visibleCapabilities, maximumOutputTokens."
+        "description": "Invoke one objective through the agent lane: the governed model invocation capability supplies a proposal (untrusted testimony), the harness resolves the proposed capability, and either executes it through the same governed delivery or refuses by absence. Supply --objective TEXT, optionally --model NAME (this environment admits gemini); canonical JSON via --input additionally accepts providerAuthorityId, modelAlias, visibleCapabilities, maximumOutputTokens."
       }
     },
     "media": {
