@@ -287,7 +287,8 @@ export function createObservationFilter(authority) {
 }
 
 export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, onObservation, spawnDeclared,
-  readAuthority: suppliedAuthorityReader, readQuery, rootExecutionId, signal, collectProviderExecution, effectContextOverrides }) {
+  readAuthority: suppliedAuthorityReader, readQuery, rootExecutionId, signal, collectProviderExecution, effectContextOverrides,
+  evaluateExpression: suppliedEvaluateExpression }) {
   const timings = { unit: 'milliseconds', queries: {} };
   const observations = [];
   const observe = value => { observations.push(value); try { onObservation?.(value); } catch { /* Observation is not execution authority. */ } };
@@ -343,65 +344,32 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, 
     selection.target = delivery.defaultTarget;
     config.deliveryTarget = delivery.defaultTarget;
   }
-  // A declared reader operation resolves through its own declared capability,
-  // with the subject as the read input. It never executes the subject.
+  // A declared reader operation resolves through the operation's declared
+  // reader capability; the subject is the read's input and is never executed.
+  // The read returns its own declared facts and the capability's declared
+  // display transformation turns them into the delivered document. Nothing
+  // here shapes, names, counts or orders what a read returns.
   const view = request.as ?? DEFAULT_VIEW;
   const readerCapability = operations[request.verb]?.readers?.[view] ?? operations[request.verb]?.reader;
-  if (readerCapability) {
-    const reader = await measure('readAuthority', () => readSelectedAuthority(databaseRoot,
-      { capabilityId: readerCapability }, { retainObjects: false, documents: false, timings: timings.queries }));
-    if (!reader.graphSource) throw new Error('DECLARED_GRAPH_SOURCE_MISSING:' + readerCapability);
-    const readerSource = structuredClone(reader.graphSource);
-    // The reader input is the declared selection: a subject for reveal, a query
-    // for find, a namespace for a listing, a carrier for the retained media.
-    const retained = request.verb === 'circuit' || (request.verb === 'reveal' && view === 'circuit');
-    readerSource.input = {
-      ...(request.subject === undefined ? {} : { capabilityId: request.subject }),
-      ...(request.query === undefined ? {} : { query: request.query }),
-      ...(selection.namespaceId === undefined ? {} : { namespaceId: selection.namespaceId }),
-      ...(selectedScenarioId === undefined ? {} : { scenarioId: selectedScenarioId }),
-      ...(retained ? { operation: 'circuit' } : {}),
-      ...(request.verb === 'artifact' ? { operation: 'artifact', artifactDigest: request.subject } : {}),
-      ...(typeof request.input?.viewId === 'string' ? { viewId: request.input.viewId } : {}) };
-    const read = await measure('executeDeclaredGraph', () => executeEstateCapability({ capabilityId: 'run-declared-graph' }, readerSource, config));
-    // A reader never executes meaning; a failed read is the domain failure the
-    // declared read raised, not an outcome a caller should inspect.
-    if (read?.disposition === 'failed' || read?.code === 'CELL_EXECUTION_FAILED') {
-      const serialized = JSON.stringify(read);
-      const message = read.error?.message ?? read.message ?? read.errorCode ?? read.error?.code
-        ?? /"message":"([^"]+)"/.exec(serialized)?.[1] ?? 'DECLARED_READ_FAILED';
-      throw new Error(String(message));
-    }
-    const readerOutcome = read?.outcome ?? read;
-    // The read's shape follows the operation: rows for a listing, the one meaning
-    // document for reveal, or the retained catalogue, view or artifact.
-    return { disposition: 'terminated',
-      outcome: { ...(request.subject === undefined ? {} : { capabilityId: request.subject }),
-        ...(selection.namespaceId === undefined ? {} : { namespaceId: selection.namespaceId }),
-        ...(selectedScenarioId === undefined ? {} : { scenarioId: selectedScenarioId }),
-        ...(request.query === undefined ? {} : { query: request.query }),
-        ...(request.verb === 'reveal' ? { view } : {}),
-        ...(Array.isArray(readerOutcome)
-          ? { count: readerOutcome.length, capabilities: readerOutcome }
-          : request.verb === 'artifact' ? { media: readerOutcome }
-            : retained ? { circuit: readerOutcome }
-              : { meaning: readerOutcome }),
-        evidence: { timings, authoritySource: 'DATABASE', snapshotId: reader.authority.snapshotId,
-          projectionDigest: reader.authority.projectionDigest, viewDefinitionDigest: reader.authority.viewDefinitionDigest } } };
-  }
-  // The reader operations (prepare/list/find/reveal/catalogue/circuit/artifact)
-  // are declared capabilities reached through the frontdoor; this loader only
-  // reads the selected declaration and hands it to the kernel.
-  // Invocation resolves the selected declaration and its execution delivery.
-  // Observation runs the same execution and streams the same telemetry.
-  // Preparation is an optional, separately invoked retained proof and is never consumed here.
-  const bundle = await measure('readAuthority', () => readSelectedAuthority(databaseRoot, selection, { retainObjects: false, documents: false, timings: timings.queries }));
+  const declaredCapabilityId = readerCapability ?? selection.capabilityId;
+  const bundle = await measure('readAuthority', () => readSelectedAuthority(databaseRoot,
+    readerCapability === undefined ? selection : { capabilityId: readerCapability },
+    { retainObjects: false, documents: false, timings: timings.queries }));
   const cli = readCliConfiguration(bundle);
-  // Invocation reads the capability's declared authority from the estate view and
-  // hands it to the kernel. No per-port estate providers; no materialization.
   const selected = bundle.authority.recordsets[0][0];
+  // The read input is the declared selection the reader's own request contract
+  // names: a subject for reveal, a query for find, a namespace for a listing, a
+  // carrier for the retained media. The subject is never an execution input.
   let input;
-  if (typeof request.input !== 'string') input = structuredClone(request.input);
+  if (readerCapability) input = {
+    ...(request.subject === undefined ? {} : { capabilityId: request.subject }),
+    ...(request.query === undefined ? {} : { query: request.query }),
+    ...(selection.namespaceId === undefined ? {} : { namespaceId: selection.namespaceId }),
+    ...(selectedScenarioId === undefined ? {} : { scenarioId: selectedScenarioId }),
+    ...(request.verb === 'circuit' || (request.verb === 'reveal' && view === 'circuit') ? { operation: 'circuit' } : {}),
+    ...(request.verb === 'artifact' ? { operation: 'artifact', artifactDigest: request.subject } : {}),
+    ...(typeof request.input?.viewId === 'string' ? { viewId: request.input.viewId } : {}) };
+  else if (typeof request.input !== 'string') input = structuredClone(request.input);
   else {
     const inputType = request.inputType ?? cli.input?.type ?? 'json';
     if (inputType === 'json') {
@@ -416,7 +384,11 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, 
   const suppliedGraph = object(input) && typeof input.capabilityId === 'string'
     && Array.isArray(input.scenarios) && Array.isArray(input.executionAuthorities);
   let graphSource;
-  if (suppliedGraph) graphSource = structuredClone(input);
+  if (readerCapability) {
+    if (!bundle.graphSource) throw new Error('DECLARED_GRAPH_SOURCE_MISSING:' + declaredCapabilityId);
+    graphSource = structuredClone(bundle.graphSource);
+    graphSource.input = input;
+  } else if (suppliedGraph) graphSource = structuredClone(input);
   else {
     if (!bundle.graphSource) throw new Error('DECLARED_GRAPH_SOURCE_MISSING:' + selection.capabilityId);
     graphSource = structuredClone(bundle.graphSource);
@@ -449,26 +421,35 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, 
   }
   const outcome = await measure('executeDeclaredGraph', () => executeEstateCapability({ capabilityId: 'run-declared-graph' }, graphSource, config));
   if (drilldown) drilldown.absorb(outcome);
+  // A failed read is the domain failure the declared read raised, not an
+  // outcome a caller should inspect: the delivery fails with its message.
+  if (readerCapability && (outcome?.disposition === 'failed' || outcome?.code === 'CELL_EXECUTION_FAILED')) {
+    const serialized = JSON.stringify(outcome);
+    const message = outcome.error?.message ?? outcome.message ?? outcome.errorCode ?? outcome.error?.code
+      ?? /"message":"([^"]+)"/.exec(serialized)?.[1] ?? 'DECLARED_READ_FAILED';
+    throw new Error(String(message));
+  }
   // The declared display projection. The interface names the transformation and
   // the declared expression builds the display document from the carrier,
-  // declared authority and testimony. Observation asks for the display;
-  // invocation asks with --display. The reading is the scope field the declared
-  // CLI configuration selects from the requested altitudes; the terminal only
-  // forwards them.
+  // declared authority and testimony. Observation always asks for the display,
+  // invocation asks with --display, and a reader operation's declared display is
+  // its reading. The reading is the scope field the declared CLI configuration
+  // selects from the requested altitudes; the terminal only forwards them.
   let displayProjection = null;
-  if (display?.transformationId && (request.verb === 'observe' || request.display === true)) {
+  if (display?.transformationId && (readerCapability !== undefined || request.verb === 'observe' || request.display === true)) {
     const transformation = (graphSource.semanticTransformations ?? []).find(entry => entry?.id === display.transformationId);
     if (transformation) {
-      const evaluateExpression = await loadExpressionEvaluator(sdaRoot);
+      const evaluateExpression = suppliedEvaluateExpression ?? await loadExpressionEvaluator(sdaRoot);
       const reading = deriveReading(cli.readings, request.observationAltitudes);
       displayProjection = { document: evaluateExpression(transformation.expression, {
         selection, selected, scenarioInput: input, rootExecutionId, authority: graphSource,
-        plan, execution: outcome, reading }), as: display.as ?? 'json' };
+        plan, execution: outcome, reading, ...(readerCapability === undefined ? {} : { view }) }), as: display.as ?? 'json' };
     }
   }
   const observedPathDigest = drilldown && typeof outcome?.observedPathDigest === 'string' ? outcome.observedPathDigest : undefined;
   return { disposition: 'terminated',
     outcome: { capabilityId: selection.capabilityId, scenarioId: selected.scenario_id, result: outcome, executions: [], observations: [],
+      ...(readerCapability !== undefined && request.verb === 'reveal' ? { view } : {}),
       ...(displayProjection ? { display: displayProjection } : display ? { display } : {}),
       ...(drilldown ? { overlay: drilldown.buildOverlay(outcome), story: drilldown.buildStory(outcome) } : {}),
       ...(observedPathDigest !== undefined ? { observedPathDigest } : {}),
