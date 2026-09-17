@@ -71,10 +71,17 @@ altitude, which is exactly the debt the declared capability removed.
    close its gaps: attributed cell time + declared delivery phases + measured
    overhead ≈ wall span, with every residual gap named or zero.
 
-## Implementation (units)
+## Implementation — landed 2026-09-17
 
-| Unit | Class | Shape |
+| Unit | Landed | Receipt |
 |---|---|---|
-| Terminal gap display | boot/presentation | print the elapsed gap since the previous streamed entry (e.g., `(+6.17 s)`) so holes are attributed in the story view |
-| Declared timing reading | data (1) | a reading over testimony: top contributors and attributed totals per altitude; the capability's display configuration selects it, the terminal renders it |
-| Timing-coherence acceptance | verification | the estate's fixture/conformance runs assert gap closure for the capabilities they exercise |
+| Terminal gap display | CLI `d68a4f3` (56/56) | story and `--trace` entries annotate the wall gap since the previous streamed entry (`(+6.17 s)`) plus the total span; negative clock deltas render honestly; `--json` byte-identical |
+| Declared timing reading | estate `612609d` | `read-invocation-timing`: top contributors, per-altitude attributed totals, and the residual against wall span; selected by its display row and rendered by the declared-display path (no CLI work). Agent-lane example: 716 cells, 10,168.9 ms attributed, 955.9 ms residual, `coherent: true` |
+| Timing-coherence acceptance | estate `612609d` | `npm run verify:timing` (rerun 2026-09-17): agent lane **715 windows closed**, attributed 7 001.7 ms, overhead named 760.3 ms, **unaccounted 2 ms** (noise bound 5 ms); equity **179 closed**, 644.3 ms / 363.7 ms / **1 ms**; verdict `TIMING-COHERENT (every residual zero or named)`; receipt `evidence/vault-20260916/iea/timing-coherence.receipt.json` |
+
+Estate suite 72 pass / 0 fail / 3 skipped.
+
+**Recorded boundary.** The timing reading is selected by its own display row;
+pointing the lane's story display at it directly needs a boot seam or display
+arithmetic (`sum` is deferred). Not a defect — the smallest coherent form keeps
+the reading independently selectable.
