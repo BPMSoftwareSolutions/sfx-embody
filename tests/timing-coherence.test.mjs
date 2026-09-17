@@ -1,6 +1,20 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { invocationTimingCoherence, streamedGapClosure, streamedCellEvents } from '../src/timing-coherence.mjs';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+import { invocationTimingCoherence, streamedGapClosure, streamedCellEvents } from '../scripts/verify-timing-coherence.mjs';
+import { executeDatabaseCommand } from '../src/invoke-database-capability.mjs';
+import { readAuthority } from '../src/read-authority.mjs';
+import { withDatabaseReadSession } from '../src/database-read-session.mjs';
+import { readExecutionDelivery } from '../src/read-execution-delivery.mjs';
+
+// W2.1 retired src/timing-coherence.mjs: the oracle was inlined into
+// scripts/verify-timing-coherence.mjs (the admitted independent test floor,
+// builder decision 5), so the oracle's tests live with the script they import.
+// The accepted authority is the declared read-invocation-timing; its covering
+// case below exercises the installed read against the same synthetic testimony
+// and runs only when the database integration flag is set.
 
 // The acceptance reading, exercised on synthetic streams that stand in for the
 // live agent-lane receipt: declared phases bracket the execution, cells complete
@@ -110,3 +124,78 @@ test('a supplied wall span is honored for the declared reading agreement', () =>
   assert.equal(reading.unaccountedOverheadMilliseconds, 10);
   assert.equal(reading.timingCoherent, false);
 });
+
+// The declared read-invocation-timing is the acceptance authority. Its
+// covering case hands the installed read the two-cell testimony the
+// declaration's own self-test uses (one 40 ms scenario cell completed at 40 ms,
+// one 60 ms mechanic cell completed at 100 ms) with the measured wall span, and
+// asserts the declared reading's gap closure, attribution and residual -- and
+// that it agrees with the independent oracle on the same stream.
+
+async function databaseRuntime() {
+  const file = new URL('../config/database-runtime.json', import.meta.url);
+  const runtime = JSON.parse(await fs.readFile(file, 'utf8'));
+  const databaseRoot = path.resolve(path.dirname(fileURLToPath(file)), runtime.databaseRoot);
+  const sdaRoot = path.resolve(path.dirname(fileURLToPath(file)), runtime.sdaRoot);
+  const core = await import(pathToFileURL(path.join(databaseRoot, 'src/core.mjs')).href);
+  const database = await import(pathToFileURL(path.join(databaseRoot, 'src/ingest/database.mjs')).href);
+  const { normalizeSql } = await import(pathToFileURL(path.join(databaseRoot, 'src/query/run.mjs')).href);
+  const { pinModel } = await import(pathToFileURL(path.join(databaseRoot, 'src/query/model-pin.mjs')).href);
+  const { connectionEnvironmentVariable, queryRowLimit } = await core.config();
+  process.env[connectionEnvironmentVariable] = database.connectionString(connectionEnvironmentVariable);
+  return { databaseRoot, sdaRoot, connect: database.connect, sql: database.sql,
+    normalizeSql, pinModel, ...core, queryRowLimit };
+}
+
+const databaseIntegration = process.env.SFX_DATABASE_INTEGRATION === '1';
+
+test('the installed timing reading closes the synthetic testimony and agrees with the oracle',
+  { skip: !databaseIntegration }, async () => {
+    const runtime = await databaseRuntime();
+    await withDatabaseReadSession(runtime, async (readQuery, sessionEvidence) => {
+      assert.ok(sessionEvidence);
+      const context = { databaseRoot: runtime.databaseRoot, sdaRoot: runtime.sdaRoot, estateRoot: path.resolve('.'),
+        readQuery,
+        readAuthority: (_, selection, options) => readAuthority(runtime.databaseRoot, selection, { ...options, query: readQuery }) };
+      context.deliveryTarget = (await readExecutionDelivery(context)).defaultTarget;
+
+      const testimony = [
+        { cellId: 'cell:scenario:synthetic', cellAltitude: 'scenario', durationMilliseconds: 40,
+          completedAt: new Date(T0 + 40).toISOString() },
+        { cellId: 'cell:mechanic:synthetic', cellAltitude: 'mechanic', durationMilliseconds: 60,
+          completedAt: new Date(T0 + 100).toISOString() }
+      ];
+      const input = { contractId: 'invocation-timing-request.v1', payload: {
+        label: 'oracle-covering-test', cellTestimony: testimony,
+        measured: { wallSpanMilliseconds: 100, deliveryPhaseMilliseconds: 0 },
+        noiseMilliseconds: 5, topCount: 2 } };
+      const execution = await executeDatabaseCommand({ deliveryType: 'sfx-command-delivery.v1', operation: 'invoke',
+        request: { object: 'capability', verb: 'invoke', subject: 'read-invocation-timing', input } }, context);
+      const result = execution.outcome?.result;
+      assert.equal(result?.disposition, 'completed', JSON.stringify(execution.outcome?.result ?? execution.outcome));
+      const reading = result.outcome;
+      assert.equal(reading.reading, 'invocation-timing-reading.v1');
+      assert.equal(reading.cells, 2);
+      assert.equal(reading.totalAttributedMilliseconds, 100);
+      assert.deepEqual(reading.gapClosure, {
+        windows: 1, closed: 1, unattributed: 0, negative: 0,
+        unattributedMilliseconds: 0, maxUnattributedMilliseconds: 0, negativeMilliseconds: 0,
+        noiseMilliseconds: 5, timingCoherent: true
+      });
+      assert.equal(reading.residualMilliseconds, 0);
+      assert.equal(reading.topContributors[0].cellId, 'cell:mechanic:synthetic');
+      assert.deepEqual(reading.attributedByAltitude.map(entry => [entry.altitude, entry.durationMilliseconds]),
+        [['mechanic', 60], ['scenario', 40]]);
+
+      const observations = testimony.map(entry => ({ observationType: 'cell-execution-testimony.v1',
+        cellId: entry.cellId, cellAltitude: entry.cellAltitude, observedAt: entry.completedAt,
+        durationMilliseconds: entry.durationMilliseconds }));
+      const oracle = invocationTimingCoherence({ observations, cellTestimony: testimony,
+        wallSpanMilliseconds: 100, deliveryPhaseMilliseconds: 0 });
+      assert.equal(reading.gapClosure.windows, oracle.gapClosure.windows);
+      assert.equal(reading.gapClosure.timingCoherent, oracle.gapClosure.timingCoherent);
+      assert.equal(reading.totalAttributedMilliseconds, oracle.attributedCellMilliseconds);
+      assert.equal(reading.residualMilliseconds, oracle.measuredOverheadMilliseconds);
+      assert.equal(oracle.timingCoherent, true);
+    });
+  });
