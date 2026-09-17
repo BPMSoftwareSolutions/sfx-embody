@@ -67,6 +67,12 @@ bytes unchanged); `compose-resolve-equity-market-price-evidence` emits 2
 
 ## Finding 2 — `root` in a nested scenario is the invocation root, not the scenario input
 
+**Resolved 2026-09-17 by the kernel route (SDA `8d5b7a0`):** `root` now binds
+to the executing scenario's input in all six languages, own-scope outputs are
+byte-identical, and no declared capability relied on the old behavior. The
+declared lane was installed (`d89b7f9`) and the driver deleted; the estate
+transformation fix below was not needed. The analysis is retained.
+
 After fix 1, the declared agent capability
 (`sql/migrations/declare-agent-capability.sql`, dry-run green) preflights
 through the whole lane: the governed model call, the declared resolution read,

@@ -25,7 +25,8 @@ it assumed:
    present in this environment, and the model is invoked as a provider inside
    governance: `obtain-governed-model-response` → Gemini returns a structured
    proposal (live receipt 2026-09-17). The composition lives in the harness
-   (`sfx agent invoke`, two governed deliveries), so the graph-path
+   (`sfx capability invoke request-capability-from-objective`, the declared
+composition with routing), so the graph-path
    `invoke-scenario` blocker (B2/R1) is sidestepped for the demo, not needed by
    it. See [agent-lane.md](agent-lane.md).
 2. **A live price is shown through the fallback route.** The primary credential
@@ -110,15 +111,16 @@ answers through real-time1 while the primary is rate-limited (verified 2026-09-1
 - **May** show (updated 2026-09-17): real governed invocation and testimony;
   real refusal by absence; the declared model/agentic language via `reveal`;
   retained live receipts **labeled** with capture time, snapshot and
-  `observedPathDigest`; and the agent lane (`sfx agent invoke`) — the governed
-  model provider's proposal and its harness execution or refusal — as long as
-  the receipt note says it is driver-composed.
+  `observedPathDigest`; and the declared agent lane
+  (`sfx capability invoke request-capability-from-objective --input "…"`) —
+  the model provider's proposal, the declared route, and the execution or
+  refusal the graph produced.
 - **May not** show without new work: `sfx agent run` / `sfx eval` as working
-  surfaces (the surface is `sfx agent invoke`); a `CAPABILITY_NOT_FOUND` as a
-  policy DENY; "provider not reached" for the purchase (the truthful statement
-  is "no execution occurred"); READ_ONLY/MUTATION as declared effect classes; an
-  agency receipt as database-derived (a driver-composed receipt must say so);
-  the demo's 384 ms as a measurement.
+  surfaces (the surface is `sfx capability invoke
+  request-capability-from-objective`); a `CAPABILITY_NOT_FOUND` as a policy
+  DENY; "provider not reached" for the purchase (the truthful statement is "no
+  execution occurred"); READ_ONLY/MUTATION as declared effect classes; the
+  demo's 384 ms as a measurement.
 - Fixture substitution, if ever used, is governed by the rubric: substitute at the
   declared provider seam, record the fixture identity, and state that provider
   conformance and the external effect remain unproven.
@@ -145,16 +147,16 @@ One wave, three units, all honest without B2/B3/B4/B5:
    `verify-demo.mjs` discipline). No database meaning, no migrations during
    recording.
 
-Superseded 2026-09-17: **agent execution landed** as the harness-composed
-`sfx agent invoke` lane (unit 3's driver is that delivery; units 1–2 remain
-presentation polish). Still deferred: the session ledger, receipt-as-data,
-comparative eval, profiles, animation, brokerage.
+Superseded 2026-09-17: **agent execution landed** as the declared capability
+`request-capability-from-objective` (installed `d89b7f9`; the driver and
+`agent-memory` delivery are deleted). Still deferred: the session ledger,
+receipt-as-data, comparative eval, profiles, animation, brokerage.
 
 ## 8. Defer list with revisit triggers
 
 | Item | Trigger |
 |---|---|
-| Agent execution lane (Acts 2–4) | **Landed 2026-09-17 by a different route:** the harness composes two governed deliveries (`sfx agent invoke`); no SDA/R1/R2 dependency for the demo |
+| Agent execution lane (Acts 2–4) | **Landed 2026-09-17:** the declared capability composes via routing (estate `d89b7f9`); R1/R2 were not required for the demo |
 | Minimal agent row-set (single-scenario `request-capability-from-objective` binding `sda-generic-llm-connector-port.v1`; driver lane; refusal beats) | **Superseded:** the driver lane shipped; an in-graph single-scenario agent waits on R1 |
 | In-graph composition (`invoke-scenario`), scheduler port catalog, LLM connector parity | unchanged: SDA R1/R2/R4 |
 | Session/agent ledger and receipt-as-data | when cross-invocation attribution is required beyond a labeled driver composition |
@@ -198,8 +200,9 @@ model as a provider inside the governed execution environment. See
 - **B5 is partially addressed**: the agency receipt is a labeled
   driver-composed summary of the two real receipts; the grant model, effect
   classes and session ledger remain future.
-- **Line 58's "no `agent` surface" is closed**: `sfx agent invoke` is offered
-  by the estate and verified for the price objective and the purchase refusal.
+- **Line 58's "no `agent` surface" is closed**: the declared capability
+  `request-capability-from-objective` is offered by the estate and verified for
+  the price objective and the purchase refusal.
 - **B7 test question answered**: the estate's non-passes are DB-gated skips (0
   failures); none touches the demo path.
 - Remaining before recording: the declared-display provider line in the Beat 1

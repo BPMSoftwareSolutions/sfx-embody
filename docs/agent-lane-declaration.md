@@ -1,11 +1,14 @@
 # Transitioning the agent lane from driver code to a declared capability
 
-**Status.** Analysis 2026-09-17. `src/agent-delivery.mjs` is UID (ungoverned
-intelligence debt): the composition meaning — prompt, proposal schema,
-resolution, execution choice, refusal, receipt — lives in boot code. It must
-become a declared (1) capability. This record states what already supports the
-transition, the one missing declared mechanism, the target row design, and the
-interim honest option.
+**Status: transitioned 2026-09-17.** The declared capability
+`request-capability-from-objective` is installed (estate `d89b7f9`), with both
+enabling fixes landed — closure scenarios emitted by the graph-source assembly
+(estate `1c11d74`) and `root` binding to the executing scenario's input (SDA
+`8d5b7a0`). `src/agent-delivery.mjs`, its `agent-memory` delivery and the
+`agent` command mapping are deleted. The analysis below is retained as the
+transition record. The driver was UID (ungoverned intelligence debt): the
+composition meaning — prompt, proposal schema, resolution, execution choice,
+refusal, receipt — lived in boot code.
 
 ## 1. What the script does today (the meaning to declare)
 

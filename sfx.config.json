@@ -33,19 +33,6 @@
       "args": [
         "src/projection-delivery.mjs", "config/database-runtime.json"
       ]
-    },
-    "agent-memory": {
-      "type": "process",
-      "command": "node",
-      "cwd": ".",
-      "args": [
-        "--experimental-permission",
-        "--allow-child-process",
-        "--allow-fs-read=./src",
-        "--allow-fs-read=./config",
-        "--allow-fs-read=./sfx.config.json",
-        "src/agent-delivery.mjs", "config/database-runtime.json"
-      ]
     }
   }
 }
