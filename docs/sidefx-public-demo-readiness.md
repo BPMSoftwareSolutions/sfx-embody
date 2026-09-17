@@ -167,3 +167,27 @@ receipt-as-data, comparative eval, profiles, animation, brokerage.
 - Quota: probe receipt 2026-09-15T22:37Z (429, remaining 0, reset `2026-10-06T16:52Z`); F6 in `architecture-priorities.md`.
 - Model lane: `sfx capability reveal obtain-governed-model-response --as meaning`; failure receipts in this review; `SDA:docs/handoff/sda-capability-invocation.md`.
 - SDA requests: R1 (graph-path `invoke-scenario`), R2 (scheduler dispatch of the admitted port catalog), R4 (LLM connector parity), R5 (principal/grant/effect-class decision, deferrable) — to be filed in the standard format.
+
+## 11. Update — the agent lane landed (2026-09-17)
+
+The credible cut was overtaken by a smaller, stronger move: the agent lane was
+realized as a **harness composition of two governed invocations**, with the
+model as a provider inside the governed execution environment. See
+[agent-lane.md](agent-lane.md) for the surface, receipts and boundaries.
+
+- **B4 is resolved in this environment**: the connector package is present and
+  the node model path is live-proven (`obtain-governed-model-response` →
+  `MODEL_RESPONSE_OBTAINED`, provider gemini, model gemini-2.5-pro).
+- **B2/B3 are sidestepped, not closed**: the composition lives in the delivery
+  (two deliveries), not `invoke-scenario` inside one graph. R1/R2 remain open
+  for in-graph composition; the demo does not depend on them.
+- **B5 is partially addressed**: the agency receipt is a labeled
+  driver-composed summary of the two real receipts; the grant model, effect
+  classes and session ledger remain future.
+- **Line 58's "no `agent` surface" is closed**: `sfx agent invoke` is offered
+  by the estate and verified for the price objective and the purchase refusal.
+- **B7 test question answered**: the estate's non-passes are DB-gated skips (0
+  failures); none touches the demo path.
+- Remaining before recording: the declared-display provider line in the Beat 1
+  frame (display-transformation change), and the D1 provider-access decision
+  (the fallback route already answers while the primary quota is exhausted).
