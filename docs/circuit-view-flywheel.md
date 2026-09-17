@@ -112,11 +112,21 @@ captured — recorded as unobserved.
 | Coverage | The generic renderer rendered live circuits for **two capabilities** (equity and the agent lane, both branches lit/unlit correctly) with **zero per-capability code**. The structural verdict covered four capabilities (agent lane 985 planned / 703 observed, 0 on-taken-path misses; equity 242/180; compose 244/182; model lane 654/451) — but it was produced by a temporary script, since removed as UID; the rule is re-specified as a declared attestation and those counts stand as its expected values |
 | Marginal effort, next instance | The renderer's second capability cost ≈0. The declared streamed fragments (CV-B) and the true ~11-component collapse (CV-A2 refinement) remain staged, so the *declared-bytes* half of the generic claim is unverified |
 
+After the first-turn defects were corrected (same day): the circuit streams in
+real time, box by box, and replaces the trace; the structural verdict moved
+out of a script (removed as UID, `7965689`) into the declared read's
+`attestation` (`b9d4499`) — live positives equal the recorded first-turn
+values, and negative fixtures return `structured: false` with the removed cell
+named.
+
 Honest limitations recorded by the lanes: the view model is per-cell, not the
 sketch's 11-component collapse; provider nodes carry no incoming edge because
 testimony records none; the large-graph collapse limit is a terminal constant,
 not declared authority; `render.mjs` still owns presentation vocabulary until
-CV-B/CV-C2 land.
+CV-B/CV-C2 land; unselected branches are only knowable from the final overlay
+(an honest closing-frame fact); the declared miss rule cannot name a
+non-fragment leaf without the `parentCellId` chain; and equity's overlay has no
+semantic-level selection edges, so its closing frame is evidence-only.
 
 ## Honest boundaries
 
