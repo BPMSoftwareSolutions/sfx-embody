@@ -19,21 +19,27 @@
 --   * observedCells = distinct cellId among cellTestimony rows at scenario,
 --     mechanic, provider or physical altitude;
 --   * unmatchedObservedCells = observed cellIds that equal no planned cell and do
---     not reduce to one by the ancestor closure (trailing :expression/:selection,
---     interior :expression/:selection token, or one trailing .segment, repeatedly);
+--     not reduce or climb to one by the ancestor closure (trailing
+--     :expression/:selection, interior :expression/:selection token, one trailing
+--     .segment, or the declared parentCellId link, repeatedly);
 --   * unmatchedPlanned = planned cellIds with no testimony entry;
 --   * onObservedPath = the observed path entered the cell's subtree (an observed
---     cell reduces to it) OR an observed cell sits at-or-above it (it reduces to an
---     observed cell). The deleted script's rule ("a semantic non-fragment cell on
---     the observed path without testimony is the failure") needs the subtree
---     direction: within one altitude the only observed ancestors of a cell are its
---     :expression/:selection fragments, and those are exactly the cells the miss
---     rule excludes. The task's observed-ancestor clause is kept as the second
---     disjunct; the fixture (remove a taken-path operation cell's testimony) is the
---     first. Remaining gap, reported rather than papered over: a non-fragment leaf
---     with no observed same-altitude relative (e.g. a provider cell whose own
---     testimony vanished) is not nameable by id hierarchy alone; naming it needs
---     the declared parentCellId chain, which the rule does not use.
+--     cell reduces or climbs to it) OR an observed cell sits at-or-above it (it
+--     reduces or climbs to an observed cell). The deleted script's rule ("a
+--     semantic non-fragment cell on the observed path without testimony is the
+--     failure") needs the subtree direction: within one altitude the only observed
+--     ancestors of a cell are its :expression/:selection fragments, and those are
+--     exactly the cells the miss rule excludes. The task's observed-ancestor clause
+--     is kept as the second disjunct; the operation-removed fixture is the first.
+--     Gap closed (recorded in b9d4499, fixed 2026-09-17): the closure now also
+--     follows the declared parentCellId chain through the planned cells, so a
+--     non-fragment leaf with no observed same-altitude relative (e.g. a provider
+--     cell whose own testimony vanished) is named when its declaring operation is
+--     observed; the id hierarchy remains the fallback where no declared parent
+--     exists. Before the fix the provider-removed fixture returned structured true
+--     with the provider only in unselectedPlanned (uninvoked-declared-subtree);
+--     after it returns structured false with the provider named in misses. Live
+--     values are unchanged (below).
 --   * misses = unmatched planned cells whose cellId contains no :expression/:selection
 --     and that are onObservedPath; these are the failures;
 --   * unselectedPlanned = the remaining unmatched planned cells, classified
@@ -49,15 +55,25 @@
 -- Expected live values (the deleted script's receipt, evidence/vault-20260916/iea/
 -- circuit-structure.receipt.json): agent lane planned 985 / observed 703 / misses 0 /
 -- structured true (267 unselected-branch-fragment, 15 uninvoked-declared-subtree);
--- equity 242/180/0/true (62 unselected-branch-fragment). The negative fixture
--- removes one taken-path operation cell's testimony and expects structured false
--- with that cell named in misses.
+-- equity 242/180/0/true (62 unselected-branch-fragment). The operation-removed
+-- negative fixture removes one taken-path operation cell's testimony and expects
+-- structured false with that cell named in misses. The gap fixture removes a
+-- non-fragment provider leaf's testimony (no observed same-altitude relative) and
+-- expects structured false with the provider named in misses.
 --
--- Default was ROLLBACK. Installed 2026-09-17 after the rollback dry run and the
--- from-transaction preflights on the live captures: agent lane 985 planned / 703
--- observed / 0 misses / structured true; equity 242/180/0/true; the negative
--- fixtures (one taken-path operation cell's testimony removed) return structured
--- false with that cell named in misses.
+-- Default was ROLLBACK. First installed 2026-09-17 after the rollback dry run and
+-- the from-transaction preflights on the live captures: agent lane 985 planned / 703
+-- observed / 0 misses / structured true; equity 242/180/0/true; the operation-removed
+-- fixtures return structured false with that cell named in misses. Re-installed
+-- 2026-09-17 with the gap closed: the provider-removed fixture captured against the
+-- first install (structured true, provider in unselectedPlanned as
+-- uninvoked-declared-subtree) returns structured false with the provider named in
+-- misses; the live values above are unchanged. The declared meaning's outcome now
+-- states the naming basis (the declared parentCellId chain when no observed
+-- same-altitude relative names the cell); the re-declaration therefore carries new
+-- meaning bytes, which is also what the platform's author step requires to re-mint
+-- the capability version (a meaning definition already held by an older version
+-- cannot be re-pointed).
 SET NOCOUNT ON;
 SET XACT_ABORT ON;
 BEGIN TRANSACTION;
@@ -220,16 +236,22 @@ DECLARE @edges_json nvarchar(max)=(
  ORDER BY e.logicalOrder,e.edgeId
  FOR JSON PATH,INCLUDE_NULL_VALUES);
 -- The structural attestation: the compiled plan (plannedCells: the overlay''s planned
--- cells) against the qualifying testimony. observedCells is the distinct cellId at
--- scenario/mechanic/provider/physical altitude. The ancestor closure reduces each id by
--- stripping a trailing :expression/:selection, an interior :expression/:selection token,
--- or one trailing .segment, repeatedly. A planned cell is on the observed path when the
--- observed path entered its subtree (an observed cell reduces to it) or an observed cell
--- sits at-or-above it (it reduces to an observed cell); the subtree direction is the one
--- the deleted script''s rule stated and is the only way a removed taken-path operation
--- cell can be named, because observed ancestors exist only among fragment sub-cells.
--- A miss is an unmatched non-fragment planned cell on that path; the rest are named and
--- classified unselected-branch-fragment (observed ancestor) or uninvoked-declared-subtree.
+-- cells, each {cellId,parentCellId,altitude}) against the qualifying testimony.
+-- observedCells is the distinct cellId at scenario/mechanic/provider/physical altitude.
+-- The ancestor closure reduces each id by stripping a trailing :expression/:selection,
+-- an interior :expression/:selection token, or one trailing .segment, repeatedly, and
+-- follows the declared parentCellId link through the planned cells, transitively; the
+-- id hierarchy remains the fallback where no declared parent exists. A planned cell is
+-- on the observed path when the observed path entered its subtree (an observed cell
+-- reduces or climbs to it) or an observed cell sits at-or-above it (it reduces or climbs
+-- to an observed cell). The declared parent link is what names a non-fragment leaf with
+-- no observed same-altitude relative: a provider cell whose own testimony vanished still
+-- climbs to its observed declaring operation, where the id hierarchy alone could not
+-- relate the two altitudes. An unselected branch whose declaring ancestry never
+-- testified stays unlit and is classified as before; the recorded first-turn values
+-- (985/703 and 242/180, misses 0, structured true) are unchanged. A miss is an unmatched
+-- non-fragment planned cell on that path; the rest are named and classified
+-- unselected-branch-fragment (observed ancestor) or uninvoked-declared-subtree.
 DECLARE @planned_input nvarchar(max)=JSON_QUERY(@input,''$.payload.plannedCells'');
 IF @planned_input IS NULL SET @planned_input=N''[]'';
 IF ISJSON(@planned_input)<>1 THROW 51000,''CIRCUIT_VIEW_PLANNED_CELLS_INVALID'',1;
@@ -239,12 +261,16 @@ SELECT c.cellId,MIN(c.cellAltitude)
 FROM OPENJSON(@cells_input) WITH (cellId nvarchar(400) ''$.cellId'',cellAltitude nvarchar(40) ''$.cellAltitude'') c
 WHERE c.cellAltitude IN (N''scenario'',N''mechanic'',N''provider'',N''physical'')
 GROUP BY c.cellId;
-DECLARE @planned TABLE(cellId nvarchar(400) NOT NULL PRIMARY KEY,altitude nvarchar(40));
-INSERT @planned(cellId,altitude)
-SELECT p.cellId,MIN(p.altitude)
-FROM OPENJSON(@planned_input) WITH (cellId nvarchar(400) ''$.cellId'',altitude nvarchar(40) ''$.altitude'') p
+DECLARE @planned TABLE(cellId nvarchar(400) NOT NULL PRIMARY KEY,altitude nvarchar(40),parentCellId nvarchar(400));
+INSERT @planned(cellId,altitude,parentCellId)
+SELECT p.cellId,MIN(p.altitude),MIN(p.parentCellId)
+FROM OPENJSON(@planned_input) WITH (cellId nvarchar(400) ''$.cellId'',altitude nvarchar(40) ''$.altitude'',parentCellId nvarchar(400) ''$.parentCellId'') p
 WHERE p.cellId IS NOT NULL
 GROUP BY p.cellId;
+DECLARE @planned_parent TABLE(cellId nvarchar(400) NOT NULL PRIMARY KEY,parentCellId nvarchar(400) NOT NULL);
+INSERT @planned_parent(cellId,parentCellId)
+SELECT p.cellId,p.parentCellId FROM @planned p
+WHERE p.parentCellId IS NOT NULL AND p.parentCellId<>p.cellId;
 DECLARE @anc TABLE(originId nvarchar(400) NOT NULL,candidate nvarchar(400) NOT NULL,PRIMARY KEY NONCLUSTERED(originId,candidate));
 INSERT @anc(originId,candidate)
 SELECT cellId,cellId FROM @planned
@@ -256,6 +282,7 @@ BEGIN
  INSERT @anc(originId,candidate)
  SELECT DISTINCT a.originId,v.candidate
  FROM @anc a
+ OUTER APPLY (SELECT pp.parentCellId FROM @planned_parent pp WHERE pp.cellId=a.candidate) d
  CROSS APPLY (VALUES
   (CASE WHEN RIGHT(a.candidate,10)=N'':selection'' THEN LEFT(a.candidate,LEN(a.candidate)-10) END),
   (CASE WHEN RIGHT(a.candidate,11)=N'':expression'' THEN LEFT(a.candidate,LEN(a.candidate)-11) END),
@@ -264,7 +291,8 @@ BEGIN
   (CASE WHEN PATINDEX(N''%:expression[.:]%'',a.candidate)>0
     THEN LEFT(a.candidate,PATINDEX(N''%:expression[.:]%'',a.candidate)-1)+SUBSTRING(a.candidate,PATINDEX(N''%:expression[.:]%'',a.candidate)+11,400) END),
   (CASE WHEN PATINDEX(N''%:selection[.:]%'',a.candidate)>0
-    THEN LEFT(a.candidate,PATINDEX(N''%:selection[.:]%'',a.candidate)-1)+SUBSTRING(a.candidate,PATINDEX(N''%:selection[.:]%'',a.candidate)+10,400) END)
+    THEN LEFT(a.candidate,PATINDEX(N''%:selection[.:]%'',a.candidate)-1)+SUBSTRING(a.candidate,PATINDEX(N''%:selection[.:]%'',a.candidate)+10,400) END),
+  (d.parentCellId)
  ) v(candidate)
  WHERE v.candidate IS NOT NULL AND LEN(v.candidate)>0 AND v.candidate<>a.candidate
   AND NOT EXISTS(SELECT 1 FROM @anc x WHERE x.originId=a.originId AND x.candidate=v.candidate);
@@ -334,7 +362,7 @@ DECLARE @cli nvarchar(max) = N'{"display":{"transformationId":"read-capability-c
 DECLARE @document nvarchar(max) = N'{
  "document":"sidefx-capability-authority.v1",
  "capabilityId":"read-capability-circuit",
- "meaning":{"intent":"read one invocation''s circuit and its structural attestation from its declared testimony and compiled plan","outcome":"the caller observes the semantic circuit and the attestation: every observed cell maps to the plan, and every planned cell without testimony is named as an on-taken-path miss, an unselected branch fragment or an uninvoked declared subtree"},
+  "meaning":{"intent":"read one invocation''s circuit and its structural attestation from its declared testimony and compiled plan","outcome":"the caller observes the semantic circuit and the attestation: every observed cell maps to the plan, and every planned cell without testimony is named as an on-taken-path miss, an unselected branch fragment or an uninvoked declared subtree, resolved through the declared parentCellId chain when no observed same-altitude relative names it"},
  "cli":' + @cli + N',
  "contracts":' + @contracts + N',
  "scenarios":[{
@@ -435,13 +463,18 @@ SELECT '4_graph_source' AS result_set, g.root_scenario_id,
  (SELECT COUNT(*) FROM OPENJSON(JSON_QUERY(@graph,'$.semanticTransformations')) t WHERE JSON_VALUE(t.value,'$.id')=@transformationId) AS display_transformation_present
 FROM analysis.v_capability_graph_source g WHERE g.capability_id=N'read-capability-circuit';
 
--- The behavioral self-tests: the declared statement itself is executed twice. The
--- sample carries a scenario, an operation, an expression root and a field sub-cell, a
--- provider and a physical cell, one planned-but-never-selected fragment and one
--- planned operation on a route that was never invoked. Positive: structured true,
--- 7 planned / 5 observed / 0 misses, 1 unselected-branch-fragment + 1 uninvoked.
--- Negative: the operation cell's testimony is removed; the observed path still entered
--- its subtree, so it is named in misses and structured is false.
+-- The behavioral self-tests: the declared statement itself is executed three times.
+-- The sample carries a scenario, an operation, an expression root and a field
+-- sub-cell, a provider and a physical cell, one planned-but-never-selected fragment
+-- and one planned operation on a route that was never invoked. Positive: structured
+-- true, 7 planned / 5 observed / 0 misses, 1 unselected-branch-fragment + 1
+-- uninvoked. Negative: the operation cell's testimony is removed; the observed path
+-- still entered its subtree, so it is named in misses and structured is false. Gap
+-- negative: the provider leaf's testimony is removed (it has no observed
+-- same-altitude relative); the declared parent chain names it, so it is named in
+-- misses and structured is false. Against the pre-fix statement this third fixture
+-- returned structured true with the provider in unselectedPlanned as
+-- uninvoked-declared-subtree (the recorded gap).
 DECLARE @stmt nvarchar(max);
 SELECT @stmt=js.statement
 FROM analysis.v_selected_semantic_definition d
@@ -449,6 +482,7 @@ CROSS APPLY OPENJSON(d.definition_json,'$.semantics.configuration') WITH (statem
 WHERE d.estate_model_pk=@estate AND d.object_kind='PORT'
  AND d.namespace_id=N'sidefx:capability:read-capability-circuit' AND d.declared_id=N'read-capability-circuit-port';
 DECLARE @sample_positive nvarchar(max)=N'{"contractId":"circuit-view-request.v1","payload":{"capabilityId":"attestation-self-test","cellTestimony":[{"cellId":"cell:scenario:demo","cellAltitude":"scenario","disposition":"completed","outcomeClassification":"success","durationMilliseconds":5,"completedAt":"2026-09-17T00:00:00.005Z","logicalOrder":0},{"cellId":"cell:mechanic:demo.operation.1:expression.fields.x","cellAltitude":"mechanic","disposition":"completed","durationMilliseconds":1,"completedAt":"2026-09-17T00:00:00.008Z","logicalOrder":5},{"cellId":"cell:mechanic:demo.operation.1","cellAltitude":"mechanic","disposition":"completed","durationMilliseconds":3,"completedAt":"2026-09-17T00:00:00.011Z","logicalOrder":7},{"cellId":"cell:provider:demo.operation.1","cellAltitude":"provider","disposition":"completed","outcomeClassification":"failure","durationMilliseconds":2,"completedAt":"2026-09-17T00:00:00.013Z","logicalOrder":9},{"cellId":"cell:physical:demo.operation.1","cellAltitude":"physical","disposition":"completed","outcomeClassification":"success","durationMilliseconds":2,"completedAt":"2026-09-17T00:00:00.015Z","logicalOrder":11}],"edgeTestimony":[{"edgeId":"edge:sequence:demo:1","sourceCellExecutionId":"execution:graph:demo:cell:mechanic:demo.operation.1:1","destinationCellId":"cell:provider:demo.operation.1","admissionDisposition":"admitted","logicalOrder":8},{"edgeId":"edge:descent:demo.operation.1","sourceCellExecutionId":"execution:graph:demo:cell:provider:demo.operation.1:1","destinationCellId":"cell:physical:demo.operation.1","admissionDisposition":"admitted","logicalOrder":10}],"plannedCells":[{"cellId":"cell:scenario:demo","parentCellId":null,"altitude":"scenario"},{"cellId":"cell:mechanic:demo.operation.1","parentCellId":"cell:scenario:demo","altitude":"mechanic"},{"cellId":"cell:mechanic:demo.operation.1:expression","parentCellId":"cell:mechanic:demo.operation.1","altitude":"mechanic"},{"cellId":"cell:mechanic:demo.operation.1:expression.fields.x","parentCellId":"cell:mechanic:demo.operation.1","altitude":"mechanic"},{"cellId":"cell:provider:demo.operation.1","parentCellId":"cell:mechanic:demo.operation.1","altitude":"provider"},{"cellId":"cell:physical:demo.operation.1","parentCellId":"cell:provider:demo.operation.1","altitude":"physical"},{"cellId":"cell:mechanic:other.operation.9","parentCellId":"cell:scenario:other","altitude":"mechanic"}],"plannedEdges":[]}}';
+DECLARE @sample_gap nvarchar(max)=N'{"contractId":"circuit-view-request.v1","payload":{"capabilityId":"attestation-self-test","cellTestimony":[{"cellId":"cell:scenario:demo","cellAltitude":"scenario","disposition":"completed","outcomeClassification":"success","durationMilliseconds":5,"completedAt":"2026-09-17T00:00:00.005Z","logicalOrder":0},{"cellId":"cell:mechanic:demo.operation.1:expression.fields.x","cellAltitude":"mechanic","disposition":"completed","durationMilliseconds":1,"completedAt":"2026-09-17T00:00:00.008Z","logicalOrder":5},{"cellId":"cell:mechanic:demo.operation.1","cellAltitude":"mechanic","disposition":"completed","durationMilliseconds":3,"completedAt":"2026-09-17T00:00:00.011Z","logicalOrder":7},{"cellId":"cell:physical:demo.operation.1","cellAltitude":"physical","disposition":"completed","outcomeClassification":"success","durationMilliseconds":2,"completedAt":"2026-09-17T00:00:00.015Z","logicalOrder":11}],"edgeTestimony":[{"edgeId":"edge:sequence:demo:1","sourceCellExecutionId":"execution:graph:demo:cell:mechanic:demo.operation.1:1","destinationCellId":"cell:provider:demo.operation.1","admissionDisposition":"admitted","logicalOrder":8},{"edgeId":"edge:descent:demo.operation.1","sourceCellExecutionId":"execution:graph:demo:cell:provider:demo.operation.1:1","destinationCellId":"cell:physical:demo.operation.1","admissionDisposition":"admitted","logicalOrder":10}],"plannedCells":[{"cellId":"cell:scenario:demo","parentCellId":null,"altitude":"scenario"},{"cellId":"cell:mechanic:demo.operation.1","parentCellId":"cell:scenario:demo","altitude":"mechanic"},{"cellId":"cell:mechanic:demo.operation.1:expression","parentCellId":"cell:mechanic:demo.operation.1","altitude":"mechanic"},{"cellId":"cell:mechanic:demo.operation.1:expression.fields.x","parentCellId":"cell:mechanic:demo.operation.1","altitude":"mechanic"},{"cellId":"cell:provider:demo.operation.1","parentCellId":"cell:mechanic:demo.operation.1","altitude":"provider"},{"cellId":"cell:physical:demo.operation.1","parentCellId":"cell:provider:demo.operation.1","altitude":"physical"},{"cellId":"cell:mechanic:other.operation.9","parentCellId":"cell:scenario:other","altitude":"mechanic"}],"plannedEdges":[]}}';
 DECLARE @sample_negative nvarchar(max)=N'{"contractId":"circuit-view-request.v1","payload":{"capabilityId":"attestation-self-test","cellTestimony":[{"cellId":"cell:scenario:demo","cellAltitude":"scenario","disposition":"completed","outcomeClassification":"success","durationMilliseconds":5,"completedAt":"2026-09-17T00:00:00.005Z","logicalOrder":0},{"cellId":"cell:mechanic:demo.operation.1:expression.fields.x","cellAltitude":"mechanic","disposition":"completed","durationMilliseconds":1,"completedAt":"2026-09-17T00:00:00.008Z","logicalOrder":5},{"cellId":"cell:provider:demo.operation.1","cellAltitude":"provider","disposition":"completed","outcomeClassification":"failure","durationMilliseconds":2,"completedAt":"2026-09-17T00:00:00.013Z","logicalOrder":9},{"cellId":"cell:physical:demo.operation.1","cellAltitude":"physical","disposition":"completed","outcomeClassification":"success","durationMilliseconds":2,"completedAt":"2026-09-17T00:00:00.015Z","logicalOrder":11}],"edgeTestimony":[{"edgeId":"edge:sequence:demo:1","sourceCellExecutionId":"execution:graph:demo:cell:mechanic:demo.operation.1:1","destinationCellId":"cell:provider:demo.operation.1","admissionDisposition":"admitted","logicalOrder":8},{"edgeId":"edge:descent:demo.operation.1","sourceCellExecutionId":"execution:graph:demo:cell:provider:demo.operation.1:1","destinationCellId":"cell:physical:demo.operation.1","admissionDisposition":"admitted","logicalOrder":10}],"plannedCells":[{"cellId":"cell:scenario:demo","parentCellId":null,"altitude":"scenario"},{"cellId":"cell:mechanic:demo.operation.1","parentCellId":"cell:scenario:demo","altitude":"mechanic"},{"cellId":"cell:mechanic:demo.operation.1:expression","parentCellId":"cell:mechanic:demo.operation.1","altitude":"mechanic"},{"cellId":"cell:mechanic:demo.operation.1:expression.fields.x","parentCellId":"cell:mechanic:demo.operation.1","altitude":"mechanic"},{"cellId":"cell:provider:demo.operation.1","parentCellId":"cell:mechanic:demo.operation.1","altitude":"provider"},{"cellId":"cell:physical:demo.operation.1","parentCellId":"cell:provider:demo.operation.1","altitude":"physical"},{"cellId":"cell:mechanic:other.operation.9","parentCellId":"cell:scenario:other","altitude":"mechanic"}],"plannedEdges":[]}}';
 DECLARE @view TABLE (value nvarchar(max));
 INSERT @view EXEC sp_executesql @stmt,N'@input nvarchar(max), @estate_model_pk bigint',@input=@sample_positive,@estate_model_pk=@estate;
@@ -467,6 +501,16 @@ FROM @view;
 DELETE @view;
 INSERT @view EXEC sp_executesql @stmt,N'@input nvarchar(max), @estate_model_pk bigint',@input=@sample_negative,@estate_model_pk=@estate;
 SELECT '6_view_self_test_negative' AS result_set,
+ JSON_VALUE(value,'$.attestation.structured') AS structured,
+ JSON_VALUE(value,'$.attestation.onTakenPathUnobserved') AS on_taken_path_unobserved,
+ (SELECT COUNT(*) FROM OPENJSON(JSON_QUERY(value,'$.attestation.misses'))) AS misses,
+ (SELECT TOP 1 JSON_VALUE(m.value,'$.cellId') FROM OPENJSON(JSON_QUERY(value,'$.attestation.misses')) m) AS first_miss,
+ JSON_QUERY(value,'$.attestation') AS attestation
+FROM @view;
+
+DELETE @view;
+INSERT @view EXEC sp_executesql @stmt,N'@input nvarchar(max), @estate_model_pk bigint',@input=@sample_gap,@estate_model_pk=@estate;
+SELECT '6b_view_self_test_gap_negative' AS result_set,
  JSON_VALUE(value,'$.attestation.structured') AS structured,
  JSON_VALUE(value,'$.attestation.onTakenPathUnobserved') AS on_taken_path_unobserved,
  (SELECT COUNT(*) FROM OPENJSON(JSON_QUERY(value,'$.attestation.misses'))) AS misses,
