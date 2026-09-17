@@ -13,6 +13,16 @@ retired (`6962040`), cross-capability composition resolved (`1c11d74`, SDA
 the rubric owns the method, this plan owns the sequence, and nothing here
 expands admission.
 
+**Already declared and installed, awaiting integration:** the agentic-client
+surfaces are not proposed work — the estate already declares them. The MCP
+delivery `deliver-capability-change-mcp` exposes the four authority-declared
+change tools (open, seal, publish, observe) with their exact schemas,
+annotations and failure carriers (`capability-change-mcp-tool-request.v1` and
+siblings; rollout `deliver-capsule-estate-mcp` for the capsule estate), and
+the context capabilities `assemble-sidefx-capability-authoring-context` and
+`carry-consumer-authority-context` assemble and carry context as declared
+work. What remains is integration and demonstration, staged in W4.
+
 **The one question per row (rubric §4):** if this decision is omitted from its
 wave, which intended behavior fails, and why?
 
@@ -45,6 +55,15 @@ wave, which intended behavior fails, and why?
 | Session/agent ledger; receipt-as-data; comparative eval; authority profiles (SDA R5) | `agent-lane.md` remaining; `sidefx-public-demo-readiness.md` defer list | Not now. Omitting them leaves cross-invocation attribution to a record, with no claim made | Benefit: database-derived agency receipt. Burden: ledger rows + read + grants model | **Defer** — trigger: a cross-invocation question the record cannot answer |
 | Sealed bootstrap binary; backdoor-script migration; per-language bootstraps | `next-experiences.md` §1–§3; `transistor-model.md` §6/§9 | Not now. Omitting them changes no current intended behavior | Benefit: distribution without implementation exposure; script debt migrates to rows. Burden: large, cross-repo | **Defer** — triggers as recorded in `next-experiences.md` |
 | `sum` display arithmetic (recorded boundary in `invisible-execution-authority.md`) | The timing reading is independently selectable today | Omitting it costs one extra selection step; no failure | Benefit: a story display could carry the timing summary directly. Burden: expression-vocabulary addition (SDA) or a boot seam | **Defer** — trigger: a story-view timing selection is actually wanted, or a second consumer needs it |
+
+## W4 — The declared agentic-client surface: MCP and context assembly (installed; integration staged)
+
+| Decision and source location | Applicable authority and scope | Necessary now? | Expected benefit / burden | Disposition and revisit trigger |
+|---|---|---|---|---|
+| Demonstrate the declared MCP tool surface: invoke `deliver-capability-change-mcp` and show the four authority-declared change tools with their schemas, effect annotations and bound operations (no undeclared tool) | The capability's own meaning (reveal: "MCP delivery owns protocol carriers, tool declarations, schema binding, annotations, invocation, and failure representation only"); the target experience's "one door to effect" for agentic clients | Not for the three recording beats. Omitting it leaves the external-agent claim (tools are declared, not granted) undemonstrated while the capability sits installed | Benefit: the MCP act states the governance claim in a second, client-facing form — the model never receives a tool SideFX did not declare. Burden: one invocation + its input example; small | **Useful now** — trigger: the recording adds an agentic-client act, or an MCP client is wired |
+| Verify the MCP failure semantics honestly: a governed operation failure returns its failure carrier and the server stays up (no mutation broadening, no read-only hiding of an effect, no kernel-terminating failure) | Same capability meaning; `represent-capability-change-mcp-failure` scenario | Not now; no consumer yet | Benefit: pins the boundary claims with receipts. Burden: negative-case invocation + note | **Defer** — trigger: the MCP surface is demonstrated or consumed |
+| Replace the agent lane's literal visible set in `build-agent-model-request` with the declared context assembly (`assemble-sidefx-capability-authoring-context`, or a context capability the lane declares) so "what the model can see" is assembled rows, not a hand-authored literal | The display/authority rule ("what can be declared must be declared"); the lane's own doc already says the visible set is authority | Omitting it keeps one hand-authored literal where the estate already declares context assembly; the demo claim ("what the model can see is governed") then rests on the literal, not on rows | Benefit: one authority for visibility; a second lane or a changed visible set is a declaration, not an edit. Burden: a context-assembly invocation in the decision chain + the lane's request builder reads it; a declared change in the lane's own capability | **Useful now** — trigger: the visible set changes, or a second agent lane appears |
+| Route external capability-change requests through the MCP surface (the four change tools) instead of any direct path | The MCP capability's binding to the four change capabilities; the No-hand-authored-code policy for external clients | Not now; no external client is connected | Benefit: external agents get exactly the admitted mutation surface. Burden: client wiring + an MCP server run | **Defer** — trigger: an external MCP client is admitted |
 
 ## Measurement notes (rubric §5, where they could change a decision)
 
