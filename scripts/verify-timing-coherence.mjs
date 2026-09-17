@@ -4,7 +4,8 @@
 //   node scripts/verify-timing-coherence.mjs [--receipt-dir DIR]
 //
 // Drives live streamed invocations of the capabilities the agent lane exercises
-// -- `request-capability-from-objective` and `resolve-equity-market-price-evidence`
+// -- `request-capability-from-objective`, `resolve-equity-market-price-evidence`,
+// `compose-resolve-equity-market-price-evidence` and `obtain-governed-model-response`
 // -- through the estate's declared invocation path with the three credential
 // names absent from the process (the vault is the only credential source), then:
 //
@@ -204,6 +205,54 @@ async function main() {
       await write('equity.timing-reading.json', equityReading.payload);
       await write('equity.display-document.json', equityReading.document);
       await write('equity.stream-events.json', streamEvents(equity.observations));
+
+      note('compose: observe compose-resolve-equity-market-price-evidence with the credential names absent');
+      const composed = await invokeObserve(base, 'compose-resolve-equity-market-price-evidence',
+        { contractId: 'live-equity-price-request.v1', payload: { symbol: 'QQQ', region: 'US' } },
+        'compose-resolve-equity-market-price-evidence');
+      const composedAnalysis = invocationTimingCoherence({ observations: composed.observations,
+        cellTestimony: composed.result.cellTestimony });
+      const composedReading = await readTiming(base, 'compose-resolve-equity-market-price-evidence',
+        composed.result.cellTestimony, composedAnalysis);
+      assertCase('compose', composed, composedAnalysis, composedReading);
+      note(`compose: ${composedAnalysis.gapClosure.windows} windows closed, attributed ` +
+        `${composedAnalysis.attributedCellMilliseconds} ms, overhead named ` +
+        `${composedAnalysis.namedOverheadMilliseconds} ms, unaccounted ${composedAnalysis.unaccountedOverheadMilliseconds} ms`);
+      report.cases.push(caseRecord(composed, composedAnalysis, composedReading));
+      await write('compose.timing-reading.json', composedReading.payload);
+      await write('compose.display-document.json', composedReading.document);
+      await write('compose.stream-events.json', streamEvents(composed.observations));
+
+      note('model lane: observe obtain-governed-model-response with the credential names absent');
+      const modelLane = await invokeObserve(base, 'obtain-governed-model-response', {
+        carrierType: 'governed-model-invocation-request.v1',
+        requestId: 'timing-coherence-model',
+        requestHash: 'sha256:' + '0'.repeat(64),
+        modelRequest: {
+          $schema: '../../generic-llm-connector/authority/model-request.schema.v1.json',
+          requestId: 'timing-coherence-model',
+          providerAuthorityId: 'primary-cognitive-provider',
+          modelAlias: 'instruction-capable-model',
+          interaction: { mode: 'text-generation', messages: [{ role: 'user', content: 'Reply with the single word: ready' }] },
+          responsePolicy: { format: 'text', maximumOutputTokens: 256, temperature: 0 },
+          executionPolicy: { timeoutMilliseconds: 120000, attemptAuthority: { maximumAuthorizedAttempts: 1 }, providerSubstitution: { allowed: false } },
+          evidencePolicy: { captureRequestHash: true, captureResponseHash: true, captureResolvedProvider: true,
+            captureResolvedModel: true, captureTokenUsage: true, captureTiming: true }
+        },
+        requestLineage: ['timing-coherence', 'obtain-governed-model-response']
+      }, 'obtain-governed-model-response');
+      const modelLaneAnalysis = invocationTimingCoherence({ observations: modelLane.observations,
+        cellTestimony: modelLane.result.cellTestimony });
+      const modelLaneReading = await readTiming(base, 'obtain-governed-model-response',
+        modelLane.result.cellTestimony, modelLaneAnalysis);
+      assertCase('model lane', modelLane, modelLaneAnalysis, modelLaneReading);
+      note(`model lane: ${modelLaneAnalysis.gapClosure.windows} windows closed, attributed ` +
+        `${modelLaneAnalysis.attributedCellMilliseconds} ms, overhead named ` +
+        `${modelLaneAnalysis.namedOverheadMilliseconds} ms, unaccounted ${modelLaneAnalysis.unaccountedOverheadMilliseconds} ms`);
+      report.cases.push(caseRecord(modelLane, modelLaneAnalysis, modelLaneReading));
+      await write('model-lane.timing-reading.json', modelLaneReading.payload);
+      await write('model-lane.display-document.json', modelLaneReading.document);
+      await write('model-lane.stream-events.json', streamEvents(modelLane.observations));
     });
 
   report.verdict = { timingCoherent: report.cases.every(item => item.timingCoherent),
