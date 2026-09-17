@@ -93,6 +93,7 @@
         "input": true,
         "namespace": true,
         "observation": true,
+        "format": true,
         "display": true,
         "inputType": true,
         "observationAltitudes": true,
