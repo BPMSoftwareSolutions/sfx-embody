@@ -72,7 +72,15 @@ SELECT b.capability_id, b.root_scenario_id,
       b.capability_id AS capabilityId,
       b.root_scenario_id AS rootScenarioId,
       JSON_QUERY(b.scenarios) AS scenarios,
-      JSON_QUERY(N'[]') AS transitions,
+      -- Declared routing. The routes live on the capability's own semantic
+      -- definition at $.semantics.routing; analysis.capability_declared_transitions
+      -- expands them to the compiler's transition input. A capability with no
+      -- declared routing emits exactly []. This view is the original assembly
+      -- generation; the runtime loader resolves the TVFs re-emitted by
+      -- sql/migrations/emit-declared-routing.sql, which installs the helper.
+      JSON_QUERY((SELECT N'[' + ISNULL(STRING_AGG(transition.transition_json, N',')
+        WITHIN GROUP (ORDER BY transition.ordinal), N'') + N']'
+        FROM analysis.capability_declared_transitions(b.capability_id) transition)) AS transitions,
       JSON_QUERY(b.execution_authorities) AS executionAuthorities,
       JSON_QUERY(b.interface_authority) AS interfaceAuthority,
       JSON_QUERY(b.semantic_transformations) AS semanticTransformations

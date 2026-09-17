@@ -130,11 +130,19 @@ SELECT cap.estate_model_pk, cap.capability_id,
              WHERE n.namespace_id COLLATE Latin1_General_100_BIN2 IN (SELECT r.namespace_id FROM reach r WHERE r.capability_id = cap.capability_id)), N'') + N']}') COLLATE Latin1_General_100_BIN2
 FROM cap
 UNION ALL
--- semantic-graph.authority.json (assembled; no separate declaration)
+-- semantic-graph.authority.json (assembled; no separate declaration). The
+-- transitions are the capability's declared routes at $.semantics.routing,
+-- expanded by analysis.capability_declared_transitions to the compiler's
+-- transition input; a capability with no declared routing keeps exactly
+-- {"transitions":[]}. This view is the original assembly generation; the runtime
+-- loader resolves the TVFs re-emitted by
+-- sql/migrations/emit-declared-routing.sql, which installs the helper.
 SELECT cap.estate_model_pk, cap.capability_id,
   (N'capabilities/' + cap.capability_id + N'/semantic-graph.authority.json') COLLATE Latin1_General_100_BIN2,
   N'semantic-graph.authority.json' COLLATE Latin1_General_100_BIN2,
-  N'{"transitions":[]}' COLLATE Latin1_General_100_BIN2
+  (N'{"transitions":' + ISNULL((SELECT N'[' + STRING_AGG(transition.transition_json, N',')
+      WITHIN GROUP (ORDER BY transition.ordinal) + N']'
+      FROM analysis.capability_declared_transitions(cap.capability_id) transition), N'[]') + N'}') COLLATE Latin1_General_100_BIN2
 FROM cap
 UNION ALL
 -- interfaces.authority.json: CLI interface (configuration from the model declaration),
