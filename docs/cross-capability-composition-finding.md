@@ -51,7 +51,7 @@ capability. (Verified by attempting it; the insert conflicted on
   `src/agent-delivery.mjs` driver cannot be retired without breaking the demo
   lane.
 
-## Fix (one place)
+## Fix 1 (landed, `emit-composed-closure-scenarios.sql`)
 
 Emit the invocation closure's scenarios in `analysis.capability_graph_source`'s
 `scenarios` JSON: union of the capability's own `capability_scenario` rows and
@@ -61,13 +61,66 @@ the downstream scenarios from `analysis.v_scenario_invocation_closure`
 in the declaration function). The kernel needs no change; the compiler already
 admits those scenarios when present.
 
-Acceptance:
+Proof on install: `hello-world-sql` emits its own 1 scenario (closure extra 0,
+bytes unchanged); `compose-resolve-equity-market-price-evidence` emits 2
+(its own root + the invoked equity scenario).
+
+## Finding 2 — `root` in a nested scenario is the invocation root, not the scenario input
+
+After fix 1, the declared agent capability
+(`sql/migrations/declare-agent-capability.sql`, dry-run green) preflights
+through the whole lane: the governed model call, the declared resolution read,
+the declared routing, and the equity execution — verified 2026-09-17:
+
+- equity objective → `ADMITTED` → the admitted child executes
+  `resolve-equity-market-price-evidence` and real-time1 answers
+  (`providerTestimony.providerId = rapidapi/yahoo-finance-real-time1`);
+- purchase objective → `REFUSED` → the refusal child shapes
+  `CAPABILITY_NOT_FOUND` with the model proposal facts.
+
+But the admitted run's canonical payload is all null while the direct
+invocation of the same capability returns AVGO 339.51 at the same moment. The
+equity scenario receives the identical input in both runs (first-cell input
+digest `sha256:f7fb8e9d…` in both), so the difference is inside the execution:
+`build-equity-price-exchange-request` (and `normalize-equity-price-evidence`)
+read `root.payload.symbol` / `root.payload.region`. **`root` is the invocation
+root** — the objective request when the equity scenario runs as a composed
+child, its own input when it runs top-level. The exchange request therefore
+carries an empty symbol under composition and the provider answers an empty
+quote that resolves with nulls.
+
+### Required declared fix
+
+The composed scenario's input is the token at its first operation. Make the
+equity capability composition-safe by carrying what later operations need
+through the token, the way the fallback route already carries its canonical
+outcome: the first builder copies the scenario input's request fields into
+`effectLineage` (the array every credential/exchange evidence echoes), and the
+exchange-request builder and normalizer read them from `input.effectLineage`
+instead of `root.payload`. Re-declare those transformations (rows), re-verify:
+Beat 1 direct invocation unchanged (AVGO 339.51), the agent lane's admitted
+branch now carries AVGO into the exchange, the two-child routing proof and the
+projection still conform. Alternatively, SDA may define `root` as the executing
+scenario's input; that is a kernel semantics decision and would fix the class
+of nested capabilities at once.
+
+### Driver retirement
+
+Until one of those lands, `src/agent-delivery.mjs` cannot be deleted without
+losing the demo lane; the declared capability is authored and dry-run green,
+and the migration's refusal diagnostic stays in place for the final
+verification run, to be removed before install.
+
+Acceptance for the declared lane (both fixes):
 
 1. `request-capability-from-objective` preflights both objectives: the equity
-   branch executes the equity scenario (its testimony appears; the refusal
-   branch shows zero execution cells).
+   branch executes the equity scenario with the proposal's ticker and returns
+   the provider-attributed evidence; the refusal branch shows zero execution
+   cells.
 2. `compose-resolve-equity-market-price-evidence` invokes and returns the
    equity outcome (its composition proof becomes executable, not just
    projectable).
 3. The C# projection of both capabilities still conforms (the declaration
    documents already carry the closure).
+4. `src/agent-delivery.mjs`, the `agent-memory` delivery and the `agent`
+   command mapping are deleted.

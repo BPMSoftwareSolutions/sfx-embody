@@ -7,12 +7,15 @@
 -- resolution, and declared routing that executes the admitted child or refuses
 -- by absence. The unselected child runs zero cells.
 --
--- Composed from proven templates:
---  - declare-two-child-routing-proof.sql (routing shape, transformation
---    authoring, variant inference through the `route` key)
---  - compose-resolve-equity-market-price-evidence.sql (direct authority mint
---    for invoke-scenario operations, faces re-pointed at shared contracts)
---  - read-declared-capability-document.sql (declared read port)
+-- Shape (proven templates): the root scenario carries ONE operation that invokes
+-- the decision chain (a multi-operation child scenario, like the model
+-- capability's own chains), and routing selects between the execution child and
+-- the refusal child on the root's ADMITTED/REFUSED variants
+-- (declare-two-child-routing-proof.sql). Composed authorities are minted
+-- directly, faces re-pointed at shared contracts
+-- (compose-resolve-equity-market-price-evidence.sql). The admitted child
+-- terminates in the equity evidence; the refusal child shapes the refusal
+-- receipt from the routed decision state.
 --
 -- Default: ROLLBACK after verification. Change the final ROLLBACK to COMMIT to install.
 SET NOCOUNT ON;
@@ -35,13 +38,13 @@ DECLARE @request_schema nvarchar(max) = N'{"$schema":"https://json-schema.org/dr
 EXEC model.declare_contract N'agent-objective-request.v1', @request_schema;
 DECLARE @route_schema nvarchar(max) = N'{"$schema":"https://json-schema.org/draft/2020-12/schema","$id":"https://schemas.agentic-harness.local/contracts/agent-route.v1.schema.json","type":"object","additionalProperties":true,"required":["contractId","route"],"properties":{"contractId":{"const":"agent-route.v1"},"route":{"enum":["ADMITTED","REFUSED"]}}}';
 EXEC model.declare_contract N'agent-route.v1', @route_schema;
-DECLARE @invocation_schema nvarchar(max) = N'{"$schema":"https://json-schema.org/draft/2020-12/schema","$id":"https://schemas.agentic-harness.local/contracts/agent-invocation-evidence.v1.schema.json","type":"object","additionalProperties":true,"required":["contractId","capability","model","resolution","execution"],"properties":{"contractId":{"const":"agent-invocation-evidence.v1"}}}';
-EXEC model.declare_contract N'agent-invocation-evidence.v1', @invocation_schema;
 DECLARE @refusal_schema nvarchar(max) = N'{"$schema":"https://json-schema.org/draft/2020-12/schema","$id":"https://schemas.agentic-harness.local/contracts/agent-refusal-evidence.v1.schema.json","type":"object","additionalProperties":true,"required":["contractId","capability","model","resolution","refusal"],"properties":{"contractId":{"const":"agent-refusal-evidence.v1"}}}';
 EXEC model.declare_contract N'agent-refusal-evidence.v1', @refusal_schema;
+DECLARE @admitted_schema nvarchar(max) = N'{"$schema":"https://json-schema.org/draft/2020-12/schema","$id":"https://schemas.agentic-harness.local/contracts/agent-admitted-evidence.v1.schema.json","type":"object","additionalProperties":true,"properties":{"contractId":{"const":"equity-market-price-evidence.v1"}}}';
+EXEC model.declare_contract N'agent-admitted-evidence.v1', @admitted_schema;
 SELECT '1_contracts' AS result_set, ct.contract_id
 FROM model.contract ct
-WHERE ct.contract_id IN (N'agent-objective-request.v1', N'agent-route.v1', N'agent-invocation-evidence.v1', N'agent-refusal-evidence.v1')
+WHERE ct.contract_id IN (N'agent-objective-request.v1', N'agent-route.v1', N'agent-refusal-evidence.v1', N'agent-admitted-evidence.v1')
 ORDER BY ct.contract_id;
 GO
 -- ============================== CAPABILITY SHELL ==============================
@@ -71,7 +74,7 @@ DECLARE @build nvarchar(max) = N'{"op":"object","fields":{'
  +     N'"format":{"op":"literal","value":"json"},'
  +     N'"maximumOutputTokens":{"op":"literal","value":4096},'
  +     N'"temperature":{"op":"literal","value":0},'
- +     N'"schema":' + @proposal_schema + N'}},'
+ +     N'"schema":{"op":"literal","value":' + @proposal_schema + N'}}},' 
  +   N'"executionPolicy":{"op":"object","fields":{'
  +     N'"timeoutMilliseconds":{"op":"literal","value":60000},'
  +     N'"attemptAuthority":{"op":"object","fields":{"maximumAuthorizedAttempts":{"op":"literal","value":1}}},'
@@ -95,45 +98,24 @@ DECLARE @decision nvarchar(max) = N'{"op":"object","fields":{'
  + N'"executionRequest":{"op":"object","fields":{"contractId":{"op":"literal","value":"live-equity-price-request.v1"},"payload":{"op":"object","fields":{"symbol":{"op":"path","from":"input","path":"proposedInput"},"region":{"op":"literal","value":"US"}}}}}'
  + N'}}';
 DECLARE @equity_request nvarchar(max) = N'{"op":"path","from":"input","path":"executionRequest"}';
-DECLARE @invocation_evidence nvarchar(max) = N'{"op":"object","fields":{'
- + N'"contractId":{"op":"literal","value":"agent-invocation-evidence.v1"},'
- + N'"capability":{"op":"literal","value":"request-capability-from-objective"},'
- + N'"model":{"op":"object","fields":{'
- +   N'"disposition":{"op":"path","from":"root","path":"carried.disposition"},'
- +   N'"provider":{"op":"path","from":"root","path":"carried.resolvedProvider"},'
- +   N'"model":{"op":"path","from":"root","path":"carried.resolvedModel"},'
- +   N'"providerAuthorityId":{"op":"literal","value":"primary-cognitive-provider"},'
- +   N'"modelAlias":{"op":"literal","value":"instruction-capable-model"},'
- +   N'"proposal":{"op":"path","from":"root","path":"proposal"},'
- +   N'"requestHash":{"op":"path","from":"root","path":"carried.requestHash"},'
- +   N'"responseHash":{"op":"path","from":"root","path":"carried.responseHash"},'
- +   N'"durationMilliseconds":{"op":"path","from":"root","path":"carried.timing.durationMilliseconds"}}},'
- + N'"resolution":{"op":"object","fields":{"capability":{"op":"path","from":"root","path":"proposal.capability"},"declared":{"op":"literal","value":true}}},'
- + N'"execution":{"op":"object","fields":{'
- +   N'"capability":{"op":"path","from":"root","path":"proposal.capability"},'
- +   N'"input":{"op":"path","from":"root","path":"proposal.input"},'
- +   N'"disposition":{"op":"path","from":"input","path":"disposition"},'
- +   N'"outcome":{"op":"path","from":"input","path":"payload"},'
- +   N'"providerTestimony":{"op":"path","from":"input","path":"providerTestimony"}}}'
- + N'}}';
 DECLARE @refusal_evidence nvarchar(max) = N'{"op":"object","fields":{'
  + N'"contractId":{"op":"literal","value":"agent-refusal-evidence.v1"},'
  + N'"capability":{"op":"literal","value":"request-capability-from-objective"},'
  + N'"model":{"op":"object","fields":{'
- +   N'"disposition":{"op":"path","from":"root","path":"carried.disposition"},'
- +   N'"provider":{"op":"path","from":"root","path":"carried.resolvedProvider"},'
- +   N'"model":{"op":"path","from":"root","path":"carried.resolvedModel"},'
- +   N'"proposal":{"op":"path","from":"root","path":"proposal"}}},'
- + N'"resolution":{"op":"object","fields":{"capability":{"op":"path","from":"root","path":"proposal.capability"},"declared":{"op":"literal","value":false}}},'
- + N'"refusal":{"op":"literal","value":"CAPABILITY_NOT_FOUND"}'
+ +   N'"disposition":{"op":"path","from":"input","path":"carried.disposition"},'
+ +   N'"provider":{"op":"path","from":"input","path":"carried.resolvedProvider"},'
+ +   N'"model":{"op":"path","from":"input","path":"carried.resolvedModel"},'
+ +   N'"proposal":{"op":"path","from":"input","path":"proposal"}}},'
+ + N'"resolution":{"op":"object","fields":{"capability":{"op":"path","from":"input","path":"proposal.capability"},"declared":{"op":"literal","value":false}}},'
+ + N'"refusal":{"op":"literal","value":"CAPABILITY_NOT_FOUND"},'
+ + N'"diagnostic":{"op":"path","from":"input","path":"carried"}'
  + N'}}';
 DECLARE @transformations TABLE (ordinal int PRIMARY KEY, id nvarchar(400), expression nvarchar(max));
 INSERT @transformations VALUES
  (0, N'build-agent-model-request', @build),
  (1, N'decide-agent-route', @decision),
  (2, N'shape-equity-execution-request', @equity_request),
- (3, N'shape-agent-execution-evidence', @invocation_evidence),
- (4, N'shape-agent-refusal-evidence', @refusal_evidence);
+ (3, N'shape-agent-refusal-evidence', @refusal_evidence);
 DECLARE @ordinal int, @id nvarchar(400), @expression nvarchar(max), @semantics nvarchar(max);
 DECLARE @object bigint, @definition bigint, @digest binary(32), @transformation bigint, @version bigint;
 DECLARE @cursor CURSOR;
@@ -169,22 +151,45 @@ FROM model.transformation t JOIN model.identity_namespace n ON n.namespace_pk = 
 WHERE n.namespace_id = @namespace ORDER BY t.transformation_id;
 GO
 -- ============================== SCENARIOS ==============================
+-- Root: one operation that invokes the decision chain; routing selects the child.
 DECLARE @capability_id nvarchar(400) = N'request-capability-from-objective';
 EXEC model.declare_scenario
   @capability_id = @capability_id,
   @scenario = N'{"scenarioId":"request-capability-from-objective","name":"Resolve one objective through the governed lane","inputId":"agent-objective-request","inputContract":"agent-objective-request.v1","eventId":"agent-objective-requested","eventAuthority":"request-capability-from-objective.v1","outcomeId":"agent-route","outcomeContract":"agent-route.v1","given":"one objective and the capabilities the invocation can see","when":"the governed model proposes one capability request and the declared estate resolves it","then":"the declared route selects the admitted execution child or the refusal child","root":true,"terminal":false,"variants":["ADMITTED","REFUSED"]}',
-  @operations = N'[{"operationId":"request-capability-from-objective.build","kind":"invoke-port","portId":"build-agent-model-request-port"},{"operationId":"request-capability-from-objective.resolve","kind":"invoke-port","portId":"resolve-proposed-capability-port"},{"operationId":"request-capability-from-objective.decide","kind":"invoke-port","portId":"decide-agent-route-port"}]',
-  @port_bindings = N'[{"portId":"build-agent-model-request-port","platformCapabilityId":"sda-authority-transformation-port.v1","configuration":{"transformationAuthorityRef":"semantic-transformation.authority.json","transformationId":"build-agent-model-request"}},{"portId":"resolve-proposed-capability-port","platformCapabilityId":"sda-embodiment-plan-port.v1","configuration":{"statement":"DECLARE @proposed nvarchar(400)=JSON_VALUE(@input,''$.normalizedResponse.structuredValue.capability'');\nDECLARE @proposedInput nvarchar(400)=JSON_VALUE(@input,''$.normalizedResponse.structuredValue.input'');\nDECLARE @declared bit=CASE WHEN EXISTS(SELECT 1 FROM analysis.v_selected_semantic_definition d WHERE d.estate_model_pk=@estate_model_pk AND d.object_kind=''CAPABILITY'' AND d.declared_id=@proposed) THEN 1 ELSE 0 END;\nSELECT (SELECT JSON_QUERY(@input) AS carried, CASE WHEN @declared=1 THEN 1 ELSE 0 END AS declared, @proposed AS proposedCapability, @proposedInput AS proposedInput FOR JSON PATH, WITHOUT_ARRAY_WRAPPER) AS value","resultColumn":"value"}},{"portId":"decide-agent-route-port","platformCapabilityId":"sda-authority-transformation-port.v1","configuration":{"transformationAuthorityRef":"semantic-transformation.authority.json","transformationId":"decide-agent-route"}}]';
+  @operations = N'[{"operationId":"request-capability-from-objective.decide","kind":"invoke-port","portId":"decide-agent-route-port"}]',
+  @port_bindings = N'[{"portId":"decide-agent-route-port","platformCapabilityId":"sda-authority-transformation-port.v1","configuration":{"transformationAuthorityRef":"semantic-transformation.authority.json","transformationId":"decide-agent-route"}}]';
+-- Decision chain: build the governed request, invoke the model capability, resolve, decide.
 EXEC model.declare_scenario
   @capability_id = @capability_id,
-  @scenario = N'{"scenarioId":"execute-admitted-proposal","name":"Execute the admitted proposal","inputId":"execute-admitted-proposal-request","inputContract":"agent-route.v1","eventId":"execute-admitted-proposal-selected","eventAuthority":"execute-admitted-proposal.v1","outcomeId":"agent-invocation-evidence","outcomeContract":"agent-invocation-evidence.v1","given":"the declared route admitted the proposed capability","when":"the admitted capability executes and the evidence is shaped","then":"the agent invocation evidence is produced","terminal":true}',
-  @operations = N'[{"operationId":"execute-admitted-proposal.shape","kind":"invoke-port","portId":"shape-equity-execution-request-port"},{"operationId":"execute-admitted-proposal.shape-evidence","kind":"invoke-port","portId":"shape-agent-execution-evidence-port"}]',
-  @port_bindings = N'[{"portId":"shape-equity-execution-request-port","platformCapabilityId":"sda-authority-transformation-port.v1","configuration":{"transformationAuthorityRef":"semantic-transformation.authority.json","transformationId":"shape-equity-execution-request"}},{"portId":"shape-agent-execution-evidence-port","platformCapabilityId":"sda-authority-transformation-port.v1","configuration":{"transformationAuthorityRef":"semantic-transformation.authority.json","transformationId":"shape-agent-execution-evidence"}}]';
+  @scenario = N'{"scenarioId":"decide-agent-route","name":"Decide the objective route","inputId":"decide-agent-route-request","inputContract":"agent-objective-request.v1","eventId":"decide-agent-route-requested","eventAuthority":"decide-agent-route.v1","outcomeId":"agent-route","outcomeContract":"agent-route.v1","given":"one objective","when":"the governed model proposes and the declared estate resolves","then":"the route state names the proposal and whether it is admitted","terminal":false,"variants":["ADMITTED","REFUSED"]}',
+  @operations = N'[{"operationId":"decide-agent-route.build","kind":"invoke-port","portId":"build-agent-model-request-port"},{"operationId":"decide-agent-route.resolve","kind":"invoke-port","portId":"resolve-proposed-capability-port"},{"operationId":"decide-agent-route.decide","kind":"invoke-port","portId":"decide-agent-route-inner-port"}]',
+  @port_bindings = N'[{"portId":"build-agent-model-request-port","platformCapabilityId":"sda-authority-transformation-port.v1","configuration":{"transformationAuthorityRef":"semantic-transformation.authority.json","transformationId":"build-agent-model-request"}},{"portId":"resolve-proposed-capability-port","platformCapabilityId":"sda-embodiment-plan-port.v1","configuration":{"statement":"DECLARE @proposed nvarchar(400)=JSON_VALUE(@input,''$.normalizedResponse.structuredValue.capability'');\nDECLARE @proposedInput nvarchar(400)=JSON_VALUE(@input,''$.normalizedResponse.structuredValue.input'');\nDECLARE @declared bit=CASE WHEN EXISTS(SELECT 1 FROM analysis.v_selected_semantic_definition d WHERE d.estate_model_pk=@estate_model_pk AND d.object_kind=''CAPABILITY'' AND d.declared_id=@proposed) THEN 1 ELSE 0 END;\nSELECT (SELECT JSON_QUERY(@input) AS carried, CASE WHEN @declared=1 THEN 1 ELSE 0 END AS declared, @proposed AS proposedCapability, @proposedInput AS proposedInput FOR JSON PATH, WITHOUT_ARRAY_WRAPPER) AS value","resultColumn":"value"}},{"portId":"decide-agent-route-inner-port","platformCapabilityId":"sda-authority-transformation-port.v1","configuration":{"transformationAuthorityRef":"semantic-transformation.authority.json","transformationId":"decide-agent-route"}}]';
+-- Admitted child: shape the equity request, execute the declared capability.
+EXEC model.declare_scenario
+  @capability_id = @capability_id,
+  @scenario = N'{"scenarioId":"execute-admitted-proposal","name":"Execute the admitted proposal","inputId":"execute-admitted-proposal-request","inputContract":"agent-route.v1","eventId":"execute-admitted-proposal-selected","eventAuthority":"execute-admitted-proposal.v1","outcomeId":"agent-admitted-evidence","outcomeContract":"agent-admitted-evidence.v1","given":"the declared route admitted the proposed capability","when":"the admitted capability executes","then":"the provider-attributed capability evidence is produced","terminal":true}',
+  @operations = N'[{"operationId":"execute-admitted-proposal.shape","kind":"invoke-port","portId":"shape-equity-execution-request-port"}]',
+  @port_bindings = N'[{"portId":"shape-equity-execution-request-port","platformCapabilityId":"sda-authority-transformation-port.v1","configuration":{"transformationAuthorityRef":"semantic-transformation.authority.json","transformationId":"shape-equity-execution-request"}}]';
+-- Refusal child: shape the refusal receipt from the routed decision state.
 EXEC model.declare_scenario
   @capability_id = @capability_id,
   @scenario = N'{"scenarioId":"refuse-proposed-capability","name":"Refuse the proposed capability by absence","inputId":"refuse-proposed-capability-request","inputContract":"agent-route.v1","eventId":"refuse-proposed-capability-selected","eventAuthority":"refuse-proposed-capability.v1","outcomeId":"agent-refusal-evidence","outcomeContract":"agent-refusal-evidence.v1","given":"the declared route refused the proposed capability","when":"the refusal evidence is shaped","then":"no provider is reached and no effect occurs","terminal":true}',
   @operations = N'[{"operationId":"refuse-proposed-capability.shape","kind":"invoke-port","portId":"shape-agent-refusal-evidence-port"}]',
   @port_bindings = N'[{"portId":"shape-agent-refusal-evidence-port","platformCapabilityId":"sda-authority-transformation-port.v1","configuration":{"transformationAuthorityRef":"semantic-transformation.authority.json","transformationId":"shape-agent-refusal-evidence"}}]';
+-- The admitted child's outcome is the invoked capability's own evidence contract;
+-- declare_scenario admits only contracts it can declare, so the outcome contract
+-- is re-pointed to the equity evidence contract version after declaration.
+DECLARE @equityOutCv bigint = (SELECT TOP 1 cv.contract_version_pk
+  FROM model.contract ct JOIN model.contract_version cv ON cv.contract_pk = ct.contract_pk
+  WHERE ct.contract_id = N'equity-market-price-evidence.v1' ORDER BY cv.contract_version_pk DESC);
+IF @equityOutCv IS NULL THROW 51000, 'AGENT_EQUITY_OUTCOME_CONTRACT_NOT_FOUND', 1;
+DECLARE @admittedScnVer bigint = (SELECT cs.scenario_version_pk
+  FROM model.capability_scenario cs
+  JOIN model.scenario s ON s.scenario_pk = cs.scenario_pk
+  JOIN model.estate_capability ec ON ec.capability_version_pk = cs.capability_version_pk
+  JOIN model.capability c ON c.capability_pk = ec.capability_pk
+  WHERE c.capability_id = @capability_id AND s.scenario_id = N'execute-admitted-proposal');
+UPDATE model.scenario_outcome_contract SET contract_version_pk = @equityOutCv WHERE scenario_version_pk = @admittedScnVer;
 GO
 -- ============================== ROUTING AND CLI ==============================
 DECLARE @capability_id nvarchar(400) = N'request-capability-from-objective';
@@ -255,18 +260,30 @@ Feature: Resolve one objective through the governed lane
     When the governed model proposes one capability request and the declared estate resolves it
     Then the declared route selects the admitted execution child or the refusal child
 
+  @scenario:decide-agent-route
+  @input:decide-agent-route-request
+  @input-contract:agent-objective-request.v1
+  @event:decide-agent-route-requested
+  @event-authority:decide-agent-route.v1
+  @outcome:agent-route
+  @outcome-contract:agent-route.v1
+  Scenario: Decide the objective route
+    Given one objective
+    When the governed model proposes and the declared estate resolves
+    Then the route state names the proposal and whether it is admitted
+
   @scenario:execute-admitted-proposal
   @input:execute-admitted-proposal-request
   @input-contract:agent-route.v1
   @event:execute-admitted-proposal-selected
   @event-authority:execute-admitted-proposal.v1
-  @outcome:agent-invocation-evidence
-  @outcome-contract:agent-invocation-evidence.v1
+  @outcome:equity-market-price-evidence
+  @outcome-contract:equity-market-price-evidence.v1
   @outcome-terminal
   Scenario: Execute the admitted proposal
     Given the declared route admitted the proposed capability
-    When the admitted capability executes and the evidence is shaped
-    Then the agent invocation evidence is produced
+    When the admitted capability executes
+    Then the provider-attributed capability evidence is produced
 
   @scenario:refuse-proposed-capability
   @input:refuse-proposed-capability-request
@@ -283,9 +300,6 @@ Feature: Resolve one objective through the governed lane
 ';
 GO
 -- ============================== COMPOSED AUTHORITIES ==============================
--- The root and the admitted child invoke other capabilities' scenarios, so their
--- authorities are minted directly with invoke-scenario operations and the
--- scenario events are re-pointed, exactly as compose-resolve-equity-market-price-evidence.
 DECLARE @capability_id nvarchar(400) = N'request-capability-from-objective';
 DECLARE @model bigint = (SELECT estate_model_pk FROM source.current_model WHERE singleton_id = 1);
 DECLARE @model_target bigint = (SELECT cs.scenario_version_pk
@@ -298,25 +312,35 @@ DECLARE @equity_target bigint = (SELECT cs.scenario_version_pk
   JOIN model.capability_scenario cs ON cs.capability_version_pk = ec.capability_version_pk
   JOIN model.scenario s ON s.scenario_pk = cs.scenario_pk
   WHERE c.capability_id = N'resolve-equity-market-price-evidence' AND s.scenario_id = N'resolve-equity-market-price-evidence');
+DECLARE @chain_target bigint = (SELECT cs.scenario_version_pk
+  FROM model.capability c JOIN model.estate_capability ec ON ec.capability_pk = c.capability_pk AND ec.estate_model_pk = @model
+  JOIN model.capability_scenario cs ON cs.capability_version_pk = ec.capability_version_pk
+  JOIN model.scenario s ON s.scenario_pk = cs.scenario_pk
+  WHERE c.capability_id = @capability_id AND s.scenario_id = N'decide-agent-route');
 IF @model_target IS NULL THROW 51000, 'AGENT_MODEL_SCENARIO_NOT_FOUND', 1;
 IF @equity_target IS NULL THROW 51000, 'AGENT_EQUITY_SCENARIO_NOT_FOUND', 1;
+IF @chain_target IS NULL THROW 51000, 'AGENT_CHAIN_SCENARIO_NOT_FOUND', 1;
 DECLARE @root_envelope nvarchar(max) = N'{"address":{"id":"request-capability-from-objective.v1","kind":"EXECUTION_AUTHORITY","namespace":"sidefx:capability:request-capability-from-objective"},"format":"sidefx-semantic-definition.v1","semantics":{"authority":{"id":"request-capability-from-objective.v1","operations":['
+ + N'{"kind":"invoke-scenario","scenarioId":"decide-agent-route"}],'
+ + N'"owningScenarioId":"request-capability-from-objective"}}}';
+DECLARE @chain_envelope nvarchar(max) = N'{"address":{"id":"decide-agent-route.v1","kind":"EXECUTION_AUTHORITY","namespace":"sidefx:capability:request-capability-from-objective"},"format":"sidefx-semantic-definition.v1","semantics":{"authority":{"id":"decide-agent-route.v1","operations":['
  + N'{"kind":"invoke-port","portId":"build-agent-model-request-port"},'
  + N'{"kind":"invoke-scenario","scenarioId":"obtain-governed-model-response"},'
  + N'{"kind":"invoke-port","portId":"resolve-proposed-capability-port"},'
- + N'{"kind":"invoke-port","portId":"decide-agent-route-port"}],'
- + N'"owningScenarioId":"request-capability-from-objective"}}}';
+ + N'{"kind":"invoke-port","portId":"decide-agent-route-inner-port"}],'
+ + N'"owningScenarioId":"decide-agent-route"}}}';
 DECLARE @child_envelope nvarchar(max) = N'{"address":{"id":"execute-admitted-proposal.v1","kind":"EXECUTION_AUTHORITY","namespace":"sidefx:capability:request-capability-from-objective"},"format":"sidefx-semantic-definition.v1","semantics":{"authority":{"id":"execute-admitted-proposal.v1","operations":['
  + N'{"kind":"invoke-port","portId":"shape-equity-execution-request-port"},'
- + N'{"kind":"invoke-scenario","scenarioId":"resolve-equity-market-price-evidence"},'
- + N'{"kind":"invoke-port","portId":"shape-agent-execution-evidence-port"}],'
+ + N'{"kind":"invoke-scenario","scenarioId":"resolve-equity-market-price-evidence"}],'
  + N'"owningScenarioId":"execute-admitted-proposal"}}}';
 DECLARE @mints TABLE (ordinal int PRIMARY KEY, authority_id nvarchar(400), scenario_id nvarchar(400), envelope nvarchar(max), operations nvarchar(max), scenario_target bigint);
 INSERT @mints VALUES
  (0, N'request-capability-from-objective.v1', N'request-capability-from-objective', @root_envelope,
-  N'[{"kind":"invoke-port","portId":"build-agent-model-request-port"},{"kind":"invoke-scenario","scenarioId":"obtain-governed-model-response"},{"kind":"invoke-port","portId":"resolve-proposed-capability-port"},{"kind":"invoke-port","portId":"decide-agent-route-port"}]', @model_target),
- (1, N'execute-admitted-proposal.v1', N'execute-admitted-proposal', @child_envelope,
-  N'[{"kind":"invoke-port","portId":"shape-equity-execution-request-port"},{"kind":"invoke-scenario","scenarioId":"resolve-equity-market-price-evidence"},{"kind":"invoke-port","portId":"shape-agent-execution-evidence-port"}]', @equity_target);
+  N'[{"kind":"invoke-scenario","scenarioId":"decide-agent-route"}]', @chain_target),
+ (1, N'decide-agent-route.v1', N'decide-agent-route', @chain_envelope,
+  N'[{"kind":"invoke-port","portId":"build-agent-model-request-port"},{"kind":"invoke-scenario","scenarioId":"obtain-governed-model-response"},{"kind":"invoke-port","portId":"resolve-proposed-capability-port"},{"kind":"invoke-port","portId":"decide-agent-route-inner-port"}]', @model_target),
+ (2, N'execute-admitted-proposal.v1', N'execute-admitted-proposal', @child_envelope,
+  N'[{"kind":"invoke-port","portId":"shape-equity-execution-request-port"},{"kind":"invoke-scenario","scenarioId":"resolve-equity-market-price-evidence"}]', @equity_target);
 DECLARE @m_ordinal int, @authority_id nvarchar(400), @scenario_id nvarchar(400), @env nvarchar(max), @operations nvarchar(max), @scenario_target bigint;
 DECLARE @eaPk bigint, @eaSo bigint, @envBytes varbinary(max), @envDigest binary(32), @authSod bigint, @eaVer bigint;
 DECLARE @mint_cursor CURSOR;
@@ -371,12 +395,6 @@ BEGIN
   FETCH NEXT FROM @mint_cursor INTO @m_ordinal, @authority_id, @scenario_id, @env, @operations, @scenario_target;
 END
 CLOSE @mint_cursor; DEALLOCATE @mint_cursor;
--- The invoked capabilities' scenarios cannot be linked into this capability's
--- scenario set: model.capability_scenario has a composite FK to model.scenario
--- (capability_pk, scenario_pk), so a capability may only own its own scenarios.
--- Cross-capability invoke-scenario therefore requires the graph-source assembly
--- to emit the invocation closure's scenarios as cells; see
--- docs/cross-capability-composition-finding.md.
 SELECT '4_composed_authorities' AS result_set, ea.execution_authority_id, eo.ordinal, eo.operation_kind, p.port_id,
   target.scenario_id AS target_scenario
 FROM model.execution_authority ea
@@ -389,8 +407,27 @@ LEFT JOIN model.port p ON p.port_pk = pv.port_pk
 LEFT JOIN model.operation_scenario_invocation osi ON osi.execution_operation_pk = eo.execution_operation_pk
 LEFT JOIN model.scenario_version tsv ON tsv.scenario_version_pk = osi.target_scenario_version_pk
 LEFT JOIN model.scenario target ON target.scenario_pk = tsv.scenario_pk
-WHERE ea.execution_authority_id IN (N'request-capability-from-objective.v1', N'execute-admitted-proposal.v1')
+WHERE ea.execution_authority_id IN (N'request-capability-from-objective.v1', N'decide-agent-route.v1', N'execute-admitted-proposal.v1')
   AND eav.execution_authority_version_pk = (SELECT MAX(execution_authority_version_pk) FROM model.execution_authority_version v WHERE v.execution_authority_pk = ea.execution_authority_pk)
 ORDER BY ea.execution_authority_id, eo.ordinal;
+SELECT '5_closure' AS result_set, s.scenario_id, cl.minimum_depth
+FROM analysis.v_scenario_invocation_closure cl
+JOIN model.scenario_version sv ON sv.scenario_version_pk = cl.downstream_scenario_version_pk
+JOIN model.scenario s ON s.scenario_pk = sv.scenario_pk
+WHERE cl.capability_version_pk = (SELECT capability_version_pk FROM model.estate_capability WHERE estate_model_pk = @model AND capability_pk = (SELECT capability_pk FROM model.capability WHERE capability_id = @capability_id))
+ORDER BY cl.minimum_depth, s.scenario_id;
+SELECT '6_graph_authorities' AS result_set, a.authority_id,
+  (SELECT STRING_AGG(JSON_VALUE(op.value, '$.kind') + ISNULL(N':' + JSON_VALUE(op.value, '$.portId'), ISNULL(N':' + JSON_VALUE(op.value, '$.scenarioId'), N'')), N' | ')
+   FROM OPENJSON(a.operations) op) AS ops
+FROM (
+  SELECT JSON_VALUE(authority.value, '$.id') AS authority_id, JSON_QUERY(authority.value, '$.operations') AS operations
+  FROM analysis.capability_graph_source(N'request-capability-from-objective', 0, NULL) g
+  CROSS APPLY OPENJSON(g.graph_source, '$.executionAuthorities') authority
+) a;
+SELECT '7_graph_scenarios' AS result_set, JSON_VALUE(s.value, '$.scenarioId') AS scenario_id,
+  JSON_VALUE(s.value, '$.event.executionAuthorityId') AS event_authority
+FROM analysis.capability_graph_source(N'request-capability-from-objective', 0, NULL) g
+CROSS APPLY OPENJSON(g.graph_source, '$.scenarios') s
+ORDER BY scenario_id;
 ROLLBACK TRANSACTION;
 -- To install, replace the ROLLBACK above with COMMIT and re-run.
