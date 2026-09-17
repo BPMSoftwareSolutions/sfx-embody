@@ -28,8 +28,16 @@
             },
             "variants": [
               {
-                "variantId": "terminal",
-                "terminal": true
+                "variantId": "equity_market_price_evidence_resolved",
+                "terminal": false
+              },
+              {
+                "variantId": "equity_market_price_provider_unavailable",
+                "terminal": false
+              },
+              {
+                "variantId": "native_market_price_testimony_rejected",
+                "terminal": false
               }
             ]
           },
@@ -63,8 +71,16 @@
         },
         "variants": [
           {
-            "variantId": "terminal",
-            "terminal": true
+            "variantId": "equity_market_price_evidence_resolved",
+            "terminal": false
+          },
+          {
+            "variantId": "equity_market_price_provider_unavailable",
+            "terminal": false
+          },
+          {
+            "variantId": "native_market_price_testimony_rejected",
+            "terminal": false
           }
         ]
       },
@@ -108,6 +124,27 @@
           "providerProjectionRefs": []
         },
         {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10",
+          "altitude": "mechanic",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "responsibility": {
+            "responsibilityId": "responsibility:cell:mechanic:resolve-equity-market-price-evidence.operation.10",
+            "statement": "Execute operation:sda-authority-transformation-port.v1"
+          },
+          "result": {
+            "dataType": "equity-market-price-evidence.v1",
+            "variants": [
+              "equity_market_price_evidence_resolved",
+              "equity_market_price_provider_unavailable",
+              "success"
+            ]
+          },
+          "mechanicProjectionRef": "circuit:mechanic:cell:mechanic:resolve-equity-market-price-evidence.operation.10",
+          "providerProjectionRefs": []
+        },
+        {
           "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.2",
           "altitude": "mechanic",
           "input": {
@@ -120,9 +157,11 @@
           "result": {
             "dataType": "semantic-value.v1",
             "variants": [
-              "cancelled",
-              "failure",
-              "success"
+              "bound",
+              "credential_not_available",
+              "identity_mismatch",
+              "success",
+              "unauthorized_reference"
             ]
           },
           "providerProjectionRefs": [
@@ -164,8 +203,15 @@
             "dataType": "semantic-value.v1",
             "variants": [
               "cancelled",
+              "completed",
               "failure",
-              "success"
+              "oversized-response-rejected",
+              "rejected-credential",
+              "rejected-endpoint",
+              "retained-non-success",
+              "success",
+              "timed-out",
+              "transport-failed"
             ]
           },
           "providerProjectionRefs": [
@@ -183,15 +229,111 @@
             "statement": "Execute operation:sda-authority-transformation-port.v1"
           },
           "result": {
-            "dataType": "equity-market-price-evidence.v1",
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "equity_market_price_evidence_resolved",
+              "equity_market_price_provider_unavailable",
+              "native_market_price_testimony_rejected",
+              "success"
+            ]
+          },
+          "mechanicProjectionRef": "circuit:mechanic:cell:mechanic:resolve-equity-market-price-evidence.operation.5",
+          "providerProjectionRefs": []
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6",
+          "altitude": "mechanic",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "responsibility": {
+            "responsibilityId": "responsibility:cell:mechanic:resolve-equity-market-price-evidence.operation.6",
+            "statement": "Execute operation:sda-authority-transformation-port.v1"
+          },
+          "result": {
+            "dataType": "semantic-value.v1",
             "variants": [
               "cancelled",
               "failure",
               "success"
             ]
           },
-          "mechanicProjectionRef": "circuit:mechanic:cell:mechanic:resolve-equity-market-price-evidence.operation.5",
+          "mechanicProjectionRef": "circuit:mechanic:cell:mechanic:resolve-equity-market-price-evidence.operation.6",
           "providerProjectionRefs": []
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.7",
+          "altitude": "mechanic",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "responsibility": {
+            "responsibilityId": "responsibility:cell:mechanic:resolve-equity-market-price-evidence.operation.7",
+            "statement": "Execute operation:sda-external-credential-reference-binding-port.v1"
+          },
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "bound",
+              "credential_not_available",
+              "identity_mismatch",
+              "success",
+              "unauthorized_reference"
+            ]
+          },
+          "providerProjectionRefs": [
+            "circuit:provider:cell:mechanic:resolve-equity-market-price-evidence.operation.7"
+          ]
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8",
+          "altitude": "mechanic",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "responsibility": {
+            "responsibilityId": "responsibility:cell:mechanic:resolve-equity-market-price-evidence.operation.8",
+            "statement": "Execute operation:sda-authority-transformation-port.v1"
+          },
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "cancelled",
+              "failure",
+              "success"
+            ]
+          },
+          "mechanicProjectionRef": "circuit:mechanic:cell:mechanic:resolve-equity-market-price-evidence.operation.8",
+          "providerProjectionRefs": []
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.9",
+          "altitude": "mechanic",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "responsibility": {
+            "responsibilityId": "responsibility:cell:mechanic:resolve-equity-market-price-evidence.operation.9",
+            "statement": "Execute operation:sda-governed-http-exchange-port.v1"
+          },
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "cancelled",
+              "completed",
+              "failure",
+              "oversized-response-rejected",
+              "rejected-credential",
+              "rejected-endpoint",
+              "retained-non-success",
+              "success",
+              "timed-out",
+              "transport-failed"
+            ]
+          },
+          "providerProjectionRefs": [
+            "circuit:provider:cell:mechanic:resolve-equity-market-price-evidence.operation.9"
+          ]
         }
       ],
       "routes": [
@@ -201,6 +343,13 @@
           "product": "semantic-value.v1",
           "semanticProgress": "narrowing",
           "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10",
+          "toCellId": "cell:scenario:resolve-equity-market-price-evidence",
+          "product": "equity-market-price-evidence.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return"
         },
         {
           "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.2",
@@ -225,10 +374,38 @@
         },
         {
           "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5",
-          "toCellId": "cell:scenario:resolve-equity-market-price-evidence",
-          "product": "equity-market-price-evidence.v1",
-          "semanticProgress": "terminating",
-          "edgeKind": "return"
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.7",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.7",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.9",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.9",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
         }
       ]
     }
@@ -381,6 +558,628 @@
           "product": "semantic-value.v1",
           "semanticProgress": "narrowing",
           "edgeKind": "sequence"
+        }
+      ]
+    },
+    {
+      "mechanicProjectionType": "mechanic-circuit.v1",
+      "projectionId": "circuit:mechanic:cell:mechanic:resolve-equity-market-price-evidence.operation.10",
+      "parentExecutionCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10",
+      "rootCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.bindings.fallbackcompleted.left",
+      "cells": [
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "let",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.bindings.fallbackcompleted",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "equals",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.bindings.fallbackcompleted.left",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "path",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.bindings.fallbackcompleted.right",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "literal",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.bindings.prior",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "path",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "identity",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.else",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "path",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "let",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.bindings.payload",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "try-parse-json",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.bindings.payload.value",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "base64-decode-utf8",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.bindings.payload.value.value",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "path",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.bindings.quote",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "path",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "object",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.contractid",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "literal",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.disposition",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "literal",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.payload",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "object",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.payload.fields.currency",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "path",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.payload.fields.exchange",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "path",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.payload.fields.marketstate",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "path",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.payload.fields.observedmarkettime",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "path",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.payload.fields.observedprice",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "path",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.payload.fields.region",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "path",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.payload.fields.sourceattribution",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "path",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.payload.fields.symbol",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "path",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.providertestimony",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "object",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.providertestimony.fields.bindingid",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "literal",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.providertestimony.fields.nativeshape",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "literal",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.providertestimony.fields.providerid",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "literal",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.when",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "path",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value:selection",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "junction:boolean-selection.v1",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "false",
+              "true"
+            ]
+          }
+        }
+      ],
+      "routes": [
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10",
+          "product": "equity-market-price-evidence.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.bindings.fallbackcompleted",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.bindings.prior",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.bindings.fallbackcompleted.left",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.bindings.fallbackcompleted.right",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.bindings.fallbackcompleted.right",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.bindings.fallbackcompleted",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.bindings.prior",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.when",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.else",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.bindings.payload",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.bindings.quote",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.bindings.payload.value",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.bindings.payload",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.bindings.payload.value.value",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.bindings.payload.value",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.bindings.quote",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.contractid",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.contractid",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.disposition",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.disposition",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.payload.fields.symbol",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.payload",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.providertestimony.fields.bindingid",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.payload.fields.currency",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.payload.fields.observedprice",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.payload.fields.exchange",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.payload.fields.sourceattribution",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.payload.fields.marketstate",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.payload.fields.exchange",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.payload.fields.observedmarkettime",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.payload.fields.marketstate",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.payload.fields.observedprice",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.payload.fields.observedmarkettime",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.payload.fields.region",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.payload.fields.currency",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.payload.fields.sourceattribution",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.payload",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.payload.fields.symbol",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.payload.fields.region",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.providertestimony",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.providertestimony.fields.bindingid",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.providertestimony.fields.providerid",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.providertestimony.fields.nativeshape",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.providertestimony",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.providertestimony.fields.providerid",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.providertestimony.fields.nativeshape",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.when",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value:selection",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value:selection",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.else",
+          "product": "semantic-value.v1",
+          "semanticProgress": "expanding",
+          "edgeKind": "selection",
+          "groupId": "group:cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value:selection",
+          "selectsVariant": "false"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value:selection",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.bindings.payload.value.value",
+          "product": "semantic-value.v1",
+          "semanticProgress": "expanding",
+          "edgeKind": "selection",
+          "groupId": "group:cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value:selection",
+          "selectsVariant": "true"
         }
       ]
     },
@@ -2346,7 +3145,7 @@
         {
           "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression",
           "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.5",
-          "product": "equity-market-price-evidence.v1",
+          "product": "semantic-value.v1",
           "semanticProgress": "terminating",
           "edgeKind": "return"
         },
@@ -3265,6 +4064,1050 @@
           "selectsVariant": "true"
         }
       ]
+    },
+    {
+      "mechanicProjectionType": "mechanic-circuit.v1",
+      "projectionId": "circuit:mechanic:cell:mechanic:resolve-equity-market-price-evidence.operation.6",
+      "parentExecutionCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6",
+      "rootCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.done.left",
+      "cells": [
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "let",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.carrier",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "array",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.carrier.items.0",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "path",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.done",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "equals",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.done.left",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "path",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.done.right",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "literal",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.request",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "object",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.request.fields.credentialreference",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "literal",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.request.fields.effectlineage",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "path",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.request.fields.effectscope",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "literal",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.request.fields.endpointauthoritydigest",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "literal",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.request.fields.invocationidentity",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "literal",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.request.fields.requestingcapabilityid",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "literal",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.value",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "identity",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.value.else",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "path",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.value.then",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "object",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.value.then.fields.effectlineage",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "path",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.value.when",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "path",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.value:selection",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "junction:boolean-selection.v1",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "false",
+              "true"
+            ]
+          }
+        }
+      ],
+      "routes": [
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6",
+          "product": "semantic-value.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.carrier",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.request.fields.credentialreference",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.carrier.items.0",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.carrier",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.done",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.carrier.items.0",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.done.left",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.done.right",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.done.right",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.done",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.request",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.value.when",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.request.fields.credentialreference",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.request.fields.invocationidentity",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.request.fields.effectlineage",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.request",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.request.fields.effectscope",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.request.fields.effectlineage",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.request.fields.endpointauthoritydigest",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.request.fields.effectscope",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.request.fields.invocationidentity",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.request.fields.requestingcapabilityid",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.request.fields.requestingcapabilityid",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.request.fields.endpointauthoritydigest",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.value",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.value.else",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.value",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.value.then",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.value",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.value.then.fields.effectlineage",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.value.then",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.value.when",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.value:selection",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.value:selection",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.value.else",
+          "product": "semantic-value.v1",
+          "semanticProgress": "expanding",
+          "edgeKind": "selection",
+          "groupId": "group:cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.value:selection",
+          "selectsVariant": "false"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.value:selection",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.value.then.fields.effectlineage",
+          "product": "semantic-value.v1",
+          "semanticProgress": "expanding",
+          "edgeKind": "selection",
+          "groupId": "group:cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.value:selection",
+          "selectsVariant": "true"
+        }
+      ]
+    },
+    {
+      "mechanicProjectionType": "mechanic-circuit.v1",
+      "projectionId": "circuit:mechanic:cell:mechanic:resolve-equity-market-price-evidence.operation.8",
+      "parentExecutionCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8",
+      "rootCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.bound.left",
+      "cells": [
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "let",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.bound",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "equals",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.bound.left",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "path",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.bound.right",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "literal",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "object",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.allowedresponseheaders",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "array",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.allowedresponseheaders.items.0",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "literal",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.allowedresponseheaders.items.1",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "literal",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.credentialinjectionruleid",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "literal",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.effectlineage",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "path",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.endpointauthoritydigest",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "literal",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.invocationidentity",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "literal",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.maxresponsebytes",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "literal",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.method",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "literal",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.opaquecredentialbinding",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "object",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.opaquecredentialbinding.fields.bindingid",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "path",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.opaquecredentialbinding.fields.credentialinjectionruleid",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "literal",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.requestbodytext",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "literal",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.requesturl",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "path",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.safeheaders",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "object",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.safeheaders.fields.x-rapidapi-host",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "literal",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.timeoutmilliseconds",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "literal",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.url",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "format",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.url.values.region",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "path",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.url.values.symbols",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "path",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.value",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "identity",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.value.else",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "object",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.value.else.fields.effectlineage",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "path",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.value.then",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "path",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.value.when",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "path",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        },
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.value:selection",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "junction:boolean-selection.v1",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "false",
+              "true"
+            ]
+          }
+        }
+      ],
+      "routes": [
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8",
+          "product": "semantic-value.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.bound",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.url.values.region",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.bound.left",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.bound.right",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.bound.right",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.bound",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.value.when",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.allowedresponseheaders",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.timeoutmilliseconds",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.allowedresponseheaders.items.0",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.allowedresponseheaders.items.1",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.allowedresponseheaders.items.1",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.allowedresponseheaders",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.credentialinjectionruleid",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.opaquecredentialbinding.fields.bindingid",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.effectlineage",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.endpointauthoritydigest",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.credentialinjectionruleid",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.invocationidentity",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.endpointauthoritydigest",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.maxresponsebytes",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.requestbodytext",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.method",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.safeheaders.fields.x-rapidapi-host",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.opaquecredentialbinding",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.effectlineage",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.opaquecredentialbinding.fields.bindingid",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.opaquecredentialbinding.fields.credentialinjectionruleid",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.opaquecredentialbinding.fields.credentialinjectionruleid",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.opaquecredentialbinding",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.requestbodytext",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.invocationidentity",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.requesturl",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.method",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.safeheaders",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.allowedresponseheaders.items.0",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.safeheaders.fields.x-rapidapi-host",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.safeheaders",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.timeoutmilliseconds",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.maxresponsebytes",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.url",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.requesturl",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.url.values.region",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.url.values.symbols",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.url.values.symbols",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.url",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.value",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.value.else",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.value",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.value.else.fields.effectlineage",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.value.else",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.value.then",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.value",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.value.when",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.value:selection",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.value:selection",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.value.else.fields.effectlineage",
+          "product": "semantic-value.v1",
+          "semanticProgress": "expanding",
+          "edgeKind": "selection",
+          "groupId": "group:cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.value:selection",
+          "selectsVariant": "false"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.value:selection",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.value.then",
+          "product": "semantic-value.v1",
+          "semanticProgress": "expanding",
+          "edgeKind": "selection",
+          "groupId": "group:cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.value:selection",
+          "selectsVariant": "true"
+        }
+      ]
     }
   ],
   "providerCircuits": [
@@ -3360,6 +5203,96 @@
     },
     {
       "providerCircuitType": "provider-circuit.v1",
+      "projectionId": "circuit:provider:cell:mechanic:resolve-equity-market-price-evidence.operation.7",
+      "parentExecutionCellId": "cell:scenario:resolve-equity-market-price-evidence",
+      "rootCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.7",
+      "cells": [
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.7",
+          "physicalInput": {
+            "dataType": "semantic-value.v1"
+          },
+          "nativeOperation": {
+            "operationId": "operation:sda-external-credential-reference-binding-port.v1",
+            "boundary": "bind-fallback-price-provider-credential",
+            "effect": "sda-external-credential-reference-binding-port.v1"
+          },
+          "physicalResult": {
+            "dataType": "semantic-value.v1"
+          }
+        }
+      ],
+      "routes": [
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.6",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.7",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.7",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:physical:resolve-equity-market-price-evidence.operation.7",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.7",
+          "product": "semantic-value.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return"
+        }
+      ]
+    },
+    {
+      "providerCircuitType": "provider-circuit.v1",
+      "projectionId": "circuit:provider:cell:mechanic:resolve-equity-market-price-evidence.operation.9",
+      "parentExecutionCellId": "cell:scenario:resolve-equity-market-price-evidence",
+      "rootCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.9",
+      "cells": [
+        {
+          "cellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.9",
+          "physicalInput": {
+            "dataType": "semantic-value.v1"
+          },
+          "nativeOperation": {
+            "operationId": "operation:sda-governed-http-exchange-port.v1",
+            "boundary": "observe-fallback-price-exchange",
+            "effect": "sda-governed-http-exchange-port.v1"
+          },
+          "physicalResult": {
+            "dataType": "semantic-value.v1"
+          }
+        }
+      ],
+      "routes": [
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.8",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.9",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.9",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.10",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:physical:resolve-equity-market-price-evidence.operation.9",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.9",
+          "product": "semantic-value.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return"
+        }
+      ]
+    },
+    {
+      "providerCircuitType": "provider-circuit.v1",
       "projectionId": "circuit:provider:cell:physical:resolve-equity-market-price-evidence.operation.2",
       "parentExecutionCellId": "cell:provider:resolve-equity-market-price-evidence.operation.2",
       "rootCellId": "cell:physical:resolve-equity-market-price-evidence.operation.2",
@@ -3436,6 +5369,82 @@
     },
     {
       "providerCircuitType": "provider-circuit.v1",
+      "projectionId": "circuit:provider:cell:physical:resolve-equity-market-price-evidence.operation.7",
+      "parentExecutionCellId": "cell:provider:resolve-equity-market-price-evidence.operation.7",
+      "rootCellId": "cell:physical:resolve-equity-market-price-evidence.operation.7",
+      "cells": [
+        {
+          "cellId": "cell:physical:resolve-equity-market-price-evidence.operation.7",
+          "physicalInput": {
+            "dataType": "semantic-value.v1"
+          },
+          "nativeOperation": {
+            "operationId": "physical:sda-external-credential-reference-binding-port.v1",
+            "boundary": "bind-fallback-price-provider-credential",
+            "effect": "sda-external-credential-reference-binding-port.v1"
+          },
+          "physicalResult": {
+            "dataType": "semantic-value.v1"
+          }
+        }
+      ],
+      "routes": [
+        {
+          "fromCellId": "cell:physical:resolve-equity-market-price-evidence.operation.7",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.7",
+          "product": "semantic-value.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return"
+        },
+        {
+          "fromCellId": "cell:provider:resolve-equity-market-price-evidence.operation.7",
+          "toCellId": "cell:physical:resolve-equity-market-price-evidence.operation.7",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        }
+      ]
+    },
+    {
+      "providerCircuitType": "provider-circuit.v1",
+      "projectionId": "circuit:provider:cell:physical:resolve-equity-market-price-evidence.operation.9",
+      "parentExecutionCellId": "cell:provider:resolve-equity-market-price-evidence.operation.9",
+      "rootCellId": "cell:physical:resolve-equity-market-price-evidence.operation.9",
+      "cells": [
+        {
+          "cellId": "cell:physical:resolve-equity-market-price-evidence.operation.9",
+          "physicalInput": {
+            "dataType": "semantic-value.v1"
+          },
+          "nativeOperation": {
+            "operationId": "physical:sda-governed-http-exchange-port.v1",
+            "boundary": "observe-fallback-price-exchange",
+            "effect": "sda-governed-http-exchange-port.v1"
+          },
+          "physicalResult": {
+            "dataType": "semantic-value.v1"
+          }
+        }
+      ],
+      "routes": [
+        {
+          "fromCellId": "cell:physical:resolve-equity-market-price-evidence.operation.9",
+          "toCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.9",
+          "product": "semantic-value.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return"
+        },
+        {
+          "fromCellId": "cell:provider:resolve-equity-market-price-evidence.operation.9",
+          "toCellId": "cell:physical:resolve-equity-market-price-evidence.operation.9",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        }
+      ]
+    },
+    {
+      "providerCircuitType": "provider-circuit.v1",
       "projectionId": "circuit:provider:cell:provider:resolve-equity-market-price-evidence.operation.2",
       "parentExecutionCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.2",
       "rootCellId": "cell:provider:resolve-equity-market-price-evidence.operation.2",
@@ -3490,6 +5499,68 @@
         {
           "fromCellId": "cell:provider:resolve-equity-market-price-evidence.operation.4",
           "toCellId": "cell:physical:resolve-equity-market-price-evidence.operation.4",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        }
+      ]
+    },
+    {
+      "providerCircuitType": "provider-circuit.v1",
+      "projectionId": "circuit:provider:cell:provider:resolve-equity-market-price-evidence.operation.7",
+      "parentExecutionCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.7",
+      "rootCellId": "cell:provider:resolve-equity-market-price-evidence.operation.7",
+      "cells": [
+        {
+          "cellId": "cell:provider:resolve-equity-market-price-evidence.operation.7",
+          "physicalInput": {
+            "dataType": "semantic-value.v1"
+          },
+          "nativeOperation": {
+            "operationId": "provider:sda-external-credential-reference-binding-port.v1",
+            "boundary": "bind-fallback-price-provider-credential",
+            "effect": "sda-external-credential-reference-binding-port.v1"
+          },
+          "physicalResult": {
+            "dataType": "semantic-value.v1"
+          }
+        }
+      ],
+      "routes": [
+        {
+          "fromCellId": "cell:provider:resolve-equity-market-price-evidence.operation.7",
+          "toCellId": "cell:physical:resolve-equity-market-price-evidence.operation.7",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        }
+      ]
+    },
+    {
+      "providerCircuitType": "provider-circuit.v1",
+      "projectionId": "circuit:provider:cell:provider:resolve-equity-market-price-evidence.operation.9",
+      "parentExecutionCellId": "cell:mechanic:resolve-equity-market-price-evidence.operation.9",
+      "rootCellId": "cell:provider:resolve-equity-market-price-evidence.operation.9",
+      "cells": [
+        {
+          "cellId": "cell:provider:resolve-equity-market-price-evidence.operation.9",
+          "physicalInput": {
+            "dataType": "semantic-value.v1"
+          },
+          "nativeOperation": {
+            "operationId": "provider:sda-governed-http-exchange-port.v1",
+            "boundary": "observe-fallback-price-exchange",
+            "effect": "sda-governed-http-exchange-port.v1"
+          },
+          "physicalResult": {
+            "dataType": "semantic-value.v1"
+          }
+        }
+      ],
+      "routes": [
+        {
+          "fromCellId": "cell:provider:resolve-equity-market-price-evidence.operation.9",
+          "toCellId": "cell:physical:resolve-equity-market-price-evidence.operation.9",
           "product": "semantic-value.v1",
           "semanticProgress": "narrowing",
           "edgeKind": "sequence"

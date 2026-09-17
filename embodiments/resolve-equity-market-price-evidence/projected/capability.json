@@ -47,6 +47,25 @@
     }
   ],
   "transitions": [],
+  "scenarioOutcomes": [
+    {
+      "scenarioId": "resolve-equity-market-price-evidence",
+      "variants": [
+        {
+          "variantId": "EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED",
+          "classification": "success"
+        },
+        {
+          "variantId": "EQUITY_MARKET_PRICE_PROVIDER_UNAVAILABLE",
+          "classification": "failure"
+        },
+        {
+          "variantId": "NATIVE_MARKET_PRICE_TESTIMONY_REJECTED",
+          "classification": "failure"
+        }
+      ]
+    }
+  ],
   "executionTopologyAuthority": "graph-v3",
   "rootScenarioId": "resolve-equity-market-price-evidence",
   "name": "Resolve provider-neutral equity market-price evidence",

@@ -1,6 +1,6 @@
 // GENERATED CAPABILITY OPERATIONS. Do not hand-edit.
-// canonicalGraphDigest: sha256:6d8e145c32ebc8629dab66e0be7fe88e135968b4bdcd888ee3e266d712b41dbf
-// realizedGraphDigest: sha256:f70031443e0d268c914cf2bc41efa0b15d72fe71496fa1b0ca5d0e0d394213e4
+// canonicalGraphDigest: sha256:e2d87ee252ea78574abc47e6d02691369f5ddb9bbebffe2a287e724d9e4f67af
+// realizedGraphDigest: sha256:3430cfa5286c3497762befbe9e485ac180e76986e6add552d82ae53a6d7dc8fb
 #nullable enable
 using System;
 using System.Collections.Generic;
@@ -779,255 +779,486 @@ public static class CapabilityOperations
         121 => Operation121(scope),
         122 => Operation122(scope),
         123 => Operation123(scope),
+        124 => Operation124(scope),
+        125 => Operation125(scope),
+        126 => Operation126(scope),
+        127 => Operation127(scope),
+        128 => Operation128(scope),
+        129 => Operation129(scope),
+        130 => Operation130(scope),
+        131 => Operation131(scope),
+        132 => Operation132(scope),
+        133 => Operation133(scope),
+        134 => Operation134(scope),
+        135 => Operation135(scope),
+        136 => Operation136(scope),
+        137 => Operation137(scope),
+        138 => Operation138(scope),
+        139 => Operation139(scope),
+        140 => Operation140(scope),
+        141 => Operation141(scope),
+        142 => Operation142(scope),
+        143 => Operation143(scope),
+        144 => Operation144(scope),
+        145 => Operation145(scope),
+        146 => Operation146(scope),
+        147 => Operation147(scope),
+        148 => Operation148(scope),
+        149 => Operation149(scope),
+        150 => Operation150(scope),
+        151 => Operation151(scope),
+        152 => Operation152(scope),
+        153 => Operation153(scope),
+        154 => Operation154(scope),
+        155 => Operation155(scope),
+        156 => Operation156(scope),
+        157 => Operation157(scope),
+        158 => Operation158(scope),
+        159 => Operation159(scope),
+        160 => Operation160(scope),
+        161 => Operation161(scope),
+        162 => Operation162(scope),
+        163 => Operation163(scope),
+        164 => Operation164(scope),
+        165 => Operation165(scope),
+        166 => Operation166(scope),
+        167 => Operation167(scope),
+        168 => Operation168(scope),
+        169 => Operation169(scope),
+        170 => Operation170(scope),
+        171 => Operation171(scope),
+        172 => Operation172(scope),
+        173 => Operation173(scope),
+        174 => Operation174(scope),
+        175 => Operation175(scope),
+        176 => Operation176(scope),
+        177 => Operation177(scope),
+        178 => Operation178(scope),
+        179 => Operation179(scope),
+        180 => Operation180(scope),
+        181 => Operation181(scope),
+        182 => Operation182(scope),
+        183 => Operation183(scope),
+        184 => Operation184(scope),
+        185 => Operation185(scope),
+        186 => Operation186(scope),
+        187 => Operation187(scope),
+        188 => Operation188(scope),
+        189 => Operation189(scope),
+        190 => Operation190(scope),
+        191 => Operation191(scope),
+        192 => Operation192(scope),
+        193 => Operation193(scope),
+        194 => Operation194(scope),
+        195 => Operation195(scope),
+        196 => Operation196(scope),
+        197 => Operation197(scope),
+        198 => Operation198(scope),
+        199 => Operation199(scope),
+        200 => Operation200(scope),
         _ => throw new InvalidOperationException("CAPABILITY_PROJECTION_MECHANIC_UNRESOLVED: operation index " + operationIndex)
     };
 
     private static JsonNode? Operation0(Dictionary<string, JsonNode?> scope) => Sfx.Object(("credentialReference", Sfx.ParseLiteral("\"RAPID_API_KEY\"")), ("effectLineage", Sfx.Array()), ("effectScope", Sfx.ParseLiteral("\"ONE_BOUNDED_HTTPS_EXCHANGE_NO_REDIRECT_NO_RETRY\"")), ("endpointAuthorityDigest", Sfx.ParseLiteral("\"sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b\"")), ("invocationIdentity", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("requestingCapabilityId", Sfx.ParseLiteral("\"resolve-equity-market-price-evidence\"")));
 
-    private static JsonNode? Operation1(Dictionary<string, JsonNode?> scope) => Sfx.Object(("allowedResponseHeaders", Sfx.Array(Sfx.ParseLiteral("\"content-type\""), Sfx.ParseLiteral("\"retry-after\""))), ("cancellationScopeReference", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("credentialInjectionRuleId", Sfx.ValueAt(Sfx.Var(scope, "input"), "credentialInjectionRuleId")), ("endpointAuthorityDigest", Sfx.ParseLiteral("\"sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b\"")), ("exchangeKind", Sfx.ParseLiteral("\"live-provider-input\"")), ("invocationIdentity", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("lineageId", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("maxResponseBytes", Sfx.ParseLiteral("262144")), ("method", Sfx.ParseLiteral("\"GET\"")), ("opaqueCredentialBinding", Sfx.Object(("bindingId", Sfx.ValueAt(Sfx.Var(scope, "input"), "opaqueBindingId")), ("credentialInjectionRuleId", Sfx.ValueAt(Sfx.Var(scope, "input"), "credentialInjectionRuleId")))), ("redirectPolicy", Sfx.ParseLiteral("\"manual\"")), ("requestBodyText", Sfx.ParseLiteral("\"\"")), ("requestUrl", JsonValue.Create(Sfx.Format("https://yahoo-finance166.p.rapidapi.com/api/stock/get-price?symbol={symbol}&region={region}", ("region", Sfx.ValueAt(Sfx.Var(scope, "root"), "payload.region")), ("symbol", Sfx.ValueAt(Sfx.Var(scope, "root"), "payload.symbol"))))), ("safeHeaders", Sfx.Object(("X-RapidAPI-Host", Sfx.ParseLiteral("\"yahoo-finance166.p.rapidapi.com\"")))), ("timeoutMilliseconds", Sfx.ParseLiteral("12000")));
+    private static JsonNode? Operation1(Dictionary<string, JsonNode?> scope) => ((Func<Dictionary<string, JsonNode?>, JsonNode?>)((Dictionary<string, JsonNode?> s0) => { s0 = Sfx.Bind(s0, "fallbackCompleted", JsonValue.Create(Sfx.Equals(Sfx.ValueAt(Sfx.Var(s0, "input"), "disposition"), Sfx.ParseLiteral("\"completed\"")))); s0 = Sfx.Bind(s0, "prior", Sfx.ValueAt(Sfx.Var(s0, "input"), "effectLineage.0")); return (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "fallbackCompleted"), "")) ? ((Func<Dictionary<string, JsonNode?>, JsonNode?>)((Dictionary<string, JsonNode?> s1) => { s1 = Sfx.Bind(s1, "payload", Sfx.TryParseJson(JsonValue.Create(Sfx.Base64DecodeUtf8(Sfx.ValueAt(Sfx.Var(s1, "input"), "responseBodyBytes"))))); s1 = Sfx.Bind(s1, "quote", Sfx.ValueAt(Sfx.Var(s1, "payload"), "value.quoteResponse.result.0")); return Sfx.Object(("contractId", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("disposition", Sfx.ParseLiteral("\"EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED\"")), ("payload", Sfx.Object(("symbol", Sfx.ValueAt(Sfx.Var(s1, "quote"), "symbol")), ("region", Sfx.ValueAt(Sfx.Var(s1, "root"), "payload.region")), ("currency", Sfx.ValueAt(Sfx.Var(s1, "quote"), "currency")), ("observedPrice", Sfx.ValueAt(Sfx.Var(s1, "quote"), "regularMarketPrice")), ("observedMarketTime", Sfx.ValueAt(Sfx.Var(s1, "quote"), "regularMarketTime")), ("marketState", Sfx.ValueAt(Sfx.Var(s1, "quote"), "marketState")), ("exchange", Sfx.ValueAt(Sfx.Var(s1, "quote"), "exchange")), ("sourceAttribution", Sfx.ValueAt(Sfx.Var(s1, "quote"), "quoteSourceName")))), ("providerTestimony", Sfx.Object(("bindingId", Sfx.ParseLiteral("\"rapidapi-yahoo-finance-real-time1-market-quotes.v1\"")), ("providerId", Sfx.ParseLiteral("\"rapidapi/yahoo-finance-real-time1\"")), ("nativeShape", Sfx.ParseLiteral("\"quoteResponse.result.0\""))))); }))(s0) : Sfx.ValueAt(Sfx.Var(s0, "prior"), "")); }))(scope);
 
-    private static JsonNode? Operation2(Dictionary<string, JsonNode?> scope) => ((Func<Dictionary<string, JsonNode?>, JsonNode?>)((Dictionary<string, JsonNode?> s0) => { s0 = Sfx.Bind(s0, "completed", JsonValue.Create(Sfx.Equals(Sfx.ValueAt(Sfx.Var(s0, "input"), "disposition"), Sfx.ParseLiteral("\"completed\"")))); s0 = Sfx.Bind(s0, "bodyText", (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "completed"), "")) ? JsonValue.Create(Sfx.Base64DecodeUtf8(Sfx.ValueAt(Sfx.Var(s0, "input"), "responseBodyBytes"))) : Sfx.ParseLiteral("\"\""))); s0 = Sfx.Bind(s0, "parsed", Sfx.TryParseJson(Sfx.ValueAt(Sfx.Var(s0, "bodyText"), ""))); s0 = Sfx.Bind(s0, "native", Sfx.ValueAt(Sfx.Var(s0, "parsed"), "value")); s0 = Sfx.Bind(s0, "summaryQuote", Sfx.ValueAt(Sfx.Var(s0, "native"), "quoteSummary.result.0.price")); s0 = Sfx.Bind(s0, "responseQuote", Sfx.ValueAt(Sfx.Var(s0, "native"), "quoteResponse.result.0")); s0 = Sfx.Bind(s0, "symbol", (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "")) ? Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "symbol") : Sfx.ValueAt(Sfx.Var(s0, "responseQuote"), "symbol"))); s0 = Sfx.Bind(s0, "currency", (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "")) ? Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "currency") : Sfx.ValueAt(Sfx.Var(s0, "responseQuote"), "currency"))); s0 = Sfx.Bind(s0, "observedPrice", (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "")) ? Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "regularMarketPrice.raw") : Sfx.ValueAt(Sfx.Var(s0, "responseQuote"), "regularMarketPrice"))); s0 = Sfx.Bind(s0, "observedMarketTime", (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "")) ? Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "regularMarketTime") : Sfx.ValueAt(Sfx.Var(s0, "responseQuote"), "regularMarketTime"))); s0 = Sfx.Bind(s0, "marketState", (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "")) ? Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "marketState") : Sfx.ValueAt(Sfx.Var(s0, "responseQuote"), "marketState"))); s0 = Sfx.Bind(s0, "exchange", (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "")) ? Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "exchange") : Sfx.ValueAt(Sfx.Var(s0, "responseQuote"), "exchange"))); s0 = Sfx.Bind(s0, "sourceAttribution", (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "")) ? Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "quoteSourceName") : Sfx.ValueAt(Sfx.Var(s0, "responseQuote"), "quoteSourceName"))); s0 = Sfx.Bind(s0, "requiredValues", Sfx.Array(Sfx.ValueAt(Sfx.Var(s0, "symbol"), ""), Sfx.ValueAt(Sfx.Var(s0, "currency"), ""), Sfx.ValueAt(Sfx.Var(s0, "observedPrice"), ""), Sfx.ValueAt(Sfx.Var(s0, "observedMarketTime"), ""), Sfx.ValueAt(Sfx.Var(s0, "marketState"), ""), Sfx.ValueAt(Sfx.Var(s0, "exchange"), ""), Sfx.ValueAt(Sfx.Var(s0, "sourceAttribution"), ""))); s0 = Sfx.Bind(s0, "missing", Sfx.Filter(s0, Sfx.ValueAt(Sfx.Var(s0, "requiredValues"), ""), "v", s1 => JsonValue.Create(Sfx.Equals(Sfx.ValueAt(Sfx.Var(s1, "v"), ""), Sfx.ParseLiteral("null"))))); s0 = Sfx.Bind(s0, "missingCount", JsonValue.Create(Sfx.Length(Sfx.ValueAt(Sfx.Var(s0, "missing"), "")))); s0 = Sfx.Bind(s0, "conforming", JsonValue.Create(Sfx.Equals(Sfx.ValueAt(Sfx.Var(s0, "missingCount"), ""), Sfx.ParseLiteral("0")))); s0 = Sfx.Bind(s0, "nativeShape", (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "")) ? Sfx.ParseLiteral("\"quoteSummary.result.0.price\"") : Sfx.ParseLiteral("\"quoteResponse.result.0\""))); s0 = Sfx.Bind(s0, "bindingId", Sfx.ParseLiteral("\"rapidapi-davethebeast-yahoo-finance166-stock-price.v1-EDITED\"")); s0 = Sfx.Bind(s0, "providerId", Sfx.ParseLiteral("\"rapidapi/davethebeast/yahoo-finance166\"")); return (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "completed"), "")) ? (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "conforming"), "")) ? Sfx.Object(("contractId", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("disposition", Sfx.ParseLiteral("\"EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED\"")), ("payload", Sfx.Object(("symbol", Sfx.ValueAt(Sfx.Var(s0, "symbol"), "")), ("region", Sfx.ValueAt(Sfx.Var(s0, "root"), "payload.region")), ("currency", Sfx.ValueAt(Sfx.Var(s0, "currency"), "")), ("observedPrice", Sfx.ValueAt(Sfx.Var(s0, "observedPrice"), "")), ("observedMarketTime", Sfx.ValueAt(Sfx.Var(s0, "observedMarketTime"), "")), ("marketState", Sfx.ValueAt(Sfx.Var(s0, "marketState"), "")), ("exchange", Sfx.ValueAt(Sfx.Var(s0, "exchange"), "")), ("sourceAttribution", Sfx.ValueAt(Sfx.Var(s0, "sourceAttribution"), "")))), ("providerTestimony", Sfx.Object(("bindingId", Sfx.ValueAt(Sfx.Var(s0, "bindingId"), "")), ("providerId", Sfx.ValueAt(Sfx.Var(s0, "providerId"), "")), ("nativeShape", Sfx.ValueAt(Sfx.Var(s0, "nativeShape"), ""))))) : Sfx.Object(("contractId", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("disposition", Sfx.ParseLiteral("\"NATIVE_MARKET_PRICE_TESTIMONY_REJECTED\"")), ("reasonCode", Sfx.ParseLiteral("\"REQUIRED_NATIVE_FIELDS_ABSENT\"")), ("absentFieldCount", Sfx.ValueAt(Sfx.Var(s0, "missingCount"), "")), ("providerTestimony", Sfx.Object(("bindingId", Sfx.ValueAt(Sfx.Var(s0, "bindingId"), "")), ("providerId", Sfx.ValueAt(Sfx.Var(s0, "providerId"), "")), ("nativeShape", Sfx.ValueAt(Sfx.Var(s0, "nativeShape"), "")))))) : Sfx.Object(("contractId", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("disposition", Sfx.ParseLiteral("\"EQUITY_MARKET_PRICE_PROVIDER_UNAVAILABLE\"")), ("reasonCode", Sfx.ParseLiteral("\"PROVIDER_EXCHANGE_NOT_COMPLETED\"")), ("providerTestimony", Sfx.Object(("bindingId", Sfx.ValueAt(Sfx.Var(s0, "bindingId"), "")), ("providerId", Sfx.ValueAt(Sfx.Var(s0, "providerId"), "")))))); }))(scope);
+    private static JsonNode? Operation2(Dictionary<string, JsonNode?> scope) => Sfx.Object(("allowedResponseHeaders", Sfx.Array(Sfx.ParseLiteral("\"content-type\""), Sfx.ParseLiteral("\"retry-after\""))), ("cancellationScopeReference", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("credentialInjectionRuleId", Sfx.ValueAt(Sfx.Var(scope, "input"), "credentialInjectionRuleId")), ("endpointAuthorityDigest", Sfx.ParseLiteral("\"sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b\"")), ("exchangeKind", Sfx.ParseLiteral("\"live-provider-input\"")), ("invocationIdentity", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("lineageId", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("maxResponseBytes", Sfx.ParseLiteral("262144")), ("method", Sfx.ParseLiteral("\"GET\"")), ("opaqueCredentialBinding", Sfx.Object(("bindingId", Sfx.ValueAt(Sfx.Var(scope, "input"), "opaqueBindingId")), ("credentialInjectionRuleId", Sfx.ValueAt(Sfx.Var(scope, "input"), "credentialInjectionRuleId")))), ("redirectPolicy", Sfx.ParseLiteral("\"manual\"")), ("requestBodyText", Sfx.ParseLiteral("\"\"")), ("requestUrl", JsonValue.Create(Sfx.Format("https://yahoo-finance166.p.rapidapi.com/api/stock/get-price?symbol={symbol}&region={region}", ("region", Sfx.ValueAt(Sfx.Var(scope, "root"), "payload.region")), ("symbol", Sfx.ValueAt(Sfx.Var(scope, "root"), "payload.symbol"))))), ("safeHeaders", Sfx.Object(("X-RapidAPI-Host", Sfx.ParseLiteral("\"yahoo-finance166.p.rapidapi.com\"")))), ("timeoutMilliseconds", Sfx.ParseLiteral("12000")));
 
-    private static JsonNode? Operation3(Dictionary<string, JsonNode?> scope) => Sfx.Object(("credentialReference", Sfx.ParseLiteral("\"RAPID_API_KEY\"")), ("effectLineage", Sfx.Array()), ("effectScope", Sfx.ParseLiteral("\"ONE_BOUNDED_HTTPS_EXCHANGE_NO_REDIRECT_NO_RETRY\"")), ("endpointAuthorityDigest", Sfx.ParseLiteral("\"sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b\"")), ("invocationIdentity", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("requestingCapabilityId", Sfx.ParseLiteral("\"resolve-equity-market-price-evidence\"")));
+    private static JsonNode? Operation3(Dictionary<string, JsonNode?> scope) => ((Func<Dictionary<string, JsonNode?>, JsonNode?>)((Dictionary<string, JsonNode?> s0) => { s0 = Sfx.Bind(s0, "completed", JsonValue.Create(Sfx.Equals(Sfx.ValueAt(Sfx.Var(s0, "input"), "disposition"), Sfx.ParseLiteral("\"completed\"")))); s0 = Sfx.Bind(s0, "bodyText", (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "completed"), "")) ? JsonValue.Create(Sfx.Base64DecodeUtf8(Sfx.ValueAt(Sfx.Var(s0, "input"), "responseBodyBytes"))) : Sfx.ParseLiteral("\"\""))); s0 = Sfx.Bind(s0, "parsed", Sfx.TryParseJson(Sfx.ValueAt(Sfx.Var(s0, "bodyText"), ""))); s0 = Sfx.Bind(s0, "native", Sfx.ValueAt(Sfx.Var(s0, "parsed"), "value")); s0 = Sfx.Bind(s0, "summaryQuote", Sfx.ValueAt(Sfx.Var(s0, "native"), "quoteSummary.result.0.price")); s0 = Sfx.Bind(s0, "responseQuote", Sfx.ValueAt(Sfx.Var(s0, "native"), "quoteResponse.result.0")); s0 = Sfx.Bind(s0, "symbol", (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "")) ? Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "symbol") : Sfx.ValueAt(Sfx.Var(s0, "responseQuote"), "symbol"))); s0 = Sfx.Bind(s0, "currency", (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "")) ? Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "currency") : Sfx.ValueAt(Sfx.Var(s0, "responseQuote"), "currency"))); s0 = Sfx.Bind(s0, "observedPrice", (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "")) ? Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "regularMarketPrice.raw") : Sfx.ValueAt(Sfx.Var(s0, "responseQuote"), "regularMarketPrice"))); s0 = Sfx.Bind(s0, "observedMarketTime", (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "")) ? Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "regularMarketTime") : Sfx.ValueAt(Sfx.Var(s0, "responseQuote"), "regularMarketTime"))); s0 = Sfx.Bind(s0, "marketState", (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "")) ? Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "marketState") : Sfx.ValueAt(Sfx.Var(s0, "responseQuote"), "marketState"))); s0 = Sfx.Bind(s0, "exchange", (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "")) ? Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "exchange") : Sfx.ValueAt(Sfx.Var(s0, "responseQuote"), "exchange"))); s0 = Sfx.Bind(s0, "sourceAttribution", (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "")) ? Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "quoteSourceName") : Sfx.ValueAt(Sfx.Var(s0, "responseQuote"), "quoteSourceName"))); s0 = Sfx.Bind(s0, "requiredValues", Sfx.Array(Sfx.ValueAt(Sfx.Var(s0, "symbol"), ""), Sfx.ValueAt(Sfx.Var(s0, "currency"), ""), Sfx.ValueAt(Sfx.Var(s0, "observedPrice"), ""), Sfx.ValueAt(Sfx.Var(s0, "observedMarketTime"), ""), Sfx.ValueAt(Sfx.Var(s0, "marketState"), ""), Sfx.ValueAt(Sfx.Var(s0, "exchange"), ""), Sfx.ValueAt(Sfx.Var(s0, "sourceAttribution"), ""))); s0 = Sfx.Bind(s0, "missing", Sfx.Filter(s0, Sfx.ValueAt(Sfx.Var(s0, "requiredValues"), ""), "v", s1 => JsonValue.Create(Sfx.Equals(Sfx.ValueAt(Sfx.Var(s1, "v"), ""), Sfx.ParseLiteral("null"))))); s0 = Sfx.Bind(s0, "missingCount", JsonValue.Create(Sfx.Length(Sfx.ValueAt(Sfx.Var(s0, "missing"), "")))); s0 = Sfx.Bind(s0, "conforming", JsonValue.Create(Sfx.Equals(Sfx.ValueAt(Sfx.Var(s0, "missingCount"), ""), Sfx.ParseLiteral("0")))); s0 = Sfx.Bind(s0, "nativeShape", (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "")) ? Sfx.ParseLiteral("\"quoteSummary.result.0.price\"") : Sfx.ParseLiteral("\"quoteResponse.result.0\""))); s0 = Sfx.Bind(s0, "bindingId", Sfx.ParseLiteral("\"rapidapi-davethebeast-yahoo-finance166-stock-price.v1-EDITED\"")); s0 = Sfx.Bind(s0, "providerId", Sfx.ParseLiteral("\"rapidapi/davethebeast/yahoo-finance166\"")); return (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "completed"), "")) ? (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "conforming"), "")) ? Sfx.Object(("contractId", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("disposition", Sfx.ParseLiteral("\"EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED\"")), ("payload", Sfx.Object(("symbol", Sfx.ValueAt(Sfx.Var(s0, "symbol"), "")), ("region", Sfx.ValueAt(Sfx.Var(s0, "root"), "payload.region")), ("currency", Sfx.ValueAt(Sfx.Var(s0, "currency"), "")), ("observedPrice", Sfx.ValueAt(Sfx.Var(s0, "observedPrice"), "")), ("observedMarketTime", Sfx.ValueAt(Sfx.Var(s0, "observedMarketTime"), "")), ("marketState", Sfx.ValueAt(Sfx.Var(s0, "marketState"), "")), ("exchange", Sfx.ValueAt(Sfx.Var(s0, "exchange"), "")), ("sourceAttribution", Sfx.ValueAt(Sfx.Var(s0, "sourceAttribution"), "")))), ("providerTestimony", Sfx.Object(("bindingId", Sfx.ValueAt(Sfx.Var(s0, "bindingId"), "")), ("providerId", Sfx.ValueAt(Sfx.Var(s0, "providerId"), "")), ("nativeShape", Sfx.ValueAt(Sfx.Var(s0, "nativeShape"), ""))))) : Sfx.Object(("contractId", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("disposition", Sfx.ParseLiteral("\"NATIVE_MARKET_PRICE_TESTIMONY_REJECTED\"")), ("reasonCode", Sfx.ParseLiteral("\"REQUIRED_NATIVE_FIELDS_ABSENT\"")), ("absentFieldCount", Sfx.ValueAt(Sfx.Var(s0, "missingCount"), "")), ("providerTestimony", Sfx.Object(("bindingId", Sfx.ValueAt(Sfx.Var(s0, "bindingId"), "")), ("providerId", Sfx.ValueAt(Sfx.Var(s0, "providerId"), "")), ("nativeShape", Sfx.ValueAt(Sfx.Var(s0, "nativeShape"), "")))))) : Sfx.Object(("contractId", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("disposition", Sfx.ParseLiteral("\"EQUITY_MARKET_PRICE_PROVIDER_UNAVAILABLE\"")), ("reasonCode", Sfx.ParseLiteral("\"PROVIDER_EXCHANGE_NOT_COMPLETED\"")), ("providerTestimony", Sfx.Object(("bindingId", Sfx.ValueAt(Sfx.Var(s0, "bindingId"), "")), ("providerId", Sfx.ValueAt(Sfx.Var(s0, "providerId"), "")))))); }))(scope);
 
-    private static JsonNode? Operation4(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"RAPID_API_KEY\"");
+    private static JsonNode? Operation4(Dictionary<string, JsonNode?> scope) => ((Func<Dictionary<string, JsonNode?>, JsonNode?>)((Dictionary<string, JsonNode?> s0) => { s0 = Sfx.Bind(s0, "done", JsonValue.Create(Sfx.Equals(Sfx.ValueAt(Sfx.Var(s0, "input"), "disposition"), Sfx.ParseLiteral("\"EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED\"")))); s0 = Sfx.Bind(s0, "carrier", Sfx.Array(Sfx.ValueAt(Sfx.Var(s0, "input"), ""))); s0 = Sfx.Bind(s0, "request", Sfx.Object(("credentialReference", Sfx.ParseLiteral("\"RAPID_API_KEY\"")), ("invocationIdentity", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("requestingCapabilityId", Sfx.ParseLiteral("\"resolve-equity-market-price-evidence\"")), ("endpointAuthorityDigest", Sfx.ParseLiteral("\"sha256:17bd0ab8347e100f7987de6b1a0144d3555c43aea73fedf90786030593a76769\"")), ("effectScope", Sfx.ParseLiteral("\"ONE_BOUNDED_HTTPS_EXCHANGE_NO_REDIRECT_NO_RETRY\"")), ("effectLineage", Sfx.ValueAt(Sfx.Var(s0, "carrier"), "")))); return (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "done"), "")) ? Sfx.Object(("effectLineage", Sfx.ValueAt(Sfx.Var(s0, "carrier"), ""))) : Sfx.ValueAt(Sfx.Var(s0, "request"), "")); }))(scope);
 
-    private static JsonNode? Operation5(Dictionary<string, JsonNode?> scope) => Sfx.Array();
+    private static JsonNode? Operation5(Dictionary<string, JsonNode?> scope) => ((Func<Dictionary<string, JsonNode?>, JsonNode?>)((Dictionary<string, JsonNode?> s0) => { s0 = Sfx.Bind(s0, "bound", JsonValue.Create(Sfx.Equals(Sfx.ValueAt(Sfx.Var(s0, "input"), "disposition"), Sfx.ParseLiteral("\"BOUND\"")))); s0 = Sfx.Bind(s0, "url", JsonValue.Create(Sfx.Format("https://yahoo-finance-real-time1.p.rapidapi.com/market/get-quotes?region={region}&symbols={symbols}", ("region", Sfx.ValueAt(Sfx.Var(s0, "root"), "payload.region")), ("symbols", Sfx.ValueAt(Sfx.Var(s0, "root"), "payload.symbol"))))); s0 = Sfx.Bind(s0, "request", Sfx.Object(("requestUrl", Sfx.ValueAt(Sfx.Var(s0, "url"), "")), ("method", Sfx.ParseLiteral("\"GET\"")), ("safeHeaders", Sfx.Object(("x-rapidapi-host", Sfx.ParseLiteral("\"yahoo-finance-real-time1.p.rapidapi.com\"")))), ("allowedResponseHeaders", Sfx.Array(Sfx.ParseLiteral("\"content-type\""), Sfx.ParseLiteral("\"retry-after\""))), ("timeoutMilliseconds", Sfx.ParseLiteral("15000")), ("maxResponseBytes", Sfx.ParseLiteral("262144")), ("requestBodyText", Sfx.ParseLiteral("\"\"")), ("invocationIdentity", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("endpointAuthorityDigest", Sfx.ParseLiteral("\"sha256:17bd0ab8347e100f7987de6b1a0144d3555c43aea73fedf90786030593a76769\"")), ("credentialInjectionRuleId", Sfx.ParseLiteral("\"rapidapi-x-rapidapi-key.v1\"")), ("opaqueCredentialBinding", Sfx.Object(("bindingId", Sfx.ValueAt(Sfx.Var(s0, "input"), "opaqueBindingId")), ("credentialInjectionRuleId", Sfx.ParseLiteral("\"rapidapi-x-rapidapi-key.v1\"")))), ("effectLineage", Sfx.ValueAt(Sfx.Var(s0, "input"), "effectLineage")))); return (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "bound"), "")) ? Sfx.ValueAt(Sfx.Var(s0, "request"), "") : Sfx.Object(("effectLineage", Sfx.ValueAt(Sfx.Var(s0, "input"), "effectLineage")))); }))(scope);
 
-    private static JsonNode? Operation6(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"ONE_BOUNDED_HTTPS_EXCHANGE_NO_REDIRECT_NO_RETRY\"");
+    private static JsonNode? Operation6(Dictionary<string, JsonNode?> scope) => ((Func<Dictionary<string, JsonNode?>, JsonNode?>)((Dictionary<string, JsonNode?> s0) => { s0 = Sfx.Bind(s0, "fallbackCompleted", JsonValue.Create(Sfx.Equals(Sfx.ValueAt(Sfx.Var(s0, "input"), "disposition"), Sfx.ParseLiteral("\"completed\"")))); s0 = Sfx.Bind(s0, "prior", Sfx.ValueAt(Sfx.Var(s0, "input"), "effectLineage.0")); return (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "fallbackCompleted"), "")) ? ((Func<Dictionary<string, JsonNode?>, JsonNode?>)((Dictionary<string, JsonNode?> s1) => { s1 = Sfx.Bind(s1, "payload", Sfx.TryParseJson(JsonValue.Create(Sfx.Base64DecodeUtf8(Sfx.ValueAt(Sfx.Var(s1, "input"), "responseBodyBytes"))))); s1 = Sfx.Bind(s1, "quote", Sfx.ValueAt(Sfx.Var(s1, "payload"), "value.quoteResponse.result.0")); return Sfx.Object(("contractId", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("disposition", Sfx.ParseLiteral("\"EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED\"")), ("payload", Sfx.Object(("symbol", Sfx.ValueAt(Sfx.Var(s1, "quote"), "symbol")), ("region", Sfx.ValueAt(Sfx.Var(s1, "root"), "payload.region")), ("currency", Sfx.ValueAt(Sfx.Var(s1, "quote"), "currency")), ("observedPrice", Sfx.ValueAt(Sfx.Var(s1, "quote"), "regularMarketPrice")), ("observedMarketTime", Sfx.ValueAt(Sfx.Var(s1, "quote"), "regularMarketTime")), ("marketState", Sfx.ValueAt(Sfx.Var(s1, "quote"), "marketState")), ("exchange", Sfx.ValueAt(Sfx.Var(s1, "quote"), "exchange")), ("sourceAttribution", Sfx.ValueAt(Sfx.Var(s1, "quote"), "quoteSourceName")))), ("providerTestimony", Sfx.Object(("bindingId", Sfx.ParseLiteral("\"rapidapi-yahoo-finance-real-time1-market-quotes.v1\"")), ("providerId", Sfx.ParseLiteral("\"rapidapi/yahoo-finance-real-time1\"")), ("nativeShape", Sfx.ParseLiteral("\"quoteResponse.result.0\""))))); }))(s0) : Sfx.ValueAt(Sfx.Var(s0, "prior"), "")); }))(scope);
 
-    private static JsonNode? Operation7(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b\"");
+    private static JsonNode? Operation7(Dictionary<string, JsonNode?> scope) => JsonValue.Create(Sfx.Equals(Sfx.ValueAt(Sfx.Var(scope, "input"), "disposition"), Sfx.ParseLiteral("\"completed\"")));
 
-    private static JsonNode? Operation8(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"");
+    private static JsonNode? Operation8(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "input"), "disposition");
 
-    private static JsonNode? Operation9(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"resolve-equity-market-price-evidence\"");
+    private static JsonNode? Operation9(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"completed\"");
 
-    private static JsonNode? Operation10(Dictionary<string, JsonNode?> scope) => Sfx.Object(("allowedResponseHeaders", Sfx.Array(Sfx.ParseLiteral("\"content-type\""), Sfx.ParseLiteral("\"retry-after\""))), ("cancellationScopeReference", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("credentialInjectionRuleId", Sfx.ValueAt(Sfx.Var(scope, "input"), "credentialInjectionRuleId")), ("endpointAuthorityDigest", Sfx.ParseLiteral("\"sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b\"")), ("exchangeKind", Sfx.ParseLiteral("\"live-provider-input\"")), ("invocationIdentity", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("lineageId", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("maxResponseBytes", Sfx.ParseLiteral("262144")), ("method", Sfx.ParseLiteral("\"GET\"")), ("opaqueCredentialBinding", Sfx.Object(("bindingId", Sfx.ValueAt(Sfx.Var(scope, "input"), "opaqueBindingId")), ("credentialInjectionRuleId", Sfx.ValueAt(Sfx.Var(scope, "input"), "credentialInjectionRuleId")))), ("redirectPolicy", Sfx.ParseLiteral("\"manual\"")), ("requestBodyText", Sfx.ParseLiteral("\"\"")), ("requestUrl", JsonValue.Create(Sfx.Format("https://yahoo-finance166.p.rapidapi.com/api/stock/get-price?symbol={symbol}&region={region}", ("region", Sfx.ValueAt(Sfx.Var(scope, "root"), "payload.region")), ("symbol", Sfx.ValueAt(Sfx.Var(scope, "root"), "payload.symbol"))))), ("safeHeaders", Sfx.Object(("X-RapidAPI-Host", Sfx.ParseLiteral("\"yahoo-finance166.p.rapidapi.com\"")))), ("timeoutMilliseconds", Sfx.ParseLiteral("12000")));
+    private static JsonNode? Operation10(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "input"), "effectLineage.0");
 
-    private static JsonNode? Operation11(Dictionary<string, JsonNode?> scope) => Sfx.Array(Sfx.ParseLiteral("\"content-type\""), Sfx.ParseLiteral("\"retry-after\""));
+    private static JsonNode? Operation11(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "prior"), "");
 
-    private static JsonNode? Operation12(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"content-type\"");
+    private static JsonNode? Operation12(Dictionary<string, JsonNode?> scope) => ((Func<Dictionary<string, JsonNode?>, JsonNode?>)((Dictionary<string, JsonNode?> s0) => { s0 = Sfx.Bind(s0, "payload", Sfx.TryParseJson(JsonValue.Create(Sfx.Base64DecodeUtf8(Sfx.ValueAt(Sfx.Var(s0, "input"), "responseBodyBytes"))))); s0 = Sfx.Bind(s0, "quote", Sfx.ValueAt(Sfx.Var(s0, "payload"), "value.quoteResponse.result.0")); return Sfx.Object(("contractId", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("disposition", Sfx.ParseLiteral("\"EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED\"")), ("payload", Sfx.Object(("symbol", Sfx.ValueAt(Sfx.Var(s0, "quote"), "symbol")), ("region", Sfx.ValueAt(Sfx.Var(s0, "root"), "payload.region")), ("currency", Sfx.ValueAt(Sfx.Var(s0, "quote"), "currency")), ("observedPrice", Sfx.ValueAt(Sfx.Var(s0, "quote"), "regularMarketPrice")), ("observedMarketTime", Sfx.ValueAt(Sfx.Var(s0, "quote"), "regularMarketTime")), ("marketState", Sfx.ValueAt(Sfx.Var(s0, "quote"), "marketState")), ("exchange", Sfx.ValueAt(Sfx.Var(s0, "quote"), "exchange")), ("sourceAttribution", Sfx.ValueAt(Sfx.Var(s0, "quote"), "quoteSourceName")))), ("providerTestimony", Sfx.Object(("bindingId", Sfx.ParseLiteral("\"rapidapi-yahoo-finance-real-time1-market-quotes.v1\"")), ("providerId", Sfx.ParseLiteral("\"rapidapi/yahoo-finance-real-time1\"")), ("nativeShape", Sfx.ParseLiteral("\"quoteResponse.result.0\""))))); }))(scope);
 
-    private static JsonNode? Operation13(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"retry-after\"");
+    private static JsonNode? Operation13(Dictionary<string, JsonNode?> scope) => Sfx.TryParseJson(JsonValue.Create(Sfx.Base64DecodeUtf8(Sfx.ValueAt(Sfx.Var(scope, "input"), "responseBodyBytes"))));
 
-    private static JsonNode? Operation14(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"");
+    private static JsonNode? Operation14(Dictionary<string, JsonNode?> scope) => JsonValue.Create(Sfx.Base64DecodeUtf8(Sfx.ValueAt(Sfx.Var(scope, "input"), "responseBodyBytes")));
 
-    private static JsonNode? Operation15(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "input"), "credentialInjectionRuleId");
+    private static JsonNode? Operation15(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "input"), "responseBodyBytes");
 
-    private static JsonNode? Operation16(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b\"");
+    private static JsonNode? Operation16(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "payload"), "value.quoteResponse.result.0");
 
-    private static JsonNode? Operation17(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"live-provider-input\"");
+    private static JsonNode? Operation17(Dictionary<string, JsonNode?> scope) => Sfx.Object(("contractId", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("disposition", Sfx.ParseLiteral("\"EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED\"")), ("payload", Sfx.Object(("symbol", Sfx.ValueAt(Sfx.Var(scope, "quote"), "symbol")), ("region", Sfx.ValueAt(Sfx.Var(scope, "root"), "payload.region")), ("currency", Sfx.ValueAt(Sfx.Var(scope, "quote"), "currency")), ("observedPrice", Sfx.ValueAt(Sfx.Var(scope, "quote"), "regularMarketPrice")), ("observedMarketTime", Sfx.ValueAt(Sfx.Var(scope, "quote"), "regularMarketTime")), ("marketState", Sfx.ValueAt(Sfx.Var(scope, "quote"), "marketState")), ("exchange", Sfx.ValueAt(Sfx.Var(scope, "quote"), "exchange")), ("sourceAttribution", Sfx.ValueAt(Sfx.Var(scope, "quote"), "quoteSourceName")))), ("providerTestimony", Sfx.Object(("bindingId", Sfx.ParseLiteral("\"rapidapi-yahoo-finance-real-time1-market-quotes.v1\"")), ("providerId", Sfx.ParseLiteral("\"rapidapi/yahoo-finance-real-time1\"")), ("nativeShape", Sfx.ParseLiteral("\"quoteResponse.result.0\"")))));
 
     private static JsonNode? Operation18(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"");
 
-    private static JsonNode? Operation19(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"");
+    private static JsonNode? Operation19(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED\"");
 
-    private static JsonNode? Operation20(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("262144");
+    private static JsonNode? Operation20(Dictionary<string, JsonNode?> scope) => Sfx.Object(("symbol", Sfx.ValueAt(Sfx.Var(scope, "quote"), "symbol")), ("region", Sfx.ValueAt(Sfx.Var(scope, "root"), "payload.region")), ("currency", Sfx.ValueAt(Sfx.Var(scope, "quote"), "currency")), ("observedPrice", Sfx.ValueAt(Sfx.Var(scope, "quote"), "regularMarketPrice")), ("observedMarketTime", Sfx.ValueAt(Sfx.Var(scope, "quote"), "regularMarketTime")), ("marketState", Sfx.ValueAt(Sfx.Var(scope, "quote"), "marketState")), ("exchange", Sfx.ValueAt(Sfx.Var(scope, "quote"), "exchange")), ("sourceAttribution", Sfx.ValueAt(Sfx.Var(scope, "quote"), "quoteSourceName")));
 
-    private static JsonNode? Operation21(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"GET\"");
+    private static JsonNode? Operation21(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "quote"), "currency");
 
-    private static JsonNode? Operation22(Dictionary<string, JsonNode?> scope) => Sfx.Object(("bindingId", Sfx.ValueAt(Sfx.Var(scope, "input"), "opaqueBindingId")), ("credentialInjectionRuleId", Sfx.ValueAt(Sfx.Var(scope, "input"), "credentialInjectionRuleId")));
+    private static JsonNode? Operation22(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "quote"), "exchange");
 
-    private static JsonNode? Operation23(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "input"), "opaqueBindingId");
+    private static JsonNode? Operation23(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "quote"), "marketState");
 
-    private static JsonNode? Operation24(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "input"), "credentialInjectionRuleId");
+    private static JsonNode? Operation24(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "quote"), "regularMarketTime");
 
-    private static JsonNode? Operation25(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"manual\"");
+    private static JsonNode? Operation25(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "quote"), "regularMarketPrice");
 
-    private static JsonNode? Operation26(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"\"");
+    private static JsonNode? Operation26(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "root"), "payload.region");
 
-    private static JsonNode? Operation27(Dictionary<string, JsonNode?> scope) => JsonValue.Create(Sfx.Format("https://yahoo-finance166.p.rapidapi.com/api/stock/get-price?symbol={symbol}&region={region}", ("region", Sfx.ValueAt(Sfx.Var(scope, "root"), "payload.region")), ("symbol", Sfx.ValueAt(Sfx.Var(scope, "root"), "payload.symbol"))));
+    private static JsonNode? Operation27(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "quote"), "quoteSourceName");
 
-    private static JsonNode? Operation28(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "root"), "payload.region");
+    private static JsonNode? Operation28(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "quote"), "symbol");
 
-    private static JsonNode? Operation29(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "root"), "payload.symbol");
+    private static JsonNode? Operation29(Dictionary<string, JsonNode?> scope) => Sfx.Object(("bindingId", Sfx.ParseLiteral("\"rapidapi-yahoo-finance-real-time1-market-quotes.v1\"")), ("providerId", Sfx.ParseLiteral("\"rapidapi/yahoo-finance-real-time1\"")), ("nativeShape", Sfx.ParseLiteral("\"quoteResponse.result.0\"")));
 
-    private static JsonNode? Operation30(Dictionary<string, JsonNode?> scope) => Sfx.Object(("X-RapidAPI-Host", Sfx.ParseLiteral("\"yahoo-finance166.p.rapidapi.com\"")));
+    private static JsonNode? Operation30(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"rapidapi-yahoo-finance-real-time1-market-quotes.v1\"");
 
-    private static JsonNode? Operation31(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"yahoo-finance166.p.rapidapi.com\"");
+    private static JsonNode? Operation31(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"quoteResponse.result.0\"");
 
-    private static JsonNode? Operation32(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("12000");
+    private static JsonNode? Operation32(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"rapidapi/yahoo-finance-real-time1\"");
 
-    private static JsonNode? Operation33(Dictionary<string, JsonNode?> scope) => ((Func<Dictionary<string, JsonNode?>, JsonNode?>)((Dictionary<string, JsonNode?> s0) => { s0 = Sfx.Bind(s0, "completed", JsonValue.Create(Sfx.Equals(Sfx.ValueAt(Sfx.Var(s0, "input"), "disposition"), Sfx.ParseLiteral("\"completed\"")))); s0 = Sfx.Bind(s0, "bodyText", (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "completed"), "")) ? JsonValue.Create(Sfx.Base64DecodeUtf8(Sfx.ValueAt(Sfx.Var(s0, "input"), "responseBodyBytes"))) : Sfx.ParseLiteral("\"\""))); s0 = Sfx.Bind(s0, "parsed", Sfx.TryParseJson(Sfx.ValueAt(Sfx.Var(s0, "bodyText"), ""))); s0 = Sfx.Bind(s0, "native", Sfx.ValueAt(Sfx.Var(s0, "parsed"), "value")); s0 = Sfx.Bind(s0, "summaryQuote", Sfx.ValueAt(Sfx.Var(s0, "native"), "quoteSummary.result.0.price")); s0 = Sfx.Bind(s0, "responseQuote", Sfx.ValueAt(Sfx.Var(s0, "native"), "quoteResponse.result.0")); s0 = Sfx.Bind(s0, "symbol", (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "")) ? Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "symbol") : Sfx.ValueAt(Sfx.Var(s0, "responseQuote"), "symbol"))); s0 = Sfx.Bind(s0, "currency", (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "")) ? Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "currency") : Sfx.ValueAt(Sfx.Var(s0, "responseQuote"), "currency"))); s0 = Sfx.Bind(s0, "observedPrice", (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "")) ? Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "regularMarketPrice.raw") : Sfx.ValueAt(Sfx.Var(s0, "responseQuote"), "regularMarketPrice"))); s0 = Sfx.Bind(s0, "observedMarketTime", (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "")) ? Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "regularMarketTime") : Sfx.ValueAt(Sfx.Var(s0, "responseQuote"), "regularMarketTime"))); s0 = Sfx.Bind(s0, "marketState", (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "")) ? Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "marketState") : Sfx.ValueAt(Sfx.Var(s0, "responseQuote"), "marketState"))); s0 = Sfx.Bind(s0, "exchange", (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "")) ? Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "exchange") : Sfx.ValueAt(Sfx.Var(s0, "responseQuote"), "exchange"))); s0 = Sfx.Bind(s0, "sourceAttribution", (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "")) ? Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "quoteSourceName") : Sfx.ValueAt(Sfx.Var(s0, "responseQuote"), "quoteSourceName"))); s0 = Sfx.Bind(s0, "requiredValues", Sfx.Array(Sfx.ValueAt(Sfx.Var(s0, "symbol"), ""), Sfx.ValueAt(Sfx.Var(s0, "currency"), ""), Sfx.ValueAt(Sfx.Var(s0, "observedPrice"), ""), Sfx.ValueAt(Sfx.Var(s0, "observedMarketTime"), ""), Sfx.ValueAt(Sfx.Var(s0, "marketState"), ""), Sfx.ValueAt(Sfx.Var(s0, "exchange"), ""), Sfx.ValueAt(Sfx.Var(s0, "sourceAttribution"), ""))); s0 = Sfx.Bind(s0, "missing", Sfx.Filter(s0, Sfx.ValueAt(Sfx.Var(s0, "requiredValues"), ""), "v", s1 => JsonValue.Create(Sfx.Equals(Sfx.ValueAt(Sfx.Var(s1, "v"), ""), Sfx.ParseLiteral("null"))))); s0 = Sfx.Bind(s0, "missingCount", JsonValue.Create(Sfx.Length(Sfx.ValueAt(Sfx.Var(s0, "missing"), "")))); s0 = Sfx.Bind(s0, "conforming", JsonValue.Create(Sfx.Equals(Sfx.ValueAt(Sfx.Var(s0, "missingCount"), ""), Sfx.ParseLiteral("0")))); s0 = Sfx.Bind(s0, "nativeShape", (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "")) ? Sfx.ParseLiteral("\"quoteSummary.result.0.price\"") : Sfx.ParseLiteral("\"quoteResponse.result.0\""))); s0 = Sfx.Bind(s0, "bindingId", Sfx.ParseLiteral("\"rapidapi-davethebeast-yahoo-finance166-stock-price.v1-EDITED\"")); s0 = Sfx.Bind(s0, "providerId", Sfx.ParseLiteral("\"rapidapi/davethebeast/yahoo-finance166\"")); return (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "completed"), "")) ? (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "conforming"), "")) ? Sfx.Object(("contractId", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("disposition", Sfx.ParseLiteral("\"EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED\"")), ("payload", Sfx.Object(("symbol", Sfx.ValueAt(Sfx.Var(s0, "symbol"), "")), ("region", Sfx.ValueAt(Sfx.Var(s0, "root"), "payload.region")), ("currency", Sfx.ValueAt(Sfx.Var(s0, "currency"), "")), ("observedPrice", Sfx.ValueAt(Sfx.Var(s0, "observedPrice"), "")), ("observedMarketTime", Sfx.ValueAt(Sfx.Var(s0, "observedMarketTime"), "")), ("marketState", Sfx.ValueAt(Sfx.Var(s0, "marketState"), "")), ("exchange", Sfx.ValueAt(Sfx.Var(s0, "exchange"), "")), ("sourceAttribution", Sfx.ValueAt(Sfx.Var(s0, "sourceAttribution"), "")))), ("providerTestimony", Sfx.Object(("bindingId", Sfx.ValueAt(Sfx.Var(s0, "bindingId"), "")), ("providerId", Sfx.ValueAt(Sfx.Var(s0, "providerId"), "")), ("nativeShape", Sfx.ValueAt(Sfx.Var(s0, "nativeShape"), ""))))) : Sfx.Object(("contractId", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("disposition", Sfx.ParseLiteral("\"NATIVE_MARKET_PRICE_TESTIMONY_REJECTED\"")), ("reasonCode", Sfx.ParseLiteral("\"REQUIRED_NATIVE_FIELDS_ABSENT\"")), ("absentFieldCount", Sfx.ValueAt(Sfx.Var(s0, "missingCount"), "")), ("providerTestimony", Sfx.Object(("bindingId", Sfx.ValueAt(Sfx.Var(s0, "bindingId"), "")), ("providerId", Sfx.ValueAt(Sfx.Var(s0, "providerId"), "")), ("nativeShape", Sfx.ValueAt(Sfx.Var(s0, "nativeShape"), "")))))) : Sfx.Object(("contractId", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("disposition", Sfx.ParseLiteral("\"EQUITY_MARKET_PRICE_PROVIDER_UNAVAILABLE\"")), ("reasonCode", Sfx.ParseLiteral("\"PROVIDER_EXCHANGE_NOT_COMPLETED\"")), ("providerTestimony", Sfx.Object(("bindingId", Sfx.ValueAt(Sfx.Var(s0, "bindingId"), "")), ("providerId", Sfx.ValueAt(Sfx.Var(s0, "providerId"), "")))))); }))(scope);
+    private static JsonNode? Operation33(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "fallbackCompleted"), "");
 
-    private static JsonNode? Operation34(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"rapidapi-davethebeast-yahoo-finance166-stock-price.v1-EDITED\"");
+    private static JsonNode? Operation34(Dictionary<string, JsonNode?> scope) => Sfx.Object(("credentialReference", Sfx.ParseLiteral("\"RAPID_API_KEY\"")), ("effectLineage", Sfx.Array()), ("effectScope", Sfx.ParseLiteral("\"ONE_BOUNDED_HTTPS_EXCHANGE_NO_REDIRECT_NO_RETRY\"")), ("endpointAuthorityDigest", Sfx.ParseLiteral("\"sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b\"")), ("invocationIdentity", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("requestingCapabilityId", Sfx.ParseLiteral("\"resolve-equity-market-price-evidence\"")));
 
-    private static JsonNode? Operation35(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"\"");
+    private static JsonNode? Operation35(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"RAPID_API_KEY\"");
 
-    private static JsonNode? Operation36(Dictionary<string, JsonNode?> scope) => JsonValue.Create(Sfx.Base64DecodeUtf8(Sfx.ValueAt(Sfx.Var(scope, "input"), "responseBodyBytes")));
+    private static JsonNode? Operation36(Dictionary<string, JsonNode?> scope) => Sfx.Array();
 
-    private static JsonNode? Operation37(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "input"), "responseBodyBytes");
+    private static JsonNode? Operation37(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"ONE_BOUNDED_HTTPS_EXCHANGE_NO_REDIRECT_NO_RETRY\"");
 
-    private static JsonNode? Operation38(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "completed"), "");
+    private static JsonNode? Operation38(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b\"");
 
-    private static JsonNode? Operation39(Dictionary<string, JsonNode?> scope) => JsonValue.Create(Sfx.Equals(Sfx.ValueAt(Sfx.Var(scope, "input"), "disposition"), Sfx.ParseLiteral("\"completed\"")));
+    private static JsonNode? Operation39(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"");
 
-    private static JsonNode? Operation40(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "input"), "disposition");
+    private static JsonNode? Operation40(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"resolve-equity-market-price-evidence\"");
 
-    private static JsonNode? Operation41(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"completed\"");
+    private static JsonNode? Operation41(Dictionary<string, JsonNode?> scope) => Sfx.Object(("allowedResponseHeaders", Sfx.Array(Sfx.ParseLiteral("\"content-type\""), Sfx.ParseLiteral("\"retry-after\""))), ("cancellationScopeReference", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("credentialInjectionRuleId", Sfx.ValueAt(Sfx.Var(scope, "input"), "credentialInjectionRuleId")), ("endpointAuthorityDigest", Sfx.ParseLiteral("\"sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b\"")), ("exchangeKind", Sfx.ParseLiteral("\"live-provider-input\"")), ("invocationIdentity", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("lineageId", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("maxResponseBytes", Sfx.ParseLiteral("262144")), ("method", Sfx.ParseLiteral("\"GET\"")), ("opaqueCredentialBinding", Sfx.Object(("bindingId", Sfx.ValueAt(Sfx.Var(scope, "input"), "opaqueBindingId")), ("credentialInjectionRuleId", Sfx.ValueAt(Sfx.Var(scope, "input"), "credentialInjectionRuleId")))), ("redirectPolicy", Sfx.ParseLiteral("\"manual\"")), ("requestBodyText", Sfx.ParseLiteral("\"\"")), ("requestUrl", JsonValue.Create(Sfx.Format("https://yahoo-finance166.p.rapidapi.com/api/stock/get-price?symbol={symbol}&region={region}", ("region", Sfx.ValueAt(Sfx.Var(scope, "root"), "payload.region")), ("symbol", Sfx.ValueAt(Sfx.Var(scope, "root"), "payload.symbol"))))), ("safeHeaders", Sfx.Object(("X-RapidAPI-Host", Sfx.ParseLiteral("\"yahoo-finance166.p.rapidapi.com\"")))), ("timeoutMilliseconds", Sfx.ParseLiteral("12000")));
 
-    private static JsonNode? Operation42(Dictionary<string, JsonNode?> scope) => JsonValue.Create(Sfx.Equals(Sfx.ValueAt(Sfx.Var(scope, "missingCount"), ""), Sfx.ParseLiteral("0")));
+    private static JsonNode? Operation42(Dictionary<string, JsonNode?> scope) => Sfx.Array(Sfx.ParseLiteral("\"content-type\""), Sfx.ParseLiteral("\"retry-after\""));
 
-    private static JsonNode? Operation43(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "missingCount"), "");
+    private static JsonNode? Operation43(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"content-type\"");
 
-    private static JsonNode? Operation44(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("0");
+    private static JsonNode? Operation44(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"retry-after\"");
 
-    private static JsonNode? Operation45(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "responseQuote"), "currency");
+    private static JsonNode? Operation45(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"");
 
-    private static JsonNode? Operation46(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "summaryQuote"), "currency");
+    private static JsonNode? Operation46(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "input"), "credentialInjectionRuleId");
 
-    private static JsonNode? Operation47(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "summaryQuote"), "");
+    private static JsonNode? Operation47(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b\"");
 
-    private static JsonNode? Operation48(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "responseQuote"), "exchange");
+    private static JsonNode? Operation48(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"live-provider-input\"");
 
-    private static JsonNode? Operation49(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "summaryQuote"), "exchange");
+    private static JsonNode? Operation49(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"");
 
-    private static JsonNode? Operation50(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "summaryQuote"), "");
+    private static JsonNode? Operation50(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"");
 
-    private static JsonNode? Operation51(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "responseQuote"), "marketState");
+    private static JsonNode? Operation51(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("262144");
 
-    private static JsonNode? Operation52(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "summaryQuote"), "marketState");
+    private static JsonNode? Operation52(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"GET\"");
 
-    private static JsonNode? Operation53(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "summaryQuote"), "");
+    private static JsonNode? Operation53(Dictionary<string, JsonNode?> scope) => Sfx.Object(("bindingId", Sfx.ValueAt(Sfx.Var(scope, "input"), "opaqueBindingId")), ("credentialInjectionRuleId", Sfx.ValueAt(Sfx.Var(scope, "input"), "credentialInjectionRuleId")));
 
-    private static JsonNode? Operation54(Dictionary<string, JsonNode?> scope) => Sfx.Filter(scope, Sfx.ValueAt(Sfx.Var(scope, "requiredValues"), ""), "v", s0 => JsonValue.Create(Sfx.Equals(Sfx.ValueAt(Sfx.Var(s0, "v"), ""), Sfx.ParseLiteral("null"))));
+    private static JsonNode? Operation54(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "input"), "opaqueBindingId");
 
-    private static JsonNode? Operation55(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "requiredValues"), "");
+    private static JsonNode? Operation55(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "input"), "credentialInjectionRuleId");
 
-    private static JsonNode? Operation56(Dictionary<string, JsonNode?> scope) => JsonValue.Create(Sfx.Equals(Sfx.ValueAt(Sfx.Var(scope, "v"), ""), Sfx.ParseLiteral("null")));
+    private static JsonNode? Operation56(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"manual\"");
 
-    private static JsonNode? Operation57(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "v"), "");
+    private static JsonNode? Operation57(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"\"");
 
-    private static JsonNode? Operation58(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("null");
+    private static JsonNode? Operation58(Dictionary<string, JsonNode?> scope) => JsonValue.Create(Sfx.Format("https://yahoo-finance166.p.rapidapi.com/api/stock/get-price?symbol={symbol}&region={region}", ("region", Sfx.ValueAt(Sfx.Var(scope, "root"), "payload.region")), ("symbol", Sfx.ValueAt(Sfx.Var(scope, "root"), "payload.symbol"))));
 
-    private static JsonNode? Operation59(Dictionary<string, JsonNode?> scope) => JsonValue.Create(Sfx.Length(Sfx.ValueAt(Sfx.Var(scope, "missing"), "")));
+    private static JsonNode? Operation59(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "root"), "payload.region");
 
-    private static JsonNode? Operation60(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "missing"), "");
+    private static JsonNode? Operation60(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "root"), "payload.symbol");
 
-    private static JsonNode? Operation61(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "parsed"), "value");
+    private static JsonNode? Operation61(Dictionary<string, JsonNode?> scope) => Sfx.Object(("X-RapidAPI-Host", Sfx.ParseLiteral("\"yahoo-finance166.p.rapidapi.com\"")));
 
-    private static JsonNode? Operation62(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"quoteResponse.result.0\"");
+    private static JsonNode? Operation62(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"yahoo-finance166.p.rapidapi.com\"");
 
-    private static JsonNode? Operation63(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"quoteSummary.result.0.price\"");
+    private static JsonNode? Operation63(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("12000");
 
-    private static JsonNode? Operation64(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "summaryQuote"), "");
+    private static JsonNode? Operation64(Dictionary<string, JsonNode?> scope) => ((Func<Dictionary<string, JsonNode?>, JsonNode?>)((Dictionary<string, JsonNode?> s0) => { s0 = Sfx.Bind(s0, "completed", JsonValue.Create(Sfx.Equals(Sfx.ValueAt(Sfx.Var(s0, "input"), "disposition"), Sfx.ParseLiteral("\"completed\"")))); s0 = Sfx.Bind(s0, "bodyText", (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "completed"), "")) ? JsonValue.Create(Sfx.Base64DecodeUtf8(Sfx.ValueAt(Sfx.Var(s0, "input"), "responseBodyBytes"))) : Sfx.ParseLiteral("\"\""))); s0 = Sfx.Bind(s0, "parsed", Sfx.TryParseJson(Sfx.ValueAt(Sfx.Var(s0, "bodyText"), ""))); s0 = Sfx.Bind(s0, "native", Sfx.ValueAt(Sfx.Var(s0, "parsed"), "value")); s0 = Sfx.Bind(s0, "summaryQuote", Sfx.ValueAt(Sfx.Var(s0, "native"), "quoteSummary.result.0.price")); s0 = Sfx.Bind(s0, "responseQuote", Sfx.ValueAt(Sfx.Var(s0, "native"), "quoteResponse.result.0")); s0 = Sfx.Bind(s0, "symbol", (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "")) ? Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "symbol") : Sfx.ValueAt(Sfx.Var(s0, "responseQuote"), "symbol"))); s0 = Sfx.Bind(s0, "currency", (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "")) ? Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "currency") : Sfx.ValueAt(Sfx.Var(s0, "responseQuote"), "currency"))); s0 = Sfx.Bind(s0, "observedPrice", (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "")) ? Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "regularMarketPrice.raw") : Sfx.ValueAt(Sfx.Var(s0, "responseQuote"), "regularMarketPrice"))); s0 = Sfx.Bind(s0, "observedMarketTime", (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "")) ? Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "regularMarketTime") : Sfx.ValueAt(Sfx.Var(s0, "responseQuote"), "regularMarketTime"))); s0 = Sfx.Bind(s0, "marketState", (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "")) ? Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "marketState") : Sfx.ValueAt(Sfx.Var(s0, "responseQuote"), "marketState"))); s0 = Sfx.Bind(s0, "exchange", (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "")) ? Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "exchange") : Sfx.ValueAt(Sfx.Var(s0, "responseQuote"), "exchange"))); s0 = Sfx.Bind(s0, "sourceAttribution", (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "")) ? Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "quoteSourceName") : Sfx.ValueAt(Sfx.Var(s0, "responseQuote"), "quoteSourceName"))); s0 = Sfx.Bind(s0, "requiredValues", Sfx.Array(Sfx.ValueAt(Sfx.Var(s0, "symbol"), ""), Sfx.ValueAt(Sfx.Var(s0, "currency"), ""), Sfx.ValueAt(Sfx.Var(s0, "observedPrice"), ""), Sfx.ValueAt(Sfx.Var(s0, "observedMarketTime"), ""), Sfx.ValueAt(Sfx.Var(s0, "marketState"), ""), Sfx.ValueAt(Sfx.Var(s0, "exchange"), ""), Sfx.ValueAt(Sfx.Var(s0, "sourceAttribution"), ""))); s0 = Sfx.Bind(s0, "missing", Sfx.Filter(s0, Sfx.ValueAt(Sfx.Var(s0, "requiredValues"), ""), "v", s1 => JsonValue.Create(Sfx.Equals(Sfx.ValueAt(Sfx.Var(s1, "v"), ""), Sfx.ParseLiteral("null"))))); s0 = Sfx.Bind(s0, "missingCount", JsonValue.Create(Sfx.Length(Sfx.ValueAt(Sfx.Var(s0, "missing"), "")))); s0 = Sfx.Bind(s0, "conforming", JsonValue.Create(Sfx.Equals(Sfx.ValueAt(Sfx.Var(s0, "missingCount"), ""), Sfx.ParseLiteral("0")))); s0 = Sfx.Bind(s0, "nativeShape", (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "summaryQuote"), "")) ? Sfx.ParseLiteral("\"quoteSummary.result.0.price\"") : Sfx.ParseLiteral("\"quoteResponse.result.0\""))); s0 = Sfx.Bind(s0, "bindingId", Sfx.ParseLiteral("\"rapidapi-davethebeast-yahoo-finance166-stock-price.v1-EDITED\"")); s0 = Sfx.Bind(s0, "providerId", Sfx.ParseLiteral("\"rapidapi/davethebeast/yahoo-finance166\"")); return (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "completed"), "")) ? (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "conforming"), "")) ? Sfx.Object(("contractId", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("disposition", Sfx.ParseLiteral("\"EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED\"")), ("payload", Sfx.Object(("symbol", Sfx.ValueAt(Sfx.Var(s0, "symbol"), "")), ("region", Sfx.ValueAt(Sfx.Var(s0, "root"), "payload.region")), ("currency", Sfx.ValueAt(Sfx.Var(s0, "currency"), "")), ("observedPrice", Sfx.ValueAt(Sfx.Var(s0, "observedPrice"), "")), ("observedMarketTime", Sfx.ValueAt(Sfx.Var(s0, "observedMarketTime"), "")), ("marketState", Sfx.ValueAt(Sfx.Var(s0, "marketState"), "")), ("exchange", Sfx.ValueAt(Sfx.Var(s0, "exchange"), "")), ("sourceAttribution", Sfx.ValueAt(Sfx.Var(s0, "sourceAttribution"), "")))), ("providerTestimony", Sfx.Object(("bindingId", Sfx.ValueAt(Sfx.Var(s0, "bindingId"), "")), ("providerId", Sfx.ValueAt(Sfx.Var(s0, "providerId"), "")), ("nativeShape", Sfx.ValueAt(Sfx.Var(s0, "nativeShape"), ""))))) : Sfx.Object(("contractId", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("disposition", Sfx.ParseLiteral("\"NATIVE_MARKET_PRICE_TESTIMONY_REJECTED\"")), ("reasonCode", Sfx.ParseLiteral("\"REQUIRED_NATIVE_FIELDS_ABSENT\"")), ("absentFieldCount", Sfx.ValueAt(Sfx.Var(s0, "missingCount"), "")), ("providerTestimony", Sfx.Object(("bindingId", Sfx.ValueAt(Sfx.Var(s0, "bindingId"), "")), ("providerId", Sfx.ValueAt(Sfx.Var(s0, "providerId"), "")), ("nativeShape", Sfx.ValueAt(Sfx.Var(s0, "nativeShape"), "")))))) : Sfx.Object(("contractId", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("disposition", Sfx.ParseLiteral("\"EQUITY_MARKET_PRICE_PROVIDER_UNAVAILABLE\"")), ("reasonCode", Sfx.ParseLiteral("\"PROVIDER_EXCHANGE_NOT_COMPLETED\"")), ("providerTestimony", Sfx.Object(("bindingId", Sfx.ValueAt(Sfx.Var(s0, "bindingId"), "")), ("providerId", Sfx.ValueAt(Sfx.Var(s0, "providerId"), "")))))); }))(scope);
 
-    private static JsonNode? Operation65(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "responseQuote"), "regularMarketTime");
+    private static JsonNode? Operation65(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"rapidapi-davethebeast-yahoo-finance166-stock-price.v1-EDITED\"");
 
-    private static JsonNode? Operation66(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "summaryQuote"), "regularMarketTime");
+    private static JsonNode? Operation66(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"\"");
 
-    private static JsonNode? Operation67(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "summaryQuote"), "");
+    private static JsonNode? Operation67(Dictionary<string, JsonNode?> scope) => JsonValue.Create(Sfx.Base64DecodeUtf8(Sfx.ValueAt(Sfx.Var(scope, "input"), "responseBodyBytes")));
 
-    private static JsonNode? Operation68(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "responseQuote"), "regularMarketPrice");
+    private static JsonNode? Operation68(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "input"), "responseBodyBytes");
 
-    private static JsonNode? Operation69(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "summaryQuote"), "regularMarketPrice.raw");
+    private static JsonNode? Operation69(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "completed"), "");
 
-    private static JsonNode? Operation70(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "summaryQuote"), "");
+    private static JsonNode? Operation70(Dictionary<string, JsonNode?> scope) => JsonValue.Create(Sfx.Equals(Sfx.ValueAt(Sfx.Var(scope, "input"), "disposition"), Sfx.ParseLiteral("\"completed\"")));
 
-    private static JsonNode? Operation71(Dictionary<string, JsonNode?> scope) => Sfx.TryParseJson(Sfx.ValueAt(Sfx.Var(scope, "bodyText"), ""));
+    private static JsonNode? Operation71(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "input"), "disposition");
 
-    private static JsonNode? Operation72(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "bodyText"), "");
+    private static JsonNode? Operation72(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"completed\"");
 
-    private static JsonNode? Operation73(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"rapidapi/davethebeast/yahoo-finance166\"");
+    private static JsonNode? Operation73(Dictionary<string, JsonNode?> scope) => JsonValue.Create(Sfx.Equals(Sfx.ValueAt(Sfx.Var(scope, "missingCount"), ""), Sfx.ParseLiteral("0")));
 
-    private static JsonNode? Operation74(Dictionary<string, JsonNode?> scope) => Sfx.Array(Sfx.ValueAt(Sfx.Var(scope, "symbol"), ""), Sfx.ValueAt(Sfx.Var(scope, "currency"), ""), Sfx.ValueAt(Sfx.Var(scope, "observedPrice"), ""), Sfx.ValueAt(Sfx.Var(scope, "observedMarketTime"), ""), Sfx.ValueAt(Sfx.Var(scope, "marketState"), ""), Sfx.ValueAt(Sfx.Var(scope, "exchange"), ""), Sfx.ValueAt(Sfx.Var(scope, "sourceAttribution"), ""));
+    private static JsonNode? Operation74(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "missingCount"), "");
 
-    private static JsonNode? Operation75(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "symbol"), "");
+    private static JsonNode? Operation75(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("0");
 
-    private static JsonNode? Operation76(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "currency"), "");
+    private static JsonNode? Operation76(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "responseQuote"), "currency");
 
-    private static JsonNode? Operation77(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "observedPrice"), "");
+    private static JsonNode? Operation77(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "summaryQuote"), "currency");
 
-    private static JsonNode? Operation78(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "observedMarketTime"), "");
+    private static JsonNode? Operation78(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "summaryQuote"), "");
 
-    private static JsonNode? Operation79(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "marketState"), "");
+    private static JsonNode? Operation79(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "responseQuote"), "exchange");
 
-    private static JsonNode? Operation80(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "exchange"), "");
+    private static JsonNode? Operation80(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "summaryQuote"), "exchange");
 
-    private static JsonNode? Operation81(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "sourceAttribution"), "");
+    private static JsonNode? Operation81(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "summaryQuote"), "");
 
-    private static JsonNode? Operation82(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "native"), "quoteResponse.result.0");
+    private static JsonNode? Operation82(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "responseQuote"), "marketState");
 
-    private static JsonNode? Operation83(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "responseQuote"), "quoteSourceName");
+    private static JsonNode? Operation83(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "summaryQuote"), "marketState");
 
-    private static JsonNode? Operation84(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "summaryQuote"), "quoteSourceName");
+    private static JsonNode? Operation84(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "summaryQuote"), "");
 
-    private static JsonNode? Operation85(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "summaryQuote"), "");
+    private static JsonNode? Operation85(Dictionary<string, JsonNode?> scope) => Sfx.Filter(scope, Sfx.ValueAt(Sfx.Var(scope, "requiredValues"), ""), "v", s0 => JsonValue.Create(Sfx.Equals(Sfx.ValueAt(Sfx.Var(s0, "v"), ""), Sfx.ParseLiteral("null"))));
 
-    private static JsonNode? Operation86(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "native"), "quoteSummary.result.0.price");
+    private static JsonNode? Operation86(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "requiredValues"), "");
 
-    private static JsonNode? Operation87(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "responseQuote"), "symbol");
+    private static JsonNode? Operation87(Dictionary<string, JsonNode?> scope) => JsonValue.Create(Sfx.Equals(Sfx.ValueAt(Sfx.Var(scope, "v"), ""), Sfx.ParseLiteral("null")));
 
-    private static JsonNode? Operation88(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "summaryQuote"), "symbol");
+    private static JsonNode? Operation88(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "v"), "");
 
-    private static JsonNode? Operation89(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "summaryQuote"), "");
+    private static JsonNode? Operation89(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("null");
 
-    private static JsonNode? Operation90(Dictionary<string, JsonNode?> scope) => Sfx.Object(("contractId", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("disposition", Sfx.ParseLiteral("\"EQUITY_MARKET_PRICE_PROVIDER_UNAVAILABLE\"")), ("reasonCode", Sfx.ParseLiteral("\"PROVIDER_EXCHANGE_NOT_COMPLETED\"")), ("providerTestimony", Sfx.Object(("bindingId", Sfx.ValueAt(Sfx.Var(scope, "bindingId"), "")), ("providerId", Sfx.ValueAt(Sfx.Var(scope, "providerId"), "")))));
+    private static JsonNode? Operation90(Dictionary<string, JsonNode?> scope) => JsonValue.Create(Sfx.Length(Sfx.ValueAt(Sfx.Var(scope, "missing"), "")));
 
-    private static JsonNode? Operation91(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"");
+    private static JsonNode? Operation91(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "missing"), "");
 
-    private static JsonNode? Operation92(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"EQUITY_MARKET_PRICE_PROVIDER_UNAVAILABLE\"");
+    private static JsonNode? Operation92(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "parsed"), "value");
 
-    private static JsonNode? Operation93(Dictionary<string, JsonNode?> scope) => Sfx.Object(("bindingId", Sfx.ValueAt(Sfx.Var(scope, "bindingId"), "")), ("providerId", Sfx.ValueAt(Sfx.Var(scope, "providerId"), "")));
+    private static JsonNode? Operation93(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"quoteResponse.result.0\"");
 
-    private static JsonNode? Operation94(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "bindingId"), "");
+    private static JsonNode? Operation94(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"quoteSummary.result.0.price\"");
 
-    private static JsonNode? Operation95(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "providerId"), "");
+    private static JsonNode? Operation95(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "summaryQuote"), "");
 
-    private static JsonNode? Operation96(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"PROVIDER_EXCHANGE_NOT_COMPLETED\"");
+    private static JsonNode? Operation96(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "responseQuote"), "regularMarketTime");
 
-    private static JsonNode? Operation97(Dictionary<string, JsonNode?> scope) => Sfx.Object(("contractId", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("disposition", Sfx.ParseLiteral("\"NATIVE_MARKET_PRICE_TESTIMONY_REJECTED\"")), ("reasonCode", Sfx.ParseLiteral("\"REQUIRED_NATIVE_FIELDS_ABSENT\"")), ("absentFieldCount", Sfx.ValueAt(Sfx.Var(scope, "missingCount"), "")), ("providerTestimony", Sfx.Object(("bindingId", Sfx.ValueAt(Sfx.Var(scope, "bindingId"), "")), ("providerId", Sfx.ValueAt(Sfx.Var(scope, "providerId"), "")), ("nativeShape", Sfx.ValueAt(Sfx.Var(scope, "nativeShape"), "")))));
+    private static JsonNode? Operation97(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "summaryQuote"), "regularMarketTime");
 
-    private static JsonNode? Operation98(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "missingCount"), "");
+    private static JsonNode? Operation98(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "summaryQuote"), "");
 
-    private static JsonNode? Operation99(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"");
+    private static JsonNode? Operation99(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "responseQuote"), "regularMarketPrice");
 
-    private static JsonNode? Operation100(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"NATIVE_MARKET_PRICE_TESTIMONY_REJECTED\"");
+    private static JsonNode? Operation100(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "summaryQuote"), "regularMarketPrice.raw");
 
-    private static JsonNode? Operation101(Dictionary<string, JsonNode?> scope) => Sfx.Object(("bindingId", Sfx.ValueAt(Sfx.Var(scope, "bindingId"), "")), ("providerId", Sfx.ValueAt(Sfx.Var(scope, "providerId"), "")), ("nativeShape", Sfx.ValueAt(Sfx.Var(scope, "nativeShape"), "")));
+    private static JsonNode? Operation101(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "summaryQuote"), "");
 
-    private static JsonNode? Operation102(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "bindingId"), "");
+    private static JsonNode? Operation102(Dictionary<string, JsonNode?> scope) => Sfx.TryParseJson(Sfx.ValueAt(Sfx.Var(scope, "bodyText"), ""));
 
-    private static JsonNode? Operation103(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "nativeShape"), "");
+    private static JsonNode? Operation103(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "bodyText"), "");
 
-    private static JsonNode? Operation104(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "providerId"), "");
+    private static JsonNode? Operation104(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"rapidapi/davethebeast/yahoo-finance166\"");
 
-    private static JsonNode? Operation105(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"REQUIRED_NATIVE_FIELDS_ABSENT\"");
+    private static JsonNode? Operation105(Dictionary<string, JsonNode?> scope) => Sfx.Array(Sfx.ValueAt(Sfx.Var(scope, "symbol"), ""), Sfx.ValueAt(Sfx.Var(scope, "currency"), ""), Sfx.ValueAt(Sfx.Var(scope, "observedPrice"), ""), Sfx.ValueAt(Sfx.Var(scope, "observedMarketTime"), ""), Sfx.ValueAt(Sfx.Var(scope, "marketState"), ""), Sfx.ValueAt(Sfx.Var(scope, "exchange"), ""), Sfx.ValueAt(Sfx.Var(scope, "sourceAttribution"), ""));
 
-    private static JsonNode? Operation106(Dictionary<string, JsonNode?> scope) => Sfx.Object(("contractId", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("disposition", Sfx.ParseLiteral("\"EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED\"")), ("payload", Sfx.Object(("symbol", Sfx.ValueAt(Sfx.Var(scope, "symbol"), "")), ("region", Sfx.ValueAt(Sfx.Var(scope, "root"), "payload.region")), ("currency", Sfx.ValueAt(Sfx.Var(scope, "currency"), "")), ("observedPrice", Sfx.ValueAt(Sfx.Var(scope, "observedPrice"), "")), ("observedMarketTime", Sfx.ValueAt(Sfx.Var(scope, "observedMarketTime"), "")), ("marketState", Sfx.ValueAt(Sfx.Var(scope, "marketState"), "")), ("exchange", Sfx.ValueAt(Sfx.Var(scope, "exchange"), "")), ("sourceAttribution", Sfx.ValueAt(Sfx.Var(scope, "sourceAttribution"), "")))), ("providerTestimony", Sfx.Object(("bindingId", Sfx.ValueAt(Sfx.Var(scope, "bindingId"), "")), ("providerId", Sfx.ValueAt(Sfx.Var(scope, "providerId"), "")), ("nativeShape", Sfx.ValueAt(Sfx.Var(scope, "nativeShape"), "")))));
+    private static JsonNode? Operation106(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "symbol"), "");
 
-    private static JsonNode? Operation107(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"");
+    private static JsonNode? Operation107(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "currency"), "");
 
-    private static JsonNode? Operation108(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED\"");
+    private static JsonNode? Operation108(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "observedPrice"), "");
 
-    private static JsonNode? Operation109(Dictionary<string, JsonNode?> scope) => Sfx.Object(("symbol", Sfx.ValueAt(Sfx.Var(scope, "symbol"), "")), ("region", Sfx.ValueAt(Sfx.Var(scope, "root"), "payload.region")), ("currency", Sfx.ValueAt(Sfx.Var(scope, "currency"), "")), ("observedPrice", Sfx.ValueAt(Sfx.Var(scope, "observedPrice"), "")), ("observedMarketTime", Sfx.ValueAt(Sfx.Var(scope, "observedMarketTime"), "")), ("marketState", Sfx.ValueAt(Sfx.Var(scope, "marketState"), "")), ("exchange", Sfx.ValueAt(Sfx.Var(scope, "exchange"), "")), ("sourceAttribution", Sfx.ValueAt(Sfx.Var(scope, "sourceAttribution"), "")));
+    private static JsonNode? Operation109(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "observedMarketTime"), "");
 
-    private static JsonNode? Operation110(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "currency"), "");
+    private static JsonNode? Operation110(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "marketState"), "");
 
     private static JsonNode? Operation111(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "exchange"), "");
 
-    private static JsonNode? Operation112(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "marketState"), "");
+    private static JsonNode? Operation112(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "sourceAttribution"), "");
 
-    private static JsonNode? Operation113(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "observedMarketTime"), "");
+    private static JsonNode? Operation113(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "native"), "quoteResponse.result.0");
 
-    private static JsonNode? Operation114(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "observedPrice"), "");
+    private static JsonNode? Operation114(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "responseQuote"), "quoteSourceName");
 
-    private static JsonNode? Operation115(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "root"), "payload.region");
+    private static JsonNode? Operation115(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "summaryQuote"), "quoteSourceName");
 
-    private static JsonNode? Operation116(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "sourceAttribution"), "");
+    private static JsonNode? Operation116(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "summaryQuote"), "");
 
-    private static JsonNode? Operation117(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "symbol"), "");
+    private static JsonNode? Operation117(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "native"), "quoteSummary.result.0.price");
 
-    private static JsonNode? Operation118(Dictionary<string, JsonNode?> scope) => Sfx.Object(("bindingId", Sfx.ValueAt(Sfx.Var(scope, "bindingId"), "")), ("providerId", Sfx.ValueAt(Sfx.Var(scope, "providerId"), "")), ("nativeShape", Sfx.ValueAt(Sfx.Var(scope, "nativeShape"), "")));
+    private static JsonNode? Operation118(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "responseQuote"), "symbol");
 
-    private static JsonNode? Operation119(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "bindingId"), "");
+    private static JsonNode? Operation119(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "summaryQuote"), "symbol");
 
-    private static JsonNode? Operation120(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "nativeShape"), "");
+    private static JsonNode? Operation120(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "summaryQuote"), "");
 
-    private static JsonNode? Operation121(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "providerId"), "");
+    private static JsonNode? Operation121(Dictionary<string, JsonNode?> scope) => Sfx.Object(("contractId", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("disposition", Sfx.ParseLiteral("\"EQUITY_MARKET_PRICE_PROVIDER_UNAVAILABLE\"")), ("reasonCode", Sfx.ParseLiteral("\"PROVIDER_EXCHANGE_NOT_COMPLETED\"")), ("providerTestimony", Sfx.Object(("bindingId", Sfx.ValueAt(Sfx.Var(scope, "bindingId"), "")), ("providerId", Sfx.ValueAt(Sfx.Var(scope, "providerId"), "")))));
 
-    private static JsonNode? Operation122(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "conforming"), "");
+    private static JsonNode? Operation122(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"");
 
-    private static JsonNode? Operation123(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "completed"), "");
+    private static JsonNode? Operation123(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"EQUITY_MARKET_PRICE_PROVIDER_UNAVAILABLE\"");
+
+    private static JsonNode? Operation124(Dictionary<string, JsonNode?> scope) => Sfx.Object(("bindingId", Sfx.ValueAt(Sfx.Var(scope, "bindingId"), "")), ("providerId", Sfx.ValueAt(Sfx.Var(scope, "providerId"), "")));
+
+    private static JsonNode? Operation125(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "bindingId"), "");
+
+    private static JsonNode? Operation126(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "providerId"), "");
+
+    private static JsonNode? Operation127(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"PROVIDER_EXCHANGE_NOT_COMPLETED\"");
+
+    private static JsonNode? Operation128(Dictionary<string, JsonNode?> scope) => Sfx.Object(("contractId", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("disposition", Sfx.ParseLiteral("\"NATIVE_MARKET_PRICE_TESTIMONY_REJECTED\"")), ("reasonCode", Sfx.ParseLiteral("\"REQUIRED_NATIVE_FIELDS_ABSENT\"")), ("absentFieldCount", Sfx.ValueAt(Sfx.Var(scope, "missingCount"), "")), ("providerTestimony", Sfx.Object(("bindingId", Sfx.ValueAt(Sfx.Var(scope, "bindingId"), "")), ("providerId", Sfx.ValueAt(Sfx.Var(scope, "providerId"), "")), ("nativeShape", Sfx.ValueAt(Sfx.Var(scope, "nativeShape"), "")))));
+
+    private static JsonNode? Operation129(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "missingCount"), "");
+
+    private static JsonNode? Operation130(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"");
+
+    private static JsonNode? Operation131(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"NATIVE_MARKET_PRICE_TESTIMONY_REJECTED\"");
+
+    private static JsonNode? Operation132(Dictionary<string, JsonNode?> scope) => Sfx.Object(("bindingId", Sfx.ValueAt(Sfx.Var(scope, "bindingId"), "")), ("providerId", Sfx.ValueAt(Sfx.Var(scope, "providerId"), "")), ("nativeShape", Sfx.ValueAt(Sfx.Var(scope, "nativeShape"), "")));
+
+    private static JsonNode? Operation133(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "bindingId"), "");
+
+    private static JsonNode? Operation134(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "nativeShape"), "");
+
+    private static JsonNode? Operation135(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "providerId"), "");
+
+    private static JsonNode? Operation136(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"REQUIRED_NATIVE_FIELDS_ABSENT\"");
+
+    private static JsonNode? Operation137(Dictionary<string, JsonNode?> scope) => Sfx.Object(("contractId", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("disposition", Sfx.ParseLiteral("\"EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED\"")), ("payload", Sfx.Object(("symbol", Sfx.ValueAt(Sfx.Var(scope, "symbol"), "")), ("region", Sfx.ValueAt(Sfx.Var(scope, "root"), "payload.region")), ("currency", Sfx.ValueAt(Sfx.Var(scope, "currency"), "")), ("observedPrice", Sfx.ValueAt(Sfx.Var(scope, "observedPrice"), "")), ("observedMarketTime", Sfx.ValueAt(Sfx.Var(scope, "observedMarketTime"), "")), ("marketState", Sfx.ValueAt(Sfx.Var(scope, "marketState"), "")), ("exchange", Sfx.ValueAt(Sfx.Var(scope, "exchange"), "")), ("sourceAttribution", Sfx.ValueAt(Sfx.Var(scope, "sourceAttribution"), "")))), ("providerTestimony", Sfx.Object(("bindingId", Sfx.ValueAt(Sfx.Var(scope, "bindingId"), "")), ("providerId", Sfx.ValueAt(Sfx.Var(scope, "providerId"), "")), ("nativeShape", Sfx.ValueAt(Sfx.Var(scope, "nativeShape"), "")))));
+
+    private static JsonNode? Operation138(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"");
+
+    private static JsonNode? Operation139(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED\"");
+
+    private static JsonNode? Operation140(Dictionary<string, JsonNode?> scope) => Sfx.Object(("symbol", Sfx.ValueAt(Sfx.Var(scope, "symbol"), "")), ("region", Sfx.ValueAt(Sfx.Var(scope, "root"), "payload.region")), ("currency", Sfx.ValueAt(Sfx.Var(scope, "currency"), "")), ("observedPrice", Sfx.ValueAt(Sfx.Var(scope, "observedPrice"), "")), ("observedMarketTime", Sfx.ValueAt(Sfx.Var(scope, "observedMarketTime"), "")), ("marketState", Sfx.ValueAt(Sfx.Var(scope, "marketState"), "")), ("exchange", Sfx.ValueAt(Sfx.Var(scope, "exchange"), "")), ("sourceAttribution", Sfx.ValueAt(Sfx.Var(scope, "sourceAttribution"), "")));
+
+    private static JsonNode? Operation141(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "currency"), "");
+
+    private static JsonNode? Operation142(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "exchange"), "");
+
+    private static JsonNode? Operation143(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "marketState"), "");
+
+    private static JsonNode? Operation144(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "observedMarketTime"), "");
+
+    private static JsonNode? Operation145(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "observedPrice"), "");
+
+    private static JsonNode? Operation146(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "root"), "payload.region");
+
+    private static JsonNode? Operation147(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "sourceAttribution"), "");
+
+    private static JsonNode? Operation148(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "symbol"), "");
+
+    private static JsonNode? Operation149(Dictionary<string, JsonNode?> scope) => Sfx.Object(("bindingId", Sfx.ValueAt(Sfx.Var(scope, "bindingId"), "")), ("providerId", Sfx.ValueAt(Sfx.Var(scope, "providerId"), "")), ("nativeShape", Sfx.ValueAt(Sfx.Var(scope, "nativeShape"), "")));
+
+    private static JsonNode? Operation150(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "bindingId"), "");
+
+    private static JsonNode? Operation151(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "nativeShape"), "");
+
+    private static JsonNode? Operation152(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "providerId"), "");
+
+    private static JsonNode? Operation153(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "conforming"), "");
+
+    private static JsonNode? Operation154(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "completed"), "");
+
+    private static JsonNode? Operation155(Dictionary<string, JsonNode?> scope) => ((Func<Dictionary<string, JsonNode?>, JsonNode?>)((Dictionary<string, JsonNode?> s0) => { s0 = Sfx.Bind(s0, "done", JsonValue.Create(Sfx.Equals(Sfx.ValueAt(Sfx.Var(s0, "input"), "disposition"), Sfx.ParseLiteral("\"EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED\"")))); s0 = Sfx.Bind(s0, "carrier", Sfx.Array(Sfx.ValueAt(Sfx.Var(s0, "input"), ""))); s0 = Sfx.Bind(s0, "request", Sfx.Object(("credentialReference", Sfx.ParseLiteral("\"RAPID_API_KEY\"")), ("invocationIdentity", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("requestingCapabilityId", Sfx.ParseLiteral("\"resolve-equity-market-price-evidence\"")), ("endpointAuthorityDigest", Sfx.ParseLiteral("\"sha256:17bd0ab8347e100f7987de6b1a0144d3555c43aea73fedf90786030593a76769\"")), ("effectScope", Sfx.ParseLiteral("\"ONE_BOUNDED_HTTPS_EXCHANGE_NO_REDIRECT_NO_RETRY\"")), ("effectLineage", Sfx.ValueAt(Sfx.Var(s0, "carrier"), "")))); return (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "done"), "")) ? Sfx.Object(("effectLineage", Sfx.ValueAt(Sfx.Var(s0, "carrier"), ""))) : Sfx.ValueAt(Sfx.Var(s0, "request"), "")); }))(scope);
+
+    private static JsonNode? Operation156(Dictionary<string, JsonNode?> scope) => Sfx.Array(Sfx.ValueAt(Sfx.Var(scope, "input"), ""));
+
+    private static JsonNode? Operation157(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "input"), "");
+
+    private static JsonNode? Operation158(Dictionary<string, JsonNode?> scope) => JsonValue.Create(Sfx.Equals(Sfx.ValueAt(Sfx.Var(scope, "input"), "disposition"), Sfx.ParseLiteral("\"EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED\"")));
+
+    private static JsonNode? Operation159(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "input"), "disposition");
+
+    private static JsonNode? Operation160(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED\"");
+
+    private static JsonNode? Operation161(Dictionary<string, JsonNode?> scope) => Sfx.Object(("credentialReference", Sfx.ParseLiteral("\"RAPID_API_KEY\"")), ("invocationIdentity", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("requestingCapabilityId", Sfx.ParseLiteral("\"resolve-equity-market-price-evidence\"")), ("endpointAuthorityDigest", Sfx.ParseLiteral("\"sha256:17bd0ab8347e100f7987de6b1a0144d3555c43aea73fedf90786030593a76769\"")), ("effectScope", Sfx.ParseLiteral("\"ONE_BOUNDED_HTTPS_EXCHANGE_NO_REDIRECT_NO_RETRY\"")), ("effectLineage", Sfx.ValueAt(Sfx.Var(scope, "carrier"), "")));
+
+    private static JsonNode? Operation162(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"RAPID_API_KEY\"");
+
+    private static JsonNode? Operation163(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "carrier"), "");
+
+    private static JsonNode? Operation164(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"ONE_BOUNDED_HTTPS_EXCHANGE_NO_REDIRECT_NO_RETRY\"");
+
+    private static JsonNode? Operation165(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"sha256:17bd0ab8347e100f7987de6b1a0144d3555c43aea73fedf90786030593a76769\"");
+
+    private static JsonNode? Operation166(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"");
+
+    private static JsonNode? Operation167(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"resolve-equity-market-price-evidence\"");
+
+    private static JsonNode? Operation168(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "request"), "");
+
+    private static JsonNode? Operation169(Dictionary<string, JsonNode?> scope) => Sfx.Object(("effectLineage", Sfx.ValueAt(Sfx.Var(scope, "carrier"), "")));
+
+    private static JsonNode? Operation170(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "carrier"), "");
+
+    private static JsonNode? Operation171(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "done"), "");
+
+    private static JsonNode? Operation172(Dictionary<string, JsonNode?> scope) => ((Func<Dictionary<string, JsonNode?>, JsonNode?>)((Dictionary<string, JsonNode?> s0) => { s0 = Sfx.Bind(s0, "bound", JsonValue.Create(Sfx.Equals(Sfx.ValueAt(Sfx.Var(s0, "input"), "disposition"), Sfx.ParseLiteral("\"BOUND\"")))); s0 = Sfx.Bind(s0, "url", JsonValue.Create(Sfx.Format("https://yahoo-finance-real-time1.p.rapidapi.com/market/get-quotes?region={region}&symbols={symbols}", ("region", Sfx.ValueAt(Sfx.Var(s0, "root"), "payload.region")), ("symbols", Sfx.ValueAt(Sfx.Var(s0, "root"), "payload.symbol"))))); s0 = Sfx.Bind(s0, "request", Sfx.Object(("requestUrl", Sfx.ValueAt(Sfx.Var(s0, "url"), "")), ("method", Sfx.ParseLiteral("\"GET\"")), ("safeHeaders", Sfx.Object(("x-rapidapi-host", Sfx.ParseLiteral("\"yahoo-finance-real-time1.p.rapidapi.com\"")))), ("allowedResponseHeaders", Sfx.Array(Sfx.ParseLiteral("\"content-type\""), Sfx.ParseLiteral("\"retry-after\""))), ("timeoutMilliseconds", Sfx.ParseLiteral("15000")), ("maxResponseBytes", Sfx.ParseLiteral("262144")), ("requestBodyText", Sfx.ParseLiteral("\"\"")), ("invocationIdentity", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("endpointAuthorityDigest", Sfx.ParseLiteral("\"sha256:17bd0ab8347e100f7987de6b1a0144d3555c43aea73fedf90786030593a76769\"")), ("credentialInjectionRuleId", Sfx.ParseLiteral("\"rapidapi-x-rapidapi-key.v1\"")), ("opaqueCredentialBinding", Sfx.Object(("bindingId", Sfx.ValueAt(Sfx.Var(s0, "input"), "opaqueBindingId")), ("credentialInjectionRuleId", Sfx.ParseLiteral("\"rapidapi-x-rapidapi-key.v1\"")))), ("effectLineage", Sfx.ValueAt(Sfx.Var(s0, "input"), "effectLineage")))); return (Sfx.Truthy(Sfx.ValueAt(Sfx.Var(s0, "bound"), "")) ? Sfx.ValueAt(Sfx.Var(s0, "request"), "") : Sfx.Object(("effectLineage", Sfx.ValueAt(Sfx.Var(s0, "input"), "effectLineage")))); }))(scope);
+
+    private static JsonNode? Operation173(Dictionary<string, JsonNode?> scope) => JsonValue.Create(Sfx.Equals(Sfx.ValueAt(Sfx.Var(scope, "input"), "disposition"), Sfx.ParseLiteral("\"BOUND\"")));
+
+    private static JsonNode? Operation174(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "input"), "disposition");
+
+    private static JsonNode? Operation175(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"BOUND\"");
+
+    private static JsonNode? Operation176(Dictionary<string, JsonNode?> scope) => Sfx.Object(("requestUrl", Sfx.ValueAt(Sfx.Var(scope, "url"), "")), ("method", Sfx.ParseLiteral("\"GET\"")), ("safeHeaders", Sfx.Object(("x-rapidapi-host", Sfx.ParseLiteral("\"yahoo-finance-real-time1.p.rapidapi.com\"")))), ("allowedResponseHeaders", Sfx.Array(Sfx.ParseLiteral("\"content-type\""), Sfx.ParseLiteral("\"retry-after\""))), ("timeoutMilliseconds", Sfx.ParseLiteral("15000")), ("maxResponseBytes", Sfx.ParseLiteral("262144")), ("requestBodyText", Sfx.ParseLiteral("\"\"")), ("invocationIdentity", Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"")), ("endpointAuthorityDigest", Sfx.ParseLiteral("\"sha256:17bd0ab8347e100f7987de6b1a0144d3555c43aea73fedf90786030593a76769\"")), ("credentialInjectionRuleId", Sfx.ParseLiteral("\"rapidapi-x-rapidapi-key.v1\"")), ("opaqueCredentialBinding", Sfx.Object(("bindingId", Sfx.ValueAt(Sfx.Var(scope, "input"), "opaqueBindingId")), ("credentialInjectionRuleId", Sfx.ParseLiteral("\"rapidapi-x-rapidapi-key.v1\"")))), ("effectLineage", Sfx.ValueAt(Sfx.Var(scope, "input"), "effectLineage")));
+
+    private static JsonNode? Operation177(Dictionary<string, JsonNode?> scope) => Sfx.Array(Sfx.ParseLiteral("\"content-type\""), Sfx.ParseLiteral("\"retry-after\""));
+
+    private static JsonNode? Operation178(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"content-type\"");
+
+    private static JsonNode? Operation179(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"retry-after\"");
+
+    private static JsonNode? Operation180(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"rapidapi-x-rapidapi-key.v1\"");
+
+    private static JsonNode? Operation181(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "input"), "effectLineage");
+
+    private static JsonNode? Operation182(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"sha256:17bd0ab8347e100f7987de6b1a0144d3555c43aea73fedf90786030593a76769\"");
+
+    private static JsonNode? Operation183(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"equity-market-price-evidence.v1\"");
+
+    private static JsonNode? Operation184(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("262144");
+
+    private static JsonNode? Operation185(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"GET\"");
+
+    private static JsonNode? Operation186(Dictionary<string, JsonNode?> scope) => Sfx.Object(("bindingId", Sfx.ValueAt(Sfx.Var(scope, "input"), "opaqueBindingId")), ("credentialInjectionRuleId", Sfx.ParseLiteral("\"rapidapi-x-rapidapi-key.v1\"")));
+
+    private static JsonNode? Operation187(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "input"), "opaqueBindingId");
+
+    private static JsonNode? Operation188(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"rapidapi-x-rapidapi-key.v1\"");
+
+    private static JsonNode? Operation189(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"\"");
+
+    private static JsonNode? Operation190(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "url"), "");
+
+    private static JsonNode? Operation191(Dictionary<string, JsonNode?> scope) => Sfx.Object(("x-rapidapi-host", Sfx.ParseLiteral("\"yahoo-finance-real-time1.p.rapidapi.com\"")));
+
+    private static JsonNode? Operation192(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("\"yahoo-finance-real-time1.p.rapidapi.com\"");
+
+    private static JsonNode? Operation193(Dictionary<string, JsonNode?> scope) => Sfx.ParseLiteral("15000");
+
+    private static JsonNode? Operation194(Dictionary<string, JsonNode?> scope) => JsonValue.Create(Sfx.Format("https://yahoo-finance-real-time1.p.rapidapi.com/market/get-quotes?region={region}&symbols={symbols}", ("region", Sfx.ValueAt(Sfx.Var(scope, "root"), "payload.region")), ("symbols", Sfx.ValueAt(Sfx.Var(scope, "root"), "payload.symbol"))));
+
+    private static JsonNode? Operation195(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "root"), "payload.region");
+
+    private static JsonNode? Operation196(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "root"), "payload.symbol");
+
+    private static JsonNode? Operation197(Dictionary<string, JsonNode?> scope) => Sfx.Object(("effectLineage", Sfx.ValueAt(Sfx.Var(scope, "input"), "effectLineage")));
+
+    private static JsonNode? Operation198(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "input"), "effectLineage");
+
+    private static JsonNode? Operation199(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "request"), "");
+
+    private static JsonNode? Operation200(Dictionary<string, JsonNode?> scope) => Sfx.ValueAt(Sfx.Var(scope, "bound"), "");
 
 }

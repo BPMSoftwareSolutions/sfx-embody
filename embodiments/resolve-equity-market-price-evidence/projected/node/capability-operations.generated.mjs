@@ -5,7 +5,7 @@ import { bindValueAt, valueAt } from "../../../../../scenario-driven-architectur
 
 const descriptorDocument = JSON.parse(fs.readFileSync(new URL("./execution-operations.json", import.meta.url), "utf8"));
 const descriptors = Array.isArray(descriptorDocument.operations) ? descriptorDocument.operations : [];
-export const cellContracts = Object.freeze({"cell:mechanic:resolve-equity-market-price-evidence.operation.1":{"inputContractId":"live-equity-price-request.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.1:expression":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.1:expression.fields.credentialReference":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.1:expression.fields.effectLineage":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.1:expression.fields.effectScope":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.1:expression.fields.endpointAuthorityDigest":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.1:expression.fields.invocationIdentity":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.1:expression.fields.requestingCapabilityId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.2":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.allowedResponseHeaders":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.allowedResponseHeaders.items.0":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.allowedResponseHeaders.items.1":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.cancellationScopeReference":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.credentialInjectionRuleId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.endpointAuthorityDigest":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.exchangeKind":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.invocationIdentity":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.lineageId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.maxResponseBytes":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.method":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.opaqueCredentialBinding":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.opaqueCredentialBinding.fields.bindingId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.opaqueCredentialBinding.fields.credentialInjectionRuleId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.redirectPolicy":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.requestBodyText":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.requestUrl":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.requestUrl.values.region":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.requestUrl.values.symbol":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.safeHeaders":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.safeHeaders.fields.X-RapidAPI-Host":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.timeoutMilliseconds":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.4":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5":{"inputContractId":"semantic-value.v1","outcomeContractId":"equity-market-price-evidence.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.bindingId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.bodyText":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.bodyText:selection":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.bodyText.else":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.bodyText.then":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.bodyText.then.value":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.bodyText.when":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.completed":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.completed.left":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.completed.right":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.conforming":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.conforming.left":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.conforming.right":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.currency":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.currency:selection":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.currency.else":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.currency.then":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.currency.when":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.exchange":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.exchange:selection":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.exchange.else":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.exchange.then":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.exchange.when":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.marketState":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.marketState:selection":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.marketState.else":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.marketState.then":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.marketState.when":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.missing":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.missing.from":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.missing.where":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.missing.where.left":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.missing.where.right":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.missingCount":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.missingCount.value":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.native":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.nativeShape":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.nativeShape:selection":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.nativeShape.else":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.nativeShape.then":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.nativeShape.when":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.observedMarketTime":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.observedMarketTime:selection":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.observedMarketTime.else":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.observedMarketTime.then":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.observedMarketTime.when":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.observedPrice":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.observedPrice:selection":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.observedPrice.else":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.observedPrice.then":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.observedPrice.when":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.parsed":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.parsed.value":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.providerId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.requiredValues":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.requiredValues.items.0":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.requiredValues.items.1":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.requiredValues.items.2":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.requiredValues.items.3":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.requiredValues.items.4":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.requiredValues.items.5":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.requiredValues.items.6":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.responseQuote":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.sourceAttribution":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.sourceAttribution:selection":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.sourceAttribution.else":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.sourceAttribution.then":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.sourceAttribution.when":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.summaryQuote":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.symbol":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.symbol:selection":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.symbol.else":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.symbol.then":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.symbol.when":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value:selection":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.else":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.else.fields.contractId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.else.fields.disposition":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.else.fields.providerTestimony":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.else.fields.providerTestimony.fields.bindingId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.else.fields.providerTestimony.fields.providerId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.else.fields.reasonCode":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then:selection":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.else":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.else.fields.absentFieldCount":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.else.fields.contractId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.else.fields.disposition":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.else.fields.providerTestimony":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.else.fields.providerTestimony.fields.bindingId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.else.fields.providerTestimony.fields.nativeShape":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.else.fields.providerTestimony.fields.providerId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.else.fields.reasonCode":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.contractId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.disposition":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.payload":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.payload.fields.currency":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.payload.fields.exchange":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.payload.fields.marketState":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.payload.fields.observedMarketTime":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.payload.fields.observedPrice":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.payload.fields.region":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.payload.fields.sourceAttribution":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.payload.fields.symbol":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.providerTestimony":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.providerTestimony.fields.bindingId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.providerTestimony.fields.nativeShape":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.providerTestimony.fields.providerId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.when":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.when":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:physical:resolve-equity-market-price-evidence.operation.2":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:physical:resolve-equity-market-price-evidence.operation.4":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:provider:resolve-equity-market-price-evidence.operation.2":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:provider:resolve-equity-market-price-evidence.operation.4":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:scenario:resolve-equity-market-price-evidence":{"inputContractId":"live-equity-price-request.v1","outcomeContractId":"equity-market-price-evidence.v1"}});
+export const cellContracts = Object.freeze({"cell:mechanic:resolve-equity-market-price-evidence.operation.1":{"inputContractId":"live-equity-price-request.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.1:expression":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.1:expression.fields.credentialReference":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.1:expression.fields.effectLineage":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.1:expression.fields.effectScope":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.1:expression.fields.endpointAuthorityDigest":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.1:expression.fields.invocationIdentity":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.1:expression.fields.requestingCapabilityId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.10":{"inputContractId":"semantic-value.v1","outcomeContractId":"equity-market-price-evidence.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.bindings.fallbackCompleted":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.bindings.fallbackCompleted.left":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.bindings.fallbackCompleted.right":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.bindings.prior":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value:selection":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.else":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.bindings.payload":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.bindings.payload.value":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.bindings.payload.value.value":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.bindings.quote":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.contractId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.disposition":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.payload":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.payload.fields.currency":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.payload.fields.exchange":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.payload.fields.marketState":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.payload.fields.observedMarketTime":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.payload.fields.observedPrice":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.payload.fields.region":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.payload.fields.sourceAttribution":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.payload.fields.symbol":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.providerTestimony":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.providerTestimony.fields.bindingId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.providerTestimony.fields.nativeShape":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.then.value.fields.providerTestimony.fields.providerId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.10:expression.value.when":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.2":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.allowedResponseHeaders":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.allowedResponseHeaders.items.0":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.allowedResponseHeaders.items.1":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.cancellationScopeReference":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.credentialInjectionRuleId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.endpointAuthorityDigest":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.exchangeKind":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.invocationIdentity":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.lineageId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.maxResponseBytes":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.method":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.opaqueCredentialBinding":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.opaqueCredentialBinding.fields.bindingId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.opaqueCredentialBinding.fields.credentialInjectionRuleId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.redirectPolicy":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.requestBodyText":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.requestUrl":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.requestUrl.values.region":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.requestUrl.values.symbol":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.safeHeaders":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.safeHeaders.fields.X-RapidAPI-Host":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.3:expression.fields.timeoutMilliseconds":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.4":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.bindingId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.bodyText":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.bodyText:selection":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.bodyText.else":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.bodyText.then":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.bodyText.then.value":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.bodyText.when":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.completed":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.completed.left":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.completed.right":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.conforming":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.conforming.left":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.conforming.right":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.currency":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.currency:selection":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.currency.else":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.currency.then":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.currency.when":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.exchange":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.exchange:selection":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.exchange.else":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.exchange.then":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.exchange.when":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.marketState":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.marketState:selection":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.marketState.else":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.marketState.then":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.marketState.when":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.missing":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.missing.from":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.missing.where":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.missing.where.left":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.missing.where.right":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.missingCount":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.missingCount.value":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.native":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.nativeShape":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.nativeShape:selection":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.nativeShape.else":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.nativeShape.then":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.nativeShape.when":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.observedMarketTime":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.observedMarketTime:selection":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.observedMarketTime.else":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.observedMarketTime.then":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.observedMarketTime.when":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.observedPrice":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.observedPrice:selection":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.observedPrice.else":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.observedPrice.then":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.observedPrice.when":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.parsed":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.parsed.value":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.providerId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.requiredValues":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.requiredValues.items.0":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.requiredValues.items.1":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.requiredValues.items.2":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.requiredValues.items.3":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.requiredValues.items.4":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.requiredValues.items.5":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.requiredValues.items.6":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.responseQuote":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.sourceAttribution":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.sourceAttribution:selection":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.sourceAttribution.else":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.sourceAttribution.then":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.sourceAttribution.when":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.summaryQuote":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.symbol":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.symbol:selection":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.symbol.else":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.symbol.then":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.bindings.symbol.when":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value:selection":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.else":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.else.fields.contractId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.else.fields.disposition":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.else.fields.providerTestimony":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.else.fields.providerTestimony.fields.bindingId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.else.fields.providerTestimony.fields.providerId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.else.fields.reasonCode":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then:selection":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.else":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.else.fields.absentFieldCount":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.else.fields.contractId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.else.fields.disposition":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.else.fields.providerTestimony":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.else.fields.providerTestimony.fields.bindingId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.else.fields.providerTestimony.fields.nativeShape":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.else.fields.providerTestimony.fields.providerId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.else.fields.reasonCode":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.contractId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.disposition":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.payload":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.payload.fields.currency":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.payload.fields.exchange":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.payload.fields.marketState":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.payload.fields.observedMarketTime":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.payload.fields.observedPrice":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.payload.fields.region":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.payload.fields.sourceAttribution":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.payload.fields.symbol":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.providerTestimony":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.providerTestimony.fields.bindingId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.providerTestimony.fields.nativeShape":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.then.fields.providerTestimony.fields.providerId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.then.when":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.5:expression.value.when":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.6":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.carrier":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.carrier.items.0":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.done":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.done.left":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.done.right":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.request":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.request.fields.credentialReference":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.request.fields.effectLineage":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.request.fields.effectScope":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.request.fields.endpointAuthorityDigest":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.request.fields.invocationIdentity":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.bindings.request.fields.requestingCapabilityId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.value":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.value:selection":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.value.else":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.value.then":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.value.then.fields.effectLineage":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.6:expression.value.when":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.7":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.8":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.bound":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.bound.left":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.bound.right":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.allowedResponseHeaders":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.allowedResponseHeaders.items.0":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.allowedResponseHeaders.items.1":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.credentialInjectionRuleId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.effectLineage":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.endpointAuthorityDigest":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.invocationIdentity":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.maxResponseBytes":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.method":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.opaqueCredentialBinding":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.opaqueCredentialBinding.fields.bindingId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.opaqueCredentialBinding.fields.credentialInjectionRuleId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.requestBodyText":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.requestUrl":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.safeHeaders":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.safeHeaders.fields.x-rapidapi-host":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.request.fields.timeoutMilliseconds":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.url":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.url.values.region":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.bindings.url.values.symbols":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.value":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.value:selection":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.value.else":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.value.else.fields.effectLineage":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.value.then":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.8:expression.value.when":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:resolve-equity-market-price-evidence.operation.9":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:physical:resolve-equity-market-price-evidence.operation.2":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:physical:resolve-equity-market-price-evidence.operation.4":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:physical:resolve-equity-market-price-evidence.operation.7":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:physical:resolve-equity-market-price-evidence.operation.9":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:provider:resolve-equity-market-price-evidence.operation.2":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:provider:resolve-equity-market-price-evidence.operation.4":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:provider:resolve-equity-market-price-evidence.operation.7":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:provider:resolve-equity-market-price-evidence.operation.9":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:scenario:resolve-equity-market-price-evidence":{"inputContractId":"live-equity-price-request.v1","outcomeContractId":"equity-market-price-evidence.v1"}});
 
 function sfxValueAt(source, dottedPath) {
   return valueAt(source, dottedPath) ?? null;
@@ -343,29 +343,31 @@ export function operation0(input, context) {
 }
 
 export function operation1(input, context) {
-  return invokeDeclaredOperation(descriptors[1], input, context);
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (((scope) => { scope = { ...scope, ["fallbackCompleted"]: (sfxEquals(sfxValueAt(scope["input"], "disposition"), structuredClone("completed"))) }; scope = { ...scope, ["prior"]: (sfxValueAt(scope["input"], "effectLineage.0")) }; return (sfxTruthy(sfxValueAt(scope["fallbackCompleted"], "")) ? ((scope) => { scope = { ...scope, ["payload"]: (sfxTryParseJson(sfxBase64DecodeUtf8(sfxValueAt(scope["input"], "responseBodyBytes")))) }; scope = { ...scope, ["quote"]: (sfxValueAt(scope["payload"], "value.quoteResponse.result.0")) }; return Object.fromEntries([["contractId", (structuredClone("equity-market-price-evidence.v1") ?? null)], ["disposition", (structuredClone("EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED") ?? null)], ["payload", (Object.fromEntries([["symbol", (sfxValueAt(scope["quote"], "symbol") ?? null)], ["region", (sfxValueAt(scope["root"], "payload.region") ?? null)], ["currency", (sfxValueAt(scope["quote"], "currency") ?? null)], ["observedPrice", (sfxValueAt(scope["quote"], "regularMarketPrice") ?? null)], ["observedMarketTime", (sfxValueAt(scope["quote"], "regularMarketTime") ?? null)], ["marketState", (sfxValueAt(scope["quote"], "marketState") ?? null)], ["exchange", (sfxValueAt(scope["quote"], "exchange") ?? null)], ["sourceAttribution", (sfxValueAt(scope["quote"], "quoteSourceName") ?? null)]]) ?? null)], ["providerTestimony", (Object.fromEntries([["bindingId", (structuredClone("rapidapi-yahoo-finance-real-time1-market-quotes.v1") ?? null)], ["providerId", (structuredClone("rapidapi/yahoo-finance-real-time1") ?? null)], ["nativeShape", (structuredClone("quoteResponse.result.0") ?? null)]]) ?? null)]]); })(scope) : sfxValueAt(scope["prior"], "")); })(scope));
 }
 
 export function operation2(input, context) {
+  return invokeDeclaredOperation(descriptors[2], input, context);
+}
+
+export function operation3(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
   return (Object.fromEntries([["allowedResponseHeaders", ([(structuredClone("content-type") ?? null), (structuredClone("retry-after") ?? null)] ?? null)], ["cancellationScopeReference", (structuredClone("equity-market-price-evidence.v1") ?? null)], ["credentialInjectionRuleId", (sfxValueAt(scope["input"], "credentialInjectionRuleId") ?? null)], ["endpointAuthorityDigest", (structuredClone("sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b") ?? null)], ["exchangeKind", (structuredClone("live-provider-input") ?? null)], ["invocationIdentity", (structuredClone("equity-market-price-evidence.v1") ?? null)], ["lineageId", (structuredClone("equity-market-price-evidence.v1") ?? null)], ["maxResponseBytes", (structuredClone(262144) ?? null)], ["method", (structuredClone("GET") ?? null)], ["opaqueCredentialBinding", (Object.fromEntries([["bindingId", (sfxValueAt(scope["input"], "opaqueBindingId") ?? null)], ["credentialInjectionRuleId", (sfxValueAt(scope["input"], "credentialInjectionRuleId") ?? null)]]) ?? null)], ["redirectPolicy", (structuredClone("manual") ?? null)], ["requestBodyText", (structuredClone("") ?? null)], ["requestUrl", (sfxFormat("https://yahoo-finance166.p.rapidapi.com/api/stock/get-price?symbol={symbol}&region={region}", Object.fromEntries([["region", (sfxValueAt(scope["root"], "payload.region"))], ["symbol", (sfxValueAt(scope["root"], "payload.symbol"))]])) ?? null)], ["safeHeaders", (Object.fromEntries([["X-RapidAPI-Host", (structuredClone("yahoo-finance166.p.rapidapi.com") ?? null)]]) ?? null)], ["timeoutMilliseconds", (structuredClone(12000) ?? null)]]));
 }
 
-export function operation3(input, context) {
-  return invokeDeclaredOperation(descriptors[3], input, context);
+export function operation4(input, context) {
+  return invokeDeclaredOperation(descriptors[4], input, context);
 }
 
-export function operation4(input, context) {
+export function operation5(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
   return (((scope) => { scope = { ...scope, ["completed"]: (sfxEquals(sfxValueAt(scope["input"], "disposition"), structuredClone("completed"))) }; scope = { ...scope, ["bodyText"]: ((sfxTruthy(sfxValueAt(scope["completed"], "")) ? sfxBase64DecodeUtf8(sfxValueAt(scope["input"], "responseBodyBytes")) : structuredClone(""))) }; scope = { ...scope, ["parsed"]: (sfxTryParseJson(sfxValueAt(scope["bodyText"], ""))) }; scope = { ...scope, ["native"]: (sfxValueAt(scope["parsed"], "value")) }; scope = { ...scope, ["summaryQuote"]: (sfxValueAt(scope["native"], "quoteSummary.result.0.price")) }; scope = { ...scope, ["responseQuote"]: (sfxValueAt(scope["native"], "quoteResponse.result.0")) }; scope = { ...scope, ["symbol"]: ((sfxTruthy(sfxValueAt(scope["summaryQuote"], "")) ? sfxValueAt(scope["summaryQuote"], "symbol") : sfxValueAt(scope["responseQuote"], "symbol"))) }; scope = { ...scope, ["currency"]: ((sfxTruthy(sfxValueAt(scope["summaryQuote"], "")) ? sfxValueAt(scope["summaryQuote"], "currency") : sfxValueAt(scope["responseQuote"], "currency"))) }; scope = { ...scope, ["observedPrice"]: ((sfxTruthy(sfxValueAt(scope["summaryQuote"], "")) ? sfxValueAt(scope["summaryQuote"], "regularMarketPrice.raw") : sfxValueAt(scope["responseQuote"], "regularMarketPrice"))) }; scope = { ...scope, ["observedMarketTime"]: ((sfxTruthy(sfxValueAt(scope["summaryQuote"], "")) ? sfxValueAt(scope["summaryQuote"], "regularMarketTime") : sfxValueAt(scope["responseQuote"], "regularMarketTime"))) }; scope = { ...scope, ["marketState"]: ((sfxTruthy(sfxValueAt(scope["summaryQuote"], "")) ? sfxValueAt(scope["summaryQuote"], "marketState") : sfxValueAt(scope["responseQuote"], "marketState"))) }; scope = { ...scope, ["exchange"]: ((sfxTruthy(sfxValueAt(scope["summaryQuote"], "")) ? sfxValueAt(scope["summaryQuote"], "exchange") : sfxValueAt(scope["responseQuote"], "exchange"))) }; scope = { ...scope, ["sourceAttribution"]: ((sfxTruthy(sfxValueAt(scope["summaryQuote"], "")) ? sfxValueAt(scope["summaryQuote"], "quoteSourceName") : sfxValueAt(scope["responseQuote"], "quoteSourceName"))) }; scope = { ...scope, ["requiredValues"]: ([(sfxValueAt(scope["symbol"], "") ?? null), (sfxValueAt(scope["currency"], "") ?? null), (sfxValueAt(scope["observedPrice"], "") ?? null), (sfxValueAt(scope["observedMarketTime"], "") ?? null), (sfxValueAt(scope["marketState"], "") ?? null), (sfxValueAt(scope["exchange"], "") ?? null), (sfxValueAt(scope["sourceAttribution"], "") ?? null)]) }; scope = { ...scope, ["missing"]: (((__source, scope) => __source.filter((item, index) => sfxTruthy(((scope) => sfxEquals(sfxValueAt(scope["v"], ""), structuredClone(null)))({ ...scope, ["v"]: item, ["vIndex"]: index }))))(sfxValueAt(scope["requiredValues"], ""), scope)) }; scope = { ...scope, ["missingCount"]: (sfxLength(sfxValueAt(scope["missing"], ""))) }; scope = { ...scope, ["conforming"]: (sfxEquals(sfxValueAt(scope["missingCount"], ""), structuredClone(0))) }; scope = { ...scope, ["nativeShape"]: ((sfxTruthy(sfxValueAt(scope["summaryQuote"], "")) ? structuredClone("quoteSummary.result.0.price") : structuredClone("quoteResponse.result.0"))) }; scope = { ...scope, ["bindingId"]: (structuredClone("rapidapi-davethebeast-yahoo-finance166-stock-price.v1-EDITED")) }; scope = { ...scope, ["providerId"]: (structuredClone("rapidapi/davethebeast/yahoo-finance166")) }; return (sfxTruthy(sfxValueAt(scope["completed"], "")) ? (sfxTruthy(sfxValueAt(scope["conforming"], "")) ? Object.fromEntries([["contractId", (structuredClone("equity-market-price-evidence.v1") ?? null)], ["disposition", (structuredClone("EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED") ?? null)], ["payload", (Object.fromEntries([["symbol", (sfxValueAt(scope["symbol"], "") ?? null)], ["region", (sfxValueAt(scope["root"], "payload.region") ?? null)], ["currency", (sfxValueAt(scope["currency"], "") ?? null)], ["observedPrice", (sfxValueAt(scope["observedPrice"], "") ?? null)], ["observedMarketTime", (sfxValueAt(scope["observedMarketTime"], "") ?? null)], ["marketState", (sfxValueAt(scope["marketState"], "") ?? null)], ["exchange", (sfxValueAt(scope["exchange"], "") ?? null)], ["sourceAttribution", (sfxValueAt(scope["sourceAttribution"], "") ?? null)]]) ?? null)], ["providerTestimony", (Object.fromEntries([["bindingId", (sfxValueAt(scope["bindingId"], "") ?? null)], ["providerId", (sfxValueAt(scope["providerId"], "") ?? null)], ["nativeShape", (sfxValueAt(scope["nativeShape"], "") ?? null)]]) ?? null)]]) : Object.fromEntries([["contractId", (structuredClone("equity-market-price-evidence.v1") ?? null)], ["disposition", (structuredClone("NATIVE_MARKET_PRICE_TESTIMONY_REJECTED") ?? null)], ["reasonCode", (structuredClone("REQUIRED_NATIVE_FIELDS_ABSENT") ?? null)], ["absentFieldCount", (sfxValueAt(scope["missingCount"], "") ?? null)], ["providerTestimony", (Object.fromEntries([["bindingId", (sfxValueAt(scope["bindingId"], "") ?? null)], ["providerId", (sfxValueAt(scope["providerId"], "") ?? null)], ["nativeShape", (sfxValueAt(scope["nativeShape"], "") ?? null)]]) ?? null)]])) : Object.fromEntries([["contractId", (structuredClone("equity-market-price-evidence.v1") ?? null)], ["disposition", (structuredClone("EQUITY_MARKET_PRICE_PROVIDER_UNAVAILABLE") ?? null)], ["reasonCode", (structuredClone("PROVIDER_EXCHANGE_NOT_COMPLETED") ?? null)], ["providerTestimony", (Object.fromEntries([["bindingId", (sfxValueAt(scope["bindingId"], "") ?? null)], ["providerId", (sfxValueAt(scope["providerId"], "") ?? null)]]) ?? null)]])); })(scope));
 }
 
-export function operation5(input, context) {
-  return structuredClone(input);
-}
-
 export function operation6(input, context) {
-  return structuredClone(input);
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (((scope) => { scope = { ...scope, ["done"]: (sfxEquals(sfxValueAt(scope["input"], "disposition"), structuredClone("EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED"))) }; scope = { ...scope, ["carrier"]: ([(sfxValueAt(scope["input"], "") ?? null)]) }; scope = { ...scope, ["request"]: (Object.fromEntries([["credentialReference", (structuredClone("RAPID_API_KEY") ?? null)], ["invocationIdentity", (structuredClone("equity-market-price-evidence.v1") ?? null)], ["requestingCapabilityId", (structuredClone("resolve-equity-market-price-evidence") ?? null)], ["endpointAuthorityDigest", (structuredClone("sha256:17bd0ab8347e100f7987de6b1a0144d3555c43aea73fedf90786030593a76769") ?? null)], ["effectScope", (structuredClone("ONE_BOUNDED_HTTPS_EXCHANGE_NO_REDIRECT_NO_RETRY") ?? null)], ["effectLineage", (sfxValueAt(scope["carrier"], "") ?? null)]])) }; return (sfxTruthy(sfxValueAt(scope["done"], "")) ? Object.fromEntries([["effectLineage", (sfxValueAt(scope["carrier"], "") ?? null)]]) : sfxValueAt(scope["request"], "")); })(scope));
 }
 
 export function operation7(input, context) {
@@ -373,371 +375,368 @@ export function operation7(input, context) {
 }
 
 export function operation8(input, context) {
-  return invokeDeclaredOperation(descriptors[8], input, context);
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (((scope) => { scope = { ...scope, ["bound"]: (sfxEquals(sfxValueAt(scope["input"], "disposition"), structuredClone("BOUND"))) }; scope = { ...scope, ["url"]: (sfxFormat("https://yahoo-finance-real-time1.p.rapidapi.com/market/get-quotes?region={region}&symbols={symbols}", Object.fromEntries([["region", (sfxValueAt(scope["root"], "payload.region"))], ["symbols", (sfxValueAt(scope["root"], "payload.symbol"))]]))) }; scope = { ...scope, ["request"]: (Object.fromEntries([["requestUrl", (sfxValueAt(scope["url"], "") ?? null)], ["method", (structuredClone("GET") ?? null)], ["safeHeaders", (Object.fromEntries([["x-rapidapi-host", (structuredClone("yahoo-finance-real-time1.p.rapidapi.com") ?? null)]]) ?? null)], ["allowedResponseHeaders", ([(structuredClone("content-type") ?? null), (structuredClone("retry-after") ?? null)] ?? null)], ["timeoutMilliseconds", (structuredClone(15000) ?? null)], ["maxResponseBytes", (structuredClone(262144) ?? null)], ["requestBodyText", (structuredClone("") ?? null)], ["invocationIdentity", (structuredClone("equity-market-price-evidence.v1") ?? null)], ["endpointAuthorityDigest", (structuredClone("sha256:17bd0ab8347e100f7987de6b1a0144d3555c43aea73fedf90786030593a76769") ?? null)], ["credentialInjectionRuleId", (structuredClone("rapidapi-x-rapidapi-key.v1") ?? null)], ["opaqueCredentialBinding", (Object.fromEntries([["bindingId", (sfxValueAt(scope["input"], "opaqueBindingId") ?? null)], ["credentialInjectionRuleId", (structuredClone("rapidapi-x-rapidapi-key.v1") ?? null)]]) ?? null)], ["effectLineage", (sfxValueAt(scope["input"], "effectLineage") ?? null)]])) }; return (sfxTruthy(sfxValueAt(scope["bound"], "")) ? sfxValueAt(scope["request"], "") : Object.fromEntries([["effectLineage", (sfxValueAt(scope["input"], "effectLineage") ?? null)]])); })(scope));
 }
 
 export function operation9(input, context) {
-  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (Object.fromEntries([["credentialReference", (structuredClone("RAPID_API_KEY") ?? null)], ["effectLineage", ([] ?? null)], ["effectScope", (structuredClone("ONE_BOUNDED_HTTPS_EXCHANGE_NO_REDIRECT_NO_RETRY") ?? null)], ["endpointAuthorityDigest", (structuredClone("sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b") ?? null)], ["invocationIdentity", (structuredClone("equity-market-price-evidence.v1") ?? null)], ["requestingCapabilityId", (structuredClone("resolve-equity-market-price-evidence") ?? null)]]));
+  return invokeDeclaredOperation(descriptors[9], input, context);
 }
 
 export function operation10(input, context) {
-  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (structuredClone("RAPID_API_KEY"));
+  return structuredClone(input);
 }
 
 export function operation11(input, context) {
-  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return ([]);
+  return structuredClone(input);
 }
 
 export function operation12(input, context) {
-  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (structuredClone("ONE_BOUNDED_HTTPS_EXCHANGE_NO_REDIRECT_NO_RETRY"));
+  return structuredClone(input);
 }
 
 export function operation13(input, context) {
-  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (structuredClone("sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b"));
+  return structuredClone(input);
 }
 
 export function operation14(input, context) {
-  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (structuredClone("equity-market-price-evidence.v1"));
+  return invokeDeclaredOperation(descriptors[14], input, context);
 }
 
 export function operation15(input, context) {
-  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (structuredClone("resolve-equity-market-price-evidence"));
+  return invokeDeclaredOperation(descriptors[15], input, context);
 }
 
 export function operation16(input, context) {
-  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (Object.fromEntries([["allowedResponseHeaders", ([(structuredClone("content-type") ?? null), (structuredClone("retry-after") ?? null)] ?? null)], ["cancellationScopeReference", (structuredClone("equity-market-price-evidence.v1") ?? null)], ["credentialInjectionRuleId", (sfxValueAt(scope["input"], "credentialInjectionRuleId") ?? null)], ["endpointAuthorityDigest", (structuredClone("sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b") ?? null)], ["exchangeKind", (structuredClone("live-provider-input") ?? null)], ["invocationIdentity", (structuredClone("equity-market-price-evidence.v1") ?? null)], ["lineageId", (structuredClone("equity-market-price-evidence.v1") ?? null)], ["maxResponseBytes", (structuredClone(262144) ?? null)], ["method", (structuredClone("GET") ?? null)], ["opaqueCredentialBinding", (Object.fromEntries([["bindingId", (sfxValueAt(scope["input"], "opaqueBindingId") ?? null)], ["credentialInjectionRuleId", (sfxValueAt(scope["input"], "credentialInjectionRuleId") ?? null)]]) ?? null)], ["redirectPolicy", (structuredClone("manual") ?? null)], ["requestBodyText", (structuredClone("") ?? null)], ["requestUrl", (sfxFormat("https://yahoo-finance166.p.rapidapi.com/api/stock/get-price?symbol={symbol}&region={region}", Object.fromEntries([["region", (sfxValueAt(scope["root"], "payload.region"))], ["symbol", (sfxValueAt(scope["root"], "payload.symbol"))]])) ?? null)], ["safeHeaders", (Object.fromEntries([["X-RapidAPI-Host", (structuredClone("yahoo-finance166.p.rapidapi.com") ?? null)]]) ?? null)], ["timeoutMilliseconds", (structuredClone(12000) ?? null)]]));
+  return invokeDeclaredOperation(descriptors[16], input, context);
 }
 
 export function operation17(input, context) {
-  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return ([(structuredClone("content-type") ?? null), (structuredClone("retry-after") ?? null)]);
+  return invokeDeclaredOperation(descriptors[17], input, context);
 }
 
 export function operation18(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (structuredClone("content-type"));
+  return (((scope) => { scope = { ...scope, ["fallbackCompleted"]: (sfxEquals(sfxValueAt(scope["input"], "disposition"), structuredClone("completed"))) }; scope = { ...scope, ["prior"]: (sfxValueAt(scope["input"], "effectLineage.0")) }; return (sfxTruthy(sfxValueAt(scope["fallbackCompleted"], "")) ? ((scope) => { scope = { ...scope, ["payload"]: (sfxTryParseJson(sfxBase64DecodeUtf8(sfxValueAt(scope["input"], "responseBodyBytes")))) }; scope = { ...scope, ["quote"]: (sfxValueAt(scope["payload"], "value.quoteResponse.result.0")) }; return Object.fromEntries([["contractId", (structuredClone("equity-market-price-evidence.v1") ?? null)], ["disposition", (structuredClone("EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED") ?? null)], ["payload", (Object.fromEntries([["symbol", (sfxValueAt(scope["quote"], "symbol") ?? null)], ["region", (sfxValueAt(scope["root"], "payload.region") ?? null)], ["currency", (sfxValueAt(scope["quote"], "currency") ?? null)], ["observedPrice", (sfxValueAt(scope["quote"], "regularMarketPrice") ?? null)], ["observedMarketTime", (sfxValueAt(scope["quote"], "regularMarketTime") ?? null)], ["marketState", (sfxValueAt(scope["quote"], "marketState") ?? null)], ["exchange", (sfxValueAt(scope["quote"], "exchange") ?? null)], ["sourceAttribution", (sfxValueAt(scope["quote"], "quoteSourceName") ?? null)]]) ?? null)], ["providerTestimony", (Object.fromEntries([["bindingId", (structuredClone("rapidapi-yahoo-finance-real-time1-market-quotes.v1") ?? null)], ["providerId", (structuredClone("rapidapi/yahoo-finance-real-time1") ?? null)], ["nativeShape", (structuredClone("quoteResponse.result.0") ?? null)]]) ?? null)]]); })(scope) : sfxValueAt(scope["prior"], "")); })(scope));
 }
 
 export function operation19(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (structuredClone("retry-after"));
+  return (sfxEquals(sfxValueAt(scope["input"], "disposition"), structuredClone("completed")));
 }
 
 export function operation20(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (structuredClone("equity-market-price-evidence.v1"));
+  return (sfxValueAt(scope["input"], "disposition"));
 }
 
 export function operation21(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["input"], "credentialInjectionRuleId"));
+  return (structuredClone("completed"));
 }
 
 export function operation22(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (structuredClone("sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b"));
+  return (sfxValueAt(scope["input"], "effectLineage.0"));
 }
 
 export function operation23(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (structuredClone("live-provider-input"));
+  return (sfxValueAt(scope["prior"], ""));
 }
 
 export function operation24(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (structuredClone("equity-market-price-evidence.v1"));
+  return (((scope) => { scope = { ...scope, ["payload"]: (sfxTryParseJson(sfxBase64DecodeUtf8(sfxValueAt(scope["input"], "responseBodyBytes")))) }; scope = { ...scope, ["quote"]: (sfxValueAt(scope["payload"], "value.quoteResponse.result.0")) }; return Object.fromEntries([["contractId", (structuredClone("equity-market-price-evidence.v1") ?? null)], ["disposition", (structuredClone("EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED") ?? null)], ["payload", (Object.fromEntries([["symbol", (sfxValueAt(scope["quote"], "symbol") ?? null)], ["region", (sfxValueAt(scope["root"], "payload.region") ?? null)], ["currency", (sfxValueAt(scope["quote"], "currency") ?? null)], ["observedPrice", (sfxValueAt(scope["quote"], "regularMarketPrice") ?? null)], ["observedMarketTime", (sfxValueAt(scope["quote"], "regularMarketTime") ?? null)], ["marketState", (sfxValueAt(scope["quote"], "marketState") ?? null)], ["exchange", (sfxValueAt(scope["quote"], "exchange") ?? null)], ["sourceAttribution", (sfxValueAt(scope["quote"], "quoteSourceName") ?? null)]]) ?? null)], ["providerTestimony", (Object.fromEntries([["bindingId", (structuredClone("rapidapi-yahoo-finance-real-time1-market-quotes.v1") ?? null)], ["providerId", (structuredClone("rapidapi/yahoo-finance-real-time1") ?? null)], ["nativeShape", (structuredClone("quoteResponse.result.0") ?? null)]]) ?? null)]]); })(scope));
 }
 
 export function operation25(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (structuredClone("equity-market-price-evidence.v1"));
+  return (sfxTryParseJson(sfxBase64DecodeUtf8(sfxValueAt(scope["input"], "responseBodyBytes"))));
 }
 
 export function operation26(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (structuredClone(262144));
+  return (sfxBase64DecodeUtf8(sfxValueAt(scope["input"], "responseBodyBytes")));
 }
 
 export function operation27(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (structuredClone("GET"));
+  return (sfxValueAt(scope["input"], "responseBodyBytes"));
 }
 
 export function operation28(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (Object.fromEntries([["bindingId", (sfxValueAt(scope["input"], "opaqueBindingId") ?? null)], ["credentialInjectionRuleId", (sfxValueAt(scope["input"], "credentialInjectionRuleId") ?? null)]]));
+  return (sfxValueAt(scope["payload"], "value.quoteResponse.result.0"));
 }
 
 export function operation29(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["input"], "opaqueBindingId"));
+  return (Object.fromEntries([["contractId", (structuredClone("equity-market-price-evidence.v1") ?? null)], ["disposition", (structuredClone("EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED") ?? null)], ["payload", (Object.fromEntries([["symbol", (sfxValueAt(scope["quote"], "symbol") ?? null)], ["region", (sfxValueAt(scope["root"], "payload.region") ?? null)], ["currency", (sfxValueAt(scope["quote"], "currency") ?? null)], ["observedPrice", (sfxValueAt(scope["quote"], "regularMarketPrice") ?? null)], ["observedMarketTime", (sfxValueAt(scope["quote"], "regularMarketTime") ?? null)], ["marketState", (sfxValueAt(scope["quote"], "marketState") ?? null)], ["exchange", (sfxValueAt(scope["quote"], "exchange") ?? null)], ["sourceAttribution", (sfxValueAt(scope["quote"], "quoteSourceName") ?? null)]]) ?? null)], ["providerTestimony", (Object.fromEntries([["bindingId", (structuredClone("rapidapi-yahoo-finance-real-time1-market-quotes.v1") ?? null)], ["providerId", (structuredClone("rapidapi/yahoo-finance-real-time1") ?? null)], ["nativeShape", (structuredClone("quoteResponse.result.0") ?? null)]]) ?? null)]]));
 }
 
 export function operation30(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["input"], "credentialInjectionRuleId"));
+  return (structuredClone("equity-market-price-evidence.v1"));
 }
 
 export function operation31(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (structuredClone("manual"));
+  return (structuredClone("EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED"));
 }
 
 export function operation32(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (structuredClone(""));
+  return (Object.fromEntries([["symbol", (sfxValueAt(scope["quote"], "symbol") ?? null)], ["region", (sfxValueAt(scope["root"], "payload.region") ?? null)], ["currency", (sfxValueAt(scope["quote"], "currency") ?? null)], ["observedPrice", (sfxValueAt(scope["quote"], "regularMarketPrice") ?? null)], ["observedMarketTime", (sfxValueAt(scope["quote"], "regularMarketTime") ?? null)], ["marketState", (sfxValueAt(scope["quote"], "marketState") ?? null)], ["exchange", (sfxValueAt(scope["quote"], "exchange") ?? null)], ["sourceAttribution", (sfxValueAt(scope["quote"], "quoteSourceName") ?? null)]]));
 }
 
 export function operation33(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxFormat("https://yahoo-finance166.p.rapidapi.com/api/stock/get-price?symbol={symbol}&region={region}", Object.fromEntries([["region", (sfxValueAt(scope["root"], "payload.region"))], ["symbol", (sfxValueAt(scope["root"], "payload.symbol"))]])));
+  return (sfxValueAt(scope["quote"], "currency"));
 }
 
 export function operation34(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["root"], "payload.region"));
+  return (sfxValueAt(scope["quote"], "exchange"));
 }
 
 export function operation35(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["root"], "payload.symbol"));
+  return (sfxValueAt(scope["quote"], "marketState"));
 }
 
 export function operation36(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (Object.fromEntries([["X-RapidAPI-Host", (structuredClone("yahoo-finance166.p.rapidapi.com") ?? null)]]));
+  return (sfxValueAt(scope["quote"], "regularMarketTime"));
 }
 
 export function operation37(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (structuredClone("yahoo-finance166.p.rapidapi.com"));
+  return (sfxValueAt(scope["quote"], "regularMarketPrice"));
 }
 
 export function operation38(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (structuredClone(12000));
+  return (sfxValueAt(scope["root"], "payload.region"));
 }
 
 export function operation39(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (((scope) => { scope = { ...scope, ["completed"]: (sfxEquals(sfxValueAt(scope["input"], "disposition"), structuredClone("completed"))) }; scope = { ...scope, ["bodyText"]: ((sfxTruthy(sfxValueAt(scope["completed"], "")) ? sfxBase64DecodeUtf8(sfxValueAt(scope["input"], "responseBodyBytes")) : structuredClone(""))) }; scope = { ...scope, ["parsed"]: (sfxTryParseJson(sfxValueAt(scope["bodyText"], ""))) }; scope = { ...scope, ["native"]: (sfxValueAt(scope["parsed"], "value")) }; scope = { ...scope, ["summaryQuote"]: (sfxValueAt(scope["native"], "quoteSummary.result.0.price")) }; scope = { ...scope, ["responseQuote"]: (sfxValueAt(scope["native"], "quoteResponse.result.0")) }; scope = { ...scope, ["symbol"]: ((sfxTruthy(sfxValueAt(scope["summaryQuote"], "")) ? sfxValueAt(scope["summaryQuote"], "symbol") : sfxValueAt(scope["responseQuote"], "symbol"))) }; scope = { ...scope, ["currency"]: ((sfxTruthy(sfxValueAt(scope["summaryQuote"], "")) ? sfxValueAt(scope["summaryQuote"], "currency") : sfxValueAt(scope["responseQuote"], "currency"))) }; scope = { ...scope, ["observedPrice"]: ((sfxTruthy(sfxValueAt(scope["summaryQuote"], "")) ? sfxValueAt(scope["summaryQuote"], "regularMarketPrice.raw") : sfxValueAt(scope["responseQuote"], "regularMarketPrice"))) }; scope = { ...scope, ["observedMarketTime"]: ((sfxTruthy(sfxValueAt(scope["summaryQuote"], "")) ? sfxValueAt(scope["summaryQuote"], "regularMarketTime") : sfxValueAt(scope["responseQuote"], "regularMarketTime"))) }; scope = { ...scope, ["marketState"]: ((sfxTruthy(sfxValueAt(scope["summaryQuote"], "")) ? sfxValueAt(scope["summaryQuote"], "marketState") : sfxValueAt(scope["responseQuote"], "marketState"))) }; scope = { ...scope, ["exchange"]: ((sfxTruthy(sfxValueAt(scope["summaryQuote"], "")) ? sfxValueAt(scope["summaryQuote"], "exchange") : sfxValueAt(scope["responseQuote"], "exchange"))) }; scope = { ...scope, ["sourceAttribution"]: ((sfxTruthy(sfxValueAt(scope["summaryQuote"], "")) ? sfxValueAt(scope["summaryQuote"], "quoteSourceName") : sfxValueAt(scope["responseQuote"], "quoteSourceName"))) }; scope = { ...scope, ["requiredValues"]: ([(sfxValueAt(scope["symbol"], "") ?? null), (sfxValueAt(scope["currency"], "") ?? null), (sfxValueAt(scope["observedPrice"], "") ?? null), (sfxValueAt(scope["observedMarketTime"], "") ?? null), (sfxValueAt(scope["marketState"], "") ?? null), (sfxValueAt(scope["exchange"], "") ?? null), (sfxValueAt(scope["sourceAttribution"], "") ?? null)]) }; scope = { ...scope, ["missing"]: (((__source, scope) => __source.filter((item, index) => sfxTruthy(((scope) => sfxEquals(sfxValueAt(scope["v"], ""), structuredClone(null)))({ ...scope, ["v"]: item, ["vIndex"]: index }))))(sfxValueAt(scope["requiredValues"], ""), scope)) }; scope = { ...scope, ["missingCount"]: (sfxLength(sfxValueAt(scope["missing"], ""))) }; scope = { ...scope, ["conforming"]: (sfxEquals(sfxValueAt(scope["missingCount"], ""), structuredClone(0))) }; scope = { ...scope, ["nativeShape"]: ((sfxTruthy(sfxValueAt(scope["summaryQuote"], "")) ? structuredClone("quoteSummary.result.0.price") : structuredClone("quoteResponse.result.0"))) }; scope = { ...scope, ["bindingId"]: (structuredClone("rapidapi-davethebeast-yahoo-finance166-stock-price.v1-EDITED")) }; scope = { ...scope, ["providerId"]: (structuredClone("rapidapi/davethebeast/yahoo-finance166")) }; return (sfxTruthy(sfxValueAt(scope["completed"], "")) ? (sfxTruthy(sfxValueAt(scope["conforming"], "")) ? Object.fromEntries([["contractId", (structuredClone("equity-market-price-evidence.v1") ?? null)], ["disposition", (structuredClone("EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED") ?? null)], ["payload", (Object.fromEntries([["symbol", (sfxValueAt(scope["symbol"], "") ?? null)], ["region", (sfxValueAt(scope["root"], "payload.region") ?? null)], ["currency", (sfxValueAt(scope["currency"], "") ?? null)], ["observedPrice", (sfxValueAt(scope["observedPrice"], "") ?? null)], ["observedMarketTime", (sfxValueAt(scope["observedMarketTime"], "") ?? null)], ["marketState", (sfxValueAt(scope["marketState"], "") ?? null)], ["exchange", (sfxValueAt(scope["exchange"], "") ?? null)], ["sourceAttribution", (sfxValueAt(scope["sourceAttribution"], "") ?? null)]]) ?? null)], ["providerTestimony", (Object.fromEntries([["bindingId", (sfxValueAt(scope["bindingId"], "") ?? null)], ["providerId", (sfxValueAt(scope["providerId"], "") ?? null)], ["nativeShape", (sfxValueAt(scope["nativeShape"], "") ?? null)]]) ?? null)]]) : Object.fromEntries([["contractId", (structuredClone("equity-market-price-evidence.v1") ?? null)], ["disposition", (structuredClone("NATIVE_MARKET_PRICE_TESTIMONY_REJECTED") ?? null)], ["reasonCode", (structuredClone("REQUIRED_NATIVE_FIELDS_ABSENT") ?? null)], ["absentFieldCount", (sfxValueAt(scope["missingCount"], "") ?? null)], ["providerTestimony", (Object.fromEntries([["bindingId", (sfxValueAt(scope["bindingId"], "") ?? null)], ["providerId", (sfxValueAt(scope["providerId"], "") ?? null)], ["nativeShape", (sfxValueAt(scope["nativeShape"], "") ?? null)]]) ?? null)]])) : Object.fromEntries([["contractId", (structuredClone("equity-market-price-evidence.v1") ?? null)], ["disposition", (structuredClone("EQUITY_MARKET_PRICE_PROVIDER_UNAVAILABLE") ?? null)], ["reasonCode", (structuredClone("PROVIDER_EXCHANGE_NOT_COMPLETED") ?? null)], ["providerTestimony", (Object.fromEntries([["bindingId", (sfxValueAt(scope["bindingId"], "") ?? null)], ["providerId", (sfxValueAt(scope["providerId"], "") ?? null)]]) ?? null)]])); })(scope));
+  return (sfxValueAt(scope["quote"], "quoteSourceName"));
 }
 
 export function operation40(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (structuredClone("rapidapi-davethebeast-yahoo-finance166-stock-price.v1-EDITED"));
+  return (sfxValueAt(scope["quote"], "symbol"));
 }
 
 export function operation41(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (structuredClone(""));
+  return (Object.fromEntries([["bindingId", (structuredClone("rapidapi-yahoo-finance-real-time1-market-quotes.v1") ?? null)], ["providerId", (structuredClone("rapidapi/yahoo-finance-real-time1") ?? null)], ["nativeShape", (structuredClone("quoteResponse.result.0") ?? null)]]));
 }
 
 export function operation42(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxBase64DecodeUtf8(sfxValueAt(scope["input"], "responseBodyBytes")));
+  return (structuredClone("rapidapi-yahoo-finance-real-time1-market-quotes.v1"));
 }
 
 export function operation43(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["input"], "responseBodyBytes"));
+  return (structuredClone("quoteResponse.result.0"));
 }
 
 export function operation44(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["completed"], ""));
+  return (structuredClone("rapidapi/yahoo-finance-real-time1"));
 }
 
 export function operation45(input, context) {
-  return invokeDeclaredOperation(descriptors[45], input, context);
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["fallbackCompleted"], ""));
 }
 
 export function operation46(input, context) {
-  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxEquals(sfxValueAt(scope["input"], "disposition"), structuredClone("completed")));
+  return invokeDeclaredOperation(descriptors[46], input, context);
 }
 
 export function operation47(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["input"], "disposition"));
+  return (Object.fromEntries([["credentialReference", (structuredClone("RAPID_API_KEY") ?? null)], ["effectLineage", ([] ?? null)], ["effectScope", (structuredClone("ONE_BOUNDED_HTTPS_EXCHANGE_NO_REDIRECT_NO_RETRY") ?? null)], ["endpointAuthorityDigest", (structuredClone("sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b") ?? null)], ["invocationIdentity", (structuredClone("equity-market-price-evidence.v1") ?? null)], ["requestingCapabilityId", (structuredClone("resolve-equity-market-price-evidence") ?? null)]]));
 }
 
 export function operation48(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (structuredClone("completed"));
+  return (structuredClone("RAPID_API_KEY"));
 }
 
 export function operation49(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxEquals(sfxValueAt(scope["missingCount"], ""), structuredClone(0)));
+  return ([]);
 }
 
 export function operation50(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["missingCount"], ""));
+  return (structuredClone("ONE_BOUNDED_HTTPS_EXCHANGE_NO_REDIRECT_NO_RETRY"));
 }
 
 export function operation51(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (structuredClone(0));
+  return (structuredClone("sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b"));
 }
 
 export function operation52(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["responseQuote"], "currency"));
+  return (structuredClone("equity-market-price-evidence.v1"));
 }
 
 export function operation53(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["summaryQuote"], "currency"));
+  return (structuredClone("resolve-equity-market-price-evidence"));
 }
 
 export function operation54(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["summaryQuote"], ""));
+  return (Object.fromEntries([["allowedResponseHeaders", ([(structuredClone("content-type") ?? null), (structuredClone("retry-after") ?? null)] ?? null)], ["cancellationScopeReference", (structuredClone("equity-market-price-evidence.v1") ?? null)], ["credentialInjectionRuleId", (sfxValueAt(scope["input"], "credentialInjectionRuleId") ?? null)], ["endpointAuthorityDigest", (structuredClone("sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b") ?? null)], ["exchangeKind", (structuredClone("live-provider-input") ?? null)], ["invocationIdentity", (structuredClone("equity-market-price-evidence.v1") ?? null)], ["lineageId", (structuredClone("equity-market-price-evidence.v1") ?? null)], ["maxResponseBytes", (structuredClone(262144) ?? null)], ["method", (structuredClone("GET") ?? null)], ["opaqueCredentialBinding", (Object.fromEntries([["bindingId", (sfxValueAt(scope["input"], "opaqueBindingId") ?? null)], ["credentialInjectionRuleId", (sfxValueAt(scope["input"], "credentialInjectionRuleId") ?? null)]]) ?? null)], ["redirectPolicy", (structuredClone("manual") ?? null)], ["requestBodyText", (structuredClone("") ?? null)], ["requestUrl", (sfxFormat("https://yahoo-finance166.p.rapidapi.com/api/stock/get-price?symbol={symbol}&region={region}", Object.fromEntries([["region", (sfxValueAt(scope["root"], "payload.region"))], ["symbol", (sfxValueAt(scope["root"], "payload.symbol"))]])) ?? null)], ["safeHeaders", (Object.fromEntries([["X-RapidAPI-Host", (structuredClone("yahoo-finance166.p.rapidapi.com") ?? null)]]) ?? null)], ["timeoutMilliseconds", (structuredClone(12000) ?? null)]]));
 }
 
 export function operation55(input, context) {
-  return invokeDeclaredOperation(descriptors[55], input, context);
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return ([(structuredClone("content-type") ?? null), (structuredClone("retry-after") ?? null)]);
 }
 
 export function operation56(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["responseQuote"], "exchange"));
+  return (structuredClone("content-type"));
 }
 
 export function operation57(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["summaryQuote"], "exchange"));
+  return (structuredClone("retry-after"));
 }
 
 export function operation58(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["summaryQuote"], ""));
+  return (structuredClone("equity-market-price-evidence.v1"));
 }
 
 export function operation59(input, context) {
-  return invokeDeclaredOperation(descriptors[59], input, context);
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["input"], "credentialInjectionRuleId"));
 }
 
 export function operation60(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["responseQuote"], "marketState"));
+  return (structuredClone("sha256:09ecb038af10e553a16ec517857dc1eaf9efd4a6e1e608bc47fb4ca27e947f9b"));
 }
 
 export function operation61(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["summaryQuote"], "marketState"));
+  return (structuredClone("live-provider-input"));
 }
 
 export function operation62(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["summaryQuote"], ""));
+  return (structuredClone("equity-market-price-evidence.v1"));
 }
 
 export function operation63(input, context) {
-  return invokeDeclaredOperation(descriptors[63], input, context);
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (structuredClone("equity-market-price-evidence.v1"));
 }
 
 export function operation64(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (((__source, scope) => __source.filter((item, index) => sfxTruthy(((scope) => sfxEquals(sfxValueAt(scope["v"], ""), structuredClone(null)))({ ...scope, ["v"]: item, ["vIndex"]: index }))))(sfxValueAt(scope["requiredValues"], ""), scope));
+  return (structuredClone(262144));
 }
 
 export function operation65(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["requiredValues"], ""));
+  return (structuredClone("GET"));
 }
 
 export function operation66(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxEquals(sfxValueAt(scope["v"], ""), structuredClone(null)));
+  return (Object.fromEntries([["bindingId", (sfxValueAt(scope["input"], "opaqueBindingId") ?? null)], ["credentialInjectionRuleId", (sfxValueAt(scope["input"], "credentialInjectionRuleId") ?? null)]]));
 }
 
 export function operation67(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["v"], ""));
+  return (sfxValueAt(scope["input"], "opaqueBindingId"));
 }
 
 export function operation68(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (structuredClone(null));
+  return (sfxValueAt(scope["input"], "credentialInjectionRuleId"));
 }
 
 export function operation69(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxLength(sfxValueAt(scope["missing"], "")));
+  return (structuredClone("manual"));
 }
 
 export function operation70(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["missing"], ""));
+  return (structuredClone(""));
 }
 
 export function operation71(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["parsed"], "value"));
+  return (sfxFormat("https://yahoo-finance166.p.rapidapi.com/api/stock/get-price?symbol={symbol}&region={region}", Object.fromEntries([["region", (sfxValueAt(scope["root"], "payload.region"))], ["symbol", (sfxValueAt(scope["root"], "payload.symbol"))]])));
 }
 
 export function operation72(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (structuredClone("quoteResponse.result.0"));
+  return (sfxValueAt(scope["root"], "payload.region"));
 }
 
 export function operation73(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (structuredClone("quoteSummary.result.0.price"));
+  return (sfxValueAt(scope["root"], "payload.symbol"));
 }
 
 export function operation74(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["summaryQuote"], ""));
+  return (Object.fromEntries([["X-RapidAPI-Host", (structuredClone("yahoo-finance166.p.rapidapi.com") ?? null)]]));
 }
 
 export function operation75(input, context) {
-  return invokeDeclaredOperation(descriptors[75], input, context);
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (structuredClone("yahoo-finance166.p.rapidapi.com"));
 }
 
 export function operation76(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["responseQuote"], "regularMarketTime"));
+  return (structuredClone(12000));
 }
 
 export function operation77(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["summaryQuote"], "regularMarketTime"));
+  return (((scope) => { scope = { ...scope, ["completed"]: (sfxEquals(sfxValueAt(scope["input"], "disposition"), structuredClone("completed"))) }; scope = { ...scope, ["bodyText"]: ((sfxTruthy(sfxValueAt(scope["completed"], "")) ? sfxBase64DecodeUtf8(sfxValueAt(scope["input"], "responseBodyBytes")) : structuredClone(""))) }; scope = { ...scope, ["parsed"]: (sfxTryParseJson(sfxValueAt(scope["bodyText"], ""))) }; scope = { ...scope, ["native"]: (sfxValueAt(scope["parsed"], "value")) }; scope = { ...scope, ["summaryQuote"]: (sfxValueAt(scope["native"], "quoteSummary.result.0.price")) }; scope = { ...scope, ["responseQuote"]: (sfxValueAt(scope["native"], "quoteResponse.result.0")) }; scope = { ...scope, ["symbol"]: ((sfxTruthy(sfxValueAt(scope["summaryQuote"], "")) ? sfxValueAt(scope["summaryQuote"], "symbol") : sfxValueAt(scope["responseQuote"], "symbol"))) }; scope = { ...scope, ["currency"]: ((sfxTruthy(sfxValueAt(scope["summaryQuote"], "")) ? sfxValueAt(scope["summaryQuote"], "currency") : sfxValueAt(scope["responseQuote"], "currency"))) }; scope = { ...scope, ["observedPrice"]: ((sfxTruthy(sfxValueAt(scope["summaryQuote"], "")) ? sfxValueAt(scope["summaryQuote"], "regularMarketPrice.raw") : sfxValueAt(scope["responseQuote"], "regularMarketPrice"))) }; scope = { ...scope, ["observedMarketTime"]: ((sfxTruthy(sfxValueAt(scope["summaryQuote"], "")) ? sfxValueAt(scope["summaryQuote"], "regularMarketTime") : sfxValueAt(scope["responseQuote"], "regularMarketTime"))) }; scope = { ...scope, ["marketState"]: ((sfxTruthy(sfxValueAt(scope["summaryQuote"], "")) ? sfxValueAt(scope["summaryQuote"], "marketState") : sfxValueAt(scope["responseQuote"], "marketState"))) }; scope = { ...scope, ["exchange"]: ((sfxTruthy(sfxValueAt(scope["summaryQuote"], "")) ? sfxValueAt(scope["summaryQuote"], "exchange") : sfxValueAt(scope["responseQuote"], "exchange"))) }; scope = { ...scope, ["sourceAttribution"]: ((sfxTruthy(sfxValueAt(scope["summaryQuote"], "")) ? sfxValueAt(scope["summaryQuote"], "quoteSourceName") : sfxValueAt(scope["responseQuote"], "quoteSourceName"))) }; scope = { ...scope, ["requiredValues"]: ([(sfxValueAt(scope["symbol"], "") ?? null), (sfxValueAt(scope["currency"], "") ?? null), (sfxValueAt(scope["observedPrice"], "") ?? null), (sfxValueAt(scope["observedMarketTime"], "") ?? null), (sfxValueAt(scope["marketState"], "") ?? null), (sfxValueAt(scope["exchange"], "") ?? null), (sfxValueAt(scope["sourceAttribution"], "") ?? null)]) }; scope = { ...scope, ["missing"]: (((__source, scope) => __source.filter((item, index) => sfxTruthy(((scope) => sfxEquals(sfxValueAt(scope["v"], ""), structuredClone(null)))({ ...scope, ["v"]: item, ["vIndex"]: index }))))(sfxValueAt(scope["requiredValues"], ""), scope)) }; scope = { ...scope, ["missingCount"]: (sfxLength(sfxValueAt(scope["missing"], ""))) }; scope = { ...scope, ["conforming"]: (sfxEquals(sfxValueAt(scope["missingCount"], ""), structuredClone(0))) }; scope = { ...scope, ["nativeShape"]: ((sfxTruthy(sfxValueAt(scope["summaryQuote"], "")) ? structuredClone("quoteSummary.result.0.price") : structuredClone("quoteResponse.result.0"))) }; scope = { ...scope, ["bindingId"]: (structuredClone("rapidapi-davethebeast-yahoo-finance166-stock-price.v1-EDITED")) }; scope = { ...scope, ["providerId"]: (structuredClone("rapidapi/davethebeast/yahoo-finance166")) }; return (sfxTruthy(sfxValueAt(scope["completed"], "")) ? (sfxTruthy(sfxValueAt(scope["conforming"], "")) ? Object.fromEntries([["contractId", (structuredClone("equity-market-price-evidence.v1") ?? null)], ["disposition", (structuredClone("EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED") ?? null)], ["payload", (Object.fromEntries([["symbol", (sfxValueAt(scope["symbol"], "") ?? null)], ["region", (sfxValueAt(scope["root"], "payload.region") ?? null)], ["currency", (sfxValueAt(scope["currency"], "") ?? null)], ["observedPrice", (sfxValueAt(scope["observedPrice"], "") ?? null)], ["observedMarketTime", (sfxValueAt(scope["observedMarketTime"], "") ?? null)], ["marketState", (sfxValueAt(scope["marketState"], "") ?? null)], ["exchange", (sfxValueAt(scope["exchange"], "") ?? null)], ["sourceAttribution", (sfxValueAt(scope["sourceAttribution"], "") ?? null)]]) ?? null)], ["providerTestimony", (Object.fromEntries([["bindingId", (sfxValueAt(scope["bindingId"], "") ?? null)], ["providerId", (sfxValueAt(scope["providerId"], "") ?? null)], ["nativeShape", (sfxValueAt(scope["nativeShape"], "") ?? null)]]) ?? null)]]) : Object.fromEntries([["contractId", (structuredClone("equity-market-price-evidence.v1") ?? null)], ["disposition", (structuredClone("NATIVE_MARKET_PRICE_TESTIMONY_REJECTED") ?? null)], ["reasonCode", (structuredClone("REQUIRED_NATIVE_FIELDS_ABSENT") ?? null)], ["absentFieldCount", (sfxValueAt(scope["missingCount"], "") ?? null)], ["providerTestimony", (Object.fromEntries([["bindingId", (sfxValueAt(scope["bindingId"], "") ?? null)], ["providerId", (sfxValueAt(scope["providerId"], "") ?? null)], ["nativeShape", (sfxValueAt(scope["nativeShape"], "") ?? null)]]) ?? null)]])) : Object.fromEntries([["contractId", (structuredClone("equity-market-price-evidence.v1") ?? null)], ["disposition", (structuredClone("EQUITY_MARKET_PRICE_PROVIDER_UNAVAILABLE") ?? null)], ["reasonCode", (structuredClone("PROVIDER_EXCHANGE_NOT_COMPLETED") ?? null)], ["providerTestimony", (Object.fromEntries([["bindingId", (sfxValueAt(scope["bindingId"], "") ?? null)], ["providerId", (sfxValueAt(scope["providerId"], "") ?? null)]]) ?? null)]])); })(scope));
 }
 
 export function operation78(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["summaryQuote"], ""));
+  return (structuredClone("rapidapi-davethebeast-yahoo-finance166-stock-price.v1-EDITED"));
 }
 
 export function operation79(input, context) {
-  return invokeDeclaredOperation(descriptors[79], input, context);
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (structuredClone(""));
 }
 
 export function operation80(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["responseQuote"], "regularMarketPrice"));
+  return (sfxBase64DecodeUtf8(sfxValueAt(scope["input"], "responseBodyBytes")));
 }
 
 export function operation81(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["summaryQuote"], "regularMarketPrice.raw"));
+  return (sfxValueAt(scope["input"], "responseBodyBytes"));
 }
 
 export function operation82(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["summaryQuote"], ""));
+  return (sfxValueAt(scope["completed"], ""));
 }
 
 export function operation83(input, context) {
@@ -746,286 +745,708 @@ export function operation83(input, context) {
 
 export function operation84(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxTryParseJson(sfxValueAt(scope["bodyText"], "")));
+  return (sfxEquals(sfxValueAt(scope["input"], "disposition"), structuredClone("completed")));
 }
 
 export function operation85(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["bodyText"], ""));
+  return (sfxValueAt(scope["input"], "disposition"));
 }
 
 export function operation86(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (structuredClone("rapidapi/davethebeast/yahoo-finance166"));
+  return (structuredClone("completed"));
 }
 
 export function operation87(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return ([(sfxValueAt(scope["symbol"], "") ?? null), (sfxValueAt(scope["currency"], "") ?? null), (sfxValueAt(scope["observedPrice"], "") ?? null), (sfxValueAt(scope["observedMarketTime"], "") ?? null), (sfxValueAt(scope["marketState"], "") ?? null), (sfxValueAt(scope["exchange"], "") ?? null), (sfxValueAt(scope["sourceAttribution"], "") ?? null)]);
+  return (sfxEquals(sfxValueAt(scope["missingCount"], ""), structuredClone(0)));
 }
 
 export function operation88(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["symbol"], ""));
+  return (sfxValueAt(scope["missingCount"], ""));
 }
 
 export function operation89(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["currency"], ""));
+  return (structuredClone(0));
 }
 
 export function operation90(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["observedPrice"], ""));
+  return (sfxValueAt(scope["responseQuote"], "currency"));
 }
 
 export function operation91(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["observedMarketTime"], ""));
+  return (sfxValueAt(scope["summaryQuote"], "currency"));
 }
 
 export function operation92(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["marketState"], ""));
+  return (sfxValueAt(scope["summaryQuote"], ""));
 }
 
 export function operation93(input, context) {
-  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["exchange"], ""));
+  return invokeDeclaredOperation(descriptors[93], input, context);
 }
 
 export function operation94(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["sourceAttribution"], ""));
+  return (sfxValueAt(scope["responseQuote"], "exchange"));
 }
 
 export function operation95(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["native"], "quoteResponse.result.0"));
+  return (sfxValueAt(scope["summaryQuote"], "exchange"));
 }
 
 export function operation96(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["responseQuote"], "quoteSourceName"));
+  return (sfxValueAt(scope["summaryQuote"], ""));
 }
 
 export function operation97(input, context) {
-  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["summaryQuote"], "quoteSourceName"));
+  return invokeDeclaredOperation(descriptors[97], input, context);
 }
 
 export function operation98(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["summaryQuote"], ""));
+  return (sfxValueAt(scope["responseQuote"], "marketState"));
 }
 
 export function operation99(input, context) {
-  return invokeDeclaredOperation(descriptors[99], input, context);
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["summaryQuote"], "marketState"));
 }
 
 export function operation100(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["native"], "quoteSummary.result.0.price"));
+  return (sfxValueAt(scope["summaryQuote"], ""));
 }
 
 export function operation101(input, context) {
-  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["responseQuote"], "symbol"));
+  return invokeDeclaredOperation(descriptors[101], input, context);
 }
 
 export function operation102(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["summaryQuote"], "symbol"));
+  return (((__source, scope) => __source.filter((item, index) => sfxTruthy(((scope) => sfxEquals(sfxValueAt(scope["v"], ""), structuredClone(null)))({ ...scope, ["v"]: item, ["vIndex"]: index }))))(sfxValueAt(scope["requiredValues"], ""), scope));
 }
 
 export function operation103(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["summaryQuote"], ""));
+  return (sfxValueAt(scope["requiredValues"], ""));
 }
 
 export function operation104(input, context) {
-  return invokeDeclaredOperation(descriptors[104], input, context);
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxEquals(sfxValueAt(scope["v"], ""), structuredClone(null)));
 }
 
 export function operation105(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (Object.fromEntries([["contractId", (structuredClone("equity-market-price-evidence.v1") ?? null)], ["disposition", (structuredClone("EQUITY_MARKET_PRICE_PROVIDER_UNAVAILABLE") ?? null)], ["reasonCode", (structuredClone("PROVIDER_EXCHANGE_NOT_COMPLETED") ?? null)], ["providerTestimony", (Object.fromEntries([["bindingId", (sfxValueAt(scope["bindingId"], "") ?? null)], ["providerId", (sfxValueAt(scope["providerId"], "") ?? null)]]) ?? null)]]));
+  return (sfxValueAt(scope["v"], ""));
 }
 
 export function operation106(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (structuredClone("equity-market-price-evidence.v1"));
+  return (structuredClone(null));
 }
 
 export function operation107(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (structuredClone("EQUITY_MARKET_PRICE_PROVIDER_UNAVAILABLE"));
+  return (sfxLength(sfxValueAt(scope["missing"], "")));
 }
 
 export function operation108(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (Object.fromEntries([["bindingId", (sfxValueAt(scope["bindingId"], "") ?? null)], ["providerId", (sfxValueAt(scope["providerId"], "") ?? null)]]));
+  return (sfxValueAt(scope["missing"], ""));
 }
 
 export function operation109(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["bindingId"], ""));
+  return (sfxValueAt(scope["parsed"], "value"));
 }
 
 export function operation110(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["providerId"], ""));
+  return (structuredClone("quoteResponse.result.0"));
 }
 
 export function operation111(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (structuredClone("PROVIDER_EXCHANGE_NOT_COMPLETED"));
+  return (structuredClone("quoteSummary.result.0.price"));
 }
 
 export function operation112(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (Object.fromEntries([["contractId", (structuredClone("equity-market-price-evidence.v1") ?? null)], ["disposition", (structuredClone("NATIVE_MARKET_PRICE_TESTIMONY_REJECTED") ?? null)], ["reasonCode", (structuredClone("REQUIRED_NATIVE_FIELDS_ABSENT") ?? null)], ["absentFieldCount", (sfxValueAt(scope["missingCount"], "") ?? null)], ["providerTestimony", (Object.fromEntries([["bindingId", (sfxValueAt(scope["bindingId"], "") ?? null)], ["providerId", (sfxValueAt(scope["providerId"], "") ?? null)], ["nativeShape", (sfxValueAt(scope["nativeShape"], "") ?? null)]]) ?? null)]]));
+  return (sfxValueAt(scope["summaryQuote"], ""));
 }
 
 export function operation113(input, context) {
-  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["missingCount"], ""));
+  return invokeDeclaredOperation(descriptors[113], input, context);
 }
 
 export function operation114(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (structuredClone("equity-market-price-evidence.v1"));
+  return (sfxValueAt(scope["responseQuote"], "regularMarketTime"));
 }
 
 export function operation115(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (structuredClone("NATIVE_MARKET_PRICE_TESTIMONY_REJECTED"));
+  return (sfxValueAt(scope["summaryQuote"], "regularMarketTime"));
 }
 
 export function operation116(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (Object.fromEntries([["bindingId", (sfxValueAt(scope["bindingId"], "") ?? null)], ["providerId", (sfxValueAt(scope["providerId"], "") ?? null)], ["nativeShape", (sfxValueAt(scope["nativeShape"], "") ?? null)]]));
+  return (sfxValueAt(scope["summaryQuote"], ""));
 }
 
 export function operation117(input, context) {
-  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["bindingId"], ""));
+  return invokeDeclaredOperation(descriptors[117], input, context);
 }
 
 export function operation118(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["nativeShape"], ""));
+  return (sfxValueAt(scope["responseQuote"], "regularMarketPrice"));
 }
 
 export function operation119(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["providerId"], ""));
+  return (sfxValueAt(scope["summaryQuote"], "regularMarketPrice.raw"));
 }
 
 export function operation120(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (structuredClone("REQUIRED_NATIVE_FIELDS_ABSENT"));
+  return (sfxValueAt(scope["summaryQuote"], ""));
 }
 
 export function operation121(input, context) {
-  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (Object.fromEntries([["contractId", (structuredClone("equity-market-price-evidence.v1") ?? null)], ["disposition", (structuredClone("EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED") ?? null)], ["payload", (Object.fromEntries([["symbol", (sfxValueAt(scope["symbol"], "") ?? null)], ["region", (sfxValueAt(scope["root"], "payload.region") ?? null)], ["currency", (sfxValueAt(scope["currency"], "") ?? null)], ["observedPrice", (sfxValueAt(scope["observedPrice"], "") ?? null)], ["observedMarketTime", (sfxValueAt(scope["observedMarketTime"], "") ?? null)], ["marketState", (sfxValueAt(scope["marketState"], "") ?? null)], ["exchange", (sfxValueAt(scope["exchange"], "") ?? null)], ["sourceAttribution", (sfxValueAt(scope["sourceAttribution"], "") ?? null)]]) ?? null)], ["providerTestimony", (Object.fromEntries([["bindingId", (sfxValueAt(scope["bindingId"], "") ?? null)], ["providerId", (sfxValueAt(scope["providerId"], "") ?? null)], ["nativeShape", (sfxValueAt(scope["nativeShape"], "") ?? null)]]) ?? null)]]));
+  return invokeDeclaredOperation(descriptors[121], input, context);
 }
 
 export function operation122(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (structuredClone("equity-market-price-evidence.v1"));
+  return (sfxTryParseJson(sfxValueAt(scope["bodyText"], "")));
 }
 
 export function operation123(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (structuredClone("EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED"));
+  return (sfxValueAt(scope["bodyText"], ""));
 }
 
 export function operation124(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (Object.fromEntries([["symbol", (sfxValueAt(scope["symbol"], "") ?? null)], ["region", (sfxValueAt(scope["root"], "payload.region") ?? null)], ["currency", (sfxValueAt(scope["currency"], "") ?? null)], ["observedPrice", (sfxValueAt(scope["observedPrice"], "") ?? null)], ["observedMarketTime", (sfxValueAt(scope["observedMarketTime"], "") ?? null)], ["marketState", (sfxValueAt(scope["marketState"], "") ?? null)], ["exchange", (sfxValueAt(scope["exchange"], "") ?? null)], ["sourceAttribution", (sfxValueAt(scope["sourceAttribution"], "") ?? null)]]));
+  return (structuredClone("rapidapi/davethebeast/yahoo-finance166"));
 }
 
 export function operation125(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["currency"], ""));
+  return ([(sfxValueAt(scope["symbol"], "") ?? null), (sfxValueAt(scope["currency"], "") ?? null), (sfxValueAt(scope["observedPrice"], "") ?? null), (sfxValueAt(scope["observedMarketTime"], "") ?? null), (sfxValueAt(scope["marketState"], "") ?? null), (sfxValueAt(scope["exchange"], "") ?? null), (sfxValueAt(scope["sourceAttribution"], "") ?? null)]);
 }
 
 export function operation126(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["exchange"], ""));
+  return (sfxValueAt(scope["symbol"], ""));
 }
 
 export function operation127(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["marketState"], ""));
+  return (sfxValueAt(scope["currency"], ""));
 }
 
 export function operation128(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["observedMarketTime"], ""));
+  return (sfxValueAt(scope["observedPrice"], ""));
 }
 
 export function operation129(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["observedPrice"], ""));
+  return (sfxValueAt(scope["observedMarketTime"], ""));
 }
 
 export function operation130(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["root"], "payload.region"));
+  return (sfxValueAt(scope["marketState"], ""));
 }
 
 export function operation131(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["sourceAttribution"], ""));
+  return (sfxValueAt(scope["exchange"], ""));
 }
 
 export function operation132(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["symbol"], ""));
+  return (sfxValueAt(scope["sourceAttribution"], ""));
 }
 
 export function operation133(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (Object.fromEntries([["bindingId", (sfxValueAt(scope["bindingId"], "") ?? null)], ["providerId", (sfxValueAt(scope["providerId"], "") ?? null)], ["nativeShape", (sfxValueAt(scope["nativeShape"], "") ?? null)]]));
+  return (sfxValueAt(scope["native"], "quoteResponse.result.0"));
 }
 
 export function operation134(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["bindingId"], ""));
+  return (sfxValueAt(scope["responseQuote"], "quoteSourceName"));
 }
 
 export function operation135(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["nativeShape"], ""));
+  return (sfxValueAt(scope["summaryQuote"], "quoteSourceName"));
 }
 
 export function operation136(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["providerId"], ""));
+  return (sfxValueAt(scope["summaryQuote"], ""));
 }
 
 export function operation137(input, context) {
-  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["conforming"], ""));
+  return invokeDeclaredOperation(descriptors[137], input, context);
 }
 
 export function operation138(input, context) {
-  return invokeDeclaredOperation(descriptors[138], input, context);
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["native"], "quoteSummary.result.0.price"));
 }
 
 export function operation139(input, context) {
   const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
-  return (sfxValueAt(scope["completed"], ""));
+  return (sfxValueAt(scope["responseQuote"], "symbol"));
 }
 
 export function operation140(input, context) {
-  return invokeDeclaredOperation(descriptors[140], input, context);
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["summaryQuote"], "symbol"));
 }
 
-const implementationByIndex = Object.freeze([operation0, operation1, operation2, operation3, operation4, operation5, operation6, operation7, operation8, operation9, operation10, operation11, operation12, operation13, operation14, operation15, operation16, operation17, operation18, operation19, operation20, operation21, operation22, operation23, operation24, operation25, operation26, operation27, operation28, operation29, operation30, operation31, operation32, operation33, operation34, operation35, operation36, operation37, operation38, operation39, operation40, operation41, operation42, operation43, operation44, operation45, operation46, operation47, operation48, operation49, operation50, operation51, operation52, operation53, operation54, operation55, operation56, operation57, operation58, operation59, operation60, operation61, operation62, operation63, operation64, operation65, operation66, operation67, operation68, operation69, operation70, operation71, operation72, operation73, operation74, operation75, operation76, operation77, operation78, operation79, operation80, operation81, operation82, operation83, operation84, operation85, operation86, operation87, operation88, operation89, operation90, operation91, operation92, operation93, operation94, operation95, operation96, operation97, operation98, operation99, operation100, operation101, operation102, operation103, operation104, operation105, operation106, operation107, operation108, operation109, operation110, operation111, operation112, operation113, operation114, operation115, operation116, operation117, operation118, operation119, operation120, operation121, operation122, operation123, operation124, operation125, operation126, operation127, operation128, operation129, operation130, operation131, operation132, operation133, operation134, operation135, operation136, operation137, operation138, operation139, operation140]);
+export function operation141(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["summaryQuote"], ""));
+}
+
+export function operation142(input, context) {
+  return invokeDeclaredOperation(descriptors[142], input, context);
+}
+
+export function operation143(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (Object.fromEntries([["contractId", (structuredClone("equity-market-price-evidence.v1") ?? null)], ["disposition", (structuredClone("EQUITY_MARKET_PRICE_PROVIDER_UNAVAILABLE") ?? null)], ["reasonCode", (structuredClone("PROVIDER_EXCHANGE_NOT_COMPLETED") ?? null)], ["providerTestimony", (Object.fromEntries([["bindingId", (sfxValueAt(scope["bindingId"], "") ?? null)], ["providerId", (sfxValueAt(scope["providerId"], "") ?? null)]]) ?? null)]]));
+}
+
+export function operation144(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (structuredClone("equity-market-price-evidence.v1"));
+}
+
+export function operation145(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (structuredClone("EQUITY_MARKET_PRICE_PROVIDER_UNAVAILABLE"));
+}
+
+export function operation146(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (Object.fromEntries([["bindingId", (sfxValueAt(scope["bindingId"], "") ?? null)], ["providerId", (sfxValueAt(scope["providerId"], "") ?? null)]]));
+}
+
+export function operation147(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["bindingId"], ""));
+}
+
+export function operation148(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["providerId"], ""));
+}
+
+export function operation149(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (structuredClone("PROVIDER_EXCHANGE_NOT_COMPLETED"));
+}
+
+export function operation150(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (Object.fromEntries([["contractId", (structuredClone("equity-market-price-evidence.v1") ?? null)], ["disposition", (structuredClone("NATIVE_MARKET_PRICE_TESTIMONY_REJECTED") ?? null)], ["reasonCode", (structuredClone("REQUIRED_NATIVE_FIELDS_ABSENT") ?? null)], ["absentFieldCount", (sfxValueAt(scope["missingCount"], "") ?? null)], ["providerTestimony", (Object.fromEntries([["bindingId", (sfxValueAt(scope["bindingId"], "") ?? null)], ["providerId", (sfxValueAt(scope["providerId"], "") ?? null)], ["nativeShape", (sfxValueAt(scope["nativeShape"], "") ?? null)]]) ?? null)]]));
+}
+
+export function operation151(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["missingCount"], ""));
+}
+
+export function operation152(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (structuredClone("equity-market-price-evidence.v1"));
+}
+
+export function operation153(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (structuredClone("NATIVE_MARKET_PRICE_TESTIMONY_REJECTED"));
+}
+
+export function operation154(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (Object.fromEntries([["bindingId", (sfxValueAt(scope["bindingId"], "") ?? null)], ["providerId", (sfxValueAt(scope["providerId"], "") ?? null)], ["nativeShape", (sfxValueAt(scope["nativeShape"], "") ?? null)]]));
+}
+
+export function operation155(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["bindingId"], ""));
+}
+
+export function operation156(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["nativeShape"], ""));
+}
+
+export function operation157(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["providerId"], ""));
+}
+
+export function operation158(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (structuredClone("REQUIRED_NATIVE_FIELDS_ABSENT"));
+}
+
+export function operation159(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (Object.fromEntries([["contractId", (structuredClone("equity-market-price-evidence.v1") ?? null)], ["disposition", (structuredClone("EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED") ?? null)], ["payload", (Object.fromEntries([["symbol", (sfxValueAt(scope["symbol"], "") ?? null)], ["region", (sfxValueAt(scope["root"], "payload.region") ?? null)], ["currency", (sfxValueAt(scope["currency"], "") ?? null)], ["observedPrice", (sfxValueAt(scope["observedPrice"], "") ?? null)], ["observedMarketTime", (sfxValueAt(scope["observedMarketTime"], "") ?? null)], ["marketState", (sfxValueAt(scope["marketState"], "") ?? null)], ["exchange", (sfxValueAt(scope["exchange"], "") ?? null)], ["sourceAttribution", (sfxValueAt(scope["sourceAttribution"], "") ?? null)]]) ?? null)], ["providerTestimony", (Object.fromEntries([["bindingId", (sfxValueAt(scope["bindingId"], "") ?? null)], ["providerId", (sfxValueAt(scope["providerId"], "") ?? null)], ["nativeShape", (sfxValueAt(scope["nativeShape"], "") ?? null)]]) ?? null)]]));
+}
+
+export function operation160(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (structuredClone("equity-market-price-evidence.v1"));
+}
+
+export function operation161(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (structuredClone("EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED"));
+}
+
+export function operation162(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (Object.fromEntries([["symbol", (sfxValueAt(scope["symbol"], "") ?? null)], ["region", (sfxValueAt(scope["root"], "payload.region") ?? null)], ["currency", (sfxValueAt(scope["currency"], "") ?? null)], ["observedPrice", (sfxValueAt(scope["observedPrice"], "") ?? null)], ["observedMarketTime", (sfxValueAt(scope["observedMarketTime"], "") ?? null)], ["marketState", (sfxValueAt(scope["marketState"], "") ?? null)], ["exchange", (sfxValueAt(scope["exchange"], "") ?? null)], ["sourceAttribution", (sfxValueAt(scope["sourceAttribution"], "") ?? null)]]));
+}
+
+export function operation163(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["currency"], ""));
+}
+
+export function operation164(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["exchange"], ""));
+}
+
+export function operation165(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["marketState"], ""));
+}
+
+export function operation166(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["observedMarketTime"], ""));
+}
+
+export function operation167(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["observedPrice"], ""));
+}
+
+export function operation168(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["root"], "payload.region"));
+}
+
+export function operation169(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["sourceAttribution"], ""));
+}
+
+export function operation170(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["symbol"], ""));
+}
+
+export function operation171(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (Object.fromEntries([["bindingId", (sfxValueAt(scope["bindingId"], "") ?? null)], ["providerId", (sfxValueAt(scope["providerId"], "") ?? null)], ["nativeShape", (sfxValueAt(scope["nativeShape"], "") ?? null)]]));
+}
+
+export function operation172(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["bindingId"], ""));
+}
+
+export function operation173(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["nativeShape"], ""));
+}
+
+export function operation174(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["providerId"], ""));
+}
+
+export function operation175(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["conforming"], ""));
+}
+
+export function operation176(input, context) {
+  return invokeDeclaredOperation(descriptors[176], input, context);
+}
+
+export function operation177(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["completed"], ""));
+}
+
+export function operation178(input, context) {
+  return invokeDeclaredOperation(descriptors[178], input, context);
+}
+
+export function operation179(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (((scope) => { scope = { ...scope, ["done"]: (sfxEquals(sfxValueAt(scope["input"], "disposition"), structuredClone("EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED"))) }; scope = { ...scope, ["carrier"]: ([(sfxValueAt(scope["input"], "") ?? null)]) }; scope = { ...scope, ["request"]: (Object.fromEntries([["credentialReference", (structuredClone("RAPID_API_KEY") ?? null)], ["invocationIdentity", (structuredClone("equity-market-price-evidence.v1") ?? null)], ["requestingCapabilityId", (structuredClone("resolve-equity-market-price-evidence") ?? null)], ["endpointAuthorityDigest", (structuredClone("sha256:17bd0ab8347e100f7987de6b1a0144d3555c43aea73fedf90786030593a76769") ?? null)], ["effectScope", (structuredClone("ONE_BOUNDED_HTTPS_EXCHANGE_NO_REDIRECT_NO_RETRY") ?? null)], ["effectLineage", (sfxValueAt(scope["carrier"], "") ?? null)]])) }; return (sfxTruthy(sfxValueAt(scope["done"], "")) ? Object.fromEntries([["effectLineage", (sfxValueAt(scope["carrier"], "") ?? null)]]) : sfxValueAt(scope["request"], "")); })(scope));
+}
+
+export function operation180(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return ([(sfxValueAt(scope["input"], "") ?? null)]);
+}
+
+export function operation181(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["input"], ""));
+}
+
+export function operation182(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxEquals(sfxValueAt(scope["input"], "disposition"), structuredClone("EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED")));
+}
+
+export function operation183(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["input"], "disposition"));
+}
+
+export function operation184(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (structuredClone("EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED"));
+}
+
+export function operation185(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (Object.fromEntries([["credentialReference", (structuredClone("RAPID_API_KEY") ?? null)], ["invocationIdentity", (structuredClone("equity-market-price-evidence.v1") ?? null)], ["requestingCapabilityId", (structuredClone("resolve-equity-market-price-evidence") ?? null)], ["endpointAuthorityDigest", (structuredClone("sha256:17bd0ab8347e100f7987de6b1a0144d3555c43aea73fedf90786030593a76769") ?? null)], ["effectScope", (structuredClone("ONE_BOUNDED_HTTPS_EXCHANGE_NO_REDIRECT_NO_RETRY") ?? null)], ["effectLineage", (sfxValueAt(scope["carrier"], "") ?? null)]]));
+}
+
+export function operation186(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (structuredClone("RAPID_API_KEY"));
+}
+
+export function operation187(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["carrier"], ""));
+}
+
+export function operation188(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (structuredClone("ONE_BOUNDED_HTTPS_EXCHANGE_NO_REDIRECT_NO_RETRY"));
+}
+
+export function operation189(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (structuredClone("sha256:17bd0ab8347e100f7987de6b1a0144d3555c43aea73fedf90786030593a76769"));
+}
+
+export function operation190(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (structuredClone("equity-market-price-evidence.v1"));
+}
+
+export function operation191(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (structuredClone("resolve-equity-market-price-evidence"));
+}
+
+export function operation192(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["request"], ""));
+}
+
+export function operation193(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (Object.fromEntries([["effectLineage", (sfxValueAt(scope["carrier"], "") ?? null)]]));
+}
+
+export function operation194(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["carrier"], ""));
+}
+
+export function operation195(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["done"], ""));
+}
+
+export function operation196(input, context) {
+  return invokeDeclaredOperation(descriptors[196], input, context);
+}
+
+export function operation197(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (((scope) => { scope = { ...scope, ["bound"]: (sfxEquals(sfxValueAt(scope["input"], "disposition"), structuredClone("BOUND"))) }; scope = { ...scope, ["url"]: (sfxFormat("https://yahoo-finance-real-time1.p.rapidapi.com/market/get-quotes?region={region}&symbols={symbols}", Object.fromEntries([["region", (sfxValueAt(scope["root"], "payload.region"))], ["symbols", (sfxValueAt(scope["root"], "payload.symbol"))]]))) }; scope = { ...scope, ["request"]: (Object.fromEntries([["requestUrl", (sfxValueAt(scope["url"], "") ?? null)], ["method", (structuredClone("GET") ?? null)], ["safeHeaders", (Object.fromEntries([["x-rapidapi-host", (structuredClone("yahoo-finance-real-time1.p.rapidapi.com") ?? null)]]) ?? null)], ["allowedResponseHeaders", ([(structuredClone("content-type") ?? null), (structuredClone("retry-after") ?? null)] ?? null)], ["timeoutMilliseconds", (structuredClone(15000) ?? null)], ["maxResponseBytes", (structuredClone(262144) ?? null)], ["requestBodyText", (structuredClone("") ?? null)], ["invocationIdentity", (structuredClone("equity-market-price-evidence.v1") ?? null)], ["endpointAuthorityDigest", (structuredClone("sha256:17bd0ab8347e100f7987de6b1a0144d3555c43aea73fedf90786030593a76769") ?? null)], ["credentialInjectionRuleId", (structuredClone("rapidapi-x-rapidapi-key.v1") ?? null)], ["opaqueCredentialBinding", (Object.fromEntries([["bindingId", (sfxValueAt(scope["input"], "opaqueBindingId") ?? null)], ["credentialInjectionRuleId", (structuredClone("rapidapi-x-rapidapi-key.v1") ?? null)]]) ?? null)], ["effectLineage", (sfxValueAt(scope["input"], "effectLineage") ?? null)]])) }; return (sfxTruthy(sfxValueAt(scope["bound"], "")) ? sfxValueAt(scope["request"], "") : Object.fromEntries([["effectLineage", (sfxValueAt(scope["input"], "effectLineage") ?? null)]])); })(scope));
+}
+
+export function operation198(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxEquals(sfxValueAt(scope["input"], "disposition"), structuredClone("BOUND")));
+}
+
+export function operation199(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["input"], "disposition"));
+}
+
+export function operation200(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (structuredClone("BOUND"));
+}
+
+export function operation201(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (Object.fromEntries([["requestUrl", (sfxValueAt(scope["url"], "") ?? null)], ["method", (structuredClone("GET") ?? null)], ["safeHeaders", (Object.fromEntries([["x-rapidapi-host", (structuredClone("yahoo-finance-real-time1.p.rapidapi.com") ?? null)]]) ?? null)], ["allowedResponseHeaders", ([(structuredClone("content-type") ?? null), (structuredClone("retry-after") ?? null)] ?? null)], ["timeoutMilliseconds", (structuredClone(15000) ?? null)], ["maxResponseBytes", (structuredClone(262144) ?? null)], ["requestBodyText", (structuredClone("") ?? null)], ["invocationIdentity", (structuredClone("equity-market-price-evidence.v1") ?? null)], ["endpointAuthorityDigest", (structuredClone("sha256:17bd0ab8347e100f7987de6b1a0144d3555c43aea73fedf90786030593a76769") ?? null)], ["credentialInjectionRuleId", (structuredClone("rapidapi-x-rapidapi-key.v1") ?? null)], ["opaqueCredentialBinding", (Object.fromEntries([["bindingId", (sfxValueAt(scope["input"], "opaqueBindingId") ?? null)], ["credentialInjectionRuleId", (structuredClone("rapidapi-x-rapidapi-key.v1") ?? null)]]) ?? null)], ["effectLineage", (sfxValueAt(scope["input"], "effectLineage") ?? null)]]));
+}
+
+export function operation202(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return ([(structuredClone("content-type") ?? null), (structuredClone("retry-after") ?? null)]);
+}
+
+export function operation203(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (structuredClone("content-type"));
+}
+
+export function operation204(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (structuredClone("retry-after"));
+}
+
+export function operation205(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (structuredClone("rapidapi-x-rapidapi-key.v1"));
+}
+
+export function operation206(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["input"], "effectLineage"));
+}
+
+export function operation207(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (structuredClone("sha256:17bd0ab8347e100f7987de6b1a0144d3555c43aea73fedf90786030593a76769"));
+}
+
+export function operation208(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (structuredClone("equity-market-price-evidence.v1"));
+}
+
+export function operation209(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (structuredClone(262144));
+}
+
+export function operation210(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (structuredClone("GET"));
+}
+
+export function operation211(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (Object.fromEntries([["bindingId", (sfxValueAt(scope["input"], "opaqueBindingId") ?? null)], ["credentialInjectionRuleId", (structuredClone("rapidapi-x-rapidapi-key.v1") ?? null)]]));
+}
+
+export function operation212(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["input"], "opaqueBindingId"));
+}
+
+export function operation213(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (structuredClone("rapidapi-x-rapidapi-key.v1"));
+}
+
+export function operation214(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (structuredClone(""));
+}
+
+export function operation215(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["url"], ""));
+}
+
+export function operation216(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (Object.fromEntries([["x-rapidapi-host", (structuredClone("yahoo-finance-real-time1.p.rapidapi.com") ?? null)]]));
+}
+
+export function operation217(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (structuredClone("yahoo-finance-real-time1.p.rapidapi.com"));
+}
+
+export function operation218(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (structuredClone(15000));
+}
+
+export function operation219(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxFormat("https://yahoo-finance-real-time1.p.rapidapi.com/market/get-quotes?region={region}&symbols={symbols}", Object.fromEntries([["region", (sfxValueAt(scope["root"], "payload.region"))], ["symbols", (sfxValueAt(scope["root"], "payload.symbol"))]])));
+}
+
+export function operation220(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["root"], "payload.region"));
+}
+
+export function operation221(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["root"], "payload.symbol"));
+}
+
+export function operation222(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (Object.fromEntries([["effectLineage", (sfxValueAt(scope["input"], "effectLineage") ?? null)]]));
+}
+
+export function operation223(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["input"], "effectLineage"));
+}
+
+export function operation224(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["request"], ""));
+}
+
+export function operation225(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["bound"], ""));
+}
+
+export function operation226(input, context) {
+  return invokeDeclaredOperation(descriptors[226], input, context);
+}
+
+const implementationByIndex = Object.freeze([operation0, operation1, operation2, operation3, operation4, operation5, operation6, operation7, operation8, operation9, operation10, operation11, operation12, operation13, operation14, operation15, operation16, operation17, operation18, operation19, operation20, operation21, operation22, operation23, operation24, operation25, operation26, operation27, operation28, operation29, operation30, operation31, operation32, operation33, operation34, operation35, operation36, operation37, operation38, operation39, operation40, operation41, operation42, operation43, operation44, operation45, operation46, operation47, operation48, operation49, operation50, operation51, operation52, operation53, operation54, operation55, operation56, operation57, operation58, operation59, operation60, operation61, operation62, operation63, operation64, operation65, operation66, operation67, operation68, operation69, operation70, operation71, operation72, operation73, operation74, operation75, operation76, operation77, operation78, operation79, operation80, operation81, operation82, operation83, operation84, operation85, operation86, operation87, operation88, operation89, operation90, operation91, operation92, operation93, operation94, operation95, operation96, operation97, operation98, operation99, operation100, operation101, operation102, operation103, operation104, operation105, operation106, operation107, operation108, operation109, operation110, operation111, operation112, operation113, operation114, operation115, operation116, operation117, operation118, operation119, operation120, operation121, operation122, operation123, operation124, operation125, operation126, operation127, operation128, operation129, operation130, operation131, operation132, operation133, operation134, operation135, operation136, operation137, operation138, operation139, operation140, operation141, operation142, operation143, operation144, operation145, operation146, operation147, operation148, operation149, operation150, operation151, operation152, operation153, operation154, operation155, operation156, operation157, operation158, operation159, operation160, operation161, operation162, operation163, operation164, operation165, operation166, operation167, operation168, operation169, operation170, operation171, operation172, operation173, operation174, operation175, operation176, operation177, operation178, operation179, operation180, operation181, operation182, operation183, operation184, operation185, operation186, operation187, operation188, operation189, operation190, operation191, operation192, operation193, operation194, operation195, operation196, operation197, operation198, operation199, operation200, operation201, operation202, operation203, operation204, operation205, operation206, operation207, operation208, operation209, operation210, operation211, operation212, operation213, operation214, operation215, operation216, operation217, operation218, operation219, operation220, operation221, operation222, operation223, operation224, operation225, operation226]);
 export const operationFunctions = Object.freeze(Object.fromEntries(
   descriptors.map((descriptor, index) => [descriptor.operationId, implementationByIndex[index]])
 ));

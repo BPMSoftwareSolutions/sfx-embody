@@ -1,1 +1,1 @@
-{"transitions":[],"executionTopologyAuthority":"graph-v3"}
+{"transitions":[],"executionTopologyAuthority":"graph-v3","scenarioOutcomes":[{"scenarioId":"resolve-equity-market-price-evidence","variants":[{"variantId":"EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED","classification":"success"},{"variantId":"EQUITY_MARKET_PRICE_PROVIDER_UNAVAILABLE","classification":"failure"},{"variantId":"NATIVE_MARKET_PRICE_TESTIMONY_REJECTED","classification":"failure"}]}]}
