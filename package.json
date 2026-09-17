@@ -12,7 +12,8 @@
   },
   "scripts": {
     "test": "node --test tests",
-    "verify:timing": "node scripts/verify-timing-coherence.mjs"
+    "verify:timing": "node scripts/verify-timing-coherence.mjs",
+    "verify:circuit": "node scripts/verify-circuit-structure.mjs"
   },
   "dependencies": {
     "ajv": "8.20.0",
