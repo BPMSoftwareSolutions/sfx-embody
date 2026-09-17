@@ -79,6 +79,16 @@ rules, measurement, boundaries) and
 carries the repair of the layout reference
 (`docs/target-harness-experience.md`, unit CV-E0).
 
+## W6 — Grafana execution dashboards (research: `grafana-execution-dashboards.md`)
+
+| Decision and source location | Applicable authority and scope | Necessary now? | Expected benefit / burden | Disposition and revisit trigger |
+|---|---|---|---|---|
+| G-A Loki ingest and dashboards over the observation stream (`grafana-execution-dashboards.md` Path A) | `src/observation-filter.mjs` is the governed field set (secret-free by allowlist); the stream is the transport | Not for the three recording beats. Omitting it leaves dashboards as a future story | Benefit: live timeline/durations/statuses/provider route with no estate or kernel code; the residual panel mirrors the IEA test. Burden: collector config + dashboard JSON (infrastructure) | **Useful now** — trigger: a dashboard is shown in the recording or a second consumer wants the stream |
+| G-B one generic OTLP exporter + Tempo (Path B) | Testimony is span-shaped; the exporter is a generic resolver over declared fields; the circuit `circuit-view.v1` is the graph model | Not now. Omitting it leaves the trace waterfall and graph panels unbuilt | Benefit: trace-shaped control room; terminal and dashboard as two emitters of one view model. Burden: one exporter + compose + panels; the mapping is presentation vocabulary, declared only if it must vary (D5) | **Useful now** — trigger: the dashboard becomes part of the demo |
+| G-C coherence and coverage panels (timing residual, planned/observed) | The receipt fields from `verify-timing-coherence.mjs` and `verify-circuit-structure.mjs` | Not now | Benefit: the attestation pair visible per run. Burden: dashboard queries only | **Useful now** — pairs with G-A/G-B |
+| G-D receipt batch import | `evidence/**/*.receipt.json` retention | Not now; runs are per-invocation | Benefit: past-run panels labeled *imported*. Burden: one importer | **Defer** — trigger: the session/ledger unit, or retention beyond the demo |
+| G-E Grafana-native JSON without a collector (Path C) | Needs the deferred long-lived delivery host + a declared read | Not now; collector paths cover the demo | Benefit: panels straight from declared readings. Burden: a long-lived host on the estate | **Defer** — trigger: the long-lived host lands or a non-collector consumer appears |
+
 ## Measurement notes (rubric §5, where they could change a decision)
 
 - **W1 rows**: "hours-or-less each" and "recovered immediately" are judgments
