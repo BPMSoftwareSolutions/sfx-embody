@@ -100,6 +100,24 @@ capability).
 
 Do not invent targets before the baseline exists; unknown values stay unknown.
 
+### First-turn observations (2026-09-17)
+
+Four lanes ran in one orchestration turn (doc repair; view-model capability;
+CLI format; structural acceptance). Precise per-lane wall times were not
+captured — recorded as unobserved.
+
+| Observation | Result |
+|---|---|
+| Time to first live circuit | Not time-stamped. Outcome: the view-model capability was authored, dry-run, preflighted, installed and verified within its lane; the real CLI rendered the first circuit on the first run after the one reader gate landed |
+| Coverage | The generic renderer rendered live circuits for **two capabilities** (equity and the agent lane, both branches lit/unlit correctly) with **zero per-capability code**; the structural verdict `CIRCUIT-STRUCTURED` covers four capabilities (agent lane 985 planned / 703 observed, 0 on-taken-path misses; equity 242/180; compose 244/182; model lane 654/451) |
+| Marginal effort, next instance | The renderer's second capability cost ≈0. The declared streamed fragments (CV-B) and the true ~11-component collapse (CV-A2 refinement) remain staged, so the *declared-bytes* half of the generic claim is unverified |
+
+Honest limitations recorded by the lanes: the view model is per-cell, not the
+sketch's 11-component collapse; provider nodes carry no incoming edge because
+testimony records none; the large-graph collapse limit is a terminal constant,
+not declared authority; `render.mjs` still owns presentation vocabulary until
+CV-B/CV-C2 land.
+
 ## Honest boundaries
 
 - **Layout expression.** Box positioning/arrows are not expressible in the

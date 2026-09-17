@@ -94,6 +94,18 @@ even when they falsify the expectation.
 | Structural acceptance (CV-D1) | The IEA record's rules; rubric §8 evidence table | Omitting it leaves the structure claim asserted, not evidenced | Benefit: planned↔observed proven per capability. Burden: one verification unit | **Useful now** |
 | Second instance (CV-B2) | The flywheel's observation 3 | Omitting it leaves the flywheel unverified (one instance proves a view, not a flywheel) | Benefit: measures marginal effort honestly. Burden: one migration | **Needed now** to test the hypothesis |
 
+## First turn results (2026-09-17)
+
+| Unit | Status | Evidence |
+|---|---|---|
+| CV-E0 doc repair | **done** | `4eef918`; the tracked file was already byte-clean at HEAD (the earlier mojibake was console decoding); 0 U+FFFD, box glyphs intact, AVGO payload preserved |
+| CV-A1/A2 view model | **landed, installed, refinement pending** | `35f02fd`; `read-capability-circuit` (contracts `circuit-view-request.v1`/`circuit-view.v1`, declared read + display); equity 19 nodes/18 edges; agent lane 54 nodes/53 edges; statuses verbatim. The sketch's 11-component collapse is *not* implemented — the honest simpler rule (nearest enclosing cell) ships instead |
+| CV-B1/B2 declared fragments | **pending** | not started; the declared-bytes half of the flywheel claim waits on these |
+| CV-C1 format + mapping | **done, end-to-end** | estate `1a6ac2c`, CLI `30518ee`; the CLI renderer and mapping were in place but the estate reader refused `format` on observe — landed as `src/invoke-database-capability.mjs` (`formats: true` spec + array-scoped checks); live `--format circuit` on equity and the agent lane, both branches, EVIDENCE payload; CLI 61/61; `--json` byte-identical |
+| CV-C2 render.mjs retirement | **pending** | gated on CV-B |
+| CV-D1 structural acceptance | **done, branch-aware** | `c01e777` + refinement; `npm run verify:circuit` → `CIRCUIT-STRUCTURED` (observed→planned exact; every unobserved planned cell lies off the taken path; fragments and uninvoked subtrees named, not exempted) |
+| CV-E1 observations | **done** | recorded in `circuit-view-flywheel.md` §First-turn observations |
+
 ## Open decisions (builder)
 
 1. **Granularity authority**: one generic collapse rule (scenarios +

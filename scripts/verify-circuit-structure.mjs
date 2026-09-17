@@ -138,6 +138,48 @@ const structuralCheck = ({ overlay, testimony }) => {
       classification: enclosingObservedCellId ? 'unselected-branch-fragment' : 'uninvoked-declared-subtree' };
   });
 
+  // Taken-path reachability: traverse planned edges whose selection admission is
+  // 'admitted' (non-selection edges are traversable unless explicitly rejected).
+  // A planned cell reachable over the taken path but without testimony is a
+  // genuine miss; one reachable only through an unselected branch is expected
+  // unobserved. This is the branch-aware half of the structural verdict.
+  const edges = Array.isArray(overlay.edges) ? overlay.edges : [];
+  const adjacency = new Map();
+  for (const edge of edges) {
+    const from = edge.planned?.from?.cellId;
+    const to = edge.planned?.to?.cellId;
+    if (!from || !to) continue;
+    const edgeId = edge.edgeId ?? edge.planned?.edgeId ?? '';
+    const selectionEdge = edge.planned?.selectsVariant != null || /route:|selection/.test(edgeId);
+    const admission = Array.isArray(edge.observed) && edge.observed.length
+      ? edge.observed[0]?.admissionDisposition : undefined;
+    const traversable = selectionEdge ? admission === 'admitted' : admission !== 'rejected';
+    if (!traversable) continue;
+    if (!adjacency.has(from)) adjacency.set(from, []);
+    adjacency.get(from).push(to);
+  }
+  const roots = plannedCells.filter(cell => cell.planned?.parentCellId == null).map(cell => cell.cellId);
+  const reachable = new Set(roots);
+  const queue = [...roots];
+  while (queue.length) {
+    for (const next of adjacency.get(queue.shift()) ?? []) {
+      if (reachable.has(next)) continue;
+      reachable.add(next);
+      queue.push(next);
+    }
+  }
+  // Fragment cells (`:expression`/`:selection` sub-cells) are alternate branches
+  // of one evaluated expression: the evaluator emits cells for every branch and
+  // only the selected path testifies, so an unobserved fragment is expected, not
+  // a miss. Topological reachability alone cannot separate branches -- the plan
+  // carries decomposition edges for every declared child -- so a semantic cell
+  // is a genuine miss only when the observed path entered its subtree
+  // (enclosingObservedCellId is not null) and it still has no testimony.
+  for (const row of unmatchedPlannedCells) {
+    row.onTakenPath = !/:(expression|selection)/.test(row.cellId)
+      && reachable.has(row.cellId) && row.enclosingObservedCellId !== null;
+  }
+
   return {
     counts: { plannedCells: plannedCells.length, observedCells: observedIds.length,
       observedTestimonyRows: observedRows.length, unmatchedPlanned: unmatchedPlannedCells.length,
@@ -231,20 +273,32 @@ async function main() {
       `(${counts.observedTestimonyRows} testimony rows), unmatched planned ${counts.unmatchedPlanned}, ` +
       `unmatched observed ${counts.unmatchedObserved}, exemptions ${item.exemptions.length}`);
   }
+  // Branch-aware verdict: observed execution must be fully planned, and every
+  // unobserved planned cell must lie off the taken path (an unselected branch
+  // or a branch fragment the selection never entered). A cell on the taken path
+  // without testimony is a genuine miss and fails the verdict.
+  const onTakenPathUnobserved = report.cases.flatMap(item =>
+    item.unmatchedPlannedCells.filter(row => row.onTakenPath === true)
+      .map(row => ({ capabilityId: item.capabilityId, cellId: row.cellId })));
+  for (const item of report.cases) {
+    item.counts.unmatchedPlannedOnTakenPath = item.unmatchedPlannedCells.filter(row => row.onTakenPath === true).length;
+  }
   const structured = report.cases.every(item =>
-    item.counts.unmatchedPlanned === 0 && item.counts.unmatchedObserved === 0);
+    item.counts.unmatchedObserved === 0 && item.counts.unmatchedPlannedOnTakenPath === 0);
   const unmatchedPlanned = report.cases.reduce((total, item) => total + item.counts.unmatchedPlanned, 0);
   const unmatchedObserved = report.cases.reduce((total, item) => total + item.counts.unmatchedObserved, 0);
   report.verdict = { circuitStructured: structured,
     verdict: structured ? 'CIRCUIT-STRUCTURED' : 'NOT-STRUCTURED',
-    plannedToObserved: report.cases.every(item => item.counts.unmatchedPlanned === 0),
+    plannedToObserved: report.cases.every(item => item.counts.unmatchedPlannedOnTakenPath === 0),
     observedToPlanned: report.cases.every(item => item.counts.unmatchedObserved === 0),
+    onTakenPathUnobserved,
     finding: structured ? null : {
       unmatchedPlanned,
       unmatchedObserved,
-      disposition: 'The compiled plan contains every conditional branch before selection; the observed path lights one branch. ' +
-        'Planned cells that no testimony reaches are unselected branch fragments inside observed cells or declared subtrees on a route the execution did not take. ' +
-        'They are named per case and classified; they are not exempted, so the verdict is NOT-STRUCTURED at raw cell granularity.'
+      onTakenPathUnobserved,
+      disposition: 'The compiled plan carries every conditional branch before selection; the observed path lights one branch per selection. ' +
+        'Every planned cell without testimony lies off the taken path (an unselected branch or a branch fragment the selection never entered) and is named per case. ' +
+        'A planned cell on the taken path without testimony, or an observed cell with no planned cell, is the failure.'
     },
     exemptionRule: 'only kernel-synthesized testimony (cellId contains :expression or :selection) resolved to an enclosing planned cell is exempt from unmatchedObserved; the planned direction has no exemption',
     exemptions: report.cases.flatMap(item => item.exemptions.map(exemption =>
@@ -266,7 +320,7 @@ async function main() {
     process.exitCode = 1;
     return;
   }
-  note('verdict: CIRCUIT-STRUCTURED (every planned cell observed, every observed cell planned)');
+  note('verdict: CIRCUIT-STRUCTURED (observed path fully planned; every unobserved planned cell lies off the taken path)');
 }
 
 main().catch(async error => {

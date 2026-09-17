@@ -232,7 +232,7 @@ function buildCanonicalInput(declared, type, raw) {
 // through the delivery.
 const operations = {
   invoke: { object: 'capability', subject: true, input: 'required', inputType: true, display: true },
-  observe: { object: 'capability', subject: true, input: 'required', inputType: true, display: true, observationAltitudes: true },
+  observe: { object: 'capability', subject: true, input: 'required', inputType: true, display: true, observationAltitudes: true, formats: true },
   circuit: { object: 'capability', subject: true, input: 'optional', scenario: true, reader: 'read-retained-publication' },
   // A reader operation is a declared capability reached through the frontdoor;
   // the subject is its input, never an execution it triggers. Reveal's reader
@@ -269,10 +269,12 @@ export function validateDatabaseCommand(envelope) {
   if (spec.observationAltitudes === true && request.observationAltitudes !== undefined
     && !isObservationAltitudeSelection(request.observationAltitudes)) throw new Error('CAPABILITY_OBSERVATION_ALTITUDE_NOT_OFFERED');
   if (spec.views && request.as !== undefined && !spec.views.includes(request.as)) throw new Error('CAPABILITY_VIEW_NOT_OFFERED');
-  if (spec.formats && request.format !== undefined && !spec.formats.includes(request.format)) throw new Error('CAPABILITY_FORMAT_NOT_OFFERED');
+  // A declared format list restricts the reading; `true` admits any named
+  // format the terminal offers (the observation's circuit view).
+  if (Array.isArray(spec.formats) && request.format !== undefined && !spec.formats.includes(request.format)) throw new Error('CAPABILITY_FORMAT_NOT_OFFERED');
   // Only the narrated view is formatted. A retained circuit is delivered as the
   // publication retains it, so a format there is refused rather than ignored.
-  if (spec.formats && request.format !== undefined && (request.as ?? DEFAULT_VIEW) !== 'meaning') throw new Error('CAPABILITY_FORMAT_NOT_OFFERED');
+  if (Array.isArray(spec.formats) && request.format !== undefined && (request.as ?? DEFAULT_VIEW) !== 'meaning') throw new Error('CAPABILITY_FORMAT_NOT_OFFERED');
   if (spec.input === 'required' && !Object.hasOwn(request, 'input')) throw new Error('CAPABILITY_INPUT_REQUIRED');
   if (spec.input === 'rejected' && Object.hasOwn(request, 'input')) throw new Error(envelope.operation === 'prepare' ? 'PREPARATION_INPUT_NOT_OFFERED' : 'OPERATION_INPUT_NOT_OFFERED');
   return request;
