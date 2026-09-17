@@ -2,7 +2,6 @@ import fs from 'node:fs/promises';
 import { randomUUID } from 'node:crypto';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { readExecutionDelivery } from './read-execution-delivery.mjs';
-import { createExecutionDrilldown, isObservationAltitudeSelection } from './execution-drilldown.mjs';
 import { resolveCredentialStoreRealization, resolveCredentialVaultLocatorsInGraphSource,
   resolveCredentialVaultLocators } from './credential-vault-realization.mjs';
 
@@ -243,7 +242,10 @@ export function validateDatabaseCommand(envelope) {
     || (request.observationAltitudes !== undefined && spec.observationAltitudes !== true)
     || (request.format !== undefined && (!spec.formats || !present(request.format)))) throw new Error('DATABASE_COMMAND_REJECTED');
   if (spec.observationAltitudes === true && request.observationAltitudes !== undefined
-    && !isObservationAltitudeSelection(request.observationAltitudes)) throw new Error('CAPABILITY_OBSERVATION_ALTITUDE_NOT_OFFERED');
+    && (!Array.isArray(request.observationAltitudes) || request.observationAltitudes.length === 0
+      || !request.observationAltitudes.every(altitude => typeof altitude === 'string' && altitude.length > 0)
+      || new Set(request.observationAltitudes).size !== request.observationAltitudes.length))
+    throw new Error('CAPABILITY_OBSERVATION_ALTITUDE_NOT_OFFERED');
   if (spec.views && request.as !== undefined && !spec.views.includes(request.as)) throw new Error('CAPABILITY_VIEW_NOT_OFFERED');
   // A declared format list restricts the reading; `true` admits any named
   // format the terminal offers (the observation's circuit view).
@@ -403,24 +405,52 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, 
   // it now that the boot read uses the estate views.
   const display = graphSource?.interfaceAuthority?.interfaces?.find(entry => entry.kind === 'cli')?.configuration?.display
     ?? cli.display ?? null;
-  // Observation carries the drilldown; every invocation captures the compiled
-  // plan from the running carrier so the declared display projection can join
-  // planned topology against testimony. The plan is read from the same onState
-  // seam the drilldown uses; nothing is re-compiled or guessed. Invocation keeps
-  // no other drilldown behavior.
+  // Observation carries no drilldown code. Every invocation captures the
+  // compiled plan from the running carrier: the declared display projection and
+  // the declared observation projection both join planned topology against
+  // testimony. The plan is read from the onState seam; nothing is re-compiled.
   let plan = null;
-  const capturePlan = value => { if (plan === null && object(value) && object(value.canonicalGraph)) plan = value; };
-  let drilldown;
+  let planAltitudeByCellId = null;
+  const capturePlan = value => {
+    if (plan !== null || !object(value) || !object(value.canonicalGraph)) return;
+    plan = value;
+    planAltitudeByCellId = new Map((value.canonicalGraph.cells ?? []).map(cell => [cell.cellId, cell.altitude]));
+  };
+  // The observation stream is the declared testimony. The altitude vocabulary is
+  // the interface's declared readings' altitude union; the requested altitudes
+  // are admitted against it where the interface declares one. The sink forwards
+  // the testimony whose altitude is selected and adds the emission time; every
+  // entry, address, admission and timing it publishes is a declared field. No
+  // cell id is parsed and no address is composed here.
+  let selectedAltitudes = null;
+  let coversAllAltitudes = false;
+  const updateAltitudeCoverage = () => {
+    const altitudes = [...(planAltitudeByCellId?.values() ?? [])];
+    coversAllAltitudes = altitudes.length > 0 && altitudes.every(altitude => selectedAltitudes.has(altitude));
+  };
   if (request.verb === 'observe') {
-    drilldown = createExecutionDrilldown({ observationAltitudes: request.observationAltitudes, scenarioId: selected.scenario_id,
-      observe, authority: graphSource });
-    config.onTestimony = drilldown.sink;
-    config.onState = value => { capturePlan(value); drilldown.setPlan(value); };
+    const declaredReadings = Array.isArray(cli.readings) ? cli.readings : [];
+    const vocabulary = new Set(declaredReadings.flatMap(entry => Array.isArray(entry?.altitudes) ? entry.altitudes : []));
+    if (vocabulary.size > 0 && request.observationAltitudes !== undefined
+      && !request.observationAltitudes.every(altitude => vocabulary.has(altitude)))
+      throw new Error('CAPABILITY_OBSERVATION_ALTITUDE_NOT_OFFERED');
+    selectedAltitudes = new Set(request.observationAltitudes ?? [...vocabulary]);
+    config.onTestimony = testimony => {
+      try {
+        const type = testimony?.testimonyType;
+        if (type === 'cell-execution-testimony.v1') {
+          if (!selectedAltitudes.has(testimony.cellAltitude)) return;
+        } else if (type === 'edge-execution-testimony.v1') {
+          if (!coversAllAltitudes && !selectedAltitudes.has(planAltitudeByCellId?.get(testimony.destinationCellId))) return;
+        } else return;
+        observe({ ...testimony, observedAt: new Date().toISOString() });
+      } catch { /* Testimony is not execution authority. */ }
+    };
+    config.onState = value => { capturePlan(value); updateAltitudeCoverage(); };
   } else {
     config.onState = capturePlan;
   }
   const outcome = await measure('executeDeclaredGraph', () => executeEstateCapability({ capabilityId: 'run-declared-graph' }, graphSource, config));
-  if (drilldown) drilldown.absorb(outcome);
   // A failed read is the domain failure the declared read raised, not an
   // outcome a caller should inspect: the delivery fails with its message.
   if (readerCapability && (outcome?.disposition === 'failed' || outcome?.code === 'CELL_EXECUTION_FAILED')) {
@@ -446,12 +476,37 @@ export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, 
         plan, execution: outcome, reading, ...(readerCapability === undefined ? {} : { view }) }), as: display.as ?? 'json' };
     }
   }
-  const observedPathDigest = drilldown && typeof outcome?.observedPathDigest === 'string' ? outcome.observedPathDigest : undefined;
+  // The declared observation projection: the planned-versus-observed overlay and
+  // the observed story are declared authority (read-observation-projection). It
+  // consumes the compiled plan, the declared execution authority rows and the
+  // kernel testimony, and joins them on the declared semantic address; the boot
+  // parses no id, composes no address and holds no ordering rule.
+  let observationProjection = null;
+  if (request.verb === 'observe') {
+    const projectionBundle = await readSelectedAuthority(databaseRoot,
+      { capabilityId: 'read-observation-projection' }, { retainObjects: false, documents: false });
+    const projectionSource = structuredClone(projectionBundle.graphSource);
+    projectionSource.input = { contractId: 'observation-projection-request.v1', payload: {
+      capabilityId: selection.capabilityId, scenarioId: selected.scenario_id,
+      graphId: plan?.canonicalGraph?.graphId ?? null,
+      canonicalGraphDigest: plan?.canonicalGraphDigest ?? outcome?.canonicalGraphDigest ?? null,
+      observedPathDigest: outcome?.observedPathDigest ?? null,
+      plan: { canonicalGraph: plan?.canonicalGraph ?? null },
+      scenarios: graphSource.scenarios ?? [], executionAuthorities: graphSource.executionAuthorities ?? [],
+      cellTestimony: outcome?.cellTestimony ?? [], edgeTestimony: outcome?.edgeTestimony ?? [] } };
+    const projection = await executeEstateCapability({ capabilityId: 'run-declared-graph' }, projectionSource,
+      { ...config, onTestimony: undefined, onState: undefined });
+    if (projection?.disposition === 'failed' || projection?.code === 'CELL_EXECUTION_FAILED')
+      throw new Error(projection?.error?.message ?? 'OBSERVATION_PROJECTION_FAILED');
+    observationProjection = projection?.outcome ?? null;
+  }
+  const observedPathDigest = request.verb === 'observe' && typeof outcome?.observedPathDigest === 'string'
+    ? outcome.observedPathDigest : undefined;
   return { disposition: 'terminated',
     outcome: { capabilityId: selection.capabilityId, scenarioId: selected.scenario_id, result: outcome, executions: [], observations: [],
       ...(readerCapability !== undefined && request.verb === 'reveal' ? { view } : {}),
       ...(displayProjection ? { display: displayProjection } : display ? { display } : {}),
-      ...(drilldown ? { overlay: drilldown.buildOverlay(outcome), story: drilldown.buildStory(outcome) } : {}),
+      ...(observationProjection ? { overlay: observationProjection.overlay, story: observationProjection.story } : {}),
       ...(observedPathDigest !== undefined ? { observedPathDigest } : {}),
       evidence: { timings, authoritySource: 'DATABASE', bodyStorage: 'NOT_REQUESTED', managedAdmission: 'NOT_REQUESTED',
         snapshotId: bundle.authority.snapshotId, projectionDigest: bundle.authority.projectionDigest,

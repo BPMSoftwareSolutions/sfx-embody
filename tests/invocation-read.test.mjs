@@ -141,7 +141,8 @@ test('invoke and observe use the same bounded graph and preserve declared scalar
     const config = context();
     const result = await executeDatabaseCommand(command('Zo\u00eb', verb), config);
     assert.deepEqual(result.outcome.result, { disposition: 'completed', outcome: { contractId: 'name.v1', payload: { name: 'Zo\u00eb' } } });
-    assert.deepEqual(config.reads.map(read => read.selection.capabilityId), ['example', 'run-declared-graph']);
+    assert.deepEqual(config.reads.map(read => read.selection.capabilityId),
+      verb === 'observe' ? ['example', 'run-declared-graph', 'read-observation-projection'] : ['example', 'run-declared-graph']);
     assert.ok(config.reads.every(read => read.options.documents === false && read.options.retainObjects === false));
     assert.equal(config.queries.length, 1);
     assert.equal(result.outcome.evidence.timings.readGraphSource, undefined);
