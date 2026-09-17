@@ -36,7 +36,7 @@ reads as if the projection cost seconds. The same invocation with `--trace`
 
 | Window | Attributed to | Duration |
 |---|---|---|
-| delivery setup | `readExecutionDelivery` + `readAuthority` phases | 132 + 376 ms |
+| delivery setup | `readExecutionDelivery` + `readAuthority` phases | 132 + 376 ms (run 04:14:13Z; a phase's span is `completed − started` in the stream, `13.654→13.786` and `13.786→14.162`, since phase lines carry no duration suffix; per-run totals vary — the durable field is `equation.declaredDeliveryPhaseMilliseconds` in `evidence/vault-20260916/iea/timing-coherence.receipt.json`) |
 | credential resolution | `bind-gemini-os-credential-port` (vault) | 849 ms |
 | **the model call** | **`obtain-governed-model-response-port`** (generic LLM connector → Gemini) | **6 170 ms** |
 | admitted execution | `resolve-proposed-capability-port` (declared read) | 83 ms |
