@@ -1,8 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+import { randomUUID } from 'node:crypto';
 import { executeDatabaseCommand, executeEstateCapability } from '../src/invoke-database-capability.mjs';
 import { CREDENTIAL_STORE_REALIZATION_MECHANIC_ID, resolveCredentialVaultLocators,
   resolveCredentialVaultLocatorsInGraphSource, resolveDeclaredEnvironmentReference } from '../src/credential-vault-realization.mjs';
+import { withDatabaseReadSession } from '../src/database-read-session.mjs';
+import { readAuthority } from '../src/read-authority.mjs';
+import { readExecutionDelivery } from '../src/read-execution-delivery.mjs';
 
 const KEY_BYTES = Array.from(Buffer.from('0123456789abcdef0123456789abcdef', 'utf8'));
 const KEY_SENTINELS = [Buffer.from(KEY_BYTES).toString('base64'), Buffer.from(KEY_BYTES).toString('hex'), '0123456789abcdef'];
@@ -201,4 +208,82 @@ test('no key bytes reach results or the observation stream', async () => {
   assert.equal(config.effectContextOverrides, undefined);
   const serialized = JSON.stringify(result) + JSON.stringify(config.observations);
   for (const sentinel of KEY_SENTINELS) assert.equal(serialized.includes(sentinel), false, sentinel);
+});
+
+// The retired harness (scripts/verify-credential-non-disclosure.mjs, W1.3) is
+// replaced by the declared read sql/migrations/declare-read-credential-non-disclosure.sql:
+// the physical collection stays in the harness layer, while every absence claim
+// and the verdict are declared SQL. This case exercises the installed read
+// against the live estate; it is the retirement's covering test and runs only
+// when the database integration flag is set.
+const databaseIntegration = process.env.SFX_DATABASE_INTEGRATION === '1';
+
+async function databaseRuntime() {
+  const file = new URL('../config/database-runtime.json', import.meta.url);
+  const runtime = JSON.parse(await fs.readFile(file, 'utf8'));
+  const databaseRoot = path.resolve(path.dirname(fileURLToPath(file)), runtime.databaseRoot);
+  const sdaRoot = path.resolve(path.dirname(fileURLToPath(file)), runtime.sdaRoot);
+  const core = await import(pathToFileURL(path.join(databaseRoot, 'src/core.mjs')).href);
+  const database = await import(pathToFileURL(path.join(databaseRoot, 'src/ingest/database.mjs')).href);
+  const { normalizeSql } = await import(pathToFileURL(path.join(databaseRoot, 'src/query/run.mjs')).href);
+  const { pinModel } = await import(pathToFileURL(path.join(databaseRoot, 'src/query/model-pin.mjs')).href);
+  const { connectionEnvironmentVariable, queryRowLimit } = await core.config();
+  process.env[connectionEnvironmentVariable] = database.connectionString(connectionEnvironmentVariable);
+  return { databaseRoot, sdaRoot, connect: database.connect, sql: database.sql,
+    normalizeSql, pinModel, ...core, queryRowLimit };
+}
+
+test('the installed non-disclosure read reproduces the sweep verdict from live observations', { skip: !databaseIntegration }, async () => {
+  const runtime = await databaseRuntime();
+  const sentinel = 'SENTINEL-TEST-' + randomUUID();
+  const pad = 'x'.repeat(4200);
+  const sweep = (channels, tamperedStore = { disposition: 'CREDENTIAL_NOT_AVAILABLE', referenceName: 'RAPID_API_KEY',
+    nonDisclosureVerified: true, sentinelAbsent: true }) => ({ contractId: 'credential-non-disclosure-request.v1',
+    payload: { sentinel, channels,
+      fileScans: [{ channel: 'evidence/ bundles', filesScanned: 0, filesMatched: 0, matchedFiles: [] }],
+      tamperedStore,
+      restore: { storeDisposition: 'CREDENTIAL_STORED', applyDisposition: 'CREDENTIAL_BOUND',
+        realization: 'windows-credential-store-provider' } } });
+  await withDatabaseReadSession(runtime, async (readQuery, sessionEvidence) => {
+    assert.ok(sessionEvidence);
+    const context = { databaseRoot: runtime.databaseRoot, sdaRoot: runtime.sdaRoot, estateRoot: path.resolve('.'),
+      readQuery,
+      readAuthority: (_, selection, options) => readAuthority(runtime.databaseRoot, selection, { ...options, query: readQuery }) };
+    context.deliveryTarget = (await readExecutionDelivery(context)).defaultTarget;
+    const read = async input => {
+      const execution = await executeDatabaseCommand({ deliveryType: 'sfx-command-delivery.v1', operation: 'invoke',
+        request: { object: 'capability', verb: 'invoke', subject: 'read-credential-non-disclosure', input } }, context);
+      const result = execution.outcome?.result;
+      assert.equal(result?.disposition, 'completed', JSON.stringify(execution.outcome?.result ?? execution.outcome));
+      return result.outcome;
+    };
+    const cleanChannels = [
+      { channel: 'invoke --json (resolve-credential)', observed: JSON.stringify({ disposition: 'CREDENTIAL_BOUND' }),
+        cliStatus: 0, disposition: 'CREDENTIAL_BOUND' },
+      // The sentinel must be searched across the full capture, beyond the
+      // 4000-character boundary a truncated reader would silently stop at.
+      { channel: 'observe --trace stdout + observation stream', observed: pad + ' no sentinel in this capture',
+        cliStatus: 0, streamedObservationLines: 14 }
+    ];
+    const green = await read(sweep(cleanChannels));
+    assert.equal(green.verdict, 'NON_DISCLOSURE_VERIFIED');
+    assert.equal(green.plaintextAbsent, true);
+    assert.deepEqual(green.channels.map(channel => channel.sentinelAbsent), [true, true]);
+    assert.equal(green.durableRows.sentinelAbsent, true);
+    assert.equal(green.durableRows.rowsMatched, 0);
+    assert.equal(green.tamperedStore.disposition, 'CREDENTIAL_NOT_AVAILABLE');
+    assert.equal(green.tamperedStore.nonDisclosureVerified, true);
+    assert.equal(JSON.stringify(green).includes(sentinel), false, 'the receipt never carries the sentinel');
+
+    const leaked = await read(sweep([{ channel: 'invoke --json (resolve-credential)', observed: pad + sentinel, cliStatus: 0 }]));
+    assert.equal(leaked.verdict, 'NON_DISCLOSURE_VIOLATION');
+    assert.equal(leaked.plaintextAbsent, false);
+    assert.equal(leaked.channels[0].sentinelAbsent, false);
+    assert.equal(JSON.stringify(leaked).includes(sentinel), false, 'the violation receipt never carries the sentinel');
+
+    const boundTampered = await read(sweep(cleanChannels, { disposition: 'CREDENTIAL_BOUND', referenceName: 'RAPID_API_KEY',
+      nonDisclosureVerified: false, sentinelAbsent: true }));
+    assert.equal(boundTampered.verdict, 'NON_DISCLOSURE_VIOLATION');
+    assert.equal(boundTampered.tamperedStore.disposition, 'CREDENTIAL_BOUND');
+  });
 });
