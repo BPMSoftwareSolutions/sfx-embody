@@ -660,6 +660,16 @@ And one precision: SideFX doesn't control the model's hidden internal reasoning.
               EVIDENCE
                  │
                  └──────────────► SIDEFX
+{
+  "symbol": "AVGO",
+  "region": "US",
+  "currency": "USD",
+  "observedPrice": 339.51,
+  "observedMarketTime": 1789588801,
+  "marketState": "PRE",
+  "exchange": "NMS",
+  "sourceAttribution": "Delayed Quote"
+}
 ```
 
 That is the architecture.
