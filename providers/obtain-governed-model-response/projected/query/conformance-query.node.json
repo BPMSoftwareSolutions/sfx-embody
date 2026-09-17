@@ -1,0 +1,3842 @@
+{
+  "queryType": "projected-consumer-conformance-query.v1",
+  "queryId": "scenario-conformance-closure",
+  "capabilityId": "obtain-governed-model-response",
+  "subjects": [
+    "feature",
+    "scenario",
+    "contract",
+    "execution-authority",
+    "transition",
+    "interface",
+    "projection",
+    "telemetry",
+    "execution",
+    "behavior",
+    "platform-capability",
+    "executable-origin"
+  ],
+  "requiredClosures": [
+    "feature-to-scenario",
+    "scenario-to-contract",
+    "scenario-to-event-authority",
+    "outcome-to-transition",
+    "transition-to-next-input",
+    "scenario-to-interface",
+    "execution-to-telemetry",
+    "scenario-to-projection",
+    "expected-to-observed-execution",
+    "root-to-terminal-behavior",
+    "required-mechanic-to-platform-capability",
+    "consumer-executable-origin"
+  ],
+  "dispositionPolicy": "all-required-closures-conform",
+  "authorityGraph": {
+    "rootScenarioId": "obtain-governed-model-response",
+    "scenarios": [
+      {
+        "scenarioId": "obtain-governed-model-response",
+        "input": {
+          "inputId": "governed-model-invocation-request",
+          "contract": {
+            "contractId": "governed-model-invocation-request.v1"
+          }
+        },
+        "event": {
+          "eventId": "governed-model-response-requested",
+          "executionAuthorityId": "obtain-governed-model-response.v1"
+        },
+        "outcome": {
+          "outcomeId": "governed-model-response-observed",
+          "contract": {
+            "contractId": "governed-model-response-evidence.v1"
+          },
+          "experience": {
+            "statement": "the exact normalized response or governed failure disposition is returned with provider, model, attempt, timing, and hash lineage and no acceptance claim"
+          },
+          "terminal": true
+        },
+        "gherkin": {
+          "given": {
+            "semanticRef": "obtain-governed-model-response.given",
+            "text": "one admitted immutable model request with fixed provider, model, response, attempt, substitution, and evidence authority"
+          },
+          "when": {
+            "semanticRef": "obtain-governed-model-response.when",
+            "text": "the admitted generic LLM connector is asked to obtain the governed response"
+          },
+          "then": {
+            "semanticRef": "obtain-governed-model-response.then",
+            "text": "the exact normalized response or governed failure disposition is returned with provider, model, attempt, timing, and hash lineage and no acceptance claim"
+          }
+        },
+        "name": "Obtain one policy-bounded model response"
+      },
+      {
+        "scenarioId": "resolve-model-alias-embodiment",
+        "input": {
+          "inputId": "governed-model-invocation-request",
+          "contract": {
+            "contractId": "governed-model-invocation-request.v1"
+          }
+        },
+        "event": {
+          "eventId": "resolve-model-alias-embodiment",
+          "executionAuthorityId": "resolve-model-alias-embodiment.v1"
+        },
+        "outcome": {
+          "outcomeId": "model-provider-embodiment-resolution",
+          "contract": {
+            "contractId": "model-provider-embodiment-resolution.v1"
+          },
+          "experience": {
+            "statement": "either one embodiment resolution carries the exact primary provider and model with the original request and alias resolution lineage, or one authorized substitute embodiment is resolved when the declared substitution policy authorizes it for a classified provider-path finding, or substitution is not authorized, or the alias is rejected with exact identities when no admitted embodiment binds it â€” and no other alias or provider is ever substituted by guessing"
+          },
+          "terminal": true
+        },
+        "gherkin": {
+          "given": {
+            "semanticRef": "resolve-model-alias-embodiment.given",
+            "text": "one governed model request declaring a model alias and one provider authority, and the admitted model-provider conveyor authority"
+          },
+          "when": {
+            "semanticRef": "resolve-model-alias-embodiment.when",
+            "text": "the alias resolves through the conveyor authority to its exact provider kind, model, adapter identity, and credential reference"
+          },
+          "then": {
+            "semanticRef": "resolve-model-alias-embodiment.then",
+            "text": "either one embodiment resolution carries the exact primary provider and model with the original request and alias resolution lineage, or one authorized substitute embodiment is resolved when the declared substitution policy authorizes it for a classified provider-path finding, or substitution is not authorized, or the alias is rejected with exact identities when no admitted embodiment binds it â€” and no other alias or provider is ever substituted by guessing"
+          }
+        },
+        "name": "Resolve the model alias to its exact admitted provider and model embodiment"
+      },
+      {
+        "scenarioId": "project-model-response-policy-to-provider-protocol",
+        "input": {
+          "inputId": "model-provider-embodiment-resolution",
+          "contract": {
+            "contractId": "model-provider-embodiment-resolution.v1"
+          }
+        },
+        "event": {
+          "eventId": "project-model-response-policy-to-provider-protocol",
+          "executionAuthorityId": "project-model-response-policy-to-provider-protocol.v1"
+        },
+        "outcome": {
+          "outcomeId": "model-provider-protocol-response-policy",
+          "contract": {
+            "contractId": "model-provider-protocol-response-policy.v1"
+          },
+          "experience": {
+            "statement": "text carries no responseSchema, JSON carries the exact admitted responsePolicy schema, and no provider-specific schema field is required from the caller"
+          },
+          "terminal": true
+        },
+        "gherkin": {
+          "given": {
+            "semanticRef": "project-model-response-policy-to-provider-protocol.given",
+            "text": "one model provider embodiment resolution carrying the original governed model request, the resolved provider authority, the resolved model, and the alias resolution lineage"
+          },
+          "when": {
+            "semanticRef": "project-model-response-policy-to-provider-protocol.when",
+            "text": "the provider-neutral protocol response context is constructed"
+          },
+          "then": {
+            "semanticRef": "project-model-response-policy-to-provider-protocol.then",
+            "text": "text carries no responseSchema, JSON carries the exact admitted responsePolicy schema, and no provider-specific schema field is required from the caller"
+          }
+        },
+        "name": "Project the model response policy into provider-neutral protocol context"
+      },
+      {
+        "scenarioId": "obtain-governed-provider-testimony",
+        "input": {
+          "inputId": "model-provider-protocol-response-policy",
+          "contract": {
+            "contractId": "model-provider-protocol-response-policy.v1"
+          }
+        },
+        "event": {
+          "eventId": "obtain-governed-provider-testimony",
+          "executionAuthorityId": "obtain-governed-provider-testimony.v1"
+        },
+        "outcome": {
+          "outcomeId": "governed-provider-testimony",
+          "contract": {
+            "contractId": "governed-provider-testimony.v1"
+          },
+          "experience": {
+            "statement": "governed provider testimony carrying provider, model, attempt, timing, and hash lineage is observed, or the exact governed failure disposition is returned without retry, substitution, or repair"
+          }
+        },
+        "gherkin": {
+          "given": {
+            "semanticRef": "obtain-governed-provider-testimony.given",
+            "text": "one projected provider protocol policy and the resolved model embodiment it was projected from"
+          },
+          "when": {
+            "semanticRef": "obtain-governed-provider-testimony.when",
+            "text": "the admitted generic LLM connector is asked to obtain the provider response once"
+          },
+          "then": {
+            "semanticRef": "obtain-governed-provider-testimony.then",
+            "text": "governed provider testimony carrying provider, model, attempt, timing, and hash lineage is observed, or the exact governed failure disposition is returned without retry, substitution, or repair"
+          }
+        },
+        "name": "Obtain governed provider testimony through the admitted connector"
+      },
+      {
+        "scenarioId": "establish-governed-model-response-evidence",
+        "input": {
+          "inputId": "governed-provider-testimony",
+          "contract": {
+            "contractId": "governed-provider-testimony.v1"
+          }
+        },
+        "event": {
+          "eventId": "establish-governed-model-response-evidence",
+          "executionAuthorityId": "establish-governed-model-response-evidence.v1"
+        },
+        "outcome": {
+          "outcomeId": "governed-model-response-observed",
+          "contract": {
+            "contractId": "governed-model-response-evidence.v1"
+          },
+          "experience": {
+            "statement": "the exact normalized response or governed failure disposition is established with full lineage and no acceptance claim, and no testimony is repaired or reinterpreted"
+          },
+          "terminal": true
+        },
+        "gherkin": {
+          "given": {
+            "semanticRef": "establish-governed-model-response-evidence.given",
+            "text": "one governed provider testimony with its full provider, model, attempt, timing, and hash lineage"
+          },
+          "when": {
+            "semanticRef": "establish-governed-model-response-evidence.when",
+            "text": "the governed model response evidence is established from the testimony"
+          },
+          "then": {
+            "semanticRef": "establish-governed-model-response-evidence.then",
+            "text": "the exact normalized response or governed failure disposition is established with full lineage and no acceptance claim, and no testimony is repaired or reinterpreted"
+          }
+        },
+        "name": "Establish the governed model response evidence"
+      }
+    ],
+    "transitions": [],
+    "executionAuthorities": [
+      {
+        "id": "obtain-governed-model-response.v1",
+        "operations": [
+          {
+            "kind": "invoke-scenario",
+            "scenarioId": "resolve-model-alias-embodiment"
+          },
+          {
+            "kind": "invoke-scenario",
+            "scenarioId": "project-model-response-policy-to-provider-protocol"
+          },
+          {
+            "kind": "invoke-scenario",
+            "scenarioId": "obtain-governed-provider-testimony"
+          },
+          {
+            "kind": "invoke-scenario",
+            "scenarioId": "establish-governed-model-response-evidence"
+          }
+        ],
+        "owningScenarioId": "obtain-governed-model-response"
+      },
+      {
+        "id": "resolve-model-alias-embodiment.v1",
+        "operations": [
+          {
+            "kind": "invoke-port",
+            "portId": "resolve-model-alias-embodiment-port"
+          }
+        ],
+        "owningScenarioId": "resolve-model-alias-embodiment"
+      },
+      {
+        "id": "project-model-response-policy-to-provider-protocol.v1",
+        "operations": [
+          {
+            "kind": "invoke-port",
+            "portId": "project-model-response-policy-to-provider-protocol-port"
+          }
+        ],
+        "owningScenarioId": "project-model-response-policy-to-provider-protocol"
+      },
+      {
+        "id": "obtain-governed-provider-testimony.v1",
+        "operations": [
+          {
+            "kind": "invoke-port",
+            "portId": "initialize-model-provider-conveyor-port"
+          },
+          {
+            "kind": "invoke-port",
+            "portId": "stage-os-credential-bind-request-port"
+          },
+          {
+            "kind": "invoke-port",
+            "portId": "bind-gemini-os-credential-port"
+          },
+          {
+            "kind": "invoke-port",
+            "portId": "bind-openai-os-credential-port"
+          },
+          {
+            "kind": "invoke-port",
+            "portId": "construct-projected-model-invocation-port"
+          },
+          {
+            "kind": "invoke-port",
+            "portId": "obtain-governed-model-response-port"
+          },
+          {
+            "kind": "invoke-port",
+            "portId": "determine-model-provider-fallback-port"
+          },
+          {
+            "kind": "invoke-port",
+            "portId": "construct-projected-model-invocation-port"
+          },
+          {
+            "kind": "invoke-port",
+            "portId": "obtain-fallback-model-response-port"
+          },
+          {
+            "kind": "invoke-port",
+            "portId": "construct-projected-model-invocation-port"
+          },
+          {
+            "kind": "invoke-port",
+            "portId": "select-model-provider-conveyor-evidence-port"
+          },
+          {
+            "kind": "invoke-port",
+            "portId": "obtain-governed-provider-testimony-port"
+          }
+        ],
+        "owningScenarioId": "obtain-governed-provider-testimony"
+      },
+      {
+        "id": "establish-governed-model-response-evidence.v1",
+        "operations": [
+          {
+            "kind": "invoke-port",
+            "portId": "establish-governed-model-response-evidence-port"
+          },
+          {
+            "kind": "invoke-port",
+            "portId": "normalize-projected-model-response-port"
+          }
+        ],
+        "owningScenarioId": "establish-governed-model-response-evidence"
+      }
+    ],
+    "projectionAuthorities": [],
+    "interfaceAuthority": {
+      "interfaceAuthorityType": "consumer-interface-authority.v1",
+      "contractValidatorCapabilityId": "sda-schema-contract-admission.v1",
+      "contractCatalog": "contracts/contract-catalog.json",
+      "interfaces": [
+        {
+          "interfaceId": "obtain-governed-model-response-cli",
+          "kind": "cli",
+          "rootScenarioId": "obtain-governed-model-response",
+          "platformCapabilityId": "sda-json-cli.v1"
+        }
+      ],
+      "portBindings": [
+        {
+          "portId": "resolve-model-alias-embodiment-port",
+          "platformCapabilityId": "sda-authority-transformation-port.v1",
+          "configuration": {
+            "expression": {
+              "bindings": {
+                "conveyor": {
+                  "else": {
+                    "op": "literal",
+                    "value": {
+                      "authorityType": "model-provider-conveyor-authority.v1",
+                      "conveyorId": "capability-authoring-model-conveyor.v1",
+                      "maximumProviderSwitches": 1,
+                      "providers": [
+                        {
+                          "adapterIdentity": "gemini-generate-content.v1",
+                          "allowedResponseHeaders": [
+                            "content-type",
+                            "x-goog-request-id"
+                          ],
+                          "credentialReference": "LOC_GEMINI_API_KEY",
+                          "endpointAuthorityDigest": "sha256:57ab352b0978dca5e5ce33a28ccd7027c20df96da4138dbc7e8088f7c8fb0c04",
+                          "models": [
+                            {
+                              "alias": "instruction-capable-model",
+                              "resolvedModel": "gemini-2.5-pro"
+                            },
+                            {
+                              "alias": "reasoning-capable-model",
+                              "resolvedModel": "gemini-2.5-flash"
+                            }
+                          ],
+                          "providerAuthorityId": "primary-cognitive-provider",
+                          "providerKind": "gemini"
+                        },
+                        {
+                          "adapterIdentity": "openai-chat-completions.v1",
+                          "allowedResponseHeaders": [
+                            "content-type",
+                            "x-request-id"
+                          ],
+                          "credentialReference": "LOC_OPENAI_API_KEY",
+                          "endpointAuthorityDigest": "sha256:b70b8bc81f93ef949d7ae6cabbf71a56b4af2440c5489c5c4037923b534f0109",
+                          "models": [
+                            {
+                              "alias": "instruction-capable-model",
+                              "resolvedModel": "gpt-4.1-mini"
+                            }
+                          ],
+                          "providerAuthorityId": "secondary-cognitive-provider",
+                          "providerKind": "openai"
+                        }
+                      ],
+                      "switchRules": []
+                    }
+                  },
+                  "op": "if",
+                  "then": {
+                    "from": "input",
+                    "op": "path",
+                    "path": "providerConveyor"
+                  },
+                  "when": {
+                    "left": {
+                      "from": "input",
+                      "op": "path",
+                      "path": "providerConveyor.authorityType"
+                    },
+                    "op": "equals",
+                    "right": {
+                      "op": "literal",
+                      "value": "model-provider-conveyor-authority.v1"
+                    }
+                  }
+                },
+                "requestProvider": {
+                  "from": "input",
+                  "op": "path",
+                  "path": "modelRequest.providerAuthorityId"
+                },
+                "providerEntry": {
+                  "as": "provider",
+                  "from": {
+                    "from": "conveyor",
+                    "op": "path",
+                    "path": "providers"
+                  },
+                  "op": "find",
+                  "where": {
+                    "left": {
+                      "from": "provider",
+                      "op": "path",
+                      "path": "providerAuthorityId"
+                    },
+                    "op": "equals",
+                    "right": {
+                      "from": "requestProvider",
+                      "op": "path",
+                      "path": ""
+                    }
+                  }
+                },
+                "requestAlias": {
+                  "from": "input",
+                  "op": "path",
+                  "path": "modelRequest.modelAlias"
+                },
+                "aliasEntry": {
+                  "else": {
+                    "op": "literal",
+                    "value": null
+                  },
+                  "op": "if",
+                  "then": {
+                    "as": "model",
+                    "from": {
+                      "from": "providerEntry",
+                      "op": "path",
+                      "path": "models"
+                    },
+                    "op": "find",
+                    "where": {
+                      "left": {
+                        "from": "model",
+                        "op": "path",
+                        "path": "alias"
+                      },
+                      "op": "equals",
+                      "right": {
+                        "from": "requestAlias",
+                        "op": "path",
+                        "path": ""
+                      }
+                    }
+                  },
+                  "when": {
+                    "from": "providerEntry",
+                    "op": "path",
+                    "path": ""
+                  }
+                },
+                "substitutionRequested": {
+                  "else": {
+                    "op": "literal",
+                    "value": false
+                  },
+                  "op": "if",
+                  "then": {
+                    "from": "input",
+                    "op": "path",
+                    "path": "modelRequest.providerSubstitutionRequested"
+                  },
+                  "when": {
+                    "from": "input",
+                    "op": "path",
+                    "path": "modelRequest.providerSubstitutionRequested"
+                  }
+                }
+              },
+              "op": "let",
+              "value": {
+                "op": "merge",
+                "values": [
+                  {
+                    "from": "input",
+                    "op": "path",
+                    "path": ""
+                  },
+                  {
+                    "fields": {
+                      "payload": {
+                        "else": {
+                          "fields": {
+                            "rejectedAlias": {
+                              "from": "requestAlias",
+                              "op": "path",
+                              "path": ""
+                            },
+                            "rejectedProviderAuthority": {
+                              "from": "requestProvider",
+                              "op": "path",
+                              "path": ""
+                            },
+                            "resolutionStatus": {
+                              "op": "literal",
+                              "value": "ALIAS_REJECTED"
+                            }
+                          },
+                          "op": "object"
+                        },
+                        "op": "if",
+                        "then": {
+                          "fields": {
+                            "adapterIdentity": {
+                              "from": "providerEntry",
+                              "op": "path",
+                              "path": "adapterIdentity"
+                            },
+                            "aliasResolutionLineage": {
+                              "fields": {
+                                "modelAlias": {
+                                  "from": "requestAlias",
+                                  "op": "path",
+                                  "path": ""
+                                },
+                                "providerAuthority": {
+                                  "from": "requestProvider",
+                                  "op": "path",
+                                  "path": ""
+                                }
+                              },
+                              "op": "object"
+                            },
+                            "credentialReference": {
+                              "from": "providerEntry",
+                              "op": "path",
+                              "path": "credentialReference"
+                            },
+                            "resolutionStatus": {
+                              "else": {
+                                "op": "literal",
+                                "value": "EMBODIMENT_AUTHORIZED"
+                              },
+                              "op": "if",
+                              "then": {
+                                "op": "literal",
+                                "value": "SUBSTITUTION_NOT_AUTHORIZED"
+                              },
+                              "when": {
+                                "from": "substitutionRequested",
+                                "op": "path",
+                                "path": ""
+                              }
+                            },
+                            "resolvedModel": {
+                              "from": "aliasEntry",
+                              "op": "path",
+                              "path": "resolvedModel"
+                            },
+                            "resolvedProviderAuthorityId": {
+                              "from": "providerEntry",
+                              "op": "path",
+                              "path": "providerAuthorityId"
+                            }
+                          },
+                          "op": "object"
+                        },
+                        "when": {
+                          "from": "aliasEntry",
+                          "op": "path",
+                          "path": ""
+                        }
+                      }
+                    },
+                    "op": "object"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "portId": "project-model-response-policy-to-provider-protocol-port",
+          "platformCapabilityId": "sda-authority-transformation-port.v1",
+          "configuration": {
+            "expression": {
+              "op": "merge",
+              "values": [
+                {
+                  "from": "input",
+                  "op": "path",
+                  "path": ""
+                },
+                {
+                  "fields": {
+                    "protocolResponsePolicy": {
+                      "fields": {
+                        "format": {
+                          "from": "input",
+                          "op": "path",
+                          "path": "modelRequest.responsePolicy.format"
+                        },
+                        "responseSchema": {
+                          "else": {
+                            "op": "literal",
+                            "value": null
+                          },
+                          "op": "if",
+                          "then": {
+                            "from": "input",
+                            "op": "path",
+                            "path": "modelRequest.responsePolicy.schema"
+                          },
+                          "when": {
+                            "left": {
+                              "from": "input",
+                              "op": "path",
+                              "path": "modelRequest.responsePolicy.format"
+                            },
+                            "op": "equals",
+                            "right": {
+                              "op": "literal",
+                              "value": "json"
+                            }
+                          }
+                        },
+                        "schemaSourceConnector": {
+                          "op": "literal",
+                          "value": "modelRequest.responsePolicy.schema"
+                        }
+                      },
+                      "op": "object"
+                    }
+                  },
+                  "op": "object"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "portId": "obtain-governed-provider-testimony-port",
+          "platformCapabilityId": "sda-authority-transformation-port.v1",
+          "configuration": {
+            "expression": {
+              "fields": {
+                "contractId": {
+                  "op": "literal",
+                  "value": "governed-provider-testimony.v1"
+                },
+                "payload": {
+                  "from": "input",
+                  "op": "path",
+                  "path": ""
+                }
+              },
+              "op": "object"
+            }
+          }
+        },
+        {
+          "portId": "establish-governed-model-response-evidence-port",
+          "platformCapabilityId": "sda-authority-transformation-port.v1",
+          "configuration": {
+            "expression": {
+              "from": "input",
+              "op": "path",
+              "path": "payload"
+            }
+          }
+        },
+        {
+          "portId": "initialize-model-provider-conveyor-port",
+          "platformCapabilityId": "sda-authority-transformation-port.v1",
+          "configuration": {
+            "expression": {
+              "else": {
+                "from": "input",
+                "op": "path",
+                "path": ""
+              },
+              "op": "if",
+              "then": {
+                "op": "merge",
+                "values": [
+                  {
+                    "from": "input",
+                    "op": "path",
+                    "path": ""
+                  },
+                  {
+                    "fields": {
+                      "fixtureBypass": {
+                        "op": "literal",
+                        "value": false
+                      },
+                      "providerConveyor": {
+                        "else": {
+                          "op": "literal",
+                          "value": {
+                            "authorityType": "model-provider-conveyor-authority.v1",
+                            "conveyorId": "capability-authoring-model-conveyor.v1",
+                            "maximumProviderSwitches": 0,
+                            "providers": [
+                              {
+                                "adapterIdentity": "gemini-generate-content.v1",
+                                "allowedResponseHeaders": [
+                                  "content-type",
+                                  "x-goog-request-id"
+                                ],
+                                "credentialReference": "LOC_GEMINI_API_KEY",
+                                "endpointAuthorityDigest": "sha256:57ab352b0978dca5e5ce33a28ccd7027c20df96da4138dbc7e8088f7c8fb0c04",
+                                "models": [
+                                  {
+                                    "alias": "instruction-capable-model",
+                                    "resolvedModel": "gemini-2.5-pro"
+                                  },
+                                  {
+                                    "alias": "reasoning-capable-model",
+                                    "resolvedModel": "gemini-2.5-flash"
+                                  }
+                                ],
+                                "providerAuthorityId": "primary-cognitive-provider",
+                                "providerKind": "gemini"
+                              },
+                              {
+                                "adapterIdentity": "openai-chat-completions.v1",
+                                "allowedResponseHeaders": [
+                                  "content-type",
+                                  "x-request-id"
+                                ],
+                                "credentialReference": "LOC_OPENAI_API_KEY",
+                                "endpointAuthorityDigest": "sha256:b70b8bc81f93ef949d7ae6cabbf71a56b4af2440c5489c5c4037923b534f0109",
+                                "models": [
+                                  {
+                                    "alias": "instruction-capable-model",
+                                    "resolvedModel": "gpt-4.1-mini"
+                                  }
+                                ],
+                                "providerAuthorityId": "secondary-cognitive-provider",
+                                "providerKind": "openai"
+                              }
+                            ],
+                            "switchRules": [
+                              {
+                                "fromProviderAuthorityId": "primary-cognitive-provider",
+                                "onDispositions": [],
+                                "toProviderAuthorityId": "secondary-cognitive-provider"
+                              }
+                            ]
+                          }
+                        },
+                        "op": "if",
+                        "then": {
+                          "from": "input",
+                          "op": "path",
+                          "path": "providerConveyor"
+                        },
+                        "when": {
+                          "left": {
+                            "from": "input",
+                            "op": "path",
+                            "path": "providerConveyor.authorityType"
+                          },
+                          "op": "equals",
+                          "right": {
+                            "op": "literal",
+                            "value": "model-provider-conveyor-authority.v1"
+                          }
+                        }
+                      },
+                      "providerSwitchCount": {
+                        "op": "literal",
+                        "value": 0
+                      },
+                      "selectedProviderAuthorityId": {
+                        "from": "input",
+                        "op": "path",
+                        "path": "modelRequest.providerAuthorityId"
+                      },
+                      "switchRequired": {
+                        "op": "literal",
+                        "value": false
+                      }
+                    },
+                    "op": "object"
+                  }
+                ]
+              },
+              "when": {
+                "left": {
+                  "from": "input",
+                  "op": "path",
+                  "path": "payload.resolutionStatus"
+                },
+                "op": "equals",
+                "right": {
+                  "op": "literal",
+                  "value": "EMBODIMENT_AUTHORIZED"
+                }
+              }
+            }
+          }
+        },
+        {
+          "portId": "stage-os-credential-bind-request-port",
+          "platformCapabilityId": "sda-authority-transformation-port.v1",
+          "configuration": {
+            "expression": {
+              "else": {
+                "from": "input",
+                "op": "path",
+                "path": ""
+              },
+              "op": "if",
+              "then": {
+                "op": "merge",
+                "values": [
+                  {
+                    "from": "input",
+                    "op": "path",
+                    "path": ""
+                  },
+                  {
+                    "fields": {
+                      "geminiBindRequest": {
+                        "fields": {
+                          "contractId": {
+                            "op": "literal",
+                            "value": "os-environment-credential-binding-request.v1"
+                          },
+                          "credentialReference": {
+                            "op": "literal",
+                            "value": "LOC_GEMINI_API_KEY"
+                          },
+                          "effectScope": {
+                            "op": "literal",
+                            "value": "governed-model-invocation"
+                          },
+                          "endpointAuthorityDigest": {
+                            "op": "literal",
+                            "value": "sha256:57ab352b0978dca5e5ce33a28ccd7027c20df96da4138dbc7e8088f7c8fb0c04"
+                          },
+                          "invocationIdentity": {
+                            "op": "literal",
+                            "value": "obtain-governed-model-response-execution"
+                          },
+                          "requestingCapabilityId": {
+                            "op": "literal",
+                            "value": "obtain-governed-model-response"
+                          }
+                        },
+                        "op": "object"
+                      },
+                      "openaiBindRequest": {
+                        "fields": {
+                          "contractId": {
+                            "op": "literal",
+                            "value": "os-environment-credential-binding-request.v1"
+                          },
+                          "credentialReference": {
+                            "op": "literal",
+                            "value": "LOC_OPENAI_API_KEY"
+                          },
+                          "effectScope": {
+                            "op": "literal",
+                            "value": "governed-model-invocation"
+                          },
+                          "endpointAuthorityDigest": {
+                            "op": "literal",
+                            "value": "sha256:b70b8bc81f93ef949d7ae6cabbf71a56b4af2440c5489c5c4037923b534f0109"
+                          },
+                          "invocationIdentity": {
+                            "op": "literal",
+                            "value": "obtain-governed-model-response-execution"
+                          },
+                          "requestingCapabilityId": {
+                            "op": "literal",
+                            "value": "obtain-governed-model-response"
+                          }
+                        },
+                        "op": "object"
+                      }
+                    },
+                    "op": "object"
+                  }
+                ]
+              },
+              "when": {
+                "left": {
+                  "from": "input",
+                  "op": "path",
+                  "path": "payload.resolutionStatus"
+                },
+                "op": "equals",
+                "right": {
+                  "op": "literal",
+                  "value": "EMBODIMENT_AUTHORIZED"
+                }
+              }
+            }
+          }
+        },
+        {
+          "portId": "bind-gemini-os-credential-port",
+          "platformCapabilityId": "sda-projected-capability-invocation-port.v2",
+          "configuration": {
+            "bindingDigest": "sha256:94d2bcbb43787c429119fead9691cd4cd93bbe5bf4195bb6f48b612f6ca0d617",
+            "bindingRef": "../../../../scenario-driven-architecture/capabilities/sda-platform/bind-os-environment-credential/projected/application-binding.node.json",
+            "capabilityAuthorityDigest": "sha256:1d7326341cd673df1e960584f101bcc722705f50df08aa856a6dd45649e5d079",
+            "invocationCondition": {
+              "equals": "EMBODIMENT_AUTHORIZED",
+              "path": "payload.resolutionStatus",
+              "whenFalse": "preserve-carrier"
+            },
+            "lineageMode": "retain-nested-execution",
+            "requestPath": "geminiBindRequest",
+            "resultMode": "bind-outcome",
+            "resultPath": "geminiBindEvidence",
+            "bindingBase": "providers/obtain-governed-model-response/projected"
+          }
+        },
+        {
+          "portId": "bind-openai-os-credential-port",
+          "platformCapabilityId": "sda-projected-capability-invocation-port.v2",
+          "configuration": {
+            "bindingDigest": "sha256:94d2bcbb43787c429119fead9691cd4cd93bbe5bf4195bb6f48b612f6ca0d617",
+            "bindingRef": "../../../../scenario-driven-architecture/capabilities/sda-platform/bind-os-environment-credential/projected/application-binding.node.json",
+            "capabilityAuthorityDigest": "sha256:1d7326341cd673df1e960584f101bcc722705f50df08aa856a6dd45649e5d079",
+            "invocationCondition": {
+              "equals": "EMBODIMENT_AUTHORIZED",
+              "path": "payload.resolutionStatus",
+              "whenFalse": "preserve-carrier"
+            },
+            "lineageMode": "retain-nested-execution",
+            "requestPath": "openaiBindRequest",
+            "resultMode": "bind-outcome",
+            "resultPath": "openaiBindEvidence",
+            "bindingBase": "providers/obtain-governed-model-response/projected"
+          }
+        },
+        {
+          "portId": "construct-projected-model-invocation-port",
+          "platformCapabilityId": "sda-authority-transformation-port.v1",
+          "configuration": {
+            "expression": {
+              "else": {
+                "from": "input",
+                "op": "path",
+                "path": ""
+              },
+              "op": "if",
+              "then": {
+                "else": {
+                  "bindings": {
+                    "provider": {
+                      "as": "candidate",
+                      "from": {
+                        "from": "input",
+                        "op": "path",
+                        "path": "providerConveyor.providers"
+                      },
+                      "op": "find",
+                      "where": {
+                        "left": {
+                          "from": "candidate",
+                          "op": "path",
+                          "path": "providerAuthorityId"
+                        },
+                        "op": "equals",
+                        "right": {
+                          "from": "input",
+                          "op": "path",
+                          "path": "selectedProviderAuthorityId"
+                        }
+                      }
+                    },
+                    "model": {
+                      "as": "candidateModel",
+                      "from": {
+                        "from": "provider",
+                        "op": "path",
+                        "path": "models"
+                      },
+                      "op": "find",
+                      "where": {
+                        "left": {
+                          "from": "candidateModel",
+                          "op": "path",
+                          "path": "alias"
+                        },
+                        "op": "equals",
+                        "right": {
+                          "from": "input",
+                          "op": "path",
+                          "path": "modelRequest.modelAlias"
+                        }
+                      }
+                    },
+                    "systemMessage": {
+                      "as": "message",
+                      "from": {
+                        "from": "input",
+                        "op": "path",
+                        "path": "modelRequest.interaction.messages"
+                      },
+                      "op": "find",
+                      "where": {
+                        "left": {
+                          "from": "message",
+                          "op": "path",
+                          "path": "role"
+                        },
+                        "op": "equals",
+                        "right": {
+                          "op": "literal",
+                          "value": "system"
+                        }
+                      }
+                    }
+                  },
+                  "op": "let",
+                  "value": {
+                    "op": "merge",
+                    "values": [
+                      {
+                        "from": "input",
+                        "op": "path",
+                        "path": ""
+                      },
+                      {
+                        "fields": {
+                          "currentInvocationRequest": {
+                            "fields": {
+                              "contractId": {
+                                "op": "literal",
+                                "value": "execute-governed-model-invocation-input.v1"
+                              },
+                              "payload": {
+                                "fields": {
+                                  "attemptPlan": {
+                                    "fields": {
+                                      "contractId": {
+                                        "op": "literal",
+                                        "value": "execute-projected-model-provider-attempt-input.v1"
+                                      },
+                                      "payload": {
+                                        "fields": {
+                                          "adapterIdentity": {
+                                            "from": "provider",
+                                            "op": "path",
+                                            "path": "adapterIdentity"
+                                          },
+                                          "allowedResponseHeaders": {
+                                            "from": "provider",
+                                            "op": "path",
+                                            "path": "allowedResponseHeaders"
+                                          },
+                                          "cancellationScopeReference": {
+                                            "op": "literal",
+                                            "value": "caller-signal"
+                                          },
+                                          "credentialReference": {
+                                            "from": "provider",
+                                            "op": "path",
+                                            "path": "credentialReference"
+                                          },
+                                          "endpointAuthorityDigest": {
+                                            "from": "provider",
+                                            "op": "path",
+                                            "path": "endpointAuthorityDigest"
+                                          },
+                                          "endpointUrl": {
+                                            "else": {
+                                              "op": "literal",
+                                              "value": "https://api.openai.com/v1/chat/completions"
+                                            },
+                                            "op": "if",
+                                            "then": {
+                                              "op": "format",
+                                              "template": "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent",
+                                              "values": {
+                                                "model": {
+                                                  "from": "model",
+                                                  "op": "path",
+                                                  "path": "resolvedModel"
+                                                }
+                                              }
+                                            },
+                                            "when": {
+                                              "left": {
+                                                "from": "provider",
+                                                "op": "path",
+                                                "path": "providerKind"
+                                              },
+                                              "op": "equals",
+                                              "right": {
+                                                "op": "literal",
+                                                "value": "gemini"
+                                              }
+                                            }
+                                          },
+                                          "invocationIdentity": {
+                                            "from": "input",
+                                            "op": "path",
+                                            "path": "requestId"
+                                          },
+                                          "maxResponseBytes": {
+                                            "op": "literal",
+                                            "value": 8388608
+                                          },
+                                          "protocolProjectionIdentity": {
+                                            "op": "literal",
+                                            "value": "project-model-provider-protocol"
+                                          },
+                                          "protocolProjectionRequest": {
+                                            "fields": {
+                                              "contractId": {
+                                                "op": "literal",
+                                                "value": "project-model-provider-protocol-input.v1"
+                                              },
+                                              "payload": {
+                                                "fields": {
+                                                  "adapterIdentity": {
+                                                    "from": "provider",
+                                                    "op": "path",
+                                                    "path": "adapterIdentity"
+                                                  },
+                                                  "context": {
+                                                    "else": {
+                                                      "fields": {
+                                                        "maxTokens": {
+                                                          "from": "input",
+                                                          "op": "path",
+                                                          "path": "modelRequest.responsePolicy.maximumOutputTokens"
+                                                        },
+                                                        "messages": {
+                                                          "from": "input",
+                                                          "op": "path",
+                                                          "path": "modelRequest.interaction.messages"
+                                                        },
+                                                        "model": {
+                                                          "from": "model",
+                                                          "op": "path",
+                                                          "path": "resolvedModel"
+                                                        },
+                                                        "responseSchema": {
+                                                          "from": "input",
+                                                          "op": "path",
+                                                          "path": "protocolResponsePolicy.responseSchema"
+                                                        },
+                                                        "temperature": {
+                                                          "from": "input",
+                                                          "op": "path",
+                                                          "path": "modelRequest.responsePolicy.temperature"
+                                                        }
+                                                      },
+                                                      "op": "object"
+                                                    },
+                                                    "op": "if",
+                                                    "then": {
+                                                      "fields": {
+                                                        "maxTokens": {
+                                                          "from": "input",
+                                                          "op": "path",
+                                                          "path": "modelRequest.responsePolicy.maximumOutputTokens"
+                                                        },
+                                                        "messages": {
+                                                          "as": "message",
+                                                          "from": {
+                                                            "from": "input",
+                                                            "op": "path",
+                                                            "path": "modelRequest.interaction.messages"
+                                                          },
+                                                          "op": "flat-map",
+                                                          "value": {
+                                                            "else": {
+                                                              "items": [
+                                                                {
+                                                                  "fields": {
+                                                                    "parts": {
+                                                                      "items": [
+                                                                        {
+                                                                          "fields": {
+                                                                            "text": {
+                                                                              "from": "message",
+                                                                              "op": "path",
+                                                                              "path": "content"
+                                                                            }
+                                                                          },
+                                                                          "op": "object"
+                                                                        }
+                                                                      ],
+                                                                      "op": "array"
+                                                                    },
+                                                                    "role": {
+                                                                      "else": {
+                                                                        "from": "message",
+                                                                        "op": "path",
+                                                                        "path": "role"
+                                                                      },
+                                                                      "op": "if",
+                                                                      "then": {
+                                                                        "op": "literal",
+                                                                        "value": "model"
+                                                                      },
+                                                                      "when": {
+                                                                        "left": {
+                                                                          "from": "message",
+                                                                          "op": "path",
+                                                                          "path": "role"
+                                                                        },
+                                                                        "op": "equals",
+                                                                        "right": {
+                                                                          "op": "literal",
+                                                                          "value": "assistant"
+                                                                        }
+                                                                      }
+                                                                    }
+                                                                  },
+                                                                  "op": "object"
+                                                                }
+                                                              ],
+                                                              "op": "array"
+                                                            },
+                                                            "op": "if",
+                                                            "then": {
+                                                              "items": [],
+                                                              "op": "array"
+                                                            },
+                                                            "when": {
+                                                              "left": {
+                                                                "from": "message",
+                                                                "op": "path",
+                                                                "path": "role"
+                                                              },
+                                                              "op": "equals",
+                                                              "right": {
+                                                                "op": "literal",
+                                                                "value": "system"
+                                                              }
+                                                            }
+                                                          }
+                                                        },
+                                                        "responseSchema": {
+                                                          "from": "input",
+                                                          "op": "path",
+                                                          "path": "protocolResponsePolicy.responseSchema"
+                                                        },
+                                                        "systemInstruction": {
+                                                          "else": {
+                                                            "op": "literal",
+                                                            "value": null
+                                                          },
+                                                          "op": "if",
+                                                          "then": {
+                                                            "fields": {
+                                                              "parts": {
+                                                                "items": [
+                                                                  {
+                                                                    "fields": {
+                                                                      "text": {
+                                                                        "from": "systemMessage",
+                                                                        "op": "path",
+                                                                        "path": "content"
+                                                                      }
+                                                                    },
+                                                                    "op": "object"
+                                                                  }
+                                                                ],
+                                                                "op": "array"
+                                                              }
+                                                            },
+                                                            "op": "object"
+                                                          },
+                                                          "when": {
+                                                            "left": {
+                                                              "from": "systemMessage",
+                                                              "op": "path",
+                                                              "path": "role"
+                                                            },
+                                                            "op": "equals",
+                                                            "right": {
+                                                              "op": "literal",
+                                                              "value": "system"
+                                                            }
+                                                          }
+                                                        },
+                                                        "temperature": {
+                                                          "from": "input",
+                                                          "op": "path",
+                                                          "path": "modelRequest.responsePolicy.temperature"
+                                                        }
+                                                      },
+                                                      "op": "object"
+                                                    },
+                                                    "when": {
+                                                      "left": {
+                                                        "from": "provider",
+                                                        "op": "path",
+                                                        "path": "providerKind"
+                                                      },
+                                                      "op": "equals",
+                                                      "right": {
+                                                        "op": "literal",
+                                                        "value": "gemini"
+                                                      }
+                                                    }
+                                                  },
+                                                  "providerKind": {
+                                                    "from": "provider",
+                                                    "op": "path",
+                                                    "path": "providerKind"
+                                                  },
+                                                  "requestType": {
+                                                    "else": {
+                                                      "else": {
+                                                        "op": "literal",
+                                                        "value": "project-openai-text"
+                                                      },
+                                                      "op": "if",
+                                                      "then": {
+                                                        "op": "literal",
+                                                        "value": "project-openai-structured"
+                                                      },
+                                                      "when": {
+                                                        "left": {
+                                                          "from": "input",
+                                                          "op": "path",
+                                                          "path": "modelRequest.responsePolicy.format"
+                                                        },
+                                                        "op": "equals",
+                                                        "right": {
+                                                          "op": "literal",
+                                                          "value": "json"
+                                                        }
+                                                      }
+                                                    },
+                                                    "op": "if",
+                                                    "then": {
+                                                      "else": {
+                                                        "op": "literal",
+                                                        "value": "project-gemini-text"
+                                                      },
+                                                      "op": "if",
+                                                      "then": {
+                                                        "op": "literal",
+                                                        "value": "project-gemini-structured"
+                                                      },
+                                                      "when": {
+                                                        "left": {
+                                                          "from": "input",
+                                                          "op": "path",
+                                                          "path": "modelRequest.responsePolicy.format"
+                                                        },
+                                                        "op": "equals",
+                                                        "right": {
+                                                          "op": "literal",
+                                                          "value": "json"
+                                                        }
+                                                      }
+                                                    },
+                                                    "when": {
+                                                      "left": {
+                                                        "from": "provider",
+                                                        "op": "path",
+                                                        "path": "providerKind"
+                                                      },
+                                                      "op": "equals",
+                                                      "right": {
+                                                        "op": "literal",
+                                                        "value": "gemini"
+                                                      }
+                                                    }
+                                                  }
+                                                },
+                                                "op": "object"
+                                              }
+                                            },
+                                            "op": "object"
+                                          },
+                                          "providerAuthorityId": {
+                                            "from": "provider",
+                                            "op": "path",
+                                            "path": "providerAuthorityId"
+                                          },
+                                          "providerKind": {
+                                            "from": "provider",
+                                            "op": "path",
+                                            "path": "providerKind"
+                                          },
+                                          "requestId": {
+                                            "from": "input",
+                                            "op": "path",
+                                            "path": "requestId"
+                                          },
+                                          "requestLineage": {
+                                            "from": "input",
+                                            "op": "path",
+                                            "path": "requestLineage"
+                                          },
+                                          "resolvedModel": {
+                                            "from": "model",
+                                            "op": "path",
+                                            "path": "resolvedModel"
+                                          },
+                                          "responseFormat": {
+                                            "from": "input",
+                                            "op": "path",
+                                            "path": "modelRequest.responsePolicy.format"
+                                          },
+                                          "timeoutMilliseconds": {
+                                            "from": "input",
+                                            "op": "path",
+                                            "path": "modelRequest.executionPolicy.timeoutMilliseconds"
+                                          }
+                                        },
+                                        "op": "object"
+                                      }
+                                    },
+                                    "op": "object"
+                                  }
+                                },
+                                "op": "object"
+                              }
+                            },
+                            "op": "object"
+                          }
+                        },
+                        "op": "object"
+                      }
+                    ]
+                  }
+                },
+                "op": "if",
+                "then": {
+                  "from": "input",
+                  "op": "path",
+                  "path": ""
+                },
+                "when": {
+                  "left": {
+                    "from": "input",
+                    "op": "path",
+                    "path": "fixtureBypass"
+                  },
+                  "op": "equals",
+                  "right": {
+                    "op": "literal",
+                    "value": true
+                  }
+                }
+              },
+              "when": {
+                "left": {
+                  "from": "input",
+                  "op": "path",
+                  "path": "payload.resolutionStatus"
+                },
+                "op": "equals",
+                "right": {
+                  "op": "literal",
+                  "value": "EMBODIMENT_AUTHORIZED"
+                }
+              }
+            }
+          }
+        },
+        {
+          "portId": "obtain-governed-model-response-port",
+          "platformCapabilityId": "sda-projected-capability-invocation-port.v2",
+          "configuration": {
+            "bindingDigest": "sha256:8c8e99a9c4347c2290d09bfd552e1d9487f60d9986a0af809804d1749e84cd57",
+            "bindingRef": "../../execute-governed-model-invocation/projected/application-binding.node.json",
+            "capabilityAuthorityDigest": "sha256:752b661c8ee4a5a2f0e9af3267350695ee6648a053039683f7aa94d51b26402b",
+            "invocationCondition": {
+              "equals": "EMBODIMENT_AUTHORIZED",
+              "path": "payload.resolutionStatus",
+              "whenFalse": "preserve-carrier"
+            },
+            "lineageMode": "retain-nested-execution",
+            "requestPath": "currentInvocationRequest",
+            "resultMode": "bind-outcome",
+            "resultPath": "primaryModelEvidence",
+            "bindingBase": "providers/obtain-governed-model-response/projected"
+          }
+        },
+        {
+          "portId": "determine-model-provider-fallback-port",
+          "platformCapabilityId": "sda-authority-transformation-port.v1",
+          "configuration": {
+            "expression": {
+              "else": {
+                "from": "input",
+                "op": "path",
+                "path": ""
+              },
+              "op": "if",
+              "then": {
+                "else": {
+                  "bindings": {
+                    "switchRule": {
+                      "as": "candidateRule",
+                      "from": {
+                        "from": "input",
+                        "op": "path",
+                        "path": "providerConveyor.switchRules"
+                      },
+                      "op": "find",
+                      "where": {
+                        "left": {
+                          "from": "candidateRule",
+                          "op": "path",
+                          "path": "fromProviderAuthorityId"
+                        },
+                        "op": "equals",
+                        "right": {
+                          "from": "input",
+                          "op": "path",
+                          "path": "selectedProviderAuthorityId"
+                        }
+                      }
+                    }
+                  },
+                  "op": "let",
+                  "value": {
+                    "op": "merge",
+                    "values": [
+                      {
+                        "from": "input",
+                        "op": "path",
+                        "path": ""
+                      },
+                      {
+                        "fields": {
+                          "providerSwitchCount": {
+                            "else": {
+                              "op": "literal",
+                              "value": 0
+                            },
+                            "op": "if",
+                            "then": {
+                              "op": "literal",
+                              "value": 1
+                            },
+                            "when": {
+                              "in": {
+                                "from": "switchRule",
+                                "op": "path",
+                                "path": "onDispositions"
+                              },
+                              "op": "includes",
+                              "value": {
+                                "from": "input",
+                                "op": "path",
+                                "path": "primaryModelEvidence.disposition"
+                              }
+                            }
+                          },
+                          "selectedProviderAuthorityId": {
+                            "else": {
+                              "from": "input",
+                              "op": "path",
+                              "path": "selectedProviderAuthorityId"
+                            },
+                            "op": "if",
+                            "then": {
+                              "from": "switchRule",
+                              "op": "path",
+                              "path": "toProviderAuthorityId"
+                            },
+                            "when": {
+                              "in": {
+                                "from": "switchRule",
+                                "op": "path",
+                                "path": "onDispositions"
+                              },
+                              "op": "includes",
+                              "value": {
+                                "from": "input",
+                                "op": "path",
+                                "path": "primaryModelEvidence.disposition"
+                              }
+                            }
+                          },
+                          "switchRequired": {
+                            "in": {
+                              "from": "switchRule",
+                              "op": "path",
+                              "path": "onDispositions"
+                            },
+                            "op": "includes",
+                            "value": {
+                              "from": "input",
+                              "op": "path",
+                              "path": "primaryModelEvidence.disposition"
+                            }
+                          }
+                        },
+                        "op": "object"
+                      }
+                    ]
+                  }
+                },
+                "op": "if",
+                "then": {
+                  "op": "merge",
+                  "values": [
+                    {
+                      "from": "input",
+                      "op": "path",
+                      "path": ""
+                    },
+                    {
+                      "fields": {
+                        "fixtureBypass": {
+                          "op": "literal",
+                          "value": true
+                        },
+                        "primaryModelEvidence": {
+                          "from": "input",
+                          "op": "path",
+                          "path": ""
+                        },
+                        "providerSwitchCount": {
+                          "op": "literal",
+                          "value": 0
+                        },
+                        "selectedProviderAuthorityId": {
+                          "op": "literal",
+                          "value": "primary-cognitive-provider"
+                        },
+                        "switchRequired": {
+                          "op": "literal",
+                          "value": false
+                        }
+                      },
+                      "op": "object"
+                    }
+                  ]
+                },
+                "when": {
+                  "left": {
+                    "from": "input",
+                    "op": "path",
+                    "path": "carrierType"
+                  },
+                  "op": "equals",
+                  "right": {
+                    "op": "literal",
+                    "value": "governed-model-response-evidence.v1"
+                  }
+                }
+              },
+              "when": {
+                "left": {
+                  "from": "input",
+                  "op": "path",
+                  "path": "payload.resolutionStatus"
+                },
+                "op": "equals",
+                "right": {
+                  "op": "literal",
+                  "value": "EMBODIMENT_AUTHORIZED"
+                }
+              }
+            }
+          }
+        },
+        {
+          "portId": "obtain-fallback-model-response-port",
+          "platformCapabilityId": "sda-projected-capability-invocation-port.v2",
+          "configuration": {
+            "bindingDigest": "sha256:8c8e99a9c4347c2290d09bfd552e1d9487f60d9986a0af809804d1749e84cd57",
+            "bindingRef": "../../execute-governed-model-invocation/projected/application-binding.node.json",
+            "capabilityAuthorityDigest": "sha256:752b661c8ee4a5a2f0e9af3267350695ee6648a053039683f7aa94d51b26402b",
+            "invocationCondition": {
+              "equals": true,
+              "path": "switchRequired",
+              "whenFalse": "preserve-carrier"
+            },
+            "lineageMode": "retain-nested-execution",
+            "requestPath": "currentInvocationRequest",
+            "resultMode": "bind-outcome",
+            "resultPath": "fallbackModelEvidence",
+            "bindingBase": "providers/obtain-governed-model-response/projected"
+          }
+        },
+        {
+          "portId": "select-model-provider-conveyor-evidence-port",
+          "platformCapabilityId": "sda-authority-transformation-port.v1",
+          "configuration": {
+            "expression": {
+              "else": {
+                "from": "input",
+                "op": "path",
+                "path": ""
+              },
+              "op": "if",
+              "then": {
+                "op": "merge",
+                "values": [
+                  {
+                    "else": {
+                      "from": "input",
+                      "op": "path",
+                      "path": "primaryModelEvidence"
+                    },
+                    "op": "if",
+                    "then": {
+                      "from": "input",
+                      "op": "path",
+                      "path": "fallbackModelEvidence"
+                    },
+                    "when": {
+                      "from": "input",
+                      "op": "path",
+                      "path": "switchRequired"
+                    }
+                  },
+                  {
+                    "fields": {
+                      "providerSwitchCount": {
+                        "from": "input",
+                        "op": "path",
+                        "path": "providerSwitchCount"
+                      },
+                      "resolvedProtocolProjection": {
+                        "else": {
+                          "op": "literal",
+                          "value": null
+                        },
+                        "op": "if",
+                        "then": {
+                          "fields": {
+                            "providerAuthorityId": {
+                              "from": "input",
+                              "op": "path",
+                              "path": "currentInvocationRequest.payload.attemptPlan.payload.providerAuthorityId"
+                            },
+                            "providerKind": {
+                              "from": "input",
+                              "op": "path",
+                              "path": "currentInvocationRequest.payload.attemptPlan.payload.providerKind"
+                            },
+                            "requestType": {
+                              "from": "input",
+                              "op": "path",
+                              "path": "currentInvocationRequest.payload.attemptPlan.payload.protocolProjectionRequest.payload.requestType"
+                            },
+                            "resolvedModel": {
+                              "from": "input",
+                              "op": "path",
+                              "path": "currentInvocationRequest.payload.attemptPlan.payload.resolvedModel"
+                            },
+                            "responseFormat": {
+                              "from": "input",
+                              "op": "path",
+                              "path": "modelRequest.responsePolicy.format"
+                            }
+                          },
+                          "op": "object"
+                        },
+                        "when": {
+                          "from": "input",
+                          "op": "path",
+                          "path": "currentInvocationRequest.payload.attemptPlan.payload.protocolProjectionRequest.payload.requestType"
+                        }
+                      },
+                      "resolvedProviderAuthorityId": {
+                        "from": "input",
+                        "op": "path",
+                        "path": "selectedProviderAuthorityId"
+                      }
+                    },
+                    "op": "object"
+                  },
+                  {
+                    "fields": {
+                      "payload": {
+                        "from": "input",
+                        "op": "path",
+                        "path": "payload"
+                      }
+                    },
+                    "op": "object"
+                  }
+                ]
+              },
+              "when": {
+                "left": {
+                  "from": "input",
+                  "op": "path",
+                  "path": "payload.resolutionStatus"
+                },
+                "op": "equals",
+                "right": {
+                  "op": "literal",
+                  "value": "EMBODIMENT_AUTHORIZED"
+                }
+              }
+            }
+          }
+        },
+        {
+          "portId": "normalize-projected-model-response-port",
+          "platformCapabilityId": "sda-authority-transformation-port.v1",
+          "configuration": {
+            "expression": {
+              "else": {
+                "else": {
+                  "else": {
+                    "fields": {
+                      "acceptanceClaimed": {
+                        "op": "literal",
+                        "value": false
+                      },
+                      "attemptCount": {
+                        "from": "input",
+                        "op": "path",
+                        "path": "attempts"
+                      },
+                      "carrierType": {
+                        "op": "literal",
+                        "value": "governed-model-response-evidence.v1"
+                      },
+                      "disposition": {
+                        "from": "input",
+                        "op": "path",
+                        "path": "disposition"
+                      },
+                      "effectLineage": {
+                        "from": "input",
+                        "op": "path",
+                        "path": "receipt.requestLineage"
+                      },
+                      "normalizedResponse": {
+                        "from": "input",
+                        "op": "path",
+                        "path": "response"
+                      },
+                      "providerSwitchCount": {
+                        "from": "input",
+                        "op": "path",
+                        "path": "providerSwitchCount"
+                      },
+                      "requestHash": {
+                        "from": "input",
+                        "op": "path",
+                        "path": "receipt.requestHash"
+                      },
+                      "requestId": {
+                        "from": "input",
+                        "op": "path",
+                        "path": "receipt.requestId"
+                      },
+                      "resolvedModel": {
+                        "from": "input",
+                        "op": "path",
+                        "path": "model"
+                      },
+                      "resolvedProtocolProjection": {
+                        "from": "input",
+                        "op": "path",
+                        "path": "resolvedProtocolProjection"
+                      },
+                      "resolvedProvider": {
+                        "from": "input",
+                        "op": "path",
+                        "path": "receipt.providerKind"
+                      },
+                      "resolvedProviderAuthorityId": {
+                        "from": "input",
+                        "op": "path",
+                        "path": "resolvedProviderAuthorityId"
+                      },
+                      "responseHash": {
+                        "from": "input",
+                        "op": "path",
+                        "path": "receipt.responseHash"
+                      },
+                      "timing": {
+                        "from": "input",
+                        "op": "path",
+                        "path": "receipt.timing"
+                      }
+                    },
+                    "op": "object"
+                  },
+                  "op": "if",
+                  "then": {
+                    "fields": {
+                      "acceptanceClaimed": {
+                        "op": "literal",
+                        "value": false
+                      },
+                      "attemptCount": {
+                        "op": "literal",
+                        "value": 0
+                      },
+                      "carrierType": {
+                        "op": "literal",
+                        "value": "governed-model-response-evidence.v1"
+                      },
+                      "disposition": {
+                        "op": "literal",
+                        "value": "MODEL_REQUEST_REJECTED"
+                      },
+                      "effectLineage": {
+                        "from": "input",
+                        "op": "path",
+                        "path": "requestLineage"
+                      },
+                      "normalizedResponse": {
+                        "op": "literal",
+                        "value": null
+                      },
+                      "payload": {
+                        "from": "input",
+                        "op": "path",
+                        "path": "payload"
+                      },
+                      "requestHash": {
+                        "from": "input",
+                        "op": "path",
+                        "path": "requestHash"
+                      },
+                      "requestId": {
+                        "from": "input",
+                        "op": "path",
+                        "path": "requestId"
+                      },
+                      "resolvedModel": {
+                        "op": "literal",
+                        "value": null
+                      },
+                      "resolvedProvider": {
+                        "op": "literal",
+                        "value": null
+                      },
+                      "responseHash": {
+                        "op": "literal",
+                        "value": null
+                      }
+                    },
+                    "op": "object"
+                  },
+                  "when": {
+                    "left": {
+                      "from": "input",
+                      "op": "path",
+                      "path": "payload.resolutionStatus"
+                    },
+                    "op": "equals",
+                    "right": {
+                      "op": "literal",
+                      "value": "SUBSTITUTION_NOT_AUTHORIZED"
+                    }
+                  }
+                },
+                "op": "if",
+                "then": {
+                  "fields": {
+                    "acceptanceClaimed": {
+                      "op": "literal",
+                      "value": false
+                    },
+                    "attemptCount": {
+                      "op": "literal",
+                      "value": 0
+                    },
+                    "carrierType": {
+                      "op": "literal",
+                      "value": "governed-model-response-evidence.v1"
+                    },
+                    "disposition": {
+                      "op": "literal",
+                      "value": "MODEL_REQUEST_REJECTED"
+                    },
+                    "effectLineage": {
+                      "from": "input",
+                      "op": "path",
+                      "path": "requestLineage"
+                    },
+                    "normalizedResponse": {
+                      "op": "literal",
+                      "value": null
+                    },
+                    "payload": {
+                      "from": "input",
+                      "op": "path",
+                      "path": "payload"
+                    },
+                    "requestHash": {
+                      "from": "input",
+                      "op": "path",
+                      "path": "requestHash"
+                    },
+                    "requestId": {
+                      "from": "input",
+                      "op": "path",
+                      "path": "requestId"
+                    },
+                    "resolvedModel": {
+                      "op": "literal",
+                      "value": null
+                    },
+                    "resolvedProvider": {
+                      "op": "literal",
+                      "value": null
+                    },
+                    "responseHash": {
+                      "op": "literal",
+                      "value": null
+                    }
+                  },
+                  "op": "object"
+                },
+                "when": {
+                  "left": {
+                    "from": "input",
+                    "op": "path",
+                    "path": "payload.resolutionStatus"
+                  },
+                  "op": "equals",
+                  "right": {
+                    "op": "literal",
+                    "value": "ALIAS_REJECTED"
+                  }
+                }
+              },
+              "op": "if",
+              "then": {
+                "from": "input",
+                "op": "path",
+                "path": ""
+              },
+              "when": {
+                "left": {
+                  "from": "input",
+                  "op": "path",
+                  "path": "carrierType"
+                },
+                "op": "equals",
+                "right": {
+                  "op": "literal",
+                  "value": "governed-model-response-evidence.v1"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "projectionBindings": []
+    },
+    "contractAuthorities": {
+      "authorityType": "consumer-contract-authorities.v1",
+      "contracts": {
+        "governed-model-invocation-request.v1": {
+          "schemaRef": "governed-model-invocation-request.v1.schema.json",
+          "schemaId": "https://schemas.agentic-harness.local/governed-model-invocation-request.schema.json",
+          "schemaDigest": "f0f754bc79108adfc8f274b4ae90ae9a633e552ac5da7138edf1b980f7553cca",
+          "schema": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "$id": "https://schemas.agentic-harness.local/governed-model-invocation-request.schema.json",
+            "oneOf": [
+              {
+                "$ref": "#/$defs/governed-model-invocation-request.v1"
+              }
+            ],
+            "$defs": {
+              "governed-model-invocation-request.v1": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "carrierType",
+                  "requestId",
+                  "requestHash",
+                  "modelRequest",
+                  "requestLineage"
+                ],
+                "properties": {
+                  "carrierType": {
+                    "const": "governed-model-invocation-request.v1"
+                  },
+                  "requestId": {
+                    "$ref": "#/$defs/identity"
+                  },
+                  "requestHash": {
+                    "$ref": "#/$defs/sha256"
+                  },
+                  "modelRequest": {
+                    "$ref": "#/$defs/modelRequest"
+                  },
+                  "providerConveyor": {
+                    "type": "object"
+                  },
+                  "requestLineage": {
+                    "$ref": "#/$defs/lineage"
+                  }
+                }
+              },
+              "modelRequest": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "$schema",
+                  "requestId",
+                  "providerAuthorityId",
+                  "modelAlias",
+                  "interaction",
+                  "responsePolicy",
+                  "executionPolicy",
+                  "evidencePolicy"
+                ],
+                "properties": {
+                  "$schema": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "requestId": {
+                    "$ref": "#/$defs/identity"
+                  },
+                  "providerAuthorityId": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "modelAlias": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "interaction": {
+                    "type": "object"
+                  },
+                  "responsePolicy": {
+                    "type": "object"
+                  },
+                  "executionPolicy": {
+                    "type": "object"
+                  },
+                  "evidencePolicy": {
+                    "type": "object"
+                  }
+                }
+              },
+              "identity": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9.-]*$"
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^sha256:[a-f0-9]{64}$"
+              },
+              "lineage": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          }
+        },
+        "governed-model-response-evidence.v1": {
+          "schemaRef": "governed-model-response-evidence.v1.schema.json",
+          "schemaId": "https://schemas.agentic-harness.local/governed-model-response-evidence.schema.json",
+          "schemaDigest": "d5506cae3d928bd1237378054ef1f15046cfb1fbae742d3c190672756a491de5",
+          "schema": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "$id": "https://schemas.agentic-harness.local/governed-model-response-evidence.schema.json",
+            "oneOf": [
+              {
+                "$ref": "#/$defs/governed-model-response-evidence.v1"
+              },
+              {
+                "$ref": "#/$defs/governed-model-response-evidence.alias-rejection.v1"
+              }
+            ],
+            "$defs": {
+              "governed-model-response-evidence.v1": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "carrierType",
+                  "requestId",
+                  "disposition",
+                  "resolvedProvider",
+                  "resolvedModel",
+                  "attemptCount",
+                  "timing",
+                  "requestHash",
+                  "responseHash",
+                  "normalizedResponse",
+                  "acceptanceClaimed",
+                  "effectLineage"
+                ],
+                "properties": {
+                  "carrierType": {
+                    "const": "governed-model-response-evidence.v1"
+                  },
+                  "requestId": {
+                    "$ref": "#/$defs/identity"
+                  },
+                  "disposition": {
+                    "enum": [
+                      "MODEL_RESPONSE_OBTAINED",
+                      "PROVIDER_REQUEST_REJECTED",
+                      "PROVIDER_TIMED_OUT",
+                      "PROVIDER_UNAVAILABLE",
+                      "PROVIDER_AUTHENTICATION_FAILED",
+                      "EXECUTION_CANCELLED",
+                      "INTERNAL_EXECUTION_FAILED",
+                      "RESPONSE_FORMAT_NOT_SATISFIED",
+                      "MODEL_REQUEST_REJECTED"
+                    ]
+                  },
+                  "resolvedProvider": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "resolvedProviderAuthorityId": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "resolvedModel": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "attemptCount": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "timing": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "startedAt",
+                      "completedAt",
+                      "durationMilliseconds"
+                    ],
+                    "properties": {
+                      "startedAt": {
+                        "type": "string",
+                        "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$"
+                      },
+                      "completedAt": {
+                        "type": "string",
+                        "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$"
+                      },
+                      "durationMilliseconds": {
+                        "type": "integer",
+                        "minimum": 0
+                      }
+                    }
+                  },
+                  "requestHash": {
+                    "$ref": "#/$defs/sha256"
+                  },
+                  "responseHash": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "pattern": "^sha256:[a-f0-9]{64}$"
+                  },
+                  "normalizedResponse": {
+                    "type": [
+                      "object",
+                      "null"
+                    ]
+                  },
+                  "acceptanceClaimed": {
+                    "const": false
+                  },
+                  "providerSwitchCount": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "resolvedProtocolProjection": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "additionalProperties": false,
+                    "required": [
+                      "requestType",
+                      "providerKind",
+                      "providerAuthorityId",
+                      "resolvedModel",
+                      "responseFormat"
+                    ],
+                    "properties": {
+                      "requestType": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "providerKind": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "providerAuthorityId": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "resolvedModel": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "responseFormat": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  },
+                  "effectLineage": {
+                    "$ref": "#/$defs/lineage"
+                  },
+                  "payload": {
+                    "type": "object",
+                    "additionalProperties": true
+                  }
+                }
+              },
+              "identity": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9.-]*$"
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^sha256:[a-f0-9]{64}$"
+              },
+              "lineage": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "governed-model-response-evidence.alias-rejection.v1": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "carrierType",
+                  "requestId",
+                  "disposition",
+                  "resolvedProvider",
+                  "resolvedModel",
+                  "attemptCount",
+                  "requestHash",
+                  "responseHash",
+                  "normalizedResponse",
+                  "acceptanceClaimed",
+                  "effectLineage",
+                  "payload"
+                ],
+                "properties": {
+                  "carrierType": {
+                    "const": "governed-model-response-evidence.v1"
+                  },
+                  "requestId": {
+                    "$ref": "#/$defs/identity"
+                  },
+                  "disposition": {
+                    "const": "MODEL_REQUEST_REJECTED"
+                  },
+                  "resolvedProvider": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "resolvedModel": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "attemptCount": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "requestHash": {
+                    "$ref": "#/$defs/sha256"
+                  },
+                  "responseHash": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "pattern": "^sha256:[a-f0-9]{64}$"
+                  },
+                  "normalizedResponse": {
+                    "type": [
+                      "object",
+                      "null"
+                    ]
+                  },
+                  "acceptanceClaimed": {
+                    "const": false
+                  },
+                  "effectLineage": {
+                    "$ref": "#/$defs/lineage"
+                  },
+                  "payload": {
+                    "type": "object",
+                    "additionalProperties": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "governed-provider-testimony.v1": {
+          "schemaRef": "governed-provider-testimony.v1.schema.json",
+          "schemaId": "https://schemas.agentic-harness.local/contracts/obtain-governed-model-response-intermediate.schema.json",
+          "schemaDigest": "006fb847a8d6efb7ddfb3445106e971e61567b03ab78433c0cd462ceeb06ec8d",
+          "schema": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "$id": "https://schemas.agentic-harness.local/contracts/obtain-governed-model-response-intermediate.schema.json",
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "contractId",
+              "payload"
+            ],
+            "properties": {
+              "contractId": {
+                "type": "string",
+                "enum": [
+                  "model-provider-embodiment-resolution.v1",
+                  "governed-provider-testimony.v1",
+                  "model-provider-protocol-response-policy.v1"
+                ]
+              },
+              "payload": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            },
+            "x-declared-intermediate-contracts": [
+              "model-provider-embodiment-resolution.v1",
+              "governed-provider-testimony.v1",
+              "model-provider-protocol-response-policy.v1"
+            ]
+          }
+        },
+        "model-provider-embodiment-resolution.v1": {
+          "schemaRef": "model-provider-embodiment-resolution.v1.schema.json",
+          "schemaId": "https://schemas.agentic-harness.local/model-provider-embodiment-resolution.v1.schema.json",
+          "schemaDigest": "a876f4fccca5cc36a825a5f62f4118da1f5158d80a1f838aa6eeef4c035f1594",
+          "schema": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "$id": "https://schemas.agentic-harness.local/model-provider-embodiment-resolution.v1.schema.json",
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "carrierType",
+              "requestId",
+              "requestHash",
+              "modelRequest",
+              "requestLineage",
+              "payload"
+            ],
+            "properties": {
+              "carrierType": {
+                "const": "governed-model-invocation-request.v1"
+              },
+              "requestId": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9.-]*$"
+              },
+              "requestHash": {
+                "type": "string",
+                "pattern": "^sha256:[a-f0-9]{64}$"
+              },
+              "modelRequest": {
+                "type": "object"
+              },
+              "providerConveyor": {
+                "type": "object"
+              },
+              "requestLineage": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "payload": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "resolutionStatus"
+                ],
+                "properties": {
+                  "resolutionStatus": {
+                    "enum": [
+                      "EMBODIMENT_AUTHORIZED",
+                      "SUBSTITUTION_NOT_AUTHORIZED",
+                      "ALIAS_REJECTED"
+                    ]
+                  },
+                  "resolvedProviderAuthorityId": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "resolvedModel": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "adapterIdentity": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "credentialReference": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "aliasResolutionLineage": {
+                    "type": "object",
+                    "additionalProperties": true
+                  },
+                  "rejectedAlias": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "rejectedProviderAuthority": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "model-provider-protocol-response-policy.v1": {
+          "schemaRef": "model-provider-protocol-response-policy.v1.schema.json",
+          "schemaId": "https://schemas.agentic-harness.local/model-provider-protocol-response-policy.v1.schema.json",
+          "schemaDigest": "ed9a3e663425c19f7bfbab95e0622602a3ee739d02f399f8ddff19eb530ad48e",
+          "schema": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "$id": "https://schemas.agentic-harness.local/model-provider-protocol-response-policy.v1.schema.json",
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "carrierType",
+              "requestId",
+              "requestHash",
+              "modelRequest",
+              "requestLineage",
+              "protocolResponsePolicy"
+            ],
+            "properties": {
+              "carrierType": {
+                "const": "governed-model-invocation-request.v1"
+              },
+              "requestId": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9.-]*$"
+              },
+              "requestHash": {
+                "type": "string",
+                "pattern": "^sha256:[a-f0-9]{64}$"
+              },
+              "modelRequest": {
+                "type": "object"
+              },
+              "providerConveyor": {
+                "type": "object"
+              },
+              "requestLineage": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "protocolResponsePolicy": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "format",
+                  "responseSchema",
+                  "schemaSourceConnector"
+                ],
+                "properties": {
+                  "format": {
+                    "enum": [
+                      "text",
+                      "json"
+                    ]
+                  },
+                  "responseSchema": {
+                    "type": [
+                      "object",
+                      "null"
+                    ]
+                  },
+                  "schemaSourceConnector": {
+                    "const": "modelRequest.responsePolicy.schema"
+                  }
+                }
+              },
+              "payload": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "admittedPlatformCapabilities": [
+      {
+        "capabilityId": "sda-node-consumer-runtime.v1",
+        "kind": "consumer-runtime",
+        "status": "ADMITTED",
+        "projectionTarget": "node",
+        "provider": "ScenarioKernel.NodePlatform",
+        "providesMechanics": [
+          "scenario-orchestration",
+          "contract-document-reading",
+          "canonicalization",
+          "schema-admission",
+          "authority-resolution",
+          "semantic-execution",
+          "telemetry-observation",
+          "scenario-invocation",
+          "transition-binding-projection",
+          "interface-delivery",
+          "runtime-projection",
+          "artifact-result-delivery",
+          "authority-driven-transformation",
+          "durable-artifact-materialization"
+        ],
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+      },
+      {
+        "capabilityId": "sda-json-cli.v1",
+        "kind": "interface-delivery",
+        "status": "ADMITTED",
+        "projectionTarget": "node",
+        "provider": "ScenarioKernel.NodePlatform.Interface.JsonCli",
+        "providesMechanics": [
+          "cli-delivery",
+          "json-reading",
+          "json-serialization"
+        ],
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+      },
+      {
+        "capabilityId": "sda-declarative-value-port.v1",
+        "kind": "event-port",
+        "status": "ADMITTED",
+        "projectionTarget": "node",
+        "provider": "ScenarioKernel.NodePlatform.Execution.DeclarativeValuePort",
+        "providesMechanics": [
+          "event-port-invocation"
+        ],
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+      },
+      {
+        "capabilityId": "sda-declarative-state-projection.v1",
+        "kind": "state-projection",
+        "status": "ADMITTED",
+        "projectionTarget": "node",
+        "provider": "ScenarioKernel.NodePlatform.Projection.DeclarativeStateProjection",
+        "providesMechanics": [
+          "state-projection"
+        ],
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+      },
+      {
+        "capabilityId": "sda-fixture-contract-validator.v1",
+        "kind": "contract-validator",
+        "status": "ADMITTED",
+        "projectionTarget": "node",
+        "provider": "ScenarioKernel.NodePlatform.Schema.FixtureContractValidator",
+        "providesMechanics": [
+          "contract-validation"
+        ],
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+      },
+      {
+        "capabilityId": "sda-schema-contract-admission.v1",
+        "kind": "contract-validator",
+        "status": "ADMITTED",
+        "projectionTarget": "node",
+        "provider": "ScenarioKernel.NodePlatform.Schema.JsonSchemaContractAdmission",
+        "providesMechanics": [
+          "contract-validation",
+          "schema-admission"
+        ],
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+      },
+      {
+        "capabilityId": "sda-authority-transformation-port.v1",
+        "kind": "event-port",
+        "status": "ADMITTED",
+        "projectionTarget": "node",
+        "provider": "ScenarioKernel.NodePlatform.Execution.AuthorityTransformation",
+        "providesMechanics": [
+          "event-port-invocation",
+          "authority-driven-transformation"
+        ],
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+      },
+      {
+        "capabilityId": "sda-json-authority-ingestion-port.v1",
+        "kind": "event-port",
+        "status": "ADMITTED",
+        "projectionTarget": "node",
+        "provider": "ScenarioKernel.NodePlatform.Ingestion.ProfileGovernedJsonAuthority",
+        "providesMechanics": [
+          "event-port-invocation",
+          "exact-byte-json-observation",
+          "duplicate-key-detecting-lossless-json-parsing",
+          "declared-json-schema-authority-resolution",
+          "admitted-json-reference-closure",
+          "content-addressed-json-ingestion-receipt"
+        ],
+        "implementationRef": "languages/typescript/runtimes/node/json-authority-ingestion-provider.mjs",
+        "conformanceRef": "tools/tests/conformance/json-authority-ingestion.test.js",
+        "providerAuthorityRef": "capabilities/sda-platform/bind-profile-governed-json-authority-ingestion/profile-governed-json-authority-ingestor.authority.json",
+        "providerAuthorityDigest": "sha256:c8ae8f56a11b3dc6cc7501edab37e589de3053edeff618c4e0f22f6e4c4e4a1f",
+        "conformanceDigest": "sha256:4cb6c54e165fcf0fe2d685946a50bc76b24f315580f42f470b1ca026add2bdfd"
+      },
+      {
+        "capabilityId": "sda-proof-binding-evaluation-port.v1",
+        "kind": "event-port",
+        "status": "ADMITTED",
+        "projectionTarget": "node",
+        "provider": "ScenarioKernel.NodePlatform.Evaluation.ProfileGovernedProofBinding",
+        "providesMechanics": [
+          "event-port-invocation",
+          "profile-governed-proof-binding-evaluation",
+          "ordered-proof-lineage-admission",
+          "prohibited-basis-rejection",
+          "stale-or-mixed-lineage-rejection",
+          "deterministic-reproduction-pinning",
+          "exactly-one-obligation-disposition"
+        ],
+        "implementationRef": "languages/typescript/runtimes/node/proof-binding-evaluation-provider.mjs",
+        "conformanceRef": "tools/tests/conformance/proof-binding-evaluation.test.js",
+        "providerAuthorityRef": "capabilities/sda-platform/bind-profile-governed-proof-binding-evaluation/profile-governed-proof-binding-evaluator.authority.json",
+        "providerAuthorityDigest": "sha256:0008ade2e1edb10fb04f0c7c288c0d85c13420c19998a88252d63eda585c6349",
+        "conformanceDigest": "sha256:22d2fd7cfacc2131626900fe80482b86cd7953ae2fcaaa447cfea7bdc02915f1"
+      },
+      {
+        "capabilityId": "sda-scenario-semantic-carrier-validation-port.v1",
+        "kind": "event-port",
+        "status": "ADMITTED",
+        "projectionTarget": "node",
+        "provider": "ScenarioKernel.NodePlatform.Validation.ScenarioSemanticCarrier",
+        "providesMechanics": [
+          "event-port-invocation",
+          "typescript-ast-literal-admission",
+          "hidden-executable-meaning-rejection",
+          "scenario-semantic-carrier-v2-schema-admission",
+          "managed-capability-carrier-v3-schema-admission",
+          "managed-authority-reference-closure",
+          "semantic-reference-closure",
+          "deterministic-finding-order",
+          "exact-validation-receipt"
+        ],
+        "implementationRef": "languages/typescript/runtimes/node/semantic-carrier-validator/index.mjs",
+        "conformanceRef": "tools/tests/conformance/scenario-semantic-carrier-validation.test.js",
+        "providerAuthorityRef": "capabilities/sda-platform/bind-scenario-semantic-carrier-validation/scenario-semantic-carrier-validator.authority.json",
+        "providerAuthorityDigest": "sha256:96b374c40dc4cb183a3e928acd209e0b6889e5166341f0caec8edd08a362b819",
+        "conformanceDigest": "sha256:2a517b1c8cd9cc2b8bd9afc62548cc6270c4b52156d4e9ab8712eb1f2e344a51"
+      },
+      {
+        "capabilityId": "sda-scenario-semantic-carrier-extraction-port.v1",
+        "kind": "event-port",
+        "status": "ADMITTED",
+        "projectionTarget": "node",
+        "provider": "ScenarioKernel.NodePlatform.Extraction.ScenarioSemanticCarrierGraph",
+        "providesMechanics": [
+          "event-port-invocation",
+          "v2-and-v3-validator-receipt-verification",
+          "same-carrier-binding",
+          "canonical-carrier-graph-construction",
+          "managed-v3-authority-preservation",
+          "deterministic-identity-and-relationship-ordering",
+          "canonical-graph-digest",
+          "carrier-blackout",
+          "exact-extraction-receipt"
+        ],
+        "implementationRef": "languages/typescript/runtimes/node/semantic-carrier-extractor-provider.mjs",
+        "conformanceRef": "tools/tests/conformance/scenario-semantic-carrier-extraction.test.js",
+        "providerAuthorityRef": "capabilities/sda-platform/bind-scenario-semantic-carrier-extraction/scenario-semantic-carrier-extractor.authority.json",
+        "providerAuthorityDigest": "sha256:aaa5ba504de4efc04ed802c729c66c74e9a1770edf2589a24701ecd11ba20a18",
+        "conformanceDigest": "sha256:cf0b5b2ad74c78310518d435d2dbc153de9207a99374663a0c7eb2a428f63433"
+      },
+      {
+        "capabilityId": "sda-scenario-semantic-carrier-evaluation-port.v1",
+        "kind": "event-port",
+        "status": "ADMITTED",
+        "projectionTarget": "node",
+        "provider": "ScenarioKernel.NodePlatform.Evaluation.ScenarioSemanticCarrierCompilationEvidence",
+        "providesMechanics": [
+          "event-port-invocation",
+          "complete-required-set",
+          "same-graph-lineage",
+          "independent-evidence-origin",
+          "ordered-findings",
+          "evaluation-disposition-classification",
+          "exact-evaluation-receipt"
+        ],
+        "implementationRef": "languages/typescript/runtimes/node/semantic-carrier-evaluator-provider.mjs",
+        "conformanceRef": "tools/tests/conformance/scenario-semantic-carrier-evaluation.test.js",
+        "providerAuthorityRef": "capabilities/sda-platform/bind-scenario-semantic-carrier-evaluation/scenario-semantic-carrier-evaluator.authority.json",
+        "providerAuthorityDigest": "sha256:88309aeb76c31c86452bdaeeaa009a15a3c70e4124d18a097587dbb154e33a00",
+        "conformanceDigest": "sha256:62d1242fb9562fbfc5e925147ce03677e93c6100aef64df7220c88329fadc318"
+      },
+      {
+        "capabilityId": "sda-semantic-vector-index.v1",
+        "kind": "event-port",
+        "status": "ADMITTED",
+        "projectionTarget": "node",
+        "provider": "ScenarioKernel.NodePlatform.Recall.DeterministicSemanticVectorIndex",
+        "providesMechanics": [
+          "event-port-invocation",
+          "deterministic-semantic-vector-projection",
+          "integer-overlap-similarity",
+          "provider-owned-ordering",
+          "novel-wording-recall"
+        ],
+        "implementationRef": "languages/typescript/runtimes/node/semantic-vector-index-provider.mjs",
+        "conformanceRef": "tools/tests/conformance/semantic-vector-index.test.js",
+        "providerAuthorityRef": "capabilities/sda-platform/bind-deterministic-semantic-vector-index/deterministic-semantic-vector-indexer.authority.json",
+        "providerAuthorityDigest": "sha256:af37a8c8a8678ced4c859ed8caa02b3feede2122e287839407ece25aed1a008b",
+        "conformanceDigest": "sha256:f9cdf606577b9daad47a8aa3d258bddb412c378af9d29a3fbc28fd21e729e87f"
+      },
+      {
+        "capabilityId": "sda-os-environment-credential-port.v1",
+        "kind": "event-port",
+        "status": "ADMITTED",
+        "projectionTarget": "node",
+        "provider": "ScenarioKernel.NodePlatform.Effects.OsEnvironmentCredentialBinding",
+        "providesMechanics": [
+          "event-port-invocation",
+          "fixed-order-os-environment-credential-resolution",
+          "opaque-effect-scoped-credential-binding",
+          "secret-non-disclosure"
+        ],
+        "implementationRef": "languages/typescript/runtimes/node/os-environment-credential-provider.mjs",
+        "conformanceRef": "tools/tests/conformance/os-environment-credential.test.js",
+        "providerAuthorityRef": "capabilities/sda-platform/verify-os-environment-credential-conformance/conformance/os-environment-credential-conformance.v1.json",
+        "providerAuthorityDigest": "sha256:18fd84451cc39df955bcb89cc06e32d49b1f13c01cfa241d127e516c802940d5",
+        "conformanceDigest": "sha256:f5745c66095ec069dffb5f93810ba21ebb1ca1ca5db81479a614a73d48b53421"
+      },
+      {
+        "capabilityId": "sda-authority-state-projection.v1",
+        "kind": "state-projection",
+        "status": "ADMITTED",
+        "projectionTarget": "node",
+        "provider": "ScenarioKernel.NodePlatform.Projection.AuthorityTransformation",
+        "providesMechanics": [
+          "state-projection",
+          "transition-binding-projection"
+        ],
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+      },
+      {
+        "capabilityId": "sda-filesystem-artifact-store.v1",
+        "kind": "event-port",
+        "status": "ADMITTED",
+        "projectionTarget": "node",
+        "provider": "ScenarioKernel.NodePlatform.Delivery.AtomicFilesystemArtifactStore",
+        "providesMechanics": [
+          "event-port-invocation",
+          "durable-artifact-materialization"
+        ],
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+      },
+      {
+        "capabilityId": "sda-external-observation-port.v1",
+        "kind": "event-port",
+        "status": "ADMITTED",
+        "projectionTarget": "node",
+        "provider": "ScenarioKernel.NodePlatform.Observation.HttpExternalObservationProvider",
+        "providesMechanics": [
+          "event-port-invocation",
+          "external-representation-observation"
+        ],
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "languages/typescript/runtimes/node/external-observation-port.conformance.test.mjs"
+      },
+      {
+        "capabilityId": "sda-external-credential-reference-binding-port.v1",
+        "kind": "event-port",
+        "status": "ADMITTED",
+        "projectionTarget": "node",
+        "provider": "ScenarioKernel.NodePlatform.Effects.ExternalCredentialReferenceBinding",
+        "providesMechanics": [
+          "event-port-invocation",
+          "external-credential-reference-binding",
+          "one-use-opaque-credential-handle",
+          "secret-non-disclosure"
+        ],
+        "implementationRef": "languages/typescript/runtimes/node/external-credential-reference-binding-provider.mjs",
+        "conformanceRef": "languages/typescript/runtimes/node/governed-http-effect-ports.conformance.test.mjs"
+      },
+      {
+        "capabilityId": "sda-governed-http-exchange-port.v1",
+        "kind": "event-port",
+        "status": "ADMITTED",
+        "projectionTarget": "node",
+        "provider": "ScenarioKernel.NodePlatform.Effects.GovernedHttpExchange",
+        "providesMechanics": [
+          "event-port-invocation",
+          "single-governed-http-exchange",
+          "bounded-response-observation",
+          "credential-injection-without-disclosure"
+        ],
+        "implementationRef": "languages/typescript/runtimes/node/governed-http-exchange-provider.mjs",
+        "conformanceRef": "languages/typescript/runtimes/node/governed-http-effect-ports.conformance.test.mjs"
+      },
+      {
+        "capabilityId": "sda-governed-repository-observation-port.v1",
+        "kind": "event-port",
+        "status": "ADMITTED",
+        "projectionTarget": "node",
+        "provider": "ScenarioKernel.NodePlatform.Observation.GovernedRepository",
+        "providesMechanics": [
+          "event-port-invocation",
+          "governed-repository-observation",
+          "physical-byte-length-observation"
+        ],
+        "implementationRef": "languages/typescript/runtimes/node/governed-repository-observation-provider.mjs",
+        "conformanceRef": "languages/typescript/runtimes/node/governed-repository-observation-port.conformance.test.mjs"
+      },
+      {
+        "capabilityId": "sda-governed-external-root-observation-port.v1",
+        "kind": "event-port",
+        "status": "ADMITTED",
+        "projectionTarget": "node",
+        "provider": "ScenarioKernel.NodePlatform.Observation.GovernedExternalRoot",
+        "providesMechanics": [
+          "event-port-invocation",
+          "caller-authorized-external-root",
+          "bounded-declared-resource-observation",
+          "exact-byte-and-digest-observation",
+          "file-and-directory-presence-observation",
+          "symbolic-link-rejection",
+          "effect-lineage"
+        ],
+        "implementationRef": "languages/typescript/runtimes/node/governed-external-root-observation-provider.mjs",
+        "conformanceRef": "languages/typescript/runtimes/node/governed-external-root-observation-port.conformance.test.mjs"
+      },
+      {
+        "capabilityId": "sda-generic-llm-connector-port.v1",
+        "kind": "event-port",
+        "status": "ADMITTED",
+        "projectionTarget": "node",
+        "provider": "ScenarioKernel.NodePlatform.Cognition.GenericLlmConnector",
+        "providesMechanics": [
+          "event-port-invocation",
+          "governed-model-invocation",
+          "external-credential-reference",
+          "model-execution-lineage"
+        ],
+        "implementationRef": "languages/typescript/runtimes/node/generic-llm-connector-provider.mjs",
+        "conformanceRef": "languages/typescript/runtimes/node/generic-llm-connector-port.conformance.test.mjs"
+      },
+      {
+        "capabilityId": "sda-semantic-execution-graph-compilation-port.v1",
+        "kind": "event-port",
+        "status": "ADMITTED",
+        "projectionTarget": "node",
+        "provider": "ScenarioKernel.NodePlatform.Execution.SemanticExecutionGraphCompilation",
+        "providesMechanics": [
+          "event-port-invocation",
+          "authority-driven-transformation",
+          "semantic-execution-graph-compilation",
+          "canonical-topology-normalization",
+          "source-lineage-publication"
+        ],
+        "implementationRef": "languages/typescript/runtimes/node/semantic-execution-graph-compilation-provider.mjs",
+        "conformanceRef": "tools/tests/semantic-execution-graph.test.js"
+      },
+      {
+        "capabilityId": "sda-governed-tooling-binding-transaction-port.v1",
+        "kind": "event-port",
+        "status": "ADMITTED",
+        "projectionTarget": "node",
+        "provider": "ScenarioKernel.NodePlatform.Effects.GovernedToolingBindingTransaction",
+        "providesMechanics": [
+          "event-port-invocation",
+          "governed-binding-transaction",
+          "exact-byte-rollback",
+          "gate-execution-lineage"
+        ],
+        "implementationRef": "languages/typescript/runtimes/node/governed-tooling-binding-transaction-provider.mjs",
+        "conformanceRef": "languages/typescript/runtimes/node/governed-tooling-binding-transaction-port.conformance.test.mjs"
+      },
+      {
+        "capabilityId": "sda-governed-tooling-migration-operation-port.v1",
+        "kind": "event-port",
+        "status": "ADMITTED",
+        "projectionTarget": "node",
+        "provider": "ScenarioKernel.NodePlatform.Effects.GovernedToolingMigrationOperation",
+        "providesMechanics": [
+          "event-port-invocation",
+          "governed-tooling-migration-operation",
+          "effect-lineage"
+        ],
+        "implementationRef": "languages/typescript/runtimes/node/governed-tooling-migration-operation-provider.mjs",
+        "conformanceRef": "languages/typescript/runtimes/node/governed-tooling-migration-operation-port.conformance.test.mjs"
+      },
+      {
+        "capabilityId": "sda-governed-file-system-shaping-port.v2",
+        "kind": "event-port",
+        "status": "ADMITTED",
+        "projectionTarget": "node",
+        "provider": "ScenarioKernel.NodePlatform.Effects.GovernedFileSystemShaping",
+        "providesMechanics": [
+          "event-port-invocation",
+          "bounded-file-system-path-resolution",
+          "bounded-file-system-fact-observation",
+          "authorized-file-system-plan-execution",
+          "effect-lineage"
+        ],
+        "implementationRef": "languages/typescript/runtimes/node/governed-file-system-shaping-provider.mjs",
+        "conformanceRef": "languages/typescript/runtimes/node/governed-file-system-shaping-port.conformance.test.mjs"
+      },
+      {
+        "capabilityId": "sda-governed-external-root-batch-materialization-port.v1",
+        "kind": "event-port",
+        "status": "ADMITTED",
+        "projectionTarget": "node",
+        "provider": "ScenarioKernel.NodePlatform.Effects.GovernedExternalRootBatchMaterialization",
+        "providesMechanics": [
+          "event-port-invocation",
+          "caller-authorized-external-root",
+          "content-addressed-batch-materialization",
+          "byte-exact-base64-decoding",
+          "target-collision-and-existence-policy",
+          "post-effect-digest-proof",
+          "effect-lineage"
+        ],
+        "implementationRef": "languages/typescript/runtimes/node/governed-external-root-batch-materialization-provider.mjs",
+        "conformanceRef": "languages/typescript/runtimes/node/governed-external-root-batch-materialization-port.conformance.test.mjs"
+      },
+      {
+        "capabilityId": "sda-bounded-base64-byte-digest-port.v1",
+        "kind": "event-port",
+        "status": "ADMITTED",
+        "projectionTarget": "node",
+        "provider": "ScenarioKernel.NodePlatform.Representation.BoundedBase64ByteDigest",
+        "providesMechanics": [
+          "event-port-invocation",
+          "canonical-base64-admission",
+          "exact-byte-sha256",
+          "declared-digest-comparison",
+          "bounded-representation-observation"
+        ],
+        "implementationRef": "languages/typescript/runtimes/node/bounded-base64-byte-digest-provider.mjs",
+        "conformanceRef": "languages/typescript/runtimes/node/bounded-base64-byte-digest-port.conformance.test.mjs"
+      },
+      {
+        "capabilityId": "sda-governed-external-root-projected-application-execution-port.v1",
+        "kind": "event-port",
+        "status": "ADMITTED",
+        "projectionTarget": "node",
+        "provider": "ScenarioKernel.NodePlatform.Execution.GovernedExternalRootProjectedApplication",
+        "providesMechanics": [
+          "event-port-invocation",
+          "caller-authorized-external-root",
+          "digest-bound-projected-application-invocation",
+          "bounded-projected-fixture-execution",
+          "nested-execution-lineage"
+        ],
+        "implementationRef": "languages/typescript/runtimes/node/node-mechanic-registry-loader.mjs",
+        "conformanceRef": "languages/typescript/runtimes/node/governed-external-root-projected-application-execution-port.conformance.test.mjs"
+      },
+      {
+        "capabilityId": "sda-governed-external-root-consumer-projection-port.v1",
+        "kind": "event-port",
+        "status": "ADMITTED",
+        "projectionTarget": "node",
+        "provider": "ScenarioKernel.NodePlatform.Projection.GovernedExternalRootConsumerProjection",
+        "providesMechanics": [
+          "event-port-invocation",
+          "caller-authorized-external-root",
+          "digest-bound-consumer-projection",
+          "consumer-projection-publication",
+          "projection-effect-lineage"
+        ],
+        "implementationRef": "languages/typescript/runtimes/node/governed-external-root-consumer-projection-provider.mjs",
+        "conformanceRef": "languages/typescript/runtimes/node/governed-external-root-consumer-projection-port.conformance.test.mjs"
+      },
+      {
+        "capabilityId": "sda-governed-disposable-root-lifecycle-port.v1",
+        "kind": "event-port",
+        "status": "ADMITTED",
+        "projectionTarget": "node",
+        "provider": "ScenarioKernel.NodePlatform.Effects.GovernedDisposableRootLifecycle",
+        "providesMechanics": [
+          "event-port-invocation",
+          "caller-authorized-disposable-parent-root",
+          "ownership-marked-root-allocation",
+          "marker-bound-root-release",
+          "symbolic-link-rejection",
+          "post-effect-absence-proof",
+          "effect-lineage"
+        ],
+        "implementationRef": "languages/typescript/runtimes/node/governed-disposable-root-lifecycle-provider.mjs",
+        "conformanceRef": "languages/typescript/runtimes/node/governed-disposable-root-lifecycle-port.conformance.test.mjs"
+      },
+      {
+        "capabilityId": "sda-governed-target-execution-observation-port.v1",
+        "kind": "event-port",
+        "status": "ADMITTED",
+        "projectionTarget": "node",
+        "provider": "ScenarioKernel.NodePlatform.Observation.GovernedTargetExecution",
+        "providesMechanics": [
+          "event-port-invocation",
+          "governed-target-execution-observation"
+        ],
+        "implementationRef": "languages/typescript/runtimes/node/governed-target-execution-observation-provider.mjs",
+        "conformanceRef": "languages/typescript/runtimes/node/governed-target-execution-observation-port.conformance.test.mjs"
+      },
+      {
+        "capabilityId": "sda-canonical-capability-feature-resolution-port.v1",
+        "kind": "event-port",
+        "status": "ADMITTED",
+        "projectionTarget": "node",
+        "provider": "ScenarioKernel.NodePlatform.Observation.CanonicalCapabilityFeatureResolution",
+        "providesMechanics": [
+          "event-port-invocation",
+          "governed-feature-reference-resolution",
+          "canonical-feature-byte-observation",
+          "canonical-root-identity-resolution"
+        ],
+        "implementationRef": "languages/typescript/runtimes/node/canonical-capability-feature-resolution-provider.mjs",
+        "conformanceRef": "languages/typescript/runtimes/node/canonical-capability-feature-resolution-port.conformance.test.mjs"
+      },
+      {
+        "capabilityId": "sda-projected-capability-invocation-port.v1",
+        "kind": "event-port",
+        "status": "ADMITTED",
+        "projectionTarget": "node",
+        "provider": "ScenarioKernel.NodePlatform.Execution.ProjectedCapabilityInvocation",
+        "providesMechanics": [
+          "event-port-invocation",
+          "projected-capability-invocation"
+        ],
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "languages/typescript/runtimes/node/projected-capability-invocation-port.conformance.test.mjs"
+      },
+      {
+        "capabilityId": "sda-projected-capability-invocation-port.v2",
+        "kind": "event-port",
+        "status": "ADMITTED",
+        "projectionTarget": "node",
+        "provider": "ScenarioKernel.NodePlatform.Execution.ProjectedCapabilityInvocationAndBinding",
+        "providesMechanics": [
+          "event-port-invocation",
+          "projected-capability-invocation",
+          "parent-carrier-preservation",
+          "nested-execution-lineage",
+          "pinned-capability-binding"
+        ],
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "languages/typescript/runtimes/node/projected-capability-invocation-port.conformance.test.mjs"
+      },
+      {
+        "capabilityId": "sda-governed-serial-execution-port.v1",
+        "kind": "event-port",
+        "status": "ADMITTED",
+        "projectionTarget": "node",
+        "provider": "ScenarioKernel.NodePlatform.Execution.GovernedSerialExecution",
+        "providesMechanics": [
+          "event-port-invocation",
+          "bounded-ordered-transaction-execution",
+          "projected-capability-invocation",
+          "nested-execution-lineage",
+          "continuation-authority-consultation"
+        ],
+        "implementationRef": "languages/typescript/runtimes/node/governed-serial-execution-provider.mjs",
+        "conformanceRef": "languages/typescript/runtimes/node/governed-serial-execution-port.conformance.test.mjs"
+      },
+      {
+        "capabilityId": "sda-json-query-cli.v1",
+        "kind": "interface-delivery",
+        "status": "ADMITTED",
+        "projectionTarget": "node",
+        "provider": "ScenarioKernel.NodePlatform.Interface.JsonQueryCli",
+        "providesMechanics": [
+          "query-cli-delivery",
+          "declared-query-evaluation",
+          "json-reading",
+          "json-serialization"
+        ],
+        "implementationRef": "languages/typescript/runtimes/node/query-cli.mjs",
+        "conformanceRef": "languages/typescript/runtimes/node/query-cli.conformance.test.mjs"
+      }
+    ]
+  },
+  "expectedTelemetry": {
+    "traceType": "projected-expected-consumer-trace.v1",
+    "telemetryId": "consumer-scenario-execution-telemetry",
+    "capabilityId": "obtain-governed-model-response",
+    "rootScenarioId": "obtain-governed-model-response",
+    "observationType": "scenario-execution-observation.v1",
+    "lineageFields": [
+      "executionId",
+      "rootExecutionId",
+      "parentExecutionId",
+      "scenarioId"
+    ],
+    "scenarios": [
+      {
+        "scenarioId": "obtain-governed-model-response",
+        "steps": [
+          "admit-input",
+          "resolve-event-authority",
+          "execute-event-authority",
+          "admit-outcome",
+          "resolve-disposition"
+        ],
+        "expectedTransitionId": null
+      },
+      {
+        "scenarioId": "resolve-model-alias-embodiment",
+        "steps": [
+          "admit-input",
+          "resolve-event-authority",
+          "execute-event-authority",
+          "admit-outcome",
+          "resolve-disposition"
+        ],
+        "expectedTransitionId": null
+      },
+      {
+        "scenarioId": "project-model-response-policy-to-provider-protocol",
+        "steps": [
+          "admit-input",
+          "resolve-event-authority",
+          "execute-event-authority",
+          "admit-outcome",
+          "resolve-disposition"
+        ],
+        "expectedTransitionId": null
+      },
+      {
+        "scenarioId": "obtain-governed-provider-testimony",
+        "steps": [
+          "admit-input",
+          "resolve-event-authority",
+          "execute-event-authority",
+          "admit-outcome",
+          "resolve-disposition"
+        ],
+        "expectedTransitionId": null
+      },
+      {
+        "scenarioId": "establish-governed-model-response-evidence",
+        "steps": [
+          "admit-input",
+          "resolve-event-authority",
+          "execute-event-authority",
+          "admit-outcome",
+          "resolve-disposition"
+        ],
+        "expectedTransitionId": null
+      }
+    ]
+  },
+  "mechanicResolution": {
+    "resolutionType": "consumer-platform-mechanic-resolution.v1",
+    "projectionTarget": "node",
+    "requirements": [
+      {
+        "mechanicId": "contract-document-reading",
+        "capabilityKind": "consumer-runtime",
+        "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1"
+      },
+      {
+        "mechanicId": "canonicalization",
+        "capabilityKind": "consumer-runtime",
+        "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1"
+      },
+      {
+        "mechanicId": "schema-admission",
+        "capabilityKind": "consumer-runtime",
+        "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1"
+      },
+      {
+        "mechanicId": "authority-resolution",
+        "capabilityKind": "consumer-runtime",
+        "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1"
+      },
+      {
+        "mechanicId": "semantic-execution",
+        "capabilityKind": "consumer-runtime",
+        "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1"
+      },
+      {
+        "mechanicId": "telemetry-observation",
+        "capabilityKind": "consumer-runtime",
+        "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1"
+      },
+      {
+        "mechanicId": "scenario-invocation",
+        "capabilityKind": "consumer-runtime",
+        "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1"
+      },
+      {
+        "mechanicId": "transition-binding-projection",
+        "capabilityKind": "consumer-runtime",
+        "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1"
+      },
+      {
+        "mechanicId": "interface-delivery",
+        "capabilityKind": "consumer-runtime",
+        "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1"
+      },
+      {
+        "mechanicId": "runtime-projection",
+        "capabilityKind": "consumer-runtime",
+        "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1"
+      },
+      {
+        "mechanicId": "artifact-result-delivery",
+        "capabilityKind": "consumer-runtime",
+        "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1"
+      },
+      {
+        "mechanicId": "authority-driven-transformation",
+        "capabilityKind": "consumer-runtime",
+        "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1"
+      },
+      {
+        "mechanicId": "durable-artifact-materialization",
+        "capabilityKind": "consumer-runtime",
+        "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1"
+      },
+      {
+        "mechanicId": "contract-validation",
+        "capabilityKind": "contract-validator",
+        "requiredBy": "scenario-contract-admission",
+        "requestedCapabilityId": "sda-schema-contract-admission.v1"
+      },
+      {
+        "mechanicId": "cli-delivery",
+        "capabilityKind": "interface-delivery",
+        "requiredBy": "interface:obtain-governed-model-response-cli",
+        "requestedCapabilityId": "sda-json-cli.v1"
+      },
+      {
+        "mechanicId": "json-reading",
+        "capabilityKind": "interface-delivery",
+        "requiredBy": "interface:obtain-governed-model-response-cli",
+        "requestedCapabilityId": "sda-json-cli.v1"
+      },
+      {
+        "mechanicId": "json-serialization",
+        "capabilityKind": "interface-delivery",
+        "requiredBy": "interface:obtain-governed-model-response-cli",
+        "requestedCapabilityId": "sda-json-cli.v1"
+      },
+      {
+        "mechanicId": "event-port-invocation",
+        "capabilityKind": "event-port",
+        "requiredBy": "port:resolve-model-alias-embodiment-port",
+        "requestedCapabilityId": "sda-authority-transformation-port.v1"
+      },
+      {
+        "mechanicId": "event-port-invocation",
+        "capabilityKind": "event-port",
+        "requiredBy": "port:project-model-response-policy-to-provider-protocol-port",
+        "requestedCapabilityId": "sda-authority-transformation-port.v1"
+      },
+      {
+        "mechanicId": "event-port-invocation",
+        "capabilityKind": "event-port",
+        "requiredBy": "port:obtain-governed-provider-testimony-port",
+        "requestedCapabilityId": "sda-authority-transformation-port.v1"
+      },
+      {
+        "mechanicId": "event-port-invocation",
+        "capabilityKind": "event-port",
+        "requiredBy": "port:establish-governed-model-response-evidence-port",
+        "requestedCapabilityId": "sda-authority-transformation-port.v1"
+      },
+      {
+        "mechanicId": "event-port-invocation",
+        "capabilityKind": "event-port",
+        "requiredBy": "port:initialize-model-provider-conveyor-port",
+        "requestedCapabilityId": "sda-authority-transformation-port.v1"
+      },
+      {
+        "mechanicId": "event-port-invocation",
+        "capabilityKind": "event-port",
+        "requiredBy": "port:stage-os-credential-bind-request-port",
+        "requestedCapabilityId": "sda-authority-transformation-port.v1"
+      },
+      {
+        "mechanicId": "event-port-invocation",
+        "capabilityKind": "event-port",
+        "requiredBy": "port:bind-gemini-os-credential-port",
+        "requestedCapabilityId": "sda-projected-capability-invocation-port.v2"
+      },
+      {
+        "mechanicId": "event-port-invocation",
+        "capabilityKind": "event-port",
+        "requiredBy": "port:bind-openai-os-credential-port",
+        "requestedCapabilityId": "sda-projected-capability-invocation-port.v2"
+      },
+      {
+        "mechanicId": "event-port-invocation",
+        "capabilityKind": "event-port",
+        "requiredBy": "port:construct-projected-model-invocation-port",
+        "requestedCapabilityId": "sda-authority-transformation-port.v1"
+      },
+      {
+        "mechanicId": "event-port-invocation",
+        "capabilityKind": "event-port",
+        "requiredBy": "port:obtain-governed-model-response-port",
+        "requestedCapabilityId": "sda-projected-capability-invocation-port.v2"
+      },
+      {
+        "mechanicId": "event-port-invocation",
+        "capabilityKind": "event-port",
+        "requiredBy": "port:determine-model-provider-fallback-port",
+        "requestedCapabilityId": "sda-authority-transformation-port.v1"
+      },
+      {
+        "mechanicId": "event-port-invocation",
+        "capabilityKind": "event-port",
+        "requiredBy": "port:obtain-fallback-model-response-port",
+        "requestedCapabilityId": "sda-projected-capability-invocation-port.v2"
+      },
+      {
+        "mechanicId": "event-port-invocation",
+        "capabilityKind": "event-port",
+        "requiredBy": "port:select-model-provider-conveyor-evidence-port",
+        "requestedCapabilityId": "sda-authority-transformation-port.v1"
+      },
+      {
+        "mechanicId": "event-port-invocation",
+        "capabilityKind": "event-port",
+        "requiredBy": "port:normalize-projected-model-response-port",
+        "requestedCapabilityId": "sda-authority-transformation-port.v1"
+      }
+    ],
+    "resolutions": [
+      {
+        "mechanicId": "contract-document-reading",
+        "capabilityKind": "consumer-runtime",
+        "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
+        "status": "AVAILABLE",
+        "capabilityId": "sda-node-consumer-runtime.v1",
+        "provider": "ScenarioKernel.NodePlatform",
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+      },
+      {
+        "mechanicId": "canonicalization",
+        "capabilityKind": "consumer-runtime",
+        "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
+        "status": "AVAILABLE",
+        "capabilityId": "sda-node-consumer-runtime.v1",
+        "provider": "ScenarioKernel.NodePlatform",
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+      },
+      {
+        "mechanicId": "schema-admission",
+        "capabilityKind": "consumer-runtime",
+        "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
+        "status": "AVAILABLE",
+        "capabilityId": "sda-node-consumer-runtime.v1",
+        "provider": "ScenarioKernel.NodePlatform",
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+      },
+      {
+        "mechanicId": "authority-resolution",
+        "capabilityKind": "consumer-runtime",
+        "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
+        "status": "AVAILABLE",
+        "capabilityId": "sda-node-consumer-runtime.v1",
+        "provider": "ScenarioKernel.NodePlatform",
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+      },
+      {
+        "mechanicId": "semantic-execution",
+        "capabilityKind": "consumer-runtime",
+        "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
+        "status": "AVAILABLE",
+        "capabilityId": "sda-node-consumer-runtime.v1",
+        "provider": "ScenarioKernel.NodePlatform",
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+      },
+      {
+        "mechanicId": "telemetry-observation",
+        "capabilityKind": "consumer-runtime",
+        "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
+        "status": "AVAILABLE",
+        "capabilityId": "sda-node-consumer-runtime.v1",
+        "provider": "ScenarioKernel.NodePlatform",
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+      },
+      {
+        "mechanicId": "scenario-invocation",
+        "capabilityKind": "consumer-runtime",
+        "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
+        "status": "AVAILABLE",
+        "capabilityId": "sda-node-consumer-runtime.v1",
+        "provider": "ScenarioKernel.NodePlatform",
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+      },
+      {
+        "mechanicId": "transition-binding-projection",
+        "capabilityKind": "consumer-runtime",
+        "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
+        "status": "AVAILABLE",
+        "capabilityId": "sda-node-consumer-runtime.v1",
+        "provider": "ScenarioKernel.NodePlatform",
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+      },
+      {
+        "mechanicId": "interface-delivery",
+        "capabilityKind": "consumer-runtime",
+        "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
+        "status": "AVAILABLE",
+        "capabilityId": "sda-node-consumer-runtime.v1",
+        "provider": "ScenarioKernel.NodePlatform",
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+      },
+      {
+        "mechanicId": "runtime-projection",
+        "capabilityKind": "consumer-runtime",
+        "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
+        "status": "AVAILABLE",
+        "capabilityId": "sda-node-consumer-runtime.v1",
+        "provider": "ScenarioKernel.NodePlatform",
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+      },
+      {
+        "mechanicId": "artifact-result-delivery",
+        "capabilityKind": "consumer-runtime",
+        "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
+        "status": "AVAILABLE",
+        "capabilityId": "sda-node-consumer-runtime.v1",
+        "provider": "ScenarioKernel.NodePlatform",
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+      },
+      {
+        "mechanicId": "authority-driven-transformation",
+        "capabilityKind": "consumer-runtime",
+        "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
+        "status": "AVAILABLE",
+        "capabilityId": "sda-node-consumer-runtime.v1",
+        "provider": "ScenarioKernel.NodePlatform",
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+      },
+      {
+        "mechanicId": "durable-artifact-materialization",
+        "capabilityKind": "consumer-runtime",
+        "requiredBy": "mandatory-profile:sda-consumer-mandatory-mechanics.v1",
+        "status": "AVAILABLE",
+        "capabilityId": "sda-node-consumer-runtime.v1",
+        "provider": "ScenarioKernel.NodePlatform",
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+      },
+      {
+        "mechanicId": "contract-validation",
+        "capabilityKind": "contract-validator",
+        "requiredBy": "scenario-contract-admission",
+        "requestedCapabilityId": "sda-schema-contract-admission.v1",
+        "status": "AVAILABLE",
+        "capabilityId": "sda-schema-contract-admission.v1",
+        "provider": "ScenarioKernel.NodePlatform.Schema.JsonSchemaContractAdmission",
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+      },
+      {
+        "mechanicId": "cli-delivery",
+        "capabilityKind": "interface-delivery",
+        "requiredBy": "interface:obtain-governed-model-response-cli",
+        "requestedCapabilityId": "sda-json-cli.v1",
+        "status": "AVAILABLE",
+        "capabilityId": "sda-json-cli.v1",
+        "provider": "ScenarioKernel.NodePlatform.Interface.JsonCli",
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+      },
+      {
+        "mechanicId": "json-reading",
+        "capabilityKind": "interface-delivery",
+        "requiredBy": "interface:obtain-governed-model-response-cli",
+        "requestedCapabilityId": "sda-json-cli.v1",
+        "status": "AVAILABLE",
+        "capabilityId": "sda-json-cli.v1",
+        "provider": "ScenarioKernel.NodePlatform.Interface.JsonCli",
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+      },
+      {
+        "mechanicId": "json-serialization",
+        "capabilityKind": "interface-delivery",
+        "requiredBy": "interface:obtain-governed-model-response-cli",
+        "requestedCapabilityId": "sda-json-cli.v1",
+        "status": "AVAILABLE",
+        "capabilityId": "sda-json-cli.v1",
+        "provider": "ScenarioKernel.NodePlatform.Interface.JsonCli",
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+      },
+      {
+        "mechanicId": "event-port-invocation",
+        "capabilityKind": "event-port",
+        "requiredBy": "port:resolve-model-alias-embodiment-port",
+        "requestedCapabilityId": "sda-authority-transformation-port.v1",
+        "status": "AVAILABLE",
+        "capabilityId": "sda-authority-transformation-port.v1",
+        "provider": "ScenarioKernel.NodePlatform.Execution.AuthorityTransformation",
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+      },
+      {
+        "mechanicId": "event-port-invocation",
+        "capabilityKind": "event-port",
+        "requiredBy": "port:project-model-response-policy-to-provider-protocol-port",
+        "requestedCapabilityId": "sda-authority-transformation-port.v1",
+        "status": "AVAILABLE",
+        "capabilityId": "sda-authority-transformation-port.v1",
+        "provider": "ScenarioKernel.NodePlatform.Execution.AuthorityTransformation",
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+      },
+      {
+        "mechanicId": "event-port-invocation",
+        "capabilityKind": "event-port",
+        "requiredBy": "port:obtain-governed-provider-testimony-port",
+        "requestedCapabilityId": "sda-authority-transformation-port.v1",
+        "status": "AVAILABLE",
+        "capabilityId": "sda-authority-transformation-port.v1",
+        "provider": "ScenarioKernel.NodePlatform.Execution.AuthorityTransformation",
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+      },
+      {
+        "mechanicId": "event-port-invocation",
+        "capabilityKind": "event-port",
+        "requiredBy": "port:establish-governed-model-response-evidence-port",
+        "requestedCapabilityId": "sda-authority-transformation-port.v1",
+        "status": "AVAILABLE",
+        "capabilityId": "sda-authority-transformation-port.v1",
+        "provider": "ScenarioKernel.NodePlatform.Execution.AuthorityTransformation",
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+      },
+      {
+        "mechanicId": "event-port-invocation",
+        "capabilityKind": "event-port",
+        "requiredBy": "port:initialize-model-provider-conveyor-port",
+        "requestedCapabilityId": "sda-authority-transformation-port.v1",
+        "status": "AVAILABLE",
+        "capabilityId": "sda-authority-transformation-port.v1",
+        "provider": "ScenarioKernel.NodePlatform.Execution.AuthorityTransformation",
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+      },
+      {
+        "mechanicId": "event-port-invocation",
+        "capabilityKind": "event-port",
+        "requiredBy": "port:stage-os-credential-bind-request-port",
+        "requestedCapabilityId": "sda-authority-transformation-port.v1",
+        "status": "AVAILABLE",
+        "capabilityId": "sda-authority-transformation-port.v1",
+        "provider": "ScenarioKernel.NodePlatform.Execution.AuthorityTransformation",
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+      },
+      {
+        "mechanicId": "event-port-invocation",
+        "capabilityKind": "event-port",
+        "requiredBy": "port:bind-gemini-os-credential-port",
+        "requestedCapabilityId": "sda-projected-capability-invocation-port.v2",
+        "status": "AVAILABLE",
+        "capabilityId": "sda-projected-capability-invocation-port.v2",
+        "provider": "ScenarioKernel.NodePlatform.Execution.ProjectedCapabilityInvocationAndBinding",
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "languages/typescript/runtimes/node/projected-capability-invocation-port.conformance.test.mjs"
+      },
+      {
+        "mechanicId": "event-port-invocation",
+        "capabilityKind": "event-port",
+        "requiredBy": "port:bind-openai-os-credential-port",
+        "requestedCapabilityId": "sda-projected-capability-invocation-port.v2",
+        "status": "AVAILABLE",
+        "capabilityId": "sda-projected-capability-invocation-port.v2",
+        "provider": "ScenarioKernel.NodePlatform.Execution.ProjectedCapabilityInvocationAndBinding",
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "languages/typescript/runtimes/node/projected-capability-invocation-port.conformance.test.mjs"
+      },
+      {
+        "mechanicId": "event-port-invocation",
+        "capabilityKind": "event-port",
+        "requiredBy": "port:construct-projected-model-invocation-port",
+        "requestedCapabilityId": "sda-authority-transformation-port.v1",
+        "status": "AVAILABLE",
+        "capabilityId": "sda-authority-transformation-port.v1",
+        "provider": "ScenarioKernel.NodePlatform.Execution.AuthorityTransformation",
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+      },
+      {
+        "mechanicId": "event-port-invocation",
+        "capabilityKind": "event-port",
+        "requiredBy": "port:obtain-governed-model-response-port",
+        "requestedCapabilityId": "sda-projected-capability-invocation-port.v2",
+        "status": "AVAILABLE",
+        "capabilityId": "sda-projected-capability-invocation-port.v2",
+        "provider": "ScenarioKernel.NodePlatform.Execution.ProjectedCapabilityInvocationAndBinding",
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "languages/typescript/runtimes/node/projected-capability-invocation-port.conformance.test.mjs"
+      },
+      {
+        "mechanicId": "event-port-invocation",
+        "capabilityKind": "event-port",
+        "requiredBy": "port:determine-model-provider-fallback-port",
+        "requestedCapabilityId": "sda-authority-transformation-port.v1",
+        "status": "AVAILABLE",
+        "capabilityId": "sda-authority-transformation-port.v1",
+        "provider": "ScenarioKernel.NodePlatform.Execution.AuthorityTransformation",
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+      },
+      {
+        "mechanicId": "event-port-invocation",
+        "capabilityKind": "event-port",
+        "requiredBy": "port:obtain-fallback-model-response-port",
+        "requestedCapabilityId": "sda-projected-capability-invocation-port.v2",
+        "status": "AVAILABLE",
+        "capabilityId": "sda-projected-capability-invocation-port.v2",
+        "provider": "ScenarioKernel.NodePlatform.Execution.ProjectedCapabilityInvocationAndBinding",
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "languages/typescript/runtimes/node/projected-capability-invocation-port.conformance.test.mjs"
+      },
+      {
+        "mechanicId": "event-port-invocation",
+        "capabilityKind": "event-port",
+        "requiredBy": "port:select-model-provider-conveyor-evidence-port",
+        "requestedCapabilityId": "sda-authority-transformation-port.v1",
+        "status": "AVAILABLE",
+        "capabilityId": "sda-authority-transformation-port.v1",
+        "provider": "ScenarioKernel.NodePlatform.Execution.AuthorityTransformation",
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+      },
+      {
+        "mechanicId": "event-port-invocation",
+        "capabilityKind": "event-port",
+        "requiredBy": "port:normalize-projected-model-response-port",
+        "requestedCapabilityId": "sda-authority-transformation-port.v1",
+        "status": "AVAILABLE",
+        "capabilityId": "sda-authority-transformation-port.v1",
+        "provider": "ScenarioKernel.NodePlatform.Execution.AuthorityTransformation",
+        "implementationRef": "languages/typescript/runtimes/node/admitted-consumer-platform.mjs",
+        "conformanceRef": "tools/tests/consumer-projection/platform-capability-admission.test.js"
+      }
+    ],
+    "disposition": "RESOLVED"
+  },
+  "executableOrigin": {
+    "originType": "consumer-executable-origin.v1",
+    "disposition": "PROJECTED_ONLY",
+    "unauthorizedFiles": []
+  }
+}

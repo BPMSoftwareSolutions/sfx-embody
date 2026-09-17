@@ -1,0 +1,16 @@
+{
+  "transitionId": "route-prove-effects",
+  "from": {
+    "scenarioId": "project-model-provider-protocol",
+    "outcomeId": "model-provider-protocol-route",
+    "contractId": "project-model-provider-protocol-input.v1"
+  },
+  "to": {
+    "scenarioId": "prove-no-http-effect-in-protocol-projection",
+    "inputId": "protocol-projection-effect-observations",
+    "contractId": "project-model-provider-protocol-input.v1"
+  },
+  "semanticProgress": "declared",
+  "topologyKind": "selection",
+  "selectsVariant": "prove-effects"
+}

@@ -1,0 +1,38 @@
+{
+  "scenarioId": "prevent-undeclared-model-attempt-or-substitution",
+  "input": {
+    "inputId": "undeclared-model-attempt-or-substitution-request",
+    "contract": {
+      "contractId": "execute-governed-model-invocation-input.v1"
+    }
+  },
+  "event": {
+    "eventId": "undeclared-model-attempt-or-substitution-requested",
+    "executionAuthorityId": "prevent-undeclared-model-attempt-or-substitution.v1"
+  },
+  "outcome": {
+    "outcomeId": "undeclared-model-attempt-or-substitution-rejection",
+    "contract": {
+      "contractId": "governed-model-invocation-evidence.v1"
+    },
+    "experience": {
+      "statement": "no undeclared attempt or adapter is eligible and the original provider disposition and binding remain unchanged"
+    },
+    "terminal": true
+  },
+  "gherkin": {
+    "given": {
+      "semanticRef": "prevent-undeclared-model-attempt-or-substitution.given",
+      "text": "a request lacking a required continuation rule or substitution authority and a failed authorized provider attempt"
+    },
+    "when": {
+      "semanticRef": "prevent-undeclared-model-attempt-or-substitution.when",
+      "text": "another attempt or different provider is considered"
+    },
+    "then": {
+      "semanticRef": "prevent-undeclared-model-attempt-or-substitution.then",
+      "text": "no undeclared attempt or adapter is eligible and the original provider disposition and binding remain unchanged"
+    }
+  },
+  "name": "Prevent hidden retry fallback and provider substitution"
+}

@@ -1,0 +1,37 @@
+{
+  "scenarioId": "project-model-provider-protocol",
+  "input": {
+    "inputId": "model-provider-protocol-projection-request",
+    "contract": {
+      "contractId": "project-model-provider-protocol-input.v1"
+    }
+  },
+  "event": {
+    "eventId": "model-provider-protocol-projection-requested",
+    "executionAuthorityId": "project-model-provider-protocol.v1"
+  },
+  "outcome": {
+    "outcomeId": "model-provider-protocol-route",
+    "contract": {
+      "contractId": "project-model-provider-protocol-input.v1"
+    },
+    "experience": {
+      "statement": "one admitted route carrier retains the complete request and selects exactly one protocol scenario without projecting a provider request or performing an external effect"
+    }
+  },
+  "gherkin": {
+    "given": {
+      "semanticRef": "project-model-provider-protocol.given",
+      "text": "one admitted provider protocol request with one declared request type"
+    },
+    "when": {
+      "semanticRef": "project-model-provider-protocol.when",
+      "text": "the protocol scenario route is resolved"
+    },
+    "then": {
+      "semanticRef": "project-model-provider-protocol.then",
+      "text": "one admitted route carrier retains the complete request and selects exactly one protocol scenario without projecting a provider request or performing an external effect"
+    }
+  },
+  "name": "Route one admitted provider protocol request to one exact protocol scenario"
+}

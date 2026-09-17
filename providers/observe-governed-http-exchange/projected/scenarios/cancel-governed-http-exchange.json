@@ -1,0 +1,38 @@
+{
+  "scenarioId": "cancel-governed-http-exchange",
+  "input": {
+    "inputId": "cancelled-governed-http-exchange",
+    "contract": {
+      "contractId": "observe-governed-http-exchange-input.v1"
+    }
+  },
+  "event": {
+    "eventId": "governed-http-exchange-cancellation-requested",
+    "executionAuthorityId": "cancel-governed-http-exchange.v1"
+  },
+  "outcome": {
+    "outcomeId": "governed-http-cancellation-observation",
+    "contract": {
+      "contractId": "governed-http-exchange-evidence.v1"
+    },
+    "experience": {
+      "statement": "cancellation testimony and any effects already reached are retained without starting or restarting a request, inventing response bytes, or changing endpoint authority"
+    },
+    "terminal": true
+  },
+  "gherkin": {
+    "given": {
+      "semanticRef": "cancel-governed-http-exchange.given",
+      "text": "valid cancellation authority observed before transmission or while the authorized exchange is active"
+    },
+    "when": {
+      "semanticRef": "cancel-governed-http-exchange.when",
+      "text": "cancellation is applied"
+    },
+    "then": {
+      "semanticRef": "cancel-governed-http-exchange.then",
+      "text": "cancellation testimony and any effects already reached are retained without starting or restarting a request, inventing response bytes, or changing endpoint authority"
+    }
+  },
+  "name": "Cancel before transmission or during one active exchange"
+}

@@ -1,0 +1,1624 @@
+{
+  "catalogType": "execution-pattern-catalog.v1",
+  "patterns": [
+    {
+      "patternId": "decomposition:cell:mechanic:cancel-model-invocation.operation.1",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:cancel-model-invocation.operation.1:expression"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:cell:mechanic:cancel-model-invocation.operation.1"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:cancel-model-invocation.operation.1:expression"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:cancel-model-invocation.operation.1:expression"
+        ],
+        "returnBindingAuthorityId": "binding:return:cell:mechanic:cancel-model-invocation.operation.1"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:classify-internal-model-execution-failure.operation.1",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:classify-internal-model-execution-failure.operation.1:expression"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:cell:mechanic:classify-internal-model-execution-failure.operation.1"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:classify-internal-model-execution-failure.operation.1:expression"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:classify-internal-model-execution-failure.operation.1:expression"
+        ],
+        "returnBindingAuthorityId": "binding:return:cell:mechanic:classify-internal-model-execution-failure.operation.1"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:classify-model-provider-authentication-failure.operation.1",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:classify-model-provider-authentication-failure.operation.1:expression"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:cell:mechanic:classify-model-provider-authentication-failure.operation.1"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:classify-model-provider-authentication-failure.operation.1:expression"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:classify-model-provider-authentication-failure.operation.1:expression"
+        ],
+        "returnBindingAuthorityId": "binding:return:cell:mechanic:classify-model-provider-authentication-failure.operation.1"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:classify-model-provider-timeout.operation.1",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:classify-model-provider-timeout.operation.1:expression"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:cell:mechanic:classify-model-provider-timeout.operation.1"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:classify-model-provider-timeout.operation.1:expression"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:classify-model-provider-timeout.operation.1:expression"
+        ],
+        "returnBindingAuthorityId": "binding:return:cell:mechanic:classify-model-provider-timeout.operation.1"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:classify-model-provider-unavailability.operation.1",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:classify-model-provider-unavailability.operation.1:expression"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:cell:mechanic:classify-model-provider-unavailability.operation.1"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:classify-model-provider-unavailability.operation.1:expression"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:classify-model-provider-unavailability.operation.1:expression"
+        ],
+        "returnBindingAuthorityId": "binding:return:cell:mechanic:classify-model-provider-unavailability.operation.1"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:continue-transient-model-attempt.operation.1",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:continue-transient-model-attempt.operation.1:expression"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:cell:mechanic:continue-transient-model-attempt.operation.1"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:continue-transient-model-attempt.operation.1:expression"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:continue-transient-model-attempt.operation.1:expression"
+        ],
+        "returnBindingAuthorityId": "binding:return:cell:mechanic:continue-transient-model-attempt.operation.1"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:execute-governed-model-invocation.operation.10",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:scenario:retain-model-provider-request-rejection"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:invoke-return:cell:mechanic:execute-governed-model-invocation.operation.10"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:scenario:retain-model-provider-request-rejection"
+        ],
+        "exitCellIds": [
+          "cell:scenario:retain-model-provider-request-rejection"
+        ],
+        "returnBindingAuthorityId": "binding:invoke-return:cell:mechanic:execute-governed-model-invocation.operation.10"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:execute-governed-model-invocation.operation.11",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:scenario:reject-malformed-structured-model-response"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:invoke-return:cell:mechanic:execute-governed-model-invocation.operation.11"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:scenario:reject-malformed-structured-model-response"
+        ],
+        "exitCellIds": [
+          "cell:scenario:reject-malformed-structured-model-response"
+        ],
+        "returnBindingAuthorityId": "binding:invoke-return:cell:mechanic:execute-governed-model-invocation.operation.11"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:execute-governed-model-invocation.operation.12",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:scenario:reject-schema-incompatible-model-response"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:invoke-return:cell:mechanic:execute-governed-model-invocation.operation.12"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:scenario:reject-schema-incompatible-model-response"
+        ],
+        "exitCellIds": [
+          "cell:scenario:reject-schema-incompatible-model-response"
+        ],
+        "returnBindingAuthorityId": "binding:invoke-return:cell:mechanic:execute-governed-model-invocation.operation.12"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:execute-governed-model-invocation.operation.13",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:scenario:continue-transient-model-attempt"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:invoke-return:cell:mechanic:execute-governed-model-invocation.operation.13"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:scenario:continue-transient-model-attempt"
+        ],
+        "exitCellIds": [
+          "cell:scenario:continue-transient-model-attempt"
+        ],
+        "returnBindingAuthorityId": "binding:invoke-return:cell:mechanic:execute-governed-model-invocation.operation.13"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:execute-governed-model-invocation.operation.14",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:scenario:stop-non-transient-model-attempt"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:invoke-return:cell:mechanic:execute-governed-model-invocation.operation.14"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:scenario:stop-non-transient-model-attempt"
+        ],
+        "exitCellIds": [
+          "cell:scenario:stop-non-transient-model-attempt"
+        ],
+        "returnBindingAuthorityId": "binding:invoke-return:cell:mechanic:execute-governed-model-invocation.operation.14"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:execute-governed-model-invocation.operation.15",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:scenario:exhaust-model-attempt-authority"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:invoke-return:cell:mechanic:execute-governed-model-invocation.operation.15"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:scenario:exhaust-model-attempt-authority"
+        ],
+        "exitCellIds": [
+          "cell:scenario:exhaust-model-attempt-authority"
+        ],
+        "returnBindingAuthorityId": "binding:invoke-return:cell:mechanic:execute-governed-model-invocation.operation.15"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:execute-governed-model-invocation.operation.16",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:scenario:prevent-undeclared-model-attempt-or-substitution"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:invoke-return:cell:mechanic:execute-governed-model-invocation.operation.16"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:scenario:prevent-undeclared-model-attempt-or-substitution"
+        ],
+        "exitCellIds": [
+          "cell:scenario:prevent-undeclared-model-attempt-or-substitution"
+        ],
+        "returnBindingAuthorityId": "binding:invoke-return:cell:mechanic:execute-governed-model-invocation.operation.16"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:execute-governed-model-invocation.operation.17",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:scenario:cancel-model-invocation"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:invoke-return:cell:mechanic:execute-governed-model-invocation.operation.17"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:scenario:cancel-model-invocation"
+        ],
+        "exitCellIds": [
+          "cell:scenario:cancel-model-invocation"
+        ],
+        "returnBindingAuthorityId": "binding:invoke-return:cell:mechanic:execute-governed-model-invocation.operation.17"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:execute-governed-model-invocation.operation.18",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:scenario:classify-internal-model-execution-failure"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:invoke-return:cell:mechanic:execute-governed-model-invocation.operation.18"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:scenario:classify-internal-model-execution-failure"
+        ],
+        "exitCellIds": [
+          "cell:scenario:classify-internal-model-execution-failure"
+        ],
+        "returnBindingAuthorityId": "binding:invoke-return:cell:mechanic:execute-governed-model-invocation.operation.18"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:execute-governed-model-invocation.operation.19",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:scenario:honor-model-evidence-policy"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:invoke-return:cell:mechanic:execute-governed-model-invocation.operation.19"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:scenario:honor-model-evidence-policy"
+        ],
+        "exitCellIds": [
+          "cell:scenario:honor-model-evidence-policy"
+        ],
+        "returnBindingAuthorityId": "binding:invoke-return:cell:mechanic:execute-governed-model-invocation.operation.19"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:execute-governed-model-invocation.operation.2",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:scenario:obtain-structured-model-response"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:invoke-return:cell:mechanic:execute-governed-model-invocation.operation.2"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:scenario:obtain-structured-model-response"
+        ],
+        "exitCellIds": [
+          "cell:scenario:obtain-structured-model-response"
+        ],
+        "returnBindingAuthorityId": "binding:invoke-return:cell:mechanic:execute-governed-model-invocation.operation.2"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:execute-governed-model-invocation.operation.20",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:scenario:return-model-execution-receipt-on-every-exit"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:invoke-return:cell:mechanic:execute-governed-model-invocation.operation.20"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:scenario:return-model-execution-receipt-on-every-exit"
+        ],
+        "exitCellIds": [
+          "cell:scenario:return-model-execution-receipt-on-every-exit"
+        ],
+        "returnBindingAuthorityId": "binding:invoke-return:cell:mechanic:execute-governed-model-invocation.operation.20"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:execute-governed-model-invocation.operation.3",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:scenario:reject-invalid-governed-model-request"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:invoke-return:cell:mechanic:execute-governed-model-invocation.operation.3"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:scenario:reject-invalid-governed-model-request"
+        ],
+        "exitCellIds": [
+          "cell:scenario:reject-invalid-governed-model-request"
+        ],
+        "returnBindingAuthorityId": "binding:invoke-return:cell:mechanic:execute-governed-model-invocation.operation.3"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:execute-governed-model-invocation.operation.4",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:scenario:preserve-canonical-model-request-identity"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:invoke-return:cell:mechanic:execute-governed-model-invocation.operation.4"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:scenario:preserve-canonical-model-request-identity"
+        ],
+        "exitCellIds": [
+          "cell:scenario:preserve-canonical-model-request-identity"
+        ],
+        "returnBindingAuthorityId": "binding:invoke-return:cell:mechanic:execute-governed-model-invocation.operation.4"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:execute-governed-model-invocation.operation.5",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:scenario:reject-stale-model-provider-binding"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:invoke-return:cell:mechanic:execute-governed-model-invocation.operation.5"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:scenario:reject-stale-model-provider-binding"
+        ],
+        "exitCellIds": [
+          "cell:scenario:reject-stale-model-provider-binding"
+        ],
+        "returnBindingAuthorityId": "binding:invoke-return:cell:mechanic:execute-governed-model-invocation.operation.5"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:execute-governed-model-invocation.operation.6",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:scenario:fail-unavailable-model-credential"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:invoke-return:cell:mechanic:execute-governed-model-invocation.operation.6"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:scenario:fail-unavailable-model-credential"
+        ],
+        "exitCellIds": [
+          "cell:scenario:fail-unavailable-model-credential"
+        ],
+        "returnBindingAuthorityId": "binding:invoke-return:cell:mechanic:execute-governed-model-invocation.operation.6"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:execute-governed-model-invocation.operation.7",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:scenario:classify-model-provider-authentication-failure"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:invoke-return:cell:mechanic:execute-governed-model-invocation.operation.7"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:scenario:classify-model-provider-authentication-failure"
+        ],
+        "exitCellIds": [
+          "cell:scenario:classify-model-provider-authentication-failure"
+        ],
+        "returnBindingAuthorityId": "binding:invoke-return:cell:mechanic:execute-governed-model-invocation.operation.7"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:execute-governed-model-invocation.operation.8",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:scenario:classify-model-provider-timeout"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:invoke-return:cell:mechanic:execute-governed-model-invocation.operation.8"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:scenario:classify-model-provider-timeout"
+        ],
+        "exitCellIds": [
+          "cell:scenario:classify-model-provider-timeout"
+        ],
+        "returnBindingAuthorityId": "binding:invoke-return:cell:mechanic:execute-governed-model-invocation.operation.8"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:execute-governed-model-invocation.operation.9",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:scenario:classify-model-provider-unavailability"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:invoke-return:cell:mechanic:execute-governed-model-invocation.operation.9"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:scenario:classify-model-provider-unavailability"
+        ],
+        "exitCellIds": [
+          "cell:scenario:classify-model-provider-unavailability"
+        ],
+        "returnBindingAuthorityId": "binding:invoke-return:cell:mechanic:execute-governed-model-invocation.operation.9"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:exhaust-model-attempt-authority.operation.1",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:exhaust-model-attempt-authority.operation.1:expression"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:cell:mechanic:exhaust-model-attempt-authority.operation.1"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:exhaust-model-attempt-authority.operation.1:expression"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:exhaust-model-attempt-authority.operation.1:expression"
+        ],
+        "returnBindingAuthorityId": "binding:return:cell:mechanic:exhaust-model-attempt-authority.operation.1"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:fail-unavailable-model-credential.operation.1",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:fail-unavailable-model-credential.operation.1:expression"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:cell:mechanic:fail-unavailable-model-credential.operation.1"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:fail-unavailable-model-credential.operation.1:expression"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:fail-unavailable-model-credential.operation.1:expression"
+        ],
+        "returnBindingAuthorityId": "binding:return:cell:mechanic:fail-unavailable-model-credential.operation.1"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:honor-model-evidence-policy.operation.1",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:honor-model-evidence-policy.operation.1:expression"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:cell:mechanic:honor-model-evidence-policy.operation.1"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:honor-model-evidence-policy.operation.1:expression"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:honor-model-evidence-policy.operation.1:expression"
+        ],
+        "returnBindingAuthorityId": "binding:return:cell:mechanic:honor-model-evidence-policy.operation.1"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:obtain-structured-model-response.operation.1",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:obtain-structured-model-response.operation.1:expression"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:cell:mechanic:obtain-structured-model-response.operation.1"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:obtain-structured-model-response.operation.1:expression"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:obtain-structured-model-response.operation.1:expression"
+        ],
+        "returnBindingAuthorityId": "binding:return:cell:mechanic:obtain-structured-model-response.operation.1"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:preserve-canonical-model-request-identity.operation.1",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:preserve-canonical-model-request-identity.operation.1:expression"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:cell:mechanic:preserve-canonical-model-request-identity.operation.1"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:preserve-canonical-model-request-identity.operation.1:expression"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:preserve-canonical-model-request-identity.operation.1:expression"
+        ],
+        "returnBindingAuthorityId": "binding:return:cell:mechanic:preserve-canonical-model-request-identity.operation.1"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:prevent-undeclared-model-attempt-or-substitution.operation.1",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:prevent-undeclared-model-attempt-or-substitution.operation.1:expression"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:cell:mechanic:prevent-undeclared-model-attempt-or-substitution.operation.1"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:prevent-undeclared-model-attempt-or-substitution.operation.1:expression"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:prevent-undeclared-model-attempt-or-substitution.operation.1:expression"
+        ],
+        "returnBindingAuthorityId": "binding:return:cell:mechanic:prevent-undeclared-model-attempt-or-substitution.operation.1"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:reject-invalid-governed-model-request.operation.1",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:reject-invalid-governed-model-request.operation.1:expression"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:cell:mechanic:reject-invalid-governed-model-request.operation.1"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:reject-invalid-governed-model-request.operation.1:expression"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:reject-invalid-governed-model-request.operation.1:expression"
+        ],
+        "returnBindingAuthorityId": "binding:return:cell:mechanic:reject-invalid-governed-model-request.operation.1"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:reject-malformed-structured-model-response.operation.1",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:reject-malformed-structured-model-response.operation.1:expression"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:cell:mechanic:reject-malformed-structured-model-response.operation.1"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:reject-malformed-structured-model-response.operation.1:expression"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:reject-malformed-structured-model-response.operation.1:expression"
+        ],
+        "returnBindingAuthorityId": "binding:return:cell:mechanic:reject-malformed-structured-model-response.operation.1"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:reject-schema-incompatible-model-response.operation.1",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:reject-schema-incompatible-model-response.operation.1:expression"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:cell:mechanic:reject-schema-incompatible-model-response.operation.1"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:reject-schema-incompatible-model-response.operation.1:expression"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:reject-schema-incompatible-model-response.operation.1:expression"
+        ],
+        "returnBindingAuthorityId": "binding:return:cell:mechanic:reject-schema-incompatible-model-response.operation.1"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:reject-stale-model-provider-binding.operation.1",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:reject-stale-model-provider-binding.operation.1:expression"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:cell:mechanic:reject-stale-model-provider-binding.operation.1"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:reject-stale-model-provider-binding.operation.1:expression"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:reject-stale-model-provider-binding.operation.1:expression"
+        ],
+        "returnBindingAuthorityId": "binding:return:cell:mechanic:reject-stale-model-provider-binding.operation.1"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:retain-model-provider-request-rejection.operation.1",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:retain-model-provider-request-rejection.operation.1:expression"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:cell:mechanic:retain-model-provider-request-rejection.operation.1"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:retain-model-provider-request-rejection.operation.1:expression"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:retain-model-provider-request-rejection.operation.1:expression"
+        ],
+        "returnBindingAuthorityId": "binding:return:cell:mechanic:retain-model-provider-request-rejection.operation.1"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:return-model-execution-receipt-on-every-exit.operation.1",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:return-model-execution-receipt-on-every-exit.operation.1:expression"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:cell:mechanic:return-model-execution-receipt-on-every-exit.operation.1"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:return-model-execution-receipt-on-every-exit.operation.1:expression"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:return-model-execution-receipt-on-every-exit.operation.1:expression"
+        ],
+        "returnBindingAuthorityId": "binding:return:cell:mechanic:return-model-execution-receipt-on-every-exit.operation.1"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:stop-non-transient-model-attempt.operation.1",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:stop-non-transient-model-attempt.operation.1:expression"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:cell:mechanic:stop-non-transient-model-attempt.operation.1"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:stop-non-transient-model-attempt.operation.1:expression"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:stop-non-transient-model-attempt.operation.1:expression"
+        ],
+        "returnBindingAuthorityId": "binding:return:cell:mechanic:stop-non-transient-model-attempt.operation.1"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:scenario:cancel-model-invocation",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:cancel-model-invocation.operation.1"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:cancel-model-invocation"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:cancel-model-invocation.operation.1"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:cancel-model-invocation.operation.1"
+        ],
+        "returnBindingAuthorityId": "binding:return:cancel-model-invocation"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:scenario:classify-internal-model-execution-failure",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:classify-internal-model-execution-failure.operation.1"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:classify-internal-model-execution-failure"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:classify-internal-model-execution-failure.operation.1"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:classify-internal-model-execution-failure.operation.1"
+        ],
+        "returnBindingAuthorityId": "binding:return:classify-internal-model-execution-failure"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:scenario:classify-model-provider-authentication-failure",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:classify-model-provider-authentication-failure.operation.1"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:classify-model-provider-authentication-failure"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:classify-model-provider-authentication-failure.operation.1"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:classify-model-provider-authentication-failure.operation.1"
+        ],
+        "returnBindingAuthorityId": "binding:return:classify-model-provider-authentication-failure"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:scenario:classify-model-provider-timeout",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:classify-model-provider-timeout.operation.1"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:classify-model-provider-timeout"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:classify-model-provider-timeout.operation.1"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:classify-model-provider-timeout.operation.1"
+        ],
+        "returnBindingAuthorityId": "binding:return:classify-model-provider-timeout"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:scenario:classify-model-provider-unavailability",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:classify-model-provider-unavailability.operation.1"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:classify-model-provider-unavailability"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:classify-model-provider-unavailability.operation.1"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:classify-model-provider-unavailability.operation.1"
+        ],
+        "returnBindingAuthorityId": "binding:return:classify-model-provider-unavailability"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:scenario:continue-transient-model-attempt",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:continue-transient-model-attempt.operation.1"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:continue-transient-model-attempt"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:continue-transient-model-attempt.operation.1"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:continue-transient-model-attempt.operation.1"
+        ],
+        "returnBindingAuthorityId": "binding:return:continue-transient-model-attempt"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:scenario:execute-governed-model-invocation",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:execute-governed-model-invocation.operation.20"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:execute-governed-model-invocation"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:execute-governed-model-invocation.operation.1"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:execute-governed-model-invocation.operation.20"
+        ],
+        "returnBindingAuthorityId": "binding:return:execute-governed-model-invocation"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:scenario:exhaust-model-attempt-authority",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:exhaust-model-attempt-authority.operation.1"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:exhaust-model-attempt-authority"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:exhaust-model-attempt-authority.operation.1"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:exhaust-model-attempt-authority.operation.1"
+        ],
+        "returnBindingAuthorityId": "binding:return:exhaust-model-attempt-authority"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:scenario:fail-unavailable-model-credential",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:fail-unavailable-model-credential.operation.1"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:fail-unavailable-model-credential"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:fail-unavailable-model-credential.operation.1"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:fail-unavailable-model-credential.operation.1"
+        ],
+        "returnBindingAuthorityId": "binding:return:fail-unavailable-model-credential"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:scenario:honor-model-evidence-policy",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:honor-model-evidence-policy.operation.1"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:honor-model-evidence-policy"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:honor-model-evidence-policy.operation.1"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:honor-model-evidence-policy.operation.1"
+        ],
+        "returnBindingAuthorityId": "binding:return:honor-model-evidence-policy"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:scenario:obtain-structured-model-response",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:obtain-structured-model-response.operation.1"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:obtain-structured-model-response"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:obtain-structured-model-response.operation.1"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:obtain-structured-model-response.operation.1"
+        ],
+        "returnBindingAuthorityId": "binding:return:obtain-structured-model-response"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:scenario:preserve-canonical-model-request-identity",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:preserve-canonical-model-request-identity.operation.1"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:preserve-canonical-model-request-identity"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:preserve-canonical-model-request-identity.operation.1"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:preserve-canonical-model-request-identity.operation.1"
+        ],
+        "returnBindingAuthorityId": "binding:return:preserve-canonical-model-request-identity"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:scenario:prevent-undeclared-model-attempt-or-substitution",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:prevent-undeclared-model-attempt-or-substitution.operation.1"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:prevent-undeclared-model-attempt-or-substitution"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:prevent-undeclared-model-attempt-or-substitution.operation.1"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:prevent-undeclared-model-attempt-or-substitution.operation.1"
+        ],
+        "returnBindingAuthorityId": "binding:return:prevent-undeclared-model-attempt-or-substitution"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:scenario:reject-invalid-governed-model-request",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:reject-invalid-governed-model-request.operation.1"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:reject-invalid-governed-model-request"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:reject-invalid-governed-model-request.operation.1"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:reject-invalid-governed-model-request.operation.1"
+        ],
+        "returnBindingAuthorityId": "binding:return:reject-invalid-governed-model-request"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:scenario:reject-malformed-structured-model-response",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:reject-malformed-structured-model-response.operation.1"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:reject-malformed-structured-model-response"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:reject-malformed-structured-model-response.operation.1"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:reject-malformed-structured-model-response.operation.1"
+        ],
+        "returnBindingAuthorityId": "binding:return:reject-malformed-structured-model-response"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:scenario:reject-schema-incompatible-model-response",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:reject-schema-incompatible-model-response.operation.1"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:reject-schema-incompatible-model-response"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:reject-schema-incompatible-model-response.operation.1"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:reject-schema-incompatible-model-response.operation.1"
+        ],
+        "returnBindingAuthorityId": "binding:return:reject-schema-incompatible-model-response"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:scenario:reject-stale-model-provider-binding",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:reject-stale-model-provider-binding.operation.1"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:reject-stale-model-provider-binding"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:reject-stale-model-provider-binding.operation.1"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:reject-stale-model-provider-binding.operation.1"
+        ],
+        "returnBindingAuthorityId": "binding:return:reject-stale-model-provider-binding"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:scenario:retain-model-provider-request-rejection",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:retain-model-provider-request-rejection.operation.1"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:retain-model-provider-request-rejection"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:retain-model-provider-request-rejection.operation.1"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:retain-model-provider-request-rejection.operation.1"
+        ],
+        "returnBindingAuthorityId": "binding:return:retain-model-provider-request-rejection"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:scenario:return-model-execution-receipt-on-every-exit",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:return-model-execution-receipt-on-every-exit.operation.1"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:return-model-execution-receipt-on-every-exit"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:return-model-execution-receipt-on-every-exit.operation.1"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:return-model-execution-receipt-on-every-exit.operation.1"
+        ],
+        "returnBindingAuthorityId": "binding:return:return-model-execution-receipt-on-every-exit"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:scenario:stop-non-transient-model-attempt",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:stop-non-transient-model-attempt.operation.1"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:stop-non-transient-model-attempt"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:stop-non-transient-model-attempt.operation.1"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:stop-non-transient-model-attempt.operation.1"
+        ],
+        "returnBindingAuthorityId": "binding:return:stop-non-transient-model-attempt"
+      }
+    },
+    {
+      "patternId": "edge:sequence:execute-governed-model-invocation:1",
+      "patternType": "sequence",
+      "participantCellIds": [
+        "cell:mechanic:execute-governed-model-invocation.operation.1",
+        "cell:mechanic:execute-governed-model-invocation.operation.2"
+      ],
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "edge:sequence:execute-governed-model-invocation:1"
+      ]
+    },
+    {
+      "patternId": "edge:sequence:execute-governed-model-invocation:10",
+      "patternType": "sequence",
+      "participantCellIds": [
+        "cell:mechanic:execute-governed-model-invocation.operation.10",
+        "cell:mechanic:execute-governed-model-invocation.operation.11"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "edge:sequence:execute-governed-model-invocation:10"
+      ]
+    },
+    {
+      "patternId": "edge:sequence:execute-governed-model-invocation:11",
+      "patternType": "sequence",
+      "participantCellIds": [
+        "cell:mechanic:execute-governed-model-invocation.operation.11",
+        "cell:mechanic:execute-governed-model-invocation.operation.12"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "edge:sequence:execute-governed-model-invocation:11"
+      ]
+    },
+    {
+      "patternId": "edge:sequence:execute-governed-model-invocation:12",
+      "patternType": "sequence",
+      "participantCellIds": [
+        "cell:mechanic:execute-governed-model-invocation.operation.12",
+        "cell:mechanic:execute-governed-model-invocation.operation.13"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "edge:sequence:execute-governed-model-invocation:12"
+      ]
+    },
+    {
+      "patternId": "edge:sequence:execute-governed-model-invocation:13",
+      "patternType": "sequence",
+      "participantCellIds": [
+        "cell:mechanic:execute-governed-model-invocation.operation.13",
+        "cell:mechanic:execute-governed-model-invocation.operation.14"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "edge:sequence:execute-governed-model-invocation:13"
+      ]
+    },
+    {
+      "patternId": "edge:sequence:execute-governed-model-invocation:14",
+      "patternType": "sequence",
+      "participantCellIds": [
+        "cell:mechanic:execute-governed-model-invocation.operation.14",
+        "cell:mechanic:execute-governed-model-invocation.operation.15"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "edge:sequence:execute-governed-model-invocation:14"
+      ]
+    },
+    {
+      "patternId": "edge:sequence:execute-governed-model-invocation:15",
+      "patternType": "sequence",
+      "participantCellIds": [
+        "cell:mechanic:execute-governed-model-invocation.operation.15",
+        "cell:mechanic:execute-governed-model-invocation.operation.16"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "edge:sequence:execute-governed-model-invocation:15"
+      ]
+    },
+    {
+      "patternId": "edge:sequence:execute-governed-model-invocation:16",
+      "patternType": "sequence",
+      "participantCellIds": [
+        "cell:mechanic:execute-governed-model-invocation.operation.16",
+        "cell:mechanic:execute-governed-model-invocation.operation.17"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "edge:sequence:execute-governed-model-invocation:16"
+      ]
+    },
+    {
+      "patternId": "edge:sequence:execute-governed-model-invocation:17",
+      "patternType": "sequence",
+      "participantCellIds": [
+        "cell:mechanic:execute-governed-model-invocation.operation.17",
+        "cell:mechanic:execute-governed-model-invocation.operation.18"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "edge:sequence:execute-governed-model-invocation:17"
+      ]
+    },
+    {
+      "patternId": "edge:sequence:execute-governed-model-invocation:18",
+      "patternType": "sequence",
+      "participantCellIds": [
+        "cell:mechanic:execute-governed-model-invocation.operation.18",
+        "cell:mechanic:execute-governed-model-invocation.operation.19"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "edge:sequence:execute-governed-model-invocation:18"
+      ]
+    },
+    {
+      "patternId": "edge:sequence:execute-governed-model-invocation:19",
+      "patternType": "sequence",
+      "participantCellIds": [
+        "cell:mechanic:execute-governed-model-invocation.operation.19",
+        "cell:mechanic:execute-governed-model-invocation.operation.20"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "governed-model-invocation-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "edge:sequence:execute-governed-model-invocation:19"
+      ]
+    },
+    {
+      "patternId": "edge:sequence:execute-governed-model-invocation:2",
+      "patternType": "sequence",
+      "participantCellIds": [
+        "cell:mechanic:execute-governed-model-invocation.operation.2",
+        "cell:mechanic:execute-governed-model-invocation.operation.3"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "edge:sequence:execute-governed-model-invocation:2"
+      ]
+    },
+    {
+      "patternId": "edge:sequence:execute-governed-model-invocation:3",
+      "patternType": "sequence",
+      "participantCellIds": [
+        "cell:mechanic:execute-governed-model-invocation.operation.3",
+        "cell:mechanic:execute-governed-model-invocation.operation.4"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "edge:sequence:execute-governed-model-invocation:3"
+      ]
+    },
+    {
+      "patternId": "edge:sequence:execute-governed-model-invocation:4",
+      "patternType": "sequence",
+      "participantCellIds": [
+        "cell:mechanic:execute-governed-model-invocation.operation.4",
+        "cell:mechanic:execute-governed-model-invocation.operation.5"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "edge:sequence:execute-governed-model-invocation:4"
+      ]
+    },
+    {
+      "patternId": "edge:sequence:execute-governed-model-invocation:5",
+      "patternType": "sequence",
+      "participantCellIds": [
+        "cell:mechanic:execute-governed-model-invocation.operation.5",
+        "cell:mechanic:execute-governed-model-invocation.operation.6"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "edge:sequence:execute-governed-model-invocation:5"
+      ]
+    },
+    {
+      "patternId": "edge:sequence:execute-governed-model-invocation:6",
+      "patternType": "sequence",
+      "participantCellIds": [
+        "cell:mechanic:execute-governed-model-invocation.operation.6",
+        "cell:mechanic:execute-governed-model-invocation.operation.7"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "edge:sequence:execute-governed-model-invocation:6"
+      ]
+    },
+    {
+      "patternId": "edge:sequence:execute-governed-model-invocation:7",
+      "patternType": "sequence",
+      "participantCellIds": [
+        "cell:mechanic:execute-governed-model-invocation.operation.7",
+        "cell:mechanic:execute-governed-model-invocation.operation.8"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "edge:sequence:execute-governed-model-invocation:7"
+      ]
+    },
+    {
+      "patternId": "edge:sequence:execute-governed-model-invocation:8",
+      "patternType": "sequence",
+      "participantCellIds": [
+        "cell:mechanic:execute-governed-model-invocation.operation.8",
+        "cell:mechanic:execute-governed-model-invocation.operation.9"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "edge:sequence:execute-governed-model-invocation:8"
+      ]
+    },
+    {
+      "patternId": "edge:sequence:execute-governed-model-invocation:9",
+      "patternType": "sequence",
+      "participantCellIds": [
+        "cell:mechanic:execute-governed-model-invocation.operation.10",
+        "cell:mechanic:execute-governed-model-invocation.operation.9"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "edge:sequence:execute-governed-model-invocation:9"
+      ]
+    }
+  ]
+}

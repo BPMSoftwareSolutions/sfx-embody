@@ -1,0 +1,16 @@
+{
+  "transitionId": "route-project-gemini-structured",
+  "from": {
+    "scenarioId": "project-model-provider-protocol",
+    "outcomeId": "model-provider-protocol-route",
+    "contractId": "project-model-provider-protocol-input.v1"
+  },
+  "to": {
+    "scenarioId": "project-gemini-structured-request",
+    "inputId": "gemini-structured-protocol-projection-request",
+    "contractId": "project-model-provider-protocol-input.v1"
+  },
+  "semanticProgress": "declared",
+  "topologyKind": "selection",
+  "selectsVariant": "project-gemini-structured"
+}

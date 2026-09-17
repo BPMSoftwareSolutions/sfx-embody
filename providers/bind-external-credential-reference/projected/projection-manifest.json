@@ -1,0 +1,633 @@
+{
+  "projectionManifestType": "consumer-capability-projection-manifest.v1",
+  "generator": "scenario-driven-architecture/tools/src/consumer-projection",
+  "authorityRefs": [
+    "capability.feature",
+    "capability.authority.json",
+    "semantic-graph.authority.json",
+    "execution-authorities.authority.json",
+    "projection-authorities.authority.json",
+    "interfaces.authority.json",
+    "fixtures.authority.json",
+    "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+    "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json"
+  ],
+  "admittedPlatformCapabilities": [
+    "sda-authority-state-projection.v1",
+    "sda-authority-transformation-port.v1",
+    "sda-bounded-base64-byte-digest-port.v1",
+    "sda-canonical-capability-feature-resolution-port.v1",
+    "sda-declarative-state-projection.v1",
+    "sda-declarative-value-port.v1",
+    "sda-external-credential-reference-binding-port.v1",
+    "sda-external-observation-port.v1",
+    "sda-filesystem-artifact-store.v1",
+    "sda-fixture-contract-validator.v1",
+    "sda-generic-llm-connector-port.v1",
+    "sda-governed-disposable-root-lifecycle-port.v1",
+    "sda-governed-external-root-batch-materialization-port.v1",
+    "sda-governed-external-root-consumer-projection-port.v1",
+    "sda-governed-external-root-observation-port.v1",
+    "sda-governed-external-root-projected-application-execution-port.v1",
+    "sda-governed-file-system-shaping-port.v2",
+    "sda-governed-http-exchange-port.v1",
+    "sda-governed-repository-observation-port.v1",
+    "sda-governed-serial-execution-port.v1",
+    "sda-governed-target-execution-observation-port.v1",
+    "sda-governed-tooling-binding-transaction-port.v1",
+    "sda-governed-tooling-migration-operation-port.v1",
+    "sda-json-authority-ingestion-port.v1",
+    "sda-json-cli.v1",
+    "sda-json-query-cli.v1",
+    "sda-node-consumer-runtime.v1",
+    "sda-os-environment-credential-port.v1",
+    "sda-projected-capability-invocation-port.v1",
+    "sda-projected-capability-invocation-port.v2",
+    "sda-proof-binding-evaluation-port.v1",
+    "sda-scenario-semantic-carrier-evaluation-port.v1",
+    "sda-scenario-semantic-carrier-extraction-port.v1",
+    "sda-scenario-semantic-carrier-validation-port.v1",
+    "sda-schema-contract-admission.v1",
+    "sda-semantic-execution-graph-compilation-port.v1",
+    "sda-semantic-vector-index.v1"
+  ],
+  "files": [
+    {
+      "path": "application-binding.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "88592e7edc52c2877b03c82788a044c4bda217d8c3c7653f01402d906f023bf3",
+      "digest": "sha256:88592e7edc52c2877b03c82788a044c4bda217d8c3c7653f01402d906f023bf3",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/bind-external-credential-reference/interfaces.authority.json"
+      ]
+    },
+    {
+      "path": "application-binding.node.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "88592e7edc52c2877b03c82788a044c4bda217d8c3c7653f01402d906f023bf3",
+      "digest": "sha256:88592e7edc52c2877b03c82788a044c4bda217d8c3c7653f01402d906f023bf3",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/bind-external-credential-reference/interfaces.authority.json"
+      ]
+    },
+    {
+      "path": "capability.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "427c22fa8247fc49dafd40d2913e7b787d9d166eae6701d772536de707099c27",
+      "digest": "sha256:427c22fa8247fc49dafd40d2913e7b787d9d166eae6701d772536de707099c27",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.feature",
+        "../sfx-embody/embodiments/bind-external-credential-reference/semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "execution-plans/consumer-execution-plan.node.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "0e642142454f2e343ec51bdca3dca14fe063d66dd3e227adac163f0afd8f06c6",
+      "digest": "sha256:0e642142454f2e343ec51bdca3dca14fe063d66dd3e227adac163f0afd8f06c6",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.feature",
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/semantic-graph.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/interfaces.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/fixtures.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json"
+      ]
+    },
+    {
+      "path": "execution-plans/consumer-execution-plan.node.v3.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "e306648a42927b2463f25375b4509e410b464c377e0baaebfbfa98ff8da0b74e",
+      "digest": "sha256:e306648a42927b2463f25375b4509e410b464c377e0baaebfbfa98ff8da0b74e",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.feature",
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/semantic-graph.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/interfaces.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/fixtures.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json"
+      ]
+    },
+    {
+      "path": "fixtures/fixtures.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "2e5a87c1d35c1e5fd64edfb3b415453d9b32902ed42b63bc026371b44abf34fd",
+      "digest": "sha256:2e5a87c1d35c1e5fd64edfb3b415453d9b32902ed42b63bc026371b44abf34fd",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/bind-external-credential-reference/fixtures.authority.json"
+      ]
+    },
+    {
+      "path": "node/bind-external-credential-reference-cli.generated.mjs",
+      "executableOrigin": "PROJECTED",
+      "sha256": "0a2ac29cf8755510f009a315ee39a183ea37e53fd92d0d193525e71c31513f29",
+      "digest": "sha256:0a2ac29cf8755510f009a315ee39a183ea37e53fd92d0d193525e71c31513f29",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.feature",
+        "../sfx-embody/embodiments/bind-external-credential-reference/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/fixtures.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/interfaces.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/semantic-graph.authority.json",
+        "capability.authority.json",
+        "execution-authorities.authority.json",
+        "interfaces.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
+        "semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "node/capability-bindings.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.feature",
+        "../sfx-embody/embodiments/bind-external-credential-reference/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/fixtures.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/interfaces.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/semantic-graph.authority.json",
+        "capability.authority.json",
+        "execution-authorities.authority.json",
+        "executionAuthorities/bind-external-credential-reference/operations/0",
+        "executionAuthorities/bind-external-credential-reference/operations/1",
+        "executionAuthorities/bind-external-credential-reference/operations/2",
+        "executionAuthorities/bind-external-credential-reference/operations/3",
+        "executionAuthorities/bind-external-credential-reference/operations/4",
+        "executionAuthorities/bind-external-credential-reference/operations/5",
+        "executionAuthorities/bind-external-credential-reference/operations/6",
+        "executionAuthorities/hold-missing-or-empty-external-credential/operations/0",
+        "executionAuthorities/prove-external-credential-non-disclosure/operations/0",
+        "executionAuthorities/reject-embedded-credential-material/operations/0",
+        "executionAuthorities/reject-mismatched-credential-invocation-identity/operations/0",
+        "executionAuthorities/reject-stale-or-replayed-credential-binding/operations/0",
+        "executionAuthorities/reject-unauthorized-external-credential-reference/operations/0",
+        "interfaces.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
+        "scenarios#/0",
+        "scenarios#/1",
+        "scenarios#/2",
+        "scenarios#/3",
+        "scenarios#/4",
+        "scenarios#/5",
+        "scenarios#/6",
+        "semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "node/capability-carrier.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "1e977b262b3ccb12603388cbc076442c89f6e186fbc18ff5ac1f62ec8e82c3e0",
+      "digest": "sha256:1e977b262b3ccb12603388cbc076442c89f6e186fbc18ff5ac1f62ec8e82c3e0",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.feature",
+        "../sfx-embody/embodiments/bind-external-credential-reference/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/fixtures.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/interfaces.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/semantic-graph.authority.json",
+        "capability.authority.json",
+        "execution-authorities.authority.json",
+        "executionAuthorities/bind-external-credential-reference/operations/0",
+        "executionAuthorities/bind-external-credential-reference/operations/1",
+        "executionAuthorities/bind-external-credential-reference/operations/2",
+        "executionAuthorities/bind-external-credential-reference/operations/3",
+        "executionAuthorities/bind-external-credential-reference/operations/4",
+        "executionAuthorities/bind-external-credential-reference/operations/5",
+        "executionAuthorities/bind-external-credential-reference/operations/6",
+        "executionAuthorities/hold-missing-or-empty-external-credential/operations/0",
+        "executionAuthorities/prove-external-credential-non-disclosure/operations/0",
+        "executionAuthorities/reject-embedded-credential-material/operations/0",
+        "executionAuthorities/reject-mismatched-credential-invocation-identity/operations/0",
+        "executionAuthorities/reject-stale-or-replayed-credential-binding/operations/0",
+        "executionAuthorities/reject-unauthorized-external-credential-reference/operations/0",
+        "interfaces.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
+        "scenarios#/0",
+        "scenarios#/1",
+        "scenarios#/2",
+        "scenarios#/3",
+        "scenarios#/4",
+        "scenarios#/5",
+        "scenarios#/6",
+        "semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "node/capability-contracts.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "937bd816954e5ee35b6f7b088d16af6c07dd510c099d68ec93c0101fe1890a9f",
+      "digest": "sha256:937bd816954e5ee35b6f7b088d16af6c07dd510c099d68ec93c0101fe1890a9f",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.feature",
+        "../sfx-embody/embodiments/bind-external-credential-reference/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/fixtures.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/interfaces.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/semantic-graph.authority.json",
+        "capability.authority.json",
+        "execution-authorities.authority.json",
+        "executionAuthorities/bind-external-credential-reference/operations/0",
+        "executionAuthorities/bind-external-credential-reference/operations/1",
+        "executionAuthorities/bind-external-credential-reference/operations/2",
+        "executionAuthorities/bind-external-credential-reference/operations/3",
+        "executionAuthorities/bind-external-credential-reference/operations/4",
+        "executionAuthorities/bind-external-credential-reference/operations/5",
+        "executionAuthorities/bind-external-credential-reference/operations/6",
+        "executionAuthorities/hold-missing-or-empty-external-credential/operations/0",
+        "executionAuthorities/prove-external-credential-non-disclosure/operations/0",
+        "executionAuthorities/reject-embedded-credential-material/operations/0",
+        "executionAuthorities/reject-mismatched-credential-invocation-identity/operations/0",
+        "executionAuthorities/reject-stale-or-replayed-credential-binding/operations/0",
+        "executionAuthorities/reject-unauthorized-external-credential-reference/operations/0",
+        "interfaces.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
+        "scenarios#/0",
+        "scenarios#/1",
+        "scenarios#/2",
+        "scenarios#/3",
+        "scenarios#/4",
+        "scenarios#/5",
+        "scenarios#/6",
+        "semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "node/capability-execution.generated.mjs",
+      "executableOrigin": "PROJECTED",
+      "sha256": "0dbe09521b1a0975afe3db6eb620db3eaddffb6e807a6d49c51d2b043051d3cb",
+      "digest": "sha256:0dbe09521b1a0975afe3db6eb620db3eaddffb6e807a6d49c51d2b043051d3cb",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.feature",
+        "../sfx-embody/embodiments/bind-external-credential-reference/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/fixtures.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/interfaces.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/semantic-graph.authority.json",
+        "capability.authority.json",
+        "execution-authorities.authority.json",
+        "executionAuthorities/bind-external-credential-reference/operations/0",
+        "executionAuthorities/bind-external-credential-reference/operations/1",
+        "executionAuthorities/bind-external-credential-reference/operations/2",
+        "executionAuthorities/bind-external-credential-reference/operations/3",
+        "executionAuthorities/bind-external-credential-reference/operations/4",
+        "executionAuthorities/bind-external-credential-reference/operations/5",
+        "executionAuthorities/bind-external-credential-reference/operations/6",
+        "executionAuthorities/hold-missing-or-empty-external-credential/operations/0",
+        "executionAuthorities/prove-external-credential-non-disclosure/operations/0",
+        "executionAuthorities/reject-embedded-credential-material/operations/0",
+        "executionAuthorities/reject-mismatched-credential-invocation-identity/operations/0",
+        "executionAuthorities/reject-stale-or-replayed-credential-binding/operations/0",
+        "executionAuthorities/reject-unauthorized-external-credential-reference/operations/0",
+        "interfaces.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
+        "scenarios#/0",
+        "scenarios#/1",
+        "scenarios#/2",
+        "scenarios#/3",
+        "scenarios#/4",
+        "scenarios#/5",
+        "scenarios#/6",
+        "semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "node/capability-operations.generated.mjs",
+      "executableOrigin": "PROJECTED",
+      "sha256": "fe8836abee42dfec7bdcf2331c0f783a45d4d25ca6469a402cf43003316dfbd5",
+      "digest": "sha256:fe8836abee42dfec7bdcf2331c0f783a45d4d25ca6469a402cf43003316dfbd5",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.feature",
+        "../sfx-embody/embodiments/bind-external-credential-reference/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/fixtures.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/interfaces.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/semantic-graph.authority.json",
+        "capability.authority.json",
+        "execution-authorities.authority.json",
+        "executionAuthorities/bind-external-credential-reference/operations/0",
+        "executionAuthorities/bind-external-credential-reference/operations/1",
+        "executionAuthorities/bind-external-credential-reference/operations/2",
+        "executionAuthorities/bind-external-credential-reference/operations/3",
+        "executionAuthorities/bind-external-credential-reference/operations/4",
+        "executionAuthorities/bind-external-credential-reference/operations/5",
+        "executionAuthorities/bind-external-credential-reference/operations/6",
+        "executionAuthorities/hold-missing-or-empty-external-credential/operations/0",
+        "executionAuthorities/prove-external-credential-non-disclosure/operations/0",
+        "executionAuthorities/reject-embedded-credential-material/operations/0",
+        "executionAuthorities/reject-mismatched-credential-invocation-identity/operations/0",
+        "executionAuthorities/reject-stale-or-replayed-credential-binding/operations/0",
+        "executionAuthorities/reject-unauthorized-external-credential-reference/operations/0",
+        "interfaces.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
+        "scenarios#/0",
+        "scenarios#/1",
+        "scenarios#/2",
+        "scenarios#/3",
+        "scenarios#/4",
+        "scenarios#/5",
+        "scenarios#/6",
+        "semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "node/capability-runtime.generated.mjs",
+      "executableOrigin": "PROJECTED",
+      "sha256": "a357eeb728c48f1898a097e0df2dcc596725fce647763dc1c5688e03db56cb61",
+      "digest": "sha256:a357eeb728c48f1898a097e0df2dcc596725fce647763dc1c5688e03db56cb61",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.feature",
+        "../sfx-embody/embodiments/bind-external-credential-reference/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/fixtures.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/interfaces.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/semantic-graph.authority.json",
+        "capability.authority.json",
+        "execution-authorities.authority.json",
+        "interfaces.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
+        "semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "node/capability.projected.test.mjs",
+      "executableOrigin": "PROJECTED",
+      "sha256": "8852d9eda37a2b685453e7964f48215e209fe7bd4008c552a289ea7baf8b9994",
+      "digest": "sha256:8852d9eda37a2b685453e7964f48215e209fe7bd4008c552a289ea7baf8b9994",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.feature",
+        "../sfx-embody/embodiments/bind-external-credential-reference/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/fixtures.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/interfaces.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/semantic-graph.authority.json",
+        "capability.authority.json",
+        "execution-authorities.authority.json",
+        "interfaces.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
+        "semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "node/conformance-query.generated.mjs",
+      "executableOrigin": "PROJECTED",
+      "sha256": "16405f28a0de363c77bc7f8abcfd91668e499376fcd68f4d8db7d95067769c57",
+      "digest": "sha256:16405f28a0de363c77bc7f8abcfd91668e499376fcd68f4d8db7d95067769c57",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.feature",
+        "../sfx-embody/embodiments/bind-external-credential-reference/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/fixtures.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/interfaces.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/semantic-graph.authority.json",
+        "capability.authority.json",
+        "execution-authorities.authority.json",
+        "interfaces.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
+        "semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "node/execution-operations.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "1d933e757653dba0c170da9169679d6e4a472fa8e0a28f72f0a71c8394904100",
+      "digest": "sha256:1d933e757653dba0c170da9169679d6e4a472fa8e0a28f72f0a71c8394904100",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.feature",
+        "../sfx-embody/embodiments/bind-external-credential-reference/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/fixtures.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/interfaces.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/semantic-graph.authority.json",
+        "capability.authority.json",
+        "execution-authorities.authority.json",
+        "executionAuthorities/bind-external-credential-reference/operations/0",
+        "executionAuthorities/bind-external-credential-reference/operations/1",
+        "executionAuthorities/bind-external-credential-reference/operations/2",
+        "executionAuthorities/bind-external-credential-reference/operations/3",
+        "executionAuthorities/bind-external-credential-reference/operations/4",
+        "executionAuthorities/bind-external-credential-reference/operations/5",
+        "executionAuthorities/bind-external-credential-reference/operations/6",
+        "executionAuthorities/hold-missing-or-empty-external-credential/operations/0",
+        "executionAuthorities/prove-external-credential-non-disclosure/operations/0",
+        "executionAuthorities/reject-embedded-credential-material/operations/0",
+        "executionAuthorities/reject-mismatched-credential-invocation-identity/operations/0",
+        "executionAuthorities/reject-stale-or-replayed-credential-binding/operations/0",
+        "executionAuthorities/reject-unauthorized-external-credential-reference/operations/0",
+        "interfaces.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
+        "scenarios#/0",
+        "scenarios#/1",
+        "scenarios#/2",
+        "scenarios#/3",
+        "scenarios#/4",
+        "scenarios#/5",
+        "scenarios#/6",
+        "semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "node/execution-patterns.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "d5e50cde39e75c1d7ecb8b987cbb261a13be7a5c056a1143bd4cb7859a66dcfa",
+      "digest": "sha256:d5e50cde39e75c1d7ecb8b987cbb261a13be7a5c056a1143bd4cb7859a66dcfa",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.feature",
+        "../sfx-embody/embodiments/bind-external-credential-reference/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/fixtures.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/interfaces.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/semantic-graph.authority.json",
+        "capability.authority.json",
+        "execution-authorities.authority.json",
+        "executionAuthorities/bind-external-credential-reference/operations/0",
+        "executionAuthorities/bind-external-credential-reference/operations/1",
+        "executionAuthorities/bind-external-credential-reference/operations/2",
+        "executionAuthorities/bind-external-credential-reference/operations/3",
+        "executionAuthorities/bind-external-credential-reference/operations/4",
+        "executionAuthorities/bind-external-credential-reference/operations/5",
+        "executionAuthorities/bind-external-credential-reference/operations/6",
+        "executionAuthorities/hold-missing-or-empty-external-credential/operations/0",
+        "executionAuthorities/prove-external-credential-non-disclosure/operations/0",
+        "executionAuthorities/reject-embedded-credential-material/operations/0",
+        "executionAuthorities/reject-mismatched-credential-invocation-identity/operations/0",
+        "executionAuthorities/reject-stale-or-replayed-credential-binding/operations/0",
+        "executionAuthorities/reject-unauthorized-external-credential-reference/operations/0",
+        "interfaces.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
+        "scenarios#/0",
+        "scenarios#/1",
+        "scenarios#/2",
+        "scenarios#/3",
+        "scenarios#/4",
+        "scenarios#/5",
+        "scenarios#/6",
+        "semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "projection-conformance.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "eff29d9d763919b405a021fc126f66b5b0c552c3cbe74d8ddb85f9781e4b2eed",
+      "digest": "sha256:eff29d9d763919b405a021fc126f66b5b0c552c3cbe74d8ddb85f9781e4b2eed",
+      "sourcePointers": [
+        "consumer-assurance/prove-mechanical-sterility"
+      ]
+    },
+    {
+      "path": "query/conformance-query.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "a9777cf25512ca89eb8bb57bb71feacc0113a71af5d535ef760e6373b59dad0d",
+      "digest": "sha256:a9777cf25512ca89eb8bb57bb71feacc0113a71af5d535ef760e6373b59dad0d",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.feature",
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/semantic-graph.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/interfaces.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/fixtures.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json"
+      ]
+    },
+    {
+      "path": "query/conformance-query.node.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "a9777cf25512ca89eb8bb57bb71feacc0113a71af5d535ef760e6373b59dad0d",
+      "digest": "sha256:a9777cf25512ca89eb8bb57bb71feacc0113a71af5d535ef760e6373b59dad0d",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.feature",
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/semantic-graph.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/interfaces.authority.json",
+        "../sfx-embody/embodiments/bind-external-credential-reference/fixtures.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json"
+      ]
+    },
+    {
+      "path": "query/platform-mechanic-resolution.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "315b8bdcdb2cafcb5e3e9004207f3bb5ad92c739d65f206a8e9227288e1dc720",
+      "digest": "sha256:315b8bdcdb2cafcb5e3e9004207f3bb5ad92c739d65f206a8e9227288e1dc720",
+      "sourcePointers": [
+        "kernel/semantic-authority/consumer/sda-platform-capabilities.semantic-authority.json"
+      ]
+    },
+    {
+      "path": "query/platform-mechanic-resolution.node.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "315b8bdcdb2cafcb5e3e9004207f3bb5ad92c739d65f206a8e9227288e1dc720",
+      "digest": "sha256:315b8bdcdb2cafcb5e3e9004207f3bb5ad92c739d65f206a8e9227288e1dc720",
+      "sourcePointers": [
+        "kernel/semantic-authority/consumer/sda-platform-capabilities.semantic-authority.json"
+      ]
+    },
+    {
+      "path": "scenarios/bind-external-credential-reference.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "29550813fb0f5a88ff942487755ea5d6f833de0e2c8751434b3d3752c0727637",
+      "digest": "sha256:29550813fb0f5a88ff942487755ea5d6f833de0e2c8751434b3d3752c0727637",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.feature"
+      ]
+    },
+    {
+      "path": "scenarios/hold-missing-or-empty-external-credential.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "313694515ccb394837241e1471eb65276b8fdd2f337a71bba0d129b288756ce2",
+      "digest": "sha256:313694515ccb394837241e1471eb65276b8fdd2f337a71bba0d129b288756ce2",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.feature"
+      ]
+    },
+    {
+      "path": "scenarios/prove-external-credential-non-disclosure.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "742fe367c3fd0a17a4529eab0ced33daa7d25a7a2c9fe8bb541eb4bbd6d93d06",
+      "digest": "sha256:742fe367c3fd0a17a4529eab0ced33daa7d25a7a2c9fe8bb541eb4bbd6d93d06",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.feature"
+      ]
+    },
+    {
+      "path": "scenarios/reject-embedded-credential-material.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "3ba0fce6141a95d0eeef251e465382d69303c1f73bd86a3b2e46b633e4993b85",
+      "digest": "sha256:3ba0fce6141a95d0eeef251e465382d69303c1f73bd86a3b2e46b633e4993b85",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.feature"
+      ]
+    },
+    {
+      "path": "scenarios/reject-mismatched-credential-invocation-identity.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "5e85d2fa92288232804e42b74f920db4196a54fcdfb24e0b7b952d34f9d4dfaa",
+      "digest": "sha256:5e85d2fa92288232804e42b74f920db4196a54fcdfb24e0b7b952d34f9d4dfaa",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.feature"
+      ]
+    },
+    {
+      "path": "scenarios/reject-stale-or-replayed-credential-binding.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "3bca6d208d238b77fd61c6c4ba1444cdf9396ab30ee6db75d5b02f5b6f71f3fb",
+      "digest": "sha256:3bca6d208d238b77fd61c6c4ba1444cdf9396ab30ee6db75d5b02f5b6f71f3fb",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.feature"
+      ]
+    },
+    {
+      "path": "scenarios/reject-unauthorized-external-credential-reference.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "da1ec9770b0db48458c42ad255e91767ed9d7f2fa6a35be21ad9fb9422626bb7",
+      "digest": "sha256:da1ec9770b0db48458c42ad255e91767ed9d7f2fa6a35be21ad9fb9422626bb7",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/bind-external-credential-reference/capability.feature"
+      ]
+    },
+    {
+      "path": "telemetry/expected-trace.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "57bd75468653ad62819c3705548d752ee0e411cbb3dff9c8d53c0d923bb575d6",
+      "digest": "sha256:57bd75468653ad62819c3705548d752ee0e411cbb3dff9c8d53c0d923bb575d6",
+      "sourcePointers": [
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
+        "kernel/contracts/execution/scenario-kernel-execution-vector.json"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.agentic-harness.local/contracts/input.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contractId", "payload"],
+  "properties": {
+    "contractId": {
+      "const": "capsule-first-repository-closure-request.v1"
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bootstrapManifestDigest",
+        "capsuleEstateManifestDigest",
+        "proof",
+        "findings"
+      ],
+      "properties": {
+        "bootstrapManifestDigest": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "capsuleEstateManifestDigest": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "proof": {
+          "$ref": "#/$defs/capsuleProof"
+        },
+        "findings": {
+          "type": "array",
+          "items": { "type": "object" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "countPair": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tests", "passed", "failed", "skipped", "todo"],
+      "properties": {
+        "tests": { "type": "integer", "minimum": 0 },
+        "passed": { "type": "integer", "minimum": 0 },
+        "failed": { "type": "integer", "minimum": 0 },
+        "skipped": { "type": "integer", "minimum": 0 },
+        "todo": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "capsuleProof": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "proofType",
+        "capsuleCount",
+        "capsuleEntryCount",
+        "dependencies",
+        "sharedAuthorityEntries",
+        "directExecution",
+        "expansion",
+        "projection",
+        "proof",
+        "broken"
+      ],
+      "properties": {
+        "proofType": { "const": "capsule-first-sterile-checkout-proof.v1" },
+        "capsuleCount": { "type": "integer", "minimum": 0 },
+        "capsuleEntryCount": { "type": "integer", "minimum": 0 },
+        "dependencies": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["declaredDependencies", "present", "toolRootsDeclared", "toolRootsPresent"],
+          "properties": {
+            "declaredDependencies": { "type": "integer", "minimum": 0 },
+            "present": { "type": "integer", "minimum": 0 },
+            "toolRootsDeclared": { "type": "integer", "minimum": 0 },
+            "toolRootsPresent": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "sharedAuthorityEntries": { "type": "integer", "minimum": 0 },
+        "directExecution": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["eligible", "reconstructedEntryCount", "fixtureCount", "tests", "passed", "failed", "skipped", "todo", "broken"],
+          "properties": {
+            "eligible": { "type": "integer", "minimum": 0 },
+            "reconstructedEntryCount": { "type": "integer", "minimum": 0 },
+            "fixtureCount": { "type": "integer", "minimum": 0 },
+            "tests": { "type": "integer", "minimum": 0 },
+            "passed": { "type": "integer", "minimum": 0 },
+            "failed": { "type": "integer", "minimum": 0 },
+            "skipped": { "type": "integer", "minimum": 0 },
+            "todo": { "type": "integer", "minimum": 0 },
+            "broken": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "expansion": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["capabilityCount", "entryCount"],
+          "properties": {
+            "capabilityCount": { "type": "integer", "minimum": 0 },
+            "entryCount": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "projection": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["eligible", "projected", "broken"],
+          "properties": {
+            "eligible": { "type": "integer", "minimum": 0 },
+            "projected": { "type": "integer", "minimum": 0 },
+            "broken": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "proof": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["pretest", "aggregate"],
+          "properties": {
+            "pretest": { "$ref": "#/$defs/countPair" },
+            "aggregate": { "$ref": "#/$defs/countPair" }
+          }
+        },
+        "broken": { "type": "integer", "minimum": 0 }
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "scenarioId": "prove-single-http-exchange-authority",
+  "input": {
+    "inputId": "governed-http-exchange-count-observations",
+    "contract": {
+      "contractId": "observe-governed-http-exchange-input.v1"
+    }
+  },
+  "event": {
+    "eventId": "single-http-exchange-authority-proof-requested",
+    "executionAuthorityId": "prove-single-http-exchange-authority.v1"
+  },
+  "outcome": {
+    "outcomeId": "single-http-exchange-authority-evidence",
+    "contract": {
+      "contractId": "governed-http-exchange-evidence.v1"
+    },
+    "experience": {
+      "statement": "at most one authorized destination exchange occurred with no hidden retry, out-of-policy redirect, alternate endpoint, or provider substitution"
+    },
+    "terminal": true
+  },
+  "gherkin": {
+    "given": {
+      "semanticRef": "prove-single-http-exchange-authority.given",
+      "text": "observations from success, non-success, timeout, cancellation, transport failure, and oversized-response paths"
+    },
+    "when": {
+      "semanticRef": "prove-single-http-exchange-authority.when",
+      "text": "transport effect count and destination lineage are evaluated"
+    },
+    "then": {
+      "semanticRef": "prove-single-http-exchange-authority.then",
+      "text": "at most one authorized destination exchange occurred with no hidden retry, out-of-policy redirect, alternate endpoint, or provider substitution"
+    }
+  },
+  "name": "Prove the transport performs no retry redirect escape or substitution"
+}

@@ -1,0 +1,38 @@
+{
+  "scenarioId": "normalize-provider-http-failure-testimony",
+  "input": {
+    "inputId": "provider-http-failure-normalization",
+    "contract": {
+      "contractId": "project-model-provider-protocol-input.v1"
+    }
+  },
+  "event": {
+    "eventId": "provider-http-failure-normalization-requested",
+    "executionAuthorityId": "normalize-provider-http-failure-testimony.v1"
+  },
+  "outcome": {
+    "outcomeId": "provider-http-failure-normalization",
+    "contract": {
+      "contractId": "model-provider-protocol-projection-evidence.v1"
+    },
+    "experience": {
+      "statement": "the exact provider code and message survive as observed testimony and the canonical disposition maps authentication, timeout, availability, and request-rejection statuses without classifying meaning"
+    },
+    "terminal": true
+  },
+  "gherkin": {
+    "given": {
+      "semanticRef": "normalize-provider-http-failure-testimony.given",
+      "text": "one provider HTTP observation with status and parsed error payload and the provider status classification authority"
+    },
+    "when": {
+      "semanticRef": "normalize-provider-http-failure-testimony.when",
+      "text": "provider HTTP failure testimony is normalized"
+    },
+    "then": {
+      "semanticRef": "normalize-provider-http-failure-testimony.then",
+      "text": "the exact provider code and message survive as observed testimony and the canonical disposition maps authentication, timeout, availability, and request-rejection statuses without classifying meaning"
+    }
+  },
+  "name": "Map one provider HTTP failure into canonical provider disposition testimony"
+}

@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.agentic-harness.local/model-provider-embodiment-resolution.v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "carrierType",
+    "requestId",
+    "requestHash",
+    "modelRequest",
+    "requestLineage",
+    "payload"
+  ],
+  "properties": {
+    "carrierType": {
+      "const": "governed-model-invocation-request.v1"
+    },
+    "requestId": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9.-]*$"
+    },
+    "requestHash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "modelRequest": {
+      "type": "object"
+    },
+    "providerConveyor": {
+      "type": "object"
+    },
+    "requestLineage": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "payload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "resolutionStatus"
+      ],
+      "properties": {
+        "resolutionStatus": {
+          "enum": [
+            "EMBODIMENT_AUTHORIZED",
+            "SUBSTITUTION_NOT_AUTHORIZED",
+            "ALIAS_REJECTED"
+          ]
+        },
+        "resolvedProviderAuthorityId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "resolvedModel": {
+          "type": "string",
+          "minLength": 1
+        },
+        "adapterIdentity": {
+          "type": "string",
+          "minLength": 1
+        },
+        "credentialReference": {
+          "type": "string",
+          "minLength": 1
+        },
+        "aliasResolutionLineage": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "rejectedAlias": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rejectedProviderAuthority": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

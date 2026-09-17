@@ -1,0 +1,38 @@
+{
+  "scenarioId": "continue-transient-model-attempt",
+  "input": {
+    "inputId": "transient-model-attempt-with-continuation-authority",
+    "contract": {
+      "contractId": "execute-governed-model-invocation-input.v1"
+    }
+  },
+  "event": {
+    "eventId": "transient-model-attempt-continuation-requested",
+    "executionAuthorityId": "continue-transient-model-attempt.v1"
+  },
+  "outcome": {
+    "outcomeId": "continued-model-attempt-evidence",
+    "contract": {
+      "contractId": "governed-model-invocation-evidence.v1"
+    },
+    "experience": {
+      "statement": "exactly one next attempt against the unchanged provider binding is eligible and both attempts retain ordered testimony and one stable request identity"
+    },
+    "terminal": true
+  },
+  "gherkin": {
+    "given": {
+      "semanticRef": "continue-transient-model-attempt.given",
+      "text": "one transient timeout or unavailable disposition, an explicit continuation rule, and unused attempt authority"
+    },
+    "when": {
+      "semanticRef": "continue-transient-model-attempt.when",
+      "text": "attempt continuation is determined"
+    },
+    "then": {
+      "semanticRef": "continue-transient-model-attempt.then",
+      "text": "exactly one next attempt against the unchanged provider binding is eligible and both attempts retain ordered testimony and one stable request identity"
+    }
+  },
+  "name": "Continue after transient testimony only when explicitly authorized"
+}

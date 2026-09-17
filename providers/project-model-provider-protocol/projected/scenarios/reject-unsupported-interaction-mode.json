@@ -1,0 +1,38 @@
+{
+  "scenarioId": "reject-unsupported-interaction-mode",
+  "input": {
+    "inputId": "unsupported-interaction-mode-projection",
+    "contract": {
+      "contractId": "project-model-provider-protocol-input.v1"
+    }
+  },
+  "event": {
+    "eventId": "unsupported-interaction-mode-projection-requested",
+    "executionAuthorityId": "reject-unsupported-interaction-mode.v1"
+  },
+  "outcome": {
+    "outcomeId": "unsupported-interaction-mode-rejection",
+    "contract": {
+      "contractId": "model-provider-protocol-projection-evidence.v1"
+    },
+    "experience": {
+      "statement": "the unsupported mode or format is rejected without inventing a mapping, loading a fallback, or performing an external effect"
+    },
+    "terminal": true
+  },
+  "gherkin": {
+    "given": {
+      "semanticRef": "reject-unsupported-interaction-mode.given",
+      "text": "a provider-neutral context whose interaction mode or response format is not declared by the resolved adapter authority"
+    },
+    "when": {
+      "semanticRef": "reject-unsupported-interaction-mode.when",
+      "text": "adapter capability compatibility is evaluated"
+    },
+    "then": {
+      "semanticRef": "reject-unsupported-interaction-mode.then",
+      "text": "the unsupported mode or format is rejected without inventing a mapping, loading a fallback, or performing an external effect"
+    }
+  },
+  "name": "Reject an interaction mode or response format absent from adapter authority"
+}

@@ -1,0 +1,38 @@
+{
+  "scenarioId": "establish-governed-model-response-evidence",
+  "input": {
+    "inputId": "governed-provider-testimony",
+    "contract": {
+      "contractId": "governed-provider-testimony.v1"
+    }
+  },
+  "event": {
+    "eventId": "establish-governed-model-response-evidence",
+    "executionAuthorityId": "establish-governed-model-response-evidence.v1"
+  },
+  "outcome": {
+    "outcomeId": "governed-model-response-observed",
+    "contract": {
+      "contractId": "governed-model-response-evidence.v1"
+    },
+    "experience": {
+      "statement": "the exact normalized response or governed failure disposition is established with full lineage and no acceptance claim, and no testimony is repaired or reinterpreted"
+    },
+    "terminal": true
+  },
+  "gherkin": {
+    "given": {
+      "semanticRef": "establish-governed-model-response-evidence.given",
+      "text": "one governed provider testimony with its full provider, model, attempt, timing, and hash lineage"
+    },
+    "when": {
+      "semanticRef": "establish-governed-model-response-evidence.when",
+      "text": "the governed model response evidence is established from the testimony"
+    },
+    "then": {
+      "semanticRef": "establish-governed-model-response-evidence.then",
+      "text": "the exact normalized response or governed failure disposition is established with full lineage and no acceptance claim, and no testimony is repaired or reinterpreted"
+    }
+  },
+  "name": "Establish the governed model response evidence"
+}

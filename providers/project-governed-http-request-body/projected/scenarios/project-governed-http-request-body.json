@@ -1,0 +1,38 @@
+{
+  "scenarioId": "project-governed-http-request-body",
+  "input": {
+    "inputId": "governed-http-request-body-projection-request",
+    "contract": {
+      "contractId": "project-governed-http-request-body-input.v1"
+    }
+  },
+  "event": {
+    "eventId": "governed-http-request-body-projection-requested",
+    "executionAuthorityId": "project-governed-http-request-body.v1"
+  },
+  "outcome": {
+    "outcomeId": "governed-http-request-body-projection",
+    "contract": {
+      "contractId": "governed-http-request-body-projection-evidence.v1"
+    },
+    "experience": {
+      "statement": "canonical compact JSON text, UTF-8 encoding authority, application/json media type, exact text digest, preserved identities, and zero network exchanges are returned without base64, executable mechanics, credential material, retry, repair, provider substitution, or remote-testimony claims"
+    },
+    "terminal": true
+  },
+  "gherkin": {
+    "given": {
+      "semanticRef": "project-governed-http-request-body.given",
+      "text": "one admitted credential-free provider wire-request document, provider adapter identity, invocation identity, and projection authority identity"
+    },
+    "when": {
+      "semanticRef": "project-governed-http-request-body.when",
+      "text": "the governed HTTP request body is projected"
+    },
+    "then": {
+      "semanticRef": "project-governed-http-request-body.then",
+      "text": "canonical compact JSON text, UTF-8 encoding authority, application/json media type, exact text digest, preserved identities, and zero network exchanges are returned without base64, executable mechanics, credential material, retry, repair, provider substitution, or remote-testimony claims"
+    }
+  },
+  "name": "Project one provider wire request into exact canonical JSON text"
+}

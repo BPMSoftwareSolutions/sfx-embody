@@ -1,0 +1,38 @@
+{
+  "scenarioId": "project-openai-structured-request",
+  "input": {
+    "inputId": "openai-structured-protocol-projection-request",
+    "contract": {
+      "contractId": "project-model-provider-protocol-input.v1"
+    }
+  },
+  "event": {
+    "eventId": "openai-structured-protocol-projection-requested",
+    "executionAuthorityId": "project-openai-structured-request.v1"
+  },
+  "outcome": {
+    "outcomeId": "openai-structured-protocol-projection",
+    "contract": {
+      "contractId": "model-provider-protocol-projection-evidence.v1"
+    },
+    "experience": {
+      "statement": "the body declares JSON response format and a provider-compatible response schema that keeps only the admitted schema vocabulary and never passes unsupported keywords"
+    },
+    "terminal": true
+  },
+  "gherkin": {
+    "given": {
+      "semanticRef": "project-openai-structured-request.given",
+      "text": "one structured-generation context bound to the OpenAI adapter with an admitted JSON response policy schema"
+    },
+    "when": {
+      "semanticRef": "project-openai-structured-request.when",
+      "text": "the OpenAI structured protocol is projected"
+    },
+    "then": {
+      "semanticRef": "project-openai-structured-request.then",
+      "text": "the body declares JSON response format and a provider-compatible response schema that keeps only the admitted schema vocabulary and never passes unsupported keywords"
+    }
+  },
+  "name": "Map a structured-generation context to an OpenAI request with a translated response schema"
+}

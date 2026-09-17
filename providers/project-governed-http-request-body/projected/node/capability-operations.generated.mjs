@@ -1,0 +1,460 @@
+// GENERATED CAPABILITY OPERATIONS. Do not hand-edit.
+import crypto from "node:crypto";
+import fs from "node:fs";
+import { bindValueAt, valueAt } from "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/native-mechanic-primitives.mjs";
+
+const descriptorDocument = JSON.parse(fs.readFileSync(new URL("./execution-operations.json", import.meta.url), "utf8"));
+const descriptors = Array.isArray(descriptorDocument.operations) ? descriptorDocument.operations : [];
+export const cellContracts = Object.freeze({"cell:mechanic:project-governed-http-request-body.operation.1":{"inputContractId":"project-governed-http-request-body-input.v1","outcomeContractId":"governed-http-request-body-projection-evidence.v1"},"cell:mechanic:project-governed-http-request-body.operation.1:expression":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:project-governed-http-request-body.operation.1:expression.bindings.requestBodyText":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:project-governed-http-request-body.operation.1:expression.bindings.requestBodyText.value":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:project-governed-http-request-body.operation.1:expression.value":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:project-governed-http-request-body.operation.1:expression.value.fields.contractId":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:project-governed-http-request-body.operation.1:expression.value.fields.payload":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:project-governed-http-request-body.operation.1:expression.value.fields.payload.fields.acceptanceClaimed":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:project-governed-http-request-body.operation.1:expression.value.fields.payload.fields.invocationIdentity":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:project-governed-http-request-body.operation.1:expression.value.fields.payload.fields.mediaType":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:project-governed-http-request-body.operation.1:expression.value.fields.payload.fields.networkExchangeCount":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:project-governed-http-request-body.operation.1:expression.value.fields.payload.fields.projectionAuthorityIdentity":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:project-governed-http-request-body.operation.1:expression.value.fields.payload.fields.providerAdapterIdentity":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:project-governed-http-request-body.operation.1:expression.value.fields.payload.fields.providerSubstitutionCount":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:project-governed-http-request-body.operation.1:expression.value.fields.payload.fields.remoteTestimonyClaimed":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:project-governed-http-request-body.operation.1:expression.value.fields.payload.fields.repairCount":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:project-governed-http-request-body.operation.1:expression.value.fields.payload.fields.requestBodyText":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:project-governed-http-request-body.operation.1:expression.value.fields.payload.fields.requestTextDigest":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:project-governed-http-request-body.operation.1:expression.value.fields.payload.fields.requestTextDigest.values.digest":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:project-governed-http-request-body.operation.1:expression.value.fields.payload.fields.requestTextDigest.values.digest.value":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:project-governed-http-request-body.operation.1:expression.value.fields.payload.fields.retryCount":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:mechanic:project-governed-http-request-body.operation.1:expression.value.fields.payload.fields.textEncodingAuthority":{"inputContractId":"semantic-value.v1","outcomeContractId":"semantic-value.v1"},"cell:scenario:project-governed-http-request-body":{"inputContractId":"project-governed-http-request-body-input.v1","outcomeContractId":"governed-http-request-body-projection-evidence.v1"}});
+
+function sfxValueAt(source, dottedPath) {
+  return valueAt(source, dottedPath) ?? null;
+}
+function sfxTruthy(value) {
+  if (value === null || value === undefined || value === false) return false;
+  if (typeof value === "number") return value !== 0 && !Number.isNaN(value);
+  if (value === "") return false;
+  if (Array.isArray(value)) return value.length > 0;
+  if (typeof value === "object") return Object.keys(value).length > 0;
+  return true;
+}
+function sfxNotAdmitted(code) {
+  const error = new Error(code);
+  error.code = code;
+  throw error;
+}
+function sfxIsPrimitive(value) {
+  return value === null || typeof value === "string" || typeof value === "number" || typeof value === "boolean";
+}
+function sfxIsObject(value) {
+  return value !== null && typeof value === "object" && !Array.isArray(value);
+}
+function sfxEquals(left, right) {
+  if (!sfxIsPrimitive(left) || !sfxIsPrimitive(right)) sfxNotAdmitted("OPERAND_NOT_PRIMITIVE");
+  return left === right;
+}
+function sfxGreaterThan(left, right) {
+  const ordered = (typeof left === "number" && typeof right === "number") || (typeof left === "string" && typeof right === "string");
+  if (!ordered) sfxNotAdmitted("OPERAND_NOT_ORDERED");
+  return left > right;
+}
+function sfxLength(value) {
+  if (typeof value !== "string" && !Array.isArray(value)) sfxNotAdmitted("OPERAND_NOT_MEASURABLE");
+  return value.length;
+}
+function sfxMerge(...values) {
+  for (const value of values) if (value !== null && !sfxIsObject(value)) sfxNotAdmitted("OPERAND_NOT_OBJECT");
+  return Object.assign({}, ...values);
+}
+function sfxJoin(value, separator) {
+  for (const member of value) if (member !== null && member !== undefined && typeof member === "object") sfxNotAdmitted("OPERAND_NOT_PRIMITIVE");
+  return value.join(separator);
+}
+function sfxFormat(template, values) {
+  const coerced = Object.entries(values).map(([key, value]) => {
+    if (value === null || value === undefined) return [key, "null"];
+    if (typeof value === "boolean") return [key, value ? "true" : "false"];
+    if (typeof value === "number") return [key, String(value)];
+    if (typeof value === "string") return [key, value];
+    sfxNotAdmitted("OPERAND_NOT_PRIMITIVE");
+  });
+  return coerced.reduce((text, [key, value]) => text.replaceAll("{" + key + "}", value), template);
+}
+function sfxUnique(value) {
+  for (const member of value) if (!sfxIsPrimitive(member)) sfxNotAdmitted("OPERAND_NOT_PRIMITIVE");
+  return [...new Set(value)];
+}
+function sfxObjectValues(value) {
+  if (!sfxIsObject(value)) sfxNotAdmitted("OPERAND_NOT_OBJECT");
+  return Object.keys(value).sort().map((key) => value[key]);
+}
+function sfxParseJson(value) {
+  if (value === null || typeof value !== "string") sfxNotAdmitted("OPERAND_NOT_PRIMITIVE");
+  try { return JSON.parse(value); }
+  catch { sfxNotAdmitted("VALUE_NOT_PARSABLE"); }
+}
+function sfxTryParseJson(value) {
+  if (value === null || value === undefined) return { disposition: "NOT_PARSED", value: null };
+  try { return { disposition: "PARSED", value: JSON.parse(value) }; }
+  catch { return { disposition: "NOT_PARSED", value: null }; }
+}
+function sfxIntersects(left, right) {
+  const members = new Set(right);
+  return left.some((value) => members.has(value));
+}
+function sfxTrim(value) {
+  return String(value).trim();
+}
+function sfxLowerCase(value) {
+  return String(value).toLowerCase();
+}
+function sfxEscapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;").replaceAll("'", "&#39;");
+}
+function sfxSha256(value) {
+  return crypto.createHash("sha256").update(String(value)).digest("hex");
+}
+function sfxBase64DecodeUtf8(value) {
+  return Buffer.from(String(value), "base64").toString("utf8");
+}
+function sfxJsonStringify(value) {
+  return JSON.stringify(value);
+}
+function sfxCanonicalize(value) {
+  if (Array.isArray(value)) return value.map(sfxCanonicalize);
+  if (!value || typeof value !== "object") return value;
+  return Object.fromEntries(Object.keys(value).sort().map((key) => [key, sfxCanonicalize(value[key])]));
+}
+function sfxDirectedGraphClosure(value) {
+  const graphInputValid = Boolean(value && typeof value === "object" && !Array.isArray(value));
+  const graph = graphInputValid ? value : {};
+  const declaredNodeIds = Array.isArray(graph.nodeIds) ? graph.nodeIds : [];
+  const declaredEdges = Array.isArray(graph.edges) ? graph.edges : [];
+  const declaredRootNodeIds = Array.isArray(graph.rootNodeIds) ? graph.rootNodeIds : [];
+  const declaredTerminalNodeIds = Array.isArray(graph.terminalNodeIds) ? graph.terminalNodeIds : [];
+  const findings = [];
+  const findingKeys = new Set();
+  const addFinding = (code, subjectId) => {
+    const key = code + "\u0000" + subjectId;
+    if (findingKeys.has(key)) return;
+    findingKeys.add(key);
+    findings.push({ code, subjectId });
+  };
+  const lexical = (left, right) => left < right ? -1 : left > right ? 1 : 0;
+  if (!graphInputValid) addFinding("GRAPH_INPUT_INVALID", "input");
+  if (!Array.isArray(graph.nodeIds)) addFinding("GRAPH_NODE_IDS_REQUIRED", "nodeIds");
+  if (!Array.isArray(graph.edges)) addFinding("GRAPH_EDGES_REQUIRED", "edges");
+  if (!Array.isArray(graph.rootNodeIds)) addFinding("GRAPH_ROOT_NODE_IDS_REQUIRED", "rootNodeIds");
+  if (!Array.isArray(graph.terminalNodeIds)) addFinding("GRAPH_TERMINAL_NODE_IDS_REQUIRED", "terminalNodeIds");
+  const nodeCounts = new Map();
+  for (const nodeId of declaredNodeIds) {
+    if (typeof nodeId !== "string" || nodeId.length === 0) {
+      addFinding("GRAPH_NODE_ID_INVALID", String(nodeId));
+      continue;
+    }
+    nodeCounts.set(nodeId, (nodeCounts.get(nodeId) ?? 0) + 1);
+  }
+  for (const [nodeId, count] of nodeCounts) {
+    if (count > 1) addFinding("GRAPH_NODE_ID_DUPLICATE", nodeId);
+  }
+  const nodeIds = [...nodeCounts.keys()].sort(lexical);
+  const nodeSet = new Set(nodeIds);
+  const edgeCounts = new Map();
+  const edges = [];
+  for (const edge of declaredEdges) {
+    if (!edge || typeof edge !== "object" || Array.isArray(edge)
+      || typeof edge.edgeId !== "string" || edge.edgeId.length === 0
+      || typeof edge.from !== "string" || edge.from.length === 0
+      || typeof edge.to !== "string" || edge.to.length === 0) {
+      addFinding("GRAPH_EDGE_INVALID", String(edge?.edgeId ?? ""));
+      continue;
+    }
+    edgeCounts.set(edge.edgeId, (edgeCounts.get(edge.edgeId) ?? 0) + 1);
+    edges.push({ edgeId: edge.edgeId, from: edge.from, to: edge.to });
+  }
+  for (const [edgeId, count] of edgeCounts) {
+    if (count > 1) addFinding("GRAPH_EDGE_ID_DUPLICATE", edgeId);
+  }
+  edges.sort((left, right) => lexical(left.edgeId, right.edgeId)
+    || lexical(left.from, right.from) || lexical(left.to, right.to));
+  for (const edge of edges) {
+    if (!nodeSet.has(edge.from)) addFinding("GRAPH_EDGE_SOURCE_UNRESOLVED", edge.edgeId);
+    if (!nodeSet.has(edge.to)) addFinding("GRAPH_EDGE_TARGET_UNRESOLVED", edge.edgeId);
+  }
+  const normalizeDeclaredNodes = (values, invalidCode, invalidIdentityCode) => {
+    for (const nodeId of values) {
+      if (typeof nodeId !== "string" || nodeId.length === 0) addFinding(invalidIdentityCode, String(nodeId));
+    }
+    const normalized = [...new Set(values.filter((nodeId) => typeof nodeId === "string" && nodeId.length > 0))].sort(lexical);
+    for (const nodeId of normalized) if (!nodeSet.has(nodeId)) addFinding(invalidCode, nodeId);
+    return normalized.filter((nodeId) => nodeSet.has(nodeId));
+  };
+  const rootNodeIds = normalizeDeclaredNodes(declaredRootNodeIds, "GRAPH_ROOT_NODE_UNRESOLVED", "GRAPH_ROOT_NODE_ID_INVALID");
+  const terminalNodeIds = normalizeDeclaredNodes(declaredTerminalNodeIds, "GRAPH_TERMINAL_NODE_UNRESOLVED", "GRAPH_TERMINAL_NODE_ID_INVALID");
+  const terminalNodeSet = new Set(terminalNodeIds);
+  findings.sort((left, right) => lexical(left.code, right.code) || lexical(left.subjectId, right.subjectId));
+  if (findings.length > 0) {
+    return {
+      disposition: "REJECTED",
+      nodeIds,
+      edgeIds: [...new Set(edges.map((edge) => edge.edgeId))].sort(lexical),
+      rootNodeIds,
+      terminalNodeIds,
+      reachableNodeIds: [],
+      unreachableNodeIds: nodeIds,
+      traversalNodeIds: [],
+      traversalEdgeIds: [],
+      reachablePairs: [],
+      terminalReachability: [],
+      cycleComponents: [],
+      cycleEdgeIds: [],
+      fixedPointPasses: 0,
+      findings
+    };
+  }
+  const adjacency = new Map(nodeIds.map((nodeId) => [nodeId, []]));
+  for (const edge of edges) adjacency.get(edge.from).push(edge);
+  for (const outgoing of adjacency.values()) outgoing.sort((left, right) => lexical(left.to, right.to) || lexical(left.edgeId, right.edgeId));
+  const closureFrom = (startNodeId) => {
+    const reached = new Set([startNodeId]);
+    let frontier = [startNodeId];
+    let passes = 0;
+    while (frontier.length > 0) {
+      const next = new Set();
+      for (const nodeId of frontier.sort(lexical)) {
+        for (const edge of adjacency.get(nodeId)) {
+          if (!reached.has(edge.to)) {
+            reached.add(edge.to);
+            next.add(edge.to);
+          }
+        }
+      }
+      frontier = [...next];
+      passes += 1;
+    }
+    return { reached: [...reached].sort(lexical), passes };
+  };
+  const closures = new Map(nodeIds.map((nodeId) => [nodeId, closureFrom(nodeId)]));
+  const reachablePairs = nodeIds.flatMap((from) => closures.get(from).reached.map((to) => ({ from, to })));
+  const reachableNodeSet = new Set(rootNodeIds.flatMap((rootNodeId) => closures.get(rootNodeId).reached));
+  const reachableNodeIds = [...reachableNodeSet].sort(lexical);
+  const unreachableNodeIds = nodeIds.filter((nodeId) => !reachableNodeSet.has(nodeId));
+  const traversalNodeIds = [];
+  const traversalEdgeIds = [];
+  const traversedNodes = new Set();
+  const traversedEdges = new Set();
+  let frontier = [...rootNodeIds];
+  while (frontier.length > 0) {
+    const nodeId = frontier.shift();
+    if (traversedNodes.has(nodeId)) continue;
+    traversedNodes.add(nodeId);
+    traversalNodeIds.push(nodeId);
+    for (const edge of adjacency.get(nodeId)) {
+      if (!traversedEdges.has(edge.edgeId)) {
+        traversedEdges.add(edge.edgeId);
+        traversalEdgeIds.push(edge.edgeId);
+      }
+      if (!traversedNodes.has(edge.to)) frontier.push(edge.to);
+    }
+    frontier.sort(lexical);
+  }
+  const terminalReachability = nodeIds.map((nodeId) => ({
+    nodeId,
+    terminalNodeIds: closures.get(nodeId).reached.filter((reachableNodeId) => terminalNodeSet.has(reachableNodeId))
+  }));
+  const assignedCycleNodes = new Set();
+  const cycleComponents = [];
+  for (const nodeId of nodeIds) {
+    if (assignedCycleNodes.has(nodeId)) continue;
+    const mutuallyReachable = nodeIds.filter((candidateNodeId) =>
+      closures.get(nodeId).reached.includes(candidateNodeId)
+      && closures.get(candidateNodeId).reached.includes(nodeId));
+    const hasSelfLoop = edges.some((edge) => edge.from === nodeId && edge.to === nodeId);
+    if (mutuallyReachable.length > 1 || hasSelfLoop) {
+      for (const member of mutuallyReachable) assignedCycleNodes.add(member);
+      cycleComponents.push(mutuallyReachable);
+    }
+  }
+  cycleComponents.sort((left, right) => lexical(left.join("\u0000"), right.join("\u0000")));
+  const cycleComponentByNode = new Map(cycleComponents.flatMap((component, index) => component.map((nodeId) => [nodeId, index])));
+  const cycleEdgeIds = edges
+    .filter((edge) => cycleComponentByNode.has(edge.from)
+      && cycleComponentByNode.get(edge.from) === cycleComponentByNode.get(edge.to))
+    .map((edge) => edge.edgeId)
+    .sort(lexical);
+  return {
+    disposition: "CLOSED",
+    nodeIds,
+    edgeIds: edges.map((edge) => edge.edgeId),
+    rootNodeIds,
+    terminalNodeIds,
+    reachableNodeIds,
+    unreachableNodeIds,
+    traversalNodeIds,
+    traversalEdgeIds,
+    reachablePairs,
+    terminalReachability,
+    cycleComponents,
+    cycleEdgeIds,
+    fixedPointPasses: Math.max(0, ...[...closures.values()].map((closure) => closure.passes)),
+    findings: []
+  };
+}
+
+async function invokeDeclaredOperation(descriptor, input, context) {
+  const configuration = descriptor && descriptor.configuration && typeof descriptor.configuration === "object" ? descriptor.configuration : {};
+  if (descriptor.sourceUnit === "identity") return input;
+  const binding = configuration.binding && typeof configuration.binding === "object" ? configuration.binding : undefined;
+  const sourceConfiguration = binding && binding.configuration && typeof binding.configuration === "object" ? binding.configuration : configuration;
+  if (descriptor.composition === "declarative-value") {
+    if (Object.hasOwn(sourceConfiguration, "outcome")) return structuredClone(sourceConfiguration.outcome);
+    throw new Error("CAPABILITY_PROJECTION_MECHANIC_UNRESOLVED: '" + descriptor.mechanicId + "'.");
+  }
+  if (descriptor.composition === "declarative-output") {
+    if (Object.hasOwn(sourceConfiguration, "output")) return structuredClone(sourceConfiguration.output);
+    throw new Error("CAPABILITY_PROJECTION_MECHANIC_UNRESOLVED: '" + descriptor.mechanicId + "'.");
+  }
+  if (sourceConfiguration.invocationCondition !== undefined) {
+    const condition = sourceConfiguration.invocationCondition;
+    if (!condition || typeof condition.path !== "string" || !Object.hasOwn(condition, "equals") || condition.whenFalse !== "preserve-carrier") {
+      throw new Error("DIRECT_PROVIDER_INVOCATION_CONDITION_INVALID");
+    }
+    if (valueAt(input, condition.path) !== condition.equals) return structuredClone(input);
+  }
+  const providerModulePath = descriptor.providerModuleRef || descriptor.providerModule;
+  const providerExportName = descriptor.providerExport;
+  if (!providerModulePath || !providerExportName) throw new Error("CAPABILITY_PROJECTION_MECHANIC_UNRESOLVED: '" + descriptor.mechanicId + "'.");
+  const providerModule = await import(new URL(providerModulePath, import.meta.url).href);
+  const exported = providerModule[providerExportName];
+  if (typeof exported !== "function") throw new Error("CAPABILITY_PROJECTION_MECHANIC_UNRESOLVED: '" + descriptor.mechanicId + "'.");
+  const provider = descriptor.factory === true
+    ? exported({ readQuery: context && context.readQuery, databaseRoot: context && context.databaseRoot, effectContext: context && context.effectContext, bindingUrl: context && context.bindingUrl })
+    : exported;
+  if (descriptor.sourceUnit === "declared-read") return provider(input, context);
+  if (sourceConfiguration.requestPath === undefined && sourceConfiguration.resultPath === undefined) {
+    if (descriptor.invocation === "url-context") return provider(sourceConfiguration, input, context && context.bindingUrl);
+    if (descriptor.invocation === "effects") return provider(sourceConfiguration, input, context, context && context.effectContext);
+    return provider(sourceConfiguration, input, context, context && context.bindingUrl);
+  }
+  if (typeof sourceConfiguration.requestPath !== "string" || typeof sourceConfiguration.resultPath !== "string") {
+    throw new Error("DIRECT_PROVIDER_CARRIER_BINDING_INVALID");
+  }
+  const request = valueAt(input, sourceConfiguration.requestPath);
+  if (request === undefined) throw new Error("DIRECT_PROVIDER_REQUEST_PATH_MISSING: '" + sourceConfiguration.requestPath + "'");
+  const outcome = descriptor.invocation === "effects"
+    ? await provider(sourceConfiguration, request, context, context && context.effectContext)
+    : await provider(sourceConfiguration, request, context, context && context.bindingUrl);
+  return bindValueAt(input, sourceConfiguration.resultPath, outcome);
+}
+
+const operationDescriptorByCellId = Object.freeze(Object.fromEntries(descriptors.map((descriptor) => [descriptor.cellId, descriptor])));
+const scenarioByScenarioId = Object.freeze(Object.fromEntries((descriptorDocument.scenarios ?? []).map((scenario) => [scenario.scenarioId, scenario])));
+const scenarioByExitCellId = Object.freeze(Object.fromEntries((descriptorDocument.scenarios ?? []).map((scenario) => [scenario.exitCellId, scenario])));
+const rootScenarioId = typeof descriptorDocument.rootScenarioId === "string" ? descriptorDocument.rootScenarioId : undefined;
+const conformanceClosures = Object.freeze([...(descriptorDocument.conformanceClosures ?? [])]);
+
+export { conformanceClosures, operationDescriptorByCellId, rootScenarioId, scenarioByExitCellId, scenarioByScenarioId };
+
+export function operation0(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (((scope) => { scope = { ...scope, ["requestBodyText"]: (sfxJsonStringify(sfxValueAt(scope["input"], "payload.wireRequestDocument"))) }; return Object.fromEntries([["contractId", (structuredClone("governed-http-request-body-projection-evidence.v1") ?? null)], ["payload", (Object.fromEntries([["acceptanceClaimed", (structuredClone(false) ?? null)], ["invocationIdentity", (sfxValueAt(scope["input"], "payload.invocationIdentity") ?? null)], ["mediaType", (structuredClone("application/json") ?? null)], ["networkExchangeCount", (structuredClone(0) ?? null)], ["projectionAuthorityIdentity", (sfxValueAt(scope["input"], "payload.projectionAuthorityIdentity") ?? null)], ["providerAdapterIdentity", (sfxValueAt(scope["input"], "payload.providerAdapterIdentity") ?? null)], ["providerSubstitutionCount", (structuredClone(0) ?? null)], ["remoteTestimonyClaimed", (structuredClone(false) ?? null)], ["repairCount", (structuredClone(0) ?? null)], ["requestBodyText", (sfxValueAt(scope["requestBodyText"], "") ?? null)], ["requestTextDigest", (sfxFormat("sha256:{digest}", Object.fromEntries([["digest", (sfxSha256(sfxValueAt(scope["requestBodyText"], "")))]])) ?? null)], ["retryCount", (structuredClone(0) ?? null)], ["textEncodingAuthority", (structuredClone("utf-8") ?? null)]]) ?? null)]]); })(scope));
+}
+
+export function operation1(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (((scope) => { scope = { ...scope, ["requestBodyText"]: (sfxJsonStringify(sfxValueAt(scope["input"], "payload.wireRequestDocument"))) }; return Object.fromEntries([["contractId", (structuredClone("governed-http-request-body-projection-evidence.v1") ?? null)], ["payload", (Object.fromEntries([["acceptanceClaimed", (structuredClone(false) ?? null)], ["invocationIdentity", (sfxValueAt(scope["input"], "payload.invocationIdentity") ?? null)], ["mediaType", (structuredClone("application/json") ?? null)], ["networkExchangeCount", (structuredClone(0) ?? null)], ["projectionAuthorityIdentity", (sfxValueAt(scope["input"], "payload.projectionAuthorityIdentity") ?? null)], ["providerAdapterIdentity", (sfxValueAt(scope["input"], "payload.providerAdapterIdentity") ?? null)], ["providerSubstitutionCount", (structuredClone(0) ?? null)], ["remoteTestimonyClaimed", (structuredClone(false) ?? null)], ["repairCount", (structuredClone(0) ?? null)], ["requestBodyText", (sfxValueAt(scope["requestBodyText"], "") ?? null)], ["requestTextDigest", (sfxFormat("sha256:{digest}", Object.fromEntries([["digest", (sfxSha256(sfxValueAt(scope["requestBodyText"], "")))]])) ?? null)], ["retryCount", (structuredClone(0) ?? null)], ["textEncodingAuthority", (structuredClone("utf-8") ?? null)]]) ?? null)]]); })(scope));
+}
+
+export function operation2(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxJsonStringify(sfxValueAt(scope["input"], "payload.wireRequestDocument")));
+}
+
+export function operation3(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["input"], "payload.wireRequestDocument"));
+}
+
+export function operation4(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (Object.fromEntries([["contractId", (structuredClone("governed-http-request-body-projection-evidence.v1") ?? null)], ["payload", (Object.fromEntries([["acceptanceClaimed", (structuredClone(false) ?? null)], ["invocationIdentity", (sfxValueAt(scope["input"], "payload.invocationIdentity") ?? null)], ["mediaType", (structuredClone("application/json") ?? null)], ["networkExchangeCount", (structuredClone(0) ?? null)], ["projectionAuthorityIdentity", (sfxValueAt(scope["input"], "payload.projectionAuthorityIdentity") ?? null)], ["providerAdapterIdentity", (sfxValueAt(scope["input"], "payload.providerAdapterIdentity") ?? null)], ["providerSubstitutionCount", (structuredClone(0) ?? null)], ["remoteTestimonyClaimed", (structuredClone(false) ?? null)], ["repairCount", (structuredClone(0) ?? null)], ["requestBodyText", (sfxValueAt(scope["requestBodyText"], "") ?? null)], ["requestTextDigest", (sfxFormat("sha256:{digest}", Object.fromEntries([["digest", (sfxSha256(sfxValueAt(scope["requestBodyText"], "")))]])) ?? null)], ["retryCount", (structuredClone(0) ?? null)], ["textEncodingAuthority", (structuredClone("utf-8") ?? null)]]) ?? null)]]));
+}
+
+export function operation5(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (structuredClone("governed-http-request-body-projection-evidence.v1"));
+}
+
+export function operation6(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (Object.fromEntries([["acceptanceClaimed", (structuredClone(false) ?? null)], ["invocationIdentity", (sfxValueAt(scope["input"], "payload.invocationIdentity") ?? null)], ["mediaType", (structuredClone("application/json") ?? null)], ["networkExchangeCount", (structuredClone(0) ?? null)], ["projectionAuthorityIdentity", (sfxValueAt(scope["input"], "payload.projectionAuthorityIdentity") ?? null)], ["providerAdapterIdentity", (sfxValueAt(scope["input"], "payload.providerAdapterIdentity") ?? null)], ["providerSubstitutionCount", (structuredClone(0) ?? null)], ["remoteTestimonyClaimed", (structuredClone(false) ?? null)], ["repairCount", (structuredClone(0) ?? null)], ["requestBodyText", (sfxValueAt(scope["requestBodyText"], "") ?? null)], ["requestTextDigest", (sfxFormat("sha256:{digest}", Object.fromEntries([["digest", (sfxSha256(sfxValueAt(scope["requestBodyText"], "")))]])) ?? null)], ["retryCount", (structuredClone(0) ?? null)], ["textEncodingAuthority", (structuredClone("utf-8") ?? null)]]));
+}
+
+export function operation7(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (structuredClone(false));
+}
+
+export function operation8(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["input"], "payload.invocationIdentity"));
+}
+
+export function operation9(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (structuredClone("application/json"));
+}
+
+export function operation10(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (structuredClone(0));
+}
+
+export function operation11(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["input"], "payload.projectionAuthorityIdentity"));
+}
+
+export function operation12(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["input"], "payload.providerAdapterIdentity"));
+}
+
+export function operation13(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (structuredClone(0));
+}
+
+export function operation14(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (structuredClone(false));
+}
+
+export function operation15(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (structuredClone(0));
+}
+
+export function operation16(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["requestBodyText"], ""));
+}
+
+export function operation17(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxFormat("sha256:{digest}", Object.fromEntries([["digest", (sfxSha256(sfxValueAt(scope["requestBodyText"], "")))]])));
+}
+
+export function operation18(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxSha256(sfxValueAt(scope["requestBodyText"], "")));
+}
+
+export function operation19(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (sfxValueAt(scope["requestBodyText"], ""));
+}
+
+export function operation20(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (structuredClone(0));
+}
+
+export function operation21(input, context) {
+  const scope = { input, root: context && context.rootInput !== undefined ? context.rootInput : input };
+  return (structuredClone("utf-8"));
+}
+
+const implementationByIndex = Object.freeze([operation0, operation1, operation2, operation3, operation4, operation5, operation6, operation7, operation8, operation9, operation10, operation11, operation12, operation13, operation14, operation15, operation16, operation17, operation18, operation19, operation20, operation21]);
+export const operationFunctions = Object.freeze(Object.fromEntries(
+  descriptors.map((descriptor, index) => [descriptor.operationId, implementationByIndex[index]])
+));
+const bindingDescriptors = Object.freeze([]);
+
+const bindingImplementationByIndex = Object.freeze([]);
+export const bindingProjectorByAuthorityId = Object.freeze(Object.fromEntries(
+  bindingDescriptors.map((descriptor, index) => [descriptor.bindingAuthorityId, bindingImplementationByIndex[index]])
+));
+

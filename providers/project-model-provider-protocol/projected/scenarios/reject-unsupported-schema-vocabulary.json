@@ -1,0 +1,38 @@
+{
+  "scenarioId": "reject-unsupported-schema-vocabulary",
+  "input": {
+    "inputId": "unsupported-schema-vocabulary-projection",
+    "contract": {
+      "contractId": "project-model-provider-protocol-input.v1"
+    }
+  },
+  "event": {
+    "eventId": "unsupported-schema-vocabulary-projection-requested",
+    "executionAuthorityId": "reject-unsupported-schema-vocabulary.v1"
+  },
+  "outcome": {
+    "outcomeId": "unsupported-schema-vocabulary-rejection",
+    "contract": {
+      "contractId": "model-provider-protocol-projection-evidence.v1"
+    },
+    "experience": {
+      "statement": "the unsupported keyword is named and no projection is emitted that would be silently dropped or mis-translated by the provider"
+    },
+    "terminal": true
+  },
+  "gherkin": {
+    "given": {
+      "semanticRef": "reject-unsupported-schema-vocabulary.given",
+      "text": "a structured response policy schema declaring vocabulary outside the provider adapter allowlist"
+    },
+    "when": {
+      "semanticRef": "reject-unsupported-schema-vocabulary.when",
+      "text": "schema vocabulary is evaluated"
+    },
+    "then": {
+      "semanticRef": "reject-unsupported-schema-vocabulary.then",
+      "text": "the unsupported keyword is named and no projection is emitted that would be silently dropped or mis-translated by the provider"
+    }
+  },
+  "name": "Reject a response schema using vocabulary the provider cannot translate"
+}

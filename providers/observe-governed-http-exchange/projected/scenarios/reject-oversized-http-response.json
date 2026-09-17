@@ -1,0 +1,38 @@
+{
+  "scenarioId": "reject-oversized-http-response",
+  "input": {
+    "inputId": "oversized-governed-http-response",
+    "contract": {
+      "contractId": "observe-governed-http-exchange-input.v1"
+    }
+  },
+  "event": {
+    "eventId": "oversized-governed-http-response-observed",
+    "executionAuthorityId": "reject-oversized-http-response.v1"
+  },
+  "outcome": {
+    "outcomeId": "oversized-http-response-rejection",
+    "contract": {
+      "contractId": "governed-http-exchange-evidence.v1"
+    },
+    "experience": {
+      "statement": "collection stops at the governed boundary and an oversized-response observation with safe hashes and lineage is returned without persisting or forwarding excess bytes"
+    },
+    "terminal": true
+  },
+  "gherkin": {
+    "given": {
+      "semanticRef": "reject-oversized-http-response.given",
+      "text": "one authorized exchange whose response exceeds the declared maximum bytes"
+    },
+    "when": {
+      "semanticRef": "reject-oversized-http-response.when",
+      "text": "bounded response collection is performed"
+    },
+    "then": {
+      "semanticRef": "reject-oversized-http-response.then",
+      "text": "collection stops at the governed boundary and an oversized-response observation with safe hashes and lineage is returned without persisting or forwarding excess bytes"
+    }
+  },
+  "name": "Enforce the admitted response byte bound"
+}

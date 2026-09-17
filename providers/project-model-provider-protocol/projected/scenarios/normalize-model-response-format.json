@@ -1,0 +1,38 @@
+{
+  "scenarioId": "normalize-model-response-format",
+  "input": {
+    "inputId": "model-response-format-normalization",
+    "contract": {
+      "contractId": "project-model-provider-protocol-input.v1"
+    }
+  },
+  "event": {
+    "eventId": "model-response-format-normalization-requested",
+    "executionAuthorityId": "normalize-model-response-format.v1"
+  },
+  "outcome": {
+    "outcomeId": "model-response-format-normalization",
+    "contract": {
+      "contractId": "model-provider-protocol-projection-evidence.v1"
+    },
+    "experience": {
+      "statement": "text format requires non-empty text, JSON format parses or extracts the structured value and checks the declared type and required properties, and every unsatisfied case yields one exact format finding without echoing the raw payload"
+    },
+    "terminal": true
+  },
+  "gherkin": {
+    "given": {
+      "semanticRef": "normalize-model-response-format.given",
+      "text": "one provider response, one declared text or JSON format, and the optional structural schema"
+    },
+    "when": {
+      "semanticRef": "normalize-model-response-format.when",
+      "text": "response format normalization is performed"
+    },
+    "then": {
+      "semanticRef": "normalize-model-response-format.then",
+      "text": "text format requires non-empty text, JSON format parses or extracts the structured value and checks the declared type and required properties, and every unsatisfied case yields one exact format finding without echoing the raw payload"
+    }
+  },
+  "name": "Confirm the declared response format and structural schema satisfaction"
+}

@@ -1,0 +1,38 @@
+{
+  "scenarioId": "honor-model-evidence-policy",
+  "input": {
+    "inputId": "model-invocation-evidence-policy-variants",
+    "contract": {
+      "contractId": "execute-governed-model-invocation-input.v1"
+    }
+  },
+  "event": {
+    "eventId": "model-invocation-evidence-policy-evaluation-requested",
+    "executionAuthorityId": "honor-model-evidence-policy.v1"
+  },
+  "outcome": {
+    "outcomeId": "policy-bounded-model-invocation-evidence",
+    "contract": {
+      "contractId": "governed-model-invocation-evidence.v1"
+    },
+    "experience": {
+      "statement": "required disposition and attempt lineage always remain while each optional field is present or absent exactly according to policy and no credential value is ever included"
+    },
+    "terminal": true
+  },
+  "gherkin": {
+    "given": {
+      "semanticRef": "honor-model-evidence-policy.given",
+      "text": "equivalent completed invocations with each admitted request-hash, response-hash, provider, model, usage, and timing evidence flag enabled or disabled"
+    },
+    "when": {
+      "semanticRef": "honor-model-evidence-policy.when",
+      "text": "their execution evidence is constructed"
+    },
+    "then": {
+      "semanticRef": "honor-model-evidence-policy.then",
+      "text": "required disposition and attempt lineage always remain while each optional field is present or absent exactly according to policy and no credential value is ever included"
+    }
+  },
+  "name": "Include or omit optional evidence exactly as declared"
+}

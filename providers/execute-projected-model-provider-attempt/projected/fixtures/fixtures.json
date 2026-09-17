@@ -1,0 +1,2759 @@
+{
+  "fixtureType": "consumer-capability-fixtures.v1",
+  "fixtures": [
+    {
+      "expected": {
+        "disposition": "terminated",
+        "outcomeAssertions": [
+          {
+            "conditionId": "response-obtained",
+            "operator": "equals",
+            "path": "disposition",
+            "value": "MODEL_RESPONSE_OBTAINED"
+          },
+          {
+            "conditionId": "provider-preserved",
+            "operator": "equals",
+            "path": "provider",
+            "value": "primary-cognitive-provider"
+          },
+          {
+            "conditionId": "model-preserved",
+            "operator": "equals",
+            "path": "model",
+            "value": "gemini-flash-latest"
+          },
+          {
+            "conditionId": "one-exchange",
+            "operator": "equals",
+            "path": "attempts",
+            "value": 1
+          },
+          {
+            "conditionId": "no-switch",
+            "operator": "equals",
+            "path": "receipt.providerSwitchCount",
+            "value": 0
+          }
+        ],
+        "scenarioSequence": [
+          "execute-projected-model-provider-attempt"
+        ],
+        "terminalScenarioId": "execute-projected-model-provider-attempt"
+      },
+      "fixtureId": "attempt-1",
+      "input": {
+        "contractId": "execute-projected-model-provider-attempt-input.v1",
+        "payload": {
+          "adapterIdentity": "gemini-generate-content.v1",
+          "allowedResponseHeaders": [
+            "content-type",
+            "x-goog-request-id"
+          ],
+          "cancellationScopeReference": "none",
+          "credentialReference": "LOC_GEMINI_API_KEY",
+          "endpointAuthorityDigest": "sha256:57ab352b0978dca5e5ce33a28ccd7027c20df96da4138dbc7e8088f7c8fb0c04",
+          "endpointUrl": "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent",
+          "invocationIdentity": "fixture-invocation-1",
+          "maxResponseBytes": 1048576,
+          "protocolProjectionIdentity": "project-model-provider-protocol",
+          "protocolProjectionRequest": {
+            "contractId": "project-model-provider-protocol-input.v1",
+            "payload": {
+              "adapterIdentity": "gemini-generate-content.v1",
+              "context": {
+                "maxTokens": 64,
+                "messages": [
+                  {
+                    "parts": [
+                      {
+                        "text": "fixture"
+                      }
+                    ],
+                    "role": "user"
+                  }
+                ],
+                "systemInstruction": {
+                  "parts": [
+                    {
+                      "text": "bounded"
+                    }
+                  ]
+                },
+                "temperature": 0
+              },
+              "providerKind": "gemini",
+              "requestType": "project-gemini-text"
+            }
+          },
+          "providerAuthorityId": "primary-cognitive-provider",
+          "providerKind": "gemini",
+          "requestId": "attempt-1",
+          "requestLineage": [
+            "attempt-1"
+          ],
+          "resolvedModel": "gemini-flash-latest",
+          "responseFormat": "text",
+          "timeoutMilliseconds": 60000
+        }
+      },
+      "portOutcomes": {
+        "bind-credential-port": {
+          "output": {
+            "contractId": "execute-projected-model-provider-attempt-input.v1",
+            "credentialBindingEvidence": {
+              "contractId": "external-credential-binding-evidence.v1",
+              "credentialInjectionRuleId": "gemini-x-goog-api-key.v1",
+              "detail": "bound",
+              "disposition": "BOUND",
+              "effectLineage": [
+                "attempt-1"
+              ],
+              "endpointAuthorityDigest": "sha256:57ab352b0978dca5e5ce33a28ccd7027c20df96da4138dbc7e8088f7c8fb0c04",
+              "invocationIdentity": "fixture-invocation-1",
+              "nonDisclosureVerified": true,
+              "opaqueBindingId": "opaque-1",
+              "referenceName": "LOC_GEMINI_API_KEY",
+              "requestingCapabilityId": "execute-projected-model-provider-attempt"
+            },
+            "credentialBindingRequest": {
+              "contractId": "bind-external-credential-reference-input.v1",
+              "payload": {
+                "credentialReference": "LOC_GEMINI_API_KEY",
+                "effectLineage": [
+                  "attempt-1"
+                ],
+                "effectScope": "governed-model-invocation",
+                "endpointAuthorityDigest": "sha256:57ab352b0978dca5e5ce33a28ccd7027c20df96da4138dbc7e8088f7c8fb0c04",
+                "invocationIdentity": "fixture-invocation-1",
+                "requestingCapabilityId": "execute-projected-model-provider-attempt"
+              }
+            },
+            "payload": {
+              "adapterIdentity": "gemini-generate-content.v1",
+              "allowedResponseHeaders": [
+                "content-type",
+                "x-goog-request-id"
+              ],
+              "cancellationScopeReference": "none",
+              "credentialReference": "LOC_GEMINI_API_KEY",
+              "endpointAuthorityDigest": "sha256:57ab352b0978dca5e5ce33a28ccd7027c20df96da4138dbc7e8088f7c8fb0c04",
+              "endpointUrl": "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent",
+              "invocationIdentity": "fixture-invocation-1",
+              "maxResponseBytes": 1048576,
+              "protocolProjectionIdentity": "project-model-provider-protocol",
+              "protocolProjectionRequest": {
+                "contractId": "project-model-provider-protocol-input.v1",
+                "payload": {
+                  "adapterIdentity": "gemini-generate-content.v1",
+                  "context": {
+                    "maxTokens": 64,
+                    "messages": [
+                      {
+                        "parts": [
+                          {
+                            "text": "fixture"
+                          }
+                        ],
+                        "role": "user"
+                      }
+                    ],
+                    "systemInstruction": {
+                      "parts": [
+                        {
+                          "text": "bounded"
+                        }
+                      ]
+                    },
+                    "temperature": 0
+                  },
+                  "providerKind": "gemini",
+                  "requestType": "project-gemini-text"
+                }
+              },
+              "providerAuthorityId": "primary-cognitive-provider",
+              "providerKind": "gemini",
+              "requestId": "attempt-1",
+              "requestLineage": [
+                "attempt-1"
+              ],
+              "resolvedModel": "gemini-flash-latest",
+              "responseFormat": "text",
+              "timeoutMilliseconds": 60000
+            },
+            "protocolProjectionEvidence": {
+              "contractId": "model-provider-protocol-projection-evidence.v1",
+              "payload": {
+                "adapterIdentity": "gemini-generate-content.v1",
+                "disposition": "projected",
+                "endpointFact": null,
+                "networkExchangeCount": 0,
+                "normalizedTestimony": null,
+                "providerKind": "gemini",
+                "rejectionReason": null,
+                "repairCount": 0,
+                "retryCount": 0,
+                "wireRequest": {
+                  "contents": [
+                    {
+                      "parts": [
+                        {
+                          "text": "fixture"
+                        }
+                      ],
+                      "role": "user"
+                    }
+                  ],
+                  "generationConfig": {
+                    "maxOutputTokens": 64,
+                    "temperature": 0
+                  },
+                  "systemInstruction": {
+                    "parts": [
+                      {
+                        "text": "bounded"
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "requestBodyProjectionEvidence": {
+              "contractId": "governed-http-request-body-projection-evidence.v1",
+              "payload": {
+                "acceptanceClaimed": false,
+                "invocationIdentity": "fixture-invocation-1",
+                "mediaType": "application/json",
+                "networkExchangeCount": 0,
+                "projectionAuthorityIdentity": "project-model-provider-protocol",
+                "providerAdapterIdentity": "gemini-generate-content.v1",
+                "providerSubstitutionCount": 0,
+                "remoteTestimonyClaimed": false,
+                "repairCount": 0,
+                "requestBodyText": "{\"contents\":[{\"role\":\"user\",\"parts\":[{\"text\":\"fixture\"}]}],\"systemInstruction\":{\"parts\":[{\"text\":\"bounded\"}]},\"generationConfig\":{\"maxOutputTokens\":64,\"temperature\":0}}",
+                "requestTextDigest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+                "retryCount": 0,
+                "textEncodingAuthority": "utf-8"
+              }
+            },
+            "requestBodyProjectionRequest": {
+              "contractId": "project-governed-http-request-body-input.v1",
+              "payload": {
+                "invocationIdentity": "fixture-invocation-1",
+                "projectionAuthorityIdentity": "project-model-provider-protocol",
+                "providerAdapterIdentity": "gemini-generate-content.v1",
+                "wireRequestDocument": {
+                  "contents": [
+                    {
+                      "parts": [
+                        {
+                          "text": "fixture"
+                        }
+                      ],
+                      "role": "user"
+                    }
+                  ],
+                  "generationConfig": {
+                    "maxOutputTokens": 64,
+                    "temperature": 0
+                  },
+                  "systemInstruction": {
+                    "parts": [
+                      {
+                        "text": "bounded"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "observe-http-port": {
+          "output": {
+            "contractId": "execute-projected-model-provider-attempt-input.v1",
+            "credentialBindingEvidence": {
+              "contractId": "external-credential-binding-evidence.v1",
+              "credentialInjectionRuleId": "gemini-x-goog-api-key.v1",
+              "detail": "bound",
+              "disposition": "BOUND",
+              "effectLineage": [
+                "attempt-1"
+              ],
+              "endpointAuthorityDigest": "sha256:57ab352b0978dca5e5ce33a28ccd7027c20df96da4138dbc7e8088f7c8fb0c04",
+              "invocationIdentity": "fixture-invocation-1",
+              "nonDisclosureVerified": true,
+              "opaqueBindingId": "opaque-1",
+              "referenceName": "LOC_GEMINI_API_KEY",
+              "requestingCapabilityId": "execute-projected-model-provider-attempt"
+            },
+            "credentialBindingRequest": {
+              "contractId": "bind-external-credential-reference-input.v1",
+              "payload": {
+                "credentialReference": "LOC_GEMINI_API_KEY",
+                "effectLineage": [
+                  "attempt-1"
+                ],
+                "effectScope": "governed-model-invocation",
+                "endpointAuthorityDigest": "sha256:57ab352b0978dca5e5ce33a28ccd7027c20df96da4138dbc7e8088f7c8fb0c04",
+                "invocationIdentity": "fixture-invocation-1",
+                "requestingCapabilityId": "execute-projected-model-provider-attempt"
+              }
+            },
+            "httpExchangeEvidence": {
+              "allowedResponseHeaders": {
+                "content-type": "application/json"
+              },
+              "boundedBytes": 100,
+              "contractId": "governed-http-exchange-evidence.v1",
+              "disposition": "completed",
+              "effectLineage": [
+                "attempt-1"
+              ],
+              "exchangeCount": 1,
+              "exchangeKind": "model-provider",
+              "httpStatus": 200,
+              "lineageId": "fixture-invocation-1",
+              "reachedStage": "response-complete",
+              "redactionVerified": true,
+              "requestBodyHash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+              "responseBodyBytes": "eyJjYW5kaWRhdGVzIjpbeyJjb250ZW50Ijp7InBhcnRzIjpbeyJ0ZXh0IjoiZml4dHVyZSJ9XX0sImZpbmlzaFJlYXNvbiI6IlNUT1AifV19",
+              "responseBodyHash": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+              "timing": {
+                "completedAt": "2026-08-14T00:00:00.010Z",
+                "durationMilliseconds": 10,
+                "startedAt": "2026-08-14T00:00:00.000Z"
+              },
+              "transportDisposition": "completed"
+            },
+            "httpExchangeRequest": {
+              "contractId": "observe-governed-http-exchange-input.v1",
+              "payload": {
+                "allowedResponseHeaders": [
+                  "content-type",
+                  "x-goog-request-id"
+                ],
+                "cancellationScopeReference": "none",
+                "credentialInjectionRuleId": "gemini-x-goog-api-key.v1",
+                "effectLineage": [
+                  "attempt-1"
+                ],
+                "endpointAuthorityDigest": "sha256:57ab352b0978dca5e5ce33a28ccd7027c20df96da4138dbc7e8088f7c8fb0c04",
+                "exchangeKind": "model-provider",
+                "invocationIdentity": "fixture-invocation-1",
+                "lineageId": "fixture-invocation-1",
+                "maxResponseBytes": 1048576,
+                "method": "POST",
+                "opaqueCredentialBinding": {
+                  "bindingId": "opaque-1",
+                  "credentialInjectionRuleId": "gemini-x-goog-api-key.v1"
+                },
+                "redirectPolicy": "manual-no-follow",
+                "requestBodyText": "{\"contents\":[{\"role\":\"user\",\"parts\":[{\"text\":\"fixture\"}]}],\"systemInstruction\":{\"parts\":[{\"text\":\"bounded\"}]},\"generationConfig\":{\"maxOutputTokens\":64,\"temperature\":0}}",
+                "requestUrl": "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent",
+                "safeHeaders": {
+                  "content-type": "application/json"
+                },
+                "timeoutMilliseconds": 60000
+              }
+            },
+            "payload": {
+              "adapterIdentity": "gemini-generate-content.v1",
+              "allowedResponseHeaders": [
+                "content-type",
+                "x-goog-request-id"
+              ],
+              "cancellationScopeReference": "none",
+              "credentialReference": "LOC_GEMINI_API_KEY",
+              "endpointAuthorityDigest": "sha256:57ab352b0978dca5e5ce33a28ccd7027c20df96da4138dbc7e8088f7c8fb0c04",
+              "endpointUrl": "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent",
+              "invocationIdentity": "fixture-invocation-1",
+              "maxResponseBytes": 1048576,
+              "protocolProjectionIdentity": "project-model-provider-protocol",
+              "protocolProjectionRequest": {
+                "contractId": "project-model-provider-protocol-input.v1",
+                "payload": {
+                  "adapterIdentity": "gemini-generate-content.v1",
+                  "context": {
+                    "maxTokens": 64,
+                    "messages": [
+                      {
+                        "parts": [
+                          {
+                            "text": "fixture"
+                          }
+                        ],
+                        "role": "user"
+                      }
+                    ],
+                    "systemInstruction": {
+                      "parts": [
+                        {
+                          "text": "bounded"
+                        }
+                      ]
+                    },
+                    "temperature": 0
+                  },
+                  "providerKind": "gemini",
+                  "requestType": "project-gemini-text"
+                }
+              },
+              "providerAuthorityId": "primary-cognitive-provider",
+              "providerKind": "gemini",
+              "requestId": "attempt-1",
+              "requestLineage": [
+                "attempt-1"
+              ],
+              "resolvedModel": "gemini-flash-latest",
+              "responseFormat": "text",
+              "timeoutMilliseconds": 60000
+            },
+            "protocolProjectionEvidence": {
+              "contractId": "model-provider-protocol-projection-evidence.v1",
+              "payload": {
+                "adapterIdentity": "gemini-generate-content.v1",
+                "disposition": "projected",
+                "endpointFact": null,
+                "networkExchangeCount": 0,
+                "normalizedTestimony": null,
+                "providerKind": "gemini",
+                "rejectionReason": null,
+                "repairCount": 0,
+                "retryCount": 0,
+                "wireRequest": {
+                  "contents": [
+                    {
+                      "parts": [
+                        {
+                          "text": "fixture"
+                        }
+                      ],
+                      "role": "user"
+                    }
+                  ],
+                  "generationConfig": {
+                    "maxOutputTokens": 64,
+                    "temperature": 0
+                  },
+                  "systemInstruction": {
+                    "parts": [
+                      {
+                        "text": "bounded"
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "requestBodyProjectionEvidence": {
+              "contractId": "governed-http-request-body-projection-evidence.v1",
+              "payload": {
+                "acceptanceClaimed": false,
+                "invocationIdentity": "fixture-invocation-1",
+                "mediaType": "application/json",
+                "networkExchangeCount": 0,
+                "projectionAuthorityIdentity": "project-model-provider-protocol",
+                "providerAdapterIdentity": "gemini-generate-content.v1",
+                "providerSubstitutionCount": 0,
+                "remoteTestimonyClaimed": false,
+                "repairCount": 0,
+                "requestBodyText": "{\"contents\":[{\"role\":\"user\",\"parts\":[{\"text\":\"fixture\"}]}],\"systemInstruction\":{\"parts\":[{\"text\":\"bounded\"}]},\"generationConfig\":{\"maxOutputTokens\":64,\"temperature\":0}}",
+                "requestTextDigest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+                "retryCount": 0,
+                "textEncodingAuthority": "utf-8"
+              }
+            },
+            "requestBodyProjectionRequest": {
+              "contractId": "project-governed-http-request-body-input.v1",
+              "payload": {
+                "invocationIdentity": "fixture-invocation-1",
+                "projectionAuthorityIdentity": "project-model-provider-protocol",
+                "providerAdapterIdentity": "gemini-generate-content.v1",
+                "wireRequestDocument": {
+                  "contents": [
+                    {
+                      "parts": [
+                        {
+                          "text": "fixture"
+                        }
+                      ],
+                      "role": "user"
+                    }
+                  ],
+                  "generationConfig": {
+                    "maxOutputTokens": 64,
+                    "temperature": 0
+                  },
+                  "systemInstruction": {
+                    "parts": [
+                      {
+                        "text": "bounded"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "expected": {
+        "disposition": "terminated",
+        "outcomeAssertions": [
+          {
+            "conditionId": "response-obtained",
+            "operator": "equals",
+            "path": "disposition",
+            "value": "MODEL_RESPONSE_OBTAINED"
+          },
+          {
+            "conditionId": "provider-preserved",
+            "operator": "equals",
+            "path": "provider",
+            "value": "secondary-cognitive-provider"
+          },
+          {
+            "conditionId": "model-preserved",
+            "operator": "equals",
+            "path": "model",
+            "value": "gpt-4.1-mini"
+          },
+          {
+            "conditionId": "one-exchange",
+            "operator": "equals",
+            "path": "attempts",
+            "value": 1
+          },
+          {
+            "conditionId": "no-switch",
+            "operator": "equals",
+            "path": "receipt.providerSwitchCount",
+            "value": 0
+          }
+        ],
+        "scenarioSequence": [
+          "execute-projected-model-provider-attempt"
+        ],
+        "terminalScenarioId": "execute-projected-model-provider-attempt"
+      },
+      "fixtureId": "attempt-2",
+      "input": {
+        "contractId": "execute-projected-model-provider-attempt-input.v1",
+        "payload": {
+          "adapterIdentity": "openai-chat-completions.v1",
+          "allowedResponseHeaders": [
+            "content-type",
+            "x-request-id"
+          ],
+          "cancellationScopeReference": "none",
+          "credentialReference": "LOC_OPENAI_API_KEY",
+          "endpointAuthorityDigest": "sha256:b70b8bc81f93ef949d7ae6cabbf71a56b4af2440c5489c5c4037923b534f0109",
+          "endpointUrl": "https://api.openai.com/v1/chat/completions",
+          "invocationIdentity": "fixture-invocation-2",
+          "maxResponseBytes": 1048576,
+          "protocolProjectionIdentity": "project-model-provider-protocol",
+          "protocolProjectionRequest": {
+            "contractId": "project-model-provider-protocol-input.v1",
+            "payload": {
+              "adapterIdentity": "openai-chat-completions.v1",
+              "context": {
+                "maxTokens": 64,
+                "messages": [
+                  {
+                    "content": "fixture",
+                    "role": "user"
+                  }
+                ],
+                "model": "gpt-4.1-mini",
+                "temperature": 0
+              },
+              "providerKind": "openai",
+              "requestType": "project-openai-text"
+            }
+          },
+          "providerAuthorityId": "secondary-cognitive-provider",
+          "providerKind": "openai",
+          "requestId": "attempt-2",
+          "requestLineage": [
+            "attempt-2"
+          ],
+          "resolvedModel": "gpt-4.1-mini",
+          "responseFormat": "text",
+          "timeoutMilliseconds": 60000
+        }
+      },
+      "portOutcomes": {
+        "bind-credential-port": {
+          "output": {
+            "contractId": "execute-projected-model-provider-attempt-input.v1",
+            "credentialBindingEvidence": {
+              "contractId": "external-credential-binding-evidence.v1",
+              "credentialInjectionRuleId": "openai-bearer-authorization.v1",
+              "detail": "bound",
+              "disposition": "BOUND",
+              "effectLineage": [
+                "attempt-2"
+              ],
+              "endpointAuthorityDigest": "sha256:b70b8bc81f93ef949d7ae6cabbf71a56b4af2440c5489c5c4037923b534f0109",
+              "invocationIdentity": "fixture-invocation-2",
+              "nonDisclosureVerified": true,
+              "opaqueBindingId": "opaque-2",
+              "referenceName": "LOC_OPENAI_API_KEY",
+              "requestingCapabilityId": "execute-projected-model-provider-attempt"
+            },
+            "credentialBindingRequest": {
+              "contractId": "bind-external-credential-reference-input.v1",
+              "payload": {
+                "credentialReference": "LOC_OPENAI_API_KEY",
+                "effectLineage": [
+                  "attempt-2"
+                ],
+                "effectScope": "governed-model-invocation",
+                "endpointAuthorityDigest": "sha256:b70b8bc81f93ef949d7ae6cabbf71a56b4af2440c5489c5c4037923b534f0109",
+                "invocationIdentity": "fixture-invocation-2",
+                "requestingCapabilityId": "execute-projected-model-provider-attempt"
+              }
+            },
+            "payload": {
+              "adapterIdentity": "openai-chat-completions.v1",
+              "allowedResponseHeaders": [
+                "content-type",
+                "x-request-id"
+              ],
+              "cancellationScopeReference": "none",
+              "credentialReference": "LOC_OPENAI_API_KEY",
+              "endpointAuthorityDigest": "sha256:b70b8bc81f93ef949d7ae6cabbf71a56b4af2440c5489c5c4037923b534f0109",
+              "endpointUrl": "https://api.openai.com/v1/chat/completions",
+              "invocationIdentity": "fixture-invocation-2",
+              "maxResponseBytes": 1048576,
+              "protocolProjectionIdentity": "project-model-provider-protocol",
+              "protocolProjectionRequest": {
+                "contractId": "project-model-provider-protocol-input.v1",
+                "payload": {
+                  "adapterIdentity": "openai-chat-completions.v1",
+                  "context": {
+                    "maxTokens": 64,
+                    "messages": [
+                      {
+                        "content": "fixture",
+                        "role": "user"
+                      }
+                    ],
+                    "model": "gpt-4.1-mini",
+                    "temperature": 0
+                  },
+                  "providerKind": "openai",
+                  "requestType": "project-openai-text"
+                }
+              },
+              "providerAuthorityId": "secondary-cognitive-provider",
+              "providerKind": "openai",
+              "requestId": "attempt-2",
+              "requestLineage": [
+                "attempt-2"
+              ],
+              "resolvedModel": "gpt-4.1-mini",
+              "responseFormat": "text",
+              "timeoutMilliseconds": 60000
+            },
+            "protocolProjectionEvidence": {
+              "contractId": "model-provider-protocol-projection-evidence.v1",
+              "payload": {
+                "adapterIdentity": "openai-chat-completions.v1",
+                "disposition": "projected",
+                "endpointFact": null,
+                "networkExchangeCount": 0,
+                "normalizedTestimony": null,
+                "providerKind": "openai",
+                "rejectionReason": null,
+                "repairCount": 0,
+                "retryCount": 0,
+                "wireRequest": {
+                  "max_tokens": 64,
+                  "messages": [
+                    {
+                      "content": "fixture",
+                      "role": "user"
+                    }
+                  ],
+                  "model": "gpt-4.1-mini",
+                  "temperature": 0
+                }
+              }
+            },
+            "requestBodyProjectionEvidence": {
+              "contractId": "governed-http-request-body-projection-evidence.v1",
+              "payload": {
+                "acceptanceClaimed": false,
+                "invocationIdentity": "fixture-invocation-2",
+                "mediaType": "application/json",
+                "networkExchangeCount": 0,
+                "projectionAuthorityIdentity": "project-model-provider-protocol",
+                "providerAdapterIdentity": "openai-chat-completions.v1",
+                "providerSubstitutionCount": 0,
+                "remoteTestimonyClaimed": false,
+                "repairCount": 0,
+                "requestBodyText": "{\"model\":\"gpt-4.1-mini\",\"messages\":[{\"role\":\"user\",\"content\":\"fixture\"}],\"max_tokens\":64,\"temperature\":0}",
+                "requestTextDigest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+                "retryCount": 0,
+                "textEncodingAuthority": "utf-8"
+              }
+            },
+            "requestBodyProjectionRequest": {
+              "contractId": "project-governed-http-request-body-input.v1",
+              "payload": {
+                "invocationIdentity": "fixture-invocation-2",
+                "projectionAuthorityIdentity": "project-model-provider-protocol",
+                "providerAdapterIdentity": "openai-chat-completions.v1",
+                "wireRequestDocument": {
+                  "max_tokens": 64,
+                  "messages": [
+                    {
+                      "content": "fixture",
+                      "role": "user"
+                    }
+                  ],
+                  "model": "gpt-4.1-mini",
+                  "temperature": 0
+                }
+              }
+            }
+          }
+        },
+        "observe-http-port": {
+          "output": {
+            "contractId": "execute-projected-model-provider-attempt-input.v1",
+            "credentialBindingEvidence": {
+              "contractId": "external-credential-binding-evidence.v1",
+              "credentialInjectionRuleId": "openai-bearer-authorization.v1",
+              "detail": "bound",
+              "disposition": "BOUND",
+              "effectLineage": [
+                "attempt-2"
+              ],
+              "endpointAuthorityDigest": "sha256:b70b8bc81f93ef949d7ae6cabbf71a56b4af2440c5489c5c4037923b534f0109",
+              "invocationIdentity": "fixture-invocation-2",
+              "nonDisclosureVerified": true,
+              "opaqueBindingId": "opaque-2",
+              "referenceName": "LOC_OPENAI_API_KEY",
+              "requestingCapabilityId": "execute-projected-model-provider-attempt"
+            },
+            "credentialBindingRequest": {
+              "contractId": "bind-external-credential-reference-input.v1",
+              "payload": {
+                "credentialReference": "LOC_OPENAI_API_KEY",
+                "effectLineage": [
+                  "attempt-2"
+                ],
+                "effectScope": "governed-model-invocation",
+                "endpointAuthorityDigest": "sha256:b70b8bc81f93ef949d7ae6cabbf71a56b4af2440c5489c5c4037923b534f0109",
+                "invocationIdentity": "fixture-invocation-2",
+                "requestingCapabilityId": "execute-projected-model-provider-attempt"
+              }
+            },
+            "httpExchangeEvidence": {
+              "allowedResponseHeaders": {
+                "content-type": "application/json"
+              },
+              "boundedBytes": 100,
+              "contractId": "governed-http-exchange-evidence.v1",
+              "disposition": "completed",
+              "effectLineage": [
+                "attempt-2"
+              ],
+              "exchangeCount": 1,
+              "exchangeKind": "model-provider",
+              "httpStatus": 200,
+              "lineageId": "fixture-invocation-2",
+              "reachedStage": "response-complete",
+              "redactionVerified": true,
+              "requestBodyHash": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+              "responseBodyBytes": "eyJjaG9pY2VzIjpbeyJtZXNzYWdlIjp7ImNvbnRlbnQiOiJmaXh0dXJlIn0sImZpbmlzaF9yZWFzb24iOiJzdG9wIn1dLCJ1c2FnZSI6eyJwcm9tcHRfdG9rZW5zIjoxLCJjb21wbGV0aW9uX3Rva2VucyI6MSwidG90YWxfdG9rZW5zIjoyfX0=",
+              "responseBodyHash": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+              "timing": {
+                "completedAt": "2026-08-14T00:00:00.010Z",
+                "durationMilliseconds": 10,
+                "startedAt": "2026-08-14T00:00:00.000Z"
+              },
+              "transportDisposition": "completed"
+            },
+            "httpExchangeRequest": {
+              "contractId": "observe-governed-http-exchange-input.v1",
+              "payload": {
+                "allowedResponseHeaders": [
+                  "content-type",
+                  "x-request-id"
+                ],
+                "cancellationScopeReference": "none",
+                "credentialInjectionRuleId": "openai-bearer-authorization.v1",
+                "effectLineage": [
+                  "attempt-2"
+                ],
+                "endpointAuthorityDigest": "sha256:b70b8bc81f93ef949d7ae6cabbf71a56b4af2440c5489c5c4037923b534f0109",
+                "exchangeKind": "model-provider",
+                "invocationIdentity": "fixture-invocation-2",
+                "lineageId": "fixture-invocation-2",
+                "maxResponseBytes": 1048576,
+                "method": "POST",
+                "opaqueCredentialBinding": {
+                  "bindingId": "opaque-2",
+                  "credentialInjectionRuleId": "openai-bearer-authorization.v1"
+                },
+                "redirectPolicy": "manual-no-follow",
+                "requestBodyText": "{\"model\":\"gpt-4.1-mini\",\"messages\":[{\"role\":\"user\",\"content\":\"fixture\"}],\"max_tokens\":64,\"temperature\":0}",
+                "requestUrl": "https://api.openai.com/v1/chat/completions",
+                "safeHeaders": {
+                  "content-type": "application/json"
+                },
+                "timeoutMilliseconds": 60000
+              }
+            },
+            "payload": {
+              "adapterIdentity": "openai-chat-completions.v1",
+              "allowedResponseHeaders": [
+                "content-type",
+                "x-request-id"
+              ],
+              "cancellationScopeReference": "none",
+              "credentialReference": "LOC_OPENAI_API_KEY",
+              "endpointAuthorityDigest": "sha256:b70b8bc81f93ef949d7ae6cabbf71a56b4af2440c5489c5c4037923b534f0109",
+              "endpointUrl": "https://api.openai.com/v1/chat/completions",
+              "invocationIdentity": "fixture-invocation-2",
+              "maxResponseBytes": 1048576,
+              "protocolProjectionIdentity": "project-model-provider-protocol",
+              "protocolProjectionRequest": {
+                "contractId": "project-model-provider-protocol-input.v1",
+                "payload": {
+                  "adapterIdentity": "openai-chat-completions.v1",
+                  "context": {
+                    "maxTokens": 64,
+                    "messages": [
+                      {
+                        "content": "fixture",
+                        "role": "user"
+                      }
+                    ],
+                    "model": "gpt-4.1-mini",
+                    "temperature": 0
+                  },
+                  "providerKind": "openai",
+                  "requestType": "project-openai-text"
+                }
+              },
+              "providerAuthorityId": "secondary-cognitive-provider",
+              "providerKind": "openai",
+              "requestId": "attempt-2",
+              "requestLineage": [
+                "attempt-2"
+              ],
+              "resolvedModel": "gpt-4.1-mini",
+              "responseFormat": "text",
+              "timeoutMilliseconds": 60000
+            },
+            "protocolProjectionEvidence": {
+              "contractId": "model-provider-protocol-projection-evidence.v1",
+              "payload": {
+                "adapterIdentity": "openai-chat-completions.v1",
+                "disposition": "projected",
+                "endpointFact": null,
+                "networkExchangeCount": 0,
+                "normalizedTestimony": null,
+                "providerKind": "openai",
+                "rejectionReason": null,
+                "repairCount": 0,
+                "retryCount": 0,
+                "wireRequest": {
+                  "max_tokens": 64,
+                  "messages": [
+                    {
+                      "content": "fixture",
+                      "role": "user"
+                    }
+                  ],
+                  "model": "gpt-4.1-mini",
+                  "temperature": 0
+                }
+              }
+            },
+            "requestBodyProjectionEvidence": {
+              "contractId": "governed-http-request-body-projection-evidence.v1",
+              "payload": {
+                "acceptanceClaimed": false,
+                "invocationIdentity": "fixture-invocation-2",
+                "mediaType": "application/json",
+                "networkExchangeCount": 0,
+                "projectionAuthorityIdentity": "project-model-provider-protocol",
+                "providerAdapterIdentity": "openai-chat-completions.v1",
+                "providerSubstitutionCount": 0,
+                "remoteTestimonyClaimed": false,
+                "repairCount": 0,
+                "requestBodyText": "{\"model\":\"gpt-4.1-mini\",\"messages\":[{\"role\":\"user\",\"content\":\"fixture\"}],\"max_tokens\":64,\"temperature\":0}",
+                "requestTextDigest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+                "retryCount": 0,
+                "textEncodingAuthority": "utf-8"
+              }
+            },
+            "requestBodyProjectionRequest": {
+              "contractId": "project-governed-http-request-body-input.v1",
+              "payload": {
+                "invocationIdentity": "fixture-invocation-2",
+                "projectionAuthorityIdentity": "project-model-provider-protocol",
+                "providerAdapterIdentity": "openai-chat-completions.v1",
+                "wireRequestDocument": {
+                  "max_tokens": 64,
+                  "messages": [
+                    {
+                      "content": "fixture",
+                      "role": "user"
+                    }
+                  ],
+                  "model": "gpt-4.1-mini",
+                  "temperature": 0
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "expected": {
+        "disposition": "terminated",
+        "outcomeAssertions": [
+          {
+            "conditionId": "response-obtained",
+            "operator": "equals",
+            "path": "disposition",
+            "value": "MODEL_RESPONSE_OBTAINED"
+          },
+          {
+            "conditionId": "provider-preserved",
+            "operator": "equals",
+            "path": "provider",
+            "value": "primary-cognitive-provider"
+          },
+          {
+            "conditionId": "model-preserved",
+            "operator": "equals",
+            "path": "model",
+            "value": "gemini-flash-latest"
+          },
+          {
+            "conditionId": "one-exchange",
+            "operator": "equals",
+            "path": "attempts",
+            "value": 1
+          },
+          {
+            "conditionId": "no-switch",
+            "operator": "equals",
+            "path": "receipt.providerSwitchCount",
+            "value": 0
+          }
+        ],
+        "scenarioSequence": [
+          "execute-projected-model-provider-attempt"
+        ],
+        "terminalScenarioId": "execute-projected-model-provider-attempt"
+      },
+      "fixtureId": "attempt-3",
+      "input": {
+        "contractId": "execute-projected-model-provider-attempt-input.v1",
+        "payload": {
+          "adapterIdentity": "gemini-generate-content.v1",
+          "allowedResponseHeaders": [
+            "content-type",
+            "x-goog-request-id"
+          ],
+          "cancellationScopeReference": "none",
+          "credentialReference": "LOC_GEMINI_API_KEY",
+          "endpointAuthorityDigest": "sha256:57ab352b0978dca5e5ce33a28ccd7027c20df96da4138dbc7e8088f7c8fb0c04",
+          "endpointUrl": "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent",
+          "invocationIdentity": "fixture-invocation-3",
+          "maxResponseBytes": 1048576,
+          "protocolProjectionIdentity": "project-model-provider-protocol",
+          "protocolProjectionRequest": {
+            "contractId": "project-model-provider-protocol-input.v1",
+            "payload": {
+              "adapterIdentity": "gemini-generate-content.v1",
+              "context": {
+                "maxTokens": 64,
+                "messages": [
+                  {
+                    "parts": [
+                      {
+                        "text": "fixture"
+                      }
+                    ],
+                    "role": "user"
+                  }
+                ],
+                "systemInstruction": {
+                  "parts": [
+                    {
+                      "text": "bounded"
+                    }
+                  ]
+                },
+                "temperature": 0
+              },
+              "providerKind": "gemini",
+              "requestType": "project-gemini-text"
+            }
+          },
+          "providerAuthorityId": "primary-cognitive-provider",
+          "providerKind": "gemini",
+          "requestId": "attempt-3",
+          "requestLineage": [
+            "attempt-3"
+          ],
+          "resolvedModel": "gemini-flash-latest",
+          "responseFormat": "text",
+          "timeoutMilliseconds": 60000
+        }
+      },
+      "portOutcomes": {
+        "bind-credential-port": {
+          "output": {
+            "contractId": "execute-projected-model-provider-attempt-input.v1",
+            "credentialBindingEvidence": {
+              "contractId": "external-credential-binding-evidence.v1",
+              "credentialInjectionRuleId": "gemini-x-goog-api-key.v1",
+              "detail": "bound",
+              "disposition": "BOUND",
+              "effectLineage": [
+                "attempt-3"
+              ],
+              "endpointAuthorityDigest": "sha256:57ab352b0978dca5e5ce33a28ccd7027c20df96da4138dbc7e8088f7c8fb0c04",
+              "invocationIdentity": "fixture-invocation-3",
+              "nonDisclosureVerified": true,
+              "opaqueBindingId": "opaque-3",
+              "referenceName": "LOC_GEMINI_API_KEY",
+              "requestingCapabilityId": "execute-projected-model-provider-attempt"
+            },
+            "credentialBindingRequest": {
+              "contractId": "bind-external-credential-reference-input.v1",
+              "payload": {
+                "credentialReference": "LOC_GEMINI_API_KEY",
+                "effectLineage": [
+                  "attempt-3"
+                ],
+                "effectScope": "governed-model-invocation",
+                "endpointAuthorityDigest": "sha256:57ab352b0978dca5e5ce33a28ccd7027c20df96da4138dbc7e8088f7c8fb0c04",
+                "invocationIdentity": "fixture-invocation-3",
+                "requestingCapabilityId": "execute-projected-model-provider-attempt"
+              }
+            },
+            "payload": {
+              "adapterIdentity": "gemini-generate-content.v1",
+              "allowedResponseHeaders": [
+                "content-type",
+                "x-goog-request-id"
+              ],
+              "cancellationScopeReference": "none",
+              "credentialReference": "LOC_GEMINI_API_KEY",
+              "endpointAuthorityDigest": "sha256:57ab352b0978dca5e5ce33a28ccd7027c20df96da4138dbc7e8088f7c8fb0c04",
+              "endpointUrl": "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent",
+              "invocationIdentity": "fixture-invocation-3",
+              "maxResponseBytes": 1048576,
+              "protocolProjectionIdentity": "project-model-provider-protocol",
+              "protocolProjectionRequest": {
+                "contractId": "project-model-provider-protocol-input.v1",
+                "payload": {
+                  "adapterIdentity": "gemini-generate-content.v1",
+                  "context": {
+                    "maxTokens": 64,
+                    "messages": [
+                      {
+                        "parts": [
+                          {
+                            "text": "fixture"
+                          }
+                        ],
+                        "role": "user"
+                      }
+                    ],
+                    "systemInstruction": {
+                      "parts": [
+                        {
+                          "text": "bounded"
+                        }
+                      ]
+                    },
+                    "temperature": 0
+                  },
+                  "providerKind": "gemini",
+                  "requestType": "project-gemini-text"
+                }
+              },
+              "providerAuthorityId": "primary-cognitive-provider",
+              "providerKind": "gemini",
+              "requestId": "attempt-3",
+              "requestLineage": [
+                "attempt-3"
+              ],
+              "resolvedModel": "gemini-flash-latest",
+              "responseFormat": "text",
+              "timeoutMilliseconds": 60000
+            },
+            "protocolProjectionEvidence": {
+              "contractId": "model-provider-protocol-projection-evidence.v1",
+              "payload": {
+                "adapterIdentity": "gemini-generate-content.v1",
+                "disposition": "projected",
+                "endpointFact": null,
+                "networkExchangeCount": 0,
+                "normalizedTestimony": null,
+                "providerKind": "gemini",
+                "rejectionReason": null,
+                "repairCount": 0,
+                "retryCount": 0,
+                "wireRequest": {
+                  "contents": [
+                    {
+                      "parts": [
+                        {
+                          "text": "fixture"
+                        }
+                      ],
+                      "role": "user"
+                    }
+                  ],
+                  "generationConfig": {
+                    "maxOutputTokens": 64,
+                    "temperature": 0
+                  },
+                  "systemInstruction": {
+                    "parts": [
+                      {
+                        "text": "bounded"
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "requestBodyProjectionEvidence": {
+              "contractId": "governed-http-request-body-projection-evidence.v1",
+              "payload": {
+                "acceptanceClaimed": false,
+                "invocationIdentity": "fixture-invocation-3",
+                "mediaType": "application/json",
+                "networkExchangeCount": 0,
+                "projectionAuthorityIdentity": "project-model-provider-protocol",
+                "providerAdapterIdentity": "gemini-generate-content.v1",
+                "providerSubstitutionCount": 0,
+                "remoteTestimonyClaimed": false,
+                "repairCount": 0,
+                "requestBodyText": "{\"contents\":[{\"role\":\"user\",\"parts\":[{\"text\":\"fixture\"}]}],\"systemInstruction\":{\"parts\":[{\"text\":\"bounded\"}]},\"generationConfig\":{\"maxOutputTokens\":64,\"temperature\":0}}",
+                "requestTextDigest": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+                "retryCount": 0,
+                "textEncodingAuthority": "utf-8"
+              }
+            },
+            "requestBodyProjectionRequest": {
+              "contractId": "project-governed-http-request-body-input.v1",
+              "payload": {
+                "invocationIdentity": "fixture-invocation-3",
+                "projectionAuthorityIdentity": "project-model-provider-protocol",
+                "providerAdapterIdentity": "gemini-generate-content.v1",
+                "wireRequestDocument": {
+                  "contents": [
+                    {
+                      "parts": [
+                        {
+                          "text": "fixture"
+                        }
+                      ],
+                      "role": "user"
+                    }
+                  ],
+                  "generationConfig": {
+                    "maxOutputTokens": 64,
+                    "temperature": 0
+                  },
+                  "systemInstruction": {
+                    "parts": [
+                      {
+                        "text": "bounded"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "observe-http-port": {
+          "output": {
+            "contractId": "execute-projected-model-provider-attempt-input.v1",
+            "credentialBindingEvidence": {
+              "contractId": "external-credential-binding-evidence.v1",
+              "credentialInjectionRuleId": "gemini-x-goog-api-key.v1",
+              "detail": "bound",
+              "disposition": "BOUND",
+              "effectLineage": [
+                "attempt-3"
+              ],
+              "endpointAuthorityDigest": "sha256:57ab352b0978dca5e5ce33a28ccd7027c20df96da4138dbc7e8088f7c8fb0c04",
+              "invocationIdentity": "fixture-invocation-3",
+              "nonDisclosureVerified": true,
+              "opaqueBindingId": "opaque-3",
+              "referenceName": "LOC_GEMINI_API_KEY",
+              "requestingCapabilityId": "execute-projected-model-provider-attempt"
+            },
+            "credentialBindingRequest": {
+              "contractId": "bind-external-credential-reference-input.v1",
+              "payload": {
+                "credentialReference": "LOC_GEMINI_API_KEY",
+                "effectLineage": [
+                  "attempt-3"
+                ],
+                "effectScope": "governed-model-invocation",
+                "endpointAuthorityDigest": "sha256:57ab352b0978dca5e5ce33a28ccd7027c20df96da4138dbc7e8088f7c8fb0c04",
+                "invocationIdentity": "fixture-invocation-3",
+                "requestingCapabilityId": "execute-projected-model-provider-attempt"
+              }
+            },
+            "httpExchangeEvidence": {
+              "allowedResponseHeaders": {
+                "content-type": "application/json"
+              },
+              "boundedBytes": 100,
+              "contractId": "governed-http-exchange-evidence.v1",
+              "disposition": "completed",
+              "effectLineage": [
+                "attempt-3"
+              ],
+              "exchangeCount": 1,
+              "exchangeKind": "model-provider",
+              "httpStatus": 200,
+              "lineageId": "fixture-invocation-3",
+              "reachedStage": "response-complete",
+              "redactionVerified": true,
+              "requestBodyHash": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+              "responseBodyBytes": "eyJjYW5kaWRhdGVzIjpbeyJjb250ZW50Ijp7InBhcnRzIjpbeyJ0ZXh0IjoiZml4dHVyZSJ9XX0sImZpbmlzaFJlYXNvbiI6IlNUT1AifV19",
+              "responseBodyHash": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+              "timing": {
+                "completedAt": "2026-08-14T00:00:00.010Z",
+                "durationMilliseconds": 10,
+                "startedAt": "2026-08-14T00:00:00.000Z"
+              },
+              "transportDisposition": "completed"
+            },
+            "httpExchangeRequest": {
+              "contractId": "observe-governed-http-exchange-input.v1",
+              "payload": {
+                "allowedResponseHeaders": [
+                  "content-type",
+                  "x-goog-request-id"
+                ],
+                "cancellationScopeReference": "none",
+                "credentialInjectionRuleId": "gemini-x-goog-api-key.v1",
+                "effectLineage": [
+                  "attempt-3"
+                ],
+                "endpointAuthorityDigest": "sha256:57ab352b0978dca5e5ce33a28ccd7027c20df96da4138dbc7e8088f7c8fb0c04",
+                "exchangeKind": "model-provider",
+                "invocationIdentity": "fixture-invocation-3",
+                "lineageId": "fixture-invocation-3",
+                "maxResponseBytes": 1048576,
+                "method": "POST",
+                "opaqueCredentialBinding": {
+                  "bindingId": "opaque-3",
+                  "credentialInjectionRuleId": "gemini-x-goog-api-key.v1"
+                },
+                "redirectPolicy": "manual-no-follow",
+                "requestBodyText": "{\"contents\":[{\"role\":\"user\",\"parts\":[{\"text\":\"fixture\"}]}],\"systemInstruction\":{\"parts\":[{\"text\":\"bounded\"}]},\"generationConfig\":{\"maxOutputTokens\":64,\"temperature\":0}}",
+                "requestUrl": "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent",
+                "safeHeaders": {
+                  "content-type": "application/json"
+                },
+                "timeoutMilliseconds": 60000
+              }
+            },
+            "payload": {
+              "adapterIdentity": "gemini-generate-content.v1",
+              "allowedResponseHeaders": [
+                "content-type",
+                "x-goog-request-id"
+              ],
+              "cancellationScopeReference": "none",
+              "credentialReference": "LOC_GEMINI_API_KEY",
+              "endpointAuthorityDigest": "sha256:57ab352b0978dca5e5ce33a28ccd7027c20df96da4138dbc7e8088f7c8fb0c04",
+              "endpointUrl": "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent",
+              "invocationIdentity": "fixture-invocation-3",
+              "maxResponseBytes": 1048576,
+              "protocolProjectionIdentity": "project-model-provider-protocol",
+              "protocolProjectionRequest": {
+                "contractId": "project-model-provider-protocol-input.v1",
+                "payload": {
+                  "adapterIdentity": "gemini-generate-content.v1",
+                  "context": {
+                    "maxTokens": 64,
+                    "messages": [
+                      {
+                        "parts": [
+                          {
+                            "text": "fixture"
+                          }
+                        ],
+                        "role": "user"
+                      }
+                    ],
+                    "systemInstruction": {
+                      "parts": [
+                        {
+                          "text": "bounded"
+                        }
+                      ]
+                    },
+                    "temperature": 0
+                  },
+                  "providerKind": "gemini",
+                  "requestType": "project-gemini-text"
+                }
+              },
+              "providerAuthorityId": "primary-cognitive-provider",
+              "providerKind": "gemini",
+              "requestId": "attempt-3",
+              "requestLineage": [
+                "attempt-3"
+              ],
+              "resolvedModel": "gemini-flash-latest",
+              "responseFormat": "text",
+              "timeoutMilliseconds": 60000
+            },
+            "protocolProjectionEvidence": {
+              "contractId": "model-provider-protocol-projection-evidence.v1",
+              "payload": {
+                "adapterIdentity": "gemini-generate-content.v1",
+                "disposition": "projected",
+                "endpointFact": null,
+                "networkExchangeCount": 0,
+                "normalizedTestimony": null,
+                "providerKind": "gemini",
+                "rejectionReason": null,
+                "repairCount": 0,
+                "retryCount": 0,
+                "wireRequest": {
+                  "contents": [
+                    {
+                      "parts": [
+                        {
+                          "text": "fixture"
+                        }
+                      ],
+                      "role": "user"
+                    }
+                  ],
+                  "generationConfig": {
+                    "maxOutputTokens": 64,
+                    "temperature": 0
+                  },
+                  "systemInstruction": {
+                    "parts": [
+                      {
+                        "text": "bounded"
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "requestBodyProjectionEvidence": {
+              "contractId": "governed-http-request-body-projection-evidence.v1",
+              "payload": {
+                "acceptanceClaimed": false,
+                "invocationIdentity": "fixture-invocation-3",
+                "mediaType": "application/json",
+                "networkExchangeCount": 0,
+                "projectionAuthorityIdentity": "project-model-provider-protocol",
+                "providerAdapterIdentity": "gemini-generate-content.v1",
+                "providerSubstitutionCount": 0,
+                "remoteTestimonyClaimed": false,
+                "repairCount": 0,
+                "requestBodyText": "{\"contents\":[{\"role\":\"user\",\"parts\":[{\"text\":\"fixture\"}]}],\"systemInstruction\":{\"parts\":[{\"text\":\"bounded\"}]},\"generationConfig\":{\"maxOutputTokens\":64,\"temperature\":0}}",
+                "requestTextDigest": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+                "retryCount": 0,
+                "textEncodingAuthority": "utf-8"
+              }
+            },
+            "requestBodyProjectionRequest": {
+              "contractId": "project-governed-http-request-body-input.v1",
+              "payload": {
+                "invocationIdentity": "fixture-invocation-3",
+                "projectionAuthorityIdentity": "project-model-provider-protocol",
+                "providerAdapterIdentity": "gemini-generate-content.v1",
+                "wireRequestDocument": {
+                  "contents": [
+                    {
+                      "parts": [
+                        {
+                          "text": "fixture"
+                        }
+                      ],
+                      "role": "user"
+                    }
+                  ],
+                  "generationConfig": {
+                    "maxOutputTokens": 64,
+                    "temperature": 0
+                  },
+                  "systemInstruction": {
+                    "parts": [
+                      {
+                        "text": "bounded"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "expected": {
+        "disposition": "terminated",
+        "outcomeAssertions": [
+          {
+            "conditionId": "response-obtained",
+            "operator": "equals",
+            "path": "disposition",
+            "value": "MODEL_RESPONSE_OBTAINED"
+          },
+          {
+            "conditionId": "provider-preserved",
+            "operator": "equals",
+            "path": "provider",
+            "value": "secondary-cognitive-provider"
+          },
+          {
+            "conditionId": "model-preserved",
+            "operator": "equals",
+            "path": "model",
+            "value": "gpt-4.1-mini"
+          },
+          {
+            "conditionId": "one-exchange",
+            "operator": "equals",
+            "path": "attempts",
+            "value": 1
+          },
+          {
+            "conditionId": "no-switch",
+            "operator": "equals",
+            "path": "receipt.providerSwitchCount",
+            "value": 0
+          }
+        ],
+        "scenarioSequence": [
+          "execute-projected-model-provider-attempt"
+        ],
+        "terminalScenarioId": "execute-projected-model-provider-attempt"
+      },
+      "fixtureId": "attempt-4",
+      "input": {
+        "contractId": "execute-projected-model-provider-attempt-input.v1",
+        "payload": {
+          "adapterIdentity": "openai-chat-completions.v1",
+          "allowedResponseHeaders": [
+            "content-type",
+            "x-request-id"
+          ],
+          "cancellationScopeReference": "none",
+          "credentialReference": "LOC_OPENAI_API_KEY",
+          "endpointAuthorityDigest": "sha256:b70b8bc81f93ef949d7ae6cabbf71a56b4af2440c5489c5c4037923b534f0109",
+          "endpointUrl": "https://api.openai.com/v1/chat/completions",
+          "invocationIdentity": "fixture-invocation-4",
+          "maxResponseBytes": 1048576,
+          "protocolProjectionIdentity": "project-model-provider-protocol",
+          "protocolProjectionRequest": {
+            "contractId": "project-model-provider-protocol-input.v1",
+            "payload": {
+              "adapterIdentity": "openai-chat-completions.v1",
+              "context": {
+                "maxTokens": 64,
+                "messages": [
+                  {
+                    "content": "fixture",
+                    "role": "user"
+                  }
+                ],
+                "model": "gpt-4.1-mini",
+                "temperature": 0
+              },
+              "providerKind": "openai",
+              "requestType": "project-openai-text"
+            }
+          },
+          "providerAuthorityId": "secondary-cognitive-provider",
+          "providerKind": "openai",
+          "requestId": "attempt-4",
+          "requestLineage": [
+            "attempt-4"
+          ],
+          "resolvedModel": "gpt-4.1-mini",
+          "responseFormat": "text",
+          "timeoutMilliseconds": 60000
+        }
+      },
+      "portOutcomes": {
+        "bind-credential-port": {
+          "output": {
+            "contractId": "execute-projected-model-provider-attempt-input.v1",
+            "credentialBindingEvidence": {
+              "contractId": "external-credential-binding-evidence.v1",
+              "credentialInjectionRuleId": "openai-bearer-authorization.v1",
+              "detail": "bound",
+              "disposition": "BOUND",
+              "effectLineage": [
+                "attempt-4"
+              ],
+              "endpointAuthorityDigest": "sha256:b70b8bc81f93ef949d7ae6cabbf71a56b4af2440c5489c5c4037923b534f0109",
+              "invocationIdentity": "fixture-invocation-4",
+              "nonDisclosureVerified": true,
+              "opaqueBindingId": "opaque-4",
+              "referenceName": "LOC_OPENAI_API_KEY",
+              "requestingCapabilityId": "execute-projected-model-provider-attempt"
+            },
+            "credentialBindingRequest": {
+              "contractId": "bind-external-credential-reference-input.v1",
+              "payload": {
+                "credentialReference": "LOC_OPENAI_API_KEY",
+                "effectLineage": [
+                  "attempt-4"
+                ],
+                "effectScope": "governed-model-invocation",
+                "endpointAuthorityDigest": "sha256:b70b8bc81f93ef949d7ae6cabbf71a56b4af2440c5489c5c4037923b534f0109",
+                "invocationIdentity": "fixture-invocation-4",
+                "requestingCapabilityId": "execute-projected-model-provider-attempt"
+              }
+            },
+            "payload": {
+              "adapterIdentity": "openai-chat-completions.v1",
+              "allowedResponseHeaders": [
+                "content-type",
+                "x-request-id"
+              ],
+              "cancellationScopeReference": "none",
+              "credentialReference": "LOC_OPENAI_API_KEY",
+              "endpointAuthorityDigest": "sha256:b70b8bc81f93ef949d7ae6cabbf71a56b4af2440c5489c5c4037923b534f0109",
+              "endpointUrl": "https://api.openai.com/v1/chat/completions",
+              "invocationIdentity": "fixture-invocation-4",
+              "maxResponseBytes": 1048576,
+              "protocolProjectionIdentity": "project-model-provider-protocol",
+              "protocolProjectionRequest": {
+                "contractId": "project-model-provider-protocol-input.v1",
+                "payload": {
+                  "adapterIdentity": "openai-chat-completions.v1",
+                  "context": {
+                    "maxTokens": 64,
+                    "messages": [
+                      {
+                        "content": "fixture",
+                        "role": "user"
+                      }
+                    ],
+                    "model": "gpt-4.1-mini",
+                    "temperature": 0
+                  },
+                  "providerKind": "openai",
+                  "requestType": "project-openai-text"
+                }
+              },
+              "providerAuthorityId": "secondary-cognitive-provider",
+              "providerKind": "openai",
+              "requestId": "attempt-4",
+              "requestLineage": [
+                "attempt-4"
+              ],
+              "resolvedModel": "gpt-4.1-mini",
+              "responseFormat": "text",
+              "timeoutMilliseconds": 60000
+            },
+            "protocolProjectionEvidence": {
+              "contractId": "model-provider-protocol-projection-evidence.v1",
+              "payload": {
+                "adapterIdentity": "openai-chat-completions.v1",
+                "disposition": "projected",
+                "endpointFact": null,
+                "networkExchangeCount": 0,
+                "normalizedTestimony": null,
+                "providerKind": "openai",
+                "rejectionReason": null,
+                "repairCount": 0,
+                "retryCount": 0,
+                "wireRequest": {
+                  "max_tokens": 64,
+                  "messages": [
+                    {
+                      "content": "fixture",
+                      "role": "user"
+                    }
+                  ],
+                  "model": "gpt-4.1-mini",
+                  "temperature": 0
+                }
+              }
+            },
+            "requestBodyProjectionEvidence": {
+              "contractId": "governed-http-request-body-projection-evidence.v1",
+              "payload": {
+                "acceptanceClaimed": false,
+                "invocationIdentity": "fixture-invocation-4",
+                "mediaType": "application/json",
+                "networkExchangeCount": 0,
+                "projectionAuthorityIdentity": "project-model-provider-protocol",
+                "providerAdapterIdentity": "openai-chat-completions.v1",
+                "providerSubstitutionCount": 0,
+                "remoteTestimonyClaimed": false,
+                "repairCount": 0,
+                "requestBodyText": "{\"model\":\"gpt-4.1-mini\",\"messages\":[{\"role\":\"user\",\"content\":\"fixture\"}],\"max_tokens\":64,\"temperature\":0}",
+                "requestTextDigest": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+                "retryCount": 0,
+                "textEncodingAuthority": "utf-8"
+              }
+            },
+            "requestBodyProjectionRequest": {
+              "contractId": "project-governed-http-request-body-input.v1",
+              "payload": {
+                "invocationIdentity": "fixture-invocation-4",
+                "projectionAuthorityIdentity": "project-model-provider-protocol",
+                "providerAdapterIdentity": "openai-chat-completions.v1",
+                "wireRequestDocument": {
+                  "max_tokens": 64,
+                  "messages": [
+                    {
+                      "content": "fixture",
+                      "role": "user"
+                    }
+                  ],
+                  "model": "gpt-4.1-mini",
+                  "temperature": 0
+                }
+              }
+            }
+          }
+        },
+        "observe-http-port": {
+          "output": {
+            "contractId": "execute-projected-model-provider-attempt-input.v1",
+            "credentialBindingEvidence": {
+              "contractId": "external-credential-binding-evidence.v1",
+              "credentialInjectionRuleId": "openai-bearer-authorization.v1",
+              "detail": "bound",
+              "disposition": "BOUND",
+              "effectLineage": [
+                "attempt-4"
+              ],
+              "endpointAuthorityDigest": "sha256:b70b8bc81f93ef949d7ae6cabbf71a56b4af2440c5489c5c4037923b534f0109",
+              "invocationIdentity": "fixture-invocation-4",
+              "nonDisclosureVerified": true,
+              "opaqueBindingId": "opaque-4",
+              "referenceName": "LOC_OPENAI_API_KEY",
+              "requestingCapabilityId": "execute-projected-model-provider-attempt"
+            },
+            "credentialBindingRequest": {
+              "contractId": "bind-external-credential-reference-input.v1",
+              "payload": {
+                "credentialReference": "LOC_OPENAI_API_KEY",
+                "effectLineage": [
+                  "attempt-4"
+                ],
+                "effectScope": "governed-model-invocation",
+                "endpointAuthorityDigest": "sha256:b70b8bc81f93ef949d7ae6cabbf71a56b4af2440c5489c5c4037923b534f0109",
+                "invocationIdentity": "fixture-invocation-4",
+                "requestingCapabilityId": "execute-projected-model-provider-attempt"
+              }
+            },
+            "httpExchangeEvidence": {
+              "allowedResponseHeaders": {
+                "content-type": "application/json"
+              },
+              "boundedBytes": 100,
+              "contractId": "governed-http-exchange-evidence.v1",
+              "disposition": "completed",
+              "effectLineage": [
+                "attempt-4"
+              ],
+              "exchangeCount": 1,
+              "exchangeKind": "model-provider",
+              "httpStatus": 200,
+              "lineageId": "fixture-invocation-4",
+              "reachedStage": "response-complete",
+              "redactionVerified": true,
+              "requestBodyHash": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+              "responseBodyBytes": "eyJjaG9pY2VzIjpbeyJtZXNzYWdlIjp7ImNvbnRlbnQiOiJmaXh0dXJlIn0sImZpbmlzaF9yZWFzb24iOiJzdG9wIn1dLCJ1c2FnZSI6eyJwcm9tcHRfdG9rZW5zIjoxLCJjb21wbGV0aW9uX3Rva2VucyI6MSwidG90YWxfdG9rZW5zIjoyfX0=",
+              "responseBodyHash": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+              "timing": {
+                "completedAt": "2026-08-14T00:00:00.010Z",
+                "durationMilliseconds": 10,
+                "startedAt": "2026-08-14T00:00:00.000Z"
+              },
+              "transportDisposition": "completed"
+            },
+            "httpExchangeRequest": {
+              "contractId": "observe-governed-http-exchange-input.v1",
+              "payload": {
+                "allowedResponseHeaders": [
+                  "content-type",
+                  "x-request-id"
+                ],
+                "cancellationScopeReference": "none",
+                "credentialInjectionRuleId": "openai-bearer-authorization.v1",
+                "effectLineage": [
+                  "attempt-4"
+                ],
+                "endpointAuthorityDigest": "sha256:b70b8bc81f93ef949d7ae6cabbf71a56b4af2440c5489c5c4037923b534f0109",
+                "exchangeKind": "model-provider",
+                "invocationIdentity": "fixture-invocation-4",
+                "lineageId": "fixture-invocation-4",
+                "maxResponseBytes": 1048576,
+                "method": "POST",
+                "opaqueCredentialBinding": {
+                  "bindingId": "opaque-4",
+                  "credentialInjectionRuleId": "openai-bearer-authorization.v1"
+                },
+                "redirectPolicy": "manual-no-follow",
+                "requestBodyText": "{\"model\":\"gpt-4.1-mini\",\"messages\":[{\"role\":\"user\",\"content\":\"fixture\"}],\"max_tokens\":64,\"temperature\":0}",
+                "requestUrl": "https://api.openai.com/v1/chat/completions",
+                "safeHeaders": {
+                  "content-type": "application/json"
+                },
+                "timeoutMilliseconds": 60000
+              }
+            },
+            "payload": {
+              "adapterIdentity": "openai-chat-completions.v1",
+              "allowedResponseHeaders": [
+                "content-type",
+                "x-request-id"
+              ],
+              "cancellationScopeReference": "none",
+              "credentialReference": "LOC_OPENAI_API_KEY",
+              "endpointAuthorityDigest": "sha256:b70b8bc81f93ef949d7ae6cabbf71a56b4af2440c5489c5c4037923b534f0109",
+              "endpointUrl": "https://api.openai.com/v1/chat/completions",
+              "invocationIdentity": "fixture-invocation-4",
+              "maxResponseBytes": 1048576,
+              "protocolProjectionIdentity": "project-model-provider-protocol",
+              "protocolProjectionRequest": {
+                "contractId": "project-model-provider-protocol-input.v1",
+                "payload": {
+                  "adapterIdentity": "openai-chat-completions.v1",
+                  "context": {
+                    "maxTokens": 64,
+                    "messages": [
+                      {
+                        "content": "fixture",
+                        "role": "user"
+                      }
+                    ],
+                    "model": "gpt-4.1-mini",
+                    "temperature": 0
+                  },
+                  "providerKind": "openai",
+                  "requestType": "project-openai-text"
+                }
+              },
+              "providerAuthorityId": "secondary-cognitive-provider",
+              "providerKind": "openai",
+              "requestId": "attempt-4",
+              "requestLineage": [
+                "attempt-4"
+              ],
+              "resolvedModel": "gpt-4.1-mini",
+              "responseFormat": "text",
+              "timeoutMilliseconds": 60000
+            },
+            "protocolProjectionEvidence": {
+              "contractId": "model-provider-protocol-projection-evidence.v1",
+              "payload": {
+                "adapterIdentity": "openai-chat-completions.v1",
+                "disposition": "projected",
+                "endpointFact": null,
+                "networkExchangeCount": 0,
+                "normalizedTestimony": null,
+                "providerKind": "openai",
+                "rejectionReason": null,
+                "repairCount": 0,
+                "retryCount": 0,
+                "wireRequest": {
+                  "max_tokens": 64,
+                  "messages": [
+                    {
+                      "content": "fixture",
+                      "role": "user"
+                    }
+                  ],
+                  "model": "gpt-4.1-mini",
+                  "temperature": 0
+                }
+              }
+            },
+            "requestBodyProjectionEvidence": {
+              "contractId": "governed-http-request-body-projection-evidence.v1",
+              "payload": {
+                "acceptanceClaimed": false,
+                "invocationIdentity": "fixture-invocation-4",
+                "mediaType": "application/json",
+                "networkExchangeCount": 0,
+                "projectionAuthorityIdentity": "project-model-provider-protocol",
+                "providerAdapterIdentity": "openai-chat-completions.v1",
+                "providerSubstitutionCount": 0,
+                "remoteTestimonyClaimed": false,
+                "repairCount": 0,
+                "requestBodyText": "{\"model\":\"gpt-4.1-mini\",\"messages\":[{\"role\":\"user\",\"content\":\"fixture\"}],\"max_tokens\":64,\"temperature\":0}",
+                "requestTextDigest": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+                "retryCount": 0,
+                "textEncodingAuthority": "utf-8"
+              }
+            },
+            "requestBodyProjectionRequest": {
+              "contractId": "project-governed-http-request-body-input.v1",
+              "payload": {
+                "invocationIdentity": "fixture-invocation-4",
+                "projectionAuthorityIdentity": "project-model-provider-protocol",
+                "providerAdapterIdentity": "openai-chat-completions.v1",
+                "wireRequestDocument": {
+                  "max_tokens": 64,
+                  "messages": [
+                    {
+                      "content": "fixture",
+                      "role": "user"
+                    }
+                  ],
+                  "model": "gpt-4.1-mini",
+                  "temperature": 0
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "expected": {
+        "disposition": "terminated",
+        "outcomeAssertions": [
+          {
+            "conditionId": "response-obtained",
+            "operator": "equals",
+            "path": "disposition",
+            "value": "MODEL_RESPONSE_OBTAINED"
+          },
+          {
+            "conditionId": "provider-preserved",
+            "operator": "equals",
+            "path": "provider",
+            "value": "primary-cognitive-provider"
+          },
+          {
+            "conditionId": "model-preserved",
+            "operator": "equals",
+            "path": "model",
+            "value": "gemini-flash-latest"
+          },
+          {
+            "conditionId": "one-exchange",
+            "operator": "equals",
+            "path": "attempts",
+            "value": 1
+          },
+          {
+            "conditionId": "no-switch",
+            "operator": "equals",
+            "path": "receipt.providerSwitchCount",
+            "value": 0
+          }
+        ],
+        "scenarioSequence": [
+          "execute-projected-model-provider-attempt"
+        ],
+        "terminalScenarioId": "execute-projected-model-provider-attempt"
+      },
+      "fixtureId": "attempt-5",
+      "input": {
+        "contractId": "execute-projected-model-provider-attempt-input.v1",
+        "payload": {
+          "adapterIdentity": "gemini-generate-content.v1",
+          "allowedResponseHeaders": [
+            "content-type",
+            "x-goog-request-id"
+          ],
+          "cancellationScopeReference": "none",
+          "credentialReference": "LOC_GEMINI_API_KEY",
+          "endpointAuthorityDigest": "sha256:57ab352b0978dca5e5ce33a28ccd7027c20df96da4138dbc7e8088f7c8fb0c04",
+          "endpointUrl": "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent",
+          "invocationIdentity": "fixture-invocation-5",
+          "maxResponseBytes": 1048576,
+          "protocolProjectionIdentity": "project-model-provider-protocol",
+          "protocolProjectionRequest": {
+            "contractId": "project-model-provider-protocol-input.v1",
+            "payload": {
+              "adapterIdentity": "gemini-generate-content.v1",
+              "context": {
+                "maxTokens": 64,
+                "messages": [
+                  {
+                    "parts": [
+                      {
+                        "text": "fixture"
+                      }
+                    ],
+                    "role": "user"
+                  }
+                ],
+                "systemInstruction": {
+                  "parts": [
+                    {
+                      "text": "bounded"
+                    }
+                  ]
+                },
+                "temperature": 0
+              },
+              "providerKind": "gemini",
+              "requestType": "project-gemini-text"
+            }
+          },
+          "providerAuthorityId": "primary-cognitive-provider",
+          "providerKind": "gemini",
+          "requestId": "attempt-5",
+          "requestLineage": [
+            "attempt-5"
+          ],
+          "resolvedModel": "gemini-flash-latest",
+          "responseFormat": "text",
+          "timeoutMilliseconds": 60000
+        }
+      },
+      "portOutcomes": {
+        "bind-credential-port": {
+          "output": {
+            "contractId": "execute-projected-model-provider-attempt-input.v1",
+            "credentialBindingEvidence": {
+              "contractId": "external-credential-binding-evidence.v1",
+              "credentialInjectionRuleId": "gemini-x-goog-api-key.v1",
+              "detail": "bound",
+              "disposition": "BOUND",
+              "effectLineage": [
+                "attempt-5"
+              ],
+              "endpointAuthorityDigest": "sha256:57ab352b0978dca5e5ce33a28ccd7027c20df96da4138dbc7e8088f7c8fb0c04",
+              "invocationIdentity": "fixture-invocation-5",
+              "nonDisclosureVerified": true,
+              "opaqueBindingId": "opaque-5",
+              "referenceName": "LOC_GEMINI_API_KEY",
+              "requestingCapabilityId": "execute-projected-model-provider-attempt"
+            },
+            "credentialBindingRequest": {
+              "contractId": "bind-external-credential-reference-input.v1",
+              "payload": {
+                "credentialReference": "LOC_GEMINI_API_KEY",
+                "effectLineage": [
+                  "attempt-5"
+                ],
+                "effectScope": "governed-model-invocation",
+                "endpointAuthorityDigest": "sha256:57ab352b0978dca5e5ce33a28ccd7027c20df96da4138dbc7e8088f7c8fb0c04",
+                "invocationIdentity": "fixture-invocation-5",
+                "requestingCapabilityId": "execute-projected-model-provider-attempt"
+              }
+            },
+            "payload": {
+              "adapterIdentity": "gemini-generate-content.v1",
+              "allowedResponseHeaders": [
+                "content-type",
+                "x-goog-request-id"
+              ],
+              "cancellationScopeReference": "none",
+              "credentialReference": "LOC_GEMINI_API_KEY",
+              "endpointAuthorityDigest": "sha256:57ab352b0978dca5e5ce33a28ccd7027c20df96da4138dbc7e8088f7c8fb0c04",
+              "endpointUrl": "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent",
+              "invocationIdentity": "fixture-invocation-5",
+              "maxResponseBytes": 1048576,
+              "protocolProjectionIdentity": "project-model-provider-protocol",
+              "protocolProjectionRequest": {
+                "contractId": "project-model-provider-protocol-input.v1",
+                "payload": {
+                  "adapterIdentity": "gemini-generate-content.v1",
+                  "context": {
+                    "maxTokens": 64,
+                    "messages": [
+                      {
+                        "parts": [
+                          {
+                            "text": "fixture"
+                          }
+                        ],
+                        "role": "user"
+                      }
+                    ],
+                    "systemInstruction": {
+                      "parts": [
+                        {
+                          "text": "bounded"
+                        }
+                      ]
+                    },
+                    "temperature": 0
+                  },
+                  "providerKind": "gemini",
+                  "requestType": "project-gemini-text"
+                }
+              },
+              "providerAuthorityId": "primary-cognitive-provider",
+              "providerKind": "gemini",
+              "requestId": "attempt-5",
+              "requestLineage": [
+                "attempt-5"
+              ],
+              "resolvedModel": "gemini-flash-latest",
+              "responseFormat": "text",
+              "timeoutMilliseconds": 60000
+            },
+            "protocolProjectionEvidence": {
+              "contractId": "model-provider-protocol-projection-evidence.v1",
+              "payload": {
+                "adapterIdentity": "gemini-generate-content.v1",
+                "disposition": "projected",
+                "endpointFact": null,
+                "networkExchangeCount": 0,
+                "normalizedTestimony": null,
+                "providerKind": "gemini",
+                "rejectionReason": null,
+                "repairCount": 0,
+                "retryCount": 0,
+                "wireRequest": {
+                  "contents": [
+                    {
+                      "parts": [
+                        {
+                          "text": "fixture"
+                        }
+                      ],
+                      "role": "user"
+                    }
+                  ],
+                  "generationConfig": {
+                    "maxOutputTokens": 64,
+                    "temperature": 0
+                  },
+                  "systemInstruction": {
+                    "parts": [
+                      {
+                        "text": "bounded"
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "requestBodyProjectionEvidence": {
+              "contractId": "governed-http-request-body-projection-evidence.v1",
+              "payload": {
+                "acceptanceClaimed": false,
+                "invocationIdentity": "fixture-invocation-5",
+                "mediaType": "application/json",
+                "networkExchangeCount": 0,
+                "projectionAuthorityIdentity": "project-model-provider-protocol",
+                "providerAdapterIdentity": "gemini-generate-content.v1",
+                "providerSubstitutionCount": 0,
+                "remoteTestimonyClaimed": false,
+                "repairCount": 0,
+                "requestBodyText": "{\"contents\":[{\"role\":\"user\",\"parts\":[{\"text\":\"fixture\"}]}],\"systemInstruction\":{\"parts\":[{\"text\":\"bounded\"}]},\"generationConfig\":{\"maxOutputTokens\":64,\"temperature\":0}}",
+                "requestTextDigest": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+                "retryCount": 0,
+                "textEncodingAuthority": "utf-8"
+              }
+            },
+            "requestBodyProjectionRequest": {
+              "contractId": "project-governed-http-request-body-input.v1",
+              "payload": {
+                "invocationIdentity": "fixture-invocation-5",
+                "projectionAuthorityIdentity": "project-model-provider-protocol",
+                "providerAdapterIdentity": "gemini-generate-content.v1",
+                "wireRequestDocument": {
+                  "contents": [
+                    {
+                      "parts": [
+                        {
+                          "text": "fixture"
+                        }
+                      ],
+                      "role": "user"
+                    }
+                  ],
+                  "generationConfig": {
+                    "maxOutputTokens": 64,
+                    "temperature": 0
+                  },
+                  "systemInstruction": {
+                    "parts": [
+                      {
+                        "text": "bounded"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "observe-http-port": {
+          "output": {
+            "contractId": "execute-projected-model-provider-attempt-input.v1",
+            "credentialBindingEvidence": {
+              "contractId": "external-credential-binding-evidence.v1",
+              "credentialInjectionRuleId": "gemini-x-goog-api-key.v1",
+              "detail": "bound",
+              "disposition": "BOUND",
+              "effectLineage": [
+                "attempt-5"
+              ],
+              "endpointAuthorityDigest": "sha256:57ab352b0978dca5e5ce33a28ccd7027c20df96da4138dbc7e8088f7c8fb0c04",
+              "invocationIdentity": "fixture-invocation-5",
+              "nonDisclosureVerified": true,
+              "opaqueBindingId": "opaque-5",
+              "referenceName": "LOC_GEMINI_API_KEY",
+              "requestingCapabilityId": "execute-projected-model-provider-attempt"
+            },
+            "credentialBindingRequest": {
+              "contractId": "bind-external-credential-reference-input.v1",
+              "payload": {
+                "credentialReference": "LOC_GEMINI_API_KEY",
+                "effectLineage": [
+                  "attempt-5"
+                ],
+                "effectScope": "governed-model-invocation",
+                "endpointAuthorityDigest": "sha256:57ab352b0978dca5e5ce33a28ccd7027c20df96da4138dbc7e8088f7c8fb0c04",
+                "invocationIdentity": "fixture-invocation-5",
+                "requestingCapabilityId": "execute-projected-model-provider-attempt"
+              }
+            },
+            "httpExchangeEvidence": {
+              "allowedResponseHeaders": {
+                "content-type": "application/json"
+              },
+              "boundedBytes": 100,
+              "contractId": "governed-http-exchange-evidence.v1",
+              "disposition": "completed",
+              "effectLineage": [
+                "attempt-5"
+              ],
+              "exchangeCount": 1,
+              "exchangeKind": "model-provider",
+              "httpStatus": 200,
+              "lineageId": "fixture-invocation-5",
+              "reachedStage": "response-complete",
+              "redactionVerified": true,
+              "requestBodyHash": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+              "responseBodyBytes": "eyJjYW5kaWRhdGVzIjpbeyJjb250ZW50Ijp7InBhcnRzIjpbeyJ0ZXh0IjoiZml4dHVyZSJ9XX0sImZpbmlzaFJlYXNvbiI6IlNUT1AifV19",
+              "responseBodyHash": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+              "timing": {
+                "completedAt": "2026-08-14T00:00:00.010Z",
+                "durationMilliseconds": 10,
+                "startedAt": "2026-08-14T00:00:00.000Z"
+              },
+              "transportDisposition": "completed"
+            },
+            "httpExchangeRequest": {
+              "contractId": "observe-governed-http-exchange-input.v1",
+              "payload": {
+                "allowedResponseHeaders": [
+                  "content-type",
+                  "x-goog-request-id"
+                ],
+                "cancellationScopeReference": "none",
+                "credentialInjectionRuleId": "gemini-x-goog-api-key.v1",
+                "effectLineage": [
+                  "attempt-5"
+                ],
+                "endpointAuthorityDigest": "sha256:57ab352b0978dca5e5ce33a28ccd7027c20df96da4138dbc7e8088f7c8fb0c04",
+                "exchangeKind": "model-provider",
+                "invocationIdentity": "fixture-invocation-5",
+                "lineageId": "fixture-invocation-5",
+                "maxResponseBytes": 1048576,
+                "method": "POST",
+                "opaqueCredentialBinding": {
+                  "bindingId": "opaque-5",
+                  "credentialInjectionRuleId": "gemini-x-goog-api-key.v1"
+                },
+                "redirectPolicy": "manual-no-follow",
+                "requestBodyText": "{\"contents\":[{\"role\":\"user\",\"parts\":[{\"text\":\"fixture\"}]}],\"systemInstruction\":{\"parts\":[{\"text\":\"bounded\"}]},\"generationConfig\":{\"maxOutputTokens\":64,\"temperature\":0}}",
+                "requestUrl": "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent",
+                "safeHeaders": {
+                  "content-type": "application/json"
+                },
+                "timeoutMilliseconds": 60000
+              }
+            },
+            "payload": {
+              "adapterIdentity": "gemini-generate-content.v1",
+              "allowedResponseHeaders": [
+                "content-type",
+                "x-goog-request-id"
+              ],
+              "cancellationScopeReference": "none",
+              "credentialReference": "LOC_GEMINI_API_KEY",
+              "endpointAuthorityDigest": "sha256:57ab352b0978dca5e5ce33a28ccd7027c20df96da4138dbc7e8088f7c8fb0c04",
+              "endpointUrl": "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent",
+              "invocationIdentity": "fixture-invocation-5",
+              "maxResponseBytes": 1048576,
+              "protocolProjectionIdentity": "project-model-provider-protocol",
+              "protocolProjectionRequest": {
+                "contractId": "project-model-provider-protocol-input.v1",
+                "payload": {
+                  "adapterIdentity": "gemini-generate-content.v1",
+                  "context": {
+                    "maxTokens": 64,
+                    "messages": [
+                      {
+                        "parts": [
+                          {
+                            "text": "fixture"
+                          }
+                        ],
+                        "role": "user"
+                      }
+                    ],
+                    "systemInstruction": {
+                      "parts": [
+                        {
+                          "text": "bounded"
+                        }
+                      ]
+                    },
+                    "temperature": 0
+                  },
+                  "providerKind": "gemini",
+                  "requestType": "project-gemini-text"
+                }
+              },
+              "providerAuthorityId": "primary-cognitive-provider",
+              "providerKind": "gemini",
+              "requestId": "attempt-5",
+              "requestLineage": [
+                "attempt-5"
+              ],
+              "resolvedModel": "gemini-flash-latest",
+              "responseFormat": "text",
+              "timeoutMilliseconds": 60000
+            },
+            "protocolProjectionEvidence": {
+              "contractId": "model-provider-protocol-projection-evidence.v1",
+              "payload": {
+                "adapterIdentity": "gemini-generate-content.v1",
+                "disposition": "projected",
+                "endpointFact": null,
+                "networkExchangeCount": 0,
+                "normalizedTestimony": null,
+                "providerKind": "gemini",
+                "rejectionReason": null,
+                "repairCount": 0,
+                "retryCount": 0,
+                "wireRequest": {
+                  "contents": [
+                    {
+                      "parts": [
+                        {
+                          "text": "fixture"
+                        }
+                      ],
+                      "role": "user"
+                    }
+                  ],
+                  "generationConfig": {
+                    "maxOutputTokens": 64,
+                    "temperature": 0
+                  },
+                  "systemInstruction": {
+                    "parts": [
+                      {
+                        "text": "bounded"
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "requestBodyProjectionEvidence": {
+              "contractId": "governed-http-request-body-projection-evidence.v1",
+              "payload": {
+                "acceptanceClaimed": false,
+                "invocationIdentity": "fixture-invocation-5",
+                "mediaType": "application/json",
+                "networkExchangeCount": 0,
+                "projectionAuthorityIdentity": "project-model-provider-protocol",
+                "providerAdapterIdentity": "gemini-generate-content.v1",
+                "providerSubstitutionCount": 0,
+                "remoteTestimonyClaimed": false,
+                "repairCount": 0,
+                "requestBodyText": "{\"contents\":[{\"role\":\"user\",\"parts\":[{\"text\":\"fixture\"}]}],\"systemInstruction\":{\"parts\":[{\"text\":\"bounded\"}]},\"generationConfig\":{\"maxOutputTokens\":64,\"temperature\":0}}",
+                "requestTextDigest": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+                "retryCount": 0,
+                "textEncodingAuthority": "utf-8"
+              }
+            },
+            "requestBodyProjectionRequest": {
+              "contractId": "project-governed-http-request-body-input.v1",
+              "payload": {
+                "invocationIdentity": "fixture-invocation-5",
+                "projectionAuthorityIdentity": "project-model-provider-protocol",
+                "providerAdapterIdentity": "gemini-generate-content.v1",
+                "wireRequestDocument": {
+                  "contents": [
+                    {
+                      "parts": [
+                        {
+                          "text": "fixture"
+                        }
+                      ],
+                      "role": "user"
+                    }
+                  ],
+                  "generationConfig": {
+                    "maxOutputTokens": 64,
+                    "temperature": 0
+                  },
+                  "systemInstruction": {
+                    "parts": [
+                      {
+                        "text": "bounded"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "expected": {
+        "disposition": "terminated",
+        "outcomeAssertions": [
+          {
+            "conditionId": "response-obtained",
+            "operator": "equals",
+            "path": "disposition",
+            "value": "MODEL_RESPONSE_OBTAINED"
+          },
+          {
+            "conditionId": "provider-preserved",
+            "operator": "equals",
+            "path": "provider",
+            "value": "secondary-cognitive-provider"
+          },
+          {
+            "conditionId": "model-preserved",
+            "operator": "equals",
+            "path": "model",
+            "value": "gpt-4.1-mini"
+          },
+          {
+            "conditionId": "one-exchange",
+            "operator": "equals",
+            "path": "attempts",
+            "value": 1
+          },
+          {
+            "conditionId": "no-switch",
+            "operator": "equals",
+            "path": "receipt.providerSwitchCount",
+            "value": 0
+          }
+        ],
+        "scenarioSequence": [
+          "execute-projected-model-provider-attempt"
+        ],
+        "terminalScenarioId": "execute-projected-model-provider-attempt"
+      },
+      "fixtureId": "attempt-6",
+      "input": {
+        "contractId": "execute-projected-model-provider-attempt-input.v1",
+        "payload": {
+          "adapterIdentity": "openai-chat-completions.v1",
+          "allowedResponseHeaders": [
+            "content-type",
+            "x-request-id"
+          ],
+          "cancellationScopeReference": "none",
+          "credentialReference": "LOC_OPENAI_API_KEY",
+          "endpointAuthorityDigest": "sha256:b70b8bc81f93ef949d7ae6cabbf71a56b4af2440c5489c5c4037923b534f0109",
+          "endpointUrl": "https://api.openai.com/v1/chat/completions",
+          "invocationIdentity": "fixture-invocation-6",
+          "maxResponseBytes": 1048576,
+          "protocolProjectionIdentity": "project-model-provider-protocol",
+          "protocolProjectionRequest": {
+            "contractId": "project-model-provider-protocol-input.v1",
+            "payload": {
+              "adapterIdentity": "openai-chat-completions.v1",
+              "context": {
+                "maxTokens": 64,
+                "messages": [
+                  {
+                    "content": "fixture",
+                    "role": "user"
+                  }
+                ],
+                "model": "gpt-4.1-mini",
+                "temperature": 0
+              },
+              "providerKind": "openai",
+              "requestType": "project-openai-text"
+            }
+          },
+          "providerAuthorityId": "secondary-cognitive-provider",
+          "providerKind": "openai",
+          "requestId": "attempt-6",
+          "requestLineage": [
+            "attempt-6"
+          ],
+          "resolvedModel": "gpt-4.1-mini",
+          "responseFormat": "text",
+          "timeoutMilliseconds": 60000
+        }
+      },
+      "portOutcomes": {
+        "bind-credential-port": {
+          "output": {
+            "contractId": "execute-projected-model-provider-attempt-input.v1",
+            "credentialBindingEvidence": {
+              "contractId": "external-credential-binding-evidence.v1",
+              "credentialInjectionRuleId": "openai-bearer-authorization.v1",
+              "detail": "bound",
+              "disposition": "BOUND",
+              "effectLineage": [
+                "attempt-6"
+              ],
+              "endpointAuthorityDigest": "sha256:b70b8bc81f93ef949d7ae6cabbf71a56b4af2440c5489c5c4037923b534f0109",
+              "invocationIdentity": "fixture-invocation-6",
+              "nonDisclosureVerified": true,
+              "opaqueBindingId": "opaque-6",
+              "referenceName": "LOC_OPENAI_API_KEY",
+              "requestingCapabilityId": "execute-projected-model-provider-attempt"
+            },
+            "credentialBindingRequest": {
+              "contractId": "bind-external-credential-reference-input.v1",
+              "payload": {
+                "credentialReference": "LOC_OPENAI_API_KEY",
+                "effectLineage": [
+                  "attempt-6"
+                ],
+                "effectScope": "governed-model-invocation",
+                "endpointAuthorityDigest": "sha256:b70b8bc81f93ef949d7ae6cabbf71a56b4af2440c5489c5c4037923b534f0109",
+                "invocationIdentity": "fixture-invocation-6",
+                "requestingCapabilityId": "execute-projected-model-provider-attempt"
+              }
+            },
+            "payload": {
+              "adapterIdentity": "openai-chat-completions.v1",
+              "allowedResponseHeaders": [
+                "content-type",
+                "x-request-id"
+              ],
+              "cancellationScopeReference": "none",
+              "credentialReference": "LOC_OPENAI_API_KEY",
+              "endpointAuthorityDigest": "sha256:b70b8bc81f93ef949d7ae6cabbf71a56b4af2440c5489c5c4037923b534f0109",
+              "endpointUrl": "https://api.openai.com/v1/chat/completions",
+              "invocationIdentity": "fixture-invocation-6",
+              "maxResponseBytes": 1048576,
+              "protocolProjectionIdentity": "project-model-provider-protocol",
+              "protocolProjectionRequest": {
+                "contractId": "project-model-provider-protocol-input.v1",
+                "payload": {
+                  "adapterIdentity": "openai-chat-completions.v1",
+                  "context": {
+                    "maxTokens": 64,
+                    "messages": [
+                      {
+                        "content": "fixture",
+                        "role": "user"
+                      }
+                    ],
+                    "model": "gpt-4.1-mini",
+                    "temperature": 0
+                  },
+                  "providerKind": "openai",
+                  "requestType": "project-openai-text"
+                }
+              },
+              "providerAuthorityId": "secondary-cognitive-provider",
+              "providerKind": "openai",
+              "requestId": "attempt-6",
+              "requestLineage": [
+                "attempt-6"
+              ],
+              "resolvedModel": "gpt-4.1-mini",
+              "responseFormat": "text",
+              "timeoutMilliseconds": 60000
+            },
+            "protocolProjectionEvidence": {
+              "contractId": "model-provider-protocol-projection-evidence.v1",
+              "payload": {
+                "adapterIdentity": "openai-chat-completions.v1",
+                "disposition": "projected",
+                "endpointFact": null,
+                "networkExchangeCount": 0,
+                "normalizedTestimony": null,
+                "providerKind": "openai",
+                "rejectionReason": null,
+                "repairCount": 0,
+                "retryCount": 0,
+                "wireRequest": {
+                  "max_tokens": 64,
+                  "messages": [
+                    {
+                      "content": "fixture",
+                      "role": "user"
+                    }
+                  ],
+                  "model": "gpt-4.1-mini",
+                  "temperature": 0
+                }
+              }
+            },
+            "requestBodyProjectionEvidence": {
+              "contractId": "governed-http-request-body-projection-evidence.v1",
+              "payload": {
+                "acceptanceClaimed": false,
+                "invocationIdentity": "fixture-invocation-6",
+                "mediaType": "application/json",
+                "networkExchangeCount": 0,
+                "projectionAuthorityIdentity": "project-model-provider-protocol",
+                "providerAdapterIdentity": "openai-chat-completions.v1",
+                "providerSubstitutionCount": 0,
+                "remoteTestimonyClaimed": false,
+                "repairCount": 0,
+                "requestBodyText": "{\"model\":\"gpt-4.1-mini\",\"messages\":[{\"role\":\"user\",\"content\":\"fixture\"}],\"max_tokens\":64,\"temperature\":0}",
+                "requestTextDigest": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+                "retryCount": 0,
+                "textEncodingAuthority": "utf-8"
+              }
+            },
+            "requestBodyProjectionRequest": {
+              "contractId": "project-governed-http-request-body-input.v1",
+              "payload": {
+                "invocationIdentity": "fixture-invocation-6",
+                "projectionAuthorityIdentity": "project-model-provider-protocol",
+                "providerAdapterIdentity": "openai-chat-completions.v1",
+                "wireRequestDocument": {
+                  "max_tokens": 64,
+                  "messages": [
+                    {
+                      "content": "fixture",
+                      "role": "user"
+                    }
+                  ],
+                  "model": "gpt-4.1-mini",
+                  "temperature": 0
+                }
+              }
+            }
+          }
+        },
+        "observe-http-port": {
+          "output": {
+            "contractId": "execute-projected-model-provider-attempt-input.v1",
+            "credentialBindingEvidence": {
+              "contractId": "external-credential-binding-evidence.v1",
+              "credentialInjectionRuleId": "openai-bearer-authorization.v1",
+              "detail": "bound",
+              "disposition": "BOUND",
+              "effectLineage": [
+                "attempt-6"
+              ],
+              "endpointAuthorityDigest": "sha256:b70b8bc81f93ef949d7ae6cabbf71a56b4af2440c5489c5c4037923b534f0109",
+              "invocationIdentity": "fixture-invocation-6",
+              "nonDisclosureVerified": true,
+              "opaqueBindingId": "opaque-6",
+              "referenceName": "LOC_OPENAI_API_KEY",
+              "requestingCapabilityId": "execute-projected-model-provider-attempt"
+            },
+            "credentialBindingRequest": {
+              "contractId": "bind-external-credential-reference-input.v1",
+              "payload": {
+                "credentialReference": "LOC_OPENAI_API_KEY",
+                "effectLineage": [
+                  "attempt-6"
+                ],
+                "effectScope": "governed-model-invocation",
+                "endpointAuthorityDigest": "sha256:b70b8bc81f93ef949d7ae6cabbf71a56b4af2440c5489c5c4037923b534f0109",
+                "invocationIdentity": "fixture-invocation-6",
+                "requestingCapabilityId": "execute-projected-model-provider-attempt"
+              }
+            },
+            "httpExchangeEvidence": {
+              "allowedResponseHeaders": {
+                "content-type": "application/json"
+              },
+              "boundedBytes": 100,
+              "contractId": "governed-http-exchange-evidence.v1",
+              "disposition": "completed",
+              "effectLineage": [
+                "attempt-6"
+              ],
+              "exchangeCount": 1,
+              "exchangeKind": "model-provider",
+              "httpStatus": 200,
+              "lineageId": "fixture-invocation-6",
+              "reachedStage": "response-complete",
+              "redactionVerified": true,
+              "requestBodyHash": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+              "responseBodyBytes": "eyJjaG9pY2VzIjpbeyJtZXNzYWdlIjp7ImNvbnRlbnQiOiJmaXh0dXJlIn0sImZpbmlzaF9yZWFzb24iOiJzdG9wIn1dLCJ1c2FnZSI6eyJwcm9tcHRfdG9rZW5zIjoxLCJjb21wbGV0aW9uX3Rva2VucyI6MSwidG90YWxfdG9rZW5zIjoyfX0=",
+              "responseBodyHash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+              "timing": {
+                "completedAt": "2026-08-14T00:00:00.010Z",
+                "durationMilliseconds": 10,
+                "startedAt": "2026-08-14T00:00:00.000Z"
+              },
+              "transportDisposition": "completed"
+            },
+            "httpExchangeRequest": {
+              "contractId": "observe-governed-http-exchange-input.v1",
+              "payload": {
+                "allowedResponseHeaders": [
+                  "content-type",
+                  "x-request-id"
+                ],
+                "cancellationScopeReference": "none",
+                "credentialInjectionRuleId": "openai-bearer-authorization.v1",
+                "effectLineage": [
+                  "attempt-6"
+                ],
+                "endpointAuthorityDigest": "sha256:b70b8bc81f93ef949d7ae6cabbf71a56b4af2440c5489c5c4037923b534f0109",
+                "exchangeKind": "model-provider",
+                "invocationIdentity": "fixture-invocation-6",
+                "lineageId": "fixture-invocation-6",
+                "maxResponseBytes": 1048576,
+                "method": "POST",
+                "opaqueCredentialBinding": {
+                  "bindingId": "opaque-6",
+                  "credentialInjectionRuleId": "openai-bearer-authorization.v1"
+                },
+                "redirectPolicy": "manual-no-follow",
+                "requestBodyText": "{\"model\":\"gpt-4.1-mini\",\"messages\":[{\"role\":\"user\",\"content\":\"fixture\"}],\"max_tokens\":64,\"temperature\":0}",
+                "requestUrl": "https://api.openai.com/v1/chat/completions",
+                "safeHeaders": {
+                  "content-type": "application/json"
+                },
+                "timeoutMilliseconds": 60000
+              }
+            },
+            "payload": {
+              "adapterIdentity": "openai-chat-completions.v1",
+              "allowedResponseHeaders": [
+                "content-type",
+                "x-request-id"
+              ],
+              "cancellationScopeReference": "none",
+              "credentialReference": "LOC_OPENAI_API_KEY",
+              "endpointAuthorityDigest": "sha256:b70b8bc81f93ef949d7ae6cabbf71a56b4af2440c5489c5c4037923b534f0109",
+              "endpointUrl": "https://api.openai.com/v1/chat/completions",
+              "invocationIdentity": "fixture-invocation-6",
+              "maxResponseBytes": 1048576,
+              "protocolProjectionIdentity": "project-model-provider-protocol",
+              "protocolProjectionRequest": {
+                "contractId": "project-model-provider-protocol-input.v1",
+                "payload": {
+                  "adapterIdentity": "openai-chat-completions.v1",
+                  "context": {
+                    "maxTokens": 64,
+                    "messages": [
+                      {
+                        "content": "fixture",
+                        "role": "user"
+                      }
+                    ],
+                    "model": "gpt-4.1-mini",
+                    "temperature": 0
+                  },
+                  "providerKind": "openai",
+                  "requestType": "project-openai-text"
+                }
+              },
+              "providerAuthorityId": "secondary-cognitive-provider",
+              "providerKind": "openai",
+              "requestId": "attempt-6",
+              "requestLineage": [
+                "attempt-6"
+              ],
+              "resolvedModel": "gpt-4.1-mini",
+              "responseFormat": "text",
+              "timeoutMilliseconds": 60000
+            },
+            "protocolProjectionEvidence": {
+              "contractId": "model-provider-protocol-projection-evidence.v1",
+              "payload": {
+                "adapterIdentity": "openai-chat-completions.v1",
+                "disposition": "projected",
+                "endpointFact": null,
+                "networkExchangeCount": 0,
+                "normalizedTestimony": null,
+                "providerKind": "openai",
+                "rejectionReason": null,
+                "repairCount": 0,
+                "retryCount": 0,
+                "wireRequest": {
+                  "max_tokens": 64,
+                  "messages": [
+                    {
+                      "content": "fixture",
+                      "role": "user"
+                    }
+                  ],
+                  "model": "gpt-4.1-mini",
+                  "temperature": 0
+                }
+              }
+            },
+            "requestBodyProjectionEvidence": {
+              "contractId": "governed-http-request-body-projection-evidence.v1",
+              "payload": {
+                "acceptanceClaimed": false,
+                "invocationIdentity": "fixture-invocation-6",
+                "mediaType": "application/json",
+                "networkExchangeCount": 0,
+                "projectionAuthorityIdentity": "project-model-provider-protocol",
+                "providerAdapterIdentity": "openai-chat-completions.v1",
+                "providerSubstitutionCount": 0,
+                "remoteTestimonyClaimed": false,
+                "repairCount": 0,
+                "requestBodyText": "{\"model\":\"gpt-4.1-mini\",\"messages\":[{\"role\":\"user\",\"content\":\"fixture\"}],\"max_tokens\":64,\"temperature\":0}",
+                "requestTextDigest": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+                "retryCount": 0,
+                "textEncodingAuthority": "utf-8"
+              }
+            },
+            "requestBodyProjectionRequest": {
+              "contractId": "project-governed-http-request-body-input.v1",
+              "payload": {
+                "invocationIdentity": "fixture-invocation-6",
+                "projectionAuthorityIdentity": "project-model-provider-protocol",
+                "providerAdapterIdentity": "openai-chat-completions.v1",
+                "wireRequestDocument": {
+                  "max_tokens": 64,
+                  "messages": [
+                    {
+                      "content": "fixture",
+                      "role": "user"
+                    }
+                  ],
+                  "model": "gpt-4.1-mini",
+                  "temperature": 0
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

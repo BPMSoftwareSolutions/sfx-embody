@@ -1,0 +1,38 @@
+{
+  "scenarioId": "reject-stale-model-provider-binding",
+  "input": {
+    "inputId": "stale-model-provider-invocation-binding",
+    "contract": {
+      "contractId": "execute-governed-model-invocation-input.v1"
+    }
+  },
+  "event": {
+    "eventId": "stale-model-provider-invocation-requested",
+    "executionAuthorityId": "reject-stale-model-provider-binding.v1"
+  },
+  "outcome": {
+    "outcomeId": "stale-model-provider-invocation-rejection",
+    "contract": {
+      "contractId": "governed-model-invocation-evidence.v1"
+    },
+    "experience": {
+      "statement": "the invocation is held with exact drift findings, zero attempts, and a receipt without credential access, protocol projection, or network effects"
+    },
+    "terminal": true
+  },
+  "gherkin": {
+    "given": {
+      "semanticRef": "reject-stale-model-provider-binding.given",
+      "text": "a valid model request and a provider, model, adapter, endpoint, or policy binding whose digest or request identity is stale"
+    },
+    "when": {
+      "semanticRef": "reject-stale-model-provider-binding.when",
+      "text": "invocation prerequisites are verified"
+    },
+    "then": {
+      "semanticRef": "reject-stale-model-provider-binding.then",
+      "text": "the invocation is held with exact drift findings, zero attempts, and a receipt without credential access, protocol projection, or network effects"
+    }
+  },
+  "name": "Reject a binding that no longer matches admitted authority"
+}

@@ -1,0 +1,38 @@
+{
+  "scenarioId": "obtain-governed-model-response",
+  "input": {
+    "inputId": "governed-model-invocation-request",
+    "contract": {
+      "contractId": "governed-model-invocation-request.v1"
+    }
+  },
+  "event": {
+    "eventId": "governed-model-response-requested",
+    "executionAuthorityId": "obtain-governed-model-response.v1"
+  },
+  "outcome": {
+    "outcomeId": "governed-model-response-observed",
+    "contract": {
+      "contractId": "governed-model-response-evidence.v1"
+    },
+    "experience": {
+      "statement": "the exact normalized response or governed failure disposition is returned with provider, model, attempt, timing, and hash lineage and no acceptance claim"
+    },
+    "terminal": true
+  },
+  "gherkin": {
+    "given": {
+      "semanticRef": "obtain-governed-model-response.given",
+      "text": "one admitted immutable model request with fixed provider, model, response, attempt, substitution, and evidence authority"
+    },
+    "when": {
+      "semanticRef": "obtain-governed-model-response.when",
+      "text": "the admitted generic LLM connector is asked to obtain the governed response"
+    },
+    "then": {
+      "semanticRef": "obtain-governed-model-response.then",
+      "text": "the exact normalized response or governed failure disposition is returned with provider, model, attempt, timing, and hash lineage and no acceptance claim"
+    }
+  },
+  "name": "Obtain one policy-bounded model response"
+}

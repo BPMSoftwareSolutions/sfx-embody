@@ -1,0 +1,948 @@
+{
+  "projectionManifestType": "consumer-capability-projection-manifest.v1",
+  "generator": "scenario-driven-architecture/tools/src/consumer-projection",
+  "authorityRefs": [
+    "capability.feature",
+    "capability.authority.json",
+    "semantic-graph.authority.json",
+    "execution-authorities.authority.json",
+    "projection-authorities.authority.json",
+    "interfaces.authority.json",
+    "fixtures.authority.json",
+    "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+    "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json"
+  ],
+  "admittedPlatformCapabilities": [
+    "sda-authority-state-projection.v1",
+    "sda-authority-transformation-port.v1",
+    "sda-bounded-base64-byte-digest-port.v1",
+    "sda-canonical-capability-feature-resolution-port.v1",
+    "sda-declarative-state-projection.v1",
+    "sda-declarative-value-port.v1",
+    "sda-external-credential-reference-binding-port.v1",
+    "sda-external-observation-port.v1",
+    "sda-filesystem-artifact-store.v1",
+    "sda-fixture-contract-validator.v1",
+    "sda-generic-llm-connector-port.v1",
+    "sda-governed-disposable-root-lifecycle-port.v1",
+    "sda-governed-external-root-batch-materialization-port.v1",
+    "sda-governed-external-root-consumer-projection-port.v1",
+    "sda-governed-external-root-observation-port.v1",
+    "sda-governed-external-root-projected-application-execution-port.v1",
+    "sda-governed-file-system-shaping-port.v2",
+    "sda-governed-http-exchange-port.v1",
+    "sda-governed-repository-observation-port.v1",
+    "sda-governed-serial-execution-port.v1",
+    "sda-governed-target-execution-observation-port.v1",
+    "sda-governed-tooling-binding-transaction-port.v1",
+    "sda-governed-tooling-migration-operation-port.v1",
+    "sda-json-authority-ingestion-port.v1",
+    "sda-json-cli.v1",
+    "sda-json-query-cli.v1",
+    "sda-node-consumer-runtime.v1",
+    "sda-os-environment-credential-port.v1",
+    "sda-projected-capability-invocation-port.v1",
+    "sda-projected-capability-invocation-port.v2",
+    "sda-proof-binding-evaluation-port.v1",
+    "sda-scenario-semantic-carrier-evaluation-port.v1",
+    "sda-scenario-semantic-carrier-extraction-port.v1",
+    "sda-scenario-semantic-carrier-validation-port.v1",
+    "sda-schema-contract-admission.v1",
+    "sda-semantic-execution-graph-compilation-port.v1",
+    "sda-semantic-vector-index.v1"
+  ],
+  "files": [
+    {
+      "path": "application-binding.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "f79fb1e8a82a76deef0f5c3c7d7c71c08bda3265361e3ba93f6234e67667eb26",
+      "digest": "sha256:f79fb1e8a82a76deef0f5c3c7d7c71c08bda3265361e3ba93f6234e67667eb26",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/interfaces.authority.json"
+      ]
+    },
+    {
+      "path": "application-binding.node.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "f79fb1e8a82a76deef0f5c3c7d7c71c08bda3265361e3ba93f6234e67667eb26",
+      "digest": "sha256:f79fb1e8a82a76deef0f5c3c7d7c71c08bda3265361e3ba93f6234e67667eb26",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/interfaces.authority.json"
+      ]
+    },
+    {
+      "path": "capability.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "89387f4b1ee61b96c1caf1c030fe3af1d4f8fe3b7d0372f6c14806ab61879f0d",
+      "digest": "sha256:89387f4b1ee61b96c1caf1c030fe3af1d4f8fe3b7d0372f6c14806ab61879f0d",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.feature",
+        "../sfx-embody/embodiments/project-model-provider-protocol/semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "execution-plans/consumer-execution-plan.node.v3.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "fb70dc6d9ce25ffb86f4720ded6735d4f8b866db001ccbb00b8bcbd6c4d91142",
+      "digest": "sha256:fb70dc6d9ce25ffb86f4720ded6735d4f8b866db001ccbb00b8bcbd6c4d91142",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.feature",
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/semantic-graph.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/interfaces.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/fixtures.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json"
+      ]
+    },
+    {
+      "path": "fixtures/fixtures.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "7260663cb3c246e7a61638e9733a324c3d96eccf4d0ad9ac32bc21b30d337625",
+      "digest": "sha256:7260663cb3c246e7a61638e9733a324c3d96eccf4d0ad9ac32bc21b30d337625",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/fixtures.authority.json"
+      ]
+    },
+    {
+      "path": "node/capability-bindings.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.feature",
+        "../sfx-embody/embodiments/project-model-provider-protocol/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/fixtures.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/interfaces.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/semantic-graph.authority.json",
+        "capability.authority.json",
+        "execution-authorities.authority.json",
+        "executionAuthorities/normalize-gemini-blocking-finish-testimony/operations/0",
+        "executionAuthorities/normalize-gemini-success-testimony/operations/0",
+        "executionAuthorities/normalize-model-response-format/operations/0",
+        "executionAuthorities/normalize-provider-http-failure-testimony/operations/0",
+        "executionAuthorities/normalize-provider-transport-testimony/operations/0",
+        "executionAuthorities/project-gemini-endpoint-and-credential-rule/operations/0",
+        "executionAuthorities/project-gemini-structured-request/operations/0",
+        "executionAuthorities/project-gemini-text-request/operations/0",
+        "executionAuthorities/project-model-provider-protocol/operations/0",
+        "executionAuthorities/project-openai-structured-request/operations/0",
+        "executionAuthorities/project-openai-text-request/operations/0",
+        "executionAuthorities/prove-deterministic-protocol-projection/operations/0",
+        "executionAuthorities/prove-no-http-effect-in-protocol-projection/operations/0",
+        "executionAuthorities/reject-unsupported-adapter-authority/operations/0",
+        "executionAuthorities/reject-unsupported-interaction-mode/operations/0",
+        "executionAuthorities/reject-unsupported-provider-protocol/operations/0",
+        "executionAuthorities/reject-unsupported-schema-vocabulary/operations/0",
+        "interfaces.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
+        "scenarios#/0",
+        "scenarios#/1",
+        "scenarios#/10",
+        "scenarios#/11",
+        "scenarios#/12",
+        "scenarios#/13",
+        "scenarios#/14",
+        "scenarios#/15",
+        "scenarios#/16",
+        "scenarios#/2",
+        "scenarios#/3",
+        "scenarios#/4",
+        "scenarios#/5",
+        "scenarios#/6",
+        "scenarios#/7",
+        "scenarios#/8",
+        "scenarios#/9",
+        "semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "node/capability-carrier.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "7ea4fc3d9c2e3040a389e51d7281c0ac5edc06cceb2d1de07bd9473aab14dc3c",
+      "digest": "sha256:7ea4fc3d9c2e3040a389e51d7281c0ac5edc06cceb2d1de07bd9473aab14dc3c",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.feature",
+        "../sfx-embody/embodiments/project-model-provider-protocol/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/fixtures.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/interfaces.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/semantic-graph.authority.json",
+        "capability.authority.json",
+        "execution-authorities.authority.json",
+        "executionAuthorities/normalize-gemini-blocking-finish-testimony/operations/0",
+        "executionAuthorities/normalize-gemini-success-testimony/operations/0",
+        "executionAuthorities/normalize-model-response-format/operations/0",
+        "executionAuthorities/normalize-provider-http-failure-testimony/operations/0",
+        "executionAuthorities/normalize-provider-transport-testimony/operations/0",
+        "executionAuthorities/project-gemini-endpoint-and-credential-rule/operations/0",
+        "executionAuthorities/project-gemini-structured-request/operations/0",
+        "executionAuthorities/project-gemini-text-request/operations/0",
+        "executionAuthorities/project-model-provider-protocol/operations/0",
+        "executionAuthorities/project-openai-structured-request/operations/0",
+        "executionAuthorities/project-openai-text-request/operations/0",
+        "executionAuthorities/prove-deterministic-protocol-projection/operations/0",
+        "executionAuthorities/prove-no-http-effect-in-protocol-projection/operations/0",
+        "executionAuthorities/reject-unsupported-adapter-authority/operations/0",
+        "executionAuthorities/reject-unsupported-interaction-mode/operations/0",
+        "executionAuthorities/reject-unsupported-provider-protocol/operations/0",
+        "executionAuthorities/reject-unsupported-schema-vocabulary/operations/0",
+        "interfaces.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
+        "scenarios#/0",
+        "scenarios#/1",
+        "scenarios#/10",
+        "scenarios#/11",
+        "scenarios#/12",
+        "scenarios#/13",
+        "scenarios#/14",
+        "scenarios#/15",
+        "scenarios#/16",
+        "scenarios#/2",
+        "scenarios#/3",
+        "scenarios#/4",
+        "scenarios#/5",
+        "scenarios#/6",
+        "scenarios#/7",
+        "scenarios#/8",
+        "scenarios#/9",
+        "semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "node/capability-contracts.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "ccdf64a47cba6412bd931e0f94f1a36eb1794288d287e4ceafb8866bc6e3b76e",
+      "digest": "sha256:ccdf64a47cba6412bd931e0f94f1a36eb1794288d287e4ceafb8866bc6e3b76e",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.feature",
+        "../sfx-embody/embodiments/project-model-provider-protocol/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/fixtures.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/interfaces.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/semantic-graph.authority.json",
+        "capability.authority.json",
+        "execution-authorities.authority.json",
+        "executionAuthorities/normalize-gemini-blocking-finish-testimony/operations/0",
+        "executionAuthorities/normalize-gemini-success-testimony/operations/0",
+        "executionAuthorities/normalize-model-response-format/operations/0",
+        "executionAuthorities/normalize-provider-http-failure-testimony/operations/0",
+        "executionAuthorities/normalize-provider-transport-testimony/operations/0",
+        "executionAuthorities/project-gemini-endpoint-and-credential-rule/operations/0",
+        "executionAuthorities/project-gemini-structured-request/operations/0",
+        "executionAuthorities/project-gemini-text-request/operations/0",
+        "executionAuthorities/project-model-provider-protocol/operations/0",
+        "executionAuthorities/project-openai-structured-request/operations/0",
+        "executionAuthorities/project-openai-text-request/operations/0",
+        "executionAuthorities/prove-deterministic-protocol-projection/operations/0",
+        "executionAuthorities/prove-no-http-effect-in-protocol-projection/operations/0",
+        "executionAuthorities/reject-unsupported-adapter-authority/operations/0",
+        "executionAuthorities/reject-unsupported-interaction-mode/operations/0",
+        "executionAuthorities/reject-unsupported-provider-protocol/operations/0",
+        "executionAuthorities/reject-unsupported-schema-vocabulary/operations/0",
+        "interfaces.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
+        "scenarios#/0",
+        "scenarios#/1",
+        "scenarios#/10",
+        "scenarios#/11",
+        "scenarios#/12",
+        "scenarios#/13",
+        "scenarios#/14",
+        "scenarios#/15",
+        "scenarios#/16",
+        "scenarios#/2",
+        "scenarios#/3",
+        "scenarios#/4",
+        "scenarios#/5",
+        "scenarios#/6",
+        "scenarios#/7",
+        "scenarios#/8",
+        "scenarios#/9",
+        "semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "node/capability-execution.generated.mjs",
+      "executableOrigin": "PROJECTED",
+      "sha256": "0dbe09521b1a0975afe3db6eb620db3eaddffb6e807a6d49c51d2b043051d3cb",
+      "digest": "sha256:0dbe09521b1a0975afe3db6eb620db3eaddffb6e807a6d49c51d2b043051d3cb",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.feature",
+        "../sfx-embody/embodiments/project-model-provider-protocol/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/fixtures.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/interfaces.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/semantic-graph.authority.json",
+        "capability.authority.json",
+        "execution-authorities.authority.json",
+        "executionAuthorities/normalize-gemini-blocking-finish-testimony/operations/0",
+        "executionAuthorities/normalize-gemini-success-testimony/operations/0",
+        "executionAuthorities/normalize-model-response-format/operations/0",
+        "executionAuthorities/normalize-provider-http-failure-testimony/operations/0",
+        "executionAuthorities/normalize-provider-transport-testimony/operations/0",
+        "executionAuthorities/project-gemini-endpoint-and-credential-rule/operations/0",
+        "executionAuthorities/project-gemini-structured-request/operations/0",
+        "executionAuthorities/project-gemini-text-request/operations/0",
+        "executionAuthorities/project-model-provider-protocol/operations/0",
+        "executionAuthorities/project-openai-structured-request/operations/0",
+        "executionAuthorities/project-openai-text-request/operations/0",
+        "executionAuthorities/prove-deterministic-protocol-projection/operations/0",
+        "executionAuthorities/prove-no-http-effect-in-protocol-projection/operations/0",
+        "executionAuthorities/reject-unsupported-adapter-authority/operations/0",
+        "executionAuthorities/reject-unsupported-interaction-mode/operations/0",
+        "executionAuthorities/reject-unsupported-provider-protocol/operations/0",
+        "executionAuthorities/reject-unsupported-schema-vocabulary/operations/0",
+        "interfaces.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
+        "scenarios#/0",
+        "scenarios#/1",
+        "scenarios#/10",
+        "scenarios#/11",
+        "scenarios#/12",
+        "scenarios#/13",
+        "scenarios#/14",
+        "scenarios#/15",
+        "scenarios#/16",
+        "scenarios#/2",
+        "scenarios#/3",
+        "scenarios#/4",
+        "scenarios#/5",
+        "scenarios#/6",
+        "scenarios#/7",
+        "scenarios#/8",
+        "scenarios#/9",
+        "semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "node/capability-operations.generated.mjs",
+      "executableOrigin": "PROJECTED",
+      "sha256": "8d0f3199db9f7f053965af2ab09afc60a5807797911415dc0cfa53c83e28c116",
+      "digest": "sha256:8d0f3199db9f7f053965af2ab09afc60a5807797911415dc0cfa53c83e28c116",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.feature",
+        "../sfx-embody/embodiments/project-model-provider-protocol/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/fixtures.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/interfaces.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/semantic-graph.authority.json",
+        "capability.authority.json",
+        "execution-authorities.authority.json",
+        "executionAuthorities/normalize-gemini-blocking-finish-testimony/operations/0",
+        "executionAuthorities/normalize-gemini-success-testimony/operations/0",
+        "executionAuthorities/normalize-model-response-format/operations/0",
+        "executionAuthorities/normalize-provider-http-failure-testimony/operations/0",
+        "executionAuthorities/normalize-provider-transport-testimony/operations/0",
+        "executionAuthorities/project-gemini-endpoint-and-credential-rule/operations/0",
+        "executionAuthorities/project-gemini-structured-request/operations/0",
+        "executionAuthorities/project-gemini-text-request/operations/0",
+        "executionAuthorities/project-model-provider-protocol/operations/0",
+        "executionAuthorities/project-openai-structured-request/operations/0",
+        "executionAuthorities/project-openai-text-request/operations/0",
+        "executionAuthorities/prove-deterministic-protocol-projection/operations/0",
+        "executionAuthorities/prove-no-http-effect-in-protocol-projection/operations/0",
+        "executionAuthorities/reject-unsupported-adapter-authority/operations/0",
+        "executionAuthorities/reject-unsupported-interaction-mode/operations/0",
+        "executionAuthorities/reject-unsupported-provider-protocol/operations/0",
+        "executionAuthorities/reject-unsupported-schema-vocabulary/operations/0",
+        "interfaces.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
+        "scenarios#/0",
+        "scenarios#/1",
+        "scenarios#/10",
+        "scenarios#/11",
+        "scenarios#/12",
+        "scenarios#/13",
+        "scenarios#/14",
+        "scenarios#/15",
+        "scenarios#/16",
+        "scenarios#/2",
+        "scenarios#/3",
+        "scenarios#/4",
+        "scenarios#/5",
+        "scenarios#/6",
+        "scenarios#/7",
+        "scenarios#/8",
+        "scenarios#/9",
+        "semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "node/capability-runtime.generated.mjs",
+      "executableOrigin": "PROJECTED",
+      "sha256": "a357eeb728c48f1898a097e0df2dcc596725fce647763dc1c5688e03db56cb61",
+      "digest": "sha256:a357eeb728c48f1898a097e0df2dcc596725fce647763dc1c5688e03db56cb61",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.feature",
+        "../sfx-embody/embodiments/project-model-provider-protocol/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/fixtures.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/interfaces.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/semantic-graph.authority.json",
+        "capability.authority.json",
+        "execution-authorities.authority.json",
+        "interfaces.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
+        "semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "node/capability.projected.test.mjs",
+      "executableOrigin": "PROJECTED",
+      "sha256": "8852d9eda37a2b685453e7964f48215e209fe7bd4008c552a289ea7baf8b9994",
+      "digest": "sha256:8852d9eda37a2b685453e7964f48215e209fe7bd4008c552a289ea7baf8b9994",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.feature",
+        "../sfx-embody/embodiments/project-model-provider-protocol/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/fixtures.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/interfaces.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/semantic-graph.authority.json",
+        "capability.authority.json",
+        "execution-authorities.authority.json",
+        "interfaces.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
+        "semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "node/conformance-query.generated.mjs",
+      "executableOrigin": "PROJECTED",
+      "sha256": "16405f28a0de363c77bc7f8abcfd91668e499376fcd68f4d8db7d95067769c57",
+      "digest": "sha256:16405f28a0de363c77bc7f8abcfd91668e499376fcd68f4d8db7d95067769c57",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.feature",
+        "../sfx-embody/embodiments/project-model-provider-protocol/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/fixtures.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/interfaces.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/semantic-graph.authority.json",
+        "capability.authority.json",
+        "execution-authorities.authority.json",
+        "interfaces.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
+        "semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "node/execution-operations.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "17012014d070cd3030da22cd18dd8874968614c1850545a8e6544022ad801e52",
+      "digest": "sha256:17012014d070cd3030da22cd18dd8874968614c1850545a8e6544022ad801e52",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.feature",
+        "../sfx-embody/embodiments/project-model-provider-protocol/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/fixtures.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/interfaces.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/semantic-graph.authority.json",
+        "capability.authority.json",
+        "execution-authorities.authority.json",
+        "executionAuthorities/normalize-gemini-blocking-finish-testimony/operations/0",
+        "executionAuthorities/normalize-gemini-success-testimony/operations/0",
+        "executionAuthorities/normalize-model-response-format/operations/0",
+        "executionAuthorities/normalize-provider-http-failure-testimony/operations/0",
+        "executionAuthorities/normalize-provider-transport-testimony/operations/0",
+        "executionAuthorities/project-gemini-endpoint-and-credential-rule/operations/0",
+        "executionAuthorities/project-gemini-structured-request/operations/0",
+        "executionAuthorities/project-gemini-text-request/operations/0",
+        "executionAuthorities/project-model-provider-protocol/operations/0",
+        "executionAuthorities/project-openai-structured-request/operations/0",
+        "executionAuthorities/project-openai-text-request/operations/0",
+        "executionAuthorities/prove-deterministic-protocol-projection/operations/0",
+        "executionAuthorities/prove-no-http-effect-in-protocol-projection/operations/0",
+        "executionAuthorities/reject-unsupported-adapter-authority/operations/0",
+        "executionAuthorities/reject-unsupported-interaction-mode/operations/0",
+        "executionAuthorities/reject-unsupported-provider-protocol/operations/0",
+        "executionAuthorities/reject-unsupported-schema-vocabulary/operations/0",
+        "interfaces.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
+        "scenarios#/0",
+        "scenarios#/1",
+        "scenarios#/10",
+        "scenarios#/11",
+        "scenarios#/12",
+        "scenarios#/13",
+        "scenarios#/14",
+        "scenarios#/15",
+        "scenarios#/16",
+        "scenarios#/2",
+        "scenarios#/3",
+        "scenarios#/4",
+        "scenarios#/5",
+        "scenarios#/6",
+        "scenarios#/7",
+        "scenarios#/8",
+        "scenarios#/9",
+        "semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "node/execution-patterns.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "3c161cecf196048ef39c5404bee186004295ab3e8b12f84e5b5ffb0953c11b90",
+      "digest": "sha256:3c161cecf196048ef39c5404bee186004295ab3e8b12f84e5b5ffb0953c11b90",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.feature",
+        "../sfx-embody/embodiments/project-model-provider-protocol/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/fixtures.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/interfaces.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/semantic-graph.authority.json",
+        "capability.authority.json",
+        "execution-authorities.authority.json",
+        "executionAuthorities/normalize-gemini-blocking-finish-testimony/operations/0",
+        "executionAuthorities/normalize-gemini-success-testimony/operations/0",
+        "executionAuthorities/normalize-model-response-format/operations/0",
+        "executionAuthorities/normalize-provider-http-failure-testimony/operations/0",
+        "executionAuthorities/normalize-provider-transport-testimony/operations/0",
+        "executionAuthorities/project-gemini-endpoint-and-credential-rule/operations/0",
+        "executionAuthorities/project-gemini-structured-request/operations/0",
+        "executionAuthorities/project-gemini-text-request/operations/0",
+        "executionAuthorities/project-model-provider-protocol/operations/0",
+        "executionAuthorities/project-openai-structured-request/operations/0",
+        "executionAuthorities/project-openai-text-request/operations/0",
+        "executionAuthorities/prove-deterministic-protocol-projection/operations/0",
+        "executionAuthorities/prove-no-http-effect-in-protocol-projection/operations/0",
+        "executionAuthorities/reject-unsupported-adapter-authority/operations/0",
+        "executionAuthorities/reject-unsupported-interaction-mode/operations/0",
+        "executionAuthorities/reject-unsupported-provider-protocol/operations/0",
+        "executionAuthorities/reject-unsupported-schema-vocabulary/operations/0",
+        "interfaces.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
+        "scenarios#/0",
+        "scenarios#/1",
+        "scenarios#/10",
+        "scenarios#/11",
+        "scenarios#/12",
+        "scenarios#/13",
+        "scenarios#/14",
+        "scenarios#/15",
+        "scenarios#/16",
+        "scenarios#/2",
+        "scenarios#/3",
+        "scenarios#/4",
+        "scenarios#/5",
+        "scenarios#/6",
+        "scenarios#/7",
+        "scenarios#/8",
+        "scenarios#/9",
+        "semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "node/project-model-provider-protocol-cli.generated.mjs",
+      "executableOrigin": "PROJECTED",
+      "sha256": "0a2ac29cf8755510f009a315ee39a183ea37e53fd92d0d193525e71c31513f29",
+      "digest": "sha256:0a2ac29cf8755510f009a315ee39a183ea37e53fd92d0d193525e71c31513f29",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.feature",
+        "../sfx-embody/embodiments/project-model-provider-protocol/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/fixtures.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/interfaces.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/semantic-graph.authority.json",
+        "capability.authority.json",
+        "execution-authorities.authority.json",
+        "interfaces.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
+        "semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "projection-conformance.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "eff29d9d763919b405a021fc126f66b5b0c552c3cbe74d8ddb85f9781e4b2eed",
+      "digest": "sha256:eff29d9d763919b405a021fc126f66b5b0c552c3cbe74d8ddb85f9781e4b2eed",
+      "sourcePointers": [
+        "consumer-assurance/prove-mechanical-sterility"
+      ]
+    },
+    {
+      "path": "query/conformance-query.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "1d0f43a52df466ad16704bd39515e1f67076856c8e9b18ec4f41459b940290d6",
+      "digest": "sha256:1d0f43a52df466ad16704bd39515e1f67076856c8e9b18ec4f41459b940290d6",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.feature",
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/semantic-graph.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/interfaces.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/fixtures.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json"
+      ]
+    },
+    {
+      "path": "query/conformance-query.node.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "1d0f43a52df466ad16704bd39515e1f67076856c8e9b18ec4f41459b940290d6",
+      "digest": "sha256:1d0f43a52df466ad16704bd39515e1f67076856c8e9b18ec4f41459b940290d6",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.feature",
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/semantic-graph.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/interfaces.authority.json",
+        "../sfx-embody/embodiments/project-model-provider-protocol/fixtures.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json"
+      ]
+    },
+    {
+      "path": "query/platform-mechanic-resolution.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "d9902831b13d92568dd9f54b8a655d12114ad529f710b871293033a6ea3d9c6c",
+      "digest": "sha256:d9902831b13d92568dd9f54b8a655d12114ad529f710b871293033a6ea3d9c6c",
+      "sourcePointers": [
+        "kernel/semantic-authority/consumer/sda-platform-capabilities.semantic-authority.json"
+      ]
+    },
+    {
+      "path": "query/platform-mechanic-resolution.node.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "d9902831b13d92568dd9f54b8a655d12114ad529f710b871293033a6ea3d9c6c",
+      "digest": "sha256:d9902831b13d92568dd9f54b8a655d12114ad529f710b871293033a6ea3d9c6c",
+      "sourcePointers": [
+        "kernel/semantic-authority/consumer/sda-platform-capabilities.semantic-authority.json"
+      ]
+    },
+    {
+      "path": "scenarios/normalize-gemini-blocking-finish-testimony.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "821484ffe4bb0269c8b216449aa0cfb2e2dd26c0c5081c251260285aae315987",
+      "digest": "sha256:821484ffe4bb0269c8b216449aa0cfb2e2dd26c0c5081c251260285aae315987",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.feature"
+      ]
+    },
+    {
+      "path": "scenarios/normalize-gemini-success-testimony.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "e2ee1485d8031bf6978ddfde33f2f6bd9fe21d1e5109c5fc635779776bc8a975",
+      "digest": "sha256:e2ee1485d8031bf6978ddfde33f2f6bd9fe21d1e5109c5fc635779776bc8a975",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.feature"
+      ]
+    },
+    {
+      "path": "scenarios/normalize-model-response-format.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "97396c139ff07a140811750006e8ee6feb88db178ea94ff00ebb3b273b46c18b",
+      "digest": "sha256:97396c139ff07a140811750006e8ee6feb88db178ea94ff00ebb3b273b46c18b",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.feature"
+      ]
+    },
+    {
+      "path": "scenarios/normalize-provider-http-failure-testimony.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "112062c14f26ea09a4f27b65daa846cb66816d01536a8f725f98037e85c4da2a",
+      "digest": "sha256:112062c14f26ea09a4f27b65daa846cb66816d01536a8f725f98037e85c4da2a",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.feature"
+      ]
+    },
+    {
+      "path": "scenarios/normalize-provider-transport-testimony.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "591d964908de665a2bd9690f28a7083368cbc1d71f4cad91a7c8d194b7517a40",
+      "digest": "sha256:591d964908de665a2bd9690f28a7083368cbc1d71f4cad91a7c8d194b7517a40",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.feature"
+      ]
+    },
+    {
+      "path": "scenarios/project-gemini-endpoint-and-credential-rule.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "a2e4e97f821baae8c8f7bf90712e05e889a9fa92a9f4fb1219df3518dd0be05a",
+      "digest": "sha256:a2e4e97f821baae8c8f7bf90712e05e889a9fa92a9f4fb1219df3518dd0be05a",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.feature"
+      ]
+    },
+    {
+      "path": "scenarios/project-gemini-structured-request.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "a388c6b2a7f6ddc932f4e2aace6b7c5a5b61cd316450b033a31a819d5ca38770",
+      "digest": "sha256:a388c6b2a7f6ddc932f4e2aace6b7c5a5b61cd316450b033a31a819d5ca38770",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.feature"
+      ]
+    },
+    {
+      "path": "scenarios/project-gemini-text-request.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "2ee1ae220024016eb137e07eded2b389bb5a7f214fcc7aca573cbf6750cd9654",
+      "digest": "sha256:2ee1ae220024016eb137e07eded2b389bb5a7f214fcc7aca573cbf6750cd9654",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.feature"
+      ]
+    },
+    {
+      "path": "scenarios/project-model-provider-protocol.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "20f9839bedcef6ab9854d930a02cbaa406a4bf037a3a28b4e020b5af6f5105df",
+      "digest": "sha256:20f9839bedcef6ab9854d930a02cbaa406a4bf037a3a28b4e020b5af6f5105df",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.feature"
+      ]
+    },
+    {
+      "path": "scenarios/project-openai-structured-request.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "5301fcaaa1fe136efb3282c692d64939de768db9db0073da4c9f1d34878cfc65",
+      "digest": "sha256:5301fcaaa1fe136efb3282c692d64939de768db9db0073da4c9f1d34878cfc65",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.feature"
+      ]
+    },
+    {
+      "path": "scenarios/project-openai-text-request.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "5df4bba524830edd085b119478de37c1a6ef762cdfcae4666be494fa09085fe1",
+      "digest": "sha256:5df4bba524830edd085b119478de37c1a6ef762cdfcae4666be494fa09085fe1",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.feature"
+      ]
+    },
+    {
+      "path": "scenarios/prove-deterministic-protocol-projection.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "0b82af7f904d9bac5703e22049a9f86bebf0a202e519e0242738298936c6428f",
+      "digest": "sha256:0b82af7f904d9bac5703e22049a9f86bebf0a202e519e0242738298936c6428f",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.feature"
+      ]
+    },
+    {
+      "path": "scenarios/prove-no-http-effect-in-protocol-projection.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "e7ff2509a4958e32cf27b5d9ad765d91191d949726e69a311143800e530f129b",
+      "digest": "sha256:e7ff2509a4958e32cf27b5d9ad765d91191d949726e69a311143800e530f129b",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.feature"
+      ]
+    },
+    {
+      "path": "scenarios/reject-unsupported-adapter-authority.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "9f121707fe23ac68fa3dd2a0a54afa94727b13b544b688902cd909d9e98153d9",
+      "digest": "sha256:9f121707fe23ac68fa3dd2a0a54afa94727b13b544b688902cd909d9e98153d9",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.feature"
+      ]
+    },
+    {
+      "path": "scenarios/reject-unsupported-interaction-mode.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "1183a0cfd091f5a3faf9f7c9a1452d8d60bea5f4517eed1acf7bf7643b9b3638",
+      "digest": "sha256:1183a0cfd091f5a3faf9f7c9a1452d8d60bea5f4517eed1acf7bf7643b9b3638",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.feature"
+      ]
+    },
+    {
+      "path": "scenarios/reject-unsupported-provider-protocol.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "388b8054d8cfe91d1e86c8b7c044d453a50df349f134bdb7c46fdfac1a9ee6e8",
+      "digest": "sha256:388b8054d8cfe91d1e86c8b7c044d453a50df349f134bdb7c46fdfac1a9ee6e8",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.feature"
+      ]
+    },
+    {
+      "path": "scenarios/reject-unsupported-schema-vocabulary.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "e6af5dce4dd75d196bc4976101da5be42a513d0660c1bae08e8a10577f1563ea",
+      "digest": "sha256:e6af5dce4dd75d196bc4976101da5be42a513d0660c1bae08e8a10577f1563ea",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/capability.feature"
+      ]
+    },
+    {
+      "path": "telemetry/expected-trace.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "669887de7033877b9b034b2e01b77fa776acdc2f18d6a1a28c709887bf1b4a0a",
+      "digest": "sha256:669887de7033877b9b034b2e01b77fa776acdc2f18d6a1a28c709887bf1b4a0a",
+      "sourcePointers": [
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
+        "kernel/contracts/execution/scenario-kernel-execution-vector.json"
+      ]
+    },
+    {
+      "path": "transitions/route-normalize-gemini-blocking.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "f30c63b778947184edee7e1600db4138726cc99edc1909b8c8ab2c6886915188",
+      "digest": "sha256:f30c63b778947184edee7e1600db4138726cc99edc1909b8c8ab2c6886915188",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "transitions/route-normalize-model-response-format.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "03f19ce10a3f84e432fcf7a258b67e38f065c9984a356ba00a27084358327b22",
+      "digest": "sha256:03f19ce10a3f84e432fcf7a258b67e38f065c9984a356ba00a27084358327b22",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "transitions/route-normalize-observation.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "7442c3e5d80d33e9e1754c22cd89634b14e09ced80fdcda1778ff0feed960d2b",
+      "digest": "sha256:7442c3e5d80d33e9e1754c22cd89634b14e09ced80fdcda1778ff0feed960d2b",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "transitions/route-normalize-provider-http-failure.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "d633398c9496471f5919d1fb3f4ed0ecb658f04d58b6b0eefbcbafdba9fe7c66",
+      "digest": "sha256:d633398c9496471f5919d1fb3f4ed0ecb658f04d58b6b0eefbcbafdba9fe7c66",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "transitions/route-normalize-provider-transport.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "8b98b00d5e6ae497aee564243d284664c2e09d316e1d774bd8232160e1ba1d14",
+      "digest": "sha256:8b98b00d5e6ae497aee564243d284664c2e09d316e1d774bd8232160e1ba1d14",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "transitions/route-project-gemini-endpoint.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "11cbbe1a54aa5245f50307b876360614b241e6b94422ee904b082d9df831d0aa",
+      "digest": "sha256:11cbbe1a54aa5245f50307b876360614b241e6b94422ee904b082d9df831d0aa",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "transitions/route-project-gemini-structured.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "6bd49135b73a730d8d98b4e13a59fba36f9ab3d615abba3c2499e0edf9e68bfa",
+      "digest": "sha256:6bd49135b73a730d8d98b4e13a59fba36f9ab3d615abba3c2499e0edf9e68bfa",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "transitions/route-project-gemini-text.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "a1226c88808c5c9d4d5f62f1d545e79acb5bb1db96e63042abaed25b2ca64a17",
+      "digest": "sha256:a1226c88808c5c9d4d5f62f1d545e79acb5bb1db96e63042abaed25b2ca64a17",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "transitions/route-project-openai-structured.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "9001bc444c3f5c5e6cfcaeaa452bbd8ee0541eda31b17b4d79067732dba0a7e6",
+      "digest": "sha256:9001bc444c3f5c5e6cfcaeaa452bbd8ee0541eda31b17b4d79067732dba0a7e6",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "transitions/route-project-openai-text.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "22e5cdcffdf8aa6603682cad5086d94a99302f5be3c5f918349d31def46aa16d",
+      "digest": "sha256:22e5cdcffdf8aa6603682cad5086d94a99302f5be3c5f918349d31def46aa16d",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "transitions/route-prove-determinism.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "ed345e64c71d394ef89ae1bd598cdf8a04e80ccc4e91ac6263b4478100bf471f",
+      "digest": "sha256:ed345e64c71d394ef89ae1bd598cdf8a04e80ccc4e91ac6263b4478100bf471f",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "transitions/route-prove-effects.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "8acd1f982ce67b48c8485d38bf530aa6a63032edae41674c5680588807936413",
+      "digest": "sha256:8acd1f982ce67b48c8485d38bf530aa6a63032edae41674c5680588807936413",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "transitions/route-reject-unsupported-adapter-authority.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "a6477549792d34c0778877450a8cdbbd96bcfbf7d66bcb96700eddb9eb2b2a17",
+      "digest": "sha256:a6477549792d34c0778877450a8cdbbd96bcfbf7d66bcb96700eddb9eb2b2a17",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "transitions/route-reject-unsupported-interaction-mode.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "a49bde433e92dd229462067fd42b8f07631c517b4f2d09983c2326f220ebbb62",
+      "digest": "sha256:a49bde433e92dd229462067fd42b8f07631c517b4f2d09983c2326f220ebbb62",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "transitions/route-reject-unsupported-provider.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "f6a2509318a367a4265146cc1b723dfd8eb26c2287ef39ecaa96001ad7365bc8",
+      "digest": "sha256:f6a2509318a367a4265146cc1b723dfd8eb26c2287ef39ecaa96001ad7365bc8",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "transitions/route-reject-unsupported-schema-vocabulary.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "48ce4d6905446dfd05526c89e4989189228f47dbfba763ca327fa57c2629c864",
+      "digest": "sha256:48ce4d6905446dfd05526c89e4989189228f47dbfba763ca327fa57c2629c864",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/project-model-provider-protocol/semantic-graph.authority.json"
+      ]
+    }
+  ]
+}

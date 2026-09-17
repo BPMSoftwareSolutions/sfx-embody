@@ -1,0 +1,37 @@
+{
+  "scenarioId": "obtain-governed-provider-testimony",
+  "input": {
+    "inputId": "model-provider-protocol-response-policy",
+    "contract": {
+      "contractId": "model-provider-protocol-response-policy.v1"
+    }
+  },
+  "event": {
+    "eventId": "obtain-governed-provider-testimony",
+    "executionAuthorityId": "obtain-governed-provider-testimony.v1"
+  },
+  "outcome": {
+    "outcomeId": "governed-provider-testimony",
+    "contract": {
+      "contractId": "governed-provider-testimony.v1"
+    },
+    "experience": {
+      "statement": "governed provider testimony carrying provider, model, attempt, timing, and hash lineage is observed, or the exact governed failure disposition is returned without retry, substitution, or repair"
+    }
+  },
+  "gherkin": {
+    "given": {
+      "semanticRef": "obtain-governed-provider-testimony.given",
+      "text": "one projected provider protocol policy and the resolved model embodiment it was projected from"
+    },
+    "when": {
+      "semanticRef": "obtain-governed-provider-testimony.when",
+      "text": "the admitted generic LLM connector is asked to obtain the provider response once"
+    },
+    "then": {
+      "semanticRef": "obtain-governed-provider-testimony.then",
+      "text": "governed provider testimony carrying provider, model, attempt, timing, and hash lineage is observed, or the exact governed failure disposition is returned without retry, substitution, or repair"
+    }
+  },
+  "name": "Obtain governed provider testimony through the admitted connector"
+}

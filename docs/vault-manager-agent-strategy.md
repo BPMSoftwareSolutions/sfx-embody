@@ -1,7 +1,7 @@
 # Vault manager — multi-agent execution strategy
 
-Status: W2b, W4, W5, W6 EXECUTED on the estate; W1 deferred; the Gemini conveyor's exchange is
-blocked by the frozen SDA graph path (see Execution log)
+Status: W2b, W4, W5, W6 EXECUTED; the declared-composition repair landed in the estate and SDA
+and the Gemini conveyor exchange completes with the vault credential; W1 deferred (see Execution log)
 Frame: `transistor-model.md` §1 — declared authority (1) or an admitted resolver (0) in the
 SDA kernel; no third place. Target model: `vault-manager-capabilities.md` (contract §3, key
 custody §4, units V1–V5 §6).
@@ -222,13 +222,48 @@ runtime edits.
   `resolve-credential` for the Gemini policy → `CREDENTIAL_BOUND` (scope
   `governed-model-invocation`, realization `windows-credential-store-provider`); final equity
   re-proof after the sweep resolved again. Receipts: `evidence/vault-20260916/live-*.out`.
-- **Gemini conveyor — BLOCKED by the frozen SDA graph path** (SDA `bf5feb1`; request R1/R2).
-  `obtain-governed-model-response` and `bind-external-credential-reference` fail
-  `SEMANTIC_EXECUTION_GRAPH_OVERLAY_BINDING_MISSING: 'invoke-scenario'`; with a diagnostic
-  `invoke-scenario` binding the next missing piece is `sda-projected-capability-invocation-port.v2`
-  (composed port) and the `invocation: "llm"` connector dispatch. No workaround was installed;
-  the credential half of the conveyor is proven from the vault and the exchange stays blocked.
-  Receipt: `evidence/vault-20260916/live-gemini-conveyor.err`, transition report `preflightConveyor`.
+- **Gemini conveyor — FIXED and DONE.** The builder rejected filing the `invoke-scenario` failure
+  as an SDA request; it was resolved directly. Root cause, in order of discovery:
+  1. The host invocation Port's `configuration.overlayBindings` had no rule for `invoke-scenario`
+     or `sda-projected-capability-invocation-port.v2`, so the compiled conveyor graph failed
+     `SEMANTIC_EXECUTION_GRAPH_OVERLAY_BINDING_MISSING`. Fixed by
+     `bind-projected-capability-invocation-and-composition-digests.sql`: both compatibility
+     overlay rules plus the `projected-capability-invocation-provider.mjs` host provider
+     (`createProjectedCapabilityInvocationProvider`) on `run-declared-graph-execute`.
+  2. The kernel had no dispatch for the composed port; implemented in SDA as
+     `languages/typescript/runtimes/node/projected-capability-invocation-provider.mjs`
+     (loads the named projected application, verifies binding/authority digests, executes it with
+     the invocation's effect context, binds the outcome; 4 conformance tests).
+  3. The declared `project-model-provider-protocol` capability had no selection routing
+     (`transitions: []`), so its siblings were `UNREACHABLE_CELL`. `declare-model-provider-protocol-
+     routing.sql` declares the 16 variant→sibling selection transitions in the graph-source
+     assembly and repairs the route carrier to the shared input contract.
+  4. The projector could not resolve the kernel-native `invoke-scenario` mechanic nor treat
+     selection topology as graph-native; both fixed in SDA (`mechanic-registry.ts`,
+     `consumer-projection-plan-builder.ts`, schema `bindingBase` admission) with
+     `tools/tests/consumer-projection/mechanic-registry-composition.test.js`.
+  5. Two declared transformations were stored with alphabetical `let` bindings, which the Node
+     evaluator cannot forward-reference; `order-model-protocol-transformation-bindings.sql`
+     restores dependency order.
+  6. The projected applications were rebased from the forbidden capability cache to the
+     read-allowed `providers/` area (`rebase-projected-applications-on-providers.sql`), with the
+     estate composition digests refreshed to the fresh projections
+     (`bind-...-composition-digests.sql`, `refresh-model-invocation-composition-digest.sql`,
+     `refresh-conveyor-composition-digest.sql`, `refresh-os-credential-binding-digest.sql`).
+  7. The SDA vault providers now resolve a declared `%LOCALAPPDATA%` locator
+     (`native-mechanic-primitives.expandEnvironmentReferences`, used by `secret-vault-provider`
+     and `windows-credential-store-provider`; new conformance test), and the SDA
+     `bind-os-environment-credential` projection is normalized to the repository's declared LF
+     byte policy so its binding's `executionPlanDigest` matches the plan bytes (its projected
+     conformance suite now passes 4/4; the estate digest was restored to the canonical
+     `14bb15a2...`).
+  **Exchange result.** With the three names absent from the invocation environment,
+  `obtain-governed-model-response` returned `MODEL_RESPONSE_OBTAINED`
+  (`resolvedProvider: gemini`, `resolvedModel: gemini-2.5-pro`, finish reason `STOP`,
+  `normalizedResponse.text: READY`, request/response hashes, 2.7 s) from a live HTTP 200
+  exchange with the vault credential applied as `x-goog-api-key`. Receipt:
+  `evidence/vault-20260916/gemini-conveyor-live.out` (request
+  `evidence/vault-20260916/gemini-request-live.json`).
 - **W5 — DONE** (`scripts/verify-credential-non-disclosure.mjs`). A random sentinel stored under
   `RAPID_API_KEY` and driven through the CLI with the names absent; the sentinel is absent from
   `invoke --json`, `observe --trace` (stdout and streamed observation lines), the
@@ -244,11 +279,11 @@ runtime edits.
 - **W6 — DONE.** `docs/vault-manager-capabilities.md` marks V1–V4 landed (V5 deferred), resolves
   open questions 1–7 where the program decided them, and fills the §8 observed result; this log
   records the final states.
-- **Verification.** `npm test`: 69 tests, 66 pass, 0 fail, 3 skipped; focused
-  `credential-vault-realization` + `database-connect-boundary` +
-  `projection-delivery-connect-boundary`: 17/17 pass. Migrations installed and observed by
-  read queries (`evidence/vault-20260916/installed-state.out`).
-- **Blocked item (reported, not worked around).** The Gemini conveyor exchange cannot execute on
-  the frozen SDA; any estate-side binding added to force it would claim a provider mapping no
-  embodiment observes. Unblock on SDA request R1 (graph-path `invoke-scenario` composition and
-  composed-port handling) plus R2 (connector dispatch).
+- **Composition repair verification.** SDA: vault conformance 17/17 (one new locator test),
+  projected-capability invocation provider 4/4, projected-port conformance 7/7,
+  `projected-capability-invocation-provider.conformance.test.mjs` 4/4, consumer-projection suite
+  116 tests / 108 pass / 0 fail / 8 skipped, `bind-os-environment-credential` projected suite 4/4.
+  Estate: `npm test` 69 tests / 66 pass / 0 fail / 3 skipped; fresh W5 sweep receipt
+  (`evidence/vault-20260916/non-disclosure/non-disclosure.receipt.json`).
+- **W6 follow-up — DONE.** The V3 status and this log now record the completed conveyor exchange
+  and the composition repairs; V5 remains deferred.

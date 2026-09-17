@@ -1,0 +1,38 @@
+{
+  "scenarioId": "observe-governed-http-exchange",
+  "input": {
+    "inputId": "governed-http-exchange-request",
+    "contract": {
+      "contractId": "observe-governed-http-exchange-input.v1"
+    }
+  },
+  "event": {
+    "eventId": "governed-http-exchange-requested",
+    "executionAuthorityId": "observe-governed-http-exchange.v1"
+  },
+  "outcome": {
+    "outcomeId": "governed-http-exchange-observation",
+    "contract": {
+      "contractId": "governed-http-exchange-evidence.v1"
+    },
+    "experience": {
+      "statement": "exact status, policy-allowed headers, bounded response bytes, timing, credential-free request evidence, hashes, and effect lineage are returned as untrusted testimony"
+    },
+    "terminal": true
+  },
+  "gherkin": {
+    "given": {
+      "semanticRef": "observe-governed-http-exchange.given",
+      "text": "one projected request, allowed HTTPS endpoint, valid opaque credential binding, positive timeout, response bound, and invocation identity"
+    },
+    "when": {
+      "semanticRef": "observe-governed-http-exchange.when",
+      "text": "the admitted transport performs the single exchange"
+    },
+    "then": {
+      "semanticRef": "observe-governed-http-exchange.then",
+      "text": "exact status, policy-allowed headers, bounded response bytes, timing, credential-free request evidence, hashes, and effect lineage are returned as untrusted testimony"
+    }
+  },
+  "name": "Observe one successful authorized HTTP exchange"
+}

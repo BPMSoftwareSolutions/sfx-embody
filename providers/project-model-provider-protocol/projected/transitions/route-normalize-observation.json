@@ -1,0 +1,16 @@
+{
+  "transitionId": "route-normalize-observation",
+  "from": {
+    "scenarioId": "project-model-provider-protocol",
+    "outcomeId": "model-provider-protocol-route",
+    "contractId": "project-model-provider-protocol-input.v1"
+  },
+  "to": {
+    "scenarioId": "normalize-gemini-success-testimony",
+    "inputId": "gemini-success-observation-normalization",
+    "contractId": "project-model-provider-protocol-input.v1"
+  },
+  "semanticProgress": "declared",
+  "topologyKind": "selection",
+  "selectsVariant": "normalize-observation"
+}

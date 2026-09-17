@@ -1,0 +1,1292 @@
+{
+  "documentType": "capability-execution-operations.v1",
+  "capabilityId": "observe-governed-http-exchange",
+  "operations": [
+    {
+      "operationId": "slot:cell:mechanic:cancel-governed-http-exchange.operation.1",
+      "cellId": "cell:mechanic:cancel-governed-http-exchange.operation.1",
+      "altitude": "mechanic",
+      "mechanicId": "sda-authority-transformation-port.v1",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "observe-governed-http-exchange/scenario/cancel-governed-http-exchange/operation/cancel-governed-http-exchange.operation.1",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-port",
+        "portId": "preserve-http-exchange-evidence-port",
+        "binding": {
+          "portId": "preserve-http-exchange-evidence-port",
+          "platformCapabilityId": "sda-authority-transformation-port.v1",
+          "configuration": {
+            "expression": {
+              "from": "input",
+              "op": "path",
+              "path": ""
+            }
+          }
+        }
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:observe-governed-http-exchange.operation.1",
+      "cellId": "cell:mechanic:observe-governed-http-exchange.operation.1",
+      "altitude": "mechanic",
+      "mechanicId": "sda-governed-http-exchange-port.v1",
+      "providerProfileId": "sda-platform-effect-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/governed-http-exchange-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/governed-http-exchange-provider.mjs",
+      "providerExport": "observeGovernedHttpExchange",
+      "invocation": "effects",
+      "factory": false,
+      "sourceUnit": "event-port",
+      "semanticAddress": "observe-governed-http-exchange/scenario/observe-governed-http-exchange/operation/observe-governed-http-exchange.operation.1",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-port",
+        "portId": "observe-governed-http-exchange-port",
+        "binding": {
+          "portId": "observe-governed-http-exchange-port",
+          "platformCapabilityId": "sda-governed-http-exchange-port.v1",
+          "configuration": {
+            "credentialInjectionRules": [
+              {
+                "headerName": "x-goog-api-key",
+                "id": "gemini-x-goog-api-key.v1"
+              },
+              {
+                "headerName": "authorization",
+                "id": "openai-bearer-authorization.v1",
+                "valuePrefix": "Bearer "
+              }
+            ],
+            "endpointAuthorities": [
+              {
+                "allowedRequestHeaders": [
+                  "content-type"
+                ],
+                "allowedResponseHeaders": [
+                  "content-type",
+                  "x-goog-request-id"
+                ],
+                "endpointAuthorityDigest": "sha256:57ab352b0978dca5e5ce33a28ccd7027c20df96da4138dbc7e8088f7c8fb0c04",
+                "methods": [
+                  "POST"
+                ],
+                "urlPrefixes": [
+                  "https://generativelanguage.googleapis.com/"
+                ]
+              },
+              {
+                "allowedRequestHeaders": [
+                  "content-type"
+                ],
+                "allowedResponseHeaders": [
+                  "content-type",
+                  "x-request-id"
+                ],
+                "endpointAuthorityDigest": "sha256:b70b8bc81f93ef949d7ae6cabbf71a56b4af2440c5489c5c4037923b534f0109",
+                "methods": [
+                  "POST"
+                ],
+                "urlPrefixes": [
+                  "https://api.openai.com/v1/"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:observe-governed-http-exchange.operation.10",
+      "cellId": "cell:mechanic:observe-governed-http-exchange.operation.10",
+      "altitude": "mechanic",
+      "mechanicId": "invoke-scenario",
+      "providerProfileId": "node:provider:invoke-scenario",
+      "providerExport": "graph-v1-compatibility-provider",
+      "invocation": "configuration",
+      "factory": false,
+      "sourceUnit": "composition",
+      "composition": "scenario-invocation",
+      "semanticAddress": "observe-governed-http-exchange/scenario/observe-governed-http-exchange/operation/observe-governed-http-exchange.operation.10",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-scenario",
+        "scenarioId": "prove-single-http-exchange-authority"
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:observe-governed-http-exchange.operation.2",
+      "cellId": "cell:mechanic:observe-governed-http-exchange.operation.2",
+      "altitude": "mechanic",
+      "mechanicId": "invoke-scenario",
+      "providerProfileId": "node:provider:invoke-scenario",
+      "providerExport": "graph-v1-compatibility-provider",
+      "invocation": "configuration",
+      "factory": false,
+      "sourceUnit": "composition",
+      "composition": "scenario-invocation",
+      "semanticAddress": "observe-governed-http-exchange/scenario/observe-governed-http-exchange/operation/observe-governed-http-exchange.operation.2",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-scenario",
+        "scenarioId": "observe-non-success-http-response"
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:observe-governed-http-exchange.operation.3",
+      "cellId": "cell:mechanic:observe-governed-http-exchange.operation.3",
+      "altitude": "mechanic",
+      "mechanicId": "invoke-scenario",
+      "providerProfileId": "node:provider:invoke-scenario",
+      "providerExport": "graph-v1-compatibility-provider",
+      "invocation": "configuration",
+      "factory": false,
+      "sourceUnit": "composition",
+      "composition": "scenario-invocation",
+      "semanticAddress": "observe-governed-http-exchange/scenario/observe-governed-http-exchange/operation/observe-governed-http-exchange.operation.3",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-scenario",
+        "scenarioId": "reject-http-endpoint-outside-authority"
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:observe-governed-http-exchange.operation.4",
+      "cellId": "cell:mechanic:observe-governed-http-exchange.operation.4",
+      "altitude": "mechanic",
+      "mechanicId": "invoke-scenario",
+      "providerProfileId": "node:provider:invoke-scenario",
+      "providerExport": "graph-v1-compatibility-provider",
+      "invocation": "configuration",
+      "factory": false,
+      "sourceUnit": "composition",
+      "composition": "scenario-invocation",
+      "semanticAddress": "observe-governed-http-exchange/scenario/observe-governed-http-exchange/operation/observe-governed-http-exchange.operation.4",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-scenario",
+        "scenarioId": "reject-invalid-http-credential-binding"
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:observe-governed-http-exchange.operation.5",
+      "cellId": "cell:mechanic:observe-governed-http-exchange.operation.5",
+      "altitude": "mechanic",
+      "mechanicId": "invoke-scenario",
+      "providerProfileId": "node:provider:invoke-scenario",
+      "providerExport": "graph-v1-compatibility-provider",
+      "invocation": "configuration",
+      "factory": false,
+      "sourceUnit": "composition",
+      "composition": "scenario-invocation",
+      "semanticAddress": "observe-governed-http-exchange/scenario/observe-governed-http-exchange/operation/observe-governed-http-exchange.operation.5",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-scenario",
+        "scenarioId": "observe-governed-http-timeout"
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:observe-governed-http-exchange.operation.6",
+      "cellId": "cell:mechanic:observe-governed-http-exchange.operation.6",
+      "altitude": "mechanic",
+      "mechanicId": "invoke-scenario",
+      "providerProfileId": "node:provider:invoke-scenario",
+      "providerExport": "graph-v1-compatibility-provider",
+      "invocation": "configuration",
+      "factory": false,
+      "sourceUnit": "composition",
+      "composition": "scenario-invocation",
+      "semanticAddress": "observe-governed-http-exchange/scenario/observe-governed-http-exchange/operation/observe-governed-http-exchange.operation.6",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-scenario",
+        "scenarioId": "cancel-governed-http-exchange"
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:observe-governed-http-exchange.operation.7",
+      "cellId": "cell:mechanic:observe-governed-http-exchange.operation.7",
+      "altitude": "mechanic",
+      "mechanicId": "invoke-scenario",
+      "providerProfileId": "node:provider:invoke-scenario",
+      "providerExport": "graph-v1-compatibility-provider",
+      "invocation": "configuration",
+      "factory": false,
+      "sourceUnit": "composition",
+      "composition": "scenario-invocation",
+      "semanticAddress": "observe-governed-http-exchange/scenario/observe-governed-http-exchange/operation/observe-governed-http-exchange.operation.7",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-scenario",
+        "scenarioId": "observe-governed-http-transport-failure"
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:observe-governed-http-exchange.operation.8",
+      "cellId": "cell:mechanic:observe-governed-http-exchange.operation.8",
+      "altitude": "mechanic",
+      "mechanicId": "invoke-scenario",
+      "providerProfileId": "node:provider:invoke-scenario",
+      "providerExport": "graph-v1-compatibility-provider",
+      "invocation": "configuration",
+      "factory": false,
+      "sourceUnit": "composition",
+      "composition": "scenario-invocation",
+      "semanticAddress": "observe-governed-http-exchange/scenario/observe-governed-http-exchange/operation/observe-governed-http-exchange.operation.8",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-scenario",
+        "scenarioId": "reject-oversized-http-response"
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:observe-governed-http-exchange.operation.9",
+      "cellId": "cell:mechanic:observe-governed-http-exchange.operation.9",
+      "altitude": "mechanic",
+      "mechanicId": "invoke-scenario",
+      "providerProfileId": "node:provider:invoke-scenario",
+      "providerExport": "graph-v1-compatibility-provider",
+      "invocation": "configuration",
+      "factory": false,
+      "sourceUnit": "composition",
+      "composition": "scenario-invocation",
+      "semanticAddress": "observe-governed-http-exchange/scenario/observe-governed-http-exchange/operation/observe-governed-http-exchange.operation.9",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-scenario",
+        "scenarioId": "prove-http-secret-redaction"
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:observe-governed-http-timeout.operation.1",
+      "cellId": "cell:mechanic:observe-governed-http-timeout.operation.1",
+      "altitude": "mechanic",
+      "mechanicId": "sda-authority-transformation-port.v1",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "observe-governed-http-exchange/scenario/observe-governed-http-timeout/operation/observe-governed-http-timeout.operation.1",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-port",
+        "portId": "preserve-http-exchange-evidence-port",
+        "binding": {
+          "portId": "preserve-http-exchange-evidence-port",
+          "platformCapabilityId": "sda-authority-transformation-port.v1",
+          "configuration": {
+            "expression": {
+              "from": "input",
+              "op": "path",
+              "path": ""
+            }
+          }
+        }
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:observe-governed-http-transport-failure.operation.1",
+      "cellId": "cell:mechanic:observe-governed-http-transport-failure.operation.1",
+      "altitude": "mechanic",
+      "mechanicId": "sda-authority-transformation-port.v1",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "observe-governed-http-exchange/scenario/observe-governed-http-transport-failure/operation/observe-governed-http-transport-failure.operation.1",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-port",
+        "portId": "preserve-http-exchange-evidence-port",
+        "binding": {
+          "portId": "preserve-http-exchange-evidence-port",
+          "platformCapabilityId": "sda-authority-transformation-port.v1",
+          "configuration": {
+            "expression": {
+              "from": "input",
+              "op": "path",
+              "path": ""
+            }
+          }
+        }
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:observe-non-success-http-response.operation.1",
+      "cellId": "cell:mechanic:observe-non-success-http-response.operation.1",
+      "altitude": "mechanic",
+      "mechanicId": "sda-authority-transformation-port.v1",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "observe-governed-http-exchange/scenario/observe-non-success-http-response/operation/observe-non-success-http-response.operation.1",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-port",
+        "portId": "preserve-http-exchange-evidence-port",
+        "binding": {
+          "portId": "preserve-http-exchange-evidence-port",
+          "platformCapabilityId": "sda-authority-transformation-port.v1",
+          "configuration": {
+            "expression": {
+              "from": "input",
+              "op": "path",
+              "path": ""
+            }
+          }
+        }
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:prove-http-secret-redaction.operation.1",
+      "cellId": "cell:mechanic:prove-http-secret-redaction.operation.1",
+      "altitude": "mechanic",
+      "mechanicId": "sda-authority-transformation-port.v1",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "observe-governed-http-exchange/scenario/prove-http-secret-redaction/operation/prove-http-secret-redaction.operation.1",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-port",
+        "portId": "preserve-http-exchange-evidence-port",
+        "binding": {
+          "portId": "preserve-http-exchange-evidence-port",
+          "platformCapabilityId": "sda-authority-transformation-port.v1",
+          "configuration": {
+            "expression": {
+              "from": "input",
+              "op": "path",
+              "path": ""
+            }
+          }
+        }
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:prove-single-http-exchange-authority.operation.1",
+      "cellId": "cell:mechanic:prove-single-http-exchange-authority.operation.1",
+      "altitude": "mechanic",
+      "mechanicId": "sda-authority-transformation-port.v1",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "observe-governed-http-exchange/scenario/prove-single-http-exchange-authority/operation/prove-single-http-exchange-authority.operation.1",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-port",
+        "portId": "preserve-http-exchange-evidence-port",
+        "binding": {
+          "portId": "preserve-http-exchange-evidence-port",
+          "platformCapabilityId": "sda-authority-transformation-port.v1",
+          "configuration": {
+            "expression": {
+              "from": "input",
+              "op": "path",
+              "path": ""
+            }
+          }
+        }
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:reject-http-endpoint-outside-authority.operation.1",
+      "cellId": "cell:mechanic:reject-http-endpoint-outside-authority.operation.1",
+      "altitude": "mechanic",
+      "mechanicId": "sda-authority-transformation-port.v1",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "observe-governed-http-exchange/scenario/reject-http-endpoint-outside-authority/operation/reject-http-endpoint-outside-authority.operation.1",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-port",
+        "portId": "preserve-http-exchange-evidence-port",
+        "binding": {
+          "portId": "preserve-http-exchange-evidence-port",
+          "platformCapabilityId": "sda-authority-transformation-port.v1",
+          "configuration": {
+            "expression": {
+              "from": "input",
+              "op": "path",
+              "path": ""
+            }
+          }
+        }
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:reject-invalid-http-credential-binding.operation.1",
+      "cellId": "cell:mechanic:reject-invalid-http-credential-binding.operation.1",
+      "altitude": "mechanic",
+      "mechanicId": "sda-authority-transformation-port.v1",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "observe-governed-http-exchange/scenario/reject-invalid-http-credential-binding/operation/reject-invalid-http-credential-binding.operation.1",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-port",
+        "portId": "preserve-http-exchange-evidence-port",
+        "binding": {
+          "portId": "preserve-http-exchange-evidence-port",
+          "platformCapabilityId": "sda-authority-transformation-port.v1",
+          "configuration": {
+            "expression": {
+              "from": "input",
+              "op": "path",
+              "path": ""
+            }
+          }
+        }
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:reject-oversized-http-response.operation.1",
+      "cellId": "cell:mechanic:reject-oversized-http-response.operation.1",
+      "altitude": "mechanic",
+      "mechanicId": "sda-authority-transformation-port.v1",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "observe-governed-http-exchange/scenario/reject-oversized-http-response/operation/reject-oversized-http-response.operation.1",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-port",
+        "portId": "preserve-http-exchange-evidence-port",
+        "binding": {
+          "portId": "preserve-http-exchange-evidence-port",
+          "platformCapabilityId": "sda-authority-transformation-port.v1",
+          "configuration": {
+            "expression": {
+              "from": "input",
+              "op": "path",
+              "path": ""
+            }
+          }
+        }
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:cell:physical:observe-governed-http-exchange.operation.1",
+      "cellId": "cell:physical:observe-governed-http-exchange.operation.1",
+      "altitude": "physical",
+      "mechanicId": "sda-governed-http-exchange-port.v1",
+      "providerProfileId": "sda-platform-effect-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/governed-http-exchange-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/governed-http-exchange-provider.mjs",
+      "providerExport": "observeGovernedHttpExchange",
+      "invocation": "effects",
+      "factory": false,
+      "sourceUnit": "event-port",
+      "semanticAddress": "observe-governed-http-exchange/scenario/observe-governed-http-exchange/operation/observe-governed-http-exchange.operation.1/physical",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-port",
+        "portId": "observe-governed-http-exchange-port",
+        "binding": {
+          "portId": "observe-governed-http-exchange-port",
+          "platformCapabilityId": "sda-governed-http-exchange-port.v1",
+          "configuration": {
+            "credentialInjectionRules": [
+              {
+                "headerName": "x-goog-api-key",
+                "id": "gemini-x-goog-api-key.v1"
+              },
+              {
+                "headerName": "authorization",
+                "id": "openai-bearer-authorization.v1",
+                "valuePrefix": "Bearer "
+              }
+            ],
+            "endpointAuthorities": [
+              {
+                "allowedRequestHeaders": [
+                  "content-type"
+                ],
+                "allowedResponseHeaders": [
+                  "content-type",
+                  "x-goog-request-id"
+                ],
+                "endpointAuthorityDigest": "sha256:57ab352b0978dca5e5ce33a28ccd7027c20df96da4138dbc7e8088f7c8fb0c04",
+                "methods": [
+                  "POST"
+                ],
+                "urlPrefixes": [
+                  "https://generativelanguage.googleapis.com/"
+                ]
+              },
+              {
+                "allowedRequestHeaders": [
+                  "content-type"
+                ],
+                "allowedResponseHeaders": [
+                  "content-type",
+                  "x-request-id"
+                ],
+                "endpointAuthorityDigest": "sha256:b70b8bc81f93ef949d7ae6cabbf71a56b4af2440c5489c5c4037923b534f0109",
+                "methods": [
+                  "POST"
+                ],
+                "urlPrefixes": [
+                  "https://api.openai.com/v1/"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "operationId": "slot:cell:provider:observe-governed-http-exchange.operation.1",
+      "cellId": "cell:provider:observe-governed-http-exchange.operation.1",
+      "altitude": "provider",
+      "mechanicId": "sda-governed-http-exchange-port.v1",
+      "providerProfileId": "sda-platform-effect-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/governed-http-exchange-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/governed-http-exchange-provider.mjs",
+      "providerExport": "observeGovernedHttpExchange",
+      "invocation": "effects",
+      "factory": false,
+      "sourceUnit": "event-port",
+      "semanticAddress": "observe-governed-http-exchange/scenario/observe-governed-http-exchange/operation/observe-governed-http-exchange.operation.1/provider",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-port",
+        "portId": "observe-governed-http-exchange-port",
+        "binding": {
+          "portId": "observe-governed-http-exchange-port",
+          "platformCapabilityId": "sda-governed-http-exchange-port.v1",
+          "configuration": {
+            "credentialInjectionRules": [
+              {
+                "headerName": "x-goog-api-key",
+                "id": "gemini-x-goog-api-key.v1"
+              },
+              {
+                "headerName": "authorization",
+                "id": "openai-bearer-authorization.v1",
+                "valuePrefix": "Bearer "
+              }
+            ],
+            "endpointAuthorities": [
+              {
+                "allowedRequestHeaders": [
+                  "content-type"
+                ],
+                "allowedResponseHeaders": [
+                  "content-type",
+                  "x-goog-request-id"
+                ],
+                "endpointAuthorityDigest": "sha256:57ab352b0978dca5e5ce33a28ccd7027c20df96da4138dbc7e8088f7c8fb0c04",
+                "methods": [
+                  "POST"
+                ],
+                "urlPrefixes": [
+                  "https://generativelanguage.googleapis.com/"
+                ]
+              },
+              {
+                "allowedRequestHeaders": [
+                  "content-type"
+                ],
+                "allowedResponseHeaders": [
+                  "content-type",
+                  "x-request-id"
+                ],
+                "endpointAuthorityDigest": "sha256:b70b8bc81f93ef949d7ae6cabbf71a56b4af2440c5489c5c4037923b534f0109",
+                "methods": [
+                  "POST"
+                ],
+                "urlPrefixes": [
+                  "https://api.openai.com/v1/"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "operationId": "slot:mechanic:cancel-governed-http-exchange.operation.1:expression",
+      "cellId": "cell:mechanic:cancel-governed-http-exchange.operation.1:expression",
+      "altitude": "mechanic",
+      "mechanicId": "path",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "preserve-http-exchange-evidence-port#/expression",
+      "outcomeVariants": [
+        "VALUE"
+      ],
+      "configuration": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:mechanic:observe-governed-http-timeout.operation.1:expression",
+      "cellId": "cell:mechanic:observe-governed-http-timeout.operation.1:expression",
+      "altitude": "mechanic",
+      "mechanicId": "path",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "preserve-http-exchange-evidence-port#/expression",
+      "outcomeVariants": [
+        "VALUE"
+      ],
+      "configuration": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:mechanic:observe-governed-http-transport-failure.operation.1:expression",
+      "cellId": "cell:mechanic:observe-governed-http-transport-failure.operation.1:expression",
+      "altitude": "mechanic",
+      "mechanicId": "path",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "preserve-http-exchange-evidence-port#/expression",
+      "outcomeVariants": [
+        "VALUE"
+      ],
+      "configuration": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:mechanic:observe-non-success-http-response.operation.1:expression",
+      "cellId": "cell:mechanic:observe-non-success-http-response.operation.1:expression",
+      "altitude": "mechanic",
+      "mechanicId": "path",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "preserve-http-exchange-evidence-port#/expression",
+      "outcomeVariants": [
+        "VALUE"
+      ],
+      "configuration": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:mechanic:prove-http-secret-redaction.operation.1:expression",
+      "cellId": "cell:mechanic:prove-http-secret-redaction.operation.1:expression",
+      "altitude": "mechanic",
+      "mechanicId": "path",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "preserve-http-exchange-evidence-port#/expression",
+      "outcomeVariants": [
+        "VALUE"
+      ],
+      "configuration": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:mechanic:prove-single-http-exchange-authority.operation.1:expression",
+      "cellId": "cell:mechanic:prove-single-http-exchange-authority.operation.1:expression",
+      "altitude": "mechanic",
+      "mechanicId": "path",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "preserve-http-exchange-evidence-port#/expression",
+      "outcomeVariants": [
+        "VALUE"
+      ],
+      "configuration": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:mechanic:reject-http-endpoint-outside-authority.operation.1:expression",
+      "cellId": "cell:mechanic:reject-http-endpoint-outside-authority.operation.1:expression",
+      "altitude": "mechanic",
+      "mechanicId": "path",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "preserve-http-exchange-evidence-port#/expression",
+      "outcomeVariants": [
+        "VALUE"
+      ],
+      "configuration": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:mechanic:reject-invalid-http-credential-binding.operation.1:expression",
+      "cellId": "cell:mechanic:reject-invalid-http-credential-binding.operation.1:expression",
+      "altitude": "mechanic",
+      "mechanicId": "path",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "preserve-http-exchange-evidence-port#/expression",
+      "outcomeVariants": [
+        "VALUE"
+      ],
+      "configuration": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:mechanic:reject-oversized-http-response.operation.1:expression",
+      "cellId": "cell:mechanic:reject-oversized-http-response.operation.1:expression",
+      "altitude": "mechanic",
+      "mechanicId": "path",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "preserve-http-exchange-evidence-port#/expression",
+      "outcomeVariants": [
+        "VALUE"
+      ],
+      "configuration": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    }
+  ],
+  "scenarios": [
+    {
+      "scenarioId": "cancel-governed-http-exchange",
+      "scenarioCellId": "cell:scenario:cancel-governed-http-exchange",
+      "exitCellId": "cell:mechanic:cancel-governed-http-exchange.operation.1",
+      "inputContractId": "observe-governed-http-exchange-input.v1",
+      "outcomeContractId": "governed-http-exchange-evidence.v1",
+      "outcomeVariants": [
+        "TERMINAL"
+      ]
+    },
+    {
+      "scenarioId": "observe-governed-http-exchange",
+      "scenarioCellId": "cell:scenario:observe-governed-http-exchange",
+      "exitCellId": "cell:mechanic:observe-governed-http-exchange.operation.10",
+      "inputContractId": "observe-governed-http-exchange-input.v1",
+      "outcomeContractId": "governed-http-exchange-evidence.v1",
+      "outcomeVariants": [
+        "TERMINAL"
+      ]
+    },
+    {
+      "scenarioId": "observe-governed-http-timeout",
+      "scenarioCellId": "cell:scenario:observe-governed-http-timeout",
+      "exitCellId": "cell:mechanic:observe-governed-http-timeout.operation.1",
+      "inputContractId": "observe-governed-http-exchange-input.v1",
+      "outcomeContractId": "governed-http-exchange-evidence.v1",
+      "outcomeVariants": [
+        "TERMINAL"
+      ]
+    },
+    {
+      "scenarioId": "observe-governed-http-transport-failure",
+      "scenarioCellId": "cell:scenario:observe-governed-http-transport-failure",
+      "exitCellId": "cell:mechanic:observe-governed-http-transport-failure.operation.1",
+      "inputContractId": "observe-governed-http-exchange-input.v1",
+      "outcomeContractId": "governed-http-exchange-evidence.v1",
+      "outcomeVariants": [
+        "TERMINAL"
+      ]
+    },
+    {
+      "scenarioId": "observe-non-success-http-response",
+      "scenarioCellId": "cell:scenario:observe-non-success-http-response",
+      "exitCellId": "cell:mechanic:observe-non-success-http-response.operation.1",
+      "inputContractId": "observe-governed-http-exchange-input.v1",
+      "outcomeContractId": "governed-http-exchange-evidence.v1",
+      "outcomeVariants": [
+        "TERMINAL"
+      ]
+    },
+    {
+      "scenarioId": "prove-http-secret-redaction",
+      "scenarioCellId": "cell:scenario:prove-http-secret-redaction",
+      "exitCellId": "cell:mechanic:prove-http-secret-redaction.operation.1",
+      "inputContractId": "observe-governed-http-exchange-input.v1",
+      "outcomeContractId": "governed-http-exchange-evidence.v1",
+      "outcomeVariants": [
+        "TERMINAL"
+      ]
+    },
+    {
+      "scenarioId": "prove-single-http-exchange-authority",
+      "scenarioCellId": "cell:scenario:prove-single-http-exchange-authority",
+      "exitCellId": "cell:mechanic:prove-single-http-exchange-authority.operation.1",
+      "inputContractId": "observe-governed-http-exchange-input.v1",
+      "outcomeContractId": "governed-http-exchange-evidence.v1",
+      "outcomeVariants": [
+        "TERMINAL"
+      ]
+    },
+    {
+      "scenarioId": "reject-http-endpoint-outside-authority",
+      "scenarioCellId": "cell:scenario:reject-http-endpoint-outside-authority",
+      "exitCellId": "cell:mechanic:reject-http-endpoint-outside-authority.operation.1",
+      "inputContractId": "observe-governed-http-exchange-input.v1",
+      "outcomeContractId": "governed-http-exchange-evidence.v1",
+      "outcomeVariants": [
+        "TERMINAL"
+      ]
+    },
+    {
+      "scenarioId": "reject-invalid-http-credential-binding",
+      "scenarioCellId": "cell:scenario:reject-invalid-http-credential-binding",
+      "exitCellId": "cell:mechanic:reject-invalid-http-credential-binding.operation.1",
+      "inputContractId": "observe-governed-http-exchange-input.v1",
+      "outcomeContractId": "governed-http-exchange-evidence.v1",
+      "outcomeVariants": [
+        "TERMINAL"
+      ]
+    },
+    {
+      "scenarioId": "reject-oversized-http-response",
+      "scenarioCellId": "cell:scenario:reject-oversized-http-response",
+      "exitCellId": "cell:mechanic:reject-oversized-http-response.operation.1",
+      "inputContractId": "observe-governed-http-exchange-input.v1",
+      "outcomeContractId": "governed-http-exchange-evidence.v1",
+      "outcomeVariants": [
+        "TERMINAL"
+      ]
+    }
+  ],
+  "rootScenarioId": "observe-governed-http-exchange",
+  "cellContracts": {
+    "cell:mechanic:cancel-governed-http-exchange.operation.1": {
+      "inputContractId": "observe-governed-http-exchange-input.v1",
+      "outcomeContractId": "governed-http-exchange-evidence.v1"
+    },
+    "cell:mechanic:cancel-governed-http-exchange.operation.1:expression": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:observe-governed-http-exchange.operation.1": {
+      "inputContractId": "observe-governed-http-exchange-input.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:observe-governed-http-exchange.operation.10": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "governed-http-exchange-evidence.v1"
+    },
+    "cell:mechanic:observe-governed-http-exchange.operation.2": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:observe-governed-http-exchange.operation.3": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:observe-governed-http-exchange.operation.4": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:observe-governed-http-exchange.operation.5": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:observe-governed-http-exchange.operation.6": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:observe-governed-http-exchange.operation.7": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:observe-governed-http-exchange.operation.8": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:observe-governed-http-exchange.operation.9": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:observe-governed-http-timeout.operation.1": {
+      "inputContractId": "observe-governed-http-exchange-input.v1",
+      "outcomeContractId": "governed-http-exchange-evidence.v1"
+    },
+    "cell:mechanic:observe-governed-http-timeout.operation.1:expression": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:observe-governed-http-transport-failure.operation.1": {
+      "inputContractId": "observe-governed-http-exchange-input.v1",
+      "outcomeContractId": "governed-http-exchange-evidence.v1"
+    },
+    "cell:mechanic:observe-governed-http-transport-failure.operation.1:expression": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:observe-non-success-http-response.operation.1": {
+      "inputContractId": "observe-governed-http-exchange-input.v1",
+      "outcomeContractId": "governed-http-exchange-evidence.v1"
+    },
+    "cell:mechanic:observe-non-success-http-response.operation.1:expression": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:prove-http-secret-redaction.operation.1": {
+      "inputContractId": "observe-governed-http-exchange-input.v1",
+      "outcomeContractId": "governed-http-exchange-evidence.v1"
+    },
+    "cell:mechanic:prove-http-secret-redaction.operation.1:expression": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:prove-single-http-exchange-authority.operation.1": {
+      "inputContractId": "observe-governed-http-exchange-input.v1",
+      "outcomeContractId": "governed-http-exchange-evidence.v1"
+    },
+    "cell:mechanic:prove-single-http-exchange-authority.operation.1:expression": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:reject-http-endpoint-outside-authority.operation.1": {
+      "inputContractId": "observe-governed-http-exchange-input.v1",
+      "outcomeContractId": "governed-http-exchange-evidence.v1"
+    },
+    "cell:mechanic:reject-http-endpoint-outside-authority.operation.1:expression": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:reject-invalid-http-credential-binding.operation.1": {
+      "inputContractId": "observe-governed-http-exchange-input.v1",
+      "outcomeContractId": "governed-http-exchange-evidence.v1"
+    },
+    "cell:mechanic:reject-invalid-http-credential-binding.operation.1:expression": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:reject-oversized-http-response.operation.1": {
+      "inputContractId": "observe-governed-http-exchange-input.v1",
+      "outcomeContractId": "governed-http-exchange-evidence.v1"
+    },
+    "cell:mechanic:reject-oversized-http-response.operation.1:expression": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:physical:observe-governed-http-exchange.operation.1": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:provider:observe-governed-http-exchange.operation.1": {
+      "inputContractId": "observe-governed-http-exchange-input.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:scenario:cancel-governed-http-exchange": {
+      "inputContractId": "observe-governed-http-exchange-input.v1",
+      "outcomeContractId": "governed-http-exchange-evidence.v1"
+    },
+    "cell:scenario:observe-governed-http-exchange": {
+      "inputContractId": "observe-governed-http-exchange-input.v1",
+      "outcomeContractId": "governed-http-exchange-evidence.v1"
+    },
+    "cell:scenario:observe-governed-http-timeout": {
+      "inputContractId": "observe-governed-http-exchange-input.v1",
+      "outcomeContractId": "governed-http-exchange-evidence.v1"
+    },
+    "cell:scenario:observe-governed-http-transport-failure": {
+      "inputContractId": "observe-governed-http-exchange-input.v1",
+      "outcomeContractId": "governed-http-exchange-evidence.v1"
+    },
+    "cell:scenario:observe-non-success-http-response": {
+      "inputContractId": "observe-governed-http-exchange-input.v1",
+      "outcomeContractId": "governed-http-exchange-evidence.v1"
+    },
+    "cell:scenario:prove-http-secret-redaction": {
+      "inputContractId": "observe-governed-http-exchange-input.v1",
+      "outcomeContractId": "governed-http-exchange-evidence.v1"
+    },
+    "cell:scenario:prove-single-http-exchange-authority": {
+      "inputContractId": "observe-governed-http-exchange-input.v1",
+      "outcomeContractId": "governed-http-exchange-evidence.v1"
+    },
+    "cell:scenario:reject-http-endpoint-outside-authority": {
+      "inputContractId": "observe-governed-http-exchange-input.v1",
+      "outcomeContractId": "governed-http-exchange-evidence.v1"
+    },
+    "cell:scenario:reject-invalid-http-credential-binding": {
+      "inputContractId": "observe-governed-http-exchange-input.v1",
+      "outcomeContractId": "governed-http-exchange-evidence.v1"
+    },
+    "cell:scenario:reject-oversized-http-response": {
+      "inputContractId": "observe-governed-http-exchange-input.v1",
+      "outcomeContractId": "governed-http-exchange-evidence.v1"
+    }
+  },
+  "conformanceClosures": [
+    "graph-admission",
+    "provider-slot-coverage",
+    "planned-observed-topology",
+    "canonical-path-parity",
+    "effect-lineage"
+  ]
+}

@@ -1,0 +1,205 @@
+{
+  "authorityType": "consumer-contract-authorities.v1",
+  "contracts": {
+    "model-provider-protocol-projection-evidence.v1": {
+      "schemaRef": "model-provider-protocol-projection-evidence.v1.schema.json",
+      "schemaId": "https://schemas.agentic-harness.local/contracts/outcome.schema.json",
+      "schemaDigest": "0bdfb16598e71319e1788bb58d5bcda4d87ef8b7fdebc4aa331273cbe2bc1323",
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "https://schemas.agentic-harness.local/contracts/outcome.schema.json",
+        "type": "object",
+        "required": [
+          "contractId",
+          "payload"
+        ],
+        "properties": {
+          "contractId": {
+            "const": "model-provider-protocol-projection-evidence.v1"
+          },
+          "payload": {
+            "type": "object",
+            "required": [
+              "disposition",
+              "providerKind",
+              "adapterIdentity",
+              "wireRequest",
+              "endpointFact",
+              "normalizedTestimony",
+              "rejectionReason",
+              "networkExchangeCount",
+              "retryCount",
+              "repairCount"
+            ],
+            "properties": {
+              "disposition": {
+                "type": "string"
+              },
+              "providerKind": {
+                "type": "string"
+              },
+              "adapterIdentity": {
+                "type": "string"
+              },
+              "wireRequest": {
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "endpointFact": {
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "normalizedTestimony": {
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "rejectionReason": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "networkExchangeCount": {
+                "type": "integer"
+              },
+              "retryCount": {
+                "type": "integer"
+              },
+              "repairCount": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      }
+    },
+    "project-model-provider-protocol-input.v1": {
+      "schemaRef": "project-model-provider-protocol-input.v1.schema.json",
+      "schemaId": "https://schemas.agentic-harness.local/contracts/input.schema.json",
+      "schemaDigest": "f0ed6b1c81e4de4b4b02e78a7f45b3fe0e8c3f0aca0509ac8b9e53d0ffb2475f",
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "https://schemas.agentic-harness.local/contracts/input.schema.json",
+        "anyOf": [
+          {
+            "type": "object",
+            "required": [
+              "contractId",
+              "payload"
+            ],
+            "properties": {
+              "contractId": {
+                "const": "project-model-provider-protocol-input.v1"
+              },
+              "payload": {
+                "type": "object",
+                "required": [
+                  "requestType",
+                  "providerKind",
+                  "adapterIdentity"
+                ],
+                "properties": {
+                  "requestType": {
+                    "type": "string"
+                  },
+                  "providerKind": {
+                    "type": "string"
+                  },
+                  "adapterIdentity": {
+                    "type": "string"
+                  },
+                  "context": {
+                    "type": "object"
+                  },
+                  "endpoint": {
+                    "type": "object"
+                  },
+                  "observation": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "contractId",
+              "payload"
+            ],
+            "properties": {
+              "contractId": {
+                "const": "model-provider-protocol-projection-evidence.v1"
+              },
+              "payload": {
+                "type": "object",
+                "required": [
+                  "disposition",
+                  "providerKind",
+                  "adapterIdentity",
+                  "wireRequest",
+                  "endpointFact",
+                  "normalizedTestimony",
+                  "rejectionReason",
+                  "networkExchangeCount",
+                  "retryCount",
+                  "repairCount"
+                ],
+                "properties": {
+                  "disposition": {
+                    "type": "string"
+                  },
+                  "providerKind": {
+                    "type": "string"
+                  },
+                  "adapterIdentity": {
+                    "type": "string"
+                  },
+                  "wireRequest": {
+                    "type": [
+                      "object",
+                      "null"
+                    ]
+                  },
+                  "endpointFact": {
+                    "type": [
+                      "object",
+                      "null"
+                    ]
+                  },
+                  "normalizedTestimony": {
+                    "type": [
+                      "object",
+                      "null"
+                    ]
+                  },
+                  "rejectionReason": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "networkExchangeCount": {
+                    "type": "integer"
+                  },
+                  "retryCount": {
+                    "type": "integer"
+                  },
+                  "repairCount": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

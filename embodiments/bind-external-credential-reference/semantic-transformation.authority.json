@@ -1,0 +1,1 @@
+{"authorityType":"semantic-transformation-authority.v1","transformations":[{"id":"preserve-credential-binding-evidence","expression":{"from":"input","op":"path","path":""}}]}

@@ -1,0 +1,38 @@
+{
+  "scenarioId": "project-gemini-text-request",
+  "input": {
+    "inputId": "gemini-text-protocol-projection-request",
+    "contract": {
+      "contractId": "project-model-provider-protocol-input.v1"
+    }
+  },
+  "event": {
+    "eventId": "gemini-text-protocol-projection-requested",
+    "executionAuthorityId": "project-gemini-text-request.v1"
+  },
+  "outcome": {
+    "outcomeId": "gemini-text-protocol-projection",
+    "contract": {
+      "contractId": "model-provider-protocol-projection-evidence.v1"
+    },
+    "experience": {
+      "statement": "one generateContent body maps system messages to systemInstruction, user messages to the user role, assistant messages to the model role, and declares maxOutputTokens and temperature without a response schema"
+    },
+    "terminal": true
+  },
+  "gherkin": {
+    "given": {
+      "semanticRef": "project-gemini-text-request.given",
+      "text": "one text-generation context bound to the Gemini adapter with system, user, and assistant messages and a text response policy"
+    },
+    "when": {
+      "semanticRef": "project-gemini-text-request.when",
+      "text": "the Gemini text protocol is projected"
+    },
+    "then": {
+      "semanticRef": "project-gemini-text-request.then",
+      "text": "one generateContent body maps system messages to systemInstruction, user messages to the user role, assistant messages to the model role, and declares maxOutputTokens and temperature without a response schema"
+    }
+  },
+  "name": "Map system user and assistant messages to a Gemini text generateContent request"
+}

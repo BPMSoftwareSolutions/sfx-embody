@@ -1,0 +1,499 @@
+{
+  "projectionManifestType": "consumer-capability-projection-manifest.v1",
+  "generator": "scenario-driven-architecture/tools/src/consumer-projection",
+  "authorityRefs": [
+    "capability.feature",
+    "capability.authority.json",
+    "semantic-graph.authority.json",
+    "execution-authorities.authority.json",
+    "projection-authorities.authority.json",
+    "interfaces.authority.json",
+    "fixtures.authority.json",
+    "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+    "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json"
+  ],
+  "admittedPlatformCapabilities": [
+    "sda-authority-state-projection.v1",
+    "sda-authority-transformation-port.v1",
+    "sda-bounded-base64-byte-digest-port.v1",
+    "sda-canonical-capability-feature-resolution-port.v1",
+    "sda-declarative-state-projection.v1",
+    "sda-declarative-value-port.v1",
+    "sda-external-credential-reference-binding-port.v1",
+    "sda-external-observation-port.v1",
+    "sda-filesystem-artifact-store.v1",
+    "sda-fixture-contract-validator.v1",
+    "sda-generic-llm-connector-port.v1",
+    "sda-governed-disposable-root-lifecycle-port.v1",
+    "sda-governed-external-root-batch-materialization-port.v1",
+    "sda-governed-external-root-consumer-projection-port.v1",
+    "sda-governed-external-root-observation-port.v1",
+    "sda-governed-external-root-projected-application-execution-port.v1",
+    "sda-governed-file-system-shaping-port.v2",
+    "sda-governed-http-exchange-port.v1",
+    "sda-governed-repository-observation-port.v1",
+    "sda-governed-serial-execution-port.v1",
+    "sda-governed-target-execution-observation-port.v1",
+    "sda-governed-tooling-binding-transaction-port.v1",
+    "sda-governed-tooling-migration-operation-port.v1",
+    "sda-json-authority-ingestion-port.v1",
+    "sda-json-cli.v1",
+    "sda-json-query-cli.v1",
+    "sda-node-consumer-runtime.v1",
+    "sda-os-environment-credential-port.v1",
+    "sda-projected-capability-invocation-port.v1",
+    "sda-projected-capability-invocation-port.v2",
+    "sda-proof-binding-evaluation-port.v1",
+    "sda-scenario-semantic-carrier-evaluation-port.v1",
+    "sda-scenario-semantic-carrier-extraction-port.v1",
+    "sda-scenario-semantic-carrier-validation-port.v1",
+    "sda-schema-contract-admission.v1",
+    "sda-semantic-execution-graph-compilation-port.v1",
+    "sda-semantic-vector-index.v1"
+  ],
+  "files": [
+    {
+      "path": "application-binding.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "c54c70fb63bca5eb52b681e92e459743f327797e504d695454eeffd3a99671f7",
+      "digest": "sha256:c54c70fb63bca5eb52b681e92e459743f327797e504d695454eeffd3a99671f7",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/interfaces.authority.json"
+      ]
+    },
+    {
+      "path": "application-binding.node.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "c54c70fb63bca5eb52b681e92e459743f327797e504d695454eeffd3a99671f7",
+      "digest": "sha256:c54c70fb63bca5eb52b681e92e459743f327797e504d695454eeffd3a99671f7",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/interfaces.authority.json"
+      ]
+    },
+    {
+      "path": "capability.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "e2f29c50b6175985408ad962b98f03eda0d35b37538af4408ac80557f914d922",
+      "digest": "sha256:e2f29c50b6175985408ad962b98f03eda0d35b37538af4408ac80557f914d922",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/capability.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/capability.feature",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "execution-plans/consumer-execution-plan.node.v3.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "b7daae977f4c37e8e8d9df586b78239dd3b48076e95eb5c6e2f0aa62c3579552",
+      "digest": "sha256:b7daae977f4c37e8e8d9df586b78239dd3b48076e95eb5c6e2f0aa62c3579552",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/capability.feature",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/capability.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/semantic-graph.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/interfaces.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/fixtures.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json"
+      ]
+    },
+    {
+      "path": "fixtures/fixtures.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "2ff0331409b6cc5c6664528e417f57f94a58f87110abea340840205bdf0ed036",
+      "digest": "sha256:2ff0331409b6cc5c6664528e417f57f94a58f87110abea340840205bdf0ed036",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/fixtures.authority.json"
+      ]
+    },
+    {
+      "path": "node/capability-bindings.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/capability.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/capability.feature",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/fixtures.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/interfaces.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/semantic-graph.authority.json",
+        "capability.authority.json",
+        "execution-authorities.authority.json",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/0",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/1",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/2",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/3",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/4",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/5",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/6",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/7",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/8",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/9",
+        "interfaces.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
+        "scenarios#/0",
+        "semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "node/capability-carrier.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "1b49712051db8477a88fe476fc11ed1ca31e648737970034b7bd5eb26f18a486",
+      "digest": "sha256:1b49712051db8477a88fe476fc11ed1ca31e648737970034b7bd5eb26f18a486",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/capability.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/capability.feature",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/fixtures.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/interfaces.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/semantic-graph.authority.json",
+        "capability.authority.json",
+        "execution-authorities.authority.json",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/0",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/1",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/2",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/3",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/4",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/5",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/6",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/7",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/8",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/9",
+        "interfaces.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
+        "scenarios#/0",
+        "semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "node/capability-contracts.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "6e0a46953f049cd2fae9dcba0fd1696057c52dd76594eb23c17a31c3c811193c",
+      "digest": "sha256:6e0a46953f049cd2fae9dcba0fd1696057c52dd76594eb23c17a31c3c811193c",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/capability.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/capability.feature",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/fixtures.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/interfaces.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/semantic-graph.authority.json",
+        "capability.authority.json",
+        "execution-authorities.authority.json",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/0",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/1",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/2",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/3",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/4",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/5",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/6",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/7",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/8",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/9",
+        "interfaces.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
+        "scenarios#/0",
+        "semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "node/capability-execution.generated.mjs",
+      "executableOrigin": "PROJECTED",
+      "sha256": "0dbe09521b1a0975afe3db6eb620db3eaddffb6e807a6d49c51d2b043051d3cb",
+      "digest": "sha256:0dbe09521b1a0975afe3db6eb620db3eaddffb6e807a6d49c51d2b043051d3cb",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/capability.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/capability.feature",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/fixtures.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/interfaces.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/semantic-graph.authority.json",
+        "capability.authority.json",
+        "execution-authorities.authority.json",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/0",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/1",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/2",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/3",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/4",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/5",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/6",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/7",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/8",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/9",
+        "interfaces.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
+        "scenarios#/0",
+        "semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "node/capability-operations.generated.mjs",
+      "executableOrigin": "PROJECTED",
+      "sha256": "16a11b198e2442dcc8744b8a57b6239650f0d43c844c8a5d6ed412295427b17b",
+      "digest": "sha256:16a11b198e2442dcc8744b8a57b6239650f0d43c844c8a5d6ed412295427b17b",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/capability.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/capability.feature",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/fixtures.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/interfaces.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/semantic-graph.authority.json",
+        "capability.authority.json",
+        "execution-authorities.authority.json",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/0",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/1",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/2",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/3",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/4",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/5",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/6",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/7",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/8",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/9",
+        "interfaces.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
+        "scenarios#/0",
+        "semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "node/capability-runtime.generated.mjs",
+      "executableOrigin": "PROJECTED",
+      "sha256": "a357eeb728c48f1898a097e0df2dcc596725fce647763dc1c5688e03db56cb61",
+      "digest": "sha256:a357eeb728c48f1898a097e0df2dcc596725fce647763dc1c5688e03db56cb61",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/capability.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/capability.feature",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/fixtures.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/interfaces.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/semantic-graph.authority.json",
+        "capability.authority.json",
+        "execution-authorities.authority.json",
+        "interfaces.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
+        "semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "node/capability.projected.test.mjs",
+      "executableOrigin": "PROJECTED",
+      "sha256": "8852d9eda37a2b685453e7964f48215e209fe7bd4008c552a289ea7baf8b9994",
+      "digest": "sha256:8852d9eda37a2b685453e7964f48215e209fe7bd4008c552a289ea7baf8b9994",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/capability.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/capability.feature",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/fixtures.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/interfaces.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/semantic-graph.authority.json",
+        "capability.authority.json",
+        "execution-authorities.authority.json",
+        "interfaces.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
+        "semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "node/conformance-query.generated.mjs",
+      "executableOrigin": "PROJECTED",
+      "sha256": "16405f28a0de363c77bc7f8abcfd91668e499376fcd68f4d8db7d95067769c57",
+      "digest": "sha256:16405f28a0de363c77bc7f8abcfd91668e499376fcd68f4d8db7d95067769c57",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/capability.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/capability.feature",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/fixtures.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/interfaces.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/semantic-graph.authority.json",
+        "capability.authority.json",
+        "execution-authorities.authority.json",
+        "interfaces.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
+        "semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "node/execute-projected-model-provider-attempt-cli.generated.mjs",
+      "executableOrigin": "PROJECTED",
+      "sha256": "0a2ac29cf8755510f009a315ee39a183ea37e53fd92d0d193525e71c31513f29",
+      "digest": "sha256:0a2ac29cf8755510f009a315ee39a183ea37e53fd92d0d193525e71c31513f29",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/capability.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/capability.feature",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/fixtures.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/interfaces.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/semantic-graph.authority.json",
+        "capability.authority.json",
+        "execution-authorities.authority.json",
+        "interfaces.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
+        "semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "node/execution-operations.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "39c2897aea5848361af17214a34b03a1978c05b83c5d34348eebe748abd0048f",
+      "digest": "sha256:39c2897aea5848361af17214a34b03a1978c05b83c5d34348eebe748abd0048f",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/capability.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/capability.feature",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/fixtures.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/interfaces.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/semantic-graph.authority.json",
+        "capability.authority.json",
+        "execution-authorities.authority.json",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/0",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/1",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/2",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/3",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/4",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/5",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/6",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/7",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/8",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/9",
+        "interfaces.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
+        "scenarios#/0",
+        "semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "node/execution-patterns.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "002a9b668940159e32cea91dbeacc64c76d19423aed5fd75ff68a9ebc32068f4",
+      "digest": "sha256:002a9b668940159e32cea91dbeacc64c76d19423aed5fd75ff68a9ebc32068f4",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/capability.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/capability.feature",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/fixtures.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/interfaces.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/semantic-graph.authority.json",
+        "capability.authority.json",
+        "execution-authorities.authority.json",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/0",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/1",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/2",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/3",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/4",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/5",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/6",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/7",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/8",
+        "executionAuthorities/execute-projected-model-provider-attempt/operations/9",
+        "interfaces.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
+        "scenarios#/0",
+        "semantic-graph.authority.json"
+      ]
+    },
+    {
+      "path": "projection-conformance.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "eff29d9d763919b405a021fc126f66b5b0c552c3cbe74d8ddb85f9781e4b2eed",
+      "digest": "sha256:eff29d9d763919b405a021fc126f66b5b0c552c3cbe74d8ddb85f9781e4b2eed",
+      "sourcePointers": [
+        "consumer-assurance/prove-mechanical-sterility"
+      ]
+    },
+    {
+      "path": "query/conformance-query.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "0b95fb0cfec78fa13384a378b4161c273bf9c22a752e3a60dd82e4351387a768",
+      "digest": "sha256:0b95fb0cfec78fa13384a378b4161c273bf9c22a752e3a60dd82e4351387a768",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/capability.feature",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/capability.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/semantic-graph.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/interfaces.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/fixtures.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json"
+      ]
+    },
+    {
+      "path": "query/conformance-query.node.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "0b95fb0cfec78fa13384a378b4161c273bf9c22a752e3a60dd82e4351387a768",
+      "digest": "sha256:0b95fb0cfec78fa13384a378b4161c273bf9c22a752e3a60dd82e4351387a768",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/capability.feature",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/capability.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/semantic-graph.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/execution-authorities.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/projection-authorities.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/interfaces.authority.json",
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/fixtures.authority.json",
+        "kernel/semantic-authority/consumer/scenario-conformance-closure.query-authority.json",
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json"
+      ]
+    },
+    {
+      "path": "query/platform-mechanic-resolution.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "5ed745df9710552342981172956dd38b627245d02285ca1605f78daaf1354802",
+      "digest": "sha256:5ed745df9710552342981172956dd38b627245d02285ca1605f78daaf1354802",
+      "sourcePointers": [
+        "kernel/semantic-authority/consumer/sda-platform-capabilities.semantic-authority.json"
+      ]
+    },
+    {
+      "path": "query/platform-mechanic-resolution.node.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "5ed745df9710552342981172956dd38b627245d02285ca1605f78daaf1354802",
+      "digest": "sha256:5ed745df9710552342981172956dd38b627245d02285ca1605f78daaf1354802",
+      "sourcePointers": [
+        "kernel/semantic-authority/consumer/sda-platform-capabilities.semantic-authority.json"
+      ]
+    },
+    {
+      "path": "scenarios/execute-projected-model-provider-attempt.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "7e880a5e57d392c3394e7a9bf9cfcc9f7e24f66eac006fb4db1185bb40b6cb8c",
+      "digest": "sha256:7e880a5e57d392c3394e7a9bf9cfcc9f7e24f66eac006fb4db1185bb40b6cb8c",
+      "sourcePointers": [
+        "../sfx-embody/embodiments/execute-projected-model-provider-attempt/capability.feature"
+      ]
+    },
+    {
+      "path": "telemetry/expected-trace.json",
+      "executableOrigin": "PROJECTED",
+      "sha256": "2207fb616a81301f889085259bbf1ff0fb929551bdda679301c3ed4e17a9d43a",
+      "digest": "sha256:2207fb616a81301f889085259bbf1ff0fb929551bdda679301c3ed4e17a9d43a",
+      "sourcePointers": [
+        "kernel/semantic-authority/consumer/scenario-execution.telemetry-authority.json",
+        "kernel/contracts/execution/scenario-kernel-execution-vector.json"
+      ]
+    }
+  ]
+}

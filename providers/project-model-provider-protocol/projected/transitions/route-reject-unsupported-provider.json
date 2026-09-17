@@ -1,0 +1,16 @@
+{
+  "transitionId": "route-reject-unsupported-provider",
+  "from": {
+    "scenarioId": "project-model-provider-protocol",
+    "outcomeId": "model-provider-protocol-route",
+    "contractId": "project-model-provider-protocol-input.v1"
+  },
+  "to": {
+    "scenarioId": "reject-unsupported-provider-protocol",
+    "inputId": "unsupported-provider-protocol-projection",
+    "contractId": "project-model-provider-protocol-input.v1"
+  },
+  "semanticProgress": "declared",
+  "topologyKind": "selection",
+  "selectsVariant": "reject-unsupported-provider"
+}

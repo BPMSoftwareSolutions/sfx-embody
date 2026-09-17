@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.agentic-harness.local/contracts/input.schema.json",
+  "type": "object",
+  "anyOf": [
+    {
+      "type": "object",
+      "required": ["contractId", "payload"],
+      "properties": {
+        "contractId": { "const": "registry-asset-admission-request.v1" },
+        "payload": {
+          "type": "object",
+          "required": ["assetKind", "assetBytesBase64", "claimedAssetDigest", "registryInventory", "referencedAuthorities", "humanDisposition"],
+          "properties": {
+            "assetKind": { "enum": ["SCENARIO_ARCHETYPE", "MECHANIC_PROFILE", "PROVIDER_CONNECTION"] },
+            "assetBytesBase64": {
+              "type": "string",
+              "minLength": 4,
+              "contentEncoding": "base64",
+              "description": "The exact candidate asset bytes. Identity is recomputed from these, never trusted from the claim."
+            },
+            "claimedAssetDigest": { "$ref": "#/$defs/digest" },
+            "registryInventory": {
+              "type": "object",
+              "required": ["supplied", "assetIds"],
+              "description": "The admitted registry for this kind, supplied rather than read, so admission stays pure.",
+              "properties": {
+                "supplied": { "type": "boolean" },
+                "assetIds": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+              }
+            },
+            "referencedAuthorities": {
+              "type": "array",
+              "description": "Every authority the asset relies upon, with its admitted standing supplied.",
+              "items": {
+                "type": "object",
+                "required": ["authorityId", "admitted"],
+                "properties": {
+                  "authorityId": { "type": "string", "minLength": 1 },
+                  "admitted": { "type": "boolean" }
+                }
+              }
+            },
+            "humanDisposition": { "enum": ["APPROVE", "HOLD", "REJECT", "NONE"] }
+          }
+        }
+      }
+    },
+    {
+      "type": "object",
+      "required": ["contractId", "disposition"],
+      "description": "The admission receipt admitted at each downstream scenario boundary, where the carrier is the previously admitted outcome.",
+      "properties": {
+        "contractId": { "enum": ["registry-asset-admission-receipt.v1", "registry-admission-carrier.v1"] },
+        "disposition": { "enum": ["ADMITTED", "HELD", "REJECTED"] }
+      }
+    }
+  ],
+  "$defs": {
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "transitionId": "route-normalize-provider-http-failure",
+  "from": {
+    "scenarioId": "project-model-provider-protocol",
+    "outcomeId": "model-provider-protocol-route",
+    "contractId": "project-model-provider-protocol-input.v1"
+  },
+  "to": {
+    "scenarioId": "normalize-provider-http-failure-testimony",
+    "inputId": "provider-http-failure-normalization",
+    "contractId": "project-model-provider-protocol-input.v1"
+  },
+  "semanticProgress": "declared",
+  "topologyKind": "selection",
+  "selectsVariant": "normalize-provider-http-failure"
+}

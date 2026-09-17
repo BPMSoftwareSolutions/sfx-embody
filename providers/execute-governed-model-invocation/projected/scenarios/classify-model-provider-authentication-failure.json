@@ -1,0 +1,38 @@
+{
+  "scenarioId": "classify-model-provider-authentication-failure",
+  "input": {
+    "inputId": "model-provider-authentication-failure-testimony",
+    "contract": {
+      "contractId": "execute-governed-model-invocation-input.v1"
+    }
+  },
+  "event": {
+    "eventId": "model-provider-authentication-failure-observed",
+    "executionAuthorityId": "classify-model-provider-authentication-failure.v1"
+  },
+  "outcome": {
+    "outcomeId": "model-provider-authentication-failure",
+    "contract": {
+      "contractId": "governed-model-invocation-evidence.v1"
+    },
+    "experience": {
+      "statement": "PROVIDER_AUTHENTICATION_FAILED preserves the provider status and response hash without secret material, retry, fallback, or provider substitution"
+    },
+    "terminal": true
+  },
+  "gherkin": {
+    "given": {
+      "semanticRef": "classify-model-provider-authentication-failure.given",
+      "text": "one authorized exchange whose provider response reports invalid or unauthorized credentials"
+    },
+    "when": {
+      "semanticRef": "classify-model-provider-authentication-failure.when",
+      "text": "provider testimony is normalized"
+    },
+    "then": {
+      "semanticRef": "classify-model-provider-authentication-failure.then",
+      "text": "PROVIDER_AUTHENTICATION_FAILED preserves the provider status and response hash without secret material, retry, fallback, or provider substitution"
+    }
+  },
+  "name": "Classify a provider-reported authentication failure"
+}

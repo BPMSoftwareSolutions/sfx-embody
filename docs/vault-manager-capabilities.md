@@ -437,19 +437,28 @@ bind still stages the same literals and the exchange injects the same headers
 (`x-goog-api-key`), now from vault entries; none of the three names is present
 in `process.env`.
 
-**Status: done for every authority that can execute; one exchange blocked by
-the frozen SDA.** All five installed authorities (equity primary and fallback,
-Gemini, OpenAI reference and speech) are `source: "vault"` with the declared
-locator; the transition unit stored each reference and proved `CREDENTIAL_BOUND`,
-and the live equity invocation with the names absent from the environment
-returned `EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED`. The live conveyor exchange
-cannot execute on SDA `bf5feb1`: the graph path fails
-`SEMANTIC_EXECUTION_GRAPH_OVERLAY_BINDING_MISSING: 'invoke-scenario'` (and, once
-`invoke-scenario` is supplied diagnostically, `sda-projected-capability-
-invocation-port.v2` / the `invocation: "llm"` connector dispatch). That is the
-recorded SDA request R1/R2, not an estate data gap; the Gemini credential
-requirement itself resolves from the vault (`CREDENTIAL_BOUND`, scope
-`governed-model-invocation`).
+**Status: done, including the Gemini exchange.** All five installed authorities
+(equity primary and fallback, Gemini, OpenAI reference and speech) are
+`source: "vault"` with the declared locator; the transition unit stored each
+reference and proved `CREDENTIAL_BOUND`, and the live equity invocation with the
+names absent from the environment returned
+`EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED`. The conveyor exchange now executes end
+to end with the vault credential: with the three names absent from the
+invocation environment, `obtain-governed-model-response` returned
+`MODEL_RESPONSE_OBTAINED` (`resolvedProvider: gemini`,
+`resolvedModel: gemini-2.5-pro`, finish reason `STOP`, response text `READY`,
+request/response hashes retained) from a live HTTP 200 exchange whose applied
+header proves the vault credential. Enabling that exchange was estate data plus
+two provider fixes, not a new capability: the host invocation Port gained
+`invoke-scenario` and `sda-projected-capability-invocation-port.v2` overlay
+rules and the projected-capability invocation provider; the estate declared the
+missing selection routing for `project-model-provider-protocol`; the declared
+model-protocol transformations were restored to dependency order; the projected
+applications were rebased on the read-allowed `providers/` area; and the SDA
+vault providers now resolve a declared `%LOCALAPPDATA%` locator (the projection
+repair also normalized the SDA `bind-os-environment-credential` projection to
+the repository's LF byte policy so its binding digest resolves). The composition details are
+recorded in the strategy Execution log with the per-unit receipts.
 
 ### V4 — Non-disclosure proof
 Sweep artifacts for the sentinel: invoke `--json`, `observe --trace` output,
@@ -512,7 +521,8 @@ shared.
    enough (recommend: enough).
    **Resolved:** enough for the credential work (equity is one scenario with
    port operations only; `resolve-credential` is a single port). The conveyor's
-   own composition stays an SDA request (V3 status), not a vault dependency.
+   own composition needed the graph-path composition repair, not a vault change;
+   it is fixed and the conveyor exchange completes (V3 status).
 6. **Store input UX:** stdin (`--input -`) suffices for machines; is a masked
    prompt required for humans in the first version?
    **Resolved for this program:** the transition unit stores in-process and the
@@ -571,5 +581,7 @@ non-disclosure sweep found the sentinel absent from every named channel
 `evidence/` and local delivery receipts, and the durable rows) and the tampered
 store failed GCM authentication. Receipts: `evidence/vault-20260916/transition/`,
 `evidence/vault-20260916/non-disclosure/`, `evidence/vault-20260916/live-*.out`.
-The conveyor's own exchange remains blocked by the frozen SDA graph-path
-composition (V3 status).
+The conveyor's own exchange completed after the declared-composition repair:
+`MODEL_RESPONSE_OBTAINED` (`gemini-2.5-pro`, STOP, text `READY`, live HTTP 200
+with the vault credential as `x-goog-api-key`). Receipt:
+`evidence/vault-20260916/gemini-conveyor-live.out`.

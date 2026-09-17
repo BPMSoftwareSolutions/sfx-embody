@@ -1,0 +1,570 @@
+{
+  "authorityType": "consumer-contract-authorities.v1",
+  "contracts": {
+    "governed-model-invocation-request.v1": {
+      "schemaRef": "governed-model-invocation-request.v1.schema.json",
+      "schemaId": "https://schemas.agentic-harness.local/governed-model-invocation-request.schema.json",
+      "schemaDigest": "f0f754bc79108adfc8f274b4ae90ae9a633e552ac5da7138edf1b980f7553cca",
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "https://schemas.agentic-harness.local/governed-model-invocation-request.schema.json",
+        "oneOf": [
+          {
+            "$ref": "#/$defs/governed-model-invocation-request.v1"
+          }
+        ],
+        "$defs": {
+          "governed-model-invocation-request.v1": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "carrierType",
+              "requestId",
+              "requestHash",
+              "modelRequest",
+              "requestLineage"
+            ],
+            "properties": {
+              "carrierType": {
+                "const": "governed-model-invocation-request.v1"
+              },
+              "requestId": {
+                "$ref": "#/$defs/identity"
+              },
+              "requestHash": {
+                "$ref": "#/$defs/sha256"
+              },
+              "modelRequest": {
+                "$ref": "#/$defs/modelRequest"
+              },
+              "providerConveyor": {
+                "type": "object"
+              },
+              "requestLineage": {
+                "$ref": "#/$defs/lineage"
+              }
+            }
+          },
+          "modelRequest": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "$schema",
+              "requestId",
+              "providerAuthorityId",
+              "modelAlias",
+              "interaction",
+              "responsePolicy",
+              "executionPolicy",
+              "evidencePolicy"
+            ],
+            "properties": {
+              "$schema": {
+                "type": "string",
+                "minLength": 1
+              },
+              "requestId": {
+                "$ref": "#/$defs/identity"
+              },
+              "providerAuthorityId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "modelAlias": {
+                "type": "string",
+                "minLength": 1
+              },
+              "interaction": {
+                "type": "object"
+              },
+              "responsePolicy": {
+                "type": "object"
+              },
+              "executionPolicy": {
+                "type": "object"
+              },
+              "evidencePolicy": {
+                "type": "object"
+              }
+            }
+          },
+          "identity": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9.-]*$"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^sha256:[a-f0-9]{64}$"
+          },
+          "lineage": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "governed-model-response-evidence.v1": {
+      "schemaRef": "governed-model-response-evidence.v1.schema.json",
+      "schemaId": "https://schemas.agentic-harness.local/governed-model-response-evidence.schema.json",
+      "schemaDigest": "d5506cae3d928bd1237378054ef1f15046cfb1fbae742d3c190672756a491de5",
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "https://schemas.agentic-harness.local/governed-model-response-evidence.schema.json",
+        "oneOf": [
+          {
+            "$ref": "#/$defs/governed-model-response-evidence.v1"
+          },
+          {
+            "$ref": "#/$defs/governed-model-response-evidence.alias-rejection.v1"
+          }
+        ],
+        "$defs": {
+          "governed-model-response-evidence.v1": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "carrierType",
+              "requestId",
+              "disposition",
+              "resolvedProvider",
+              "resolvedModel",
+              "attemptCount",
+              "timing",
+              "requestHash",
+              "responseHash",
+              "normalizedResponse",
+              "acceptanceClaimed",
+              "effectLineage"
+            ],
+            "properties": {
+              "carrierType": {
+                "const": "governed-model-response-evidence.v1"
+              },
+              "requestId": {
+                "$ref": "#/$defs/identity"
+              },
+              "disposition": {
+                "enum": [
+                  "MODEL_RESPONSE_OBTAINED",
+                  "PROVIDER_REQUEST_REJECTED",
+                  "PROVIDER_TIMED_OUT",
+                  "PROVIDER_UNAVAILABLE",
+                  "PROVIDER_AUTHENTICATION_FAILED",
+                  "EXECUTION_CANCELLED",
+                  "INTERNAL_EXECUTION_FAILED",
+                  "RESPONSE_FORMAT_NOT_SATISFIED",
+                  "MODEL_REQUEST_REJECTED"
+                ]
+              },
+              "resolvedProvider": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "resolvedProviderAuthorityId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "resolvedModel": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "attemptCount": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "timing": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "startedAt",
+                  "completedAt",
+                  "durationMilliseconds"
+                ],
+                "properties": {
+                  "startedAt": {
+                    "type": "string",
+                    "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$"
+                  },
+                  "completedAt": {
+                    "type": "string",
+                    "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$"
+                  },
+                  "durationMilliseconds": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                }
+              },
+              "requestHash": {
+                "$ref": "#/$defs/sha256"
+              },
+              "responseHash": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "pattern": "^sha256:[a-f0-9]{64}$"
+              },
+              "normalizedResponse": {
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "acceptanceClaimed": {
+                "const": false
+              },
+              "providerSwitchCount": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "resolvedProtocolProjection": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "additionalProperties": false,
+                "required": [
+                  "requestType",
+                  "providerKind",
+                  "providerAuthorityId",
+                  "resolvedModel",
+                  "responseFormat"
+                ],
+                "properties": {
+                  "requestType": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "providerKind": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "providerAuthorityId": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "resolvedModel": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "responseFormat": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              },
+              "effectLineage": {
+                "$ref": "#/$defs/lineage"
+              },
+              "payload": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          },
+          "identity": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9.-]*$"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^sha256:[a-f0-9]{64}$"
+          },
+          "lineage": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "governed-model-response-evidence.alias-rejection.v1": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "carrierType",
+              "requestId",
+              "disposition",
+              "resolvedProvider",
+              "resolvedModel",
+              "attemptCount",
+              "requestHash",
+              "responseHash",
+              "normalizedResponse",
+              "acceptanceClaimed",
+              "effectLineage",
+              "payload"
+            ],
+            "properties": {
+              "carrierType": {
+                "const": "governed-model-response-evidence.v1"
+              },
+              "requestId": {
+                "$ref": "#/$defs/identity"
+              },
+              "disposition": {
+                "const": "MODEL_REQUEST_REJECTED"
+              },
+              "resolvedProvider": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "resolvedModel": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "attemptCount": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "requestHash": {
+                "$ref": "#/$defs/sha256"
+              },
+              "responseHash": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "pattern": "^sha256:[a-f0-9]{64}$"
+              },
+              "normalizedResponse": {
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "acceptanceClaimed": {
+                "const": false
+              },
+              "effectLineage": {
+                "$ref": "#/$defs/lineage"
+              },
+              "payload": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "governed-provider-testimony.v1": {
+      "schemaRef": "governed-provider-testimony.v1.schema.json",
+      "schemaId": "https://schemas.agentic-harness.local/contracts/obtain-governed-model-response-intermediate.schema.json",
+      "schemaDigest": "006fb847a8d6efb7ddfb3445106e971e61567b03ab78433c0cd462ceeb06ec8d",
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "https://schemas.agentic-harness.local/contracts/obtain-governed-model-response-intermediate.schema.json",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "contractId",
+          "payload"
+        ],
+        "properties": {
+          "contractId": {
+            "type": "string",
+            "enum": [
+              "model-provider-embodiment-resolution.v1",
+              "governed-provider-testimony.v1",
+              "model-provider-protocol-response-policy.v1"
+            ]
+          },
+          "payload": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "x-declared-intermediate-contracts": [
+          "model-provider-embodiment-resolution.v1",
+          "governed-provider-testimony.v1",
+          "model-provider-protocol-response-policy.v1"
+        ]
+      }
+    },
+    "model-provider-embodiment-resolution.v1": {
+      "schemaRef": "model-provider-embodiment-resolution.v1.schema.json",
+      "schemaId": "https://schemas.agentic-harness.local/model-provider-embodiment-resolution.v1.schema.json",
+      "schemaDigest": "a876f4fccca5cc36a825a5f62f4118da1f5158d80a1f838aa6eeef4c035f1594",
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "https://schemas.agentic-harness.local/model-provider-embodiment-resolution.v1.schema.json",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "carrierType",
+          "requestId",
+          "requestHash",
+          "modelRequest",
+          "requestLineage",
+          "payload"
+        ],
+        "properties": {
+          "carrierType": {
+            "const": "governed-model-invocation-request.v1"
+          },
+          "requestId": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9.-]*$"
+          },
+          "requestHash": {
+            "type": "string",
+            "pattern": "^sha256:[a-f0-9]{64}$"
+          },
+          "modelRequest": {
+            "type": "object"
+          },
+          "providerConveyor": {
+            "type": "object"
+          },
+          "requestLineage": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "payload": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "resolutionStatus"
+            ],
+            "properties": {
+              "resolutionStatus": {
+                "enum": [
+                  "EMBODIMENT_AUTHORIZED",
+                  "SUBSTITUTION_NOT_AUTHORIZED",
+                  "ALIAS_REJECTED"
+                ]
+              },
+              "resolvedProviderAuthorityId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "resolvedModel": {
+                "type": "string",
+                "minLength": 1
+              },
+              "adapterIdentity": {
+                "type": "string",
+                "minLength": 1
+              },
+              "credentialReference": {
+                "type": "string",
+                "minLength": 1
+              },
+              "aliasResolutionLineage": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "rejectedAlias": {
+                "type": "string",
+                "minLength": 1
+              },
+              "rejectedProviderAuthority": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "model-provider-protocol-response-policy.v1": {
+      "schemaRef": "model-provider-protocol-response-policy.v1.schema.json",
+      "schemaId": "https://schemas.agentic-harness.local/model-provider-protocol-response-policy.v1.schema.json",
+      "schemaDigest": "ed9a3e663425c19f7bfbab95e0622602a3ee739d02f399f8ddff19eb530ad48e",
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "https://schemas.agentic-harness.local/model-provider-protocol-response-policy.v1.schema.json",
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "carrierType",
+          "requestId",
+          "requestHash",
+          "modelRequest",
+          "requestLineage",
+          "protocolResponsePolicy"
+        ],
+        "properties": {
+          "carrierType": {
+            "const": "governed-model-invocation-request.v1"
+          },
+          "requestId": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9.-]*$"
+          },
+          "requestHash": {
+            "type": "string",
+            "pattern": "^sha256:[a-f0-9]{64}$"
+          },
+          "modelRequest": {
+            "type": "object"
+          },
+          "providerConveyor": {
+            "type": "object"
+          },
+          "requestLineage": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "protocolResponsePolicy": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "format",
+              "responseSchema",
+              "schemaSourceConnector"
+            ],
+            "properties": {
+              "format": {
+                "enum": [
+                  "text",
+                  "json"
+                ]
+              },
+              "responseSchema": {
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "schemaSourceConnector": {
+                "const": "modelRequest.responsePolicy.schema"
+              }
+            }
+          },
+          "payload": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      }
+    }
+  }
+}

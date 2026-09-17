@@ -1,0 +1,38 @@
+{
+  "scenarioId": "obtain-structured-model-response",
+  "input": {
+    "inputId": "governed-structured-model-invocation",
+    "contract": {
+      "contractId": "execute-governed-model-invocation-input.v1"
+    }
+  },
+  "event": {
+    "eventId": "governed-structured-model-invocation-requested",
+    "executionAuthorityId": "obtain-structured-model-response.v1"
+  },
+  "outcome": {
+    "outcomeId": "governed-structured-model-response",
+    "contract": {
+      "contractId": "governed-model-invocation-evidence.v1"
+    },
+    "experience": {
+      "statement": "MODEL_RESPONSE_OBTAINED returns the schema-valid structured value and credential-free provider testimony with complete execution proof and no domain-validity or acceptance claim"
+    },
+    "terminal": true
+  },
+  "gherkin": {
+    "given": {
+      "semanticRef": "obtain-structured-model-response.given",
+      "text": "one valid structured-generation request with an admitted response schema and one provider model supporting structured output"
+    },
+    "when": {
+      "semanticRef": "obtain-structured-model-response.when",
+      "text": "the governed model invocation is executed"
+    },
+    "then": {
+      "semanticRef": "obtain-structured-model-response.then",
+      "text": "MODEL_RESPONSE_OBTAINED returns the schema-valid structured value and credential-free provider testimony with complete execution proof and no domain-validity or acceptance claim"
+    }
+  },
+  "name": "Obtain structured output satisfying the declared schema"
+}

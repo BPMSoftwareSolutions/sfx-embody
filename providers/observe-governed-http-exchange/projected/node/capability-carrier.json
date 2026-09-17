@@ -1,0 +1,1890 @@
+{
+  "carrierType": "fractal-execution-carrier.v1",
+  "capabilityId": "observe-governed-http-exchange",
+  "features": [
+    {
+      "featureId": "feature:cancel-governed-http-exchange",
+      "name": "cancel-governed-http-exchange",
+      "scenarios": [
+        {
+          "scenarioId": "cancel-governed-http-exchange",
+          "input": {
+            "dataType": "observe-governed-http-exchange-input.v1"
+          },
+          "event": {
+            "eventId": "event:cancel-governed-http-exchange",
+            "actionId": "cancel-governed-http-exchange.v1",
+            "responsibility": {
+              "responsibilityId": "responsibility:cancel-governed-http-exchange",
+              "statement": "Execute cancel-governed-http-exchange.v1"
+            },
+            "executionProjectionRef": "projection:cancel-governed-http-exchange"
+          },
+          "outcome": {
+            "outcomeId": "outcome:cancel-governed-http-exchange",
+            "experience": "observe-governed-http-exchange/scenario/cancel-governed-http-exchange",
+            "product": {
+              "dataType": "governed-http-exchange-evidence.v1"
+            },
+            "variants": [
+              {
+                "variantId": "terminal",
+                "terminal": true
+              }
+            ]
+          },
+          "routes": [
+            {
+              "routeId": "edge:invoke-return:cell:mechanic:observe-governed-http-exchange.operation.6:cell:scenario:cancel-governed-http-exchange",
+              "productId": "semantic-value.v1",
+              "semanticProgress": "terminating",
+              "edgeKind": "return"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "featureId": "feature:observe-governed-http-exchange",
+      "name": "observe-governed-http-exchange",
+      "scenarios": [
+        {
+          "scenarioId": "observe-governed-http-exchange",
+          "input": {
+            "dataType": "observe-governed-http-exchange-input.v1"
+          },
+          "event": {
+            "eventId": "event:observe-governed-http-exchange",
+            "actionId": "observe-governed-http-exchange.v1",
+            "responsibility": {
+              "responsibilityId": "responsibility:observe-governed-http-exchange",
+              "statement": "Execute observe-governed-http-exchange.v1"
+            },
+            "executionProjectionRef": "projection:observe-governed-http-exchange"
+          },
+          "outcome": {
+            "outcomeId": "outcome:observe-governed-http-exchange",
+            "experience": "observe-governed-http-exchange/scenario/observe-governed-http-exchange",
+            "product": {
+              "dataType": "governed-http-exchange-evidence.v1"
+            },
+            "variants": [
+              {
+                "variantId": "terminal",
+                "terminal": true
+              }
+            ]
+          },
+          "routes": []
+        }
+      ]
+    },
+    {
+      "featureId": "feature:observe-governed-http-timeout",
+      "name": "observe-governed-http-timeout",
+      "scenarios": [
+        {
+          "scenarioId": "observe-governed-http-timeout",
+          "input": {
+            "dataType": "observe-governed-http-exchange-input.v1"
+          },
+          "event": {
+            "eventId": "event:observe-governed-http-timeout",
+            "actionId": "observe-governed-http-timeout.v1",
+            "responsibility": {
+              "responsibilityId": "responsibility:observe-governed-http-timeout",
+              "statement": "Execute observe-governed-http-timeout.v1"
+            },
+            "executionProjectionRef": "projection:observe-governed-http-timeout"
+          },
+          "outcome": {
+            "outcomeId": "outcome:observe-governed-http-timeout",
+            "experience": "observe-governed-http-exchange/scenario/observe-governed-http-timeout",
+            "product": {
+              "dataType": "governed-http-exchange-evidence.v1"
+            },
+            "variants": [
+              {
+                "variantId": "terminal",
+                "terminal": true
+              }
+            ]
+          },
+          "routes": [
+            {
+              "routeId": "edge:invoke-return:cell:mechanic:observe-governed-http-exchange.operation.5:cell:scenario:observe-governed-http-timeout",
+              "productId": "semantic-value.v1",
+              "semanticProgress": "terminating",
+              "edgeKind": "return"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "featureId": "feature:observe-governed-http-transport-failure",
+      "name": "observe-governed-http-transport-failure",
+      "scenarios": [
+        {
+          "scenarioId": "observe-governed-http-transport-failure",
+          "input": {
+            "dataType": "observe-governed-http-exchange-input.v1"
+          },
+          "event": {
+            "eventId": "event:observe-governed-http-transport-failure",
+            "actionId": "observe-governed-http-transport-failure.v1",
+            "responsibility": {
+              "responsibilityId": "responsibility:observe-governed-http-transport-failure",
+              "statement": "Execute observe-governed-http-transport-failure.v1"
+            },
+            "executionProjectionRef": "projection:observe-governed-http-transport-failure"
+          },
+          "outcome": {
+            "outcomeId": "outcome:observe-governed-http-transport-failure",
+            "experience": "observe-governed-http-exchange/scenario/observe-governed-http-transport-failure",
+            "product": {
+              "dataType": "governed-http-exchange-evidence.v1"
+            },
+            "variants": [
+              {
+                "variantId": "terminal",
+                "terminal": true
+              }
+            ]
+          },
+          "routes": [
+            {
+              "routeId": "edge:invoke-return:cell:mechanic:observe-governed-http-exchange.operation.7:cell:scenario:observe-governed-http-transport-failure",
+              "productId": "semantic-value.v1",
+              "semanticProgress": "terminating",
+              "edgeKind": "return"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "featureId": "feature:observe-non-success-http-response",
+      "name": "observe-non-success-http-response",
+      "scenarios": [
+        {
+          "scenarioId": "observe-non-success-http-response",
+          "input": {
+            "dataType": "observe-governed-http-exchange-input.v1"
+          },
+          "event": {
+            "eventId": "event:observe-non-success-http-response",
+            "actionId": "observe-non-success-http-response.v1",
+            "responsibility": {
+              "responsibilityId": "responsibility:observe-non-success-http-response",
+              "statement": "Execute observe-non-success-http-response.v1"
+            },
+            "executionProjectionRef": "projection:observe-non-success-http-response"
+          },
+          "outcome": {
+            "outcomeId": "outcome:observe-non-success-http-response",
+            "experience": "observe-governed-http-exchange/scenario/observe-non-success-http-response",
+            "product": {
+              "dataType": "governed-http-exchange-evidence.v1"
+            },
+            "variants": [
+              {
+                "variantId": "terminal",
+                "terminal": true
+              }
+            ]
+          },
+          "routes": [
+            {
+              "routeId": "edge:invoke-return:cell:mechanic:observe-governed-http-exchange.operation.2:cell:scenario:observe-non-success-http-response",
+              "productId": "semantic-value.v1",
+              "semanticProgress": "terminating",
+              "edgeKind": "return"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "featureId": "feature:prove-http-secret-redaction",
+      "name": "prove-http-secret-redaction",
+      "scenarios": [
+        {
+          "scenarioId": "prove-http-secret-redaction",
+          "input": {
+            "dataType": "observe-governed-http-exchange-input.v1"
+          },
+          "event": {
+            "eventId": "event:prove-http-secret-redaction",
+            "actionId": "prove-http-secret-redaction.v1",
+            "responsibility": {
+              "responsibilityId": "responsibility:prove-http-secret-redaction",
+              "statement": "Execute prove-http-secret-redaction.v1"
+            },
+            "executionProjectionRef": "projection:prove-http-secret-redaction"
+          },
+          "outcome": {
+            "outcomeId": "outcome:prove-http-secret-redaction",
+            "experience": "observe-governed-http-exchange/scenario/prove-http-secret-redaction",
+            "product": {
+              "dataType": "governed-http-exchange-evidence.v1"
+            },
+            "variants": [
+              {
+                "variantId": "terminal",
+                "terminal": true
+              }
+            ]
+          },
+          "routes": [
+            {
+              "routeId": "edge:invoke-return:cell:mechanic:observe-governed-http-exchange.operation.9:cell:scenario:prove-http-secret-redaction",
+              "productId": "semantic-value.v1",
+              "semanticProgress": "terminating",
+              "edgeKind": "return"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "featureId": "feature:prove-single-http-exchange-authority",
+      "name": "prove-single-http-exchange-authority",
+      "scenarios": [
+        {
+          "scenarioId": "prove-single-http-exchange-authority",
+          "input": {
+            "dataType": "observe-governed-http-exchange-input.v1"
+          },
+          "event": {
+            "eventId": "event:prove-single-http-exchange-authority",
+            "actionId": "prove-single-http-exchange-authority.v1",
+            "responsibility": {
+              "responsibilityId": "responsibility:prove-single-http-exchange-authority",
+              "statement": "Execute prove-single-http-exchange-authority.v1"
+            },
+            "executionProjectionRef": "projection:prove-single-http-exchange-authority"
+          },
+          "outcome": {
+            "outcomeId": "outcome:prove-single-http-exchange-authority",
+            "experience": "observe-governed-http-exchange/scenario/prove-single-http-exchange-authority",
+            "product": {
+              "dataType": "governed-http-exchange-evidence.v1"
+            },
+            "variants": [
+              {
+                "variantId": "terminal",
+                "terminal": true
+              }
+            ]
+          },
+          "routes": [
+            {
+              "routeId": "edge:invoke-return:cell:mechanic:observe-governed-http-exchange.operation.10:cell:scenario:prove-single-http-exchange-authority",
+              "productId": "governed-http-exchange-evidence.v1",
+              "semanticProgress": "terminating",
+              "edgeKind": "return"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "featureId": "feature:reject-http-endpoint-outside-authority",
+      "name": "reject-http-endpoint-outside-authority",
+      "scenarios": [
+        {
+          "scenarioId": "reject-http-endpoint-outside-authority",
+          "input": {
+            "dataType": "observe-governed-http-exchange-input.v1"
+          },
+          "event": {
+            "eventId": "event:reject-http-endpoint-outside-authority",
+            "actionId": "reject-http-endpoint-outside-authority.v1",
+            "responsibility": {
+              "responsibilityId": "responsibility:reject-http-endpoint-outside-authority",
+              "statement": "Execute reject-http-endpoint-outside-authority.v1"
+            },
+            "executionProjectionRef": "projection:reject-http-endpoint-outside-authority"
+          },
+          "outcome": {
+            "outcomeId": "outcome:reject-http-endpoint-outside-authority",
+            "experience": "observe-governed-http-exchange/scenario/reject-http-endpoint-outside-authority",
+            "product": {
+              "dataType": "governed-http-exchange-evidence.v1"
+            },
+            "variants": [
+              {
+                "variantId": "terminal",
+                "terminal": true
+              }
+            ]
+          },
+          "routes": [
+            {
+              "routeId": "edge:invoke-return:cell:mechanic:observe-governed-http-exchange.operation.3:cell:scenario:reject-http-endpoint-outside-authority",
+              "productId": "semantic-value.v1",
+              "semanticProgress": "terminating",
+              "edgeKind": "return"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "featureId": "feature:reject-invalid-http-credential-binding",
+      "name": "reject-invalid-http-credential-binding",
+      "scenarios": [
+        {
+          "scenarioId": "reject-invalid-http-credential-binding",
+          "input": {
+            "dataType": "observe-governed-http-exchange-input.v1"
+          },
+          "event": {
+            "eventId": "event:reject-invalid-http-credential-binding",
+            "actionId": "reject-invalid-http-credential-binding.v1",
+            "responsibility": {
+              "responsibilityId": "responsibility:reject-invalid-http-credential-binding",
+              "statement": "Execute reject-invalid-http-credential-binding.v1"
+            },
+            "executionProjectionRef": "projection:reject-invalid-http-credential-binding"
+          },
+          "outcome": {
+            "outcomeId": "outcome:reject-invalid-http-credential-binding",
+            "experience": "observe-governed-http-exchange/scenario/reject-invalid-http-credential-binding",
+            "product": {
+              "dataType": "governed-http-exchange-evidence.v1"
+            },
+            "variants": [
+              {
+                "variantId": "terminal",
+                "terminal": true
+              }
+            ]
+          },
+          "routes": [
+            {
+              "routeId": "edge:invoke-return:cell:mechanic:observe-governed-http-exchange.operation.4:cell:scenario:reject-invalid-http-credential-binding",
+              "productId": "semantic-value.v1",
+              "semanticProgress": "terminating",
+              "edgeKind": "return"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "featureId": "feature:reject-oversized-http-response",
+      "name": "reject-oversized-http-response",
+      "scenarios": [
+        {
+          "scenarioId": "reject-oversized-http-response",
+          "input": {
+            "dataType": "observe-governed-http-exchange-input.v1"
+          },
+          "event": {
+            "eventId": "event:reject-oversized-http-response",
+            "actionId": "reject-oversized-http-response.v1",
+            "responsibility": {
+              "responsibilityId": "responsibility:reject-oversized-http-response",
+              "statement": "Execute reject-oversized-http-response.v1"
+            },
+            "executionProjectionRef": "projection:reject-oversized-http-response"
+          },
+          "outcome": {
+            "outcomeId": "outcome:reject-oversized-http-response",
+            "experience": "observe-governed-http-exchange/scenario/reject-oversized-http-response",
+            "product": {
+              "dataType": "governed-http-exchange-evidence.v1"
+            },
+            "variants": [
+              {
+                "variantId": "terminal",
+                "terminal": true
+              }
+            ]
+          },
+          "routes": [
+            {
+              "routeId": "edge:invoke-return:cell:mechanic:observe-governed-http-exchange.operation.8:cell:scenario:reject-oversized-http-response",
+              "productId": "semantic-value.v1",
+              "semanticProgress": "terminating",
+              "edgeKind": "return"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "scenarioCells": [
+    {
+      "scenarioCellType": "scenario-cell.v1",
+      "scenarioId": "cancel-governed-http-exchange",
+      "sequence": 1,
+      "input": {
+        "dataType": "observe-governed-http-exchange-input.v1"
+      },
+      "event": {
+        "eventId": "event:cancel-governed-http-exchange",
+        "actionId": "cancel-governed-http-exchange.v1",
+        "responsibility": {
+          "responsibilityId": "responsibility:cancel-governed-http-exchange",
+          "statement": "Execute cancel-governed-http-exchange.v1"
+        },
+        "executionProjectionRef": "projection:cancel-governed-http-exchange"
+      },
+      "outcome": {
+        "outcomeId": "outcome:cancel-governed-http-exchange",
+        "experience": "observe-governed-http-exchange/scenario/cancel-governed-http-exchange",
+        "product": {
+          "dataType": "governed-http-exchange-evidence.v1"
+        },
+        "variants": [
+          {
+            "variantId": "terminal",
+            "terminal": true
+          }
+        ]
+      },
+      "routes": [
+        {
+          "routeId": "edge:invoke-return:cell:mechanic:observe-governed-http-exchange.operation.6:cell:scenario:cancel-governed-http-exchange",
+          "productId": "semantic-value.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return",
+          "fromCellId": "cell:scenario:cancel-governed-http-exchange"
+        }
+      ]
+    },
+    {
+      "scenarioCellType": "scenario-cell.v1",
+      "scenarioId": "observe-governed-http-exchange",
+      "sequence": 2,
+      "input": {
+        "dataType": "observe-governed-http-exchange-input.v1"
+      },
+      "event": {
+        "eventId": "event:observe-governed-http-exchange",
+        "actionId": "observe-governed-http-exchange.v1",
+        "responsibility": {
+          "responsibilityId": "responsibility:observe-governed-http-exchange",
+          "statement": "Execute observe-governed-http-exchange.v1"
+        },
+        "executionProjectionRef": "projection:observe-governed-http-exchange"
+      },
+      "outcome": {
+        "outcomeId": "outcome:observe-governed-http-exchange",
+        "experience": "observe-governed-http-exchange/scenario/observe-governed-http-exchange",
+        "product": {
+          "dataType": "governed-http-exchange-evidence.v1"
+        },
+        "variants": [
+          {
+            "variantId": "terminal",
+            "terminal": true
+          }
+        ]
+      },
+      "routes": []
+    },
+    {
+      "scenarioCellType": "scenario-cell.v1",
+      "scenarioId": "observe-governed-http-timeout",
+      "sequence": 3,
+      "input": {
+        "dataType": "observe-governed-http-exchange-input.v1"
+      },
+      "event": {
+        "eventId": "event:observe-governed-http-timeout",
+        "actionId": "observe-governed-http-timeout.v1",
+        "responsibility": {
+          "responsibilityId": "responsibility:observe-governed-http-timeout",
+          "statement": "Execute observe-governed-http-timeout.v1"
+        },
+        "executionProjectionRef": "projection:observe-governed-http-timeout"
+      },
+      "outcome": {
+        "outcomeId": "outcome:observe-governed-http-timeout",
+        "experience": "observe-governed-http-exchange/scenario/observe-governed-http-timeout",
+        "product": {
+          "dataType": "governed-http-exchange-evidence.v1"
+        },
+        "variants": [
+          {
+            "variantId": "terminal",
+            "terminal": true
+          }
+        ]
+      },
+      "routes": [
+        {
+          "routeId": "edge:invoke-return:cell:mechanic:observe-governed-http-exchange.operation.5:cell:scenario:observe-governed-http-timeout",
+          "productId": "semantic-value.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return",
+          "fromCellId": "cell:scenario:observe-governed-http-timeout"
+        }
+      ]
+    },
+    {
+      "scenarioCellType": "scenario-cell.v1",
+      "scenarioId": "observe-governed-http-transport-failure",
+      "sequence": 4,
+      "input": {
+        "dataType": "observe-governed-http-exchange-input.v1"
+      },
+      "event": {
+        "eventId": "event:observe-governed-http-transport-failure",
+        "actionId": "observe-governed-http-transport-failure.v1",
+        "responsibility": {
+          "responsibilityId": "responsibility:observe-governed-http-transport-failure",
+          "statement": "Execute observe-governed-http-transport-failure.v1"
+        },
+        "executionProjectionRef": "projection:observe-governed-http-transport-failure"
+      },
+      "outcome": {
+        "outcomeId": "outcome:observe-governed-http-transport-failure",
+        "experience": "observe-governed-http-exchange/scenario/observe-governed-http-transport-failure",
+        "product": {
+          "dataType": "governed-http-exchange-evidence.v1"
+        },
+        "variants": [
+          {
+            "variantId": "terminal",
+            "terminal": true
+          }
+        ]
+      },
+      "routes": [
+        {
+          "routeId": "edge:invoke-return:cell:mechanic:observe-governed-http-exchange.operation.7:cell:scenario:observe-governed-http-transport-failure",
+          "productId": "semantic-value.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return",
+          "fromCellId": "cell:scenario:observe-governed-http-transport-failure"
+        }
+      ]
+    },
+    {
+      "scenarioCellType": "scenario-cell.v1",
+      "scenarioId": "observe-non-success-http-response",
+      "sequence": 5,
+      "input": {
+        "dataType": "observe-governed-http-exchange-input.v1"
+      },
+      "event": {
+        "eventId": "event:observe-non-success-http-response",
+        "actionId": "observe-non-success-http-response.v1",
+        "responsibility": {
+          "responsibilityId": "responsibility:observe-non-success-http-response",
+          "statement": "Execute observe-non-success-http-response.v1"
+        },
+        "executionProjectionRef": "projection:observe-non-success-http-response"
+      },
+      "outcome": {
+        "outcomeId": "outcome:observe-non-success-http-response",
+        "experience": "observe-governed-http-exchange/scenario/observe-non-success-http-response",
+        "product": {
+          "dataType": "governed-http-exchange-evidence.v1"
+        },
+        "variants": [
+          {
+            "variantId": "terminal",
+            "terminal": true
+          }
+        ]
+      },
+      "routes": [
+        {
+          "routeId": "edge:invoke-return:cell:mechanic:observe-governed-http-exchange.operation.2:cell:scenario:observe-non-success-http-response",
+          "productId": "semantic-value.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return",
+          "fromCellId": "cell:scenario:observe-non-success-http-response"
+        }
+      ]
+    },
+    {
+      "scenarioCellType": "scenario-cell.v1",
+      "scenarioId": "prove-http-secret-redaction",
+      "sequence": 6,
+      "input": {
+        "dataType": "observe-governed-http-exchange-input.v1"
+      },
+      "event": {
+        "eventId": "event:prove-http-secret-redaction",
+        "actionId": "prove-http-secret-redaction.v1",
+        "responsibility": {
+          "responsibilityId": "responsibility:prove-http-secret-redaction",
+          "statement": "Execute prove-http-secret-redaction.v1"
+        },
+        "executionProjectionRef": "projection:prove-http-secret-redaction"
+      },
+      "outcome": {
+        "outcomeId": "outcome:prove-http-secret-redaction",
+        "experience": "observe-governed-http-exchange/scenario/prove-http-secret-redaction",
+        "product": {
+          "dataType": "governed-http-exchange-evidence.v1"
+        },
+        "variants": [
+          {
+            "variantId": "terminal",
+            "terminal": true
+          }
+        ]
+      },
+      "routes": [
+        {
+          "routeId": "edge:invoke-return:cell:mechanic:observe-governed-http-exchange.operation.9:cell:scenario:prove-http-secret-redaction",
+          "productId": "semantic-value.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return",
+          "fromCellId": "cell:scenario:prove-http-secret-redaction"
+        }
+      ]
+    },
+    {
+      "scenarioCellType": "scenario-cell.v1",
+      "scenarioId": "prove-single-http-exchange-authority",
+      "sequence": 7,
+      "input": {
+        "dataType": "observe-governed-http-exchange-input.v1"
+      },
+      "event": {
+        "eventId": "event:prove-single-http-exchange-authority",
+        "actionId": "prove-single-http-exchange-authority.v1",
+        "responsibility": {
+          "responsibilityId": "responsibility:prove-single-http-exchange-authority",
+          "statement": "Execute prove-single-http-exchange-authority.v1"
+        },
+        "executionProjectionRef": "projection:prove-single-http-exchange-authority"
+      },
+      "outcome": {
+        "outcomeId": "outcome:prove-single-http-exchange-authority",
+        "experience": "observe-governed-http-exchange/scenario/prove-single-http-exchange-authority",
+        "product": {
+          "dataType": "governed-http-exchange-evidence.v1"
+        },
+        "variants": [
+          {
+            "variantId": "terminal",
+            "terminal": true
+          }
+        ]
+      },
+      "routes": [
+        {
+          "routeId": "edge:invoke-return:cell:mechanic:observe-governed-http-exchange.operation.10:cell:scenario:prove-single-http-exchange-authority",
+          "productId": "governed-http-exchange-evidence.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return",
+          "fromCellId": "cell:scenario:prove-single-http-exchange-authority"
+        }
+      ]
+    },
+    {
+      "scenarioCellType": "scenario-cell.v1",
+      "scenarioId": "reject-http-endpoint-outside-authority",
+      "sequence": 8,
+      "input": {
+        "dataType": "observe-governed-http-exchange-input.v1"
+      },
+      "event": {
+        "eventId": "event:reject-http-endpoint-outside-authority",
+        "actionId": "reject-http-endpoint-outside-authority.v1",
+        "responsibility": {
+          "responsibilityId": "responsibility:reject-http-endpoint-outside-authority",
+          "statement": "Execute reject-http-endpoint-outside-authority.v1"
+        },
+        "executionProjectionRef": "projection:reject-http-endpoint-outside-authority"
+      },
+      "outcome": {
+        "outcomeId": "outcome:reject-http-endpoint-outside-authority",
+        "experience": "observe-governed-http-exchange/scenario/reject-http-endpoint-outside-authority",
+        "product": {
+          "dataType": "governed-http-exchange-evidence.v1"
+        },
+        "variants": [
+          {
+            "variantId": "terminal",
+            "terminal": true
+          }
+        ]
+      },
+      "routes": [
+        {
+          "routeId": "edge:invoke-return:cell:mechanic:observe-governed-http-exchange.operation.3:cell:scenario:reject-http-endpoint-outside-authority",
+          "productId": "semantic-value.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return",
+          "fromCellId": "cell:scenario:reject-http-endpoint-outside-authority"
+        }
+      ]
+    },
+    {
+      "scenarioCellType": "scenario-cell.v1",
+      "scenarioId": "reject-invalid-http-credential-binding",
+      "sequence": 9,
+      "input": {
+        "dataType": "observe-governed-http-exchange-input.v1"
+      },
+      "event": {
+        "eventId": "event:reject-invalid-http-credential-binding",
+        "actionId": "reject-invalid-http-credential-binding.v1",
+        "responsibility": {
+          "responsibilityId": "responsibility:reject-invalid-http-credential-binding",
+          "statement": "Execute reject-invalid-http-credential-binding.v1"
+        },
+        "executionProjectionRef": "projection:reject-invalid-http-credential-binding"
+      },
+      "outcome": {
+        "outcomeId": "outcome:reject-invalid-http-credential-binding",
+        "experience": "observe-governed-http-exchange/scenario/reject-invalid-http-credential-binding",
+        "product": {
+          "dataType": "governed-http-exchange-evidence.v1"
+        },
+        "variants": [
+          {
+            "variantId": "terminal",
+            "terminal": true
+          }
+        ]
+      },
+      "routes": [
+        {
+          "routeId": "edge:invoke-return:cell:mechanic:observe-governed-http-exchange.operation.4:cell:scenario:reject-invalid-http-credential-binding",
+          "productId": "semantic-value.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return",
+          "fromCellId": "cell:scenario:reject-invalid-http-credential-binding"
+        }
+      ]
+    },
+    {
+      "scenarioCellType": "scenario-cell.v1",
+      "scenarioId": "reject-oversized-http-response",
+      "sequence": 10,
+      "input": {
+        "dataType": "observe-governed-http-exchange-input.v1"
+      },
+      "event": {
+        "eventId": "event:reject-oversized-http-response",
+        "actionId": "reject-oversized-http-response.v1",
+        "responsibility": {
+          "responsibilityId": "responsibility:reject-oversized-http-response",
+          "statement": "Execute reject-oversized-http-response.v1"
+        },
+        "executionProjectionRef": "projection:reject-oversized-http-response"
+      },
+      "outcome": {
+        "outcomeId": "outcome:reject-oversized-http-response",
+        "experience": "observe-governed-http-exchange/scenario/reject-oversized-http-response",
+        "product": {
+          "dataType": "governed-http-exchange-evidence.v1"
+        },
+        "variants": [
+          {
+            "variantId": "terminal",
+            "terminal": true
+          }
+        ]
+      },
+      "routes": [
+        {
+          "routeId": "edge:invoke-return:cell:mechanic:observe-governed-http-exchange.operation.8:cell:scenario:reject-oversized-http-response",
+          "productId": "semantic-value.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return",
+          "fromCellId": "cell:scenario:reject-oversized-http-response"
+        }
+      ]
+    }
+  ],
+  "eventExecutionProjections": [
+    {
+      "eventExecutionProjectionType": "event-execution-projection.v1",
+      "projectionId": "projection:cancel-governed-http-exchange",
+      "eventId": "event:cancel-governed-http-exchange",
+      "actionId": "cancel-governed-http-exchange.v1",
+      "parentScenarioId": "cancel-governed-http-exchange",
+      "input": {
+        "dataType": "observe-governed-http-exchange-input.v1"
+      },
+      "result": {
+        "dataType": "governed-http-exchange-evidence.v1"
+      },
+      "rootCellId": "cell:mechanic:cancel-governed-http-exchange.operation.1",
+      "cells": [
+        {
+          "cellId": "cell:mechanic:cancel-governed-http-exchange.operation.1",
+          "altitude": "mechanic",
+          "input": {
+            "dataType": "observe-governed-http-exchange-input.v1"
+          },
+          "responsibility": {
+            "responsibilityId": "responsibility:cell:mechanic:cancel-governed-http-exchange.operation.1",
+            "statement": "Execute operation:sda-authority-transformation-port.v1"
+          },
+          "result": {
+            "dataType": "governed-http-exchange-evidence.v1",
+            "variants": [
+              "cancelled",
+              "failure",
+              "success"
+            ]
+          },
+          "mechanicProjectionRef": "circuit:mechanic:cell:mechanic:cancel-governed-http-exchange.operation.1",
+          "providerProjectionRefs": []
+        }
+      ],
+      "routes": [
+        {
+          "fromCellId": "cell:mechanic:cancel-governed-http-exchange.operation.1",
+          "toCellId": "cell:scenario:cancel-governed-http-exchange",
+          "product": "governed-http-exchange-evidence.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return"
+        }
+      ]
+    },
+    {
+      "eventExecutionProjectionType": "event-execution-projection.v1",
+      "projectionId": "projection:observe-governed-http-exchange",
+      "eventId": "event:observe-governed-http-exchange",
+      "actionId": "observe-governed-http-exchange.v1",
+      "parentScenarioId": "observe-governed-http-exchange",
+      "input": {
+        "dataType": "observe-governed-http-exchange-input.v1"
+      },
+      "result": {
+        "dataType": "governed-http-exchange-evidence.v1"
+      },
+      "rootCellId": "cell:mechanic:observe-governed-http-exchange.operation.1",
+      "cells": [
+        {
+          "cellId": "cell:mechanic:observe-governed-http-exchange.operation.1",
+          "altitude": "mechanic",
+          "input": {
+            "dataType": "observe-governed-http-exchange-input.v1"
+          },
+          "responsibility": {
+            "responsibilityId": "responsibility:cell:mechanic:observe-governed-http-exchange.operation.1",
+            "statement": "Execute operation:sda-governed-http-exchange-port.v1"
+          },
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "cancelled",
+              "failure",
+              "success"
+            ]
+          },
+          "providerProjectionRefs": [
+            "circuit:provider:cell:mechanic:observe-governed-http-exchange.operation.1"
+          ]
+        },
+        {
+          "cellId": "cell:mechanic:observe-governed-http-exchange.operation.10",
+          "altitude": "mechanic",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "responsibility": {
+            "responsibilityId": "responsibility:cell:mechanic:observe-governed-http-exchange.operation.10",
+            "statement": "Execute operation:invoke-scenario"
+          },
+          "result": {
+            "dataType": "governed-http-exchange-evidence.v1",
+            "variants": [
+              "cancelled",
+              "failure",
+              "success"
+            ]
+          },
+          "providerProjectionRefs": []
+        },
+        {
+          "cellId": "cell:mechanic:observe-governed-http-exchange.operation.2",
+          "altitude": "mechanic",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "responsibility": {
+            "responsibilityId": "responsibility:cell:mechanic:observe-governed-http-exchange.operation.2",
+            "statement": "Execute operation:invoke-scenario"
+          },
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "cancelled",
+              "failure",
+              "success"
+            ]
+          },
+          "providerProjectionRefs": []
+        },
+        {
+          "cellId": "cell:mechanic:observe-governed-http-exchange.operation.3",
+          "altitude": "mechanic",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "responsibility": {
+            "responsibilityId": "responsibility:cell:mechanic:observe-governed-http-exchange.operation.3",
+            "statement": "Execute operation:invoke-scenario"
+          },
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "cancelled",
+              "failure",
+              "success"
+            ]
+          },
+          "providerProjectionRefs": []
+        },
+        {
+          "cellId": "cell:mechanic:observe-governed-http-exchange.operation.4",
+          "altitude": "mechanic",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "responsibility": {
+            "responsibilityId": "responsibility:cell:mechanic:observe-governed-http-exchange.operation.4",
+            "statement": "Execute operation:invoke-scenario"
+          },
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "cancelled",
+              "failure",
+              "success"
+            ]
+          },
+          "providerProjectionRefs": []
+        },
+        {
+          "cellId": "cell:mechanic:observe-governed-http-exchange.operation.5",
+          "altitude": "mechanic",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "responsibility": {
+            "responsibilityId": "responsibility:cell:mechanic:observe-governed-http-exchange.operation.5",
+            "statement": "Execute operation:invoke-scenario"
+          },
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "cancelled",
+              "failure",
+              "success"
+            ]
+          },
+          "providerProjectionRefs": []
+        },
+        {
+          "cellId": "cell:mechanic:observe-governed-http-exchange.operation.6",
+          "altitude": "mechanic",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "responsibility": {
+            "responsibilityId": "responsibility:cell:mechanic:observe-governed-http-exchange.operation.6",
+            "statement": "Execute operation:invoke-scenario"
+          },
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "cancelled",
+              "failure",
+              "success"
+            ]
+          },
+          "providerProjectionRefs": []
+        },
+        {
+          "cellId": "cell:mechanic:observe-governed-http-exchange.operation.7",
+          "altitude": "mechanic",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "responsibility": {
+            "responsibilityId": "responsibility:cell:mechanic:observe-governed-http-exchange.operation.7",
+            "statement": "Execute operation:invoke-scenario"
+          },
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "cancelled",
+              "failure",
+              "success"
+            ]
+          },
+          "providerProjectionRefs": []
+        },
+        {
+          "cellId": "cell:mechanic:observe-governed-http-exchange.operation.8",
+          "altitude": "mechanic",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "responsibility": {
+            "responsibilityId": "responsibility:cell:mechanic:observe-governed-http-exchange.operation.8",
+            "statement": "Execute operation:invoke-scenario"
+          },
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "cancelled",
+              "failure",
+              "success"
+            ]
+          },
+          "providerProjectionRefs": []
+        },
+        {
+          "cellId": "cell:mechanic:observe-governed-http-exchange.operation.9",
+          "altitude": "mechanic",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "responsibility": {
+            "responsibilityId": "responsibility:cell:mechanic:observe-governed-http-exchange.operation.9",
+            "statement": "Execute operation:invoke-scenario"
+          },
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "cancelled",
+              "failure",
+              "success"
+            ]
+          },
+          "providerProjectionRefs": []
+        }
+      ],
+      "routes": [
+        {
+          "fromCellId": "cell:mechanic:observe-governed-http-exchange.operation.1",
+          "toCellId": "cell:mechanic:observe-governed-http-exchange.operation.2",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:observe-governed-http-exchange.operation.10",
+          "toCellId": "cell:scenario:observe-governed-http-exchange",
+          "product": "governed-http-exchange-evidence.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return"
+        },
+        {
+          "fromCellId": "cell:mechanic:observe-governed-http-exchange.operation.2",
+          "toCellId": "cell:mechanic:observe-governed-http-exchange.operation.3",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:observe-governed-http-exchange.operation.3",
+          "toCellId": "cell:mechanic:observe-governed-http-exchange.operation.4",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:observe-governed-http-exchange.operation.4",
+          "toCellId": "cell:mechanic:observe-governed-http-exchange.operation.5",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:observe-governed-http-exchange.operation.5",
+          "toCellId": "cell:mechanic:observe-governed-http-exchange.operation.6",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:observe-governed-http-exchange.operation.6",
+          "toCellId": "cell:mechanic:observe-governed-http-exchange.operation.7",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:observe-governed-http-exchange.operation.7",
+          "toCellId": "cell:mechanic:observe-governed-http-exchange.operation.8",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:observe-governed-http-exchange.operation.8",
+          "toCellId": "cell:mechanic:observe-governed-http-exchange.operation.9",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:mechanic:observe-governed-http-exchange.operation.9",
+          "toCellId": "cell:mechanic:observe-governed-http-exchange.operation.10",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        }
+      ]
+    },
+    {
+      "eventExecutionProjectionType": "event-execution-projection.v1",
+      "projectionId": "projection:observe-governed-http-timeout",
+      "eventId": "event:observe-governed-http-timeout",
+      "actionId": "observe-governed-http-timeout.v1",
+      "parentScenarioId": "observe-governed-http-timeout",
+      "input": {
+        "dataType": "observe-governed-http-exchange-input.v1"
+      },
+      "result": {
+        "dataType": "governed-http-exchange-evidence.v1"
+      },
+      "rootCellId": "cell:mechanic:observe-governed-http-timeout.operation.1",
+      "cells": [
+        {
+          "cellId": "cell:mechanic:observe-governed-http-timeout.operation.1",
+          "altitude": "mechanic",
+          "input": {
+            "dataType": "observe-governed-http-exchange-input.v1"
+          },
+          "responsibility": {
+            "responsibilityId": "responsibility:cell:mechanic:observe-governed-http-timeout.operation.1",
+            "statement": "Execute operation:sda-authority-transformation-port.v1"
+          },
+          "result": {
+            "dataType": "governed-http-exchange-evidence.v1",
+            "variants": [
+              "cancelled",
+              "failure",
+              "success"
+            ]
+          },
+          "mechanicProjectionRef": "circuit:mechanic:cell:mechanic:observe-governed-http-timeout.operation.1",
+          "providerProjectionRefs": []
+        }
+      ],
+      "routes": [
+        {
+          "fromCellId": "cell:mechanic:observe-governed-http-timeout.operation.1",
+          "toCellId": "cell:scenario:observe-governed-http-timeout",
+          "product": "governed-http-exchange-evidence.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return"
+        }
+      ]
+    },
+    {
+      "eventExecutionProjectionType": "event-execution-projection.v1",
+      "projectionId": "projection:observe-governed-http-transport-failure",
+      "eventId": "event:observe-governed-http-transport-failure",
+      "actionId": "observe-governed-http-transport-failure.v1",
+      "parentScenarioId": "observe-governed-http-transport-failure",
+      "input": {
+        "dataType": "observe-governed-http-exchange-input.v1"
+      },
+      "result": {
+        "dataType": "governed-http-exchange-evidence.v1"
+      },
+      "rootCellId": "cell:mechanic:observe-governed-http-transport-failure.operation.1",
+      "cells": [
+        {
+          "cellId": "cell:mechanic:observe-governed-http-transport-failure.operation.1",
+          "altitude": "mechanic",
+          "input": {
+            "dataType": "observe-governed-http-exchange-input.v1"
+          },
+          "responsibility": {
+            "responsibilityId": "responsibility:cell:mechanic:observe-governed-http-transport-failure.operation.1",
+            "statement": "Execute operation:sda-authority-transformation-port.v1"
+          },
+          "result": {
+            "dataType": "governed-http-exchange-evidence.v1",
+            "variants": [
+              "cancelled",
+              "failure",
+              "success"
+            ]
+          },
+          "mechanicProjectionRef": "circuit:mechanic:cell:mechanic:observe-governed-http-transport-failure.operation.1",
+          "providerProjectionRefs": []
+        }
+      ],
+      "routes": [
+        {
+          "fromCellId": "cell:mechanic:observe-governed-http-transport-failure.operation.1",
+          "toCellId": "cell:scenario:observe-governed-http-transport-failure",
+          "product": "governed-http-exchange-evidence.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return"
+        }
+      ]
+    },
+    {
+      "eventExecutionProjectionType": "event-execution-projection.v1",
+      "projectionId": "projection:observe-non-success-http-response",
+      "eventId": "event:observe-non-success-http-response",
+      "actionId": "observe-non-success-http-response.v1",
+      "parentScenarioId": "observe-non-success-http-response",
+      "input": {
+        "dataType": "observe-governed-http-exchange-input.v1"
+      },
+      "result": {
+        "dataType": "governed-http-exchange-evidence.v1"
+      },
+      "rootCellId": "cell:mechanic:observe-non-success-http-response.operation.1",
+      "cells": [
+        {
+          "cellId": "cell:mechanic:observe-non-success-http-response.operation.1",
+          "altitude": "mechanic",
+          "input": {
+            "dataType": "observe-governed-http-exchange-input.v1"
+          },
+          "responsibility": {
+            "responsibilityId": "responsibility:cell:mechanic:observe-non-success-http-response.operation.1",
+            "statement": "Execute operation:sda-authority-transformation-port.v1"
+          },
+          "result": {
+            "dataType": "governed-http-exchange-evidence.v1",
+            "variants": [
+              "cancelled",
+              "failure",
+              "success"
+            ]
+          },
+          "mechanicProjectionRef": "circuit:mechanic:cell:mechanic:observe-non-success-http-response.operation.1",
+          "providerProjectionRefs": []
+        }
+      ],
+      "routes": [
+        {
+          "fromCellId": "cell:mechanic:observe-non-success-http-response.operation.1",
+          "toCellId": "cell:scenario:observe-non-success-http-response",
+          "product": "governed-http-exchange-evidence.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return"
+        }
+      ]
+    },
+    {
+      "eventExecutionProjectionType": "event-execution-projection.v1",
+      "projectionId": "projection:prove-http-secret-redaction",
+      "eventId": "event:prove-http-secret-redaction",
+      "actionId": "prove-http-secret-redaction.v1",
+      "parentScenarioId": "prove-http-secret-redaction",
+      "input": {
+        "dataType": "observe-governed-http-exchange-input.v1"
+      },
+      "result": {
+        "dataType": "governed-http-exchange-evidence.v1"
+      },
+      "rootCellId": "cell:mechanic:prove-http-secret-redaction.operation.1",
+      "cells": [
+        {
+          "cellId": "cell:mechanic:prove-http-secret-redaction.operation.1",
+          "altitude": "mechanic",
+          "input": {
+            "dataType": "observe-governed-http-exchange-input.v1"
+          },
+          "responsibility": {
+            "responsibilityId": "responsibility:cell:mechanic:prove-http-secret-redaction.operation.1",
+            "statement": "Execute operation:sda-authority-transformation-port.v1"
+          },
+          "result": {
+            "dataType": "governed-http-exchange-evidence.v1",
+            "variants": [
+              "cancelled",
+              "failure",
+              "success"
+            ]
+          },
+          "mechanicProjectionRef": "circuit:mechanic:cell:mechanic:prove-http-secret-redaction.operation.1",
+          "providerProjectionRefs": []
+        }
+      ],
+      "routes": [
+        {
+          "fromCellId": "cell:mechanic:prove-http-secret-redaction.operation.1",
+          "toCellId": "cell:scenario:prove-http-secret-redaction",
+          "product": "governed-http-exchange-evidence.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return"
+        }
+      ]
+    },
+    {
+      "eventExecutionProjectionType": "event-execution-projection.v1",
+      "projectionId": "projection:prove-single-http-exchange-authority",
+      "eventId": "event:prove-single-http-exchange-authority",
+      "actionId": "prove-single-http-exchange-authority.v1",
+      "parentScenarioId": "prove-single-http-exchange-authority",
+      "input": {
+        "dataType": "observe-governed-http-exchange-input.v1"
+      },
+      "result": {
+        "dataType": "governed-http-exchange-evidence.v1"
+      },
+      "rootCellId": "cell:mechanic:prove-single-http-exchange-authority.operation.1",
+      "cells": [
+        {
+          "cellId": "cell:mechanic:prove-single-http-exchange-authority.operation.1",
+          "altitude": "mechanic",
+          "input": {
+            "dataType": "observe-governed-http-exchange-input.v1"
+          },
+          "responsibility": {
+            "responsibilityId": "responsibility:cell:mechanic:prove-single-http-exchange-authority.operation.1",
+            "statement": "Execute operation:sda-authority-transformation-port.v1"
+          },
+          "result": {
+            "dataType": "governed-http-exchange-evidence.v1",
+            "variants": [
+              "cancelled",
+              "failure",
+              "success"
+            ]
+          },
+          "mechanicProjectionRef": "circuit:mechanic:cell:mechanic:prove-single-http-exchange-authority.operation.1",
+          "providerProjectionRefs": []
+        }
+      ],
+      "routes": [
+        {
+          "fromCellId": "cell:mechanic:prove-single-http-exchange-authority.operation.1",
+          "toCellId": "cell:scenario:prove-single-http-exchange-authority",
+          "product": "governed-http-exchange-evidence.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return"
+        }
+      ]
+    },
+    {
+      "eventExecutionProjectionType": "event-execution-projection.v1",
+      "projectionId": "projection:reject-http-endpoint-outside-authority",
+      "eventId": "event:reject-http-endpoint-outside-authority",
+      "actionId": "reject-http-endpoint-outside-authority.v1",
+      "parentScenarioId": "reject-http-endpoint-outside-authority",
+      "input": {
+        "dataType": "observe-governed-http-exchange-input.v1"
+      },
+      "result": {
+        "dataType": "governed-http-exchange-evidence.v1"
+      },
+      "rootCellId": "cell:mechanic:reject-http-endpoint-outside-authority.operation.1",
+      "cells": [
+        {
+          "cellId": "cell:mechanic:reject-http-endpoint-outside-authority.operation.1",
+          "altitude": "mechanic",
+          "input": {
+            "dataType": "observe-governed-http-exchange-input.v1"
+          },
+          "responsibility": {
+            "responsibilityId": "responsibility:cell:mechanic:reject-http-endpoint-outside-authority.operation.1",
+            "statement": "Execute operation:sda-authority-transformation-port.v1"
+          },
+          "result": {
+            "dataType": "governed-http-exchange-evidence.v1",
+            "variants": [
+              "cancelled",
+              "failure",
+              "success"
+            ]
+          },
+          "mechanicProjectionRef": "circuit:mechanic:cell:mechanic:reject-http-endpoint-outside-authority.operation.1",
+          "providerProjectionRefs": []
+        }
+      ],
+      "routes": [
+        {
+          "fromCellId": "cell:mechanic:reject-http-endpoint-outside-authority.operation.1",
+          "toCellId": "cell:scenario:reject-http-endpoint-outside-authority",
+          "product": "governed-http-exchange-evidence.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return"
+        }
+      ]
+    },
+    {
+      "eventExecutionProjectionType": "event-execution-projection.v1",
+      "projectionId": "projection:reject-invalid-http-credential-binding",
+      "eventId": "event:reject-invalid-http-credential-binding",
+      "actionId": "reject-invalid-http-credential-binding.v1",
+      "parentScenarioId": "reject-invalid-http-credential-binding",
+      "input": {
+        "dataType": "observe-governed-http-exchange-input.v1"
+      },
+      "result": {
+        "dataType": "governed-http-exchange-evidence.v1"
+      },
+      "rootCellId": "cell:mechanic:reject-invalid-http-credential-binding.operation.1",
+      "cells": [
+        {
+          "cellId": "cell:mechanic:reject-invalid-http-credential-binding.operation.1",
+          "altitude": "mechanic",
+          "input": {
+            "dataType": "observe-governed-http-exchange-input.v1"
+          },
+          "responsibility": {
+            "responsibilityId": "responsibility:cell:mechanic:reject-invalid-http-credential-binding.operation.1",
+            "statement": "Execute operation:sda-authority-transformation-port.v1"
+          },
+          "result": {
+            "dataType": "governed-http-exchange-evidence.v1",
+            "variants": [
+              "cancelled",
+              "failure",
+              "success"
+            ]
+          },
+          "mechanicProjectionRef": "circuit:mechanic:cell:mechanic:reject-invalid-http-credential-binding.operation.1",
+          "providerProjectionRefs": []
+        }
+      ],
+      "routes": [
+        {
+          "fromCellId": "cell:mechanic:reject-invalid-http-credential-binding.operation.1",
+          "toCellId": "cell:scenario:reject-invalid-http-credential-binding",
+          "product": "governed-http-exchange-evidence.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return"
+        }
+      ]
+    },
+    {
+      "eventExecutionProjectionType": "event-execution-projection.v1",
+      "projectionId": "projection:reject-oversized-http-response",
+      "eventId": "event:reject-oversized-http-response",
+      "actionId": "reject-oversized-http-response.v1",
+      "parentScenarioId": "reject-oversized-http-response",
+      "input": {
+        "dataType": "observe-governed-http-exchange-input.v1"
+      },
+      "result": {
+        "dataType": "governed-http-exchange-evidence.v1"
+      },
+      "rootCellId": "cell:mechanic:reject-oversized-http-response.operation.1",
+      "cells": [
+        {
+          "cellId": "cell:mechanic:reject-oversized-http-response.operation.1",
+          "altitude": "mechanic",
+          "input": {
+            "dataType": "observe-governed-http-exchange-input.v1"
+          },
+          "responsibility": {
+            "responsibilityId": "responsibility:cell:mechanic:reject-oversized-http-response.operation.1",
+            "statement": "Execute operation:sda-authority-transformation-port.v1"
+          },
+          "result": {
+            "dataType": "governed-http-exchange-evidence.v1",
+            "variants": [
+              "cancelled",
+              "failure",
+              "success"
+            ]
+          },
+          "mechanicProjectionRef": "circuit:mechanic:cell:mechanic:reject-oversized-http-response.operation.1",
+          "providerProjectionRefs": []
+        }
+      ],
+      "routes": [
+        {
+          "fromCellId": "cell:mechanic:reject-oversized-http-response.operation.1",
+          "toCellId": "cell:scenario:reject-oversized-http-response",
+          "product": "governed-http-exchange-evidence.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return"
+        }
+      ]
+    }
+  ],
+  "mechanicCircuits": [
+    {
+      "mechanicProjectionType": "mechanic-circuit.v1",
+      "projectionId": "circuit:mechanic:cell:mechanic:cancel-governed-http-exchange.operation.1",
+      "parentExecutionCellId": "cell:mechanic:cancel-governed-http-exchange.operation.1",
+      "rootCellId": "cell:mechanic:cancel-governed-http-exchange.operation.1:expression",
+      "cells": [
+        {
+          "cellId": "cell:mechanic:cancel-governed-http-exchange.operation.1:expression",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "path",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        }
+      ],
+      "routes": [
+        {
+          "fromCellId": "cell:mechanic:cancel-governed-http-exchange.operation.1:expression",
+          "toCellId": "cell:mechanic:cancel-governed-http-exchange.operation.1",
+          "product": "governed-http-exchange-evidence.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return"
+        }
+      ]
+    },
+    {
+      "mechanicProjectionType": "mechanic-circuit.v1",
+      "projectionId": "circuit:mechanic:cell:mechanic:observe-governed-http-timeout.operation.1",
+      "parentExecutionCellId": "cell:mechanic:observe-governed-http-timeout.operation.1",
+      "rootCellId": "cell:mechanic:observe-governed-http-timeout.operation.1:expression",
+      "cells": [
+        {
+          "cellId": "cell:mechanic:observe-governed-http-timeout.operation.1:expression",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "path",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        }
+      ],
+      "routes": [
+        {
+          "fromCellId": "cell:mechanic:observe-governed-http-timeout.operation.1:expression",
+          "toCellId": "cell:mechanic:observe-governed-http-timeout.operation.1",
+          "product": "governed-http-exchange-evidence.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return"
+        }
+      ]
+    },
+    {
+      "mechanicProjectionType": "mechanic-circuit.v1",
+      "projectionId": "circuit:mechanic:cell:mechanic:observe-governed-http-transport-failure.operation.1",
+      "parentExecutionCellId": "cell:mechanic:observe-governed-http-transport-failure.operation.1",
+      "rootCellId": "cell:mechanic:observe-governed-http-transport-failure.operation.1:expression",
+      "cells": [
+        {
+          "cellId": "cell:mechanic:observe-governed-http-transport-failure.operation.1:expression",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "path",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        }
+      ],
+      "routes": [
+        {
+          "fromCellId": "cell:mechanic:observe-governed-http-transport-failure.operation.1:expression",
+          "toCellId": "cell:mechanic:observe-governed-http-transport-failure.operation.1",
+          "product": "governed-http-exchange-evidence.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return"
+        }
+      ]
+    },
+    {
+      "mechanicProjectionType": "mechanic-circuit.v1",
+      "projectionId": "circuit:mechanic:cell:mechanic:observe-non-success-http-response.operation.1",
+      "parentExecutionCellId": "cell:mechanic:observe-non-success-http-response.operation.1",
+      "rootCellId": "cell:mechanic:observe-non-success-http-response.operation.1:expression",
+      "cells": [
+        {
+          "cellId": "cell:mechanic:observe-non-success-http-response.operation.1:expression",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "path",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        }
+      ],
+      "routes": [
+        {
+          "fromCellId": "cell:mechanic:observe-non-success-http-response.operation.1:expression",
+          "toCellId": "cell:mechanic:observe-non-success-http-response.operation.1",
+          "product": "governed-http-exchange-evidence.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return"
+        }
+      ]
+    },
+    {
+      "mechanicProjectionType": "mechanic-circuit.v1",
+      "projectionId": "circuit:mechanic:cell:mechanic:prove-http-secret-redaction.operation.1",
+      "parentExecutionCellId": "cell:mechanic:prove-http-secret-redaction.operation.1",
+      "rootCellId": "cell:mechanic:prove-http-secret-redaction.operation.1:expression",
+      "cells": [
+        {
+          "cellId": "cell:mechanic:prove-http-secret-redaction.operation.1:expression",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "path",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        }
+      ],
+      "routes": [
+        {
+          "fromCellId": "cell:mechanic:prove-http-secret-redaction.operation.1:expression",
+          "toCellId": "cell:mechanic:prove-http-secret-redaction.operation.1",
+          "product": "governed-http-exchange-evidence.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return"
+        }
+      ]
+    },
+    {
+      "mechanicProjectionType": "mechanic-circuit.v1",
+      "projectionId": "circuit:mechanic:cell:mechanic:prove-single-http-exchange-authority.operation.1",
+      "parentExecutionCellId": "cell:mechanic:prove-single-http-exchange-authority.operation.1",
+      "rootCellId": "cell:mechanic:prove-single-http-exchange-authority.operation.1:expression",
+      "cells": [
+        {
+          "cellId": "cell:mechanic:prove-single-http-exchange-authority.operation.1:expression",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "path",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        }
+      ],
+      "routes": [
+        {
+          "fromCellId": "cell:mechanic:prove-single-http-exchange-authority.operation.1:expression",
+          "toCellId": "cell:mechanic:prove-single-http-exchange-authority.operation.1",
+          "product": "governed-http-exchange-evidence.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return"
+        }
+      ]
+    },
+    {
+      "mechanicProjectionType": "mechanic-circuit.v1",
+      "projectionId": "circuit:mechanic:cell:mechanic:reject-http-endpoint-outside-authority.operation.1",
+      "parentExecutionCellId": "cell:mechanic:reject-http-endpoint-outside-authority.operation.1",
+      "rootCellId": "cell:mechanic:reject-http-endpoint-outside-authority.operation.1:expression",
+      "cells": [
+        {
+          "cellId": "cell:mechanic:reject-http-endpoint-outside-authority.operation.1:expression",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "path",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        }
+      ],
+      "routes": [
+        {
+          "fromCellId": "cell:mechanic:reject-http-endpoint-outside-authority.operation.1:expression",
+          "toCellId": "cell:mechanic:reject-http-endpoint-outside-authority.operation.1",
+          "product": "governed-http-exchange-evidence.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return"
+        }
+      ]
+    },
+    {
+      "mechanicProjectionType": "mechanic-circuit.v1",
+      "projectionId": "circuit:mechanic:cell:mechanic:reject-invalid-http-credential-binding.operation.1",
+      "parentExecutionCellId": "cell:mechanic:reject-invalid-http-credential-binding.operation.1",
+      "rootCellId": "cell:mechanic:reject-invalid-http-credential-binding.operation.1:expression",
+      "cells": [
+        {
+          "cellId": "cell:mechanic:reject-invalid-http-credential-binding.operation.1:expression",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "path",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        }
+      ],
+      "routes": [
+        {
+          "fromCellId": "cell:mechanic:reject-invalid-http-credential-binding.operation.1:expression",
+          "toCellId": "cell:mechanic:reject-invalid-http-credential-binding.operation.1",
+          "product": "governed-http-exchange-evidence.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return"
+        }
+      ]
+    },
+    {
+      "mechanicProjectionType": "mechanic-circuit.v1",
+      "projectionId": "circuit:mechanic:cell:mechanic:reject-oversized-http-response.operation.1",
+      "parentExecutionCellId": "cell:mechanic:reject-oversized-http-response.operation.1",
+      "rootCellId": "cell:mechanic:reject-oversized-http-response.operation.1:expression",
+      "cells": [
+        {
+          "cellId": "cell:mechanic:reject-oversized-http-response.operation.1:expression",
+          "input": {
+            "dataType": "semantic-value.v1"
+          },
+          "mechanicId": "path",
+          "result": {
+            "dataType": "semantic-value.v1",
+            "variants": [
+              "value"
+            ]
+          }
+        }
+      ],
+      "routes": [
+        {
+          "fromCellId": "cell:mechanic:reject-oversized-http-response.operation.1:expression",
+          "toCellId": "cell:mechanic:reject-oversized-http-response.operation.1",
+          "product": "governed-http-exchange-evidence.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return"
+        }
+      ]
+    }
+  ],
+  "providerCircuits": [
+    {
+      "providerCircuitType": "provider-circuit.v1",
+      "projectionId": "circuit:provider:cell:mechanic:observe-governed-http-exchange.operation.1",
+      "parentExecutionCellId": "cell:scenario:observe-governed-http-exchange",
+      "rootCellId": "cell:mechanic:observe-governed-http-exchange.operation.1",
+      "cells": [
+        {
+          "cellId": "cell:mechanic:observe-governed-http-exchange.operation.1",
+          "physicalInput": {
+            "dataType": "observe-governed-http-exchange-input.v1"
+          },
+          "nativeOperation": {
+            "operationId": "operation:sda-governed-http-exchange-port.v1",
+            "boundary": "observe-governed-http-exchange-port",
+            "effect": "sda-governed-http-exchange-port.v1"
+          },
+          "physicalResult": {
+            "dataType": "semantic-value.v1"
+          }
+        }
+      ],
+      "routes": [
+        {
+          "fromCellId": "cell:mechanic:observe-governed-http-exchange.operation.1",
+          "toCellId": "cell:mechanic:observe-governed-http-exchange.operation.2",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        },
+        {
+          "fromCellId": "cell:physical:observe-governed-http-exchange.operation.1",
+          "toCellId": "cell:mechanic:observe-governed-http-exchange.operation.1",
+          "product": "semantic-value.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return"
+        }
+      ]
+    },
+    {
+      "providerCircuitType": "provider-circuit.v1",
+      "projectionId": "circuit:provider:cell:physical:observe-governed-http-exchange.operation.1",
+      "parentExecutionCellId": "cell:provider:observe-governed-http-exchange.operation.1",
+      "rootCellId": "cell:physical:observe-governed-http-exchange.operation.1",
+      "cells": [
+        {
+          "cellId": "cell:physical:observe-governed-http-exchange.operation.1",
+          "physicalInput": {
+            "dataType": "semantic-value.v1"
+          },
+          "nativeOperation": {
+            "operationId": "physical:sda-governed-http-exchange-port.v1",
+            "boundary": "observe-governed-http-exchange-port",
+            "effect": "sda-governed-http-exchange-port.v1"
+          },
+          "physicalResult": {
+            "dataType": "semantic-value.v1"
+          }
+        }
+      ],
+      "routes": [
+        {
+          "fromCellId": "cell:physical:observe-governed-http-exchange.operation.1",
+          "toCellId": "cell:mechanic:observe-governed-http-exchange.operation.1",
+          "product": "semantic-value.v1",
+          "semanticProgress": "terminating",
+          "edgeKind": "return"
+        },
+        {
+          "fromCellId": "cell:provider:observe-governed-http-exchange.operation.1",
+          "toCellId": "cell:physical:observe-governed-http-exchange.operation.1",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        }
+      ]
+    },
+    {
+      "providerCircuitType": "provider-circuit.v1",
+      "projectionId": "circuit:provider:cell:provider:observe-governed-http-exchange.operation.1",
+      "parentExecutionCellId": "cell:mechanic:observe-governed-http-exchange.operation.1",
+      "rootCellId": "cell:provider:observe-governed-http-exchange.operation.1",
+      "cells": [
+        {
+          "cellId": "cell:provider:observe-governed-http-exchange.operation.1",
+          "physicalInput": {
+            "dataType": "observe-governed-http-exchange-input.v1"
+          },
+          "nativeOperation": {
+            "operationId": "provider:sda-governed-http-exchange-port.v1",
+            "boundary": "observe-governed-http-exchange-port",
+            "effect": "sda-governed-http-exchange-port.v1"
+          },
+          "physicalResult": {
+            "dataType": "semantic-value.v1"
+          }
+        }
+      ],
+      "routes": [
+        {
+          "fromCellId": "cell:provider:observe-governed-http-exchange.operation.1",
+          "toCellId": "cell:physical:observe-governed-http-exchange.operation.1",
+          "product": "semantic-value.v1",
+          "semanticProgress": "narrowing",
+          "edgeKind": "sequence"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "scenarioId": "execute-projected-model-provider-attempt",
+  "input": {
+    "inputId": "projected-model-provider-attempt-plan",
+    "contract": {
+      "contractId": "execute-projected-model-provider-attempt-input.v1"
+    }
+  },
+  "event": {
+    "eventId": "projected-model-provider-attempt-requested",
+    "executionAuthorityId": "execute-projected-model-provider-attempt.v1"
+  },
+  "outcome": {
+    "outcomeId": "projected-model-provider-attempt-evidence",
+    "contract": {
+      "contractId": "projected-model-provider-attempt-evidence.v1"
+    },
+    "experience": {
+      "statement": "one normalized credential-free attempt receipt preserves exact provider and model identity, request and response hashes, usage, timing, native transport testimony, complete nested lineage, one exchange at most, and no retry, provider switch, repair, acceptance, or promotion claim"
+    },
+    "terminal": true
+  },
+  "gherkin": {
+    "given": {
+      "semanticRef": "execute-projected-model-provider-attempt.given",
+      "text": "one admitted provider-neutral request and one exact provider, model, adapter, endpoint, credential, protocol, effect, and evidence plan"
+    },
+    "when": {
+      "semanticRef": "execute-projected-model-provider-attempt.when",
+      "text": "the attempt is executed through projected protocol, representation, credential, and HTTP capabilities in one shared effect scope"
+    },
+    "then": {
+      "semanticRef": "execute-projected-model-provider-attempt.then",
+      "text": "one normalized credential-free attempt receipt preserves exact provider and model identity, request and response hashes, usage, timing, native transport testimony, complete nested lineage, one exchange at most, and no retry, provider switch, repair, acceptance, or promotion claim"
+    }
+  },
+  "name": "Execute one selected provider attempt through projected capabilities"
+}

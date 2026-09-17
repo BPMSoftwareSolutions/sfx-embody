@@ -1,0 +1,556 @@
+{
+  "catalogType": "execution-pattern-catalog.v1",
+  "patterns": [
+    {
+      "patternId": "decomposition:cell:mechanic:bind-external-credential-reference.operation.1",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:physical:bind-external-credential-reference.operation.1"
+      ],
+      "inputContractId": "bind-external-credential-reference-input.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:cell:mechanic:bind-external-credential-reference.operation.1"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:provider:bind-external-credential-reference.operation.1"
+        ],
+        "exitCellIds": [
+          "cell:physical:bind-external-credential-reference.operation.1"
+        ],
+        "returnBindingAuthorityId": "binding:return:cell:mechanic:bind-external-credential-reference.operation.1",
+        "descent": true
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:bind-external-credential-reference.operation.2",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:scenario:hold-missing-or-empty-external-credential"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:invoke-return:cell:mechanic:bind-external-credential-reference.operation.2"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:scenario:hold-missing-or-empty-external-credential"
+        ],
+        "exitCellIds": [
+          "cell:scenario:hold-missing-or-empty-external-credential"
+        ],
+        "returnBindingAuthorityId": "binding:invoke-return:cell:mechanic:bind-external-credential-reference.operation.2"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:bind-external-credential-reference.operation.3",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:scenario:reject-unauthorized-external-credential-reference"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:invoke-return:cell:mechanic:bind-external-credential-reference.operation.3"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:scenario:reject-unauthorized-external-credential-reference"
+        ],
+        "exitCellIds": [
+          "cell:scenario:reject-unauthorized-external-credential-reference"
+        ],
+        "returnBindingAuthorityId": "binding:invoke-return:cell:mechanic:bind-external-credential-reference.operation.3"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:bind-external-credential-reference.operation.4",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:scenario:reject-mismatched-credential-invocation-identity"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:invoke-return:cell:mechanic:bind-external-credential-reference.operation.4"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:scenario:reject-mismatched-credential-invocation-identity"
+        ],
+        "exitCellIds": [
+          "cell:scenario:reject-mismatched-credential-invocation-identity"
+        ],
+        "returnBindingAuthorityId": "binding:invoke-return:cell:mechanic:bind-external-credential-reference.operation.4"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:bind-external-credential-reference.operation.5",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:scenario:reject-stale-or-replayed-credential-binding"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:invoke-return:cell:mechanic:bind-external-credential-reference.operation.5"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:scenario:reject-stale-or-replayed-credential-binding"
+        ],
+        "exitCellIds": [
+          "cell:scenario:reject-stale-or-replayed-credential-binding"
+        ],
+        "returnBindingAuthorityId": "binding:invoke-return:cell:mechanic:bind-external-credential-reference.operation.5"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:bind-external-credential-reference.operation.6",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:scenario:reject-embedded-credential-material"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:invoke-return:cell:mechanic:bind-external-credential-reference.operation.6"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:scenario:reject-embedded-credential-material"
+        ],
+        "exitCellIds": [
+          "cell:scenario:reject-embedded-credential-material"
+        ],
+        "returnBindingAuthorityId": "binding:invoke-return:cell:mechanic:bind-external-credential-reference.operation.6"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:bind-external-credential-reference.operation.7",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:scenario:prove-external-credential-non-disclosure"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "external-credential-binding-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:invoke-return:cell:mechanic:bind-external-credential-reference.operation.7"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:scenario:prove-external-credential-non-disclosure"
+        ],
+        "exitCellIds": [
+          "cell:scenario:prove-external-credential-non-disclosure"
+        ],
+        "returnBindingAuthorityId": "binding:invoke-return:cell:mechanic:bind-external-credential-reference.operation.7"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:hold-missing-or-empty-external-credential.operation.1",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:hold-missing-or-empty-external-credential.operation.1:expression"
+      ],
+      "inputContractId": "bind-external-credential-reference-input.v1",
+      "outputContractId": "external-credential-binding-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:cell:mechanic:hold-missing-or-empty-external-credential.operation.1"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:hold-missing-or-empty-external-credential.operation.1:expression"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:hold-missing-or-empty-external-credential.operation.1:expression"
+        ],
+        "returnBindingAuthorityId": "binding:return:cell:mechanic:hold-missing-or-empty-external-credential.operation.1"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:prove-external-credential-non-disclosure.operation.1",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:prove-external-credential-non-disclosure.operation.1:expression"
+      ],
+      "inputContractId": "bind-external-credential-reference-input.v1",
+      "outputContractId": "external-credential-binding-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:cell:mechanic:prove-external-credential-non-disclosure.operation.1"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:prove-external-credential-non-disclosure.operation.1:expression"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:prove-external-credential-non-disclosure.operation.1:expression"
+        ],
+        "returnBindingAuthorityId": "binding:return:cell:mechanic:prove-external-credential-non-disclosure.operation.1"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:reject-embedded-credential-material.operation.1",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:reject-embedded-credential-material.operation.1:expression"
+      ],
+      "inputContractId": "bind-external-credential-reference-input.v1",
+      "outputContractId": "external-credential-binding-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:cell:mechanic:reject-embedded-credential-material.operation.1"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:reject-embedded-credential-material.operation.1:expression"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:reject-embedded-credential-material.operation.1:expression"
+        ],
+        "returnBindingAuthorityId": "binding:return:cell:mechanic:reject-embedded-credential-material.operation.1"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:reject-mismatched-credential-invocation-identity.operation.1",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:reject-mismatched-credential-invocation-identity.operation.1:expression"
+      ],
+      "inputContractId": "bind-external-credential-reference-input.v1",
+      "outputContractId": "external-credential-binding-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:cell:mechanic:reject-mismatched-credential-invocation-identity.operation.1"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:reject-mismatched-credential-invocation-identity.operation.1:expression"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:reject-mismatched-credential-invocation-identity.operation.1:expression"
+        ],
+        "returnBindingAuthorityId": "binding:return:cell:mechanic:reject-mismatched-credential-invocation-identity.operation.1"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:reject-stale-or-replayed-credential-binding.operation.1",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:reject-stale-or-replayed-credential-binding.operation.1:expression"
+      ],
+      "inputContractId": "bind-external-credential-reference-input.v1",
+      "outputContractId": "external-credential-binding-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:cell:mechanic:reject-stale-or-replayed-credential-binding.operation.1"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:reject-stale-or-replayed-credential-binding.operation.1:expression"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:reject-stale-or-replayed-credential-binding.operation.1:expression"
+        ],
+        "returnBindingAuthorityId": "binding:return:cell:mechanic:reject-stale-or-replayed-credential-binding.operation.1"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:mechanic:reject-unauthorized-external-credential-reference.operation.1",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:reject-unauthorized-external-credential-reference.operation.1:expression"
+      ],
+      "inputContractId": "bind-external-credential-reference-input.v1",
+      "outputContractId": "external-credential-binding-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:cell:mechanic:reject-unauthorized-external-credential-reference.operation.1"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:reject-unauthorized-external-credential-reference.operation.1:expression"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:reject-unauthorized-external-credential-reference.operation.1:expression"
+        ],
+        "returnBindingAuthorityId": "binding:return:cell:mechanic:reject-unauthorized-external-credential-reference.operation.1"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:scenario:bind-external-credential-reference",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:bind-external-credential-reference.operation.7"
+      ],
+      "inputContractId": "bind-external-credential-reference-input.v1",
+      "outputContractId": "external-credential-binding-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:bind-external-credential-reference"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:bind-external-credential-reference.operation.1"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:bind-external-credential-reference.operation.7"
+        ],
+        "returnBindingAuthorityId": "binding:return:bind-external-credential-reference"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:scenario:hold-missing-or-empty-external-credential",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:hold-missing-or-empty-external-credential.operation.1"
+      ],
+      "inputContractId": "bind-external-credential-reference-input.v1",
+      "outputContractId": "external-credential-binding-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:hold-missing-or-empty-external-credential"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:hold-missing-or-empty-external-credential.operation.1"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:hold-missing-or-empty-external-credential.operation.1"
+        ],
+        "returnBindingAuthorityId": "binding:return:hold-missing-or-empty-external-credential"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:scenario:prove-external-credential-non-disclosure",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:prove-external-credential-non-disclosure.operation.1"
+      ],
+      "inputContractId": "bind-external-credential-reference-input.v1",
+      "outputContractId": "external-credential-binding-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:prove-external-credential-non-disclosure"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:prove-external-credential-non-disclosure.operation.1"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:prove-external-credential-non-disclosure.operation.1"
+        ],
+        "returnBindingAuthorityId": "binding:return:prove-external-credential-non-disclosure"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:scenario:reject-embedded-credential-material",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:reject-embedded-credential-material.operation.1"
+      ],
+      "inputContractId": "bind-external-credential-reference-input.v1",
+      "outputContractId": "external-credential-binding-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:reject-embedded-credential-material"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:reject-embedded-credential-material.operation.1"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:reject-embedded-credential-material.operation.1"
+        ],
+        "returnBindingAuthorityId": "binding:return:reject-embedded-credential-material"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:scenario:reject-mismatched-credential-invocation-identity",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:reject-mismatched-credential-invocation-identity.operation.1"
+      ],
+      "inputContractId": "bind-external-credential-reference-input.v1",
+      "outputContractId": "external-credential-binding-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:reject-mismatched-credential-invocation-identity"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:reject-mismatched-credential-invocation-identity.operation.1"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:reject-mismatched-credential-invocation-identity.operation.1"
+        ],
+        "returnBindingAuthorityId": "binding:return:reject-mismatched-credential-invocation-identity"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:scenario:reject-stale-or-replayed-credential-binding",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:reject-stale-or-replayed-credential-binding.operation.1"
+      ],
+      "inputContractId": "bind-external-credential-reference-input.v1",
+      "outputContractId": "external-credential-binding-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:reject-stale-or-replayed-credential-binding"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:reject-stale-or-replayed-credential-binding.operation.1"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:reject-stale-or-replayed-credential-binding.operation.1"
+        ],
+        "returnBindingAuthorityId": "binding:return:reject-stale-or-replayed-credential-binding"
+      }
+    },
+    {
+      "patternId": "decomposition:cell:scenario:reject-unauthorized-external-credential-reference",
+      "patternType": "decomposition",
+      "participantCellIds": [
+        "cell:mechanic:reject-unauthorized-external-credential-reference.operation.1"
+      ],
+      "inputContractId": "bind-external-credential-reference-input.v1",
+      "outputContractId": "external-credential-binding-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "binding:return:reject-unauthorized-external-credential-reference"
+      ],
+      "decomposition": {
+        "entryCellIds": [
+          "cell:mechanic:reject-unauthorized-external-credential-reference.operation.1"
+        ],
+        "exitCellIds": [
+          "cell:mechanic:reject-unauthorized-external-credential-reference.operation.1"
+        ],
+        "returnBindingAuthorityId": "binding:return:reject-unauthorized-external-credential-reference"
+      }
+    },
+    {
+      "patternId": "edge:sequence:bind-external-credential-reference:1",
+      "patternType": "sequence",
+      "participantCellIds": [
+        "cell:mechanic:bind-external-credential-reference.operation.1",
+        "cell:mechanic:bind-external-credential-reference.operation.2"
+      ],
+      "inputContractId": "bind-external-credential-reference-input.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "edge:sequence:bind-external-credential-reference:1"
+      ]
+    },
+    {
+      "patternId": "edge:sequence:bind-external-credential-reference:2",
+      "patternType": "sequence",
+      "participantCellIds": [
+        "cell:mechanic:bind-external-credential-reference.operation.2",
+        "cell:mechanic:bind-external-credential-reference.operation.3"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "edge:sequence:bind-external-credential-reference:2"
+      ]
+    },
+    {
+      "patternId": "edge:sequence:bind-external-credential-reference:3",
+      "patternType": "sequence",
+      "participantCellIds": [
+        "cell:mechanic:bind-external-credential-reference.operation.3",
+        "cell:mechanic:bind-external-credential-reference.operation.4"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "edge:sequence:bind-external-credential-reference:3"
+      ]
+    },
+    {
+      "patternId": "edge:sequence:bind-external-credential-reference:4",
+      "patternType": "sequence",
+      "participantCellIds": [
+        "cell:mechanic:bind-external-credential-reference.operation.4",
+        "cell:mechanic:bind-external-credential-reference.operation.5"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "edge:sequence:bind-external-credential-reference:4"
+      ]
+    },
+    {
+      "patternId": "edge:sequence:bind-external-credential-reference:5",
+      "patternType": "sequence",
+      "participantCellIds": [
+        "cell:mechanic:bind-external-credential-reference.operation.5",
+        "cell:mechanic:bind-external-credential-reference.operation.6"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "semantic-value.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "edge:sequence:bind-external-credential-reference:5"
+      ]
+    },
+    {
+      "patternId": "edge:sequence:bind-external-credential-reference:6",
+      "patternType": "sequence",
+      "participantCellIds": [
+        "cell:mechanic:bind-external-credential-reference.operation.6",
+        "cell:mechanic:bind-external-credential-reference.operation.7"
+      ],
+      "inputContractId": "semantic-value.v1",
+      "outputContractId": "external-credential-binding-evidence.v1",
+      "decisions": [],
+      "invariants": [],
+      "dataRefs": [
+        "edge:sequence:bind-external-credential-reference:6"
+      ]
+    }
+  ]
+}

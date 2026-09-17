@@ -1,0 +1,251 @@
+{
+  "authorityType": "consumer-contract-authorities.v1",
+  "contracts": {
+    "execute-governed-model-invocation-input.v1": {
+      "schemaRef": "execute-governed-model-invocation-input.v1.schema.json",
+      "schemaId": "https://schemas.agentic-harness.local/contracts/input.schema.json",
+      "schemaDigest": "9c4223f8b80bd0977103740186e570810db8ff7a907370010b1a9ca3abe4d978",
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "https://schemas.agentic-harness.local/contracts/input.schema.json",
+        "type": "object",
+        "anyOf": [
+          {
+            "type": "object",
+            "required": [
+              "contractId",
+              "payload"
+            ],
+            "properties": {
+              "contractId": {
+                "const": "execute-governed-model-invocation-input.v1"
+              },
+              "payload": {
+                "type": "object",
+                "required": [
+                  "attemptPlan"
+                ],
+                "properties": {
+                  "attemptPlan": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "contractId",
+                      "payload"
+                    ],
+                    "properties": {
+                      "contractId": {
+                        "const": "execute-projected-model-provider-attempt-input.v1"
+                      },
+                      "payload": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "requestId",
+                          "invocationIdentity",
+                          "providerAuthorityId",
+                          "providerKind",
+                          "resolvedModel",
+                          "adapterIdentity",
+                          "protocolProjectionIdentity",
+                          "protocolProjectionRequest",
+                          "credentialReference",
+                          "endpointAuthorityDigest",
+                          "endpointUrl",
+                          "responseFormat",
+                          "timeoutMilliseconds",
+                          "cancellationScopeReference",
+                          "maxResponseBytes",
+                          "allowedResponseHeaders",
+                          "requestLineage"
+                        ],
+                        "properties": {
+                          "requestId": {
+                            "type": "string"
+                          },
+                          "invocationIdentity": {
+                            "type": "string"
+                          },
+                          "providerAuthorityId": {
+                            "type": "string"
+                          },
+                          "providerKind": {
+                            "type": "string"
+                          },
+                          "resolvedModel": {
+                            "type": "string"
+                          },
+                          "adapterIdentity": {
+                            "type": "string"
+                          },
+                          "protocolProjectionIdentity": {
+                            "type": "string"
+                          },
+                          "protocolProjectionRequest": {
+                            "type": "object"
+                          },
+                          "credentialReference": {
+                            "type": "string"
+                          },
+                          "endpointAuthorityDigest": {
+                            "type": "string",
+                            "pattern": "^sha256:[a-f0-9]{64}$"
+                          },
+                          "endpointUrl": {
+                            "type": "string"
+                          },
+                          "responseFormat": {
+                            "enum": [
+                              "text",
+                              "json"
+                            ]
+                          },
+                          "timeoutMilliseconds": {
+                            "type": "integer",
+                            "minimum": 1
+                          },
+                          "cancellationScopeReference": {
+                            "type": "string"
+                          },
+                          "maxResponseBytes": {
+                            "type": "integer",
+                            "minimum": 1
+                          },
+                          "allowedResponseHeaders": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "requestLineage": {
+                            "type": "array",
+                            "minItems": 1,
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "contractId",
+              "payload"
+            ],
+            "properties": {
+              "contractId": {
+                "const": "execute-governed-model-invocation-input.v1"
+              },
+              "payload": {
+                "type": "object",
+                "required": [
+                  "disposition",
+                  "provider",
+                  "model",
+                  "response",
+                  "attempts",
+                  "receipt"
+                ],
+                "properties": {
+                  "disposition": {
+                    "type": "string"
+                  },
+                  "provider": {
+                    "type": "string"
+                  },
+                  "model": {
+                    "type": "string"
+                  },
+                  "response": {
+                    "type": "object"
+                  },
+                  "attempts": {
+                    "type": "integer"
+                  },
+                  "receipt": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "disposition",
+              "provider",
+              "model",
+              "response",
+              "attempts",
+              "receipt"
+            ],
+            "properties": {
+              "disposition": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "model": {
+                "type": "string"
+              },
+              "response": {
+                "type": "object"
+              },
+              "attempts": {
+                "type": "integer"
+              },
+              "receipt": {
+                "type": "object"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "governed-model-invocation-evidence.v1": {
+      "schemaRef": "governed-model-invocation-evidence.v1.schema.json",
+      "schemaId": "https://schemas.agentic-harness.local/contracts/outcome.schema.json",
+      "schemaDigest": "4f0be857274af75f97d1c6741ab35fea2f1961d6d1d277b8ad7d769df740d120",
+      "schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": "https://schemas.agentic-harness.local/contracts/outcome.schema.json",
+        "type": "object",
+        "required": [
+          "disposition",
+          "provider",
+          "model",
+          "response",
+          "attempts",
+          "receipt"
+        ],
+        "properties": {
+          "disposition": {
+            "type": "string"
+          },
+          "provider": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string"
+          },
+          "response": {
+            "type": "object"
+          },
+          "attempts": {
+            "type": "integer"
+          },
+          "receipt": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  }
+}

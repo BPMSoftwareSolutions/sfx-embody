@@ -1,0 +1,38 @@
+{
+  "scenarioId": "reject-unsupported-provider-protocol",
+  "input": {
+    "inputId": "unsupported-provider-protocol-projection",
+    "contract": {
+      "contractId": "project-model-provider-protocol-input.v1"
+    }
+  },
+  "event": {
+    "eventId": "unsupported-provider-protocol-projection-requested",
+    "executionAuthorityId": "reject-unsupported-provider-protocol.v1"
+  },
+  "outcome": {
+    "outcomeId": "unsupported-provider-protocol-rejection",
+    "contract": {
+      "contractId": "model-provider-protocol-projection-evidence.v1"
+    },
+    "experience": {
+      "statement": "the unsupported provider or adapter is rejected with exact identities and no wire request, observation normalization, native module load, or network effect occurs"
+    },
+    "terminal": true
+  },
+  "gherkin": {
+    "given": {
+      "semanticRef": "reject-unsupported-provider-protocol.given",
+      "text": "a provider-neutral context bound to a provider kind or adapter identity with no admitted declarative adapter authority"
+    },
+    "when": {
+      "semanticRef": "reject-unsupported-provider-protocol.when",
+      "text": "adapter authority is evaluated"
+    },
+    "then": {
+      "semanticRef": "reject-unsupported-provider-protocol.then",
+      "text": "the unsupported provider or adapter is rejected with exact identities and no wire request, observation normalization, native module load, or network effect occurs"
+    }
+  },
+  "name": "Reject a provider kind or adapter identity absent from adapter authority"
+}

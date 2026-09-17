@@ -1,0 +1,2237 @@
+{
+  "documentType": "capability-execution-operations.v1",
+  "capabilityId": "execute-governed-model-invocation",
+  "operations": [
+    {
+      "operationId": "slot:cell:mechanic:cancel-model-invocation.operation.1",
+      "cellId": "cell:mechanic:cancel-model-invocation.operation.1",
+      "altitude": "mechanic",
+      "mechanicId": "sda-authority-transformation-port.v1",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "execute-governed-model-invocation/scenario/cancel-model-invocation/operation/cancel-model-invocation.operation.1",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-port",
+        "portId": "observe-cancel-model-invocation-port",
+        "binding": {
+          "portId": "observe-cancel-model-invocation-port",
+          "platformCapabilityId": "sda-authority-transformation-port.v1",
+          "configuration": {
+            "expression": {
+              "from": "input",
+              "op": "path",
+              "path": ""
+            }
+          }
+        }
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:classify-internal-model-execution-failure.operation.1",
+      "cellId": "cell:mechanic:classify-internal-model-execution-failure.operation.1",
+      "altitude": "mechanic",
+      "mechanicId": "sda-authority-transformation-port.v1",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "execute-governed-model-invocation/scenario/classify-internal-model-execution-failure/operation/classify-internal-model-execution-failure.operation.1",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-port",
+        "portId": "observe-classify-internal-model-execution-failure-port",
+        "binding": {
+          "portId": "observe-classify-internal-model-execution-failure-port",
+          "platformCapabilityId": "sda-authority-transformation-port.v1",
+          "configuration": {
+            "expression": {
+              "from": "input",
+              "op": "path",
+              "path": ""
+            }
+          }
+        }
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:classify-model-provider-authentication-failure.operation.1",
+      "cellId": "cell:mechanic:classify-model-provider-authentication-failure.operation.1",
+      "altitude": "mechanic",
+      "mechanicId": "sda-authority-transformation-port.v1",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "execute-governed-model-invocation/scenario/classify-model-provider-authentication-failure/operation/classify-model-provider-authentication-failure.operation.1",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-port",
+        "portId": "observe-classify-model-provider-authentication-failure-port",
+        "binding": {
+          "portId": "observe-classify-model-provider-authentication-failure-port",
+          "platformCapabilityId": "sda-authority-transformation-port.v1",
+          "configuration": {
+            "expression": {
+              "from": "input",
+              "op": "path",
+              "path": ""
+            }
+          }
+        }
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:classify-model-provider-timeout.operation.1",
+      "cellId": "cell:mechanic:classify-model-provider-timeout.operation.1",
+      "altitude": "mechanic",
+      "mechanicId": "sda-authority-transformation-port.v1",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "execute-governed-model-invocation/scenario/classify-model-provider-timeout/operation/classify-model-provider-timeout.operation.1",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-port",
+        "portId": "observe-classify-model-provider-timeout-port",
+        "binding": {
+          "portId": "observe-classify-model-provider-timeout-port",
+          "platformCapabilityId": "sda-authority-transformation-port.v1",
+          "configuration": {
+            "expression": {
+              "from": "input",
+              "op": "path",
+              "path": ""
+            }
+          }
+        }
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:classify-model-provider-unavailability.operation.1",
+      "cellId": "cell:mechanic:classify-model-provider-unavailability.operation.1",
+      "altitude": "mechanic",
+      "mechanicId": "sda-authority-transformation-port.v1",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "execute-governed-model-invocation/scenario/classify-model-provider-unavailability/operation/classify-model-provider-unavailability.operation.1",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-port",
+        "portId": "observe-classify-model-provider-unavailability-port",
+        "binding": {
+          "portId": "observe-classify-model-provider-unavailability-port",
+          "platformCapabilityId": "sda-authority-transformation-port.v1",
+          "configuration": {
+            "expression": {
+              "from": "input",
+              "op": "path",
+              "path": ""
+            }
+          }
+        }
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:continue-transient-model-attempt.operation.1",
+      "cellId": "cell:mechanic:continue-transient-model-attempt.operation.1",
+      "altitude": "mechanic",
+      "mechanicId": "sda-authority-transformation-port.v1",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "execute-governed-model-invocation/scenario/continue-transient-model-attempt/operation/continue-transient-model-attempt.operation.1",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-port",
+        "portId": "observe-continue-transient-model-attempt-port",
+        "binding": {
+          "portId": "observe-continue-transient-model-attempt-port",
+          "platformCapabilityId": "sda-authority-transformation-port.v1",
+          "configuration": {
+            "expression": {
+              "from": "input",
+              "op": "path",
+              "path": ""
+            }
+          }
+        }
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:execute-governed-model-invocation.operation.1",
+      "cellId": "cell:mechanic:execute-governed-model-invocation.operation.1",
+      "altitude": "mechanic",
+      "mechanicId": "sda-projected-capability-invocation-port.v2",
+      "providerProfileId": "node:provider:sda-projected-capability-invocation-port.v2",
+      "providerExport": "graph-v1-compatibility-provider",
+      "invocation": "configuration",
+      "factory": false,
+      "sourceUnit": "composition",
+      "composition": "invoke-binding-v2",
+      "semanticAddress": "execute-governed-model-invocation/scenario/execute-governed-model-invocation/operation/execute-governed-model-invocation.operation.1",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-port",
+        "portId": "model-invocation-execution-port",
+        "binding": {
+          "portId": "model-invocation-execution-port",
+          "platformCapabilityId": "sda-projected-capability-invocation-port.v2",
+          "configuration": {
+            "bindingDigest": "sha256:31df62a424d4c5244fffe6c0c828b699b1457e241625d3e92e15c49fe5858656",
+            "bindingRef": "../../execute-projected-model-provider-attempt/projected/application-binding.node.json",
+            "capabilityAuthorityDigest": "sha256:4c2d1b3f114b1050d8316772a45c3ea9134e4d839ac64d256229decaa051c6db",
+            "lineageMode": "retain-nested-execution",
+            "requestPath": "payload.attemptPlan",
+            "resultMode": "replace-carrier",
+            "bindingBase": "embodiments/execute-governed-model-invocation/projected"
+          }
+        }
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:execute-governed-model-invocation.operation.10",
+      "cellId": "cell:mechanic:execute-governed-model-invocation.operation.10",
+      "altitude": "mechanic",
+      "mechanicId": "invoke-scenario",
+      "providerProfileId": "node:provider:invoke-scenario",
+      "providerExport": "graph-v1-compatibility-provider",
+      "invocation": "configuration",
+      "factory": false,
+      "sourceUnit": "composition",
+      "composition": "scenario-invocation",
+      "semanticAddress": "execute-governed-model-invocation/scenario/execute-governed-model-invocation/operation/execute-governed-model-invocation.operation.10",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-scenario",
+        "scenarioId": "retain-model-provider-request-rejection"
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:execute-governed-model-invocation.operation.11",
+      "cellId": "cell:mechanic:execute-governed-model-invocation.operation.11",
+      "altitude": "mechanic",
+      "mechanicId": "invoke-scenario",
+      "providerProfileId": "node:provider:invoke-scenario",
+      "providerExport": "graph-v1-compatibility-provider",
+      "invocation": "configuration",
+      "factory": false,
+      "sourceUnit": "composition",
+      "composition": "scenario-invocation",
+      "semanticAddress": "execute-governed-model-invocation/scenario/execute-governed-model-invocation/operation/execute-governed-model-invocation.operation.11",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-scenario",
+        "scenarioId": "reject-malformed-structured-model-response"
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:execute-governed-model-invocation.operation.12",
+      "cellId": "cell:mechanic:execute-governed-model-invocation.operation.12",
+      "altitude": "mechanic",
+      "mechanicId": "invoke-scenario",
+      "providerProfileId": "node:provider:invoke-scenario",
+      "providerExport": "graph-v1-compatibility-provider",
+      "invocation": "configuration",
+      "factory": false,
+      "sourceUnit": "composition",
+      "composition": "scenario-invocation",
+      "semanticAddress": "execute-governed-model-invocation/scenario/execute-governed-model-invocation/operation/execute-governed-model-invocation.operation.12",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-scenario",
+        "scenarioId": "reject-schema-incompatible-model-response"
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:execute-governed-model-invocation.operation.13",
+      "cellId": "cell:mechanic:execute-governed-model-invocation.operation.13",
+      "altitude": "mechanic",
+      "mechanicId": "invoke-scenario",
+      "providerProfileId": "node:provider:invoke-scenario",
+      "providerExport": "graph-v1-compatibility-provider",
+      "invocation": "configuration",
+      "factory": false,
+      "sourceUnit": "composition",
+      "composition": "scenario-invocation",
+      "semanticAddress": "execute-governed-model-invocation/scenario/execute-governed-model-invocation/operation/execute-governed-model-invocation.operation.13",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-scenario",
+        "scenarioId": "continue-transient-model-attempt"
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:execute-governed-model-invocation.operation.14",
+      "cellId": "cell:mechanic:execute-governed-model-invocation.operation.14",
+      "altitude": "mechanic",
+      "mechanicId": "invoke-scenario",
+      "providerProfileId": "node:provider:invoke-scenario",
+      "providerExport": "graph-v1-compatibility-provider",
+      "invocation": "configuration",
+      "factory": false,
+      "sourceUnit": "composition",
+      "composition": "scenario-invocation",
+      "semanticAddress": "execute-governed-model-invocation/scenario/execute-governed-model-invocation/operation/execute-governed-model-invocation.operation.14",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-scenario",
+        "scenarioId": "stop-non-transient-model-attempt"
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:execute-governed-model-invocation.operation.15",
+      "cellId": "cell:mechanic:execute-governed-model-invocation.operation.15",
+      "altitude": "mechanic",
+      "mechanicId": "invoke-scenario",
+      "providerProfileId": "node:provider:invoke-scenario",
+      "providerExport": "graph-v1-compatibility-provider",
+      "invocation": "configuration",
+      "factory": false,
+      "sourceUnit": "composition",
+      "composition": "scenario-invocation",
+      "semanticAddress": "execute-governed-model-invocation/scenario/execute-governed-model-invocation/operation/execute-governed-model-invocation.operation.15",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-scenario",
+        "scenarioId": "exhaust-model-attempt-authority"
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:execute-governed-model-invocation.operation.16",
+      "cellId": "cell:mechanic:execute-governed-model-invocation.operation.16",
+      "altitude": "mechanic",
+      "mechanicId": "invoke-scenario",
+      "providerProfileId": "node:provider:invoke-scenario",
+      "providerExport": "graph-v1-compatibility-provider",
+      "invocation": "configuration",
+      "factory": false,
+      "sourceUnit": "composition",
+      "composition": "scenario-invocation",
+      "semanticAddress": "execute-governed-model-invocation/scenario/execute-governed-model-invocation/operation/execute-governed-model-invocation.operation.16",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-scenario",
+        "scenarioId": "prevent-undeclared-model-attempt-or-substitution"
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:execute-governed-model-invocation.operation.17",
+      "cellId": "cell:mechanic:execute-governed-model-invocation.operation.17",
+      "altitude": "mechanic",
+      "mechanicId": "invoke-scenario",
+      "providerProfileId": "node:provider:invoke-scenario",
+      "providerExport": "graph-v1-compatibility-provider",
+      "invocation": "configuration",
+      "factory": false,
+      "sourceUnit": "composition",
+      "composition": "scenario-invocation",
+      "semanticAddress": "execute-governed-model-invocation/scenario/execute-governed-model-invocation/operation/execute-governed-model-invocation.operation.17",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-scenario",
+        "scenarioId": "cancel-model-invocation"
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:execute-governed-model-invocation.operation.18",
+      "cellId": "cell:mechanic:execute-governed-model-invocation.operation.18",
+      "altitude": "mechanic",
+      "mechanicId": "invoke-scenario",
+      "providerProfileId": "node:provider:invoke-scenario",
+      "providerExport": "graph-v1-compatibility-provider",
+      "invocation": "configuration",
+      "factory": false,
+      "sourceUnit": "composition",
+      "composition": "scenario-invocation",
+      "semanticAddress": "execute-governed-model-invocation/scenario/execute-governed-model-invocation/operation/execute-governed-model-invocation.operation.18",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-scenario",
+        "scenarioId": "classify-internal-model-execution-failure"
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:execute-governed-model-invocation.operation.19",
+      "cellId": "cell:mechanic:execute-governed-model-invocation.operation.19",
+      "altitude": "mechanic",
+      "mechanicId": "invoke-scenario",
+      "providerProfileId": "node:provider:invoke-scenario",
+      "providerExport": "graph-v1-compatibility-provider",
+      "invocation": "configuration",
+      "factory": false,
+      "sourceUnit": "composition",
+      "composition": "scenario-invocation",
+      "semanticAddress": "execute-governed-model-invocation/scenario/execute-governed-model-invocation/operation/execute-governed-model-invocation.operation.19",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-scenario",
+        "scenarioId": "honor-model-evidence-policy"
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:execute-governed-model-invocation.operation.2",
+      "cellId": "cell:mechanic:execute-governed-model-invocation.operation.2",
+      "altitude": "mechanic",
+      "mechanicId": "invoke-scenario",
+      "providerProfileId": "node:provider:invoke-scenario",
+      "providerExport": "graph-v1-compatibility-provider",
+      "invocation": "configuration",
+      "factory": false,
+      "sourceUnit": "composition",
+      "composition": "scenario-invocation",
+      "semanticAddress": "execute-governed-model-invocation/scenario/execute-governed-model-invocation/operation/execute-governed-model-invocation.operation.2",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-scenario",
+        "scenarioId": "obtain-structured-model-response"
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:execute-governed-model-invocation.operation.20",
+      "cellId": "cell:mechanic:execute-governed-model-invocation.operation.20",
+      "altitude": "mechanic",
+      "mechanicId": "invoke-scenario",
+      "providerProfileId": "node:provider:invoke-scenario",
+      "providerExport": "graph-v1-compatibility-provider",
+      "invocation": "configuration",
+      "factory": false,
+      "sourceUnit": "composition",
+      "composition": "scenario-invocation",
+      "semanticAddress": "execute-governed-model-invocation/scenario/execute-governed-model-invocation/operation/execute-governed-model-invocation.operation.20",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-scenario",
+        "scenarioId": "return-model-execution-receipt-on-every-exit"
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:execute-governed-model-invocation.operation.3",
+      "cellId": "cell:mechanic:execute-governed-model-invocation.operation.3",
+      "altitude": "mechanic",
+      "mechanicId": "invoke-scenario",
+      "providerProfileId": "node:provider:invoke-scenario",
+      "providerExport": "graph-v1-compatibility-provider",
+      "invocation": "configuration",
+      "factory": false,
+      "sourceUnit": "composition",
+      "composition": "scenario-invocation",
+      "semanticAddress": "execute-governed-model-invocation/scenario/execute-governed-model-invocation/operation/execute-governed-model-invocation.operation.3",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-scenario",
+        "scenarioId": "reject-invalid-governed-model-request"
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:execute-governed-model-invocation.operation.4",
+      "cellId": "cell:mechanic:execute-governed-model-invocation.operation.4",
+      "altitude": "mechanic",
+      "mechanicId": "invoke-scenario",
+      "providerProfileId": "node:provider:invoke-scenario",
+      "providerExport": "graph-v1-compatibility-provider",
+      "invocation": "configuration",
+      "factory": false,
+      "sourceUnit": "composition",
+      "composition": "scenario-invocation",
+      "semanticAddress": "execute-governed-model-invocation/scenario/execute-governed-model-invocation/operation/execute-governed-model-invocation.operation.4",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-scenario",
+        "scenarioId": "preserve-canonical-model-request-identity"
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:execute-governed-model-invocation.operation.5",
+      "cellId": "cell:mechanic:execute-governed-model-invocation.operation.5",
+      "altitude": "mechanic",
+      "mechanicId": "invoke-scenario",
+      "providerProfileId": "node:provider:invoke-scenario",
+      "providerExport": "graph-v1-compatibility-provider",
+      "invocation": "configuration",
+      "factory": false,
+      "sourceUnit": "composition",
+      "composition": "scenario-invocation",
+      "semanticAddress": "execute-governed-model-invocation/scenario/execute-governed-model-invocation/operation/execute-governed-model-invocation.operation.5",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-scenario",
+        "scenarioId": "reject-stale-model-provider-binding"
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:execute-governed-model-invocation.operation.6",
+      "cellId": "cell:mechanic:execute-governed-model-invocation.operation.6",
+      "altitude": "mechanic",
+      "mechanicId": "invoke-scenario",
+      "providerProfileId": "node:provider:invoke-scenario",
+      "providerExport": "graph-v1-compatibility-provider",
+      "invocation": "configuration",
+      "factory": false,
+      "sourceUnit": "composition",
+      "composition": "scenario-invocation",
+      "semanticAddress": "execute-governed-model-invocation/scenario/execute-governed-model-invocation/operation/execute-governed-model-invocation.operation.6",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-scenario",
+        "scenarioId": "fail-unavailable-model-credential"
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:execute-governed-model-invocation.operation.7",
+      "cellId": "cell:mechanic:execute-governed-model-invocation.operation.7",
+      "altitude": "mechanic",
+      "mechanicId": "invoke-scenario",
+      "providerProfileId": "node:provider:invoke-scenario",
+      "providerExport": "graph-v1-compatibility-provider",
+      "invocation": "configuration",
+      "factory": false,
+      "sourceUnit": "composition",
+      "composition": "scenario-invocation",
+      "semanticAddress": "execute-governed-model-invocation/scenario/execute-governed-model-invocation/operation/execute-governed-model-invocation.operation.7",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-scenario",
+        "scenarioId": "classify-model-provider-authentication-failure"
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:execute-governed-model-invocation.operation.8",
+      "cellId": "cell:mechanic:execute-governed-model-invocation.operation.8",
+      "altitude": "mechanic",
+      "mechanicId": "invoke-scenario",
+      "providerProfileId": "node:provider:invoke-scenario",
+      "providerExport": "graph-v1-compatibility-provider",
+      "invocation": "configuration",
+      "factory": false,
+      "sourceUnit": "composition",
+      "composition": "scenario-invocation",
+      "semanticAddress": "execute-governed-model-invocation/scenario/execute-governed-model-invocation/operation/execute-governed-model-invocation.operation.8",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-scenario",
+        "scenarioId": "classify-model-provider-timeout"
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:execute-governed-model-invocation.operation.9",
+      "cellId": "cell:mechanic:execute-governed-model-invocation.operation.9",
+      "altitude": "mechanic",
+      "mechanicId": "invoke-scenario",
+      "providerProfileId": "node:provider:invoke-scenario",
+      "providerExport": "graph-v1-compatibility-provider",
+      "invocation": "configuration",
+      "factory": false,
+      "sourceUnit": "composition",
+      "composition": "scenario-invocation",
+      "semanticAddress": "execute-governed-model-invocation/scenario/execute-governed-model-invocation/operation/execute-governed-model-invocation.operation.9",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-scenario",
+        "scenarioId": "classify-model-provider-unavailability"
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:exhaust-model-attempt-authority.operation.1",
+      "cellId": "cell:mechanic:exhaust-model-attempt-authority.operation.1",
+      "altitude": "mechanic",
+      "mechanicId": "sda-authority-transformation-port.v1",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "execute-governed-model-invocation/scenario/exhaust-model-attempt-authority/operation/exhaust-model-attempt-authority.operation.1",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-port",
+        "portId": "observe-exhaust-model-attempt-authority-port",
+        "binding": {
+          "portId": "observe-exhaust-model-attempt-authority-port",
+          "platformCapabilityId": "sda-authority-transformation-port.v1",
+          "configuration": {
+            "expression": {
+              "from": "input",
+              "op": "path",
+              "path": ""
+            }
+          }
+        }
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:fail-unavailable-model-credential.operation.1",
+      "cellId": "cell:mechanic:fail-unavailable-model-credential.operation.1",
+      "altitude": "mechanic",
+      "mechanicId": "sda-authority-transformation-port.v1",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "execute-governed-model-invocation/scenario/fail-unavailable-model-credential/operation/fail-unavailable-model-credential.operation.1",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-port",
+        "portId": "observe-fail-unavailable-model-credential-port",
+        "binding": {
+          "portId": "observe-fail-unavailable-model-credential-port",
+          "platformCapabilityId": "sda-authority-transformation-port.v1",
+          "configuration": {
+            "expression": {
+              "from": "input",
+              "op": "path",
+              "path": ""
+            }
+          }
+        }
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:honor-model-evidence-policy.operation.1",
+      "cellId": "cell:mechanic:honor-model-evidence-policy.operation.1",
+      "altitude": "mechanic",
+      "mechanicId": "sda-authority-transformation-port.v1",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "execute-governed-model-invocation/scenario/honor-model-evidence-policy/operation/honor-model-evidence-policy.operation.1",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-port",
+        "portId": "observe-honor-model-evidence-policy-port",
+        "binding": {
+          "portId": "observe-honor-model-evidence-policy-port",
+          "platformCapabilityId": "sda-authority-transformation-port.v1",
+          "configuration": {
+            "expression": {
+              "from": "input",
+              "op": "path",
+              "path": ""
+            }
+          }
+        }
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:obtain-structured-model-response.operation.1",
+      "cellId": "cell:mechanic:obtain-structured-model-response.operation.1",
+      "altitude": "mechanic",
+      "mechanicId": "sda-authority-transformation-port.v1",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "execute-governed-model-invocation/scenario/obtain-structured-model-response/operation/obtain-structured-model-response.operation.1",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-port",
+        "portId": "observe-obtain-structured-model-response-port",
+        "binding": {
+          "portId": "observe-obtain-structured-model-response-port",
+          "platformCapabilityId": "sda-authority-transformation-port.v1",
+          "configuration": {
+            "expression": {
+              "from": "input",
+              "op": "path",
+              "path": ""
+            }
+          }
+        }
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:preserve-canonical-model-request-identity.operation.1",
+      "cellId": "cell:mechanic:preserve-canonical-model-request-identity.operation.1",
+      "altitude": "mechanic",
+      "mechanicId": "sda-authority-transformation-port.v1",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "execute-governed-model-invocation/scenario/preserve-canonical-model-request-identity/operation/preserve-canonical-model-request-identity.operation.1",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-port",
+        "portId": "observe-preserve-canonical-model-request-identity-port",
+        "binding": {
+          "portId": "observe-preserve-canonical-model-request-identity-port",
+          "platformCapabilityId": "sda-authority-transformation-port.v1",
+          "configuration": {
+            "expression": {
+              "from": "input",
+              "op": "path",
+              "path": ""
+            }
+          }
+        }
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:prevent-undeclared-model-attempt-or-substitution.operation.1",
+      "cellId": "cell:mechanic:prevent-undeclared-model-attempt-or-substitution.operation.1",
+      "altitude": "mechanic",
+      "mechanicId": "sda-authority-transformation-port.v1",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "execute-governed-model-invocation/scenario/prevent-undeclared-model-attempt-or-substitution/operation/prevent-undeclared-model-attempt-or-substitution.operation.1",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-port",
+        "portId": "observe-prevent-undeclared-model-attempt-or-substitution-port",
+        "binding": {
+          "portId": "observe-prevent-undeclared-model-attempt-or-substitution-port",
+          "platformCapabilityId": "sda-authority-transformation-port.v1",
+          "configuration": {
+            "expression": {
+              "from": "input",
+              "op": "path",
+              "path": ""
+            }
+          }
+        }
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:reject-invalid-governed-model-request.operation.1",
+      "cellId": "cell:mechanic:reject-invalid-governed-model-request.operation.1",
+      "altitude": "mechanic",
+      "mechanicId": "sda-authority-transformation-port.v1",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "execute-governed-model-invocation/scenario/reject-invalid-governed-model-request/operation/reject-invalid-governed-model-request.operation.1",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-port",
+        "portId": "observe-reject-invalid-governed-model-request-port",
+        "binding": {
+          "portId": "observe-reject-invalid-governed-model-request-port",
+          "platformCapabilityId": "sda-authority-transformation-port.v1",
+          "configuration": {
+            "expression": {
+              "from": "input",
+              "op": "path",
+              "path": ""
+            }
+          }
+        }
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:reject-malformed-structured-model-response.operation.1",
+      "cellId": "cell:mechanic:reject-malformed-structured-model-response.operation.1",
+      "altitude": "mechanic",
+      "mechanicId": "sda-authority-transformation-port.v1",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "execute-governed-model-invocation/scenario/reject-malformed-structured-model-response/operation/reject-malformed-structured-model-response.operation.1",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-port",
+        "portId": "observe-reject-malformed-structured-model-response-port",
+        "binding": {
+          "portId": "observe-reject-malformed-structured-model-response-port",
+          "platformCapabilityId": "sda-authority-transformation-port.v1",
+          "configuration": {
+            "expression": {
+              "from": "input",
+              "op": "path",
+              "path": ""
+            }
+          }
+        }
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:reject-schema-incompatible-model-response.operation.1",
+      "cellId": "cell:mechanic:reject-schema-incompatible-model-response.operation.1",
+      "altitude": "mechanic",
+      "mechanicId": "sda-authority-transformation-port.v1",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "execute-governed-model-invocation/scenario/reject-schema-incompatible-model-response/operation/reject-schema-incompatible-model-response.operation.1",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-port",
+        "portId": "observe-reject-schema-incompatible-model-response-port",
+        "binding": {
+          "portId": "observe-reject-schema-incompatible-model-response-port",
+          "platformCapabilityId": "sda-authority-transformation-port.v1",
+          "configuration": {
+            "expression": {
+              "from": "input",
+              "op": "path",
+              "path": ""
+            }
+          }
+        }
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:reject-stale-model-provider-binding.operation.1",
+      "cellId": "cell:mechanic:reject-stale-model-provider-binding.operation.1",
+      "altitude": "mechanic",
+      "mechanicId": "sda-authority-transformation-port.v1",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "execute-governed-model-invocation/scenario/reject-stale-model-provider-binding/operation/reject-stale-model-provider-binding.operation.1",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-port",
+        "portId": "observe-reject-stale-model-provider-binding-port",
+        "binding": {
+          "portId": "observe-reject-stale-model-provider-binding-port",
+          "platformCapabilityId": "sda-authority-transformation-port.v1",
+          "configuration": {
+            "expression": {
+              "from": "input",
+              "op": "path",
+              "path": ""
+            }
+          }
+        }
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:retain-model-provider-request-rejection.operation.1",
+      "cellId": "cell:mechanic:retain-model-provider-request-rejection.operation.1",
+      "altitude": "mechanic",
+      "mechanicId": "sda-authority-transformation-port.v1",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "execute-governed-model-invocation/scenario/retain-model-provider-request-rejection/operation/retain-model-provider-request-rejection.operation.1",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-port",
+        "portId": "observe-retain-model-provider-request-rejection-port",
+        "binding": {
+          "portId": "observe-retain-model-provider-request-rejection-port",
+          "platformCapabilityId": "sda-authority-transformation-port.v1",
+          "configuration": {
+            "expression": {
+              "from": "input",
+              "op": "path",
+              "path": ""
+            }
+          }
+        }
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:return-model-execution-receipt-on-every-exit.operation.1",
+      "cellId": "cell:mechanic:return-model-execution-receipt-on-every-exit.operation.1",
+      "altitude": "mechanic",
+      "mechanicId": "sda-authority-transformation-port.v1",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "execute-governed-model-invocation/scenario/return-model-execution-receipt-on-every-exit/operation/return-model-execution-receipt-on-every-exit.operation.1",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-port",
+        "portId": "observe-return-model-execution-receipt-on-every-exit-port",
+        "binding": {
+          "portId": "observe-return-model-execution-receipt-on-every-exit-port",
+          "platformCapabilityId": "sda-authority-transformation-port.v1",
+          "configuration": {
+            "expression": {
+              "from": "input",
+              "op": "path",
+              "path": ""
+            }
+          }
+        }
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:cell:mechanic:stop-non-transient-model-attempt.operation.1",
+      "cellId": "cell:mechanic:stop-non-transient-model-attempt.operation.1",
+      "altitude": "mechanic",
+      "mechanicId": "sda-authority-transformation-port.v1",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "execute-governed-model-invocation/scenario/stop-non-transient-model-attempt/operation/stop-non-transient-model-attempt.operation.1",
+      "outcomeVariants": [
+        "CANCELLED",
+        "FAILURE",
+        "SUCCESS"
+      ],
+      "configuration": {
+        "kind": "invoke-port",
+        "portId": "observe-stop-non-transient-model-attempt-port",
+        "binding": {
+          "portId": "observe-stop-non-transient-model-attempt-port",
+          "platformCapabilityId": "sda-authority-transformation-port.v1",
+          "configuration": {
+            "expression": {
+              "from": "input",
+              "op": "path",
+              "path": ""
+            }
+          }
+        }
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:mechanic:cancel-model-invocation.operation.1:expression",
+      "cellId": "cell:mechanic:cancel-model-invocation.operation.1:expression",
+      "altitude": "mechanic",
+      "mechanicId": "path",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "observe-cancel-model-invocation-port#/expression",
+      "outcomeVariants": [
+        "VALUE"
+      ],
+      "configuration": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:mechanic:classify-internal-model-execution-failure.operation.1:expression",
+      "cellId": "cell:mechanic:classify-internal-model-execution-failure.operation.1:expression",
+      "altitude": "mechanic",
+      "mechanicId": "path",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "observe-classify-internal-model-execution-failure-port#/expression",
+      "outcomeVariants": [
+        "VALUE"
+      ],
+      "configuration": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:mechanic:classify-model-provider-authentication-failure.operation.1:expression",
+      "cellId": "cell:mechanic:classify-model-provider-authentication-failure.operation.1:expression",
+      "altitude": "mechanic",
+      "mechanicId": "path",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "observe-classify-model-provider-authentication-failure-port#/expression",
+      "outcomeVariants": [
+        "VALUE"
+      ],
+      "configuration": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:mechanic:classify-model-provider-timeout.operation.1:expression",
+      "cellId": "cell:mechanic:classify-model-provider-timeout.operation.1:expression",
+      "altitude": "mechanic",
+      "mechanicId": "path",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "observe-classify-model-provider-timeout-port#/expression",
+      "outcomeVariants": [
+        "VALUE"
+      ],
+      "configuration": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:mechanic:classify-model-provider-unavailability.operation.1:expression",
+      "cellId": "cell:mechanic:classify-model-provider-unavailability.operation.1:expression",
+      "altitude": "mechanic",
+      "mechanicId": "path",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "observe-classify-model-provider-unavailability-port#/expression",
+      "outcomeVariants": [
+        "VALUE"
+      ],
+      "configuration": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:mechanic:continue-transient-model-attempt.operation.1:expression",
+      "cellId": "cell:mechanic:continue-transient-model-attempt.operation.1:expression",
+      "altitude": "mechanic",
+      "mechanicId": "path",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "observe-continue-transient-model-attempt-port#/expression",
+      "outcomeVariants": [
+        "VALUE"
+      ],
+      "configuration": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:mechanic:exhaust-model-attempt-authority.operation.1:expression",
+      "cellId": "cell:mechanic:exhaust-model-attempt-authority.operation.1:expression",
+      "altitude": "mechanic",
+      "mechanicId": "path",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "observe-exhaust-model-attempt-authority-port#/expression",
+      "outcomeVariants": [
+        "VALUE"
+      ],
+      "configuration": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:mechanic:fail-unavailable-model-credential.operation.1:expression",
+      "cellId": "cell:mechanic:fail-unavailable-model-credential.operation.1:expression",
+      "altitude": "mechanic",
+      "mechanicId": "path",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "observe-fail-unavailable-model-credential-port#/expression",
+      "outcomeVariants": [
+        "VALUE"
+      ],
+      "configuration": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:mechanic:honor-model-evidence-policy.operation.1:expression",
+      "cellId": "cell:mechanic:honor-model-evidence-policy.operation.1:expression",
+      "altitude": "mechanic",
+      "mechanicId": "path",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "observe-honor-model-evidence-policy-port#/expression",
+      "outcomeVariants": [
+        "VALUE"
+      ],
+      "configuration": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:mechanic:obtain-structured-model-response.operation.1:expression",
+      "cellId": "cell:mechanic:obtain-structured-model-response.operation.1:expression",
+      "altitude": "mechanic",
+      "mechanicId": "path",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "observe-obtain-structured-model-response-port#/expression",
+      "outcomeVariants": [
+        "VALUE"
+      ],
+      "configuration": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:mechanic:preserve-canonical-model-request-identity.operation.1:expression",
+      "cellId": "cell:mechanic:preserve-canonical-model-request-identity.operation.1:expression",
+      "altitude": "mechanic",
+      "mechanicId": "path",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "observe-preserve-canonical-model-request-identity-port#/expression",
+      "outcomeVariants": [
+        "VALUE"
+      ],
+      "configuration": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:mechanic:prevent-undeclared-model-attempt-or-substitution.operation.1:expression",
+      "cellId": "cell:mechanic:prevent-undeclared-model-attempt-or-substitution.operation.1:expression",
+      "altitude": "mechanic",
+      "mechanicId": "path",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "observe-prevent-undeclared-model-attempt-or-substitution-port#/expression",
+      "outcomeVariants": [
+        "VALUE"
+      ],
+      "configuration": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:mechanic:reject-invalid-governed-model-request.operation.1:expression",
+      "cellId": "cell:mechanic:reject-invalid-governed-model-request.operation.1:expression",
+      "altitude": "mechanic",
+      "mechanicId": "path",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "observe-reject-invalid-governed-model-request-port#/expression",
+      "outcomeVariants": [
+        "VALUE"
+      ],
+      "configuration": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:mechanic:reject-malformed-structured-model-response.operation.1:expression",
+      "cellId": "cell:mechanic:reject-malformed-structured-model-response.operation.1:expression",
+      "altitude": "mechanic",
+      "mechanicId": "path",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "observe-reject-malformed-structured-model-response-port#/expression",
+      "outcomeVariants": [
+        "VALUE"
+      ],
+      "configuration": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:mechanic:reject-schema-incompatible-model-response.operation.1:expression",
+      "cellId": "cell:mechanic:reject-schema-incompatible-model-response.operation.1:expression",
+      "altitude": "mechanic",
+      "mechanicId": "path",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "observe-reject-schema-incompatible-model-response-port#/expression",
+      "outcomeVariants": [
+        "VALUE"
+      ],
+      "configuration": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:mechanic:reject-stale-model-provider-binding.operation.1:expression",
+      "cellId": "cell:mechanic:reject-stale-model-provider-binding.operation.1:expression",
+      "altitude": "mechanic",
+      "mechanicId": "path",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "observe-reject-stale-model-provider-binding-port#/expression",
+      "outcomeVariants": [
+        "VALUE"
+      ],
+      "configuration": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:mechanic:retain-model-provider-request-rejection.operation.1:expression",
+      "cellId": "cell:mechanic:retain-model-provider-request-rejection.operation.1:expression",
+      "altitude": "mechanic",
+      "mechanicId": "path",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "observe-retain-model-provider-request-rejection-port#/expression",
+      "outcomeVariants": [
+        "VALUE"
+      ],
+      "configuration": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:mechanic:return-model-execution-receipt-on-every-exit.operation.1:expression",
+      "cellId": "cell:mechanic:return-model-execution-receipt-on-every-exit.operation.1:expression",
+      "altitude": "mechanic",
+      "mechanicId": "path",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "observe-return-model-execution-receipt-on-every-exit-port#/expression",
+      "outcomeVariants": [
+        "VALUE"
+      ],
+      "configuration": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    },
+    {
+      "operationId": "slot:mechanic:stop-non-transient-model-attempt.operation.1:expression",
+      "cellId": "cell:mechanic:stop-non-transient-model-attempt.operation.1:expression",
+      "altitude": "mechanic",
+      "mechanicId": "path",
+      "providerProfileId": "sda-semantic-value-graph-provider.v1",
+      "providerModule": "languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerModuleRef": "../../../../../scenario-driven-architecture/languages/typescript/runtimes/node/semantic-execution-graph-mechanic-provider.mjs",
+      "providerExport": "createMechanicProvider",
+      "invocation": "transformation",
+      "factory": true,
+      "sourceUnit": "semantic-value",
+      "semanticAddress": "observe-stop-non-transient-model-attempt-port#/expression",
+      "outcomeVariants": [
+        "VALUE"
+      ],
+      "configuration": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      },
+      "expression": {
+        "from": "input",
+        "op": "path",
+        "path": ""
+      }
+    }
+  ],
+  "scenarios": [
+    {
+      "scenarioId": "cancel-model-invocation",
+      "scenarioCellId": "cell:scenario:cancel-model-invocation",
+      "exitCellId": "cell:mechanic:cancel-model-invocation.operation.1",
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1",
+      "outcomeVariants": [
+        "TERMINAL"
+      ]
+    },
+    {
+      "scenarioId": "classify-internal-model-execution-failure",
+      "scenarioCellId": "cell:scenario:classify-internal-model-execution-failure",
+      "exitCellId": "cell:mechanic:classify-internal-model-execution-failure.operation.1",
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1",
+      "outcomeVariants": [
+        "TERMINAL"
+      ]
+    },
+    {
+      "scenarioId": "classify-model-provider-authentication-failure",
+      "scenarioCellId": "cell:scenario:classify-model-provider-authentication-failure",
+      "exitCellId": "cell:mechanic:classify-model-provider-authentication-failure.operation.1",
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1",
+      "outcomeVariants": [
+        "TERMINAL"
+      ]
+    },
+    {
+      "scenarioId": "classify-model-provider-timeout",
+      "scenarioCellId": "cell:scenario:classify-model-provider-timeout",
+      "exitCellId": "cell:mechanic:classify-model-provider-timeout.operation.1",
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1",
+      "outcomeVariants": [
+        "TERMINAL"
+      ]
+    },
+    {
+      "scenarioId": "classify-model-provider-unavailability",
+      "scenarioCellId": "cell:scenario:classify-model-provider-unavailability",
+      "exitCellId": "cell:mechanic:classify-model-provider-unavailability.operation.1",
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1",
+      "outcomeVariants": [
+        "TERMINAL"
+      ]
+    },
+    {
+      "scenarioId": "continue-transient-model-attempt",
+      "scenarioCellId": "cell:scenario:continue-transient-model-attempt",
+      "exitCellId": "cell:mechanic:continue-transient-model-attempt.operation.1",
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1",
+      "outcomeVariants": [
+        "TERMINAL"
+      ]
+    },
+    {
+      "scenarioId": "execute-governed-model-invocation",
+      "scenarioCellId": "cell:scenario:execute-governed-model-invocation",
+      "exitCellId": "cell:mechanic:execute-governed-model-invocation.operation.20",
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1",
+      "outcomeVariants": [
+        "TERMINAL"
+      ]
+    },
+    {
+      "scenarioId": "exhaust-model-attempt-authority",
+      "scenarioCellId": "cell:scenario:exhaust-model-attempt-authority",
+      "exitCellId": "cell:mechanic:exhaust-model-attempt-authority.operation.1",
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1",
+      "outcomeVariants": [
+        "TERMINAL"
+      ]
+    },
+    {
+      "scenarioId": "fail-unavailable-model-credential",
+      "scenarioCellId": "cell:scenario:fail-unavailable-model-credential",
+      "exitCellId": "cell:mechanic:fail-unavailable-model-credential.operation.1",
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1",
+      "outcomeVariants": [
+        "TERMINAL"
+      ]
+    },
+    {
+      "scenarioId": "honor-model-evidence-policy",
+      "scenarioCellId": "cell:scenario:honor-model-evidence-policy",
+      "exitCellId": "cell:mechanic:honor-model-evidence-policy.operation.1",
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1",
+      "outcomeVariants": [
+        "TERMINAL"
+      ]
+    },
+    {
+      "scenarioId": "obtain-structured-model-response",
+      "scenarioCellId": "cell:scenario:obtain-structured-model-response",
+      "exitCellId": "cell:mechanic:obtain-structured-model-response.operation.1",
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1",
+      "outcomeVariants": [
+        "TERMINAL"
+      ]
+    },
+    {
+      "scenarioId": "preserve-canonical-model-request-identity",
+      "scenarioCellId": "cell:scenario:preserve-canonical-model-request-identity",
+      "exitCellId": "cell:mechanic:preserve-canonical-model-request-identity.operation.1",
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1",
+      "outcomeVariants": [
+        "TERMINAL"
+      ]
+    },
+    {
+      "scenarioId": "prevent-undeclared-model-attempt-or-substitution",
+      "scenarioCellId": "cell:scenario:prevent-undeclared-model-attempt-or-substitution",
+      "exitCellId": "cell:mechanic:prevent-undeclared-model-attempt-or-substitution.operation.1",
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1",
+      "outcomeVariants": [
+        "TERMINAL"
+      ]
+    },
+    {
+      "scenarioId": "reject-invalid-governed-model-request",
+      "scenarioCellId": "cell:scenario:reject-invalid-governed-model-request",
+      "exitCellId": "cell:mechanic:reject-invalid-governed-model-request.operation.1",
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1",
+      "outcomeVariants": [
+        "TERMINAL"
+      ]
+    },
+    {
+      "scenarioId": "reject-malformed-structured-model-response",
+      "scenarioCellId": "cell:scenario:reject-malformed-structured-model-response",
+      "exitCellId": "cell:mechanic:reject-malformed-structured-model-response.operation.1",
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1",
+      "outcomeVariants": [
+        "TERMINAL"
+      ]
+    },
+    {
+      "scenarioId": "reject-schema-incompatible-model-response",
+      "scenarioCellId": "cell:scenario:reject-schema-incompatible-model-response",
+      "exitCellId": "cell:mechanic:reject-schema-incompatible-model-response.operation.1",
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1",
+      "outcomeVariants": [
+        "TERMINAL"
+      ]
+    },
+    {
+      "scenarioId": "reject-stale-model-provider-binding",
+      "scenarioCellId": "cell:scenario:reject-stale-model-provider-binding",
+      "exitCellId": "cell:mechanic:reject-stale-model-provider-binding.operation.1",
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1",
+      "outcomeVariants": [
+        "TERMINAL"
+      ]
+    },
+    {
+      "scenarioId": "retain-model-provider-request-rejection",
+      "scenarioCellId": "cell:scenario:retain-model-provider-request-rejection",
+      "exitCellId": "cell:mechanic:retain-model-provider-request-rejection.operation.1",
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1",
+      "outcomeVariants": [
+        "TERMINAL"
+      ]
+    },
+    {
+      "scenarioId": "return-model-execution-receipt-on-every-exit",
+      "scenarioCellId": "cell:scenario:return-model-execution-receipt-on-every-exit",
+      "exitCellId": "cell:mechanic:return-model-execution-receipt-on-every-exit.operation.1",
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1",
+      "outcomeVariants": [
+        "TERMINAL"
+      ]
+    },
+    {
+      "scenarioId": "stop-non-transient-model-attempt",
+      "scenarioCellId": "cell:scenario:stop-non-transient-model-attempt",
+      "exitCellId": "cell:mechanic:stop-non-transient-model-attempt.operation.1",
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1",
+      "outcomeVariants": [
+        "TERMINAL"
+      ]
+    }
+  ],
+  "rootScenarioId": "execute-governed-model-invocation",
+  "cellContracts": {
+    "cell:mechanic:cancel-model-invocation.operation.1": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:mechanic:cancel-model-invocation.operation.1:expression": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:classify-internal-model-execution-failure.operation.1": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:mechanic:classify-internal-model-execution-failure.operation.1:expression": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:classify-model-provider-authentication-failure.operation.1": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:mechanic:classify-model-provider-authentication-failure.operation.1:expression": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:classify-model-provider-timeout.operation.1": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:mechanic:classify-model-provider-timeout.operation.1:expression": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:classify-model-provider-unavailability.operation.1": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:mechanic:classify-model-provider-unavailability.operation.1:expression": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:continue-transient-model-attempt.operation.1": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:mechanic:continue-transient-model-attempt.operation.1:expression": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:execute-governed-model-invocation.operation.1": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:execute-governed-model-invocation.operation.10": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:execute-governed-model-invocation.operation.11": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:execute-governed-model-invocation.operation.12": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:execute-governed-model-invocation.operation.13": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:execute-governed-model-invocation.operation.14": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:execute-governed-model-invocation.operation.15": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:execute-governed-model-invocation.operation.16": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:execute-governed-model-invocation.operation.17": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:execute-governed-model-invocation.operation.18": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:execute-governed-model-invocation.operation.19": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:execute-governed-model-invocation.operation.2": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:execute-governed-model-invocation.operation.20": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:mechanic:execute-governed-model-invocation.operation.3": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:execute-governed-model-invocation.operation.4": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:execute-governed-model-invocation.operation.5": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:execute-governed-model-invocation.operation.6": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:execute-governed-model-invocation.operation.7": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:execute-governed-model-invocation.operation.8": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:execute-governed-model-invocation.operation.9": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:exhaust-model-attempt-authority.operation.1": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:mechanic:exhaust-model-attempt-authority.operation.1:expression": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:fail-unavailable-model-credential.operation.1": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:mechanic:fail-unavailable-model-credential.operation.1:expression": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:honor-model-evidence-policy.operation.1": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:mechanic:honor-model-evidence-policy.operation.1:expression": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:obtain-structured-model-response.operation.1": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:mechanic:obtain-structured-model-response.operation.1:expression": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:preserve-canonical-model-request-identity.operation.1": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:mechanic:preserve-canonical-model-request-identity.operation.1:expression": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:prevent-undeclared-model-attempt-or-substitution.operation.1": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:mechanic:prevent-undeclared-model-attempt-or-substitution.operation.1:expression": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:reject-invalid-governed-model-request.operation.1": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:mechanic:reject-invalid-governed-model-request.operation.1:expression": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:reject-malformed-structured-model-response.operation.1": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:mechanic:reject-malformed-structured-model-response.operation.1:expression": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:reject-schema-incompatible-model-response.operation.1": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:mechanic:reject-schema-incompatible-model-response.operation.1:expression": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:reject-stale-model-provider-binding.operation.1": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:mechanic:reject-stale-model-provider-binding.operation.1:expression": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:retain-model-provider-request-rejection.operation.1": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:mechanic:retain-model-provider-request-rejection.operation.1:expression": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:return-model-execution-receipt-on-every-exit.operation.1": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:mechanic:return-model-execution-receipt-on-every-exit.operation.1:expression": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:mechanic:stop-non-transient-model-attempt.operation.1": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:mechanic:stop-non-transient-model-attempt.operation.1:expression": {
+      "inputContractId": "semantic-value.v1",
+      "outcomeContractId": "semantic-value.v1"
+    },
+    "cell:scenario:cancel-model-invocation": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:scenario:classify-internal-model-execution-failure": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:scenario:classify-model-provider-authentication-failure": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:scenario:classify-model-provider-timeout": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:scenario:classify-model-provider-unavailability": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:scenario:continue-transient-model-attempt": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:scenario:execute-governed-model-invocation": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:scenario:exhaust-model-attempt-authority": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:scenario:fail-unavailable-model-credential": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:scenario:honor-model-evidence-policy": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:scenario:obtain-structured-model-response": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:scenario:preserve-canonical-model-request-identity": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:scenario:prevent-undeclared-model-attempt-or-substitution": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:scenario:reject-invalid-governed-model-request": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:scenario:reject-malformed-structured-model-response": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:scenario:reject-schema-incompatible-model-response": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:scenario:reject-stale-model-provider-binding": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:scenario:retain-model-provider-request-rejection": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:scenario:return-model-execution-receipt-on-every-exit": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    },
+    "cell:scenario:stop-non-transient-model-attempt": {
+      "inputContractId": "execute-governed-model-invocation-input.v1",
+      "outcomeContractId": "governed-model-invocation-evidence.v1"
+    }
+  },
+  "conformanceClosures": [
+    "graph-admission",
+    "provider-slot-coverage",
+    "planned-observed-topology",
+    "canonical-path-parity",
+    "effect-lineage"
+  ]
+}

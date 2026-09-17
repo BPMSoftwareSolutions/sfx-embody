@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.agentic-harness.local/contracts/input.schema.json",
+  "anyOf": [
+    {
+      "type": "object",
+      "required": ["contractId", "payload"],
+      "properties": {
+        "contractId": {
+          "const": "project-model-provider-protocol-input.v1"
+        },
+        "payload": {
+          "type": "object",
+          "required": ["requestType", "providerKind", "adapterIdentity"],
+          "properties": {
+            "requestType": { "type": "string" },
+            "providerKind": { "type": "string" },
+            "adapterIdentity": { "type": "string" },
+            "context": { "type": "object" },
+            "endpoint": { "type": "object" },
+            "observation": { "type": "object" }
+          }
+        }
+      }
+    },
+    {
+      "type": "object",
+      "required": ["contractId", "payload"],
+      "properties": {
+        "contractId": {
+          "const": "model-provider-protocol-projection-evidence.v1"
+        },
+        "payload": {
+          "type": "object",
+          "required": [
+            "disposition",
+            "providerKind",
+            "adapterIdentity",
+            "wireRequest",
+            "endpointFact",
+            "normalizedTestimony",
+            "rejectionReason",
+            "networkExchangeCount",
+            "retryCount",
+            "repairCount"
+          ],
+          "properties": {
+            "disposition": { "type": "string" },
+            "providerKind": { "type": "string" },
+            "adapterIdentity": { "type": "string" },
+            "wireRequest": { "type": ["object", "null"] },
+            "endpointFact": { "type": ["object", "null"] },
+            "normalizedTestimony": { "type": ["object", "null"] },
+            "rejectionReason": { "type": ["string", "null"] },
+            "networkExchangeCount": { "type": "integer" },
+            "retryCount": { "type": "integer" },
+            "repairCount": { "type": "integer" }
+          }
+        }
+      }
+    }
+  ]
+}

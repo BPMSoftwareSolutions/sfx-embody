@@ -1,0 +1,38 @@
+{
+  "scenarioId": "project-gemini-structured-request",
+  "input": {
+    "inputId": "gemini-structured-protocol-projection-request",
+    "contract": {
+      "contractId": "project-model-provider-protocol-input.v1"
+    }
+  },
+  "event": {
+    "eventId": "gemini-structured-protocol-projection-requested",
+    "executionAuthorityId": "project-gemini-structured-request.v1"
+  },
+  "outcome": {
+    "outcomeId": "gemini-structured-protocol-projection",
+    "contract": {
+      "contractId": "model-provider-protocol-projection-evidence.v1"
+    },
+    "experience": {
+      "statement": "the body declares application/json response MIME type and a Gemini-compatible responseSchema that keeps only the admitted schema vocabulary and never passes unsupported keywords such as $schema or additionalProperties"
+    },
+    "terminal": true
+  },
+  "gherkin": {
+    "given": {
+      "semanticRef": "project-gemini-structured-request.given",
+      "text": "one structured-generation context bound to the Gemini adapter with an admitted JSON response policy schema"
+    },
+    "when": {
+      "semanticRef": "project-gemini-structured-request.when",
+      "text": "the Gemini structured protocol is projected"
+    },
+    "then": {
+      "semanticRef": "project-gemini-structured-request.then",
+      "text": "the body declares application/json response MIME type and a Gemini-compatible responseSchema that keeps only the admitted schema vocabulary and never passes unsupported keywords such as $schema or additionalProperties"
+    }
+  },
+  "name": "Map a structured-generation context to a Gemini request with a translated response schema"
+}
