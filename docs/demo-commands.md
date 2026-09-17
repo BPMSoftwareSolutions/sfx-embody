@@ -62,9 +62,9 @@ Verification variant (machine-readable, cmd capture):
 cmd /c "sfx capability observe resolve-equity-market-price-evidence --display --input AVGO --json > beat1.json 2>&1"
 ```
 
-Check `result.result.outcome.disposition` is
+Check `result.outcome.disposition` is
 `EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED` and
-`result.result.outcome.providerTestimony.providerId` =
+`result.outcome.providerTestimony.providerId` =
 `rapidapi/yahoo-finance-real-time1` (the route that answered).
 
 Deeper variant (the ten-op trace, for the "want to see them?" moment):
@@ -102,7 +102,7 @@ cmd /c "sfx capability observe request-capability-from-objective --input "What i
 Verification variant (machine-readable):
 
 ```text
-cmd /c "sfx capability invoke request-capability-from-objective --input ""What is Broadcom's current market price?"" --json > beat2.json 2>&1"
+cmd /c "sfx capability invoke request-capability-from-objective --input "What is Broadcom's current market price?" --json > beat2.json 2>&1"
 ```
 
 Wall time is measured per invocation, never scripted.

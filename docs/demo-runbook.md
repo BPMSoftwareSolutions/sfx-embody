@@ -5,8 +5,11 @@ the installed `sfx` CLI. Every value shown is read from the selected estate's ro
 nothing is synthesized, no capability is special-cased in the terminal, and no
 migration runs during the recording.
 
-Receipts for every command below are produced by `scripts/verify-demo.mjs` into
+Receipts for every command below are captured into
 `evidence/demo-<ISO timestamp>/` (`*.stdout.txt`, `*.stderr.txt`, `report.json`).
+The machine-readable acceptance over those captures is the declared read
+`read-demo-acceptance` (`sql/migrations/declare-read-demo-acceptance.sql`, W1.4);
+the hand-authored `scripts/verify-demo.mjs` harness is retired.
 
 ## Current state (what the recording can honestly claim)
 
@@ -37,15 +40,16 @@ Receipts for every command below are produced by `scripts/verify-demo.mjs` into
 
 ## Before recording
 
-```cmd
-node scripts/verify-demo.mjs
-node scripts/verify-demo.mjs --live
-```
+The machine-readable acceptance is declared, not scripted: one run's captured
+command observations are handed to `read-demo-acceptance` and it returns
+`demo-acceptance-receipt.v1` with the twelve declared cases (10 offline + 2
+live) and the no-synthesized-values verdict. The retired
+`scripts/verify-demo.mjs` harness and its final report are retained as the W1.4
+record in `evidence/vault-20260916/retirement/w1.4/`.
 
-The first run is offline-safe and must print VERIFIED for every case and exit 0.
-The second adds the live equity case; if the network or the market-data provider
-is unavailable it prints `LIVE-UNAVAILABLE` and still exits 0, which is a note,
-not a blocker.
+Every offline case must come back green; a live case may be declared
+unavailable (`LIVE_UNAVAILABLE`, exit non-zero), which is a note, not a
+blocker.
 
 Production notes:
 

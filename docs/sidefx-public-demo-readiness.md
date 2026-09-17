@@ -50,7 +50,7 @@ honest refusal beats (B3 in the target experience) are real via
 | The declared model/agentic language | 27 model capabilities, e.g. `obtain-governed-model-response`, `execute-governed-model-invocation`, `project-model-provider-protocol`, `bind-model-testimony-evidence`; `reveal --as meaning` renders them |
 | Typed input mapping | `sfx capability invoke resolve-equity-market-price-evidence --input AAPL --json` exits 0 via the declared CLI input mapping (`embodiments/…/interfaces.authority.json`) |
 | Retained live receipts | `evidence/demo-2026-09-15T12-25-03.280Z`, `…12-28-14.353Z` (QQQ 709.18, `Delayed Quote`); post-digest green run 14:21Z (MSFT 498.82, `sha256:10d4386c…`) |
-| Demo verifier | `scripts/verify-demo.mjs` — 11 cases, receipts + `report.json`, no synthesized values |
+| Demo acceptance | declared `read-demo-acceptance` receipt (W1.4; `scripts/verify-demo.mjs` retired) — 12 cases (10 offline + 2 live), receipts + `report.json` retained, no synthesized values |
 
 **Correction to a suspected regression.** The declaration-conformance migration's
 digest move (`8ad3907…` → `10d4386c…`) did **not** break live equity: the post-migration
