@@ -1,8 +1,17 @@
 # Release-path finding: the projection consumer schema rejects declared operation variants
 
-**Status.** Found 2026-09-17 while attempting the first C# executable install of
-`compose-resolve-equity-market-price-evidence` (the release-flywheel step).
-Blocks projection to **every** target for the equity capability.
+**Status: resolved 2026-09-17.** SDA `fa35b99` admits operation
+`outcomeVariants` in both declared shapes; estate `f80c68f` re-projected
+successfully (`PURE_PROJECTION_CONFORMS`, csharp/node/python, 227/227 bindings).
+Adjacent gate also fixed: empty fixtures document with superseded
+`owner_definition_pk` (estate `7fa3d89`). The first C# executable install then
+completed — see [projected-csharp-install.md](projected-csharp-install.md).
+The original finding is retained below.
+
+**Status (original).** Found 2026-09-17 while attempting the first C# executable
+install of `compose-resolve-equity-market-price-evidence` (the
+release-flywheel step). Blocked projection to **every** target for the equity
+capability.
 
 ## What was attempted
 
