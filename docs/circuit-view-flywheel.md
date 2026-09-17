@@ -109,7 +109,7 @@ captured — recorded as unobserved.
 | Observation | Result |
 |---|---|
 | Time to first live circuit | Not time-stamped. Outcome: the view-model capability was authored, dry-run, preflighted, installed and verified within its lane; the real CLI rendered the first circuit on the first run after the one reader gate landed |
-| Coverage | The generic renderer rendered live circuits for **two capabilities** (equity and the agent lane, both branches lit/unlit correctly) with **zero per-capability code**; the structural verdict `CIRCUIT-STRUCTURED` covers four capabilities (agent lane 985 planned / 703 observed, 0 on-taken-path misses; equity 242/180; compose 244/182; model lane 654/451) |
+| Coverage | The generic renderer rendered live circuits for **two capabilities** (equity and the agent lane, both branches lit/unlit correctly) with **zero per-capability code**. The structural verdict covered four capabilities (agent lane 985 planned / 703 observed, 0 on-taken-path misses; equity 242/180; compose 244/182; model lane 654/451) — but it was produced by a temporary script, since removed as UID; the rule is re-specified as a declared attestation and those counts stand as its expected values |
 | Marginal effort, next instance | The renderer's second capability cost ≈0. The declared streamed fragments (CV-B) and the true ~11-component collapse (CV-A2 refinement) remain staged, so the *declared-bytes* half of the generic claim is unverified |
 
 Honest limitations recorded by the lanes: the view model is per-cell, not the
