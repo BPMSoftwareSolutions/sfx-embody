@@ -1,12 +1,11 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { executeDatabaseCommand, validateDatabaseCommand } from './invoke-database-capability.mjs';
+import { executeDatabaseCommand, validateDatabaseCommand, createObservationFilter } from './invoke-database-capability.mjs';
 import { readAuthority } from './read-authority.mjs';
 import { withDatabaseReadSession } from './database-read-session.mjs';
 import { createDatabaseConnectBoundary } from './database-connect-boundary.mjs';
 import { restrictMemoryProcess } from './restrict-memory-process.mjs';
-import { safeObservation } from './observation-filter.mjs';
 
 try {
   const chunks = [];
@@ -42,18 +41,25 @@ try {
   const { pinModel } = await import(pathToFileURL(path.join(config.databaseRoot, 'src/query/model-pin.mjs')));
   const processEvidence = restrictMemoryProcess(config);
   config.spawnDeclared = processEvidence.spawnDeclared;
-  if (process.env.SIDEFX_OBSERVE === '1') {
-    config.onObservation = observation => {
-      // Only telemetry leaves this channel. Inputs, provider bodies and secrets
-      // remain in their existing execution/evidence boundaries.
-      process.stderr.write('SFX_OBSERVATION ' + JSON.stringify(safeObservation(observation)) + '\n');
-    };
-  }
   const setupTime = performance.now();
   const result = await withDatabaseReadSession({ connect, sql, pinModel, normalizeSql, stable, hash, digest, queryRowLimit },
     async (readQuery, sessionEvidence) => {
       config.readQuery = readQuery;
       config.readAuthority = (root, selection, options) => readAuthority(root, selection, { ...options, query: readQuery });
+      // Only declared telemetry leaves the observation channel. The allowlist is
+      // declared authority (read-observation-telemetry-authority), read once
+      // through the same declared-invocation path; the seam applies it. Inputs,
+      // provider bodies and secrets remain in their existing execution/evidence
+      // boundaries.
+      if (process.env.SIDEFX_OBSERVE === '1') {
+        const telemetry = await executeDatabaseCommand({ deliveryType: 'sfx-command-delivery.v1', operation: 'invoke',
+          request: { object: 'capability', verb: 'invoke', subject: 'read-observation-telemetry-authority',
+            input: { contractId: 'observation-telemetry-request.v1' } } }, config);
+        const filter = createObservationFilter(telemetry?.outcome?.result?.outcome ?? telemetry?.outcome?.result);
+        config.onObservation = observation => {
+          process.stderr.write('SFX_OBSERVATION ' + JSON.stringify(filter(observation)) + '\n');
+        };
+      }
       const result = await executeDatabaseCommand(envelope, config);
       if (result.outcome?.evidence) result.outcome.evidence.readSession = sessionEvidence;
       return result;

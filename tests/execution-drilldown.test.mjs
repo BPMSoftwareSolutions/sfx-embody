@@ -1,11 +1,25 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { validateDatabaseCommand, executeDatabaseCommand } from '../src/invoke-database-capability.mjs';
+import { validateDatabaseCommand, executeDatabaseCommand, createObservationFilter } from '../src/invoke-database-capability.mjs';
 import { isObservationAltitudeSelection } from '../src/execution-drilldown.mjs';
-import { safeObservation } from '../src/observation-filter.mjs';
 
 const command = (input, verb = 'invoke', extra = {}) => ({ deliveryType: 'sfx-command-delivery.v1', operation: verb,
   request: { object: 'capability', verb, subject: 'example', input, ...extra } });
+
+// The declared observation telemetry authority
+// (sql/migrations/declare-observation-telemetry-authority.sql): the seam reads
+// the members from this document; no field name is code.
+const DECLARED_TELEMETRY = {
+  authorityType: 'observation-telemetry-authority.v1',
+  observationFields: ['observationType', 'phase', 'status', 'observedAt', 'executionId', 'rootExecutionId',
+    'parentExecutionId', 'scenarioId', 'stepId', 'sequence', 'cellId', 'cellAltitude', 'edgeId',
+    'durationMilliseconds', 'startedAt', 'completedAt', 'semanticRole', 'responsibilityId', 'responsibilityKind',
+    'responsibilityOrdinal', 'mechanicId', 'mechanicPath', 'childScenarioId', 'parentScenarioId', 'inputId', 'eventId',
+    'outcomeId', 'outcomeContractId', 'sourceCellId', 'destinationCellId', 'admissionDisposition'],
+  entryFields: ['status', 'text', 'note', 'admission', 'timing'],
+  objectFields: { providerEvidence: ['reachedStage', 'exchangeCount', 'transportDisposition', 'redactionVerified',
+    'httpStatus'], display: ['entry'] }
+};
 
 test('observation altitudes are validated only where the operation offers them', () => {
   const observe = altitude => command(null, 'observe', { observationAltitudes: altitude });
@@ -20,16 +34,18 @@ test('observation altitudes are validated only where the operation offers them',
   assert.throws(() => validateDatabaseCommand(command(null, 'invoke', { observationAltitudes: ['scenario'] })), /DATABASE_COMMAND_REJECTED/);
 });
 
-test('the observation filter carries the bounded httpStatus and keeps other provider evidence out', () => {
-  const safe = safeObservation({ observationType: 'cell-execution-testimony.v1',
+test('the declared observation filter carries the bounded httpStatus and keeps other provider evidence out', () => {
+  const filter = createObservationFilter(DECLARED_TELEMETRY);
+  const safe = filter({ observationType: 'cell-execution-testimony.v1',
     providerEvidence: { reachedStage: 'response-complete', exchangeCount: 1, transportDisposition: 'completed',
       redactionVerified: true, httpStatus: 429, responseBodyBytes: 'c2VjcmV0', secret: 'x' } });
   assert.deepEqual(safe.providerEvidence, { reachedStage: 'response-complete', exchangeCount: 1,
     transportDisposition: 'completed', redactionVerified: true, httpStatus: 429 });
 });
 
-test('the observation filter carries testimony fields and keeps inputs and bodies out', () => {
-  const safe = safeObservation({ observationType: 'cell-execution-testimony.v1', phase: 'executeDeclaredGraph',
+test('the declared observation filter carries testimony fields and keeps inputs and bodies out', () => {
+  const filter = createObservationFilter(DECLARED_TELEMETRY);
+  const safe = filter({ observationType: 'cell-execution-testimony.v1', phase: 'executeDeclaredGraph',
     status: 'observed', observedAt: '2026-01-01T00:00:00.000Z', executionId: 'exec:1', rootExecutionId: 'root:1',
     parentExecutionId: null, scenarioId: 'root', stepId: 'step', sequence: 0, cellId: 'cell:scenario',
     cellAltitude: 'scenario', edgeId: undefined, durationMilliseconds: 5, startedAt: '2026-01-01T00:00:00.000Z',
@@ -39,6 +55,26 @@ test('the observation filter carries testimony fields and keeps inputs and bodie
     parentExecutionId: null, scenarioId: 'root', stepId: 'step', sequence: 0, cellId: 'cell:scenario',
     cellAltitude: 'scenario', durationMilliseconds: 5, startedAt: '2026-01-01T00:00:00.000Z',
     completedAt: '2026-01-01T00:00:00.005Z' });
+});
+
+test('the observation filter selects only the declared members, never a built-in field list', () => {
+  const narrowed = createObservationFilter({
+    observationFields: ['cellId', 'durationMilliseconds'],
+    entryFields: ['status'],
+    objectFields: { providerEvidence: ['exchangeCount'], display: ['entry'] } });
+  const safe = narrowed({ observationType: 'cell-execution-testimony.v1', cellId: 'cell:scenario',
+    durationMilliseconds: 5, disposition: 'completed',
+    providerEvidence: { exchangeCount: 0, httpStatus: 429 },
+    display: { entry: { status: 'completed', text: 'declared', timing: '5 ms' } } });
+  assert.deepEqual(safe, { cellId: 'cell:scenario', durationMilliseconds: 5,
+    display: { entry: { status: 'completed' } }, providerEvidence: { exchangeCount: 0 } });
+});
+
+test('an unresolved observation telemetry authority refuses the channel', () => {
+  assert.throws(() => createObservationFilter({}), /OBSERVATION_TELEMETRY_AUTHORITY_NOT_RESOLVED/);
+  assert.throws(() => createObservationFilter(null), /OBSERVATION_TELEMETRY_AUTHORITY_NOT_RESOLVED/);
+  assert.throws(() => createObservationFilter({ observationFields: [], entryFields: [], objectFields: {} }),
+    /OBSERVATION_TELEMETRY_AUTHORITY_NOT_RESOLVED/);
 });
 
 const identity = { snapshotId: 'snapshot', projectionDigest: 'projection', viewDefinitionDigest: 'views', truncated: false };

@@ -1,12 +1,11 @@
 import fs from 'node:fs/promises';
-import { createHash, randomUUID } from 'node:crypto';
+import { randomUUID } from 'node:crypto';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { readExecutionDelivery } from './read-execution-delivery.mjs';
 import { createExecutionDrilldown, isObservationAltitudeSelection } from './execution-drilldown.mjs';
 import { resolveCredentialStoreRealization, resolveCredentialVaultLocatorsInGraphSource,
   resolveCredentialVaultLocators } from './credential-vault-realization.mjs';
 
-const digest = value => 'sha256:' + createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 const requestFields = ['object', 'verb', 'subject', 'namespace', 'input', 'inputType', 'query', 'as', 'scenario', 'format', 'display', 'observationAltitudes'];
 // The estate runtime root: a Port binding configuration may name an estate
@@ -96,29 +95,6 @@ function readEstatePortBinding(bundle, portId) {
 }
 function ownerOfScenario(bundle, scenarioId) {
   return bundle.closure.recordsets[0].find(r => r.downstream_scenario_id === scenarioId)?.owning_capability_id ?? null;
-}
-
-export async function isEstateDelivery(bundle, context) {
-  try {
-    const selected = bundle.authority.recordsets[0][0].scenario_id;
-    const pending = [selected], visited = new Set();
-    // The declaration already includes the complete invocation closure and its
-    // port bindings. Read it once, including cycles, without querying children
-    // again or executing any operation during delivery selection.
-    while (pending.length) {
-      const id = pending.pop();
-      if (visited.has(id)) continue;
-      visited.add(id);
-      const authority = readRootAuthority(bundle, id);
-      if (!authority) continue;
-      for (const operation of authority.operations ?? []) {
-        if (operation.kind === 'invoke-port') {
-          if (readEstatePortBinding(bundle, operation.portId)?.configuration?.estateProvider) return true;
-        } else if (operation.kind === 'invoke-scenario') pending.push(operation.scenarioId);
-      }
-    }
-    return false;
-  } catch { return false; }
 }
 
 // Execute a capability's declared execution authority as a sequence of estate
@@ -278,6 +254,36 @@ export function validateDatabaseCommand(envelope) {
   if (spec.input === 'required' && !Object.hasOwn(request, 'input')) throw new Error('CAPABILITY_INPUT_REQUIRED');
   if (spec.input === 'rejected' && Object.hasOwn(request, 'input')) throw new Error(envelope.operation === 'prepare' ? 'PREPARATION_INPUT_NOT_OFFERED' : 'OPERATION_INPUT_NOT_OFFERED');
   return request;
+}
+
+// The observation channel carries declared telemetry only. The allowlist is
+// declared authority (read-observation-telemetry-authority); this seam applies
+// the declared selection to each observation. The picker is the emission seam:
+// no field name lives here, only the declared members. Inputs, provider bodies
+// and secrets are never among the declared fields.
+const scalarMember = value => typeof value === 'string' || typeof value === 'number' || value === null;
+const nestedScalarMember = value => scalarMember(value) || typeof value === 'boolean';
+function pickDeclared(value, fields) {
+  if (value === null || typeof value !== 'object' || Array.isArray(value)) return null;
+  const picked = Object.fromEntries(fields.filter(key => nestedScalarMember(value[key])).map(key => [key, value[key]]));
+  return Object.keys(picked).length ? picked : null;
+}
+export function createObservationFilter(authority) {
+  const observationFields = Array.isArray(authority?.observationFields) ? authority.observationFields : null;
+  const entryFields = Array.isArray(authority?.entryFields) ? authority.entryFields : null;
+  const displayMembers = Array.isArray(authority?.objectFields?.display) ? authority.objectFields.display : null;
+  const providerFields = Array.isArray(authority?.objectFields?.providerEvidence) ? authority.objectFields.providerEvidence : null;
+  if (!observationFields || !entryFields || !displayMembers?.length || !providerFields)
+    throw new Error('OBSERVATION_TELEMETRY_AUTHORITY_NOT_RESOLVED');
+  return observation => {
+    const safe = {};
+    for (const key of observationFields) if (scalarMember(observation?.[key])) safe[key] = observation[key];
+    const entry = pickDeclared(observation?.display?.[displayMembers[0]], entryFields);
+    if (entry) safe.display = { [displayMembers[0]]: entry };
+    const providerEvidence = pickDeclared(observation?.providerEvidence, providerFields);
+    if (providerEvidence) safe.providerEvidence = providerEvidence;
+    return safe;
+  };
 }
 
 export async function executeDatabaseCommand(envelope, { databaseRoot, sdaRoot, onObservation, spawnDeclared,
