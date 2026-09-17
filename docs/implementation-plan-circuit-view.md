@@ -106,6 +106,58 @@ even when they falsify the expectation.
 | CV-D1 structural acceptance | **done as declared authority** | `7965689` removed the script as UID; `b9d4499` re-declares `read-capability-circuit` with `plannedCells`/`plannedEdges` input and the `attestation` output computed in the read's own statement (ancestor closure over the JSON inputs). Live: agent lane 985/703, **misses 0, structured true**; equity 242/180, misses 0, true — exactly the first-turn values; negative fixtures (removed taken-path testimony) return **structured false with the cell named**. Honest gap recorded in the migration header: a non-fragment leaf with no observed same-altitude relative is not nameable by id hierarchy alone and needs the declared `parentCellId` chain; the bidirectional candidate closure reproduces the script's intent and the recorded positives |
 | CV-E1 observations | **done** | recorded in `circuit-view-flywheel.md` §First-turn observations |
 
+## UID audit and agent guard (2026-09-17)
+
+Trigger: an agent task for the TUI box rules was cancelled and found to have
+already written `CIRCUIT_MIN_COLUMNS`/`CIRCUIT_MAX_COLUMNS`, `circuitWrap`,
+`padCenter` and the shared box helper into `sidefx-cli/src/render.mjs`
+**uncommitted**. The diff was reverted unreviewed; the CLI tree is clean.
+Rule applied: cancelled work is never left in the tree, and geometry policy is
+not renderer code.
+
+Audit of the committed circuit renderer (`30518ee`, `abe326d`), classified:
+
+| Item | Class | Disposition |
+|---|---|---|
+| Glyph repertoire (`┌ ┐ └ ┘ ─ │ ▼ ► ×`), box drawing, connector lines | Generic emitter vocabulary (recorded phase-1 boundary: layout is not expressible in the transformation vocabulary) | Keep, but frozen: no new geometry policy in code |
+| `CIRCUIT_DETAIL_LIMIT = 30` (collapse threshold) | **Policy constant = UID** | Move to the declared view model/reading (granularity rule) before any further renderer work |
+| `circuitStatus` precedence (classification → display entry → disposition → `–`) | **Duplicates declared classification = UID** | The declared view model carries status; the emitter must consume it (CC-V1) |
+| `circuitLabel` / collapse derivation from `semanticAddress` and cell ids | **Duplicates `read-capability-circuit`'s nodes/edges = UID** | Stream from declared fragments (CV-B) and consume the declared view model (CV-C2) |
+| Altitude names (`SCENARIO`/`MECHANIC`/`PROVIDER`/`PHYSICAL`) as literals | Presentation labels of declared altitudes | Acceptable while CV-B declares the fragments; move with them |
+| Streaming box-by-box, trace replacement, closing frame from the overlay, `streamedCircuit` flag | Transport (when to write, which stream) | Keep; transport carries no meaning |
+
+**Agent guard (binding for any agent touching this area):**
+
+1. Before writing emitter code, name the declared rows the behavior reads; if
+   none exist for a choice the code makes, the choice is UID — declare it or
+   record a unit, never code it.
+2. No capability-specific strings, no status/classification/precedence logic,
+   no policy constants, no label derivation in `render.mjs` or any emitter.
+3. Geometry policy (box metrics, wrapping, justification) is **declared
+   presentation authority**, not renderer code. The TUI rules below are
+   specified as data; the emitter at most interprets them.
+4. A cancelled or interrupted agent edit is reverted before any other work;
+   cancelled work never lands.
+5. Commit messages name the classification of every code change (transport /
+   glyph interpretation / declared-row consumption).
+
+## TUI box rules (declared presentation specification)
+
+The rules the emitter must interpret, to be carried by the declared
+presentation (CV-B fragments and the declared view model; not hardcoded in the
+renderer):
+
+| Rule | Value |
+|---|---|
+| Minimum content columns | 20 |
+| Maximum content columns | 40 |
+| Minimum content rows | 2 (label row(s) plus one status row; no blank filler) |
+| Wrapping | at spaces within the maximum width; hyphen-preferred break inside the limit; only then a hard break |
+| Justification | every content line centered; the label block centered vertically within the minimum rows |
+| Status row | its own centered row: `✓ 0.104 ms`, `× 0.058 ms`, `–` (unobserved); duration verbatim |
+| Connectors | vertical connector centered under the box; one `│` row then one `▼` row; branch forks keep labels above the target boxes |
+| Diagram column | stable indent for the streamed view (no re-centering while boxes arrive) |
+
 ## Open decisions (builder)
 
 1. **Granularity authority**: one generic collapse rule (scenarios +
