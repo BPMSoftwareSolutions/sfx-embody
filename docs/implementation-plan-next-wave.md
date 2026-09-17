@@ -67,6 +67,18 @@ wave, which intended behavior fails, and why?
 | Replace the agent lane's visible-set literal in `build-agent-model-request` with the declared context assembly (`assemble-sidefx-capability-authoring-context`, or a context capability the lane declares) | The display/authority rule ("what can be declared must be declared"); `agent-lane.md:20-21` | **Premise corrected:** the visible set is not undeclared — it is a literal inside the declared transformation, i.e. declared authority; the change is a declared change to the lane's capability and request contract, not a repair of an undeclared literal | Benefit: one authority for visibility; a changed visible set becomes a declaration. Burden: a context-assembly invocation in the decision chain + request-builder change; durable, beyond routine delegation | **Builder decision needed** (add to review closure) — trigger: the visible set changes, or a second agent lane appears |
 | Route external capability-change requests through the MCP surface (the four change tools) instead of any direct path | The MCP capability's binding to the four change capabilities; the No-hand-authored-code policy for external clients | Not now; no external client is connected | Benefit: external agents get exactly the admitted mutation surface. Burden: client wiring + an MCP server run | **Defer** — trigger: an external MCP client is admitted |
 
+## W5 — The circuit view (its own flywheel and multi-agent plan)
+
+The generic live circuit — every capability's declared execution graph rendered
+in real time, boxes for cells, arrows for edges, lighting from testimony — is
+staged as its own record and plan rather than inferred from the rows above:
+[circuit-view-flywheel.md](circuit-view-flywheel.md) (hypothesis, generality
+rules, measurement, boundaries) and
+[implementation-plan-circuit-view.md](implementation-plan-circuit-view.md)
+(lanes CV-A…CV-E, sequencing, acceptance, rubric rows). Its first turn also
+carries the repair of the layout reference
+(`docs/target-harness-experience.md`, unit CV-E0).
+
 ## Measurement notes (rubric §5, where they could change a decision)
 
 - **W1 rows**: "hours-or-less each" and "recovered immediately" are judgments

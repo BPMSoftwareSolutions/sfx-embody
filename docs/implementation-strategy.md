@@ -15,7 +15,10 @@ next wave — recording close-out, the projection/install release flywheel, and
 the deferred experiences with triggers — is
 [implementation-plan-next-wave.md](implementation-plan-next-wave.md), which
 applies [sidefx-architecture-decision-rubric.md](sidefx-architecture-decision-rubric.md)
-§4/§5/§7 to each unit.
+§4/§5/§7 to each unit. The circuit view (a generic, declared live render of
+every capability's execution graph) has its own flywheel record and multi-agent
+plan: [circuit-view-flywheel.md](circuit-view-flywheel.md) and
+[implementation-plan-circuit-view.md](implementation-plan-circuit-view.md).
 
 ## Rules every agent follows
 
