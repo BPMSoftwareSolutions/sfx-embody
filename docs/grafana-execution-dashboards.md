@@ -91,6 +91,53 @@ Runs are per-invocation; "last N days" dashboards wait on the
 receipts into Loki/Tempo/Postgres for past-run panels; the honest label is
 "imported receipts", not "live history".
 
+## Model evaluation on multiple provider ports
+
+The eval lane already has its research and its principle
+([ml-opportunity/README.md](research/ml-opportunity/README.md)): **models provide
+intelligence; capabilities own meaning — and orchestration alone is not an
+evaluation oracle.** An eval run is therefore just another governed execution:
+the conveyor family (`construct-model-role-conveyor-plan`,
+`execute-governed-model-role-conveyor`, `determine-model-role-provider-switch`,
+`verify-governed-model-invocation-parity`) runs N bindings under declared
+ordering, budgets and switching; each attempt is testimony; acceptance comes
+from a declared oracle, never from the model.
+
+What that means for the dashboards:
+
+- **The trace shape is already right.** One eval run = one trace; role stage =
+  parent span; provider attempt = child span with provider/model identity,
+  latency, attempts, failure class and response hash; switching lineage is the
+  span tree. The generic OTLP exporter in Path B maps it with no eval-specific
+  code.
+- **Panels:** per-model and per-provider latency distributions (from span
+  durations), readiness/status and failure classes (from the declared
+  classifications), attempt counts and substitution lineage, token usage where
+  the profile captures it, and side-by-side comparison for replacement
+  decisions — both providers on the same role, policy and partition, per the
+  lane's replacement rule. Operational panels (latency, attempts,
+  timeout/failure rates, cost) sit beside the scenario-obligation panels;
+  aggregate metrics and scenario evidence answer different questions.
+- **Evidence contract per attempt** (what the eval receipt carries): model and
+  provider identities, adapter/profile revision, attempt ordinal and switch
+  reason, `durationMilliseconds`, `attemptCount`, response hash, classification
+  and failure class, token usage where captured, and the **oracle outcome** for
+  the case under evaluation. Raw prompts stay out of the observation channel
+  (the allowlist); the eval's own evidence policy decides whether content is
+  retained and where — hashes and identities are the default.
+- **Multi-provider ports are data.** Each model/provider is a declared
+  authority and binding (the conveyor authority already names
+  `primary-cognitive-provider`; the credential port already declares an OpenAI
+  reference) with its endpoint/credential rules; adding a port is rows plus a
+  provider-connection declaration, not new runtime. Quota and rate-limit
+  evidence needs the bounded `httpStatus` (request 11) to be visible in
+  dashboards.
+- **Honest labels.** An automated judge may assist open-ended generations only
+  with its own model, rubric and disagreement rate visible, and never as the
+  silent source of truth; fixtures are not a corpus; sample counts accompany
+  every percentage; thresholds are set before evaluating candidates, not
+  invented afterwards; model output is testimony until the oracle admits it.
+
 ## What the demo gains
 
 The recording already shows the terminal circuit; the dashboard shows the same
@@ -106,3 +153,6 @@ emitters of rows; neither invents status.
 | G-B OTLP exporter + Tempo | one generic exporter (testimony → spans), compose stack, trace/waterfall/graph panels | one trace per invocation with correct parent-child nesting; spans land while the run executes; node graph equals the terminal circuit for the same run |
 | G-C Coherence and coverage panels | dashboard queries over receipt fields and span metrics | attributed/residual and planned/observed shown per run; a deliberately failed invocation shows the failure, not a blank panel |
 | G-D Receipt batch import | importer for `evidence/**/*.receipt.json` | past runs visible, labeled imported |
+| G-E Eval evidence contract | declared eval receipt per attempt (identities, latency, attempts, switch reason, hashes, classification, failure class, oracle outcome) | one real two-provider eval run yields comparable receipts for both candidates on the same role and partition |
+| G-F Eval comparison panels | dashboard over the eval receipts and spans (per-model/provider latency, status, failure classes, switching lineage, side-by-side) | replacement candidate compared against the incumbent with sample counts; a failed candidate shows its failure class, not a blank panel |
+| G-G Multi-provider-port declaration | provider authorities/bindings for each evaluated port (rows + provider-connection declaration); `httpStatus` for quota evidence | a second provider port resolves and executes under the same capability meaning; quota evidence visible once request 11 lands |

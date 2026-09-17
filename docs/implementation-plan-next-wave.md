@@ -89,6 +89,23 @@ carries the repair of the layout reference
 | G-D receipt batch import | `evidence/**/*.receipt.json` retention | Not now; runs are per-invocation | Benefit: past-run panels labeled *imported*. Burden: one importer | **Defer** — trigger: the session/ledger unit, or retention beyond the demo |
 | G-E Grafana-native JSON without a collector (Path C) | Needs the deferred long-lived delivery host + a declared read | Not now; collector paths cover the demo | Benefit: panels straight from declared readings. Burden: a long-lived host on the estate | **Defer** — trigger: the long-lived host lands or a non-collector consumer appears |
 
+## W7 — Model evaluation on multiple provider ports, inspected in Grafana
+
+Authority: [ml-opportunity/README.md](research/ml-opportunity/README.md)
+("models provide intelligence; capabilities own meaning"; "orchestration alone
+is not an evaluation oracle"; replacement requires both providers on the same
+role, policy and partition) and
+[grafana-execution-dashboards.md](grafana-execution-dashboards.md) §Model
+evaluation.
+
+| Decision and source location | Applicable authority and scope | Necessary now? | Expected benefit / burden | Disposition and revisit trigger |
+|---|---|---|---|---|
+| G-E eval evidence contract: declared per-attempt receipt (model/provider identity, attempt ordinal and switch reason, duration, attempts, response hash, classification, failure class, oracle outcome) | The ML lane's evidence table and the conduit's testimony; the oracle is declared, never the model | Not for W1/W2. Omitting it makes "which model is better" a narrative | Benefit: comparable candidates and inspectable replacement. Burden: one receipt contract + the run wiring | **Useful now** — trigger: the first eval run is scheduled |
+| G-F eval comparison panels over the receipts/spans | The dashboard research and the generic OTLP exporter | Not now | Benefit: side-by-side latency/status/failure with sample counts. Burden: dashboard queries | **Useful now** — pairs with G-E |
+| G-G multi-provider-port declaration (second port's authority/binding; `httpStatus` for quota evidence) | Conveyor authority + credential port references; request 11 for the bounded status | Not now; one provider is wired | Benefit: the same capability meaning realized by another port; quota visible. Burden: rows + a provider-connection declaration | **Useful now** — trigger: a second model/provider is evaluated |
+| Automated judge for open-ended generations | ML lane §7: judge model, rubric and disagreement rate visible; never the silent source of truth | Not now; deterministic oracles cover the first eval | Benefit: qualitative coverage. Burden: judge evaluation itself | **Defer** — trigger: an open-ended generation eval exists with a deterministic-oracle gap |
+| Thresholds and corpus | ML lane §10: set acceptance thresholds and sample requirements before evaluating; fixtures are not a corpus | Not now | Benefit: honest comparison. Burden: corpus audit | **Builder decision** (thresholds are intent, not agent-set) |
+
 ## Measurement notes (rubric §5, where they could change a decision)
 
 - **W1 rows**: "hours-or-less each" and "recovered immediately" are judgments
