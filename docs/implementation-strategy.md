@@ -10,6 +10,13 @@ binding requirement that every executable mechanic be embodied per target is
 specified in [embodiment-completeness.md](embodiment-completeness.md) — a unit is
 not done until that rule holds for the capability it touches.
 
+**Current wave (2026-09-17):** the lane queue below is the 2026-09-14 seed; the
+next wave — recording close-out, the projection/install release flywheel, and
+the deferred experiences with triggers — is
+[implementation-plan-next-wave.md](implementation-plan-next-wave.md), which
+applies [sidefx-architecture-decision-rubric.md](sidefx-architecture-decision-rubric.md)
+§4/§5/§7 to each unit.
+
 ## Rules every agent follows
 
 1. **The target is fixed; direction is never requested.** The standards decide
