@@ -7,6 +7,13 @@ tools. SideFX does not govern the model's hidden reasoning; it governs how the
 model is invoked, what capabilities it can see, and whether any proposal can
 become an effect.
 
+**UID note (2026-09-17).** The composition currently lives in a labeled driver
+(`src/agent-delivery.mjs`) — ungoverned intelligence debt. The transition to a
+declared capability, the one missing declared mechanism (scenario routes), the
+target row design, and the interim honest option are in
+[agent-lane-declaration.md](agent-lane-declaration.md). The driver is to be
+deleted when the declared capability lands.
+
 ## The surface
 
 ```text
