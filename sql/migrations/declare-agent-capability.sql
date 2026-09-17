@@ -429,5 +429,9 @@ SELECT '7_graph_scenarios' AS result_set, JSON_VALUE(s.value, '$.scenarioId') AS
 FROM analysis.capability_graph_source(N'request-capability-from-objective', 0, NULL) g
 CROSS APPLY OPENJSON(g.graph_source, '$.scenarios') s
 ORDER BY scenario_id;
-ROLLBACK TRANSACTION;
--- To install, replace the ROLLBACK above with COMMIT and re-run.
+COMMIT TRANSACTION;
+-- Installed 2026-09-17: the declared agent lane routes ADMITTED/REFUSED, the
+-- admitted child executes the admitted capability, and the refusal child shapes
+-- the refusal receipt with no execution child cells. Reversal: a single
+-- migration that drops the capability's scenario links and capability row (the
+-- definitions remain content-addressed).
