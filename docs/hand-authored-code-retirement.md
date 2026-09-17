@@ -47,7 +47,10 @@ event would add ~716 round trips and break the stream clock, so it was refused.
 **Landed so far:** `observation-filter.mjs` deleted with its allowlist declared
 (`read-observation-telemetry-authority`, estate `9c3254c`); circuit attestation
 names unobserved leaves through the declared parent chain (`70f60f2`); the driver
-retired (`6962040`).
+retired (`6962040`); W1.1 reader documents declared
+(`declare-reader-display-documents.sql`: reveal/list/find/catalogue/circuit/
+artifact), the boot reader branch and the CLI `meaningLines`/`capabilityLine`/
+`format` dispatch deleted, live reveal and `--format markdown` byte-equal.
 
 **Builder decisions outstanding** (from the inventory): the
 `invoke-database-capability` floor-vs-UID reading; `read-authority` SQL constants;
