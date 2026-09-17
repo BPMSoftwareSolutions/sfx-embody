@@ -119,14 +119,23 @@ out of a script (removed as UID, `7965689`) into the declared read's
 values, and negative fixtures return `structured: false` with the removed cell
 named.
 
+The TUI look is now **policy-driven**: the box metrics, wrap, centering,
+glyphs, altitude prefixes and the collapse limit are declared in
+`circuit-presentation.v1` (`read-circuit-presentation`) and the emitter only
+interprets them — a stub policy with different metrics changes the output in
+the tests, which is the generic claim made executable. The policy is fetched by
+a second delivery before execution (~2.3 s, uncached — recorded).
+
 Honest limitations recorded by the lanes: the view model is per-cell, not the
 sketch's 11-component collapse; provider nodes carry no incoming edge because
-testimony records none; the large-graph collapse limit is a terminal constant,
-not declared authority; `render.mjs` still owns presentation vocabulary until
-CV-B/CV-C2 land; unselected branches are only knowable from the final overlay
-(an honest closing-frame fact); the declared miss rule cannot name a
-non-fragment leaf without the `parentCellId` chain; and equity's overlay has no
-semantic-level selection edges, so its closing frame is evidence-only.
+testimony records none; frame characters, branch markers, section labels and
+duration formatting remain emitter vocabulary until the declared fragments
+land; unselected branches are only knowable from the final overlay (a closing-
+frame fact); the declared miss rule now names unobserved leaves through the
+declared `parentCellId` chain (external `70f60f2`); streamed events carry no
+`outcomeClassification`, so the streamed status source is the declared
+`display.entry.status`; and equity's overlay has no semantic-level selection
+edges, so its closing frame is evidence-only.
 
 ## Honest boundaries
 
