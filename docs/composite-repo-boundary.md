@@ -364,6 +364,8 @@ clean ground, U4 on U2, U5-U7 on U4.
 
 ### U5 — Rebase lifecycle scripts and tests on the kernel ground
 
+**Status 2026-09-18:** `extract-inflight-bundle` homed in the kernel (`SDA:languages/typescript/src/kernel/bootstrap/inflight-bundle.mjs`) and removed from the estate; the remaining U5 scope and order are tracked in [estate-script-severance.md](estate-script-severance.md).
+
 - **Scope:** `scripts/run-query.mjs`, `scripts/run-migration.mjs`,
   `scripts/invoke-from-transaction.mjs`, `scripts/extract-inflight-bundle.mjs`,
   `scripts/verify-timing-coherence.mjs`, `tests/timing-coherence.test.mjs`,
