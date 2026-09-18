@@ -1,112 +1,98 @@
-sfx-embody materializes executable Capability and Scenario bodies from database authority. The database selects the Capability, Scenario, downstream Scenarios, transformations, mechanics and provider bindings. The existing Node projection boundary materializes their native bodies. Paths derive from authority IDs and never establish identity.
+# sfx-embody
 
-[Deterministic scenario experience research](docs/research/scenario-experiences/README.md) inventories all 824 selected scenarios and 630 contracts, analyzes input-form and outcome-view generation, and proposes a presentation architecture and acceptance criteria. The accompanying census and renderer probes are research artifacts; the proposed capability is not implemented.
+The declared estate. This repository holds **no execution code** — it is the
+database authority's authoring surface, the client configuration, and the
+evidence record.
 
-[Scenario experience opportunity](docs/research/scenario-experiences/opportunity.md) assesses the team's review and documents the proposed four-layer architecture, the role of a Scenario Experience Plan, product implications, and the evidence needed for experience delivery and cross-target parity.
+What lives here:
 
-[SideFX ML opportunity](docs/research/ml-opportunity/README.md) documents a separate lane for models as capability providers, scenario evaluation, training and promotion, authoring assistance, and learning from execution evidence. It maps existing model-related declarations to the proposed architecture and defines a bounded first proof.
-
-[Hugging Face pilot qualification](docs/research/hugging-face-platform/pilot-qualification.md) records the initial 16 installed-CLI runs and Linux parity. The [live finance deployment](../sfx-platform/docs/live-finance-deployment.md) now runs all three pilots and an actual RapidAPI stock-price request in the private Hugging Face Space through the authenticated Azure service and this database delivery.
-
-[Current repair and acceptance evidence](docs/native-embodiment-repair.md), and [bounded execution closure](docs/bounded-execution-closure.md) records why invoking one capability must expand only the capabilities it declares a dependency on. [Review findings and architectural goals](docs/embodiment-review-findings.md) record the properties the current integrity boundary and oracles are built to hold, and [cross-target embodiment](docs/cross-target-embodiment.md) records what Python and C# require and why declared mechanic meaning had to be closed first. The required meaning already existed. This repair replaces the Expression runtime with native expressions, retains declared lexical bindings, fixes weakened contract types, and adds inverse transformation checks. Full Capability/Scenario round-trip equivalence remains an explicit acceptance obligation.
-
-| Directory | Contents |
+| Path | Contents |
 | --- | --- |
-| src/ | Database reader, materializer, language resolvers, native Reveal and verification |
-| scripts/ | Regression, audit, reporting and baseline commands |
-| sql/ | The database-change authority: installed views and procedures (`sql/schema/`), one-off data migrations (`sql/migrations/`), and the change lifecycle (`sql/README.md`) |
-| tests/ | Resolver regression tests |
-| config/ | Workspace paths and Capability/Scenario selections |
-| embodiments/ | Capability → scenarios → Scenario → language → body and evidence |
-| evidence/ | Local database query results, regression results and review evidence; ignored by Git |
-| evidence/history/ | Local historical exploration records and superseded review specimens |
-| docs/ | Current implementation findings and acceptance limits |
-| baselines/ | Frozen original source, bodies and evidence with byte manifests |
+| `sql/` | The database-change authority: installed views and procedures (`sql/schema/`), migrations (`sql/migrations/`), and the change lifecycle (`sql/README.md`) |
+| `config/` | Host and invocation configuration (kernel selection, workspace data); no credentials |
+| `sfx.config.json` | The process deliveries the CLI drives — they invoke the **installed kernel executable** |
+| `docs/` | The architecture, product and decision record (see the document map below) |
+| `evidence/` | Local receipts and captures (ignored by Git) |
+| `AGENTS.md`, `.opencode/`, `.claude/` | Agent guidance and skills for the change lifecycle |
 
-Every directory named evidence and every embodiment.receipt.json file is ignored by Git, including those inside Scenarios and frozen baselines. Generated bodies remain version controlled. Verification and audit commands recreate current evidence and receipts locally; historical baseline verification requires its saved local evidence and receipts.
+## How execution works now
 
-## Database-only change lifecycle
-
-Capability meaning is authored in the database, so every change is a `.sql` migration under `sql/migrations/`, installed and verified without editing the runtime. The process is evidence-first and preflight-verified:
-
-1. capture the working generation (`evidence/<capability>/`),
-2. author one idempotent migration that opens its own transaction and ends in `ROLLBACK`,
-3. dry-run it: `node ../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/run-migration.mjs sql/migrations/<file>.sql`,
-4. preflight the invocation from the uncommitted transaction:
-   `node ../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/invoke-from-transaction.mjs sql/migrations/<file>.sql <capabilityId> <input.json>`,
-5. install the committed copy, verify with `sfx capability invoke`, then commit.
-
-Read [sql/README.md](sql/README.md) for the rules and why they exist. Agents: the same lifecycle is in [AGENTS.md](AGENTS.md) and the `sidefx-database-change` skill.
-
-[Database invocation investigation](docs/database-direct-invocation.md) follows expanded execution through to live SQL-to-memory invocation. `planNode` produces the same native bytes in memory; `writeNodePlan` is an optional persistence step. The candidate memory loader runs those unchanged bytes and resolves contracts from the in-memory resource map. A restricted-process live proof passed for the provider resolver, and `npm run verify:memory` checks retained-fixture parity across the three configured capabilities. This is a bounded execution proof, not a completed database-native change or capsulization surface.
-
-Invoke from this directory using the project's explicit database process binding:
+The estate declares; the **SDA Kernel executable** resolves and executes. The
+installed executable is selected as host data (per-OS builds; C# on Windows),
+admitted by manifest and digest, and invoked over the closed
+`sfx-command-delivery.v1` envelope protocol.
 
 ```powershell
-sfx capability invoke resolve-sidefx-eligible-providers --input '@examples/provider-resolution.request.json' --json
+sfx capability invoke say-hello-world --input '{}'
+sfx capability invoke resolve-equity-market-price-evidence --display --input AVGO
+sfx capability observe request-capability-from-objective --input "What is Broadcom's current market price?" --json
 ```
 
-The same database surface now also lists, finds, reveals and observes
-capabilities. [The database capability command surface](docs/capability-command-surface.md)
-records every offered command, the declared chain `sfx capability reveal --as meaning`
-walks to tell a capability's canonical story, and what was actually exercised.
-`sfx capability reveal <id> --as meaning --format markdown` renders that story as
-review-ready documentation with declared-relationship diagrams.
-`sfx capability observe` runs exactly what `invoke` runs and streams the
-delivery's execution telemetry to stderr as it arrives.
+The invocation path reads declared authority from the database, resolves
+credentials from the **secrets vault** (never the process environment), and
+executes through the installed kernel. No `scenario-driven-architecture`
+source path, read grant, or build step participates at runtime.
 
-The exercised command returned exit 0 and `PROVIDERS_RESOLVED`. It reads the
-capability and declared root Scenario from SQL, plans the selected native body,
-executes it in memory, and returns the kernel result and authority/storage
-evidence. Invocation is direct: any selected capability can be invoked without
-a preparation prerequisite. The optional `sfx capability prepare` retains a
-proved preparation in SQL but is never consumed by invocation; deliberately open
-contract positions now project as `unknown[]` or `Record<string, unknown>`
-instead of blocking planning. Install
-the current `sidefx-cli` and prepare the dependencies described below first.
-`scripts/verify-sfx-invocation.ps1` repeats the native success and failure checks.
-The sample input is retained fixture authority for the pure provider resolver;
-it does not call or admit an external provider. Database revision authoring and
-capsulization are still separate work. The [scaffold assessment](docs/scaffold-invocation-rapidapi.md)
-records how far direct invocation carries the scaffold capability and what the
-remaining hold is.
+## The discipline
 
-| Scenario | Executable code |
+Everything executable is either **declared (1)** — language-invariant rows —
+or an **admitted resolver (0)** in the SDA Kernel. There is no third place.
+Boot, the DB ground, the bootstrap installer and the physical carriers are
+resolver (0); capability, contracts, scenarios, operations, transformations,
+mechanics, bindings and host selection are declared (1). Models reason only
+inside a governed declared lane and never hold execution authority.
+
+Read [docs/architecture-achieved.md](docs/architecture-achieved.md) for the
+achieved state and the canonical/stale document map, and
+[docs/product-flywheel.md](docs/product-flywheel.md) for the compounding loops.
+
+## Document map
+
+| Concern | Canonical document |
 | --- | --- |
-| adapt-job-market-intelligence-evidence | [Scenario](embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/scenario.mjs), [port](embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/providers/adapt-job-market-intelligence-evidence-port.mjs), [composition](embodiments/adapt-job-market-intelligence-evidence/scenarios/adapt-job-market-intelligence-evidence/node/body/composition.mjs) |
-| bind-jmi-adapter-receipt | [Scenario](embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/scenario.mjs), [port](embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/providers/bind-jmi-adapter-receipt-port.mjs), [composition](embodiments/adapt-job-market-intelligence-evidence/scenarios/bind-jmi-adapter-receipt/node/body/composition.mjs) |
-| verify-jmi-record-binding | [Scenario](embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/scenario.mjs), [port](embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/providers/verify-jmi-record-binding-port.mjs), [composition](embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-record-binding/node/body/composition.mjs) |
-| verify-jmi-type-admission | [Scenario](embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-type-admission/node/body/scenario.mjs), [port](embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-type-admission/node/body/providers/verify-jmi-type-admission-port.mjs), [composition](embodiments/adapt-job-market-intelligence-evidence/scenarios/verify-jmi-type-admission/node/body/composition.mjs) |
-| admit-canonical-circuit-blueprint | [Scenario](embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/scenario.mjs), [port](embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/providers/admit-canonical-circuit-blueprint-port.mjs), [composition](embodiments/admit-canonical-circuit-blueprint/scenarios/admit-canonical-circuit-blueprint/node/body/composition.mjs) |
-| emit-immutable-blueprint-authority | [Scenario](embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/scenario.mjs), [port](embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/providers/emit-immutable-blueprint-authority-port.mjs), [composition](embodiments/admit-canonical-circuit-blueprint/scenarios/emit-immutable-blueprint-authority/node/body/composition.mjs) |
-| require-blueprint-conformance-evidence | [Scenario](embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/scenario.mjs), [port](embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/providers/require-blueprint-conformance-evidence-port.mjs), [composition](embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-conformance-evidence/node/body/composition.mjs) |
-| require-blueprint-geometry-proof | [Scenario](embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/scenario.mjs), [port](embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/providers/require-blueprint-geometry-proof-port.mjs), [composition](embodiments/admit-canonical-circuit-blueprint/scenarios/require-blueprint-geometry-proof/node/body/composition.mjs) |
-| require-current-approved-review-receipt | [Scenario](embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/scenario.mjs), [port](embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/providers/require-current-approved-review-receipt-port.mjs), [composition](embodiments/admit-canonical-circuit-blueprint/scenarios/require-current-approved-review-receipt/node/body/composition.mjs) |
-| resolve-sidefx-eligible-providers | [Scenario](embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/scenario.mjs), [port](embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/providers/resolve-sidefx-eligible-providers-port.mjs), [composition](embodiments/resolve-sidefx-eligible-providers/scenarios/resolve-sidefx-eligible-providers/node/body/composition.mjs) |
+| Achieved architecture (estate) | `docs/architecture-achieved.md` |
+| Achieved kernel architecture (SDA) | `../scenario-driven-architecture/docs/kernel-architecture-achieved.md` |
+| The resolver/declared law | `docs/transistor-model.md` |
+| Target architecture | `docs/target-architecture.md` |
+| Governed model harness / agent lane | `docs/agent-lane.md` |
+| Trust, non-disclosure, timing coherence | `docs/invisible-execution-authority.md`, `docs/vault-manager-capabilities.md` |
+| Composite repo boundary | `docs/composite-repo-boundary.md` |
+| Kernel install matrix | `docs/kernel-install-matrix.md` |
+| Retirement/homing ledgers | `docs/hand-authored-code-retirement*.md`, `docs/sda-capabilities-blast-radius.md`, `docs/sda-tools-uid-homing.md` |
+| Database change lifecycle | `sql/README.md`, `AGENTS.md` |
 
-The same implementation passes 17/17 retained fixtures across three Capabilities and ten Scenarios, with 64 native port comparisons against the selected provider and 320 real kernel observations. All 994 expression regions recover their transformation authority. A 200-vector corpus checks all 32 pure mechanics implemented by that provider, including native syntax recovery. All 21 declared conformance references the retained lineage uses now resolve at the pinned commit; binding each to its vectors remains outstanding. Contract evidence includes 2337 TypeScript assignments, 976 required compiler rejections, and 25764 runtime vectors.
+`docs/architecture-achieved.md` carries the explicit **stale-document list**
+and what supersedes each entry. Historical material — the materializer era,
+retained baselines and generated embodiments — remains in Git history; the
+`embodiments/`, `providers/`, `baselines/`, `src/`, `scripts/` and `tests/`
+trees no longer exist in this repository.
 
-The body contains no numbered expression variables, numbered state variables, numbered dependency aliases, generic Expression runtime, or mechanic dictionary. Contracts are TypeScript projections; the original JSON Schemas remain runtime admission authority. The real SDA Scenario Kernel, admission provider and native helper dependencies remain visible under body/providers/.
+## Changing the estate
 
-[NodeConsumerObjectProvider](src/resolvers/node/consumer-object-provider.mjs) implements the existing SDA ConsumerApplicationProvider.render protocol as a candidate native provider. [Native expression projection](src/resolvers/node/native-expression-projection.mjs) supplies Node syntax, lexical scoping and physical source maps. [Reveal](src/reveal-native-expressions.mjs) reads actual native syntax; [verification](src/verification/verify-native-projection.mjs) compares recovered transformations and execution with separately retained authority and the selected provider. The existing SDA graph and type builders remain in use.
+Every change is a `.sql` migration under `sql/migrations/`, authored to open its
+own transaction and end in `ROLLBACK`, dry-run, preflighted from the uncommitted
+transaction against the live circuit, then installed from a committed copy and
+verified with `sfx capability invoke`. The rules and exact commands are in
+[sql/README.md](sql/README.md) and [AGENTS.md](AGENTS.md); the lifecycle is
+enforced by the SDA Kernel's lifecycle tools, not by estate scripts.
 
-Use Node.js 20 or later. Full regeneration requires the loaded SideFX Database workspace and the Scenario Driven Architecture workspace, including its built tools and Node kernel. Their locations are configuration data in [regression.cases.json](config/regression.cases.json). All configured paths, including selection and retained bundle locations, resolve against that file; absolute locations are also supported. The default layout is sfx-embody and scenario-driven-architecture under repos/, with sidefx-database alongside repos/. The database workspace owns its dependencies, local snapshot store and connection configuration (sidefx-connection-string); credentials are not part of this repository.
+Expansion is declaration-only: a new capability is contracts, scenarios,
+operations, transformations, mechanics and provider bindings — rows, preflight,
+evidence. No runtime build and no language code are required to add meaning.
 
-The selected database authority pins the SDA checkout to 716811046f52dd2a67f9ff308a50d755571cbbad. Prepare that checkout with its dependency installation and npm run build:tools before regenerating. The materializer verifies the selected source revision and source digests. An unavailable or different provider remains a hold. Retained baselines and historical reports preserve their original paths; current evidence records the folder where the latest verification actually ran. Git preserves exact bytes for digest-bearing files.
+## Install or select a kernel
 
-Reproduce from this directory (npm test runs independently of the database):
+The kernel installer is resolver (0) in the SDA Kernel, implemented per language
+(Node, Python, C#). Publishing stages a deterministic artifact set, installs it
+to a digest-named immutable root with a `sfx-kernel-install-manifest.v1`
+manifest and receipt, and can switch this estate's deliveries to the installed
+executable. Per-OS RIDs, install roots, vault realizations and selection rules
+are recorded in [docs/kernel-install-matrix.md](docs/kernel-install-matrix.md).
 
-```powershell
-npm ci --ignore-scripts --no-audit --no-fund
-npm test
-npm run verify:estate
-npm run audit:source
-npm run audit:lowering
-npm run report
-```
+## Known limits (schedule, not architecture)
 
-The regression and four resolver tests passed with exit code 0. The local evidence/regression-results.json retains exact component digests, database pins, dependency installation results and receipt hashes. Selection inputs live under config/selections/, and local database bundles live under evidence/authority/. Regeneration holds on unsupported topology or unavailable/ambiguous providers and protects edits to previously generated files. Historical specimens under evidence/history/ retain the context of their original run and are not current verification commands.
-
-Receipts state EXECUTION_CHECKS_PASSED and NOT_REQUESTED for managed admission. They bind contract, native projection and lineage proof digests. Child Scenario testimony identifies its parent-fixture scope. These results do not claim universal Capability coverage, full governed Reveal/Compare, authority/database round trips or Cross-Apply to other languages. The separate sfx invocation above exercises the candidate database provider; no database admission write is claimed.
-
-[Frozen original baseline](baselines/bbf0345d901983b6c0eeab449c2842419a3154b56bf2d04a973cf51c6974d66a/baseline.manifest.json). Its 17-fixture evidence and original bodies remain inspectable.
+Named and tracked in `docs/architecture-achieved.md` §9: C# filesystem-write
+enforcement requires a launch-profile mechanism (`NOT_ENFORCED_MANAGED_HOST`);
+macOS/Linux kernel builds are owed; the Python kernel's observe path awaits its
+registry/declared-application seam. None of these change what is declared or
+how meaning executes.
