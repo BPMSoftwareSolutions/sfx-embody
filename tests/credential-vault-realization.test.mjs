@@ -4,12 +4,13 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { randomUUID } from 'node:crypto';
-import { executeDatabaseCommand, executeEstateCapability } from '../src/invoke-database-capability.mjs';
+import { executeDatabaseCommand } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/command-carrier.mjs';
+import { executeDeclaredCapability } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/declared-operation-carrier.mjs';
 import { CREDENTIAL_STORE_REALIZATION_MECHANIC_ID, resolveCredentialVaultLocators,
-  resolveCredentialVaultLocatorsInGraphSource, resolveDeclaredEnvironmentReference } from '../src/credential-vault-realization.mjs';
-import { withDatabaseReadSession } from '../src/database-read-session.mjs';
-import { readAuthority } from '../src/read-authority.mjs';
-import { readExecutionDelivery } from '../src/read-execution-delivery.mjs';
+  resolveCredentialVaultLocatorsInGraphSource, resolveDeclaredEnvironmentReference } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/credential-realization.mjs';
+import { withDatabaseReadSession } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/database-read-session.mjs';
+import { readAuthority } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/authority-read.mjs';
+import { readExecutionDelivery } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/delivery-read.mjs';
 
 const KEY_BYTES = Array.from(Buffer.from('0123456789abcdef0123456789abcdef', 'utf8'));
 const KEY_SENTINELS = [Buffer.from(KEY_BYTES).toString('base64'), Buffer.from(KEY_BYTES).toString('hex'), '0123456789abcdef'];
@@ -71,8 +72,15 @@ function bundleFor(configuration) {
   };
 }
 
+function fixtureMechanic(binding) {
+  const provider = binding?.configuration?.estateProvider;
+  if (!provider || typeof provider.module !== 'string' || typeof provider.export !== 'string') return null;
+  return import(provider.module).then(module => typeof module[provider.export] === 'function' ? module[provider.export] : null);
+}
+
 function estateContext(configuration, overrides = {}) {
-  return { sdaRoot: process.cwd(), readAuthority: async () => bundleFor(configuration), ...overrides };
+  return { sdaRoot: process.cwd(), resolveMechanic: fixtureMechanic,
+    readAuthority: async () => bundleFor(configuration), ...overrides };
 }
 
 const identity = { snapshotId: 'snapshot', projectionDigest: 'projection', viewDefinitionDigest: 'views', truncated: false };
@@ -88,10 +96,11 @@ function commandContext(configuration) {
   const subject = { capabilityId: 'example', scenarios: [], executionAuthorities: [] };
   return { databaseRoot: 'unused', sdaRoot: process.cwd(), observations,
     onObservation: observation => { observations.push(observation); },
+    resolveMechanic: fixtureMechanic,
     readQuery: async () => ({ ...identity, recordsets: [
       [{ provider_id: 'delivery', configuration: JSON.stringify({ capabilityId: 'run-declared-graph', requestExpression: {}, resultExpression: {} }) }],
       [{ default_target: 'node' }]] }),
-    readAuthority: async (_, selection) => ({ selection,
+    readAuthority: async selection => ({ selection,
       authority: { ...identity, recordsets: [[{ scenario_id: selection.capabilityId === 'run-declared-graph' ? 'executor' : 'root' }]] },
       closure: { recordsets: [[]] },
       graphSource: structuredClone(selection.capabilityId === 'run-declared-graph' ? executor : subject) }) };
@@ -99,7 +108,7 @@ function commandContext(configuration) {
 
 test('the declared provider profile resolves the realization into the kernel host overrides', async () => {
   const context = estateContext(bindingConfiguration());
-  const result = await executeEstateCapability({ capabilityId: 'fixture' }, { input: null }, context);
+  const result = await executeDeclaredCapability({ capabilityId: 'fixture' }, { input: null }, context);
   assert.equal(result.outcome.realizationId, 'fixture-credential-store');
   assert.equal(result.outcome.sealed, false);
   assert.equal(result.outcome.releasedKeyBytes, 32);
@@ -109,15 +118,15 @@ test('the declared provider profile resolves the realization into the kernel hos
 test('the resolution is cached for the invocation and never written onto the context', async () => {
   globalThis.__fixtureRealizationCreations = 0;
   const context = estateContext(bindingConfiguration());
-  await executeEstateCapability({ capabilityId: 'fixture' }, { input: null }, context);
-  await executeEstateCapability({ capabilityId: 'fixture' }, { input: null }, context);
+  await executeDeclaredCapability({ capabilityId: 'fixture' }, { input: null }, context);
+  await executeDeclaredCapability({ capabilityId: 'fixture' }, { input: null }, context);
   assert.equal(globalThis.__fixtureRealizationCreations, 1);
   assert.equal(context.effectContextOverrides, undefined);
   assert.equal(Object.keys(context).includes('credentialStoreRealization'), false);
 });
 
 test('an undeclared realization injects nothing and never falls back to environment credentials', async () => {
-  const result = await executeEstateCapability({ capabilityId: 'fixture' }, { input: null },
+  const result = await executeDeclaredCapability({ capabilityId: 'fixture' }, { input: null },
     estateContext(bindingConfiguration({ declaration: false })));
   assert.equal(result.outcome.realizationId, 'unavailable');
   assert.equal(result.outcome.sealed, true);
@@ -133,7 +142,7 @@ test('a broken or absent declared realization fails closed with the declared pro
     bindingConfiguration({ exportName: 'missingExport' }),
     bindingConfiguration({ exportName: 'notARealization' })
   ]) {
-    const result = await executeEstateCapability({ capabilityId: 'fixture' }, { input: null }, estateContext(configuration));
+    const result = await executeDeclaredCapability({ capabilityId: 'fixture' }, { input: null }, estateContext(configuration));
     assert.equal(result.outcome.realizationId, 'fixture-credential-store-provider.v1');
     assert.equal(result.outcome.sealed, true);
     assert.equal(result.outcome.releasedKeyBytes, 0);
@@ -141,7 +150,7 @@ test('a broken or absent declared realization fails closed with the declared pro
 });
 
 test('a sealed realization refuses without releasing key bytes', async () => {
-  const result = await executeEstateCapability({ capabilityId: 'fixture' }, { input: null },
+  const result = await executeDeclaredCapability({ capabilityId: 'fixture' }, { input: null },
     estateContext(bindingConfiguration({ exportName: 'sealedRealization' })));
   assert.equal(result.outcome.realizationId, 'fixture-sealed-store');
   assert.equal(result.outcome.sealed, true);
@@ -150,7 +159,7 @@ test('a sealed realization refuses without releasing key bytes', async () => {
 
 test('an explicit boot-supplied realization takes precedence over the declared profile', async () => {
   const bootRealization = { realizationId: 'boot-supplied-store', releaseKeyHandle: () => ({ sealed: true }) };
-  const result = await executeEstateCapability({ capabilityId: 'fixture' }, { input: null },
+  const result = await executeDeclaredCapability({ capabilityId: 'fixture' }, { input: null },
     estateContext(bindingConfiguration(), { effectContextOverrides: { credentialStoreRealization: bootRealization } }));
   assert.equal(result.outcome.realizationId, 'boot-supplied-store');
   assert.equal(result.outcome.sealed, true);
@@ -248,7 +257,7 @@ test('the installed non-disclosure read reproduces the sweep verdict from live o
     assert.ok(sessionEvidence);
     const context = { databaseRoot: runtime.databaseRoot, sdaRoot: runtime.sdaRoot, estateRoot: path.resolve('.'),
       readQuery,
-      readAuthority: (_, selection, options) => readAuthority(runtime.databaseRoot, selection, { ...options, query: readQuery }) };
+      readAuthority: (selection, options) => readAuthority(selection, { ...options, query: readQuery }) };
     context.deliveryTarget = (await readExecutionDelivery(context)).defaultTarget;
     const read = async input => {
       const execution = await executeDatabaseCommand({ deliveryType: 'sfx-command-delivery.v1', operation: 'invoke',

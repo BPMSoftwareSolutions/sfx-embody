@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { validateDatabaseCommand, executeDatabaseCommand, createObservationFilter } from '../src/invoke-database-capability.mjs';
+import { validateDatabaseCommand, executeDatabaseCommand, createObservationFilter } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/command-carrier.mjs';
 
 // Observation retirement W4.1: the drilldown module is gone. The stream is the
 // kernel's declared testimony, scoped by the interface's declared readings; the
@@ -133,10 +133,16 @@ function context() {
   const reads = [], observations = [];
   return { databaseRoot: 'unused', reads, observations,
     onObservation: observation => observations.push(observation),
+    resolveMechanic: async binding => {
+      const provider = binding?.configuration?.estateProvider;
+      if (!provider || typeof provider.module !== 'string' || typeof provider.export !== 'string') return null;
+      const module = await import(provider.module);
+      return typeof module[provider.export] === 'function' ? module[provider.export] : null;
+    },
     readQuery: async () => ({ ...identity, recordsets: [[{ provider_id: 'delivery',
       configuration: JSON.stringify({ capabilityId: 'run-declared-graph', requestExpression: {}, resultExpression: {} }) }],
       [{ default_target: 'node' }]] }),
-    readAuthority: async (_, selection) => {
+    readAuthority: async selection => {
       reads.push(selection);
       const isExecutor = selection.capabilityId === 'run-declared-graph';
       return { selection, authority: { ...identity, recordsets: [[{ scenario_id: isExecutor ? 'executor' : 'root' }]] },

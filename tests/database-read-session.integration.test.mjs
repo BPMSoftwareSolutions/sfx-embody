@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import { EventEmitter } from 'node:events';
-import { withDatabaseReadSession } from '../src/database-read-session.mjs';
+import { withDatabaseReadSession } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/database-read-session.mjs';
 
 const enabled = process.env.SFX_DATABASE_INTEGRATION === '1';
 

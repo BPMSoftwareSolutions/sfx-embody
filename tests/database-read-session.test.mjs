@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { EventEmitter } from 'node:events';
 import { createHash } from 'node:crypto';
-import { withDatabaseReadSession } from '../src/database-read-session.mjs';
+import { withDatabaseReadSession } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/database-read-session.mjs';
 
 const digest = value => 'sha256:' + createHash('sha256').update(value).digest('hex');
 const stable = JSON.stringify;

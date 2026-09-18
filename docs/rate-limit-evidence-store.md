@@ -78,7 +78,7 @@ one.
 ## Alternatives considered
 
 - **Receipt rows published into the model by a migration per run** (mirroring
-  `publish-projected-bodies.mjs`). Rejected for now: it needs a semantic kind
+  the retired `publish-projected-bodies` generator, estate U5c). Rejected for now: it needs a semantic kind
   the model does not have (SDA schema), it turns every run into an install,
   and the first consumer (the selection) can receive receipts as input. Kept as
   the trigger above.

@@ -81,6 +81,39 @@ this unit's).
 
 ---
 
+## 1.1 U5c outcome — the remaining execution scripts severed (2026-09-18)
+
+`sfx-embody/scripts/` no longer exists. Every remaining execution script was
+deleted after a live declared replacement or an admitted kernel conformance
+ground; the inventory rows in §2.1 (and the pre-U5c `run-migration` /
+`invoke-from-transaction` / `run-query` rows) are historical.
+
+| Script (deleted) | Replacement / declared ground | Proof |
+|---|---|---|
+| `publish-projected-bodies.mjs` | none (materialization is eliminated; the projector database-artifact target was reverted in SDA M1, and `read-projected-bodies` is the declared read for the installed generation) | consumer sweep + `sfx capability invoke read-projected-bodies` live receipt (`evidence/vault-20260916/u5a/`) |
+| `verify-timing-coherence.mjs` | kernel conformance command `SDA:languages/typescript/src/kernel/bootstrap/timing-coherence.mjs`; the declared `read-invocation-timing` remains the acceptance authority; `npm run verify:timing` runs it | live receipt `evidence/vault-20260916/u5c/timing-coherence.receipt.json` — `TIMING-COHERENT`, windows **715 / 179 / 181 / 460**, every residual zero or named |
+| `verify-projected-testimony.mjs` | admitted SDA conformance probe `SDA:conformance/projected-testimony/verify-projected-testimony.mjs`; the kernel-side cross-target conformance is the SDA emitter test (SDA `a696fdd`, `0bff62b`) | `evidence/vault-20260916/u5c/projected-testimony.conformance.json` + the probe's live report |
+| `projected-performance.mjs` | admitted SDA conformance harness `SDA:conformance/projected-performance/projected-performance.mjs`; per-cell timing is read from the kernel testimony fields | `evidence/vault-20260916/u5c/projected-performance.report.json` — `ADMITTED`, per-cell timing `AVAILABLE` on node/python/csharp |
+
+The independent oracle (retired from `src/timing-coherence.mjs` at W2.1) is
+inlined in the kernel command and its six pure cases are also an admitted kernel
+conformance test (`SDA:languages/typescript/runtimes/node/timing-coherence.conformance.test.mjs`);
+the estate test imports that home. The projected probes keep `--expect-closed`
+semantics; on the committed equity workspace they report `TESTIMONY OPEN`
+because the committed bodies predate the emitters — the regenerated projection
+closes timing and lands `observedPathDigest`/`resolverTestimony` on every
+target. The remaining equity-fixture case is a reported kernel field: python
+testimony still carries semantic-normalized `cellId`s, so canonical-cell-id
+membership and cross-walker set equality cannot be asserted on that fixture;
+cross-target digest equality is asserted on the shared chaining fixtures.
+
+**Proof sweep (U5c):** `git ls-files scripts/` = 0 and no `.mjs` under
+`scripts/**` (tests/docs excluded). Estate `npm test` 71 pass / 0 fail /
+6 skipped; SDA TypeScript 5/5; live invoke/observe digests unchanged. No estate
+script remains.
+
+---
+
 ## 2. Inventory — every estate execution script and `src/` execution role
 
 Consumers are repo-wide (`src/`, `scripts/`, `tests/`, `sql/`, config, docs);
@@ -189,10 +222,10 @@ receipt; nothing here restarts the full U5 as one unit.
 | `run-migration` | live (documented install path); DB edge open (U5a) |
 | `invoke-from-transaction` | live (documented preflight path); DB edge open (U5a) |
 | `run-query` | live only as the documented executor of `queries/list-projected-bodies.sql`; DB edge open (U5b) |
-| `verify-timing-coherence` | live (`npm run verify:timing`, test oracle); DB edge open (U5c) |
-| `verify-projected-testimony` | live harness; no DB edge; retires on SDA 7/8 (U5c) |
-| `projected-performance` | live harness; no DB edge; W2 trigger (U5c) |
-| `publish-projected-bodies` | live generator; no DB edge; retires on SDA request 9 (U5c) |
+| `verify-timing-coherence` | **retired (U5c)**: kernel command + `read-invocation-timing`; `npm run verify:timing` |
+| `verify-projected-testimony` | **retired (U5c)**: SDA conformance probe |
+| `projected-performance` | **retired (U5c)**: SDA conformance harness |
+| `publish-projected-bodies` | **retired (U5c)**: materialization eliminated; declared `read-projected-bodies` |
 | `verify-declared-provider-authority` | already deleted in estate `1ea2b9c` (no live file); not in this inventory |
 | `extract-inflight-bundle` | **severed**: kernel lifecycle tool; estate file deleted |
 
@@ -211,7 +244,7 @@ receipt; nothing here restarts the full U5 as one unit.
 | 3 | `scripts/run-migration.mjs:14,21` | `SIDEFX_DATABASE_ROOT` + `DB` connection/runner (D4) | U5a |
 | 4 | `scripts/invoke-from-transaction.mjs:20` | hardcoded `DB` root + imports (D5) | U5a |
 | 5 | `scripts/run-query.mjs:9` | `SIDEFX_DATABASE_ROOT` + `DB` import (D3) | U5b |
-| 6 | `scripts/verify-timing-coherence.mjs:194` | `SIDEFX_DATABASE_ROOT` + `DB` imports (D7) | U5c |
+| 6 | ~~`scripts/verify-timing-coherence.mjs:194`~~ | `SIDEFX_DATABASE_ROOT` + `DB` imports (D7) — **closed by U5c** (script deleted; kernel command uses the kernel ground) | U5c |
 | 7 | `config/database-runtime.json:3` | `"databaseRoot": "../../../sidefx-database"` (D8) | U5a/U5d |
 | 8 | `config/regression.cases.json:2` | `databaseRoot` for tests (D9) | U5e |
 | 9 | `tests/timing-coherence.test.mjs:138-159`; `tests/demo-acceptance.test.mjs:23-74`; `tests/credential-vault-realization.test.mjs:224-251`; `tests/database-read-session.integration.test.mjs:12`; `tests/execution-drilldown.test.mjs:134`; `tests/semantic-address.test.mjs:84`; `tests/invocation-read.test.mjs:112` | `DB`-rooted fixtures/placeholders (D10–D14) | U5e |

@@ -7,23 +7,14 @@
       "command": "node",
       "cwd": ".",
       "args": [
-        "--experimental-vm-modules",
         "--experimental-permission",
         "--allow-addons",
         "--allow-child-process",
-        "--allow-fs-read=./src",
         "--allow-fs-read=./providers",
-        "--allow-fs-read=./config",
-        "--allow-fs-read=./node_modules",
-        "--allow-fs-read=./package.json",
-        "--allow-fs-read=C:\\Users\\*\\AppData\\Local\\sfx",
         "--allow-fs-read=../scenario-driven-architecture",
-        "--allow-fs-read=../../sidefx-database/src",
-        "--allow-fs-read=../../sidefx-database/config",
-        "--allow-fs-read=../../sidefx-database/sql",
-        "--allow-fs-read=../../sidefx-database/node_modules",
-        "--allow-fs-read=../../sidefx-database/package.json",
-        "src/database-delivery.mjs", "config/database-runtime.json"
+        "--allow-fs-read=C:\\Users\\*\\AppData\\Local\\sfx",
+        "../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/entry.mjs",
+        "--stdin-envelope"
       ]
     },
     "database-projection": {
@@ -31,7 +22,8 @@
       "command": "node",
       "cwd": ".",
       "args": [
-        "src/projection-delivery.mjs", "config/database-runtime.json"
+        "../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/entry.mjs",
+        "--stdin-envelope"
       ]
     }
   }

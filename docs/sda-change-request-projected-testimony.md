@@ -12,8 +12,10 @@ not parity: python `observedPathDigest: null`, csharp omits
 8 / 112 / 5 on the resolved branch in `docs/projection-performance.md`; 8 / 111 /
 5 on today's F6 provider-unavailable branch). The fix belongs to the SDA
 projection emitters (the generated bodies are owned artifacts; the estate must
-not hand-edit them), so this is the formal request plus
-`scripts/verify-projected-testimony.mjs`, the probe that must flip from
+not hand-edit them), so this is the formal request plus the projected-testimony
+conformance probe (estate U5c homed it at
+`SDA:conformance/projected-testimony/verify-projected-testimony.mjs`; the
+estate `scripts/` copy is deleted), the probe that must flip from
 `TESTIMONY OPEN` to `TESTIMONY CLOSED`.
 
 ## 1. Primitive
@@ -114,7 +116,9 @@ canonical `cellId`.
 
 - The testimony shape is the kernel's observable contract, not a projection
   choice: `sfx capability observe`, the estate's planned-vs-observed overlay and
-  `scripts/projected-performance.mjs` read the same keys from every target.
+  the projected-performance conformance harness
+  (`SDA:conformance/projected-performance/projected-performance.mjs`) read the
+  same keys from every target.
   Cross-language comparison is only meaningful if all three speak the kernel's
   field names and digest semantics.
 - Field names and units cannot be "selected as data": the testifying code is
@@ -187,7 +191,9 @@ emitters and their regenerated bodies). No java/go consumer target exists today
   `sha256:6d8e145c…` shared by all three).
 - Regeneration: `sfx capability project resolve-equity-market-price-evidence
   --workspace embodiments/resolve-equity-market-price-evidence --full-mechanics`.
-- Estate acceptance probe: `scripts/verify-projected-testimony.mjs`.
+- Acceptance probe (estate U5c): `SDA:conformance/projected-testimony/verify-projected-testimony.mjs`
+  (the estate `scripts/verify-projected-testimony.mjs` is deleted; the kernel
+  ground owns the probe).
 
 ## 6. Evidence — the gaps as re-verified 2026-09-15
 
@@ -198,7 +204,7 @@ prebuilt dll launched from `bin/Debug/net10.0`):
 node embodiments/resolve-equity-market-price-evidence/projected/node/resolve-equity-market-price-evidence-cli.generated.mjs --fixture=equity-qqq-evidence-resolves
 python embodiments/resolve-equity-market-price-evidence/projected/python/consumer.generated.py --fixture=equity-qqq-evidence-resolves
 dotnet embodiments/resolve-equity-market-price-evidence/projected/csharp/bin/Debug/net10.0/ProjectedConsumerCli.dll --fixture=equity-qqq-evidence-resolves
-node scripts/verify-projected-testimony.mjs
+node ../scenario-driven-architecture/conformance/projected-testimony/verify-projected-testimony.mjs
 ```
 
 Observed (all three: exit 0, `disposition=terminated`,
@@ -255,7 +261,7 @@ After the emitters change and the estate regenerates
 (`sfx capability project … --full-mechanics`):
 
 ```
-node scripts/verify-projected-testimony.mjs --expect-closed
+node ../scenario-driven-architecture/conformance/projected-testimony/verify-projected-testimony.mjs --expect-closed
 ```
 
 prints `TESTIMONY CLOSED` and exits 0 — for the F6 provider-unavailable fallback

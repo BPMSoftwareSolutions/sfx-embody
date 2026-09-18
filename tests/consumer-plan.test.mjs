@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readExecutionDelivery } from '../src/read-execution-delivery.mjs';
+import { readExecutionDelivery } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/delivery-read.mjs';
 
 test('execution delivery reads its capability, mappings and default target from declarations', async () => {
   const result = { recordsets: [[{ provider_id: 'declared-cli', configuration: JSON.stringify({ capabilityId: 'declared-executor',

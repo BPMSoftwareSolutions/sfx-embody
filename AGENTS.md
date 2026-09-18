@@ -32,7 +32,8 @@ The lifecycle's database ground is the SDA kernel bootstrap: the migration
 runner and the from-transaction preflight live at
 `../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/`
 (`run-migration.mjs`, `invoke-from-transaction.mjs`). No estate script executes
-SQL or reads arbitrary `.sql` files.
+SQL or reads arbitrary `.sql` files. Verification is a declared reading/receipt
+or an admitted SDA conformance tool; no estate execution script remains.
 
 1. **Evidence first.** Establish the working generation for the capability: a
    readable bundle under `evidence/<capability>/` or an extracted
@@ -69,6 +70,9 @@ SQL or reads arbitrary `.sql` files.
 | `node ../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/run-migration.mjs <file.sql>` | Run a migration as authored (no outer transaction). |
 | `node ../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/invoke-from-transaction.mjs <file.sql> <capabilityId> [input.json]` | Preflight: apply uncommitted, invoke, roll back. |
 | `sfx capability invoke read-projected-bodies --input '{"capabilityId":"<id>"}' --json` | Read a capability's projected bodies and hot-path isolation counts (declared read; replaces `run-query`). |
+| `npm run verify:timing` | IEA timing acceptance through the SDA kernel command (`SDA:languages/typescript/src/kernel/bootstrap/timing-coherence.mjs`); writes the receipt under `evidence/vault-20260916/u5c/`. Run from the estate root. Replaces `scripts/verify-timing-coherence.mjs`. |
+| `npm run verify:projected-testimony` | Projected-testimony conformance through the SDA conformance probe (`SDA:conformance/projected-testimony/verify-projected-testimony.mjs`); replaces `scripts/verify-projected-testimony.mjs`. |
+| `npm run verify:projected-performance` | Projected cross-language performance through the SDA conformance harness (`SDA:conformance/projected-performance/projected-performance.mjs`); replaces `scripts/projected-performance.mjs`. |
 | `npm run verify:estate` | Regression cases. |
 | `npm run verify:memory` | Retained-fixture parity. |
 | `sfx capability invoke <identity> --input '@file.json' --json` | Real-surface invocation. |

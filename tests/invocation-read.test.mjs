@@ -1,7 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readAuthority } from '../src/read-authority.mjs';
-import { executeDatabaseCommand, executeEstateCapability } from '../src/invoke-database-capability.mjs';
+import { readAuthority } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/authority-read.mjs';
+import { executeDatabaseCommand } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/command-carrier.mjs';
+import { executeDeclaredCapability } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/declared-operation-carrier.mjs';
 
 const identity = { snapshotId: 'snapshot', projectionDigest: 'projection', viewDefinitionDigest: 'views', truncated: false };
 const graph = { capabilityId: 'example', scenarios: [], executionAuthorities: [],
@@ -112,13 +113,19 @@ function context({ mismatch, executorModule = fixtureModule, readerGraph } = {})
   return { databaseRoot: 'unused', reads, queries, observations,
     evaluateExpression: expression => expression.value,
     onObservation: observation => { observations.push(observation); },
+    resolveMechanic: async binding => {
+      const provider = binding?.configuration?.estateProvider;
+      if (!provider || typeof provider.module !== 'string' || typeof provider.export !== 'string') return null;
+      const module = await import(provider.module);
+      return typeof module[provider.export] === 'function' ? module[provider.export] : null;
+    },
     readQuery: async statement => {
       queries.push(statement);
       assert.match(statement, /executionDelivery/);
       return { ...identity, recordsets: [[{ provider_id: 'delivery', configuration: JSON.stringify({ capabilityId: 'run-declared-graph',
         requestExpression: {}, resultExpression: {} }) }], [{ default_target: 'node' }]] };
     },
-    readAuthority: async (_, selection, options) => {
+    readAuthority: async (selection, options) => {
       reads.push({ selection, options });
       const isExecutor = selection.capabilityId === 'run-declared-graph';
       const isReader = selection.capabilityId === 'read-capability-meaning';
@@ -269,7 +276,7 @@ test('the actual authority reader fetches each graph once and shares mechanics o
     return { ...identity, recordsets: [[]] };
   };
   const config = { ...context(), readQuery: query,
-    readAuthority: (root, selection, options) => readAuthority(root, selection, { ...options, query }) };
+    readAuthority: (selection, options) => readAuthority(selection, { ...options, query }) };
   for (let i = 1; i <= 2; i++) {
     await executeDatabaseCommand(command(null), config);
     assert.equal(calls.length, 6 * i);
@@ -285,7 +292,13 @@ test('retained document recordsets still work for the exported declaration carri
     const recordsets = [[{ scenario_id: 'executor' }], [], []];
     recordsets[index] = [record('execution-authorities.authority.json', { executionAuthorities: executor.executionAuthorities }),
       record('interfaces.authority.json', executor.interfaceAuthority)];
-    const result = await executeEstateCapability({ capabilityId: 'fixture' }, { input: { value: 7 } }, {
+    const result = await executeDeclaredCapability({ capabilityId: 'fixture' }, { input: { value: 7 } }, {
+      resolveMechanic: async binding => {
+        const provider = binding?.configuration?.estateProvider;
+        if (!provider || typeof provider.module !== 'string' || typeof provider.export !== 'string') return null;
+        const module = await import(provider.module);
+        return typeof module[provider.export] === 'function' ? module[provider.export] : null;
+      },
       readAuthority: async () => ({ authority: { recordsets } })
     });
     assert.deepEqual(result, { disposition: 'completed', outcome: { value: 7 } });

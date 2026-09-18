@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
-import { createDatabaseConnectBoundary } from '../src/database-connect-boundary.mjs';
+import { createDatabaseConnectBoundary } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/database-connect-boundary.mjs';
 
 const CONNECTION_NAME = 'SFX_TEST_CONNECTION_STRING';
 const CONNECTION_VALUE = 'Server=test;Database=test;User Id=reader;Password=not-retained';
@@ -69,7 +69,7 @@ test('a failed connect closes its own pool and reports the driver code', async (
 });
 
 test('the delivery boot resolves at the connect boundary and never copies the string into process.env', async () => {
-  const source = await fs.readFile(new URL('../src/database-delivery.mjs', import.meta.url), 'utf8');
+  const source = await fs.readFile(new URL('../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/invocation-boot.mjs', import.meta.url), 'utf8');
   assert.match(source, /createDatabaseConnectBoundary/);
   assert.equal(/process\.env\s*\[/.test(source), false);
   assert.equal(source.includes('process.env[connectionEnvironmentVariable]'), false);

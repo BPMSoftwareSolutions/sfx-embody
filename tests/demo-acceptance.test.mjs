@@ -3,10 +3,10 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { executeDatabaseCommand } from '../src/invoke-database-capability.mjs';
-import { withDatabaseReadSession } from '../src/database-read-session.mjs';
-import { readAuthority } from '../src/read-authority.mjs';
-import { readExecutionDelivery } from '../src/read-execution-delivery.mjs';
+import { executeDatabaseCommand } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/command-carrier.mjs';
+import { withDatabaseReadSession } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/database-read-session.mjs';
+import { readAuthority } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/authority-read.mjs';
+import { readExecutionDelivery } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/delivery-read.mjs';
 
 // The retired harness (scripts/verify-demo.mjs, W1.4) is replaced by the
 // declared read sql/migrations/declare-read-demo-acceptance.sql: the physical
@@ -71,7 +71,7 @@ test('the installed demo-acceptance read reproduces the twelve-case verdict from
     assert.ok(sessionEvidence);
     const context = { databaseRoot: runtime.databaseRoot, sdaRoot: runtime.sdaRoot, estateRoot: path.resolve('.'),
       readQuery,
-      readAuthority: (_, selection, options) => readAuthority(runtime.databaseRoot, selection, { ...options, query: readQuery }) };
+      readAuthority: (selection, options) => readAuthority(selection, { ...options, query: readQuery }) };
     context.deliveryTarget = (await readExecutionDelivery(context)).defaultTarget;
     const read = async input => {
       const execution = await executeDatabaseCommand({ deliveryType: 'sfx-command-delivery.v1', operation: 'invoke',

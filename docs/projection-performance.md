@@ -1,12 +1,14 @@
 # Cross-language performance of projected bodies
 
-`scripts/projected-performance.mjs` runs the committed projected bodies of one
-canonical capability — node, python and csharp — on the same fixture corpus, in
-a separate subprocess per run per target, on one machine, and reports
-whole-invocation median/p95 (process startup included), captured execution
-testimony, cross-target parity, and per-cell timing **when the testimony carries
-it**. It reads only the committed projection: no database, no migration, no
-SDA edit, no semantics change.
+`SDA:conformance/projected-performance/projected-performance.mjs` (estate U5c;
+replaces the deleted `scripts/projected-performance.mjs`) runs the committed
+projected bodies of one canonical capability — node, python and csharp — on the
+same fixture corpus, in a separate subprocess per run per target, on one
+machine, and reports whole-invocation median/p95 (process startup included),
+captured execution testimony, cross-target parity, and per-cell timing **when
+the testimony carries it**. It reads only the committed projection: no database,
+no migration, no SDA edit, no semantics change. Run it from the estate root or
+point `--estate` at the estate workspace.
 
 ## What it runs
 
@@ -26,11 +28,12 @@ SDA edit, no semantics change.
   target today.
 
 ```
-node scripts/projected-performance.mjs --runs 3 --out evidence/projected-performance.report.json
+node ../scenario-driven-architecture/conformance/projected-performance/projected-performance.mjs --runs 3 --out evidence/projected-performance.report.json
 ```
 
 | option | default | meaning |
 | --- | --- | --- |
+| `--estate <dir>` | `../sfx-embody` beside the SDA checkout | estate workspace root |
 | `--runs N` | `3` | timed runs per target |
 | `--targets a,b,c` | `node,python,csharp` | target subset |
 | `--out <json>` | `evidence/projected-performance.report.json` | machine-readable report (gitignored) |

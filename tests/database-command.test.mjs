@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { validateDatabaseCommand } from '../src/invoke-database-capability.mjs';
+import { validateDatabaseCommand } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/command-carrier.mjs';
 
 const envelope = request => ({ deliveryType: 'sfx-command-delivery.v1', operation: 'invoke', request });
 const request = { object: 'capability', verb: 'invoke', subject: 'example', input: { contractId: 'example.v1', domain: 'é能力' } };

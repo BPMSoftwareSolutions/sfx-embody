@@ -3,18 +3,18 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { invocationTimingCoherence, streamedGapClosure, streamedCellEvents } from '../scripts/verify-timing-coherence.mjs';
-import { executeDatabaseCommand } from '../src/invoke-database-capability.mjs';
-import { readAuthority } from '../src/read-authority.mjs';
-import { withDatabaseReadSession } from '../src/database-read-session.mjs';
-import { readExecutionDelivery } from '../src/read-execution-delivery.mjs';
+import { invocationTimingCoherence, streamedGapClosure, streamedCellEvents } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/timing-coherence.mjs';
+import { executeDatabaseCommand } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/command-carrier.mjs';
+import { readAuthority } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/authority-read.mjs';
+import { withDatabaseReadSession } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/database-read-session.mjs';
+import { readExecutionDelivery } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/delivery-read.mjs';
 
-// W2.1 retired src/timing-coherence.mjs: the oracle was inlined into
-// scripts/verify-timing-coherence.mjs (the admitted independent test floor,
-// builder decision 5), so the oracle's tests live with the script they import.
-// The accepted authority is the declared read-invocation-timing; its covering
-// case below exercises the installed read against the same synthetic testimony
-// and runs only when the database integration flag is set.
+// W2.1/U5c retired the estate oracle: it is homed on the SDA kernel ground at
+// languages/typescript/src/kernel/bootstrap/timing-coherence.mjs (the admitted
+// independent test floor, builder decision 5). The accepted authority is the
+// declared read-invocation-timing; its covering case below exercises the
+// installed read against the same synthetic testimony and runs only when the
+// database integration flag is set.
 
 // The acceptance reading, exercised on synthetic streams that stand in for the
 // live agent-lane receipt: declared phases bracket the execution, cells complete
@@ -156,7 +156,7 @@ test('the installed timing reading closes the synthetic testimony and agrees wit
       assert.ok(sessionEvidence);
       const context = { databaseRoot: runtime.databaseRoot, sdaRoot: runtime.sdaRoot, estateRoot: path.resolve('.'),
         readQuery,
-        readAuthority: (_, selection, options) => readAuthority(runtime.databaseRoot, selection, { ...options, query: readQuery }) };
+        readAuthority: (selection, options) => readAuthority(selection, { ...options, query: readQuery }) };
       context.deliveryTarget = (await readExecutionDelivery(context)).defaultTarget;
 
       const testimony = [

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { executeDatabaseCommand } from '../src/invoke-database-capability.mjs';
+import { executeDatabaseCommand } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/command-carrier.mjs';
 
 // Semantic address retirement W4.1: src/semantic-address.mjs is gone. The
 // kernel emits the declared semanticAddress on every cell and edge testimony
@@ -83,10 +83,16 @@ function context() {
   const observations = [];
   return { databaseRoot: 'unused', observations,
     onObservation: observation => observations.push(observation),
+    resolveMechanic: async binding => {
+      const provider = binding?.configuration?.estateProvider;
+      if (!provider || typeof provider.module !== 'string' || typeof provider.export !== 'string') return null;
+      const module = await import(provider.module);
+      return typeof module[provider.export] === 'function' ? module[provider.export] : null;
+    },
     readQuery: async () => ({ ...identity, recordsets: [[{ provider_id: 'delivery',
       configuration: JSON.stringify({ capabilityId: 'run-declared-graph', requestExpression: {}, resultExpression: {} }) }],
       [{ default_target: 'node' }]] }),
-    readAuthority: async (_, selection) => ({ selection,
+    readAuthority: async selection => ({ selection,
       authority: { ...identity, recordsets: [[{ scenario_id: selection.capabilityId === 'run-declared-graph' ? 'executor' : 'example' }]] },
       closure: { recordsets: [[]] }, graphSource: structuredClone(selection.capabilityId === 'run-declared-graph' ? executor : graph) }) };
 }
