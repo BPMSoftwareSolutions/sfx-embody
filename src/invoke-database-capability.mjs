@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import { randomUUID } from 'node:crypto';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { readExecutionDelivery } from './read-execution-delivery.mjs';
+import { declaredAuthorityPortContext } from '../../scenario-driven-architecture/languages/typescript/runtimes/node/declared-authority-reader.mjs';
 import { resolveCredentialStoreRealization, resolveCredentialVaultLocatorsInGraphSource,
   resolveCredentialVaultLocators } from './credential-vault-realization.mjs';
 
@@ -27,8 +28,15 @@ async function resolvePlatformMechanic(binding, context) {
     || typeof context?.sdaRoot !== 'string' || context.sdaRoot.length === 0) return null;
   const registry = await readPlatformRegistry(context.sdaRoot);
   const entries = [...(registry.contractAdmissions ?? []), ...(registry.eventPorts ?? []), ...(registry.stateProjections ?? [])];
+  // A `url-context` Port whose binding declares a provider authority is served
+  // by the declared-authority reader: the carrier resolves the authority through
+  // the declared data-access read and passes the invocation context, never a
+  // repository path.
+  const declaredAuthorityBinding = typeof binding?.configuration?.providerAuthorityRef === 'string'
+    && binding.configuration.providerAuthorityRef.length > 0;
   const entry = entries.find(candidate => candidate.platformCapabilityId === platformCapabilityId
-    && candidate.kind === 'direct' && candidate.invocation === 'configuration'
+    && candidate.kind === 'direct'
+    && (candidate.invocation === 'configuration' || (candidate.invocation === 'url-context' && declaredAuthorityBinding))
     && typeof candidate.providerModule === 'string' && typeof candidate.providerExport === 'string');
   if (!entry) return null;
   const moduleRoot = typeof registry.providerModuleRoot === 'string' ? registry.providerModuleRoot : '';
@@ -142,7 +150,7 @@ export async function executeEstateCapability({ capabilityId, scenarioId, namesp
         invokePort = await resolvePlatformMechanic(binding, context);
         if (typeof invokePort !== 'function') throw new Error('PLATFORM_MECHANIC_NOT_DECLARED:' + capabilityId + ':' + operation.portId);
       }
-      const portContext = await credentialVaultPortContext(binding, context);
+      const portContext = await declaredAuthorityPortContext(binding, await credentialVaultPortContext(binding, context));
       current = await invokePort(resolveCredentialVaultLocators(binding.configuration), current, portContext);
       if (typeof context?.onState === 'function') { try { context.onState(current, operation); } catch { /* State observation is not execution authority. */ } }
     } else if (operation.kind === 'invoke-scenario') {

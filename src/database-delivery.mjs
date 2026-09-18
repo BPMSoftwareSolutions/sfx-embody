@@ -73,12 +73,13 @@ try {
   }
   const envelope = JSON.parse(Buffer.concat(chunks).toString('utf8'));
   validateDatabaseCommand(envelope);
-  const configFile = path.resolve(process.argv[2]);
-  // The invoke operation is homed in the SDA Kernel bootstrap. The remaining
+  // The invoke operation is homed in the SDA Kernel bootstrap, which owns its
+  // database ground: the delegation passes the request only, and no estate or
+  // database checkout path or configuration file is consulted. The remaining
   // operations still traverse the transitional estate loader until their unit.
   const result = envelope.operation === 'invoke'
-    ? await invokeDeclaredCapability({ configurationFile: configFile, request: envelope.request })
-    : await runEstateDelivery(envelope, configFile);
+    ? await invokeDeclaredCapability({ request: envelope.request })
+    : await runEstateDelivery(envelope, path.resolve(process.argv[2]));
   process.stdout.write(JSON.stringify(result) + '\n');
 } catch (error) {
   const message = error.message ?? 'DATABASE_INVOCATION_FAILED';
