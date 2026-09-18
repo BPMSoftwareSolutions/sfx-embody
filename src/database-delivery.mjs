@@ -6,18 +6,9 @@ import { readAuthority } from './read-authority.mjs';
 import { withDatabaseReadSession } from './database-read-session.mjs';
 import { createDatabaseConnectBoundary } from './database-connect-boundary.mjs';
 import { restrictMemoryProcess } from './restrict-memory-process.mjs';
+import { invokeDeclaredCapability } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/invocation-boot.mjs';
 
-try {
-  const chunks = [];
-  let size = 0;
-  for await (const chunk of process.stdin) {
-    size += chunk.length;
-    if (size > 9 * 1024 * 1024) throw new Error('DELIVERY_INPUT_TOO_LARGE');
-    chunks.push(chunk);
-  }
-  const envelope = JSON.parse(Buffer.concat(chunks).toString('utf8'));
-  validateDatabaseCommand(envelope);
-  const configFile = path.resolve(process.argv[2]);
+async function runEstateDelivery(envelope, configFile) {
   const config = JSON.parse(await fs.readFile(configFile, 'utf8'));
   if (config.configurationType !== 'sfx-database-memory-runtime.v1'
     || typeof config.databaseRoot !== 'string' || typeof config.sdaRoot !== 'string') throw new Error('RUNTIME_CONFIGURATION_REJECTED');
@@ -69,6 +60,25 @@ try {
     result.outcome.evidence.timings.processTotal = performance.now();
     result.outcome.evidence.process = processEvidence;
   }
+  return result;
+}
+
+try {
+  const chunks = [];
+  let size = 0;
+  for await (const chunk of process.stdin) {
+    size += chunk.length;
+    if (size > 9 * 1024 * 1024) throw new Error('DELIVERY_INPUT_TOO_LARGE');
+    chunks.push(chunk);
+  }
+  const envelope = JSON.parse(Buffer.concat(chunks).toString('utf8'));
+  validateDatabaseCommand(envelope);
+  const configFile = path.resolve(process.argv[2]);
+  // The invoke operation is homed in the SDA Kernel bootstrap. The remaining
+  // operations still traverse the transitional estate loader until their unit.
+  const result = envelope.operation === 'invoke'
+    ? await invokeDeclaredCapability({ configurationFile: configFile, request: envelope.request })
+    : await runEstateDelivery(envelope, configFile);
   process.stdout.write(JSON.stringify(result) + '\n');
 } catch (error) {
   const message = error.message ?? 'DATABASE_INVOCATION_FAILED';
