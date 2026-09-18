@@ -10,12 +10,6 @@
   "engines": {
     "node": ">=20"
   },
-  "scripts": {
-    "test": "node --test tests",
-    "verify:timing": "node ../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/timing-coherence.mjs",
-    "verify:projected-testimony": "node ../scenario-driven-architecture/conformance/projected-testimony/verify-projected-testimony.mjs",
-    "verify:projected-performance": "node ../scenario-driven-architecture/conformance/projected-performance/projected-performance.mjs"
-  },
   "dependencies": {
     "ajv": "8.20.0",
     "json-schema-traverse": "1.0.0",

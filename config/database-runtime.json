@@ -1,4 +1,3 @@
 {
-  "configurationType": "sfx-database-memory-runtime.v1",
-  "sdaRoot": "../../scenario-driven-architecture"
+  "configurationType": "sfx-database-memory-runtime.v1"
 }
