@@ -10,7 +10,6 @@
         "--experimental-permission",
         "--allow-addons",
         "--allow-child-process",
-        "--allow-fs-read=./providers",
         "--allow-fs-read=../scenario-driven-architecture",
         "--allow-fs-read=C:\\Users\\*\\AppData\\Local\\sfx",
         "../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/entry.mjs",

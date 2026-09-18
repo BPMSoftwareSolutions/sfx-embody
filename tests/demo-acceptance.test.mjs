@@ -1,10 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import fs from 'node:fs/promises';
-import path from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 import { executeDatabaseCommand } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/command-carrier.mjs';
-import { withDatabaseReadSession } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/database-read-session.mjs';
+import { createDatabaseConnectBoundary, connectionString, sql } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/database-connect-boundary.mjs';
+import { withDatabaseReadSession, digest, hash, normalizeSql, pinModel, stable } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/database-read-session.mjs';
 import { readAuthority } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/authority-read.mjs';
 import { readExecutionDelivery } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/delivery-read.mjs';
 
@@ -17,19 +16,16 @@ import { readExecutionDelivery } from '../../scenario-driven-architecture/langua
 // is set.
 const databaseIntegration = process.env.SFX_DATABASE_INTEGRATION === '1';
 
+// The retired sidefx-database loader is gone; the covering case runs on the
+// kernel ground: the connection boundary resolves the string by its declared
+// environment-variable name and the read session is the kernel's own.
+const CONNECTION_NAME = 'sidefx-connection-string';
+
 async function databaseRuntime() {
-  const file = new URL('../config/database-runtime.json', import.meta.url);
-  const runtime = JSON.parse(await fs.readFile(file, 'utf8'));
-  const databaseRoot = path.resolve(path.dirname(fileURLToPath(file)), runtime.databaseRoot);
-  const sdaRoot = path.resolve(path.dirname(fileURLToPath(file)), runtime.sdaRoot);
-  const core = await import(pathToFileURL(path.join(databaseRoot, 'src/core.mjs')).href);
-  const database = await import(pathToFileURL(path.join(databaseRoot, 'src/ingest/database.mjs')).href);
-  const { normalizeSql } = await import(pathToFileURL(path.join(databaseRoot, 'src/query/run.mjs')).href);
-  const { pinModel } = await import(pathToFileURL(path.join(databaseRoot, 'src/query/model-pin.mjs')).href);
-  const { connectionEnvironmentVariable, queryRowLimit } = await core.config();
-  process.env[connectionEnvironmentVariable] = database.connectionString(connectionEnvironmentVariable);
-  return { databaseRoot, sdaRoot, connect: database.connect, sql: database.sql,
-    normalizeSql, pinModel, ...core, queryRowLimit };
+  const sdaRoot = fileURLToPath(new URL('../../scenario-driven-architecture/', import.meta.url));
+  const connect = createDatabaseConnectBoundary({ sql, connectionString: connectionString(CONNECTION_NAME),
+    connectionName: CONNECTION_NAME, requestTimeoutMs: 600000 });
+  return { sdaRoot, connect, sql, normalizeSql, pinModel, stable, hash, digest, queryRowLimit: 1000 };
 }
 
 function capture(caseId, context, exitCode, stdout, claims = [], stderr = null) {
@@ -69,7 +65,7 @@ test('the installed demo-acceptance read reproduces the twelve-case verdict from
   const runtime = await databaseRuntime();
   await withDatabaseReadSession(runtime, async (readQuery, sessionEvidence) => {
     assert.ok(sessionEvidence);
-    const context = { databaseRoot: runtime.databaseRoot, sdaRoot: runtime.sdaRoot, estateRoot: path.resolve('.'),
+    const context = { sdaRoot: runtime.sdaRoot, estateRoot: process.cwd(),
       readQuery,
       readAuthority: (selection, options) => readAuthority(selection, { ...options, query: readQuery }) };
     context.deliveryTarget = (await readExecutionDelivery(context)).defaultTarget;

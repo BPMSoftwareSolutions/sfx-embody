@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { COMMAND_OPERATIONS, withDeclaredGroundRead } from './kernel-declared-authority.fixture.mjs';
 import { readAuthority } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/authority-read.mjs';
 import { executeDatabaseCommand } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/command-carrier.mjs';
 import { executeDeclaredCapability } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/declared-operation-carrier.mjs';
@@ -10,11 +11,11 @@ const graph = { capabilityId: 'example', scenarios: [], executionAuthorities: []
 
 test('authority reads use the injected session and return the graph without fetching documents by default on invoke', async () => {
   const calls = [];
-  const query = async (statement, options) => {
+  const query = withDeclaredGroundRead(async (statement, options) => {
     calls.push({ statement, options });
     return { ...identity, recordsets: [calls.length === 1 ? [{ capability_id: 'example', scenario_id: 'root', namespace_id: 'names',
       graph_source: JSON.stringify(graph), documents: null }] : []] };
-  };
+  });
   const bundle = await readAuthority('must-not-import-a-runner', { capabilityId: 'example' }, { query, documents: false, retainObjects: false });
   assert.equal(calls.length, 3);
   assert.match(calls[0].statement, /FROM analysis\.capability_graph_source\(/);
@@ -31,11 +32,11 @@ test('standalone authority extraction can request the complete document set', as
   let calls = 0;
   const documents = JSON.stringify([{ source_path: 'capabilities/example/semantic-graph.authority.json', entry_id: 'semantic-graph.authority.json',
     document: '{"executionTopologyAuthority":"graph-v3"}' }]);
-  const query = async (_, options) => {
+  const query = withDeclaredGroundRead(async (_, options) => {
     calls++;
     if (calls === 1) assert.equal(options.input.includeDocuments, 1);
     return { ...identity, recordsets: [calls === 1 ? [{ scenario_id: 'root', graph_source: JSON.stringify(graph), documents }] : []] };
-  };
+  });
   const bundle = await readAuthority('unused', { capabilityId: 'example' }, { query, retainObjects: false });
   assert.equal(bundle.authority.recordsets[0][0].documents, documents);
 });
@@ -44,13 +45,13 @@ test('coherence and truncation guards remain on every authority read', async () 
   for (const changed of [{ snapshotId: 'other' }, { projectionDigest: 'other' }, { viewDefinitionDigest: 'other' }, { truncated: true }]) {
     for (const failingRead of [2, 3]) {
       let calls = 0;
-      const query = async () => ({ ...identity, ...( ++calls === failingRead ? changed : {}),
-        recordsets: [calls === 1 ? [{ scenario_id: 'root', graph_source: JSON.stringify(graph) }] : []] });
+      const query = withDeclaredGroundRead(async () => ({ ...identity, ...( ++calls === failingRead ? changed : {}),
+        recordsets: [calls === 1 ? [{ scenario_id: 'root', graph_source: JSON.stringify(graph) }] : []] }));
       await assert.rejects(readAuthority('unused', { capabilityId: 'example' }, { query, retainObjects: false }), /DATABASE_AUTHORITY_NOT_COHERENT/);
     }
   }
   await assert.rejects(readAuthority('unused', { capabilityId: 'missing' }, {
-    query: async () => ({ ...identity, recordsets: [[]] }), retainObjects: false
+    query: withDeclaredGroundRead(async () => ({ ...identity, recordsets: [[]] })), retainObjects: false
   }), /CAPABILITY_NOT_FOUND/);
 });
 
@@ -110,7 +111,7 @@ const bareReader = { capabilityId: 'read-capability-meaning',
 function context({ mismatch, executorModule = fixtureModule, readerGraph } = {}) {
   const reads = [], queries = [], observations = [];
   const executor = executorFor(executorModule);
-  return { databaseRoot: 'unused', reads, queries, observations,
+  return { databaseRoot: 'unused', reads, queries, observations, commandOperations: COMMAND_OPERATIONS,
     evaluateExpression: expression => expression.value,
     onObservation: observation => { observations.push(observation); },
     resolveMechanic: async binding => {
@@ -119,12 +120,12 @@ function context({ mismatch, executorModule = fixtureModule, readerGraph } = {})
       const module = await import(provider.module);
       return typeof module[provider.export] === 'function' ? module[provider.export] : null;
     },
-    readQuery: async statement => {
+    readQuery: withDeclaredGroundRead(async statement => {
       queries.push(statement);
       assert.match(statement, /executionDelivery/);
       return { ...identity, recordsets: [[{ provider_id: 'delivery', configuration: JSON.stringify({ capabilityId: 'run-declared-graph',
         requestExpression: {}, resultExpression: {} }) }], [{ default_target: 'node' }]] };
-    },
+    }),
     readAuthority: async (selection, options) => {
       reads.push({ selection, options });
       const isExecutor = selection.capabilityId === 'run-declared-graph';
@@ -264,7 +265,7 @@ test('supplied graph input remains unchanged and observation failures do not aff
 test('the actual authority reader fetches each graph once and shares mechanics only within an invocation', async () => {
   const calls = [];
   const delivery = context().readQuery;
-  const query = async (statement, options) => {
+  const query = withDeclaredGroundRead(async (statement, options) => {
     calls.push(statement);
     if (statement.includes('executionDelivery')) return delivery(statement);
     if (statement.includes('analysis.capability_graph_source(')) {
@@ -274,7 +275,7 @@ test('the actual authority reader fetches each graph once and shares mechanics o
         graph_source: JSON.stringify(isExecutor ? executor : graph), documents: null }]] };
     }
     return { ...identity, recordsets: [[]] };
-  };
+  });
   const config = { ...context(), readQuery: query,
     readAuthority: (selection, options) => readAuthority(selection, { ...options, query }) };
   for (let i = 1; i <= 2; i++) {

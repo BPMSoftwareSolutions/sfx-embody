@@ -1,6 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { validateDatabaseCommand, executeDatabaseCommand, createObservationFilter } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/command-carrier.mjs';
+import { validateDatabaseCommand as validate, executeDatabaseCommand, createObservationFilter } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/command-carrier.mjs';
+import { COMMAND_OPERATIONS, withDeclaredGroundRead } from './kernel-declared-authority.fixture.mjs';
+
+// The carrier validates against the declared operation vocabulary; the unit
+// tests exercise the validator's rules with the same document the row carries.
+const validateDatabaseCommand = envelope => validate(envelope, COMMAND_OPERATIONS);
 
 // Observation retirement W4.1: the drilldown module is gone. The stream is the
 // kernel's declared testimony, scoped by the interface's declared readings; the
@@ -131,7 +136,7 @@ const executor = { capabilityId: 'run-declared-graph',
 
 function context() {
   const reads = [], observations = [];
-  return { databaseRoot: 'unused', reads, observations,
+  return { databaseRoot: 'unused', reads, observations, commandOperations: COMMAND_OPERATIONS,
     onObservation: observation => observations.push(observation),
     resolveMechanic: async binding => {
       const provider = binding?.configuration?.estateProvider;
@@ -139,9 +144,9 @@ function context() {
       const module = await import(provider.module);
       return typeof module[provider.export] === 'function' ? module[provider.export] : null;
     },
-    readQuery: async () => ({ ...identity, recordsets: [[{ provider_id: 'delivery',
+    readQuery: withDeclaredGroundRead(async () => ({ ...identity, recordsets: [[{ provider_id: 'delivery',
       configuration: JSON.stringify({ capabilityId: 'run-declared-graph', requestExpression: {}, resultExpression: {} }) }],
-      [{ default_target: 'node' }]] }),
+      [{ default_target: 'node' }]] })),
     readAuthority: async selection => {
       reads.push(selection);
       const isExecutor = selection.capabilityId === 'run-declared-graph';

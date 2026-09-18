@@ -1,16 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import fs from 'node:fs/promises';
-import path from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 import { randomUUID } from 'node:crypto';
 import { executeDatabaseCommand } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/command-carrier.mjs';
 import { executeDeclaredCapability } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/declared-operation-carrier.mjs';
 import { CREDENTIAL_STORE_REALIZATION_MECHANIC_ID, resolveCredentialVaultLocators,
   resolveCredentialVaultLocatorsInGraphSource, resolveDeclaredEnvironmentReference } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/credential-realization.mjs';
-import { withDatabaseReadSession } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/database-read-session.mjs';
+import { createDatabaseConnectBoundary, connectionString, sql } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/database-connect-boundary.mjs';
+import { withDatabaseReadSession, digest, hash, normalizeSql, pinModel, stable } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/database-read-session.mjs';
 import { readAuthority } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/authority-read.mjs';
 import { readExecutionDelivery } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/delivery-read.mjs';
+import { COMMAND_OPERATIONS, withDeclaredGroundRead } from './kernel-declared-authority.fixture.mjs';
 
 const KEY_BYTES = Array.from(Buffer.from('0123456789abcdef0123456789abcdef', 'utf8'));
 const KEY_SENTINELS = [Buffer.from(KEY_BYTES).toString('base64'), Buffer.from(KEY_BYTES).toString('hex'), '0123456789abcdef'];
@@ -94,12 +94,12 @@ function commandContext(configuration) {
     executionAuthorities: [{ owningScenarioId: 'executor', operations: [{ kind: 'invoke-port', portId: 'port' }] }],
     interfaceAuthority: { portBindings: [{ portId: 'port', configuration }] } };
   const subject = { capabilityId: 'example', scenarios: [], executionAuthorities: [] };
-  return { databaseRoot: 'unused', sdaRoot: process.cwd(), observations,
+  return { databaseRoot: 'unused', sdaRoot: process.cwd(), observations, commandOperations: COMMAND_OPERATIONS,
     onObservation: observation => { observations.push(observation); },
     resolveMechanic: fixtureMechanic,
-    readQuery: async () => ({ ...identity, recordsets: [
+    readQuery: withDeclaredGroundRead(async () => ({ ...identity, recordsets: [
       [{ provider_id: 'delivery', configuration: JSON.stringify({ capabilityId: 'run-declared-graph', requestExpression: {}, resultExpression: {} }) }],
-      [{ default_target: 'node' }]] }),
+      [{ default_target: 'node' }]] })),
     readAuthority: async selection => ({ selection,
       authority: { ...identity, recordsets: [[{ scenario_id: selection.capabilityId === 'run-declared-graph' ? 'executor' : 'root' }]] },
       closure: { recordsets: [[]] },
@@ -227,19 +227,16 @@ test('no key bytes reach results or the observation stream', async () => {
 // when the database integration flag is set.
 const databaseIntegration = process.env.SFX_DATABASE_INTEGRATION === '1';
 
+// The retired sidefx-database loader is gone; the covering case runs on the
+// kernel ground: the connection boundary resolves the string by its declared
+// environment-variable name and the read session is the kernel's own.
+const CONNECTION_NAME = 'sidefx-connection-string';
+
 async function databaseRuntime() {
-  const file = new URL('../config/database-runtime.json', import.meta.url);
-  const runtime = JSON.parse(await fs.readFile(file, 'utf8'));
-  const databaseRoot = path.resolve(path.dirname(fileURLToPath(file)), runtime.databaseRoot);
-  const sdaRoot = path.resolve(path.dirname(fileURLToPath(file)), runtime.sdaRoot);
-  const core = await import(pathToFileURL(path.join(databaseRoot, 'src/core.mjs')).href);
-  const database = await import(pathToFileURL(path.join(databaseRoot, 'src/ingest/database.mjs')).href);
-  const { normalizeSql } = await import(pathToFileURL(path.join(databaseRoot, 'src/query/run.mjs')).href);
-  const { pinModel } = await import(pathToFileURL(path.join(databaseRoot, 'src/query/model-pin.mjs')).href);
-  const { connectionEnvironmentVariable, queryRowLimit } = await core.config();
-  process.env[connectionEnvironmentVariable] = database.connectionString(connectionEnvironmentVariable);
-  return { databaseRoot, sdaRoot, connect: database.connect, sql: database.sql,
-    normalizeSql, pinModel, ...core, queryRowLimit };
+  const sdaRoot = fileURLToPath(new URL('../../scenario-driven-architecture/', import.meta.url));
+  const connect = createDatabaseConnectBoundary({ sql, connectionString: connectionString(CONNECTION_NAME),
+    connectionName: CONNECTION_NAME, requestTimeoutMs: 600000 });
+  return { sdaRoot, connect, sql, normalizeSql, pinModel, stable, hash, digest, queryRowLimit: 1000 };
 }
 
 test('the installed non-disclosure read reproduces the sweep verdict from live observations', { skip: !databaseIntegration }, async () => {
@@ -255,7 +252,7 @@ test('the installed non-disclosure read reproduces the sweep verdict from live o
         realization: 'windows-credential-store-provider' } } });
   await withDatabaseReadSession(runtime, async (readQuery, sessionEvidence) => {
     assert.ok(sessionEvidence);
-    const context = { databaseRoot: runtime.databaseRoot, sdaRoot: runtime.sdaRoot, estateRoot: path.resolve('.'),
+    const context = { sdaRoot: runtime.sdaRoot, estateRoot: process.cwd(),
       readQuery,
       readAuthority: (selection, options) => readAuthority(selection, { ...options, query: readQuery }) };
     context.deliveryTarget = (await readExecutionDelivery(context)).defaultTarget;

@@ -1,6 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { validateDatabaseCommand } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/command-carrier.mjs';
+import { validateDatabaseCommand as validate } from '../../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/command-carrier.mjs';
+import { COMMAND_OPERATIONS } from './kernel-declared-authority.fixture.mjs';
+
+// The carrier validates against the declared operation vocabulary; the unit
+// tests exercise the validator's rules with the same document the row carries.
+const validateDatabaseCommand = envelope => validate(envelope, COMMAND_OPERATIONS);
 
 const envelope = request => ({ deliveryType: 'sfx-command-delivery.v1', operation: 'invoke', request });
 const request = { object: 'capability', verb: 'invoke', subject: 'example', input: { contractId: 'example.v1', domain: 'é能力' } };
