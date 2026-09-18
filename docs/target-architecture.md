@@ -62,11 +62,11 @@ bars only the bootstrap.)
 
 | Concern | Disposition |
 |---|---|
-| domain resolvers (`src/resolvers/node/*.mjs`) | **declared capability** — served by kernel mechanics (`compileSemanticExecutionGraph`, `executeSemanticExecutionGraph`, `sda-semantic-value-graph-provider`, `sda-declared-read-graph-provider`, `sda-schema-contract-admission`) or declared reads |
-| reader/projection operations (`read-capability-meaning`, `read-circuit-media`) | **declared capability** (SQL read + transformation) |
-| presentation (`narrate-*`, `diagram-*`) | **declared capability** (templates/transformations over authority); if not expressible, a platform presentation mechanic — never estate code |
-| frontdoor/loader, DB query runner, bootstrap installer | **code** (the irreducible three) |
-| delivery/workspace config (`read-workspace-config`) | **code** (boot config) |
+| domain resolvers (`src/resolvers/node/*.mjs`) | **declared (1) capability** — realized by resolver (0): served by kernel mechanics (`compileSemanticExecutionGraph`, `executeSemanticExecutionGraph`, `sda-semantic-value-graph-provider`, `sda-declared-read-graph-provider`, `sda-schema-contract-admission`) or declared reads |
+| reader/projection operations (`read-capability-meaning`, `read-circuit-media`) | **declared (1) capability** (SQL read + transformation) |
+| presentation (`narrate-*`, `diagram-*`) | **declared (1) capability** — realized by resolver (0): templates/transformations over authority; if not expressible, a platform presentation mechanic — never estate code |
+| frontdoor/loader, DB query runner, bootstrap installer | **resolver (0) code** (the irreducible three) |
+| delivery/workspace config (`read-workspace-config`) | **resolver (0) code** (boot config) |
 | materialization (`materialize-node`, `prepare-database-capability`, `load-memory-scenario`, `load-consumer-plan`, `read-execution-graph`, `reveal-native-expressions`, `embodiment-delivery`) | **eliminated** — nothing is emitted/loaded/written once the kernel interprets |
 | native-body verification (`verification/verify-node`, `verify-native-projection`, `verify-contract-fidelity`) | **eliminated** — verifies artifacts that no longer exist |
 
