@@ -68,19 +68,23 @@ model G1); their `projectReferences.kernel` values are:
 | go | `kernel` | admitted surface |
 | cpp | `generated/execution` | **projected (1), not resolver (0)** — G10 |
 
-No inventoried file lies on any of those paths. The estate boot is also
-**resolver (0)** — `target-architecture.md` Disposition's two "code" rows:
+No inventoried SDA `tools/` file lies on any of those paths. The estate boot is
+also **resolver (0)** — `target-architecture.md` Disposition's two "code" rows:
 frontdoor/loader, DB query runner, bootstrap installer (the irreducible three)
 and delivery/workspace config (`read-workspace-config`) (boot config)
-(`target-architecture.md:68-69`; transistor-model corollary 2) — but it is
-estate code, not part of this SDA inventory. Consequently **zero files in this
-ledger are homed resolver (0)**: the boot lives in the estate, and the SDA tools
-inventory contains no resolver(0) files because none sit in a declared kernel
-resolver boundary. The rule holds literally: a file in `tools/` that is not in
-a language runtime or the estate boot cannot be resolver(0). Where a file's
-behavior is irreducibly native (clock, SHA-256, process spawn, module load),
-the declared (1) side names the mechanic it becomes and the per-language
-resolver (0) body implements it.
+(`target-architecture.md:68-69`; transistor-model corollary 2) — and its home is
+the **SDA Kernel**. The fact that the boot currently lives in the estate does not
+exempt it from being moved into the SDA Kernel: `docs/hand-authored-code-retirement.md`
+classifies the 12-file estate boot set resolver (0) and names its files (§3), the
+estate location is transitional, and the homing migration unit is M0 (§8). Per
+`transistor-model.md:44-49`, resolver mechanics live in the SDA Kernel with
+bare-minimum Node/Python/CSharp conformance; the bootstrap is resolver code (0)
+(`transistor-model.md:81-85`), so a multi-language runtime owes, per language, an
+admitted native path from physical entry to canonical authority to its resolver
+floor — *"The code cannot remain in its found location"* — without delegating
+executable semantics to another runtime. Where a file's behavior is irreducibly
+native (clock, SHA-256, process spawn, module load), the declared (1) side names
+the mechanic it becomes and the per-language resolver (0) body implements it.
 
 ### 1.3 Sterility counts
 
@@ -237,11 +241,11 @@ only other home, not a separate class.
 
 > | Concern | Disposition |
 > |---|---|
-> | domain resolvers (`src/resolvers/node/*.mjs`) | **declared capability** … |
-> | reader/projection operations (`read-capability-meaning`, `read-circuit-media`) | **declared capability** (SQL read + transformation) |
-> | presentation (`narrate-*`, `diagram-*`) | **declared capability** (templates/transformations over authority); if not expressible, a platform presentation mechanic — never estate code |
-> | frontdoor/loader, DB query runner, bootstrap installer | **code** (the irreducible three) |
-> | delivery/workspace config (`read-workspace-config`) | **code** (boot config) |
+> | domain resolvers (`src/resolvers/node/*.mjs`) | **declared(1) capability** … |
+> | reader/projection operations (`read-capability-meaning`, `read-circuit-media`) | **declared(1) capability** (SQL read + transformation) |
+> | presentation (`narrate-*`, `diagram-*`) | **declared(1) capability** (templates/transformations over authority); if not expressible, a platform presentation mechanic — never estate code |
+> | frontdoor/loader, DB query runner, bootstrap installer | **resolver(0) code** (the irreducible three) |
+> | delivery/workspace config (`read-workspace-config`) | **resolver(0) code** (boot config) |
 > | materialization (`materialize-node`, `prepare-database-capability`, `load-memory-scenario`, `load-consumer-plan`, `read-execution-graph`, `reveal-native-expressions`, `embodiment-delivery`) | **eliminated** — nothing is emitted/loaded/written once the kernel interprets |
 > | native-body verification (`verification/verify-node`, `verify-native-projection`, `verify-contract-fidelity`) | **eliminated** — verifies artifacts that no longer exist |
 
@@ -252,8 +256,8 @@ only other home, not a separate class.
 > 2. **Does it emit, load, write, or verify a native body / materialized plan?**
 >    → it is **eliminated**; do not port it or declare it. This is what the kernel
 >    supersedes.
-> 3. **Otherwise** → it is **meaning**; it becomes rows (a declared read, a
->    declared transformation, a provider binding) and is invoked through the
+> 3. **Otherwise** → it is **meaning**; it becomes rows (a declared(1) read, a
+>    declared(1) transformation, a provider binding) and is invoked through the
 >    frontdoor.
 
 **Non-reasons to retain `target-architecture.md:86-95` include:** "it makes an
@@ -267,16 +271,25 @@ native-body fixtures; "we might need it later".
 
 | Classification | Files | LOC | Sterility mechanics | Share of files |
 |---|---:|---:|---:|---:|
-| **declared (1)** | 275 | 18,784 | 5,870 | 59.7% |
-| **resolver (0)** (declared kernel resolver boundary + estate boot; the boot is not in this SDA inventory: frontdoor/loader, DB query runner, bootstrap installer, delivery/workspace config) | 0 | 0 | — | 0% |
-| **delete (eliminated by target-architecture Disposition)** | 68 | 6,121 | 2,490 | 14.8% |
-| **no-home defect (K029) — projector/host/enterprise machinery** | 23 | 10,782 | 4,791 | 5.0% |
-| **no-home defect (K029) — test/verification harnesses** | 95 | 18,047 | 7,245 | 20.6% |
-| **Total** | **461** | **53,734** | **20,396** | 100% |
+| **declared (1)** | 275 | 18,784 | 5,870 | 58.1% |
+| **resolver (0) — homed in the SDA Kernel (transitional estate location is not the home)**: the 12-file boot set `docs/hand-authored-code-retirement.md` classifies resolver (0) — frontdoor/loader, DB connection/query runner, session/connect boundary, sandbox, bootstrap installer, lifecycle preflight, delivery/workspace config | 12 | 1,401 | — | 2.5% |
+| **delete (eliminated by target-architecture Disposition)** | 68 | 6,121 | 2,490 | 14.4% |
+| **no-home defect (K029) — projector/host/enterprise machinery** | 23 | 10,782 | 4,791 | 4.9% |
+| **no-home defect (K029) — test/verification harnesses** | 95 | 18,047 | 7,245 | 20.1% |
+| **Total** | **473** | **55,135** | **20,396** | 100% |
 
-The resolver (0) count is **0** for the SDA inventory: the boot lives in the
-estate, and the SDA tools inventory contains no resolver(0) files because none
-sit in a declared kernel resolver boundary (§1.2).
+**resolver (0) is the estate boot set homed in the SDA Kernel.** The 12 files
+are the boot class `docs/hand-authored-code-retirement.md` records
+(frontdoor/loader, DB connection/query runner, session/connect boundary, sandbox,
+bootstrap installer, lifecycle preflight, delivery/workspace config): 12 files,
+1,401 LOC, for 473 files in total with the 461 SDA `tools/` files of §1.1. The
+boot's current estate location is transitional; it does not exempt the boot from
+being moved into the SDA Kernel (M0, §8). Per `docs/transistor-model.md:44-49`,
+resolver mechanics live in the SDA Kernel with bare-minimum Node/Python/CSharp
+conformance; the bootstrap is resolver code (0) (`:81-85`), so a multi-language
+runtime owes, per language, an admitted native path from physical entry to
+canonical authority to its resolver floor — *"The code cannot remain in its found
+location"*.
 
 By evidence code:
 
@@ -298,6 +311,7 @@ By evidence code:
 | N-UNBOUND — no-home defect (K029): unbound application machinery | 11 | 2,021 | 664 |
 | N-HOST — no-home defect (K029): `ToolCapabilityHost` and provider loader | 2 | 156 | 58 |
 | N-AUTH — no-home defect (K029): new database-artifact materialization | 1 | 259 | 65 |
+| R-BOOT — estate boot set: resolver (0), homed in the SDA Kernel (`docs/hand-authored-code-retirement.md`) | 12 | 1,401 | — |
 
 The three highest single-file mechanic counts in the repository are the target
 `capability-execution-emitter.ts` files (csharp 1,076; node 880; python 557) —
@@ -321,9 +335,9 @@ test at 1,050 and `tools/tests/semantic-execution-graph.test.js` at 1,023
   `target-architecture.md:68-69`): frontdoor/loader, DB query runner, bootstrap
   installer (the irreducible three) and delivery/workspace config
   (`read-workspace-config`) (boot config); transistor-model corollary 2: the
-  bootstrap is resolver code. **No inventoried SDA file qualifies** — the boot
-  lives in the estate, and no inventoried file sits in a declared kernel
-  resolver boundary.
+  bootstrap is resolver code. The boot set is inventoried resolver (0) (§3); its
+  home is the SDA Kernel, and the transitional estate location does not exempt it
+  from the move (M0, §8).
 - **delete (eliminated by target-architecture Disposition)** — a disposition,
   not a home: the file implements a function the target architecture deletes
   (materialization: `materialize-node`, `prepare-database-capability`,
@@ -334,8 +348,8 @@ test at 1,050 and `tools/tests/semantic-execution-graph.test.js` at 1,023
 
 ### 4.2 Classification test, applied in order
 
-1. Is it the boot? → **resolver (0)**. Only the estate names boot files; none
-   in this inventory.
+1. Is it the boot? → **resolver (0)**: the 12-file estate boot set whose home is
+   the SDA Kernel (§3; M0). The transitional estate location is not an exemption.
 2. Does it emit, load, write, or verify a native body or materialized plan? →
    **delete (eliminated by target-architecture Disposition)** (E-MAT / E-VER /
    E-LEG); deletion is the action.
@@ -1036,6 +1050,34 @@ Short list, highest severity first:
 
 A unit lands coordinated changes together plus its proof. Invocation (or the
 named acceptance) is the unit's proof; a green appearing in isolation is not.
+
+### M0 — Home the boot as resolver (0) in the SDA Kernel
+
+- **Scope.** The estate boot set (`docs/hand-authored-code-retirement.md`):
+  frontdoor/loader, DB query runner, bootstrap installer, delivery/workspace
+  config — `src/restrict-memory-process.mjs` (sandbox),
+  `src/database-connect-boundary.mjs`, `src/database-read-session.mjs`,
+  `src/database-delivery.mjs` (frontdoor), `src/read-authority.mjs` (loader read),
+  `src/invoke-database-capability.mjs` (loader), `src/read-workspace-config.mjs`
+  (boot config; its W1.2 instance retired), `src/credential-vault-realization.mjs`,
+  `scripts/run-migration.mjs`, `scripts/invoke-from-transaction.mjs`,
+  `scripts/extract-inflight-bundle.mjs`, `scripts/run-query.mjs`.
+- **Implementation.** Per language, an admitted native path from physical entry to
+  canonical authority to the per-language resolver; minimum Node/Python/CSharp, all
+  six per the resolver diagram; one admitted resolver surface per language/runtime
+  profile. Resolver mechanics live in the SDA Kernel with bare-minimum
+  Node/Python/CSharp conformance (`docs/transistor-model.md:44-49`); the bootstrap
+  is resolver code (0) and a multi-language runtime owes, per language, an admitted
+  native path from physical entry to canonical authority to its resolver floor
+  (`docs/transistor-model.md:81-85`); *"The code cannot remain in its found
+  location"* (`docs/transistor-model.md:44-49`).
+- **Acceptance.** Each language boots and executes a declared capability through
+  its own native path without delegating semantics to another runtime; parity of
+  outcome digests.
+- **Verification.** Per-language physical-entry conformance runs; estate invocation
+  parity; no estate-side meaning remains.
+- **Dependencies.** Parallel with M1 (the DB-artifact regression deletion does not gate the boot); coordinates with the per-language bootstrap work in
+  `docs/transistor-model.md` §6/§9.
 
 ### M1 — Delete the database-artifact materialization target (F2)
 
