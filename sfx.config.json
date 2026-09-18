@@ -4,20 +4,9 @@
   "deliveries": {
     "database-memory": {
       "type": "process",
-      "command": "C:\\nvm4w\\nodejs\\node.exe",
-      "cwd": "C:\\Users\\Sidney Jones\\AppData\\Local\\sfx\\kernel\\890cf164b2c91154d8950158d91bb958ed179b0c14b4b57192842123709fbb1d",
+      "command": "C:\\Users\\Sidney Jones\\AppData\\Local\\sfx\\kernel\\59d6030fbc4cb5ee7d8316c675281e6ba5c790eada03ec7ec5324385737138c6\\KernelEntry.exe",
+      "cwd": "C:\\Users\\Sidney Jones\\AppData\\Local\\sfx\\kernel\\59d6030fbc4cb5ee7d8316c675281e6ba5c790eada03ec7ec5324385737138c6",
       "args": [
-        "--experimental-permission",
-        "--allow-addons",
-        "--allow-child-process",
-        "--allow-fs-read=C:\\Users\\Sidney Jones\\AppData\\Local\\sfx\\kernel\\890cf164b2c91154d8950158d91bb958ed179b0c14b4b57192842123709fbb1d/languages",
-        "--allow-fs-read=C:\\Users\\Sidney Jones\\AppData\\Local\\sfx\\kernel\\890cf164b2c91154d8950158d91bb958ed179b0c14b4b57192842123709fbb1d/node_modules",
-        "--allow-fs-read=C:\\Users\\Sidney Jones\\AppData\\Local\\sfx\\kernel\\890cf164b2c91154d8950158d91bb958ed179b0c14b4b57192842123709fbb1d/kernel",
-        "--allow-fs-read=C:\\Users\\Sidney Jones\\AppData\\Local\\sfx\\kernel\\890cf164b2c91154d8950158d91bb958ed179b0c14b4b57192842123709fbb1d/kernel-host.json",
-        "--allow-fs-read=C:\\Users\\Sidney Jones\\AppData\\Local\\sfx\\kernel\\890cf164b2c91154d8950158d91bb958ed179b0c14b4b57192842123709fbb1d/package.json",
-        "--allow-fs-read=C:\\Users\\Sidney Jones\\AppData\\Local\\sfx\\vault",
-        "--allow-fs-read=C:\\Users\\Sidney Jones\\AppData\\Local\\sfx\\credential-vault-keys",
-        "C:\\Users\\Sidney Jones\\AppData\\Local\\sfx\\kernel\\890cf164b2c91154d8950158d91bb958ed179b0c14b4b57192842123709fbb1d/languages/typescript/src/kernel/bootstrap/entry.mjs",
         "--stdin-envelope",
         "--config",
         "kernel-host.json"
@@ -25,20 +14,9 @@
     },
     "database-projection": {
       "type": "process",
-      "command": "C:\\nvm4w\\nodejs\\node.exe",
-      "cwd": "C:\\Users\\Sidney Jones\\AppData\\Local\\sfx\\kernel\\890cf164b2c91154d8950158d91bb958ed179b0c14b4b57192842123709fbb1d",
+      "command": "C:\\Users\\Sidney Jones\\AppData\\Local\\sfx\\kernel\\59d6030fbc4cb5ee7d8316c675281e6ba5c790eada03ec7ec5324385737138c6\\KernelEntry.exe",
+      "cwd": "C:\\Users\\Sidney Jones\\AppData\\Local\\sfx\\kernel\\59d6030fbc4cb5ee7d8316c675281e6ba5c790eada03ec7ec5324385737138c6",
       "args": [
-        "--experimental-permission",
-        "--allow-addons",
-        "--allow-child-process",
-        "--allow-fs-read=C:\\Users\\Sidney Jones\\AppData\\Local\\sfx\\kernel\\890cf164b2c91154d8950158d91bb958ed179b0c14b4b57192842123709fbb1d/languages",
-        "--allow-fs-read=C:\\Users\\Sidney Jones\\AppData\\Local\\sfx\\kernel\\890cf164b2c91154d8950158d91bb958ed179b0c14b4b57192842123709fbb1d/node_modules",
-        "--allow-fs-read=C:\\Users\\Sidney Jones\\AppData\\Local\\sfx\\kernel\\890cf164b2c91154d8950158d91bb958ed179b0c14b4b57192842123709fbb1d/kernel",
-        "--allow-fs-read=C:\\Users\\Sidney Jones\\AppData\\Local\\sfx\\kernel\\890cf164b2c91154d8950158d91bb958ed179b0c14b4b57192842123709fbb1d/kernel-host.json",
-        "--allow-fs-read=C:\\Users\\Sidney Jones\\AppData\\Local\\sfx\\kernel\\890cf164b2c91154d8950158d91bb958ed179b0c14b4b57192842123709fbb1d/package.json",
-        "--allow-fs-read=C:\\Users\\Sidney Jones\\AppData\\Local\\sfx\\vault",
-        "--allow-fs-read=C:\\Users\\Sidney Jones\\AppData\\Local\\sfx\\credential-vault-keys",
-        "C:\\Users\\Sidney Jones\\AppData\\Local\\sfx\\kernel\\890cf164b2c91154d8950158d91bb958ed179b0c14b4b57192842123709fbb1d/languages/typescript/src/kernel/bootstrap/entry.mjs",
         "--stdin-envelope",
         "--config",
         "kernel-host.json"
