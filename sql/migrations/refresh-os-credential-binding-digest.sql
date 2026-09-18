@@ -16,7 +16,7 @@
 -- nothing.
 --
 -- Default: ROLLBACK. Install only after the from-transaction preflight passes:
---   node scripts/run-migration.mjs sql/migrations/refresh-os-credential-binding-digest.sql
+--   node ../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/run-migration.mjs sql/migrations/refresh-os-credential-binding-digest.sql
 SET NOCOUNT ON;
 SET XACT_ABORT ON;
 DECLARE @trg nvarchar(400), @trgCur CURSOR;

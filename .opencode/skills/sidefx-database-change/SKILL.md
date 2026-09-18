@@ -26,11 +26,11 @@ process and rationale are in `sql/README.md`; the repository rules are in
    - end in `ROLLBACK TRANSACTION;`,
    - print result sets that prove the change.
 
-3. **Dry-run it:** `node scripts/run-migration.mjs sql/migrations/<file>.sql`.
+3. **Dry-run it:** `node ../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/run-migration.mjs sql/migrations/<file>.sql`.
 
 4. **Preflight the invocation from the uncommitted transaction:**
    ```
-   node --experimental-vm-modules scripts/invoke-from-transaction.mjs \
+   node ../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/invoke-from-transaction.mjs \
      sql/migrations/<file>.sql <capabilityId> <input.json>
    ```
    Read `DISPOSITION` and `OUTCOME`. If they are not what the change intends,
@@ -38,8 +38,8 @@ process and rationale are in `sql/README.md`; the repository rules are in
    passes.**
 
 5. **Install:** replace the final `ROLLBACK TRANSACTION;` with
-   `COMMIT TRANSACTION;` in a committed copy and run
-   `node scripts/run-migration.mjs <committed file>`.
+   `COMMIT TRANSACTION;` in a committed copy and run the kernel lifecycle
+   runner: `node ../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/run-migration.mjs <committed file>`.
 
 6. **Verify the installation** through the real surface:
    `sfx capability invoke <identity> --input '@file.json' --json` (and
@@ -52,10 +52,12 @@ process and rationale are in `sql/README.md`; the repository rules are in
 
 - `sidefx-database/sql/migrations/run-file.mjs` opens its **own** transaction.
   A script's `BEGIN/COMMIT` nests and run-file's outer rollback silently
-  discards the install. Use `scripts/run-migration.mjs`.
+  discards the install. Use the kernel lifecycle runner
+  (`SDA:.../bootstrap/run-migration.mjs`).
 - PowerShell 5.1 rewrites a native command's stderr and can insert line breaks
   inside JSON. Capture `--json` through `cmd /c`, not `2>`.
-- Read input files without a BOM for `invoke-from-transaction.mjs`
+- Read input files without a BOM for the kernel preflight
+  (`SDA:.../bootstrap/invoke-from-transaction.mjs`)
   (`JSON.parse` does not strip it); write them with
   `[System.IO.File]::WriteAllText($p, $json, (New-Object System.Text.UTF8Encoding($false)))`.
 - The Node lowering emits a `let` expression's bindings in document order and

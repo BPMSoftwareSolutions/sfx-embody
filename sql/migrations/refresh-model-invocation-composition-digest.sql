@@ -9,7 +9,7 @@
 -- Idempotent: a replay finds the digests present and writes no new definition.
 --
 -- Default: ROLLBACK. Install only after the from-transaction preflight passes:
---   node scripts/run-migration.mjs sql/migrations/refresh-model-invocation-composition-digest.sql
+--   node ../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/run-migration.mjs sql/migrations/refresh-model-invocation-composition-digest.sql
 SET NOCOUNT ON;
 SET XACT_ABORT ON;
 DECLARE @trg nvarchar(400), @trgCur CURSOR;

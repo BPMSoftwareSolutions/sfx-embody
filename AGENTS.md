@@ -28,6 +28,12 @@ editing `src/` or `sidefx-database/sql/diagnostics/`. Those are readers.
 
 ## The change lifecycle (read `sql/README.md`)
 
+The lifecycle's database ground is the SDA kernel bootstrap: the migration
+runner and the from-transaction preflight live at
+`../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/`
+(`run-migration.mjs`, `invoke-from-transaction.mjs`). No estate script executes
+SQL or reads arbitrary `.sql` files.
+
 1. **Evidence first.** Establish the working generation for the capability: a
    readable bundle under `evidence/<capability>/` or an extracted
    `edited-bundle.json`. A regression is a diff against the generation that
@@ -35,13 +41,13 @@ editing `src/` or `sidefx-database/sql/diagnostics/`. Those are readers.
 2. **Author one migration** in `sql/migrations/`: idempotent, drops the
    `model`/`source` guard triggers inside the script, opens its own
    `BEGIN TRANSACTION`, ends in `ROLLBACK`, prints result sets.
-3. **Dry-run:** `node scripts/run-migration.mjs sql/migrations/<file>.sql`.
+3. **Dry-run:** `node ../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/run-migration.mjs sql/migrations/<file>.sql`.
 4. **Preflight the invocation from the uncommitted state:**
-   `node --experimental-vm-modules scripts/invoke-from-transaction.mjs sql/migrations/<file>.sql <capabilityId> <input.json>`.
+   `node ../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/invoke-from-transaction.mjs sql/migrations/<file>.sql <capabilityId> <input.json>`.
    If the disposition is wrong, edit the migration and repeat from 3. Never
    commit before this passes.
 5. **Install:** flip the final `ROLLBACK TRANSACTION;` to `COMMIT TRANSACTION;`
-   and run `node scripts/run-migration.mjs <committed file>`.
+   and run `node ../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/run-migration.mjs <committed file>`.
 6. **Verify the installation:** `sfx capability invoke <identity> --input ... --json`.
 7. **Commit** only after 6, one migration per commit.
 
@@ -60,8 +66,9 @@ editing `src/` or `sidefx-database/sql/diagnostics/`. Those are readers.
 
 | Command | Purpose |
 | --- | --- |
-| `node scripts/run-migration.mjs <file.sql>` | Run a migration as authored (no outer transaction). |
-| `node --experimental-vm-modules scripts/invoke-from-transaction.mjs <file.sql> <capabilityId> [input.json]` | Preflight: apply uncommitted, invoke, roll back. |
+| `node ../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/run-migration.mjs <file.sql>` | Run a migration as authored (no outer transaction). |
+| `node ../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/invoke-from-transaction.mjs <file.sql> <capabilityId> [input.json]` | Preflight: apply uncommitted, invoke, roll back. |
+| `sfx capability invoke read-projected-bodies --input '{"capabilityId":"<id>"}' --json` | Read a capability's projected bodies and hot-path isolation counts (declared read; replaces `run-query`). |
 | `npm run verify:estate` | Regression cases. |
 | `npm run verify:memory` | Retained-fixture parity. |
 | `sfx capability invoke <identity> --input '@file.json' --json` | Real-surface invocation. |

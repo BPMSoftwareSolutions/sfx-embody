@@ -13,7 +13,7 @@
 -- Idempotent: the document digest gate returns UNCHANGED on replay.
 --
 -- Default: ROLLBACK. Install only after the from-transaction preflight passes:
---   node scripts/run-migration.mjs sql/migrations/order-model-protocol-transformation-bindings.sql
+--   node ../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/run-migration.mjs sql/migrations/order-model-protocol-transformation-bindings.sql
 SET NOCOUNT ON;
 SET XACT_ABORT ON;
 DECLARE @trg nvarchar(400), @trgCur CURSOR;

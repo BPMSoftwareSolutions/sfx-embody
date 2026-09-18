@@ -29,7 +29,7 @@
 --
 -- Default: ROLLBACK. Install only after the from-transaction preflight passes
 -- (per capability, with the three names absent from the invocation process):
---   node scripts/run-migration.mjs sql/migrations/switch-credential-authorities-to-vault.sql
+--   node ../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/run-migration.mjs sql/migrations/switch-credential-authorities-to-vault.sql
 -- To install, replace the final rollback statement with a commit statement and
 -- run the same command (scripts/transition-credential-authorities-to-vault.mjs
 -- performs both steps).

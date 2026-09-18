@@ -31,9 +31,9 @@ Capability meaning is authored in the database, so every change is a `.sql` migr
 
 1. capture the working generation (`evidence/<capability>/`),
 2. author one idempotent migration that opens its own transaction and ends in `ROLLBACK`,
-3. dry-run it: `node scripts/run-migration.mjs sql/migrations/<file>.sql`,
+3. dry-run it: `node ../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/run-migration.mjs sql/migrations/<file>.sql`,
 4. preflight the invocation from the uncommitted transaction:
-   `node --experimental-vm-modules scripts/invoke-from-transaction.mjs sql/migrations/<file>.sql <capabilityId> <input.json>`,
+   `node ../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/invoke-from-transaction.mjs sql/migrations/<file>.sql <capabilityId> <input.json>`,
 5. install the committed copy, verify with `sfx capability invoke`, then commit.
 
 Read [sql/README.md](sql/README.md) for the rules and why they exist. Agents: the same lifecycle is in [AGENTS.md](AGENTS.md) and the `sidefx-database-change` skill.

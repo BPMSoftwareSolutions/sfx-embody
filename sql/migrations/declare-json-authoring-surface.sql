@@ -26,9 +26,10 @@
 --   current definition   -- definitions are appended, never mutated, so
 --                           analysis.v_selected_semantic_definition selects the newest
 --                           per semantic object. The document ledger obeys the same rule.
---   rollback preflight   -- the document is carried by this .sql, so
---                           scripts/invoke-from-transaction.mjs applies it uncommitted,
---                           invokes, and rolls back with no change to the boot.
+--   rollback preflight   -- the document is carried by this .sql, so the kernel
+--                           from-transaction preflight
+--                           (SDA:languages/typescript/src/kernel/bootstrap/invoke-from-transaction.mjs)
+--                           applies it uncommitted, invokes, and rolls back with no change to the boot.
 --
 -- Idempotent: a second run re-creates the procedure (CREATE OR ALTER) and both
 -- document installs report UNCHANGED.

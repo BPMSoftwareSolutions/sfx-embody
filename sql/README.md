@@ -12,8 +12,14 @@ the `.sql` deliverables and the process that installs and verifies them.
 | `sql/schema/` | Installed, idempotent model objects: assembled declaration views, authoring procedures, selection views. Re-runnable `CREATE OR ALTER`. |
 | `sql/migrations/` | One-off data migrations. Each is a single unit of change and the subject of the lifecycle below. |
 | `sql/inspect/` | Read-only inspection queries. |
-| `scripts/run-migration.mjs` | Runs a migration as authored, without wrapping it in a transaction. |
-| `scripts/invoke-from-transaction.mjs` | Applies a migration **uncommitted**, reads/plans/executes a capability, then rolls back. |
+| `SDA:languages/typescript/src/kernel/bootstrap/run-migration.mjs` | Runs a migration as authored, without wrapping it in a transaction. |
+| `SDA:languages/typescript/src/kernel/bootstrap/invoke-from-transaction.mjs` | Applies a migration **uncommitted**, reads/plans/executes a capability, then rolls back. |
+
+`SDA:` is the scenario-driven-architecture checkout; from this workspace the
+default layout is `../scenario-driven-architecture`. The runner and the
+preflight are kernel-bootstrap lifecycle code (their database ground is the
+kernel's own connect boundary and pinned read session); no estate script
+executes SQL or reads an arbitrary `.sql` file from the workspace.
 
 The runtime reads only the estate's own declared views
 (`analysis.v_capability_graph_source` /
@@ -33,11 +39,11 @@ is itself a database change and follows the same lifecycle.
    idempotent (refuse or no-op on a second run), drop the `model`/`source`
    guard triggers inside the script, open its own `BEGIN TRANSACTION`, and end
    in `ROLLBACK`. Print result sets that prove the change.
-2. **Verify the dry run.** `node scripts/run-migration.mjs sql/migrations/<file>.sql`
+2. **Verify the dry run.** `node ../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/run-migration.mjs sql/migrations/<file>.sql`
    and read the result sets. Nothing is written.
 3. **Preflight the invocation from the uncommitted state.**
    ```
-   node --experimental-vm-modules scripts/invoke-from-transaction.mjs \
+   node ../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/invoke-from-transaction.mjs \
      sql/migrations/<file>.sql <capabilityId> <input.json>
    ```
    The migration is applied but never committed, then the read path plans and
@@ -46,7 +52,7 @@ is itself a database change and follows the same lifecycle.
    commit a migration that has not passed this step.
 4. **Install.** Produce a committed copy (replace the final
    `ROLLBACK TRANSACTION;` with `COMMIT TRANSACTION;`) and run
-   `node scripts/run-migration.mjs <committed file>`.
+   `node ../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/run-migration.mjs <committed file>`.
 5. **Verify the installation through the real surface.**
    `sfx capability invoke <identity> --input ... --json` (and `observe` where a
    stream matters). Exit 0 and the intended disposition, or the change is not
@@ -63,8 +69,8 @@ is itself a database change and follows the same lifecycle.
 - **One transaction, no runner wrapper.** `sidefx-database`'s
   `sql/migrations/run-file.mjs` opens its own transaction. A script's
   `BEGIN TRANSACTION` then nests, its `COMMIT` only decrements `@@TRANCOUNT`,
-  and run-file's outer rollback silently discards the install. Use
-  `scripts/run-migration.mjs`.
+  and run-file's outer rollback silently discards the install. Use the kernel
+  lifecycle runner (`SDA:.../bootstrap/run-migration.mjs`).
 - **Idempotency.** Migrations are replayed against a rolling estate. A second
   run must not mint a duplicate version or double-link a row.
 - **Native stderr.** PowerShell 5.1 rewrites a native command's stderr and can

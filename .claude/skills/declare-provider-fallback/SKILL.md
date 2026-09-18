@@ -69,8 +69,10 @@ The exchange port (`sda-governed-http-exchange-port.v1`) declares
 `requestingCapabilityIds`, `injectionRule`, `endpointAuthorityDigests`).
 
 The **`endpointAuthorityDigest` ties the two together and must match exactly**.
-Nothing in this repo computes it - it is only carried
-([scripts/invoke-from-transaction.mjs:65](scripts/invoke-from-transaction.mjs#L65)).
+Nothing in this repo computes it - it is only carried, and the kernel
+preflight's physical trace prints it
+(`SDA:languages/typescript/src/kernel/bootstrap/invoke-from-transaction.mjs`,
+`SFX_PREFLIGHT_PHYSICAL_TRACE=1`).
 It is declared authority you obtain from the endpoint authority that grants the
 route. If you cannot obtain it, the change is blocked and that is a finding.
 **Never compute, guess or copy a digest to make a preflight pass** - a route
@@ -172,8 +174,8 @@ script, its own `BEGIN TRANSACTION`, before/after result sets, ending in
 [templates/declare-fallback-route.sql](.claude/skills/declare-provider-fallback/templates/declare-fallback-route.sql).
 
 ```
-node scripts/run-migration.mjs sql/migrations/<file>.sql
-node --experimental-vm-modules scripts/invoke-from-transaction.mjs sql/migrations/<file>.sql <capabilityId> <input.json>
+node ../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/run-migration.mjs sql/migrations/<file>.sql
+node ../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/invoke-from-transaction.mjs sql/migrations/<file>.sql <capabilityId> <input.json>
 ```
 
 The preflight is the only place the whole change is exercised before it can
@@ -188,7 +190,8 @@ affect consumers. For a fallback it must answer three questions, not one:
 3. **Both fail** - the declared "no route completed" variant, not a partially
    filled payload.
 
-Then install (`ROLLBACK` to `COMMIT`, `node scripts/run-migration.mjs`), verify
+Then install (`ROLLBACK` to `COMMIT`, the kernel lifecycle runner
+`SDA:.../bootstrap/run-migration.mjs`), verify
 through the real surface with `--trace` (both routes' cells visible, the
 selection resolving, the variant classified), and commit - one migration per
 commit.

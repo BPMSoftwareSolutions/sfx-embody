@@ -51,7 +51,7 @@
 -- binding state and the changed count.
 --
 -- Default: ROLLBACK. Install only after the from-transaction preflight passes:
---   node scripts/run-migration.mjs sql/migrations/bind-credential-vault-mechanic-and-realization.sql
+--   node ../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/run-migration.mjs sql/migrations/bind-credential-vault-mechanic-and-realization.sql
 -- To install, replace the final rollback statement with a commit statement and
 -- run the same command.
 SET NOCOUNT ON;

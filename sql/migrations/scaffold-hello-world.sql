@@ -14,8 +14,8 @@
 -- prior entries for @CapabilityId, then creates the capability fresh.
 --
 -- Default: ROLLBACK after verification. Change the final ROLLBACK to COMMIT to
--- install so the CLI can invoke it; the invoke-from-transaction harness instead
--- invokes against the uncommitted rows before rollback.
+-- install so the CLI can invoke it; the kernel from-transaction preflight
+-- instead invokes against the uncommitted rows before rollback.
 SET NOCOUNT ON;
 SET XACT_ABORT ON;
 

@@ -75,7 +75,7 @@
 -- inside the uncommitted transaction.
 --
 -- Default: ROLLBACK. Install only after the from-transaction preflight passes:
---   node scripts/run-migration.mjs sql/migrations/declare-credential-capabilities.sql
+--   node ../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/run-migration.mjs sql/migrations/declare-credential-capabilities.sql
 -- To install, replace the final rollback statement with a commit statement and
 -- run the same command.
 SET NOCOUNT ON;
