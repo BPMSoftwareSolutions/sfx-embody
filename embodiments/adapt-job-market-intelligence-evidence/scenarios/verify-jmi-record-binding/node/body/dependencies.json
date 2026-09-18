@@ -1,8 +1,0 @@
-[
-  {
-    "id": "verify-jmi-record-binding-port",
-    "module": "./providers/verify-jmi-record-binding-port.mjs",
-    "className": "VerifyJmiRecordBindingPort",
-    "kind": "invoke-port"
-  }
-]

@@ -1,1 +1,0 @@
-{"authorityType":"execution-authorities.v1","executionAuthorities":[{"id":"project-governed-http-request-body.v1","operations":[{"kind":"invoke-port","portId":"project-governed-http-request-body-port"}],"owningScenarioId":"project-governed-http-request-body"}]}

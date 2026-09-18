@@ -1,8 +1,0 @@
-[
-  {
-    "id": "emit-immutable-blueprint-authority-port",
-    "module": "./providers/emit-immutable-blueprint-authority-port.mjs",
-    "className": "EmitImmutableBlueprintAuthorityPort",
-    "kind": "invoke-port"
-  }
-]
