@@ -1,10 +1,12 @@
 # Kernel install matrix — one installed kernel executable per host, selected as data
 
-**Status.** Defined 2026-09-18 (K6). This is the durable recipe for building,
-installing and selecting the SDA Kernel physical entry per host OS. It records
-the matrix, the manifest an install is admitted by, the host-selection data
-contract (config/boot data, not code branching), and the acceptance owed per
-OS. It builds nothing by itself; no claim below is made beyond what is cited.
+**Status.** Defined 2026-09-18 (K6); updated 2026-09-18 (K7) with runtime
+dependency staging and the `provision` ground-credential step. This is the
+durable recipe for building, installing and selecting the SDA Kernel physical
+entry per host OS. It records the matrix, the manifest an install is admitted
+by, the host-selection data contract (config/boot data, not code branching),
+and the acceptance owed per OS. It builds nothing by itself; no claim below is
+made beyond what is cited.
 
 **Scope and honesty.** This machine is Windows x64 with .NET SDK `10.0.202`.
 Only a `win-x64` executable can be executed here, so only `win-x64` can carry a
@@ -95,6 +97,7 @@ LF-terminated; directory entries excluded.
 | `vaultRealization` | yes | `{providerProfileId, keystore, storeLocator, module, status}` |
 | `parity` | yes | `{fixture, observedPathDigest, canonicalGraphDigest, realizedGraphDigest}` |
 | `conformanceReceipt` | yes | retained path/digest of the per-OS conformance run |
+| `stagedDependencies` | yes (K7) | the runtime dependencies the installer staged and checked present: `[{name, version, kind}]` with kind `npm-module`, `npm-module-optional`, `python-distribution`, or `dotnet-assembly` |
 | `publishedAt` | audit | ISO timestamp; never part of selection semantics |
 
 Example (`win-x64`, fields illustrative except the recorded digests in
@@ -133,6 +136,55 @@ Example (`win-x64`, fields illustrative except the recorded digests in
   "publishedAt": "2026-09-18T00:00:00Z"
 }
 ```
+
+### 2.1 Staged runtime dependencies (K7)
+
+An installed entry that cannot load its database driver cannot connect, so
+staging is part of admission, not an environment assumption. Each installer
+stages its declared runtime set, checks it present before the digest is
+computed, and records the set in the manifest `stagedDependencies`:
+
+- **Node**: `dependencies` + installed `optionalDependencies` from the root
+  `package.json` (today `mssql`, `mammoth`, `pdf-parse`, `@cucumber/gherkin`,
+  `@cucumber/messages`, `@sda/semantic-execution-graph-resolver`, optional
+  `@primno/dpapi`) staged under `node_modules/`; a missing required module
+  fails `KERNEL_RUNTIME_DEPENDENCY_MISSING`.
+- **Python**: `pyodbc` and `cryptography` per `pyproject.toml`, plus their
+  installed transitive closure, staged into `languages/python/site-packages`
+  and added to the launcher's `sys.path`.
+- **C#**: the `dotnet publish --self-contained` set; the inspected required
+  files are the entry (`KernelEntry.exe`/`KernelEntry`), `hostfxr`, the
+  adapters assembly, `Microsoft.Data.SqlClient.dll`, and on Windows the SNI
+  native driver.
+
+---
+
+## 2.2 Provisioning the ground credential (K7)
+
+The initial `DB_CONNECTION_STRING` cannot be stored through the declared
+`store-credential` capability because that capability needs a database session,
+and the session needs the connection string. Bootstrapping it is therefore
+resolver (0), beside `install`/`verify`/`switch`:
+
+```
+<installer> provision [--install-root DIR] [--reference-name DB_CONNECTION_STRING]
+                      [--replace] [--store-locator LOCATOR] [--maximum-secret-bytes N]
+```
+
+- The secret is read from **stdin**; the command never reads it from the
+  process environment, and there is no flag that would.
+- It stores directly in the declared vault through the host credential-store
+  realization (`windows-credential-store-provider` today). The stored value is
+  the same `sda-secret-vault.v1` entry the boot's connect boundary applies.
+- An existing entry is refused with `CREDENTIAL_ALREADY_PROVISIONED` unless
+  `--replace` is explicit; an unavailable realization fails closed with
+  `VAULT_SEALED` (exit 4).
+- Downstream provider credentials (`RAPID_API_KEY` and friends) continue
+  through the declared `store-credential` capability once the DB is reachable.
+
+Install flow per host: **install → provision → first invoke → `store-credential`
+for providers**. The install manifest's `vaultRealization` names the locator and
+realization the provision step uses.
 
 ---
 
@@ -224,18 +276,31 @@ admitted build means a new digest-named directory and a new pinned
 | Host / RID | Build evidence | Installed live invoke | Observe parity | Vault realization | Status |
 |---|---|---|---|---|---|
 | Windows x64 / `win-x64` | source-tree conformance and the parity triple recorded (`9ff6dc0`); **no published install yet** | **owed** (needs K4 tool) | **owed** (C# carrier refuses `SIDEFX_OBSERVE=1`) | DPAPI live (V3/V4 receipts) | partial |
-| macOS arm64 / `osx-arm64` | owed | owed | owed | Keychain module owed (vault §6 V5) | owed |
-| macOS x64 / `osx-x64` | owed | owed | owed | Keychain module owed | owed |
+| macOS arm64 / `osx-arm64` | owed | owed | owed | Keychain realization being added (K7 Node provider + C# Keychain release); macOS execution owed | owed |
+| macOS x64 / `osx-x64` | owed | owed | owed | Keychain realization being added; macOS execution owed | owed |
 | Linux x64 / `linux-x64` | owed | owed | owed | Secret Service/TPM module owed | owed |
 | Linux arm64 / `linux-arm64` | owed | owed | owed | Secret Service/TPM module owed | owed |
 | Node fallback (any host) | n/a (runtime) | live on this host through the estate delivery | **offered** | Windows live | admitted fallback |
 | Python fallback (any host) | in-tree entry/tests (`9ff6dc0`); no installed form | owed | owed (refuses today) | none | not admitted |
 
 **Owed on this machine specifically.** Only `win-x64` can be executed here.
-The `win-x64` publish + install + live invoke is owed to K4's tool. The other
-four RIDs can be *published* from this machine only if the .NET runtime packs
-resolve; even then the result is build evidence, and the row stays owed until
-executed on its OS. No macOS/Linux acceptance is claimed from a Windows run.
+The other four RIDs can be *published* from this machine only if the .NET
+runtime packs resolve; even then the result is build evidence, and the row
+stays owed until executed on its OS. No macOS/Linux acceptance is claimed from
+a Windows run.
+
+**K7 Windows observations (this host, `win-x64`).** The three installers now
+stage and record their runtime dependencies (`stagedDependencies`), and each
+`provision` refuses an existing entry without `--replace`, reads the secret
+from stdin only, and fails closed `VAULT_SEALED` for an unavailable realization
+or a cross-OS target. Observed here: Node, Python and C# each installed
+(`VERIFIED`), each re-provisioned the real `DB_CONNECTION_STRING` through its
+native Windows realization, and each installed entry (plus the other two)
+completed the `say-hello-world` invoke with the recorded
+`observedPathDigest sha256:20864ba2…`. Receipts:
+`evidence/vault-20260916/kernel-install/` (`receipt.k7.json`, ignored tree).
+The macOS rows remain **owed**; the exact commands owed there are in
+`receipt.k7.json.notClaimed`.
 
 ---
 
@@ -291,9 +356,13 @@ it; closing that is K5.
    `%LOCALAPPDATA%\sfx\vault` and the realization to
    `windows-credential-store-provider`; per-OS host data must override both
    (vault §3: realization selection is data).
-6. **macOS/Linux vault realizations do not exist** (vault §6 V5):
-   `macos-keychain-credential-store-provider`,
-   `linux-secret-service-credential-store-provider`.
+6. **macOS/Linux vault realizations** (vault §6 V5): the macOS Keychain
+   realization is being added in K7 (Node
+   `macos-keychain-credential-store-provider.mjs`, C# Keychain release, Python
+   port); it is unexecuted here and its macOS receipt is owed. The Linux
+   `linux-secret-service-credential-store-provider` remains owed. Until a
+   realization exists, `provision` fails closed with `VAULT_SEALED` on that
+   host.
 7. **Installed-root root resolution** (§5): source-location root discovery
    and `sdaRoot`-relative registry reads must accept the installed tree.
 8. **Cross-RID publish prerequisites.** `dotnet publish` for a non-host RID
