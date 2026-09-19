@@ -1,13 +1,19 @@
 # Cross-host kernel acceptance runbook — macOS
 
-**Status.** Written 2026-09-18; **unexecuted**. This is the recipe the
+**Status.** Written 2026-09-18; **unexecuted** for macOS. This is the recipe the
 installed-kernel acceptance path (`accept`) follows per host, with the exact
 macOS commands per language (install → provision on Keychain → accept). No
 macOS run has happened and none is claimed below; macOS rows stay owed until a
 receipt exists on that host. The Windows live result and the WSL `linux-x64`
 attempt are recorded in
 `evidence/vault-20260916/cross-host/` (ignored tree) and in
-`SDA:docs/kernel-architecture-achieved.md` §4.8.
+`SDA:docs/kernel-architecture-achieved.md` §4.8. The Windows AppContainer
+full profile is also live: the installed C# kernel's `accept` under
+`SIDEFX_PROCESS_ISOLATION=appcontainer` returned `ACCEPTED` (all three
+invocations matched) with `fsWriteEnforcement: appcontainer`, the
+`internetClient` capability, `fsWriteAllowed: false` and the job-object child
+block; receipt and process testimony are in
+`evidence/vault-20260916/cross-host/windows-csharp-appcontainer/`.
 
 **Authority.** SDA installer surfaces at
 `languages/csharp/src/ScenarioKernel/Install/`,
@@ -113,6 +119,15 @@ dispatches through the same physical-entry registration as
 `install|verify|switch|provision` (the registration itself is the minimal
 physical-entry seam; without it the surface is still reachable in-process).
 
+The process-isolation profile is boot data: `SIDEFX_PROCESS_ISOLATION` or the
+boot configuration's `processIsolation` key selects `off`, `low-integrity`
+(the Windows host default) or `appcontainer`. The AppContainer profile
+re-execs the entry under the per-user `sfx.scenario.kernel` container with
+only the `internetClient` capability, grants the container SID read/execute
+on the entry directory, stages the declared vault ciphertext and wrapped key
+records into the container's own storage, and denies host filesystem writes;
+a selected profile that cannot be applied fails closed.
+
 ## 4. Python
 
 ```bash
@@ -181,13 +196,14 @@ printf '%s\n' "$DB_CONNECTION_STRING_ONCE" | \
   accept --install-root "$ROOT"
 ```
 
-**Node accept blocker (owed).** Non-Windows Node installs currently record
-`entryArgs: null` (`kernel-install.mjs:381-382`), so `accept` fails closed
-with `KERNEL_ACCEPTANCE_ENTRY_NOT_RESOLVED` rather than spawning a bare
-interpreter. Until that seam is closed (per-host permission args + entry
-path), the Node macOS acceptance stays owed; use the C# or Python row above,
-or fix the seam first. Step 3 (provision) is not affected by the seam and can
-still be verified on macOS.
+**Node non-Windows permission model.** The osx/linux manifests now record the
+admitted entry under Node's permission model: `--experimental-permission`
+with read grants for the install root, authority and host vault roots and no
+`--allow-fs-write`, so `accept` resolves the declared delivery command there.
+The manifest-resolution test asserts those flags for all four non-Windows
+RIDs. The macOS acceptance itself remains unexecuted on a Mac and owed until a
+receipt exists on that host; step 3 (provision) is unaffected and can still be
+verified on macOS.
 
 ---
 

@@ -4,6 +4,62 @@ Format per [embodiment-completeness.md](embodiment-completeness.md): primitive /
 why kernel / affected languages / data that binds it / evidence. Filed from the
 estate; agents do not edit SDA.
 
+## Status — resolved (2026-09-19)
+
+Resolved in the SDA working tree on top of `ed643150b011d9eafe003ef28437b1768f59a05c`
+(orchestrator commit pending); installed and verified as artifact
+`sha256:7eec4896fc3e77eb329c64ec71a5f8ba8f808d56a043fb8f3dd36e63c013cb7d`
+(`sourceState: working-tree`), and `sfx.config.json` switched to it.
+
+- **Fix.** `languages/csharp/src/ScenarioKernel/bootstrap/InvocationBoot.cs`
+  extracts `CreateReadQueryBinding` (the pinned session's bounded read seam) and
+  the invocation path binds it; `CommandCarrier.ExecuteReaderOperationAsync`
+  now builds `KernelHostBindings { Metadata, ReadQuery }` and executes the
+  reader `CarrierContext` with it plus the reader bundle's mechanics — the same
+  bindings `InvocationBoot` adopts and the Python carrier already passed.
+  `CommandCarrier.OutcomeFailureMessage` raises the failed read's own
+  message/error code (serialized fallback) instead of collapsing to
+  `DECLARED_READ_FAILED`.
+- **Conformance.** `languages/csharp/tests/ScenarioKernel.ConformanceTests/
+  ReaderOperationConformanceTests.cs` (6 tests): list, catalogue, find, reveal,
+  reader/invocation fact parity for `list-capabilities`, and circuit-carry-its-
+  own-declared-cause. C# suite: **205 passed / 0 failed** (baseline 199).
+- **Installed verification (direct `KernelEntry.exe`, no CLI).**
+  `capability list` and `capability catalogue` returned the 318-row declared
+  catalogue; `capability find hello` returned the 4 matches; `capability reveal
+  say-hello-world --as meaning` returned 16 feature lines and the declared
+  contracts. Node (under its permission model) and Python returned the same
+  facts: identical sorted capability ids for list (`bfd5000d…`) and find
+  (`6066359a…`), identical feature-line bytes (`cfb07763…`).
+- **Circuit data source (option b).** Estate migration
+  `sql/migrations/repoint-circuit-reader-to-live-ancestor-walk.sql` re-points
+  `operations.circuit.reader` to the installed live `read-capability-circuit`
+  (content digest `sha256:6b9c2d38c9cab66f75089876c5b57457b7f401c4a690f63361cd4354e29413e3`);
+  `reveal.readers.circuit` and `artifact` stay on `read-retained-publication`
+  (no producer) and the header records the reverse re-point. A testimony-less
+  circuit reader request now refuses with the declared
+  `CIRCUIT_VIEW_CELL_TESTIMONY_REQUIRED` in all three kernels — the read's own
+  cause, never the collapse. The ancestor attestation is live when the request
+  carries testimony: the migration self-test and the from-transaction kernel
+  preflight returned `circuit-view.v1` with `structured: true`.
+- **Acceptance digests.** `accept` matched `say-hello-world` (20864ba/8b859397/
+  f7655bd9) and the live AVGO equity reading (`c507678e`); the agent-lane
+  observe exceeded the entry's 120 s internal delivery bound in the acceptance
+  child and, run directly with `--timeout 900000`, returned the recorded
+  `observedPathDigest sha256:26c85c04…` with overlay and story.
+- **Timing.** `read-invocation-timing` over the live agent-lane testimony
+  (716 cells, 715 windows, 0 unattributed, 0 negative, coherent) is byte-
+  identical through the installed C# kernel and Node
+  (`sha256:0c7070faf737947b185b2b4cb87328571beab209b5e088e6cb584dd7b67ad976`).
+  The full live timing acceptance is currently red on the independent oracle's
+  unaccounted-overhead bound (22–29 ms vs 5 ms; recorded 3 ms), traced to an
+  OS-environment credential registry probe outside the declared cells — a host
+  condition, not a declared-reading regression; recorded here as the honest
+  residual.
+- The `docs/capability-command-surface.md` note in Impact stands: the reader
+  operations are now true of the installed C# kernel; the circuit surface reads
+  the live declared circuit, not a retained publication.
+
 ## Summary
 
 On the installed win-x64 C# kernel every **reader operation** of the declared
