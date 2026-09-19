@@ -56,6 +56,7 @@ achieved state and the canonical/stale document map, and
 | Target architecture | `docs/target-architecture.md` |
 | Governed model harness / agent lane | `docs/agent-lane.md` |
 | Agent harness enforcement (hook register) | `docs/agent-harness-hooks.md` |
+| Declared capability estate: shape, gaps, proposals | `docs/capability-estate-research.md` |
 | Trust, non-disclosure, timing coherence | `docs/invisible-execution-authority.md`, `docs/vault-manager-capabilities.md` |
 | Composite repo boundary | `docs/composite-repo-boundary.md` |
 | Kernel install matrix | `docs/kernel-install-matrix.md` |
