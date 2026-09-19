@@ -4,8 +4,8 @@
   "deliveries": {
     "database-memory": {
       "type": "process",
-      "command": "C:\\Users\\Sidney Jones\\AppData\\Local\\sfx\\kernel\\a567cfa59bf66d736aabc80af5dcf98000062bd1fdfd15103e79e3d95d42d5c8\\KernelEntry.exe",
-      "cwd": "C:\\Users\\Sidney Jones\\AppData\\Local\\sfx\\kernel\\a567cfa59bf66d736aabc80af5dcf98000062bd1fdfd15103e79e3d95d42d5c8",
+      "command": "C:\\Users\\Sidney Jones\\AppData\\Local\\sfx\\kernel\\21d74027606b24f8d98e84218c72d3aab756d5c7de720f6bc0bd2b621962bd67\\KernelEntry.exe",
+      "cwd": "C:\\Users\\Sidney Jones\\AppData\\Local\\sfx\\kernel\\21d74027606b24f8d98e84218c72d3aab756d5c7de720f6bc0bd2b621962bd67",
       "args": [
         "--stdin-envelope",
         "--config",
@@ -14,8 +14,8 @@
     },
     "database-projection": {
       "type": "process",
-      "command": "C:\\Users\\Sidney Jones\\AppData\\Local\\sfx\\kernel\\a567cfa59bf66d736aabc80af5dcf98000062bd1fdfd15103e79e3d95d42d5c8\\KernelEntry.exe",
-      "cwd": "C:\\Users\\Sidney Jones\\AppData\\Local\\sfx\\kernel\\a567cfa59bf66d736aabc80af5dcf98000062bd1fdfd15103e79e3d95d42d5c8",
+      "command": "C:\\Users\\Sidney Jones\\AppData\\Local\\sfx\\kernel\\21d74027606b24f8d98e84218c72d3aab756d5c7de720f6bc0bd2b621962bd67\\KernelEntry.exe",
+      "cwd": "C:\\Users\\Sidney Jones\\AppData\\Local\\sfx\\kernel\\21d74027606b24f8d98e84218c72d3aab756d5c7de720f6bc0bd2b621962bd67",
       "args": [
         "--stdin-envelope",
         "--config",
