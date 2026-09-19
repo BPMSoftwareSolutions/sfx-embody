@@ -1,0 +1,60 @@
+{
+  "contractId": "provider-binding-change.v1",
+  "providerId": "rapidapi/yahoo-finance15",
+  "capabilityId": "resolve-equity-market-price-evidence",
+  "outcomeContractId": "equity-market-price-evidence.v1",
+  "bindingId": "rapidapi-yahoo-finance15-market-quotes.v1",
+  "endpoint": {
+    "host": "yahoo-finance15.p.rapidapi.com",
+    "method": "GET",
+    "pathPrefix": "/api/v1/markets/quote?",
+    "requestTemplate": "https://yahoo-finance15.p.rapidapi.com/api/v1/markets/quote?ticker={symbol}&type=STOCKS",
+    "safeHeaders": {
+      "x-rapidapi-host": "yahoo-finance15.p.rapidapi.com"
+    },
+    "allowedResponseHeaders": ["content-type", "retry-after"],
+    "timeoutMilliseconds": 15000,
+    "maxResponseBytes": 262144
+  },
+  "credential": {
+    "referenceName": "RAPID_API_KEY",
+    "injectionRuleId": "rapidapi-x-rapidapi-key.v1",
+    "headerName": "X-RapidAPI-Key",
+    "source": "vault",
+    "storeLocator": "%LOCALAPPDATA%\\sfx\\vault"
+  },
+  "effectScope": "ONE_BOUNDED_HTTPS_EXCHANGE_NO_REDIRECT_NO_RETRY",
+  "nativeShape": "body.primaryData",
+  "mapping": {
+    "symbol": "body.symbol",
+    "region": "request:payload.region",
+    "currency": null,
+    "observedPrice": "body.primaryData.lastSalePrice",
+    "observedMarketTime": "body.primaryData.lastTradeTimestamp",
+    "marketState": "body.marketStatus",
+    "exchange": "body.exchange",
+    "sourceAttribution": "body.companyName"
+  },
+  "observedSample": {
+    "meta": { "version": "v1.0", "status": 200 },
+    "body": {
+      "symbol": "AVGO",
+      "companyName": "Broadcom Inc. Common Stock",
+      "stockType": "Common Stock",
+      "exchange": "NASDAQ-GS",
+      "primaryData": {
+        "lastSalePrice": "$357.61",
+        "netChange": "+10.31",
+        "percentageChange": "+2.97%",
+        "deltaIndicator": "up",
+        "lastTradeTimestamp": "Sep 17, 2026",
+        "isRealTime": false,
+        "volume": "44,033,029",
+        "currency": null
+      },
+      "secondaryData": null,
+      "marketStatus": "Closed",
+      "assetClass": "STOCKS"
+    }
+  }
+}

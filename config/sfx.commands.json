@@ -29,6 +29,10 @@
     "media": {
       "pattern": "^[a-f0-9]{64}$",
       "message": "Supply a retained media digest."
+    },
+    "provider": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._/-]*$",
+      "message": "Supply a declared provider identity."
     }
   },
   "commands": {
@@ -155,6 +159,43 @@
           "operation": "artifact"
         },
         "description": "Read the original bytes of an artifact in the selected snapshot media publication."
+      }
+    },
+    "provider": {
+      "list": {
+        "min": 0,
+        "max": 0,
+        "input": false,
+        "namespace": false,
+        "wraps": {
+          "surface": "database-invocation",
+          "operation": "providerList"
+        },
+        "description": "List the providers the selected database estate declares: identity, declared transport host, source, operations and the counts of declared endpoints and provider bindings."
+      },
+      "reveal": {
+        "min": 1,
+        "max": 1,
+        "identity": "provider",
+        "input": false,
+        "namespace": false,
+        "wraps": {
+          "surface": "database-invocation",
+          "operation": "providerReveal"
+        },
+        "description": "Reveal one declared provider configuration: host, endpoint authorities (URL prefixes, methods, allowed request and response headers, digest), credential reference and injection rule, request templates with timeouts, provider bindings, and availability evidence when recorded."
+      },
+      "set": {
+        "min": 1,
+        "max": 1,
+        "identity": "provider",
+        "input": true,
+        "namespace": false,
+        "wraps": {
+          "surface": "database-invocation",
+          "operation": "providerSet"
+        },
+        "description": "Author and preflight one provider binding change through the declared lifecycle: validate the change document against the selected model, the declared outcome contract and the observed sample, refuse secret material, and mint the endpoint authority content address, or hold the change with its exact findings. Installation remains the standard migration lifecycle."
       }
     }
   }
