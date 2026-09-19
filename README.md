@@ -54,10 +54,16 @@ closed `sfx-command-delivery.v1` envelope. Selecting an admitted binary is not a
 dependency on a source tree. A change that needs SDA source is a cross-language
 **request**, not an edit and not a path reference.
 
-The check is mechanical and must return nothing:
+**No link in this repository may resolve outside it.** Provenance for external
+material is recorded as name plus inspected revision — never as a local path,
+which is not reproducible provenance for anyone else anyway. Retired sources are
+named in brackets, e.g. `input binding [agentic-harness]`.
+
+The checks are mechanical and must each return nothing:
 
 ```
 git grep -n "sidefx-cli\|sidefx-database" -- . ':!docs' ':!*.md'
+git grep -n "](C:\|](\.\./\.\./sidefx\|](\.\./\.\./agentic\|](\.\./\.\./scenario-driven" -- .
 ```
 
 **One violation is outstanding and is tracked, not tolerated.** The change

@@ -426,9 +426,9 @@ All local and web sources were inspected September 9, 2026. Local file links ide
 
 [^3]: Research probes, [probe-existing-form.mjs](probe-existing-form.mjs) and [existing-form-probes.json](existing-form-probes.json). Source helper digest retained in the result; all 630 schemas passed the Ajv 8.20.0 draft-2020-12 meta-schema check.
 
-[^4]: SFX Platform, [input publication](C:/lab/repos/sfx-platform/scripts/publish-input-contracts.mjs), [form interpretation](C:/lab/repos/sfx-platform/lib/json-schema-form.ts), [field renderer](C:/lab/repos/sfx-platform/components/estate/schema-field.tsx), [run and result panel](C:/lab/repos/sfx-platform/components/estate/capability-run-panel.tsx), [invocation contracts](C:/lab/repos/sfx-platform/contracts/invocation.ts), and [form tests](C:/lab/repos/sfx-platform/tests/schema-form.test.ts). Inspected checkout `c025299f2a12d7191d4c5819b47eb50421d02350`; publication pin matches the census.
+[^4]: SFX Platform, input publication [sfx-platform], form interpretation [sfx-platform], field renderer [sfx-platform], run and result panel [sfx-platform], invocation contracts [sfx-platform], and form tests [sfx-platform]. Inspected checkout `c025299f2a12d7191d4c5819b47eb50421d02350`; publication pin matches the census.
 
-[^5]: Agentic Harness, [input binding](C:/lab/repos/agentic-harness/features/project-input-binding.feature), [collection presentation](C:/lab/repos/agentic-harness/features/project-collection-presentation.feature), [structured data](C:/lab/repos/agentic-harness/features/project-structured-data-presentation.feature), [feedback](C:/lab/repos/agentic-harness/features/project-feedback-presentation.feature), and [design tokens](C:/lab/repos/agentic-harness/features/project-presentation-token-binding.feature). Inspected checkout `47395018b04332a34debbde637a1b3efc4d0301a`; current source declarations corroborate the presentation semantics found in selected SQL contracts, without constituting runtime proof.
+[^5]: Agentic Harness, input binding [agentic-harness], collection presentation [agentic-harness], structured data [agentic-harness], feedback [agentic-harness], and design tokens [agentic-harness]. Inspected checkout `47395018b04332a34debbde637a1b3efc4d0301a`; current source declarations corroborate the presentation semantics found in selected SQL contracts, without constituting runtime proof.
 
 [^6]: JSON Schema, [Modular JSON Schema combination](https://json-schema.org/understanding-json-schema/structuring). Official documentation on IDs, base URIs, registries, references, and reusable definitions; live documentation, publication date not stated.
 
@@ -438,11 +438,11 @@ All local and web sources were inspected September 9, 2026. Local file links ide
 
 [^9]: Ajv, [Modifying data during validation](https://ajv.js.org/guide/modifying-data.html). Official documentation; publication date not stated. Default assignment, coercion, and additional-property removal are configurable data mutations.
 
-[^10]: Scenario Driven Architecture, [Node schema admission provider](C:/lab/repos/scenario-driven-architecture/languages/typescript/runtimes/node/schema-contract-admission-provider.mjs), `compileContractValidators`. Uses Ajv2020 and registers schema IDs within the supplied authority collection.
+[^10]: Scenario Driven Architecture, Node schema admission provider [scenario-driven-architecture], `compileContractValidators`. Uses Ajv2020 and registers schema IDs within the supplied authority collection.
 
 [^11]: JSON Forms, [UI Schema](https://jsonforms.io/docs/uischema/) and [Custom Renderers](https://jsonforms.io/docs/tutorial/custom-renderers/); react-jsonschema-form, [Custom Widgets and Fields](https://rjsf-team.github.io/react-jsonschema-form/docs/advanced-customization/custom-widgets-fields/). Official current documentation, publication dates not stated. Both offer declarative customization patterns; neither was installed or benchmarked for this research. JSON Forms is the closer conceptual reference for a separate presentation schema and renderer registry; RJSF is a credible React form implementation option to evaluate against the estate corpus.
 
-[^12]: SideFX.UI provisional workspaces: [composition](C:/lab/sidefx-ui/sidefx-compose-ui-surface/README.md), [component semantics](C:/lab/sidefx-ui/sidefx-ui-component/semantics/component-semantics.v1.json), [state semantics](C:/lab/sidefx-ui/sidefx-ui-state/semantics/state-semantics.v1.json), [binding](C:/lab/sidefx-ui/sidefx-ui-binding/README.md), and [validation](C:/lab/sidefx-ui/sidefx-ui-validation/README.md). Local design/implementation references, explicitly provisional.
+[^12]: SideFX.UI provisional workspaces: composition [sidefx-ui], component semantics [sidefx-ui], state semantics [sidefx-ui], binding [sidefx-ui], and validation [sidefx-ui]. Local design/implementation references, explicitly provisional.
 
 [^13]: Vega-Lite, [Encoding](https://vega.github.io/vega-lite/docs/encoding.html). Official documentation, publication date not stated. Example of declarative data/visual channel mapping; not a recommendation to infer chart meaning from field names.
 

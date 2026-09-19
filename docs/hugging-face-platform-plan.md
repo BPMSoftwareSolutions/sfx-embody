@@ -8,7 +8,7 @@ The recommendation is to fund a bounded first release, then expand when its evid
 
 This document combines the [scenario experience proposal](research/scenario-experiences/opportunity.md), [ML opportunity](research/ml-opportunity/README.md), current runtime and API code, and external research. [Research notes and sources](research/hugging-face-platform/README.md) record factual checks, implementation limits, and competing approaches. The attached strategic direction is retained as [source material](research/hugging-face-platform/strategic-direction.txt). The original research did not perform deployment, account purchase, model evaluation, or database changes.
 
-**Implementation update, 9 September 2026 (local time):** the private Hugging Face Space is now running the shared SideFX Lab. All three original interactions and actual RapidAPI stock-price retrieval passed through the authenticated Azure service and selected database authority. The [deployment report](../../sfx-platform/docs/live-finance-deployment.md) records the HF commit, pinned service image, native execution identities and hosted verification. The research roadmap below retains its wider proposed scope.
+**Implementation update, 9 September 2026 (local time):** the private Hugging Face Space is now running the shared SideFX Lab. All three original interactions and actual RapidAPI stock-price retrieval passed through the authenticated Azure service and selected database authority. The deployment report [sfx-platform] records the HF commit, pinned service image, native execution identities and hosted verification. The research roadmap below retains its wider proposed scope.
 
 ## 1. Decisions for this review
 

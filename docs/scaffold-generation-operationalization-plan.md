@@ -33,7 +33,7 @@ There are two distinct products to track during implementation:
 | Revision of the existing managed scaffold generator | Resolve its exact predecessor and current contracts; follow the Harness managed revision lifecycle. Changing its declared behavior is managed work. |
 | Capability produced by the revised generator | Determine whether the request is token provisioning or managed admission/revision. Keep the cheap provisioning path available; do not impose managed publication on every generated token. |
 
-Harness lifecycle and authorship requirements come from its [AGENTS.md](../../agentic-harness/AGENTS.md), [CLAUDE.md](../../agentic-harness/CLAUDE.md) and [capability-change lifecycle](../../agentic-harness/docs/capability-change-lifecycle.md). Author declarative meaning there and project executable code through the applicable admitted mechanisms. Database registration is a separate projection/publication boundary; SQL `PUBLISHED` is not Harness managed admission.
+Harness lifecycle and authorship requirements come from its AGENTS.md [agentic-harness], CLAUDE.md [agentic-harness] and capability-change lifecycle [agentic-harness]. Author declarative meaning there and project executable code through the applicable admitted mechanisms. Database registration is a separate projection/publication boundary; SQL `PUBLISHED` is not Harness managed admission.
 
 ### 1.1 Mutable workshop, managed promotion
 
@@ -119,7 +119,7 @@ Local inspection on 2026-09-11 covered the generator feature and capsule entry i
 
 | Existing responsibility | Evidence inspected | Implementation implication |
 | --- | --- | --- |
-| Pure generation of a standard shell, slots, evidence obligations and bounded authoring work | [Generator feature](../../agentic-harness/features/generate-executable-capability-scaffold.feature) | Extend this capability; retain supplied inventory, no external effects during generation and byte-identical replay. |
+| Pure generation of a standard shell, slots, evidence obligations and bounded authoring work | Generator feature [agentic-harness] | Extend this capability; retain supplied inventory, no external effects during generation and byte-identical replay. |
 | Blueprint conditioning, candidate/admitted distinction and exact embodiment | Same feature: `condition-scaffold-on-admitted-blueprint`, `prove-blueprint-embodiment` | Preserve cells, edges, terminals, precedence, altitudes and required slots. A first realization is a binding of that design, not a replacement circuit. |
 | Slot lookup and completeness | Same feature: `resolve-slots-against-admitted-estate`, `resolve-scaffold-completeness-level` | `FOUND`/`NOT_FOUND` and design completeness are insufficient to express compatibility, actual execution or verified outcomes. Add separate evidence without reinterpreting those statuses. |
 | Unresolved root meaning and preserving child cells | Same feature: `preserve-semantic-transformation-as-unresolved` | The rule currently rejects a resolved root as `SEMANTIC_MEANING_FABRICATED`. Reusing a supplied admitted transformation needs an explicit feature/authority revision, not a workaround in generated code. |
@@ -203,7 +203,7 @@ For a declared read → hash → model interpretation path, reuse compatible adm
 6. Emit the rubric decision, artifact/reference closure, realization mapping, proof obligations and the next bounded authoring queue. Preserve target requirements when a fixture enables early execution.
 7. Replay generation from identical canonical inputs and frozen evidence. Keep timestamps, execution IDs and evolving measurements outside the deterministic generation digest basis. Rule changes change the generator identity and therefore the replay basis.
 
-The [Semantic Brain](../../agentic-harness/docs/SideFX%20Semantic%20Brain.md) records this reuse ordering. Parameters reuse an existing contract; allowed specialization uses a profile; a conforming implementation changes binding; different behavior/effects/guarantees require revised or new semantic identity. This procedure must not let the generator author domain meaning or rewire composition to save effort.
+The Semantic Brain [agentic-harness] records this reuse ordering. Parameters reuse an existing contract; allowed specialization uses a profile; a conforming implementation changes binding; different behavior/effects/guarantees require revised or new semantic identity. This procedure must not let the generator author domain meaning or rewire composition to save effort.
 
 ### 4.3 Contract and evidence changes
 

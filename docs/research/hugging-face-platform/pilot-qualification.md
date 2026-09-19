@@ -2,7 +2,7 @@
 
 Observed 9 September 2026, America/New_York (10 September UTC).
 
-The initial three-root qualification passed the installed `sfx` path: **16 cases, 36 outcome assertions, zero failures**, followed by Linux parity and local renderer checks. The subsequent [live finance deployment](../../../../sfx-platform/docs/live-finance-deployment.md) now runs all three interactions and actual RapidAPI stock-price retrieval in the private Hugging Face Space through the authenticated Azure service. The sections below retain the initial qualification's narrower evidence scope.
+The initial three-root qualification passed the installed `sfx` path: **16 cases, 36 outcome assertions, zero failures**, followed by Linux parity and local renderer checks. The subsequent live finance deployment [sfx-platform] now runs all three interactions and actual RapidAPI stock-price retrieval in the private Hugging Face Space through the authenticated Azure service. The sections below retain the initial qualification's narrower evidence scope.
 
 The organization is **BPM Software Solutions**; the private Docker Space is [BPMSoftwareSolutions/SideFX](https://huggingface.co/spaces/BPMSoftwareSolutions/SideFX). The user completed the Team purchase. The initial qualification did not deploy an application; the linked deployment report records the later completed deployment using the existing Azure plan.
 

@@ -1,6 +1,6 @@
 # Next run: live stock-price capability in the Hugging Face Space
 
-**Completed 9 September 2026 (local time):** all three original interactions and live RapidAPI stock-price retrieval are deployed and verified in the private Space. [Deployed identities and hosted evidence](../../../../sfx-platform/docs/live-finance-deployment.md) records the result. The original acceptance scope below is retained for traceability.
+**Completed 9 September 2026 (local time):** all three original interactions and live RapidAPI stock-price retrieval are deployed and verified in the private Space. Deployed identities and hosted evidence [sfx-platform] records the result. The original acceptance scope below is retained for traceability.
 
 User direction: deploy the working Lab to the private Hugging Face Space `BPMSoftwareSolutions/SideFX` and carry it through an actual finance capability and external API call. Keep all three existing interactions working in that Space, and extend the shared experience to the RapidAPI stock-price path. **Hugging Face deployment is mandatory. Local execution is a development check and never the completion point.**
 

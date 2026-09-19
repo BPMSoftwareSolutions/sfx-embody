@@ -208,7 +208,7 @@ in the schema.
 
 ### 3.1 The equity example
 
-The [Harness feature](C:/lab/repos/agentic-harness/features/resolve-equity-market-price-evidence.feature)
+The Harness feature [agentic-harness]
 has four scenarios and root input `equity-market-price-evidence-request`. The
 [registered feature](../features/resolve-equity-market-price-evidence.feature)
 has one scenario and root input `live-equity-price-request`. Its
