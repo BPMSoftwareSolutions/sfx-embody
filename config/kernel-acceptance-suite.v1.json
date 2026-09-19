@@ -1,0 +1,103 @@
+{
+  "suiteType": "sfx-kernel-acceptance-suite.v1",
+  "suiteId": "kernel-acceptance",
+  "description": "The declared kernel acceptance suite: each invocation names its request envelope, the observed paths the evaluator projects from the delivery outcome, and the conditions it evaluates. Adding an invocation is a change to this document (installed by sql/migrations/declare-kernel-acceptance-suite.sql), never a kernel evaluator change. The equity alternates resolved-live and declared-unavailable: both are honest terminal shapes and either is accepted.",
+  "invocations": [
+    {
+      "id": "invoke-say-hello-world",
+      "command": "capability invoke say-hello-world --input {}",
+      "operation": "invoke",
+      "request": {
+        "object": "capability",
+        "verb": "invoke",
+        "subject": "say-hello-world",
+        "input": {}
+      },
+      "observed": [
+        { "name": "observedPathDigest", "path": "result.observedPathDigest" },
+        { "name": "canonicalGraphDigest", "path": "evidence.graph.canonicalGraphDigest" },
+        { "name": "realizedGraphDigest", "path": "evidence.graph.realizedGraphDigest" }
+      ],
+      "expect": [
+        {
+          "label": "recorded-parity",
+          "conditions": [
+            { "condition": "equals", "path": "observedPathDigest", "value": "sha256:20864ba25e20de3698d3affd2303f6064a7f50528ae79db9c33f24847a7f70ba" },
+            { "condition": "equals", "path": "canonicalGraphDigest", "value": "sha256:8b859397e5bf18f8d24580ecfb3859fedc09f4150a69b40f7447273cbb014931" },
+            { "condition": "equals", "path": "realizedGraphDigest", "value": "sha256:f7655bd9b1897fb19e823a226f0e9538f7ec9f6c85a0374c0f0f866b999a72de" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "invoke-resolve-equity-market-price-evidence",
+      "command": "capability invoke resolve-equity-market-price-evidence --display --input AVGO",
+      "operation": "invoke",
+      "request": {
+        "object": "capability",
+        "verb": "invoke",
+        "subject": "resolve-equity-market-price-evidence",
+        "display": true,
+        "input": "AVGO"
+      },
+      "observed": [
+        { "name": "observedPathDigest", "path": "result.observedPathDigest" },
+        { "name": "outcomeVariant", "path": "result.outcomeVariant" },
+        { "name": "payload", "path": "result.outcome.payload" },
+        { "name": "symbol", "path": "result.outcome.payload.symbol" },
+        { "name": "observedPrice", "path": "result.outcome.payload.observedPrice" },
+        { "name": "marketState", "path": "result.outcome.payload.marketState" },
+        { "name": "reasonCode", "path": "result.outcome.reasonCode" }
+      ],
+      "expect": [
+        {
+          "label": "resolved-live",
+          "conditions": [
+            { "condition": "equals", "path": "observedPathDigest", "value": "sha256:c507678e9cd9600d502a2f86f3fbc9d0c102270be93a571926efc605c19879eb" },
+            { "condition": "equals", "path": "outcomeVariant", "value": "EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED" },
+            { "condition": "equals", "path": "symbol", "value": "AVGO" },
+            { "condition": "number-greater-than", "path": "observedPrice", "value": 0 },
+            { "condition": "present", "path": "marketState" }
+          ]
+        },
+        {
+          "label": "declared-unavailable",
+          "conditions": [
+            { "condition": "one-of", "path": "observedPathDigest", "values": ["sha256:edffdf7fb3c3aafe3025f34e7cb208ab3262dae9b74d4db9974a190c8beff4e1"] },
+            { "condition": "equals", "path": "outcomeVariant", "value": "EQUITY_MARKET_PRICE_PROVIDER_UNAVAILABLE" },
+            { "condition": "empty", "path": "payload" },
+            { "condition": "present", "path": "reasonCode" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "observe-request-capability-from-objective",
+      "command": "capability observe request-capability-from-objective --input \"What is Broadcom's current market price?\" --json",
+      "operation": "observe",
+      "request": {
+        "object": "capability",
+        "verb": "observe",
+        "subject": "request-capability-from-objective",
+        "display": true,
+        "input": "What is Broadcom's current market price?",
+        "observationAltitudes": ["scenario"]
+      },
+      "observed": [
+        { "name": "observedPathDigest", "path": "observedPathDigest" },
+        { "name": "overlay", "path": "overlay.counts" },
+        { "name": "story", "path": "story.scenario" }
+      ],
+      "expect": [
+        {
+          "label": "recorded-observation",
+          "conditions": [
+            { "condition": "one-of", "path": "observedPathDigest", "values": ["sha256:5f8e6fdad28b4847a516cac59e11423aa3f5ed238c9005a6ddc2cec7c01d1a4a", "sha256:26c85c04c7ed278950d5d108b8568232cb00a742ebb7f3db3c76a8fc0accfb73"] },
+            { "condition": "present", "path": "overlay" },
+            { "condition": "present", "path": "story" }
+          ]
+        }
+      ]
+    }
+  ]
+}
