@@ -12,10 +12,26 @@ declared**. Nothing in this document declares anything.
 
 | Read | Command | Result |
 | --- | --- | --- |
-| Full estate | `sfx capability list --json` | exit 0, 16 s, 281 KB, 318 capabilities |
-| Discovery | `sfx capability find <query> --json` | exit 0, 4–12 s |
+| Full estate | `sfx capability list --json` | exit 0, 281 KB, 318 capabilities |
+| Discovery | `sfx capability find <query> --json` | exit 0 |
 | Circuit | `sfx capability circuit say-hello-world --json` | **exit 4**, `CIRCUIT_VIEW_CELL_TESTIMONY_REQUIRED` |
-| Host | `../scenario-driven-architecture` at `ed64315`; kernel `7eec4896…` present and selected in `sfx.config.json`; `sfx` on PATH | all live |
+
+**The host under measurement**, pinned because it changed three times during this
+research (`59d6030f` → `7eec4896` → `f3ae79b1`):
+
+| Field | Value |
+| --- | --- |
+| `outputDigest` | `sha256:f3ae79b106db307a78d03db1189c3b2dd60779312e7a3de8211cc55ae9141b39` |
+| `manifestDigest` | `sha256:81873b45ddbfd4b76a6526c3f318a4711bebcff2b56ca74afd4ad0864fc48acf` |
+| `sdaRevision` | `925587b5d5ed300c61a7502f0b7f44ab6e380f98` |
+| `sourceState` | **`working-tree`** |
+| `rid` / language | `win-x64` / `csharp` |
+| Delivery args | `--stdin-envelope --config kernel-host.json --timeout 900000` |
+
+`sourceState: working-tree` means this kernel was published from an uncommitted
+tree: the timings in §3 are not reproducible from `925587b5` alone. Any figure
+below is read as "this build, this machine," never as a property of the
+architecture.
 
 The `list` payload carries, per capability: `capabilityId`, `namespaceId`,
 `definitionDigest`, `name`, `mode`, `declaredRootCount`, `declaredRootScenarioId`,
@@ -38,7 +54,9 @@ one declared root (`declaredRootCount == 0` is empty) and at least one scenario 
 For scale: [invocation-latency-2026-09-08.md](invocation-latency-2026-09-08.md)
 records 219 capabilities and 824 capability/scenario pairs on 2026-09-08. The
 estate added **99 capabilities in 11 days** without a build step. The
-declaration-only expansion claim in the README is borne out by the count.
+declaration-only expansion claim in the README is borne out by the count. *Count
+only* — that record's timings are loader-era and not comparable to anything here;
+see §3.
 
 ### The families
 
@@ -71,19 +89,57 @@ the right shape.
 change lifecycle are all declared rather than coded. The gaps below are narrow by
 comparison, and most are declaration-only to close.
 
-## 3. What works, measured
+## 3. What works, measured on the installed kernel
 
-- **Whole-estate discovery in 16 seconds.** This is the headline. The 2026-09-08
-  record shows `DELIVERY_TIMEOUT` at 120 s with the resolver query costing 120.9 s;
-  [database-preparation.md](database-preparation.md) removed that query from
-  invocation, and the estate-wide read now completes well inside one delivery
-  window. Interactive discovery is viable today.
-- **Single-token discovery in 4–12 seconds.** `find equity` returns
-  `compose-resolve-equity-market-price-evidence`; `find hello` returns
-  `greet-by-name` and siblings; `find market` returns 9 rows.
+Three consecutive runs each, wall clock, against `f3ae79b1` as pinned in §1.
+
+| Operation | Run 1 | Run 2 | Run 3 | Payload |
+| --- | ---: | ---: | ---: | ---: |
+| `capability list` (all 318) | 5926 ms | 3409 ms | 3312 ms | 281 KB |
+| `capability find equity` | 3464 ms | 3246 ms | 3158 ms | 6.7 KB |
+| `capability invoke say-hello-world` | 2367 ms | 2565 ms | 2904 ms | 15 KB |
+| `KernelEntry.exe` alone, empty envelope, no work | 523 ms | 432 ms | 465 ms | — |
+
+**No comparison is drawn to [invocation-latency-2026-09-08.md](invocation-latency-2026-09-08.md).**
+That is the loader-era record: a different execution path, a different operation
+(`invoke resolve-sidefx-eligible-providers`, not a whole-estate `list`), measured
+under acknowledged shared load, and its own header states those timings "are not an
+isolated before/after benchmark." Reading a speedup across the two is unsound. The
+table above is a fresh baseline on the installed kernel and supersedes any such
+comparison. Its count of 219 capabilities is era-independent and is the only figure
+carried forward from it.
+
+### What the baseline says
+
+- **~450 ms is .NET process start**, before any estate work — 19% of the floor.
+- **`say-hello-world` costs ~2.4 s** for a capability that does essentially
+  nothing. That is the fixed cost of an invocation: process start, connect,
+  authority reads, planning.
+- **318 capabilities and 281 KB cost only ~0.9 s on top of that floor.** The
+  estate's size is not the problem. Per-invocation overhead is, and it is paid in
+  full by the smallest capability in the estate.
+- **First run is consistently slower** (5926 vs ~3350 ms on `list`) — a cold
+  effect that does not survive into run 2.
+
+The targeted fix follows from the shape, not from a guess: every `sfx` call is a
+new process, so nothing is amortized — no warm connection, no reused planner, .NET
+start paid every time. A **long-lived delivery host** would amortize all three, and
+it is already a named unit rather than a new proposal: `docs/architecture-achieved.md`
+§9 row 8 carries the carrier residual (U6), and the deferred long-lived delivery
+host appears in the dashboard research as the precondition for a non-collector
+consumer. This measurement quantifies what it is worth: roughly 2 s of every
+invocation, and the difference between a 3 s discovery loop and a sub-second one.
+
+Two further notes on instruments:
+
 - **Retained meaning is near-complete.** 313 of 318 carry a `userStory` in
-  `{actor, intent, outcome}` form. An agent can pick a capability by intent without
-  reading a single document.
+  `{actor, intent, outcome}` form, so an agent can pick a capability by intent
+  without reading a document.
+- **`read-invocation-timing` and `circuit` read testimony; they do not generate
+  it.** Both return `*_TESTIMONY_REQUIRED` when invoked bare. That is their
+  contract, not a defect — the supported path is `npm run verify:timing`, whose
+  receipt is the acceptance authority. G2 below is about the circuit view's
+  declared fragments, not about this shape.
 
 ## 4. Gaps found live
 
@@ -164,6 +220,12 @@ Cited, not re-derived, so this document does not restate owed work as discovery:
   filesystem-write enforcement (`NOT_ENFORCED_MANAGED_HOST`); macOS/Linux kernel
   builds; the Python observe seam. SDA `ed64315` ("Bind declared credential
   operations to the macOS host vault") is movement on the third.
+- **Long-lived delivery host / carrier residual (U6)**
+  ([architecture-achieved.md](architecture-achieved.md) §9 row 8). Already named,
+  now quantified by §3: process-per-invocation costs ~450 ms of .NET start and a
+  ~2 s fixed floor that the smallest capability in the estate pays in full. This
+  is the highest-value performance item and it is not a capability — it is carrier
+  and host work.
 - **Installed but unintegrated** ([implementation-plan-next-wave.md](implementation-plan-next-wave.md)):
   the MCP change surface and the context capabilities are declared and installed,
   awaiting integration — W4. Not new work.
@@ -206,12 +268,18 @@ is deliberate so this document cannot be mistaken for the estate.
 6. **U4** — adapter composition, the deepest and the one that most changes what the
    platform can express.
 
+Outside this list, because it is host work rather than a capability: the
+**long-lived delivery host** (§5) outranks most of the rows above on
+user-perceived value. It is worth ~2 s of every invocation, which is the
+difference between a 3 s discovery loop and a sub-second one — and an agent runs
+that loop dozens of times per task.
+
 ## 7. The honest summary
 
 The estate is in better shape than the gap list suggests. 318 capabilities with
 declared roots, scenarios and retained meaning; 99 added in 11 days with no build
-step; whole-estate discovery in 16 seconds where it timed out at 120 s eleven days
-ago. The declaration-only expansion claim holds up under a live read.
+step; the whole estate read, planned and returned in ~3.3 s warm. The
+declaration-only expansion claim holds up under a live read.
 
 What is missing is not capability — it is **reflexivity**. The estate can author,
 prove, project and execute meaning, and it cannot yet reliably tell you what it
