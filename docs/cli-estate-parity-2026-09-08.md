@@ -34,9 +34,11 @@ capability. The repair must supply a proven necessary closure or bounded batches
 with error and disposable-root release behavior, and repeat the native CLI test.
 The materializer's admitted bound was not modified.
 
-[CLI changes and verification](../../sidefx-cli/docs/estate-delivery-verification-2026-09-08.md)
-and [Harness finding](../../agentic-harness/docs/cli-estate-invocation-2026-09-08.md)
-describe the exact boundaries. Native commands, exit codes, outputs, request
+Two external records described the exact boundaries at the time — the CLI's
+`estate-delivery-verification-2026-09-08` and the harness's
+`cli-estate-invocation-2026-09-08`. Both are named, not linked: their
+repositories are retired from this estate and no link may resolve outside this
+repository. Native commands, exit codes, outputs, request
 bytes, outcome comparisons, and content digests are retained locally in
 [the evidence summary](../evidence/cli-estate-2026-09-08/summary.json).
 

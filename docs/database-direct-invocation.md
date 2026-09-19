@@ -100,7 +100,7 @@ Both live runs selected database snapshot `sha256:1a770ac0795d10665a88166f8d8c96
 
 ## What still separates this from the database change surface
 
-The current [authority query](C:/lab/sidefx-database/sql/diagnostics/capability-embodiment.sql) selects normalized identities and relationships, then exports exact source documents from `source.content_object` through retained capsule lineage. The planner still parses the retained feature, execution-authority JSON, interface bindings, transformations, and contract schemas. Normalized mechanic definitions and Scenario resolution already participate, but normalized rows alone are not yet the complete compilation input.
+The authority query of that era (`capability-embodiment.sql`, in the retired `sidefx-database` diagnostics tree — named, not linked) selected normalized identities and relationships, then exports exact source documents from `source.content_object` through retained capsule lineage. The planner still parses the retained feature, execution-authority JSON, interface bindings, transformations, and contract schemas. Normalized mechanic definitions and Scenario resolution already participate, but normalized rows alone are not yet the complete compilation input.
 
 Consequently, changing a normalized transformation or contract row would not, by itself, establish a revised executable capability through this path. Published definitions are also deliberately immutable. A database-native change surface needs an explicit candidate revision with a coherent content identity and a reader/compiler adapter that consumes that exact revision rather than the previous capsule's retained documents.
 

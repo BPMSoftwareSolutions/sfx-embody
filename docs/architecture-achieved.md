@@ -14,10 +14,17 @@ digest is recorded, or (ii) an observed live run on this host
 owed in §9. Receipts under `evidence/` are local-only (`.gitignore:4`); commit
 messages and this document carry the digests.
 
-**Citation roots.** Unprefixed paths are this repo (`sfx-embody`). `SDA:` is
-`C:\lab\repos\scenario-driven-architecture`; `DB:` is `C:\lab\sidefx-database`;
-`CLI:` is `C:\lab\repos\sidefx-cli`. Agents must not edit `SDA:`; cross-language
+**Citation roots.** Unprefixed paths are this repo (`sfx-embody`). `SDA:` names
+the scenario-driven-architecture project for citation only — it is not a
+dependency of this estate, and the estate's relationship to it is the installed
+`KernelEntry.exe`, never a checkout. Agents must not edit `SDA:`; cross-language
 changes are requests (see [transistor-model.md](transistor-model.md) §10).
+
+The former `DB:` and `CLI:` roots are **retired**. `sidefx-database` and
+`sidefx-cli` have no role in this estate and must not be referenced by any path
+spelling; §1.6 records the zero-edge state and
+[the dependency law](../AGENTS.md) forbids reintroducing either. Historical
+mentions below and in the research record are narrative, not live roots.
 
 **Evidence policy.** The primary receipt for the achieved install is
 `evidence/vault-20260916/csharp-seams/` (receipt JSON, install/verify/switch

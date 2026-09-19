@@ -1,8 +1,10 @@
 # sfx-embody
 
-The declared estate. This repository holds **no execution code** — it is the
-database authority's authoring surface, the client configuration, and the
-evidence record.
+The declared estate. This repository holds **no execution code and no
+dependencies** — it is the database authority's authoring surface, the client
+configuration, and the evidence record. There is no package manifest, no
+lockfile, no vendored tree and no build step. Execution arrives as an installed,
+digest-admitted kernel executable, selected as host data.
 
 What lives here:
 
@@ -32,6 +34,38 @@ The invocation path reads declared authority from the database, resolves
 credentials from the **secrets vault** (never the process environment), and
 executes through the installed kernel. No `scenario-driven-architecture`
 source path, read grant, or build step participates at runtime.
+
+## This repository depends on nothing
+
+The estate declares; it does not import, install or build. The rule is absolute
+and the surfaces it closes are named so they cannot creep back:
+
+| Forbidden | Why |
+| --- | --- |
+| A package manifest, lockfile or `node_modules` | The estate is rows and prose. Nothing here is installed, built or bundled. There is no `package.json` and one must not be added |
+| A sibling-repository path — `sidefx-cli`, `sidefx-database`, in any spelling | Neither has a role here: not code, not config, not a resolvable documentation link. Both are retired; see [composite-repo-boundary.md](docs/composite-repo-boundary.md) for the removal record |
+| An SDA **checkout** reference | The relationship to SDA is an install, never a source tree |
+
+**The one permitted relationship to SDA is the installed executable.**
+`KernelEntry.exe` lives under `%LOCALAPPDATA%\sfx\kernel\<outputDigest>\`, is
+admitted by an `sfx-kernel-install-manifest.v1` manifest and digest, is selected
+as host data in [sfx.config.json](sfx.config.json), and is invoked over the
+closed `sfx-command-delivery.v1` envelope. Selecting an admitted binary is not a
+dependency on a source tree. A change that needs SDA source is a cross-language
+**request**, not an edit and not a path reference.
+
+The check is mechanical and must return nothing:
+
+```
+git grep -n "sidefx-cli\|sidefx-database" -- . ':!docs' ':!*.md'
+```
+
+**One violation is outstanding and is tracked, not tolerated.** The change
+lifecycle still runs `run-migration.mjs` and `invoke-from-transaction.mjs` from
+an SDA checkout — the last dependency in the estate. It closes when the migration
+lifecycle is reached through the installed kernel like every other execution
+([capability-estate-research.md](docs/capability-estate-research.md) §6 A5). It
+is named in [AGENTS.md](AGENTS.md) and is not a precedent for anything else.
 
 ## The discipline
 

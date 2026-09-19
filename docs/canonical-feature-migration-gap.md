@@ -212,7 +212,7 @@ The [Harness feature](C:/lab/repos/agentic-harness/features/resolve-equity-marke
 has four scenarios and root input `equity-market-price-evidence-request`. The
 [registered feature](../features/resolve-equity-market-price-evidence.feature)
 has one scenario and root input `live-equity-price-request`. Its
-[registration specification](C:/lab/sidefx-database/config/register/resolve-equity-market-price-evidence.json)
+the registration specification `resolve-equity-market-price-evidence.json` (retired `sidefx-database` register config — named, not linked)
 uses the latter shape. The selected root has `live-equity-price-request` and no
 Gherkin steps in its semantic definition.
 
@@ -445,7 +445,7 @@ capability_scenario ──(capability_pk)─────────────
 ### 6.2 Backfill
 
 The applied SQL is one file,
-[`sidefx-database/sql/migrations/007-canonical-feature.sql`](C:/lab/sidefx-database/sql/migrations/007-canonical-feature.sql):
+`007-canonical-feature.sql` (retired `sidefx-database` migrations — named, not linked):
 
 - **schema** — the additive expand DDL above;
 - **load** — set-based; resolves one retained feature appearance per selected

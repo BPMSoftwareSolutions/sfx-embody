@@ -422,7 +422,7 @@ All local and web sources were inspected September 9, 2026. Local file links ide
 
 [^1]: SideFX Database selected-model read, [inventory.sql](inventory.sql), [summary.json](summary.json), [contract-taxonomy.json](contract-taxonomy.json), and [raw local extraction](../../../evidence/research/scenario-experiences/inventory.json). Full query/pin identity appears above. The primary source for all measured estate counts and example contract structures.
 
-[^2]: SideFX Database, [normalized schema migration](C:/lab/sidefx-database/sql/migrations/001-normalized-estate.sql), especially `scenario_input`, `scenario_outcome`, `scenario_outcome_contract`, `contract_version`, and `schema_object`; [restricted reader](C:/lab/sidefx-database/src/query/run.mjs). Inspected checkout `266bbce853a576835b1e174ca747f6d093229327`.
+[^2]: SideFX Database (**retired** — named, not linked), normalized schema migration `001-normalized-estate.sql`, especially `scenario_input`, `scenario_outcome`, `scenario_outcome_contract`, `contract_version`, and `schema_object`; restricted reader `src/query/run.mjs`. Inspected checkout `266bbce853a576835b1e174ca747f6d093229327` — the revision, not a local path, is the provenance.
 
 [^3]: Research probes, [probe-existing-form.mjs](probe-existing-form.mjs) and [existing-form-probes.json](existing-form-probes.json). Source helper digest retained in the result; all 630 schemas passed the Ajv 8.20.0 draft-2020-12 meta-schema check.
 

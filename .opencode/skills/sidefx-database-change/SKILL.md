@@ -6,9 +6,9 @@ description: Use when authoring, editing, installing, or verifying a SideFX data
 # SideFX database change
 
 Meaning is authored in the database. Change a capability by writing rows in
-`.sql`; never by editing `src/` or `sidefx-database/sql/diagnostics/`. The full
-process and rationale are in `sql/README.md`; the repository rules are in
-`AGENTS.md`.
+`.sql`; never by editing a file. There is no estate source tree and no sibling
+repository reader. The full process and rationale are in `sql/README.md`; the
+repository rules, including the dependency law, are in `AGENTS.md`.
 
 ## Do this
 
@@ -50,10 +50,10 @@ process and rationale are in `sql/README.md`; the repository rules are in
 
 ## Traps
 
-- `sidefx-database/sql/migrations/run-file.mjs` opens its **own** transaction.
-  A script's `BEGIN/COMMIT` nests and run-file's outer rollback silently
-  discards the install. Use the kernel lifecycle runner
-  (`SDA:.../bootstrap/run-migration.mjs`).
+- Any runner that opens its **own** transaction breaks the install silently: a
+  script's `BEGIN/COMMIT` nests and the runner's outer rollback discards the
+  install while reporting success. Use the lifecycle runner named in
+  `AGENTS.md` and nothing else.
 - PowerShell 5.1 rewrites a native command's stderr and can insert line breaks
   inside JSON. Capture `--json` through `cmd /c`, not `2>`.
 - Read input files without a BOM for the kernel preflight

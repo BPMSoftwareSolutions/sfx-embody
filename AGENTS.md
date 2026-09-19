@@ -26,7 +26,42 @@ mechanically - rather than by an agent's compliance with it - are registered in
 
 Capabilities are changed by rows, in `.sql`, under `sql/`. Do not change a
 capability's meaning, wiring, contracts, authorities or transformations by
-editing `src/` or `sidefx-database/sql/diagnostics/`. Those are readers.
+editing any file. There is no estate source tree to edit: `src/`, `scripts/` and
+`tests/` do not exist, and no sibling repository is a reader of this one.
+
+## The dependency law: this repository depends on nothing
+
+`sfx-embody` declares. It has **no dependencies** — no package manager, no
+sibling-repository source path, no build step, no vendored tree.
+
+- **No npm footprint.** There is no `package.json`, no lockfile and no
+  `node_modules`. Do not add one. Nothing here is installed, built or bundled.
+- **No sibling-repository dependency.** `sidefx-cli` and `sidefx-database` have
+  no role in this estate — not as code, not as config, not as a resolvable
+  documentation link. Do not reintroduce either, by any path spelling.
+- **The one relationship to SDA is an install, not a checkout.** The estate
+  reaches the kernel as `KernelEntry.exe` — an **installed executable** under
+  `%LOCALAPPDATA%\sfx\kernel\<outputDigest>\`, admitted by
+  `sfx-kernel-install-manifest.v1` and digest, selected as host data in
+  `sfx.config.json`, and invoked over the closed `sfx-command-delivery.v1`
+  envelope. Selecting an admitted binary is not a dependency on a source tree.
+  No `scenario-driven-architecture` checkout, source path, read grant or build
+  step participates at runtime. If a change requires the SDA source, it is a
+  cross-language **request**, not an edit and not a path reference.
+
+The check is the estate's own, and it must return nothing:
+
+```
+git grep -n "sidefx-cli\|sidefx-database" -- . ':!docs' ':!*.md'
+```
+
+**One violation remains, and it is owed, not permitted.** The change lifecycle
+below still invokes `run-migration.mjs` and `invoke-from-transaction.mjs` from an
+SDA **checkout** — the one thing this law forbids. It is the last dependency in
+the estate. It closes when the migration lifecycle is reached through the
+installed `KernelEntry.exe` like every other execution
+(`docs/capability-estate-research.md` §6 A5). Until then it is named here rather
+than hidden, and it is not a precedent for any other checkout reference.
 
 ## The change lifecycle (read `sql/README.md`)
 
@@ -56,8 +91,12 @@ or an admitted SDA conformance tool; no estate execution script remains.
 
 ## Non-negotiables
 
-- Never use `sidefx-database/sql/migrations/run-file.mjs` to install: it wraps
-  its own transaction and silently discards the script's `COMMIT`.
+- Never add a dependency. No package manager, no lockfile, no sibling-repository
+  path, no build step. See the dependency law above.
+- Never install through a runner that opens its own transaction. A migration
+  authors its own `BEGIN TRANSACTION`; an outer wrapper makes that nest, reduces
+  the script's `COMMIT` to a `@@TRANCOUNT` decrement, and silently discards the
+  install. Use the lifecycle runner named below and nothing else.
 - Capture `--json` through `cmd /c`; PowerShell 5.1 corrupts native stderr.
 - On the database surface it is *all rows*. No "capsule", "artifact",
   "retained source" or "projection" vocabulary in migrations.
@@ -72,11 +111,18 @@ or an admitted SDA conformance tool; no estate execution script remains.
 | `node ../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/run-migration.mjs <file.sql>` | Run a migration as authored (no outer transaction). |
 | `node ../scenario-driven-architecture/languages/typescript/src/kernel/bootstrap/invoke-from-transaction.mjs <file.sql> <capabilityId> [input.json]` | Preflight: apply uncommitted, invoke, roll back. |
 | `sfx capability invoke read-projected-bodies --input '{"capabilityId":"<id>"}' --json` | Read a capability's projected bodies and hot-path isolation counts (declared read; replaces `run-query`). |
-| `npm run verify:timing` | IEA timing acceptance through the SDA kernel command (`SDA:languages/typescript/src/kernel/bootstrap/timing-coherence.mjs`); writes the receipt under `evidence/vault-20260916/u5c/`. Run from the estate root. Replaces `scripts/verify-timing-coherence.mjs`. |
-| `npm run verify:projected-testimony` | Projected-testimony conformance through the SDA conformance probe (`SDA:conformance/projected-testimony/verify-projected-testimony.mjs`); replaces `scripts/verify-projected-testimony.mjs`. |
-| `npm run verify:projected-performance` | Projected cross-language performance through the SDA conformance harness (`SDA:conformance/projected-performance/projected-performance.mjs`); replaces `scripts/projected-performance.mjs`. |
-| `npm run verify:estate` | Regression cases. |
-| `npm run verify:memory` | Retained-fixture parity. |
+| `sfx capability list` / `find <query>` | Discover what the estate declares, with each capability's retained user story. |
 | `sfx capability invoke <identity> --input '@file.json' --json` | Real-surface invocation. |
 | `sfx capability observe <identity> --input '@file.json'` | Same execution, streamed telemetry. |
 | `sfx capability reveal <identity> --as meaning --format markdown` | Render retained meaning. |
+
+The first two rows are the owed violation named in the dependency law: they run
+from an SDA checkout rather than the installed `KernelEntry.exe`. Every other row
+goes through the installed kernel.
+
+**Verification.** The estate has no `npm` surface, so the former
+`npm run verify:*` commands no longer exist. Timing coherence, projected
+testimony and projected performance are SDA-side conformance tools and are run
+from there, against their own receipts; the declared acceptance authority in this
+estate is `read-invocation-timing` and the receipts under `evidence/`. Do not
+reintroduce a package manifest to make a verification runnable from here.

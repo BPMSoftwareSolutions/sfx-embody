@@ -28,8 +28,10 @@ The database-invocation operations are rows in the `operations` table of
 [src/projection-delivery.mjs](../src/projection-delivery.mjs), a
 publication/harness boundary that no invocation, reader or graph source consults.
 Neither the CLI nor the delivery gained a capability-specific dispatch branch, so
-the [Entity Neutrality Law](../../sidefx-cli/docs/command-model.md) still holds:
-`sfx <object> <operation> [identity]`.
+the Entity Neutrality Law still holds: `sfx <object> <operation> [identity]` —
+entity identities and vendors belong in canonical data, never in new commands or
+dispatch branches. The rule is restated here because its former home
+(`sidefx-cli`) is retired and no link may resolve outside this repository.
 
 ## Nothing is synthesized
 

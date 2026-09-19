@@ -227,7 +227,7 @@ commit.
   double-link a port. Guard on the envelope digest, as
   [restore-equity-root-authority.sql](sql/migrations/restore-equity-root-authority.sql)
   does.
-- **Never install with `sidefx-database/sql/migrations/run-file.mjs`** - it wraps
+- **Never install through a runner that opens its own transaction** - it wraps
   its own transaction and silently discards the script's `COMMIT`.
 - **Capture `--json` through `cmd /c`**; PowerShell 5.1 corrupts native stderr.
   Write input files without a BOM.

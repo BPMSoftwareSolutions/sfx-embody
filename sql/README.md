@@ -1,9 +1,10 @@
 # SQL: the database-only change lifecycle
 
-Every change to the estate's meaning is a database change. The runtime
-(`src/`) is a reader of that meaning; it is not where a capability, scenario,
-authority, contract, port or transformation is authored. This directory holds
-the `.sql` deliverables and the process that installs and verifies them.
+Every change to the estate's meaning is a database change. The installed kernel
+executable is a reader of that meaning; no file in this repository is where a
+capability, scenario, authority, contract, port or transformation is authored.
+This directory holds the `.sql` deliverables and the process that installs and
+verifies them.
 
 ## Layout
 
@@ -21,12 +22,13 @@ preflight are kernel-bootstrap lifecycle code (their database ground is the
 kernel's own connect boundary and pinned read session); no estate script
 executes SQL or reads an arbitrary `.sql` file from the workspace.
 
-The runtime reads only the estate's own declared views
+The kernel reads only the estate's own declared views
 (`analysis.v_capability_graph_source` /
 `analysis.v_capability_execution_declaration`), built by the migrations here.
-Nothing reads `sidefx-database/sql/` — not diagnostics, not migrations;
-`sidefx-database` supplies the connection and query runner only. A read change
-is itself a database change and follows the same lifecycle.
+No sibling repository participates — not as a reader, not as a connection
+provider, not as a query runner; the kernel owns its own connect boundary and
+pinned read session. A read change is itself a database change and follows the
+same lifecycle. See the dependency law in [AGENTS.md](../AGENTS.md).
 
 ## The lifecycle
 
@@ -66,11 +68,11 @@ is itself a database change and follows the same lifecycle.
   the whole change is exercised (migration + read path + planner + body)
   before it can affect every consumer. It catches the failure class that
   otherwise installs cleanly and breaks at runtime.
-- **One transaction, no runner wrapper.** `sidefx-database`'s
-  `sql/migrations/run-file.mjs` opens its own transaction. A script's
-  `BEGIN TRANSACTION` then nests, its `COMMIT` only decrements `@@TRANCOUNT`,
-  and run-file's outer rollback silently discards the install. Use the kernel
-  lifecycle runner (`SDA:.../bootstrap/run-migration.mjs`).
+- **One transaction, no runner wrapper.** Any runner that opens its own
+  transaction breaks the install silently: the script's `BEGIN TRANSACTION`
+  nests, its `COMMIT` only decrements `@@TRANCOUNT`, and the runner's outer
+  rollback discards everything while reporting success. Use the lifecycle runner
+  named in the Layout table and nothing else.
 - **Idempotency.** Migrations are replayed against a rolling estate. A second
   run must not mint a duplicate version or double-link a row.
 - **Native stderr.** PowerShell 5.1 rewrites a native command's stderr and can

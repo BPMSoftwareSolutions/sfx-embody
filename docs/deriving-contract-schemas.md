@@ -31,13 +31,12 @@ against authored as an oracle.
 
 **The promotion mechanism, stated once so it is not re-derived**
 
-A capability enters the database through the `register` command in
-`sidefx-database`:
-
-```powershell
-cd C:\lab\sidefx-database
-node src/cli.mjs register --spec config/register/<spec>.json --dry-run
-```
+> **Retired procedure.** This section records how a capability entered the
+> database in the `sidefx-database` era, through that repository's `register`
+> command. `sidefx-database` is retired from this estate and the command is not
+> runnable from here. A capability now enters by migration under `sql/migrations/`
+> following [sql/README.md](../sql/README.md); the text below is kept for the
+> schema-derivation reasoning, not as instructions.
 
 It packs the authored artifacts into a `sidefx-capsule-pack.v1` capsule, reads
 that capsule back through the estate's own `decodeCapsule`, and promotes it under
