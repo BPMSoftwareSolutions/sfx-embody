@@ -134,6 +134,59 @@ Add one end to end with a single command:
 sfx provider add --input '@examples/provider-binding-change.<name>.json'
 ```
 
+The spec shape (see `examples/provider-binding-change.finance15.json`):
+
+```json
+{
+  "contractId": "provider-binding-change.v1",
+  "providerId": "rapidapi/yahoo-finance15",
+  "capabilityId": "resolve-equity-market-price-evidence",
+  "outcomeContractId": "equity-market-price-evidence.v1",
+  "bindingId": "rapidapi-yahoo-finance15-market-quotes.v1",
+  "endpoint": {
+    "host": "yahoo-finance15.p.rapidapi.com",
+    "method": "GET",
+    "pathPrefix": "/api/v1/markets/quote?",
+    "requestTemplate": "https://yahoo-finance15.p.rapidapi.com/api/v1/markets/quote?ticker={symbol}&type=STOCKS",
+    "safeHeaders": { "x-rapidapi-host": "yahoo-finance15.p.rapidapi.com" },
+    "allowedResponseHeaders": ["content-type", "retry-after"],
+    "timeoutMilliseconds": 15000,
+    "maxResponseBytes": 262144
+  },
+  "credential": {
+    "referenceName": "RAPID_API_KEY",
+    "injectionRuleId": "rapidapi-x-rapidapi-key.v1",
+    "headerName": "X-RapidAPI-Key",
+    "source": "vault",
+    "storeLocator": "%LOCALAPPDATA%\\sfx\\vault"
+  },
+  "effectScope": "ONE_BOUNDED_HTTPS_EXCHANGE_NO_REDIRECT_NO_RETRY",
+  "nativeShape": "body.primaryData",
+  "mapping": {
+    "symbol": "body.symbol",
+    "region": "request:payload.region",
+    "currency": null,
+    "observedPrice": "body.primaryData.lastSalePrice",
+    "observedMarketTime": "body.primaryData.lastTradeTimestamp",
+    "marketState": "body.marketStatus",
+    "exchange": "body.exchange",
+    "sourceAttribution": "body.companyName"
+  },
+  "observedSample": { "meta": { "version": "v1.0", "status": 200 }, "body": { } }
+}
+```
+
+Field notes: `endpoint.requestTemplate` is the declared URL with `{symbol}` tokens;
+`credential.source` is always `vault` and the value is a reference, never the
+secret; `nativeShape` names the response root (`body.primaryData`, `body.0`, …);
+`mapping` assigns each outcome contract field to a declared path (`body.*` for
+the response, `request:payload.*` for the request) — a `null` value marks a field
+the source does not supply, and the author stage returns `PROVIDER_CHANGE_HELD`
+naming it rather than fabricating; `observedSample` is the probe body the author
+stage validates the mapping against. `contractId`, `providerId`, `capabilityId`,
+`outcomeContractId`, `bindingId`, `endpoint`, `credential`, `effectScope`,
+`nativeShape`, `mapping`, and `observedSample` are required.
+
 The command runs the declared lifecycle in order: **author** (validates the
 native-to-canonical mapping against a sample response and mints the endpoint
 digest) → **render** (the declared install mechanic emits the migration — no
