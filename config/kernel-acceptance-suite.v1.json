@@ -53,7 +53,7 @@
         {
           "label": "resolved-live",
           "conditions": [
-            { "condition": "equals", "path": "observedPathDigest", "value": "sha256:c507678e9cd9600d502a2f86f3fbc9d0c102270be93a571926efc605c19879eb" },
+            { "condition": "equals", "path": "observedPathDigest", "value": "sha256:0724765ddbe8da85dc22ca478671087b0ff75ce3fa0332e3b06456aab5efa01d" },
             { "condition": "equals", "path": "outcomeVariant", "value": "EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED" },
             { "condition": "equals", "path": "symbol", "value": "AVGO" },
             { "condition": "number-greater-than", "path": "observedPrice", "value": 0 },
@@ -92,7 +92,7 @@
         {
           "label": "recorded-observation",
           "conditions": [
-            { "condition": "one-of", "path": "observedPathDigest", "values": ["sha256:5f8e6fdad28b4847a516cac59e11423aa3f5ed238c9005a6ddc2cec7c01d1a4a", "sha256:26c85c04c7ed278950d5d108b8568232cb00a742ebb7f3db3c76a8fc0accfb73"] },
+            { "condition": "one-of", "path": "observedPathDigest", "values": ["sha256:5f8e6fdad28b4847a516cac59e11423aa3f5ed238c9005a6ddc2cec7c01d1a4a", "sha256:26c85c04c7ed278950d5d108b8568232cb00a742ebb7f3db3c76a8fc0accfb73", "sha256:05be13899f97defe3eb6969d3fd3cbf002ec054c38f09a2dbfa577ab33e2dd37"] },
             { "condition": "present", "path": "overlay" },
             { "condition": "present", "path": "story" }
           ]
