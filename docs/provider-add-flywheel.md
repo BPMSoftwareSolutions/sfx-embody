@@ -1,5 +1,30 @@
 # Provider-add flywheel
 
+**Declared family update:** `sql/migrations/declare-change-family-admission.sql`
+installs mandatory per-kind admission and the `declared-change.v1` family.
+Provider payloads are now carried by `changeKind: provider-binding`; a second
+kind registers bounded non-root Hello World scenarios with scenario-owned
+fixtures. Its live pilot is `declared-change-hello-world`. Both kinds use bound
+parameters, restoring guards and model/authority/document pins. New operation
+declarations live in `changeOperations`, so change operations require the rebuilt
+v2 runner; old runners cannot bypass admission through the retired catalogue.
+The rebuilt provider command completed all six stages, and the scenario completed
+rollback preflight, install, verification and replay. Receipts are under
+`evidence/declared-change-family/`. Publishing a new installed executable remains
+the normal kernel release step.
+
+**2026-09-19 update:** The declared write pilot is installed by
+`sql/migrations/declare-data-access-provider-change.sql`. The rebuilt command now
+runs author / prepare / dry-run / preflight / install / verify. Preparation pins
+the selected authority and binds the document as a parameter; it emits no SQL.
+The declared guard scope requires restoration before commit. The inspected estate
+has no model/source DML triggers, so its named guard set is explicitly empty;
+historical trigger restoration remains a separate estate decision. The six-stage
+finance15 run passed with live provider testimony. A distinct route also passed
+uncommitted preflight and left the provider graph unchanged after rollback.
+Evidence is retained under `evidence/declared-change-provider-20260919/`.
+The earlier record below describes the migration-emitting command this replaces.
+
 **Status.** Authored 2026-09-19. This records the finance15 fallback install and
 the one-command provider flywheel. The estate's change lifecycle and dependency
 law are unchanged: the command drives the declared change and the standard
