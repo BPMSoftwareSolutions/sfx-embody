@@ -1,0 +1,103 @@
+{
+  "op": "let",
+  "bindings": {
+    "candidate": null,
+    "absent": {
+      "op": "filter",
+      "from": {
+        "op": "object-values",
+        "value": {
+          "op": "path",
+          "from": "candidate",
+          "path": "payload"
+        }
+      },
+      "as": "field",
+      "where": {
+        "op": "if",
+        "when": {
+          "op": "equals",
+          "left": {
+            "op": "path",
+            "from": "field",
+            "path": ""
+          },
+          "right": {
+            "op": "literal",
+            "value": null
+          }
+        },
+        "then": {
+          "op": "literal",
+          "value": true
+        },
+        "else": {
+          "op": "equals",
+          "left": {
+            "op": "path",
+            "from": "field",
+            "path": ""
+          },
+          "right": {
+            "op": "literal",
+            "value": ""
+          }
+        }
+      }
+    }
+  },
+  "value": {
+    "op": "if",
+    "when": {
+      "op": "equals",
+      "left": {
+        "op": "length",
+        "value": {
+          "op": "path",
+          "from": "absent",
+          "path": ""
+        }
+      },
+      "right": {
+        "op": "literal",
+        "value": 0
+      }
+    },
+    "then": {
+      "op": "path",
+      "from": "candidate",
+      "path": ""
+    },
+    "else": {
+      "op": "object",
+      "fields": {
+        "contractId": {
+          "op": "path",
+          "from": "candidate",
+          "path": "contractId"
+        },
+        "disposition": {
+          "op": "literal",
+          "value": "NATIVE_MARKET_PRICE_TESTIMONY_REJECTED"
+        },
+        "reasonCode": {
+          "op": "literal",
+          "value": "REQUIRED_NATIVE_FIELDS_ABSENT"
+        },
+        "absentFieldCount": {
+          "op": "length",
+          "value": {
+            "op": "path",
+            "from": "absent",
+            "path": ""
+          }
+        },
+        "providerTestimony": {
+          "op": "path",
+          "from": "candidate",
+          "path": "providerTestimony"
+        }
+      }
+    }
+  }
+}

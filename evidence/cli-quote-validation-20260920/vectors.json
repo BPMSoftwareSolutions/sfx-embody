@@ -1,0 +1,212 @@
+[
+  {
+    "id": "select-finance15-price-route:valid",
+    "scope": {
+      "input": {
+        "disposition": "completed",
+        "responseBodyBytes": "eyJib2R5IjogW3sic3ltYm9sIjogIlNQWSIsICJjdXJyZW5jeSI6ICJVU0QiLCAicmVndWxhck1hcmtldFByaWNlIjogMTIuNSwgInJlZ3VsYXJNYXJrZXRUaW1lIjogMTIzLCAibWFya2V0U3RhdGUiOiAiQ0xPU0VEIiwgImV4Y2hhbmdlIjogIlBDWCIsICJxdW90ZVNvdXJjZU5hbWUiOiAiZml4dHVyZSJ9XX0=",
+        "effectLineage": [
+          {}
+        ]
+      },
+      "root": {
+        "contractId": "live-equity-price-request.v1",
+        "payload": {
+          "symbol": "SPY",
+          "region": "US"
+        }
+      }
+    },
+    "expectedDisposition": "EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED",
+    "transformationId": "select-finance15-price-route"
+  },
+  {
+    "id": "select-finance15-price-route:empty",
+    "scope": {
+      "input": {
+        "disposition": "completed",
+        "responseBodyBytes": "eyJib2R5IjogW119",
+        "effectLineage": [
+          {}
+        ]
+      },
+      "root": {
+        "contractId": "live-equity-price-request.v1",
+        "payload": {
+          "symbol": "SPY",
+          "region": "US"
+        }
+      }
+    },
+    "expectedDisposition": "NATIVE_MARKET_PRICE_TESTIMONY_REJECTED",
+    "transformationId": "select-finance15-price-route"
+  },
+  {
+    "id": "select-finance15-price-route:missing-field",
+    "scope": {
+      "input": {
+        "disposition": "completed",
+        "responseBodyBytes": "eyJib2R5IjogW3sic3ltYm9sIjogIlNQWSIsICJjdXJyZW5jeSI6ICJVU0QiLCAicmVndWxhck1hcmtldFRpbWUiOiAxMjMsICJtYXJrZXRTdGF0ZSI6ICJDTE9TRUQiLCAiZXhjaGFuZ2UiOiAiUENYIiwgInF1b3RlU291cmNlTmFtZSI6ICJmaXh0dXJlIn1dfQ==",
+        "effectLineage": [
+          {}
+        ]
+      },
+      "root": {
+        "contractId": "live-equity-price-request.v1",
+        "payload": {
+          "symbol": "SPY",
+          "region": "US"
+        }
+      }
+    },
+    "expectedDisposition": "NATIVE_MARKET_PRICE_TESTIMONY_REJECTED",
+    "transformationId": "select-finance15-price-route"
+  },
+  {
+    "id": "select-finance15-price-route:null-field",
+    "scope": {
+      "input": {
+        "disposition": "completed",
+        "responseBodyBytes": "eyJib2R5IjogW3sic3ltYm9sIjogIlNQWSIsICJjdXJyZW5jeSI6ICJVU0QiLCAicmVndWxhck1hcmtldFByaWNlIjogbnVsbCwgInJlZ3VsYXJNYXJrZXRUaW1lIjogMTIzLCAibWFya2V0U3RhdGUiOiAiQ0xPU0VEIiwgImV4Y2hhbmdlIjogIlBDWCIsICJxdW90ZVNvdXJjZU5hbWUiOiAiZml4dHVyZSJ9XX0=",
+        "effectLineage": [
+          {}
+        ]
+      },
+      "root": {
+        "contractId": "live-equity-price-request.v1",
+        "payload": {
+          "symbol": "SPY",
+          "region": "US"
+        }
+      }
+    },
+    "expectedDisposition": "NATIVE_MARKET_PRICE_TESTIMONY_REJECTED",
+    "transformationId": "select-finance15-price-route"
+  },
+  {
+    "id": "select-finance15-price-route:empty-field",
+    "scope": {
+      "input": {
+        "disposition": "completed",
+        "responseBodyBytes": "eyJib2R5IjogW3sic3ltYm9sIjogIiIsICJjdXJyZW5jeSI6ICJVU0QiLCAicmVndWxhck1hcmtldFByaWNlIjogMTIuNSwgInJlZ3VsYXJNYXJrZXRUaW1lIjogMTIzLCAibWFya2V0U3RhdGUiOiAiQ0xPU0VEIiwgImV4Y2hhbmdlIjogIlBDWCIsICJxdW90ZVNvdXJjZU5hbWUiOiAiZml4dHVyZSJ9XX0=",
+        "effectLineage": [
+          {}
+        ]
+      },
+      "root": {
+        "contractId": "live-equity-price-request.v1",
+        "payload": {
+          "symbol": "SPY",
+          "region": "US"
+        }
+      }
+    },
+    "expectedDisposition": "NATIVE_MARKET_PRICE_TESTIMONY_REJECTED",
+    "transformationId": "select-finance15-price-route"
+  },
+  {
+    "id": "select-equity-price-route:valid",
+    "scope": {
+      "input": {
+        "disposition": "completed",
+        "responseBodyBytes": "eyJxdW90ZVJlc3BvbnNlIjogeyJyZXN1bHQiOiBbeyJzeW1ib2wiOiAiU1BZIiwgImN1cnJlbmN5IjogIlVTRCIsICJyZWd1bGFyTWFya2V0UHJpY2UiOiAxMi41LCAicmVndWxhck1hcmtldFRpbWUiOiAxMjMsICJtYXJrZXRTdGF0ZSI6ICJDTE9TRUQiLCAiZXhjaGFuZ2UiOiAiUENYIiwgInF1b3RlU291cmNlTmFtZSI6ICJmaXh0dXJlIn1dfX0=",
+        "effectLineage": [
+          {}
+        ]
+      },
+      "root": {
+        "contractId": "live-equity-price-request.v1",
+        "payload": {
+          "symbol": "SPY",
+          "region": "US"
+        }
+      }
+    },
+    "expectedDisposition": "EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED",
+    "transformationId": "select-equity-price-route"
+  },
+  {
+    "id": "select-equity-price-route:empty",
+    "scope": {
+      "input": {
+        "disposition": "completed",
+        "responseBodyBytes": "eyJxdW90ZVJlc3BvbnNlIjogeyJyZXN1bHQiOiBbXX19",
+        "effectLineage": [
+          {}
+        ]
+      },
+      "root": {
+        "contractId": "live-equity-price-request.v1",
+        "payload": {
+          "symbol": "SPY",
+          "region": "US"
+        }
+      }
+    },
+    "expectedDisposition": "NATIVE_MARKET_PRICE_TESTIMONY_REJECTED",
+    "transformationId": "select-equity-price-route"
+  },
+  {
+    "id": "select-equity-price-route:missing-field",
+    "scope": {
+      "input": {
+        "disposition": "completed",
+        "responseBodyBytes": "eyJxdW90ZVJlc3BvbnNlIjogeyJyZXN1bHQiOiBbeyJzeW1ib2wiOiAiU1BZIiwgImN1cnJlbmN5IjogIlVTRCIsICJyZWd1bGFyTWFya2V0VGltZSI6IDEyMywgIm1hcmtldFN0YXRlIjogIkNMT1NFRCIsICJleGNoYW5nZSI6ICJQQ1giLCAicXVvdGVTb3VyY2VOYW1lIjogImZpeHR1cmUifV19fQ==",
+        "effectLineage": [
+          {}
+        ]
+      },
+      "root": {
+        "contractId": "live-equity-price-request.v1",
+        "payload": {
+          "symbol": "SPY",
+          "region": "US"
+        }
+      }
+    },
+    "expectedDisposition": "NATIVE_MARKET_PRICE_TESTIMONY_REJECTED",
+    "transformationId": "select-equity-price-route"
+  },
+  {
+    "id": "select-equity-price-route:null-field",
+    "scope": {
+      "input": {
+        "disposition": "completed",
+        "responseBodyBytes": "eyJxdW90ZVJlc3BvbnNlIjogeyJyZXN1bHQiOiBbeyJzeW1ib2wiOiAiU1BZIiwgImN1cnJlbmN5IjogIlVTRCIsICJyZWd1bGFyTWFya2V0UHJpY2UiOiBudWxsLCAicmVndWxhck1hcmtldFRpbWUiOiAxMjMsICJtYXJrZXRTdGF0ZSI6ICJDTE9TRUQiLCAiZXhjaGFuZ2UiOiAiUENYIiwgInF1b3RlU291cmNlTmFtZSI6ICJmaXh0dXJlIn1dfX0=",
+        "effectLineage": [
+          {}
+        ]
+      },
+      "root": {
+        "contractId": "live-equity-price-request.v1",
+        "payload": {
+          "symbol": "SPY",
+          "region": "US"
+        }
+      }
+    },
+    "expectedDisposition": "NATIVE_MARKET_PRICE_TESTIMONY_REJECTED",
+    "transformationId": "select-equity-price-route"
+  },
+  {
+    "id": "select-equity-price-route:empty-field",
+    "scope": {
+      "input": {
+        "disposition": "completed",
+        "responseBodyBytes": "eyJxdW90ZVJlc3BvbnNlIjogeyJyZXN1bHQiOiBbeyJzeW1ib2wiOiAiIiwgImN1cnJlbmN5IjogIlVTRCIsICJyZWd1bGFyTWFya2V0UHJpY2UiOiAxMi41LCAicmVndWxhck1hcmtldFRpbWUiOiAxMjMsICJtYXJrZXRTdGF0ZSI6ICJDTE9TRUQiLCAiZXhjaGFuZ2UiOiAiUENYIiwgInF1b3RlU291cmNlTmFtZSI6ICJmaXh0dXJlIn1dfX0=",
+        "effectLineage": [
+          {}
+        ]
+      },
+      "root": {
+        "contractId": "live-equity-price-request.v1",
+        "payload": {
+          "symbol": "SPY",
+          "region": "US"
+        }
+      }
+    },
+    "expectedDisposition": "NATIVE_MARKET_PRICE_TESTIMONY_REJECTED",
+    "transformationId": "select-equity-price-route"
+  }
+]

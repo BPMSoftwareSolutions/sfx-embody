@@ -1,0 +1,14 @@
+{
+  "status": "PREFLIGHT_PASSED_ROLLED_BACK",
+  "cases": [
+    {
+      "name": "plain-SPY",
+      "disposition": "PASSED"
+    },
+    {
+      "name": "literal-apostrophes",
+      "disposition": "PASSED"
+    }
+  ],
+  "observedPathDigest": "sha256:0724765ddbe8da85dc22ca478671087b0ff75ce3fa0332e3b06456aab5efa01d"
+}

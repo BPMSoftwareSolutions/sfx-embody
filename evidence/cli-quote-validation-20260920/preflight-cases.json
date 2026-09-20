@@ -1,0 +1,32 @@
+[
+  {
+    "name": "plain-SPY",
+    "capabilityId": "resolve-equity-market-price-evidence",
+    "input": {
+      "contractId": "live-equity-price-request.v1",
+      "payload": {
+        "symbol": "SPY",
+        "region": "US"
+      }
+    },
+    "expected": {
+      "outcome.disposition": "EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED",
+      "outcome.payload.symbol": "SPY"
+    }
+  },
+  {
+    "name": "literal-apostrophes",
+    "capabilityId": "resolve-equity-market-price-evidence",
+    "input": {
+      "contractId": "live-equity-price-request.v1",
+      "payload": {
+        "symbol": "'SPY'",
+        "region": "US"
+      }
+    },
+    "expected": {
+      "outcome.disposition": "NATIVE_MARKET_PRICE_TESTIMONY_REJECTED",
+      "outcome.reasonCode": "REQUIRED_NATIVE_FIELDS_ABSENT"
+    }
+  }
+]
