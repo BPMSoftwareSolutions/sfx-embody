@@ -41,7 +41,7 @@
       "properties": {
         "bindingId": { "type": "string", "minLength": 1 },
         "providerId": { "type": "string", "minLength": 1 },
-        "nativeShape": { "enum": ["quoteSummary.result.0.price", "quoteResponse.result.0"] }
+        "nativeShape": { "enum": ["quoteSummary.result.0.price", "quoteResponse.result.0", "body.0", "body.primaryData"] }
       }
     }
   },
