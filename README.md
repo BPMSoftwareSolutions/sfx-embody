@@ -122,6 +122,33 @@ Expansion is declaration-only: a new capability is contracts, scenarios,
 operations, transformations, mechanics and provider bindings — rows, preflight,
 evidence. No runtime build and no language code are required to add meaning.
 
+## Adding a provider
+
+Inspect what is installed with `sfx provider list` and `sfx provider reveal
+<providerId>` — host, endpoints, headers, credential reference and injection
+rule, request templates and bindings, all rendered from declared rows.
+
+Add one end to end with a single command:
+
+```powershell
+sfx provider add --input '@examples/provider-binding-change.<name>.json'
+```
+
+The command runs the declared lifecycle in order: **author** (validates the
+native-to-canonical mapping against a sample response and mints the endpoint
+digest) → **render** (the declared install mechanic emits the migration — no
+hand-written row SQL) → **dry-run** → **in-transaction preflight** →
+**install** → **verify** (a live invocation). A held authoring result stops
+after author with `installed:false`, writes nothing, and names the exact
+findings — no fabricated values. Credentials always resolve from the vault;
+never put secrets in the spec or the environment. Provider routing is data, so
+adding a fallback extends the declared chain (primary → fallback → …) rather
+than changing code.
+
+The full flow, the held no-install guarantee and the N-fallback chain are
+recorded in [docs/provider-add-flywheel.md](docs/provider-add-flywheel.md);
+the finance15 fallback is the worked example.
+
 ## Install or select a kernel
 
 The kernel installer is resolver (0) in the SDA Kernel, implemented per language
