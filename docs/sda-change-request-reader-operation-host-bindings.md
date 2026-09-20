@@ -111,7 +111,7 @@ the context construction is unified.
 
 ## Data that binds it
 
-- `sda-node-command-operations.v1` — the declared operation vocabulary, 8
+- `sda-kernel-command-operations.v1` — the declared operation vocabulary, 8
   operations: `invoke`, `observe`, `circuit`, `reveal`, `catalogue`, `list`,
   `find`, `artifact`. Every operation except `invoke`/`observe` is served by the
   reader path.

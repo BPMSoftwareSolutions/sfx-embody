@@ -1,0 +1,12 @@
+{
+  "declarationType": "sfx-kernel-vault-references.v1",
+  "description": "The credential reference names this estate's declared vault serves. The kernel installer stamps this roster into the install manifest's vaultRealization.credentialReferences and records bootCredentialReference; acceptance scrubs exactly those names from the child environment, so no installer body carries a credential name.",
+  "bootCredentialReference": "DB_CONNECTION_STRING",
+  "credentialReferences": [
+    "DB_CONNECTION_STRING",
+    "RAPID_API_KEY",
+    "LOC_OPENAI_API_KEY",
+    "LOC_GEMINI_API_KEY",
+    "sidefx-connection-string"
+  ]
+}
