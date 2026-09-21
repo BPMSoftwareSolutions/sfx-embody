@@ -61,6 +61,56 @@ function classFor(payload) {
   return 'other';
 }
 
+// Bounded shape values print compactly: contract plus payload size, or the
+// ref digest prefix when the emitter declared the payload over its bound.
+function shapeSummary(value) {
+  if (!isRecord(value)) return null;
+  const contract = clip(value.contractId, 44) ?? '?';
+  if (isRecord(value.payloadRef)) {
+    const digest = asText(value.payloadRef.digest) ?? '?';
+    const bytes = asText(value.payloadRef.byteLength) ?? '?';
+    return `${contract} ref(${digest.slice(0, 16)}\u2026 ${bytes}B)`;
+  }
+  if (value.payload !== undefined) {
+    let bytes = 0;
+    try {
+      bytes = Buffer.byteLength(JSON.stringify(value.payload) ?? '');
+    } catch {
+      bytes = 0;
+    }
+    return `${contract} payload(${bytes}B)`;
+  }
+  return contract;
+}
+
+function exchangeShapeSummary(payload) {
+  const parts = [];
+  if (isRecord(payload.requestShape)) {
+    const method = clip(payload.requestShape.method, 12) ?? '?';
+    const host = clip(payload.requestShape.host, 44) ?? '?';
+    const path = clip(payload.requestShape.path, 44) ?? '';
+    const query = Array.isArray(payload.requestShape.query) ? payload.requestShape.query.length : 0;
+    const headers = isRecord(payload.requestShape.headers) ? Object.keys(payload.requestShape.headers).length : 0;
+    parts.push(`req=${method} ${host}${path} q=${query} h=${headers}`);
+  }
+  if (isRecord(payload.responseShape)) {
+    const status = asText(payload.responseShape.status) ?? '?';
+    const bytes = asText(payload.responseShape.byteLength) ?? '?';
+    const headers = isRecord(payload.responseShape.headers) ? Object.keys(payload.responseShape.headers).length : 0;
+    const body = isRecord(payload.responseShape.bodyRef)
+      ? `ref(${clip(payload.responseShape.bodyRef.digest, 18)}\u2026)`
+      : payload.responseShape.body !== undefined
+        ? `body(${asText(payload.responseShape.body)?.length ?? 0}b64)`
+        : 'no-body';
+    parts.push(`rsp=${status} ${bytes}B h=${headers} ${body}`);
+  }
+  if (isRecord(payload.modelResponse)) {
+    const model = shapeSummary(payload.modelResponse);
+    if (model) parts.push(`model=${model}`);
+  }
+  return parts;
+}
+
 function summarize(kind, payload) {
   if (kind === 'run-start') {
     const pid = asText(payload.nativeProcessId) ?? asText(payload.pid) ?? asText(payload.processId) ?? '?';
@@ -89,6 +139,11 @@ function summarize(kind, payload) {
   if (phase) parts.push(`phase=${phase}`);
   if (status) parts.push(`status=${status}`);
   if (disposition) parts.push(`disp=${disposition}`);
+  const inputShape = shapeSummary(payload.inputShape);
+  if (inputShape) parts.push(`in=${inputShape}`);
+  const outcomeShape = shapeSummary(payload.outcomeShape);
+  if (outcomeShape) parts.push(`out=${outcomeShape}`);
+  parts.push(...exchangeShapeSummary(payload));
   if (typeof payload.durationMilliseconds === 'number') parts.push(`dur=${payload.durationMilliseconds}ms`);
   return { glyph: glyphFor(payload), cls: classFor(payload), text: [type, ...parts].join(' ') };
 }
