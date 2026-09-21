@@ -1,0 +1,324 @@
+#!/usr/bin/env node
+import http from 'node:http';
+
+const port = Number.parseInt(process.env.OBSERVER_PORT ?? '8787', 10);
+const ringLimit = 2000;
+const maxBodyBytes = 16 * 1024 * 1024;
+
+const ring = [];
+const clients = new Set();
+let sequence = 0;
+
+function isRecord(value) {
+  return value !== null && typeof value === 'object' && !Array.isArray(value);
+}
+
+function asText(value) {
+  if (typeof value === 'string') return value;
+  if (typeof value === 'number' || typeof value === 'boolean') return String(value);
+  return null;
+}
+
+function clip(value, limit = 96) {
+  const text = asText(value);
+  if (text === null) return null;
+  return text.length > limit ? `${text.slice(0, limit - 1)}\u2026` : text;
+}
+
+function normalizeEvent(input) {
+  if (!isRecord(input)) return null;
+  const kind = asText(input.kind);
+  if (kind === 'observation') {
+    return { kind, payload: isRecord(input.payload) ? input.payload : {} };
+  }
+  if (kind === 'run-start' || kind === 'run-end') {
+    return { kind, payload: input };
+  }
+  if (isRecord(input.payload)) {
+    return { kind: 'observation', payload: input.payload };
+  }
+  return { kind: kind ?? 'observation', payload: input };
+}
+
+function glyphFor(payload) {
+  if (payload.testimonyType === 'cell-execution-testimony.v1') return '\u25c6';
+  if (payload.testimonyType === 'edge-execution-testimony.v1') return '\u2192';
+  if (payload.observationType === 'delivery-phase') {
+    if (payload.status === 'completed') return '\u2713';
+    if (payload.status === 'started') return '\u25b6';
+    if (payload.status === 'failed') return '\u2717';
+    return '\u2022';
+  }
+  if (payload.observationType === 'command-timing.v1') return '\u23f1';
+  return '\u2022';
+}
+
+function classFor(payload) {
+  if (payload.testimonyType === 'cell-execution-testimony.v1') return 'cell';
+  if (payload.testimonyType === 'edge-execution-testimony.v1') return 'edge';
+  if (payload.observationType === 'delivery-phase') return 'phase';
+  if (payload.observationType === 'command-timing.v1') return 'timing';
+  return 'other';
+}
+
+function summarize(kind, payload) {
+  if (kind === 'run-start') {
+    const pid = asText(payload.nativeProcessId) ?? asText(payload.pid) ?? asText(payload.processId) ?? '?';
+    return { glyph: '\u25b6', cls: 'run', text: `pid=${pid}` };
+  }
+  if (kind === 'run-end') {
+    const exitCode = asText(payload.exitCode) ?? '?';
+    return { glyph: '\u25a0', cls: 'run', text: `exit=${exitCode}` };
+  }
+  if (kind !== 'observation') {
+    return { glyph: '\u2022', cls: 'other', text: kind };
+  }
+  const type = asText(payload.testimonyType) ?? asText(payload.observationType) ?? 'observation';
+  const parts = [];
+  const branch = clip(payload.branchId, 32);
+  const cell = clip(payload.cellId ?? payload.cellExecutionId);
+  const edge = clip(payload.edgeId ?? payload.sourceCellExecutionId);
+  const address = clip(payload.semanticAddress);
+  const phase = clip(payload.phase, 40);
+  const status = clip(payload.status, 32);
+  const disposition = clip(payload.admissionDisposition ?? payload.disposition ?? payload.outcomeVariant, 48);
+  if (branch) parts.push(`branch=${branch}`);
+  if (cell) parts.push(`cell=${cell}`);
+  if (edge) parts.push(`edge=${edge}`);
+  if (address) parts.push(`address=${address}`);
+  if (phase) parts.push(`phase=${phase}`);
+  if (status) parts.push(`status=${status}`);
+  if (disposition) parts.push(`disp=${disposition}`);
+  if (typeof payload.durationMilliseconds === 'number') parts.push(`dur=${payload.durationMilliseconds}ms`);
+  return { glyph: glyphFor(payload), cls: classFor(payload), text: [type, ...parts].join(' ') };
+}
+
+function clockOf(date) {
+  return date.toISOString().slice(11, 23);
+}
+
+function admit(event) {
+  const summary = summarize(event.kind, event.payload);
+  sequence += 1;
+  const receivedAt = new Date();
+  const record = {
+    seq: sequence,
+    receivedAt: receivedAt.toISOString(),
+    kind: event.kind,
+    glyph: summary.glyph,
+    cls: summary.cls,
+    text: summary.text,
+    payload: event.payload,
+  };
+  ring.push(record);
+  if (ring.length > ringLimit) ring.splice(0, ring.length - ringLimit);
+  console.log(`[${clockOf(receivedAt)}] ${record.glyph} ${record.kind} ${record.text}`);
+  const frame = `data: ${JSON.stringify(record)}\n\n`;
+  for (const client of clients) {
+    try {
+      client.write(frame);
+    } catch {
+      clients.delete(client);
+    }
+  }
+  return record;
+}
+
+function sendJson(res, status, body) {
+  const text = JSON.stringify(body);
+  res.writeHead(status, {
+    'content-type': 'application/json; charset=utf-8',
+    'content-length': Buffer.byteLength(text),
+  });
+  res.end(text);
+}
+
+function readBody(req) {
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    let size = 0;
+    req.on('data', (chunk) => {
+      size += chunk.length;
+      if (size > maxBodyBytes) {
+        reject(new Error('body_too_large'));
+        req.destroy();
+        return;
+      }
+      chunks.push(chunk);
+    });
+    req.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')));
+    req.on('error', reject);
+  });
+}
+
+async function receive(req, res) {
+  let text;
+  try {
+    text = await readBody(req);
+  } catch {
+    sendJson(res, 413, { error: 'body_too_large' });
+    return;
+  }
+  let parsed;
+  try {
+    const cleaned = text.replace(/^\uFEFF/, '').trim();
+    parsed = JSON.parse(cleaned.length > 0 ? cleaned : 'null');
+  } catch {
+    sendJson(res, 400, { error: 'invalid_json' });
+    return;
+  }
+  const items = Array.isArray(parsed) ? parsed : [parsed];
+  let accepted = 0;
+  for (const item of items) {
+    const event = normalizeEvent(item);
+    if (event === null) continue;
+    admit(event);
+    accepted += 1;
+  }
+  sendJson(res, 202, { accepted, sequence });
+}
+
+function openStream(req, res) {
+  res.writeHead(200, {
+    'content-type': 'text/event-stream; charset=utf-8',
+    'cache-control': 'no-cache, no-transform',
+    connection: 'keep-alive',
+    'access-control-allow-origin': '*',
+  });
+  res.write('retry: 3000\n\n');
+  for (const record of ring) {
+    res.write(`data: ${JSON.stringify(record)}\n\n`);
+  }
+  clients.add(res);
+  req.on('close', () => clients.delete(res));
+}
+
+const page = `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SFX live observation timeline</title>
+<style>
+  body { font-family: ui-monospace, Consolas, "Courier New", monospace; background: #0b0e14; color: #d7dae0; margin: 0; padding: 16px; }
+  h1 { font-size: 15px; font-weight: 600; margin: 0 0 4px; }
+  #status { color: #8f98a8; font-size: 12px; margin-bottom: 12px; }
+  ol { list-style: none; padding: 0; margin: 0; }
+  li { padding: 2px 0; white-space: pre-wrap; word-break: break-all; border-bottom: 1px solid #161a22; font-size: 13px; }
+  .phase { color: #93c5fd; } .cell { color: #fbbf24; } .edge { color: #f472b6; }
+  .timing { color: #8f98a8; } .run { color: #6ee7b7; } .other { color: #d7dae0; }
+</style>
+</head>
+<body>
+<h1>SFX live observation timeline</h1>
+<div id="status">connecting...</div>
+<ol id="timeline"></ol>
+<script>
+  var status = document.getElementById('status');
+  var timeline = document.getElementById('timeline');
+  var total = 0;
+  function stamp(iso) {
+    var at = new Date(iso);
+    return at.toLocaleTimeString('en-GB', { hour12: false }) + '.' + String(at.getMilliseconds()).padStart(3, '0');
+  }
+  function add(record) {
+    var li = document.createElement('li');
+    li.className = record.cls || 'other';
+    li.textContent = '[' + stamp(record.receivedAt) + '] ' + record.glyph + ' ' + record.kind + ' ' + record.text;
+    li.title = JSON.stringify(record.payload);
+    timeline.appendChild(li);
+    total += 1;
+    status.textContent = 'connected - ' + total + ' events';
+    while (timeline.childNodes.length > 2000) timeline.removeChild(timeline.firstChild);
+    window.scrollTo(0, document.body.scrollHeight);
+  }
+  var source = new EventSource('/events');
+  source.onopen = function () { status.textContent = 'connected'; };
+  source.onerror = function () { status.textContent = 'reconnecting...'; };
+  source.onmessage = function (message) {
+    try { add(JSON.parse(message.data)); } catch (error) {}
+  };
+</script>
+</body>
+</html>
+`;
+
+const handleRequest = async (req, res) => {
+  try {
+    const url = new URL(req.url ?? '/', `http://localhost:${port}`);
+    if (req.method === 'GET' && url.pathname === '/health') {
+      sendJson(res, 200, { status: 'ok' });
+      return;
+    }
+    if (req.method === 'GET' && url.pathname === '/events') {
+      openStream(req, res);
+      return;
+    }
+    if (req.method === 'GET' && (url.pathname === '/' || url.pathname === '/index.html')) {
+      res.writeHead(200, { 'content-type': 'text/html; charset=utf-8' });
+      res.end(page);
+      return;
+    }
+    if (req.method === 'POST' && (url.pathname === '/events' || url.pathname === '/events/batch')) {
+      await receive(req, res);
+      return;
+    }
+    sendJson(res, 404, { error: 'not_found' });
+  } catch {
+    try {
+      sendJson(res, 500, { error: 'internal_error' });
+    } catch {
+      /* the response is already gone */
+    }
+  }
+};
+
+// localhost resolves to ::1 before 127.0.0.1 on Windows, and .NET carriers do
+// not fall back before their timeout, so both loopback families are served.
+const server4 = http.createServer(handleRequest);
+const server6 = http.createServer(handleRequest);
+let ready = false;
+const reportReady = () => {
+  if (ready) return;
+  ready = true;
+  console.log(`OBSERVER_READY http://localhost:${port}`);
+};
+const fatal = (error) => {
+  console.error(`OBSERVER_ERROR ${error.message}`);
+  process.exit(1);
+};
+server4.on('error', fatal);
+server6.on('error', (error) => {
+  if (error.code === 'EADDRINUSE') fatal(error);
+  else console.error(`OBSERVER_WARN ipv6 loopback unavailable: ${error.code ?? error.message}`);
+});
+server6.listen(port, '::1', reportReady);
+server4.listen(port, '127.0.0.1', reportReady);
+
+const keepAlive = setInterval(() => {
+  for (const client of clients) {
+    try {
+      client.write(': keep-alive\n\n');
+    } catch {
+      clients.delete(client);
+    }
+  }
+}, 15000);
+keepAlive.unref();
+
+const shutdown = () => {
+  console.log('OBSERVER_STOP');
+  clearInterval(keepAlive);
+  for (const client of clients) client.end();
+  for (const listener of [server4, server6]) {
+    try {
+      listener.close();
+    } catch {
+      /* listener already closed */
+    }
+  }
+  setTimeout(() => process.exit(0), 500).unref();
+};
+
+process.on('SIGINT', shutdown);
+process.on('SIGTERM', shutdown);
