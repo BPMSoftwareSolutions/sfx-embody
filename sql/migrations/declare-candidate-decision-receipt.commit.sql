@@ -39,6 +39,21 @@ EXEC @lock=sys.sp_getapplock @Resource=N'sidefx:model-write',@LockMode=N'Exclusi
 IF @lock<0 THROW 51000,N'CANDIDATE_DECISION_LOCK_FAILED',1;
 IF EXISTS(SELECT 1 FROM sys.triggers t JOIN sys.tables p ON p.object_id=t.parent_id JOIN sys.schemas s ON s.schema_id=p.schema_id
  WHERE s.name IN (N'model',N'source')) THROW 51000,N'GUARD_INVENTORY_CHANGED_REDECLARE_EXPLICIT_SET',1;
+-- Unrelated capability graph digests must be byte-identical across this change.
+CREATE TABLE #candidate_decision_unrelated(capability_id nvarchar(400) COLLATE Latin1_General_100_BIN2 PRIMARY KEY,digest varchar(64),bytes bigint);
+INSERT #candidate_decision_unrelated(capability_id,digest,bytes)
+SELECT g.capability_id,LOWER(CONVERT(varchar(64),HASHBYTES('SHA2_256',
+ CONVERT(varbinary(max),CONVERT(varchar(max),g.graph_source) COLLATE Latin1_General_100_BIN2_UTF8)),2)),DATALENGTH(g.graph_source)
+FROM analysis.capability_graph_source(N'say-hello-world',1,NULL) g
+UNION ALL
+SELECT g.capability_id,LOWER(CONVERT(varchar(64),HASHBYTES('SHA2_256',
+ CONVERT(varbinary(max),CONVERT(varchar(max),g.graph_source) COLLATE Latin1_General_100_BIN2_UTF8)),2)),DATALENGTH(g.graph_source)
+FROM analysis.capability_graph_source(N'authoring-altitude-model-stubs',1,NULL) g
+UNION ALL
+SELECT g.capability_id,LOWER(CONVERT(varchar(64),HASHBYTES('SHA2_256',
+ CONVERT(varbinary(max),CONVERT(varchar(max),g.graph_source) COLLATE Latin1_General_100_BIN2_UTF8)),2)),DATALENGTH(g.graph_source)
+FROM analysis.capability_graph_source(N'resolve-equity-market-price-evidence',1,NULL) g;
+IF (SELECT COUNT(*) FROM #candidate_decision_unrelated)<>3 THROW 51000,N'CANDIDATE_DECISION_BASELINE_MISSING',1;
 GO
 CREATE OR ALTER PROCEDURE model.record_candidate_decision @document nvarchar(max)
 WITH EXECUTE AS OWNER
@@ -278,8 +293,30 @@ IF (SELECT COUNT(*) FROM model.semantic_object_definition d
  JOIN model.identity_namespace n ON n.namespace_pk=o.namespace_pk
  WHERE n.namespace_id=N'sidefx:candidates' AND o.declared_id=@candidate+N'.decision.v1')<>@recorded_definitions
  THROW 51000,N'CANDIDATE_DECISION_READ_WROTE',1;
+-- Unrelated capability graph digests must be byte-identical.
+DECLARE @candidate_decision_after TABLE(capability_id nvarchar(400) COLLATE Latin1_General_100_BIN2 PRIMARY KEY,digest varchar(64),bytes bigint);
+INSERT @candidate_decision_after(capability_id,digest,bytes)
+SELECT g.capability_id,LOWER(CONVERT(varchar(64),HASHBYTES('SHA2_256',
+ CONVERT(varbinary(max),CONVERT(varchar(max),g.graph_source) COLLATE Latin1_General_100_BIN2_UTF8)),2)),DATALENGTH(g.graph_source)
+FROM analysis.capability_graph_source(N'say-hello-world',1,NULL) g
+UNION ALL
+SELECT g.capability_id,LOWER(CONVERT(varchar(64),HASHBYTES('SHA2_256',
+ CONVERT(varbinary(max),CONVERT(varchar(max),g.graph_source) COLLATE Latin1_General_100_BIN2_UTF8)),2)),DATALENGTH(g.graph_source)
+FROM analysis.capability_graph_source(N'authoring-altitude-model-stubs',1,NULL) g
+UNION ALL
+SELECT g.capability_id,LOWER(CONVERT(varchar(64),HASHBYTES('SHA2_256',
+ CONVERT(varbinary(max),CONVERT(varchar(max),g.graph_source) COLLATE Latin1_General_100_BIN2_UTF8)),2)),DATALENGTH(g.graph_source)
+FROM analysis.capability_graph_source(N'resolve-equity-market-price-evidence',1,NULL) g;
+SELECT N'7_graph_digest_compare' AS result_set,b.capability_id,b.digest AS before_digest,a.digest AS after_digest,
+ CASE WHEN b.digest=a.digest THEN N'UNCHANGED' ELSE N'CHANGED' END AS disposition
+FROM #candidate_decision_unrelated b JOIN @candidate_decision_after a ON a.capability_id=b.capability_id ORDER BY b.capability_id;
+IF EXISTS(SELECT 1 FROM #candidate_decision_unrelated b JOIN @candidate_decision_after a ON a.capability_id=b.capability_id WHERE b.digest<>a.digest)
+ THROW 51000,N'CANDIDATE_DECISION_UNRELATED_CAPABILITY_CHANGED',1;
 GO
--- Installer revision refusal (dooms the transaction; the same batch rolls back).
+COMMIT TRANSACTION;
+GO
+-- Installer revision refusal (separate transaction; the committed install is unaffected).
+BEGIN TRANSACTION;
 SET XACT_ABORT OFF;
 DECLARE @probe_estate bigint=(SELECT estate_model_pk FROM source.current_model WHERE singleton_id=1);
 DECLARE @probe_candidate nvarchar(400)=N'resolve-equity-market-price-evidence.candidate-1';
@@ -298,4 +335,4 @@ BEGIN CATCH
  SELECT N'7_revision_probe' AS result_set,ERROR_MESSAGE() AS disposition,
   CASE WHEN ERROR_MESSAGE()=N'CANDIDATE_DECISION_REVISION_NOT_ADMITTED' THEN N'PASSED' ELSE N'FAILED' END AS probe_result;
 END CATCH
-COMMIT TRANSACTION;
+ROLLBACK TRANSACTION;

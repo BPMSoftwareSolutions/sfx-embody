@@ -431,28 +431,36 @@ IF (SELECT COUNT(*) FROM model.port_version pv JOIN model.port p ON p.port_pk=pv
  THROW 51000,N'PLACEMENT_SANDBOX_A_REPLAY_WROTE',1;
 
 DECLARE @c_document nvarchar(max)=N'{"contractId":"model-placement-change.v1","capabilityId":"lane3-placement-sandbox","portId":"lane3-placement-c-port","platformCapabilityId":"sda-projected-capability-invocation-port.v2","configuration":{"bindingDigest":"sha256:0000000000000000000000000000000000000000000000000000000000000000","capabilityAuthorityDigest":"sha256:1111111111111111111111111111111111111111111111111111111111111111","lineageMode":"retain-nested-execution","requestPath":"currentInvocationRequest","resultMode":"bind-outcome","resultPath":"primaryModelEvidence","declaredApplication":{"bindingDocument":"lane3-placement-sandbox.binding.json"}},"scenario":{"scenarioId":"lane3-placement-c","name":"Placement C","inputId":"lane3-placement-sandbox-request","inputContract":"lane3-placement-sandbox-request.v1","eventId":"lane3-placement-c-requested","eventAuthority":"lane3-placement-c.v1","outcomeId":"lane3-placement-sandbox-outcome","outcomeContract":"lane3-placement-sandbox-outcome.v1","given":"a scratch capability","when":"the projected child is invoked","then":"the nested evidence is returned","terminal":true,"operations":[{"operationId":"lane3-placement-c.0","kind":"invoke-port","portId":"lane3-placement-c-port"}]}}';
-EXEC model.install_model_placement_change @document=@c_document;
-IF NOT EXISTS(SELECT 1 FROM model.operation_port_invocation i
- JOIN model.port_version pv ON pv.port_version_pk=i.port_version_pk JOIN model.port p ON p.port_pk=pv.port_pk
- WHERE p.port_id=N'lane3-placement-c-port') THROW 51000,N'PLACEMENT_SANDBOX_C_LINK_MISSING',1;
-DECLARE @c_versions int=(SELECT COUNT(*) FROM model.port_version pv JOIN model.port p ON p.port_pk=pv.port_pk
- WHERE p.port_id=N'lane3-placement-c-port');
-EXEC model.install_model_placement_change @document=@c_document;
-IF (SELECT COUNT(*) FROM model.port_version pv JOIN model.port p ON p.port_pk=pv.port_pk
- WHERE p.port_id=N'lane3-placement-c-port')<>@c_versions
- THROW 51000,N'PLACEMENT_SANDBOX_C_REPLAY_WROTE',1;
+-- Whole-file replay leaves the C port already replaced; the fresh-install half
+-- is then skipped and the replace call below proves its own byte-identical replay.
+DECLARE @c_replaced bit=CASE WHEN EXISTS(SELECT 1 FROM analysis.v_selected_semantic_definition d
+ WHERE d.estate_model_pk=@estate AND d.object_kind=N'PORT' AND d.namespace_id=N'sidefx:capability:lane3-placement-sandbox'
+  AND d.declared_id=N'lane3-placement-c-port' AND JSON_VALUE(d.definition_json,'$.semantics.configuration.requestPath')=N'replacementInvocationRequest') THEN 1 ELSE 0 END;
+IF @c_replaced=0
+BEGIN
+ EXEC model.install_model_placement_change @document=@c_document;
+ IF NOT EXISTS(SELECT 1 FROM model.operation_port_invocation i
+  JOIN model.port_version pv ON pv.port_version_pk=i.port_version_pk JOIN model.port p ON p.port_pk=pv.port_pk
+  WHERE p.port_id=N'lane3-placement-c-port') THROW 51000,N'PLACEMENT_SANDBOX_C_LINK_MISSING',1;
+ DECLARE @c_versions int=(SELECT COUNT(*) FROM model.port_version pv JOIN model.port p ON p.port_pk=pv.port_pk
+  WHERE p.port_id=N'lane3-placement-c-port');
+ EXEC model.install_model_placement_change @document=@c_document;
+ IF (SELECT COUNT(*) FROM model.port_version pv JOIN model.port p ON p.port_pk=pv.port_pk
+  WHERE p.port_id=N'lane3-placement-c-port')<>@c_versions
+  THROW 51000,N'PLACEMENT_SANDBOX_C_REPLAY_WROTE',1;
+END
 
 DECLARE @c_prev_version bigint=(SELECT MAX(pv.port_version_pk) FROM model.port p JOIN model.port_version pv ON pv.port_pk=p.port_pk
  WHERE p.port_id=N'lane3-placement-c-port');
-IF NOT EXISTS(SELECT 1 FROM model.operation_port_invocation i WHERE i.port_version_pk=@c_prev_version)
+IF @c_replaced=0 AND NOT EXISTS(SELECT 1 FROM model.operation_port_invocation i WHERE i.port_version_pk=@c_prev_version)
  THROW 51000,N'PLACEMENT_SANDBOX_C_PREV_LINK_MISSING',1;
 EXEC model.replace_port_configuration @namespace=N'sidefx:capability:lane3-placement-sandbox',
  @port=N'lane3-placement-c-port',
  @configuration_json=N'{"bindingDigest":"sha256:2222222222222222222222222222222222222222222222222222222222222222","capabilityAuthorityDigest":"sha256:1111111111111111111111111111111111111111111111111111111111111111","lineageMode":"retain-nested-execution","requestPath":"replacementInvocationRequest","resultMode":"bind-outcome","resultPath":"primaryModelEvidence","declaredApplication":{"bindingDocument":"lane3-placement-sandbox.binding.json"}}';
 DECLARE @c_new_version bigint=(SELECT MAX(pv.port_version_pk) FROM model.port p JOIN model.port_version pv ON pv.port_pk=p.port_pk
  WHERE p.port_id=N'lane3-placement-c-port');
-IF @c_new_version=@c_prev_version THROW 51000,N'PLACEMENT_SANDBOX_C_REPLACE_NO_VERSION',1;
-IF EXISTS(SELECT 1 FROM model.operation_port_invocation WHERE port_version_pk=@c_prev_version)
+IF @c_replaced=0 AND @c_new_version=@c_prev_version THROW 51000,N'PLACEMENT_SANDBOX_C_REPLACE_NO_VERSION',1;
+IF @c_replaced=0 AND EXISTS(SELECT 1 FROM model.operation_port_invocation WHERE port_version_pk=@c_prev_version)
  THROW 51000,N'PLACEMENT_SANDBOX_C_REPLACE_NOT_RELINKED',1;
 IF NOT EXISTS(SELECT 1 FROM model.operation_port_invocation WHERE port_version_pk=@c_new_version)
  THROW 51000,N'PLACEMENT_SANDBOX_C_REPLACE_LINK_MISSING',1;
@@ -468,11 +476,19 @@ IF (SELECT COUNT(*) FROM model.port_version pv JOIN model.port p ON p.port_pk=pv
  THROW 51000,N'PLACEMENT_SANDBOX_C_REPLACE_REPLAY_WROTE',1;
 
 DECLARE @d_document nvarchar(max)=N'{"contractId":"model-placement-change.v1","capabilityId":"lane3-placement-sandbox","portId":"lane3-placement-d-port","platformCapabilityId":"sda-authority-transformation-port.v1","configuration":{"transformationId":"lane3-placement-d-transform.v1","expression":{"op":"literal","value":"lane3-placement-proof"}},"scenario":{"scenarioId":"lane3-placement-d","name":"Placement D","inputId":"lane3-placement-sandbox-request","inputContract":"lane3-placement-sandbox-request.v1","eventId":"lane3-placement-d-requested","eventAuthority":"lane3-placement-d.v1","outcomeId":"lane3-placement-sandbox-outcome","outcomeContract":"lane3-placement-sandbox-outcome.v1","given":"a scratch capability","when":"the transformation port is invoked","then":"the literal is returned","terminal":true,"operations":[{"operationId":"lane3-placement-d.0","kind":"invoke-port","portId":"lane3-placement-d-port"}]}}';
-EXEC model.install_model_placement_change @document=@d_document;
-IF NOT EXISTS(SELECT 1 FROM model.transformation t JOIN model.identity_namespace n ON n.namespace_pk=t.namespace_pk
- JOIN model.transformation_version tv ON tv.transformation_pk=t.transformation_pk
- WHERE n.namespace_id=N'sidefx:capability:lane3-placement-sandbox' AND t.transformation_id=N'lane3-placement-d-transform.v1')
- THROW 51000,N'PLACEMENT_SANDBOX_D_TRANSFORMATION_MISSING',1;
+-- Whole-file replay: the retirement receipt short-circuits install, which would
+-- otherwise re-select the definition membership while leaving the port unlinked.
+DECLARE @d_retired bit=CASE WHEN EXISTS(SELECT 1 FROM analysis.v_selected_semantic_definition d
+ WHERE d.estate_model_pk=@estate AND d.object_kind=N'AUTHORITY' AND d.namespace_id=N'sidefx:capability:lane3-placement-sandbox'
+  AND d.declared_id=N'lane3-placement-d-port.retired.v1') THEN 1 ELSE 0 END;
+IF @d_retired=0
+BEGIN
+ EXEC model.install_model_placement_change @document=@d_document;
+ IF NOT EXISTS(SELECT 1 FROM model.transformation t JOIN model.identity_namespace n ON n.namespace_pk=t.namespace_pk
+  JOIN model.transformation_version tv ON tv.transformation_pk=t.transformation_pk
+  WHERE n.namespace_id=N'sidefx:capability:lane3-placement-sandbox' AND t.transformation_id=N'lane3-placement-d-transform.v1')
+  THROW 51000,N'PLACEMENT_SANDBOX_D_TRANSFORMATION_MISSING',1;
+END
 EXEC model.retire_model_placement @namespace=N'sidefx:capability:lane3-placement-sandbox',
  @port=N'lane3-placement-d-port',@disposition=N'RETIRED';
 IF EXISTS(SELECT 1 FROM model.operation_port_invocation i JOIN model.port_version pv ON pv.port_version_pk=i.port_version_pk

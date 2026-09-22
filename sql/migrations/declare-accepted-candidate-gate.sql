@@ -100,8 +100,10 @@ SELECT CASE WHEN (SELECT COUNT(*) FROM @findings)=0 THEN N''ADMITTED'' ELSE N''H
 
 DECLARE @declared bit=CASE WHEN
  EXISTS(SELECT 1 FROM @new_reads WHERE JSON_VALUE(entry,'$.readId')=N'admit-candidate-acceptance')
- AND (SELECT COUNT(*) FROM @new_reads WHERE JSON_VALUE(entry,'$.readId') IN (SELECT read_id FROM @executable_reads)
-   AND JSON_VALUE(entry,'$.statement') LIKE N'%'+@gate_marker+N'%')=6
+ AND (SELECT COUNT(*) FROM @new_reads r
+   WHERE JSON_VALUE(r.entry,'$.readId') IN (SELECT read_id FROM @executable_reads)
+    AND EXISTS(SELECT 1 FROM OPENJSON(r.entry) WITH(statement nvarchar(max) '$.statement')
+     WHERE statement LIKE N'%'+@gate_marker+N'%'))=6
  AND (SELECT COUNT(*) FROM OPENJSON(@body,'$.changeContracts') c
    WHERE c.[key] IN (N'capability-authoring-change.v1',N'contract-change.v1',N'scenario-authoring-change.v1',
     N'transformation-change.v1',N'execution-authority-change.v1',N'feature-binding-change.v1')
@@ -148,16 +150,16 @@ BEGIN
  FETCH NEXT FROM read_cursor INTO @read_ordinal,@read_entry;
  WHILE @@FETCH_STATUS=0
  BEGIN
-  SET @read_id=JSON_VALUE(@read_entry,'$.readId');
-  IF EXISTS(SELECT 1 FROM @executable_reads WHERE read_id=@read_id COLLATE Latin1_General_100_BIN2)
-   AND JSON_VALUE(@read_entry,'$.statement') NOT LIKE N'%'+@gate_marker+N'%'
-  BEGIN
-   SET @stmt=JSON_VALUE(@read_entry,'$.statement');
-   SET @stmt_pos=CHARINDEX(N'DECLARE @reason nvarchar(max)',@stmt);
-   IF @stmt_pos<=0 THROW 51000,N'ACCEPTED_GATE_ADMISSION_TEMPLATE_UNEXPECTED',1;
-   SET @stmt=LEFT(@stmt,@stmt_pos-1)+@gate+CHAR(13)+CHAR(10)+SUBSTRING(@stmt,@stmt_pos,LEN(@stmt));
-   SET @read_entry=JSON_MODIFY(@read_entry,'$.statement',@stmt);
-  END
+   SET @read_id=JSON_VALUE(@read_entry,'$.readId');
+   SET @stmt=(SELECT statement FROM OPENJSON(@read_entry) WITH(statement nvarchar(max) '$.statement'));
+   IF EXISTS(SELECT 1 FROM @executable_reads WHERE read_id=@read_id COLLATE Latin1_General_100_BIN2)
+    AND ISNULL(@stmt,N'') NOT LIKE N'%'+@gate_marker+N'%'
+   BEGIN
+    SET @stmt_pos=CHARINDEX(N'DECLARE @reason nvarchar(max)',@stmt);
+    IF @stmt_pos<=0 THROW 51000,N'ACCEPTED_GATE_ADMISSION_TEMPLATE_UNEXPECTED',1;
+    SET @stmt=LEFT(@stmt,@stmt_pos-1)+@gate+CHAR(13)+CHAR(10)+SUBSTRING(@stmt,@stmt_pos,LEN(@stmt));
+    SET @read_entry=JSON_MODIFY(@read_entry,'$.statement',@stmt);
+   END
   SET @body=JSON_MODIFY(@body,'append $.reads',JSON_QUERY(@read_entry));
   FETCH NEXT FROM read_cursor INTO @read_ordinal,@read_entry;
  END
@@ -201,10 +203,10 @@ IF JSON_VALUE(@declared_body,'$.authorityDigest')<>N'sha256:a34639fce305a43c02c4
  THROW 51000,N'ACCEPTED_GATE_AUTHORITY_DIGEST_DIVERGED',1;
 IF (SELECT COUNT(*) FROM OPENJSON(@declared_body,'$.reads') WHERE JSON_VALUE(value,'$.readId')=N'admit-candidate-acceptance')<>1
  THROW 51000,N'ACCEPTED_GATE_READ_MISSING',1;
-IF (SELECT COUNT(*) FROM OPENJSON(@declared_body,'$.reads') WHERE JSON_VALUE(value,'$.readId') IN
- (N'admit-capability-authoring-change',N'admit-contract-change',N'admit-scenario-authoring-change',
+IF (SELECT COUNT(*) FROM OPENJSON(@declared_body,'$.reads') WITH(readId nvarchar(400) '$.readId',statement nvarchar(max) '$.statement')
+ WHERE readId IN (N'admit-capability-authoring-change',N'admit-contract-change',N'admit-scenario-authoring-change',
   N'admit-transformation-change',N'admit-execution-authority-change',N'admit-feature-binding-change')
- AND JSON_VALUE(value,'$.statement') LIKE N'%'+@gate_marker+N'%')<>6
+ AND statement LIKE N'%'+@gate_marker+N'%')<>6
  THROW 51000,N'ACCEPTED_GATE_NOT_IN_EVERY_ADMISSION',1;
 IF (SELECT COUNT(*) FROM OPENJSON(@declared_body,'$.changeContracts') c
  WHERE c.[key] IN (N'capability-authoring-change.v1',N'contract-change.v1',N'scenario-authoring-change.v1',
@@ -212,15 +214,21 @@ IF (SELECT COUNT(*) FROM OPENJSON(@declared_body,'$.changeContracts') c
  AND JSON_QUERY(c.value,'$.required') LIKE N'%candidateId%' AND JSON_QUERY(c.value,'$.required') LIKE N'%bundleDigest%')<>6
  THROW 51000,N'ACCEPTED_GATE_CONTRACT_PAYLOAD_INCOMPLETE',1;
 SELECT N'1_gate_declared' AS result_set,
- (SELECT COUNT(*) FROM OPENJSON(@declared_body,'$.reads') WHERE JSON_VALUE(value,'$.statement') LIKE N'%'+@gate_marker+N'%') AS gated_reads,
+ (SELECT COUNT(*) FROM OPENJSON(@declared_body,'$.reads') WITH(statement nvarchar(max) '$.statement') WHERE statement LIKE N'%'+@gate_marker+N'%') AS gated_reads,
  (SELECT COUNT(*) FROM OPENJSON(@declared_body,'$.changeContracts') c WHERE JSON_QUERY(c.value,'$.required') LIKE N'%candidateId%') AS gated_contracts;
 
 -- Proof 1: a change document with no accepted candidate receipt is HELD.
-DECLARE @p_candidate nvarchar(400)=N'resolve-equity-market-price-evidence.candidate-1';
 DECLARE @p_bundle nvarchar(100)=(SELECT JSON_VALUE(definition_json,'$.semantics.document.bundleDigest')
  FROM analysis.v_selected_semantic_definition WHERE estate_model_pk=@estate
-  AND object_kind='AUTHORITY' AND namespace_id=N'sidefx:candidates' AND declared_id=@p_candidate+N'.receipt.v1');
+  AND object_kind='AUTHORITY' AND namespace_id=N'sidefx:candidates'
+  AND declared_id=N'resolve-equity-market-price-evidence.candidate-1.receipt.v1');
 IF @p_bundle IS NULL THROW 51000,N'ACCEPTED_GATE_PROOF_CANDIDATE_MISSING',1;
+-- The live candidate already carries an ACCEPTED decision receipt from the
+-- decision-receipt wave, so the HELD proof uses a distinct candidate id at the
+-- live bundle digest; the ADMITTED proof uses a second id whose stub decision is
+-- idempotently replayed.
+DECLARE @p_candidate nvarchar(400)=N'lane4-accepted-gate-proof.candidate-held';
+DECLARE @p_stub_candidate nvarchar(400)=N'lane4-accepted-gate-proof.candidate-admitted';
 DECLARE @gate_stmt nvarchar(max)=JSON_VALUE(@gate_read,'$.statement');
 DECLARE @single TABLE(disposition nvarchar(20),reason nvarchar(max));
 DECLARE @gate_input nvarchar(max)=(SELECT N'capability-authoring-change.v1' AS contractId,N'gate-probe-capability' AS capabilityId,
@@ -234,8 +242,8 @@ IF NOT EXISTS(SELECT 1 FROM @single WHERE disposition=N'HELD' AND reason LIKE N'
  THROW 51000,N'ACCEPTED_GATE_HELD_PROOF_FAILED',1;
 -- The embedded gate on the executable admission refuses the same document before
 -- the skeleton's NOT_IMPLEMENTED refusal is reachable.
-DECLARE @admit_stmt nvarchar(max)=(SELECT JSON_VALUE(value,'$.statement') FROM OPENJSON(@declared_body,'$.reads')
- WHERE JSON_VALUE(value,'$.readId')=N'admit-capability-authoring-change');
+DECLARE @admit_stmt nvarchar(max)=(SELECT statement FROM OPENJSON(@declared_body,'$.reads') WITH(readId nvarchar(400) '$.readId',statement nvarchar(max) '$.statement')
+ WHERE readId=N'admit-capability-authoring-change');
 DELETE @single;
 INSERT @single EXEC sp_executesql @admit_stmt,N'@input nvarchar(max),@estate_model_pk bigint',@input=@gate_input,@estate_model_pk=@estate;
 SELECT N'3_embedded_gate_held' AS result_set,disposition,reason FROM @single;
@@ -243,25 +251,29 @@ IF NOT EXISTS(SELECT 1 FROM @single WHERE disposition=N'HELD' AND reason LIKE N'
  THROW 51000,N'ACCEPTED_GATE_EMBEDDED_HELD_PROOF_FAILED',1;
 
 -- Proof 2: with a stub ACCEPTED candidate-decision receipt (written in this
--- rolled-back transaction) the gate answers ADMITTED.
-DECLARE @decision_document nvarchar(max)=(SELECT N'candidate-decision.v1' AS contractId,@p_candidate AS candidateId,
+-- transaction, or replayed from a prior committed install) the gate answers
+-- ADMITTED for that candidate.
+DECLARE @gate_input_admitted nvarchar(max)=JSON_MODIFY(@gate_input,'$.candidateId',@p_stub_candidate);
+DECLARE @decision_document nvarchar(max)=(SELECT N'candidate-decision.v1' AS contractId,@p_stub_candidate AS candidateId,
  @p_bundle AS bundleDigest,N'ACCEPTED' AS decision,N'lane4-proof-reviewer.v1' AS reviewerAuthorityId,
  N'2026-09-22T00:00:00Z' AS decidedAt FOR JSON PATH,WITHOUT_ARRAY_WRAPPER);
 DECLARE @decision_semantics nvarchar(max)=(SELECT JSON_QUERY(@decision_document) AS document FOR JSON PATH,WITHOUT_ARRAY_WRAPPER);
-DECLARE @decision_id nvarchar(400)=@p_candidate+N'.decision.v1';
+DECLARE @decision_id nvarchar(400)=@p_stub_candidate+N'.decision.v1';
 DECLARE @decision_object bigint,@decision_definition bigint,@decision_digest binary(32);
 EXEC model.put_semantic_definition 'AUTHORITY',N'sidefx:candidates',@decision_id,@decision_semantics,
  @decision_object OUTPUT,@decision_definition OUTPUT,@decision_digest OUTPUT;
 DELETE @single;
-INSERT @single EXEC sp_executesql @gate_stmt,N'@input nvarchar(max),@estate_model_pk bigint',@input=@gate_input,@estate_model_pk=@estate;
+INSERT @single EXEC sp_executesql @gate_stmt,N'@input nvarchar(max),@estate_model_pk bigint',@input=@gate_input_admitted,@estate_model_pk=@estate;
 SELECT N'4_gate_admitted' AS result_set,disposition,reason FROM @single;
 IF NOT EXISTS(SELECT 1 FROM @single WHERE disposition=N'ADMITTED') THROW 51000,N'ACCEPTED_GATE_ADMITTED_PROOF_FAILED',1;
--- The embedded gate passes; the skeleton's own NOT_IMPLEMENTED refusal is the
--- only remaining finding, and CANDIDATE_NOT_ACCEPTED is absent.
+-- The embedded gate passes; the superset admission's own document finding is the
+-- only remaining refusal, and CANDIDATE_NOT_ACCEPTED is absent.
 DELETE @single;
-INSERT @single EXEC sp_executesql @admit_stmt,N'@input nvarchar(max),@estate_model_pk bigint',@input=@gate_input,@estate_model_pk=@estate;
+INSERT @single EXEC sp_executesql @admit_stmt,N'@input nvarchar(max),@estate_model_pk bigint',@input=@gate_input_admitted,@estate_model_pk=@estate;
 SELECT N'5_embedded_gate_passed' AS result_set,disposition,reason FROM @single;
-IF NOT EXISTS(SELECT 1 FROM @single WHERE disposition=N'HELD' AND reason LIKE N'%NOT_IMPLEMENTED%' AND reason NOT LIKE N'%CANDIDATE_NOT_ACCEPTED%')
+IF NOT EXISTS(SELECT 1 FROM @single WHERE disposition=N'HELD'
+ AND (reason LIKE N'%NOT_IMPLEMENTED%' OR reason LIKE N'%CAPABILITY_AUTHORING_DOCUMENT_REQUIRED%')
+ AND reason NOT LIKE N'%CANDIDATE_NOT_ACCEPTED%')
  THROW 51000,N'ACCEPTED_GATE_EMBEDDED_ADMITTED_PROOF_FAILED',1;
 -- A decision for a different bundle digest does not open the gate.
 DECLARE @wrong_input nvarchar(max)=JSON_MODIFY(@gate_input,'$.bundleDigest',N'sha256:0000000000000000000000000000000000000000000000000000000000000000');

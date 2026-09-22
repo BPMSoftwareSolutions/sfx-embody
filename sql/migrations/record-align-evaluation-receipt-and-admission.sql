@@ -282,9 +282,20 @@ DECLARE @port_before int=(SELECT COUNT(*) FROM model.port);
 DECLARE @transformation_before int=(SELECT COUNT(*) FROM model.transformation);
 DECLARE @stub_request nvarchar(max)=(SELECT N'alignment-evaluation.v1' AS contractId,@candidate AS candidateId,@bundle AS bundleDigest FOR JSON PATH,WITHOUT_ARRAY_WRAPPER);
 DECLARE @stub_result TABLE(result_set nvarchar(100),candidate_id nvarchar(400),receipt_id nvarchar(400),evaluation_digest nvarchar(100),convergence_distance nvarchar(40),dimension_count nvarchar(40));
-INSERT @stub_result EXEC model.record_alignment_evaluation @document=@stub_request;
+DECLARE @stub_installed TABLE(result_set nvarchar(100),candidate_id nvarchar(400),receipt_id nvarchar(400),evaluation_digest nvarchar(100));
+-- The evaluator's already_installed envelope is narrower than the recorded one, so
+-- a replay routes the capture through the narrow shape and normalizes it.
+IF NOT EXISTS(SELECT 1 FROM analysis.v_selected_semantic_definition
+ WHERE estate_model_pk=@estate AND object_kind=N'AUTHORITY' AND namespace_id=N'sidefx:candidates'
+  AND declared_id=@candidate+N'.alignment.v1')
+ INSERT @stub_result EXEC model.record_alignment_evaluation @document=@stub_request;
+ELSE
+ INSERT @stub_installed EXEC model.record_alignment_evaluation @document=@stub_request;
+INSERT @stub_result(result_set,candidate_id,receipt_id,evaluation_digest)
+ SELECT result_set,candidate_id,receipt_id,evaluation_digest FROM @stub_installed;
 SELECT N'4_stub_evaluator' AS result_set,* FROM @stub_result;
 IF NOT EXISTS(SELECT 1 FROM @stub_result WHERE result_set=N'alignment_evaluation_recorded' AND convergence_distance=N'3' AND dimension_count=N'10')
+ AND NOT EXISTS(SELECT 1 FROM @stub_result WHERE result_set=N'already_installed')
  THROW 51000,N'ALIGNMENT_EVALUATION_STUB_PROOF_FAILED',1;
 DECLARE @replay_state TABLE(result_set nvarchar(100),candidate_id nvarchar(400),receipt_id nvarchar(400),evaluation_digest nvarchar(100));
 INSERT @replay_state EXEC model.record_alignment_evaluation @document=@stub_request;

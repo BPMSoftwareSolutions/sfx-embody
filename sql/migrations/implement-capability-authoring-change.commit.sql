@@ -407,9 +407,25 @@ EXEC model.put_semantic_definition 'AUTHORITY',N'sidefx:candidates',@decision_id
  @d_object OUTPUT,@d_definition OUTPUT,@d_digest OUTPUT;
 
 DECLARE @admission TABLE(disposition nvarchar(20),reason nvarchar(400));
-INSERT @admission EXEC sp_executesql @admit_statement,N'@input nvarchar(max),@estate_model_pk bigint',@input=@payload,@estate_model_pk=@estate;
-SELECT N'1_admission_admitted' AS result_set,disposition,reason FROM @admission;
-IF NOT EXISTS(SELECT 1 FROM @admission WHERE disposition=N'ADMITTED') THROW 51000,N'CAPABILITY_AUTHORING_ADMISSION_FAILED',1;
+-- Whole-file replay: the ledger already selects the authorized revision, so the
+-- fresh-install proof is skipped and replaced by the replay proof at the end.
+DECLARE @owned nvarchar(max)=JSON_MODIFY(JSON_MODIFY(@payload,'$.document.meaning.outcome',N'a revised outcome'),
+ '$.candidateId',N'lane3-authoring-proof.candidate-2');
+DECLARE @owned_digest varchar(64)=LOWER(CONVERT(varchar(64),HASHBYTES('SHA2_256',
+ CONVERT(varbinary(max),CONVERT(varchar(max),JSON_QUERY(@owned,'$.document') COLLATE Latin1_General_100_BIN2_UTF8))),2));
+DECLARE @proof_revised bit=CASE WHEN (SELECT TOP (1) JSON_VALUE(d.definition_json,'$.semantics.document_digest')
+ FROM analysis.v_selected_semantic_definition d
+ WHERE d.estate_model_pk=@estate AND d.object_kind=N'CAPABILITY_DOCUMENT' AND d.namespace_id=N'sidefx:capability-documents'
+  AND d.declared_id=N'lane3-authoring-proof' COLLATE Latin1_General_100_BIN2)=@owned_digest THEN 1 ELSE 0 END;
+DECLARE @receipt_definitions int=(SELECT COUNT(*) FROM model.semantic_object_definition d
+ JOIN model.semantic_object o ON o.semantic_object_pk=d.semantic_object_pk
+ JOIN model.identity_namespace n ON n.namespace_pk=o.namespace_pk
+ WHERE n.namespace_id=N'sidefx:capability:lane3-authoring-proof' AND o.declared_id=N'lane3-authoring-proof.authored.v1');
+IF @proof_revised=0
+BEGIN
+ INSERT @admission EXEC sp_executesql @admit_statement,N'@input nvarchar(max),@estate_model_pk bigint',@input=@payload,@estate_model_pk=@estate;
+ SELECT N'1_admission_admitted' AS result_set,disposition,reason FROM @admission;
+ IF NOT EXISTS(SELECT 1 FROM @admission WHERE disposition=N'ADMITTED') THROW 51000,N'CAPABILITY_AUTHORING_ADMISSION_FAILED',1;
 EXEC model.install_capability_authoring_change @document=@payload;
 IF NOT EXISTS(SELECT 1 FROM model.capability c JOIN model.identity_namespace n ON n.namespace_pk=c.namespace_pk
  JOIN model.estate_capability ec ON ec.capability_pk=c.capability_pk AND ec.estate_model_pk=@estate
@@ -427,10 +443,6 @@ IF NOT EXISTS(SELECT 1 FROM analysis.v_selected_semantic_definition d
  WHERE d.estate_model_pk=@estate AND d.object_kind=N'FEATURE' AND d.namespace_id=N'sidefx:features'
   AND d.declared_id=N'lane3-authoring-proof')
  THROW 51000,N'CAPABILITY_AUTHORING_FEATURE_MISSING',1;
-DECLARE @receipt_definitions int=(SELECT COUNT(*) FROM model.semantic_object_definition d
- JOIN model.semantic_object o ON o.semantic_object_pk=d.semantic_object_pk
- JOIN model.identity_namespace n ON n.namespace_pk=o.namespace_pk
- WHERE n.namespace_id=N'sidefx:capability:lane3-authoring-proof' AND o.declared_id=N'lane3-authoring-proof.authored.v1');
 EXEC model.install_capability_authoring_change @document=@payload;
 IF (SELECT COUNT(*) FROM model.semantic_object_definition d
  JOIN model.semantic_object o ON o.semantic_object_pk=d.semantic_object_pk
@@ -452,8 +464,6 @@ INSERT @admission EXEC sp_executesql @admit_statement,N'@input nvarchar(max),@es
 SELECT N'3_secret_shaped' AS result_set,disposition,reason FROM @admission;
 IF NOT EXISTS(SELECT 1 FROM @admission WHERE disposition=N'HELD' AND reason LIKE N'%SECRET_SHAPED_MATERIAL%')
  THROW 51000,N'CAPABILITY_AUTHORING_SECRET_PROOF_FAILED',1;
-DECLARE @owned nvarchar(max)=JSON_MODIFY(JSON_MODIFY(@payload,'$.document.meaning.outcome',N'a revised outcome'),
- '$.candidateId',N'lane3-authoring-proof.candidate-2');
 DECLARE @c2 nvarchar(400)=N'lane3-authoring-proof.candidate-2';
 DECLARE @c2_decision_id nvarchar(400)=@c2+N'.decision.v1';
 DECLARE @c2_decision nvarchar(max)=(SELECT @c2 AS candidateId,@bundle AS bundleDigest,N'ACCEPTED' AS decision,
@@ -468,8 +478,6 @@ SELECT N'4_owned_refused' AS result_set,disposition,reason FROM @admission;
 IF NOT EXISTS(SELECT 1 FROM @admission WHERE disposition=N'HELD' AND reason LIKE N'%CAPABILITY_AUTHORING_CAPABILITY_OWNED%')
  THROW 51000,N'CAPABILITY_AUTHORING_OWNED_PROOF_FAILED',1;
 -- A revision is authorized when the ACCEPTED decision names this exact document digest.
-DECLARE @owned_digest varchar(64)=LOWER(CONVERT(varchar(64),HASHBYTES('SHA2_256',
- CONVERT(varbinary(max),CONVERT(varchar(max),JSON_QUERY(@owned,'$.document') COLLATE Latin1_General_100_BIN2_UTF8))),2));
 DECLARE @c2_authorized nvarchar(max)=(SELECT @c2 AS candidateId,@bundle AS bundleDigest,N'ACCEPTED' AS decision,
  N'lane3-reviewer' AS reviewerAuthorityId,N'2026-09-22T00:00:03Z' AS decidedAt,
  N'sha256:'+@owned_digest AS capabilityDocumentDigest FOR JSON PATH,WITHOUT_ARRAY_WRAPPER);
@@ -482,6 +490,26 @@ INSERT @admission EXEC sp_executesql @admit_statement,N'@input nvarchar(max),@es
 SELECT N'5_revision_authorized' AS result_set,disposition,reason FROM @admission;
 IF NOT EXISTS(SELECT 1 FROM @admission WHERE disposition=N'ADMITTED') THROW 51000,N'CAPABILITY_AUTHORING_REVISION_ACCEPTANCE_FAILED',1;
 EXEC model.install_capability_authoring_change @document=@owned;
+END
+ELSE
+BEGIN
+ -- The authorized revision is already the selected document: prove its byte-identical
+ -- replay and that the superseded original is still refused without authorization.
+ INSERT @admission EXEC sp_executesql @admit_statement,N'@input nvarchar(max),@estate_model_pk bigint',@input=@owned,@estate_model_pk=@estate;
+ SELECT N'1_admission_admitted' AS result_set,disposition,reason FROM @admission;
+ IF NOT EXISTS(SELECT 1 FROM @admission WHERE disposition=N'ADMITTED') THROW 51000,N'CAPABILITY_AUTHORING_REVISION_ACCEPTANCE_FAILED',1;
+ EXEC model.install_capability_authoring_change @document=@owned;
+ IF (SELECT COUNT(*) FROM model.semantic_object_definition d
+  JOIN model.semantic_object o ON o.semantic_object_pk=d.semantic_object_pk
+  JOIN model.identity_namespace n ON n.namespace_pk=o.namespace_pk
+  WHERE n.namespace_id=N'sidefx:capability:lane3-authoring-proof' AND o.declared_id=N'lane3-authoring-proof.authored.v1')<>@receipt_definitions
+  THROW 51000,N'CAPABILITY_AUTHORING_REPLAY_WROTE',1;
+ DELETE @admission;
+ INSERT @admission EXEC sp_executesql @admit_statement,N'@input nvarchar(max),@estate_model_pk bigint',@input=@payload,@estate_model_pk=@estate;
+ SELECT N'2_superseded_owned' AS result_set,disposition,reason FROM @admission;
+ IF NOT EXISTS(SELECT 1 FROM @admission WHERE disposition=N'HELD' AND reason LIKE N'%CAPABILITY_AUTHORING_CAPABILITY_OWNED%')
+  THROW 51000,N'CAPABILITY_AUTHORING_OWNED_PROOF_FAILED',1;
+END
 
 DECLARE @after TABLE(capability_id nvarchar(400) COLLATE Latin1_General_100_BIN2 PRIMARY KEY,digest varchar(64),bytes bigint);
 INSERT @after(capability_id,digest,bytes)
@@ -502,7 +530,10 @@ FROM @baseline b JOIN @after a ON a.capability_id=b.capability_id ORDER BY b.cap
 IF EXISTS(SELECT 1 FROM @baseline b JOIN @after a ON a.capability_id=b.capability_id WHERE b.digest<>a.digest)
  THROW 51000,N'CAPABILITY_AUTHORING_UNRELATED_CAPABILITY_CHANGED',1;
 GO
--- Installer acceptance refusal (dooms the transaction; the same batch rolls back).
+COMMIT TRANSACTION;
+GO
+-- Installer acceptance refusal (separate transaction; the committed install is unaffected).
+BEGIN TRANSACTION;
 SET XACT_ABORT OFF;
 BEGIN TRY
  DECLARE @probe_payload nvarchar(max)=(SELECT N'capability-authoring-change.v1' AS contractId,
@@ -518,4 +549,4 @@ BEGIN CATCH
  SELECT N'7_acceptance_probe' AS result_set,ERROR_MESSAGE() AS disposition,
   CASE WHEN ERROR_MESSAGE()=N'CANDIDATE_NOT_ACCEPTED' THEN N'PASSED' ELSE N'FAILED' END AS probe_result;
 END CATCH
-COMMIT TRANSACTION;
+ROLLBACK TRANSACTION;
