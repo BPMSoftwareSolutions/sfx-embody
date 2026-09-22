@@ -1,0 +1,57 @@
+{
+  "contractId": "capability-candidate-bundle.v1",
+  "candidateId": "resolve-equity-market-price-evidence.candidate-1",
+  "sourceDigest": "sha256:a546e7db1fbf50741ea00533046759c859d2e6bd37ec3486804d2ba059bf0968",
+  "author": {
+    "providerId": "sda-agent-lane",
+    "modelId": "deepseek-flash",
+    "invocationDigest": "sha256:f625ff7b91b4b228af8a2ae0955d758654946692d13ee966fbba9f2a6102be6b"
+  },
+  "altitudes": {
+    "capability": {
+      "contractId": "capability-authoring-change.v1",
+      "preflight": {
+        "capabilityId": "resolve-equity-market-price-evidence",
+        "input": {
+          "contractId": "equity-market-price-evidence-request.v1",
+          "payload": {
+            "symbol": "AAPL",
+            "region": "US"
+          }
+        },
+        "expected": {
+          "disposition": "EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED"
+        },
+        "disposition": "EQUITY_MARKET_PRICE_EVIDENCE_RESOLVED"
+      }
+    },
+    "contracts": {
+      "contractId": "contract-change.v1",
+      "preflight": {
+        "input": {
+          "contractId": "equity-market-price-evidence.v1"
+        },
+        "expected": {
+          "schemaObject": "equity-market-price-evidence.v1"
+        }
+      }
+    },
+    "scenarios": {
+      "contractId": "scenario-authoring-change.v1",
+      "preflight": {
+        "input": {
+          "capabilityId": "resolve-equity-market-price-evidence"
+        },
+        "expected": {
+          "scenarioId": "resolve-equity-market-price-evidence"
+        }
+      }
+    }
+  },
+  "receiptRef": {
+    "contractId": "capability-candidate-receipt.v1",
+    "namespaceId": "sidefx:candidates",
+    "declaredId": "resolve-equity-market-price-evidence.candidate-1.receipt.v1",
+    "state": "PENDING"
+  }
+}

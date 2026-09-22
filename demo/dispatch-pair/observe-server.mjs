@@ -7,6 +7,7 @@ const maxBodyBytes = 16 * 1024 * 1024;
 
 const ring = [];
 const clients = new Set();
+const runs = [];
 let sequence = 0;
 
 function isRecord(value) {
@@ -167,11 +168,18 @@ function admit(event) {
   };
   ring.push(record);
   if (ring.length > ringLimit) ring.splice(0, ring.length - ringLimit);
+  while (runs.length > 0 && runs[0].endSeq !== null && ring.length > 0 && runs[0].endSeq < ring[0].seq) runs.shift();
+  if (record.kind === 'run-start') {
+    runs.push({ index: runs.length + 1, startSeq: record.seq, endSeq: null });
+  } else if (record.kind === 'run-end' && runs.length > 0 && runs[runs.length - 1].endSeq === null) {
+    runs[runs.length - 1].endSeq = record.seq;
+  }
   console.log(`[${clockOf(receivedAt)}] ${record.glyph} ${record.kind} ${record.text}`);
   const frame = `data: ${JSON.stringify(record)}\n\n`;
   for (const client of clients) {
+    if (client.matcher !== null && !client.matcher(record)) continue;
     try {
-      client.write(frame);
+      client.res.write(frame);
     } catch {
       clients.delete(client);
     }
@@ -233,7 +241,55 @@ async function receive(req, res) {
   sendJson(res, 202, { accepted, sequence });
 }
 
-function openStream(req, res) {
+// Per-run scoping: a run spans its run-start through its run-end (an open run
+// stays open). `run=current` (or `last`) selects the most recent run, an
+// ordinal selects the nth run, and `run=next` waits for the next run-start.
+// `run=current`/ordinal replay that run's ring records; a new SSE client with
+// no parameters is live-only and never receives an earlier run's events.
+function parseRunSelector(raw) {
+  if (raw === null) return null;
+  const value = raw.trim().toLowerCase();
+  if (value === 'current' || value === 'last') return { kind: 'current' };
+  if (value === 'next') return { kind: 'next' };
+  const ordinal = Number.parseInt(value, 10);
+  return Number.isInteger(ordinal) && ordinal > 0 && String(ordinal) === value
+    ? { kind: 'ordinal', value: ordinal }
+    : undefined;
+}
+
+function createRunMatcher(selector) {
+  let selected = null;
+  const resolve = () => selector.kind === 'current'
+    ? runs[runs.length - 1] ?? null
+    : runs[selector.value - 1] ?? null;
+  if (selector.kind !== 'next') selected = resolve();
+  return (record) => {
+    if (selected === null) {
+      if (record.kind !== 'run-start') return false;
+      selected = selector.kind === 'next' ? runs[runs.length - 1] ?? null : resolve();
+      if (selected === null) return false;
+    }
+    if (record.seq < selected.startSeq) return false;
+    if (selected.endSeq !== null && record.seq > selected.endSeq) return false;
+    return true;
+  };
+}
+
+function openStream(req, res, url) {
+  const sinceRaw = url.searchParams.get('since');
+  const selector = parseRunSelector(url.searchParams.get('run'));
+  if (selector === undefined) {
+    sendJson(res, 400, { error: 'invalid_run' });
+    return;
+  }
+  let since = null;
+  if (sinceRaw !== null) {
+    since = Number.parseInt(sinceRaw, 10);
+    if (!Number.isInteger(since) || since < 0) {
+      sendJson(res, 400, { error: 'invalid_since' });
+      return;
+    }
+  }
   res.writeHead(200, {
     'content-type': 'text/event-stream; charset=utf-8',
     'cache-control': 'no-cache, no-transform',
@@ -241,11 +297,20 @@ function openStream(req, res) {
     'access-control-allow-origin': '*',
   });
   res.write('retry: 3000\n\n');
-  for (const record of ring) {
-    res.write(`data: ${JSON.stringify(record)}\n\n`);
+  const matcher = selector === null ? null : createRunMatcher(selector);
+  // Replay is explicit: `since` names the last sequence the client already
+  // has, and a run selector replays that run. A bare `/events` is live-only.
+  // `run=next` has nothing historical to replay by definition.
+  if (selector?.kind !== 'next' && (since !== null || selector !== null)) {
+    for (const record of ring) {
+      if (since !== null && record.seq <= since) continue;
+      if (matcher !== null && !matcher(record)) continue;
+      res.write(`data: ${JSON.stringify(record)}\n\n`);
+    }
   }
-  clients.add(res);
-  req.on('close', () => clients.delete(res));
+  const client = { res, matcher };
+  clients.add(client);
+  req.on('close', () => clients.delete(client));
 }
 
 const page = `<!doctype html>
@@ -287,7 +352,7 @@ const page = `<!doctype html>
     while (timeline.childNodes.length > 2000) timeline.removeChild(timeline.firstChild);
     window.scrollTo(0, document.body.scrollHeight);
   }
-  var source = new EventSource('/events');
+  var source = new EventSource('/events?since=0');
   source.onopen = function () { status.textContent = 'connected'; };
   source.onerror = function () { status.textContent = 'reconnecting...'; };
   source.onmessage = function (message) {
@@ -306,7 +371,7 @@ const handleRequest = async (req, res) => {
       return;
     }
     if (req.method === 'GET' && url.pathname === '/events') {
-      openStream(req, res);
+      openStream(req, res, url);
       return;
     }
     if (req.method === 'GET' && (url.pathname === '/' || url.pathname === '/index.html')) {
@@ -353,7 +418,7 @@ server4.listen(port, '127.0.0.1', reportReady);
 const keepAlive = setInterval(() => {
   for (const client of clients) {
     try {
-      client.write(': keep-alive\n\n');
+      client.res.write(': keep-alive\n\n');
     } catch {
       clients.delete(client);
     }
@@ -364,7 +429,7 @@ keepAlive.unref();
 const shutdown = () => {
   console.log('OBSERVER_STOP');
   clearInterval(keepAlive);
-  for (const client of clients) client.end();
+  for (const client of clients) client.res.end();
   for (const listener of [server4, server6]) {
     try {
       listener.close();
