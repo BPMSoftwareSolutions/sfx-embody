@@ -1,7 +1,22 @@
 #!/usr/bin/env node
+import { readFile } from 'node:fs/promises';
 import http from 'node:http';
 
 const port = Number.parseInt(process.env.OBSERVER_PORT ?? '8787', 10);
+
+// The live circuit page (demo/circuit): the platform's circuit component, animated from the
+// observations this server receives. Only these files are served.
+const CIRCUIT_DIR = new URL('../circuit/', import.meta.url);
+const CIRCUIT_FILES = new Map([
+  ['/circuit', ['index.html', 'text/html; charset=utf-8']],
+  ['/circuit/', ['index.html', 'text/html; charset=utf-8']],
+  ['/circuit/app.js', ['app.js', 'text/javascript; charset=utf-8']],
+  ['/circuit/circuit-viewer.js', ['circuit-viewer.js', 'text/javascript; charset=utf-8']],
+  ['/circuit/geometry.js', ['geometry.js', 'text/javascript; charset=utf-8']],
+  ['/circuit/live-trace.js', ['live-trace.js', 'text/javascript; charset=utf-8']],
+  ['/circuit/run-graph.js', ['run-graph.js', 'text/javascript; charset=utf-8']],
+  ['/circuit/scl-theme.js', ['scl-theme.js', 'text/javascript; charset=utf-8']],
+]);
 const ringLimit = 2000;
 const maxBodyBytes = 16 * 1024 * 1024;
 
@@ -381,6 +396,13 @@ const handleRequest = async (req, res) => {
     }
     if (req.method === 'POST' && (url.pathname === '/events' || url.pathname === '/events/batch')) {
       await receive(req, res);
+      return;
+    }
+    if (req.method === 'GET' && CIRCUIT_FILES.has(url.pathname)) {
+      const [file, type] = CIRCUIT_FILES.get(url.pathname);
+      const body = await readFile(new URL(file, CIRCUIT_DIR));
+      res.writeHead(200, { 'content-type': type, 'cache-control': 'no-store' });
+      res.end(body);
       return;
     }
     sendJson(res, 404, { error: 'not_found' });

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SFX live circuit</title>
+<style>
+  /* Palette and live-state classes copied from sfx-platform/app/globals.css (.circuit-surface). */
+  :root {
+    color-scheme: dark;
+    --color-ink: #07131e; --color-ink-2: #101e2a; --color-grid-line: #2c4350;
+    --color-text: #e6edf5; --color-muted: #a8bcc8; --color-signal: #88e2d3;
+    --color-authority: #82a8f9; --color-projection: #b6a4ff; --color-telemetry: #efbe77;
+    --color-failure: #ff8a6b;
+    --font-sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-mono: ui-monospace, Consolas, "Courier New", monospace;
+  }
+  body { margin: 0; padding: 16px; background: var(--color-ink); color: var(--color-text); font-family: var(--font-sans); }
+  h1 { font-size: 16px; margin: 0 0 8px; }
+  h3 { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: var(--color-muted); margin: 0 0 8px; }
+  .controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 8px; }
+  .controls label { font-size: 13px; color: var(--color-muted); }
+  .controls input { min-width: 360px; padding: 6px 8px; background: var(--color-ink-2); color: var(--color-text); border: 1px solid var(--color-grid-line); border-radius: 4px; font-family: var(--font-mono); }
+  #status, #run { font-family: var(--font-mono); font-size: 12px; color: var(--color-muted); margin: 4px 0; }
+  #run { color: var(--color-text); }
+  .viewer { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr) 320px; margin-top: 12px; }
+  .viewer-bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 8px; }
+  .viewer-canvas { overflow-x: auto; border: 1px solid var(--color-grid-line); border-radius: 8px; background: var(--color-ink-2); padding: 8px; }
+  .circuit-svg { min-width: 520px; }
+  .badge { font-family: var(--font-mono); font-size: 12px; color: var(--color-telemetry); border: 1px solid color-mix(in srgb, var(--color-telemetry) 50%, transparent); border-radius: 4px; padding: 1px 8px; }
+  .button { margin-left: auto; background: transparent; color: var(--color-text); border: 1px solid var(--color-grid-line); border-radius: 4px; padding: 4px 10px; font-size: 12px; cursor: pointer; }
+  .card { border: 1px solid var(--color-grid-line); border-radius: 8px; background: var(--color-ink-2); padding: 14px; margin-bottom: 12px; }
+  .outline { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; max-height: 50vh; overflow: auto; }
+  .outline-item { width: 100%; text-align: left; background: transparent; color: var(--color-text); border: 1px solid var(--color-grid-line); border-radius: 4px; padding: 6px 10px; cursor: pointer; }
+  .outline-item--selected { border-color: var(--color-signal); }
+  .outline-item--done { border-left: 3px solid var(--color-signal); }
+  .outline-item--active { border-left: 3px dashed var(--color-signal); }
+  .outline-item--failed { border-left: 3px solid var(--color-failure); }
+  .outline-kind { display: block; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: var(--color-muted); }
+  .outline-label { display: block; font-size: 13px; }
+  .inspector { margin: 0; font-size: 13px; } .inspector dt { color: var(--color-muted); font-size: 11px; margin-top: 8px; } .inspector dd { margin: 0; }
+  .legend { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-size: 13px; } .legend li { display: flex; gap: 8px; align-items: center; }
+  .muted { color: var(--color-muted); } .mono { font-family: var(--font-mono); } .small { font-size: 12px; } .tiny { font-size: 10px; } .break { word-break: break-all; }
+  #unmatched h3 { color: var(--color-failure); margin-top: 16px; } #unmatched ul { font-family: var(--font-mono); font-size: 12px; }
+
+  .circuit-node { transition: opacity .25s ease; }
+  .circuit-node--planned rect { opacity: .55; }
+  .circuit-node--planned { opacity: .8; }
+  .circuit-node--active rect { stroke-dasharray: 7 4; }
+  .circuit-node--active { animation: circuit-node-pulse 1.4s ease-in-out infinite; }
+  .circuit-node--done rect { stroke-width: 2.5; }
+  .circuit-node--failed rect { stroke: var(--color-failure); stroke-width: 2.5; }
+  .circuit-edge--planned { opacity: .35; }
+  .circuit-edge--active { stroke-dasharray: 7 4; }
+  .circuit-edge--done { stroke-width: 2.5; }
+  .circuit-edge--failed { stroke: var(--color-failure); stroke-width: 2.5; }
+  @keyframes circuit-node-pulse { 0%,100% { opacity: 1 } 50% { opacity: .55 } }
+  @media (prefers-reduced-motion: reduce) { .circuit-node--active { animation: none; } }
+  @media (max-width: 900px) { .viewer { grid-template-columns: 1fr; } .controls input { min-width: 0; width: 100%; } }
+</style>
+</head>
+<body>
+<h1>SFX live circuit</h1>
+<div class="controls">
+  <label for="capability">Capability</label>
+  <input id="capability" list="seen-capabilities" placeholder="any capability, or e.g. resolve-equity-market-price-evidence" autocomplete="off">
+  <datalist id="seen-capabilities"></datalist>
+</div>
+<div id="status">connecting…</div>
+<div id="run"></div>
+<div id="viewer"></div>
+<div id="unmatched"></div>
+<script type="module" src="/circuit/app.js"></script>
+</body>
+</html>
