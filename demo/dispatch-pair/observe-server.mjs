@@ -346,10 +346,10 @@ const page = `<!doctype html>
 </head>
 <body>
 <h1>SFX live observation timeline</h1>
-<div id="status">connecting...</div>
+<div id="status">Connecting to live events; past events are not loaded.</div>
 <ol id="timeline"></ol>
 <script>
-  var status = document.getElementById('status');
+  var statusLine = document.getElementById('status');
   var timeline = document.getElementById('timeline');
   var total = 0;
   function stamp(iso) {
@@ -363,13 +363,13 @@ const page = `<!doctype html>
     li.title = JSON.stringify(record.payload);
     timeline.appendChild(li);
     total += 1;
-    status.textContent = 'connected - ' + total + ' events';
+    statusLine.textContent = 'Connected - ' + total + ' live events';
     while (timeline.childNodes.length > 2000) timeline.removeChild(timeline.firstChild);
     window.scrollTo(0, document.body.scrollHeight);
   }
-  var source = new EventSource('/events?since=0');
-  source.onopen = function () { status.textContent = 'connected'; };
-  source.onerror = function () { status.textContent = 'reconnecting...'; };
+  var source = new EventSource('/events');
+  source.onopen = function () { statusLine.textContent = total ? 'Connected - ' + total + ' live events' : 'Connected; waiting for live events.'; };
+  source.onerror = function () { statusLine.textContent = 'Event stream disconnected; reconnecting...'; };
   source.onmessage = function (message) {
     try { add(JSON.parse(message.data)); } catch (error) {}
   };

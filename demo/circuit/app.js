@@ -207,9 +207,9 @@ function render() {
 let source = null;
 function connect() {
   source?.close();
-  // Replay what the observer still holds, then stay live. On reconnect, resume after the last
-  // record already applied so nothing is applied twice.
-  source = new EventSource(`/events?since=${state.lastSeq}`);
+  // Start live, without replaying the observer's retained history. Once this page has seen an
+  // event, a reconnect resumes after that sequence so a brief disconnect does not lose a run.
+  source = new EventSource(state.lastSeq ? `/events?since=${state.lastSeq}` : '/events');
   source.onopen = () => {
     state.connection = 'connected';
     scheduleRender();
