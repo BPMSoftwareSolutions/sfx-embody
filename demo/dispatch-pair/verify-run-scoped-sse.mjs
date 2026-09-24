@@ -146,6 +146,11 @@ try {
   await post(base, thirdRun);
   await bare.waitFor(3);
   assert(bare.received.every((record) => record.seq > afterCapture), 'bare /events replayed a captured record');
+  assert(bare.received.every((record) =>
+    typeof record.observationKey === 'string' && record.observationKey.endsWith(`:${record.seq}`)),
+  'live observer records have no stable observation key');
+  assert(new Set(bare.received.map((record) => record.observationKey)).size === bare.received.length,
+    'observer reused an observation key');
   assert(bare.received[0].kind === 'run-start' && bare.received[2].kind === 'run-end', 'bare /events missed the live run window');
   const afterThirdRun = bare.received[2].seq;
   await bare.close();
@@ -163,6 +168,8 @@ try {
   // Per-run filtering: run 1 and run 2 replay only their own windows.
   const runOne = openStream(base, '?run=1');
   const runOneRecords = await runOne.waitFor(3);
+  assert(runOneRecords.every((record) => typeof record.observationKey === 'string'),
+    'replayed observer records lost their observation keys');
   assert(runOneRecords[0].kind === 'run-start' && runOneRecords[2].kind === 'run-end', 'run=1 window is not run-start..run-end');
   assert(runOneRecords[1].payload.testimonyType === 'cell-execution-testimony.v1', 'run=1 event does not belong to the captured run');
   await new Promise((resolve) => setTimeout(resolve, 150));

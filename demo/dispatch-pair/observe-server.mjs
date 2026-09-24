@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { readFile } from 'node:fs/promises';
 import http from 'node:http';
+import { randomBytes } from 'node:crypto';
 
 const port = Number.parseInt(process.env.OBSERVER_PORT ?? '8787', 10);
 
@@ -24,6 +25,7 @@ const ring = [];
 const clients = new Set();
 const runs = [];
 let sequence = 0;
+const observerInstance = randomBytes(12).toString('hex');
 
 function isRecord(value) {
   return value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -174,6 +176,7 @@ function admit(event) {
   const receivedAt = new Date();
   const record = {
     seq: sequence,
+    observationKey: `sfx-observer:${observerInstance}:${sequence}`,
     receivedAt: receivedAt.toISOString(),
     kind: event.kind,
     glyph: summary.glyph,
@@ -189,7 +192,7 @@ function admit(event) {
   } else if (record.kind === 'run-end' && runs.length > 0 && runs[runs.length - 1].endSeq === null) {
     runs[runs.length - 1].endSeq = record.seq;
   }
-  console.log(`[${clockOf(receivedAt)}] ${record.glyph} ${record.kind} ${record.text}`);
+  console.log(`[${clockOf(receivedAt)}] ${record.observationKey} ${record.glyph} ${record.kind} ${record.text}`);
   const frame = `data: ${JSON.stringify(record)}\n\n`;
   for (const client of clients) {
     if (client.matcher !== null && !client.matcher(record)) continue;
@@ -307,6 +310,7 @@ function openStream(req, res, url) {
   }
   res.writeHead(200, {
     'content-type': 'text/event-stream; charset=utf-8',
+    'x-observer-instance': observerInstance,
     'cache-control': 'no-cache, no-transform',
     connection: 'keep-alive',
     'access-control-allow-origin': '*',
@@ -359,7 +363,7 @@ const page = `<!doctype html>
   function add(record) {
     var li = document.createElement('li');
     li.className = record.cls || 'other';
-    li.textContent = '[' + stamp(record.receivedAt) + '] ' + record.glyph + ' ' + record.kind + ' ' + record.text;
+    li.textContent = '[' + stamp(record.receivedAt) + '] ' + record.observationKey + ' ' + record.glyph + ' ' + record.kind + ' ' + record.text;
     li.title = JSON.stringify(record.payload);
     timeline.appendChild(li);
     total += 1;
