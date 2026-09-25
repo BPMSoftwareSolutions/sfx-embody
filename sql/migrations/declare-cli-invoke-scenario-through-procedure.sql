@@ -1,5 +1,6 @@
--- Declares the CLI `invoke` scenario through model.declare_scenario_document.
--- Parity: the readback must match declare-cli-invoke-scenario.sql row-for-row.
+-- Declares the CLI `invoke` scenario through model.declare_scenario_from_contract.
+-- The declaration contract is declared first, then the scenario authority conforms to it.
+-- Parity: the scenario readback must match declare-cli-invoke-scenario.sql.
 -- Preflight: ends with ROLLBACK; run as a dry run with the migration runner.
 SET NOCOUNT ON;
 SET XACT_ABORT ON;
@@ -7,10 +8,12 @@ BEGIN TRANSACTION;
 IF NOT EXISTS(SELECT 1 FROM model.capability WHERE capability_id=N'sda-cli')
  EXEC model.scaffold_capability @capability_id=N'sda-cli', @on_exists=N'ERROR';
 GO
-DECLARE @document nvarchar(max)=N'{"capabilityId":"sda-cli","input":{"contract":"sda-cli-invoke-request.v1","schema":{"type":"object","additionalProperties":false,"required":["capabilityId"],"properties":{"capabilityId":{"type":"string","minLength":1},"inputType":{"type":"string","minLength":1},"input":{},"namespace":{"type":"string","minLength":1},"scenario":{"type":"string","minLength":1}}}},"outcome":{"contract":"sda-cli-invoke-result.v1","schema":{"type":"object","additionalProperties":false,"required":["capabilityId","disposition"],"properties":{"capabilityId":{"type":"string"},"disposition":{"type":"string"},"result":{}}}},"scenario":{"scenarioId":"invoke","name":"Invoke a declared capability","inputId":"sda-cli-invoke-request","inputContract":"sda-cli-invoke-request.v1","eventId":"sda-cli-invoke-requested","eventAuthority":"sda-cli-invoke.v1","outcomeId":"sda-cli-invoke-result","outcomeContract":"sda-cli-invoke-result.v1","terminal":true,"given":"one declared capability identity and admitted input","when":"the CLI invoke carrier runs the selected capability","then":"the declared scenario output is delivered"},"operations":[{"operationId":"sda-cli-invoke.0","kind":"invoke-port","portId":"sda-cli-invoke-port"}],"portBindings":[{"portId":"sda-cli-invoke-port","platformCapabilityId":"sda-cli-invoke-port.v1","configuration":{"providerId":"sda-cli.invoke"}}]}';
-EXEC model.declare_scenario_document @document=@document;
+EXEC model.declare_contract @id=N'sda-cli-scenario-declaration.v1', @schema=N'{"type":"object","additionalProperties":false,"required":["capabilityId","input","outcome","scenario","operations","portBindings"],"properties":{"capabilityId":{"type":"string","minLength":1},"input":{"type":"object","required":["contract","schema"]},"outcome":{"type":"object","required":["contract","schema"]},"scenario":{"type":"object","required":["scenarioId","eventId","eventAuthority","given","when","then"]},"operations":{"type":"array","minItems":1},"portBindings":{"type":"array","minItems":1}}}';
 GO
-SELECT 'cli_invoke_through_procedure' AS result_set, c.capability_id, s.scenario_id, sv.scenario_version_pk,
+DECLARE @scenario_authority nvarchar(max)=N'{"capabilityId":"sda-cli","input":{"contract":"sda-cli-invoke-request.v1","schema":{"type":"object","additionalProperties":false,"required":["capabilityId"],"properties":{"capabilityId":{"type":"string","minLength":1},"inputType":{"type":"string","minLength":1},"input":{},"namespace":{"type":"string","minLength":1},"scenario":{"type":"string","minLength":1}}}},"outcome":{"contract":"sda-cli-invoke-result.v1","schema":{"type":"object","additionalProperties":false,"required":["capabilityId","disposition"],"properties":{"capabilityId":{"type":"string"},"disposition":{"type":"string"},"result":{}}}},"scenario":{"scenarioId":"invoke","name":"Invoke a declared capability","inputId":"sda-cli-invoke-request","inputContract":"sda-cli-invoke-request.v1","eventId":"sda-cli-invoke-requested","eventAuthority":"sda-cli-invoke.v1","outcomeId":"sda-cli-invoke-result","outcomeContract":"sda-cli-invoke-result.v1","terminal":true,"given":"one declared capability identity and admitted input","when":"the CLI invoke carrier runs the selected capability","then":"the declared scenario output is delivered"},"operations":[{"operationId":"sda-cli-invoke.0","kind":"invoke-port","portId":"sda-cli-invoke-port"}],"portBindings":[{"portId":"sda-cli-invoke-port","platformCapabilityId":"sda-cli-invoke-port.v1","configuration":{"providerId":"sda-cli.invoke"}}]}';
+EXEC model.declare_scenario_from_contract @contract_id=N'sda-cli-scenario-declaration.v1', @scenario_authority=@scenario_authority;
+GO
+SELECT 'cli_invoke_through_contract' AS result_set, c.capability_id, s.scenario_id, sv.scenario_version_pk,
  si.input_id, se.event_id, so.outcome_id, eo.operation_id, opi.port_version_pk
 FROM model.capability c
 JOIN model.capability_version cv ON cv.capability_pk=c.capability_pk
