@@ -47,5 +47,5 @@ BEGIN
 END
 GO
 SELECT 'declare_scenario_from_contract_procedure' AS result_set,
- CASE WHEN OBJECT_ID(N'model.declare_scenario_from_contract') IS NOT NULL THEN N'READY' ELSE N'MISSING' END AS procedure;
+ CASE WHEN OBJECT_ID(N'model.declare_scenario_from_contract') IS NOT NULL THEN N'READY' ELSE N'MISSING' END
 COMMIT TRANSACTION;
