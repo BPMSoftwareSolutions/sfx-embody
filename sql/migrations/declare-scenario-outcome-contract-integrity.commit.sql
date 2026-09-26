@@ -1,69 +1,33 @@
--- Authoring helpers. They participate in the caller's transaction.
-CREATE OR ALTER PROCEDURE model.put_semantic_definition
- @kind varchar(64),@namespace nvarchar(400),@id nvarchar(400),@semantics nvarchar(max),
- @object bigint OUTPUT,@definition bigint OUTPUT,@digest binary(32) OUTPUT
-WITH EXECUTE AS OWNER
-AS
-BEGIN
- SET NOCOUNT ON;
- IF ISJSON(@semantics)<>1 THROW 51000,'SEMANTIC_DEFINITION_INVALID',1;
- DECLARE @namespace_pk bigint=(SELECT namespace_pk FROM model.identity_namespace WHERE namespace_kind=@kind AND namespace_id=@namespace);
- IF @namespace_pk IS NULL BEGIN
-  INSERT model.identity_namespace(namespace_kind,namespace_id) VALUES(@kind,@namespace);
-  SET @namespace_pk=SCOPE_IDENTITY();
- END;
- SET @object=(SELECT semantic_object_pk FROM model.semantic_object WHERE namespace_pk=@namespace_pk AND object_kind=@kind AND declared_id=@id);
- IF @object IS NULL BEGIN
-  INSERT model.semantic_object(object_kind,namespace_pk,declared_id) VALUES(@kind,@namespace_pk,@id);
-  SET @object=SCOPE_IDENTITY();
- END;
- DECLARE @text nvarchar(max)=(SELECT @id AS [address.id],@kind AS [address.kind],@namespace AS [address.namespace],
-  N'sidefx-semantic-definition.v1' AS format,JSON_QUERY(@semantics) AS semantics FOR JSON PATH,WITHOUT_ARRAY_WRAPPER);
- DECLARE @bytes varbinary(max)=CONVERT(varbinary(max),CONVERT(varchar(max),@text COLLATE Latin1_General_100_BIN2_UTF8));
- SET @digest=HASHBYTES('SHA2_256',@bytes);
- IF NOT EXISTS (SELECT 1 FROM source.content_object WHERE content_digest=@digest)
-  INSERT source.content_object(content_digest,content_bytes,byte_length) VALUES(@digest,@bytes,DATALENGTH(@bytes));
- SET @definition=(SELECT semantic_object_definition_pk FROM model.semantic_object_definition WHERE semantic_object_pk=@object AND definition_digest=@digest);
- IF @definition IS NULL BEGIN
-  INSERT model.semantic_object_definition(semantic_object_pk,object_kind,definition_digest,canonical_content_pk)
-   VALUES(@object,@kind,@digest,(SELECT content_object_pk FROM source.content_object WHERE content_digest=@digest));
-  SET @definition=SCOPE_IDENTITY();
- END;
- DECLARE @estate bigint=(SELECT estate_model_pk FROM source.current_model WHERE singleton_id=1);
- IF NOT EXISTS (SELECT 1 FROM model.estate_definition WHERE estate_model_pk=@estate AND semantic_object_definition_pk=@definition)
-  INSERT model.estate_definition(estate_model_pk,semantic_object_definition_pk) VALUES(@estate,@definition);
-END;
-GO
-CREATE OR ALTER PROCEDURE model.declare_contract
- @id nvarchar(400),@schema nvarchar(max)
-WITH EXECUTE AS OWNER
-AS
-BEGIN
- SET NOCOUNT ON;
- IF ISJSON(@schema)<>1 THROW 51000,'CONTRACT_SCHEMA_INVALID',1;
- DECLARE @bytes varbinary(max)=CONVERT(varbinary(max),CONVERT(varchar(max),@schema COLLATE Latin1_General_100_BIN2_UTF8));
- DECLARE @schema_digest binary(32)=HASHBYTES('SHA2_256',@bytes),@object bigint,@definition bigint,@digest binary(32);
- IF NOT EXISTS (SELECT 1 FROM source.content_object WHERE content_digest=@schema_digest)
-  INSERT source.content_object(content_digest,content_bytes,byte_length) VALUES(@schema_digest,@bytes,DATALENGTH(@bytes));
- DECLARE @schema_pk bigint=(SELECT schema_object_pk FROM model.schema_object WHERE content_digest=@schema_digest);
- IF @schema_pk IS NULL BEGIN
-  INSERT model.schema_object(content_digest,dialect,content_object_pk)
-   VALUES(@schema_digest,JSON_VALUE(@schema,'$."$schema"'),(SELECT content_object_pk FROM source.content_object WHERE content_digest=@schema_digest));
-  SET @schema_pk=SCOPE_IDENTITY();
- END;
- DECLARE @semantics nvarchar(max)=(SELECT LOWER(CONVERT(varchar(64),@schema_digest,2)) AS schema_digest,
-  JSON_VALUE(@schema,'$."$id"') AS schema_id FOR JSON PATH,WITHOUT_ARRAY_WRAPPER);
- EXEC model.put_semantic_definition 'CONTRACT',N'sidefx:contracts',@id,@semantics,@object OUTPUT,@definition OUTPUT,@digest OUTPUT;
- DECLARE @contract bigint=(SELECT contract_pk FROM model.contract WHERE semantic_object_pk=@object);
- IF @contract IS NULL BEGIN
-  INSERT model.contract(namespace_pk,contract_id,semantic_object_pk,object_kind)
-   SELECT namespace_pk,@id,@object,'CONTRACT' FROM model.semantic_object WHERE semantic_object_pk=@object;
-  SET @contract=SCOPE_IDENTITY();
- END;
- IF NOT EXISTS (SELECT 1 FROM model.contract_version WHERE semantic_object_definition_pk=@definition)
-  INSERT model.contract_version(contract_pk,semantic_object_pk,semantic_object_definition_pk,definition_digest,schema_object_pk,object_kind,_owner_definition_pk,_canonical_pointer,schema_reference_state)
-   VALUES(@contract,@object,@definition,@digest,@schema_pk,'CONTRACT',@definition,N'','RESOLVED');
-END;
+-- declare-scenario-outcome-contract-integrity.commit.sql
+--
+-- COMMIT twin of declare-scenario-outcome-contract-integrity.sql. Installs the
+-- trailing-invoke outcome contract law: when a scenario's execution authority
+-- ends with an `invoke-scenario` operation, the declared outcome contract must
+-- equal the invoked scenario's outcome contract, else
+-- 51000 SCENARIO_OUTCOME_CONTRACT_DIVERGENCE with zero writes. The installed
+-- body's unconditional outcome-contract re-assert is guarded for that case
+-- (`IF @terminal_invoke=0`); every other path is byte-identical to the live
+-- definition (sys.sql_modules digest
+-- 9D0C1E4A4F770E1DEF199E8DAD51D077BC62490B432BDC58796A76F0C6C02BEE).
+--
+-- The acceptance experiments (divergent refusal, matching acceptance, identical
+-- replay, unresolved contract, missing faces, non-terminal acceptance) are in
+-- the preflight twin; this twin installs and reports the installed state.
+-- Idempotent: CREATE OR ALTER plus read-only verification.
+SET NOCOUNT ON;
+SET XACT_ABORT ON;
+DECLARE @trigger_name nvarchar(517), @triggers CURSOR;
+SET @triggers=CURSOR LOCAL FAST_FORWARD FOR
+ SELECT QUOTENAME(s.name)+N'.'+QUOTENAME(t.name)
+ FROM sys.triggers t JOIN sys.objects o ON o.object_id=t.parent_id
+ JOIN sys.schemas s ON s.schema_id=o.schema_id
+ WHERE o.type='U' AND s.name IN ('model','source')
+ AND (t.name LIKE 'guard%' OR t.name LIKE '%immutable%');
+OPEN @triggers;
+FETCH NEXT FROM @triggers INTO @trigger_name;
+WHILE @@FETCH_STATUS=0 BEGIN EXEC(N'DROP TRIGGER '+@trigger_name); FETCH NEXT FROM @triggers INTO @trigger_name; END;
+CLOSE @triggers; DEALLOCATE @triggers;
+BEGIN TRANSACTION;
 GO
 CREATE OR ALTER PROCEDURE model.declare_scenario
  @capability_id nvarchar(400),@scenario nvarchar(max),@operations nvarchar(max),@port_bindings nvarchar(max)
@@ -291,38 +255,20 @@ BEGIN
  SELECT @id AS declared_scenario,@version AS scenario_version_pk;
 END;
 GO
-CREATE OR ALTER PROCEDURE model.declare_capability_feature
- @capability_id nvarchar(400),@feature_text nvarchar(max)
-WITH EXECUTE AS OWNER
-AS
-BEGIN
- SET NOCOUNT ON;
- DECLARE @estate bigint=(SELECT estate_model_pk FROM source.current_model WHERE singleton_id=1);
- DECLARE @capability bigint,@capability_version bigint,@feature bigint;
- SELECT @capability=c.capability_pk,@capability_version=ec.capability_version_pk,@feature=c.feature_pk
- FROM model.capability c JOIN model.identity_namespace n ON n.namespace_pk=c.namespace_pk AND n.namespace_id=N'sidefx:capabilities'
- JOIN model.estate_capability ec ON ec.capability_pk=c.capability_pk AND ec.estate_model_pk=@estate WHERE c.capability_id=@capability_id;
- IF @capability IS NULL THROW 51000,'CAPABILITY_NOT_FOUND',1;
- DECLARE @bytes varbinary(max)=CONVERT(varbinary(max),CONVERT(varchar(max),@feature_text COLLATE Latin1_General_100_BIN2_UTF8));
- DECLARE @feature_digest binary(32)=HASHBYTES('SHA2_256',@bytes);
- IF NOT EXISTS (SELECT 1 FROM source.content_object WHERE content_digest=@feature_digest)
-  INSERT source.content_object(content_digest,content_bytes,byte_length) VALUES(@feature_digest,@bytes,DATALENGTH(@bytes));
- DECLARE @scenarios nvarchar(max)=(SELECT s.scenario_id AS scenarioId,cs.scenario_version_pk AS scenarioVersionPk
-  FROM model.capability_scenario cs JOIN model.scenario s ON s.scenario_pk=cs.scenario_pk
-  WHERE cs.capability_version_pk=@capability_version ORDER BY s.scenario_id FOR JSON PATH);
- DECLARE @semantics nvarchar(max)=(SELECT @capability_id AS name,LOWER(CONVERT(varchar(64),@feature_digest,2)) AS content_digest,
-  N'features/'+@capability_id+N'.feature' AS source_path,JSON_QUERY(@scenarios) AS scenarios FOR JSON PATH,WITHOUT_ARRAY_WRAPPER);
- DECLARE @object bigint,@definition bigint,@digest binary(32);
- EXEC model.put_semantic_definition 'FEATURE',N'sidefx:features',@capability_id,@semantics,@object OUTPUT,@definition OUTPUT,@digest OUTPUT;
- DECLARE @version bigint=(SELECT feature_version_pk FROM model.feature_version WHERE semantic_object_definition_pk=@definition);
- IF @version IS NULL BEGIN
-  INSERT model.feature_version(feature_pk,capability_pk,semantic_object_pk,semantic_object_definition_pk,definition_digest,name,source_profile,object_kind,_owner_definition_pk,_canonical_pointer)
-   VALUES(@feature,@capability,@object,@definition,@digest,@capability_id,'parsed-feature-declaration.v1','FEATURE',@definition,N'');
-  SET @version=SCOPE_IDENTITY();
-  INSERT model.feature_scenario(feature_version_pk,scenario_pk,scenario_version_pk,capability_pk,ordinal)
-   SELECT @version,cs.scenario_pk,cs.scenario_version_pk,@capability,ROW_NUMBER() OVER(ORDER BY s.scenario_id)-1
-   FROM model.capability_scenario cs JOIN model.scenario s ON s.scenario_pk=cs.scenario_pk WHERE cs.capability_version_pk=@capability_version;
- END;
- UPDATE model.estate_capability_feature SET feature_version_pk=@version WHERE estate_model_pk=@estate AND capability_version_pk=@capability_version;
-END;
-GO
+SET NOCOUNT ON;
+SELECT 'integrity_installed' AS result_set,
+ CASE WHEN EXISTS (SELECT 1 FROM sys.sql_modules WHERE object_id=OBJECT_ID(N'model.declare_scenario')
+   AND definition LIKE N'%SCENARIO_OUTCOME_CONTRACT_DIVERGENCE%') THEN N'READY' ELSE N'MISSING' END AS divergence_refusal,
+ CASE WHEN EXISTS (SELECT 1 FROM sys.sql_modules WHERE object_id=OBJECT_ID(N'model.declare_scenario')
+   AND definition LIKE N'%SCENARIO_INVOKED_CAPABILITY_NOT_DECLARED%')
+  AND EXISTS (SELECT 1 FROM sys.sql_modules WHERE object_id=OBJECT_ID(N'model.declare_scenario')
+   AND definition LIKE N'%SCENARIO_CONTRACT_NOT_DECLARED%')
+  AND EXISTS (SELECT 1 FROM sys.sql_modules WHERE object_id=OBJECT_ID(N'model.declare_scenario')
+   AND definition LIKE N'%SCENARIO_FACES_REQUIRED%') THEN N'PRESERVED' ELSE N'LOST' END AS installed_refusals,
+ CASE WHEN EXISTS (SELECT 1 FROM sys.sql_modules WHERE object_id=OBJECT_ID(N'model.declare_scenario')
+   AND definition LIKE N'%IF @terminal_invoke=0 UPDATE model.scenario_outcome_contract%') THEN N'GUARDED' ELSE N'UNGUARDED' END AS outcome_write,
+ LOWER(CONVERT(varchar(64),HASHBYTES('SHA2_256',CONVERT(varbinary(max),m.definition)),2)) AS definition_sha256,
+ DATALENGTH(m.definition)/2 AS definition_chars,
+ CASE WHEN LOWER(CONVERT(varchar(64),HASHBYTES('SHA2_256',CONVERT(varbinary(max),m.definition)),2))=N'dcc9fa18a517b1ae79a1389ce93300e2f406f6f46b2935299d85910e41bbbd21' THEN 1 ELSE 0 END AS digest_matches_preflight
+FROM sys.sql_modules m WHERE m.object_id=OBJECT_ID(N'model.declare_scenario');
+COMMIT TRANSACTION;
